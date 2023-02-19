@@ -3,6 +3,7 @@ import os
 import subprocess
 import gi
 import sys
+import json
 from datetime import date
 from pathlib import Path
 gi.require_version('Gtk', '4.0')
@@ -12,16 +13,18 @@ from gi.repository import Gtk, Adw, Gio
 
 download_dir = subprocess.getoutput(["xdg-user-dir DOWNLOADS"])
 CACHE = f"{Path.home()}/.var/app/com.github.vikdevelop.gnome-config-saver/cache/tmp"
+CONFIG = f"{Path.home()}/.var/app/com.github.vikdevelop.gnome-config-saver/config"
 
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_title("GNOME Config Saver")
         self.headerbar = Gtk.HeaderBar.new()
+        self.connect("close-request", self.on_close)
         self.set_titlebar(titlebar=self.headerbar)
-        self.set_default_size(750, 540)
-        self.set_size_request(750, 540)
         self.application = kwargs.get('application')
+        
+        self.get_settings()
         
         # App menu
         self.menu_button_model = Gio.Menu()
@@ -62,13 +65,17 @@ class MainWindow(Gtk.Window):
         self.pBox.append(self.lbox)
         
         self.sbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
-        self.sbox.set_margin_top(7)
-        self.sbox.set_margin_bottom(7)
+        self.sbox.set_margin_top(9)
+        self.sbox.set_margin_bottom(9)
         
         self.ebox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         
         self.saveEntry = Adw.EntryRow.new()
         self.saveEntry.set_title("Set the file name")
+        if os.path.exists(f'{CONFIG}/settings.json'):
+            with open(f'{CONFIG}/settings.json') as e:
+                jE = json.load(e)
+            self.saveEntry.set_text(jE["file-text"])
         self.ebox.append(self.saveEntry)
         
         self.saveButton = Gtk.Button.new_from_icon_name("document-save-symbolic")
@@ -158,6 +165,22 @@ class MainWindow(Gtk.Window):
     
     def on_toast_dismissed(self, toast):
         print('')
+        
+    def get_settings(self):
+        if os.path.exists(f'{CONFIG}/settings.json'):
+            with open(f'{CONFIG}/settings.json') as l:
+                jL = json.load(l)
+            w_width = jL["window_width"]
+            w_height = jL["window_height"]
+            self.set_default_size(int(w_width), int(w_height))
+            self.set_size_request(750, 540)
+        else:
+            self.set_default_size(750, 540)
+            self.set_size_request(750, 540)
+    
+    def on_close(self, widget, *args):
+        with open(f'{CONFIG}/settings.json', 'w') as s:
+            s.write('{\n "file-text": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), self.get_allocation().width, self.get_allocation().height))
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
