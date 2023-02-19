@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=GNOME Config Saver
+Categories=Utility
+Comment=Save and apply GNOME configuration
+Comment[cs]=Uložit a použít konfiguraci prostředí GNOME
+Exec=run.sh
+Type=Application
+Icon=com.github.vikdevelop.gnome-config-saver
