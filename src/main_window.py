@@ -34,6 +34,8 @@ class MainWindow(Gtk.Window):
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.pBox.set_halign(Gtk.Align.CENTER)
         self.pBox.set_valign(Gtk.Align.CENTER)
+        self.pBox.set_margin_start(100)
+        self.pBox.set_margin_end(100)
         
         self.toast_overlay = Adw.ToastOverlay.new()
         self.toast_overlay.set_margin_top(margin=1)
@@ -59,9 +61,15 @@ class MainWindow(Gtk.Window):
         self.lbox.get_style_context().add_class(class_name='boxed-list')
         self.pBox.append(self.lbox)
         
-        self.sbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.sbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         self.sbox.set_margin_top(7)
         self.sbox.set_margin_bottom(7)
+        
+        self.ebox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        
+        self.saveEntry = Adw.EntryRow.new()
+        self.saveEntry.set_title("Set the file name")
+        self.ebox.append(self.saveEntry)
         
         self.saveButton = Gtk.Button.new_from_icon_name("document-save-symbolic")
         self.saveButton.add_css_class("suggested-action")
@@ -71,6 +79,9 @@ class MainWindow(Gtk.Window):
         
         self.adw_action_row_save = Adw.ActionRow.new()
         self.adw_action_row_save.set_title("Save GNOME Desktop Configuration")
+        self.adw_action_row_save.set_title_lines(3)
+        self.adw_action_row_save.set_subtitle("Set the file name without diacritics and spaces")
+        self.adw_action_row_save.add_suffix(widget=self.ebox)
         self.adw_action_row_save.add_suffix(widget=self.sbox)
         self.adw_action_row_save.set_activatable_widget(widget=self.saveButton)
         self.lbox.append(child=self.adw_action_row_save)
@@ -96,8 +107,12 @@ class MainWindow(Gtk.Window):
         if not os.path.exists("{}/GNOME_configs/archives".format(download_dir)):
             os.system("mkdir {}/GNOME_configs/archives/".format(download_dir))
         os.system("mkdir -p {}/GNOME_configs/.{} && cp ~/.config/dconf/user {}/GNOME_configs/.{}/".format(download_dir, date.today(), download_dir, date.today()))
-        os.system("cd {}/GNOME_configs/.{} && tar --gzip -cf GNOME_config_{}.tar.gz ./".format(download_dir, date.today(), date.today()))
-        os.system("mv {}/GNOME_configs/.{}/GNOME_config_{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), date.today(), download_dir))
+        if self.saveEntry.get_text() == "":
+            os.system("cd {}/GNOME_configs/.{} && tar --gzip -cf GNOME_config_{}.tar.gz ./".format(download_dir, date.today(), date.today()))
+            os.system("mv {}/GNOME_configs/.{}/GNOME_config_{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), date.today(), download_dir))
+        else:
+            os.system("cd {}/GNOME_configs/.{} && tar --gzip -cf {}.tar.gz ./".format(download_dir, date.today(), self.saveEntry.get_text()))
+            os.system("mv {}/GNOME_configs/.{}/{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
         self.toast.set_title(title="Configuration has been saved!")
         self.toast.set_button_label("Open the folder")
         self.toast.set_action_name("app.open_dir")
