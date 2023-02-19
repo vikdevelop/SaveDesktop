@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+    
+    <id>com.github.vikdevelop.gnome-config-saver</id>
+    <launchable type="desktop-id">com.github.vikdevelop.gnome-config-saver.desktop</launchable>
+    <name>GNOME Config Saver</name>
+    <summary>Save and apply GNOME desktop configuration</summary>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-3.0-or-later</project_license>
+    <developer_name>vikdevelop</developer_name>
+    
+    <description>
+      <p>Save and apply GNOME desktop configuration.</p>
+    </description>
+    
+    <url type="homepage">https://github.com/vikdevelop/gnome-config-saver</url>
+    <url type="bugtracker">https://github.com/vikdevelop/gnome-config-saver/issues</url>
+    
+    <screenshots>
+        <screenshot type="default">
+            <image>https://raw.githubusercontent.com/vikdevelop/timer/main/img/timer-gtk4_2-9_1.png</image>
+        </screenshot>
+    </screenshots>
+    
+    <content_rating type="oars-1.1"/>
+    
+    <categories>
+        <category>Utility</category>
+    </categories>
+    
+    <releases>
+        <release version="1.0" date="2023-02-19">
+        </release>
+    </releases>
+    
+</component>
