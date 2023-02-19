@@ -15,13 +15,13 @@ modules:
   - name: gnome-config-saver
     buildsystem: simple
     build-commands:
+       - chmod +x main_window.py
        - chmod +x run.sh
        - install -D -t /app/bin run.sh
-       - install -D -t /app main.py
+       - install -D -t /app main_window.py
        - install -D -t /app/share/applications com.github.vikdevelop.gnome-config-saver.desktop
        - install -D -t /app/share/icons/hicolor/128x128/apps com.github.vikdevelop.gnome-config-saver.png
        - install -D -t /app/share/metainfo com.github.vikdevelop.gnome-config-saver.metainfo.xml
     sources:
           - type: dir
             path: .
-
