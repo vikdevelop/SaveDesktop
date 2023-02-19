@@ -1,0 +1,27 @@
+app-id: com.github.vikdevelop.gnome-config-saver
+runtime: org.gnome.Platform
+runtime-version: '43'
+sdk: org.gnome.Sdk
+command: run.sh
+finish-args:
+    - --share=ipc
+    - --socket=wayland
+    - --socket=fallback-x11
+    - --device=dri
+    - --filesystem=xdg-download/GNOME_configs:create
+    - --filesystem=~/.config/dconf
+    - --talk-name=org.gnome.SessionManager
+modules:
+  - name: gnome-config-saver
+    buildsystem: simple
+    build-commands:
+       - chmod +x run.sh
+       - install -D -t /app/bin run.sh
+       - install -D -t /app main.py
+       - install -D -t /app/share/applications com.github.vikdevelop.gnome-config-saver.desktop
+       - install -D -t /app/share/icons/hicolor/128x128/apps com.github.vikdevelop.gnome-config-saver.png
+       - install -D -t /app/share/metainfo com.github.vikdevelop.gnome-config-saver.metainfo.xml
+    sources:
+          - type: dir
+            path: .
+
