@@ -12,8 +12,8 @@ gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio
 
 download_dir = subprocess.getoutput(["xdg-user-dir DOWNLOADS"])
-CACHE = f"{Path.home()}/.var/app/com.github.vikdevelop.gnome-config-saver/cache/tmp"
-CONFIG = f"{Path.home()}/.var/app/com.github.vikdevelop.gnome-config-saver/config"
+CACHE = f"{Path.home()}/.var/app/com.github.vikdevelop.SaveDesktop/cache/tmp"
+CONFIG = f"{Path.home()}/.var/app/com.github.vikdevelop.SaveDesktop/config"
 
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
@@ -146,7 +146,7 @@ class MainWindow(Gtk.Window):
         else:
             if not os.path.exists("{}/GNOME_configs/archives".format(download_dir)):
                 os.system("mkdir {}/GNOME_configs/archives/".format(download_dir))
-            os.system("mkdir -p {}/GNOME_configs/.{} && cp ~/.config/dconf/user {}/GNOME_configs/.{}/".format(download_dir, date.today(), download_dir, date.today()))
+            os.system("mkdir -p {}/GNOME_configs/.{} && cd {}/GNOME_configs/.{} && dconf dump / > ./dconf-settings.ini".format(download_dir, date.today(), download_dir, date.today()))
             if self.environment == 'GNOME':
                 os.popen("cd {}/GNOME_configs/.{} && cp -R ~/.local/share/backgrounds ./ && cp -R ~/.local/share/gnome-background-properties ./".format(download_dir, date.today()))
             if self.saveEntry.get_text() == "":
@@ -187,7 +187,7 @@ class MainWindow(Gtk.Window):
             if not os.path.exists("{}/.config/dconf".format(Path.home())):
                 os.system("mkdir ~/.config/dconf/")
             os.system("cd %s && tar -xf %s ./" % (CACHE, filename))
-            os.system("rm ~/.config/dconf/* && cp %s/user ~/.config/dconf/" % CACHE)
+            #os.system("rm ~/.config/dconf/* && cp %s/user ~/.config/dconf/" % CACHE) # FINISH THE APPLICATION OF THE DCONF CONFIGURATION FILE!
             if self.environment == 'GNOME':
                 if not os.path.exists(f'{Path.home()}/.local/share/gnome-background-properties'):
                     os.system('mkdir ~/.local/share/gnome-background-properties && mkdir -p ~/.local/share/backgrounds')
