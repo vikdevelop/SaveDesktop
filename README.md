@@ -1,4 +1,4 @@
-# GNOME Config Saver
+# SaveDesktop
 Save and load GNOME Desktop configuration
 
 ## Screenshots
