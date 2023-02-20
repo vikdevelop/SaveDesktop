@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
     
-    <id>com.github.vikdevelop.gnome-config-saver</id>
-    <launchable type="desktop-id">com.github.vikdevelop.gnome-config-saver.desktop</launchable>
-    <name>GNOME Config Saver</name>
-    <summary>Save and apply GNOME desktop configuration</summary>
+    <id>com.github.vikdevelop.SaveDesktop</id>
+    <launchable type="desktop-id">com.github.vikdevelop.SaveDesktop.desktop</launchable>
+    <name>SaveDesktop</name>
+    <summary>Save and apply KDE Plasma and GNOME based desktop environments configuration</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
     
     <description>
-      <p>Save and apply GNOME desktop configuration.</p>
+      <p>Save and apply KDE Plasma and GNOME based desktop environments configuration</p>
+      <p>Supported desktop environments: GNOME, Cinnamon, Budgie, COSMIC and KDE Plasma
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/gnome-config-saver</url>
@@ -18,7 +19,7 @@
     
     <screenshots>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/vikdevelop/timer/main/img/timer-gtk4_2-9_1.png</image>
+            <image>https://raw.githubusercontent.com/vikdevelop/gnome-config-saver/main/flatpak/screenshots/main_window.png</image>
         </screenshot>
     </screenshots>
     
