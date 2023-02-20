@@ -18,9 +18,8 @@ CONFIG = f"{Path.home()}/.var/app/com.github.vikdevelop.gnome-config-saver/confi
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.set_title("GNOME Config Saver")
+        self.set_title("SaveDesktop")
         self.headerbar = Gtk.HeaderBar.new()
-        self.connect("close-request", self.on_close)
         self.set_titlebar(titlebar=self.headerbar)
         self.application = kwargs.get('application')
         
@@ -53,8 +52,35 @@ class MainWindow(Gtk.Window):
         self.toast.set_timeout(5)
         self.toast.connect('dismissed', self.on_toast_dismissed)
         
+        if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
+            self.environment = 'GNOME'
+            self.save_desktop()
+            self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
+            self.environment = 'COSMIC'
+            self.save_desktop()
+            self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
+            self.environment = 'Cinnamon'
+            self.save_desktop()
+            self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'Budgie:GNOME':
+            self.environment = 'Budgie'
+            self.save_desktop()
+            self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
+            self.environment = 'KDE Plasma'
+            self.save_desktop()
+        else:
+            self.label_sorry = Gtk.Label()
+            self.label_sorry.set_markup("<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: GNOME, COSMIC, Cinnamon, Budgie or KDE Plasma.")
+            self.label_sorry.set_wrap(True)
+            self.label_sorry.set_justify(Gtk.Justification.CENTER)
+            self.pBox.append(self.label_sorry)
+        
+    def save_desktop(self):
         self.label_title = Gtk.Label.new()
-        self.label_title.set_markup("<big><b>Welcome to GNOME Config Saver!</b></big> \nThis program allows you to save and load your GNOME configuration. \n \n")
+        self.label_title.set_markup("<big><b>Welcome to SaveDesktop for {}</b></big> \nThis program allows you to save and load your {} configuration. \n \n".format(self.environment, self.environment))
         self.label_title.set_wrap(True)
         self.label_title.set_justify(Gtk.Justification.CENTER)
         self.pBox.append(self.label_title)
@@ -81,11 +107,11 @@ class MainWindow(Gtk.Window):
         self.saveButton = Gtk.Button.new_from_icon_name("document-save-symbolic")
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("circular")
-        self.saveButton.connect("clicked", self.save_config)
+        self.saveButton.connect("clicked", self.set_title_t)
         self.sbox.append(self.saveButton)
         
         self.adw_action_row_save = Adw.ActionRow.new()
-        self.adw_action_row_save.set_title("Save GNOME Desktop Configuration")
+        self.adw_action_row_save.set_title("Save {} Configuration".format(self.environment))
         self.adw_action_row_save.set_title_lines(3)
         self.adw_action_row_save.set_subtitle("Set the file name without diacritics and spaces")
         self.adw_action_row_save.add_suffix(widget=self.ebox)
@@ -103,32 +129,41 @@ class MainWindow(Gtk.Window):
         self.obox.append(self.loadButton)
         
         self.adw_action_row_load = Adw.ActionRow.new()
-        self.adw_action_row_load.set_title("Apply GNOME Desktop Configuration")
+        self.adw_action_row_load.set_title("Apply {} Configuration".format(self.environment))
         self.adw_action_row_load.add_suffix(widget=self.obox)
         self.adw_action_row_load.set_activatable_widget(widget=self.loadButton)
         self.lbox.append(child=self.adw_action_row_load)
         
         self.pBox.append(self.toast_overlay)
         
-    def save_config(self, w):
-        if not os.path.exists("{}/GNOME_configs/archives".format(download_dir)):
-            os.system("mkdir {}/GNOME_configs/archives/".format(download_dir))
-        os.system("mkdir -p {}/GNOME_configs/.{} && cp ~/.config/dconf/user {}/GNOME_configs/.{}/".format(download_dir, date.today(), download_dir, date.today()))
-        if self.saveEntry.get_text() == "":
-            os.system("cd {}/GNOME_configs/.{} && tar --gzip -cf GNOME_config_{}.tar.gz ./".format(download_dir, date.today(), date.today()))
-            os.system("mv {}/GNOME_configs/.{}/GNOME_config_{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), date.today(), download_dir))
+    def set_title_t(self, w):
+        self.toast.set_title("Please wait...")
+        self.save_config()
+    
+    def save_config(self):
+        if self.environment == 'KDE Plasma':
+            print('')
         else:
-            os.system("cd {}/GNOME_configs/.{} && tar --gzip -cf {}.tar.gz ./".format(download_dir, date.today(), self.saveEntry.get_text()))
-            os.system("mv {}/GNOME_configs/.{}/{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
-        self.toast.set_title(title="Configuration has been saved!")
-        self.toast.set_button_label("Open the folder")
-        self.toast.set_action_name("app.open_dir")
-        self.toast_overlay.add_toast(self.toast)
+            if not os.path.exists("{}/GNOME_configs/archives".format(download_dir)):
+                os.system("mkdir {}/GNOME_configs/archives/".format(download_dir))
+            os.system("mkdir -p {}/GNOME_configs/.{} && cp ~/.config/dconf/user {}/GNOME_configs/.{}/".format(download_dir, date.today(), download_dir, date.today()))
+            if self.environment == 'GNOME':
+                os.popen("cd {}/GNOME_configs/.{} && cp -R ~/.local/share/backgrounds ./ && cp -R ~/.local/share/gnome-background-properties ./".format(download_dir, date.today()))
+            if self.saveEntry.get_text() == "":
+                os.popen("cd {}/GNOME_configs/.{} && tar --gzip -cf GNOME_config_{}.tar.gz ./".format(download_dir, date.today(), date.today()))
+                os.popen("mv {}/GNOME_configs/.{}/GNOME_config_{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), date.today(), download_dir))
+            else:
+                os.popen("cd {}/GNOME_configs/.{} && tar --gzip -cf {}.tar.gz ./".format(download_dir, date.today(), self.saveEntry.get_text()))
+                os.popen("mv {}/GNOME_configs/.{}/{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
+            self.toast.set_title(title="Configuration has been saved!")
+            self.toast.set_button_label("Open the folder")
+            self.toast.set_action_name("app.open_dir")
+            self.toast_overlay.add_toast(self.toast)
         
     def fileshooser(self):
         self.file_chooser = Gtk.FileChooserDialog()
         self.file_chooser.set_transient_for(self)
-        self.file_chooser.set_title('Import GNOME Configuration')
+        self.file_chooser.set_title('Import {} Configuration'.format(self.environment))
         self.file_chooser.set_action(Gtk.FileChooserAction.OPEN)
         self.file_chooser.add_buttons('Open', Gtk.ResponseType.ACCEPT, \
             'Cancel', Gtk.ResponseType.CANCEL)
@@ -152,7 +187,12 @@ class MainWindow(Gtk.Window):
             if not os.path.exists("{}/.config/dconf".format(Path.home())):
                 os.system("mkdir ~/.config/dconf/")
             os.system("cd %s && tar -xf %s ./" % (CACHE, filename))
-            os.system("rm ~/.config/dconf/* && cp %s/user ~/.config/dconf/ && rm %s/*" % (CACHE, CACHE))
+            os.system("rm ~/.config/dconf/* && cp %s/user ~/.config/dconf/" % CACHE)
+            if self.environment == 'GNOME':
+                if not os.path.exists(f'{Path.home()}/.local/share/gnome-background-properties'):
+                    os.system('mkdir ~/.local/share/gnome-background-properties && mkdir -p ~/.local/share/backgrounds')
+                os.system("cd %s && cp backgrounds/* ~/.local/share/backgrounds/ && cp gnome-background-properties/* ~/.local/share/gnome-background-properties/*" % CACHE)
+            os.system("rm %s/*" % CACHE)
             self.toast.set_title(title='The configuration has been applied! Log out and log \nback in for the changes to take effect.')
             self.toast.set_button_label("Log Out")
             self.toast.set_action_name("app.logout")
@@ -194,11 +234,18 @@ class MyApp(Adw.Application):
         os.system("xdg-open {}/GNOME_configs/archives".format(download_dir))
         
     def logout(self, action, param):
-        os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
+        try:
+            os.system("dbus-send --system --print-reply --dest=org.freedesktop.login1 \
+    /org/freedesktop/login1 'org.freedesktop.login1.Manager.TerminateSession' \
+    string:2")
+        except:
+            os.system("dbus-send --system --print-reply --dest=org.freedesktop.login1 \
+    /org/freedesktop/login1 'org.freedesktop.login1.Manager.TerminateSession' \
+    string:1")
         
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
-        dialog.set_application_name("GNOME Config Saver")
+        dialog.set_application_name("SaveDesktop")
         dialog.set_version("1.0")
         dialog.set_developer_name("vikdevelop")
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
