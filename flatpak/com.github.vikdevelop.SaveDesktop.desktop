@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=SaveDesktop
+Categories=Utility
+Comment=Save and apply KDE Plasma and GNOME-based desktop environments configuration
+Comment[cs]=Uložit a použít konfiguraci KDE Plasma a na GNOME založených prostředích
+Exec=run.sh
+Type=Application
+Icon=com.github.vikdevelop.SaveDesktop
