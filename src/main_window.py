@@ -144,7 +144,7 @@ class MainWindow(Gtk.Window):
         if self.environment == 'KDE Plasma':
             if not os.path.exists('{}/SaveDesktop'.format(download_dir)):
                 os.popen('mkdir {}/SaveDesktop'.format(download_dir))
-            os.chdir('{}/KDE_configs/.{}'.format(download_dir, date.today()))
+            os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
             if self.saveEntry.get_text() == "":
                 os.popen('konsave -s kde_{}'.format(date.today()))
                 os.popen('konsave -e kde_{}'.format(date.today()))
