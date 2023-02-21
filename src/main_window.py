@@ -142,9 +142,8 @@ class MainWindow(Gtk.Window):
     
     def save_config(self):
         if self.environment == 'KDE Plasma':
-            if not os.path.exists('{}/KDE_configs'.format(download_dir)):
-                os.popen('mkdir {}/KDE_configs'.format(download_dir))
-                os.popen('mkdir {}/KDE_configs/.{}'.format(download_dir, date.today()))
+            if not os.path.exists('{}/SaveDesktop'.format(download_dir)):
+                os.popen('mkdir {}/SaveDesktop'.format(download_dir))
             os.chdir('{}/KDE_configs/.{}'.format(download_dir, date.today()))
             if self.saveEntry.get_text() == "":
                 os.popen('konsave -s kde_{}'.format(date.today()))
@@ -154,10 +153,12 @@ class MainWindow(Gtk.Window):
                 os.popen('konsave -e {}'.format(self.saveEntry.get_text()))
             self.exporting_done()
         else:
-            if not os.path.exists("{}/{}_configs/archives".format(download_dir, self.environment)):
-                os.system("mkdir {}/{}_configs/archives/".format(download_dir, self.environment))
-            os.system("mkdir -p {}/{}_configs/.{} && cd {}/GNOME_configs/.{} && dconf dump / > ./dconf-settings.ini".format(download_dir, self.environment, date.today(), download_dir, date.today()))
-            os.chdir('{}/GNOME_configs/.{}'.format(download_dir, date.today()))
+            if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
+                os.system("mkdir {}/SaveDesktop/".format(download_dir))
+            if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
+                os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
+            os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{} && dconf dump / > ./dconf-settings.ini".format(download_dir, date.today(), download_dir, date.today()))
+            os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
             os.popen('cp -R ~/.local/share/backgrounds ./')
             # Save configs on individual desktop environments
             if self.environment == 'GNOME':
@@ -179,11 +180,11 @@ class MainWindow(Gtk.Window):
                 
             # Get self.saveEntry text
             if self.saveEntry.get_text() == "":
-                os.popen("tar --gzip -cf GNOME_config_{}.tar.gz ./".format(date.today()))
-                os.popen("mv {}/GNOME_configs/.{}/GNOME_config_{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), date.today(), download_dir))
+                os.popen("tar --gzip -cf {}_config_{}.tar.gz ./".format(self.environment, date.today()))
+                os.popen("mv {}/SaveDesktop/.{}/{}_config_{}.tar.gz {}/SaveDesktop/archives/".format(download_dir, date.today(), self.environment, date.today(), download_dir))
             else:
                 os.popen("tar --gzip -cf {}.tar.gz ./".format(self.saveEntry.get_text()))
-                os.popen("mv {}/GNOME_configs/.{}/{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
+                os.popen("mv {}/SaveDesktop/.{}/{}.tar.gz {}/SaveDesktop/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
             self.exporting_done()
             
     def exporting_done(self):
@@ -298,10 +299,7 @@ class MyApp(Adw.Application):
         self.connect('activate', self.on_activate)
         
     def open_dir(self, action, param):
-        if os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
-            os.system("xdg-open {}/KDE_configs".format(download_dir))
-        else:
-            os.system("xdg-open {}/GNOME_configs/archives".format(download_dir))
+        os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
         
     def logout(self, action, param):
         try:
