@@ -144,7 +144,7 @@ class MainWindow(Gtk.Window):
         if self.environment == 'KDE Plasma':
             if not os.path.exists('{}/KDE_configs'.format(download_dir)):
                 os.popen('mkdir {}/KDE_configs'.format(download_dir))
-            os.popen('mkdir {}/KDE_configs/.{}'.format(download_dir, date.today()))
+                os.popen('mkdir {}/KDE_configs/.{}'.format(download_dir, date.today()))
             os.chdir('{}/KDE_configs/.{}'.format(download_dir, date.today()))
             if self.saveEntry.get_text() == "":
                 os.popen('konsave -s kde_{}'.format(date.today()))
@@ -205,7 +205,11 @@ class MainWindow(Gtk.Window):
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name('Gzip archive')
         self.file_filter.add_pattern('*.tar.gz')
+        self.file_filter_knsv = Gtk.FileFilter.new()
+        self.file_filter_knsv.set_name('Konsave files')
+        self.file_filter_knsv.add_pattern('*.knsv')
         self.file_chooser.add_filter(self.file_filter)
+        self.file_chooser.add_filter(self.file_filter_knsv)
         self.file_chooser.connect('response', self.open_response)
         self.file_chooser.show()
         
@@ -294,7 +298,10 @@ class MyApp(Adw.Application):
         self.connect('activate', self.on_activate)
         
     def open_dir(self, action, param):
-        os.system("xdg-open {}/GNOME_configs/archives".format(download_dir))
+        if os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
+            os.system("xdg-open {}/KDE_configs".format(download_dir))
+        else:
+            os.system("xdg-open {}/GNOME_configs/archives".format(download_dir))
         
     def logout(self, action, param):
         try:
