@@ -8,7 +8,6 @@ finish-args:
     - --socket=wayland
     - --socket=fallback-x11
     - --device=dri
-    - --filesystem=xdg-download/GNOME_configs:create
     - --filesystem=home
     - --talk-name=org.freedesktop.SessionManager
 modules:
