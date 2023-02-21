@@ -142,23 +142,55 @@ class MainWindow(Gtk.Window):
     
     def save_config(self):
         if self.environment == 'KDE Plasma':
-            print('')
-        else:
-            if not os.path.exists("{}/GNOME_configs/archives".format(download_dir)):
-                os.system("mkdir {}/GNOME_configs/archives/".format(download_dir))
-            os.system("mkdir -p {}/GNOME_configs/.{} && cd {}/GNOME_configs/.{} && dconf dump / > ./dconf-settings.ini".format(download_dir, date.today(), download_dir, date.today()))
-            if self.environment == 'GNOME':
-                os.popen("cd {}/GNOME_configs/.{} && cp -R ~/.local/share/backgrounds ./ && cp -R ~/.local/share/gnome-background-properties ./".format(download_dir, date.today()))
+            if not os.path.exists('{}/KDE_configs'.format(download_dir)):
+                os.popen('mkdir {}/KDE_configs'.format(download_dir))
+            os.popen('mkdir {}/KDE_configs/.{}'.format(download_dir, date.today()))
+            os.chdir('{}/KDE_configs/.{}'.format(download_dir, date.today()))
             if self.saveEntry.get_text() == "":
-                os.popen("cd {}/GNOME_configs/.{} && tar --gzip -cf GNOME_config_{}.tar.gz ./".format(download_dir, date.today(), date.today()))
+                os.popen('konsave -s kde_{}'.format(date.today()))
+                os.popen('konsave -e kde_{}'.format(date.today()))
+            else:
+                os.popen('konsave -s {}'.format(self.saveEntry.get_text()))
+                os.popen('konsave -e {}'.format(self.saveEntry.get_text()))
+            self.exporting_done()
+        else:
+            if not os.path.exists("{}/{}_configs/archives".format(download_dir, self.environment)):
+                os.system("mkdir {}/{}_configs/archives/".format(download_dir, self.environment))
+            os.system("mkdir -p {}/{}_configs/.{} && cd {}/GNOME_configs/.{} && dconf dump / > ./dconf-settings.ini".format(download_dir, self.environment, date.today(), download_dir, date.today()))
+            os.chdir('{}/GNOME_configs/.{}'.format(download_dir, date.today()))
+            os.popen('cp -R ~/.local/share/backgrounds ./')
+            # Save configs on individual desktop environments
+            if self.environment == 'GNOME':
+                os.popen("cp -R ~/.local/share/gnome-background-properties ./")
+                os.popen("cp -R ~/.local/share/gnome-shell ./")
+                os.popen("cp -R ~/.local/share/nautilus-python ./")
+                os.popen("cp -R ~/.config/gnome-control-center ./")
+            elif self.environment == 'Cinnamon':
+                os.popen("cp -R ~/.config/nemo ./")
+                os.popen("cp -R ~/.local/share/cinnamon ./")
+                os.popen("cp -R ~/.cinnamon ./")
+            elif self.environment == 'Budgie':
+                os.popen("cp -R ~/.config/budgie-desktop ./")
+                os.popen("cp -R ~/.config/budgie-extras ./")
+                os.popen("cp -R ~/.config/nemo ./")
+            elif self.environment == 'COSMIC':
+                os.popen("cp -R ~/.config/pop-shell ./")
+                os.popen("cp -R ~/.local/share/gnome-shell ./")
+                
+            # Get self.saveEntry text
+            if self.saveEntry.get_text() == "":
+                os.popen("tar --gzip -cf GNOME_config_{}.tar.gz ./".format(date.today()))
                 os.popen("mv {}/GNOME_configs/.{}/GNOME_config_{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), date.today(), download_dir))
             else:
-                os.popen("cd {}/GNOME_configs/.{} && tar --gzip -cf {}.tar.gz ./".format(download_dir, date.today(), self.saveEntry.get_text()))
+                os.popen("tar --gzip -cf {}.tar.gz ./".format(self.saveEntry.get_text()))
                 os.popen("mv {}/GNOME_configs/.{}/{}.tar.gz {}/GNOME_configs/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
-            self.toast.set_title(title="Configuration has been saved!")
-            self.toast.set_button_label("Open the folder")
-            self.toast.set_action_name("app.open_dir")
-            self.toast_overlay.add_toast(self.toast)
+            self.exporting_done()
+            
+    def exporting_done(self):
+        self.toast.set_title(title="Configuration has been saved!")
+        self.toast.set_button_label("Open the folder")
+        self.toast.set_action_name("app.open_dir")
+        self.toast_overlay.add_toast(self.toast)
         
     def fileshooser(self):
         self.file_chooser = Gtk.FileChooserDialog()
@@ -182,26 +214,57 @@ class MainWindow(Gtk.Window):
             dialog.close()
             file = dialog.get_file()
             filename = file.get_path()
-            if not os.path.exists("{}/.config".format(Path.home())):
-                os.system("mkdir ~/.config/")
-            if not os.path.exists("{}/.config/dconf".format(Path.home())):
-                os.system("mkdir ~/.config/dconf/")
-            os.system("cd %s && tar -xf %s ./" % (CACHE, filename))
-            #os.system("rm ~/.config/dconf/* && cp %s/user ~/.config/dconf/" % CACHE) # FINISH THE APPLICATION OF THE DCONF CONFIGURATION FILE!
-            if self.environment == 'GNOME':
-                if not os.path.exists(f'{Path.home()}/.local/share/gnome-background-properties'):
-                    os.system('mkdir ~/.local/share/gnome-background-properties && mkdir -p ~/.local/share/backgrounds')
-                os.system("cd %s && cp backgrounds/* ~/.local/share/backgrounds/ && cp gnome-background-properties/* ~/.local/share/gnome-background-properties/*" % CACHE)
-            os.system("rm %s/*" % CACHE)
-            self.toast.set_title(title='The configuration has been applied! Log out and log \nback in for the changes to take effect.')
-            self.toast.set_button_label("Log Out")
-            self.toast.set_action_name("app.logout")
-            self.toast_overlay.add_toast(self.toast)
+            # Applying configuration for KDE Plasma
+            if self.environment == 'KDE Plasma':
+                os.chdir('%s' % CACHE)
+                os.popen('cp %s ./' % filename)
+                knsvname = subprocess.getoutput("basename -s .knsv *.knsv")
+                os.popen('konsave -i *.knsv')
+                os.popen('konsave -a %s' % knsvname)
+                os.popen('rm %s/*' % CACHE)
+                self.applying_done()
+            # Applying configuration for GNOME-based environments
+            else:
+                if not os.path.exists("{}/.config".format(Path.home())):
+                    os.system("mkdir ~/.config/")
+                if not os.path.exists("{}/.config/dconf".format(Path.home())):
+                    os.system("mkdir ~/.config/dconf/")
+                os.chdir("%s" % CACHE)
+                os.system("tar -xf %s ./" % (CACHE, filename))
+                os.system("dconf load < %/dconf-settings.ini" % CACHE)
+                # Apply configs for individual desktop environments
+                if self.environment == 'GNOME':
+                    if not os.path.exists(f'{Path.home()}/.local/share/gnome-background-properties'):
+                        os.system('mkdir ~/.local/share/gnome-background-properties && mkdir -p ~/.local/share/backgrounds')
+                    os.system("cp gnome-background-properties/* ~/.local/share/gnome-background-properties/*")
+                    os.popen("cp -R gnome-shell ~/.local/share/")
+                    os.popen("cp -R nautilus-python ~/.local/share/")
+                    os.popen("cp -R gnome-control-center ~/.config/")
+                elif self.environment == 'Cinnamon':
+                    os.popen("cp -R nemo ~/.config/")
+                    os.popen("cp -R cinnamon ~/.local/share/")
+                    os.popen("cp -R .cinnamon ~/")
+                elif self.environment == 'Budgie':
+                    os.popen("cp -R budgie-desktop ~/.config/")
+                    os.popen("cp -R budgie-extras ~/.config/")
+                    os.popen("cp -R nemo ~/.config/")
+                elif self.environment == 'COSMIC':
+                    os.popen("cp -R pop-shell ~/.config/")
+                    os.popen("cp -R gnome-shell ~/.local/share/")
+                os.system("cp backgrounds/* ~/.local/share/backgrounds/")
+                os.system("rm %s/*" % CACHE)
+                self.applying_done()
         else:
             dialog.close()
             
     def apply_config(self, w):
         self.fileshooser()
+    
+    def applying_done(self):
+        self.toast.set_title(title='The configuration has been applied! Log out and log \nback in for the changes to take effect.')
+        self.toast.set_button_label("Log Out")
+        self.toast.set_action_name("app.logout")
+        self.toast_overlay.add_toast(self.toast)
     
     def on_toast_dismissed(self, toast):
         print('')
@@ -249,11 +312,11 @@ class MyApp(Adw.Application):
         dialog.set_version("1.0")
         dialog.set_developer_name("vikdevelop")
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
-        dialog.set_website("https://github.com/vikdevelop/gnome-config-saver")
-        dialog.set_issue_url("https://github.com/vikdevelop/gnome-config-saver/issues")
+        dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
+        dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop")
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
-        dialog.set_application_icon("com.github.vikdevelop.gnome-config-saver")
+        dialog.set_application_icon("com.github.vikdevelop.SaveDesktop")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
