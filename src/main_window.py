@@ -157,8 +157,9 @@ class MainWindow(Gtk.Window):
                 os.system("mkdir {}/SaveDesktop/".format(download_dir))
             if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
                 os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
-            os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{} && dconf dump / > ./dconf-settings.ini".format(download_dir, date.today(), download_dir, date.today()))
+            os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
             os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+            os.system('dconf dump / > ./dconf-settings.ini')
             os.popen('cp -R ~/.local/share/backgrounds ./')
             # Save configs on individual desktop environments
             if self.environment == 'GNOME':
@@ -235,8 +236,8 @@ class MainWindow(Gtk.Window):
                 if not os.path.exists("{}/.config/dconf".format(Path.home())):
                     os.system("mkdir ~/.config/dconf/")
                 os.chdir("%s" % CACHE)
-                os.system("tar -xf %s ./" % (CACHE, filename))
-                os.system("dconf load < %/dconf-settings.ini" % CACHE)
+                os.system("tar -xf %s ./" % filename)
+                os.system("dconf load %s/dconf-settings.ini" % CACHE)
                 # Apply configs for individual desktop environments
                 if self.environment == 'GNOME':
                     if not os.path.exists(f'{Path.home()}/.local/share/gnome-background-properties'):
