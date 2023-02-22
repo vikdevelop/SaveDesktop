@@ -159,7 +159,7 @@ class MainWindow(Gtk.Window):
                 os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
             os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
             os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-            os.system('dconf dump / > ./dconf-settings.ini')
+            os.system('cp ~/.config/dconf/user ./')
             os.popen('cp -R ~/.local/share/backgrounds ./')
             # Save configs on individual desktop environments
             if self.environment == 'GNOME':
@@ -237,28 +237,27 @@ class MainWindow(Gtk.Window):
                     os.system("mkdir ~/.config/dconf/")
                 os.chdir("%s" % CACHE)
                 os.system("tar -xf %s ./" % filename)
-                os.system("dconf load %s/dconf-settings.ini" % CACHE)
+                os.system("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
                 # Apply configs for individual desktop environments
                 if self.environment == 'GNOME':
                     if not os.path.exists(f'{Path.home()}/.local/share/gnome-background-properties'):
                         os.system('mkdir ~/.local/share/gnome-background-properties && mkdir -p ~/.local/share/backgrounds')
                     os.system("cp gnome-background-properties/* ~/.local/share/gnome-background-properties/*")
-                    os.popen("cp -R gnome-shell ~/.local/share/")
-                    os.popen("cp -R nautilus-python ~/.local/share/")
-                    os.popen("cp -R gnome-control-center ~/.config/")
+                    os.popen("cp -R ./gnome-shell ~/.local/share/")
+                    os.popen("cp -R ./nautilus-python ~/.local/share/")
+                    os.popen("cp -R ./gnome-control-center ~/.config/")
                 elif self.environment == 'Cinnamon':
-                    os.popen("cp -R nemo ~/.config/")
-                    os.popen("cp -R cinnamon ~/.local/share/")
-                    os.popen("cp -R .cinnamon ~/")
+                    os.popen("cp -R ./nemo ~/.config/")
+                    os.popen("cp -R ./cinnamon ~/.local/share/")
+                    os.popen("cp -R ./.cinnamon ~/")
                 elif self.environment == 'Budgie':
-                    os.popen("cp -R budgie-desktop ~/.config/")
-                    os.popen("cp -R budgie-extras ~/.config/")
-                    os.popen("cp -R nemo ~/.config/")
+                    os.popen("cp -R ./budgie-desktop ~/.config/")
+                    os.popen("cp -R ./budgie-extras ~/.config/")
+                    os.popen("cp -R ./nemo ~/.config/")
                 elif self.environment == 'COSMIC':
-                    os.popen("cp -R pop-shell ~/.config/")
-                    os.popen("cp -R gnome-shell ~/.local/share/")
-                os.system("cp backgrounds/* ~/.local/share/backgrounds/")
-                os.system("rm %s/*" % CACHE)
+                    os.popen("cp -R ./pop-shell ~/.config/")
+                    os.popen("cp -R ./gnome-shell ~/.local/share/")
+                os.system("cp ./backgrounds/* ~/.local/share/backgrounds/")
                 self.applying_done()
         else:
             dialog.close()
@@ -274,6 +273,7 @@ class MainWindow(Gtk.Window):
     
     def on_toast_dismissed(self, toast):
         print('')
+        os.system("rm %s/*" % CACHE)
         
     def get_settings(self):
         if os.path.exists(f'{CONFIG}/settings.json'):
@@ -303,14 +303,8 @@ class MyApp(Adw.Application):
         os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
         
     def logout(self, action, param):
-        try:
-            os.system("dbus-send --system --print-reply --dest=org.freedesktop.login1 \
-    /org/freedesktop/login1 'org.freedesktop.login1.Manager.TerminateSession' \
-    string:2")
-        except:
-            os.system("dbus-send --system --print-reply --dest=org.freedesktop.login1 \
-    /org/freedesktop/login1 'org.freedesktop.login1.Manager.TerminateSession' \
-    string:1")
+        os.system("rm %s/*" % CACHE)
+        os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
         
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
