@@ -161,6 +161,8 @@ class MainWindow(Gtk.Window):
             os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
             os.system('cp ~/.config/dconf/user ./')
             os.popen('cp -R ~/.local/share/backgrounds ./')
+            os.popen('cp -R ~/.local/share/icons ./')
+            os.popen('cp -R ~/.themes ./')
             # Save configs on individual desktop environments
             if self.environment == 'GNOME':
                 os.popen("cp -R ~/.local/share/gnome-background-properties ./")
@@ -204,14 +206,16 @@ class MainWindow(Gtk.Window):
         self.file_chooser.set_current_folder( \
             Gio.File.new_for_path(os.environ['HOME']))
         self.file_chooser.set_modal(True)
-        self.file_filter = Gtk.FileFilter.new()
-        self.file_filter.set_name('Gzip archive')
-        self.file_filter.add_pattern('*.tar.gz')
-        self.file_filter_knsv = Gtk.FileFilter.new()
-        self.file_filter_knsv.set_name('Konsave files')
-        self.file_filter_knsv.add_pattern('*.knsv')
-        self.file_chooser.add_filter(self.file_filter)
-        self.file_chooser.add_filter(self.file_filter_knsv)
+        if self.environment == 'KDE Plasma':
+            self.file_filter_knsv = Gtk.FileFilter.new()
+            self.file_filter_knsv.set_name('Konsave files')
+            self.file_filter_knsv.add_pattern('*.knsv')
+            self.file_chooser.add_filter(self.file_filter_knsv)
+        else:
+            self.file_filter = Gtk.FileFilter.new()
+            self.file_filter.set_name('Gzip archive')
+            self.file_filter.add_pattern('*.tar.gz')
+            self.file_chooser.add_filter(self.file_filter)
         self.file_chooser.connect('response', self.open_response)
         self.file_chooser.show()
         
@@ -238,11 +242,12 @@ class MainWindow(Gtk.Window):
                 os.chdir("%s" % CACHE)
                 os.system("tar -xf %s ./" % filename)
                 os.system("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
+                os.popen('cp -R ./icons ~/.local/share/')
+                os.popen('cp -R ./.themes ~/')
+                os.popen("cp -R ./backgrounds ~/.local/share/")
                 # Apply configs for individual desktop environments
                 if self.environment == 'GNOME':
-                    if not os.path.exists(f'{Path.home()}/.local/share/gnome-background-properties'):
-                        os.system('mkdir ~/.local/share/gnome-background-properties && mkdir -p ~/.local/share/backgrounds')
-                    os.system("cp gnome-background-properties/* ~/.local/share/gnome-background-properties/*")
+                    os.popen("cp -R ./gnome-background-properties ~/.local/share/")
                     os.popen("cp -R ./gnome-shell ~/.local/share/")
                     os.popen("cp -R ./nautilus-python ~/.local/share/")
                     os.popen("cp -R ./gnome-control-center ~/.config/")
@@ -257,7 +262,6 @@ class MainWindow(Gtk.Window):
                 elif self.environment == 'COSMIC':
                     os.popen("cp -R ./pop-shell ~/.config/")
                     os.popen("cp -R ./gnome-shell ~/.local/share/")
-                os.system("cp ./backgrounds/* ~/.local/share/backgrounds/")
                 self.applying_done()
         else:
             dialog.close()
