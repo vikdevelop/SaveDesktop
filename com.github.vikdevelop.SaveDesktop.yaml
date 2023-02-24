@@ -8,29 +8,14 @@ finish-args:
     - --socket=wayland
     - --socket=fallback-x11
     - --device=dri
+    # for load ~/.local/share, ~/.config, ~/Downloads/SaveDesktop, .themes and .icons
     - --filesystem=home
+    # for logout from session
     - --talk-name=org.gnome.SessionManager
 modules:
+  # for save KDE Plasma configuration
   - python3-konsave.json
   - name: other-modules
-  - name: dconf
-    buildsystem: meson
-    config-opts:
-      - '-Dbash_completion=false'
-      - '-Dman=false'
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /libexec
-      - /share/dbus-1
-    sources:
-      - type: archive
-        url: https://download.gnome.org/sources/dconf/0.40/dconf-0.40.0.tar.xz
-        sha256: cf7f22a4c9200421d8d3325c5c1b8b93a36843650c9f95d6451e20f0bcb24533
-        x-checker-data:
-          type: gnome
-          name: dconf
-
   - name: savedesktop
     buildsystem: simple
     build-commands:
