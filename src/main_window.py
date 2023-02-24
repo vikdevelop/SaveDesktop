@@ -111,7 +111,7 @@ class MainWindow(Gtk.Window):
         self.sbox.append(self.saveButton)
         
         self.adw_action_row_save = Adw.ActionRow.new()
-        self.adw_action_row_save.set_title("Save {} Configuration".format(self.environment))
+        self.adw_action_row_save.set_title("Save {} Desktop Configuration".format(self.environment))
         self.adw_action_row_save.set_title_lines(3)
         self.adw_action_row_save.set_subtitle("Set the file name without diacritics and spaces")
         self.adw_action_row_save.add_suffix(widget=self.ebox)
@@ -129,7 +129,7 @@ class MainWindow(Gtk.Window):
         self.obox.append(self.loadButton)
         
         self.adw_action_row_load = Adw.ActionRow.new()
-        self.adw_action_row_load.set_title("Apply {} Configuration".format(self.environment))
+        self.adw_action_row_load.set_title("Apply {} Desktop Configuration".format(self.environment))
         self.adw_action_row_load.add_suffix(widget=self.obox)
         self.adw_action_row_load.set_activatable_widget(widget=self.loadButton)
         self.lbox.append(child=self.adw_action_row_load)
