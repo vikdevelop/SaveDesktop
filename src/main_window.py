@@ -144,7 +144,7 @@ class MainWindow(Gtk.Window):
         if self.environment == 'KDE Plasma':
             if not os.path.exists('{}/SaveDesktop'.format(download_dir)):
                 os.popen('mkdir {}/SaveDesktop'.format(download_dir))
-            os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+            os.chdir('{}/SaveDesktop/'.format(download_dir))
             if self.saveEntry.get_text() == "":
                 os.popen('konsave -s kde_{}'.format(date.today()))
                 os.popen('konsave -e kde_{}'.format(date.today()))
@@ -229,8 +229,8 @@ class MainWindow(Gtk.Window):
                 os.chdir('%s' % CACHE)
                 os.popen('cp %s ./' % filename)
                 knsvname = subprocess.getoutput("basename -s .knsv *.knsv")
-                os.popen('konsave -i *.knsv')
-                os.popen('konsave -a %s' % knsvname)
+                os.system('konsave -i *.knsv')
+                os.system('konsave -a %s' % knsvname)
                 os.popen('rm %s/*' % CACHE)
                 self.applying_done()
             # Applying configuration for GNOME-based environments
@@ -304,7 +304,10 @@ class MyApp(Adw.Application):
         self.connect('activate', self.on_activate)
         
     def open_dir(self, action, param):
-        os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
+        if os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
+            os.system("xdg-open {}/SaveDesktop/".format(download_dir))
+        else:
+            os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
         
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
