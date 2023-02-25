@@ -178,11 +178,11 @@ class MainWindow(Gtk.Window):
             
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
-            os.popen("tar --gzip -cf {}_config_{}.tar.gz ./".format(self.environment, date.today()))
-            os.popen("mv {}/SaveDesktop/.{}/{}_config_{}.tar.gz {}/SaveDesktop/archives/".format(download_dir, date.today(), self.environment, date.today(), download_dir))
+            os.popen("tar --gzip -cf {}_config_{}.sd.tar.gz ./".format(self.environment, date.today()))
+            os.popen("mv ./{}_config_{}.sd.tar.gz {}/SaveDesktop/archives/".format(self.environment, date.today(), download_dir))
         else:
-            os.popen("tar --gzip -cf {}.tar.gz ./".format(self.saveEntry.get_text()))
-            os.popen("mv {}/SaveDesktop/.{}/{}.tar.gz {}/SaveDesktop/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
+            os.popen("tar --gzip -cf {}.sd.tar.gz ./".format(self.saveEntry.get_text()))
+            os.popen("mv ./{}.sd.tar.gz {}/SaveDesktop/archives/".format(self.saveEntry.get_text(), download_dir))
         self.exporting_done()
             
     def exporting_done(self):
@@ -202,8 +202,8 @@ class MainWindow(Gtk.Window):
             Gio.File.new_for_path(os.environ['HOME']))
         self.file_chooser.set_modal(True)
         self.file_filter = Gtk.FileFilter.new()
-        self.file_filter.set_name('Gzip archive')
-        self.file_filter.add_pattern('*.tar.gz')
+        self.file_filter.set_name('SaveDesktop files')
+        self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_chooser.add_filter(self.file_filter)
         self.file_chooser.connect('response', self.open_response)
         self.file_chooser.show()
