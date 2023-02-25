@@ -10,8 +10,10 @@ finish-args:
     - --device=dri
     # for load ~/.local/share, ~/.config, ~/Downloads/SaveDesktop, .themes and .icons
     - --filesystem=home
-    # for logout from session
+    # for logout from session (GNOME-based environments)
     - --talk-name=org.gnome.SessionManager
+    # for logout from session (KDE Plasma)
+    - --talk-name=org.kde.ksmserver
 modules:
   # for save KDE Plasma configuration
   - python3-konsave.json
