@@ -15,9 +15,6 @@ finish-args:
     # for logout from session (Xfce)
     - --talk-name=org.xfce.SessionManager
 modules:
-  # for save KDE Plasma configuration
-  - python3-konsave.json
-  - name: other-modules
   - name: savedesktop
     buildsystem: simple
     build-commands:
