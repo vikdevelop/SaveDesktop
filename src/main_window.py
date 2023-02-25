@@ -9,9 +9,9 @@ from pathlib import Path
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, Adw, Gio
+from gi.repository import Gtk, Adw, Gio, GLib
 
-download_dir = subprocess.getoutput(["xdg-user-dir DOWNLOADS"])
+download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 CACHE = f"{Path.home()}/.var/app/com.github.vikdevelop.SaveDesktop/cache/tmp"
 CONFIG = f"{Path.home()}/.var/app/com.github.vikdevelop.SaveDesktop/config"
 
