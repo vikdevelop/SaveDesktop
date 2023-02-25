@@ -68,16 +68,13 @@ class MainWindow(Gtk.Window):
             self.environment = 'Budgie'
             self.save_desktop()
             self.connect("close-request", self.on_close)
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
-            self.environment = 'KDE Plasma'
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
+            self.environment = 'Xfce'
             self.save_desktop()
             self.connect("close-request", self.on_close)
         else:
-            self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
-            self.Image.set_pixel_size(64)
-            self.pBox.append(self.Image)
             self.label_sorry = Gtk.Label()
-            self.label_sorry.set_markup("<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: GNOME, COSMIC, Cinnamon, Budgie or KDE Plasma.")
+            self.label_sorry.set_markup("<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: GNOME, COSMIC, Cinnamon, Budgie or Xfce.")
             self.label_sorry.set_wrap(True)
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
@@ -145,54 +142,45 @@ class MainWindow(Gtk.Window):
         self.save_config()
     
     def save_config(self):
-        if self.environment == 'KDE Plasma':
-            if not os.path.exists('{}/SaveDesktop'.format(download_dir)):
-                os.popen('mkdir {}/SaveDesktop'.format(download_dir))
-            os.chdir('{}/SaveDesktop/'.format(download_dir))
-            if self.saveEntry.get_text() == "":
-                os.popen('konsave -s kde_{}'.format(date.today()))
-                os.popen('konsave -e kde_{}'.format(date.today()))
-            else:
-                os.popen('konsave -s {}'.format(self.saveEntry.get_text()))
-                os.popen('konsave -e {}'.format(self.saveEntry.get_text()))
-            self.exporting_done()
+        if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
+            os.system("mkdir {}/SaveDesktop/".format(download_dir))
+        if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
+            os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
+        os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
+        os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+        os.system('cp ~/.config/dconf/user ./')
+        os.system('cp -R ~/.local/share/backgrounds ./')
+        os.system('cp -R ~/.local/share/icons ./')
+        os.system('cp -R ~/.themes ./')
+        # Save configs on individual desktop environments
+        if self.environment == 'GNOME':
+            os.popen("cp -R ~/.local/share/gnome-background-properties ./")
+            os.popen("cp -R ~/.local/share/gnome-shell ./")
+            os.popen("cp -R ~/.local/share/nautilus-python ./")
+            os.popen("cp -R ~/.config/gnome-control-center ./")
+        elif self.environment == 'Cinnamon':
+            os.popen("cp -R ~/.config/nemo ./")
+            os.popen("cp -R ~/.local/share/cinnamon ./")
+            os.popen("cp -R ~/.cinnamon ./")
+        elif self.environment == 'Budgie':
+            os.popen("cp -R ~/.config/budgie-desktop ./")
+            os.popen("cp -R ~/.config/budgie-extras ./")
+            os.popen("cp -R ~/.config/nemo ./")
+        elif self.environment == 'COSMIC':
+            os.popen("cp -R ~/.config/pop-shell ./")
+            os.popen("cp -R ~/.local/share/gnome-shell ./")
+        elif self.environment == 'Xfce':
+            os.popen("cp -R ~/.config/xfce4 ./")
+            os.popen("cp -R ~/.config/Thunar ./")
+            
+        # Get self.saveEntry text
+        if self.saveEntry.get_text() == "":
+            os.popen("tar --gzip -cf {}_config_{}.tar.gz ./".format(self.environment, date.today()))
+            os.popen("mv {}/SaveDesktop/.{}/{}_config_{}.tar.gz {}/SaveDesktop/archives/".format(download_dir, date.today(), self.environment, date.today(), download_dir))
         else:
-            if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
-                os.system("mkdir {}/SaveDesktop/".format(download_dir))
-            if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
-                os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
-            os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
-            os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-            os.system('cp ~/.config/dconf/user ./')
-            os.popen('cp -R ~/.local/share/backgrounds ./')
-            os.popen('cp -R ~/.local/share/icons ./')
-            os.popen('cp -R ~/.themes ./')
-            # Save configs on individual desktop environments
-            if self.environment == 'GNOME':
-                os.popen("cp -R ~/.local/share/gnome-background-properties ./")
-                os.popen("cp -R ~/.local/share/gnome-shell ./")
-                os.popen("cp -R ~/.local/share/nautilus-python ./")
-                os.popen("cp -R ~/.config/gnome-control-center ./")
-            elif self.environment == 'Cinnamon':
-                os.popen("cp -R ~/.config/nemo ./")
-                os.popen("cp -R ~/.local/share/cinnamon ./")
-                os.popen("cp -R ~/.cinnamon ./")
-            elif self.environment == 'Budgie':
-                os.popen("cp -R ~/.config/budgie-desktop ./")
-                os.popen("cp -R ~/.config/budgie-extras ./")
-                os.popen("cp -R ~/.config/nemo ./")
-            elif self.environment == 'COSMIC':
-                os.popen("cp -R ~/.config/pop-shell ./")
-                os.popen("cp -R ~/.local/share/gnome-shell ./")
-                
-            # Get self.saveEntry text
-            if self.saveEntry.get_text() == "":
-                os.popen("tar --gzip -cf {}_config_{}.tar.gz ./".format(self.environment, date.today()))
-                os.popen("mv {}/SaveDesktop/.{}/{}_config_{}.tar.gz {}/SaveDesktop/archives/".format(download_dir, date.today(), self.environment, date.today(), download_dir))
-            else:
-                os.popen("tar --gzip -cf {}.tar.gz ./".format(self.saveEntry.get_text()))
-                os.popen("mv {}/SaveDesktop/.{}/{}.tar.gz {}/SaveDesktop/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
-            self.exporting_done()
+            os.popen("tar --gzip -cf {}.tar.gz ./".format(self.saveEntry.get_text()))
+            os.popen("mv {}/SaveDesktop/.{}/{}.tar.gz {}/SaveDesktop/archives/".format(download_dir, date.today(), self.saveEntry.get_text(), download_dir))
+        self.exporting_done()
             
     def exporting_done(self):
         self.toast.set_title(title="Configuration has been saved!")
@@ -228,45 +216,38 @@ class MainWindow(Gtk.Window):
             dialog.close()
             file = dialog.get_file()
             filename = file.get_path()
-            # Applying configuration for KDE Plasma
-            if self.environment == 'KDE Plasma':
-                os.chdir('%s' % CACHE)
-                os.popen('cp %s ./' % filename)
-                knsvname = subprocess.getoutput("basename -s .knsv *.knsv")
-                os.system('konsave -i *.knsv')
-                os.system('konsave -a %s' % knsvname)
-                os.popen('rm %s/*' % CACHE)
-                self.applying_done()
             # Applying configuration for GNOME-based environments
-            else:
-                if not os.path.exists("{}/.config".format(Path.home())):
-                    os.system("mkdir ~/.config/")
-                if not os.path.exists("{}/.config/dconf".format(Path.home())):
-                    os.system("mkdir ~/.config/dconf/")
-                os.chdir("%s" % CACHE)
-                os.system("tar -xf %s ./" % filename)
-                os.system("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
-                os.popen('cp -R ./icons ~/.local/share/')
-                os.popen('cp -R ./.themes ~/')
-                os.popen("cp -R ./backgrounds ~/.local/share/")
-                # Apply configs for individual desktop environments
-                if self.environment == 'GNOME':
-                    os.popen("cp -R ./gnome-background-properties ~/.local/share/")
-                    os.popen("cp -R ./gnome-shell ~/.local/share/")
-                    os.popen("cp -R ./nautilus-python ~/.local/share/")
-                    os.popen("cp -R ./gnome-control-center ~/.config/")
-                elif self.environment == 'Cinnamon':
-                    os.popen("cp -R ./nemo ~/.config/")
-                    os.popen("cp -R ./cinnamon ~/.local/share/")
-                    os.popen("cp -R ./.cinnamon ~/")
-                elif self.environment == 'Budgie':
-                    os.popen("cp -R ./budgie-desktop ~/.config/")
-                    os.popen("cp -R ./budgie-extras ~/.config/")
-                    os.popen("cp -R ./nemo ~/.config/")
-                elif self.environment == 'COSMIC':
-                    os.popen("cp -R ./pop-shell ~/.config/")
-                    os.popen("cp -R ./gnome-shell ~/.local/share/")
-                self.applying_done()
+            if not os.path.exists("{}/.config".format(Path.home())):
+                os.system("mkdir ~/.config/")
+            if not os.path.exists("{}/.config/dconf".format(Path.home())):
+                os.system("mkdir ~/.config/dconf/")
+            os.chdir("%s" % CACHE)
+            os.system("tar -xf %s ./" % filename)
+            os.system("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
+            os.popen('cp -R ./icons ~/.local/share/')
+            os.popen('cp -R ./.themes ~/')
+            os.popen("cp -R ./backgrounds ~/.local/share/")
+            # Apply configs for individual desktop environments
+            if self.environment == 'GNOME':
+                os.popen("cp -R ./gnome-background-properties ~/.local/share/")
+                os.popen("cp -R ./gnome-shell ~/.local/share/")
+                os.popen("cp -R ./nautilus-python ~/.local/share/")
+                os.popen("cp -R ./gnome-control-center ~/.config/")
+            elif self.environment == 'Cinnamon':
+                os.popen("cp -R ./nemo ~/.config/")
+                os.popen("cp -R ./cinnamon ~/.local/share/")
+                os.popen("cp -R ./.cinnamon ~/")
+            elif self.environment == 'Budgie':
+                os.popen("cp -R ./budgie-desktop ~/.config/")
+                os.popen("cp -R ./budgie-extras ~/.config/")
+                os.popen("cp -R ./nemo ~/.config/")
+            elif self.environment == 'COSMIC':
+                os.popen("cp -R ./pop-shell ~/.config/")
+                os.popen("cp -R ./gnome-shell ~/.local/share/")
+            elif self.environment == 'Xfce':
+                os.popen("cp -R ./xfce4 ~/.config/")
+                os.popen("cp -R ./Thunar ~/.config/")
+            self.applying_done()
         else:
             dialog.close()
             
@@ -308,17 +289,11 @@ class MyApp(Adw.Application):
         self.connect('activate', self.on_activate)
         
     def open_dir(self, action, param):
-        if os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
-            os.system("xdg-open {}/SaveDesktop/".format(download_dir))
-        else:
-            os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
+        os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
         
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
-        if os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
-            os.system('dbus-send --print-reply --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int:32:0 int32:0')
-        else:
-            os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
+        os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
         
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
