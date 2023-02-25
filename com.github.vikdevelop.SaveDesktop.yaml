@@ -12,8 +12,8 @@ finish-args:
     - --filesystem=home
     # for logout from session (GNOME-based environments)
     - --talk-name=org.gnome.SessionManager
-    # for logout from session (KDE Plasma)
-    - --talk-name=org.kde.ksmserver
+    # for logout from session (Xfce)
+    - --talk-name=org.xfce.SessionManager
 modules:
   # for save KDE Plasma configuration
   - python3-konsave.json
