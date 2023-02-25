@@ -10,8 +10,8 @@
     <developer_name>vikdevelop</developer_name>
     
     <description>
-      <p>Save and apply KDE Plasma and GNOME based desktop environments configuration</p>
-      <p>Supported desktop environments: GNOME, Cinnamon, Budgie, COSMIC and KDE Plasma</p>
+      <p>Save and apply your desktop environment configuration</p>
+      <p>Supported desktop environments: GNOME, Cinnamon, Budgie, COSMIC and Xfce</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/gnome-config-saver</url>
