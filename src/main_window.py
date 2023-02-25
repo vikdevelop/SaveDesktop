@@ -71,6 +71,7 @@ class MainWindow(Gtk.Window):
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
             self.environment = 'KDE Plasma'
             self.save_desktop()
+            self.connect("close-request", self.on_close)
         else:
             self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
             self.Image.set_pixel_size(64)
