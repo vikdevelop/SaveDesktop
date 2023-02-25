@@ -73,6 +73,9 @@ class MainWindow(Gtk.Window):
             self.save_desktop()
             self.connect("close-request", self.on_close)
         else:
+            self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
+            self.Image.set_pixel_size(50)
+            self.pBox.append(self.Image)
             self.label_sorry = Gtk.Label()
             self.label_sorry.set_markup("<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: GNOME, COSMIC, Cinnamon, Budgie or Xfce.")
             self.label_sorry.set_wrap(True)
