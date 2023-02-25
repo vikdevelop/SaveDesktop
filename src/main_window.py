@@ -315,7 +315,10 @@ class MyApp(Adw.Application):
         
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
-        os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
+        if os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
+            os.system('dbus-send --print-reply --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int:32:0 int32:0')
+        else:
+            os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
         
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
