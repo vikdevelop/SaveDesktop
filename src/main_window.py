@@ -198,16 +198,10 @@ class MainWindow(Gtk.Window):
         self.file_chooser.set_current_folder( \
             Gio.File.new_for_path(os.environ['HOME']))
         self.file_chooser.set_modal(True)
-        if self.environment == 'KDE Plasma':
-            self.file_filter_knsv = Gtk.FileFilter.new()
-            self.file_filter_knsv.set_name('Konsave files')
-            self.file_filter_knsv.add_pattern('*.knsv')
-            self.file_chooser.add_filter(self.file_filter_knsv)
-        else:
-            self.file_filter = Gtk.FileFilter.new()
-            self.file_filter.set_name('Gzip archive')
-            self.file_filter.add_pattern('*.tar.gz')
-            self.file_chooser.add_filter(self.file_filter)
+        self.file_filter = Gtk.FileFilter.new()
+        self.file_filter.set_name('Gzip archive')
+        self.file_filter.add_pattern('*.tar.gz')
+        self.file_chooser.add_filter(self.file_filter)
         self.file_chooser.connect('response', self.open_response)
         self.file_chooser.show()
         
