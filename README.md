@@ -6,7 +6,7 @@
 Save and apply your Desktop Environment configuration
 ### Supported environments:
 - GNOME
-- KDE Plasma
+- Xfce
 - Cinnamon
 - Budgie
 - COSMIC (Pop!_OS)
