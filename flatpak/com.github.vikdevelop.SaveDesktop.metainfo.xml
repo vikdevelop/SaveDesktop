@@ -4,14 +4,18 @@
     <id>com.github.vikdevelop.SaveDesktop</id>
     <launchable type="desktop-id">com.github.vikdevelop.SaveDesktop.desktop</launchable>
     <name>SaveDesktop</name>
-    <summary>Save and apply KDE Plasma and GNOME based desktop environments configuration</summary>
+    <summary>Save the current configuration of your environment</summary>
+    <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho prostředí</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
     
     <description>
-      <p>Save and apply your desktop environment configuration</p>
-      <p>Supported desktop environments: GNOME, Cinnamon, Budgie, COSMIC and Xfce</p>
+      <p>Would you like to save your current configuration including themes, icons, wallpapers, all environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
+    </description>
+    <!-- from translations/cs.json -->
+    <description xml:lang="cs_CZ">
+      <p>Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/gnome-config-saver</url>
@@ -30,7 +34,7 @@
     </categories>
     
     <releases>
-        <release version="1.0" date="2023-02-19">
+        <release version="1.0" date="2023-02-26">
         </release>
     </releases>
     
