@@ -11,6 +11,14 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Adw, Gio, GLib
 
+if subprocess.getoutput('locale | grep "LANG"') == 'LANG=cs_CZ.UTF-8':
+    lang = "cs.json"
+else:
+    lang = "en.json"
+
+locale = open(f"/app/translations/{lang}")
+_ = json.load(locale)
+
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 CACHE = f"{Path.home()}/.var/app/com.github.vikdevelop.SaveDesktop/cache/tmp"
 CONFIG = f"{Path.home()}/.var/app/com.github.vikdevelop.SaveDesktop/config"
@@ -27,18 +35,20 @@ class MainWindow(Gtk.Window):
         
         # App menu
         self.menu_button_model = Gio.Menu()
-        self.menu_button_model.append("About app", 'app.about')
+        self.menu_button_model.append(_["about_app"], 'app.about')
         self.menu_button = Gtk.MenuButton.new()
         self.menu_button.set_icon_name(icon_name='open-menu-symbolic')
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
         
+        # Primary layout
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.pBox.set_halign(Gtk.Align.CENTER)
         self.pBox.set_valign(Gtk.Align.CENTER)
         self.pBox.set_margin_start(100)
         self.pBox.set_margin_end(100)
         
+        # Toast
         self.toast_overlay = Adw.ToastOverlay.new()
         self.toast_overlay.set_margin_top(margin=1)
         self.toast_overlay.set_margin_end(margin=1)
@@ -52,6 +62,7 @@ class MainWindow(Gtk.Window):
         self.toast.set_timeout(5)
         self.toast.connect('dismissed', self.on_toast_dismissed)
         
+        # check of user current desktop
         if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
@@ -77,22 +88,23 @@ class MainWindow(Gtk.Window):
             self.Image.set_pixel_size(50)
             self.pBox.append(self.Image)
             self.label_sorry = Gtk.Label()
-            self.label_sorry.set_markup("<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: GNOME, COSMIC, Cinnamon, Budgie or Xfce.")
+            self.label_sorry.set_markup(_["unsuppurted_env_desc"])
             self.label_sorry.set_wrap(True)
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
-        
+    
+    # Show main layout
     def save_desktop(self):
         self.titleImage = Gtk.Image.new_from_icon_name("com.github.vikdevelop.SaveDesktop")
         self.titleImage.set_pixel_size(64)
         self.pBox.append(self.titleImage) 
         
         self.label_title = Gtk.Label.new()
-        self.label_title.set_markup("<big><b>SaveDesktop for {}</b></big>\n".format(self.environment))
+        self.label_title.set_markup(_["savedesktop_title"].format(self.environment))
         self.pBox.append(self.label_title)
         
         self.label_export = Gtk.Label.new()
-        self.label_export.set_markup("<b>Save current configuration</b>")
+        self.label_export.set_markup(f'<b>{_["save_config"]}</b>')
         self.label_export.set_xalign(-1)
         self.pBox.append(self.label_export)
         
@@ -102,7 +114,7 @@ class MainWindow(Gtk.Window):
         self.pBox.append(self.lbox_e)
         
         self.label_import = Gtk.Label.new()
-        self.label_import.set_markup("<b>Import saved configuration</b>")
+        self.label_import.set_markup(f'<b>{_["import_config"]}</b>')
         self.label_import.set_xalign(-1)
         self.pBox.append(self.label_import)
         
@@ -112,7 +124,7 @@ class MainWindow(Gtk.Window):
         self.pBox.append(self.lbox_a)
         
         self.saveEntry = Adw.EntryRow.new()
-        self.saveEntry.set_title("Set the file name (without spaces)")
+        self.saveEntry.set_title(_["set_filename"])
         if os.path.exists(f'{CONFIG}/settings.json'):
             with open(f'{CONFIG}/settings.json') as e:
                 jE = json.load(e)
@@ -133,7 +145,7 @@ class MainWindow(Gtk.Window):
         self.sbox.append(self.saveButton)
         
         self.adw_action_row_save = Adw.ActionRow.new()
-        self.adw_action_row_save.set_title("Save current configuration")
+        self.adw_action_row_save.set_title(_["save_config"])
         self.adw_action_row_save.set_title_lines(3)
         self.adw_action_row_save.add_suffix(widget=self.sbox)
         self.adw_action_row_save.set_activatable_widget(widget=self.saveButton)
@@ -149,7 +161,7 @@ class MainWindow(Gtk.Window):
         self.obox.append(self.loadButton)
         
         self.adw_action_row_load = Adw.ActionRow.new()
-        self.adw_action_row_load.set_title("Import saved configuration")
+        self.adw_action_row_load.set_title(_["import_config"])
         self.adw_action_row_load.add_suffix(widget=self.obox)
         self.adw_action_row_load.set_activatable_widget(widget=self.loadButton)
         self.lbox_a.append(child=self.adw_action_row_load)
@@ -162,6 +174,7 @@ class MainWindow(Gtk.Window):
         self.save_config()
         self.exporting_done()
     
+    # Save configuration
     def save_config(self):
         if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
             os.popen("mkdir {}/SaveDesktop/".format(download_dir))
@@ -203,29 +216,32 @@ class MainWindow(Gtk.Window):
             os.popen("mv ./{}.sd.tar.gz {}/SaveDesktop/archives/".format(self.saveEntry.get_text(), download_dir))
         self.spinner.stop()
             
+    # configuration has been exported action
     def exporting_done(self):
-        self.toast.set_title(title="Configuration has been saved!")
-        self.toast.set_button_label("Open the folder")
+        self.toast.set_title(title=_["config_saved"])
+        self.toast.set_button_label(_["open_folder"])
         self.toast.set_action_name("app.open_dir")
         self.toast_overlay.add_toast(self.toast)
         
+    # Load file chooser
     def fileshooser(self):
         self.file_chooser = Gtk.FileChooserDialog()
         self.file_chooser.set_transient_for(self)
-        self.file_chooser.set_title('Import {} Configuration'.format(self.environment))
+        self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
         self.file_chooser.set_action(Gtk.FileChooserAction.OPEN)
-        self.file_chooser.add_buttons('Open', Gtk.ResponseType.ACCEPT, \
-            'Cancel', Gtk.ResponseType.CANCEL)
+        self.file_chooser.add_buttons(_["open"], Gtk.ResponseType.ACCEPT, \
+            _["cancel"], Gtk.ResponseType.CANCEL)
         self.file_chooser.set_current_folder( \
             Gio.File.new_for_path(os.environ['HOME']))
         self.file_chooser.set_modal(True)
         self.file_filter = Gtk.FileFilter.new()
-        self.file_filter.set_name('SaveDesktop files')
+        self.file_filter.set_name(_["savedesktop_f"])
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_chooser.add_filter(self.file_filter)
         self.file_chooser.connect('response', self.open_response)
         self.file_chooser.show()
         
+    ## Action after closing file chooser
     def open_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
             dialog.close()
@@ -266,12 +282,14 @@ class MainWindow(Gtk.Window):
         else:
             dialog.close()
             
+    ## open file chooser
     def apply_config(self, w):
         self.fileshooser()
     
+    # Config has been imported action
     def applying_done(self):
-        self.toast.set_title(title='The configuration has been applied! Log out and log \nback in for the changes to take effect.')
-        self.toast.set_button_label("Log Out")
+        self.toast.set_title(title=_["config_imported"])
+        self.toast.set_button_label(_["logout"])
         self.toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.toast)
     
@@ -279,6 +297,7 @@ class MainWindow(Gtk.Window):
         print('')
         os.system("rm %s/*" % CACHE)
         
+    # Get settings from XDG_CONFIG/settings.json
     def get_settings(self):
         if os.path.exists(f'{CONFIG}/settings.json'):
             with open(f'{CONFIG}/settings.json') as l:
@@ -291,6 +310,7 @@ class MainWindow(Gtk.Window):
             self.set_default_size(750, 540)
             self.set_size_request(750, 540)
     
+    # action after closing window
     def on_close(self, widget, *args):
         with open(f'{CONFIG}/settings.json', 'w') as s:
             s.write('{\n "file-text": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), self.get_allocation().width, self.get_allocation().height))
@@ -318,6 +338,10 @@ class MyApp(Adw.Application):
         dialog.set_application_name("SaveDesktop")
         dialog.set_version("1.0")
         dialog.set_developer_name("vikdevelop")
+        if lang == "en.json":
+            print("")
+        else:
+            dialog.set_translator_credits(_["translator_credits"])
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop")
