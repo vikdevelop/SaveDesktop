@@ -13,5 +13,7 @@
 	"savedesktop_f": "Soubory SaveDesktop",
 	"config_imported": "Konfigurace byla provedena!",
 	"logout": "Odhlásit se",
+	"summary": "Uložte aktuální konfiguraci vašeho prostředí",
+	"description": "Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.",
 	"translator_credits": "vikdevelop https://github.com/vikdevelop"
 }
