@@ -25,6 +25,7 @@ modules:
        - install -D -t /app/share/applications flatpak/com.github.vikdevelop.SaveDesktop.desktop
        - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/icons/com.github.vikdevelop.SaveDesktop.png
        - install -D -t /app/share/metainfo flatpak/com.github.vikdevelop.SaveDesktop.metainfo.xml
+       - cp -R translations /app/
     sources:
           - type: dir
             path: .
