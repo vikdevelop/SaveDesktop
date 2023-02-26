@@ -1,0 +1,17 @@
+{
+	"about_app": "About app",
+	"unsuppurted_env_desc": "<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: GNOME, COSMIC, Cinnamon, Budgie or Xfce.",
+	"savedesktop_title": "<big><b>SaveDesktop for {}</b></big>\n",
+	"save_config": "<b>Save current configuration</b>",
+	"import_config": "<b>Import saved configuration</b>",
+	"set_filename": "Set the file name (without spaces)",
+	"config_saved": "Configuration has been saved!",
+	"open_folder": "Open the folder",
+	"import_fileshooser": "Import {} configuration",
+	"open": "Open",
+	"cancel": "Cancel",
+	"savedesktop_f": "SaveDesktop files",
+	"config_imported": "The configuration has been applied!",
+	"logout": "Log Out",
+	"translator_credits": "Translator <email> or github-link"
+}
