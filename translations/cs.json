@@ -1,0 +1,17 @@
+{
+	"about_app": "O aplikaci",
+	"unsuppurted_env_desc": "<big><b>Máte nainstalované nepodporované prostředí.</b></big> \nPoužijte následující prostředí: GNOME, COSMIC, Cinnamon, Budgie or Xfce.",
+	"savedesktop_title": "<big><b>SaveDesktop pro {}</b></big>\n",
+	"save_config": "Uložit aktuální konfiguraci",
+	"import_config": "Importovat již uloženou konfiguraci",
+	"set_filename": "Nastavit název souboru (bez mezer)",
+	"config_saved": "Konfigurace byla uložena!",
+	"open_folder": "Otevřít složku",
+	"import_fileshooser": "Importovat konfiguraci {}",
+	"open": "Otevřít",
+	"cancel": "Zrušit",
+	"savedesktop_f": "Soubory SaveDesktop",
+	"config_imported": "Konfigurace byla provedena!",
+	"logout": "Odhlásit se",
+	"translator_credits": "vikdevelop https://github.com/vikdevelop"
+}
