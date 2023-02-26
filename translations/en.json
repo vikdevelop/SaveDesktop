@@ -13,7 +13,7 @@
 	"savedesktop_f": "SaveDesktop files",
 	"config_imported": "The configuration has been applied!",
 	"logout": "Log Out",
-	"summary": "Save the current configuration of your desktop environment"
-	"description": "Would you like to save your current configuration including themes, icons, wallpapers, all environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved."
+	"summary": "Save the current configuration of your desktop environment",
+	"description": "Would you like to save your current configuration including themes, icons, wallpapers, all environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.",
 	"translator_credits": "Translator <email> or github-link"
 }
