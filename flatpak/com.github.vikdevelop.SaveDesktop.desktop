@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=SaveDesktop
 Categories=Utility
-Comment=Save and apply Xfce and GNOME-based desktop environments configuration
-Comment[cs]=Uložit a použít konfiguraci Xfce a na GNOME založených prostředích
+Comment=Save the current configuration of your desktop environment
+Comment[cs]=Uložit aktuální konfiguraci vašeho desktopového prostředí
 Exec=run.sh
 Type=Application
 Icon=com.github.vikdevelop.SaveDesktop
