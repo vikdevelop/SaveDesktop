@@ -83,30 +83,48 @@ class MainWindow(Gtk.Window):
             self.pBox.append(self.label_sorry)
         
     def save_desktop(self):
+        self.titleImage = Gtk.Image.new_from_icon_name("com.github.vikdevelop.SaveDesktop")
+        self.titleImage.set_pixel_size(64)
+        self.pBox.append(self.titleImage) 
+        
         self.label_title = Gtk.Label.new()
-        self.label_title.set_markup("<big><b>Welcome to SaveDesktop for {}</b></big> \nThis program allows you to save and load your {} configuration. \n \n".format(self.environment, self.environment))
-        self.label_title.set_wrap(True)
-        self.label_title.set_justify(Gtk.Justification.CENTER)
+        self.label_title.set_markup("<big><b>SaveDesktop for {}</b></big>\n".format(self.environment))
         self.pBox.append(self.label_title)
         
-        self.lbox = Gtk.ListBox.new()
-        self.lbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.lbox.get_style_context().add_class(class_name='boxed-list')
-        self.pBox.append(self.lbox)
+        self.label_export = Gtk.Label.new()
+        self.label_export.set_markup("<b>Save current configuration</b>")
+        self.label_export.set_xalign(-1)
+        self.pBox.append(self.label_export)
+        
+        self.lbox_e = Gtk.ListBox.new()
+        self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.lbox_e.get_style_context().add_class(class_name='boxed-list')
+        self.pBox.append(self.lbox_e)
+        
+        self.label_import = Gtk.Label.new()
+        self.label_import.set_markup("<b>Import saved configuration</b>")
+        self.label_import.set_xalign(-1)
+        self.pBox.append(self.label_import)
+        
+        self.lbox_a = Gtk.ListBox.new()
+        self.lbox_a.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.lbox_a.get_style_context().add_class(class_name='boxed-list')
+        self.pBox.append(self.lbox_a)
+        
+        self.saveEntry = Adw.EntryRow.new()
+        self.saveEntry.set_title("Set the file name (without spaces)")
+        if os.path.exists(f'{CONFIG}/settings.json'):
+            with open(f'{CONFIG}/settings.json') as e:
+                jE = json.load(e)
+            self.saveEntry.set_text(jE["file-text"])
+        self.lbox_e.append(self.saveEntry)
         
         self.sbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         self.sbox.set_margin_top(9)
         self.sbox.set_margin_bottom(9)
         
-        self.ebox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
-        
-        self.saveEntry = Adw.EntryRow.new()
-        self.saveEntry.set_title("Set the file name")
-        if os.path.exists(f'{CONFIG}/settings.json'):
-            with open(f'{CONFIG}/settings.json') as e:
-                jE = json.load(e)
-            self.saveEntry.set_text(jE["file-text"])
-        self.ebox.append(self.saveEntry)
+        self.spinner = Gtk.Spinner()
+        self.sbox.append(self.spinner)
         
         self.saveButton = Gtk.Button.new_from_icon_name("document-save-symbolic")
         self.saveButton.add_css_class("suggested-action")
@@ -115,46 +133,46 @@ class MainWindow(Gtk.Window):
         self.sbox.append(self.saveButton)
         
         self.adw_action_row_save = Adw.ActionRow.new()
-        self.adw_action_row_save.set_title("Save {} Desktop Configuration".format(self.environment))
+        self.adw_action_row_save.set_title("Save current configuration")
         self.adw_action_row_save.set_title_lines(3)
-        self.adw_action_row_save.set_subtitle("Set the file name without diacritics and spaces")
-        self.adw_action_row_save.add_suffix(widget=self.ebox)
         self.adw_action_row_save.add_suffix(widget=self.sbox)
         self.adw_action_row_save.set_activatable_widget(widget=self.saveButton)
-        self.lbox.append(child=self.adw_action_row_save)
+        self.lbox_e.append(child=self.adw_action_row_save)
         
         self.obox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.obox.set_margin_top(7)
         self.obox.set_margin_bottom(7)
         
-        self.loadButton = Gtk.Button.new_from_icon_name("image-loading-symbolic")
+        self.loadButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.loadButton.add_css_class("circular")
         self.loadButton.connect("clicked", self.apply_config)
         self.obox.append(self.loadButton)
         
         self.adw_action_row_load = Adw.ActionRow.new()
-        self.adw_action_row_load.set_title("Apply {} Desktop Configuration".format(self.environment))
+        self.adw_action_row_load.set_title("Import saved configuration")
         self.adw_action_row_load.add_suffix(widget=self.obox)
         self.adw_action_row_load.set_activatable_widget(widget=self.loadButton)
-        self.lbox.append(child=self.adw_action_row_load)
+        self.lbox_a.append(child=self.adw_action_row_load)
         
         self.pBox.append(self.toast_overlay)
         
     def set_title_t(self, w):
-        self.toast.set_title("Please wait...")
+        self.spinner.start()
+        self.time_01 = GLib.timeout_add(5, self.spinner.start)
         self.save_config()
+        self.exporting_done()
     
     def save_config(self):
         if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
-            os.system("mkdir {}/SaveDesktop/".format(download_dir))
+            os.popen("mkdir {}/SaveDesktop/".format(download_dir))
         if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
-            os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
-        os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
+            os.popen("mkdir {}/SaveDesktop/archives/".format(download_dir))
+        os.popen("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
         os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-        os.system('cp ~/.config/dconf/user ./')
-        os.system('cp -R ~/.local/share/backgrounds ./')
-        os.system('cp -R ~/.local/share/icons ./')
-        os.system('cp -R ~/.themes ./')
+        os.popen('cp ~/.config/dconf/user ./')
+        os.popen('cp -R ~/.local/share/backgrounds ./')
+        os.popen('cp -R ~/.local/share/icons ./')
+        os.popen('cp -R ~/.themes ./')
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             os.popen("cp -R ~/.local/share/gnome-background-properties ./")
@@ -183,7 +201,7 @@ class MainWindow(Gtk.Window):
         else:
             os.popen("tar --gzip -cf {}.sd.tar.gz ./".format(self.saveEntry.get_text()))
             os.popen("mv ./{}.sd.tar.gz {}/SaveDesktop/archives/".format(self.saveEntry.get_text(), download_dir))
-        self.exporting_done()
+        self.spinner.stop()
             
     def exporting_done(self):
         self.toast.set_title(title="Configuration has been saved!")
