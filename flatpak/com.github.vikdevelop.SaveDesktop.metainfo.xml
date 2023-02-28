@@ -4,26 +4,26 @@
     <id>com.github.vikdevelop.SaveDesktop</id>
     <launchable type="desktop-id">com.github.vikdevelop.SaveDesktop.desktop</launchable>
     <name>SaveDesktop</name>
-    <summary>Save the current configuration of your environment</summary>
-    <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho prostředí</summary>
+    <summary>Save the current configuration of your desktop environment</summary>
+    <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho desktopového prostředí</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
     
     <description>
-      <p>Would you like to save your current configuration including themes, icons, wallpapers, all environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
+      <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
     </description>
     <!-- from translations/cs.json -->
     <description xml:lang="cs_CZ">
-      <p>Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.</p>
+      <p>Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení desktopového prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.</p>
     </description>
     
-    <url type="homepage">https://github.com/vikdevelop/gnome-config-saver</url>
-    <url type="bugtracker">https://github.com/vikdevelop/gnome-config-saver/issues</url>
+    <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
+    <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
     
     <screenshots>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/vikdevelop/gnome-config-saver/main/flatpak/screenshots/main_window.png</image>
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png</image>
         </screenshot>
     </screenshots>
     
