@@ -169,18 +169,18 @@ class MainWindow(Gtk.Window):
         self.pBox.append(self.toast_overlay)
         
     def set_title_t(self, w):
-        self.spinner.start()
-        self.time_01 = GLib.timeout_add(5, self.spinner.start)
+        #self.spinner.start()
+        #self.time_01 = GLib.timeout_add(5, self.spinner.start)
         self.save_config()
         self.exporting_done()
     
     # Save configuration
     def save_config(self):
         if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
-            os.popen("mkdir {}/SaveDesktop/".format(download_dir))
+            os.system("mkdir {}/SaveDesktop/".format(download_dir))
         if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
-            os.popen("mkdir {}/SaveDesktop/archives/".format(download_dir))
-        os.popen("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
+            os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
+        os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
         os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
         os.popen('cp ~/.config/dconf/user ./')
         os.popen('cp -R ~/.local/share/backgrounds ./')
