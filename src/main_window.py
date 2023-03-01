@@ -300,6 +300,7 @@ class MainWindow(Gtk.Window):
     def on_toast_dismissed(self, toast):
         print('')
         os.system("rm %s/*" % CACHE)
+        os.system("rm {}/SaveDesktop/.{}/*.tar.gz".format(download_dir, date.today()))
     
     def on_toast_w_dismissed(self, toast_wait):
         print('')
