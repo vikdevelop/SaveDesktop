@@ -155,6 +155,9 @@ class MainWindow(Gtk.Window):
         self.obox.set_margin_top(7)
         self.obox.set_margin_bottom(7)
         
+        self.spinner1 = Gtk.Spinner()
+        self.obox.append(self.spinner1)
+        
         self.loadButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.loadButton.add_css_class("circular")
         self.loadButton.connect("clicked", self.apply_config)
@@ -169,10 +172,9 @@ class MainWindow(Gtk.Window):
         self.pBox.append(self.toast_overlay)
         
     def set_title_t(self, w):
-        #self.spinner.start()
-        #self.time_01 = GLib.timeout_add(5, self.spinner.start)
+        self.spinner.start()
         self.save_config()
-        self.exporting_done()
+        self.timeout_id = GLib.timeout_add_seconds(10, self.exporting_done)
     
     # Save configuration
     def save_config(self):
@@ -214,10 +216,10 @@ class MainWindow(Gtk.Window):
         else:
             os.popen("tar --gzip -cf {}.sd.tar.gz ./".format(self.saveEntry.get_text()))
             os.popen("mv ./{}.sd.tar.gz {}/SaveDesktop/archives/".format(self.saveEntry.get_text(), download_dir))
-        self.spinner.stop()
             
     # configuration has been exported action
     def exporting_done(self):
+        self.spinner.stop()
         self.toast.set_title(title=_["config_saved"])
         self.toast.set_button_label(_["open_folder"])
         self.toast.set_action_name("app.open_dir")
@@ -247,6 +249,8 @@ class MainWindow(Gtk.Window):
             dialog.close()
             file = dialog.get_file()
             filename = file.get_path()
+            self.spinner1.start()
+            self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
             # Applying configuration for GNOME-based environments
             if not os.path.exists("{}/.config".format(Path.home())):
                 os.system("mkdir ~/.config/")
