@@ -135,9 +135,6 @@ class MainWindow(Gtk.Window):
         self.sbox.set_margin_top(9)
         self.sbox.set_margin_bottom(9)
         
-        self.spinner = Gtk.Spinner()
-        self.sbox.append(self.spinner)
-        
         self.saveButton = Gtk.Button.new_from_icon_name("document-save-symbolic")
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("circular")
@@ -152,11 +149,8 @@ class MainWindow(Gtk.Window):
         self.lbox_e.append(child=self.adw_action_row_save)
         
         self.obox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.obox.set_margin_top(7)
-        self.obox.set_margin_bottom(7)
-        
-        self.spinner1 = Gtk.Spinner()
-        self.obox.append(self.spinner1)
+        self.obox.set_margin_top(9)
+        self.obox.set_margin_bottom(9)
         
         self.loadButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.loadButton.add_css_class("circular")
@@ -165,6 +159,7 @@ class MainWindow(Gtk.Window):
         
         self.adw_action_row_load = Adw.ActionRow.new()
         self.adw_action_row_load.set_title(_["import_config"])
+        self.adw_action_row_load.set_title_lines(3)
         self.adw_action_row_load.add_suffix(widget=self.obox)
         self.adw_action_row_load.set_activatable_widget(widget=self.loadButton)
         self.lbox_a.append(child=self.adw_action_row_load)
@@ -172,7 +167,7 @@ class MainWindow(Gtk.Window):
         self.pBox.append(self.toast_overlay)
         
     def set_title_t(self, w):
-        self.spinner.start()
+        self.please_wait_toast()
         self.save_config()
         self.timeout_id = GLib.timeout_add_seconds(10, self.exporting_done)
     
@@ -219,7 +214,6 @@ class MainWindow(Gtk.Window):
             
     # configuration has been exported action
     def exporting_done(self):
-        self.spinner.stop()
         self.toast.set_title(title=_["config_saved"])
         self.toast.set_button_label(_["open_folder"])
         self.toast.set_action_name("app.open_dir")
@@ -249,7 +243,7 @@ class MainWindow(Gtk.Window):
             dialog.close()
             file = dialog.get_file()
             filename = file.get_path()
-            self.spinner1.start()
+            self.please_wait_toast()
             self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
             # Applying configuration for GNOME-based environments
             if not os.path.exists("{}/.config".format(Path.home())):
@@ -296,10 +290,19 @@ class MainWindow(Gtk.Window):
         self.toast.set_button_label(_["logout"])
         self.toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.toast)
+        
+    def please_wait_toast(self):
+        self.toast_wait = Adw.Toast(title=_["please_wait"])
+        self.toast_wait.set_timeout(10)
+        self.toast_wait.connect('dismissed', self.on_toast_w_dismissed)
+        self.toast_overlay.add_toast(self.toast_wait)
     
     def on_toast_dismissed(self, toast):
         print('')
         os.system("rm %s/*" % CACHE)
+    
+    def on_toast_w_dismissed(self, toast_wait):
+        print('')
         
     # Get settings from XDG_CONFIG/settings.json
     def get_settings(self):
