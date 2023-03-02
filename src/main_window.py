@@ -206,8 +206,8 @@ class MainWindow(Gtk.Window):
             
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
-            os.popen("tar --gzip -cf {}_config_{}.sd.tar.gz ./".format(self.environment, date.today()))
-            os.popen("mv ./{}_config_{}.sd.tar.gz {}/SaveDesktop/archives/".format(self.environment, date.today(), download_dir))
+            os.popen("tar --gzip -cf config_{}.sd.tar.gz ./".format(date.today()))
+            os.popen("mv ./config_{}.sd.tar.gz {}/SaveDesktop/archives/".format(date.today(), download_dir))
         else:
             os.popen("tar --gzip -cf {}.sd.tar.gz ./".format(self.saveEntry.get_text()))
             os.popen("mv ./{}.sd.tar.gz {}/SaveDesktop/archives/".format(self.saveEntry.get_text(), download_dir))
