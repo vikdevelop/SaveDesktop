@@ -12,10 +12,12 @@
     
     <description>
       <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
+      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie and Cinnamon</p>
     </description>
     <!-- from translations/cs.json -->
     <description xml:lang="cs_CZ">
       <p>Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení desktopového prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.</p>
+      <p>Podporovaná desktopová prostředí: GNOME, Cosmic, Xfce, Budgie a Cinnamon</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
@@ -34,7 +36,7 @@
     </categories>
     
     <releases>
-        <release version="1.0" date="2023-02-26">
+        <release version="1.0" date="2023-03-03">
         </release>
     </releases>
     
