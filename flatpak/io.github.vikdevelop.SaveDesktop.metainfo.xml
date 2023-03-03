@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
     
-    <id>com.github.vikdevelop.SaveDesktop</id>
-    <launchable type="desktop-id">com.github.vikdevelop.SaveDesktop.desktop</launchable>
+    <id>io.github.vikdevelop.SaveDesktop</id>
+    <launchable type="desktop-id">io.github.vikdevelop.SaveDesktop.desktop</launchable>
     <name>SaveDesktop</name>
     <summary>Save the current configuration of your desktop environment</summary>
     <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho desktopového prostředí</summary>
