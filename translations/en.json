@@ -16,5 +16,6 @@
 	"please_wait": "Please wait ...",
 	"summary": "Save the current configuration of your desktop environment",
 	"description": "Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.",
+	"supported_environments_desc": "Supported desktop environments: GNOME, Cosmic, Xfce, Budgie and Cinnamon",
 	"translator_credits": "Translator <email> or github-link"
 }
