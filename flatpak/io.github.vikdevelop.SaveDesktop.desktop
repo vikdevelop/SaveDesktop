@@ -5,4 +5,4 @@ Comment=Save the current configuration of your desktop environment
 Comment[cs]=Uložit aktuální konfiguraci vašeho desktopového prostředí
 Exec=run.sh
 Type=Application
-Icon=com.github.vikdevelop.SaveDesktop
+Icon=io.github.vikdevelop.SaveDesktop
