@@ -20,8 +20,8 @@ locale = open(f"/app/translations/{lang}")
 _ = json.load(locale)
 
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
-CACHE = f"{Path.home()}/.var/app/com.github.vikdevelop.SaveDesktop/cache/tmp"
-CONFIG = f"{Path.home()}/.var/app/com.github.vikdevelop.SaveDesktop/config"
+CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
+CONFIG = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config"
 
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
@@ -95,7 +95,7 @@ class MainWindow(Gtk.Window):
     
     # Show main layout
     def save_desktop(self):
-        self.titleImage = Gtk.Image.new_from_icon_name("com.github.vikdevelop.SaveDesktop")
+        self.titleImage = Gtk.Image.new_from_icon_name("io.github.vikdevelop.SaveDesktop")
         self.titleImage.set_pixel_size(64)
         self.pBox.append(self.titleImage) 
         
@@ -355,7 +355,7 @@ class MyApp(Adw.Application):
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop")
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
-        dialog.set_application_icon("com.github.vikdevelop.SaveDesktop")
+        dialog.set_application_icon("io.github.vikdevelop.SaveDesktop")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
