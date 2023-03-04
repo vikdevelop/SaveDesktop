@@ -203,20 +203,20 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'Xfce':
             os.popen("cp -R ~/.config/xfce4 ./")
             os.popen("cp -R ~/.config/Thunar ./")
-            
+              
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
             os.popen("tar --gzip -cf config_{}.sd.tar.gz ./".format(date.today()))
-            os.popen("mv ./config_{}.sd.tar.gz {}/SaveDesktop/archives/".format(date.today(), download_dir))
         else:
             os.popen("tar --gzip -cf {}.sd.tar.gz ./".format(self.saveEntry.get_text()))
-            os.popen("mv ./{}.sd.tar.gz {}/SaveDesktop/archives/".format(self.saveEntry.get_text(), download_dir))
             
     # configuration has been exported action
     def exporting_done(self):
         self.toast.set_title(title=_["config_saved"])
         self.toast.set_button_label(_["open_folder"])
         self.toast.set_action_name("app.open_dir")
+        os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+        os.popen('mv ./*.tar.gz {}/SaveDesktop/archives/'.format(download_dir))
         self.toast_overlay.add_toast(self.toast)
         
     # Load file chooser
@@ -252,7 +252,7 @@ class MainWindow(Gtk.Window):
                 os.system("mkdir ~/.config/dconf/")
             os.chdir("%s" % CACHE)
             os.system("tar -xf %s ./" % filename)
-            os.system("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
+            os.popen("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
             os.popen('cp -R ./icons ~/.local/share/')
             os.popen('cp -R ./.themes ~/')
             os.popen("cp -R ./backgrounds ~/.local/share/")
