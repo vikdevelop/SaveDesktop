@@ -251,34 +251,37 @@ class MainWindow(Gtk.Window):
             if not os.path.exists("{}/.config/dconf".format(Path.home())):
                 os.system("mkdir ~/.config/dconf/")
             os.chdir("%s" % CACHE)
-            os.system("tar -xf %s ./" % filename)
-            os.popen("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
-            os.popen('cp -R ./icons ~/.local/share/')
-            os.popen('cp -R ./.themes ~/')
-            os.popen("cp -R ./backgrounds ~/.local/share/")
-            # Apply configs for individual desktop environments
-            if self.environment == 'GNOME':
-                os.popen("cp -R ./gnome-background-properties ~/.local/share/")
-                os.popen("cp -R ./gnome-shell ~/.local/share/")
-                os.popen("cp -R ./nautilus-python ~/.local/share/")
-                os.popen("cp -R ./gnome-control-center ~/.config/")
-            elif self.environment == 'Cinnamon':
-                os.popen("cp -R ./nemo ~/.config/")
-                os.popen("cp -R ./cinnamon ~/.local/share/")
-                os.popen("cp -R ./.cinnamon ~/")
-            elif self.environment == 'Budgie':
-                os.popen("cp -R ./budgie-desktop ~/.config/")
-                os.popen("cp -R ./budgie-extras ~/.config/")
-                os.popen("cp -R ./nemo ~/.config/")
-            elif self.environment == 'COSMIC':
-                os.popen("cp -R ./pop-shell ~/.config/")
-                os.popen("cp -R ./gnome-shell ~/.local/share/")
-            elif self.environment == 'Xfce':
-                os.popen("cp -R ./xfce4 ~/.config/")
-                os.popen("cp -R ./Thunar ~/.config/")
-            self.applying_done()
+            os.popen("tar -xf %s ./" % filename)
+            self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
         else:
             dialog.close()
+            
+    def import_config(self):
+        os.popen("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
+        os.popen('cp -R ./icons ~/.local/share/')
+        os.popen('cp -R ./.themes ~/')
+        os.popen("cp -R ./backgrounds ~/.local/share/")
+        # Apply configs for individual desktop environments
+        if self.environment == 'GNOME':
+            os.popen("cp -R ./gnome-background-properties ~/.local/share/")
+            os.popen("cp -R ./gnome-shell ~/.local/share/")
+            os.popen("cp -R ./nautilus-python ~/.local/share/")
+            os.popen("cp -R ./gnome-control-center ~/.config/")
+        elif self.environment == 'Cinnamon':
+            os.popen("cp -R ./nemo ~/.config/")
+            os.popen("cp -R ./cinnamon ~/.local/share/")
+            os.popen("cp -R ./.cinnamon ~/")
+        elif self.environment == 'Budgie':
+            os.popen("cp -R ./budgie-desktop ~/.config/")
+            os.popen("cp -R ./budgie-extras ~/.config/")
+            os.popen("cp -R ./nemo ~/.config/")
+        elif self.environment == 'COSMIC':
+            os.popen("cp -R ./pop-shell ~/.config/")
+            os.popen("cp -R ./gnome-shell ~/.local/share/")
+        elif self.environment == 'Xfce':
+            os.popen("cp -R ./xfce4 ~/.config/")
+            os.popen("cp -R ./Thunar ~/.config/")
+        self.applying_done()
             
     ## open file chooser
     def apply_config(self, w):
@@ -299,8 +302,8 @@ class MainWindow(Gtk.Window):
     
     def on_toast_dismissed(self, toast):
         print('')
-        os.system("rm %s/*" % CACHE)
-        os.system("rm {}/SaveDesktop/.{}/*.tar.gz".format(download_dir, date.today()))
+        os.popen("rm -rf %s/*" % CACHE)
+        os.popen("rm {}/SaveDesktop/.{}/*.tar.gz".format(download_dir, date.today()))
     
     def on_toast_w_dismissed(self, toast_wait):
         print('')
