@@ -183,6 +183,7 @@ class MainWindow(Gtk.Window):
         os.popen('cp -R ~/.local/share/backgrounds ./')
         os.popen('cp -R ~/.local/share/icons ./')
         os.popen('cp -R ~/.themes ./')
+        os.popen('cp -R ~/.icons ./')
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             os.popen("cp -R ~/.local/share/gnome-background-properties ./")
@@ -261,6 +262,7 @@ class MainWindow(Gtk.Window):
         os.popen("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
         os.popen('cp -R ./icons ~/.local/share/')
         os.popen('cp -R ./.themes ~/')
+        os.popen('cp -R ./.icons ~/')
         os.popen("cp -R ./backgrounds ~/.local/share/")
         # Apply configs for individual desktop environments
         if self.environment == 'GNOME':
