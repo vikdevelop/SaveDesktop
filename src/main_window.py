@@ -203,6 +203,7 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'Xfce':
             os.popen("cp -R ~/.config/xfce4 ./")
             os.popen("cp -R ~/.config/Thunar ./")
+            os.popen("cp -R ~/.xfce4 ./")
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
@@ -281,6 +282,7 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'Xfce':
             os.popen("cp -R ./xfce4 ~/.config/")
             os.popen("cp -R ./Thunar ~/.config/")
+            os.popen("cp -R ./.xfce4 ~/")
         self.applying_done()
             
     ## open file chooser
