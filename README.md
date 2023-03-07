@@ -5,6 +5,8 @@
 
 Save and apply your Desktop Environment configuration
 
+<a href='https://beta.flathub.org/cs/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+
 ## Translations
 If you want to help with localize SaveDesktop, you can use the Weblate tool (is possible register with e.g. GitHub or Google)
 
