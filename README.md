@@ -3,6 +3,13 @@
   <h1 align="center">SaveDesktop</h1>
 </p>
 
+## Translations
+If you want to help with localize SaveDesktop, you can use the Weblate tool (is possible register with e.g. GitHub or Google)
+
+<a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/">
+<img src="https://hosted.weblate.org/widgets/vikdevelop/-/savedesktop/open-graph.png" alt="Stav překladu" width=300 />
+</a>
+
 Save and apply your Desktop Environment configuration
 ### Supported environments:
 - GNOME
