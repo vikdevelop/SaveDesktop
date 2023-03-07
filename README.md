@@ -3,6 +3,8 @@
   <h1 align="center">SaveDesktop</h1>
 </p>
 
+Save and apply your Desktop Environment configuration
+
 ## Translations
 If you want to help with localize SaveDesktop, you can use the Weblate tool (is possible register with e.g. GitHub or Google)
 
@@ -10,7 +12,7 @@ If you want to help with localize SaveDesktop, you can use the Weblate tool (is 
 <img src="https://hosted.weblate.org/widgets/vikdevelop/-/savedesktop/open-graph.png" alt="Stav překladu" width=300 />
 </a>
 
-Save and apply your Desktop Environment configuration
+## About
 ### Supported environments:
 - GNOME
 - Xfce
@@ -26,5 +28,5 @@ Save and apply your Desktop Environment configuration
 
 and more...
 
-## Screenshots
+### Screenshots
 ![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/fbb8864fbf57659a19de42f6996f449367678985/flatpak/screenshots/main_window.png)
