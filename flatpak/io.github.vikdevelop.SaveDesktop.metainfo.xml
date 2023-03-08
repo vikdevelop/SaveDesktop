@@ -27,7 +27,7 @@
       <p>Environnements de bureau pris en charge : GNOME, Cosmic, Xfce, Budgie et Cinnamon</p>
     </description>
     <!-- from translations/pt_BR.json -->
-    <description xml:lang="pt_BR":
+    <description xml:lang="pt_BR">
       <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
       <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie and Cinnamon</p>
     </description>
