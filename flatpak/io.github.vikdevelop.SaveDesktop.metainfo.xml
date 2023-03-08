@@ -6,6 +6,8 @@
     <name>SaveDesktop</name>
     <summary>Save the current configuration of your desktop environment</summary>
     <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho desktopového prostředí</summary>
+		<summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
+		<summary xml:lang="pt_BR">Save the current configuration of your desktop environment</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
@@ -19,9 +21,19 @@
       <p>Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení desktopového prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.</p>
       <p>Podporovaná desktopová prostředí: GNOME, Cosmic, Xfce, Budgie a Cinnamon</p>
     </description>
+    <!-- from translations/fr.json -->
+    <description xml:lang="fr_FR">
+      <p>Vous souhaitez sauvegarder votre configuration actuelle, y compris les thèmes, les icônes, les fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, etc. SaveDesktop peut vous aider. Un simple clic et votre configuration est sauvegardée.</p>
+      <p>Environnements de bureau pris en charge : GNOME, Cosmic, Xfce, Budgie et Cinnamon</p>
+    </description>
+    <!-- from translations/pt_BR.json -->
+    <description xml:lang="pt_BR":
+      <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
+			<p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie and Cinnamon</p>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
     <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
+    <url type="translate">https://hosted.weblate.org/projects/vikdevelop/savedesktop/</url>
     
     <screenshots>
         <screenshot type="default">
@@ -36,8 +48,16 @@
     </categories>
     
     <releases>
-        <release version="1.0" date="2023-03-03">
-        </release>
+      <release version="1.1" date="2023-03-08">
+        <description>
+          <ul>
+            <li>Added Portugalese (Brazil) translations, thanks to @fnogcps</li>
+            <li>Added French translations, thanks to tachyglossues</li>
+          </ul>
+        </description>
+      </release>
+      <release version="1.0" date="2023-03-06">
+      </release>
     </releases>
     
 </component>
