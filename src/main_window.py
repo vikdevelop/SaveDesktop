@@ -11,8 +11,16 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Adw, Gio, GLib
 
+# Czech
 if subprocess.getoutput('locale | grep "LANG"') == 'LANG=cs_CZ.UTF-8':
     lang = "cs.json"
+# French
+elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=fr_FR.UTF-8':
+    lang = 'fr.json'
+# Portugales (Brasil)    
+elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=pt_BR.UTF-8':
+    lang = 'pt_BR.json'
+# English
 else:
     lang = "en.json"
 
