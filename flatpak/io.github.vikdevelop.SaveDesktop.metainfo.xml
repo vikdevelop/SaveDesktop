@@ -6,8 +6,8 @@
     <name>SaveDesktop</name>
     <summary>Save the current configuration of your desktop environment</summary>
     <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho desktopového prostředí</summary>
-		<summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
-		<summary xml:lang="pt_BR">Save the current configuration of your desktop environment</summary>
+    <summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
+    <summary xml:lang="pt_BR">Save the current configuration of your desktop environment</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
