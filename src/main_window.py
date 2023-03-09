@@ -88,7 +88,7 @@ class MainWindow(Gtk.Window):
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
             self.environment = 'Pantheon'
-            self.savedesktop()
+            self.save_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
             self.environment = 'Cinnamon'
@@ -210,8 +210,8 @@ class MainWindow(Gtk.Window):
             os.popen("cp -R ~/.local/share/nautilus-python ./")
             os.popen("cp -R ~/.config/gnome-control-center ./")
         elif self.environment == 'Pantheon':
-            os.popen("cp -R ~/.config/plank")
-            os.popen("cp -R ~/.config/marlin")
+            os.popen("cp -R ~/.config/plank ./")
+            os.popen("cp -R ~/.config/marlin ./")
         elif self.environment == 'Cinnamon':
             os.popen("cp -R ~/.config/nemo ./")
             os.popen("cp -R ~/.local/share/cinnamon ./")
