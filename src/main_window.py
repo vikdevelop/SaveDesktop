@@ -87,7 +87,7 @@ class MainWindow(Gtk.Window):
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
             self.environment = 'GNOME'
-            self.savedesktop()
+            self.save_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
             self.environment = 'Pantheon'
