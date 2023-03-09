@@ -6,6 +6,7 @@ Comment[cs]=Uložit aktuální konfiguraci vašeho desktopového prostředí
 Comment[fr]=Sauvegarder la configuration actuelle de votre environnement de bureau
 Comment[pt_BR]=Save the current configuration of your desktop environment
 Comment[it]=Salva la configurazione corrente del tuo ambiente desktop
+Comment[nl]=Sla de huidige voorkeuren van uw werkomgeving op
 Exec=run.sh
 Type=Application
 Icon=io.github.vikdevelop.SaveDesktop
