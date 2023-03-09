@@ -9,6 +9,7 @@
     <summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
     <summary xml:lang="pt_BR">Salvar a configuração atual do seu ambiente desktop</summary>
     <summary xml:lang="it_IT">Salva la configurazione corrente del tuo ambiente desktop</summary>
+    <summary xml:lang="nl_NL">Sla de huidige voorkeuren van uw werkomgeving op</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
@@ -20,22 +21,27 @@
     <!-- from translations/cs.json -->
     <description xml:lang="cs_CZ">
       <p>Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení desktopového prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.</p>
-      <p>Podporovaná desktopová prostředí: GNOME, Cosmic, Xfce, Budgie a Cinnamon</p>
+      <p>Podporovaná desktopová prostředí: GNOME, Cosmic, Xfce, Budgie, Pantheon a Cinnamon</p>
     </description>
     <!-- from translations/fr.json -->
     <description xml:lang="fr_FR">
       <p>Vous souhaitez sauvegarder votre configuration actuelle, y compris les thèmes, les icônes, les fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, etc. SaveDesktop peut vous aider. Un simple clic et votre configuration est sauvegardée.</p>
-      <p>Environnements de bureau pris en charge : GNOME, Cosmic, Xfce, Budgie et Cinnamon</p>
+      <p>Environnements de bureau pris en charge : GNOME, Cosmic, Xfce, Budgie, Pantheon et Cinnamon</p>
     </description>
     <!-- from translations/pt_BR.json -->
     <description xml:lang="pt_BR">
       <p>Gostaria de salvar sua configuração atual, incluindo temas, ícones, papéis de parede, todas as configurações do ambiente desktop, extensões e assim por diante? SaveDesktop pode ajudá-lo com isso. Apenas um clique e você terá sua configuração salva.</p>
-      <p>Ambientes desktop suportados: GNOME, Cosmic, Xfce, Budgie and Cinnamon</p>
+      <p>Ambientes desktop suportados: GNOME, Cosmic, Xfce, Budgie, Patheon and Cinnamon</p>
     </description>
     <!-- from translations/it.json -->
     <description xml:lang="it_IT">
       <p>Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? SaveDesktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata.</p>
-      <p>Ambienti desktop supportati: GNOME, Cosmic, Xfce, Budgie e Cinnamon</p>
+      <p>Ambienti desktop supportati: GNOME, Cosmic, Xfce, Budgie, Pantheon e Cinnamon</p>
+    </description>
+    <!-- from translations/nl.json -->
+    <description xml:lang="nl_NL">
+      <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
+      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon and Cinnamon</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
@@ -55,6 +61,16 @@
     </categories>
     
     <releases>
+      <release version="1.2" date="2023-03-09">
+        <description>
+          <ul>
+            <li>Added Italian translations, thanks to @albanobattistella</li>
+            <li>Added Dutch translations, thanks to @Vistaus</li>
+            <li>Added support for Pantheon desktop environment</li>
+            <li>Added support for using GNOME on Zorin OS distribution</li>
+          </ul>
+        </description>
+      </release>
       <release version="1.1" date="2023-03-08">
         <description>
           <ul>
