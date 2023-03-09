@@ -1,6 +1,6 @@
 {
     "about_app": "About app",
-    "unsuppurted_env_desc": "<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: GNOME, COSMIC, Cinnamon, Budgie or Xfce.",
+    "unsuppurted_env_desc": "<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: {}.",
     "savedesktop_title": "<big><b>SaveDesktop for {}</b></big>\n",
     "save_config": "Save current configuration",
     "import_config": "Import saved configuration",
@@ -16,6 +16,6 @@
     "please_wait": "Please wait …",
     "summary": "Save the current configuration of your desktop environment",
     "description": "Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.",
-    "supported_environments_desc": "Supported desktop environments: GNOME, Cosmic, Xfce, Budgie and Cinnamon",
+    "supported_environments_desc": "Supported desktop environments: {}",
     "translator_credits": "Translator github-link"
 }
