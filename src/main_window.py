@@ -17,12 +17,15 @@ if subprocess.getoutput('locale | grep "LANG"') == 'LANG=cs_CZ.UTF-8':
 # French
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=fr_FR.UTF-8':
     lang = 'fr.json'
-# Portugales (Brasil)    
+# Portugalese (Brasil)    
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=pt_BR.UTF-8':
     lang = 'pt_BR.json'
 # Italian    
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=it_IT.UTF-8':
     lang = 'it.json'
+# Dutch
+elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=nl_NL.UTF-8':
+    lang = 'nl.json'
 # English
 else:
     lang = "en.json"
