@@ -21,6 +21,7 @@ If you want to help with localize SaveDesktop, you can use the Weblate tool (is 
 - Cinnamon
 - Budgie
 - COSMIC (Pop!_OS)
+- Pantheon
 
 ### SaveDesktop can save:
 - your icons and themes
