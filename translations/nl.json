@@ -17,5 +17,6 @@
     "summary": "Sla de huidige voorkeuren van uw werkomgeving op",
     "description": "Wilt u uw huidige voorkeuren (thema's, pictogrammen, bureaubladachtergronden, systeemvoorkeuren, uitbreidingen, etc.) opslaan? SaveDesktop kan u hierbij helpen. Met slechts één muisklik wordt alles opgeslagen.",
     "supported_environments_desc": "Ondersteunde werkomgevingen: GNOME, Cosmic, Xfce, Budgie, Cinnamon",
-    "translator_credits": "https://github.com/Vistaus"
+    "translator_credits": "https://github.com/Vistaus",
+    "filename_spaces_msg": "There must be no spaces in the file name"
 }
