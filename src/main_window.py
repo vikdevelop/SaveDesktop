@@ -112,12 +112,16 @@ class MainWindow(Gtk.Window):
             self.environment = 'Xfce'
             self.save_desktop()
             self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
+            self.environment = 'MATE'
+            self.save_desktop()
+            self.connect("close-request", self.on_close)
         else:
             self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
             self.Image.set_pixel_size(50)
             self.pBox.append(self.Image)
             self.label_sorry = Gtk.Label()
-            self.label_sorry.set_markup(_["unsuppurted_env_desc"])
+            self.label_sorry.set_markup(_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, MATE"))
             self.label_sorry.set_wrap(True)
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
@@ -240,6 +244,8 @@ class MainWindow(Gtk.Window):
             os.popen("cp -R ~/.config/xfce4 ./")
             os.popen("cp -R ~/.config/Thunar ./")
             os.popen("cp -R ~/.xfce4 ./")
+        elif self.environment == 'MATE':
+            os.popen("cp -R ~/.config/caja ./")
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
@@ -314,7 +320,9 @@ class MainWindow(Gtk.Window):
             os.popen("cp -R ./xfce4 ~/.config/")
             os.popen("cp -R ./Thunar ~/.config/")
             os.popen("cp -R ./.xfce4 ~/")
-        self.applying_done()
+        elif self.environment == 'MATE':
+            os.popen("cp -R ./caja ~/.config/")
+        #self.applying_done()
             
     ## open file chooser
     def apply_config(self, w):
