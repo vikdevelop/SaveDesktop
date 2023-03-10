@@ -26,6 +26,9 @@ elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=it_IT.UTF-8':
 # Dutch
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=nl_NL.UTF-8':
     lang = 'nl.json'
+# Arabic
+elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=ar_EG.UTF-8':
+    lang == 'ar.json'
 # English
 else:
     lang = "en.json"
@@ -81,12 +84,16 @@ class MainWindow(Gtk.Window):
             self.environment = 'GNOME'
             self.save_desktop()
             self.connect("close-request", self.on_close)
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
-            self.environment = 'COSMIC'
-            self.save_desktop()
-            self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
             self.environment = 'GNOME'
+            self.save_desktop()
+            self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
+            self.environment = 'GNOME'
+            self.save_desktop()
+            self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
+            self.environment = 'COSMIC'
             self.save_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
