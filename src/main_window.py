@@ -196,9 +196,12 @@ class MainWindow(Gtk.Window):
         self.pBox.append(self.toast_overlay)
         
     def set_title_t(self, w):
-        self.please_wait_toast()
-        self.save_config()
-        self.timeout_id = GLib.timeout_add_seconds(10, self.exporting_done)
+        if " " in self.saveEntry.get_text():
+            self.spaces_toast()
+        else:
+            self.please_wait_toast()
+            self.save_config()
+            self.timeout_id = GLib.timeout_add_seconds(10, self.exporting_done)
     
     # Save configuration
     def save_config(self):
@@ -243,15 +246,6 @@ class MainWindow(Gtk.Window):
             os.popen("tar --gzip -cf config_{}.sd.tar.gz ./".format(date.today()))
         else:
             os.popen("tar --gzip -cf {}.sd.tar.gz ./".format(self.saveEntry.get_text()))
-            
-    # configuration has been exported action
-    def exporting_done(self):
-        self.toast.set_title(title=_["config_saved"])
-        self.toast.set_button_label(_["open_folder"])
-        self.toast.set_action_name("app.open_dir")
-        os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-        os.popen('mv ./*.tar.gz {}/SaveDesktop/archives/'.format(download_dir))
-        self.toast_overlay.add_toast(self.toast)
         
     # Load file chooser
     def fileshooser(self):
@@ -326,6 +320,21 @@ class MainWindow(Gtk.Window):
     def apply_config(self, w):
         self.fileshooser()
     
+    # configuration has been exported action
+    def exporting_done(self):
+        self.toast.set_title(title=_["config_saved"])
+        self.toast.set_button_label(_["open_folder"])
+        self.toast.set_action_name("app.open_dir")
+        os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+        os.popen('mv ./*.tar.gz {}/SaveDesktop/archives/'.format(download_dir))
+        self.toast_overlay.add_toast(self.toast)
+        
+    def spaces_toast(self):
+        self.toast_sp = Adw.Toast(title=_["filename_spaces_msg"])
+        self.toast_sp.set_timeout(5)
+        self.toast_sp.connect('dismissed', self.on_toast_p_dismissed)
+        self.toast_overlay.add_toast(self.toast_sp)
+    
     # Config has been imported action
     def applying_done(self):
         self.toast.set_title(title=_["config_imported"])
@@ -345,6 +354,9 @@ class MainWindow(Gtk.Window):
         os.popen("rm {}/SaveDesktop/.{}/*.tar.gz".format(download_dir, date.today()))
     
     def on_toast_w_dismissed(self, toast_wait):
+        print('')
+        
+    def on_toast_p_dismissed(self, toast_sp):
         print('')
         
     # Get settings from XDG_CONFIG/settings.json
