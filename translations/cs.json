@@ -1,6 +1,6 @@
 {
     "about_app": "O aplikaci",
-    "unsuppurted_env_desc": "<big><b>Máte nainstalované nepodporované prostředí.</b></big> \nPoužijte následující prostředí: GNOME, COSMIC, Cinnamon, Budgie or Xfce.",
+    "unsuppurted_env_desc": "<big><b>Máte nainstalované nepodporované prostředí.</b></big> \nPoužijte následující prostředí: {}.",
     "savedesktop_title": "<big><b>SaveDesktop pro {}</b></big>\n",
     "save_config": "Uložit aktuální konfiguraci",
     "import_config": "Importovat již uloženou konfiguraci",
