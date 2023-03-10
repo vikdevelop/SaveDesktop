@@ -16,6 +16,7 @@
     "please_wait": "Počkejte prosím …",
     "summary": "Uložte aktuální konfiguraci vašeho desktopového prostředí",
     "description": "Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení desktopového prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.",
-    "supported_environments_desc": "Podporovaná desktopová prostředí: GNOME, Cosmic, Xfce, Budgie a Cinnamon",
-    "translator_credits": "vikdevelop https://github.com/vikdevelop"
+    "supported_environments_desc": "Podporovaná desktopová prostředí: {}",
+    "translator_credits": "vikdevelop https://github.com/vikdevelop",
+    "filename_spaces_msg": "V názvu souboru nesmí být mezery"
 }

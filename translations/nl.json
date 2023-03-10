@@ -1,6 +1,6 @@
 {
     "about_app": "Over de toepassing",
-    "unsuppurted_env_desc": "<big><b>U maakt gebruik van een niet-ondersteunde werkomgeving.</b></big> \nDe volgende werkomgevingen worden ondersteund: GNOME, COSMIC, Cinnamon, Budgie, Xfce.",
+    "unsuppurted_env_desc": "<big><b>U maakt gebruik van een niet-ondersteunde werkomgeving.</b></big> \nDe volgende werkomgevingen worden ondersteund: {}.",
     "savedesktop_title": "<big><b>SaveDesktop voor {}</b></big>\n",
     "save_config": "Huidige voorkeuren opslaan",
     "import_config": "Voorkeuren importeren",
@@ -16,6 +16,7 @@
     "please_wait": "Even geduld…",
     "summary": "Sla de huidige voorkeuren van uw werkomgeving op",
     "description": "Wilt u uw huidige voorkeuren (thema's, pictogrammen, bureaubladachtergronden, systeemvoorkeuren, uitbreidingen, etc.) opslaan? SaveDesktop kan u hierbij helpen. Met slechts één muisklik wordt alles opgeslagen.",
-    "supported_environments_desc": "Ondersteunde werkomgevingen: GNOME, Cosmic, Xfce, Budgie, Cinnamon",
-    "translator_credits": "https://github.com/Vistaus"
+    "supported_environments_desc": "Ondersteunde werkomgevingen: {}",
+    "translator_credits": "https://github.com/Vistaus",
+    "filename_spaces_msg": "De bestandsnaam mag geen spaties bevatten"
 }
