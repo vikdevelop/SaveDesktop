@@ -10,13 +10,14 @@
     <summary xml:lang="pt_BR">Salvar a configuração atual do seu ambiente desktop</summary>
     <summary xml:lang="it_IT">Salva la configurazione corrente del tuo ambiente desktop</summary>
     <summary xml:lang="nl_NL">Sla de huidige voorkeuren van uw werkomgeving op</summary>
+    <summary xml:lang="ar_EG">احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
     
     <description>
       <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
-      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie and Cinnamon</p>
+      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon and Cinnamon</p>
     </description>
     <!-- from translations/cs.json -->
     <description xml:lang="cs_CZ">
@@ -40,8 +41,13 @@
     </description>
     <!-- from translations/nl.json -->
     <description xml:lang="nl_NL">
-      <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
-      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon and Cinnamon</p>
+      <p>Wilt u uw huidige voorkeuren (thema's, pictogrammen, bureaubladachtergronden, systeemvoorkeuren, uitbreidingen, etc.) opslaan? SaveDesktop kan u hierbij helpen. Met slechts één muisklik wordt alles opgeslagen.</p>
+      <p>Ondersteunde werkomgevingen: GNOME, Cosmic, Xfce, Budgie, Pantheon and Cinnamon</p>
+    </description>
+    <!-- from translations/ar.json -->
+    <description xml:lang="ar_EG">
+      <p>هل ترغب في حفظ التخصيصات الحالي الخاص بك بما في ذلك السمات والرموز والخلفيات وجميع إعدادات بيئة سطح المكتب والإضافات وما إلى ذلك؟ يمكن أن يساعدك SaveDesktop في ذلك. بنقرة واحدة فقط ويتم حفظ التخصيصات الخاص بك.</p>
+      <p>بيئات سطح المكتب المدعومة: GNOME, Cosmic, Xfce, Budgie, Pantheon and Cinnamon</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
