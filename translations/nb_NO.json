@@ -1,0 +1,22 @@
+{
+    "about_app": "Om programmet",
+    "unsuppurted_env_desc": "<big><b>Du har et ustøttet miljø installert.</b></big> \nBruk ett av disse miljøene: {}.",
+    "savedesktop_title": "<big><b>SaveDesktop for {}</b></big>\n",
+    "save_config": "Lagre nåværende oppsett",
+    "import_config": "Importer lagret oppsett",
+    "set_filename": "Sett filnavn (uten mellomrom)",
+    "config_saved": "Oppsettet har blitt lagret.",
+    "open_folder": "Åpne mappen",
+    "import_fileshooser": "Importer {}-oppsett",
+    "open": "Åpne",
+    "cancel": "Avbryt",
+    "savedesktop_f": "SaveDesktop-filer",
+    "config_imported": "Oppsettet har blitt anvendt.",
+    "logout": "Logg ut",
+    "please_wait": "Vent …",
+    "summary": "Lagre nåværende oppsett av skrivebordsmiljøet ditt",
+    "description": "SaveDesktop lar deg lagre ditt nåværende oppsett (drakter, ikoner, bakgrunnsbilder, alle skrivebordsmiljøinnstillinger, utvidelser, osv.) med ett klikk.",
+    "supported_environments_desc": "Støttede skrivebordsmiljø: {}",
+    "filename_spaces_msg": "Det kan ikke være noen mellomrom i filnavnet",
+    "translator_credits": "Allan Nordhøy https://github.com/comradekingu"
+}

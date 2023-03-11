@@ -1,6 +1,6 @@
 {
     "about_app": "About app",
-    "unsuppurted_env_desc": "<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: {}.",
+    "unsuppurted_env_desc": "<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}.",
     "savedesktop_title": "<big><b>SaveDesktop for {}</b></big>\n",
     "save_config": "Save current configuration",
     "import_config": "Import saved configuration",
@@ -15,7 +15,7 @@
     "logout": "Log Out",
     "please_wait": "Please wait …",
     "summary": "Save the current configuration of your desktop environment",
-    "description": "Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.",
+    "description": "SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc. with one click.",
     "supported_environments_desc": "Supported desktop environments: {}",
     "filename_spaces_msg": "There must be no spaces in the file name",
     "translator_credits": "Translator github-link"
