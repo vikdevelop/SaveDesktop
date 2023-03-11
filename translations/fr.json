@@ -17,6 +17,6 @@
     "summary": "Sauvegarder la configuration actuelle de votre environnement de bureau",
     "description": "Vous souhaitez sauvegarder votre configuration actuelle, y compris les thèmes, les icônes, les fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, etc. SaveDesktop peut vous aider. Un simple clic et votre configuration est sauvegardée.",
     "supported_environments_desc": "Environnements de bureau pris en charge : GNOME, Cosmic, Xfce, Budgie et Cinnamon",
-    "translator_credits": "Lien github du traducteur",
+    "translator_credits": "",
     "filename_spaces_msg": "There must be no spaces in the file name"
 }
