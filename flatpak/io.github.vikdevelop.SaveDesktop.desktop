@@ -9,6 +9,7 @@ Comment[it]=Salva la configurazione corrente del tuo ambiente desktop
 Comment[nl]=Sla de huidige voorkeuren van uw werkomgeving op
 Comment[ar]=احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك
 Comment[ru]=Сохранить текущую конфигурацию окружения рабочего стола
+Comment[id]=Save the current configuration of your desktop environment
 Exec=run.sh
 Type=Application
 Icon=io.github.vikdevelop.SaveDesktop
