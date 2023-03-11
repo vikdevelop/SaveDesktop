@@ -28,10 +28,13 @@ elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=nl_NL.UTF-8':
     lang = 'nl.json'
 # Arabic
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=ar_EG.UTF-8':
-    lang == 'ar.json'
+    lang = 'ar.json'
 # Russian
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=ru_RU.UTF-8':
-    lang == 'ru.json'
+    lang = 'ru.json'
+# Indonesian
+elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=id_ID.UTF-8':
+    lang = 'id.json'
 # English
 else:
     lang = "en.json"
