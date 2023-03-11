@@ -15,7 +15,7 @@
     "logout": "Log Out",
     "please_wait": "Please wait …",
     "summary": "Save the current configuration of your desktop environment",
-    "description": "SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc. with one click.",
+    "description": "SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.",
     "supported_environments_desc": "Supported desktop environments: {}",
     "filename_spaces_msg": "There must be no spaces in the file name",
     "translator_credits": "Translator github-link"
