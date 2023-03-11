@@ -13,7 +13,7 @@ from gi.repository import Gtk, Adw, Gio, GLib
 
 # Czech
 if subprocess.getoutput('locale | grep "LANG"') == 'LANG=cs_CZ.UTF-8':
-    lang = "cs.json"
+    lang = 'cs.json'
 # French
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=fr_FR.UTF-8':
     lang = 'fr.json'
@@ -27,7 +27,7 @@ elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=it_IT.UTF-8':
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=nl_NL.UTF-8':
     lang = 'nl.json'
 # Arabic
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=ar_EG.UTF-8':
+elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=ar_SA.UTF-8':
     lang = 'ar.json'
 # Russian
 elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=ru_RU.UTF-8':
@@ -37,7 +37,7 @@ elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=id_ID.UTF-8':
     lang = 'id.json'
 # English
 else:
-    lang = "en.json"
+    lang = 'en.json'
 
 locale = open(f"/app/translations/{lang}")
 _ = json.load(locale)
