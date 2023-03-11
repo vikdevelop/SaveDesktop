@@ -12,6 +12,7 @@
     <summary xml:lang="nl_NL">Sla de huidige voorkeuren van uw werkomgeving op</summary>
     <summary xml:lang="ar_EG">احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك</summary>
     <summary xml:lang="ru_RU">Сохранить текущую конфигурацию окружения рабочего стола</summary>
+    <summary xml:lang="id_ID">Save the current configuration of your desktop environment</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
@@ -54,6 +55,11 @@
     <description xml:lang="ru_RU">
       <p>Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все настройки окружения рабочего стола, расширения и т.д.? SaveDesktop поможет вам в этом. Всего один клик - и ваша конфигурация сохранена.</p>
       <p>Поддерживаемые окружения рабочего стола: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, Cinnamon</p>
+    </description>
+    <!-- from translations/id.json -->
+    <description xml:lang="id_ID">
+      <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
+      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, Cinnamon</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
