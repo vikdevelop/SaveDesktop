@@ -13,17 +13,19 @@
     <summary xml:lang="ar_EG">احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك</summary>
     <summary xml:lang="ru_RU">Сохранить текущую конфигурацию окружения рабочего стола</summary>
     <summary xml:lang="id_ID">Save the current configuration of your desktop environment</summary>
+    <summary xml:lang="nb_NO">Lagre nåværende oppsett av skrivebordsmiljøet ditt</summary>
+    <summary xml:lang="uk_UA">Збережіть поточну конфігурацію середовища робочого столу</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
     
     <description>
-      <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
+      <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
       <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE and Cinnamon</p>
     </description>
     <!-- from translations/cs.json -->
     <description xml:lang="cs_CZ">
-      <p>Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení desktopového prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.</p>
+      <p>SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.</p>
       <p>Podporovaná desktopová prostředí: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE a Cinnamon</p>
     </description>
     <!-- from translations/fr.json -->
@@ -60,6 +62,16 @@
     <description xml:lang="id_ID">
       <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
       <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, Cinnamon</p>
+    </description>
+    <!-- from translations/nb_NO.json -->
+    <description xml:lang="nb_NO">
+      <p>SaveDesktop lar deg lagre ditt nåværende oppsett (drakter, ikoner, bakgrunnsbilder, alle skrivebordsmiljøinnstillinger, utvidelser, osv.) med ett klikk.</p>
+      <p>Støttede skrivebordsmiljø: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, Cinnamon</p>
+    </description>
+    <!-- from translations/uk.json -->
+    <description xml:lang="uk_UA">
+      <p>SaveDesktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, всі налаштування середовища робочого столу, розширення тощо) одним клацанням миші.</p>
+      <p>Підтримувані середовища робочого столу: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, Cinnamon</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
