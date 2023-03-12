@@ -10,7 +10,7 @@
     <summary xml:lang="pt_BR">Salvar a configuração atual do seu ambiente desktop</summary>
     <summary xml:lang="it_IT">Salva la configurazione corrente del tuo ambiente desktop</summary>
     <summary xml:lang="nl_NL">Sla de huidige voorkeuren van uw werkomgeving op</summary>
-    <summary xml:lang="ar_EG">احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك</summary>
+    <summary xml:lang="ar_SA">احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك</summary>
     <summary xml:lang="ru_RU">Сохранить текущую конфигурацию окружения рабочего стола</summary>
     <summary xml:lang="id_ID">Save the current configuration of your desktop environment</summary>
     <summary xml:lang="nb_NO">Lagre nåværende oppsett av skrivebordsmiljøet ditt</summary>
@@ -91,11 +91,11 @@
     </categories>
     
     <releases>
-      <release version="1.4" date="2023-03-11">
+      <release version="1.5" date="2023-03-12">
         <description>
           <ul>
             <li>Added Ukrainian translations, thanks to @Kefir2105</li>
-            <li>Added Norwegian (Bokmmål) translations, thanks to @comradekingu</li>
+            <li>Added Norwegian (Bokmål) translations, thanks to @comradekingu</li>
             <li>Updated translations</li>
           </ul>
         </description>
