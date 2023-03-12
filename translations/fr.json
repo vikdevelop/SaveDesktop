@@ -1,6 +1,6 @@
 {
     "about_app": "À propos",
-    "unsuppurted_env_desc": "<big><b>Vous disposez d'un environnement non pris en charge.</b></big> \nVeuillez utiliser les environnements suivants : GNOME, COSMIC, Cinnamon, Budgie or Xfce.",
+    "unsuppurted_env_desc": "<big><b>Votre environnements de bureau n'est pas compatible </b></big> \nVeuillez utiliser l'un de ces environnements : {}.",
     "savedesktop_title": "<big><b>SaveDesktop pour {}</b></big>\n",
     "save_config": "Sauvegarder la configuration actuelle",
     "import_config": "Importer la configuration sauvegardée",
@@ -15,8 +15,8 @@
     "logout": "Fermer la session",
     "please_wait": "Veuillez patienter …",
     "summary": "Sauvegarder la configuration actuelle de votre environnement de bureau",
-    "description": "Vous souhaitez sauvegarder votre configuration actuelle, y compris les thèmes, les icônes, les fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, etc. SaveDesktop peut vous aider. Un simple clic et votre configuration est sauvegardée.",
-    "supported_environments_desc": "Environnements de bureau pris en charge : GNOME, Cosmic, Xfce, Budgie et Cinnamon",
-    "translator_credits": "Translator github-link",
-    "filename_spaces_msg": "There must be no spaces in the file name"
+    "description": "SaveDesktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.",
+    "supported_environments_desc": "Environnements de bureau pris en charge : {}",
+    "translator_credits": "Lien github des traducteurs",
+    "filename_spaces_msg": "Le nom du fichier ne doit pas comporter d'espace"
 }
