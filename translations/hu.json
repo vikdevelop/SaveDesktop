@@ -18,5 +18,5 @@
     "description": "SaveDesktop lehetővé teszi, hogy egy gombnyomással elmentsd a jelenlegi konfigurációdat (témákat, ikonokat, háttereket, az összes asztali környezeti beállítást, kiegészítéseket, stb.).",
     "supported_environments_desc": "Támogatott asztali környezetek: {}",
     "filename_spaces_msg": "A fájlnévben nem lehet szóköz",
-    "translator_credits": "https://github.com/danieluhrinyi"
+    "translator_credits": "Daniel Uhrinyi https://github.com/danieluhrinyi"
 }
