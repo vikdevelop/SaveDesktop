@@ -1,6 +1,6 @@
 {
     "about_app": "Informazioni sull'app",
-    "unsuppurted_env_desc": "<big><b>Hai installato un ambiente non supportato.</b></big>\nSi prega di utilizzare questi ambienti: {}.",
+    "unsuppurted_env_desc": "<big><b>Hai installato un ambiente non supportato.</b></big>\nSi prega di utilizzare uno di questi ambienti: {}.",
     "savedesktop_title": "<big><b>Salva Desktop per {}</b></big>\n",
     "save_config": "Salva la configurazione corrente",
     "import_config": "Importa la configurazione salvata",

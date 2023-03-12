@@ -15,7 +15,7 @@
     "logout": "Odhlásit se",
     "please_wait": "Počkejte prosím …",
     "summary": "Uložte aktuální konfiguraci vašeho desktopového prostředí",
-    "description": "Chtěli byste uložit aktuální konfiguraci zahrnující témata, ikony, tapety, všechna nastavení desktopového prostředí, rozšíření a podobně? S tím vám pomůže program SaveDesktop. Stačí jedno kliknutí a máte konfiguraci uloženou.",
+    "description": "SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.",
     "supported_environments_desc": "Podporovaná desktopová prostředí: {}",
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
     "filename_spaces_msg": "V názvu souboru nesmí být mezery"
