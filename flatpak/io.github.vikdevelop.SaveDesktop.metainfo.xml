@@ -30,7 +30,7 @@
     </description>
     <!-- from translations/fr.json -->
     <description xml:lang="fr_FR">
-      <p>Vous souhaitez sauvegarder votre configuration actuelle, y compris les thèmes, les icônes, les fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, etc. SaveDesktop peut vous aider. Un simple clic et votre configuration est sauvegardée.</p>
+      <p>SaveDesktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.</p>
       <p>Environnements de bureau pris en charge : GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE et Cinnamon</p>
     </description>
     <!-- from translations/pt_BR.json -->
@@ -91,6 +91,15 @@
     </categories>
     
     <releases>
+      <release version="1.4" date="2023-03-11">
+        <description>
+          <ul>
+            <li>Added Ukrainian translations, thanks to @Kefir2105</li>
+            <li>Added Norwegian (Bokmmål) translations, thanks to @comradekingu</li>
+            <li>Updated translations</li>
+          </ul>
+        </description>
+      </release>
       <release version="1.4" date="2023-03-11">
         <description>
           <ul>
