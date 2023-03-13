@@ -97,6 +97,14 @@
     </categories>
     
     <releases>
+      <release version="1.6" date="2023-03-13">
+        <description>
+          <ul>
+            <li>Added Hungarian translations, thanks to @danieluhrinyi</li>
+            <li>Updated translations</li>
+          </ul>
+        </description>
+      </release>
       <release version="1.5" date="2023-03-12">
         <description>
           <ul>
