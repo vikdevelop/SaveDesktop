@@ -1,0 +1,22 @@
+{
+    "about_app": "Sobre la aplicación",
+    "unsuppurted_env_desc": "<big><b>Tienes instalado un entorno no compatible.</b></big> \nUtilice uno de estos entornos: {}.",
+    "savedesktop_title": "<big><b>SaveDesktop para {}</b></big>\n",
+    "save_config": "Guardar la configuración actual",
+    "import_config": "Importar una configuración guardada",
+    "set_filename": "Definir el nombre del archivo (sin espacios)",
+    "config_saved": "¡Se ha guardado la configuración!",
+    "open_folder": "Abrir la carpeta",
+    "import_fileshooser": "Importar la configuración {}",
+    "open": "Abrir",
+    "cancel": "Cancelar",
+    "savedesktop_f": "Archivos de SaveDesktop",
+    "config_imported": "¡La configuración se ha aplicado!",
+    "logout": "Cerrar sesión",
+    "please_wait": "Espera, por favor…",
+    "summary": "Guarda la configuración actual de tu entorno de escritorio",
+    "description": "SaveDesktop te permite guardar tu configuración actual (temas, iconos, fondos de pantalla, todos los ajustes del entorno del escritorio, extensiones, etc.) con un solo clic.",
+    "supported_environments_desc": "Entornos de escritorio compatibles: {}",
+    "filename_spaces_msg": "No debe haber espacios en el nombre del archivo",
+    "translator_credits": "Translator github-link"
+}
