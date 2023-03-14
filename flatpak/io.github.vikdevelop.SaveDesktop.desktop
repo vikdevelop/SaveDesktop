@@ -13,6 +13,7 @@ Comment[id]=Save the current configuration of your desktop environment
 Comment[uk]=Збережіть поточну конфігурацію середовища робочого столу
 Comment[nb_NO]=Lagre nåværende oppsett av skrivebordsmiljøet ditt
 Comment[hu]=Mentsd el az asztali környezeted jelenlegi konfigurációját
+Comment[es]=Guarda la configuración actual de tu entorno de escritorio
 Exec=run.sh
 Type=Application
 Icon=io.github.vikdevelop.SaveDesktop
