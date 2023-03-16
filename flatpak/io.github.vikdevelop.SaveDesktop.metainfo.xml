@@ -103,6 +103,14 @@
     </categories>
     
     <releases>
+      <release version="1.7" date="2023-03-16">
+        <description>
+          <ul>
+            <li>Added Spanish translations, thanks to @gallegonovato</li>
+            <li>Fixed minor bugs</li>
+          </ul>
+        </description>
+      </release>
       <release version="1.6" date="2023-03-13">
         <description>
           <ul>
