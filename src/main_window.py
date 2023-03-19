@@ -9,7 +9,7 @@ from pathlib import Path
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, Adw, Gio, GLib
+from gi.repository import Gtk, Adw, Gio, GLib, Gdk, GObject
 
 # Czech
 if subprocess.getoutput('locale | grep "LANG"') == 'LANG=cs_CZ.UTF-8':
@@ -75,6 +75,20 @@ class MainWindow(Gtk.Window):
         self.menu_button.set_icon_name(icon_name='open-menu-symbolic')
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
+        
+        # Drag and drop area
+        drag_source = Gtk.DragSource.new()
+        drag_source.set_actions(Gdk.DragAction.COPY)
+        drag_source.connect('prepare', self.on_prepare)
+        drag_source.connect('drag-begin', self.on_drag_begin)
+        drag_source.connect('drag-end', self.on_drag_end)
+        drag_source.connect('drag-cancel', self.on_drag_cancel)
+
+        drop_target = Gtk.DropTarget.new(GObject.TYPE_STRING, Gdk.DragAction.COPY)
+        drop_target.connect('drop', self.on_drop)
+
+        self.add_controller(drag_source)
+        self.add_controller(drop_target)
         
         # Primary layout
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -383,6 +397,35 @@ class MainWindow(Gtk.Window):
         print('')
         
     def on_toast_p_dismissed(self, toast_sp):
+        print('')
+    
+    # Drag and drop function
+    def on_drop(self, DropTarget, data, x, y):
+        #print('[!] drop_target (drop) [!]')
+        #print(f'Widget = {DropTarget}')
+        #print(f'Data = {data}')
+        
+        self.please_wait_toast()
+        self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
+        # Applying configuration for GNOME-based environments
+        if not os.path.exists("{}/.config".format(Path.home())):
+            os.system("mkdir ~/.config/")
+        if not os.path.exists("{}/.config/dconf".format(Path.home())):
+            os.system("mkdir ~/.config/dconf/")
+        os.chdir("%s" % CACHE)
+        os.popen(f"tar -xf {data} ./")
+        #self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
+        
+    def on_prepare(self, DropTarget, x, y):
+        print('')
+
+    def on_drag_begin(self):
+        print('')
+
+    def on_drag_end(self):
+        print('')
+
+    def on_drag_cancel(self):
         print('')
         
     # Get settings from XDG_CONFIG/settings.json
