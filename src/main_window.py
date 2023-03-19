@@ -414,7 +414,7 @@ class MainWindow(Gtk.Window):
             os.system("mkdir ~/.config/dconf/")
         os.chdir("%s" % CACHE)
         os.popen(f"tar -xf {data} ./")
-        #self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
+        self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
         
     def on_prepare(self, DropTarget, x, y):
         print('')
