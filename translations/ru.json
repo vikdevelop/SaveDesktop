@@ -18,5 +18,7 @@
     "description": "Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все настройки окружения рабочего стола, расширения и т.д.? SaveDesktop поможет вам в этом. Всего один клик - и ваша конфигурация сохранена.",
     "supported_environments_desc": "Поддерживаемые окружения рабочего стола: {}",
     "filename_spaces_msg": "В имени файла не должно быть пробелов",
-    "translator_credits": "Сергей Ворон https://github.com/vorons"
+    "translator_credits": "Сергей Ворон https://github.com/vorons",
+    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
+    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
 }

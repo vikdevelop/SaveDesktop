@@ -18,5 +18,7 @@
     "description": "Wilt u uw huidige voorkeuren (thema's, pictogrammen, bureaubladachtergronden, systeemvoorkeuren, uitbreidingen, etc.) opslaan? SaveDesktop kan u hierbij helpen. Met slechts één muisklik wordt alles opgeslagen.",
     "supported_environments_desc": "Ondersteunde werkomgevingen: {}",
     "translator_credits": "https://github.com/Vistaus",
-    "filename_spaces_msg": "De bestandsnaam mag geen spaties bevatten"
+    "filename_spaces_msg": "De bestandsnaam mag geen spaties bevatten",
+    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
+    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
 }

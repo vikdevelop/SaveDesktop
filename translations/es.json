@@ -18,5 +18,7 @@
     "description": "SaveDesktop te permite guardar tu configuración actual (temas, iconos, fondos de pantalla, todos los ajustes del entorno del escritorio, extensiones, etc.) con un solo clic.",
     "supported_environments_desc": "Entornos de escritorio compatibles: {}",
     "filename_spaces_msg": "No debe haber espacios en el nombre del archivo",
-    "translator_credits": "gallegonovato https://github.com/gallegonovato"
+    "translator_credits": "gallegonovato https://github.com/gallegonovato",
+    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
+    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
 }
