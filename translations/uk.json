@@ -18,5 +18,7 @@
     "description": "SaveDesktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, всі налаштування середовища робочого столу, розширення тощо) одним клацанням миші.",
     "supported_environments_desc": "Підтримувані середовища робочого столу: {}",
     "filename_spaces_msg": "В імені файлу не повинно бути пробілів",
-    "translator_credits": "vikdevelop https://github.com/vikdevelop"
+    "translator_credits": "vikdevelop https://github.com/vikdevelop",
+    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
+    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
 }
