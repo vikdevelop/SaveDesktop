@@ -19,6 +19,6 @@
     "supported_environments_desc": "Ondersteunde werkomgevingen: {}",
     "translator_credits": "https://github.com/Vistaus",
     "filename_spaces_msg": "De bestandsnaam mag geen spaties bevatten",
-    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
-    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
+    "unsupp_file_desc": "Niet-ondersteund bestand - gebruik SaveDesktop-bestanden",
+    "unable_find_file": "Het bestand is niet aangetroffen - sleep het hierheen vanuit de downloadsmap"
 }
