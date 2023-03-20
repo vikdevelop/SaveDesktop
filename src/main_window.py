@@ -418,7 +418,7 @@ class MainWindow(Gtk.Window):
     
     # Drag and drop function
     def on_drop(self, DropTarget, data, x, y):
-        try:
+        if os.path.exists(data):
             if "sd.tar.gz" in data:
                 self.please_wait_toast()
                 self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
@@ -432,7 +432,7 @@ class MainWindow(Gtk.Window):
                 self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
             else:
                 self.unsupp_toast()
-        except:
+        else:
             self.fileerr_toast()
         
     def on_prepare(self, DropTarget, x, y):
