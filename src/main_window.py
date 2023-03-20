@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import tarfile
 import subprocess
 import gi
 import sys
@@ -387,6 +388,12 @@ class MainWindow(Gtk.Window):
         self.toast_wait.set_timeout(10)
         self.toast_wait.connect('dismissed', self.on_toast_w_dismissed)
         self.toast_overlay.add_toast(self.toast_wait)
+        
+    def unsupp_toast(self):
+        self.toast_unsupp = Adw.Toast(title=_["unsupp_file_desc"])
+        self.toast_unsupp.set_timeout(5)
+        self.toast_unsupp.connect('dismissed', self.on_toast_u_dismissed)
+        self.toast_overlay.add_toast(self.toast_unsupp)
     
     def on_toast_dismissed(self, toast):
         print('')
@@ -396,26 +403,28 @@ class MainWindow(Gtk.Window):
     def on_toast_w_dismissed(self, toast_wait):
         print('')
         
+    def on_toast_u_dismissed(self, toast_unsupp):
+        print('')
+        
     def on_toast_p_dismissed(self, toast_sp):
         print('')
     
     # Drag and drop function
     def on_drop(self, DropTarget, data, x, y):
-        #print('[!] drop_target (drop) [!]')
-        #print(f'Widget = {DropTarget}')
-        #print(f'Data = {data}')
-        
-        self.please_wait_toast()
-        self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
-        # Applying configuration for GNOME-based environments
-        if not os.path.exists("{}/.config".format(Path.home())):
-            os.system("mkdir ~/.config/")
-        if not os.path.exists("{}/.config/dconf".format(Path.home())):
-            os.system("mkdir ~/.config/dconf/")
-        os.chdir("%s" % CACHE)
-        os.popen(f"tar -xf {data} ./")
-        self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
-        
+        if tarfile.is_tarfile(data) == True:
+            self.please_wait_toast()
+            self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
+            # Applying configuration for GNOME-based environments
+            if not os.path.exists("{}/.config".format(Path.home())):
+                os.system("mkdir ~/.config/")
+            if not os.path.exists("{}/.config/dconf".format(Path.home())):
+                os.system("mkdir ~/.config/dconf/")
+            os.chdir("%s" % CACHE)
+            os.popen(f"tar -xf {data} ./")
+            self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
+        else:
+            self.unsupp_toast()
+            
     def on_prepare(self, DropTarget, x, y):
         print('')
 
