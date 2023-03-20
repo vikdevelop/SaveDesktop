@@ -19,6 +19,6 @@
     "supported_environments_desc": "Podporovaná desktopová prostředí: {}",
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
     "filename_spaces_msg": "V názvu souboru nesmí být mezery",
-    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
-    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
+    "unsupp_file_desc": "Nepodporovaný soubor, použijte soubory SaveDesktop",
+    "unable_find_file": "Soubor se nepodařilo najít, přetáhněte jej prosím z adresáře Stažené"
 }
