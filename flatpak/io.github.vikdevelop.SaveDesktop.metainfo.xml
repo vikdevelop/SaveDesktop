@@ -103,6 +103,13 @@
     </categories>
     
     <releases>
+      <release version="1.8" date="2023-03-20">
+          <description>
+            <ul>
+              <li>Added support for drag and drop for import saved configuration (drag is working only from Downloads directory in default)</li>
+            </ul>
+        </description>
+      </release>
       <release version="1.7" date="2023-03-16">
         <description>
           <ul>
