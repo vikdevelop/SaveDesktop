@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import os
-import tarfile
 import subprocess
 import gi
 import sys
@@ -420,7 +419,7 @@ class MainWindow(Gtk.Window):
     # Drag and drop function
     def on_drop(self, DropTarget, data, x, y):
         try:
-            if tarfile.is_tarfile(data) == True:
+            if "sd.tar.gz" in data:
                 self.please_wait_toast()
                 self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
                 # Applying configuration for GNOME-based environments
