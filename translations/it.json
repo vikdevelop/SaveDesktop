@@ -19,6 +19,6 @@
     "supported_environments_desc": "Ambienti desktop supportati: {}",
     "translator_credits": "Albano Battistella https://github.com/albanobattistella",
     "filename_spaces_msg": "Non ci devono essere spazi nel nome del file",
-    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
-    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
+    "unsupp_file_desc": "File non supportato, utilizzare i file SaveDesktop",
+    "unable_find_file": "Impossibile trovare il file, trascina il file dalla directory dei download"
 }
