@@ -18,5 +18,7 @@
     "description": "Gostaria de salvar sua configuração atual, incluindo temas, ícones, papéis de parede, todas as configurações do ambiente desktop, extensões e assim por diante? SaveDesktop pode ajudá-lo com isso. Apenas um clique e você terá sua configuração salva.",
     "supported_environments_desc": "Ambientes desktop suportados: GNOME, Cosmic, Xfce, Budgie and Cinnamon",
     "translator_credits": "Felipe Nogueira https://github.com/fnogcps",
-    "filename_spaces_msg": "Não deve haver espaços no nome do arquivo"
+    "filename_spaces_msg": "Não deve haver espaços no nome do arquivo",
+    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
+    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
 }
