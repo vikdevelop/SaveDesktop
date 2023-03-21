@@ -252,6 +252,9 @@ class MainWindow(Gtk.Window):
         os.popen('cp -R ~/.local/share/icons ./')
         os.popen('cp -R ~/.themes ./')
         os.popen('cp -R ~/.icons ./')
+        os.popen('cp -R ~/.fonts ./')
+        os.popen('cp -R ~/.config/gtk-4.0 ./')
+        os.popen('cp -R ~/.config/gtk-3.0 ./')
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             os.popen("cp -R ~/.local/share/gnome-background-properties ./")
@@ -328,6 +331,9 @@ class MainWindow(Gtk.Window):
         os.popen('cp -R ./.themes ~/')
         os.popen('cp -R ./.icons ~/')
         os.popen("cp -R ./backgrounds ~/.local/share/")
+        os.popen('cp -R ./.fonts ~/')
+        os.popen('cp -R ./gtk-4.0 ~/.config/')
+        os.popen('cp -R ./gtk-3.0 ~/.config/')
         # Apply configs for individual desktop environments
         if self.environment == 'GNOME':
             os.popen("cp -R ./gnome-background-properties ~/.local/share/")
