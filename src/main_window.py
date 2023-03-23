@@ -507,6 +507,11 @@ class MyApp(Adw.Application):
         os.system("rm %s/*" % CACHE)
         if os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             os.system("dbus-send --session --type=method_call --print-reply --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
+            try:
+                os.system("dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 'org.freedesktop.login1.Manager.TerminateSession' string:1")
+            except:
+                os.system("--system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 'org.freedesktop.login1.Manager.TerminateSession' string:2")
         else:
             os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
         
