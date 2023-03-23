@@ -151,6 +151,10 @@ class MainWindow(Gtk.Window):
             self.environment = 'MATE'
             self.save_desktop()
             self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
+            self.environment = 'KDE Plasma'
+            self.save_desktop()
+            self.connect("close-request", self.on_close)
         else:
             self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
             self.Image.set_pixel_size(50)
@@ -284,6 +288,13 @@ class MainWindow(Gtk.Window):
             os.popen("cp -R ~/.xfce4 ./")
         elif self.environment == 'MATE':
             os.popen("cp -R ~/.config/caja ./")
+        elif self.environment == 'KDE Plasma':
+            os.popen("cp -R ~/.config/[k]* ./")
+            os.popen("cp ~/.config/gtkrc ./")
+            os.popen("cp ~/.config/dolphinrc ./")
+            os.popen("cp ~/.config/gwenviewrc ./")
+            os.popen("cp ~/.config/plasmashellrc ./")
+            os.popen("cp ~/.config/spectaclerc ./")
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
@@ -363,6 +374,13 @@ class MainWindow(Gtk.Window):
             os.popen("cp -R ./.xfce4 ~/")
         elif self.environment == 'MATE':
             os.popen("cp -R ./caja ~/.config/")
+        elif self.environment == 'KDE Plasma':
+            os.popen("cp -R ./[k]* ~/.config/")
+            os.popen("cp ./gtkrc ~/.config/")
+            os.popen("cp ./dolphinrc ~/.config/")
+            os.popen("cp ./gwenviewrc ~/.config/")
+            os.popen("cp ./plasmashellrc ~/.config/")
+            os.popen("cp ./spectaclerc ~/.config/")
         #self.applying_done()
             
     ## open file chooser
