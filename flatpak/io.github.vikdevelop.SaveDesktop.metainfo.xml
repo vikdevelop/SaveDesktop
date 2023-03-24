@@ -109,6 +109,14 @@
     </categories>
     
     <releases>
+      <release version="1.9" date="2023-03-24">
+          <description>
+            <ul>
+              <li>Added support for KDE Plasma DE</li>
+              <li>Added Turkish translations, thanks to @Batmanly</li>
+            </ul>
+        </description>
+      </release>
       <release version="1.8" date="2023-03-20">
           <description>
             <ul>
