@@ -289,12 +289,13 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'MATE':
             os.popen("cp -R ~/.config/caja ./")
         elif self.environment == 'KDE Plasma':
-            os.popen("cp -R ~/.config/[k]* ./")
-            os.popen("cp ~/.config/gtkrc ./")
-            os.popen("cp ~/.config/dolphinrc ./")
-            os.popen("cp ~/.config/gwenviewrc ./")
-            os.popen("cp ~/.config/plasmashellrc ./")
-            os.popen("cp ~/.config/spectaclerc ./")
+            os.system("mkdir xdg-config && mkdir xdg-data")
+            os.popen("cp -R ~/.config/[k]* ./xdg-config/")
+            os.popen("cp ~/.config/gtkrc ./xdg-config/")
+            os.popen("cp ~/.config/dolphinrc ./xdg-config/")
+            os.popen("cp ~/.config/gwenviewrc ./xdg-config/")
+            os.popen("cp ~/.config/plasmashellrc ./xdg-config/")
+            os.popen("cp ~/.config/spectaclerc ./xdg-config/")
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
@@ -375,12 +376,8 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'MATE':
             os.popen("cp -R ./caja ~/.config/")
         elif self.environment == 'KDE Plasma':
-            os.popen("cp -R ./[k]* ~/.config/")
-            os.popen("cp ./gtkrc ~/.config/")
-            os.popen("cp ./dolphinrc ~/.config/")
-            os.popen("cp ./gwenviewrc ~/.config/")
-            os.popen("cp ./plasmashellrc ~/.config/")
-            os.popen("cp ./spectaclerc ~/.config/")
+            os.popen("cp -R ./xdg-config/* ~/.config/")
+            os.popen("cp -R ./xdg-data/* ~/.local/share/")
         #self.applying_done()
             
     ## open file chooser
