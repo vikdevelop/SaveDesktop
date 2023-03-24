@@ -23,6 +23,7 @@ If you want to help with localize SaveDesktop, you can use the Weblate tool (is 
 - COSMIC (Pop!_OS)
 - Pantheon
 - MATE
+- KDE Plasma
 
 ### SaveDesktop can save:
 - your icons and themes
