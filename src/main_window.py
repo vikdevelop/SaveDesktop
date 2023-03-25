@@ -296,10 +296,12 @@ class MainWindow(Gtk.Window):
             os.popen("cp ~/.config/gwenviewrc ./xdg-config/")
             os.popen("cp ~/.config/plasmashellrc ./xdg-config/")
             os.popen("cp ~/.config/spectaclerc ./xdg-config/")
+            os.popen("cp ~/.config/plasmarc ./xdg-config/")
             os.popen("cp -R ~/.local/share/[k]* ./xdg-data/")
             os.popen("cp -R ~/.local/share/dolphin ./xdg-data/")
             os.popen("cp -R ~/.local/share/sddm ./xdg-data/")
             os.popen("cp -R ~/.local/share/wallpapers ./xdg-data/")
+            os.popen("cp -R ~/.local/share/plasma-systemmonitor ./xdg-data/")
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
