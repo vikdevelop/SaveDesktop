@@ -160,7 +160,7 @@ class MainWindow(Gtk.Window):
             self.Image.set_pixel_size(50)
             self.pBox.append(self.Image)
             self.label_sorry = Gtk.Label()
-            self.label_sorry.set_markup(_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, MATE"))
+            self.label_sorry.set_markup(_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE"))
             self.label_sorry.set_wrap(True)
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
@@ -299,6 +299,7 @@ class MainWindow(Gtk.Window):
             os.popen("cp -R ~/.local/share/[k]* ./xdg-data/")
             os.popen("cp -R ~/.local/share/dolphin ./xdg-data/")
             os.popen("cp -R ~/.local/share/sddm ./xdg-data/")
+            os.popen("cp -R ~/.local/share/wallpapers ./xdg-data/")
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
