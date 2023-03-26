@@ -302,6 +302,9 @@ class MainWindow(Gtk.Window):
             os.popen("cp -R ~/.local/share/sddm ./xdg-data/")
             os.popen("cp -R ~/.local/share/wallpapers ./xdg-data/")
             os.popen("cp -R ~/.local/share/plasma-systemmonitor ./xdg-data/")
+            os.popen("cp -R ~/.local/share/plasma ./xdg-data/")
+            os.popen("cp -R ~/.local/share/aurorae ./xdg-data/")
+            os.popen("cp -R ~/.local/share/color-schemes ./xdg-data/")
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
