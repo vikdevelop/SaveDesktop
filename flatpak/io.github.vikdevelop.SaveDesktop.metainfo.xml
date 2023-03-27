@@ -18,6 +18,7 @@
     <summary xml:lang="hu_HU">Mentsd el az asztali környezeted jelenlegi konfigurációját</summary>
     <summary xml:lang="es_ES">Guarda la configuración actual de tu entorno de escritorio</summary>
     <summary xml:lang="tr_TR">Masaüstünün şuanki ayarlarını kayıt et</summary>
+    <summary xml:lang="de_DE">Speichern Sie die aktuelle Konfiguration Ihrer Desktop-Umgebung</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
