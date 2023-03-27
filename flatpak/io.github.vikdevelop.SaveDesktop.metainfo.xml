@@ -91,6 +91,11 @@
       <p>SaveDesktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.</p>
       <p>Desteklenen masaüstü ortamları: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
     </description>
+    <!-- from translations/de.json -->
+    <description xml:lang="de_DE">
+      <p>Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.</p>
+      <p>Unterstützte Desktop-Umgebungen: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
+    </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
     <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
