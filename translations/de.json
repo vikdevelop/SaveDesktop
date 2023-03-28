@@ -1,6 +1,6 @@
 {
-    "about_app": "Über app",
-    "unsuppurted_env_desc": "<big><b>Sie haben eine nicht unterstützte Umgebung installiert.</b></big> \nBitte verwenden Sie eine der folgenden Umgebungen: {}.",
+    "about_app": "Über",
+    "unsuppurted_env_desc": "<big><b>Sie haben eine nicht unterstützte Umgebung installiert.</b></big>\nBitte verwenden Sie eine der folgenden Umgebungen: {}.",
     "savedesktop_title": "<big><b>SaveDesktop für {}</b></big>\n",
     "save_config": "Die aktuelle Konfiguration speichern",
     "import_config": "Die gespeicherte Konfiguration importieren",
