@@ -113,7 +113,7 @@
     <categories>
         <category>Utility</category>
     </categories>
-    
+          
     <releases>
       <release version="2.0" date="2023-03-28">
           <description>
@@ -121,8 +121,7 @@
               <li>Added Deutsch translations, thanks to @gimplyworxs</li>
             </ul>
         </description>
-    </release>
-    <releases>
+      </release>
       <release version="1.9" date="2023-03-24">
           <description>
             <ul>
