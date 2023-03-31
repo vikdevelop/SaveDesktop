@@ -214,7 +214,9 @@ class MainWindow(Gtk.Window):
         
         self.adw_action_row_backups = Adw.ComboRow.new()
         self.adw_action_row_backups.set_title(title="Periodic backups")
+        self.adw_action_row_backups.set_subtitle(subtitle="Changes will only take effect when you log back in")
         self.adw_action_row_backups.set_title_lines(2)
+        self.adw_action_row_backups.set_subtitle_lines(2)
         self.adw_action_row_backups.set_model(model=actions)
         self.lbox_e.append(child=self.adw_action_row_backups)
         
