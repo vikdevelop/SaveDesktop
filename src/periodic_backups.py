@@ -66,7 +66,11 @@ class PeriodicBackups:
          
     # Periodic backups: daily
     def daily(self):
-        self.backup()
+        if os.path.exists('{}/SaveDesktop/archives/config_{}.sd.tar.gz'.format(download_dir, date.today())):
+            print("File already exists")
+            exit()
+        else:
+            self.backup()
         
     # Periodic backups: weekly
     def weekly(self):
