@@ -198,6 +198,7 @@ class MainWindow(Gtk.Window):
         self.lbox_a.get_style_context().add_class(class_name='boxed-list')
         self.pBox.append(self.lbox_a)
         
+        # set the filename section
         self.saveEntry = Adw.EntryRow.new()
         self.saveEntry.set_title(_["set_filename"])
         if os.path.exists(f'{CONFIG}/settings.json'):
@@ -206,16 +207,46 @@ class MainWindow(Gtk.Window):
             self.saveEntry.set_text(jE["file-text"])
         self.lbox_e.append(self.saveEntry)
         
+        # Periodic backups section
+        actions = Gtk.StringList.new(strings=[
+            "Never", "Daily", "Weekly", "Monthly"
+        ])
+        
+        self.adw_action_row_backups = Adw.ComboRow.new()
+        self.adw_action_row_backups.set_title(title="Periodic backups")
+        self.adw_action_row_backups.set_title_lines(2)
+        self.adw_action_row_backups.set_model(model=actions)
+        self.lbox_e.append(child=self.adw_action_row_backups)
+        
+        if os.path.exists(f'{CONFIG}/settings.json'):
+            with open(f'{CONFIG}/settings.json') as b:
+                jb = json.load(b)
+            try:
+                if jb["periodic_backups"] == "Never":
+                    self.adw_action_row_backups.set_selected(0)
+                elif jb["periodic_backups"] == "Daily":
+                    self.adw_action_row_backups.set_selected(1)
+                elif jb["periodic_backups"] == "Weekly":
+                    self.adw_action_row_backups.set_selected(2)
+                elif jb["periodic_backups"] == "Monthly":
+                    self.adw_action_row_backups.set_selected(3)
+            except:
+                self.adw_action_row_backups.set_selected(0)
+        else:
+            self.adw_action_row_backups.set_selected(0)
+        
         self.sbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         self.sbox.set_margin_top(9)
         self.sbox.set_margin_bottom(9)
         
+        # save configuration button
         self.saveButton = Gtk.Button.new_from_icon_name("document-save-symbolic")
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("circular")
         self.saveButton.connect("clicked", self.set_title_t)
         self.sbox.append(self.saveButton)
         
+        # Save configuration section
         self.adw_action_row_save = Adw.ActionRow.new()
         self.adw_action_row_save.set_title(_["save_config"])
         self.adw_action_row_save.set_title_lines(3)
@@ -227,11 +258,13 @@ class MainWindow(Gtk.Window):
         self.obox.set_margin_top(9)
         self.obox.set_margin_bottom(9)
         
+        # Import configuration button
         self.loadButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.loadButton.add_css_class("circular")
         self.loadButton.connect("clicked", self.apply_config)
         self.obox.append(self.loadButton)
         
+        # Import configuration section
         self.adw_action_row_load = Adw.ActionRow.new()
         self.adw_action_row_load.set_title(_["import_config"])
         self.adw_action_row_load.set_title_lines(3)
@@ -241,6 +274,7 @@ class MainWindow(Gtk.Window):
         
         self.pBox.append(self.toast_overlay)
         
+    # Check if filename has spaces or not
     def set_title_t(self, w):
         if " " in self.saveEntry.get_text():
             self.spaces_toast()
@@ -352,6 +386,7 @@ class MainWindow(Gtk.Window):
         else:
             dialog.close()
             
+    # Import configuration
     def import_config(self):
         os.popen("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
         os.popen('cp -R ./icons ~/.local/share/')
@@ -405,6 +440,7 @@ class MainWindow(Gtk.Window):
         os.popen('mv ./*.tar.gz {}/SaveDesktop/archives/'.format(download_dir))
         self.toast_overlay.add_toast(self.toast)
         
+    # popup about message of using spaces in the filename
     def spaces_toast(self):
         self.toast_sp = Adw.Toast(title=_["filename_spaces_msg"])
         self.toast_sp.set_timeout(5)
@@ -418,6 +454,7 @@ class MainWindow(Gtk.Window):
         self.toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.toast)
         
+    # popup about message "Please wait ..."
     def please_wait_toast(self):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
         self.toast_wait.set_timeout(10)
@@ -498,8 +535,17 @@ class MainWindow(Gtk.Window):
     
     # action after closing window
     def on_close(self, widget, *args):
+        selected_item = self.adw_action_row_backups.get_selected_item()
+        # Create desktop file to make periodic backups work
+        if selected_item.get_string() == 'Never':
+            print("")
+        else:
+            if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
+                with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
+                    cb.write('[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --background')
+        # Save settings of filename text, periodic backups and window size
         with open(f'{CONFIG}/settings.json', 'w') as s:
-            s.write('{\n "file-text": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), self.get_allocation().width, self.get_allocation().height))
+            s.write('{\n "file-text": "%s",\n "periodic_backups": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), selected_item.get_string(), self.get_allocation().width, self.get_allocation().height))
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
