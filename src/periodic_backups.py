@@ -49,11 +49,11 @@ class PeriodicBackups:
                 self.pbackups = jp["periodic_backups"]
                 cont = "true"
             except:
-                print("Periodic backups is not set up.")
+                print("Periodic backups are not set up.")
                 cont = "false"
             if cont == "true":
                 if self.pbackups == "Never":
-                    print("Periodic backups is not set up.")
+                    print("Periodic backups are not set up.")
                     exit()
                 elif self.pbackups == "Daily":
                     self.daily()
