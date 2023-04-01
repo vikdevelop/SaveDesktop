@@ -115,6 +115,13 @@
     </categories>
           
     <releases>
+      <release version="2.1" date="2023-04-01">
+          <description>
+            <ul>
+              <li>Added periodic saving (Never, Daily, Weekly and Monthly)</li>
+            </ul>
+        </description>
+      </release>
       <release version="2.0" date="2023-03-28">
           <description>
             <ul>

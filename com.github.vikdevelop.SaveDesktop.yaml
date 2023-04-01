@@ -1,4 +1,4 @@
-app-id: com.github.vikdevelop.SaveDesktop
+app-id: io.github.vikdevelop.SaveDesktop
 runtime: org.gnome.Platform
 runtime-version: '43'
 sdk: org.gnome.Sdk
@@ -8,24 +8,41 @@ finish-args:
     - --socket=wayland
     - --socket=fallback-x11
     - --device=dri
-    # for load ~/.local/share, ~/.config, ~/Downloads/SaveDesktop, .themes and .icons
-    - --filesystem=home
-    # for logout from session (GNOME-based environments)
+    # load Desktop environment config files
+    - --filesystem=~/.config
+    # load Desktop environment data files (e.g. backgrounds, extensions, etc.)
+    - --filesystem=~/.local/share
+    # save config to tar.gz archive in this directory
+    - --filesystem=xdg-download/SaveDesktop:create
+    # to be able to select the archive also from the xdg-downloads folder
+    - --filesystem=xdg-download
+    # save all themes installed in home folder
+    - --filesystem=~/.themes:create
+    # save all icons installed in home folder
+    - --filesystem=~/.icons:create
+    # save cinnamon config in home directory
+    - --filesystem=~/.cinnamon:create
+    # save xfce config in home directory
+    - --filesystem=~/.xfce4:create
+    # save all fonts installed in home directory
+    - --filesystem=~/.fonts:create
+    # logout from session (GNOME-based environments) for changes to the desktop configuration to take effect 
     - --talk-name=org.gnome.SessionManager
-    # for logout from session (Xfce)
+    # logout from session (Xfce) for changes to the Xfce desktop configuration to take effect
     - --talk-name=org.xfce.SessionManager
+    # logout from session (KDE5) for changes to the KDE5 desktop configuration to take effect
+    - --talk-name=org.kde.ksmserver
 modules:
   - name: savedesktop
     buildsystem: simple
     build-commands:
-       - chmod +x src/main_window.py
-       - chmod +x run.sh
-       - install -D -t /app/bin run.sh
-       - install -D -t /app src/main_window.py
-       - install -D -t /app/share/applications flatpak/com.github.vikdevelop.SaveDesktop.desktop
-       - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/icons/com.github.vikdevelop.SaveDesktop.png
+       - install -Dm755 -t /app/bin run.sh
+       - install -Dm755 -t /app src/main_window.py
+       - install -Dm755 -t /app src/periodic_saving.py
+       - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
+       - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.png
        - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/exclamation_mark.png
-       - install -D -t /app/share/metainfo flatpak/com.github.vikdevelop.SaveDesktop.metainfo.xml
+       - install -D -t /app/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
        - cp -R translations /app/
     sources:
           - type: dir
