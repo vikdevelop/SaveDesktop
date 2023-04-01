@@ -20,5 +20,11 @@
     "translator_credits": "Felipe Nogueira https://github.com/fnogcps",
     "filename_spaces_msg": "Não deve haver espaços no nome do arquivo",
     "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
-    "unable_find_file": "Unable to find the file, please drag file from Downloads directory"
+    "unable_find_file": "Unable to find the file, please drag file from Downloads directory",
+    "periodic_saving": "Periodic saving",
+    "periodic_saving_desc": "Changes will only take effect after the next login",
+    "never": "Never",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
 }
