@@ -20,5 +20,11 @@
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
     "filename_spaces_msg": "V názvu souboru nesmí být mezery",
     "unsupp_file_desc": "Nepodporovaný soubor, použijte soubory SaveDesktop",
-    "unable_find_file": "Soubor se nepodařilo najít, přetáhněte jej prosím z adresáře Stažené"
+    "unable_find_file": "Soubor se nepodařilo najít, přetáhněte jej prosím z adresáře Stažené",
+    "periodic_saving": "Periodic saving",
+    "periodic_saving_desc": "Changes will only take effect after the next login",
+    "never": "Never",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
 }
