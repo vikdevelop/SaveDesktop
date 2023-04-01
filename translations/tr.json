@@ -20,5 +20,11 @@
     "filename_spaces_msg": "Dosya isminde bosluk olmalı",
     "unsupp_file_desc": "Desteklenmeyen dosya, SaveDesktop dosyalarını kullan",
     "unable_find_file": "Dosya bulunamıyor , indirme klasöründen dosyayı alıp uygulama üstüne sürükleyin",
-    "translator_credits": "Batmanly https://github.com/batmanly"
+    "translator_credits": "Batmanly https://github.com/batmanly",
+    "periodic_saving": "Periodic saving",
+    "periodic_saving_desc": "Changes will only take effect after the next login",
+    "never": "Never",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
 }
