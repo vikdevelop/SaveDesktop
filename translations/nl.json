@@ -21,10 +21,10 @@
     "filename_spaces_msg": "De bestandsnaam mag geen spaties bevatten",
     "unsupp_file_desc": "Niet-ondersteund bestand - gebruik SaveDesktop-bestanden",
     "unable_find_file": "Het bestand is niet aangetroffen - sleep het hierheen vanuit de downloadsmap",
-    "periodic_saving": "Periodic saving",
-    "periodic_saving_desc": "Changes will only take effect after the next login",
-    "never": "Never",
-    "daily": "Daily",
-    "weekly": "Weekly",
-    "monthly": "Monthly"
+    "periodic_saving": "Periodiek opslaan",
+    "periodic_saving_desc": "Meld u opnieuw aan om de wijzigingen toe te passen",
+    "never": "Nooit",
+    "daily": "Iedere dag",
+    "weekly": "Iedere week",
+    "monthly": "Iedere maand"
 }
