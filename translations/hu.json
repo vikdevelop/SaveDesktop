@@ -21,10 +21,10 @@
     "translator_credits": "Daniel Uhrinyi https://github.com/danieluhrinyi",
     "unsupp_file_desc": "Nem támogatott fájl, használj SaveDesktop fájlt",
     "unable_find_file": "A fájl nem találfató, kérlek húzd be a Letöltések könyvtárból",
-    "periodic_saving": "Periodic saving",
-    "periodic_saving_desc": "Changes will only take effect after the next login",
-    "never": "Never",
-    "daily": "Daily",
-    "weekly": "Weekly",
-    "monthly": "Monthly"
+    "periodic_saving": "Időszakos mentés",
+    "periodic_saving_desc": "A változtatások csak a következő belépéskor lépnek érvénybe",
+    "never": "Soha",
+    "daily": "Naponta",
+    "weekly": "Hetente",
+    "monthly": "Havonta"
 }
