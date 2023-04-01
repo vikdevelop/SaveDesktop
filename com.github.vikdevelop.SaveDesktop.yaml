@@ -38,7 +38,7 @@ modules:
     build-commands:
        - install -Dm755 -t /app/bin run.sh
        - install -Dm755 -t /app src/main_window.py
-       - install -Dm755 -t /app src/periodic_backups.py
+       - install -Dm755 -t /app src/periodic_saving.py
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
        - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.png
        - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/exclamation_mark.png
