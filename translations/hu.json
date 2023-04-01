@@ -20,5 +20,11 @@
     "filename_spaces_msg": "A fájlnévben nem lehet szóköz",
     "translator_credits": "Daniel Uhrinyi https://github.com/danieluhrinyi",
     "unsupp_file_desc": "Nem támogatott fájl, használj SaveDesktop fájlt",
-    "unable_find_file": "A fájl nem találfató, kérlek húzd be a Letöltések könyvtárból"
+    "unable_find_file": "A fájl nem találfató, kérlek húzd be a Letöltések könyvtárból",
+    "periodic_saving": "Periodic saving",
+    "periodic_saving_desc": "Changes will only take effect after the next login",
+    "never": "Never",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
 }
