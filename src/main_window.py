@@ -209,12 +209,12 @@ class MainWindow(Gtk.Window):
         
         # Periodic backups section
         actions = Gtk.StringList.new(strings=[
-            "Never", "Daily", "Weekly", "Monthly"
+            _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
         
         self.adw_action_row_backups = Adw.ComboRow.new()
-        self.adw_action_row_backups.set_title(title="Periodic backups")
-        self.adw_action_row_backups.set_subtitle(subtitle="Changes will only take effect when you log back in")
+        self.adw_action_row_backups.set_title(title=_["periodic_saving"])
+        self.adw_action_row_backups.set_subtitle(subtitle=_["periodic_saving_desc"])
         self.adw_action_row_backups.set_title_lines(2)
         self.adw_action_row_backups.set_subtitle_lines(2)
         self.adw_action_row_backups.set_model(model=actions)
@@ -539,15 +539,22 @@ class MainWindow(Gtk.Window):
     def on_close(self, widget, *args):
         selected_item = self.adw_action_row_backups.get_selected_item()
         # Create desktop file to make periodic backups work
-        if selected_item.get_string() == 'Never':
-            print("")
+        if selected_item.get_string() == _["never"]:
+            backup_item = "Never"
         else:
             if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
                 with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
                     cb.write('[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --background')
+        # Translate backup items to English because it is necessary for the proper functioning of periodic backups correctly
+        if selected_item.get_string() == _["daily"]:
+            backup_item = "Daily"
+        if selected_item.get_string() == _["weekly"]:
+            backup_item = "Weekly"
+        if selected_item.get_string() == _["monthly"]:
+            backup_item = "Monthly"
         # Save settings of filename text, periodic backups and window size
         with open(f'{CONFIG}/settings.json', 'w') as s:
-            s.write('{\n "file-text": "%s",\n "periodic_backups": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), selected_item.get_string(), self.get_allocation().width, self.get_allocation().height))
+            s.write('{\n "file-text": "%s",\n "periodic_backups": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), backup_item, self.get_allocation().width, self.get_allocation().height))
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
