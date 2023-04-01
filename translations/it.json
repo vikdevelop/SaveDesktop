@@ -21,10 +21,10 @@
     "filename_spaces_msg": "Non ci devono essere spazi nel nome del file",
     "unsupp_file_desc": "File non supportato, utilizzare i file SaveDesktop",
     "unable_find_file": "Impossibile trovare il file, trascina il file dalla directory dei download",
-    "periodic_saving": "Periodic saving",
-    "periodic_saving_desc": "Changes will only take effect after the next login",
-    "never": "Never",
-    "daily": "Daily",
-    "weekly": "Weekly",
-    "monthly": "Monthly"
+    "periodic_saving": "Salvataggio periodico",
+    "periodic_saving_desc": "Le modifiche avranno effetto solo dopo il prossimo login",
+    "never": "Mai",
+    "daily": "Giornaliero",
+    "weekly": "Settimanale",
+    "monthly": "Mensile"
 }
