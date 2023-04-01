@@ -20,5 +20,11 @@
     "filename_spaces_msg": "Der Dateiname darf keine Leerzeichen enthalten",
     "unsupp_file_desc": "Nicht unterstützte Datei, verwenden Sie SaveDesktop-Dateien",
     "unable_find_file": "Die Datei kann nicht gefunden werden, ziehen Sie die Datei aus dem Download-Verzeichnis herein",
-    "translator_credits": "Github Link des Übersetzers"
+    "translator_credits": "Github Link des Übersetzers",
+    "periodic_saving": "Periodic saving",
+    "periodic_saving_desc": "Changes will only take effect after the next login",
+    "never": "Never",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
 }
