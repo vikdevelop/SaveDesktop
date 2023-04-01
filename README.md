@@ -34,4 +34,4 @@ If you want to help with localize SaveDesktop, you can use the Weblate tool (is 
 and more...
 
 ### Screenshots
-![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/fbb8864fbf57659a19de42f6996f449367678985/flatpak/screenshots/main_window.png)
+![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png)
