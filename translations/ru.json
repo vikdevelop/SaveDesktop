@@ -1,10 +1,10 @@
 {
     "about_app": "О приложении",
-    "unsuppurted_env_desc": "<big><b>У вас установлено неподдерживаемое окружение.</b></big> \nПожалуйста, используйте это окружение: {}.",
+    "unsuppurted_env_desc": "<big><b>У вас установлено неподдерживаемое окружение.</b></big> \nПожалуйста, используйте одно из этих окружений: {}.",
     "savedesktop_title": "<big><b>SaveDesktop для {}</b></big>\n",
     "save_config": "Сохранить текущую конфигурацию",
     "import_config": "Импорт сохраненной конфигурации",
-    "set_filename": "Задать имя файла (без пробелов)",
+    "set_filename": "Задайте имя файла (без пробелов)",
     "config_saved": "Конфигурация сохранена!",
     "open_folder": "Открыть папку",
     "import_fileshooser": "Импортировать {} конфигурацию",
@@ -19,12 +19,12 @@
     "supported_environments_desc": "Поддерживаемые окружения рабочего стола: {}",
     "filename_spaces_msg": "В имени файла не должно быть пробелов",
     "translator_credits": "Сергей Ворон https://github.com/vorons",
-    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
-    "unable_find_file": "Unable to find the file, please drag file from Downloads directory",
-    "periodic_saving": "Periodic saving",
-    "periodic_saving_desc": "Changes will only take effect after the next login",
-    "never": "Never",
-    "daily": "Daily",
-    "weekly": "Weekly",
-    "monthly": "Monthly"
+    "unsupp_file_desc": "Неподдерживаемый файл, используйте файлы SaveDesktop",
+    "unable_find_file": "Не удалось найти файл, пожалуйста, перетащите файл из каталога Загрузки",
+    "periodic_saving": "Периодическое сохранение",
+    "periodic_saving_desc": "Изменения вступят в силу только после следующего входа в систему",
+    "never": "Никогда",
+    "daily": "Ежедневно",
+    "weekly": "Еженедельно",
+    "monthly": "Ежемесячно"
 }
