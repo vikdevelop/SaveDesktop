@@ -82,19 +82,15 @@ class MainWindow(Gtk.Window):
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
         
-        # Drag and drop area
-        drag_source = Gtk.DragSource.new()
-        drag_source.set_actions(Gdk.DragAction.COPY)
-        drag_source.connect('prepare', self.on_prepare)
-        drag_source.connect('drag-begin', self.on_drag_begin)
-        drag_source.connect('drag-end', self.on_drag_end)
-        drag_source.connect('drag-cancel', self.on_drag_cancel)
-
-        drop_target = Gtk.DropTarget.new(GObject.TYPE_STRING, Gdk.DragAction.COPY)
-        drop_target.connect('drop', self.on_drop)
-
-        self.add_controller(drag_source)
-        self.add_controller(drop_target)
+        self.savePGButton = Gtk.Button.new_with_label("Save")
+        self.savePGButton.add_css_class('flat')
+        self.savePGButton.connect('clicked', self.load_save_page)
+        self.headerbar.pack_start(self.savePGButton)
+        
+        self.importPGButton = Gtk.Button.new_with_label("Import")
+        self.importPGButton.add_css_class('flat')
+        self.importPGButton.connect('clicked', self.load_import_page)
+        self.headerbar.pack_start(self.importPGButton)
         
         # Primary layout
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -168,35 +164,40 @@ class MainWindow(Gtk.Window):
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
     
+    def load_save_page(self, w):
+        self.importPGButton.add_css_class('flat')
+        self.savePGButton.set_sensitive(False)
+        self.importPGButton.set_sensitive(True)
+        self.save_desktop()
+        
+    def load_import_page(self, w):
+        self.importPGButton.set_sensitive(False)
+        self.savePGButton.set_sensitive(True)
+        self.import_desktop()
+    
     # Show main layout
     def save_desktop(self):
-        self.titleImage = Gtk.Image.new_from_icon_name("io.github.vikdevelop.SaveDesktop")
+        try:
+            self.pBox.remove(self.importBox)
+        except:
+            print("")
+        self.savePGButton.remove_css_class('flat')
+        
+        self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        self.pBox.append(self.saveBox)
+        
+        self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
         self.titleImage.set_pixel_size(64)
-        self.pBox.append(self.titleImage) 
+        self.saveBox.append(self.titleImage) 
         
         self.label_title = Gtk.Label.new()
-        self.label_title.set_markup(_["savedesktop_title"].format(self.environment))
-        self.pBox.append(self.label_title)
-        
-        self.label_export = Gtk.Label.new()
-        self.label_export.set_markup(f'<b>{_["save_config"]}</b>')
-        self.label_export.set_xalign(-1)
-        self.pBox.append(self.label_export)
+        self.label_title.set_markup('\n<big><b>{} ({})</b></big>\n'.format(_["save_config"], self.environment))
+        self.saveBox.append(self.label_title)
         
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.lbox_e.get_style_context().add_class(class_name='boxed-list')
-        self.pBox.append(self.lbox_e)
-        
-        self.label_import = Gtk.Label.new()
-        self.label_import.set_markup(f'<b>{_["import_config"]}</b>')
-        self.label_import.set_xalign(-1)
-        self.pBox.append(self.label_import)
-        
-        self.lbox_a = Gtk.ListBox.new()
-        self.lbox_a.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.lbox_a.get_style_context().add_class(class_name='boxed-list')
-        self.pBox.append(self.lbox_a)
+        self.saveBox.append(self.lbox_e)
         
         # set the filename section
         self.saveEntry = Adw.EntryRow.new()
@@ -236,46 +237,162 @@ class MainWindow(Gtk.Window):
                 self.adw_action_row_backups.set_selected(0)
         else:
             self.adw_action_row_backups.set_selected(0)
+            
+        self.switch_01 = Gtk.Switch.new()
+        if os.path.exists(f'{CONFIG}/settings.json'):
+            with open(f'{CONFIG}/settings.json') as r:
+                jR = json.load(r)
+            try:
+                flatpak = jR["save_flatpakapp_data"]
+                if flatpak == "true":
+                    self.switch_01.set_active(True)
+                else:
+                    self.switch_01.set_active(False)
+            except:
+                self.switch_01.set_active(False)
+        else:
+            self.switch_01.set_active(False)
+        self.switch_01.set_valign(align=Gtk.Align.CENTER)
+         
+        self.adw_action_row_more = Adw.ActionRow.new()
+        self.adw_action_row_more.set_title(title="Save Flatpak custom permissions")
+        self.adw_action_row_more.set_title_lines(2)
+        self.adw_action_row_more.set_subtitle_lines(2)
+        self.adw_action_row_more.add_suffix(self.switch_01)
+        self.adw_action_row_more.set_activatable_widget(self.switch_01)
+        self.lbox_e.append(child=self.adw_action_row_more)
         
-        self.sbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
-        self.sbox.set_margin_top(9)
-        self.sbox.set_margin_bottom(9)
+        self.savebtnBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        self.savebtnBox.set_margin_top(10)
+        self.savebtnBox.set_margin_start(180)
+        self.savebtnBox.set_margin_end(180)
+        self.saveBox.append(self.savebtnBox)
         
         # save configuration button
-        self.saveButton = Gtk.Button.new_from_icon_name("document-save-symbolic")
+        self.saveButton = Gtk.Button.new_with_label("Save")
         self.saveButton.add_css_class("suggested-action")
-        self.saveButton.add_css_class("circular")
+        self.saveButton.add_css_class("pill")
         self.saveButton.connect("clicked", self.set_title_t)
-        self.sbox.append(self.saveButton)
-        
-        # Save configuration section
-        self.adw_action_row_save = Adw.ActionRow.new()
-        self.adw_action_row_save.set_title(_["save_config"])
-        self.adw_action_row_save.set_title_lines(3)
-        self.adw_action_row_save.add_suffix(widget=self.sbox)
-        self.adw_action_row_save.set_activatable_widget(widget=self.saveButton)
-        self.lbox_e.append(child=self.adw_action_row_save)
-        
-        self.obox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.obox.set_margin_top(9)
-        self.obox.set_margin_bottom(9)
-        
-        # Import configuration button
-        self.loadButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
-        self.loadButton.add_css_class("circular")
-        self.loadButton.connect("clicked", self.apply_config)
-        self.obox.append(self.loadButton)
-        
-        # Import configuration section
-        self.adw_action_row_load = Adw.ActionRow.new()
-        self.adw_action_row_load.set_title(_["import_config"])
-        self.adw_action_row_load.set_title_lines(3)
-        self.adw_action_row_load.add_suffix(widget=self.obox)
-        self.adw_action_row_load.set_activatable_widget(widget=self.loadButton)
-        self.lbox_a.append(child=self.adw_action_row_load)
+        self.savebtnBox.append(self.saveButton)
         
         self.pBox.append(self.toast_overlay)
         
+    # Import configuration section
+    def import_desktop(self):
+        try:
+            self.pBox.remove(self.saveBox)
+        except:
+            print("")
+            
+        #self.importPGButton.set_sensitive(False)
+        self.savePGButton.add_css_class('flat')
+        self.importPGButton.remove_css_class('flat')
+        
+        # Drag and drop area
+        drag_source = Gtk.DragSource.new()
+        drag_source.set_actions(Gdk.DragAction.COPY)
+
+        drop_target = Gtk.DropTarget.new(GObject.TYPE_STRING, Gdk.DragAction.COPY)
+        drop_target.connect('drop', self.on_drop)
+
+        self.add_controller(drag_source)
+        self.add_controller(drop_target)
+        
+        self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        
+        self.importImage = Gtk.Image.new_from_icon_name("document-open-symbolic")
+        self.importImage.set_pixel_size(64)
+        self.importBox.append(self.importImage) 
+        
+        self.labelImport = Gtk.Label.new()
+        self.labelImport.set_markup(f"<big><b>{_['import_config']}</b></big>")
+        self.importBox.append(self.labelImport)
+        
+        self.labelDesc = Gtk.Label.new(str="Import the configuration using drag and drop, from a file or from a list.")
+        self.importBox.append(self.labelDesc)
+        
+        self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        self.importbtnBox.set_margin_start(65)
+        self.importbtnBox.set_margin_end(65)
+        self.importBox.append(self.importbtnBox)
+        
+        # Import configuration button
+        self.fileButton = Gtk.Button.new_with_label("Import from file")
+        self.fileButton.add_css_class("pill")
+        self.fileButton.add_css_class("suggested-action")
+        self.fileButton.connect("clicked", self.apply_config)
+        self.importbtnBox.append(self.fileButton)
+        
+        self.fromlistButton = Gtk.Button.new_with_label("Import from list")
+        self.fromlistButton.add_css_class("pill")
+        self.fromlistButton.connect("clicked", self.import_from_list)
+        self.importbtnBox.append(self.fromlistButton)
+        
+        self.pBox.append(self.importBox)
+        
+    # Import archive from list
+    def import_from_list(self, w):
+        self.pBox.remove(self.importBox)
+        self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
+        self.backButton.add_css_class("flat")
+        self.backButton.connect("clicked", self.close_list)
+        self.headerbar.pack_start(self.backButton)
+        self.headerbar.remove(self.savePGButton)
+        self.headerbar.remove(self.importPGButton)
+        
+        self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
+        self.pBox.append(self.flistBox)
+        
+        self.flistLabel = Gtk.Label.new()
+        self.flistBox.append(self.flistLabel)
+        if subprocess.getoutput(f'ls {download_dir}/SaveDesktop/archives') == '':
+            self.flistLabel.set_text("No configuration was found in the SaveDesktop directory.")
+        else:
+            self.flistLabel.set_markup("<big><b>Import from list</b></big>")
+            self.fdesclabel = Gtk.Label.new(f"{download_dir}/SaveDesktop/archives")
+            self.flistBox.append(self.fdesclabel)
+            
+            self.applyButton = Gtk.Button.new_with_label("Apply")
+            self.applyButton.add_css_class('suggested-action')
+            self.applyButton.connect('clicked', self.imp_cfg_from_list)
+            self.headerbar.pack_end(self.applyButton)
+            
+            self.radioBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+            self.listbox = Gtk.ListBox.new()
+            self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+            self.listbox.get_style_context().add_class(class_name='boxed-list')
+            self.flistBox.append(self.listbox)
+            
+            get_dir_content = os.listdir(f'{download_dir}/SaveDesktop/archives')
+            
+            archives_model = Gtk.StringList.new(strings=get_dir_content)
+            
+            self.radio_row = Adw.ComboRow.new()
+            self.radio_row.set_model(model=archives_model)
+            self.radio_row.set_icon_name('document-properties-symbolic')
+            self.listbox.append(self.radio_row)
+        
+    # Action after closing import from list page
+    def close_list(self, w):
+        self.pBox.append(self.importBox)
+        self.pBox.remove(self.flistBox)
+        self.headerbar.pack_start(self.savePGButton)
+        self.headerbar.pack_start(self.importPGButton)
+        self.headerbar.remove(self.backButton)
+        try:
+            self.headerbar.remove(self.applyButton)
+        except:
+            print("")
+        
+    # Import config from list
+    def imp_cfg_from_list(self, w):
+        selected_archive = self.radio_row.get_selected_item()
+        self.please_wait_toast()
+        self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
+        os.chdir("%s" % CACHE)
+        os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
+        self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
+    
     # Check if filename has spaces or not
     def set_title_t(self, w):
         if " " in self.saveEntry.get_text():
@@ -301,6 +418,9 @@ class MainWindow(Gtk.Window):
         os.popen('cp -R ~/.fonts ./')
         os.popen('cp -R ~/.config/gtk-4.0 ./')
         os.popen('cp -R ~/.config/gtk-3.0 ./')
+        if self.switch_01.get_active() == True:
+            os.popen('cp -R ~/.var/app/com.github.tchx84.Flatseal ./')
+            os.popen('cp -R ~/.local/share/flatpak/overrides ./')
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             os.popen("cp -R ~/.local/share/gnome-background-properties ./")
@@ -350,17 +470,11 @@ class MainWindow(Gtk.Window):
             os.popen("tar --gzip -cf config_{}.sd.tar.gz ./".format(date.today()))
         else:
             os.popen("tar --gzip -cf {}.sd.tar.gz ./".format(self.saveEntry.get_text()))
-        
+    
     # Load file chooser
     def fileshooser(self):
-        self.file_chooser = Gtk.FileChooserDialog()
-        self.file_chooser.set_transient_for(self)
-        self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
-        self.file_chooser.set_action(Gtk.FileChooserAction.OPEN)
-        self.file_chooser.add_buttons(_["open"], Gtk.ResponseType.ACCEPT, \
-            _["cancel"], Gtk.ResponseType.CANCEL)
-        self.file_chooser.set_current_folder( \
-            Gio.File.new_for_path(os.environ['HOME']))
+        self.file_chooser = Gtk.FileChooserNative.new(_["import_fileshooser"].format(self.environment), \
+                self, Gtk.FileChooserAction.OPEN, _["open"], _["cancel"])
         self.file_chooser.set_modal(True)
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
@@ -372,24 +486,21 @@ class MainWindow(Gtk.Window):
     ## Action after closing file chooser
     def open_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
-            dialog.close()
             file = dialog.get_file()
             filename = file.get_path()
             self.please_wait_toast()
             self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
-            # Applying configuration for GNOME-based environments
-            if not os.path.exists("{}/.config".format(Path.home())):
-                os.system("mkdir ~/.config/")
-            if not os.path.exists("{}/.config/dconf".format(Path.home())):
-                os.system("mkdir ~/.config/dconf/")
             os.chdir("%s" % CACHE)
             os.popen("tar -xf %s ./" % filename)
             self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
-        else:
-            dialog.close()
             
     # Import configuration
     def import_config(self):
+        # Applying configuration for GNOME-based environments
+        if not os.path.exists("{}/.config".format(Path.home())):
+            os.system("mkdir ~/.config/")
+        if not os.path.exists("{}/.config/dconf".format(Path.home())):
+            os.system("mkdir ~/.config/dconf/")
         os.popen("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
         os.popen('cp -R ./icons ~/.local/share/')
         os.popen('cp -R ./.themes ~/')
@@ -398,6 +509,8 @@ class MainWindow(Gtk.Window):
         os.popen('cp -R ./.fonts ~/')
         os.popen('cp -R ./gtk-4.0 ~/.config/')
         os.popen('cp -R ./gtk-3.0 ~/.config/')
+        os.popen('cp -R ./com.github.tchx84.Flatseal ~/.var/app/')
+        os.popen('cp -R ./overrides ~/.local/share/flatpak/')
         # Apply configs for individual desktop environments
         if self.environment == 'GNOME':
             os.popen("cp -R ./gnome-background-properties ~/.local/share/")
@@ -427,7 +540,6 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'KDE Plasma':
             os.popen("cp -R ./xdg-config/* ~/.config/")
             os.popen("cp -R ./xdg-data/* ~/.local/share/")
-        #self.applying_done()
             
     ## open file chooser
     def apply_config(self, w):
@@ -446,7 +558,6 @@ class MainWindow(Gtk.Window):
     def spaces_toast(self):
         self.toast_sp = Adw.Toast(title=_["filename_spaces_msg"])
         self.toast_sp.set_timeout(5)
-        self.toast_sp.connect('dismissed', self.on_toast_p_dismissed)
         self.toast_overlay.add_toast(self.toast_sp)
     
     # Config has been imported action
@@ -460,36 +571,23 @@ class MainWindow(Gtk.Window):
     def please_wait_toast(self):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
         self.toast_wait.set_timeout(10)
-        self.toast_wait.connect('dismissed', self.on_toast_w_dismissed)
         self.toast_overlay.add_toast(self.toast_wait)
        
     # Popup about unsupported file
     def unsupp_toast(self):
         self.toast_unsupp = Adw.Toast(title=_["unsupp_file_desc"])
         self.toast_unsupp.set_timeout(5)
-        self.toast_unsupp.connect('dismissed', self.on_toast_u_dismissed)
         self.toast_overlay.add_toast(self.toast_unsupp)
         
     # Popup about unable to find the file
     def fileerr_toast(self):
         self.toast_fileerr = Adw.Toast(title=_["unable_find_file"])
         self.toast_fileerr.set_timeout(7)
-        #self.toast_fileerr.connect('dismissed', self.on_toast_u_dismissed)
         self.toast_overlay.add_toast(self.toast_fileerr)
     
     def on_toast_dismissed(self, toast):
-        print('')
         os.popen("rm -rf %s/*" % CACHE)
         os.popen("rm -rf {}/SaveDesktop/.{}/*".format(download_dir, date.today()))
-    
-    def on_toast_w_dismissed(self, toast_wait):
-        print('')
-        
-    def on_toast_u_dismissed(self, toast_unsupp):
-        print('')
-        
-    def on_toast_p_dismissed(self, toast_sp):
-        print('')
     
     # Drag and drop function
     def on_drop(self, DropTarget, data, x, y):
@@ -497,11 +595,6 @@ class MainWindow(Gtk.Window):
             if "sd.tar.gz" in data:
                 self.please_wait_toast()
                 self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
-                # Applying configuration for GNOME-based environments
-                if not os.path.exists("{}/.config".format(Path.home())):
-                    os.system("mkdir ~/.config/")
-                if not os.path.exists("{}/.config/dconf".format(Path.home())):
-                    os.system("mkdir ~/.config/dconf/")
                 os.chdir("%s" % CACHE)
                 os.popen(f"tar -xf {data} ./")
                 self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
@@ -509,18 +602,6 @@ class MainWindow(Gtk.Window):
                 self.unsupp_toast()
         else:
             self.fileerr_toast()
-        
-    def on_prepare(self, DropTarget, x, y):
-        print('')
-
-    def on_drag_begin(self):
-        print('')
-
-    def on_drag_end(self):
-        print('')
-
-    def on_drag_cancel(self):
-        print('')
         
     # Get settings from XDG_CONFIG/settings.json
     def get_settings(self):
