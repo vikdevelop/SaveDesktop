@@ -182,6 +182,7 @@ class MainWindow(Gtk.Window):
         except:
             print("")
         self.savePGButton.remove_css_class('flat')
+        self.savePGButton.set_sensitive(False)
         
         self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.pBox.append(self.saveBox)
