@@ -82,15 +82,18 @@ class MainWindow(Gtk.Window):
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
         
+        self.menuBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        self.headerbar.set_title_widget(self.menuBox)
+        
         self.savePGButton = Gtk.Button.new_with_label("Save")
         self.savePGButton.add_css_class('flat')
         self.savePGButton.connect('clicked', self.load_save_page)
-        self.headerbar.pack_start(self.savePGButton)
+        self.menuBox.append(self.savePGButton)
         
         self.importPGButton = Gtk.Button.new_with_label("Import")
         self.importPGButton.add_css_class('flat')
         self.importPGButton.connect('clicked', self.load_import_page)
-        self.headerbar.pack_start(self.importPGButton)
+        self.menuBox.append(self.importPGButton)
         
         # Primary layout
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
