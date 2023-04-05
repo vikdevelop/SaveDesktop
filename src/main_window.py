@@ -84,7 +84,7 @@ class MainWindow(Gtk.Window):
         
         self.savedesktop_mode_dropdwn = Gtk.DropDown.new_from_strings( \
             [_["save_config"], _["import_config"]] )
-        self.savedesktop_mode_dropdwn.get_first_child().add_css_class('flat')
+        #self.savedesktop_mode_dropdwn.get_first_child().add_css_class('flat')
         self.savedesktop_mode_dropdwn.set_tooltip_text("Select SaveDesktop page")
         self.savedesktop_mode_dropdwn.connect('notify::selected-item', \
             self.change_savedesktop_mode)
