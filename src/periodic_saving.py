@@ -52,6 +52,10 @@ class PeriodicBackups:
                 print("Periodic backups are not set up.")
                 cont = "false"
             if cont == "true":
+                try:
+                    self.fpermissions = jp["save_flatpak_permissions"]
+                except:
+                    print("")
                 if self.pbackups == "Never":
                     print("Periodic backups are not set up.")
                     exit()
@@ -104,6 +108,11 @@ class PeriodicBackups:
             os.system('cp -R ~/.fonts ./')
             os.system('cp -R ~/.config/gtk-4.0 ./')
             os.system('cp -R ~/.config/gtk-3.0 ./')
+            try:
+                if self.fpermissions == 'True':
+                    os.system('cp -R ~/.local/share/flatpak/overrides ./')
+            except:
+                print("Option 'Save Flatpak custom permissions' not available.")
             # Save configs on individual desktop environments
             if self.environment == 'GNOME':
                 os.system("cp -R ~/.local/share/gnome-background-properties ./")
