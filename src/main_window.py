@@ -183,7 +183,8 @@ class MainWindow(Gtk.Window):
         self.saveBox.append(self.titleImage) 
         
         self.label_title = Gtk.Label.new()
-        self.label_title.set_markup('\n<big><b>{} ({})</b></big>\n'.format(_["save_config"], self.environment))
+        self.label_title.set_markup('\n<big><b>{}</b></big>\n{}\n'.format(_["save_config"], self.environment))
+        self.label_title.set_justify(Gtk.Justification.CENTER)
         self.saveBox.append(self.label_title)
         
         self.lbox_e = Gtk.ListBox.new()
@@ -235,8 +236,8 @@ class MainWindow(Gtk.Window):
             with open(f'{CONFIG}/settings.json') as r:
                 jR = json.load(r)
             try:
-                flatpak = jR["save_flatpakapp_data"]
-                if flatpak == "true":
+                flatpak = jR["save_flatpak_permissions"]
+                if flatpak == "True":
                     self.switch_01.set_active(True)
                 else:
                     self.switch_01.set_active(False)
@@ -405,7 +406,6 @@ class MainWindow(Gtk.Window):
         os.popen('cp -R ~/.config/gtk-4.0 ./')
         os.popen('cp -R ~/.config/gtk-3.0 ./')
         if self.switch_01.get_active() == True:
-            os.popen('cp -R ~/.var/app/com.github.tchx84.Flatseal ./')
             os.popen('cp -R ~/.local/share/flatpak/overrides ./')
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
@@ -495,7 +495,6 @@ class MainWindow(Gtk.Window):
         os.popen('cp -R ./.fonts ~/')
         os.popen('cp -R ./gtk-4.0 ~/.config/')
         os.popen('cp -R ./gtk-3.0 ~/.config/')
-        os.popen('cp -R ./com.github.tchx84.Flatseal ~/.var/app/')
         os.popen('cp -R ./overrides ~/.local/share/flatpak/')
         # Apply configs for individual desktop environments
         if self.environment == 'GNOME':
@@ -621,7 +620,7 @@ class MainWindow(Gtk.Window):
             backup_item = "Monthly"
         # Save settings of filename text, periodic backups and window size
         with open(f'{CONFIG}/settings.json', 'w') as s:
-            s.write('{\n "file-text": "%s",\n "periodic_backups": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), backup_item, self.get_allocation().width, self.get_allocation().height))
+            s.write('{\n "file-text": "%s",\n "periodic_backups": "%s",\n "save_flatpak_permissions": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), backup_item, self.switch_01.get_active(), self.get_allocation().width, self.get_allocation().height))
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
