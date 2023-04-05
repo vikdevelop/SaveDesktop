@@ -82,15 +82,13 @@ class MainWindow(Gtk.Window):
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
         
-        self.savePGButton = Gtk.Button.new_with_label("Save")
-        self.savePGButton.add_css_class('flat')
-        self.savePGButton.connect('clicked', self.load_save_page)
-        self.headerbar.pack_start(self.savePGButton)
-        
-        self.importPGButton = Gtk.Button.new_with_label("Import")
-        self.importPGButton.add_css_class('flat')
-        self.importPGButton.connect('clicked', self.load_import_page)
-        self.headerbar.pack_start(self.importPGButton)
+        self.savedesktop_mode_dropdwn = Gtk.DropDown.new_from_strings( \
+            ["Save", "Import"] )
+        self.savedesktop_mode_dropdwn.get_first_child().add_css_class('flat')
+        self.savedesktop_mode_dropdwn.set_tooltip_text("Select SaveDesktop mode")
+        self.savedesktop_mode_dropdwn.connect('notify::selected-item', \
+            self.change_savedesktop_mode)
+        self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
         
         # Primary layout
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -164,16 +162,11 @@ class MainWindow(Gtk.Window):
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
     
-    def load_save_page(self, w):
-        self.importPGButton.add_css_class('flat')
-        self.savePGButton.set_sensitive(False)
-        self.importPGButton.set_sensitive(True)
-        self.save_desktop()
-        
-    def load_import_page(self, w):
-        self.importPGButton.set_sensitive(False)
-        self.savePGButton.set_sensitive(True)
-        self.import_desktop()
+    def change_savedesktop_mode(self, w, pspec):
+        if self.savedesktop_mode_dropdwn.get_selected() == 0:
+            self.save_desktop()
+        else:
+            self.import_desktop()
     
     # Show main layout
     def save_desktop(self):
@@ -181,8 +174,6 @@ class MainWindow(Gtk.Window):
             self.pBox.remove(self.importBox)
         except:
             print("")
-        self.savePGButton.remove_css_class('flat')
-        self.savePGButton.set_sensitive(False)
         
         self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.pBox.append(self.saveBox)
@@ -284,10 +275,6 @@ class MainWindow(Gtk.Window):
             self.pBox.remove(self.saveBox)
         except:
             print("")
-            
-        #self.importPGButton.set_sensitive(False)
-        self.savePGButton.add_css_class('flat')
-        self.importPGButton.remove_css_class('flat')
         
         # Drag and drop area
         drag_source = Gtk.DragSource.new()
@@ -337,9 +324,8 @@ class MainWindow(Gtk.Window):
         self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
         self.backButton.add_css_class("flat")
         self.backButton.connect("clicked", self.close_list)
+        self.headerbar.remove(self.savedesktop_mode_dropdwn)
         self.headerbar.pack_start(self.backButton)
-        self.headerbar.remove(self.savePGButton)
-        self.headerbar.remove(self.importPGButton)
         
         self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
         self.pBox.append(self.flistBox)
@@ -377,9 +363,8 @@ class MainWindow(Gtk.Window):
     def close_list(self, w):
         self.pBox.append(self.importBox)
         self.pBox.remove(self.flistBox)
-        self.headerbar.pack_start(self.savePGButton)
-        self.headerbar.pack_start(self.importPGButton)
         self.headerbar.remove(self.backButton)
+        self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
         try:
             self.headerbar.remove(self.applyButton)
         except:
