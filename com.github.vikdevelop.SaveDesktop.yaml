@@ -1,6 +1,6 @@
 app-id: io.github.vikdevelop.SaveDesktop
 runtime: org.gnome.Platform
-runtime-version: '43'
+runtime-version: '44'
 sdk: org.gnome.Sdk
 command: run.sh
 finish-args:
@@ -12,6 +12,8 @@ finish-args:
     - --filesystem=~/.config
     # load Desktop environment data files (e.g. backgrounds, extensions, etc.)
     - --filesystem=~/.local/share
+    # load Flatpak custom permissions for including to configuration
+    - --filesystem=~/.local/share/flatpak/overrides
     # save config to tar.gz archive in this directory
     - --filesystem=xdg-download/SaveDesktop:create
     # to be able to select the archive also from the xdg-downloads folder
@@ -32,6 +34,8 @@ finish-args:
     - --talk-name=org.xfce.SessionManager
     # logout from session (KDE5) for changes to the KDE5 desktop configuration to take effect
     - --talk-name=org.kde.ksmserver
+    # ensuring to FileChooserNative will work correctly
+    - --talk-name=org.freedesktop.FileManager1
 modules:
   - name: savedesktop
     buildsystem: simple
