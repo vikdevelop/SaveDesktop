@@ -201,6 +201,30 @@ class MainWindow(Gtk.Window):
             self.saveEntry.set_text(jE["file-text"])
         self.lbox_e.append(self.saveEntry)
         
+        self.switch_01 = Gtk.Switch.new()
+        if os.path.exists(f'{CONFIG}/settings.json'):
+            with open(f'{CONFIG}/settings.json') as r:
+                jR = json.load(r)
+            try:
+                flatpak = jR["save_flatpak_permissions"]
+                if flatpak == "True":
+                    self.switch_01.set_active(True)
+                else:
+                    self.switch_01.set_active(False)
+            except:
+                self.switch_01.set_active(False)
+        else:
+            self.switch_01.set_active(False)
+        self.switch_01.set_valign(align=Gtk.Align.CENTER)
+         
+        self.adw_action_row_more = Adw.ActionRow.new()
+        self.adw_action_row_more.set_title(title="Save Flatpak custom permissions")
+        self.adw_action_row_more.set_title_lines(2)
+        self.adw_action_row_more.set_subtitle_lines(2)
+        self.adw_action_row_more.add_suffix(self.switch_01)
+        self.adw_action_row_more.set_activatable_widget(self.switch_01)
+        self.lbox_e.append(child=self.adw_action_row_more)
+        
         # Periodic backups section
         actions = Gtk.StringList.new(strings=[
             _["never"], _["daily"], _["weekly"], _["monthly"]
@@ -230,30 +254,6 @@ class MainWindow(Gtk.Window):
                 self.adw_action_row_backups.set_selected(0)
         else:
             self.adw_action_row_backups.set_selected(0)
-            
-        self.switch_01 = Gtk.Switch.new()
-        if os.path.exists(f'{CONFIG}/settings.json'):
-            with open(f'{CONFIG}/settings.json') as r:
-                jR = json.load(r)
-            try:
-                flatpak = jR["save_flatpak_permissions"]
-                if flatpak == "True":
-                    self.switch_01.set_active(True)
-                else:
-                    self.switch_01.set_active(False)
-            except:
-                self.switch_01.set_active(False)
-        else:
-            self.switch_01.set_active(False)
-        self.switch_01.set_valign(align=Gtk.Align.CENTER)
-         
-        self.adw_action_row_more = Adw.ActionRow.new()
-        self.adw_action_row_more.set_title(title="Save Flatpak custom permissions")
-        self.adw_action_row_more.set_title_lines(2)
-        self.adw_action_row_more.set_subtitle_lines(2)
-        self.adw_action_row_more.add_suffix(self.switch_01)
-        self.adw_action_row_more.set_activatable_widget(self.switch_01)
-        self.lbox_e.append(child=self.adw_action_row_more)
         
         self.savebtnBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         self.savebtnBox.set_margin_top(10)
@@ -267,8 +267,6 @@ class MainWindow(Gtk.Window):
         self.saveButton.add_css_class("pill")
         self.saveButton.connect("clicked", self.set_title_t)
         self.savebtnBox.append(self.saveButton)
-        
-        self.pBox.append(self.toast_overlay)
         
     # Import configuration section
     def import_desktop(self):
