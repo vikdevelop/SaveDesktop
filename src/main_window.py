@@ -83,9 +83,9 @@ class MainWindow(Gtk.Window):
         self.headerbar.pack_end(child=self.menu_button)
         
         self.savedesktop_mode_dropdwn = Gtk.DropDown.new_from_strings( \
-            ["Save", "Import"] )
+            [_["save_config"], _["import_config"]] )
         self.savedesktop_mode_dropdwn.get_first_child().add_css_class('flat')
-        self.savedesktop_mode_dropdwn.set_tooltip_text("Select SaveDesktop mode")
+        self.savedesktop_mode_dropdwn.set_tooltip_text("Select SaveDesktop page")
         self.savedesktop_mode_dropdwn.connect('notify::selected-item', \
             self.change_savedesktop_mode)
         self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
@@ -170,23 +170,34 @@ class MainWindow(Gtk.Window):
     
     # Show main layout
     def save_desktop(self):
+        # Remove Import page box
         try:
             self.pBox.remove(self.importBox)
         except:
             print("")
+        # Remove controller for drag and drop if loaded save page
+        try:
+            self.remove_controller(self.drag_source)
+            self.remove_controller(self.drop_target)
+        except:
+            print("")
         
+        # Box for save page
         self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         self.pBox.append(self.saveBox)
         
+        # Tittle image for save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
         self.titleImage.set_pixel_size(64)
         self.saveBox.append(self.titleImage) 
         
+        # Tittle "Save Current configuration" for save page and subtitle "{user_desktop}"
         self.label_title = Gtk.Label.new()
         self.label_title.set_markup('\n<big><b>{}</b></big>\n{}\n'.format(_["save_config"], self.environment))
         self.label_title.set_justify(Gtk.Justification.CENTER)
         self.saveBox.append(self.label_title)
         
+        # Box for show this options: set the filename, save flatpak custom permissions and periodic saving
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.lbox_e.get_style_context().add_class(class_name='boxed-list')
@@ -201,6 +212,7 @@ class MainWindow(Gtk.Window):
             self.saveEntry.set_text(jE["file-text"])
         self.lbox_e.append(self.saveEntry)
         
+        # Switch and row of option 'Save Flatpak custom permissions'
         self.switch_01 = Gtk.Switch.new()
         if os.path.exists(f'{CONFIG}/settings.json'):
             with open(f'{CONFIG}/settings.json') as r:
@@ -276,21 +288,24 @@ class MainWindow(Gtk.Window):
             print("")
         
         # Drag and drop area
-        drag_source = Gtk.DragSource.new()
-        drag_source.set_actions(Gdk.DragAction.COPY)
+        self.drag_source = Gtk.DragSource.new()
+        self.drag_source.set_actions(Gdk.DragAction.COPY)
 
-        drop_target = Gtk.DropTarget.new(GObject.TYPE_STRING, Gdk.DragAction.COPY)
-        drop_target.connect('drop', self.on_drop)
+        self.drop_target = Gtk.DropTarget.new(GObject.TYPE_STRING, Gdk.DragAction.COPY)
+        self.drop_target.connect('drop', self.on_drop)
 
-        self.add_controller(drag_source)
-        self.add_controller(drop_target)
+        self.add_controller(self.drag_source)
+        self.add_controller(self.drop_target)
         
+        # box for import page
         self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         
+        # Image for import page
         self.importImage = Gtk.Image.new_from_icon_name("document-open-symbolic")
         self.importImage.set_pixel_size(64)
-        self.importBox.append(self.importImage) 
+        self.importBox.append(self.importImage)
         
+        # Title and subtitle for import page 
         self.labelImport = Gtk.Label.new()
         self.labelImport.set_markup(f"<big><b>{_['import_config']}</b></big>")
         self.importBox.append(self.labelImport)
@@ -298,6 +313,7 @@ class MainWindow(Gtk.Window):
         self.labelDesc = Gtk.Label.new(str="Import the configuration using drag and drop, from a file or from a list.")
         self.importBox.append(self.labelDesc)
         
+        # Box of this buttons: Import from file and Import from list
         self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         self.importbtnBox.set_margin_start(65)
         self.importbtnBox.set_margin_end(65)
@@ -310,6 +326,7 @@ class MainWindow(Gtk.Window):
         self.fileButton.connect("clicked", self.apply_config)
         self.importbtnBox.append(self.fileButton)
         
+        # Import from list button
         self.fromlistButton = Gtk.Button.new_with_label("Import from list")
         self.fromlistButton.add_css_class("pill")
         self.fromlistButton.connect("clicked", self.import_from_list)
@@ -350,7 +367,6 @@ class MainWindow(Gtk.Window):
             self.flistBox.append(self.listbox)
             
             get_dir_content = os.listdir(f'{download_dir}/SaveDesktop/archives')
-            
             archives_model = Gtk.StringList.new(strings=get_dir_content)
             
             self.radio_row = Adw.ComboRow.new()
@@ -643,7 +659,7 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.1.1")
+        dialog.set_version("2.2")
         dialog.set_developer_name("vikdevelop")
         if lang == "en.json":
             print("")
