@@ -359,7 +359,7 @@ class MainWindow(Gtk.Window):
             self.fdesclabel = Gtk.Label.new(f"{download_dir}/SaveDesktop/archives")
             self.flistBox.append(self.fdesclabel)
             
-            self.applyButton = Gtk.Button.new_with_label("Apply")
+            self.applyButton = Gtk.Button.new_with_label(_["apply"])
             self.applyButton.add_css_class('suggested-action')
             self.applyButton.connect('clicked', self.imp_cfg_from_list)
             self.headerbar.pack_end(self.applyButton)
