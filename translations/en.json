@@ -31,5 +31,6 @@
     "import_config_desc": "Import the configuration using drag and drop, from a file or from a list.",
     "save_flatpak_permissions": "Save Flatpak custom permissions",
     "save": "Save",
+    "apply": "Apply",
     "translator_credits": "Translator github-link"
 }
