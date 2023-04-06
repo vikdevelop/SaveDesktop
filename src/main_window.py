@@ -230,12 +230,14 @@ class MainWindow(Gtk.Window):
         self.switch_01.set_valign(align=Gtk.Align.CENTER)
          
         self.adw_action_row_more = Adw.ActionRow.new()
-        self.adw_action_row_more.set_title(title="Save Flatpak custom permissions")
+        self.adw_action_row_more.set_title(title=_["save_flatpak_permissions"])
         self.adw_action_row_more.set_title_lines(2)
         self.adw_action_row_more.set_subtitle_lines(2)
         self.adw_action_row_more.add_suffix(self.switch_01)
         self.adw_action_row_more.set_activatable_widget(self.switch_01)
         self.lbox_e.append(child=self.adw_action_row_more)
+        
+        self.lbox_e.set_show_separators(True)
         
         # Periodic backups section
         actions = Gtk.StringList.new(strings=[
@@ -274,7 +276,7 @@ class MainWindow(Gtk.Window):
         self.saveBox.append(self.savebtnBox)
         
         # save configuration button
-        self.saveButton = Gtk.Button.new_with_label("Save")
+        self.saveButton = Gtk.Button.new_with_label(_["save"])
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("pill")
         self.saveButton.connect("clicked", self.set_title_t)
@@ -310,24 +312,24 @@ class MainWindow(Gtk.Window):
         self.labelImport.set_markup(f"<big><b>{_['import_config']}</b></big>")
         self.importBox.append(self.labelImport)
         
-        self.labelDesc = Gtk.Label.new(str="Import the configuration using drag and drop, from a file or from a list.")
+        self.labelDesc = Gtk.Label.new(str=_["import_config_desc"])
         self.importBox.append(self.labelDesc)
         
         # Box of this buttons: Import from file and Import from list
         self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        self.importbtnBox.set_margin_start(65)
-        self.importbtnBox.set_margin_end(65)
+        self.importbtnBox.set_margin_start(20)
+        self.importbtnBox.set_margin_end(20)
         self.importBox.append(self.importbtnBox)
         
         # Import configuration button
-        self.fileButton = Gtk.Button.new_with_label("Import from file")
+        self.fileButton = Gtk.Button.new_with_label(_["import_from_file"])
         self.fileButton.add_css_class("pill")
         self.fileButton.add_css_class("suggested-action")
         self.fileButton.connect("clicked", self.apply_config)
         self.importbtnBox.append(self.fileButton)
         
         # Import from list button
-        self.fromlistButton = Gtk.Button.new_with_label("Import from list")
+        self.fromlistButton = Gtk.Button.new_with_label(_["import_from_list"])
         self.fromlistButton.add_css_class("pill")
         self.fromlistButton.connect("clicked", self.import_from_list)
         self.importbtnBox.append(self.fromlistButton)
@@ -348,10 +350,12 @@ class MainWindow(Gtk.Window):
         
         self.flistLabel = Gtk.Label.new()
         self.flistBox.append(self.flistLabel)
-        if subprocess.getoutput(f'ls {download_dir}/SaveDesktop/archives') == '':
-            self.flistLabel.set_text("No configuration was found in the SaveDesktop directory.")
+        if not os.path.exists(f'{download_dir}/SaveDesktop/archives/'):
+            self.flistLabel.set_text(_["import_from_list_error"])
+        if os.listdir(f'{download_dir}/SaveDesktop/archives/') == []:
+            self.flistLabel.set_text(_["import_from_list_error"])
         else:
-            self.flistLabel.set_markup("<big><b>Import from list</b></big>")
+            self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
             self.fdesclabel = Gtk.Label.new(f"{download_dir}/SaveDesktop/archives")
             self.flistBox.append(self.fdesclabel)
             
