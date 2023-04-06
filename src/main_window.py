@@ -206,6 +206,7 @@ class MainWindow(Gtk.Window):
         # set the filename section
         self.saveEntry = Adw.EntryRow.new()
         self.saveEntry.set_title(_["set_filename"])
+        self.saveEntry.connect('changed', self.on_saveentry)
         if os.path.exists(f'{CONFIG}/settings.json'):
             with open(f'{CONFIG}/settings.json') as e:
                 jE = json.load(e)
@@ -279,8 +280,16 @@ class MainWindow(Gtk.Window):
         self.saveButton = Gtk.Button.new_with_label(_["save"])
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("pill")
+        self.saveButton.set_sensitive(False)
         self.saveButton.connect("clicked", self.set_title_t)
         self.savebtnBox.append(self.saveButton)
+    
+    def on_saveentry(self, saveEntry):
+        entry = self.saveEntry.get_text()
+        if entry == '':
+            self.saveButton.set_sensitive(False)
+        else:
+            self.saveButton.set_sensitive(True)
         
     # Import configuration section
     def import_desktop(self):
