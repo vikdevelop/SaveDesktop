@@ -326,8 +326,7 @@ class MainWindow(Gtk.Window):
         
         # Box of this buttons: Import from file and Import from list
         self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
-        self.importbtnBox.set_margin_start(20)
-        self.importbtnBox.set_margin_end(20)
+        self.importbtnBox.set_halign(Gtk.Align.CENTER)
         self.importBox.append(self.importbtnBox)
         
         # Import configuration button
