@@ -26,11 +26,11 @@
     "daily": "Denně",
     "weekly": "Týdně",
     "monthly": "Měsíčně",
-    "import_from_list": "Import from list",
-    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "import_from_list": "Importovat ze seznamu",
+    "import_from_list_error": "V adresáři SaveDesktop nebyla nalezena žádná konfigurace.",
     "apply": "Apply",
-    "import_from_file": "Import from file",
-    "import_config_desc": "Import the configuration from a file or list.",
+    "import_from_file": "Importovat ze souboru",
+    "import_config_desc": "Importujte konfiguraci ze souboru nebo seznamu.",
     "save_flatpak_permissions": "Save custom Flatpak app permissions",
     "save": "Save"
 }
