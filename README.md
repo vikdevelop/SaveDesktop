@@ -26,10 +26,11 @@ If you want to help with localize SaveDesktop, you can use the Weblate tool (is 
 - KDE Plasma
 
 ### SaveDesktop can save:
-- your icons and themes
+- your icons, fonts and themes
 - your settings
 - your backgrounds (including dynamic wallpapers, provided that the same username is retained)
 - your GNOME and Nautilus extensions
+- your custom Flatpak apps permissions
 
 and more...
 
