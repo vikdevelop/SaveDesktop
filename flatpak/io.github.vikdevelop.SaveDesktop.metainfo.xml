@@ -106,6 +106,9 @@
         <screenshot type="default">
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png</image>
         </screenshot>
+        <screenshot>
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png</image>
+        </screenshot>
     </screenshots>
     
     <content_rating type="oars-1.1"/>
@@ -115,6 +118,17 @@
     </categories>
           
     <releases>
+      <release version="2.2" date="2023-04-07">
+          <description>
+            <p>New application design</p>
+            <ul>
+              <li>Divided into two pages: Save current configuration and Import saved configuration</li>
+              <li>Added option for import from list</li>
+              <li>Replaced normal File Chooser Dialog with File Chooser Native: is now possible load configuration from anything directory</li>
+              <li>Added option for save Flatpak apps custom permissions</li>
+            </ul>
+        </description>
+      </release>
       <release version="2.1" date="2023-04-01">
           <description>
             <ul>

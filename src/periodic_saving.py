@@ -104,6 +104,7 @@ class PeriodicBackups:
             os.system('cp -R ~/.fonts ./')
             os.system('cp -R ~/.config/gtk-4.0 ./')
             os.system('cp -R ~/.config/gtk-3.0 ./')
+            os.system('cp -R ~/.local/share/flatpak/overrides ./')
             # Save configs on individual desktop environments
             if self.environment == 'GNOME':
                 os.system("cp -R ~/.local/share/gnome-background-properties ./")
