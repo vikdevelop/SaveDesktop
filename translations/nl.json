@@ -26,11 +26,11 @@
     "daily": "Iedere dag",
     "weekly": "Iedere week",
     "monthly": "Iedere maand",
-    "import_from_list": "Import from list",
-    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
-    "import_from_file": "Import from file",
-    "import_config_desc": "Import the configuration from a file or list.",
-    "save_flatpak_permissions": "Save custom Flatpak app permissions",
-    "save": "Save",
-    "apply": "Apply"
+    "import_from_list": "Importeren van lijst",
+    "import_from_list_error": "Er zijn geen voorkeuren aangetroffen in de SaveDesktop-map.",
+    "import_from_file": "Importeren uit bestand",
+    "import_config_desc": "Importeer voorkeuren uit een bestand of lijst.",
+    "save_flatpak_permissions": "Eigen Flatpak-rechten opslaan",
+    "save": "Opslaan",
+    "apply": "Toepassen"
 }

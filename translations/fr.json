@@ -26,11 +26,11 @@
     "daily": "Journalier",
     "weekly": "Hebdomadaire",
     "monthly": "Mensuel",
-    "import_from_list": "Import from list",
-    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
-    "import_from_file": "Import from file",
-    "import_config_desc": "Import the configuration from a file or list.",
-    "save_flatpak_permissions": "Save custom Flatpak app permissions",
-    "save": "Save",
-    "apply": "Apply"
+    "import_from_list": "Importer à partir de la liste",
+    "import_from_list_error": "Aucune configuration n'a été trouvée dans le répertoire SaveDesktop.",
+    "import_from_file": "Importer à partir de la liste",
+    "import_config_desc": "Importer la configuration à partir d'un fichier ou d'une liste.",
+    "save_flatpak_permissions": "Enregistrer les permissions des applications Flatpak personnalisées",
+    "save": "Sauvegarder",
+    "apply": "Appliquer"
 }
