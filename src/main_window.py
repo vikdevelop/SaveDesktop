@@ -201,7 +201,7 @@ class MainWindow(Gtk.Window):
         # Box for show this options: set the filename, save flatpak custom permissions and periodic saving
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.lbox_e.get_style_context().add_class(class_name='boxed-list')
+        self.lbox_e.add_css_class(css_class='boxed-list')
         self.saveBox.append(self.lbox_e)
         
         # set the filename section
