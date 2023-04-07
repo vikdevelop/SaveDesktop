@@ -25,5 +25,12 @@
     "never": "Nunca",
     "daily": "Diariamente",
     "weekly": "Semanalmente",
-    "monthly": "Mensalmente"
+    "monthly": "Mensalmente",
+    "import_from_list": "Import from list",
+    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "import_from_file": "Import from file",
+    "import_config_desc": "Import the configuration from a file or list.",
+    "save_flatpak_permissions": "Save custom Flatpak app permissions",
+    "save": "Save",
+    "apply": "Apply"
 }
