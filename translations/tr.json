@@ -1,7 +1,6 @@
 {
     "about_app": "Uygulama Hakkında",
     "unsuppurted_env_desc": "<big><b>Daha önceden yüklenmiş , desteklenmeyen ortama sahipsiniz.</b></big> \nLütfen bu ortamlardan herhangi birini kullanın.: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop için {}</b></big>\n",
     "save_config": "Suanki ayarları kayıt et",
     "import_config": "Kaydedilmiş ayarları yükle",
     "set_filename": "Dosya ismini ayarla(boşluk kullanma)",
@@ -26,5 +25,12 @@
     "never": "Never",
     "daily": "Daily",
     "weekly": "Weekly",
-    "monthly": "Monthly"
+    "monthly": "Monthly",
+    "import_from_list": "Import from list",
+    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "import_from_file": "Import from file",
+    "import_config_desc": "Import the configuration from a file or list.",
+    "save_flatpak_permissions": "Save custom Flatpak app permissions",
+    "save": "Save",
+    "apply": "Apply"
 }

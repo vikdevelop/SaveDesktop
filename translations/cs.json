@@ -1,7 +1,6 @@
 {
     "about_app": "O aplikaci",
     "unsuppurted_env_desc": "<big><b>Máte nainstalované nepodporované prostředí.</b></big> \nPoužijte jedno z těchto prostředí: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop pro {}</b></big>\n",
     "save_config": "Uložit aktuální konfiguraci",
     "import_config": "Importovat již uloženou konfiguraci",
     "set_filename": "Nastavit název souboru (bez mezer)",
@@ -26,5 +25,12 @@
     "never": "Nikdy",
     "daily": "Denně",
     "weekly": "Týdně",
-    "monthly": "Měsíčně"
+    "monthly": "Měsíčně",
+    "import_from_list": "Import from list",
+    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "apply": "Apply",
+    "import_from_file": "Import from file",
+    "import_config_desc": "Import the configuration from a file or list.",
+    "save_flatpak_permissions": "Save custom Flatpak app permissions",
+    "save": "Save"
 }

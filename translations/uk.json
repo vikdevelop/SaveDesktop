@@ -1,7 +1,6 @@
 {
     "about_app": "Про застосунок",
     "unsuppurted_env_desc": "<big><b>У вас встановлено непідтримуване середовище.<b><big>\nБудь ласка, використовуйте одне з цих середовищ: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop для {}</b></big>\n",
     "save_config": "Зберегти поточну конфігурацію",
     "import_config": "Імпорт збереженої конфігурації",
     "set_filename": "Задайте ім'я файлу (без пробілів)",
@@ -26,5 +25,12 @@
     "never": "Ніколи",
     "daily": "Щодня",
     "weekly": "Щотижня",
-    "monthly": "Щомісяця"
+    "monthly": "Щомісяця",
+    "save": "Save",
+    "import_from_list": "Import from list",
+    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "import_from_file": "Import from file",
+    "import_config_desc": "Import the configuration from a file or list.",
+    "save_flatpak_permissions": "Save custom Flatpak app permissions",
+    "apply": "Apply"
 }

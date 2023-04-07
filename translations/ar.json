@@ -1,7 +1,6 @@
 {
     "about_app": "حول التطبيق",
     "unsuppurted_env_desc": "<big><b>بيئة سطح المكتب التي لديك غير مدعومة.</b></big>\nالرجاء استخدام هذه البيئات: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop ل {}</b></big>\n",
     "save_config": "حفظ التخصيصات الحالية",
     "import_config": "استيراد تخصيصات محفوظة",
     "set_filename": "قم بتعيين اسم الملف (بدون مسافات)",
@@ -26,5 +25,12 @@
     "never": "Never",
     "daily": "Daily",
     "weekly": "Weekly",
-    "monthly": "Monthly"
+    "monthly": "Monthly",
+    "import_from_list": "Import from list",
+    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "import_from_file": "Import from file",
+    "import_config_desc": "Import the configuration from a file or list.",
+    "save_flatpak_permissions": "Save custom Flatpak app permissions",
+    "save": "Save",
+    "apply": "Apply"
 }

@@ -1,7 +1,6 @@
 {
     "about_app": "Sobre o app",
     "unsuppurted_env_desc": "<big><b>Você tem um ambiente não suportado instalado.</b></big> \nPor favor, use estes ambientes: GNOME, COSMIC, Cinnamon, Budgie or Xfce.",
-    "savedesktop_title": "<big><b>SaveDesktop para {}</b></big>\n",
     "save_config": "Salvar configuração atual",
     "import_config": "Importar configuração salva",
     "set_filename": "Definir nome de arquivo (sem espaços)",
@@ -26,5 +25,12 @@
     "never": "Nunca",
     "daily": "Diariamente",
     "weekly": "Semanalmente",
-    "monthly": "Mensalmente"
+    "monthly": "Mensalmente",
+    "import_from_list": "Import from list",
+    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "import_from_file": "Import from file",
+    "import_config_desc": "Import the configuration from a file or list.",
+    "save_flatpak_permissions": "Save custom Flatpak app permissions",
+    "save": "Save",
+    "apply": "Apply"
 }

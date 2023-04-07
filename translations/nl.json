@@ -1,7 +1,6 @@
 {
     "about_app": "Over de toepassing",
     "unsuppurted_env_desc": "<big><b>U maakt gebruik van een niet-ondersteunde werkomgeving.</b></big> \nDe volgende werkomgevingen worden ondersteund: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop voor {}</b></big>\n",
     "save_config": "Huidige voorkeuren opslaan",
     "import_config": "Voorkeuren importeren",
     "set_filename": "Geef het bestand een naam (zonder spaties)",
@@ -26,5 +25,12 @@
     "never": "Nooit",
     "daily": "Iedere dag",
     "weekly": "Iedere week",
-    "monthly": "Iedere maand"
+    "monthly": "Iedere maand",
+    "import_from_list": "Import from list",
+    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "import_from_file": "Import from file",
+    "import_config_desc": "Import the configuration from a file or list.",
+    "save_flatpak_permissions": "Save custom Flatpak app permissions",
+    "save": "Save",
+    "apply": "Apply"
 }

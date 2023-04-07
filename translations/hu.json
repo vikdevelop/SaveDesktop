@@ -1,7 +1,6 @@
 {
     "about_app": "Névjegy",
     "unsuppurted_env_desc": "<big><b>Az általad használt környezet nem támogatott.</b></big> \nKérlek használd a következők valamelyikét: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop: {}</b></big>\n",
     "save_config": "Jelenlegi konfiguráció mentése",
     "import_config": "Mentett konfiguráció importálása",
     "set_filename": "Fájlnév megadása (szóközök nélkül)",
@@ -26,5 +25,12 @@
     "never": "Soha",
     "daily": "Naponta",
     "weekly": "Hetente",
-    "monthly": "Havonta"
+    "monthly": "Havonta",
+    "import_from_list": "Import from list",
+    "save_flatpak_permissions": "Save custom Flatpak app permissions",
+    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
+    "import_from_file": "Import from file",
+    "import_config_desc": "Import the configuration from a file or list.",
+    "save": "Save",
+    "apply": "Apply"
 }
