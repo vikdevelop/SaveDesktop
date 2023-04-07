@@ -206,7 +206,6 @@ class MainWindow(Gtk.Window):
         # set the filename section
         self.saveEntry = Adw.EntryRow.new()
         self.saveEntry.set_title(_["set_filename"])
-        self.saveEntry.connect('changed', self.on_saveentry)
         if os.path.exists(f'{CONFIG}/settings.json'):
             with open(f'{CONFIG}/settings.json') as e:
                 jE = json.load(e)
@@ -280,16 +279,8 @@ class MainWindow(Gtk.Window):
         self.saveButton = Gtk.Button.new_with_label(_["save"])
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("pill")
-        self.saveButton.set_sensitive(False)
         self.saveButton.connect("clicked", self.set_title_t)
         self.savebtnBox.append(self.saveButton)
-    
-    def on_saveentry(self, saveEntry):
-        entry = self.saveEntry.get_text()
-        if entry == '':
-            self.saveButton.set_sensitive(False)
-        else:
-            self.saveButton.set_sensitive(True)
         
     # Import configuration section
     def import_desktop(self):
@@ -297,16 +288,6 @@ class MainWindow(Gtk.Window):
             self.pBox.remove(self.saveBox)
         except:
             print("")
-        if self.environment == 'GNOME':
-            # Drag and drop area
-            self.drag_source = Gtk.DragSource.new()
-            self.drag_source.set_actions(Gdk.DragAction.COPY)
-
-            self.drop_target = Gtk.DropTarget.new(GObject.TYPE_STRING, Gdk.DragAction.COPY)
-            self.drop_target.connect('drop', self.on_drop)
-
-            self.add_controller(self.drag_source)
-            self.add_controller(self.drop_target)
         
         # box for import page
         self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -599,20 +580,6 @@ class MainWindow(Gtk.Window):
     def on_toast_dismissed(self, toast):
         os.popen("rm -rf %s/*" % CACHE)
         os.popen("rm -rf {}/SaveDesktop/.{}/*".format(download_dir, date.today()))
-    
-    # Drag and drop function
-    def on_drop(self, DropTarget, data, x, y):
-        if os.path.exists(data):
-            if "sd.tar.gz" in data:
-                self.please_wait_toast()
-                self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
-                os.chdir("%s" % CACHE)
-                os.popen(f"tar -xf {data} ./")
-                self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
-            else:
-                self.unsupp_toast()
-        else:
-            self.fileerr_toast()
         
     # Get settings from XDG_CONFIG/settings.json
     def get_settings(self):
