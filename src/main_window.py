@@ -84,11 +84,8 @@ class MainWindow(Gtk.Window):
         
         self.savedesktop_mode_dropdwn = Gtk.DropDown.new_from_strings( \
             [_["save_config"], _["import_config"]] )
-        #self.savedesktop_mode_dropdwn.get_first_child().add_css_class('flat')
-        self.savedesktop_mode_dropdwn.set_tooltip_text("Select SaveDesktop page")
         self.savedesktop_mode_dropdwn.connect('notify::selected-item', \
             self.change_savedesktop_mode)
-        self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
         
         # Primary layout
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -115,42 +112,52 @@ class MainWindow(Gtk.Window):
         if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
             self.environment = 'COSMIC'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
             self.environment = 'Pantheon'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
             self.environment = 'Cinnamon'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Budgie:GNOME':
             self.environment = 'Budgie'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             self.environment = 'Xfce'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
             self.environment = 'MATE'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
             self.environment = 'KDE Plasma'
             self.save_desktop()
+            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
             self.connect("close-request", self.on_close)
         else:
             self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
@@ -173,12 +180,6 @@ class MainWindow(Gtk.Window):
         # Remove Import page box
         try:
             self.pBox.remove(self.importBox)
-        except:
-            print("")
-        # Remove controller for drag and drop if loaded save page
-        try:
-            self.remove_controller(self.drag_source)
-            self.remove_controller(self.drop_target)
         except:
             print("")
         
@@ -564,18 +565,6 @@ class MainWindow(Gtk.Window):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
         self.toast_wait.set_timeout(10)
         self.toast_overlay.add_toast(self.toast_wait)
-       
-    # Popup about unsupported file
-    def unsupp_toast(self):
-        self.toast_unsupp = Adw.Toast(title=_["unsupp_file_desc"])
-        self.toast_unsupp.set_timeout(5)
-        self.toast_overlay.add_toast(self.toast_unsupp)
-        
-    # Popup about unable to find the file
-    def fileerr_toast(self):
-        self.toast_fileerr = Adw.Toast(title=_["unable_find_file"])
-        self.toast_fileerr.set_timeout(7)
-        self.toast_overlay.add_toast(self.toast_fileerr)
     
     def on_toast_dismissed(self, toast):
         os.popen("rm -rf %s/*" % CACHE)
@@ -638,7 +627,7 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.2")
+        dialog.set_version("2.2.1")
         dialog.set_developer_name("vikdevelop")
         if lang == "en.json":
             print("")
