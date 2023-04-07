@@ -35,3 +35,4 @@ and more...
 
 ### Screenshots
 ![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png)
+![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png)
