@@ -1,7 +1,6 @@
 {
     "about_app": "About app",
     "unsuppurted_env_desc": "<big><b>You have an unsupported environment installed.</b></big> \nPlease use this environments: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop for {}</b></big>\n",
     "save_config": "Menyimpan konfigurasi saat ini",
     "import_config": "Mengimpor konfigurasi yang tersimpan",
     "set_filename": "Set the file name (without spaces)",

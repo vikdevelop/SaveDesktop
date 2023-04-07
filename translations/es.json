@@ -1,7 +1,6 @@
 {
     "about_app": "Sobre la aplicación",
     "unsuppurted_env_desc": "<big><b>Tienes instalado un entorno no compatible.</b></big> \nUtilice uno de estos entornos: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop para {}</b></big>\n",
     "save_config": "Guardar la configuración actual",
     "import_config": "Importar una configuración guardada",
     "set_filename": "Definir el nombre del archivo (sin espacios)",

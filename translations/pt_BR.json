@@ -1,7 +1,6 @@
 {
     "about_app": "Sobre o app",
     "unsuppurted_env_desc": "<big><b>Você tem um ambiente não suportado instalado.</b></big> \nPor favor, use estes ambientes: GNOME, COSMIC, Cinnamon, Budgie or Xfce.",
-    "savedesktop_title": "<big><b>SaveDesktop para {}</b></big>\n",
     "save_config": "Salvar configuração atual",
     "import_config": "Importar configuração salva",
     "set_filename": "Definir nome de arquivo (sem espaços)",

@@ -1,7 +1,6 @@
 {
     "about_app": "Om programmet",
     "unsuppurted_env_desc": "<big><b>Du har et ustøttet miljø installert.</b></big> \nBruk ett av disse miljøene: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop for {}</b></big>\n",
     "save_config": "Lagre nåværende oppsett",
     "import_config": "Importer lagret oppsett",
     "set_filename": "Sett filnavn (uten mellomrom)",

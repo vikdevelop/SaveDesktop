@@ -1,7 +1,6 @@
 {
     "about_app": "Over de toepassing",
     "unsuppurted_env_desc": "<big><b>U maakt gebruik van een niet-ondersteunde werkomgeving.</b></big> \nDe volgende werkomgevingen worden ondersteund: {}.",
-    "savedesktop_title": "<big><b>SaveDesktop voor {}</b></big>\n",
     "save_config": "Huidige voorkeuren opslaan",
     "import_config": "Voorkeuren importeren",
     "set_filename": "Geef het bestand een naam (zonder spaties)",
