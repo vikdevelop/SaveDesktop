@@ -233,7 +233,7 @@ class MainWindow(Gtk.Window):
         self.adw_action_row_more = Adw.ActionRow.new()
         self.adw_action_row_more.set_title(title=_["save_flatpak_permissions"])
         self.adw_action_row_more.set_title_lines(2)
-        self.adw_action_row_more.set_subtitle_lines(2)
+        self.adw_action_row_more.set_subtitle_lines(3)
         self.adw_action_row_more.add_suffix(self.switch_01)
         self.adw_action_row_more.set_activatable_widget(self.switch_01)
         self.lbox_e.append(child=self.adw_action_row_more)
@@ -297,16 +297,16 @@ class MainWindow(Gtk.Window):
             self.pBox.remove(self.saveBox)
         except:
             print("")
-        
-        # Drag and drop area
-        self.drag_source = Gtk.DragSource.new()
-        self.drag_source.set_actions(Gdk.DragAction.COPY)
+        if self.environment == 'GNOME':
+            # Drag and drop area
+            self.drag_source = Gtk.DragSource.new()
+            self.drag_source.set_actions(Gdk.DragAction.COPY)
 
-        self.drop_target = Gtk.DropTarget.new(GObject.TYPE_STRING, Gdk.DragAction.COPY)
-        self.drop_target.connect('drop', self.on_drop)
+            self.drop_target = Gtk.DropTarget.new(GObject.TYPE_STRING, Gdk.DragAction.COPY)
+            self.drop_target.connect('drop', self.on_drop)
 
-        self.add_controller(self.drag_source)
-        self.add_controller(self.drop_target)
+            self.add_controller(self.drag_source)
+            self.add_controller(self.drop_target)
         
         # box for import page
         self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
