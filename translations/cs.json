@@ -28,9 +28,9 @@
     "monthly": "Měsíčně",
     "import_from_list": "Importovat ze seznamu",
     "import_from_list_error": "V adresáři SaveDesktop nebyla nalezena žádná konfigurace.",
-    "apply": "Apply",
+    "apply": "Použít",
     "import_from_file": "Importovat ze souboru",
     "import_config_desc": "Importujte konfiguraci ze souboru nebo seznamu.",
-    "save_flatpak_permissions": "Save custom Flatpak app permissions",
-    "save": "Save"
+    "save_flatpak_permissions": "Uložit vlastní oprávnění aplikací Flatpak",
+    "save": "Uložit"
 }
