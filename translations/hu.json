@@ -10,7 +10,7 @@
     "open": "Megnyitás",
     "cancel": "Mégsem",
     "savedesktop_f": "SaveDesktop fájlok",
-    "config_imported": "A konfiguráció megállításra került!",
+    "config_imported": "A konfigurációt alkalmaztuk!",
     "logout": "Kijelentkezés",
     "please_wait": "Kérlek várj …",
     "summary": "Mentsd el az asztali környezeted jelenlegi konfigurációját",
@@ -26,11 +26,11 @@
     "daily": "Naponta",
     "weekly": "Hetente",
     "monthly": "Havonta",
-    "import_from_list": "Import from list",
-    "save_flatpak_permissions": "Save custom Flatpak app permissions",
-    "import_from_list_error": "No configuration was found in the SaveDesktop directory.",
-    "import_from_file": "Import from file",
-    "import_config_desc": "Import the configuration from a file or list.",
-    "save": "Save",
-    "apply": "Apply"
+    "import_from_list": "Importálás listából",
+    "save_flatpak_permissions": "Egyedi Flatpak alkalmazás engedélyek mentése",
+    "import_from_list_error": "Nem található konfiguráció a SaveDesktop könyvtárban.",
+    "import_from_file": "Importálás fájlból",
+    "import_config_desc": "Importáld a konfigurációt fájlból vagy listából.",
+    "save": "Mentés",
+    "apply": "Alkalmazás"
 }
