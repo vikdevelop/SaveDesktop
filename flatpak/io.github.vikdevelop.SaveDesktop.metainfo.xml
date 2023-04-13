@@ -118,7 +118,16 @@
     </categories>
           
     <releases>
-      <release version="2.2" date="2023-04-07">
+       <release version="2.2.2" date="2023-04-13">
+          <description>
+            <ul>
+              <li>Improved saving and importing configuration</li>
+              <li>Added link to About Dialog about how periodic saving works (is possible to find it under option "Details")</li>
+              <li>Updated translations</li>
+            </ul>
+          </description>
+        </release>
+        <release version="2.2" date="2023-04-07">
           <description>
             <p>New application design</p>
             <ul>
