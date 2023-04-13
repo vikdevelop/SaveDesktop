@@ -383,7 +383,7 @@ class MainWindow(Gtk.Window):
     def imp_cfg_from_list(self, w):
         selected_archive = self.radio_row.get_selected_item()
         self.please_wait_toast()
-        self.timeout_io = GLib.timeout_add_seconds(15, self.applying_done)
+        #self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
         os.chdir("%s" % CACHE)
         os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
@@ -486,7 +486,7 @@ class MainWindow(Gtk.Window):
             file = dialog.get_file()
             filename = file.get_path()
             self.please_wait_toast()
-            self.timeout_io = GLib.timeout_add_seconds(10, self.exporting_done)
+            #self.timeout_io = GLib.timeout_add_seconds(10, self.exporting_done)
             os.chdir("%s" % CACHE)
             os.popen("tar -xf %s ./" % filename)
             self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
@@ -498,44 +498,45 @@ class MainWindow(Gtk.Window):
             os.system("mkdir ~/.config/")
         if not os.path.exists("{}/.config/dconf".format(Path.home())):
             os.system("mkdir ~/.config/dconf/")
-        os.popen("rm ~/.config/dconf/* && cp ./user ~/.config/dconf/")
-        os.popen('cp -R ./icons ~/.local/share/')
-        os.popen('cp -R ./.themes ~/')
-        os.popen('cp -R ./.icons ~/')
-        os.popen("cp -R ./backgrounds ~/.local/share/")
-        os.popen('cp -R ./.fonts ~/')
-        os.popen('cp -R ./gtk-4.0 ~/.config/')
-        os.popen('cp -R ./gtk-3.0 ~/.config/')
-        os.popen('cp -R ./overrides ~/.local/share/flatpak/')
+        self.i_dconf = GLib.spawn_command_line_async(f"cp ./user {Path.home()}/.config/dconf/")
+        self.i_icons = GLib.spawn_command_line_async(f'cp -R ./icons {Path.home()}/.local/share/')
+        self.i_themes = GLib.spawn_command_line_async(f'cp -R ./.themes {Path.home()}/')
+        self.i_icons_home = GLib.spawn_command_line_async(f'cp -R ./.icons {Path.home()}/')
+        self.i_backgrounds = GLib.spawn_command_line_async(f'cp -R ./backgrounds {Path.home()}/.local/share/')
+        self.i_fonts = GLib.spawn_command_line_async(f'cp -R ./.fonts {Path.home()}/')
+        self.i_gtk4 = GLib.spawn_command_line_async(f'cp -R ./gtk-4.0 {Path.home()}/.config/')
+        self.i_gtk3 = GLib.spawn_command_line_async(f'cp -R ./gtk-3.0 {Path.home()}/.config/')
+        self.i_overrides = GLib.spawn_command_line_async(f'cp -R ./overrides {Path.home()}/.local/share/flatpak/')
         # Apply configs for individual desktop environments
         if self.environment == 'GNOME':
-            os.popen("cp -R ./gnome-background-properties ~/.local/share/")
-            os.popen("cp -R ./gnome-shell ~/.local/share/")
-            os.popen("cp -R ./nautilus-python ~/.local/share/")
-            os.popen("cp -R ./gnome-control-center ~/.config/")
+            self.i_background_properties = GLib.spawn_command_line_async(f'cp -R ./gnome-background-properties {Path.home()}/.local/share/')
+            self.i_gshell = GLib.spawn_command_line_async(f'cp -R ./gnome-shell {Path.home()}/.local/share/')
+            self.i_nautilus = GLib.spawn_command_line_async(f'cp -R ./nautilus-python {Path.home()}/.local/share/')
+            self.i_gccenter = GLib.spawn_command_line_async(f'cp -R ./gnome-control-center {Path.home()}/.config/')
         elif self.environment == 'Pantheon':
-            os.popen("cp -R ./plank ~/.config/")
-            os.popen("cp -R ./marlin ~/.config/")
+            self.i_plank = GLib.spawn_command_line_async(f'cp -R ./plank {Path.home()}/.config/')
+            self.i_marlin = GLib.spawn_command_line_async(f'cp -R ./marlin {Path.home()}/.config/')
         elif self.environment == 'Cinnamon':
-            os.popen("cp -R ./nemo ~/.config/")
-            os.popen("cp -R ./cinnamon ~/.local/share/")
-            os.popen("cp -R ./.cinnamon ~/")
+            self.i_nemo = GLib.spawn_command_line_async(f'cp -R ./nemo {Path.home()}/.config/')
+            self.i_cinnamon_data = GLib.spawn_command_line_async(f'cp -R ./cinnamon {Path.home()}/.local/share/')
+            self.i_cinnamon_home = GLib.spawn_command_line_async(f'cp -R ./.cinnamon {Path.home()}/')
         elif self.environment == 'Budgie':
-            os.popen("cp -R ./budgie-desktop ~/.config/")
-            os.popen("cp -R ./budgie-extras ~/.config/")
-            os.popen("cp -R ./nemo ~/.config/")
+            self.i_budgie_desktop = GLib.spawn_command_line_async(f'cp -R ./budgie-desktop {Path.home()}/.config/')
+            self.i_budgie_extras = GLib.spawn_command_line_async(f'cp -R ./budgie-extras {Path.home()}/.config/')
+            GLib.spawn_command_line_async(f'cp -R ./nemo {Path.home()}/.config/')
         elif self.environment == 'COSMIC':
-            os.popen("cp -R ./pop-shell ~/.config/")
-            os.popen("cp -R ./gnome-shell ~/.local/share/")
+            self.i_popshell = GLib.spawn_command_line_async(f'cp -R ./pop-shell {Path.home()}/.config/')
+            self.i_gshell_pop = GLib.spawn_command_line_async(f'cp -R ./gnome-shell {Path.home()}/.local/share/')
         elif self.environment == 'Xfce':
-            os.popen("cp -R ./xfce4 ~/.config/")
-            os.popen("cp -R ./Thunar ~/.config/")
-            os.popen("cp -R ./.xfce4 ~/")
+            self.i_xfconf = GLib.spawn_command_line_async(f'cp -R ./xfce4 {Path.home()}/.config/')
+            self.i_thunar = GLib.spawn_command_line_async(f'cp -R ./Thunar {Path.home()}/.config/')
+            self.i_xfhome = GLib.spawn_command_line_async(f'cp -R ./.xfce4 {Path.home()}/')
         elif self.environment == 'MATE':
-            os.popen("cp -R ./caja ~/.config/")
+            self.i_caja = GLib.spawn_command_line_async(f'cp -R ./caja {Path.home()}/.config/')
         elif self.environment == 'KDE Plasma':
-            os.popen("cp -R ./xdg-config/* ~/.config/")
-            os.popen("cp -R ./xdg-data/* ~/.local/share/")
+            self.i_kconf = GLib.spawn_command_line_async(f'cp -R ./xdg-config/* {Path.home()}/.config/')
+            self.i_kdata = GLib.spawn_command_line_async(f'cp -R ./xdg-data/* {Path.home()}/.local/share/')
+        self.applying_done()
             
     ## open file chooser
     def apply_config(self, w):
@@ -627,7 +628,7 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.2.1")
+        dialog.set_version("2.2.2")
         dialog.set_developer_name("vikdevelop")
         if lang == "en.json":
             print("")
