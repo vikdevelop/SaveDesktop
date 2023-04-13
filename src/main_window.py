@@ -383,7 +383,7 @@ class MainWindow(Gtk.Window):
     def imp_cfg_from_list(self, w):
         selected_archive = self.radio_row.get_selected_item()
         self.please_wait_toast()
-        self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
+        self.timeout_io = GLib.timeout_add_seconds(15, self.applying_done)
         os.chdir("%s" % CACHE)
         os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
@@ -395,7 +395,7 @@ class MainWindow(Gtk.Window):
         else:
             self.please_wait_toast()
             self.save_config()
-            self.timeout_id = GLib.timeout_add_seconds(10, self.exporting_done)
+            self.timeout_id = GLib.timeout_add_seconds(15, self.exporting_done)
     
     # Save configuration
     def save_config(self):
@@ -483,7 +483,7 @@ class MainWindow(Gtk.Window):
             file = dialog.get_file()
             filename = file.get_path()
             self.please_wait_toast()
-            self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
+            self.timeout_io = GLib.timeout_add_seconds(15, self.applying_done)
             os.chdir("%s" % CACHE)
             os.popen("tar -xf %s ./" % filename)
             self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
@@ -563,7 +563,7 @@ class MainWindow(Gtk.Window):
     # popup about message "Please wait ..."
     def please_wait_toast(self):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
-        self.toast_wait.set_timeout(10)
+        self.toast_wait.set_timeout(15)
         self.toast_overlay.add_toast(self.toast_wait)
     
     def on_toast_dismissed(self, toast):
