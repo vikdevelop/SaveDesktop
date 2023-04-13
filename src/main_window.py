@@ -190,7 +190,7 @@ class MainWindow(Gtk.Window):
         # Tittle image for save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
         self.titleImage.set_pixel_size(64)
-        self.saveBox.append(self.titleImage) 
+        self.saveBox.append(self.titleImage)
         
         # Tittle "Save Current configuration" for save page and subtitle "{user_desktop}"
         self.label_title = Gtk.Label.new()
@@ -298,7 +298,7 @@ class MainWindow(Gtk.Window):
         self.importImage.set_pixel_size(64)
         self.importBox.append(self.importImage)
         
-        # Title and subtitle for import page 
+        # Title and subtitle for import page
         self.labelImport = Gtk.Label.new()
         self.labelImport.set_markup(f"<big><b>{_['import_config']}</b></big>")
         self.importBox.append(self.labelImport)
@@ -534,8 +534,12 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'MATE':
             self.i_caja = GLib.spawn_command_line_async(f'cp -R ./caja {Path.home()}/.config/')
         elif self.environment == 'KDE Plasma':
-            self.i_kconf = GLib.spawn_command_line_async(f'cp -R ./xdg-config/* {Path.home()}/.config/')
-            self.i_kdata = GLib.spawn_command_line_async(f'cp -R ./xdg-data/* {Path.home()}/.local/share/')
+            os.chdir("%s" % CACHE)
+            os.chdir('xdg-config')
+            self.i_kconf = GLib.spawn_command_line_async(f'cp -R ./ {Path.home()}/.config/')
+            os.chdir("%s" % CACHE)
+            os.chdir('xdg-data')
+            self.i_kdata = GLib.spawn_command_line_async(f'cp -R ./ {Path.home()}/.local/share/')
         self.applying_done()
             
     ## open file chooser
