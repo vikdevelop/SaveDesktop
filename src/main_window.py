@@ -395,7 +395,6 @@ class MainWindow(Gtk.Window):
         else:
             self.please_wait_toast()
             self.save_config()
-            self.timeout_id = GLib.timeout_add_seconds(15, self.exporting_done)
     
     # Save configuration
     def save_config(self):
@@ -405,65 +404,69 @@ class MainWindow(Gtk.Window):
             os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
         os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
         os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-        os.popen('cp ~/.config/dconf/user ./')
-        os.popen('cp -R ~/.local/share/backgrounds ./')
-        os.popen('cp -R ~/.local/share/icons ./')
-        os.popen('cp -R ~/.themes ./')
-        os.popen('cp -R ~/.icons ./')
-        os.popen('cp -R ~/.fonts ./')
-        os.popen('cp -R ~/.config/gtk-4.0 ./')
-        os.popen('cp -R ~/.config/gtk-3.0 ./')
+        self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
+        self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
+        self.themes = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.themes ./")
+        self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.icons ./")
+        self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/icons ./")
+        self.fonts = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.fonts ./")
+        self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
+        self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
         if self.switch_01.get_active() == True:
-            os.popen('cp -R ~/.local/share/flatpak/overrides ./')
+            self.overrides = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/flatpak/overrides ./")
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
-            os.popen("cp -R ~/.local/share/gnome-background-properties ./")
-            os.popen("cp -R ~/.local/share/gnome-shell ./")
-            os.popen("cp -R ~/.local/share/nautilus-python ./")
-            os.popen("cp -R ~/.config/gnome-control-center ./")
+            self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
+            self.gshell = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-shell ./")
+            self.nautilus = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/nautilus-python ./")
+            self.gccenter = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-control-center ./")
         elif self.environment == 'Pantheon':
-            os.popen("cp -R ~/.config/plank ./")
-            os.popen("cp -R ~/.config/marlin ./")
+            self.plank = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plank ./")
+            self.marlin = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/marlin ./")
         elif self.environment == 'Cinnamon':
-            os.popen("cp -R ~/.config/nemo ./")
-            os.popen("cp -R ~/.local/share/cinnamon ./")
-            os.popen("cp -R ~/.cinnamon ./")
+            self.nemo = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/nemo ./")
+            self.data_cinn = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/cinnamon ./")
+            self.home_cinn = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.cinnamon ./")
         elif self.environment == 'Budgie':
-            os.popen("cp -R ~/.config/budgie-desktop ./")
-            os.popen("cp -R ~/.config/budgie-extras ./")
-            os.popen("cp -R ~/.config/nemo ./")
+            self.budgie_desktop = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/budgie-desktop ./")
+            self.budgie_extras = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/bugie-extras ./")
+            self.nemo_budgie = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/nemo ./")
         elif self.environment == 'COSMIC':
-            os.popen("cp -R ~/.config/pop-shell ./")
-            os.popen("cp -R ~/.local/share/gnome-shell ./")
+            self.pop_shell = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/pop-shell ./")
+            self.gshellpop = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-shell ./")
         elif self.environment == 'Xfce':
-            os.popen("cp -R ~/.config/xfce4 ./")
-            os.popen("cp -R ~/.config/Thunar ./")
-            os.popen("cp -R ~/.xfce4 ./")
+            self.xfce4conf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/xfce4 ./")
+            self.thunarxf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/Thunar ./")
+            self.xfce4home = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.xfce4 ./")
         elif self.environment == 'MATE':
-            os.popen("cp -R ~/.config/caja ./")
+            self.caja_mate = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/caja ./")
         elif self.environment == 'KDE Plasma':
             os.system("mkdir xdg-config && mkdir xdg-data")
-            os.popen("cp -R ~/.config/[k]* ./xdg-config/")
-            os.popen("cp ~/.config/gtkrc ./xdg-config/")
-            os.popen("cp ~/.config/dolphinrc ./xdg-config/")
-            os.popen("cp ~/.config/gwenviewrc ./xdg-config/")
-            os.popen("cp ~/.config/plasmashellrc ./xdg-config/")
-            os.popen("cp ~/.config/spectaclerc ./xdg-config/")
-            os.popen("cp ~/.config/plasmarc ./xdg-config/")
-            os.popen("cp -R ~/.local/share/[k]* ./xdg-data/")
-            os.popen("cp -R ~/.local/share/dolphin ./xdg-data/")
-            os.popen("cp -R ~/.local/share/sddm ./xdg-data/")
-            os.popen("cp -R ~/.local/share/wallpapers ./xdg-data/")
-            os.popen("cp -R ~/.local/share/plasma-systemmonitor ./xdg-data/")
-            os.popen("cp -R ~/.local/share/plasma ./xdg-data/")
-            os.popen("cp -R ~/.local/share/aurorae ./xdg-data/")
+            self.kconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/[k]* ./xdg-config/")
+            self.gtkrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtkrc ./xdg-config/")
+            self.dolphinrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dolphinrc ./xdg-config/")
+            self.gwenviewrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gwenviewrc ./xdg-config/")
+            self.plasmashrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plasmashellrc ./xdg-config/")
+            self.spectaclerc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/spectaclerc ./xdg-config/")
+            self.plasmarc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plasmarc ./xdg-config/")
+            self.kdata = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/[k]* ./xdg-data/")
+            self.dolphin_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/dolphin ./xdg-data/")
+            self.sddm = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/sddm ./xdg-data/")
+            self.wallpapers = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/wallpapers ./xdg-data/")
+            self.psysmonitor = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma-systemmonitor ./xdg-data/")
+            self.plasma_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma ./xdg-data/")
+            self.aurorae = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/aurorae ./xdg-data/")
             os.popen("cp -R ~/.local/share/color-schemes ./xdg-data/")
+            self.colors = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/color-schemes ./xdg-data/")
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
-            os.popen("tar --gzip -cf config_{}.sd.tar.gz ./".format(date.today()))
+            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date_today()}.sd.tar.gz ./")
+            self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
         else:
-            os.popen("tar --gzip -cf {}.sd.tar.gz ./".format(self.saveEntry.get_text()))
+            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
+            self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
+        self.exporting_done()
     
     # Load file chooser
     def fileshooser(self):
@@ -483,7 +486,7 @@ class MainWindow(Gtk.Window):
             file = dialog.get_file()
             filename = file.get_path()
             self.please_wait_toast()
-            self.timeout_io = GLib.timeout_add_seconds(15, self.applying_done)
+            self.timeout_io = GLib.timeout_add_seconds(10, self.exporting_done)
             os.chdir("%s" % CACHE)
             os.popen("tar -xf %s ./" % filename)
             self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
@@ -543,8 +546,6 @@ class MainWindow(Gtk.Window):
         self.toast.set_title(title=_["config_saved"])
         self.toast.set_button_label(_["open_folder"])
         self.toast.set_action_name("app.open_dir")
-        os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-        os.popen('mv ./*.tar.gz {}/SaveDesktop/archives/'.format(download_dir))
         self.toast_overlay.add_toast(self.toast)
         
     # popup about message of using spaces in the filename
@@ -563,7 +564,6 @@ class MainWindow(Gtk.Window):
     # popup about message "Please wait ..."
     def please_wait_toast(self):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
-        self.toast_wait.set_timeout(15)
         self.toast_overlay.add_toast(self.toast_wait)
     
     def on_toast_dismissed(self, toast):
