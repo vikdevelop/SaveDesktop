@@ -442,21 +442,21 @@ class MainWindow(Gtk.Window):
             self.caja_mate = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/caja ./")
         elif self.environment == 'KDE Plasma':
             os.system("mkdir xdg-config && mkdir xdg-data")
-            self.kconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/[k]* ./xdg-config/")
+            os.popen(f"cp -R ~/.config/[k]* ./xdg-config/")
             self.gtkrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtkrc ./xdg-config/")
             self.dolphinrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dolphinrc ./xdg-config/")
             self.gwenviewrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gwenviewrc ./xdg-config/")
             self.plasmashrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plasmashellrc ./xdg-config/")
             self.spectaclerc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/spectaclerc ./xdg-config/")
             self.plasmarc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plasmarc ./xdg-config/")
-            self.kdata = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/[k]* ./xdg-data/")
+            self.kdata = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/konsole ./xdg-data/")
             self.dolphin_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/dolphin ./xdg-data/")
             self.sddm = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/sddm ./xdg-data/")
             self.wallpapers = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/wallpapers ./xdg-data/")
             self.psysmonitor = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma-systemmonitor ./xdg-data/")
             self.plasma_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma ./xdg-data/")
             self.aurorae = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/aurorae ./xdg-data/")
-            os.popen("cp -R ~/.local/share/color-schemes ./xdg-data/")
+            self.kscreen = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/kscreen ./xdg-data/")
             self.colors = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/color-schemes ./xdg-data/")
               
         # Get self.saveEntry text
@@ -632,7 +632,7 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.2.2")
+        dialog.set_version("2.2.4")
         dialog.set_developer_name("vikdevelop")
         dialog.add_link(_["periodic_saving"], "https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving")
         if lang == "en.json":
