@@ -452,6 +452,7 @@ class MainWindow(Gtk.Window):
             self.plasmashrc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plasmashellrc ./xdg-config/")
             self.spectaclerc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/spectaclerc ./xdg-config/")
             self.plasmarc = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plasmarc ./xdg-config/")
+            self.kpanel = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plasma-org.kde.plasma.desktop-appletsrc ./xdg-config/")
             self.kdata = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/konsole ./xdg-data/")
             self.dolphin_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/dolphin ./xdg-data/")
             self.sddm = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/sddm ./xdg-data/")
