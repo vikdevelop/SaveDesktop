@@ -16,6 +16,7 @@ Comment[hu]=Mentsd el az asztali környezeted jelenlegi konfigurációját
 Comment[es]=Guarda la configuración actual de tu entorno de escritorio
 Comment[tr]=Masaüstünün şuanki ayarlarını kayıt et
 Comment[de]=Speichern Sie die aktuelle Konfiguration Ihrer Desktop-Umgebung
+Comment[zh]=保存桌面环境的当前配置
 Exec=run.sh
 Type=Application
 Icon=io.github.vikdevelop.SaveDesktop
