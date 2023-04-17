@@ -12,49 +12,49 @@ gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk, GObject
 
 # Czech
-if subprocess.getoutput('locale | grep "LANG"') == 'LANG=cs_CZ.UTF-8':
+if "cs" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'cs.json'
 # French
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=fr_FR.UTF-8':
+elif "fr" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'fr.json'
 # Portugalese (Brasil)    
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=pt_BR.UTF-8':
+elif "pt_BR" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'pt_BR.json'
 # Italian    
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=it_IT.UTF-8':
+elif "it" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'it.json'
 # Dutch
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=nl_NL.UTF-8':
+elif "nl" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'nl.json'
 # Arabic
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=ar_SA.UTF-8':
+elif "ar" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'ar.json'
 # Russian
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=ru_RU.UTF-8':
+elif "ru" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'ru.json'
 # Indonesian
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=id_ID.UTF-8':
+elif "id" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'id.json'
 # Norwegian (Bokmål)
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=nb_NO.UTF-8':
+elif "nb_NO" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'nb_NO.json'
 # Ukrainian
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=uk_UA.UTF-8':
+elif "uk" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'uk.json'
 # Hungarian
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=hu_HU.UTF-8':
+elif "hu" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'hu.json'
 # Spanish
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=es_ES.UTF-8':
+elif "es" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'es.json'
 # Turkish
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=tr_TR.UTF-8':
+elif "tr" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'tr.json'
 # Deutsch
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=de_DE.UTF-8':
+elif "de" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'de.json'
 # Chinese (Simplified)
-elif subprocess.getoutput('locale | grep "LANG"') == 'LANG=zh_CN.UTF-8':
+elif "zh" in subprocess.getoutput('locale | grep "LANG"'):
     lang = 'zh_Hans.json'
 # English
 else:
