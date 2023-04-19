@@ -140,6 +140,7 @@ class PeriodicBackups:
                 os.system("cp ~/.config/plasmashellrc ./xdg-config/")
                 os.system("cp ~/.config/spectaclerc ./xdg-config/")
                 os.system("cp ~/.config/plasmarc ./xdg-config/")
+                os.system("cp ~/.config/plasma-org.kde.plasma.desktop-appletsrc ./xdg-config/")
                 os.system("cp -R ~/.local/share/[k]* ./xdg-data/")
                 os.system("cp -R ~/.local/share/dolphin ./xdg-data/")
                 os.system("cp -R ~/.local/share/sddm ./xdg-data/")
