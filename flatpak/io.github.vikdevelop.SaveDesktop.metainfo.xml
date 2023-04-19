@@ -124,6 +124,14 @@
     </categories>
           
     <releases>
+       <release version="2.3" date="2023-04-19">
+          <description>
+            <ul>
+              <li>Added Chinese (simplified) translations</li>
+              <li>Fixed minor bugs</li>
+            </ul>
+          </description>
+       </release>
        <release version="2.2.2" date="2023-04-13">
           <description>
             <ul>
