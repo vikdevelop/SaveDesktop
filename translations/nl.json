@@ -32,5 +32,6 @@
     "import_config_desc": "Importeer voorkeuren uit een bestand of lijst.",
     "save_flatpak_permissions": "Eigen Flatpak-rechten opslaan",
     "save": "Opslaan",
-    "apply": "Toepassen"
+    "apply": "Toepassen",
+    "learn_more": "Learn more"
 }
