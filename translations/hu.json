@@ -32,5 +32,6 @@
     "import_from_file": "Importálás fájlból",
     "import_config_desc": "Importáld a konfigurációt fájlból vagy listából.",
     "save": "Mentés",
-    "apply": "Alkalmazás"
+    "apply": "Alkalmazás",
+    "learn_more": "Learn more"
 }

@@ -32,5 +32,6 @@
     "save_flatpak_permissions": "保存自定义 Flatpak 应用权限",
     "save": "保存",
     "apply": "应用",
-    "translator_credits": "译者github链接"
+    "translator_credits": "译者github链接",
+    "learn_more": "Learn more"
 }
