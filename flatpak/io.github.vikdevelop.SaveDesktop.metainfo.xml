@@ -127,7 +127,7 @@
        <release version="2.3" date="2023-04-19">
           <description>
             <ul>
-              <li>Added Chinese (simplified) translations</li>
+              <li>Added Chinese (simplified) translations, thanks to @carrothu-cn</li>
               <li>Fixed minor bugs</li>
             </ul>
           </description>
