@@ -640,7 +640,7 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.2.4")
+        dialog.set_version("2.3")
         dialog.set_developer_name("vikdevelop")
         dialog.add_link(_["periodic_saving"], "https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving")
         if lang == "en.json":
