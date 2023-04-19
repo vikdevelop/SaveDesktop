@@ -32,5 +32,6 @@
     "import_config_desc": "Importa la configuración desde un archivo o una lista.",
     "save_flatpak_permissions": "Guardar permisos personalizados de aplicaciones Flatpak",
     "save": "Guardar",
-    "apply": "Aplicar"
+    "apply": "Aplicar",
+    "learn_more": "Learn more"
 }
