@@ -642,7 +642,6 @@ class MyApp(Adw.Application):
         dialog.set_application_name("SaveDesktop")
         dialog.set_version("2.3")
         dialog.set_developer_name("vikdevelop")
-        dialog.add_link(_["periodic_saving"], "https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving")
         if lang == "en.json":
             print("")
         else:
