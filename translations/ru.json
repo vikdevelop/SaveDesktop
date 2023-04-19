@@ -32,5 +32,6 @@
     "import_from_list_error": "В каталоге SaveDesktop не найдена конфигурация.",
     "import_from_file": "Импорт из файла",
     "import_config_desc": "Импорт конфигурации из файла или списка.",
-    "save_flatpak_permissions": "Сохранять пользовательские разрешения Flatpak"
+    "save_flatpak_permissions": "Сохранять пользовательские разрешения Flatpak",
+    "learn_more": "Learn more"
 }
