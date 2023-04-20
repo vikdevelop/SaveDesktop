@@ -249,7 +249,7 @@ class MainWindow(Gtk.Window):
         ])
         
         self.periodicLabel = Gtk.Label.new()
-        self.periodicLabel.set_markup(f"{_['periodic_saving']}\n<small>{_['periodic_saving_desc']}. \n<a href='https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving'>{_['learn_more']}</a></small>")
+        self.periodicLabel.set_markup(f"{_['periodic_saving']}\n<small><span color='grey'>{_['periodic_saving_desc']}</span>\n<a href='https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving'>{_['learn_more']}</a></small>")
         self.periodicLabel.set_wrap(True)
         
         self.adw_action_row_backups = Adw.ComboRow.new()
