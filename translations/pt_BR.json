@@ -16,7 +16,7 @@
     "summary": "Salvar a configuração atual do seu ambiente desktop",
     "description": "Gostaria de salvar sua configuração atual, incluindo temas, ícones, papéis de parede, todas as configurações do ambiente desktop, extensões e assim por diante? SaveDesktop pode ajudá-lo com isso. Apenas um clique e você terá sua configuração salva.",
     "supported_environments_desc": "Ambientes desktop suportados: {}",
-    "translator_credits": "Felipe Nogueira https://github.com/fnogcps\nhttps://hosted.weblate.org/user/IsaacDias/",
+    "translator_credits": "https://github.com/fnogcps, https://hosted.weblate.org/user/IsaacDias/",
     "filename_spaces_msg": "Não deve haver espaços no nome do arquivo",
     "unsupp_file_desc": "Arquivo não suportado, use arquivos do SaveDesktop",
     "unable_find_file": "Não foi possível encontrar o arquivo, arraste o arquivo do diretório de downloads",
@@ -33,5 +33,5 @@
     "save_flatpak_permissions": "Salvar permissões de aplicativos Flatpak personalizados",
     "save": "Salvar",
     "apply": "Aplicar",
-    "learn_more": "Learn more"
+    "learn_more": "Aprender mais"
 }
