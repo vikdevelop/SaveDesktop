@@ -651,6 +651,7 @@ class MyApp(Adw.Application):
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop")
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
+        dialog.set_artists(["Brage Fuglseth"])
         dialog.set_application_icon("io.github.vikdevelop.SaveDesktop")
         dialog.show()    
     
