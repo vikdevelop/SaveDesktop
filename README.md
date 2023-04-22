@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/icons/io.github.vikdevelop.SaveDesktop.png">
+  <img src="/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg">
   <h1 align="center">SaveDesktop</h1>
 </p>
 
