@@ -124,6 +124,14 @@
     </categories>
           
     <releases>
+       <release version="2.3.1" date="2023-04-22">
+          <description>
+            <ul>
+              <li>Added new application icon, thanks to @bragefuglseth</li>
+              <li>Updated translations</li>
+            </ul>
+          </description>
+       </release>
        <release version="2.3" date="2023-04-19">
           <description>
             <ul>
