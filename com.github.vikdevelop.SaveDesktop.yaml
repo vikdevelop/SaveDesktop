@@ -44,7 +44,8 @@ modules:
        - install -Dm755 -t /app src/main_window.py
        - install -Dm755 -t /app src/periodic_saving.py
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
-       - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.png
+       - install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
+       - install -D -t /app/share/icons/hicolor/symbolic/apps flatpak/icons/io.github.vikdevelop.SaveDesktop-symbolic.svg
        - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/exclamation_mark.png
        - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/desktop-symbolic.svg
        - install -D -t /app/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
