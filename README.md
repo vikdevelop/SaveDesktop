@@ -35,14 +35,8 @@ If you want to help with localize SaveDesktop, you can use the Weblate tool (is 
 and more...
 
 ### Screenshots
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png" width="872" height="662">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window_dark.png" width="872" height="662">
-  <img alt="Hashnode logo" src="https://user-images.githubusercontent.com/71297412/178180441-59f1644e-2ab6-4bf0-866f-2c77b2a63433.png" height="25">
-</picture>
+![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window_dark.png#gh-dark-mode-only)
+![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png#gh-light-mode-only)
 
-<picture>
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png" width="872" height="662">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page_dark.png" width="872" height="662">
-  <img alt="Hashnode logo" src="https://user-images.githubusercontent.com/71297412/178180441-59f1644e-2ab6-4bf0-866f-2c77b2a63433.png" height="25">
-</picture>
+![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page_dark.png#gh-dark-mode-only)
+![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png#gh-light-mode-only)
