@@ -78,11 +78,10 @@ class PeriodicBackups:
             
     # Periodic backups: monthly
     def monthly(self):
-        if first_day.date() == True:
+        if dt.day == 1:
             self.backup()
         else:
             print("Today is not first day of month.")
-            exit()
         
     # Create backup
     def backup(self):
