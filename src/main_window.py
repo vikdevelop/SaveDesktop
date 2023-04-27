@@ -66,6 +66,7 @@ _ = json.load(locale)
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
 CONFIG = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config"
+DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
 
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
@@ -76,6 +77,8 @@ class MainWindow(Gtk.Window):
         self.application = kwargs.get('application')
         
         self.get_settings()
+        
+        self.filename = ""
         
         # App menu
         self.menu_button_model = Gio.Menu()
@@ -286,7 +289,7 @@ class MainWindow(Gtk.Window):
         self.saveButton = Gtk.Button.new_with_label(_["save"])
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("pill")
-        self.saveButton.connect("clicked", self.set_title_t)
+        self.saveButton.connect("clicked", self.filechooser_save_load)
         self.savebtnBox.append(self.saveButton)
         
     # Import configuration section
@@ -389,27 +392,35 @@ class MainWindow(Gtk.Window):
     def imp_cfg_from_list(self, w):
         selected_archive = self.radio_row.get_selected_item()
         self.please_wait_toast()
-        #self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
         os.chdir("%s" % CACHE)
         os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
     
-    # Check if filename has spaces or not
-    def set_title_t(self, w):
-        if " " in self.saveEntry.get_text():
-            self.spaces_toast()
-        else:
+    # Load data from file chooser (save)
+    def set_title_t(self, dialog, response):
+        if response == Gtk.ResponseType.ACCEPT:
+            file = dialog.get_file()
+            self.filename = file.get_path()
+            with open(f'{DATA}/recently_folder.json', 'w') as r:
+                r.write('{\n "recently_folder": "%s"\n}' % self.filename)
             self.please_wait_toast()
             self.save_config()
     
     # Save configuration
     def save_config(self):
-        if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
-            os.system("mkdir {}/SaveDesktop/".format(download_dir))
-        if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
-            os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
-        os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
-        os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+        if self.filename == f'{download_dir}/SaveDesktop/archives':
+            if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
+                os.system("mkdir {}/SaveDesktop/".format(download_dir))
+            if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
+                os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
+            os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
+            os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+            directory = f'{download_dir}/SaveDesktop/archives'
+        else:
+            if not os.path.exists(f'{self.filename}/.{date.today()}'):
+                os.system(f'mkdir {self.filename}/.{date.today()}')
+            os.chdir(f'{self.filename}/.{date.today()}')
+            directory = f'{self.filename}'
         self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
         self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
         self.themes = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.themes ./")
@@ -469,13 +480,38 @@ class MainWindow(Gtk.Window):
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
             self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
-            self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
+            if directory == f'{download_dir}/SaveDesktop/archives':
+                self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
+            else:
+                self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {directory}/")
         else:
             self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
-            self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
+            if directory == f'{download_dir}/SaveDesktop/archives':
+                self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
+            else:
+                self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {directory}/")
         self.exporting_done()
     
-    # Load file chooser
+    # Action after clicking on Save button
+    def filechooser_save_load(self, w):
+        if " " in self.saveEntry.get_text():
+            self.spaces_toast()
+        else:
+            self.filechooser_save()
+    
+    # Load file chooser - save config
+    def filechooser_save(self):
+        self.file_save = Gtk.FileChooserNative.new(_["save_config"], \
+                self, Gtk.FileChooserAction.SELECT_FOLDER, _["save"], _["cancel"])
+        self.file_save.set_modal(True)
+        self.file_save.connect('response', self.set_title_t)
+        if os.path.exists(f'{download_dir}/SaveDesktop/archives/'):
+            self.file_save.set_current_folder(
+                Gio.File.new_for_path(path=f'{download_dir}/SaveDesktop/archives'),
+            )
+        self.file_save.show()
+    
+    # Load file chooser - import config
     def fileshooser(self):
         self.file_chooser = Gtk.FileChooserNative.new(_["import_fileshooser"].format(self.environment), \
                 self, Gtk.FileChooserAction.OPEN, _["open"], _["cancel"])
@@ -581,7 +617,7 @@ class MainWindow(Gtk.Window):
     
     def on_toast_dismissed(self, toast):
         os.popen("rm -rf %s/*" % CACHE)
-        os.popen("rm -rf {}/SaveDesktop/.{}/*".format(download_dir, date.today()))
+        os.popen("rm -rf {}/.{}/*".format(self.filename, date.today()))
         
     # Get settings from XDG_CONFIG/settings.json
     def get_settings(self):
@@ -626,7 +662,12 @@ class MyApp(Adw.Application):
         self.connect('activate', self.on_activate)
         
     def open_dir(self, action, param):
-        os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
+        if os.path.exists(f'{DATA}/recently_folder.json'):
+            with open(f'{DATA}/recently_folder.json') as jr:
+                jR = json.load(jr)
+            os.system("xdg-open {}/".format(jR["recently_folder"]))
+        else:
+            os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
         
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
@@ -640,7 +681,7 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.3.1")
+        dialog.set_version("2.4")
         dialog.set_developer_name("vikdevelop")
         if lang == "en.json":
             print("")
