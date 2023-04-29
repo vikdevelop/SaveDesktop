@@ -640,7 +640,7 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.3.1")
+        dialog.set_version("2.3.2")
         dialog.set_developer_name("vikdevelop")
         if lang == "en.json":
             print("")
