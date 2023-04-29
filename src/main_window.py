@@ -77,6 +77,8 @@ class MainWindow(Gtk.Window):
         
         self.get_settings()
         
+        self.show_export_done = ""
+        
         # App menu
         self.menu_button_model = Gio.Menu()
         self.menu_button_model.append(_["about_app"], 'app.about')
@@ -399,30 +401,34 @@ class MainWindow(Gtk.Window):
         if " " in self.saveEntry.get_text():
             self.spaces_toast()
         else:
+            self.please_wait_toast()
+            if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
+                try:
+                    os.mkdir("{}/SaveDesktop/".format(download_dir))
+                    self.show_export_done = True
+                except Exception as e:
+                    print(e)
+                    self.err_toast()
+                    self.show_export_done = False
+            else:
+                self.show_export_done = True
+            if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
+                try:
+                    os.mkdir("{}/SaveDesktop/archives/".format(download_dir))
+                    self.show_export_done = True
+                except Exception as e:
+                    print(e)
+                    with open(f"{CACHE}/log.json", "w") as l:
+                        l.write('{\n "err": "%s"\n}' % e)
+                    self.err_toast()
+                    self.show_export_done = False
+            else:
+                self.show_export_done = True
             self.save_config()
     
     # Save configuration
     def save_config(self):
-        if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
-            try:
-                os.mkdir("{}/SaveDesktop/".format(download_dir))
-                self.please_wait_toast()
-                self.show_export_done = True
-            except Exception as e:
-                print(e)
-                self.err_toast()
-                self.show_export_done = False
-        if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
-            try:
-                os.mkdir("{}/SaveDesktop/archives/".format(download_dir))
-                self.please_wait_toast()
-                self.show_export_done = True
-            except Exception as e:
-                print(e)
-                with open(f"{CACHE}/log.json", "w") as l:
-                    l.write('{\n "err": "%s"\n}' % e)
-                self.err_toast()
-                self.show_export_done = False
+        
         os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
         os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
         self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
