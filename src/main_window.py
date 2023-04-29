@@ -77,8 +77,6 @@ class MainWindow(Gtk.Window):
         
         self.get_settings()
         
-        self.show_export_done = ""
-        
         # App menu
         self.menu_button_model = Gio.Menu()
         self.menu_button_model.append(_["about_app"], 'app.about')
@@ -402,33 +400,14 @@ class MainWindow(Gtk.Window):
             self.spaces_toast()
         else:
             self.please_wait_toast()
-            if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
-                try:
-                    os.mkdir("{}/SaveDesktop/".format(download_dir))
-                    self.show_export_done = True
-                except Exception as e:
-                    print(e)
-                    self.err_toast()
-                    self.show_export_done = False
-            else:
-                self.show_export_done = True
-            if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
-                try:
-                    os.mkdir("{}/SaveDesktop/archives/".format(download_dir))
-                    self.show_export_done = True
-                except Exception as e:
-                    print(e)
-                    with open(f"{CACHE}/log.json", "w") as l:
-                        l.write('{\n "err": "%s"\n}' % e)
-                    self.err_toast()
-                    self.show_export_done = False
-            else:
-                self.show_export_done = True
             self.save_config()
     
     # Save configuration
     def save_config(self):
-        
+        if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
+            os.system("mkdir {}/SaveDesktop/".format(download_dir))
+        if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
+            os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
         os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
         os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
         self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
@@ -494,10 +473,7 @@ class MainWindow(Gtk.Window):
         else:
             self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
             self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
-        if self.show_export_done == True:
-            self.exporting_done()
-        else:
-            print("")
+        self.exporting_done()
     
     # Load file chooser
     def fileshooser(self):
@@ -602,13 +578,6 @@ class MainWindow(Gtk.Window):
     def please_wait_toast(self):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
         self.toast_overlay.add_toast(self.toast_wait)
-        
-    # Error toast
-    def err_toast(self):
-        self.toast_err = Adw.Toast(title="Error occured")
-        self.toast_err.set_button_label("Show log")
-        self.toast_err.set_action_name("app.copy_log")
-        self.toast_overlay.add_toast(self.toast_err)
     
     def on_toast_dismissed(self, toast):
         os.popen("rm -rf %s/*" % CACHE)
@@ -654,24 +623,10 @@ class MyApp(Adw.Application):
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open_dir', self.open_dir)
         self.create_action('logout', self.logout)
-        self.create_action('copy_log', self.copy_log)
         self.connect('activate', self.on_activate)
         
     def open_dir(self, action, param):
         os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
-        
-    def copy_log(self, action, param):
-        with open(f'{CACHE}/log.json') as lr:
-            jl = json.load(lr)
-        errlog = jl["err"]
-        self.logDialog = Adw.MessageDialog.new(app.get_active_window())
-        self.logDialog.set_heading("Show log")
-        entry = Gtk.Entry.new()
-        entry.set_text(errlog)
-        self.logDialog.set_extra_child(entry)
-        self.logDialog.add_response('close', _["cancel"])
-        self.logDialog.set_response_appearance('close', Adw.ResponseAppearance.SUGGESTED)
-        self.logDialog.show()
         
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
