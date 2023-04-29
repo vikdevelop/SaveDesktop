@@ -412,9 +412,9 @@ class MainWindow(Gtk.Window):
                 print(e)
                 self.err_toast()
                 self.show_export_done = False
-        if not os.path.exists("None/SaveDesktop/archives".format(download_dir)):
+        if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
             try:
-                os.mkdir("None/SaveDesktop/archives/".format(download_dir))
+                os.mkdir("{}/SaveDesktop/archives/".format(download_dir))
                 self.please_wait_toast()
                 self.show_export_done = True
             except Exception as e:
@@ -600,7 +600,7 @@ class MainWindow(Gtk.Window):
     # Error toast
     def err_toast(self):
         self.toast_err = Adw.Toast(title="Error occured")
-        self.toast_err.set_button_label("Copy log")
+        self.toast_err.set_button_label("Show log")
         self.toast_err.set_action_name("app.copy_log")
         self.toast_overlay.add_toast(self.toast_err)
     
