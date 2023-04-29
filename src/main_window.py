@@ -664,7 +664,7 @@ class MyApp(Adw.Application):
         with open(f'{CACHE}/log.json') as lr:
             jl = json.load(lr)
         errlog = jl["err"]
-        self.logDialog = Adw.MessageDialog.new()
+        self.logDialog = Adw.MessageDialog.new(app.get_active_window())
         self.logDialog.set_heading("Show log")
         entry = Gtk.Entry.new()
         entry.set_text(errlog)
