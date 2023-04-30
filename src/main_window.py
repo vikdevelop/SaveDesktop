@@ -77,6 +77,8 @@ class MainWindow(Gtk.Window):
         
         self.get_settings()
         
+        self.show_export_done = ""
+        
         # App menu
         self.menu_button_model = Gio.Menu()
         self.menu_button_model.append(_["about_app"], 'app.about')
@@ -404,77 +406,86 @@ class MainWindow(Gtk.Window):
     
     # Save configuration
     def save_config(self):
-        if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
-            os.system("mkdir {}/SaveDesktop/".format(download_dir))
-        if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
-            os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
-        os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
-        os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-        self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
-        self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
-        self.themes = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.themes ./")
-        self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.icons ./")
-        self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/icons ./")
-        self.fonts = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.fonts ./")
-        self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
-        self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
-        if self.switch_01.get_active() == True:
-            self.overrides = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/flatpak/overrides ./")
-        # Save configs on individual desktop environments
-        if self.environment == 'GNOME':
-            self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
-            self.gshell = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-shell ./")
-            self.nautilus = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/nautilus-python ./")
-            self.gccenter = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-control-center ./")
-        elif self.environment == 'Pantheon':
-            self.plank = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plank ./")
-            self.marlin = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/marlin ./")
-        elif self.environment == 'Cinnamon':
-            self.nemo = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/nemo ./")
-            self.data_cinn = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/cinnamon ./")
-            self.home_cinn = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.cinnamon ./")
-        elif self.environment == 'Budgie':
-            self.budgie_desktop = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/budgie-desktop ./")
-            self.budgie_extras = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/bugie-extras ./")
-            self.nemo_budgie = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/nemo ./")
-        elif self.environment == 'COSMIC':
-            self.pop_shell = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/pop-shell ./")
-            self.gshellpop = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-shell ./")
-        elif self.environment == 'Xfce':
-            self.xfce4conf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/xfce4 ./")
-            self.thunarxf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/Thunar ./")
-            self.xfce4home = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.xfce4 ./")
-        elif self.environment == 'MATE':
-            self.caja_mate = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/caja ./")
-        elif self.environment == 'KDE Plasma':
-            os.system("mkdir xdg-config && mkdir xdg-data")
-            os.popen(f"cp -R ~/.config/[k]* ./xdg-config/")
-            self.gtkrc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/gtkrc ./xdg-config/")
-            self.dolphinrc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/dolphinrc ./xdg-config/")
-            self.gwenviewrc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/gwenviewrc ./xdg-config/")
-            self.plasmashrc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/plasmashellrc ./xdg-config/")
-            self.spectaclerc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/spectaclerc ./xdg-config/")
-            self.plasmarc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/plasmarc ./xdg-config/")
-            self.kpanel = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/plasma-org.kde.plasma.desktop-appletsrc ./xdg-config/")
-            self.kdata = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/konsole ./xdg-data/")
-            self.dolphin_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/dolphin ./xdg-data/")
-            self.sddm = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/sddm ./xdg-data/")
-            self.wallpapers = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/wallpapers ./xdg-data/")
-            self.psysmonitor = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma-systemmonitor ./xdg-data/")
-            self.plasma_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma ./xdg-data/")
-            self.aurorae = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/aurorae ./xdg-data/")
-            self.kscreen = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/kscreen ./xdg-data/")
-            self.colors = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/color-schemes ./xdg-data/")
-              
-        # Get self.saveEntry text
-        if self.saveEntry.get_text() == "":
-            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
-            self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
-        else:
-            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
-            self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
-        self.exporting_done()
-    
+        try:
+            self.show_export_done = True
+            if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
+                os.mkdir("{}/SaveDesktop/".format(download_dir))
+            if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
+                os.mkdir("{}/SaveDesktop/archives/".format(download_dir))
+            os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
+            os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+            self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
+            self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
+            self.themes = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.themes ./")
+            self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.icons ./")
+            self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/icons ./")
+            self.fonts = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.fonts ./")
+            self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
+            self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
+            if self.switch_01.get_active() == True:
+                self.overrides = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/flatpak/overrides ./")
+            # Save configs on individual desktop environments
+            if self.environment == 'GNOME':
+                self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
+                self.gshell = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-shell ./")
+                self.nautilus = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/nautilus-python ./")
+                self.gccenter = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-control-center ./")
+            elif self.environment == 'Pantheon':
+                self.plank = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/plank ./")
+                self.marlin = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/marlin ./")
+            elif self.environment == 'Cinnamon':
+                self.nemo = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/nemo ./")
+                self.data_cinn = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/cinnamon ./")
+                self.home_cinn = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.cinnamon ./")
+            elif self.environment == 'Budgie':
+                self.budgie_desktop = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/budgie-desktop ./")
+                self.budgie_extras = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/bugie-extras ./")
+                self.nemo_budgie = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/nemo ./")
+            elif self.environment == 'COSMIC':
+                self.pop_shell = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/pop-shell ./")
+                self.gshellpop = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-shell ./")
+            elif self.environment == 'Xfce':
+                self.xfce4conf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/xfce4 ./")
+                self.thunarxf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/Thunar ./")
+                self.xfce4home = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.xfce4 ./")
+            elif self.environment == 'MATE':
+                self.caja_mate = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/caja ./")
+            elif self.environment == 'KDE Plasma':
+                os.system("mkdir xdg-config && mkdir xdg-data")
+                os.popen(f"cp -R ~/.config/[k]* ./xdg-config/")
+                self.gtkrc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/gtkrc ./xdg-config/")
+                self.dolphinrc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/dolphinrc ./xdg-config/")
+                self.gwenviewrc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/gwenviewrc ./xdg-config/")
+                self.plasmashrc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/plasmashellrc ./xdg-config/")
+                self.spectaclerc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/spectaclerc ./xdg-config/")
+                self.plasmarc = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/plasmarc ./xdg-config/")
+                self.kpanel = GLib.spawn_command_line_async(f"cp {Path.home()}/.config/plasma-org.kde.plasma.desktop-appletsrc ./xdg-config/")
+                self.kdata = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/konsole ./xdg-data/")
+                self.dolphin_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/dolphin ./xdg-data/")
+                self.sddm = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/sddm ./xdg-data/")
+                self.wallpapers = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/wallpapers ./xdg-data/")
+                self.psysmonitor = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma-systemmonitor ./xdg-data/")
+                self.plasma_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma ./xdg-data/")
+                self.aurorae = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/aurorae ./xdg-data/")
+                self.kscreen = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/kscreen ./xdg-data/")
+                self.colors = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/color-schemes ./xdg-data/")
+                  
+            # Get self.saveEntry text
+            if self.saveEntry.get_text() == "":
+                self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
+                self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
+            else:
+                self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
+                self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {download_dir}/SaveDesktop/archives/")
+            self.exporting_done()
+            
+        except Exception as e:
+            self.show_export_done = False
+            print(e)
+            with open(f"{CACHE}/log.json", "w") as l:
+                l.write('{\n "err": "%s"\n}' % e)
+            self.err_toast()
+            
     # Load file chooser
     def fileshooser(self):
         self.file_chooser = Gtk.FileChooserNative.new(_["import_fileshooser"].format(self.environment), \
@@ -556,10 +567,13 @@ class MainWindow(Gtk.Window):
     
     # configuration has been exported action
     def exporting_done(self):
-        self.toast.set_title(title=_["config_saved"])
-        self.toast.set_button_label(_["open_folder"])
-        self.toast.set_action_name("app.open_dir")
-        self.toast_overlay.add_toast(self.toast)
+        if self.show_export_done == True:
+            self.toast.set_title(title=_["config_saved"])
+            self.toast.set_button_label(_["open_folder"])
+            self.toast.set_action_name("app.open_dir")
+            self.toast_overlay.add_toast(self.toast)
+        else:
+            self.err_toast()
         
     # popup about message of using spaces in the filename
     def spaces_toast(self):
@@ -578,6 +592,13 @@ class MainWindow(Gtk.Window):
     def please_wait_toast(self):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
         self.toast_overlay.add_toast(self.toast_wait)
+        
+    # Error toast
+    def err_toast(self):
+        self.toast_err = Adw.Toast(title=_["err_occured"])
+        self.toast_err.set_button_label(_["show_log"])
+        self.toast_err.set_action_name("app.copy_log")
+        self.toast_overlay.add_toast(self.toast_err)
     
     def on_toast_dismissed(self, toast):
         os.popen("rm -rf %s/*" % CACHE)
@@ -623,10 +644,34 @@ class MyApp(Adw.Application):
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open_dir', self.open_dir)
         self.create_action('logout', self.logout)
+        self.create_action('copy_log', self.copy_log)
         self.connect('activate', self.on_activate)
         
     def open_dir(self, action, param):
         os.system("xdg-open {}/SaveDesktop/archives".format(download_dir))
+        
+    def copy_log(self, action, param):
+        with open(f'{CACHE}/log.json') as lr:
+            jl = json.load(lr)
+        errlog = jl["err"]
+        self.logDialog = Adw.MessageDialog.new(app.get_active_window())
+        self.logDialog.set_heading(_["show_log"])
+        textbuffer = Gtk.TextBuffer()
+        textbuffer.set_text(f"\n{errlog}\n")
+        textview = Gtk.TextView.new_with_buffer(textbuffer)
+        textview.set_wrap_mode(True)
+        textview.set_editable(False)
+        self.logDialog.set_extra_child(textview)
+        self.logDialog.add_response('close', _["close"])
+        if "None/SaveDesktop" in errlog:
+            self.logDialog.add_response('learn_more', _["learn_more"])
+            self.logDialog.set_response_appearance('learn_more', Adw.ResponseAppearance.SUGGESTED)
+            self.logDialog.connect('response', self.open_link)
+        self.logDialog.show()
+        
+    def open_link(self, w, response):
+        if response == 'learn_more':
+            os.system("xdg-open https://github.com/vikdevelop/SaveDesktop/wiki/Problem-with-creating-Downloads-directory")
         
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
@@ -640,7 +685,7 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.3.2")
+        dialog.set_version("2.4")
         dialog.set_developer_name("vikdevelop")
         if lang == "en.json":
             print("")
