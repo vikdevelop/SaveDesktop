@@ -43,6 +43,7 @@ modules:
        - install -Dm755 -t /app/bin run.sh
        - install -Dm755 -t /app src/main_window.py
        - install -Dm755 -t /app src/periodic_saving.py
+       - install -D -t /app/share build-beta.sh
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
        - install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
        - install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.Devel.svg
@@ -54,3 +55,7 @@ modules:
     sources:
           - type: dir
             path: .
+          - type: script
+            dest-filename: build-beta.sh
+            commands:
+              - echo "build-type:beta"
