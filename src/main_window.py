@@ -685,7 +685,6 @@ class MyApp(Adw.Application):
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
-        dialog.set_version("2.4")
         dialog.set_developer_name("vikdevelop")
         if lang == "en.json":
             print("")
@@ -697,7 +696,14 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        dialog.set_application_icon("io.github.vikdevelop.SaveDesktop")
+        version = "2.4"
+        icon = "io.github.vikdevelop.SaveDesktop"
+        if not os.path.exists("/app/share/build-beta.sh"):
+            dialog.set_version(version)
+            dialog.set_application_icon(icon)
+        else:
+            dialog.set_version(f"{version}-beta")
+            dialog.set_application_icon(f"{icon}.Devel")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
