@@ -473,10 +473,10 @@ class MainWindow(Gtk.Window):
               
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
-            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz .")
+            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
             self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {self.folder}/SaveDesktop/archives/")
         else:
-            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz .")
+            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
             self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {self.folder}/SaveDesktop/archives/")
         self.exporting_done()
         
