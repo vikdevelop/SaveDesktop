@@ -351,19 +351,20 @@ class MainWindow(Gtk.Window):
         self.flistBox.append(self.flistLabel)
         if os.path.exists(f'{download_dir}/SaveDesktop/periodic_saving'):
             self.dir = f'{download_dir}/SaveDesktop/periodic_saving'
-            self.view_configs()
-        elif os.listdir(f'{download_dir}/SaveDesktop/periodic_saving') == []:
-            self.flistLabel.set_text(_["import_from_list_error"])
-        else:
-            try:
-                self.dir = f'{download_dir}/SaveDesktop/archives'
-                self.view_configs()
-            except:
+            if os.listdir(f'{download_dir}/SaveDesktop/periodic_saving') == []:
                 self.flistLabel.set_text(_["import_from_list_error"])
+            else:
+                self.view_configs()
+        else:
+            self.dir = f'{download_dir}/SaveDesktop/archives'
+            if os.listdir(f'{download_dir}/SaveDesktop/archives') == []:
+                self.flistLabel.set_text(_["import_from_list_error"])
+            else:
+                self.view_configs()
     
     # View configs
     def view_configs(self):
-        self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>\n{self.dir}")
+        self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>\n\n{self.dir}")
         
         self.applyButton = Gtk.Button.new_with_label(_["apply"])
         self.applyButton.add_css_class('suggested-action')
@@ -376,14 +377,17 @@ class MainWindow(Gtk.Window):
         self.listbox.get_style_context().add_class(class_name='boxed-list')
         self.flistBox.append(self.listbox)
         
-        get_dir_content = os.listdir(self.dir)
-        archives_model = Gtk.StringList.new(strings=get_dir_content)
-        
-        self.radio_row = Adw.ComboRow.new()
-        self.radio_row.set_model(model=archives_model)
-        self.radio_row.set_tooltip_text(self.dir)
-        self.radio_row.set_icon_name('document-properties-symbolic')
-        self.listbox.append(self.radio_row)
+        try:
+            get_dir_content = os.listdir(self.dir)
+            archives_model = Gtk.StringList.new(strings=get_dir_content)
+            
+            self.radio_row = Adw.ComboRow.new()
+            self.radio_row.set_model(model=archives_model)
+            self.radio_row.set_tooltip_text(self.dir)
+            self.radio_row.set_icon_name('document-properties-symbolic')
+            self.listbox.append(self.radio_row)
+        except:
+            self.flistLabel.set_text(_["import_from_list_error"])
         
     # Action after closing import from list page
     def close_list(self, w):
