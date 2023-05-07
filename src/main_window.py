@@ -396,16 +396,6 @@ class MainWindow(Gtk.Window):
         os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
     
-    """
-    # Check if filename has spaces or not
-    def set_title_t(self):
-        if " " in self.saveEntry.get_text():
-            self.spaces_toast()
-        else:
-            self.please_wait_toast()
-            self.save_config()
-    """
-    
     # Save configuration
     def save_config(self):
         self.show_export_done = True
@@ -413,8 +403,10 @@ class MainWindow(Gtk.Window):
             os.mkdir("{}/SaveDesktop/".format(self.folder))
         if not os.path.exists("{}/SaveDesktop/archives".format(self.folder)):
             os.mkdir("{}/SaveDesktop/archives/".format(self.folder))
-        os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(self.folder, date.today(), self.folder, date.today()))
-        os.chdir('{}/SaveDesktop/.{}'.format(self.folder, date.today()))
+        if not os.path.exists(f"{CACHE}/saved_config"):
+            os.mkdir(f"{CACHE}/saved_config")
+        #os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(self.folder, date.today(), self.folder, date.today()))
+        os.chdir(f"{CACHE}/saved_config")
         self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
         self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
         self.themes = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.themes ./")
@@ -474,11 +466,11 @@ class MainWindow(Gtk.Window):
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
             self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
-            self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {self.folder}/SaveDesktop/archives/")
+            #self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {self.folder}/SaveDesktop/archives/")
         else:
-            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
-            self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {self.folder}/SaveDesktop/archives/")
-        self.exporting_done()
+            self.create_classic_tar = GLib.spawn_command_line_async(f"tar -czf {self.saveEntry.get_text()}.sd.tar.gz ./")
+            #self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {self.folder}/SaveDesktop/archives/")
+        self.tar_time = GLib.timeout_add_seconds(4, self.exporting_done)
         
     # Select folder for saving configuration
     def select_folder(self, w):
@@ -582,13 +574,12 @@ class MainWindow(Gtk.Window):
     
     # configuration has been exported action
     def exporting_done(self):
-        if self.show_export_done == True:
-            self.toast.set_title(title=_["config_saved"])
-            self.toast.set_button_label(_["open_folder"])
-            self.toast.set_action_name("app.open_dir")
-            self.toast_overlay.add_toast(self.toast)
-        else:
-            self.err_toast()
+        os.chdir(f"{CACHE}/saved_config")
+        os.system(f"mv *.tar.gz {self.folder}/")
+        self.toast.set_title(title=_["config_saved"])
+        self.toast.set_button_label(_["open_folder"])
+        self.toast.set_action_name("app.open_dir")
+        self.toast_overlay.add_toast(self.toast)
         
     # popup about message of using spaces in the filename
     def spaces_toast(self):
@@ -657,7 +648,7 @@ class MyApp(Adw.Application):
     def open_dir(self, action, param):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
-        os.system("xdg-open {}/SaveDesktop/archives".format(jf["recently_folder"]))
+        os.system("xdg-open {}/".format(jf["recently_folder"]))
         
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
