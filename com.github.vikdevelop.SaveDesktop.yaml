@@ -14,10 +14,14 @@ finish-args:
     - --filesystem=~/.local/share
     # load Flatpak custom permissions for including to configuration
     - --filesystem=~/.local/share/flatpak/overrides
-    # save config to tar.gz archive in this directory
-    - --filesystem=xdg-download/SaveDesktop:create
-    # to be able to select the archive also from the xdg-downloads folder
+    # to be able to select destination for saving configuration in also these directories
     - --filesystem=xdg-download
+    - --filesystem=xdg-music
+    - --filesystem=xdg-videos
+    - --filesystem=xdg-documents
+    - --filesystem=xdg-public-share
+    - --filesystem=xdg-pictures
+    - --filesystem=xdg-desktop
     # save all themes installed in home folder
     - --filesystem=~/.themes:create
     # save all icons installed in home folder
@@ -36,6 +40,7 @@ finish-args:
     - --talk-name=org.kde.ksmserver
     # ensuring to FileChooserNative will work correctly
     - --talk-name=org.freedesktop.FileManager1
+    - --talk-name=org.freedesktop.portal.FileChooser
 modules:
   - name: savedesktop
     buildsystem: simple
