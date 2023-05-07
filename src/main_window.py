@@ -357,10 +357,13 @@ class MainWindow(Gtk.Window):
                 self.view_configs()
         else:
             self.dir = f'{download_dir}/SaveDesktop/archives'
-            if os.listdir(f'{download_dir}/SaveDesktop/archives') == []:
-                self.flistLabel.set_text(_["import_from_list_error"])
+            if os.path.exists(f"{download_dir}/SaveDesktop/archives"):
+                if os.listdir(f'{download_dir}/SaveDesktop/archives') == []:
+                    self.flistLabel.set_text(_["import_from_list_error"])
+                else:
+                    self.view_configs()
             else:
-                self.view_configs()
+                self.flistLabel.set_text(_["import_from_list_error"])
     
     # View configs
     def view_configs(self):
