@@ -347,14 +347,15 @@ class MainWindow(Gtk.Window):
         self.pBox.append(self.flistBox)
         
         self.flistLabel = Gtk.Label.new()
+        self.flistLabel.set_justify(Gtk.Justification.CENTER)
         self.flistBox.append(self.flistLabel)
-        if not os.path.exists(f'{download_dir}/SaveDesktop/archives/'):
+        if not os.path.exists(f'{download_dir}/SaveDesktop/periodic_saving'):
             self.flistLabel.set_text(_["import_from_list_error"])
-        if os.listdir(f'{download_dir}/SaveDesktop/archives/') == []:
+        if os.listdir(f'{download_dir}/SaveDesktop/periodic_saving') == []:
             self.flistLabel.set_text(_["import_from_list_error"])
         else:
-            self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
-            self.fdesclabel = Gtk.Label.new(f"{download_dir}/SaveDesktop/archives")
+            self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>\n{_['periodic_saving']}")
+            self.fdesclabel = Gtk.Label.new(f"{download_dir}/SaveDesktop/periodic_saving")
             self.flistBox.append(self.fdesclabel)
             
             self.applyButton = Gtk.Button.new_with_label(_["apply"])
@@ -398,14 +399,13 @@ class MainWindow(Gtk.Window):
     
     # Save configuration
     def save_config(self):
-        self.show_export_done = True
-        if not os.path.exists("{}/SaveDesktop/".format(self.folder)):
-            os.mkdir("{}/SaveDesktop/".format(self.folder))
-        if not os.path.exists("{}/SaveDesktop/archives".format(self.folder)):
-            os.mkdir("{}/SaveDesktop/archives/".format(self.folder))
+        try:
+            if not os.path.exists(f"{download_dir}/SaveDesktop/periodic_saving"):
+                os.makedirs(f"{download_dir}/SaveDesktop/periodic_saving")
+        except:
+            print("ERR: Can't create folder for periodic backups because Downloads folder is not setup correctly. See more https://github.com/vikdevelop/SaveDesktop/wiki/Fix-problem-with-creating-SaveDesktop-directory-in-~-Downloads-directory")
         if not os.path.exists(f"{CACHE}/saved_config"):
             os.mkdir(f"{CACHE}/saved_config")
-        #os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(self.folder, date.today(), self.folder, date.today()))
         os.chdir(f"{CACHE}/saved_config")
         self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
         self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
