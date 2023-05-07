@@ -349,33 +349,41 @@ class MainWindow(Gtk.Window):
         self.flistLabel = Gtk.Label.new()
         self.flistLabel.set_justify(Gtk.Justification.CENTER)
         self.flistBox.append(self.flistLabel)
-        if not os.path.exists(f'{download_dir}/SaveDesktop/periodic_saving'):
-            self.flistLabel.set_text(_["import_from_list_error"])
-        if os.listdir(f'{download_dir}/SaveDesktop/periodic_saving') == []:
+        if os.path.exists(f'{download_dir}/SaveDesktop/periodic_saving'):
+            self.dir = f'{download_dir}/SaveDesktop/periodic_saving'
+            self.view_configs()
+        elif os.listdir(f'{download_dir}/SaveDesktop/periodic_saving') == []:
             self.flistLabel.set_text(_["import_from_list_error"])
         else:
-            self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>\n{_['periodic_saving']}")
-            self.fdesclabel = Gtk.Label.new(f"{download_dir}/SaveDesktop/periodic_saving")
-            self.flistBox.append(self.fdesclabel)
-            
-            self.applyButton = Gtk.Button.new_with_label(_["apply"])
-            self.applyButton.add_css_class('suggested-action')
-            self.applyButton.connect('clicked', self.imp_cfg_from_list)
-            self.headerbar.pack_end(self.applyButton)
-            
-            self.radioBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-            self.listbox = Gtk.ListBox.new()
-            self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-            self.listbox.get_style_context().add_class(class_name='boxed-list')
-            self.flistBox.append(self.listbox)
-            
-            get_dir_content = os.listdir(f'{download_dir}/SaveDesktop/archives')
-            archives_model = Gtk.StringList.new(strings=get_dir_content)
-            
-            self.radio_row = Adw.ComboRow.new()
-            self.radio_row.set_model(model=archives_model)
-            self.radio_row.set_icon_name('document-properties-symbolic')
-            self.listbox.append(self.radio_row)
+            try:
+                self.dir = f'{download_dir}/SaveDesktop/archives'
+                self.view_configs()
+            except:
+                self.flistLabel.set_text(_["import_from_list_error"])
+    
+    # View configs
+    def view_configs(self):
+        self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>\n{self.dir}")
+        
+        self.applyButton = Gtk.Button.new_with_label(_["apply"])
+        self.applyButton.add_css_class('suggested-action')
+        self.applyButton.connect('clicked', self.imp_cfg_from_list)
+        self.headerbar.pack_end(self.applyButton)
+        
+        self.radioBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        self.listbox = Gtk.ListBox.new()
+        self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.listbox.get_style_context().add_class(class_name='boxed-list')
+        self.flistBox.append(self.listbox)
+        
+        get_dir_content = os.listdir(self.dir)
+        archives_model = Gtk.StringList.new(strings=get_dir_content)
+        
+        self.radio_row = Adw.ComboRow.new()
+        self.radio_row.set_model(model=archives_model)
+        self.radio_row.set_tooltip_text(self.dir)
+        self.radio_row.set_icon_name('document-properties-symbolic')
+        self.listbox.append(self.radio_row)
         
     # Action after closing import from list page
     def close_list(self, w):
@@ -392,9 +400,8 @@ class MainWindow(Gtk.Window):
     def imp_cfg_from_list(self, w):
         selected_archive = self.radio_row.get_selected_item()
         self.please_wait_toast()
-        #self.timeout_io = GLib.timeout_add_seconds(10, self.applying_done)
         os.chdir("%s" % CACHE)
-        os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
+        os.popen("tar -xf %s/%s ./" % (self.dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
     
     # Save configuration
