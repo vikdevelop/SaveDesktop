@@ -253,9 +253,16 @@ class MainWindow(Gtk.Window):
         self.periodicLabel = Gtk.Label.new()
         self.periodicLabel.set_markup(f"{_['periodic_saving']}\n<small><span color='grey'>{_['periodic_saving_desc']}</span>\n<a href='https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving'>{_['learn_more']}</a></small>")
         self.periodicLabel.set_wrap(True)
+        self.periodicLabel.set_max_width_chars(10)
+        
+        self.periodicButton = Gtk.Button.new_from_icon_name("folder-open-symbolic")
+        self.periodicButton.add_css_class("flat")
+        self.periodicButton.connect("clicked", self.open_periodic_backups)
+        self.periodicButton.set_tooltip_text(_["periodic_saving_tooltip"])
         
         self.adw_action_row_backups = Adw.ComboRow.new()
         self.adw_action_row_backups.add_prefix(self.periodicLabel)
+        self.adw_action_row_backups.add_suffix(self.periodicButton)
         self.adw_action_row_backups.set_title_lines(2)
         self.adw_action_row_backups.set_subtitle_lines(2)
         self.adw_action_row_backups.set_model(model=actions)
@@ -399,6 +406,9 @@ class MainWindow(Gtk.Window):
         os.chdir("%s" % CACHE)
         os.popen("tar -xf %s/%s ./" % (self.dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
+        
+    def open_periodic_backups(self, w):
+        os.system(f"xdg-open {download_dir}/SaveDesktop/archives")
     
     # Save configuration
     def save_config(self):
