@@ -77,8 +77,6 @@ class MainWindow(Gtk.Window):
         
         self.get_settings()
         
-        self.show_export_done = ""
-        
         # App menu
         self.menu_button_model = Gio.Menu()
         self.menu_button_model.append(_["about_app"], 'app.about')
@@ -250,21 +248,19 @@ class MainWindow(Gtk.Window):
             _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
         
-        self.periodicLabel = Gtk.Label.new()
-        self.periodicLabel.set_markup(f"{_['periodic_saving']}\n<small><span color='grey'>{_['periodic_saving_desc']}</span>\n<a href='https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving'>{_['learn_more']}</a></small>")
-        self.periodicLabel.set_wrap(True)
-        self.periodicLabel.set_max_width_chars(10)
-        
         self.periodicButton = Gtk.Button.new_from_icon_name("folder-open-symbolic")
         self.periodicButton.add_css_class("flat")
         self.periodicButton.connect("clicked", self.open_periodic_backups)
-        self.periodicButton.set_tooltip_text(_["periodic_saving_tooltip"])
+        self.periodicButton.set_tooltip_text("periodic_saving_tooltip")
         
         self.adw_action_row_backups = Adw.ComboRow.new()
-        self.adw_action_row_backups.add_prefix(self.periodicLabel)
         self.adw_action_row_backups.add_suffix(self.periodicButton)
+        self.adw_action_row_backups.set_use_markup(True)
+        self.adw_action_row_backups.set_use_underline(True)
+        self.adw_action_row_backups.set_title(_["periodic_saving"])
+        self.adw_action_row_backups.set_subtitle(f"{_['periodic_saving_desc']}\n<a href='https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving'>{_['learn_more']}</a>")
         self.adw_action_row_backups.set_title_lines(2)
-        self.adw_action_row_backups.set_subtitle_lines(2)
+        self.adw_action_row_backups.set_subtitle_lines(4)
         self.adw_action_row_backups.set_model(model=actions)
         self.lbox_e.append(child=self.adw_action_row_backups)
         
