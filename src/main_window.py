@@ -408,14 +408,6 @@ class MainWindow(Gtk.Window):
     
     # Save configuration
     def save_config(self):
-        # Create SaveDesktop/archives directory for periodic saving
-        try:
-            if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
-                os.makedirs(f"{download_dir}/SaveDesktop/archives")
-        except:
-            os.system("mkdir ~/Downloads")
-            os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home}/Downloads")
-            os.makedirs(f"{download_dir}/SaveDesktop/archives")
         # Create and load directory for saving configuration in CACHE
         if not os.path.exists(f"{CACHE}/saved_config"):
             os.mkdir(f"{CACHE}/saved_config")
