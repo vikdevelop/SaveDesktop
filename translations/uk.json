@@ -33,5 +33,6 @@
     "import_config_desc": "Імпорт конфігурації з файлу або списку.",
     "save_flatpak_permissions": "Збереження користувацьких дозволів для застосунків Flatpak",
     "apply": "Застосувати",
-    "learn_more": "Дізнатися більше"
+    "learn_more": "Дізнатися більше",
+    "periodic_saving_tooltip": "Open periodic saving folder"
 }
