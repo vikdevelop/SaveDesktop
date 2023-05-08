@@ -372,17 +372,17 @@ class MainWindow(Gtk.Window):
                 self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
                 self.listbox.get_style_context().add_class(class_name='boxed-list')
                 self.flistBox.append(self.listbox)
-                
-                try:
-                    get_dir_content = os.listdir(self.dir)
-                    archives_model = Gtk.StringList.new(strings=get_dir_content)
-                    
-                    self.radio_row = Adw.ComboRow.new()
-                    self.radio_row.set_model(model=archives_model)
-                    self.radio_row.set_icon_name('document-properties-symbolic')
-                    self.listbox.append(self.radio_row)
-                except:
-                    self.flistLabel.set_text(_["import_from_list_error"])
+
+                get_dir_content = os.listdir(f'{download_dir}/SaveDesktop/archives')
+                archives_model = Gtk.StringList.new(strings=get_dir_content)
+
+                self.radio_row = Adw.ComboRow.new()
+                self.radio_row.set_model(model=archives_model)
+                self.radio_row.set_icon_name('document-properties-symbolic')
+                self.listbox.append(self.radio_row)
+
+        else:
+            self.flistLabel.set_text(_["import_from_list_error"])
     
     # Action after closing import from list page
     def close_list(self, w):
