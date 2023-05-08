@@ -349,49 +349,38 @@ class MainWindow(Gtk.Window):
         self.flistLabel = Gtk.Label.new()
         self.flistLabel.set_justify(Gtk.Justification.CENTER)
         self.flistBox.append(self.flistLabel)
-        if os.path.exists(f'{download_dir}/SaveDesktop/periodic_saving'):
-            self.dir = f'{download_dir}/SaveDesktop/periodic_saving'
-            if os.listdir(f'{download_dir}/SaveDesktop/periodic_saving') == []:
-                self.flistLabel.set_text(_["import_from_list_error"])
-            else:
-                self.view_configs()
-        else:
+        if os.path.exists(f'{download_dir}/SaveDesktop/archives'):
             self.dir = f'{download_dir}/SaveDesktop/archives'
-            if os.path.exists(f"{download_dir}/SaveDesktop/archives"):
-                if os.listdir(f'{download_dir}/SaveDesktop/archives') == []:
-                    self.flistLabel.set_text(_["import_from_list_error"])
-                else:
-                    self.view_configs()
-            else:
+            if os.listdir(f'{download_dir}/SaveDesktop/archives') == []:
                 self.flistLabel.set_text(_["import_from_list_error"])
+            else:
+                self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
+                self.fdescLabel = Gtk.Label.new(str=f"{download_dir}/SaveDesktop/archives")
+                self.flistBox.append(self.fdescLabel)
+        
+                self.applyButton = Gtk.Button.new_with_label(_["apply"])
+                self.applyButton.add_css_class('suggested-action')
+                self.applyButton.connect('clicked', self.imp_cfg_from_list)
+                self.headerbar.pack_end(self.applyButton)
+                
+                self.radioBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+                self.listbox = Gtk.ListBox.new()
+                self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+                self.listbox.get_style_context().add_class(class_name='boxed-list')
+                self.flistBox.append(self.listbox)
+                
+                try:
+                    get_dir_content = os.listdir(self.dir)
+                    archives_model = Gtk.StringList.new(strings=get_dir_content)
+                    
+                    self.radio_row = Adw.ComboRow.new()
+                    self.radio_row.set_model(model=archives_model)
+                    self.radio_row.set_tooltip_text(self.dir)
+                    self.radio_row.set_icon_name('document-properties-symbolic')
+                    self.listbox.append(self.radio_row)
+                except:
+                    self.flistLabel.set_text(_["import_from_list_error"])
     
-    # View configs
-    def view_configs(self):
-        self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>\n\n{self.dir}")
-        
-        self.applyButton = Gtk.Button.new_with_label(_["apply"])
-        self.applyButton.add_css_class('suggested-action')
-        self.applyButton.connect('clicked', self.imp_cfg_from_list)
-        self.headerbar.pack_end(self.applyButton)
-        
-        self.radioBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-        self.listbox = Gtk.ListBox.new()
-        self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.listbox.get_style_context().add_class(class_name='boxed-list')
-        self.flistBox.append(self.listbox)
-        
-        try:
-            get_dir_content = os.listdir(self.dir)
-            archives_model = Gtk.StringList.new(strings=get_dir_content)
-            
-            self.radio_row = Adw.ComboRow.new()
-            self.radio_row.set_model(model=archives_model)
-            self.radio_row.set_tooltip_text(self.dir)
-            self.radio_row.set_icon_name('document-properties-symbolic')
-            self.listbox.append(self.radio_row)
-        except:
-            self.flistLabel.set_text(_["import_from_list_error"])
-        
     # Action after closing import from list page
     def close_list(self, w):
         self.pBox.append(self.importBox)
@@ -413,11 +402,15 @@ class MainWindow(Gtk.Window):
     
     # Save configuration
     def save_config(self):
+        # Create SaveDesktop/archives directory for periodic saving
         try:
-            if not os.path.exists(f"{download_dir}/SaveDesktop/periodic_saving"):
-                os.makedirs(f"{download_dir}/SaveDesktop/periodic_saving")
+            if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
+                os.makedirs(f"{download_dir}/SaveDesktop/archives")
         except:
-            print("ERR: Can't create folder for periodic backups because Downloads folder is not setup correctly. See more https://github.com/vikdevelop/SaveDesktop/wiki/Fix-problem-with-creating-SaveDesktop-directory-in-~-Downloads-directory")
+            os.system("mkdir ~/Downloads")
+            os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home}/Downloads")
+            os.makedirs(f"{download_dir}/SaveDesktop/archives")
+        # Create and load directory for saving configuration in CACHE
         if not os.path.exists(f"{CACHE}/saved_config"):
             os.mkdir(f"{CACHE}/saved_config")
         os.chdir(f"{CACHE}/saved_config")
@@ -480,10 +473,8 @@ class MainWindow(Gtk.Window):
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
             self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
-            #self.move_tarball = GLib.spawn_command_line_async(f"mv config_{date.today()}.sd.tar.gz {self.folder}/SaveDesktop/archives/")
         else:
             self.create_classic_tar = GLib.spawn_command_line_async(f"tar -czf {self.saveEntry.get_text()}.sd.tar.gz ./")
-            #self.move_tarball = GLib.spawn_command_line_async(f"mv {self.saveEntry.get_text()}.sd.tar.gz {self.folder}/SaveDesktop/archives/")
         self.tar_time = GLib.timeout_add_seconds(4, self.exporting_done)
         
     # Select folder for saving configuration
@@ -525,7 +516,6 @@ class MainWindow(Gtk.Window):
             file = dialog.get_file()
             filename = file.get_path()
             self.please_wait_toast()
-            #self.timeout_io = GLib.timeout_add_seconds(10, self.exporting_done)
             os.chdir("%s" % CACHE)
             os.popen("tar -xf %s ./" % filename)
             self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
