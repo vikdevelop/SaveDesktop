@@ -33,5 +33,6 @@
     "save_flatpak_permissions": "Guardar permisos personalizados de aplicaciones Flatpak",
     "save": "Guardar",
     "apply": "Aplicar",
-    "learn_more": "Más información"
+    "learn_more": "Más información",
+    "periodic_saving_tooltip": "Open periodic saving folder"
 }
