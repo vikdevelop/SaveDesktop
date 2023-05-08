@@ -89,10 +89,13 @@ class PeriodicBackups:
             print("File already exists")
             exit()
         else:
-            if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
-                os.system("mkdir {}/SaveDesktop/".format(download_dir))
-            if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
-                os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
+            try:
+                if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
+                    os.makedirs(f"{download_dir}/SaveDesktop/archives")
+            except:
+                os.system("mkdir ~/Downloads")
+                os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home}/Downloads")
+                os.makedirs(f"{download_dir}/SaveDesktop/archives")
             os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
             os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
             os.system('cp ~/.config/dconf/user ./')
