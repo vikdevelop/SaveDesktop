@@ -124,6 +124,15 @@
     </categories>
           
     <releases>
+       <release version="2.4" date="2023-05-08">
+          <description>
+            <ul>
+              <li>Added option for saving configuration to custom directory</li>
+            </ul>
+            <p>NOTE:</p>
+            <p>You can save configuration to more or less to anything regular directory in home folder such as ~/Downloads, ~/Pictures, ~/Documents, ~/Music, etc., but if you want to save configuration e.g. on another hard drive, will be neccessary allow access in Flatseal to work correctly.</p>
+          </description>
+       </release>
        <release version="2.3.1" date="2023-04-22">
           <description>
             <ul>
