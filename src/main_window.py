@@ -251,7 +251,7 @@ class MainWindow(Gtk.Window):
         self.periodicButton = Gtk.Button.new_from_icon_name("folder-open-symbolic")
         self.periodicButton.add_css_class("flat")
         self.periodicButton.connect("clicked", self.open_periodic_backups)
-        self.periodicButton.set_tooltip_text("periodic_saving_tooltip")
+        self.periodicButton.set_tooltip_text(_["periodic_saving_tooltip"])
         
         self.adw_action_row_backups = Adw.ComboRow.new()
         if os.path.exists(f"{download_dir}/SaveDesktop/archives"):
