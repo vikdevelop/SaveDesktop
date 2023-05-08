@@ -33,5 +33,6 @@
     "import_config_desc": "Importáld a konfigurációt fájlból vagy listából.",
     "save": "Mentés",
     "apply": "Alkalmazás",
-    "learn_more": "Tudj meg többet"
+    "learn_more": "Tudj meg többet",
+    "periodic_saving_tooltip": "Open periodic saving folder"
 }

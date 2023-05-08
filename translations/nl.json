@@ -33,5 +33,6 @@
     "save_flatpak_permissions": "Eigen Flatpak-rechten opslaan",
     "save": "Opslaan",
     "apply": "Toepassen",
-    "learn_more": "Meer informatie"
+    "learn_more": "Meer informatie",
+    "periodic_saving_tooltip": "Open periodic saving folder"
 }
