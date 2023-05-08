@@ -33,5 +33,6 @@
     "import_from_file": "Импорт из файла",
     "import_config_desc": "Импорт конфигурации из файла или списка.",
     "save_flatpak_permissions": "Сохранять пользовательские разрешения Flatpak",
-    "learn_more": "Подробнее"
+    "learn_more": "Подробнее",
+    "periodic_saving_tooltip": "Open periodic saving folder"
 }
