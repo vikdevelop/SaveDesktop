@@ -354,7 +354,6 @@ class MainWindow(Gtk.Window):
         self.flistLabel.set_justify(Gtk.Justification.CENTER)
         self.flistBox.append(self.flistLabel)
         if os.path.exists(f'{download_dir}/SaveDesktop/archives'):
-            self.dir = f'{download_dir}/SaveDesktop/archives'
             if os.listdir(f'{download_dir}/SaveDesktop/archives') == []:
                 self.flistLabel.set_text(_["import_from_list_error"])
             else:
@@ -400,7 +399,7 @@ class MainWindow(Gtk.Window):
         selected_archive = self.radio_row.get_selected_item()
         self.please_wait_toast()
         os.chdir("%s" % CACHE)
-        os.popen("tar -xf %s/%s ./" % (self.dir, selected_archive.get_string()))
+        os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
         
     def open_periodic_backups(self, w):
