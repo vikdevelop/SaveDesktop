@@ -379,7 +379,6 @@ class MainWindow(Gtk.Window):
                     
                     self.radio_row = Adw.ComboRow.new()
                     self.radio_row.set_model(model=archives_model)
-                    self.radio_row.set_tooltip_text(self.dir)
                     self.radio_row.set_icon_name('document-properties-symbolic')
                     self.listbox.append(self.radio_row)
                 except:
