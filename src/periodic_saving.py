@@ -85,14 +85,14 @@ class PeriodicBackups:
         
     # Create backup
     def backup(self):
-        if os.path.exists('{}/SaveDesktop/periodic_saving/config_{}.sd.tar.gz'.format(download_dir, date.today())):
+        if os.path.exists('{}/SaveDesktop/archives/config_{}.sd.tar.gz'.format(download_dir, date.today())):
             print("File already exists")
             exit()
         else:
             if not os.path.exists("{}/SaveDesktop/".format(download_dir)):
                 os.system("mkdir {}/SaveDesktop/".format(download_dir))
-            if not os.path.exists("{}/SaveDesktop/periodic_saving".format(download_dir)):
-                os.system("mkdir {}/SaveDesktop/periodic_saving/".format(download_dir))
+            if not os.path.exists("{}/SaveDesktop/archives".format(download_dir)):
+                os.system("mkdir {}/SaveDesktop/archives/".format(download_dir))
             os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
             os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
             os.system('cp ~/.config/dconf/user ./')
@@ -153,7 +153,7 @@ class PeriodicBackups:
     # Move tarball to ~/Downloads/SaveDesktop/archives/
     def move_tarball(self):
         os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-        os.system("mv ./*.tar.gz {}/SaveDesktop/periodic_saving/".format(download_dir))
+        os.system("mv ./*.tar.gz {}/SaveDesktop/archives/".format(download_dir))
       
     # Message about saved config
     def config_saved(self):
