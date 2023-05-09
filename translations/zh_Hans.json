@@ -17,7 +17,6 @@
     "description": "SaveDesktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。",
     "supported_environments_desc": "支持的桌面环境：{}",
     "filename_spaces_msg": "文件名中不得有空格",
-    "unable_find_file": "找不到文件，请从下载目录中拖入文件",
     "periodic_saving": "定期保存",
     "periodic_saving_desc": "更改仅在下次登录后生效",
     "never": "从不",
