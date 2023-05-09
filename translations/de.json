@@ -17,7 +17,6 @@
     "description": "Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.",
     "supported_environments_desc": "Unterstützte Desktop-Umgebungen: {}",
     "filename_spaces_msg": "Der Dateiname darf keine Leerzeichen enthalten",
-    "unsupp_file_desc": "Nicht unterstützte Datei, verwenden Sie SaveDesktop-Dateien",
     "unable_find_file": "Die Datei kann nicht gefunden werden, ziehen Sie die Datei aus dem Download-Verzeichnis herein",
     "translator_credits": "Github Link des Übersetzers",
     "periodic_saving": "Regelmäßiges Speichern",
