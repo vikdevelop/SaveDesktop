@@ -18,7 +18,6 @@
     "supported_environments_desc": "Environnements de bureau pris en charge : {}",
     "translator_credits": "Lien github des traducteurs",
     "filename_spaces_msg": "Le nom du fichier ne doit pas comporter d'espace",
-    "unable_find_file": "Impossible de trouver le fichier, veuillez faire glisser le fichier depuis le répertoire Téléchargements",
     "periodic_saving": "Sauvegarde périodique",
     "periodic_saving_desc": "Les modifications ne prendront effet qu'après la prochaine connexion",
     "never": "Jamais",
