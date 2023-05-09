@@ -18,7 +18,6 @@
     "supported_environments_desc": "Entornos de escritorio compatibles: {}",
     "filename_spaces_msg": "No debe haber espacios en el nombre del archivo",
     "translator_credits": "gallegonovato https://github.com/gallegonovato",
-    "unsupp_file_desc": "Archivo no admitido, use archivos de SaveDesktop",
     "unable_find_file": "No se puede encontrar el archivo, por favor, arrastre el archivo desde el directorio Descargas",
     "periodic_saving": "Copia de seguridad periódica",
     "periodic_saving_desc": "Los cambios sólo surtirán efecto tras el siguiente inicio de sesión",
