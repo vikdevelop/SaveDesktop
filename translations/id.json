@@ -18,7 +18,6 @@
     "supported_environments_desc": "Supported desktop environments: {}",
     "filename_spaces_msg": "There must be no spaces in the file name",
     "translator_credits": "Translator github-link",
-    "unsupp_file_desc": "Unsupported file, use SaveDesktop files",
     "unable_find_file": "Unable to find the file, please drag file from Downloads directory",
     "periodic_saving": "Periodic saving",
     "periodic_saving_desc": "Changes will only take effect after the next login",
