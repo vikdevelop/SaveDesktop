@@ -18,8 +18,6 @@
     "supported_environments_desc": "Ambientes desktop suportados: {}",
     "translator_credits": "https://github.com/fnogcps https://hosted.weblate.org/user/IsaacDias/",
     "filename_spaces_msg": "Não deve haver espaços no nome do arquivo",
-    "unsupp_file_desc": "Arquivo não suportado, use arquivos do SaveDesktop",
-    "unable_find_file": "Não foi possível encontrar o arquivo, arraste o arquivo do diretório de downloads",
     "periodic_saving": "Salvamento periódico",
     "periodic_saving_desc": "As alterações só terão efeito após o próximo login",
     "never": "Nunca",

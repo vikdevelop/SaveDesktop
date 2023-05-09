@@ -17,8 +17,6 @@
     "description": "SaveDesktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.",
     "supported_environments_desc": "Desteklenen masaüstü ortamları: {}",
     "filename_spaces_msg": "Dosya isminde bosluk olmalı",
-    "unsupp_file_desc": "Desteklenmeyen dosya, SaveDesktop dosyalarını kullan",
-    "unable_find_file": "Dosya bulunamıyor , indirme klasöründen dosyayı alıp uygulama üstüne sürükleyin",
     "translator_credits": "Batmanly https://github.com/batmanly\nSabri Ünal https://github.com/sabriunal",
     "periodic_saving": "Periyodik kaydetme",
     "periodic_saving_desc": "Değişiklikler yalnızca bir sonraki oturum açma işleminden sonra geçerli olacaktır",

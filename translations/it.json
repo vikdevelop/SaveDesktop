@@ -18,8 +18,6 @@
     "supported_environments_desc": "Ambienti desktop supportati: {}",
     "translator_credits": "Albano Battistella https://github.com/albanobattistella",
     "filename_spaces_msg": "Non ci devono essere spazi nel nome del file",
-    "unsupp_file_desc": "File non supportato, utilizzare i file SaveDesktop",
-    "unable_find_file": "Impossibile trovare il file, trascina il file dalla directory dei download",
     "periodic_saving": "Salvataggio periodico",
     "periodic_saving_desc": "Le modifiche avranno effetto solo dopo il prossimo login",
     "never": "Mai",
@@ -34,5 +32,5 @@
     "save_flatpak_permissions": "Salva le autorizzazioni personalizzate dell'app Flatpak",
     "apply": "Applica",
     "learn_more": "Ulteriori informazioni",
-    "periodic_saving_tooltip": "Open periodic saving folder"
+    "periodic_saving_tooltip": "Apri cartella di salvataggio periodico"
 }
