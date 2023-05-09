@@ -18,7 +18,6 @@
     "supported_environments_desc": "Поддерживаемые окружения рабочего стола: {}",
     "filename_spaces_msg": "В имени файла не должно быть пробелов",
     "translator_credits": "Сергей Ворон https://github.com/vorons",
-    "unable_find_file": "Не удалось найти файл, пожалуйста, переместите файл в папку Загрузки",
     "periodic_saving": "Периодическое сохранение",
     "periodic_saving_desc": "Изменения вступят в силу после следующего входа в систему",
     "never": "Никогда",
