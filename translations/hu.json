@@ -18,7 +18,6 @@
     "supported_environments_desc": "Támogatott asztali környezetek: {}",
     "filename_spaces_msg": "A fájlnévben nem lehet szóköz",
     "translator_credits": "Daniel Uhrinyi https://github.com/danieluhrinyi",
-    "unsupp_file_desc": "Nem támogatott fájl, használj SaveDesktop fájlt",
     "unable_find_file": "A fájl nem találfató, kérlek húzd be a Letöltések könyvtárból",
     "periodic_saving": "Időszakos mentés",
     "periodic_saving_desc": "A változtatások csak a következő belépéskor lépnek érvénybe",
