@@ -18,7 +18,6 @@
     "supported_environments_desc": "Підтримувані середовища робочого столу: {}",
     "filename_spaces_msg": "В імені файлу не повинно бути пробілів",
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
-    "unsupp_file_desc": "Непідтримуваний файл, використовувати файли SaveDesktop",
     "unable_find_file": "Не вдалося знайти файл, перетягніть його з каталогу Завантаження",
     "periodic_saving": "Періодичне збереження",
     "periodic_saving_desc": "Зміни набудуть чинності тільки після наступного входу в систему",
