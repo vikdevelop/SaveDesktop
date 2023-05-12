@@ -60,12 +60,21 @@ elif "zh" in subprocess.getoutput('locale | grep "LANG"'):
 else:
     lang = 'en.json'
 
-locale = open(f"/app/translations/{lang}")
-_ = json.load(locale)
-
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
-CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
-CONFIG = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config"
+flatpak = os.path.exists("/.flatpak-info")
+
+if flatpak:
+    locale = open(f"/app/translations/{lang}")
+    CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
+    CONFIG = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config"
+else:
+    locale = open(f"translations/{lang}")
+    os.system("mkdir ~/.config/io.github.vikdevelop.SaveDesktop")
+    os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
+    CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
+    CONFIG = f"{Path.home()}/.config/io.github.vikdevelop.SaveDesktop"
+    
+_ = json.load(locale)
 
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
