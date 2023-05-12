@@ -12,6 +12,7 @@ Save and apply your Desktop Environment configuration
 ```bash
 git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/run_natively.sh
 ```
+NOTE: For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
 
 ## Translations
 If you want to help with localize SaveDesktop, you can use the Weblate tool (is possible register with e.g. GitHub or Google)
