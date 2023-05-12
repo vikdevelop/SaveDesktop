@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop
+#git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop
 cd /tmp/SaveDesktop
 if [ "$1" == "" ]
 then 
