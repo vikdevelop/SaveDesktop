@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-sh run_natively.sh
+sh /tmp/SaveDesktop/run_natively.sh
