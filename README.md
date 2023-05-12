@@ -7,6 +7,12 @@ Save and apply your Desktop Environment configuration
 
 <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://beta.flathub.org/_next/static/media/flathub-badge-en.b42a637e.png'/></a>
 
+**... or run natively with this command:**
+
+```bash
+git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/run_natively.sh
+```
+
 ## Translations
 If you want to help with localize SaveDesktop, you can use the Weblate tool (is possible register with e.g. GitHub or Google)
 
