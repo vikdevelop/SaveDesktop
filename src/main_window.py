@@ -12,9 +12,8 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk, GObject
 
-p_lang = locale.getlocale(locale.LC_MESSAGES)[0]
+p_lang = locale.getlocale()[0]
 r_lang = p_lang[:-3]
-syslang = r_lang + ".json"
 
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 flatpak = os.path.exists("/.flatpak-info")
