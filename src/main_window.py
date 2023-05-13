@@ -629,7 +629,7 @@ class MyApp(Adw.Application):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
         dialog.set_developer_name("vikdevelop")
-        if lang == "en.json":
+        if r_lang == "en":
             print("")
         else:
             dialog.set_translator_credits(_["translator_credits"])
