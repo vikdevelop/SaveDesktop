@@ -4,6 +4,7 @@ import subprocess
 import gi
 import sys
 import json
+import locale
 from datetime import date
 from pathlib import Path
 gi.require_version('Gtk', '4.0')
@@ -11,69 +12,24 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk, GObject
 
-# Czech
-if "cs" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'cs.json'
-# French
-elif "fr" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'fr.json'
-# Portugalese (Brasil)    
-elif "pt_BR" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'pt_BR.json'
-# Italian    
-elif "it" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'it.json'
-# Dutch
-elif "nl" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'nl.json'
-# Arabic
-elif "ar" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'ar.json'
-# Russian
-elif "ru" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'ru.json'
-# Indonesian
-elif "id" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'id.json'
-# Norwegian (Bokmål)
-elif "nb_NO" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'nb_NO.json'
-# Ukrainian
-elif "uk" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'uk.json'
-# Hungarian
-elif "hu" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'hu.json'
-# Spanish
-elif "es" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'es.json'
-# Turkish
-elif "tr" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'tr.json'
-# Deutsch
-elif "de" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'de.json'
-# Chinese (Simplified)
-elif "zh" in subprocess.getoutput('locale | grep "LANG"'):
-    lang = 'zh_Hans.json'
-# English
-else:
-    lang = 'en.json'
+p_lang = locale.getlocale(locale.LC_MESSAGES)[0]
+r_lang = p_lang[:-3]
+syslang = r_lang + ".json"
 
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 flatpak = os.path.exists("/.flatpak-info")
 
 if flatpak:
-    locale = open(f"/app/translations/{lang}")
+    locale = open(f"/app/translations/{r_lang}.json")
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     CONFIG = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config"
 else:
-    locale = open(f"translations/{lang}")
+    locale = open(f"translations/{r_lang}.json")
     os.system("mkdir ~/.config/io.github.vikdevelop.SaveDesktop")
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     CONFIG = f"{Path.home()}/.config/io.github.vikdevelop.SaveDesktop"
-    
+
 _ = json.load(locale)
 
 class MainWindow(Gtk.Window):
