@@ -19,11 +19,17 @@ download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 flatpak = os.path.exists("/.flatpak-info")
 
 if flatpak:
-    locale = open(f"/app/translations/{r_lang}.json")
+    try:
+        locale = open(f"/app/translations/{r_lang}.json")
+    except:
+        locale = open("/app/translations/en.json")
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     CONFIG = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config"
 else:
-    locale = open(f"translations/{r_lang}.json")
+    try:
+        locale = open(f"translations/{r_lang}.json")
+    except:
+        locale = open("translations/en.json")
     os.system("mkdir ~/.config/io.github.vikdevelop.SaveDesktop")
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
@@ -638,7 +644,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.4"
+        version = "2.4.2"
         icon = "io.github.vikdevelop.SaveDesktop"
         if os.path.exists("/app/share/build-beta.sh"):
             dialog.set_version(f"{version}-beta")
