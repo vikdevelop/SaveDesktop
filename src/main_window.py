@@ -384,7 +384,7 @@ class MainWindow(Gtk.Window):
         self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
         self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
         self.themes = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.themes ./")
-        self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.icons ./")
+        self.icons_home = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.icons ./")
         self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/icons ./")
         self.fonts = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.fonts ./")
         self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
@@ -640,14 +640,14 @@ class MyApp(Adw.Application):
             dialog.set_translator_credits(_["translator_credits"])
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
-        dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop")
+        dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.4.2"
+        version = "2.4.3"
         icon = "io.github.vikdevelop.SaveDesktop"
         if os.path.exists("/app/share/build-beta.sh"):
-            dialog.set_version(f"{version}-beta")
+            dialog.set_version(f"{version}-dev")
             dialog.set_application_icon(f"{icon}.Devel")
         else:
             dialog.set_version(version)
