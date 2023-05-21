@@ -13,7 +13,14 @@ gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk, GObject
 
 p_lang = locale.getlocale()[0]
-r_lang = p_lang[:-3]
+if p_lang == 'pt_BR':
+    r_lang = 'pt_BR'
+elif p_lang == 'nb_NO':
+    r_lang = 'nb_NO'
+elif p_lang == 'zh':
+    r_lang == 'zh_Hans'
+else:
+    r_lang = p_lang[:-3]
 
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 flatpak = os.path.exists("/.flatpak-info")
@@ -22,7 +29,7 @@ if flatpak:
     try:
         locale = open(f"/app/translations/{r_lang}.json")
     except:
-        locale = open("/app/translations/en.json")
+        locale = open(f"/app/translations/en.json")
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     CONFIG = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config"
 else:
@@ -640,14 +647,14 @@ class MyApp(Adw.Application):
             dialog.set_translator_credits(_["translator_credits"])
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
-        dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
+        dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop")
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.4.3"
+        version = "2.4.2"
         icon = "io.github.vikdevelop.SaveDesktop"
         if os.path.exists("/app/share/build-beta.sh"):
-            dialog.set_version(f"{version}-dev")
+            dialog.set_version(f"{version}-beta")
             dialog.set_application_icon(f"{icon}.Devel")
         else:
             dialog.set_version(version)
