@@ -2,7 +2,9 @@
 #git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop
 cd /tmp/SaveDesktop
 # Build GLib schema
-glib-compile-schemas flatpak
+mkdir ./glib-2.0/schemas
+cp flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml glib-2.0/schemas/
+glib-compile-schemas ./glib-2.0/schemas
 # Install app icons
 install -D -t ~/.local/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/icons/io.github.vikdevelop.SaveDesktop-symbolic.svg
