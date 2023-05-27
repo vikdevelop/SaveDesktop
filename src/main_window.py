@@ -17,7 +17,7 @@ if p_lang == 'pt_BR':
     r_lang = 'pt_BR'
 elif p_lang == 'nb_NO':
     r_lang = 'nb_NO'
-elif p_lang == 'zh':
+elif 'zh' in p_lang:
     r_lang == 'zh_Hans'
 else:
     r_lang = p_lang[:-3]
@@ -443,13 +443,17 @@ class MainWindow(Gtk.Window):
             self.aurorae = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/aurorae ./xdg-data/")
             self.kscreen = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/kscreen ./xdg-data/")
             self.colors = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/color-schemes ./xdg-data/")
-              
+        self.create_archive()
+           
+    def create_archive(self):
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
-            self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
+            #self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
+            os.popen(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
         else:
-            self.create_classic_tar = GLib.spawn_command_line_async(f"tar -czf {self.saveEntry.get_text()}.sd.tar.gz ./")
-        self.tar_time = GLib.timeout_add_seconds(4, self.exporting_done)
+            #self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
+            os.popen(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
+        self.tar_time = GLib.timeout_add_seconds(6, self.exporting_done)
         
     # Select folder for saving configuration
     def select_folder(self, w):
