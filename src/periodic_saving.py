@@ -4,7 +4,7 @@ from pathlib import Path
 import json
 import os
 import gi
-from gi.repository import GLib
+from gi.repository import GLib, Gio
 
 # get current datetime
 dt = datetime.now()
@@ -40,29 +40,16 @@ class PeriodicBackups:
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
             self.environment = 'KDE Plasma'
         
-        # Load SaveDesktop configuration file
-        if os.path.exists(f'{CONFIG}/settings.json'):
-            with open(f'{CONFIG}/settings.json') as pb:
-                jp = json.load(pb)
-            # Check if periodic backups are activated
-            try:
-                self.pbackups = jp["periodic_backups"]
-                cont = "true"
-            except:
-                print("Periodic backups are not set up.")
-                cont = "false"
-            if cont == "true":
-                if self.pbackups == "Never":
-                    print("Periodic backups are not set up.")
-                    exit()
-                elif self.pbackups == "Daily":
-                    self.daily()
-                elif self.pbackups == "Weekly":
-                    self.weekly()
-                elif self.pbackups == "Monthly":
-                    self.monthly()
-            else:
-                exit()
+        self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
+        if self.settings["periodic-saving"] == 'Never':
+            print("Periodic saving are not set up.")
+            exit()
+        elif self.settings["periodic-saving"] == 'Daily':
+            self.daily()
+        elif self.settings["periodic-saving"] == 'Weekly':
+            self.weekly()
+        elif self.settings["periodic-saving"] == 'Monthly':
+            self.monthly()
          
     # Periodic backups: daily
     def daily(self):
