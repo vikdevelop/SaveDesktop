@@ -655,7 +655,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.4.3"
+        version = "2.4.4"
         icon = "io.github.vikdevelop.SaveDesktop"
         if os.path.exists("/app/share/build-beta.sh"):
             dialog.set_version(f"{version}-beta")
