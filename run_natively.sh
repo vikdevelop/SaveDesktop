@@ -8,7 +8,7 @@ if test -f "/usr/share/glib-2.0/schemas/io.github.vikdevelop.SaveDesktop.gschema
 else
 	echo "Please enter password, because it is neccessary for installing GLib schema."
 	sudo cp flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml /usr/share/glib-2.0/schemas/
-	sudo glib-compile-schemas ./usr/share/glib-2.0/schemas
+	sudo glib-compile-schemas /usr/share/glib-2.0/schemas
 fi
 # Install app icons
 install -D -t ~/.local/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
