@@ -3,8 +3,13 @@
 cd /tmp/SaveDesktop
 # Build GLib schema
 mkdir ./glib-2.0/schemas
-cp flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml glib-2.0/schemas/
-glib-compile-schemas ./glib-2.0/schemas
+if test -f "/usr/share/glib-2.0/schemas/io.github.vikdevelop.SaveDesktop.gschema.xml"; then
+	echo "-"
+else
+	echo "Please enter password, because it is neccessary for installing GLib schema."
+	sudo cp flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml /usr/share/glib-2.0/schemas/
+	sudo glib-compile-schemas ./usr/share/glib-2.0/schemas
+fi
 # Install app icons
 install -D -t ~/.local/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/icons/io.github.vikdevelop.SaveDesktop-symbolic.svg
