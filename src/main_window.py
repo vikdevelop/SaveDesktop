@@ -52,7 +52,14 @@ class MainWindow(Gtk.Window):
         self.set_titlebar(titlebar=self.headerbar)
         self.application = kwargs.get('application')
         
-        self.get_settings()
+        self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
+        
+        self.set_size_request(750, 540)
+        (width, height) = self.settings["window-size"]
+        self.set_default_size(width, height)
+        
+        if self.settings["maximized"]:
+            self.maximize()
         
         # App menu
         self.menu_button_model = Gio.Menu()
@@ -187,27 +194,13 @@ class MainWindow(Gtk.Window):
         # set the filename section
         self.saveEntry = Adw.EntryRow.new()
         self.saveEntry.set_title(_["set_filename"])
-        if os.path.exists(f'{CONFIG}/settings.json'):
-            with open(f'{CONFIG}/settings.json') as e:
-                jE = json.load(e)
-            self.saveEntry.set_text(jE["file-text"])
+        self.saveEntry.set_text(self.settings["filename"])
         self.lbox_e.append(self.saveEntry)
         
         # Switch and row of option 'Save Flatpak custom permissions'
         self.switch_01 = Gtk.Switch.new()
-        if os.path.exists(f'{CONFIG}/settings.json'):
-            with open(f'{CONFIG}/settings.json') as r:
-                jR = json.load(r)
-            try:
-                flatpak = jR["save_flatpak_permissions"]
-                if flatpak == "True":
-                    self.switch_01.set_active(True)
-                else:
-                    self.switch_01.set_active(False)
-            except:
-                self.switch_01.set_active(False)
-        else:
-            self.switch_01.set_active(False)
+        if self.settings["flatpak-permissions"]:
+            self.switch_01.set_active(True)
         self.switch_01.set_valign(align=Gtk.Align.CENTER)
          
         self.adw_action_row_more = Adw.ActionRow.new()
@@ -242,22 +235,14 @@ class MainWindow(Gtk.Window):
         self.adw_action_row_backups.set_model(model=actions)
         self.lbox_e.append(child=self.adw_action_row_backups)
         
-        if os.path.exists(f'{CONFIG}/settings.json'):
-            with open(f'{CONFIG}/settings.json') as b:
-                jb = json.load(b)
-            try:
-                if jb["periodic_backups"] == "Never":
-                    self.adw_action_row_backups.set_selected(0)
-                elif jb["periodic_backups"] == "Daily":
-                    self.adw_action_row_backups.set_selected(1)
-                elif jb["periodic_backups"] == "Weekly":
-                    self.adw_action_row_backups.set_selected(2)
-                elif jb["periodic_backups"] == "Monthly":
-                    self.adw_action_row_backups.set_selected(3)
-            except:
-                self.adw_action_row_backups.set_selected(0)
-        else:
+        if self.settings["periodic-saving"] == 'Never':
             self.adw_action_row_backups.set_selected(0)
+        elif self.settings["periodic-saving"] == 'Daily':
+            self.adw_action_row_backups.set_selected(1)
+        elif self.settings["periodic-saving"] == 'Weekly':
+            self.adw_action_row_backups.set_selected(2)
+        elif self.settings["periodic-saving"] == 'Monthly':
+            self.adw_action_row_backups.set_selected(3)
         
         self.savebtnBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         self.savebtnBox.set_margin_top(10)
@@ -584,19 +569,6 @@ class MainWindow(Gtk.Window):
     def on_toast_dismissed(self, toast):
         os.popen("rm -rf %s/*" % CACHE)
         os.popen("rm -rf {}/SaveDesktop/.{}/*".format(download_dir, date.today()))
-        
-    # Get settings from XDG_CONFIG/settings.json
-    def get_settings(self):
-        if os.path.exists(f'{CONFIG}/settings.json'):
-            with open(f'{CONFIG}/settings.json') as l:
-                jL = json.load(l)
-            w_width = jL["window_width"]
-            w_height = jL["window_height"]
-            self.set_default_size(int(w_width), int(w_height))
-            self.set_size_request(750, 540)
-        else:
-            self.set_default_size(750, 540)
-            self.set_size_request(750, 540)
     
     # action after closing window
     def on_close(self, widget, *args):
@@ -615,9 +587,12 @@ class MainWindow(Gtk.Window):
             backup_item = "Weekly"
         if selected_item.get_string() == _["monthly"]:
             backup_item = "Monthly"
-        # Save settings of filename text, periodic backups and window size
-        with open(f'{CONFIG}/settings.json', 'w') as s:
-            s.write('{\n "file-text": "%s",\n "periodic_backups": "%s",\n "save_flatpak_permissions": "%s",\n "window_width": "%s",\n "window_height": "%s"\n}' % (self.saveEntry.get_text(), backup_item, self.switch_01.get_active(), self.get_allocation().width, self.get_allocation().height))
+        (width, height) = self.get_default_size()
+        self.settings["window-size"] = (width, height)
+        self.settings["flatpak-permissions"] = self.switch_01.get_active()
+        self.settings["periodic-saving"] = backup_item
+        self.settings["maximized"] = self.is_maximized()
+        self.settings["filename"] = self.saveEntry.get_text()
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
@@ -655,7 +630,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.4.4"
+        version = "2.4.5"
         icon = "io.github.vikdevelop.SaveDesktop"
         if os.path.exists("/app/share/build-beta.sh"):
             dialog.set_version(f"{version}-beta")
