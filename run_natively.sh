@@ -1,6 +1,8 @@
 #!/usr/bin/bash
 #git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop
 cd /tmp/SaveDesktop
+# Build GLib schema
+glib-compile-schemas flatpak
 # Install app icons
 install -D -t ~/.local/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/icons/io.github.vikdevelop.SaveDesktop-symbolic.svg
