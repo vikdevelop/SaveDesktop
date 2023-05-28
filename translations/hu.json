@@ -32,5 +32,6 @@
     "save": "Mentés",
     "apply": "Alkalmazás",
     "learn_more": "Tudj meg többet",
-    "periodic_saving_tooltip": "Időszakos mentés mappájának megnyitása"
+    "periodic_saving_tooltip": "Időszakos mentés mappájának megnyitása",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }
