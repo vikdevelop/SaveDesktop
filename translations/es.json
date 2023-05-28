@@ -28,7 +28,6 @@
     "import_from_list_error": "No se ha encontrado ninguna configuración en el directorio SaveDesktop.",
     "import_from_file": "Importar desde el archivo",
     "import_config_desc": "Importa la configuración desde un archivo o una lista.",
-    "save_flatpak_permissions": "Guardar permisos personalizados de aplicaciones Flatpak",
     "save": "Guardar",
     "apply": "Aplicar",
     "learn_more": "Más información",

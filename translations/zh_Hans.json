@@ -27,7 +27,6 @@
     "import_from_list_error": "在 SaveDesktop 目录中找不到任何配置。",
     "import_from_file": "从文件导入",
     "import_config_desc": "从文件或列表导入配置。",
-    "save_flatpak_permissions": "保存自定义 Flatpak 应用权限",
     "save": "保存",
     "apply": "应用",
     "translator_credits": "译者github链接",

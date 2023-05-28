@@ -28,7 +28,6 @@
     "import_from_list_error": "Er zijn geen voorkeuren aangetroffen in de SaveDesktop-map.",
     "import_from_file": "Importeren uit bestand",
     "import_config_desc": "Importeer voorkeuren uit een bestand of lijst.",
-    "save_flatpak_permissions": "Eigen Flatpak-rechten opslaan",
     "save": "Opslaan",
     "apply": "Toepassen",
     "learn_more": "Meer informatie",

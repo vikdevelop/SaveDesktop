@@ -29,7 +29,6 @@
     "import_from_list_error": "У каталозі SaveDesktop не знайдено конфігурацію.",
     "import_from_file": "Імпорт з файлу",
     "import_config_desc": "Імпорт конфігурації з файлу або списку.",
-    "save_flatpak_permissions": "Збереження користувацьких дозволів для застосунків Flatpak",
     "apply": "Застосувати",
     "learn_more": "Дізнатися більше",
     "periodic_saving_tooltip": "Відкрити папку періодичного збереження",

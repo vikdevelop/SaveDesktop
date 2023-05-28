@@ -25,7 +25,6 @@
     "weekly": "Hetente",
     "monthly": "Havonta",
     "import_from_list": "Importálás listából",
-    "save_flatpak_permissions": "Egyedi Flatpak alkalmazás engedélyek mentése",
     "import_from_list_error": "Nem található konfiguráció a SaveDesktop könyvtárban.",
     "import_from_file": "Importálás fájlból",
     "import_config_desc": "Importáld a konfigurációt fájlból vagy listából.",
