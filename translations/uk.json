@@ -32,5 +32,6 @@
     "save_flatpak_permissions": "Збереження користувацьких дозволів для застосунків Flatpak",
     "apply": "Застосувати",
     "learn_more": "Дізнатися більше",
-    "periodic_saving_tooltip": "Відкрити папку періодичного збереження"
+    "periodic_saving_tooltip": "Відкрити папку періодичного збереження",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }
