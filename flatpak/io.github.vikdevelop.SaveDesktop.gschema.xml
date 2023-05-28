@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <schemalist>
-    <schema id="io.github.vikdevelop.SaveDesktop" path="/io/github/vikdevelop/SaveDesktop/">
-        <key name="window-size" type="(ii)">
-            <default>(750,540)</default>
-            <summary>Window size</summary>
-        </key>
-        <key name="maximized" type="b">
-          <default>false</default>
-          <summary>Window maximize state</summary>
-        </key>
-        <key name="flatpak-permissions" type="b">
-            <default>false</default>
-            <summary>Save Flatpak apps custom permissions</summary>
-        </key>
-        <key name="periodic-saving" type="s">
-          <choices>
-                <choice value="Never"/>
-                <choice value="Daily"/>
-                <choice value="Weekly"/>
-                <choice value="Monthly"/>
-            </choices>
-            <default>"Never"</default>
-            <summary>Periodic saving</summary>
-        </key>
-        <key name="filename" type="s">
-            <default>''</default>
-            <summary>Filename text</summary>
-        </key>
-    </schema>
+	<schema id="io.github.vikdevelop.SaveDesktop" path="/io/github/vikdevelop/SaveDesktop/">
+		<key name="window-size" type="(ii)">
+			<default>(750,540)</default>
+			<summary>Window size</summary>
+		</key>
+		<key name="maximized" type="b">
+		  <default>false</default>
+		  <summary>Window state</summary>
+		</key>
+		<key name="save-installed-flatpaks" type="b">
+			<default>false</default>
+			<summary>Save installed Flatpak apps</summary>
+		</key>
+		<key name="periodic-saving" type="s">
+		  <choices>
+				<choice value="Never"/>
+				<choice value="Daily"/>
+				<choice value="Weekly"/>
+				<choice value="Monthly"/>
+			</choices>
+			<default>"Never"</default>
+			<summary>Periodic saving</summary>
+		</key>
+		<key name="filename" type="s">
+			<default>''</default>
+			<summary>Filename text</summary>
+		</key>
+	</schema>
 </schemalist>
