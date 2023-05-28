@@ -41,6 +41,7 @@ finish-args:
     # ensuring to FileChooserNative will work correctly
     - --talk-name=org.freedesktop.FileManager1
     - --talk-name=org.freedesktop.portal.FileChooser
+    - --talk-name=org.freedesktop.Flatpak
 modules:
   - name: savedesktop
     buildsystem: simple
