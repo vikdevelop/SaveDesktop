@@ -28,9 +28,9 @@
     "import_from_list_error": "Tidak ada konfigurasi yang ditemukan di direktori SaveDesktop.",
     "import_from_file": "Impor dari file",
     "import_config_desc": "Impor konfigurasi dari file atau daftar.",
-    "save_flatpak_permissions": "Simpan izin aplikasi Flatpak khusus",
     "save": "Simpan",
     "apply": "Terapkan",
     "learn_more": "Pelajari lebih lanjut",
-    "periodic_saving_tooltip": "Buka folder penyimpanan berkala"
+    "periodic_saving_tooltip": "Buka folder penyimpanan berkala",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }

@@ -25,12 +25,12 @@
     "weekly": "Hetente",
     "monthly": "Havonta",
     "import_from_list": "Importálás listából",
-    "save_flatpak_permissions": "Egyedi Flatpak alkalmazás engedélyek mentése",
     "import_from_list_error": "Nem található konfiguráció a SaveDesktop könyvtárban.",
     "import_from_file": "Importálás fájlból",
     "import_config_desc": "Importáld a konfigurációt fájlból vagy listából.",
     "save": "Mentés",
     "apply": "Alkalmazás",
     "learn_more": "Tudj meg többet",
-    "periodic_saving_tooltip": "Időszakos mentés mappájának megnyitása"
+    "periodic_saving_tooltip": "Időszakos mentés mappájának megnyitása",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }

@@ -29,8 +29,8 @@
     "import_from_list_error": "Nessuna configurazione è stata trovata nella directory SaveDesktop.",
     "import_from_file": "Importa da file",
     "import_config_desc": "Importa la configurazione da un file o da un elenco.",
-    "save_flatpak_permissions": "Salva le autorizzazioni personalizzate dell'app Flatpak",
     "apply": "Applica",
     "learn_more": "Ulteriori informazioni",
-    "periodic_saving_tooltip": "Apri cartella di salvataggio periodico"
+    "periodic_saving_tooltip": "Apri cartella di salvataggio periodico",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }

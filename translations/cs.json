@@ -29,8 +29,8 @@
     "apply": "Použít",
     "import_from_file": "Importovat ze souboru",
     "import_config_desc": "Importujte konfiguraci ze souboru nebo seznamu.",
-    "save_flatpak_permissions": "Uložit vlastní oprávnění aplikací Flatpak",
     "save": "Uložit",
     "learn_more": "Zjistit více",
-    "periodic_saving_tooltip": "Otevřít složku pro pravidelné ukládání"
+    "periodic_saving_tooltip": "Otevřít složku pro pravidelné ukládání",
+    "save_installed_flatpaks": "Uložit nainstalované aplikace Flatpak"
 }

@@ -28,9 +28,9 @@
     "import_from_list_error": "SaveDesktop klasöründe hiçbir yapılandırma yok.",
     "import_from_file": "Dosyadan içe aktar",
     "import_config_desc": "Yapılandırmayı bir dosyadan ya da listeden içe aktar.",
-    "save_flatpak_permissions": "Özel Flatpak uygulama izinlerini kaydetme",
     "save": "Kaydet",
     "apply": "Uygula",
     "learn_more": "Daha çoğunu öğren",
-    "periodic_saving_tooltip": "Düzenli kaydetme klasörünü aç"
+    "periodic_saving_tooltip": "Düzenli kaydetme klasörünü aç",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }
