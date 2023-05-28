@@ -32,5 +32,6 @@
     "save": "Opslaan",
     "apply": "Toepassen",
     "learn_more": "Meer informatie",
-    "periodic_saving_tooltip": "Periodieke opslagmap openen"
+    "periodic_saving_tooltip": "Periodieke opslagmap openen",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }
