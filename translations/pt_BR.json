@@ -32,5 +32,6 @@
     "save": "Salvar",
     "apply": "Aplicar",
     "learn_more": "Aprender mais",
-    "periodic_saving_tooltip": "Open periodic saving folder"
+    "periodic_saving_tooltip": "Open periodic saving folder",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }
