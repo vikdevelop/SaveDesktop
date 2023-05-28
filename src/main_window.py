@@ -206,7 +206,7 @@ class MainWindow(Gtk.Window):
         self.switch_01.set_valign(align=Gtk.Align.CENTER)
          
         self.adw_action_row_more = Adw.ActionRow.new()
-        self.adw_action_row_more.set_title(title="Save installed Flatpak apps")
+        self.adw_action_row_more.set_title(title=_["save_installed_flatpaks"])
         self.adw_action_row_more.set_title_lines(2)
         self.adw_action_row_more.set_subtitle_lines(3)
         self.adw_action_row_more.add_suffix(self.switch_01)
