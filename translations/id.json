@@ -32,5 +32,6 @@
     "save": "Simpan",
     "apply": "Terapkan",
     "learn_more": "Pelajari lebih lanjut",
-    "periodic_saving_tooltip": "Buka folder penyimpanan berkala"
+    "periodic_saving_tooltip": "Buka folder penyimpanan berkala",
+    "save_installed_flatpaks": "Save installed Flatpak apps"
 }
