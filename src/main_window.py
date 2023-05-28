@@ -544,9 +544,10 @@ class MainWindow(Gtk.Window):
     
     # Create desktop for install Flatpaks from list
     def create_flatpak_desktop(self):
+        os.popen(f"cp /app/install_flatpak_from_script.py {DATA}/")
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
-                fa.write("[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --installer")
+                fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
     
     # configuration has been exported action
     def exporting_done(self):
