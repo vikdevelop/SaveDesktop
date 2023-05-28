@@ -31,16 +31,16 @@ if flatpak:
     except:
         locale = open(f"/app/translations/en.json")
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
-    CONFIG = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config"
+    DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
 else:
     try:
         locale = open(f"translations/{r_lang}.json")
     except:
         locale = open("translations/en.json")
-    os.system("mkdir ~/.config/io.github.vikdevelop.SaveDesktop")
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
+    os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
-    CONFIG = f"{Path.home()}/.config/io.github.vikdevelop.SaveDesktop"
+    DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
 
 _ = json.load(locale)
 
@@ -199,12 +199,12 @@ class MainWindow(Gtk.Window):
         
         # Switch and row of option 'Save Flatpak custom permissions'
         self.switch_01 = Gtk.Switch.new()
-        if self.settings["flatpak-permissions"]:
+        if self.settings["save-installed-flatpaks"]:
             self.switch_01.set_active(True)
         self.switch_01.set_valign(align=Gtk.Align.CENTER)
          
         self.adw_action_row_more = Adw.ActionRow.new()
-        self.adw_action_row_more.set_title(title=_["save_flatpak_permissions"])
+        self.adw_action_row_more.set_title(title="Save installed Flatpak apps")
         self.adw_action_row_more.set_title_lines(2)
         self.adw_action_row_more.set_subtitle_lines(3)
         self.adw_action_row_more.add_suffix(self.switch_01)
@@ -382,7 +382,7 @@ class MainWindow(Gtk.Window):
         self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
         self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
         if self.switch_01.get_active() == True:
-            self.overrides = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/flatpak/overrides ./")
+            os.popen("sh /app/backup_flatpaks.sh")
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
@@ -499,7 +499,7 @@ class MainWindow(Gtk.Window):
         self.i_fonts = GLib.spawn_command_line_async(f'cp -R ./.fonts {Path.home()}/')
         self.i_gtk4 = GLib.spawn_command_line_async(f'cp -R ./gtk-4.0 {Path.home()}/.config/')
         self.i_gtk3 = GLib.spawn_command_line_async(f'cp -R ./gtk-3.0 {Path.home()}/.config/')
-        self.i_overrides = GLib.spawn_command_line_async(f'cp -R ./overrides {Path.home()}/.local/share/flatpak/')
+        self.flatpak_apps = GLib.spawn_command_line_async(f'cp ./installed_flatpaks.sh {DATA}/')
         # Apply configs for individual desktop environments
         if self.environment == 'GNOME':
             self.i_background_properties = GLib.spawn_command_line_async(f'cp -R ./gnome-background-properties {Path.home()}/.local/share/')
@@ -533,11 +533,18 @@ class MainWindow(Gtk.Window):
             os.chdir("%s" % CACHE)
             os.chdir('xdg-data')
             self.i_kdata = GLib.spawn_command_line_async(f'cp -R ./ {Path.home()}/.local/share/')
+        self.create_flatpak_desktop()
         self.applying_done()
             
     ## open file chooser
     def apply_config(self, w):
         self.fileshooser()
+    
+    # Create desktop for install Flatpaks from list
+    def create_flatpak_desktop(self):
+        if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
+            with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
+                fa.write("[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --installer")
     
     # configuration has been exported action
     def exporting_done(self):
@@ -589,7 +596,7 @@ class MainWindow(Gtk.Window):
             backup_item = "Monthly"
         (width, height) = self.get_default_size()
         self.settings["window-size"] = (width, height)
-        self.settings["flatpak-permissions"] = self.switch_01.get_active()
+        self.settings["save-installed-flatpaks"] = self.switch_01.get_active()
         self.settings["periodic-saving"] = backup_item
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
@@ -630,7 +637,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.4.5"
+        version = "2.5"
         icon = "io.github.vikdevelop.SaveDesktop"
         if os.path.exists("/app/share/build-beta.sh"):
             dialog.set_version(f"{version}-beta")
