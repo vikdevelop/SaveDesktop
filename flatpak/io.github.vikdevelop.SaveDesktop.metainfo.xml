@@ -127,7 +127,7 @@
        <release version="2.5" date="2023-05-28">
           <description>
             <ul>
-              <li>Added option for saving installed Flatpak apps (#84)</li>
+              <li>Added option for saving installed Flatpak apps (#84) (is possible backup only flatpaks that has been installed on system)</li>
               <li>For storing SaveDesktop app settings (such as filename, window size, etc.) is now using GSettings instead of JSON file</li>
             </ul>
           </description>
