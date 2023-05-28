@@ -48,6 +48,8 @@ modules:
        - install -Dm755 -t /app/bin run.sh
        - install -Dm755 -t /app src/main_window.py
        - install -Dm755 -t /app src/periodic_saving.py
+       - install -Dm755 -t /app src/install_flatpak_from_script.py
+       - install -Dm755 -t /app src/backup_flatpaks.sh
        - install -D -t /app/share build-beta.sh
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
        - install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
