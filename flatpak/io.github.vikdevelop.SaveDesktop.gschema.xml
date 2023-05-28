@@ -7,7 +7,7 @@
 		</key>
 		<key name="maximized" type="b">
 		  <default>false</default>
-		  <summary>Window state</summary>
+		  <summary>Window maximization</summary>
 		</key>
 		<key name="save-installed-flatpaks" type="b">
 			<default>false</default>
