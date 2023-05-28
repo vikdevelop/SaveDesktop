@@ -30,6 +30,7 @@ if flatpak:
         locale = open(f"/app/translations/{r_lang}.json")
     except:
         locale = open(f"/app/translations/en.json")
+    flatpak_script = "/app/backup_flatpaks.sh"
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
 else:
@@ -37,6 +38,7 @@ else:
         locale = open(f"translations/{r_lang}.json")
     except:
         locale = open("translations/en.json")
+    flatpak_script = "src/backup_flatpaks.sh"
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
@@ -382,7 +384,7 @@ class MainWindow(Gtk.Window):
         self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
         self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
         if self.switch_01.get_active() == True:
-            os.popen("sh /app/backup_flatpaks.sh")
+            os.popen(flatpak_script)
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
