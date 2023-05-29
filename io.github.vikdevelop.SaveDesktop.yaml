@@ -12,8 +12,6 @@ finish-args:
     - --filesystem=~/.config
     # load Desktop environment data files (e.g. backgrounds, extensions, etc.)
     - --filesystem=~/.local/share
-    # load Flatpak custom permissions for including to configuration
-    - --filesystem=~/.local/share/flatpak/overrides
     # to be able to select destination for saving configuration in also these directories
     - --filesystem=xdg-download
     - --filesystem=xdg-music
@@ -32,6 +30,7 @@ finish-args:
     - --filesystem=~/.xfce4:create
     # save all fonts installed in home directory
     - --filesystem=~/.fonts:create
+    - --filesystem=/var/lib/flatpak:ro
     # logout from session (GNOME-based environments) for changes to the desktop configuration to take effect 
     - --talk-name=org.gnome.SessionManager
     # logout from session (Xfce) for changes to the Xfce desktop configuration to take effect
@@ -41,7 +40,6 @@ finish-args:
     # ensuring to FileChooserNative will work correctly
     - --talk-name=org.freedesktop.FileManager1
     - --talk-name=org.freedesktop.portal.FileChooser
-    - --talk-name=org.freedesktop.Flatpak
 modules:
   - name: savedesktop
     buildsystem: simple
