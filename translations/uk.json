@@ -1,11 +1,11 @@
 {
-    "about_app": "Про застосунок",
+    "about_app": "Про додаток",
     "unsuppurted_env_desc": "<big><b>У вас встановлено непідтримуване середовище.<b><big>\nБудь ласка, використовуйте одне з цих середовищ: {}.",
     "save_config": "Зберегти поточну конфігурацію",
     "import_config": "Імпорт збереженої конфігурації",
     "set_filename": "Задайте ім'я файлу (без пробілів)",
     "config_saved": "Конфігурацію збережено!",
-    "open_folder": "Відкрити папку",
+    "open_folder": "Відкрити теку",
     "import_fileshooser": "Імпорт {} конфігурації",
     "open": "Відкрити",
     "cancel": "Скасувати",
@@ -26,11 +26,11 @@
     "monthly": "Щомісяця",
     "save": "Зберегти",
     "import_from_list": "Імпорт зі списку",
-    "import_from_list_error": "У каталозі SaveDesktop не знайдено конфігурацію.",
+    "import_from_list_error": "У теці SaveDesktop не знайдено конфігурацію.",
     "import_from_file": "Імпорт з файлу",
     "import_config_desc": "Імпорт конфігурації з файлу або списку.",
     "apply": "Застосувати",
     "learn_more": "Дізнатися більше",
-    "periodic_saving_tooltip": "Відкрити папку періодичного збереження",
-    "save_installed_flatpaks": "Save installed Flatpak apps"
+    "periodic_saving_tooltip": "Відкрити теку для періодичного збереження",
+    "save_installed_flatpaks": "Зберегти встановлені Flatpak додатки"
 }
