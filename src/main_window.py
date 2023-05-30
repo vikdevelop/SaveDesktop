@@ -205,13 +205,15 @@ class MainWindow(Gtk.Window):
             self.switch_01.set_active(True)
         self.switch_01.set_valign(align=Gtk.Align.CENTER)
          
-        self.adw_action_row_more = Adw.ActionRow.new()
-        self.adw_action_row_more.set_title(title=_["save_installed_flatpaks"])
-        self.adw_action_row_more.set_title_lines(2)
-        self.adw_action_row_more.set_subtitle_lines(3)
-        self.adw_action_row_more.add_suffix(self.switch_01)
-        self.adw_action_row_more.set_activatable_widget(self.switch_01)
-        self.lbox_e.append(child=self.adw_action_row_more)
+        self.flatpak_row = Adw.ActionRow.new()
+        self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
+        self.flatpak_row.set_subtitle(f'<a href="https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list">{_["learn_more"]}</a>')
+        self.flatpak_row.set_use_markup(True)
+        self.flatpak_row.set_title_lines(2)
+        self.flatpak_row.set_subtitle_lines(3)
+        self.flatpak_row.add_suffix(self.switch_01)
+        self.flatpak_row.set_activatable_widget(self.switch_01)
+        self.lbox_e.append(child=self.flatpak_row)
         
         self.lbox_e.set_show_separators(True)
         
@@ -640,7 +642,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.5.2"
+        version = "2.5.3"
         icon = "io.github.vikdevelop.SaveDesktop"
         if os.path.exists("/app/share/build-beta.sh"):
             dialog.set_version(f"{version}-beta")
