@@ -13,7 +13,7 @@ current_day = datetime.today()
 # get first day of month
 first_day = current_day.replace(day=1)
 
-CONFIG = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/config'
+CACHE = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp'
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 
 class PeriodicBackups:
@@ -41,6 +41,12 @@ class PeriodicBackups:
             self.environment = 'KDE Plasma'
         
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
+        
+        if self.settings["periodic-saving-folder"] == '':
+            self.pbfolder = f'{download_dir}/SaveDesktop/archives'
+        else:
+            self.pbfolder = f'{self.settings["periodic-saving-folder"]}'
+        
         if self.settings["periodic-saving"] == 'Never':
             print("Periodic saving are not set up.")
             exit()
@@ -72,19 +78,20 @@ class PeriodicBackups:
         
     # Create backup
     def backup(self):
-        if os.path.exists('{}/SaveDesktop/archives/config_{}.sd.tar.gz'.format(download_dir, date.today())):
+        if os.path.exists('{}/config_{}.sd.tar.gz'.format(self.pbfolder, date.today())):
             print("File already exists")
             exit()
         else:
-            try:
-                if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
+            if self.pbfolder == f'{download_dir}/SaveDesktop/archives':
+                try:
+                    if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
+                        os.makedirs(f"{download_dir}/SaveDesktop/archives")
+                except:
+                    os.system("mkdir ~/Downloads")
+                    os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home}/Downloads")
                     os.makedirs(f"{download_dir}/SaveDesktop/archives")
-            except:
-                os.system("mkdir ~/Downloads")
-                os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home}/Downloads")
-                os.makedirs(f"{download_dir}/SaveDesktop/archives")
-            os.system("mkdir -p {}/SaveDesktop/.{} && cd {}/SaveDesktop/.{}".format(download_dir, date.today(), download_dir, date.today()))
-            os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
+            os.system("mkdir -p {}/periodic-saving/{}".format(CACHE, date.today()))
+            os.chdir('{}/periodic-saving/{}'.format(CACHE, date.today()))
             os.system('cp ~/.config/dconf/user ./')
             os.system('cp -R ~/.local/share/backgrounds ./')
             os.system('cp -R ~/.local/share/icons ./')
@@ -142,12 +149,12 @@ class PeriodicBackups:
     
     # Move tarball to ~/Downloads/SaveDesktop/archives/
     def move_tarball(self):
-        os.chdir('{}/SaveDesktop/.{}'.format(download_dir, date.today()))
-        os.system("mv ./*.tar.gz {}/SaveDesktop/archives/".format(download_dir))
+        os.chdir('{}/periodic-saving/{}'.format(CACHE, date.today()))
+        os.system("mv ./*.tar.gz {}/".format(self.pbfolder))
       
     # Message about saved config
     def config_saved(self):
-        os.system("rm -rf {}/SaveDesktop/.{}/*".format(download_dir, date.today()))
+        os.system("rm -rf {}/periodic-saving/*".format(CACHE, date.today()))
         print("Configuration saved.")
     
 PeriodicBackups()
