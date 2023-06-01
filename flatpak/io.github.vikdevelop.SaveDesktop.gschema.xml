@@ -27,5 +27,9 @@
 			<default>''</default>
 			<summary>Filename text</summary>
 		</key>
+		<key name="periodic-saving-folder" type="s">
+		  <default>''</default>
+		  <summary>Folder for periodic backups</summary>
+		</key>
 	</schema>
 </schemalist>
