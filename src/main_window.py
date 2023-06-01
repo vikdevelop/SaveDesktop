@@ -71,6 +71,7 @@ class MainWindow(Gtk.Window):
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
         
+        # Savedesktop menu
         self.savedesktop_mode_dropdwn = Gtk.DropDown.new_from_strings( \
             [_["save_config"], _["import_config"]] )
         self.savedesktop_mode_dropdwn.connect('notify::selected-item', \
@@ -222,10 +223,9 @@ class MainWindow(Gtk.Window):
             _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
         
-        self.periodicButton = Gtk.Button.new_from_icon_name("folder-open-symbolic")
+        self.periodicButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.periodicButton.add_css_class("flat")
         self.periodicButton.connect("clicked", self.open_periodic_backups)
-        self.periodicButton.set_tooltip_text(_["periodic_saving_tooltip"])
         
         self.adw_action_row_backups = Adw.ComboRow.new()
         if os.path.exists(f"{download_dir}/SaveDesktop/archives"):
@@ -360,16 +360,83 @@ class MainWindow(Gtk.Window):
         except:
             print("")
         
-    # Import config from list
-    def imp_cfg_from_list(self, w):
-        selected_archive = self.radio_row.get_selected_item()
-        self.please_wait_toast()
-        os.chdir("%s" % CACHE)
-        os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
-        self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
-        
+    # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
-        os.system(f"xdg-open {download_dir}/SaveDesktop/archives")
+        self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
+        self.dirDialog.set_heading("Set custom directory of periodic saving")
+        self.dirLBox = Gtk.ListBox.new()
+        self.dirLBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.dirLBox.get_style_context().add_class(class_name='boxed-list')
+        self.dirEntry = Adw.EntryRow.new()
+        if self.settings["periodic-saving-folder"] == '':
+            self.dirEntry.set_text(f"{download_dir}/SaveDesktop/archives")
+        else:
+            self.dirEntry.set_text(self.settings["periodic-saving-folder"])
+        self.dirEntry.set_editable(False)
+        self.dirLBox.append(self.dirEntry)
+        self.dirDialog.set_extra_child(self.dirLBox)
+        self.dirDialog.add_response('cancel', _["cancel"])
+        self.dirDialog.add_response('another-folder', "Set another")
+        self.dirDialog.set_response_appearance('another-folder', Adw.ResponseAppearance.SUGGESTED)
+        self.dirDialog.connect('response', self.dirdialog_closed)
+        self.dirDialog.show()
+        
+    def dirdialog_closed(self, w, response):
+        if response == 'another-folder':
+            self.select_pb_folder()
+    
+    # Select folder for periodic backups
+    def select_pb_folder(self):
+        def save_selected(source, res, data):
+            try:
+                file = source.select_folder_finish(res)
+            except:
+                return
+            self.folder_pb = file.get_path()
+            if self.dirEntry.get_text() == '':
+                self.settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
+            else:
+                self.settings["periodic-saving-folder"] = self.dirEntry.get_text()
+            self.toast_pb = Adw.Toast.new(title="Folder selected")
+            self.toast_overlay.add_toast(self.toast_pb)
+        
+        self.pb_chooser = Gtk.FileDialog.new()
+        self.pb_chooser.set_modal(True)
+        self.pb_chooser.set_title("Set custom directory of periodic saving")
+        self.pb_chooser.select_folder(self, None, save_selected, None)
+    
+    # Select folder for saving configuration
+    def select_folder(self, w):
+        def save_selected(source, res, data):
+            try:
+                file = source.select_folder_finish(res)
+            except:
+                return
+            self.please_wait_toast()
+            self.folder = file.get_path()
+            with open(f"{CACHE}/.filedialog.json", "w") as fd:
+                fd.write('{\n "recently_folder": "%s"\n}' % self.folder)
+            self.save_config()
+        
+        if " " in self.saveEntry.get_text():
+            self.spaces_toast()
+        else:
+            self.folderchooser = Gtk.FileDialog.new()
+            self.folderchooser.set_modal(True)
+            self.folderchooser.set_title(_["save_config"])
+            self.folderchooser.select_folder(self, None, save_selected, None)
+            
+    # Load file chooser
+    def fileshooser(self):
+        self.file_chooser = Gtk.FileChooserNative.new(_["import_fileshooser"].format(self.environment), \
+                self, Gtk.FileChooserAction.OPEN, _["open"], _["cancel"])
+        self.file_chooser.set_modal(True)
+        self.file_filter = Gtk.FileFilter.new()
+        self.file_filter.set_name(_["savedesktop_f"])
+        self.file_filter.add_pattern('*.sd.tar.gz')
+        self.file_chooser.add_filter(self.file_filter)
+        self.file_chooser.connect('response', self.open_response)
+        self.file_chooser.show()
     
     # Save configuration
     def save_config(self):
@@ -444,40 +511,15 @@ class MainWindow(Gtk.Window):
             os.popen(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
         self.tar_time = GLib.timeout_add_seconds(6, self.exporting_done)
         
-    # Select folder for saving configuration
-    def select_folder(self, w):
-        def save_selected(source, res, data):
-            try:
-                file = source.select_folder_finish(res)
-            except:
-                return
-            self.please_wait_toast()
-            self.folder = file.get_path()
-            with open(f"{CACHE}/.filedialog.json", "w") as fd:
-                fd.write('{\n "recently_folder": "%s"\n}' % self.folder)
-            self.save_config()
+    # Import config from list
+    def imp_cfg_from_list(self, w):
+        selected_archive = self.radio_row.get_selected_item()
+        self.please_wait_toast()
+        os.chdir("%s" % CACHE)
+        os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
+        self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
         
-        if " " in self.saveEntry.get_text():
-            self.spaces_toast()
-        else:
-            self.folderchooser = Gtk.FileDialog.new()
-            self.folderchooser.set_modal(True)
-            self.folderchooser.set_title(_["save_config"])
-            self.folderchooser.select_folder(self, None, save_selected, None)
-            
-    # Load file chooser
-    def fileshooser(self):
-        self.file_chooser = Gtk.FileChooserNative.new(_["import_fileshooser"].format(self.environment), \
-                self, Gtk.FileChooserAction.OPEN, _["open"], _["cancel"])
-        self.file_chooser.set_modal(True)
-        self.file_filter = Gtk.FileFilter.new()
-        self.file_filter.set_name(_["savedesktop_f"])
-        self.file_filter.add_pattern('*.sd.tar.gz')
-        self.file_chooser.add_filter(self.file_filter)
-        self.file_chooser.connect('response', self.open_response)
-        self.file_chooser.show()
-        
-    ## Action after closing file chooser
+    ## Action after closing file chooser (import configuration)
     def open_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
             file = dialog.get_file()
@@ -642,7 +684,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.5.3"
+        version = "2.6"
         icon = "io.github.vikdevelop.SaveDesktop"
         if os.path.exists("/app/share/build-beta.sh"):
             dialog.set_version(f"{version}-beta")
