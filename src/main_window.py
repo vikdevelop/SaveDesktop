@@ -393,6 +393,7 @@ class MainWindow(Gtk.Window):
             except:
                 return
             self.folder_pb = file.get_path()
+            self.dirEntry.set_text(self.folder_pb)
             if self.dirEntry.get_text() == '':
                 self.settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
             else:
