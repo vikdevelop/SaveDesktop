@@ -362,8 +362,12 @@ class MainWindow(Gtk.Window):
         
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
+        self.dirdialog()
+        
+    def dirdialog(self):
         self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
         self.dirDialog.set_heading("Set custom directory of periodic saving")
+        self.dirDialog.set_body("")
         self.dirLBox = Gtk.ListBox.new()
         self.dirLBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.dirLBox.get_style_context().add_class(class_name='boxed-list')
@@ -375,15 +379,20 @@ class MainWindow(Gtk.Window):
         self.dirEntry.set_editable(False)
         self.dirLBox.append(self.dirEntry)
         self.dirDialog.set_extra_child(self.dirLBox)
-        self.dirDialog.add_response('cancel', _["cancel"])
         self.dirDialog.add_response('another-folder', "Set another")
-        self.dirDialog.set_response_appearance('another-folder', Adw.ResponseAppearance.SUGGESTED)
+        self.dirDialog.add_response('ok', "OK")
+        self.dirDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.dirDialog.connect('response', self.dirdialog_closed)
         self.dirDialog.show()
         
     def dirdialog_closed(self, w, response):
         if response == 'another-folder':
             self.select_pb_folder()
+        elif response == 'ok':
+            if self.dirEntry.get_text() == '':
+                self.settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
+            else:
+                self.settings["periodic-saving-folder"] = self.dirEntry.get_text()
     
     # Select folder for periodic backups
     def select_pb_folder(self):
@@ -393,13 +402,8 @@ class MainWindow(Gtk.Window):
             except:
                 return
             self.folder_pb = file.get_path()
+            self.dirdialog()
             self.dirEntry.set_text(self.folder_pb)
-            if self.dirEntry.get_text() == '':
-                self.settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
-            else:
-                self.settings["periodic-saving-folder"] = self.dirEntry.get_text()
-            self.toast_pb = Adw.Toast.new(title="Folder selected")
-            self.toast_overlay.add_toast(self.toast_pb)
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -644,10 +648,10 @@ class MainWindow(Gtk.Window):
             backup_item = "Monthly"
         (width, height) = self.get_default_size()
         self.settings["window-size"] = (width, height)
-        self.settings["save-installed-flatpaks"] = self.switch_01.get_active()
-        self.settings["periodic-saving"] = backup_item
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
+        self.settings["save-installed-flatpaks"] = self.switch_01.get_active()
+        self.settings["periodic-saving"] = backup_item
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
