@@ -12,7 +12,7 @@
     <summary xml:lang="nl_NL">Sla de huidige voorkeuren van uw werkomgeving op</summary>
     <summary xml:lang="ar_SA">احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك</summary>
     <summary xml:lang="ru_RU">Сохранить текущую конфигурацию окружения рабочего стола</summary>
-    <summary xml:lang="id_ID">Save the current configuration of your desktop environment</summary>
+    <summary xml:lang="id_ID">Simpan konfigurasi lingkungan desktop Anda saat ini</summary>
     <summary xml:lang="nb_NO">Lagre nåværende oppsett av skrivebordsmiljøet ditt</summary>
     <summary xml:lang="uk_UA">Збережіть поточну конфігурацію середовища робочого столу</summary>
     <summary xml:lang="hu_HU">Mentsd el az asztali környezeted jelenlegi konfigurációját</summary>
@@ -65,8 +65,8 @@
     </description>
     <!-- from translations/id.json -->
     <description xml:lang="id_ID">
-      <p>Would you like to save your current configuration including themes, icons, wallpapers, all desktop environment settings, extensions and so on? SaveDesktop can help you with that. Just one click and you have your configuration saved.</p>
-      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE Cinnamon</p>
+      <p>SaveDesktop memungkinkan Anda menyimpan konfigurasi saat ini (tema, ikon, wallpaper, semua pengaturan lingkungan desktop, ekstensi, dll.) dengan satu klik.</p>
+      <p>Lingkungan desktop yang didukung: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE Cinnamon</p>
     </description>
     <!-- from translations/nb_NO.json -->
     <description xml:lang="nb_NO">
