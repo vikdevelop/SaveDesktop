@@ -225,6 +225,7 @@ class MainWindow(Gtk.Window):
         
         self.periodicButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.periodicButton.add_css_class("flat")
+        self.periodicButton.set_tooltip_text("Set custom directory of periodic saving")
         self.periodicButton.connect("clicked", self.open_periodic_backups)
         
         self.adw_action_row_backups = Adw.ComboRow.new()
