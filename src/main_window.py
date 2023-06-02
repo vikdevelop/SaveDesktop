@@ -13,6 +13,7 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk, GObject
 
+# Load system language
 p_lang = locale.getlocale()[0]
 if p_lang == 'pt_BR':
     r_lang = 'pt_BR'
@@ -374,6 +375,7 @@ class MainWindow(Gtk.Window):
     def open_periodic_backups(self, w):
         self.dirdialog()
         
+    # Dialog for changing directory for periodic backups
     def dirdialog(self):
         self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
         self.dirDialog.set_heading("Set custom directory of periodic saving")
@@ -395,6 +397,7 @@ class MainWindow(Gtk.Window):
         self.dirDialog.connect('response', self.dirdialog_closed)
         self.dirDialog.show()
         
+    # Action after closed dialog for choosing periodic backups folder
     def dirdialog_closed(self, w, response):
         if response == 'another-folder':
             self.select_pb_folder()
@@ -404,7 +407,7 @@ class MainWindow(Gtk.Window):
             else:
                 self.settings["periodic-saving-folder"] = self.dirEntry.get_text()
     
-    # Select folder for periodic backups
+    # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self):
         def save_selected(source, res, data):
             try:
@@ -516,6 +519,7 @@ class MainWindow(Gtk.Window):
             self.colors = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/color-schemes ./xdg-data/")
         self.create_archive()
            
+    # Create tarball archive
     def create_archive(self):
         # Get self.saveEntry text
         if self.saveEntry.get_text() == "":
@@ -534,7 +538,7 @@ class MainWindow(Gtk.Window):
         os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
         
-    ## Action after closing file chooser (import configuration)
+    # Action after closing file chooser for import configuration
     def open_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
             file = dialog.get_file()
@@ -597,7 +601,7 @@ class MainWindow(Gtk.Window):
         self.create_flatpak_desktop()
         self.applying_done()
             
-    ## open file chooser
+    # Action after clicking on "Import from file" button -> open FileChooserNative
     def apply_config(self, w):
         self.fileshooser()
     
@@ -635,6 +639,7 @@ class MainWindow(Gtk.Window):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
         self.toast_overlay.add_toast(self.toast_wait)
     
+    # Action after disappearancing toast
     def on_toast_dismissed(self, toast):
         os.popen("rm -rf %s/*" % CACHE)
         os.popen("rm -rf {}/SaveDesktop/.{}/*".format(download_dir, date.today()))
@@ -671,11 +676,13 @@ class MyApp(Adw.Application):
         self.create_action('logout', self.logout)
         self.connect('activate', self.on_activate)
         
+    # Open directory (action after clicking button Open the folder on Adw.Toast)
     def open_dir(self, action, param):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
         os.system("xdg-open {}/".format(jf["recently_folder"]))
         
+    # Logout (action after clicking button Log Out on Adw.Toast)
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
         if os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
@@ -685,6 +692,7 @@ class MyApp(Adw.Application):
         else:
             os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
         
+    # About dialog
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
