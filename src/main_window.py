@@ -2,6 +2,7 @@
 import os
 import subprocess
 import gi
+import glob
 import sys
 import json
 import locale
@@ -319,14 +320,21 @@ class MainWindow(Gtk.Window):
         
         self.flistLabel = Gtk.Label.new()
         self.flistLabel.set_justify(Gtk.Justification.CENTER)
-        self.flistBox.append(self.flistLabel)
-        if os.path.exists(f'{download_dir}/SaveDesktop/archives'):
-            if os.listdir(f'{download_dir}/SaveDesktop/archives') == []:
+        if self.settings["periodic-saving-folder"] == '':
+            self.dir = f'{download_dir}/SaveDesktop/archives'
+        else:
+            self.dir = f'{self.settings["periodic-saving-folder"]}'
+        if os.path.exists(self.dir):
+            if glob.glob(f"{self.dir}/*.sd.tar.gz") == []:
                 self.flistLabel.set_text(_["import_from_list_error"])
+                self.flistBox.append(self.flistLabel)
             else:
-                self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
-                self.fdescLabel = Gtk.Label.new(str=f"{download_dir}/SaveDesktop/archives")
-                self.flistBox.append(self.fdescLabel)
+                self.flistImage = Gtk.Image.new_from_icon_name("backup")
+                self.flistImage.set_pixel_size(128)
+                self.flistBox.append(self.flistImage)
+                self.flistBox.append(self.flistLabel)
+                
+                self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>\n{_['periodic_saving']}\n<i>{self.dir}</i>")
         
                 self.applyButton = Gtk.Button.new_with_label(_["apply"])
                 self.applyButton.add_css_class('suggested-action')
@@ -338,17 +346,18 @@ class MainWindow(Gtk.Window):
                 self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
                 self.listbox.get_style_context().add_class(class_name='boxed-list')
                 self.flistBox.append(self.listbox)
-
-                get_dir_content = os.listdir(f'{download_dir}/SaveDesktop/archives')
+                
+                os.chdir(self.dir)
+                get_dir_content = glob.glob(f"*.sd.tar.gz")
                 archives_model = Gtk.StringList.new(strings=get_dir_content)
 
                 self.radio_row = Adw.ComboRow.new()
                 self.radio_row.set_model(model=archives_model)
                 self.radio_row.set_icon_name('document-properties-symbolic')
                 self.listbox.append(self.radio_row)
-
         else:
             self.flistLabel.set_text(_["import_from_list_error"])
+            self.flistBox.append(self.flistLabel)
     
     # Action after closing import from list page
     def close_list(self, w):
