@@ -231,8 +231,7 @@ class MainWindow(Gtk.Window):
         self.periodicButton.connect("clicked", self.open_periodic_backups)
         
         self.adw_action_row_backups = Adw.ComboRow.new()
-        if os.path.exists(f"{download_dir}/SaveDesktop/archives"):
-            self.adw_action_row_backups.add_suffix(self.periodicButton)
+        self.adw_action_row_backups.add_suffix(self.periodicButton)
         self.adw_action_row_backups.set_use_markup(True)
         self.adw_action_row_backups.set_use_underline(True)
         self.adw_action_row_backups.set_title(_["periodic_saving"])
