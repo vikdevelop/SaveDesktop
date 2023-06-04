@@ -7,10 +7,10 @@ Save and apply your Desktop Environment configuration
 
 <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://beta.flathub.org/_next/static/media/flathub-badge-en.b42a637e.png'/></a>
 
-**... or run natively with this command:**
+**... or install to your system with this command:**
 
 ```bash
-git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/run_natively.sh
+git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh
 ```
 NOTE: For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
 
