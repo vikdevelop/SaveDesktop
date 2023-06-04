@@ -5,6 +5,7 @@ then
 		cd /tmp/SaveDesktop
 		sed -i 's\Exec=run.sh\Exec=/usr/bin/savedesktop\' flatpak/io.github.vikdevelop.SaveDesktop.desktop
 		sudo cp run_natively.sh /usr/bin/savedesktop
+		sudo chmod +x /usr/bin/savedesktop
 		sudo cp flatpak/io.github.vikdevelop.SaveDesktop.desktop /usr/share/applications/
 		sudo cp flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml /usr/share/metainfo/
 		sudo cp flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml /usr/share/glib-2.0/schemas/
@@ -17,11 +18,14 @@ then
 		sudo install -D -t /usr/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 		sudo install -D -t /usr/share/icons/hicolor/symbolic/apps flatpak/icons/io.github.vikdevelop.SaveDesktop-symbolic.svg
 		sudo install -D -t /usr/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/desktop-symbolic.svg
+		# Create cache and data dirs
+		mkdir ~/.cache/io.github.vikdevelop.SaveDesktop
+		mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop
 		cd
 		rm -rf /tmp/SaveDesktop
 elif [ "$1" == "--remove" ]
 			then
-					sudo rm /usr/bin/savedesktop/run_natively.sh
+					sudo rm /usr/bin/savedesktop
 					sudo rm /usr/share/applications/io.github.vikdevelop.SaveDesktop.desktop
 					sudo rm /usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml
 					sudo rm /usr/share/glib-2.0/schemas/io.github.vikdevelop.SaveDesktop.gschema.xml
