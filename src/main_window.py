@@ -329,7 +329,7 @@ class MainWindow(Gtk.Window):
                 self.flistLabel.set_text(_["import_from_list_error"])
                 self.flistBox.append(self.flistLabel)
             else:
-                self.flistImage = Gtk.Image.new_from_icon_name("view-list-rtl-symbolic")
+                self.flistImage = Gtk.Image.new_from_icon_name("list-view")
                 self.flistImage.set_pixel_size(128)
                 self.flistBox.append(self.flistImage)
                 self.flistBox.append(self.flistLabel)
