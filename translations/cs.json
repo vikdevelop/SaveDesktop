@@ -31,6 +31,8 @@
     "import_config_desc": "Importujte konfiguraci ze souboru nebo seznamu.",
     "save": "Uložit",
     "learn_more": "Zjistit více",
-    "periodic_saving_tooltip": "Otevřít složku pro pravidelné ukládání",
-    "save_installed_flatpaks": "Uložit nainstalované aplikace Flatpak"
+    "save_installed_flatpaks": "Uložit nainstalované aplikace Flatpak",
+    "pb_folder": "Složka pro pravidelné ukládání",
+    "set_pb_folder_tooltip": "Vybrat vlastní složku pro pravidelné ukládání",
+    "set_another": "Vybrat jinou složku"
 }

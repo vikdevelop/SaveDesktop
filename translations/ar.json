@@ -31,6 +31,8 @@
     "save": "Save",
     "apply": "Apply",
     "learn_more": "Learn more",
-    "periodic_saving_tooltip": "Open periodic saving folder",
-    "save_installed_flatpaks": "Save installed Flatpak apps"
+    "save_installed_flatpaks": "Save installed Flatpak apps",
+    "pb_folder": "Folder for periodic saving",
+    "set_pb_folder_tooltip": "Choose custom folder for periodic saving",
+    "set_another": "Choose another folder"
 }
