@@ -31,5 +31,8 @@
     "import_from_file": "Импорт из файла",
     "import_config_desc": "Импорт конфигурации из файла или списка.",
     "learn_more": "Подробнее",
-    "save_installed_flatpaks": "Сохранять установленные приложения Flatpak"
+    "save_installed_flatpaks": "Сохранять установленные приложения Flatpak",
+    "pb_folder": "Folder for periodic saving",
+    "set_pb_folder_tooltip": "Choose custom folder for periodic saving",
+    "set_another": "Choose another folder"
 }
