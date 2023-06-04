@@ -32,7 +32,7 @@
     "apply": "Applica",
     "learn_more": "Ulteriori informazioni",
     "save_installed_flatpaks": "Salva le app Flatpak installate",
-    "pb_folder": "Folder for periodic saving",
-    "set_pb_folder_tooltip": "Choose custom folder for periodic saving",
-    "set_another": "Choose another folder"
+    "pb_folder": "Cartella per il salvataggio periodico",
+    "set_pb_folder_tooltip": "Scegli la cartella personalizzata per il salvataggio periodico",
+    "set_another": "Scegli un'altra cartella"
 }
