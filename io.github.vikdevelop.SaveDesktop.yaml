@@ -56,6 +56,7 @@ modules:
        - install -D -t /app/share/icons/hicolor/symbolic/apps flatpak/icons/io.github.vikdevelop.SaveDesktop-symbolic.svg
        - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/exclamation_mark.png
        - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/desktop-symbolic.svg
+       - install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/list-view.svg
        - install -D -t /app/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
        - install -D -t /app/share/glib-2.0/schemas flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
        - glib-compile-schemas /app/share/glib-2.0/schemas
