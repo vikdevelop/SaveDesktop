@@ -31,6 +31,5 @@
     "import_config_desc": "Import the configuration from a file or list.",
     "apply": "Apply",
     "learn_more": "Learn more",
-    "periodic_saving_tooltip": "Open periodic saving folder",
     "save_installed_flatpaks": "Save installed Flatpak apps"
 }

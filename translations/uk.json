@@ -31,6 +31,5 @@
     "import_config_desc": "Імпорт конфігурації з файлу або списку.",
     "apply": "Застосувати",
     "learn_more": "Дізнатися більше",
-    "periodic_saving_tooltip": "Відкрити теку для періодичного збереження",
     "save_installed_flatpaks": "Зберегти встановлені Flatpak додатки"
 }

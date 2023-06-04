@@ -31,6 +31,5 @@
     "import_config_desc": "Importa la configurazione da un file o da un elenco.",
     "apply": "Applica",
     "learn_more": "Ulteriori informazioni",
-    "periodic_saving_tooltip": "Apri cartella di salvataggio periodico",
     "save_installed_flatpaks": "Salva le app Flatpak installate"
 }
