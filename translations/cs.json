@@ -31,5 +31,8 @@
     "import_config_desc": "Importujte konfiguraci ze souboru nebo seznamu.",
     "save": "Uložit",
     "learn_more": "Zjistit více",
-    "save_installed_flatpaks": "Uložit nainstalované aplikace Flatpak"
+    "save_installed_flatpaks": "Uložit nainstalované aplikace Flatpak",
+    "pb_folder": "Folder for periodic saving",
+    "set_pb_folder_tooltip": "Choose custom folder for periodic saving",
+    "set_another": "Choose another folder"
 }
