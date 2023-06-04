@@ -227,7 +227,7 @@ class MainWindow(Gtk.Window):
         
         self.periodicButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.periodicButton.add_css_class("flat")
-        self.periodicButton.set_tooltip_text("Set custom directory of periodic saving")
+        self.periodicButton.set_tooltip_text("Set custom periodic saving folder")
         self.periodicButton.connect("clicked", self.open_periodic_backups)
         
         self.adw_action_row_backups = Adw.ComboRow.new()
@@ -348,7 +348,7 @@ class MainWindow(Gtk.Window):
                 self.flistBox.append(self.listbox)
                 
                 self.dir_row = Adw.ActionRow.new()
-                self.dir_row.set_title(_["periodic_saving"])
+                self.dir_row.set_title("Periodic saving folder")
                 self.dir_row.set_subtitle(self.dir)
                 self.dir_row.set_icon_name("folder-open-symbolic")
                 self.listbox.append(self.dir_row)
@@ -383,18 +383,16 @@ class MainWindow(Gtk.Window):
     # Dialog for changing directory for periodic backups
     def dirdialog(self):
         self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
-        self.dirDialog.set_heading("Set custom directory of periodic saving")
-        self.dirDialog.set_body("")
         self.dirLBox = Gtk.ListBox.new()
         self.dirLBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.dirLBox.get_style_context().add_class(class_name='boxed-list')
-        self.dirEntry = Adw.EntryRow.new()
+        self.dirRow = Adw.ActionRow.new()
+        self.dirRow.set_title("Periodic saving folder")
         if self.settings["periodic-saving-folder"] == '':
-            self.dirEntry.set_text(f"{download_dir}/SaveDesktop/archives")
+            self.dirRow.set_subtitle(f"{download_dir}/SaveDesktop/archives")
         else:
-            self.dirEntry.set_text(self.settings["periodic-saving-folder"])
-        self.dirEntry.set_editable(False)
-        self.dirLBox.append(self.dirEntry)
+            self.dirRow.set_subtitle(self.settings["periodic-saving-folder"])
+        self.dirLBox.append(self.dirRow)
         self.dirDialog.set_extra_child(self.dirLBox)
         self.dirDialog.add_response('another-folder', "Set another")
         self.dirDialog.add_response('ok', "OK")
@@ -407,10 +405,10 @@ class MainWindow(Gtk.Window):
         if response == 'another-folder':
             self.select_pb_folder()
         elif response == 'ok':
-            if self.dirEntry.get_text() == '':
+            if self.dirRow.get_subtitle() == '':
                 self.settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
             else:
-                self.settings["periodic-saving-folder"] = self.dirEntry.get_text()
+                self.settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self):
@@ -421,7 +419,7 @@ class MainWindow(Gtk.Window):
                 return
             self.folder_pb = file.get_path()
             self.dirdialog()
-            self.dirEntry.set_text(self.folder_pb)
+            self.dirRow.set_subtitle(self.folder_pb)
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
