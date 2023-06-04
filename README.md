@@ -10,7 +10,7 @@ Save and apply your Desktop Environment configuration
 **... or install to your system with this command:**
 
 ```bash
-git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh
+git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --install
 ```
 NOTE: For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
 
