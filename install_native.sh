@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-#git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop
 if [ "$1" == "--install" ]
 then
 		cd /tmp/SaveDesktop
