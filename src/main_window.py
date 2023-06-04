@@ -287,7 +287,7 @@ class MainWindow(Gtk.Window):
         self.importBox.append(self.labelDesc)
         
         # Box of this buttons: Import from file and Import from list
-        self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+        self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=7)
         self.importbtnBox.set_halign(Gtk.Align.CENTER)
         self.importBox.append(self.importbtnBox)
         
@@ -315,7 +315,7 @@ class MainWindow(Gtk.Window):
         self.headerbar.remove(self.savedesktop_mode_dropdwn)
         self.headerbar.pack_start(self.backButton)
         
-        self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
+        self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=20)
         self.pBox.append(self.flistBox)
         
         self.flistLabel = Gtk.Label.new()
@@ -334,7 +334,7 @@ class MainWindow(Gtk.Window):
                 self.flistBox.append(self.flistImage)
                 self.flistBox.append(self.flistLabel)
                 
-                self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>\n{_['periodic_saving']}\n<i>{self.dir}</i>")
+                self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
         
                 self.applyButton = Gtk.Button.new_with_label(_["apply"])
                 self.applyButton.add_css_class('suggested-action')
@@ -346,6 +346,12 @@ class MainWindow(Gtk.Window):
                 self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
                 self.listbox.get_style_context().add_class(class_name='boxed-list')
                 self.flistBox.append(self.listbox)
+                
+                self.dir_row = Adw.ActionRow.new()
+                self.dir_row.set_title(_["periodic_saving"])
+                self.dir_row.set_subtitle(self.dir)
+                self.dir_row.set_icon_name("folder-open-symbolic")
+                self.listbox.append(self.dir_row)
                 
                 os.chdir(self.dir)
                 get_dir_content = glob.glob(f"*.sd.tar.gz")
