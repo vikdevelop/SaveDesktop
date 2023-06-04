@@ -540,7 +540,7 @@ class MainWindow(Gtk.Window):
         selected_archive = self.radio_row.get_selected_item()
         self.please_wait_toast()
         os.chdir("%s" % CACHE)
-        os.popen("tar -xf %s/SaveDesktop/archives/%s ./" % (download_dir, selected_archive.get_string()))
+        os.popen("tar -xf %s/%s ./" % (self.dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
         
     # Action after closing file chooser for import configuration
