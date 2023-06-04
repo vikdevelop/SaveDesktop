@@ -124,6 +124,14 @@
     </categories>
           
     <releases>
+       <release version="2.6" date="2023-06-04">
+          <description>
+            <ul>
+              <li>Added option to choosing custom folder for periodic saving</li>
+              <li>Importing a configuration from the list is now dependent on selecting a folder for periodic saving</li>
+            </ul>
+          </description>
+       </release>
        <release version="2.5" date="2023-05-28">
           <description>
             <ul>
