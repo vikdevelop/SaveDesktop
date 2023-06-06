@@ -707,17 +707,21 @@ class MyApp(Adw.Application):
             dialog.set_translator_credits(_["translator_credits"])
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
-        dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop")
+        dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.6"
+        version = "2.6.1"
         icon = "io.github.vikdevelop.SaveDesktop"
-        if os.path.exists("/app/share/build-beta.sh"):
-            dialog.set_version(f"{version}-beta")
-            dialog.set_application_icon(f"{icon}.Devel")
+        if flatpak:
+            if os.path.exists("/app/share/build-beta.sh"):
+                dialog.set_version(f"{version}-beta")
+                dialog.set_application_icon(f"{icon}.Devel")
+            else:
+                dialog.set_version(version)
+                dialog.set_application_icon(icon)
         else:
-            dialog.set_version(version)
+            dialog.set_version(f"{version}-native")
             dialog.set_application_icon(icon)
         dialog.show()    
     
