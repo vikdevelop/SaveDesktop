@@ -32,7 +32,7 @@
     "apply": "Застосувати",
     "learn_more": "Дізнатися більше",
     "save_installed_flatpaks": "Зберегти встановлені Flatpak додатки",
-    "pb_folder": "Folder for periodic saving",
-    "set_pb_folder_tooltip": "Choose custom folder for periodic saving",
-    "set_another": "Choose another folder"
+    "pb_folder": "Папка для періодичного збереження",
+    "set_pb_folder_tooltip": "Виберіть власну папку для періодичного збереження",
+    "set_another": "Виберіть іншу папку"
 }
