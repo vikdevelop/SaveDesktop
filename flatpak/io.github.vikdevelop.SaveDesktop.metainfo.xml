@@ -19,7 +19,6 @@
     <summary xml:lang="es_ES">Guarda la configuración actual de tu entorno de escritorio</summary>
     <summary xml:lang="tr_TR">Masaüstünün şuanki ayarlarını kayıt et</summary>
     <summary xml:lang="de_DE">Speichern Sie die aktuelle Konfiguration Ihrer Desktop-Umgebung</summary>
-    <summary xml:lang="zh_CN">保存桌面环境的当前配置</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
@@ -97,11 +96,6 @@
     <description xml:lang="de_DE">
       <p>Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.</p>
       <p>Unterstützte Desktop-Umgebungen: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
-    <!-- from translations/zh_Hans.json -->
-    <description xml:lang="zh_CN">
-      <p>SaveDesktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。</p>
-      <p>支持的桌面环境：GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
