@@ -177,6 +177,8 @@ class MainWindow(Gtk.Window):
         
         # Box for save page
         self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        self.saveBox.set_margin_start(40)
+        self.saveBox.set_margin_end(40)
         self.pBox.append(self.saveBox)
         
         # Tittle image for save page
@@ -711,7 +713,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.6.1"
+        version = "2.6.2"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
