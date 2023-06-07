@@ -4,6 +4,7 @@
     <id>io.github.vikdevelop.SaveDesktop</id>
     <launchable type="desktop-id">io.github.vikdevelop.SaveDesktop.desktop</launchable>
     <name>SaveDesktop</name>
+    <summary>Save the current configuration of your desktop environment</summary>
     <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho desktopového prostředí</summary>
     <summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
     <summary xml:lang="pt_BR">Salvar a configuração atual do seu ambiente desktop</summary>
@@ -19,89 +20,27 @@
     <summary xml:lang="tr_TR">Masaüstünün şuanki ayarlarını kayıt et</summary>
     <summary xml:lang="de_DE">Speichern Sie die aktuelle Konfiguration Ihrer Desktop-Umgebung</summary>
     <summary xml:lang="zh_CN">保存桌面环境的当前配置</summary>
-    <summary>Save the current configuration of your desktop environment</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
     
-    <!-- from translations/cs.json -->
-    <description xml:lang="cs_CZ">
-      <p>SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.</p>
-      <p>Podporovaná desktopová prostředí: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, KDE Plasma a Cinnamon</p>
-    </description>
-    <!-- from translations/fr.json -->
-    <description xml:lang="fr_FR">
-      <p>SaveDesktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.</p>
-      <p>Environnements de bureau pris en charge : GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, KDE Plasma et Cinnamon</p>
-    </description>
-    <!-- from translations/pt_BR.json -->
-    <description xml:lang="pt_BR">
-      <p>Gostaria de salvar sua configuração atual, incluindo temas, ícones, papéis de parede, todas as configurações do ambiente desktop, extensões e assim por diante? SaveDesktop pode ajudá-lo com isso. Apenas um clique e você terá sua configuração salva.</p>
-      <p>Ambientes desktop suportados: GNOME, Cosmic, Xfce, Budgie, Patheon, MATE, KDE Plasma and Cinnamon</p>
-    </description>
-    <!-- from translations/it.json -->
-    <description xml:lang="it_IT">
-      <p>Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? SaveDesktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata.</p>
-      <p>Ambienti desktop supportati: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, KDE Plasma e Cinnamon</p>
-    </description>
-    <!-- from translations/nl.json -->
-    <description xml:lang="nl_NL">
-      <p>Wilt u uw huidige voorkeuren (thema's, pictogrammen, bureaubladachtergronden, systeemvoorkeuren, uitbreidingen, etc.) opslaan? SaveDesktop kan u hierbij helpen. Met slechts één muisklik wordt alles opgeslagen.</p>
-      <p>Ondersteunde werkomgevingen: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, KDE Plasma and Cinnamon</p>
-    </description>
-    <!-- from translations/ar.json -->
-    <description xml:lang="ar_EG">
-      <p>هل ترغب في حفظ التخصيصات الحالي الخاص بك بما في ذلك السمات والرموز والخلفيات وجميع إعدادات بيئة سطح المكتب والإضافات وما إلى ذلك؟ يمكن أن يساعدك SaveDesktop في ذلك. بنقرة واحدة فقط ويتم حفظ التخصيصات الخاص بك.</p>
-      <p>بيئات سطح المكتب المدعومة: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, KDE Plasma and Cinnamon</p>
-    </description>
-    <!-- from translations/ru.json -->
-    <description xml:lang="ru_RU">
-      <p>Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все настройки окружения рабочего стола, расширения и т.д.? SaveDesktop поможет вам в этом. Всего один клик - и ваша конфигурация сохранена.</p>
-      <p>Поддерживаемые окружения рабочего стола: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
-    <!-- from translations/id.json -->
-    <description xml:lang="id_ID">
-      <p>SaveDesktop memungkinkan Anda menyimpan konfigurasi saat ini (tema, ikon, wallpaper, semua pengaturan lingkungan desktop, ekstensi, dll.) dengan satu klik.</p>
-      <p>Lingkungan desktop yang didukung: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE Cinnamon</p>
-    </description>
-    <!-- from translations/nb_NO.json -->
-    <description xml:lang="nb_NO">
-      <p>SaveDesktop lar deg lagre ditt nåværende oppsett (drakter, ikoner, bakgrunnsbilder, alle skrivebordsmiljøinnstillinger, utvidelser, osv.) med ett klikk.</p>
-      <p>Støttede skrivebordsmiljø: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
-    <!-- from translations/uk.json -->
-    <description xml:lang="uk_UA">
-      <p>SaveDesktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, всі налаштування середовища робочого столу, розширення тощо) одним клацанням миші.</p>
-      <p>Підтримувані середовища робочого столу: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
-    <!-- from translations/hu.json -->
-    <description xml:lang="hu_HU">
-      <p>SaveDesktop lehetővé teszi, hogy egy gombnyomással elmentsd a jelenlegi konfigurációdat (témákat, ikonokat, háttereket, az összes asztali környezeti beállítást, kiegészítéseket, stb.).</p>
-      <p>Támogatott asztali környezetek: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
-    <!-- from translations/es.json -->
-    <description xml:lang="es_ES">
-      <p>SaveDesktop te permite guardar tu configuración actual (temas, iconos, fondos de pantalla, todos los ajustes del entorno del escritorio, extensiones, etc.) con un solo clic.</p>
-      <p>Entornos de escritorio compatibles: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
-    <!-- from translations/tr.json -->
-    <description xml:lang="tr_TR">
-      <p>SaveDesktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.</p>
-      <p>Desteklenen masaüstü ortamları: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
-    <!-- from translations/de.json -->
-    <description xml:lang="de_DE">
-      <p>Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.</p>
-      <p>Unterstützte Desktop-Umgebungen: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
-    <!-- from translations/zh_Hans.json -->
-    <description xml:lang="zh_CN">
-      <p>SaveDesktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。</p>
-      <p>支持的桌面环境：GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
-    </description>
     <description>
       <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
-      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, KDE Plasma and Cinnamon</p>
+      <p xml:lang="cs_CZ">SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.</p>
+      <p xml:lang="fr_FR">SaveDesktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.</p>
+      <p xml:lang="pt_BR">Gostaria de salvar sua configuração atual, incluindo temas, ícones, papéis de parede, todas as configurações do ambiente desktop, extensões e assim por diante? SaveDesktop pode ajudá-lo com isso. Apenas um clique e você terá sua configuração salva.</p>
+      <p xml:lang="it_IT">Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? SaveDesktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata.</p>
+      <p xml:lang="nl_NL">Wilt u uw huidige voorkeuren (thema's, pictogrammen, bureaubladachtergronden, systeemvoorkeuren, uitbreidingen, etc.) opslaan? SaveDesktop kan u hierbij helpen. Met slechts één muisklik wordt alles opgeslagen.</p>
+      <p xml:lang="ar_EG">هل ترغب في حفظ التخصيصات الحالي الخاص بك بما في ذلك السمات والرموز والخلفيات وجميع إعدادات بيئة سطح المكتب والإضافات وما إلى ذلك؟ يمكن أن يساعدك SaveDesktop في ذلك. بنقرة واحدة فقط ويتم حفظ التخصيصات الخاص بك.</p>
+      <p xml:lang="ru_RU">Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все настройки окружения рабочего стола, расширения и т.д.? SaveDesktop поможет вам в этом. Всего один клик - и ваша конфигурация сохранена.</p>
+      <p xml:lang="id_ID">SaveDesktop memungkinkan Anda menyimpan konfigurasi saat ini (tema, ikon, wallpaper, semua pengaturan lingkungan desktop, ekstensi, dll.) dengan satu klik.</p>
+      <p xml:lang="nb_NO">SaveDesktop lar deg lagre ditt nåværende oppsett (drakter, ikoner, bakgrunnsbilder, alle skrivebordsmiljøinnstillinger, utvidelser, osv.) med ett klikk.</p>
+      <p xml:lang="uk_UA">SaveDesktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, всі налаштування середовища робочого столу, розширення тощо) одним клацанням миші.</p>
+      <p xml:lang="hu_HU">SaveDesktop lehetővé teszi, hogy egy gombnyomással elmentsd a jelenlegi konfigurációdat (témákat, ikonokat, háttereket, az összes asztali környezeti beállítást, kiegészítéseket, stb.).</p>
+      <p xml:lang="es_ES">SaveDesktop te permite guardar tu configuración actual (temas, iconos, fondos de pantalla, todos los ajustes del entorno del escritorio, extensiones, etc.) con un solo clic.</p>
+      <p xml:lang="tr_TR">SaveDesktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.</p>
+      <p xml:lang="de_DE">Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.</p>
+      <p xml:lang="zh_CN">SaveDesktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
