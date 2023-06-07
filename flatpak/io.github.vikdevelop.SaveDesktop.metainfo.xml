@@ -4,7 +4,6 @@
     <id>io.github.vikdevelop.SaveDesktop</id>
     <launchable type="desktop-id">io.github.vikdevelop.SaveDesktop.desktop</launchable>
     <name>SaveDesktop</name>
-    <summary>Save the current configuration of your desktop environment</summary>
     <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho desktopového prostředí</summary>
     <summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
     <summary xml:lang="pt_BR">Salvar a configuração atual do seu ambiente desktop</summary>
@@ -19,14 +18,12 @@
     <summary xml:lang="es_ES">Guarda la configuración actual de tu entorno de escritorio</summary>
     <summary xml:lang="tr_TR">Masaüstünün şuanki ayarlarını kayıt et</summary>
     <summary xml:lang="de_DE">Speichern Sie die aktuelle Konfiguration Ihrer Desktop-Umgebung</summary>
+    <summary xml:lang="zh_CN">保存桌面环境的当前配置</summary>
+    <summary>Save the current configuration of your desktop environment</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
     
-    <description>
-      <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
-      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, KDE Plasma and Cinnamon</p>
-    </description>
     <!-- from translations/cs.json -->
     <description xml:lang="cs_CZ">
       <p>SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.</p>
@@ -96,6 +93,15 @@
     <description xml:lang="de_DE">
       <p>Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.</p>
       <p>Unterstützte Desktop-Umgebungen: GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
+    </description>
+    <!-- from translations/zh_Hans.json -->
+    <description xml:lang="zh_CN">
+      <p>SaveDesktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。</p>
+      <p>支持的桌面环境：GNOME, Cosmic, Xfce, Budgie, Pantheon, KDE Plasma, MATE, Cinnamon</p>
+    </description>
+    <description>
+      <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
+      <p>Supported desktop environments: GNOME, Cosmic, Xfce, Budgie, Pantheon, MATE, KDE Plasma and Cinnamon</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
