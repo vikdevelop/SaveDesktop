@@ -5,9 +5,9 @@
 
 Save and apply your Desktop Environment configuration
 
-<a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://beta.flathub.org/_next/static/media/flathub-badge-en.b42a637e.png'/></a>
+<a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-**... or install to your system with this command:**
+**... or install on your system with this command:**
 
 ```bash
 git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --install
