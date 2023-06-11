@@ -31,8 +31,8 @@
     "save": "Mentés",
     "apply": "Alkalmazás",
     "learn_more": "Tudj meg többet",
-    "save_installed_flatpaks": "Save installed Flatpak apps",
-    "pb_folder": "Folder for periodic saving",
-    "set_pb_folder_tooltip": "Choose custom folder for periodic saving",
-    "set_another": "Choose another folder"
+    "save_installed_flatpaks": "Telepített Flatpak alkalmazások mentése",
+    "pb_folder": "Időszakos mentések mappája",
+    "set_pb_folder_tooltip": "Válassz egyéni mappát az időszakos mentéshez",
+    "set_another": "Válassz másik mappát"
 }
