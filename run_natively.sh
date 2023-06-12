@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-cd /usr/share/savedesktop
+cd ~/.local/share/savedesktop
 if [ "$1" == "" ]
 then 
 	python3 src/main_window.py
