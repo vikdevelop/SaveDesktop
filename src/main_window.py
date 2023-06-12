@@ -227,7 +227,7 @@ class MainWindow(Gtk.Window):
             _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
         
-        self.periodicButton = Gtk.Button.new_from_icon_name("edit-symbolic")
+        self.periodicButton = Gtk.Button.new_from_icon_name("folder-drag-accept-symbolic")
         self.periodicButton.add_css_class("flat")
         self.periodicButton.set_tooltip_text(_["set_pb_folder_tooltip"])
         self.periodicButton.connect("clicked", self.open_periodic_backups)
@@ -713,7 +713,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.6.2"
+        version = "2.6.3"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
