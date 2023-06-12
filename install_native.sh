@@ -1,11 +1,6 @@
 #!/usr/bin/bash
 if [ "$1" == "--install" ]
 then
-		if [ ! -d "/tmp/SaveDesktop"]; then
-			echo "..."
-		else
-			git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop
-		fi
 		cd /tmp/SaveDesktop
 		sed -i "s\Exec=run.sh\Exec=/home/${USER}/.local/bin/savedesktop\ " flatpak/io.github.vikdevelop.SaveDesktop.desktop
 		install -Dm755 run_natively.sh ~/.local/bin/savedesktop
@@ -44,5 +39,6 @@ elif [ "$1" == "--remove" ]
 					rm ~/.local/share/icons/hicolor/symbolic/apps/desktop-symbolic.svg
 					rm ~/.local/share/icons/hicolor/symbolic/apps/edit-symbolic.svg
 					rm ~/.local/share/icons/hicolor/symbolic/apps/list-view.png
+					rm -rf /tmp/SaveDesktop
 					echo "SaveDesktop has been removed."
 fi
