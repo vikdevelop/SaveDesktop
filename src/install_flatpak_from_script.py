@@ -12,6 +12,8 @@ elif os.getenv("XDG_CURRENT_DESKTOP") == 'ubuntu:GNOME':
     environment = 'GNOME'
 elif os.getenv("XDG_CURRENT_DESKTOP") == 'zorin:GNOME':
     environment = 'GNOME'
+else:
+    environment = 'None'
 
 # Activate gsettings property
 if environment == 'GNOME':
