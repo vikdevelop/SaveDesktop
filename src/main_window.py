@@ -227,7 +227,7 @@ class MainWindow(Gtk.Window):
             _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
         
-        self.periodicButton = Gtk.Button.new_from_icon_name("folder-drag-accept-symbolic")
+        self.periodicButton = Gtk.Button.new_from_icon_name("preferences-system-symbolic")
         self.periodicButton.add_css_class("flat")
         self.periodicButton.set_tooltip_text(_["set_pb_folder_tooltip"])
         self.periodicButton.connect("clicked", self.open_periodic_backups)
