@@ -297,7 +297,7 @@ class MainWindow(Gtk.Window):
         self.fileButton = Gtk.Button.new_with_label(_["import_from_file"])
         self.fileButton.add_css_class("pill")
         self.fileButton.add_css_class("suggested-action")
-        self.fileButton.connect("clicked", self.apply_config)
+        self.fileButton.connect("clicked", self.select_import_folder)
         self.importbtnBox.append(self.fileButton)
         
         # Import from list button
@@ -451,16 +451,29 @@ class MainWindow(Gtk.Window):
             self.folderchooser.select_folder(self, None, save_selected, None)
             
     # Load file chooser
-    def fileshooser(self):
-        self.file_chooser = Gtk.FileChooserNative.new(_["import_fileshooser"].format(self.environment), \
-                self, Gtk.FileChooserAction.OPEN, _["open"], _["cancel"])
+    def select_import_folder(self, w):
+        def open_selected(source, res, data):
+            try:
+                file = source.open_finish(res)
+            except:
+                return
+            self.please_wait_toast()
+            if not os.path.exists(f'{CACHE}/import_config'):
+                os.mkdir(f'{CACHE}/import_config')
+            os.chdir(f'{CACHE}/import_config')
+            os.system("tar -xf %s ./" % file.get_path())
+            self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
+        
+        self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
+        self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
         self.file_filter.add_pattern('*.sd.tar.gz')
-        self.file_chooser.add_filter(self.file_filter)
-        self.file_chooser.connect('response', self.open_response)
-        self.file_chooser.show()
+        self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
+        self.file_filter_list.append(self.file_filter)
+        self.file_chooser.set_filters(self.file_filter_list)
+        self.file_chooser.open(self, None, open_selected, None)
     
     # Save configuration
     def save_config(self):
@@ -543,16 +556,6 @@ class MainWindow(Gtk.Window):
         os.chdir("%s" % CACHE)
         os.popen("tar -xf %s/%s ./" % (self.dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
-        
-    # Action after closing file chooser for import configuration
-    def open_response(self, dialog, response):
-        if response == Gtk.ResponseType.ACCEPT:
-            file = dialog.get_file()
-            filename = file.get_path()
-            self.please_wait_toast()
-            os.chdir("%s" % CACHE)
-            os.popen("tar -xf %s ./" % filename)
-            self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
             
     # Import configuration
     def import_config(self):
@@ -608,10 +611,6 @@ class MainWindow(Gtk.Window):
             self.i_kdata = GLib.spawn_command_line_async(f'cp -R ./ {Path.home()}/.local/share/')
         self.create_flatpak_desktop()
         self.applying_done()
-            
-    # Action after clicking on "Import from file" button -> open FileChooserNative
-    def apply_config(self, w):
-        self.fileshooser()
     
     # Create desktop for install Flatpaks from list
     def create_flatpak_desktop(self):
@@ -651,8 +650,8 @@ class MainWindow(Gtk.Window):
     
     # Action after disappearancing toast
     def on_toast_dismissed(self, toast):
-        os.popen("rm -rf %s/*" % CACHE)
-        os.popen("rm -rf {}/SaveDesktop/.{}/*".format(download_dir, date.today()))
+        os.popen(f"rm -rf {CACHE}/import_config/*")
+        os.popen(f"rm -rf {CACHE}/saved_config/*")
     
     # action after closing window
     def on_close(self, widget, *args):
@@ -694,7 +693,7 @@ class MyApp(Adw.Application):
         
     # Logout (action after clicking button Log Out on Adw.Toast)
     def logout(self, action, param):
-        os.system("rm %s/*" % CACHE)
+        os.system("rm %s/import_config/*" % CACHE)
         if os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             os.system("dbus-send --session --type=method_call --print-reply --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
@@ -717,7 +716,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.6.3"
+        version = "2.6.4"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
