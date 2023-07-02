@@ -3,16 +3,27 @@
   <h1 align="center">SaveDesktop</h1>
 </p>
 
-Save and apply your Desktop Environment configuration
+Save the current configuration of your desktop environment
 
-<a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+## Installation
+- Flathub (stable version)
+  
+  <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-**... or install on your system with this command:**
-
-```bash
-git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --install
-```
-NOTE: For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
+- Install to system (native version)
+  
+  ```bash
+  # Install
+  git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --install
+  # Remove
+  git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --remove
+  ```
+  NOTE: For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
+- Build with Flatpak builder (beta version)
+  ```
+  git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
+  # Maybe you will need to install org.gnome.Sdk (version 44) with flatpak
+  ```
 
 ## Translations
 If you want to help with localize SaveDesktop, you can use the Weblate tool (is possible register with e.g. GitHub or Google)
