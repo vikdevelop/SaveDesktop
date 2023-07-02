@@ -47,9 +47,9 @@ else:
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
     os.system(f"wget -qO {DATA}/main_window.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/src/main_window.py")
-    result = filecmp.cmp(f"{DATA}/main_window.py", "/mnt/sdb1/savedesktop/src/main_window.py")
+    result = filecmp.cmp(f"{DATA}/main_window.py", f"{Path.home()}/.local/share/savedesktop/src/main_window.py")
     if result == False:
-        os.popen(f"cp {DATA}/main_window.py /mnt/sdb1/savedesktop/src/")
+        os.popen(f"cp {DATA}/main_window.py {Path.home()}/.local/share/savedesktop/src/")
         python = sys.executable
         os.execl(python, python, *sys.argv)
 
