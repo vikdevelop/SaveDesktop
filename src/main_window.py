@@ -446,7 +446,7 @@ class MainWindow(Gtk.Window):
             self.please_wait_toast()
             self.folder = file.get_path()
             with open(f"{CACHE}/.filedialog.json", "w") as fd:
-                fd.write('{\n "recently_folder": "%s"\n}' % self.folder)
+                fd.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.saveEntry.get_text()))
             self.save_config()
         
         if " " in self.saveEntry.get_text():
@@ -657,8 +657,7 @@ class MainWindow(Gtk.Window):
     
     # Action after disappearancing toast
     def on_toast_dismissed(self, toast):
-        os.popen(f"rm -rf {CACHE}/import_config/*")
-        os.popen(f"rm -rf {CACHE}/saved_config/*")
+        os.popen("rm -rf %s/*" % CACHE)
     
     # action after closing window
     def on_close(self, widget, *args):
@@ -696,11 +695,11 @@ class MyApp(Adw.Application):
     def open_dir(self, action, param):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
-        os.system("xdg-open {}/".format(jf["recently_folder"]))
+        os.popen(f'dbus-send --session --print-reply --dest=org.freedesktop.FileManager1 --type=method_call /org/freedesktop/FileManager1 org.freedesktop.FileManager1.ShowItems array:string:"file://{jf["recent_file"]}" string:""')
         
     # Logout (action after clicking button Log Out on Adw.Toast)
     def logout(self, action, param):
-        os.system("rm %s/import_config/*" % CACHE)
+        os.system("rm %s/*" % CACHE)
         if os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             os.system("dbus-send --session --type=method_call --print-reply --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
