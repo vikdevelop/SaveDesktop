@@ -11,7 +11,7 @@
   
   <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-- Install to system (native version)
+- Install on the system (native version)
   
   ```bash
   # Install
@@ -20,6 +20,7 @@
   git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --remove
   ```
   NOTE: For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
+  
 - Build with Flatpak builder (beta version)
   ```
   git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
@@ -27,7 +28,7 @@
   ```
 
 ## Translations
-If you want to help with localize SaveDesktop, you can use the Weblate tool (is possible register with e.g. GitHub or Google)
+If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
 
 <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/">
 <img src="https://hosted.weblate.org/widgets/vikdevelop/-/savedesktop/open-graph.png" alt="Stav překladu" width=300 />
@@ -45,7 +46,7 @@ If you want to help with localize SaveDesktop, you can use the Weblate tool (is 
 - KDE Plasma
 
 ### SaveDesktop can save:
-- your icons, fonts and themes
+- your icons, fonts, and themes
 - your settings
 - your backgrounds (including dynamic wallpapers, provided that the same username is retained)
 - your GNOME and Nautilus extensions
