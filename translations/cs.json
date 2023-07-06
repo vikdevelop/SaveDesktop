@@ -17,7 +17,6 @@
     "description": "SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.",
     "supported_environments_desc": "Podporovaná desktopová prostředí: {}",
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
-    "filename_spaces_msg": "V názvu souboru nesmí být mezery",
     "periodic_saving": "Pravidelné ukládání",
     "periodic_saving_desc": "Změny se projeví až po dalším přihlášení",
     "never": "Nikdy",
