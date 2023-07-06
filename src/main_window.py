@@ -445,8 +445,6 @@ class MainWindow(Gtk.Window):
                 return
             self.please_wait_toast()
             self.folder = file.get_path()
-            with open(f"{CACHE}/.filedialog.json", "w") as fd:
-                fd.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.saveEntry.get_text()))
             self.save_config()
         
         if " " in self.saveEntry.get_text():
@@ -551,9 +549,13 @@ class MainWindow(Gtk.Window):
         if self.saveEntry.get_text() == "":
             #self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
             os.popen(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
+            filename = f'config_{date.today()}'
         else:
             #self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
             os.popen(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
+            filename = f'{self.saveEntry.get_text()}'
+        with open(f"{CACHE}/.filedialog.json", "w") as fd:
+                fd.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, filename))
         self.tar_time = GLib.timeout_add_seconds(6, self.exporting_done)
         
     # Import config from list
