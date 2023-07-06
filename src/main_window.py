@@ -392,6 +392,7 @@ class MainWindow(Gtk.Window):
     # Dialog for changing directory for periodic backups
     def dirdialog(self):
         self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
+        self.dirDialog.set_heading(_["set_pb_folder_tooltip"])
         self.dirLBox = Gtk.ListBox.new()
         self.dirLBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.dirLBox.get_style_context().add_class(class_name='boxed-list')
