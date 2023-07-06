@@ -17,7 +17,6 @@
     "description": "Gostaria de salvar sua configuração atual, incluindo temas, ícones, papéis de parede, todas as configurações do ambiente desktop, extensões e assim por diante? SaveDesktop pode ajudá-lo com isso. Apenas um clique e você terá sua configuração salva.",
     "supported_environments_desc": "Ambientes desktop suportados: {}",
     "translator_credits": "https://github.com/fnogcps https://hosted.weblate.org/user/IsaacDias/",
-    "filename_spaces_msg": "Não deve haver espaços no nome do arquivo",
     "periodic_saving": "Salvamento periódico",
     "periodic_saving_desc": "As alterações só terão efeito após o próximo login",
     "never": "Nunca",

@@ -17,7 +17,6 @@
     "description": "SaveDesktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.",
     "supported_environments_desc": "Environnements de bureau pris en charge : {}",
     "translator_credits": "Lien github des traducteurs",
-    "filename_spaces_msg": "Le nom du fichier ne doit pas comporter d'espace",
     "periodic_saving": "Sauvegarde périodique",
     "periodic_saving_desc": "Les modifications ne prendront effet qu'après la prochaine connexion",
     "never": "Jamais",
