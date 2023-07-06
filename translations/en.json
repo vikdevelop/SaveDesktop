@@ -16,7 +16,6 @@
     "summary": "Save the current configuration of your desktop environment",
     "description": "SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.",
     "supported_environments_desc": "Supported desktop environments: {}",
-    "filename_spaces_msg": "There must be no spaces in the file name",
     "periodic_saving": "Periodic saving",
     "periodic_saving_desc": "Changes will only take effect after the next login",
     "never": "Never",
