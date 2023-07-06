@@ -448,12 +448,15 @@ class MainWindow(Gtk.Window):
             self.save_config()
         
         if " " in self.saveEntry.get_text():
-            self.spaces_toast()
+            self.with_spaces_text = self.saveEntry.get_text()
+            self.filename_text = self.with_spaces_text.replace(" ", "_")
         else:
-            self.folderchooser = Gtk.FileDialog.new()
-            self.folderchooser.set_modal(True)
-            self.folderchooser.set_title(_["save_config"])
-            self.folderchooser.select_folder(self, None, save_selected, None)
+            self.filename_text = f'{self.saveEntry.get_text()}'
+        
+        self.folderchooser = Gtk.FileDialog.new()
+        self.folderchooser.set_modal(True)
+        self.folderchooser.set_title(_["save_config"])
+        self.folderchooser.select_folder(self, None, save_selected, None)
             
     # Load file chooser
     def select_import_folder(self, w):
@@ -552,8 +555,8 @@ class MainWindow(Gtk.Window):
             filename = f'config_{date.today()}'
         else:
             #self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
-            os.popen(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
-            filename = f'{self.saveEntry.get_text()}'
+            os.popen(f"tar --gzip -cf {self.filename_text}.sd.tar.gz ./")
+            filename = f'{self.filename_text}'
         with open(f"{CACHE}/.filedialog.json", "w") as fd:
                 fd.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, filename))
         self.tar_time = GLib.timeout_add_seconds(6, self.exporting_done)
@@ -638,12 +641,6 @@ class MainWindow(Gtk.Window):
         self.toast.set_button_label(_["open_folder"])
         self.toast.set_action_name("app.open_dir")
         self.toast_overlay.add_toast(self.toast)
-        
-    # popup about message of using spaces in the filename
-    def spaces_toast(self):
-        self.toast_sp = Adw.Toast(title=_["filename_spaces_msg"])
-        self.toast_sp.set_timeout(5)
-        self.toast_overlay.add_toast(self.toast_sp)
     
     # Config has been imported action
     def applying_done(self):
