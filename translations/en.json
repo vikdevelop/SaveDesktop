@@ -3,7 +3,7 @@
     "unsuppurted_env_desc": "<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}.",
     "save_config": "Save current configuration",
     "import_config": "Import saved configuration",
-    "set_filename": "Set the file name (without spaces)",
+    "set_filename": "Set the file name",
     "config_saved": "Configuration has been saved!",
     "open_folder": "Open the folder",
     "import_fileshooser": "Import {} configuration",
