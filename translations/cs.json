@@ -3,7 +3,7 @@
     "unsuppurted_env_desc": "<big><b>Máte nainstalované nepodporované prostředí.</b></big> \nPoužijte jedno z těchto prostředí: {}.",
     "save_config": "Uložit aktuální konfiguraci",
     "import_config": "Importovat již uloženou konfiguraci",
-    "set_filename": "Nastavit název souboru (bez mezer)",
+    "set_filename": "Nastavit název souboru",
     "config_saved": "Konfigurace byla uložena!",
     "open_folder": "Otevřít složku",
     "import_fileshooser": "Importovat konfiguraci {}",
