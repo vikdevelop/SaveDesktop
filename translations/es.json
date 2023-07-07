@@ -3,7 +3,7 @@
     "unsuppurted_env_desc": "<big><b>Tiene instalado un entorno no compatible.</b></big> \nPor favor, use uno de estos entornos: {}.",
     "save_config": "Guardar la configuración actual",
     "import_config": "Importar configuración guardada",
-    "set_filename": "Definir el nombre del archivo (sin espacios)",
+    "set_filename": "Establecer el nombre del archivo",
     "config_saved": "¡Se ha guardado la configuración!",
     "open_folder": "Abrir la carpeta",
     "import_fileshooser": "Importar la configuración {}",
