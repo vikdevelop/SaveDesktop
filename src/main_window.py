@@ -616,10 +616,10 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'MATE':
             self.i_caja = GLib.spawn_command_line_async(f'cp -R ./caja {Path.home()}/.config/')
         elif self.environment == 'KDE Plasma':
-            os.chdir("%s" % CACHE)
+            os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-config')
             self.i_kconf = GLib.spawn_command_line_async(f'cp -R ./ {Path.home()}/.config/')
-            os.chdir("%s" % CACHE)
+            os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-data')
             self.i_kdata = GLib.spawn_command_line_async(f'cp -R ./ {Path.home()}/.local/share/')
         self.create_flatpak_desktop()
@@ -722,7 +722,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.6.4"
+        version = "2.7"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
