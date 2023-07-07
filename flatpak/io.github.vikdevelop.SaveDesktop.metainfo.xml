@@ -63,6 +63,14 @@
     </categories>
           
     <releases>
+       <release version="2.7" date="2023-07-07">
+          <description>
+            <ul>
+              <li>Now, after saving the configuration and opening the folder, the configuration file will be selected automatically, so you don't need to have difficulty searching for the configuration file in the folder.</li>
+              <li>Added support for setting the filename with spaces</li>
+            </ul>
+          </description>
+       </release>
        <release version="2.6" date="2023-06-04">
           <description>
             <ul>
