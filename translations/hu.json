@@ -3,7 +3,7 @@
     "unsuppurted_env_desc": "<big><b>Az általad használt környezet nem támogatott.</b></big> \nKérlek használd a következők valamelyikét: {}.",
     "save_config": "Jelenlegi konfiguráció mentése",
     "import_config": "Mentett konfiguráció importálása",
-    "set_filename": "Fájlnév megadása (szóközök nélkül)",
+    "set_filename": "Fájlnév megadása",
     "config_saved": "A konfiguráció elmentve!",
     "open_folder": "A mappa megnyitása",
     "import_fileshooser": "{} konfiguráció importálása",

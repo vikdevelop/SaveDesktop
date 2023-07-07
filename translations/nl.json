@@ -3,7 +3,7 @@
     "unsuppurted_env_desc": "<big><b>U maakt gebruik van een niet-ondersteunde werkomgeving.</b></big> \nDe volgende werkomgevingen worden ondersteund: {}.",
     "save_config": "Huidige voorkeuren opslaan",
     "import_config": "Voorkeuren importeren",
-    "set_filename": "Geef het bestand een naam (zonder spaties)",
+    "set_filename": "Geef het bestand een naam",
     "config_saved": "De voorkeuren zijn opgeslagen!",
     "open_folder": "Map openen",
     "import_fileshooser": "{}-voorkeuren importeren",
