@@ -3,7 +3,7 @@
     "unsuppurted_env_desc": "<big><b>Hai installato un ambiente non supportato.</b></big>\nSi prega di utilizzare uno di questi ambienti: {}.",
     "save_config": "Salva la configurazione corrente",
     "import_config": "Importa la configurazione salvata",
-    "set_filename": "Imposta il nome del file (senza spazi)",
+    "set_filename": "Impostare il nome file",
     "config_saved": "La configurazione è stata salvata!",
     "open_folder": "Apri la cartella",
     "import_fileshooser": "Importa {} configurazione",
