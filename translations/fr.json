@@ -3,7 +3,7 @@
     "unsuppurted_env_desc": "<big><b>Votre environnements de bureau n'est pas compatible </b></big> \nVeuillez utiliser l'un de ces environnements : {}.",
     "save_config": "Sauvegarder la configuration actuelle",
     "import_config": "Importer la configuration sauvegardée",
-    "set_filename": "Définir le nom du fichier (sans espaces)",
+    "set_filename": "Définir le nom du fichier",
     "config_saved": "La configuration a été enregistrée !",
     "open_folder": "Ouvrir le dossier",
     "import_fileshooser": "Importer {} la configuration",
