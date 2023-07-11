@@ -33,7 +33,7 @@ if flatpak:
         locale = open(f"/app/translations/{r_lang}.json")
     except:
         locale = open(f"/app/translations/en.json")
-    flatpak_script = "/app/backup_flatpaks.sh"
+    system_dir = "/app"
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
 else:
@@ -41,7 +41,7 @@ else:
         locale = open(f"translations/{r_lang}.json")
     except:
         locale = open("translations/en.json")
-    flatpak_script = "src/backup_flatpaks.sh"
+    system_dir = f"{Path.home()}/.local/share/savedesktop/src"
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
@@ -499,7 +499,7 @@ class MainWindow(Gtk.Window):
         self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
         self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
         if self.switch_01.get_active() == True:
-            os.popen(flatpak_script)
+            os.popen(f"sh {system_dir}/backup_flatpaks.sh")
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
@@ -627,7 +627,7 @@ class MainWindow(Gtk.Window):
     
     # Create desktop for install Flatpaks from list
     def create_flatpak_desktop(self):
-        os.popen(f"cp /app/install_flatpak_from_script.py {DATA}/")
+        os.popen(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
         if not os.path.exists(f"{Path.home()}/.config/autostart"):
             os.mkdir(f"{Path.home()}/.config/autostart")
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
