@@ -59,13 +59,13 @@ class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_title("SaveDesktop")
-        self.headerbar = Gtk.HeaderBar.new()
+        self.headerbar = Adw.HeaderBar.new()
         self.set_titlebar(titlebar=self.headerbar)
         self.application = kwargs.get('application')
         
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         
-        self.set_size_request(750, 540)
+        #self.set_size_request(750, 540)
         (width, height) = self.settings["window-size"]
         self.set_default_size(width, height)
         
@@ -80,18 +80,34 @@ class MainWindow(Gtk.Window):
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
         
-        # Savedesktop menu
-        self.savedesktop_mode_dropdwn = Gtk.DropDown.new_from_strings( \
-            [_["save_config"], _["import_config"]] )
-        self.savedesktop_mode_dropdwn.connect('notify::selected-item', \
-            self.change_savedesktop_mode)
-        
         # Primary layout
+        self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.headapp.set_valign(Gtk.Align.CENTER)
+        self.headapp.set_halign(Gtk.Align.CENTER)
+        
+        # Layout for import from list section
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.pBox.set_halign(Gtk.Align.CENTER)
         self.pBox.set_valign(Gtk.Align.CENTER)
-        self.pBox.set_margin_start(100)
-        self.pBox.set_margin_end(100)
+        
+        # Stack
+        self.stack =Adw.ViewStack(vexpand=True)
+        self.headapp.append(self.stack)
+        
+        # Layout for saving and importing configuration
+        self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.imp_cfg_title = _["import_from_file"]
+        
+        # Add pages
+        self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
+        self.stack.add_titled_with_icon(self.importBox,"importpage","Import","document-open-symbolic")
+        
+        # Adw Switcher
+        self.switcher_title=Adw.ViewSwitcherTitle()
+        self.switcher_title.set_stack(self.stack)
+        self.switcher_title.set_title("")
+        self.headerbar.set_title_widget(self.switcher_title)
         
         # Toast
         self.toast_overlay = Adw.ToastOverlay.new()
@@ -101,7 +117,7 @@ class MainWindow(Gtk.Window):
         self.toast_overlay.set_margin_start(margin=1)
         
         self.set_child(self.toast_overlay)
-        self.toast_overlay.set_child(self.pBox)
+        self.toast_overlay.set_child(self.headapp)
         
         self.toast = Adw.Toast.new(title='')
         self.toast.set_timeout(5)
@@ -111,52 +127,52 @@ class MainWindow(Gtk.Window):
         if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
             self.environment = 'COSMIC'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
             self.environment = 'Pantheon'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
             self.environment = 'Cinnamon'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Budgie:GNOME':
             self.environment = 'Budgie'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             self.environment = 'Xfce'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
             self.environment = 'MATE'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
             self.environment = 'KDE Plasma'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         else:
             self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
@@ -168,25 +184,11 @@ class MainWindow(Gtk.Window):
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
     
-    def change_savedesktop_mode(self, w, pspec):
-        if self.savedesktop_mode_dropdwn.get_selected() == 0:
-            self.save_desktop()
-        else:
-            self.import_desktop()
-    
     # Show main layout
     def save_desktop(self):
-        # Remove Import page box
-        try:
-            self.pBox.remove(self.importBox)
-        except:
-            print("")
-        
-        # Box for save page
-        self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        # Set margin for save desktop layout
         self.saveBox.set_margin_start(40)
         self.saveBox.set_margin_end(40)
-        self.pBox.append(self.saveBox)
         
         # Tittle image for save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
@@ -274,14 +276,6 @@ class MainWindow(Gtk.Window):
         
     # Import configuration section
     def import_desktop(self):
-        try:
-            self.pBox.remove(self.saveBox)
-        except:
-            print("")
-        
-        # box for import page
-        self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        
         # Image for import page
         self.importImage = Gtk.Image.new_from_icon_name("document-open-symbolic")
         self.importImage.set_pixel_size(64)
@@ -313,15 +307,15 @@ class MainWindow(Gtk.Window):
         self.fromlistButton.connect("clicked", self.import_from_list)
         self.importbtnBox.append(self.fromlistButton)
         
-        self.pBox.append(self.importBox)
+        #self.pBox.append(self.importBox)
         
     # Import archive from list
     def import_from_list(self, w):
-        self.pBox.remove(self.importBox)
+        self.set_child(self.pBox)
         self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
         self.backButton.add_css_class("flat")
         self.backButton.connect("clicked", self.close_list)
-        self.headerbar.remove(self.savedesktop_mode_dropdwn)
+        self.headerbar.set_title_widget(None)
         self.headerbar.pack_start(self.backButton)
         
         self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=20)
@@ -376,10 +370,10 @@ class MainWindow(Gtk.Window):
     
     # Action after closing import from list page
     def close_list(self, w):
-        self.pBox.append(self.importBox)
-        self.pBox.remove(self.flistBox)
+        self.set_child(self.toast_overlay)
+        self.toast_overlay.set_child(self.headapp)
         self.headerbar.remove(self.backButton)
-        self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+        self.headerbar.set_title_widget(self.switcher_title)
         try:
             self.headerbar.remove(self.applyButton)
         except:
@@ -499,7 +493,7 @@ class MainWindow(Gtk.Window):
         self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
         self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
         if self.switch_01.get_active() == True:
-            os.popen(f"sh {system_dir}/backup_flatpaks.sh")
+            os.popen(flatpak_script)
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
@@ -627,7 +621,7 @@ class MainWindow(Gtk.Window):
     
     # Create desktop for install Flatpaks from list
     def create_flatpak_desktop(self):
-        os.popen(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
+        os.popen(f"cp /app/install_flatpak_from_script.py {DATA}/")
         if not os.path.exists(f"{Path.home()}/.config/autostart"):
             os.mkdir(f"{Path.home()}/.config/autostart")
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
@@ -722,7 +716,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.7.1"
+        version = "2.7.2"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
