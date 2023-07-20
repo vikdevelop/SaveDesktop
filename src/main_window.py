@@ -493,7 +493,7 @@ class MainWindow(Gtk.Window):
         self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
         self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
         if self.switch_01.get_active() == True:
-            os.popen(flatpak_script)
+            os.popen(f"sh {system_dir}/backup_flatpaks.sh")
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
@@ -621,7 +621,7 @@ class MainWindow(Gtk.Window):
     
     # Create desktop for install Flatpaks from list
     def create_flatpak_desktop(self):
-        os.popen(f"cp /app/install_flatpak_from_script.py {DATA}/")
+        os.popen(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
         if not os.path.exists(f"{Path.home()}/.config/autostart"):
             os.mkdir(f"{Path.home()}/.config/autostart")
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
