@@ -65,7 +65,7 @@ class MainWindow(Gtk.Window):
         
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         
-        #self.set_size_request(750, 540)
+        self.set_size_request(750, 540)
         (width, height) = self.settings["window-size"]
         self.set_default_size(width, height)
         
@@ -82,6 +82,8 @@ class MainWindow(Gtk.Window):
         
         # Primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.headapp.set_margin_start(80)
+        self.headapp.set_margin_end(80)
         self.headapp.set_valign(Gtk.Align.CENTER)
         self.headapp.set_halign(Gtk.Align.CENTER)
         
