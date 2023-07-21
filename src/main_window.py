@@ -276,6 +276,8 @@ class MainWindow(Gtk.Window):
         
     # Import configuration section
     def import_desktop(self):
+        self.importBox.set_valign(Gtk.Align.CENTER)
+        self.importBox.set_halign(Gtk.Align.CENTER)
         # Image for import page
         self.importImage = Gtk.Image.new_from_icon_name("document-open-symbolic")
         self.importImage.set_pixel_size(64)
@@ -370,6 +372,7 @@ class MainWindow(Gtk.Window):
     
     # Action after closing import from list page
     def close_list(self, w):
+        self.pBox.remove(self.flistBox)
         self.set_child(self.toast_overlay)
         self.toast_overlay.set_child(self.headapp)
         self.headerbar.remove(self.backButton)
