@@ -4,40 +4,7 @@
   <p align="center">Save the current configuration of your desktop environment</p>
 </p>
 
-![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window_dark.png#gh-dark-mode-only)
-![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png#gh-light-mode-only)
-
-![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page_dark.png#gh-dark-mode-only)
-![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png#gh-light-mode-only)
-
 <br>
-
-## About
-### Supported environments:
-- GNOME
-- Xfce
-- Cinnamon
-- Budgie
-- COSMIC (Pop!_OS)
-- Pantheon
-- MATE
-- KDE Plasma
-
-### SaveDesktop can save:
-- your icons, fonts, and themes
-- your settings
-- your backgrounds (including dynamic wallpapers, provided that the same username is retained)
-- your GNOME and Nautilus extensions
-- your installed Flatpak apps
-
-and more...
-
-## Translations
-If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
-
-<a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/">
-<img src="https://hosted.weblate.org/widgets/vikdevelop/-/savedesktop/open-graph.png" alt="Stav překladu" width=300 />
-</a>
 
 ## Installation
 - Flathub (stable version)
@@ -59,3 +26,37 @@ If you want to help localize SaveDesktop, you can use the Weblate tool (it is po
   git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
   # Maybe you will need to install org.gnome.Sdk (version 44) with flatpak
   ```
+
+## Translations
+If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
+
+<a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/">
+<img src="https://hosted.weblate.org/widgets/vikdevelop/-/savedesktop/open-graph.png" alt="Stav překladu" width=300 />
+</a>
+
+## About
+### Supported environments:
+- GNOME
+- Xfce
+- Cinnamon
+- Budgie
+- COSMIC (Pop!_OS)
+- Pantheon
+- MATE
+- KDE Plasma
+
+### SaveDesktop can save:
+- your icons, fonts, and themes
+- your settings
+- your backgrounds (including dynamic wallpapers, provided that the same username is retained)
+- your GNOME and Nautilus extensions
+- your installed Flatpak apps
+
+and more...
+
+### Screenshots
+![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window_dark.png#gh-dark-mode-only)
+![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png#gh-light-mode-only)
+
+![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page_dark.png#gh-dark-mode-only)
+![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png#gh-light-mode-only)
