@@ -13,6 +13,10 @@
 			<default>false</default>
 			<summary>Save installed Flatpak apps</summary>
 		</key>
+		<key name="save-installed-flatpaks-pb" type="b">
+			<default>true</default>
+			<summary>Save installed Flatpak apps (designed to periodic saving)</summary>
+		</key>
 		<key name="periodic-saving" type="s">
 		  <choices>
 				<choice value="Never"/>
@@ -26,6 +30,10 @@
 		<key name="filename" type="s">
 			<default>''</default>
 			<summary>Filename text</summary>
+		</key>
+		<key name="filename-format" type="s">
+			<default>'config_YY-MM-DD'</default>
+			<summary>File name format (designed to periodic saving)</summary>
 		</key>
 		<key name="periodic-saving-folder" type="s">
 		  <default>''</default>
