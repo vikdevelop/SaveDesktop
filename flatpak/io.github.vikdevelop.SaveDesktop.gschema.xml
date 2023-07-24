@@ -14,7 +14,7 @@
 			<summary>Save installed Flatpak apps</summary>
 		</key>
 		<key name="save-installed-flatpaks-pb" type="b">
-			<default>true</default>
+			<default>false</default>
 			<summary>Save installed Flatpak apps (designed to periodic saving)</summary>
 		</key>
 		<key name="periodic-saving" type="s">
