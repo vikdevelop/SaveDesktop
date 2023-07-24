@@ -238,9 +238,9 @@ class MainWindow(Gtk.Window):
             _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
         
-        self.periodicButton = Gtk.Button.new_from_icon_name("preferences-system-symbolic")
+        self.periodicButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.periodicButton.add_css_class("flat")
-        self.periodicButton.set_tooltip_text(_["set_pb_folder_tooltip"])
+        self.periodicButton.set_tooltip_text("Additional settings for periodic saving")
         self.periodicButton.connect("clicked", self.open_periodic_backups)
         
         self.adw_action_row_backups = Adw.ComboRow.new()
@@ -391,20 +391,61 @@ class MainWindow(Gtk.Window):
     # Dialog for changing directory for periodic backups
     def dirdialog(self):
         self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
-        self.dirDialog.set_heading(_["set_pb_folder_tooltip"])
+        #self.dirDialog.set_heading("Additional settings for periodic saving")
+        
+        self.dirBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        
+        self.pbLabel = Gtk.Label.new(str="<big><b>Additional settings for periodic saving</b></big>\n")
+        self.pbLabel.set_use_markup(True)
+        self.dirBox.append(self.pbLabel)
+        
+        # Box for adding widgets in this dialog
         self.dirLBox = Gtk.ListBox.new()
         self.dirLBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.dirLBox.get_style_context().add_class(class_name='boxed-list')
+        self.dirBox.append(self.dirLBox)
+        
+        # Entry for selecting file name format
+        self.filefrmtEntry = Adw.EntryRow.new()
+        self.filefrmtEntry.set_title("File name format")
+        self.filefrmtEntry.set_text(self.settings["filename-format"])
+        self.dirLBox.append(self.filefrmtEntry)
+        
+        # Button for choosing folder for periodic saving
+        self.folderButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
+        self.folderButton.add_css_class("flat")
+        self.folderButton.set_tooltip_text(_["set_pb_folder_tooltip"])
+        self.folderButton.connect("clicked", self.select_pb_folder)
+        
+        # Adw.ActionRow for showing folder for periodic saving
         self.dirRow = Adw.ActionRow.new()
         self.dirRow.set_title(_["pb_folder"])
+        self.dirRow.add_suffix(self.folderButton)
         self.dirRow.set_use_markup(True)
         if self.settings["periodic-saving-folder"] == '':
             self.dirRow.set_subtitle(f"{download_dir}/SaveDesktop/archives")
         else:
             self.dirRow.set_subtitle(self.settings["periodic-saving-folder"])
         self.dirLBox.append(self.dirRow)
-        self.dirDialog.set_extra_child(self.dirLBox)
-        self.dirDialog.add_response('another-folder', _["set_another"])
+        
+        # Switch and row of option 'Save Flatpak custom permissions'
+        self.switch_02 = Gtk.Switch.new()
+        if self.settings["save-installed-flatpaks-pb"]:
+            self.switch_02.set_active(True)
+        self.switch_02.set_valign(align=Gtk.Align.CENTER)
+         
+        self.flatpak_pb_row = Adw.ActionRow.new()
+        self.flatpak_pb_row.set_title(title=_["save_installed_flatpaks"])
+        self.flatpak_pb_row.set_subtitle(f'<a href="https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list">{_["learn_more"]}</a>')
+        self.flatpak_pb_row.set_use_markup(True)
+        self.flatpak_pb_row.set_title_lines(2)
+        self.flatpak_pb_row.set_subtitle_lines(3)
+        self.flatpak_pb_row.add_suffix(self.switch_02)
+        self.flatpak_pb_row.set_activatable_widget(self.switch_02)
+        self.dirLBox.append(self.flatpak_pb_row)
+        
+        self.dirDialog.set_extra_child(self.dirBox)
+        self.dirDialog.add_response('cancel', _["cancel"])
         self.dirDialog.add_response('ok', _["apply"])
         self.dirDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.dirDialog.connect('response', self.dirdialog_closed)
@@ -412,16 +453,16 @@ class MainWindow(Gtk.Window):
         
     # Action after closed dialog for choosing periodic backups folder
     def dirdialog_closed(self, w, response):
-        if response == 'another-folder':
-            self.select_pb_folder()
-        elif response == 'ok':
+        if response == 'ok':
             if self.dirRow.get_subtitle() == '':
                 self.settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
             else:
                 self.settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
+            self.settings["filename-format"] = self.filefrmtEntry.get_text()
+            self.settings["save-installed-flatpaks-pb"] = self.switch_02.get_active()
     
     # Select folder for periodic backups (Gtk.FileDialog)
-    def select_pb_folder(self):
+    def select_pb_folder(self, w):
         def save_selected(source, res, data):
             try:
                 file = source.select_folder_finish(res)
@@ -430,6 +471,8 @@ class MainWindow(Gtk.Window):
             self.folder_pb = file.get_path()
             self.dirdialog()
             self.dirRow.set_subtitle(self.folder_pb)
+            
+        self.dirDialog.close()
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -721,7 +764,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.7.2"
+        version = "2.8"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
