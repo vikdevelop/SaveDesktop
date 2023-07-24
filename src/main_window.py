@@ -405,9 +405,15 @@ class MainWindow(Gtk.Window):
         self.dirLBox.get_style_context().add_class(class_name='boxed-list')
         self.dirBox.append(self.dirLBox)
         
+        self.filefrmtButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
+        self.filefrmtButton.add_css_class('destructive-action')
+        self.filefrmtButton.set_valign(Gtk.Align.CENTER)
+        self.filefrmtButton.connect("clicked", self.set_default_filefrmtEntry)
+        
         # Entry for selecting file name format
         self.filefrmtEntry = Adw.EntryRow.new()
         self.filefrmtEntry.set_title("File name format")
+        self.filefrmtEntry.add_suffix(self.filefrmtButton)
         self.filefrmtEntry.set_text(self.settings["filename-format"])
         self.dirLBox.append(self.filefrmtEntry)
         
@@ -460,6 +466,10 @@ class MainWindow(Gtk.Window):
                 self.settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
             self.settings["filename-format"] = self.filefrmtEntry.get_text()
             self.settings["save-installed-flatpaks-pb"] = self.switch_02.get_active()
+            
+    # Set text of self.filefrmtEntry to default
+    def set_default_filefrmtEntry(self, w):
+        self.filefrmtEntry.set_text("config_YY-MM-DD")
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
