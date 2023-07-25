@@ -408,6 +408,7 @@ class MainWindow(Gtk.Window):
         self.filefrmtButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
         self.filefrmtButton.add_css_class('destructive-action')
         self.filefrmtButton.set_valign(Gtk.Align.CENTER)
+        self.filefrmtButton.set_tooltip_text("Reset to default")
         self.filefrmtButton.connect("clicked", self.set_default_filefrmtEntry)
         
         # Entry for selecting file name format
