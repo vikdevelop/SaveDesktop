@@ -419,7 +419,7 @@ class MainWindow(Gtk.Window):
         
         # Button for choosing folder for periodic saving
         self.folderButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
-        self.folderButton.add_css_class("flat")
+        self.folderButton.set_valign(Gtk.Align.CENTER)
         self.folderButton.set_tooltip_text(_["set_pb_folder_tooltip"])
         self.folderButton.connect("clicked", self.select_pb_folder)
         
@@ -677,7 +677,7 @@ class MainWindow(Gtk.Window):
         self.create_flatpak_desktop()
         self.applying_done()
     
-    # Create desktop for install Flatpaks from list
+    # Create desktop file for install Flatpaks from list
     def create_flatpak_desktop(self):
         os.popen(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
         if not os.path.exists(f"{Path.home()}/.config/autostart"):
@@ -714,26 +714,32 @@ class MainWindow(Gtk.Window):
     # action after closing window
     def on_close(self, widget, *args):
         selected_item = self.adw_action_row_backups.get_selected_item()
-        # Create desktop file to make periodic backups work
-        if selected_item.get_string() == _["never"]:
-            backup_item = "Never"
-        else:
-            if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
-                with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
-                    cb.write('[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --background')
         # Translate backup items to English because it is necessary for the proper functioning of periodic backups correctly
-        if selected_item.get_string() == _["daily"]:
+        if selected_item.get_string() == _["never"]:
+            backup_item = "Never" 
+        elif selected_item.get_string() == _["daily"]:
             backup_item = "Daily"
-        if selected_item.get_string() == _["weekly"]:
+            self.create_pb_desktop()
+        elif selected_item.get_string() == _["weekly"]:
             backup_item = "Weekly"
-        if selected_item.get_string() == _["monthly"]:
+            self.create_pb_desktop()
+        elif selected_item.get_string() == _["monthly"]:
             backup_item = "Monthly"
+            self.create_pb_desktop()
         (width, height) = self.get_default_size()
         self.settings["window-size"] = (width, height)
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["save-installed-flatpaks"] = self.switch_01.get_active()
         self.settings["periodic-saving"] = backup_item
+        
+    ## Create desktop file to make periodic backups work
+    def create_pb_desktop(self):
+        if not os.path.exists(f'{Path.home()}/.config/autostart'):
+            os.mkdir(f'{Path.home}/.config/autostart')
+        if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
+            with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
+                cb.write('[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --background')
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
