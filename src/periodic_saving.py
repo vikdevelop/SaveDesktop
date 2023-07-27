@@ -49,9 +49,9 @@ class PeriodicBackups:
             self.pbfolder = f'{self.settings["periodic-saving-folder"]}'
                 
         # Get filename format     
-        if 'YY-MM-DD' in self.settings["filename-format"]:
+        if '{}' in self.settings["filename-format"]:
             self.format_b = self.settings["filename-format"]
-            self.filename = self.format_b.replace('YY-MM-DD', f'{date.today()}')
+            self.filename = self.format_b.replace('{}', f'{date.today()}')
             self.overwrite = False
         else:
             self.filename = self.settings["filename-format"]
