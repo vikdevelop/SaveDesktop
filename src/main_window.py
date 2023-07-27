@@ -177,6 +177,10 @@ class MainWindow(Gtk.Window):
             self.import_desktop()
             self.connect("close-request", self.on_close)
         else:
+            self.set_child(self.pBox)
+            self.pBox.set_margin_start(50)
+            self.pBox.set_margin_end(50)
+            self.headerbar.set_title_widget(None)
             self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
             self.Image.set_pixel_size(50)
             self.pBox.append(self.Image)
@@ -421,7 +425,7 @@ class MainWindow(Gtk.Window):
         # Button for choosing folder for periodic saving
         self.folderButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.folderButton.set_valign(Gtk.Align.CENTER)
-        self.folderButton.set_tooltip_text(_["set_pb_folder_tooltip"])
+        self.folderButton.set_tooltip_text(_["set_another"])
         self.folderButton.connect("clicked", self.select_pb_folder)
         
         # Adw.ActionRow for showing folder for periodic saving
