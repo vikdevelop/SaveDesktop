@@ -51,10 +51,18 @@ class PeriodicBackups:
         # Get filename format     
         if '{}' in self.settings["filename-format"]:
             self.format_b = self.settings["filename-format"]
-            self.filename = self.format_b.replace('{}', f'{date.today()}')
+            self.name_with_spaces = self.format_b.replace('{}', f'{date.today()}')
+            if ' ' in self.name_with_spaces:
+                self.filename = self.name_with_spaces.replace(' ', '_')
+            else:
+                self.filename = self.format_b.replace('{}', f'{date.today()}')
             self.overwrite = False
         else:
-            self.filename = self.settings["filename-format"]
+            self.name_with_spaces = self.settings["filename-format"]
+            if ' ' in self.name_with_spaces:
+                self.filename = self.name_with_spaces.replace(' ', '_')
+            else:
+                self.filename = self.settings["filename-format"]
             self.overwrite = True
         
         # Get periodic saving interval selected by the user
