@@ -474,7 +474,7 @@ class MainWindow(Gtk.Window):
             
     # Set text of self.filefrmtEntry to default
     def set_default_filefrmtEntry(self, w):
-        self.filefrmtEntry.set_text("config_YY-MM-DD")
+        self.filefrmtEntry.set_text("config_{}")
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
