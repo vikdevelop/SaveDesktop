@@ -31,6 +31,83 @@
 - your installed Flatpak apps
 - other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, etc.)
 
+<details>
+  <summary><b>Configuration files that will be included in the archive</b></summary>
+  
+  - **General files**
+  ```
+  - ~/.config/dconf/user
+  - ~/.local/share/backgrounds 
+  - ~/.themes
+  - ~/.icons
+  - ~/.local/share/icons 
+  - ~/.fonts
+  - ~/.config/gtk-4.0 
+  - ~/.config/gtk-3.0 
+  ```
+  - **GNOME**
+  ```
+   - ~/.local/share/gnome-background-properties
+   - ~/.local/share/gnome-shell
+   - ~/.local/share/nautilus-python
+   - ~/.local/share/gnome-control-center
+  ```
+  - **Pantheon**
+  ```
+  - ~/.config/plank 
+  - ~/.config/marlin 
+  ```
+  - **Cinnamon**
+  ```
+  - ~/.config/nemo
+  - ~/.local/share/cinnamon
+  - ~/.cinnamon
+  ```
+  - **Budgie**
+  ```
+  - ~/.config/budgie-desktop
+  - ~/.config/bugie-extras
+  - ~/.config/nemo ./")
+  ```
+  - **Cosmic**
+  ```
+  - ~/.config/pop-shell
+  - ~/.local/share/gnome-shell
+  ```
+  - **Xfce**
+  ```
+  - ~/.config/xfce4
+  - ~/.config/Thunar
+  - ~/.xfce4
+  ```
+  - **MATE**
+  ```
+  - ~/.config/caja
+  ```
+  - **KDE Plasma**
+  ```
+  - ~/.config/[k]* (all directories and files beginning with k)
+  - ~/.config/gtkrc
+  - ~/.config/dolphinrc
+  - ~/.config/gwenviewrc
+  - ~/.config/plasmashellrc
+  - ~/.config/spectaclerc
+  - ~/.config/plasmarc
+  - ~/.config/plasma-org.kde.plasma.desktop-appletsrc
+  - ~/.local/share/konsole
+  - ~/.local/share/dolphin
+  - ~/.local/share/sddm
+  - ~/.local/share/wallpapers
+  - ~/.local/share/plasma-systemmonitor
+  - ~/.local/share/plasma
+  - ~/.local/share/aurorae
+  - ~/.local/share/kscreen
+  - ~/.local/share/color-schemes
+  ```
+  
+  
+</details>
+
 ## Translations
 If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
 
