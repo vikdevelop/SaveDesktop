@@ -29,8 +29,7 @@
 - your backgrounds (including dynamic wallpapers, provided that the same username is retained)
 - your GNOME and Nautilus extensions
 - your installed Flatpak apps
-
-and more...
+- other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, etc.)
 
 ## Translations
 If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
