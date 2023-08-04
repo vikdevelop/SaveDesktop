@@ -37,6 +37,7 @@
     "filename_format": "File name format",
     "reset_button": "Reset to default",
     "items_for_archive": "Items to include in the configuration archive",
+    "items_desc": "These settings also apply to periodic saving",
     "icons": "Icons",
     "themes": "Themes",
     "fonts": "Fonts",
