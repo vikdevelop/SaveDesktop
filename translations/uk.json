@@ -33,5 +33,15 @@
     "save_installed_flatpaks": "Зберегти встановлені Flatpak додатки",
     "pb_folder": "Папка для періодичного збереження",
     "set_pb_folder_tooltip": "Виберіть власну папку для періодичного збереження",
-    "set_another": "Виберіть іншу папку"
+    "set_another": "Виберіть іншу папку",
+    "filename_format": "File name format",
+    "import_title": "Import",
+    "more_settings_pb": "Additional settings for periodic saving",
+    "reset_button": "Reset to default",
+    "items_for_archive": "Items to include in the configuration archive",
+    "items_desc": "These settings also apply to periodic saving",
+    "icons": "Icons",
+    "themes": "Themes",
+    "fonts": "Fonts",
+    "backgrounds": "Backgrounds"
 }

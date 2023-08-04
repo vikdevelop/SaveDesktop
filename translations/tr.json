@@ -33,5 +33,15 @@
     "save_installed_flatpaks": "Kurulu Flatpak uygulamalarını kaydet",
     "pb_folder": "Düzenli kayıt klasörü",
     "set_pb_folder_tooltip": "Düzenli kayıt için özel klasör seçin",
-    "set_another": "Başka bir klasör seçin"
+    "set_another": "Başka bir klasör seçin",
+    "import_title": "Import",
+    "items_desc": "These settings also apply to periodic saving",
+    "themes": "Themes",
+    "fonts": "Fonts",
+    "backgrounds": "Backgrounds",
+    "more_settings_pb": "Additional settings for periodic saving",
+    "filename_format": "File name format",
+    "reset_button": "Reset to default",
+    "items_for_archive": "Items to include in the configuration archive",
+    "icons": "Icons"
 }

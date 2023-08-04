@@ -33,5 +33,15 @@
     "save_installed_flatpaks": "Telepített Flatpak alkalmazások mentése",
     "pb_folder": "Időszakos mentések mappája",
     "set_pb_folder_tooltip": "Válassz egyéni mappát az időszakos mentéshez",
-    "set_another": "Válassz másik mappát"
+    "set_another": "Válassz másik mappát",
+    "import_title": "Import",
+    "more_settings_pb": "Additional settings for periodic saving",
+    "items_for_archive": "Items to include in the configuration archive",
+    "filename_format": "File name format",
+    "reset_button": "Reset to default",
+    "items_desc": "These settings also apply to periodic saving",
+    "icons": "Icons",
+    "themes": "Themes",
+    "fonts": "Fonts",
+    "backgrounds": "Backgrounds"
 }
