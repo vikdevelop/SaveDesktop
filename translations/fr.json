@@ -33,5 +33,15 @@
     "save_installed_flatpaks": "Sauvegarder les applications Flatpak installées",
     "pb_folder": "Dossier de sauvegarde périodique",
     "set_pb_folder_tooltip": "Choisir un dossier personnalisé pour la sauvegarde périodique",
-    "set_another": "Sélectionnez un autre dossier"
+    "set_another": "Sélectionnez un autre dossier",
+    "icons": "Icons",
+    "import_title": "Import",
+    "more_settings_pb": "Additional settings for periodic saving",
+    "filename_format": "File name format",
+    "reset_button": "Reset to default",
+    "items_desc": "These settings also apply to periodic saving",
+    "themes": "Themes",
+    "items_for_archive": "Items to include in the configuration archive",
+    "fonts": "Fonts",
+    "backgrounds": "Backgrounds"
 }
