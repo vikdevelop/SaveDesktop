@@ -46,10 +46,8 @@ else:
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
-    os.system(f"wget -qO {DATA}/main_window.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/src/main_window.py")
-    result = filecmp.cmp(f"{DATA}/main_window.py", f"{Path.home()}/.local/share/savedesktop/src/main_window.py")
-    if result == False:
-        os.popen(f"cp {DATA}/main_window.py {Path.home()}/.local/share/savedesktop/src/")
+    if not subprocess.getoutput("curl -Ls -o /dev/null -w %{url_effective} https://github.com/vikdevelop/SaveDesktop/releases/latest") == "https://github.com/vikdevelop/SaveDesktop/releases/tag/2.8%":
+        os.popen("git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --remove && git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --install")
         python = sys.executable
         os.execl(python, python, *sys.argv)
 
@@ -59,7 +57,7 @@ class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_title("SaveDesktop")
-        self.headerbar = Gtk.HeaderBar.new()
+        self.headerbar = Adw.HeaderBar.new()
         self.set_titlebar(titlebar=self.headerbar)
         self.application = kwargs.get('application')
         
@@ -80,18 +78,36 @@ class MainWindow(Gtk.Window):
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
         
-        # Savedesktop menu
-        self.savedesktop_mode_dropdwn = Gtk.DropDown.new_from_strings( \
-            [_["save_config"], _["import_config"]] )
-        self.savedesktop_mode_dropdwn.connect('notify::selected-item', \
-            self.change_savedesktop_mode)
-        
         # Primary layout
+        self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.headapp.set_margin_start(80)
+        self.headapp.set_margin_end(80)
+        self.headapp.set_valign(Gtk.Align.CENTER)
+        self.headapp.set_halign(Gtk.Align.CENTER)
+        
+        # Layout for import from list section
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.pBox.set_halign(Gtk.Align.CENTER)
         self.pBox.set_valign(Gtk.Align.CENTER)
-        self.pBox.set_margin_start(100)
-        self.pBox.set_margin_end(100)
+        
+        # Stack
+        self.stack =Adw.ViewStack(vexpand=True)
+        self.headapp.append(self.stack)
+        
+        # Layout for saving and importing configuration
+        self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=17)
+        self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.imp_cfg_title = _["import_from_file"]
+        
+        # Add pages
+        self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
+        self.stack.add_titled_with_icon(self.importBox,"importpage","Import","document-open-symbolic")
+        
+        # Adw Switcher
+        self.switcher_title=Adw.ViewSwitcherTitle()
+        self.switcher_title.set_stack(self.stack)
+        self.switcher_title.set_title("")
+        self.headerbar.set_title_widget(self.switcher_title)
         
         # Toast
         self.toast_overlay = Adw.ToastOverlay.new()
@@ -101,7 +117,7 @@ class MainWindow(Gtk.Window):
         self.toast_overlay.set_margin_start(margin=1)
         
         self.set_child(self.toast_overlay)
-        self.toast_overlay.set_child(self.pBox)
+        self.toast_overlay.set_child(self.headapp)
         
         self.toast = Adw.Toast.new(title='')
         self.toast.set_timeout(5)
@@ -111,54 +127,58 @@ class MainWindow(Gtk.Window):
         if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
             self.environment = 'COSMIC'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
             self.environment = 'Pantheon'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
             self.environment = 'Cinnamon'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Budgie:GNOME':
             self.environment = 'Budgie'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             self.environment = 'Xfce'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
             self.environment = 'MATE'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
             self.environment = 'KDE Plasma'
             self.save_desktop()
-            self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+            self.import_desktop()
             self.connect("close-request", self.on_close)
         else:
+            self.set_child(self.pBox)
+            self.pBox.set_margin_start(50)
+            self.pBox.set_margin_end(50)
+            self.headerbar.set_title_widget(None)
             self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
             self.Image.set_pixel_size(50)
             self.pBox.append(self.Image)
@@ -168,25 +188,11 @@ class MainWindow(Gtk.Window):
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
     
-    def change_savedesktop_mode(self, w, pspec):
-        if self.savedesktop_mode_dropdwn.get_selected() == 0:
-            self.save_desktop()
-        else:
-            self.import_desktop()
-    
     # Show main layout
     def save_desktop(self):
-        # Remove Import page box
-        try:
-            self.pBox.remove(self.importBox)
-        except:
-            print("")
-        
-        # Box for save page
-        self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        # Set margin for save desktop layout
         self.saveBox.set_margin_start(40)
         self.saveBox.set_margin_end(40)
-        self.pBox.append(self.saveBox)
         
         # Tittle image for save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
@@ -195,7 +201,7 @@ class MainWindow(Gtk.Window):
         
         # Tittle "Save Current configuration" for save page and subtitle "{user_desktop}"
         self.label_title = Gtk.Label.new()
-        self.label_title.set_markup('\n<big><b>{}</b></big>\n{}\n'.format(_["save_config"], self.environment))
+        self.label_title.set_markup('<big><b>{}</b></big>\n{}'.format(_["save_config"], self.environment))
         self.label_title.set_justify(Gtk.Justification.CENTER)
         self.saveBox.append(self.label_title)
         
@@ -210,22 +216,20 @@ class MainWindow(Gtk.Window):
         self.saveEntry.set_title(_["set_filename"])
         self.saveEntry.set_text(self.settings["filename"])
         self.lbox_e.append(self.saveEntry)
-        
-        # Switch and row of option 'Save Flatpak custom permissions'
-        self.switch_01 = Gtk.Switch.new()
-        if self.settings["save-installed-flatpaks"]:
-            self.switch_01.set_active(True)
-        self.switch_01.set_valign(align=Gtk.Align.CENTER)
          
-        self.flatpak_row = Adw.ActionRow.new()
-        self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
-        self.flatpak_row.set_subtitle(f'<a href="https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list">{_["learn_more"]}</a>')
-        self.flatpak_row.set_use_markup(True)
-        self.flatpak_row.set_title_lines(2)
-        self.flatpak_row.set_subtitle_lines(3)
-        self.flatpak_row.add_suffix(self.switch_01)
-        self.flatpak_row.set_activatable_widget(self.switch_01)
-        self.lbox_e.append(child=self.flatpak_row)
+        self.itemsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
+        self.itemsButton.set_valign(Gtk.Align.CENTER)
+        self.itemsButton.add_css_class("flat")
+        self.itemsButton.connect("clicked", self.open_itemsDialog)
+        
+        self.items_row = Adw.ActionRow.new()
+        self.items_row.set_title(title=_["items_for_archive"])
+        self.items_row.set_use_markup(True)
+        self.items_row.set_title_lines(3)
+        self.items_row.set_subtitle_lines(3)
+        self.items_row.add_suffix(self.itemsButton)
+        self.items_row.set_activatable_widget(self.itemsButton)
+        self.lbox_e.append(child=self.items_row)
         
         self.lbox_e.set_show_separators(True)
         
@@ -234,9 +238,10 @@ class MainWindow(Gtk.Window):
             _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
         
-        self.periodicButton = Gtk.Button.new_from_icon_name("preferences-system-symbolic")
+        self.periodicButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.periodicButton.add_css_class("flat")
-        self.periodicButton.set_tooltip_text(_["set_pb_folder_tooltip"])
+        self.periodicButton.set_tooltip_text(_["more_settings_pb"])
+        self.periodicButton.set_valign(Gtk.Align.CENTER)
         self.periodicButton.connect("clicked", self.open_periodic_backups)
         
         self.adw_action_row_backups = Adw.ComboRow.new()
@@ -259,29 +264,19 @@ class MainWindow(Gtk.Window):
         elif self.settings["periodic-saving"] == 'Monthly':
             self.adw_action_row_backups.set_selected(3)
         
-        self.savebtnBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-        self.savebtnBox.set_margin_top(10)
-        self.savebtnBox.set_margin_start(180)
-        self.savebtnBox.set_margin_end(180)
-        self.saveBox.append(self.savebtnBox)
-        
         # save configuration button
         self.saveButton = Gtk.Button.new_with_label(_["save"])
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("pill")
         self.saveButton.connect("clicked", self.select_folder)
-        self.savebtnBox.append(self.saveButton)
+        self.saveButton.set_valign(Gtk.Align.CENTER)
+        self.saveButton.set_halign(Gtk.Align.CENTER)
+        self.saveBox.append(self.saveButton)
         
     # Import configuration section
     def import_desktop(self):
-        try:
-            self.pBox.remove(self.saveBox)
-        except:
-            print("")
-        
-        # box for import page
-        self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        
+        self.importBox.set_valign(Gtk.Align.CENTER)
+        self.importBox.set_halign(Gtk.Align.CENTER)
         # Image for import page
         self.importImage = Gtk.Image.new_from_icon_name("document-open-symbolic")
         self.importImage.set_pixel_size(64)
@@ -313,15 +308,15 @@ class MainWindow(Gtk.Window):
         self.fromlistButton.connect("clicked", self.import_from_list)
         self.importbtnBox.append(self.fromlistButton)
         
-        self.pBox.append(self.importBox)
+        #self.pBox.append(self.importBox)
         
     # Import archive from list
     def import_from_list(self, w):
-        self.pBox.remove(self.importBox)
+        self.set_child(self.pBox)
         self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
         self.backButton.add_css_class("flat")
         self.backButton.connect("clicked", self.close_list)
-        self.headerbar.remove(self.savedesktop_mode_dropdwn)
+        self.headerbar.set_title_widget(None)
         self.headerbar.pack_start(self.backButton)
         
         self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=20)
@@ -376,10 +371,11 @@ class MainWindow(Gtk.Window):
     
     # Action after closing import from list page
     def close_list(self, w):
-        self.pBox.append(self.importBox)
         self.pBox.remove(self.flistBox)
+        self.set_child(self.toast_overlay)
+        self.toast_overlay.set_child(self.headapp)
         self.headerbar.remove(self.backButton)
-        self.headerbar.pack_start(self.savedesktop_mode_dropdwn)
+        self.headerbar.set_title_widget(self.switcher_title)
         try:
             self.headerbar.remove(self.applyButton)
         except:
@@ -392,20 +388,54 @@ class MainWindow(Gtk.Window):
     # Dialog for changing directory for periodic backups
     def dirdialog(self):
         self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
-        self.dirDialog.set_heading(_["set_pb_folder_tooltip"])
+        #self.dirDialog.set_heading("Additional settings for periodic saving")
+        
+        self.dirBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        
+        self.pbLabel = Gtk.Label.new(str=f"<big><b>{_['more_settings_pb']}</b></big>\n")
+        self.pbLabel.set_use_markup(True)
+        self.pbLabel.set_wrap(True)
+        self.pbLabel.set_justify(Gtk.Justification.CENTER)
+        self.dirBox.append(self.pbLabel)
+        
+        # Box for adding widgets in this dialog
         self.dirLBox = Gtk.ListBox.new()
         self.dirLBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.dirLBox.get_style_context().add_class(class_name='boxed-list')
+        self.dirBox.append(self.dirLBox)
+        
+        self.filefrmtButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
+        self.filefrmtButton.add_css_class('destructive-action')
+        self.filefrmtButton.set_valign(Gtk.Align.CENTER)
+        self.filefrmtButton.set_tooltip_text(_["reset_button"])
+        self.filefrmtButton.connect("clicked", self.set_default_filefrmtEntry)
+        
+        # Entry for selecting file name format
+        self.filefrmtEntry = Adw.EntryRow.new()
+        self.filefrmtEntry.set_title(_["filename_format"])
+        self.filefrmtEntry.add_suffix(self.filefrmtButton)
+        self.filefrmtEntry.set_text(self.settings["filename-format"])
+        self.dirLBox.append(self.filefrmtEntry)
+        
+        # Button for choosing folder for periodic saving
+        self.folderButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
+        self.folderButton.set_valign(Gtk.Align.CENTER)
+        self.folderButton.set_tooltip_text(_["set_another"])
+        self.folderButton.connect("clicked", self.select_pb_folder)
+        
+        # Adw.ActionRow for showing folder for periodic saving
         self.dirRow = Adw.ActionRow.new()
         self.dirRow.set_title(_["pb_folder"])
+        self.dirRow.add_suffix(self.folderButton)
         self.dirRow.set_use_markup(True)
         if self.settings["periodic-saving-folder"] == '':
             self.dirRow.set_subtitle(f"{download_dir}/SaveDesktop/archives")
         else:
             self.dirRow.set_subtitle(self.settings["periodic-saving-folder"])
         self.dirLBox.append(self.dirRow)
-        self.dirDialog.set_extra_child(self.dirLBox)
-        self.dirDialog.add_response('another-folder', _["set_another"])
+        
+        self.dirDialog.set_extra_child(self.dirBox)
+        self.dirDialog.add_response('cancel', _["cancel"])
         self.dirDialog.add_response('ok', _["apply"])
         self.dirDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.dirDialog.connect('response', self.dirdialog_closed)
@@ -413,16 +443,122 @@ class MainWindow(Gtk.Window):
         
     # Action after closed dialog for choosing periodic backups folder
     def dirdialog_closed(self, w, response):
-        if response == 'another-folder':
-            self.select_pb_folder()
-        elif response == 'ok':
+        if response == 'ok':
             if self.dirRow.get_subtitle() == '':
                 self.settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
             else:
                 self.settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
+            self.settings["filename-format"] = self.filefrmtEntry.get_text()
+            
+    # Set text of self.filefrmtEntry to default
+    def set_default_filefrmtEntry(self, w):
+        self.filefrmtEntry.set_text("config_{}")
+            
+    # Dialog: items to include in the configuration archive
+    def open_itemsDialog(self, w):
+        self.itemsDialog = Adw.MessageDialog.new(app.get_active_window())
+        self.itemsDialog.set_heading(_["items_for_archive"])
+        self.itemsDialog.set_body(_["items_desc"])
+        
+        # Box for loading widgets in this dialog
+        self.itemsBox = Gtk.ListBox.new()
+        self.itemsBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.itemsBox.get_style_context().add_class(class_name='boxed-list')
+        self.itemsDialog.set_extra_child(self.itemsBox)
+        
+        # Switch and row of option 'Save icons'
+        self.switch_01 = Gtk.Switch.new()
+        if self.settings["save-icons"]:
+            self.switch_01.set_active(True)
+        self.switch_01.set_valign(align=Gtk.Align.CENTER)
+         
+        self.icons_row = Adw.ActionRow.new()
+        self.icons_row.set_title(title=_["icons"])
+        self.icons_row.set_use_markup(True)
+        self.icons_row.set_title_lines(2)
+        self.icons_row.set_subtitle_lines(3)
+        self.icons_row.add_suffix(self.switch_01)
+        self.icons_row.set_activatable_widget(self.switch_01)
+        self.itemsBox.append(child=self.icons_row)
+        
+        # Switch and row of option 'Save themes'
+        self.switch_02 = Gtk.Switch.new()
+        if self.settings["save-themes"]:
+            self.switch_02.set_active(True)
+        self.switch_02.set_valign(align=Gtk.Align.CENTER)
+         
+        self.themes_row = Adw.ActionRow.new()
+        self.themes_row.set_title(title=_["themes"])
+        self.themes_row.set_use_markup(True)
+        self.themes_row.set_title_lines(2)
+        self.themes_row.set_subtitle_lines(3)
+        self.themes_row.add_suffix(self.switch_02)
+        self.themes_row.set_activatable_widget(self.switch_02)
+        self.itemsBox.append(child=self.themes_row)
+        
+        # Switch and row of option 'Save fonts'
+        self.switch_03 = Gtk.Switch.new()
+        if self.settings["save-fonts"]:
+            self.switch_03.set_active(True)
+        self.switch_03.set_valign(align=Gtk.Align.CENTER)
+         
+        self.fonts_row = Adw.ActionRow.new()
+        self.fonts_row.set_title(title=_["fonts"])
+        self.fonts_row.set_use_markup(True)
+        self.fonts_row.set_title_lines(2)
+        self.fonts_row.set_subtitle_lines(3)
+        self.fonts_row.add_suffix(self.switch_03)
+        self.fonts_row.set_activatable_widget(self.switch_03)
+        self.itemsBox.append(child=self.fonts_row)
+        
+        # Switch and row of option 'Save backgrounds'
+        self.switch_04 = Gtk.Switch.new()
+        if self.settings["save-backgrounds"]:
+            self.switch_04.set_active(True)
+        self.switch_04.set_valign(align=Gtk.Align.CENTER)
+         
+        self.backgrounds_row = Adw.ActionRow.new()
+        self.backgrounds_row.set_title(title=_["backgrounds"])
+        self.backgrounds_row.set_use_markup(True)
+        self.backgrounds_row.set_title_lines(2)
+        self.backgrounds_row.set_subtitle_lines(3)
+        self.backgrounds_row.add_suffix(self.switch_04)
+        self.backgrounds_row.set_activatable_widget(self.switch_04)
+        self.itemsBox.append(child=self.backgrounds_row)
+        
+        # Switch and row of option 'Save installed flatpaks'
+        self.switch_05 = Gtk.Switch.new()
+        if self.settings["save-installed-flatpaks"]:
+            self.switch_05.set_active(True)
+        self.switch_05.set_valign(align=Gtk.Align.CENTER)
+         
+        self.flatpak_row = Adw.ActionRow.new()
+        self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
+        self.flatpak_row.set_subtitle(f'<a href="https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list">{_["learn_more"]}</a>')
+        self.flatpak_row.set_use_markup(True)
+        self.flatpak_row.set_title_lines(2)
+        self.flatpak_row.set_subtitle_lines(3)
+        self.flatpak_row.add_suffix(self.switch_05)
+        self.flatpak_row.set_activatable_widget(self.switch_05)
+        self.itemsBox.append(child=self.flatpak_row)
+        
+        self.itemsDialog.add_response('cancel', _["cancel"])
+        self.itemsDialog.add_response('ok', _["apply"])
+        self.itemsDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.itemsDialog.connect('response', self.itemsdialog_closed)
+        self.itemsDialog.show()
+        
+    # Action after closing itemsDialog
+    def itemsdialog_closed(self, w, response):
+        if response == 'ok':
+            self.settings["save-icons"] = self.switch_01.get_active()
+            self.settings["save-themes"] = self.switch_02.get_active()
+            self.settings["save-fonts"] = self.switch_03.get_active()
+            self.settings["save-backgrounds"] = self.switch_04.get_active()
+            self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
     
     # Select folder for periodic backups (Gtk.FileDialog)
-    def select_pb_folder(self):
+    def select_pb_folder(self, w):
         def save_selected(source, res, data):
             try:
                 file = source.select_folder_finish(res)
@@ -431,6 +567,8 @@ class MainWindow(Gtk.Window):
             self.folder_pb = file.get_path()
             self.dirdialog()
             self.dirRow.set_subtitle(self.folder_pb)
+            
+        self.dirDialog.close()
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -491,14 +629,18 @@ class MainWindow(Gtk.Window):
             os.mkdir(f"{CACHE}/saved_config")
         os.chdir(f"{CACHE}/saved_config")
         self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
-        self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
-        self.themes = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.themes ./")
-        self.icons_home = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.icons ./")
-        self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/icons ./")
-        self.fonts = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.fonts ./")
         self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
         self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
-        if self.switch_01.get_active() == True:
+        if self.settings["save-backgrounds"] == True:
+            self.backgrounds = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/backgrounds ./")
+        if self.settings["save-themes"] == True:
+            self.themes = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.themes ./")
+        if self.settings["save-icons"] == True:
+            self.icons_home = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.icons ./")
+            self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/icons ./")
+        if self.settings["save-fonts"] == True:
+            self.fonts = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.fonts ./")
+        if self.settings["save-installed-flatpaks"] == True:
             os.popen(f"sh {system_dir}/backup_flatpaks.sh")
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
@@ -539,7 +681,8 @@ class MainWindow(Gtk.Window):
             self.kdata = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/konsole ./xdg-data/")
             self.dolphin_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/dolphin ./xdg-data/")
             self.sddm = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/sddm ./xdg-data/")
-            self.wallpapers = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/wallpapers ./xdg-data/")
+            if self.settings["save-backgrounds"]:
+                self.wallpapers = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/wallpapers ./xdg-data/")
             self.psysmonitor = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma-systemmonitor ./xdg-data/")
             self.plasma_data = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/plasma ./xdg-data/")
             self.aurorae = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/aurorae ./xdg-data/")
@@ -625,7 +768,7 @@ class MainWindow(Gtk.Window):
         self.create_flatpak_desktop()
         self.applying_done()
     
-    # Create desktop for install Flatpaks from list
+    # Create desktop file for install Flatpaks from list
     def create_flatpak_desktop(self):
         os.popen(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
         if not os.path.exists(f"{Path.home()}/.config/autostart"):
@@ -662,26 +805,31 @@ class MainWindow(Gtk.Window):
     # action after closing window
     def on_close(self, widget, *args):
         selected_item = self.adw_action_row_backups.get_selected_item()
-        # Create desktop file to make periodic backups work
-        if selected_item.get_string() == _["never"]:
-            backup_item = "Never"
-        else:
-            if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
-                with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
-                    cb.write('[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --background')
         # Translate backup items to English because it is necessary for the proper functioning of periodic backups correctly
-        if selected_item.get_string() == _["daily"]:
+        if selected_item.get_string() == _["never"]:
+            backup_item = "Never" 
+        elif selected_item.get_string() == _["daily"]:
             backup_item = "Daily"
-        if selected_item.get_string() == _["weekly"]:
+            self.create_pb_desktop()
+        elif selected_item.get_string() == _["weekly"]:
             backup_item = "Weekly"
-        if selected_item.get_string() == _["monthly"]:
+            self.create_pb_desktop()
+        elif selected_item.get_string() == _["monthly"]:
             backup_item = "Monthly"
+            self.create_pb_desktop()
         (width, height) = self.get_default_size()
         self.settings["window-size"] = (width, height)
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
-        self.settings["save-installed-flatpaks"] = self.switch_01.get_active()
         self.settings["periodic-saving"] = backup_item
+        
+    ## Create desktop file to make periodic backups work
+    def create_pb_desktop(self):
+        if not os.path.exists(f'{Path.home()}/.config/autostart'):
+            os.mkdir(f'{Path.home}/.config/autostart')
+        if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
+            with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
+                cb.write('[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --background')
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
@@ -712,9 +860,7 @@ class MyApp(Adw.Application):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
         dialog.set_developer_name("vikdevelop")
-        if r_lang == "en":
-            print("")
-        else:
+        if not r_lang == "en":
             dialog.set_translator_credits(_["translator_credits"])
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
@@ -722,7 +868,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.7.1"
+        version = "2.8"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):

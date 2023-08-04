@@ -63,6 +63,15 @@
     </categories>
           
     <releases>
+       <release version="2.8" date="2023-04-08">
+           <description>
+               <ul>
+                   <li>Added option for choosing file name format for periodic saving (information about how it works can be found in the Wiki article about periodic saving (Learn More button under the periodic saving section))</li>
+                   <li>Now, it is possible to choose items that will be included in the configuration archive. These items include icons, fonts, themes, and backgrounds.</li>
+                   <li>Improved menu switcher in the header bar</li>
+               </ul>
+           </description>
+       </release>
        <release version="2.7" date="2023-07-07">
           <description>
             <ul>
