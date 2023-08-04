@@ -33,5 +33,15 @@
     "save_installed_flatpaks": "Geïnstalleerde flatpaktoepassingen bewaren",
     "pb_folder": "Periodieke-opslagmap",
     "set_pb_folder_tooltip": "Kies een map waarin periodiek reservekopieën dienen te worden bewaard",
-    "set_another": "Kies een andere map"
+    "set_another": "Kies een andere map",
+    "import_title": "Import",
+    "more_settings_pb": "Additional settings for periodic saving",
+    "filename_format": "File name format",
+    "reset_button": "Reset to default",
+    "items_for_archive": "Items to include in the configuration archive",
+    "items_desc": "These settings also apply to periodic saving",
+    "icons": "Icons",
+    "themes": "Themes",
+    "fonts": "Fonts",
+    "backgrounds": "Backgrounds"
 }
