@@ -33,5 +33,15 @@
     "save_installed_flatpaks": "Uložit nainstalované aplikace Flatpak",
     "pb_folder": "Složka pro pravidelné ukládání",
     "set_pb_folder_tooltip": "Vybrat vlastní složku pro pravidelné ukládání",
-    "set_another": "Vybrat jinou složku"
+    "set_another": "Vybrat jinou složku",
+    "icons": "Icons",
+    "import_title": "Import",
+    "more_settings_pb": "Additional settings for periodic saving",
+    "filename_format": "File name format",
+    "reset_button": "Reset to default",
+    "items_for_archive": "Items to include in the configuration archive",
+    "items_desc": "These settings also apply to periodic saving",
+    "themes": "Themes",
+    "fonts": "Fonts",
+    "backgrounds": "Backgrounds"
 }
