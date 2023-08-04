@@ -95,7 +95,7 @@ class MainWindow(Gtk.Window):
         self.headapp.append(self.stack)
         
         # Layout for saving and importing configuration
-        self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=17)
         self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.imp_cfg_title = _["import_from_file"]
         
@@ -201,7 +201,7 @@ class MainWindow(Gtk.Window):
         
         # Tittle "Save Current configuration" for save page and subtitle "{user_desktop}"
         self.label_title = Gtk.Label.new()
-        self.label_title.set_markup('\n<big><b>{}</b></big>\n{}\n'.format(_["save_config"], self.environment))
+        self.label_title.set_markup('<big><b>{}</b></big>\n{}'.format(_["save_config"], self.environment))
         self.label_title.set_justify(Gtk.Justification.CENTER)
         self.saveBox.append(self.label_title)
         
@@ -225,7 +225,7 @@ class MainWindow(Gtk.Window):
         self.items_row = Adw.ActionRow.new()
         self.items_row.set_title(title=_["items_for_archive"])
         self.items_row.set_use_markup(True)
-        self.items_row.set_title_lines(2)
+        self.items_row.set_title_lines(3)
         self.items_row.set_subtitle_lines(3)
         self.items_row.add_suffix(self.itemsButton)
         self.items_row.set_activatable_widget(self.itemsButton)
@@ -264,18 +264,14 @@ class MainWindow(Gtk.Window):
         elif self.settings["periodic-saving"] == 'Monthly':
             self.adw_action_row_backups.set_selected(3)
         
-        self.savebtnBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-        self.savebtnBox.set_margin_top(10)
-        self.savebtnBox.set_margin_start(180)
-        self.savebtnBox.set_margin_end(180)
-        self.saveBox.append(self.savebtnBox)
-        
         # save configuration button
         self.saveButton = Gtk.Button.new_with_label(_["save"])
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("pill")
         self.saveButton.connect("clicked", self.select_folder)
-        self.savebtnBox.append(self.saveButton)
+        self.saveButton.set_valign(Gtk.Align.CENTER)
+        self.saveButton.set_halign(Gtk.Align.CENTER)
+        self.saveBox.append(self.saveButton)
         
     # Import configuration section
     def import_desktop(self):
@@ -399,6 +395,7 @@ class MainWindow(Gtk.Window):
         self.pbLabel = Gtk.Label.new(str=f"<big><b>{_['more_settings_pb']}</b></big>\n")
         self.pbLabel.set_use_markup(True)
         self.pbLabel.set_wrap(True)
+        self.pbLabel.set_justify(Gtk.Justification.CENTER)
         self.dirBox.append(self.pbLabel)
         
         # Box for adding widgets in this dialog
@@ -460,8 +457,8 @@ class MainWindow(Gtk.Window):
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
         self.itemsDialog = Adw.MessageDialog.new(app.get_active_window())
-        self.itemsDialog.set_heading("Items to include in the configuration archive")
-        self.itemsDialog.set_body("These settings also apply to periodic saving")
+        self.itemsDialog.set_heading(_["items_for_archive"])
+        self.itemsDialog.set_body(_["items_desc"])
         
         # Box for loading widgets in this dialog
         self.itemsBox = Gtk.ListBox.new()
