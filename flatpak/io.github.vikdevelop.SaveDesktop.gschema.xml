@@ -11,11 +11,23 @@
 		</key>
 		<key name="save-installed-flatpaks" type="b">
 			<default>false</default>
-			<summary>Save installed Flatpak apps</summary>
+			<summary>Save installed Flatpak apps (option)</summary>
 		</key>
-		<key name="save-installed-flatpaks-pb" type="b">
-			<default>false</default>
-			<summary>Save installed Flatpak apps (designed to periodic saving)</summary>
+		<key name="save-icons" type="b">
+			<default>true</default>
+			<summary>Save icons (option)</summary>
+		</key>
+		<key name="save-themes" type="b">
+			<default>true</default>
+			<summary>Save themes (option)</summary>
+		</key>
+		<key name="save-fonts" type="b">
+			<default>true</default>
+			<summary>Save fonts (option)</summary>
+		</key>
+		<key name="save-backgrounds" type="b">
+			<default>true</default>
+			<summary>Save backgrounds (option)</summary>
 		</key>
 		<key name="periodic-saving" type="s">
 		  <choices>
@@ -27,6 +39,10 @@
 			<default>"Never"</default>
 			<summary>Periodic saving</summary>
 		</key>
+		<key name="periodic-saving-folder" type="s">
+		  	<default>''</default>
+		  	<summary>Folder for periodic backups</summary>
+		</key>
 		<key name="filename" type="s">
 			<default>''</default>
 			<summary>Filename text</summary>
@@ -34,10 +50,6 @@
 		<key name="filename-format" type="s">
 			<default>'config_{}'</default>
 			<summary>File name format (designed to periodic saving)</summary>
-		</key>
-		<key name="periodic-saving-folder" type="s">
-		  <default>''</default>
-		  <summary>Folder for periodic backups</summary>
 		</key>
 	</schema>
 </schemalist>
