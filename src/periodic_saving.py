@@ -119,14 +119,18 @@ class PeriodicBackups:
         os.system("mkdir -p {}/periodic-saving/{}".format(CACHE, date.today()))
         os.chdir('{}/periodic-saving/{}'.format(CACHE, date.today()))
         os.system('cp ~/.config/dconf/user ./')
-        os.system('cp -R ~/.local/share/backgrounds ./')
-        os.system('cp -R ~/.local/share/icons ./')
-        os.system('cp -R ~/.themes ./')
-        os.system('cp -R ~/.icons ./')
-        os.system('cp -R ~/.fonts ./')
         os.system('cp -R ~/.config/gtk-4.0 ./')
         os.system('cp -R ~/.config/gtk-3.0 ./')
-        if self.settings["save-installed-flatpaks-pb"] == True:
+        if self.settings["save-backgrounds"] == True:
+            os.system('cp -R ~/.local/share/backgrounds ./')
+        if self.settings["save-icons"] == True:
+            os.system('cp -R ~/.local/share/icons ./')
+            os.system('cp -R ~/.icons ./')
+        if self.settings["save-themes"] == True:
+            os.system('cp -R ~/.themes ./')
+        if self.settings["save-fonts"] == True:
+            os.system('cp -R ~/.fonts ./')
+        if self.settings["save-installed-flatpaks"] == True:
             os.system('sh /app/backup_flatpaks.sh')
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
@@ -167,7 +171,8 @@ class PeriodicBackups:
             os.system("cp -R ~/.local/share/[k]* ./xdg-data/")
             os.system("cp -R ~/.local/share/dolphin ./xdg-data/")
             os.system("cp -R ~/.local/share/sddm ./xdg-data/")
-            os.system("cp -R ~/.local/share/wallpapers ./xdg-data/")
+            if self.settings["save-backgrounds"] == True:
+                os.system("cp -R ~/.local/share/wallpapers ./xdg-data/")
             os.system("cp -R ~/.local/share/plasma-systemmonitor ./xdg-data/")
         # Create Tar.gz archive
         os.system(f"tar --gzip -cf {self.filename}.sd.tar.gz ./")
