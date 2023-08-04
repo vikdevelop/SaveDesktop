@@ -33,5 +33,15 @@
     "save_installed_flatpaks": "Salva le app Flatpak installate",
     "pb_folder": "Cartella per il salvataggio periodico",
     "set_pb_folder_tooltip": "Scegli la cartella personalizzata per il salvataggio periodico",
-    "set_another": "Scegli un'altra cartella"
+    "set_another": "Scegli un'altra cartella",
+    "backgrounds": "Backgrounds",
+    "themes": "Themes",
+    "fonts": "Fonts",
+    "import_title": "Import",
+    "more_settings_pb": "Additional settings for periodic saving",
+    "filename_format": "File name format",
+    "reset_button": "Reset to default",
+    "items_for_archive": "Items to include in the configuration archive",
+    "items_desc": "These settings also apply to periodic saving",
+    "icons": "Icons"
 }
