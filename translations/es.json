@@ -33,5 +33,15 @@
     "save_installed_flatpaks": "Guardar las aplicaciones Flatpak instaladas",
     "pb_folder": "Carpeta de almacenamiento periódico",
     "set_pb_folder_tooltip": "Elegir una carpeta personalizada para el almacenamiento periódico",
-    "set_another": "Elegir otra carpeta"
+    "set_another": "Elegir otra carpeta",
+    "filename_format": "File name format",
+    "reset_button": "Reset to default",
+    "items_for_archive": "Items to include in the configuration archive",
+    "items_desc": "These settings also apply to periodic saving",
+    "icons": "Icons",
+    "themes": "Themes",
+    "fonts": "Fonts",
+    "backgrounds": "Backgrounds",
+    "import_title": "Import",
+    "more_settings_pb": "Additional settings for periodic saving"
 }
