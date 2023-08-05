@@ -410,10 +410,17 @@ class MainWindow(Gtk.Window):
         self.filefrmtButton.set_tooltip_text(_["reset_button"])
         self.filefrmtButton.connect("clicked", self.set_default_filefrmtEntry)
         
+        self.helpButton = Gtk.Button.new_from_icon_name("help")
+        self.helpButton.add_css_class("flat")
+        self.helpButton.set_valign(Gtk.Align.CENTER)
+        self.helpButton.set_tooltip_text(_["learn_more"])
+        self.helpButton.connect("clicked", self.open_fileformat_link)
+        
         # Entry for selecting file name format
         self.filefrmtEntry = Adw.EntryRow.new()
         self.filefrmtEntry.set_title(_["filename_format"])
         self.filefrmtEntry.add_suffix(self.filefrmtButton)
+        self.filefrmtEntry.add_suffix(self.helpButton)
         self.filefrmtEntry.set_text(self.settings["filename-format"])
         self.dirLBox.append(self.filefrmtEntry)
         
@@ -453,6 +460,9 @@ class MainWindow(Gtk.Window):
     # Set text of self.filefrmtEntry to default
     def set_default_filefrmtEntry(self, w):
         self.filefrmtEntry.set_text("config_{}")
+        
+    def open_fileformat_link(self, w):
+        os.system("xdg-open https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving#filename-format")
             
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
@@ -868,7 +878,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.8"
+        version = "2.8.1"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
