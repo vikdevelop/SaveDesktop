@@ -46,7 +46,7 @@ else:
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
-    if not subprocess.getoutput("curl -Ls -o /dev/null -w %{url_effective} https://github.com/vikdevelop/SaveDesktop/releases/latest") == "https://github.com/vikdevelop/SaveDesktop/releases/tag/2.8%":
+    if not subprocess.getoutput("curl -Ls -o /dev/null -w %{url_effective} https://github.com/vikdevelop/SaveDesktop/releases/latest") == "https://github.com/vikdevelop/SaveDesktop/releases/tag/2.8.2%":
         os.popen("git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --remove && git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --install")
         python = sys.executable
         os.execl(python, python, *sys.argv)
@@ -101,7 +101,7 @@ class MainWindow(Gtk.Window):
         
         # Add pages
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
-        self.stack.add_titled_with_icon(self.importBox,"importpage","Import","document-open-symbolic")
+        self.stack.add_titled_with_icon(self.importBox,"importpage",_["import_title"],"document-open-symbolic")
         
         # Adw Switcher
         self.switcher_title=Adw.ViewSwitcherTitle()
@@ -878,7 +878,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.8.1"
+        version = "2.8.2"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
