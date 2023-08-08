@@ -410,7 +410,7 @@ class MainWindow(Gtk.Window):
         self.filefrmtButton.set_tooltip_text(_["reset_button"])
         self.filefrmtButton.connect("clicked", self.set_default_filefrmtEntry)
         
-        self.helpButton = Gtk.Button.new_from_icon_name("help")
+        self.helpButton = Gtk.Button.new_from_icon_name("help-about-symbolic")
         self.helpButton.add_css_class("flat")
         self.helpButton.set_valign(Gtk.Align.CENTER)
         self.helpButton.set_tooltip_text(_["learn_more"])
