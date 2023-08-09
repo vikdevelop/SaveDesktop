@@ -46,10 +46,6 @@ else:
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
-    if not subprocess.getoutput("curl -Ls -o /dev/null -w %{url_effective} https://github.com/vikdevelop/SaveDesktop/releases/latest") == "https://github.com/vikdevelop/SaveDesktop/releases/tag/2.8.2%":
-        os.popen("git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --remove && git clone https://github.com/vikdevelop/SaveDesktop /tmp/SaveDesktop && sh /tmp/SaveDesktop/install_native.sh --install")
-        python = sys.executable
-        os.execl(python, python, *sys.argv)
 
 _ = json.load(locale)
 
