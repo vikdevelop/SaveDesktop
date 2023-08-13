@@ -60,7 +60,6 @@ class Syncing:
                 os.system(f"tar -xf {file}.gz ./")
             else:
                 os.system(f"tar -xf {file}.gz.1 ./")
-            print("Synchronization has been completed.")
                 
             self.import_config()
             
