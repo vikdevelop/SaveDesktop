@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os
-import subprocess
+import socket
 import gi
 import glob
 import sys
@@ -24,6 +24,10 @@ elif 'zh' in p_lang:
     r_lang = 'zh_Hans'
 else:
     r_lang = p_lang[:-3]
+    
+# Get IP adress of user computer
+hostname = socket.gethostname()
+IPAddr = socket.gethostbyname(hostname)
 
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 flatpak = os.path.exists("/.flatpak-info")
@@ -94,10 +98,12 @@ class MainWindow(Gtk.Window):
         self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=17)
         self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.imp_cfg_title = _["import_from_file"]
+        self.syncingBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
         
         # Add pages
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
         self.stack.add_titled_with_icon(self.importBox,"importpage",_["import_title"],"document-open-symbolic")
+        self.stack.add_titled_with_icon(self.syncingBox,"syncpage","Syncing","emblem-synchronizing-symbolic")
         
         # Adw Switcher
         self.switcher_title=Adw.ViewSwitcherTitle()
@@ -124,6 +130,7 @@ class MainWindow(Gtk.Window):
             self.environment = 'GNOME'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
             self.environment = 'GNOME'
@@ -376,7 +383,68 @@ class MainWindow(Gtk.Window):
             self.headerbar.remove(self.applyButton)
         except:
             print("")
+            
+    # Syncing desktop page
+    def syncing_desktop(self):
+        self.syncingBox.set_valign(Gtk.Align.CENTER)
+        self.syncingBox.set_halign(Gtk.Align.CENTER)
+        self.syncingBox.set_margin_start(40)
+        self.syncingBox.set_margin_end(40)
         
+        self.statusPage = Adw.StatusPage.new()
+        self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
+        self.statusPage.set_title("Syncing")
+        self.statusPage.set_description("Sync your desktop environmnent configuration with other computers in the network.")
+        self.statusPage.set_child(self.syncingBox)
+        self.syncingBox.append(self.statusPage)
+        
+        self.setButton = Gtk.Button.new_with_label("Set file location")
+        self.setButton.add_css_class("pill")
+        self.setButton.add_css_class("suggested-action")
+        self.setButton.connect("clicked", self.setButton_dialog)
+        self.syncingBox.append(self.setButton)
+        
+    # Set Dialog
+    def setButton_dialog(self, w):
+        self.open_setDialog()
+        
+    def open_setDialog(self):
+        self.setDialog = Adw.MessageDialog.new(self)
+        self.setDialog.set_heading("Set file for syncing configuration with other computers in the network")
+        self.setDialog.set_body(_['periodic_saving_desc'])
+        
+        self.setdBox = Gtk.ListBox.new()
+        self.setdBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.setdBox.get_style_context().add_class(class_name='boxed-list')
+        self.setDialog.set_extra_child(self.setdBox)
+        
+        self.selsetButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
+        self.selsetButton.set_valign(Gtk.Align.CENTER)
+        self.selsetButton.connect("clicked", self.select_syncfile)
+        
+        self.file_row = Adw.ActionRow.new()
+        self.file_row.set_title("Syncing file")
+        self.file_row.set_subtitle("")
+        self.file_row.add_suffix(self.selsetButton)
+        self.setdBox.append(self.file_row)
+        
+        self.url_row = Adw.ActionRow.new()
+        self.url_row.set_title("URL for syncing with other computers")
+        self.url_row.set_subtitle(f"http://{hostname}:8000")
+        self.url_row.set_subtitle_selectable(True)
+        self.setdBox.append(self.url_row)
+        
+        self.setDialog.add_response('cancel', _["cancel"])
+        self.setDialog.add_response('ok', _["apply"])
+        self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.setDialog.connect('response', self.setDialog_closed)
+        
+        self.setDialog.show()
+        
+    def setDialog_closed(self, w, response):
+        if response == "ok":
+            self.settings["file-for-syncing"] == self.file_row.get_subtitle()
+    
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
         self.dirdialog()
@@ -627,6 +695,29 @@ class MainWindow(Gtk.Window):
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
         self.file_chooser.open(self, None, open_selected, None)
+        
+    # Select file for syncing with other computers in the network
+    def select_syncfile(self, w):
+        def set_selected(source, res, data):
+            try:
+                file = source.open_finish(res)
+            except:
+                return
+            self.open_setDialog()
+            self.file_row.set_subtitle(file.get_path())
+            
+        self.setDialog.close()
+        
+        self.syncfile_chooser = Gtk.FileDialog.new()
+        self.syncfile_chooser.set_modal(True)
+        self.syncfile_chooser.set_title(_["import_fileshooser"].format(self.environment))
+        self.file_filter_s = Gtk.FileFilter.new()
+        self.file_filter_s.set_name(_["savedesktop_f"])
+        self.file_filter_s.add_pattern('*.sd.tar.gz')
+        self.file_filter_list_s = Gio.ListStore.new(Gtk.FileFilter);
+        self.file_filter_list_s.append(self.file_filter_s)
+        self.syncfile_chooser.set_filters(self.file_filter_list_s)
+        self.syncfile_chooser.open(self, None, set_selected, None)
     
     # Save configuration
     def save_config(self):
@@ -874,7 +965,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.8.2"
+        version = "2.9"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
