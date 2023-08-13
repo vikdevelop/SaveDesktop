@@ -405,7 +405,7 @@ class MainWindow(Gtk.Window):
         self.setButton.connect("clicked", self.setButton_dialog)
         self.syncingBox.append(self.setButton)
         
-        self.getButton = Gtk.Button.new_with_label("Connect with other computer")
+        self.getButton = Gtk.Button.new_with_label("Connect with other computers")
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_urlDialog)
         self.syncingBox.append(self.getButton)
@@ -417,7 +417,8 @@ class MainWindow(Gtk.Window):
     def open_setDialog(self):
         self.setDialog = Adw.MessageDialog.new(self)
         self.setDialog.set_heading("Set file for syncing configuration with other computers in the network")
-        self.setDialog.set_body(_['periodic_saving_desc'])
+        self.setDialog.set_body(f'<span color="grey">{_["periodic_saving_desc"]}</span>')
+        self.setDialog.set_body_use_markup(True)
         
         self.setdBox = Gtk.ListBox.new()
         self.setdBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
@@ -460,7 +461,7 @@ class MainWindow(Gtk.Window):
     # URL Dialog
     def open_urlDialog(self, w):
         self.urlDialog = Adw.MessageDialog.new(self)
-        self.urlDialog.set_heading("Connect with other computer")
+        self.urlDialog.set_heading("Connect with other computers")
         self.urlDialog.set_body('On the other computer, click the "Set up sync file" button and overwrite the sync URL here.')
         
         self.urlBox = Gtk.ListBox.new()
