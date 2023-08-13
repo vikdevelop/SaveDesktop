@@ -1,9 +1,29 @@
 #!/usr/bin/python3
 from pathlib import Path
 import os
+import locale
+import json
 import gi
 import socket
 from gi.repository import Gio
+
+# Load system language
+p_lang = locale.getlocale()[0]
+if p_lang == 'pt_BR':
+    r_lang = 'pt_BR'
+elif p_lang == 'nb_NO':
+    r_lang = 'nb_NO'
+elif 'zh' in p_lang:
+    r_lang = 'zh_Hans'
+else:
+    r_lang = p_lang[:-3]
+    
+try:
+    locale = open(f"/app/translations/{r_lang}.json")
+except:
+    locale = open("/app/translations/en.json")
+    
+_ = json.load(locale)
 
 # Get IP adress of user computer
 hostname = socket.gethostname()
@@ -44,22 +64,22 @@ class Syncing:
         if settings["url-for-syncing"] == "":
             print("Synchronization is not set up.")
             exit()
-
+        
         if IPAddr in settings["url-for-syncing"]:
             print("You have same IP adress.")
         else:
-            path = Path(settings["file-for-syncing"])
-            folder = path.parent.absolute()
+            self.path = Path(settings["file-for-syncing"])
+            self.folder = self.path.parent.absolute()
             
-            file_name = os.path.basename(settings["file-for-syncing"])
-            file = os.path.splitext(file_name)[0]
-
+            self.file_name = os.path.basename(settings["file-for-syncing"])
+            self.file = os.path.splitext(self.file_name)[0]
+            
             os.chdir(f"{CACHE}/syncing")
-            os.system(f"wget {settings['url-for-syncing']}/{file}.gz")
-            if os.path.exists(f"{file}.gz"):
-                os.system(f"tar -xf {file}.gz ./")
+            os.system(f"wget {settings['url-for-syncing']}/{self.file}.gz")
+            if os.path.exists(f"{self.file}.gz"):
+                os.system(f"tar -xf {self.file}.gz ./")
             else:
-                os.system(f"tar -xf {file}.gz.1 ./")
+                os.system(f"tar -xf {self.file}.gz.1 ./")
                 
             self.import_config()
             
@@ -128,5 +148,6 @@ class Syncing:
     def done(self):
         os.system(f"rm -rf {CACHE}/*")
         print("Configuration has been synced successfully.")
+        os.system(f"notify-send 'SaveDesktop' '{_['config_imported']} ({self.file[:-7]})' -i io.github.vikdevelop.SaveDesktop")
         #os.system("pkill -15 python3 && pkill -15 python")
 Syncing()
