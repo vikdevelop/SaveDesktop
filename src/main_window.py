@@ -196,6 +196,7 @@ class MainWindow(Gtk.Window):
         # Set margin for save desktop layout
         self.saveBox.set_margin_start(40)
         self.saveBox.set_margin_end(40)
+        self.saveBox.set_valign(Gtk.Align.CENTER)
         
         # Tittle image for save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
@@ -398,11 +399,16 @@ class MainWindow(Gtk.Window):
         self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
         
-        self.setButton = Gtk.Button.new_with_label("Set file location")
+        self.setButton = Gtk.Button.new_with_label("Set up syncing file")
         self.setButton.add_css_class("pill")
         self.setButton.add_css_class("suggested-action")
         self.setButton.connect("clicked", self.setButton_dialog)
         self.syncingBox.append(self.setButton)
+        
+        self.getButton = Gtk.Button.new_with_label("Connect with other computer")
+        self.getButton.add_css_class("pill")
+        self.getButton.connect("clicked", self.open_urlDialog)
+        self.syncingBox.append(self.getButton)
         
     # Set Dialog
     def setButton_dialog(self, w):
@@ -424,13 +430,13 @@ class MainWindow(Gtk.Window):
         
         self.file_row = Adw.ActionRow.new()
         self.file_row.set_title("Syncing file")
-        self.file_row.set_subtitle("")
+        self.file_row.set_subtitle(self.settings["file-for-syncing"])
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
         
         self.url_row = Adw.ActionRow.new()
         self.url_row.set_title("URL for syncing with other computers")
-        self.url_row.set_subtitle(f"http://{hostname}:8000")
+        self.url_row.set_subtitle(f"http://{IPAddr}:8000")
         self.url_row.set_subtitle_selectable(True)
         self.setdBox.append(self.url_row)
         
@@ -442,8 +448,50 @@ class MainWindow(Gtk.Window):
         self.setDialog.show()
         
     def setDialog_closed(self, w, response):
-        if response == "ok":
-            self.settings["file-for-syncing"] == self.file_row.get_subtitle()
+        if response == 'ok':
+            if self.settings["file-for-syncing"] == '':
+                print("")
+            else:
+                self.settings["file-for-syncing"] = self.file_row.get_subtitle()
+                self.path = Path(self.settings["file-for-syncing"])
+                self.folder = self.path.parent.absolute()
+                self.set_syncing()
+                
+    # URL Dialog
+    def open_urlDialog(self, w):
+        self.urlDialog = Adw.MessageDialog.new(self)
+        self.urlDialog.set_heading("Connect with other computer")
+        self.urlDialog.set_body('On the other computer, click the "Set up sync file" button and overwrite the sync URL here.')
+        
+        self.urlBox = Gtk.ListBox.new()
+        self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.urlBox.get_style_context().add_class(class_name='boxed-list')
+        self.urlDialog.set_extra_child(self.urlBox)
+        
+        self.urlEntry = Adw.EntryRow.new()
+        self.urlEntry.set_title("Enter the URL adress for syncing")
+        self.urlEntry.set_text(self.settings["url-for-syncing"])
+        self.urlBox.append(self.urlEntry)
+        
+        self.urlDialog.add_response('cancel', _["cancel"])
+        self.urlDialog.add_response('ok', _["apply"])
+        self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.urlDialog.connect('response', self.urlDialog_closed)
+        self.urlDialog.show()
+        
+    def urlDialog_closed(self, w, response):
+        if response == 'ok':
+            self.settings["url-for-syncing"] = self.urlEntry.get_text()
+            self.folder = self.settings["file-for-syncing"]
+            self.set_syncing()
+            
+    def set_syncing(self):
+        if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
+            with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
+                sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --start-server')
+        if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
+            with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
+                pv.write('[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --sync')
     
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
@@ -703,8 +751,9 @@ class MainWindow(Gtk.Window):
                 file = source.open_finish(res)
             except:
                 return
+            self.syncfile = file.get_path()
             self.open_setDialog()
-            self.file_row.set_subtitle(file.get_path())
+            self.file_row.set_subtitle(self.syncfile)
             
         self.setDialog.close()
         
