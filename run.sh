@@ -8,4 +8,7 @@ elif [ "$1" == "--background" ]
 elif [ "$1" == "--sync" ]
 	then
 		python3 /app/network_sharing.py
+elif [ "$1" == "--start-server" ]
+	then
+		python3 /app/server.py
 fi
