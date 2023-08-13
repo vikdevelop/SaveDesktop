@@ -5,4 +5,7 @@ then
 elif [ "$1" == "--background" ]
 	then
 		python3 /app/periodic_saving.py
+elif [ "$1" == "--sync" ]
+	then
+		python3 /app/network_sharing.py
 fi
