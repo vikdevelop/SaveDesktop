@@ -894,7 +894,7 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'Budgie':
             self.i_budgie_desktop = GLib.spawn_command_line_async(f'cp -R ./budgie-desktop {Path.home()}/.config/')
             self.i_budgie_extras = GLib.spawn_command_line_async(f'cp -R ./budgie-extras {Path.home()}/.config/')
-            GLib.spawn_command_line_async(f'cp -R ./nemo {Path.home()}/.config/')
+            self.i_nemo_b = GLib.spawn_command_line_async(f'cp -R ./nemo {Path.home()}/.config/')
         elif self.environment == 'COSMIC':
             self.i_popshell = GLib.spawn_command_line_async(f'cp -R ./pop-shell {Path.home()}/.config/')
             self.i_gshell_pop = GLib.spawn_command_line_async(f'cp -R ./gnome-shell {Path.home()}/.local/share/')
