@@ -135,46 +135,55 @@ class MainWindow(Gtk.Window):
             self.environment = 'GNOME'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
             self.environment = 'COSMIC'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
             self.environment = 'Pantheon'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
             self.environment = 'Cinnamon'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Budgie:GNOME':
             self.environment = 'Budgie'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             self.environment = 'Xfce'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
             self.environment = 'MATE'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
             self.environment = 'KDE Plasma'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         else:
             self.set_child(self.pBox)
