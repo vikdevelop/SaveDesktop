@@ -31,6 +31,9 @@ IPAddr = socket.gethostbyname(hostname)
 
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 CACHE = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp'
+DATA = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data'
+system_dir = "/app"
+
 
 if not os.path.exists(f"{CACHE}/syncing"):
     os.mkdir(f"{CACHE}/syncing")
