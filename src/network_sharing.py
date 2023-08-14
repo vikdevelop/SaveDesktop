@@ -5,7 +5,7 @@ import locale
 import json
 import gi
 import socket
-from gi.repository import Gio
+from gi.repository import Gio, GLib
 
 # Load system language
 p_lang = locale.getlocale()[0]
@@ -66,7 +66,7 @@ class Syncing:
         if settings["url-for-syncing"] == "":
             print("Synchronization is not set up.")
             exit()
-        
+
         if IPAddr in settings["url-for-syncing"]:
             print("You have same IP adress.")
         elif settings["url-for-syncing"] == "":
