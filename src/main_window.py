@@ -416,7 +416,6 @@ class MainWindow(Gtk.Window):
     def open_setDialog(self):
         self.setDialog = Adw.MessageDialog.new(self)
         self.setDialog.set_heading("Set file for syncing configuration with other computers in the network")
-        self.setDialog.set_body(f'<span color="grey">{_["periodic_saving_desc"]}</span>')
         self.setDialog.set_body_use_markup(True)
         
         self.setdBox = Gtk.ListBox.new()
