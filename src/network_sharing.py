@@ -34,7 +34,6 @@ CACHE = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp'
 DATA = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data'
 system_dir = "/app"
 
-
 if not os.path.exists(f"{CACHE}/syncing"):
     os.mkdir(f"{CACHE}/syncing")
     
@@ -70,6 +69,8 @@ class Syncing:
         
         if IPAddr in settings["url-for-syncing"]:
             print("You have same IP adress.")
+        elif settings["url-for-syncing"] == "":
+            print("Synchronization is not set up.")
         else:
             self.path = Path(settings["file-for-syncing"])
             self.folder = self.path.parent.absolute()
@@ -153,4 +154,5 @@ class Syncing:
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop' '{_['config_imported']} ({self.file[:-7]})' -i io.github.vikdevelop.SaveDesktop")
         #os.system("pkill -15 python3 && pkill -15 python")
+
 Syncing()
