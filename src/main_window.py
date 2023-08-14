@@ -457,14 +457,11 @@ class MainWindow(Gtk.Window):
         
     def setDialog_closed(self, w, response):
         if response == 'ok':
-            if self.settings["file-for-syncing"] == '':
-                print("")
-            else:
-                self.settings["file-for-syncing"] = self.file_row.get_subtitle()
-                self.path = Path(self.settings["file-for-syncing"])
-                self.folder = self.path.parent.absolute()
-                self.set_syncing()
-                self.show_warn_toast()
+            self.settings["file-for-syncing"] = self.file_row.get_subtitle()
+            self.path = Path(self.settings["file-for-syncing"])
+            self.folder = self.path.parent.absolute()
+            self.set_syncing()
+            self.show_warn_toast()
                 
     # URL Dialog
     def open_urlDialog(self, w):
@@ -970,7 +967,7 @@ class MainWindow(Gtk.Window):
         selected_item = self.adw_action_row_backups.get_selected_item()
         # Translate backup items to English because it is necessary for the proper functioning of periodic backups correctly
         if selected_item.get_string() == _["never"]:
-            backup_item = "Never" 
+            backup_item = "Never"
         elif selected_item.get_string() == _["daily"]:
             backup_item = "Daily"
             self.create_pb_desktop()
