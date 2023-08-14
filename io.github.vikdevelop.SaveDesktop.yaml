@@ -5,6 +5,7 @@ sdk: org.gnome.Sdk
 command: run.sh
 finish-args:
     - --share=ipc
+    - --share=network
     - --socket=wayland
     - --socket=fallback-x11
     - --device=dri
@@ -31,7 +32,7 @@ finish-args:
     # save all fonts installed in home directory
     - --filesystem=~/.fonts:create
     - --filesystem=/var/lib/flatpak:ro
-    # logout from session (GNOME-based environments) for changes to the desktop configuration to take effect 
+    # logout from session (GNOME-based environments) for changes to the desktop configuration to take effect
     - --talk-name=org.gnome.SessionManager
     # logout from session (Xfce) for changes to the Xfce desktop configuration to take effect
     - --talk-name=org.xfce.SessionManager
@@ -48,6 +49,8 @@ modules:
        - install -Dm755 -t /app src/main_window.py
        - install -Dm755 -t /app src/periodic_saving.py
        - install -Dm755 -t /app src/install_flatpak_from_script.py
+       - install -Dm755 -t /app src/server.py
+       - install -Dm755 -t /app src/network_sharing.py
        - install -Dm755 -t /app src/backup_flatpaks.sh
        - install -D -t /app/share build-beta.sh
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
