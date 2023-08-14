@@ -6,13 +6,12 @@ import glob
 import sys
 import json
 import locale
-import filecmp
 from datetime import date
 from pathlib import Path
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, Adw, Gio, GLib, Gdk, GObject
+from gi.repository import Gtk, Adw, Gio, GLib
 
 # Load system language
 p_lang = locale.getlocale()[0]
@@ -103,7 +102,7 @@ class MainWindow(Gtk.Window):
         # Add pages
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
         self.stack.add_titled_with_icon(self.importBox,"importpage",_["import_title"],"document-open-symbolic")
-        self.stack.add_titled_with_icon(self.syncingBox,"syncpage","Syncing","emblem-synchronizing-symbolic")
+        self.stack.add_titled_with_icon(self.syncingBox,"syncpage","Sync","emblem-synchronizing-symbolic")
         
         # Adw Switcher
         self.switcher_title=Adw.ViewSwitcherTitle()
@@ -394,8 +393,8 @@ class MainWindow(Gtk.Window):
         
         self.statusPage = Adw.StatusPage.new()
         self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
-        self.statusPage.set_title("Syncing")
-        self.statusPage.set_description("Sync your desktop environmnent configuration with other computers in the network.")
+        self.statusPage.set_title("Sync")
+        self.statusPage.set_description("Sync your desktop environment configuration with other computers in the network.")
         self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
         
@@ -405,7 +404,7 @@ class MainWindow(Gtk.Window):
         self.setButton.connect("clicked", self.setButton_dialog)
         self.syncingBox.append(self.setButton)
         
-        self.getButton = Gtk.Button.new_with_label("Connect with other computers")
+        self.getButton = Gtk.Button.new_with_label("Connect with other computer")
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_urlDialog)
         self.syncingBox.append(self.getButton)
@@ -457,6 +456,7 @@ class MainWindow(Gtk.Window):
                 self.path = Path(self.settings["file-for-syncing"])
                 self.folder = self.path.parent.absolute()
                 self.set_syncing()
+                self.show_warn_toast()
                 
     # URL Dialog
     def open_urlDialog(self, w):
@@ -485,6 +485,7 @@ class MainWindow(Gtk.Window):
             self.settings["url-for-syncing"] = self.urlEntry.get_text()
             self.folder = self.settings["file-for-syncing"]
             self.set_syncing()
+            self.show_warn_toast()
             
     def set_syncing(self):
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
@@ -944,6 +945,13 @@ class MainWindow(Gtk.Window):
     def please_wait_toast(self):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
         self.toast_overlay.add_toast(self.toast_wait)
+       
+    # a warning indicating that the user must log out
+    def show_warn_toast(self):
+        self.warn_toast = Adw.Toast.new(title=_["periodic_saving_desc"])
+        self.warn_toast.set_button_label(_["logout"])
+        self.warn_toast.set_action_name("app.logout")
+        self.toast_overlay.add_toast(self.warn_toast)
     
     # Action after disappearancing toast
     def on_toast_dismissed(self, toast):
