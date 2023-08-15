@@ -442,8 +442,33 @@ class MainWindow(Gtk.Window):
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
         
+        # Periodic backups section
+        actions = Gtk.StringList.new(strings=[
+            _["never"], _["daily"], _["weekly"], _["monthly"]
+        ])
+        
+        self.import_row = Adw.ComboRow.new()
+        self.import_row.add_suffix(self.periodicButton)
+        self.import_row.set_use_markup(True)
+        self.import_row.set_use_underline(True)
+        self.import_row.set_title("Periodic import")
+        self.import_row.set_title_lines(2)
+        self.import_row.set_subtitle_lines(4)
+        self.import_row.set_model(model=actions)
+        self.setdBox.append(child=self.import_row)
+        
+        if self.settings["periodic-import"] == "Never":
+            self.import_row.set_selected(0)
+        elif self.settings["periodic-import"] == "Daily":
+            self.import_row.set_selected(1)
+        elif self.settings["periodic-import"] == "Weekly":
+            self.import_row.set_selected(2)
+        elif self.settings["periodic-import"] == "Monthly":
+            self.import_row.set_selected(3)
+        
         self.url_row = Adw.ActionRow.new()
-        self.url_row.set_title("URL for synchronization with other computers")
+        self.url_row.set_title("<b>URL for synchronization with other computers</b>")
+        self.url_row.set_use_markup(True)
         self.url_row.set_subtitle(f"http://{IPAddr}:8000")
         self.url_row.set_subtitle_selectable(True)
         self.setdBox.append(self.url_row)
@@ -462,9 +487,21 @@ class MainWindow(Gtk.Window):
             self.folder = self.path.parent.absolute()
             self.file_name = os.path.basename(self.settings["file-for-syncing"])
             self.file = os.path.splitext(self.file_name)[0]
-            with open(f"{self.folder}/file-name.json", "w") as f:
-                f.write('{\n "file-name": "%s.gz"\n}' % self.file)
-            self.set_syncing()
+            selected_item = self.import_row.get_selected_item()
+            if selected_item.get_string() == _["never"]:
+                import_item = "Never"
+            elif selected_item.get_string() == _["daily"]:
+                import_item = "Daily"
+                self.set_syncing()
+            elif selected_item.get_string() == _["weekly"]:
+                import_item = "Weekly"
+                self.set_syncing()
+            elif selected_item.get_string() == _["monthly"]:
+                import_item = "Monthly"
+                self.set_syncing()
+            with open(f"{self.folder}/file-settings.json", "w") as f:
+                f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, selected_item.get_string()))
+            self.settings["periodic-import"] = import_item
             self.show_warn_toast()
                 
     # URL Dialog
