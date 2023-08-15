@@ -60,14 +60,6 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
 
 class Syncing:
     def __init__(self):
-        if settings["file-for-syncing"] == "":
-            print("Synchronization is not set up.")
-            exit()
-            
-        if settings["url-for-syncing"] == "":
-            print("Synchronization is not set up.")
-            exit()
-
         if IPAddr in settings["url-for-syncing"]:
             print("You have same IP adress.")
         elif settings["url-for-syncing"] == "":
