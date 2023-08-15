@@ -90,7 +90,7 @@ class Syncing:
                     self.download_config()
                 else:
                     print("Today is not Tuesday.")
-            elif jF["periodic-import"] == _["monthly"]:
+            elif self.jF["periodic-import"] == _["monthly"]:
                 if dt.day == 10:
                     self.download_config()
                 else:
