@@ -500,7 +500,7 @@ class MainWindow(Gtk.Window):
                 import_item = "Monthly"
                 self.set_syncing()
             with open(f"{self.folder}/file-settings.json", "w") as f:
-                f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, selected_item.get_string()))
+                f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
             self.settings["periodic-import"] = import_item
             self.show_warn_toast()
                 
