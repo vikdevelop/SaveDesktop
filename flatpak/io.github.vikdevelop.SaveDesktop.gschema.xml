@@ -59,5 +59,15 @@
 		  <default>''</default>
 		  <summary>URL of local directory to be get file for importing configuration</summary>
 		</key>
+		<key name="periodic-import" type="s">
+		  <choices>
+				<choice value="Never"/>
+				<choice value="Daily"/>
+				<choice value="Weekly"/>
+				<choice value="Monthly"/>
+			</choices>
+			<default>"Never"</default>
+			<summary>Periodic import</summary>
+		</key>
 	</schema>
 </schemalist>
