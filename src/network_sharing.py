@@ -81,16 +81,16 @@ class Syncing:
             with open("file-settings.json") as j:
                 self.jF = json.load(j)
             self.file = self.jF["file-name"]
-            if self.jF["periodic-import"] == _["never"]:
+            if self.jF["periodic-import"] == "Never":
                 print("Synchronization is not set up.")
-            elif self.jF["periodic-import"] == _["daily"]:
+            elif self.jF["periodic-import"] == "Daily":
                 self.download_config()
-            elif self.jF["periodic-import"] == _["weekly"]:
+            elif self.jF["periodic-import"] == "Weekly":
                 if date.today().weekday() == 1:
                     self.download_config()
                 else:
                     print("Today is not Tuesday.")
-            elif self.jF["periodic-import"] == _["monthly"]:
+            elif self.jF["periodic-import"] == "Monthly":
                 if dt.day == 10:
                     self.download_config()
                 else:
