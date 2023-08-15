@@ -460,6 +460,10 @@ class MainWindow(Gtk.Window):
             self.settings["file-for-syncing"] = self.file_row.get_subtitle()
             self.path = Path(self.settings["file-for-syncing"])
             self.folder = self.path.parent.absolute()
+            self.file_name = os.path.basename(self.settings["file-for-syncing"])
+            self.file = os.path.splitext(self.file_name)[0]
+            with open(f"{self.folder}/file-name.json", "w") as f:
+                f.write('{\n "file-name": "%s.gz"\n}' % self.file)
             self.set_syncing()
             self.show_warn_toast()
                 
