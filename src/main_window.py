@@ -426,23 +426,26 @@ class MainWindow(Gtk.Window):
         self.setDialog = Adw.MessageDialog.new(self)
         self.setDialog.set_heading("Set up the sync file")
         self.setDialog.set_body_use_markup(True)
-        
+
+        # Box for appending widgets
         self.setdBox = Gtk.ListBox.new()
         self.setdBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.setdBox.get_style_context().add_class(class_name='boxed-list')
         self.setDialog.set_extra_child(self.setdBox)
-        
+
+        # Button for choosing synchronization file
         self.selsetButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.selsetButton.set_valign(Gtk.Align.CENTER)
         self.selsetButton.connect("clicked", self.select_syncfile)
-        
+
+        # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
         self.file_row.set_title("Synchronization file")
         self.file_row.set_subtitle(self.settings["file-for-syncing"])
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
         
-        # Periodic backups section
+        # Periodic import section
         actions = Gtk.StringList.new(strings=[
             _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
@@ -465,7 +468,8 @@ class MainWindow(Gtk.Window):
             self.import_row.set_selected(2)
         elif self.settings["periodic-import"] == "Monthly":
             self.import_row.set_selected(3)
-        
+
+        # Row for showing URL for synchronization with other computers
         self.url_row = Adw.ActionRow.new()
         self.url_row.set_title("<b>URL for synchronization with other computers</b>")
         self.url_row.set_use_markup(True)
@@ -479,7 +483,8 @@ class MainWindow(Gtk.Window):
         self.setDialog.connect('response', self.setDialog_closed)
         
         self.setDialog.show()
-        
+
+    # Action after closing dialog for setting synchronization file
     def setDialog_closed(self, w, response):
         if response == 'ok':
             self.settings["file-for-syncing"] = self.file_row.get_subtitle()
@@ -525,15 +530,19 @@ class MainWindow(Gtk.Window):
         self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.urlDialog.connect('response', self.urlDialog_closed)
         self.urlDialog.show()
-        
+
+    # Action after closing URL dialog
     def urlDialog_closed(self, w, response):
         if response == 'ok':
             self.settings["url-for-syncing"] = self.urlEntry.get_text()
             self.folder = self.settings["file-for-syncing"]
             self.set_syncing()
             self.show_warn_toast()
-            
+
+    # Set synchronization for running in the background
     def set_syncing(self):
+        if not os.path.exists(f"{Path.home()}/.config/autostart"):
+            os.mkdir(f"{Path.home()}/.config/autostart")
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
                 sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --start-server')
