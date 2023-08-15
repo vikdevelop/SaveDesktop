@@ -86,10 +86,7 @@ class Syncing:
         if not os.path.exists("{}/.config".format(Path.home())):
             os.system("mkdir ~/.config/")
         # Create Dconf directory
-        if not os.path.exists("{}/.config/dconf".format(Path.home())):
-            os.system("mkdir ~/.config/dconf/")
-        else:
-            os.system('rm -rf ~/.config/dconf && mkdir ~/.config/dconf')
+        os.system("rm -rf ~/.config/dconf && mkdir ~/.config/dconf")
         self.i_dconf = GLib.spawn_command_line_async(f"cp ./user {Path.home()}/.config/dconf/")
         self.i_icons = GLib.spawn_command_line_async(f'cp -R ./icons {Path.home()}/.local/share/')
         self.i_themes = GLib.spawn_command_line_async(f'cp -R ./.themes {Path.home()}/')
