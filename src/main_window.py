@@ -508,7 +508,7 @@ class MainWindow(Gtk.Window):
     def open_urlDialog(self, w):
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading("Connect with other computers")
-        self.urlDialog.set_body('On another computer, open the SaveDesktop application and on this page, click on the "Set up the sync file" button and copy the URL for synchronization.')
+        self.urlDialog.set_body('On another computer, open the SaveDesktop application, and on this page, click on the "Set up the sync file" button and copy the URL for synchronization and enter it below.')
         
         self.urlBox = Gtk.ListBox.new()
         self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
