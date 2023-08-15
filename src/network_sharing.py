@@ -63,6 +63,7 @@ class Syncing:
         if settings["file-for-syncing"] == "":
             print("Synchronization is not set up.")
             exit()
+            
         if settings["url-for-syncing"] == "":
             print("Synchronization is not set up.")
             exit()
@@ -75,15 +76,16 @@ class Syncing:
             self.path = Path(settings["file-for-syncing"])
             self.folder = self.path.parent.absolute()
             
-            self.file_name = os.path.basename(settings["file-for-syncing"])
-            self.file = os.path.splitext(self.file_name)[0]
-            
             os.chdir(f"{CACHE}/syncing")
-            os.system(f"wget {settings['url-for-syncing']}/{self.file}.gz")
-            if os.path.exists(f"{self.file}.gz"):
-                os.system(f"tar -xf {self.file}.gz ./")
+            os.system(f"wget {settings['url-for-syncing']}/file-name.json")
+            with open("file-name.json") as j:
+                self.jF = json.load(j)
+            self.file = self.jF["file-name"]
+            os.system(f"wget {settings['url-for-syncing']}/{self.file}")
+            if os.path.exists(f"{self.file}"):
+                os.system(f"tar -xf {self.file} ./")
             else:
-                os.system(f"tar -xf {self.file}.gz.1 ./")
+                os.system(f"tar -xf {self.file}.1 ./")
                 
             self.import_config()
             
