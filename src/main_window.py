@@ -407,7 +407,7 @@ class MainWindow(Gtk.Window):
         self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
         
-        self.setButton = Gtk.Button.new_with_label("Set up syncing file")
+        self.setButton = Gtk.Button.new_with_label("Set up the sync file")
         self.setButton.add_css_class("pill")
         self.setButton.add_css_class("suggested-action")
         self.setButton.connect("clicked", self.setButton_dialog)
@@ -424,7 +424,7 @@ class MainWindow(Gtk.Window):
         
     def open_setDialog(self):
         self.setDialog = Adw.MessageDialog.new(self)
-        self.setDialog.set_heading("Set file for syncing configuration with other computers in the network")
+        self.setDialog.set_heading("Set up the sync file")
         self.setDialog.set_body_use_markup(True)
         
         self.setdBox = Gtk.ListBox.new()
@@ -437,13 +437,13 @@ class MainWindow(Gtk.Window):
         self.selsetButton.connect("clicked", self.select_syncfile)
         
         self.file_row = Adw.ActionRow.new()
-        self.file_row.set_title("Syncing file")
+        self.file_row.set_title("Synchronization file")
         self.file_row.set_subtitle(self.settings["file-for-syncing"])
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
         
         self.url_row = Adw.ActionRow.new()
-        self.url_row.set_title("URL for syncing with other computers")
+        self.url_row.set_title("URL for synchronization with other computers")
         self.url_row.set_subtitle(f"http://{IPAddr}:8000")
         self.url_row.set_subtitle_selectable(True)
         self.setdBox.append(self.url_row)
@@ -471,7 +471,7 @@ class MainWindow(Gtk.Window):
     def open_urlDialog(self, w):
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading("Connect with other computers")
-        self.urlDialog.set_body('On the other computer, click the "Set up sync file" button and overwrite the sync URL here.')
+        self.urlDialog.set_body('On another computer, open the SaveDesktop application and on this page, click on the "Set up the sync file" button and copy the URL for synchronization.')
         
         self.urlBox = Gtk.ListBox.new()
         self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
@@ -479,7 +479,7 @@ class MainWindow(Gtk.Window):
         self.urlDialog.set_extra_child(self.urlBox)
         
         self.urlEntry = Adw.EntryRow.new()
-        self.urlEntry.set_title("Enter the URL adress for syncing")
+        self.urlEntry.set_title("Enter a URL for synchronization")
         self.urlEntry.set_text(self.settings["url-for-syncing"])
         self.urlBox.append(self.urlEntry)
         
