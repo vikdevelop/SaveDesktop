@@ -91,10 +91,10 @@ class Syncing:
                 else:
                     print("Today is not Tuesday.")
             elif self.jF["periodic-import"] == "Monthly":
-                if dt.day == 10:
+                if dt.day == 2:
                     self.download_config()
                 else:
-                    print("Today is not tenth day of month.")
+                    print("Today is not second day of month.")
                
     # Download file from URL
     def download_config(self):
@@ -174,7 +174,7 @@ class Syncing:
         os.system("mv file-settings.json .file-settings.json")
         os.system(f"rm -rf {CACHE}/syncing/*")
         print("Configuration has been synced successfully.")
-        os.system(f"notify-send 'SaveDesktop' '{_['config_imported']} ({self.file[:-7]})' -i io.github.vikdevelop.SaveDesktop")
+        os.system(f"notify-send 'SaveDesktop' '{_['config_imported']} ({self.file[:-10]})' -i io.github.vikdevelop.SaveDesktop")
         #os.system("pkill -15 python3 && pkill -15 python")
 
 Syncing()
