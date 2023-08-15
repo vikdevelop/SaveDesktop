@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 from pathlib import Path
+from datetime import datetime
+from datetime import date
 import os
 import locale
 import json
@@ -29,14 +31,18 @@ _ = json.load(locale)
 hostname = socket.gethostname()
 IPAddr = socket.gethostbyname(hostname)
 
+dt = datetime.now()
+
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 CACHE = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp'
 DATA = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data'
 system_dir = "/app"
 
+# Check if syncing directory exists
 if not os.path.exists(f"{CACHE}/syncing"):
     os.mkdir(f"{CACHE}/syncing")
     
+# Check of user current desktop environment
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
     environment = 'GNOME'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
@@ -60,6 +66,7 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
 
 class Syncing:
     def __init__(self):
+        # Check if user has same or empty IP adress property
         if IPAddr in settings["url-for-syncing"]:
             print("You have same IP adress.")
         elif settings["url-for-syncing"] == "":
@@ -68,19 +75,42 @@ class Syncing:
             self.path = Path(settings["file-for-syncing"])
             self.folder = self.path.parent.absolute()
             
+            # Download file-settings.json file to getting information about it
             os.chdir(f"{CACHE}/syncing")
-            os.system(f"wget {settings['url-for-syncing']}/file-name.json")
-            with open("file-name.json") as j:
+            os.system(f"wget {settings['url-for-syncing']}/file-settings.json")
+            with open("file-settings.json") as j:
                 self.jF = json.load(j)
             self.file = self.jF["file-name"]
-            os.system(f"wget {settings['url-for-syncing']}/{self.file}")
-            if os.path.exists(f"{self.file}"):
-                os.system(f"tar -xf {self.file} ./")
-            else:
-                os.system(f"tar -xf {self.file}.1 ./")
+            if self.jF["periodic-import"] == _["never"]:
+                print("Synchronization is not set up.")
+            elif self.jF["periodic-import"] == _["daily"]:
+                self.download_config()
+            elif self.jF["periodic-import"] == _["weekly"]:
+                if date.today().weekday() == 1:
+                    self.download_config()
+                else:
+                    print("Today is not Tuesday.")
+            elif jF["periodic-import"] == _["monthly"]:
+                if dt.day == 10:
+                    self.download_config()
+                else:
+                    print("Today is not tenth day of month.")
+               
+    # Download file from URL
+    def download_config(self):
+        os.system(f"wget {settings['url-for-syncing']}/{self.file}")
+        if os.path.exists(f"{self.file}"):
+            os.system(f"tar -xf {self.file} ./")
+        else:
+            os.system(f"tar -xf {self.file}.1 ./")
                 
+        if os.path.exists(".file-settings.json"):
+            print("The configuration has already been imported today.")
+            exit()
+        else:
             self.import_config()
             
+    # Import configuration
     def import_config(self):
         # Applying configuration for GNOME-based environments
         if not os.path.exists("{}/.config".format(Path.home())):
@@ -133,7 +163,7 @@ class Syncing:
         self.done()
         
     def create_flatpak_desktop(self):
-        os.popen(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
+        os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
         if not os.path.exists(f"{Path.home()}/.config/autostart"):
             os.mkdir(f"{Path.home()}/.config/autostart")
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
@@ -141,7 +171,8 @@ class Syncing:
                 fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
                 
     def done(self):
-        os.system(f"rm -rf {CACHE}/*")
+        os.system("mv file-settings.json .file-settings.json")
+        os.system(f"rm -rf {CACHE}/syncing/*")
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop' '{_['config_imported']} ({self.file[:-7]})' -i io.github.vikdevelop.SaveDesktop")
         #os.system("pkill -15 python3 && pkill -15 python")
