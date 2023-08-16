@@ -75,26 +75,39 @@ class Syncing:
             self.path = Path(settings["file-for-syncing"])
             self.folder = self.path.parent.absolute()
             
-            # Download file-settings.json file to getting information about it
-            os.chdir(f"{CACHE}/syncing")
-            os.system(f"wget {settings['url-for-syncing']}/file-settings.json")
-            with open("file-settings.json") as j:
-                self.jF = json.load(j)
-            self.file = self.jF["file-name"]
-            if self.jF["periodic-import"] == "Never":
-                print("Synchronization is not set up.")
-            elif self.jF["periodic-import"] == "Daily":
+            if os.path.exists(f"{DATA}/sync-info.json"):
+                with open(f"{DATA}/sync-info.json") as s:
+                    jl = json.load(s)
+                if jl["sync-date"] == f'{date.today()}':
+                    print("The configuration has already been imported today.")
+                    exit()
+                else:
+                    self.get_file_info()
+            else:
+                self.get_file_info()
+
+    # Get info about synchronization
+    def get_file_info(self):
+        # Download file-settings.json file to getting information about it
+        os.chdir(f"{CACHE}/syncing")
+        os.system(f"wget {settings['url-for-syncing']}/file-settings.json")
+        with open("file-settings.json") as j:
+            self.jF = json.load(j)
+        self.file = self.jF["file-name"]
+        if self.jF["periodic-import"] == "Never":
+            print("Synchronization is not set up.")
+        elif self.jF["periodic-import"] == "Daily":
+            self.download_config()
+        elif self.jF["periodic-import"] == "Weekly":
+            if date.today().weekday() == 1:
                 self.download_config()
-            elif self.jF["periodic-import"] == "Weekly":
-                if date.today().weekday() == 1:
-                    self.download_config()
-                else:
-                    print("Today is not Tuesday.")
-            elif self.jF["periodic-import"] == "Monthly":
-                if dt.day == 2:
-                    self.download_config()
-                else:
-                    print("Today is not second day of month.")
+            else:
+                print("Today is not Tuesday.")
+        elif self.jF["periodic-import"] == "Monthly":
+            if dt.day == 2:
+                self.download_config()
+            else:
+                print("Today is not second day of month.")
                
     # Download file from URL
     def download_config(self):
@@ -103,12 +116,8 @@ class Syncing:
             os.system(f"tar -xf {self.file} ./")
         else:
             os.system(f"tar -xf {self.file}.1 ./")
-                
-        if os.path.exists(".file-settings.json"):
-            print("The configuration has already been imported today.")
-            exit()
-        else:
-            self.import_config()
+        
+        self.import_config()
             
     # Import configuration
     def import_config(self):
@@ -171,7 +180,8 @@ class Syncing:
                 fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
                 
     def done(self):
-        os.system("mv file-settings.json .file-settings.json")
+        with open(f"{DATA}/sync-info.json", "w") as s:
+            s.write('{\n "sync-date": "%s"\n}' % date.today())
         os.system(f"rm -rf {CACHE}/syncing/*")
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop' '{_['config_imported']} ({self.file[:-10]})' -i io.github.vikdevelop.SaveDesktop")
