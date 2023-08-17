@@ -454,7 +454,7 @@ class MainWindow(Gtk.Window):
         self.import_row.add_suffix(self.periodicButton)
         self.import_row.set_use_markup(True)
         self.import_row.set_use_underline(True)
-        self.import_row.set_title("Periodic import")
+        self.import_row.set_title("Periodic synchronization")
         self.import_row.set_title_lines(2)
         self.import_row.set_subtitle_lines(4)
         self.import_row.set_model(model=actions)
