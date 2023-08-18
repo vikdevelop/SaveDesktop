@@ -25,8 +25,10 @@ else:
     r_lang = p_lang[:-3]
     
 # Get IP adress of user computer
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+IPAddr = s.getsockname()[0]
+s.close()
 
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 flatpak = os.path.exists("/.flatpak-info")
