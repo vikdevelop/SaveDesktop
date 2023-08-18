@@ -405,7 +405,7 @@ class MainWindow(Gtk.Window):
         self.statusPage = Adw.StatusPage.new()
         self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
         self.statusPage.set_title("Sync")
-        self.statusPage.set_description("Sync your desktop environment configuration with other computers in the network.")
+        self.statusPage.set_description("Sync your desktop environment configuration with other computers in the network. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>How it works?</a>")
         self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
         
