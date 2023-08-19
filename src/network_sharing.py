@@ -127,7 +127,10 @@ class Syncing:
         if not os.path.exists("{}/.config".format(Path.home())):
             os.system("mkdir ~/.config/")
         # Create Dconf directory
-        os.system("rm ~/.config/dconf/*")
+        if not os.path.exists("{}/.config/dconf".format(Path.home())):
+            os.system("mkdir ~/.config/dconf/")
+        else:
+            os.system('rm -rf ~/.config/dconf && mkdir ~/.config/dconf')
         os.system(f"cp ./user {Path.home()}/.config/dconf/")
         os.system(f'cp -R ./icons {Path.home()}/.local/share/')
         os.system(f'cp -R ./.themes {Path.home()}/')
