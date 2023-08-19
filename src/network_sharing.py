@@ -28,8 +28,10 @@ except:
 _ = json.load(locale)
 
 # Get IP adress of user computer
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+IPAddr = s.getsockname()[0]
+s.close()
 
 dt = datetime.now()
 
