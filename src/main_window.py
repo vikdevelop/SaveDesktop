@@ -104,7 +104,7 @@ class MainWindow(Gtk.Window):
         # Add pages
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
         self.stack.add_titled_with_icon(self.importBox,"importpage",_["import_title"],"document-open-symbolic")
-        self.stack.add_titled_with_icon(self.syncingBox,"syncpage","Sync","emblem-synchronizing-symbolic")
+        self.stack.add_titled_with_icon(self.syncingBox,"syncpage",_["sync"],"emblem-synchronizing-symbolic")
         
         # Adw Switcher
         self.switcher_title=Adw.ViewSwitcherTitle()
@@ -404,18 +404,18 @@ class MainWindow(Gtk.Window):
         
         self.statusPage = Adw.StatusPage.new()
         self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
-        self.statusPage.set_title("Sync")
-        self.statusPage.set_description("Sync your desktop environment configuration with other computers in the network. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>How it works?</a>")
+        self.statusPage.set_title(_["sync"])
+        self.statusPage.set_description(_["sync_desc"])
         self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
         
-        self.setButton = Gtk.Button.new_with_label("Set up the sync file")
+        self.setButton = Gtk.Button.new_with_label(_["set_up_sync_file"])
         self.setButton.add_css_class("pill")
         self.setButton.add_css_class("suggested-action")
         self.setButton.connect("clicked", self.setButton_dialog)
         self.syncingBox.append(self.setButton)
         
-        self.getButton = Gtk.Button.new_with_label("Connect with other computer")
+        self.getButton = Gtk.Button.new_with_label(_["connect_with_other_computer"])
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_urlDialog)
         self.syncingBox.append(self.getButton)
@@ -426,7 +426,7 @@ class MainWindow(Gtk.Window):
         
     def open_setDialog(self):
         self.setDialog = Adw.MessageDialog.new(self)
-        self.setDialog.set_heading("Set up the sync file")
+        self.setDialog.set_heading(_["set_up_sync_file"])
         self.setDialog.set_body_use_markup(True)
 
         # Box for appending widgets
@@ -442,7 +442,7 @@ class MainWindow(Gtk.Window):
 
         # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
-        self.file_row.set_title("Synchronization file")
+        self.file_row.set_title(_["sync_file"])
         self.file_row.set_subtitle(self.settings["file-for-syncing"])
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
@@ -456,7 +456,7 @@ class MainWindow(Gtk.Window):
         self.import_row.add_suffix(self.periodicButton)
         self.import_row.set_use_markup(True)
         self.import_row.set_use_underline(True)
-        self.import_row.set_title("Periodic synchronization")
+        self.import_row.set_title(_["periodic_sync"])
         self.import_row.set_title_lines(2)
         self.import_row.set_subtitle_lines(4)
         self.import_row.set_model(model=actions)
@@ -473,7 +473,7 @@ class MainWindow(Gtk.Window):
 
         # Row for showing URL for synchronization with other computers
         self.url_row = Adw.ActionRow.new()
-        self.url_row.set_title("<b>URL for synchronization with other computers</b>")
+        self.url_row.set_title(_["url_for_sync"])
         self.url_row.set_use_markup(True)
         self.url_row.set_subtitle(f"http://{IPAddr}:8000")
         self.url_row.set_subtitle_selectable(True)
@@ -514,8 +514,8 @@ class MainWindow(Gtk.Window):
     # URL Dialog
     def open_urlDialog(self, w):
         self.urlDialog = Adw.MessageDialog.new(self)
-        self.urlDialog.set_heading("Connect with other computer")
-        self.urlDialog.set_body('On another computer, open the SaveDesktop application, and on this page, click on the "Set up the sync file" button and copy the URL for synchronization and enter it below.')
+        self.urlDialog.set_heading(_["connect_with_other_computer"])
+        self.urlDialog.set_body(_["connect_with_pc_desc"])
         
         self.urlBox = Gtk.ListBox.new()
         self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
@@ -523,7 +523,7 @@ class MainWindow(Gtk.Window):
         self.urlDialog.set_extra_child(self.urlBox)
         
         self.urlEntry = Adw.EntryRow.new()
-        self.urlEntry.set_title("Enter a URL for synchronization")
+        self.urlEntry.set_title(_["pc_url_entry"])
         self.urlEntry.set_text(self.settings["url-for-syncing"])
         self.urlBox.append(self.urlEntry)
         
