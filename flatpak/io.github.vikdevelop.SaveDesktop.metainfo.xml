@@ -63,6 +63,13 @@
     </categories>
           
     <releases>
+       <release version="2.9" date="2023-08-20">
+           <description>
+               <ul>
+                   <li>Added support for synchronization between computers in the network. Information about how it works, is on <a href="https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network">Github wiki.</a></li>
+               </ul>
+           </description>
+       </release>
        <release version="2.8" date="2023-08-04">
            <description>
                <ul>
