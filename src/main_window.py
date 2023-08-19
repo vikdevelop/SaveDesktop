@@ -93,13 +93,14 @@ class MainWindow(Gtk.Window):
         
         # Stack
         self.stack =Adw.ViewStack(vexpand=True)
+        self.stack.set_hhomogeneous(True)
         self.headapp.append(self.stack)
         
         # Layout for saving and importing configuration
         self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=17)
         self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.imp_cfg_title = _["import_from_file"]
-        self.syncingBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
+        self.syncingBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         
         # Add pages
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
@@ -291,18 +292,13 @@ class MainWindow(Gtk.Window):
     def import_desktop(self):
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
-        # Image for import page
-        self.importImage = Gtk.Image.new_from_icon_name("document-open-symbolic")
-        self.importImage.set_pixel_size(64)
-        self.importBox.append(self.importImage)
         
-        # Title and subtitle for import page
-        self.labelImport = Gtk.Label.new()
-        self.labelImport.set_markup(f"<big><b>{_['import_config']}</b></big>")
-        self.importBox.append(self.labelImport)
-        
-        self.labelDesc = Gtk.Label.new(str=_["import_config_desc"])
-        self.importBox.append(self.labelDesc)
+        self.statusPage_i = Adw.StatusPage.new()
+        self.statusPage_i.set_icon_name("document-open-symbolic")
+        self.statusPage_i.set_title(_['import_config'])
+        self.statusPage_i.set_description(_["import_config_desc"])
+        self.statusPage_i.set_child(self.syncingBox)
+        self.importBox.append(self.statusPage_i)
         
         # Box of this buttons: Import from file and Import from list
         self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=7)
@@ -404,7 +400,7 @@ class MainWindow(Gtk.Window):
         
         self.statusPage = Adw.StatusPage.new()
         self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
-        self.statusPage.set_title(_["sync"])
+        self.statusPage.set_title(_["sync_title"])
         self.statusPage.set_description(_["sync_desc"])
         self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
@@ -413,11 +409,17 @@ class MainWindow(Gtk.Window):
         self.setButton.add_css_class("pill")
         self.setButton.add_css_class("suggested-action")
         self.setButton.connect("clicked", self.setButton_dialog)
+        self.setButton.set_valign(Gtk.Align.CENTER)
+        self.setButton.set_margin_start(70)
+        self.setButton.set_margin_end(70)
         self.syncingBox.append(self.setButton)
         
         self.getButton = Gtk.Button.new_with_label(_["connect_with_other_computer"])
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_urlDialog)
+        self.getButton.set_valign(Gtk.Align.CENTER)
+        self.getButton.set_margin_start(70)
+        self.getButton.set_margin_end(70)
         self.syncingBox.append(self.getButton)
         
     # Set Dialog
