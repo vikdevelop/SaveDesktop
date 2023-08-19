@@ -61,12 +61,12 @@
 		</key>
 		<key name="periodic-import" type="s">
 		  <choices>
-				<choice value="Never"/>
-				<choice value="Daily"/>
-				<choice value="Weekly"/>
-				<choice value="Monthly"/>
+				<choice value="Never2"/>
+				<choice value="Daily2"/>
+				<choice value="Weekly2"/>
+				<choice value="Monthly2"/>
 			</choices>
-			<default>"Never"</default>
+			<default>"Never2"</default>
 			<summary>Periodic import</summary>
 		</key>
 	</schema>
