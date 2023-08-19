@@ -11,4 +11,11 @@ elif [ "$1" == "--sync" ]
 elif [ "$1" == "--start-server" ]
 	then
 		python3 /app/server.py
+elif [ "$1" == "--help" ]
+	then
+   		echo -e '\033[1mArguments:\033[0m'
+  		echo "--background | Start periodic saving"
+			echo "--sync | Sync desktop configuration with other computer"
+  		echo "--start-server | Start HTTP server for synchronization DE config with other computers"
+  		echo "--help | Show this message"
 fi
