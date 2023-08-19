@@ -464,13 +464,13 @@ class MainWindow(Gtk.Window):
         self.import_row.set_model(model=actions)
         self.setdBox.append(child=self.import_row)
         
-        if self.settings["periodic-import"] == "Never":
+        if self.settings["periodic-import"] == "Never2":
             self.import_row.set_selected(0)
-        elif self.settings["periodic-import"] == "Daily":
+        elif self.settings["periodic-import"] == "Daily2":
             self.import_row.set_selected(1)
-        elif self.settings["periodic-import"] == "Weekly":
+        elif self.settings["periodic-import"] == "Weekly2":
             self.import_row.set_selected(2)
-        elif self.settings["periodic-import"] == "Monthly":
+        elif self.settings["periodic-import"] == "Monthly2":
             self.import_row.set_selected(3)
 
         # Row for showing URL for synchronization with other computers
@@ -498,15 +498,15 @@ class MainWindow(Gtk.Window):
             self.file = os.path.splitext(self.file_name)[0]
             selected_item = self.import_row.get_selected_item()
             if selected_item.get_string() == _["never"]:
-                import_item = "Never"
+                import_item = "Never2"
             elif selected_item.get_string() == _["daily"]:
-                import_item = "Daily"
+                import_item = "Daily2"
                 self.set_syncing()
             elif selected_item.get_string() == _["weekly"]:
-                import_item = "Weekly"
+                import_item = "Weekly2"
                 self.set_syncing()
             elif selected_item.get_string() == _["monthly"]:
-                import_item = "Monthly"
+                import_item = "Monthly2"
                 self.set_syncing()
             with open(f"{self.folder}/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
