@@ -15,7 +15,6 @@
     "please_wait": "Počkejte prosím …",
     "summary": "Uložte aktuální konfiguraci vašeho desktopového prostředí",
     "description": "SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.",
-    "supported_environments_desc": "Podporovaná desktopová prostředí: {}",
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
     "periodic_saving": "Pravidelné ukládání",
     "periodic_saving_desc": "Změny se projeví až po dalším přihlášení",

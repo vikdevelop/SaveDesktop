@@ -15,7 +15,6 @@
     "please_wait": "Bitte warten …",
     "summary": "Speichern Sie die aktuelle Konfiguration Ihrer Desktop-Umgebung",
     "description": "Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.",
-    "supported_environments_desc": "Unterstützte Desktop-Umgebungen: {}",
     "translator_credits": "Github Link des Übersetzers",
     "periodic_saving": "Regelmäßiges Speichern",
     "periodic_saving_desc": "Die Änderungen werden erst nach der nächsten Anmeldung wirksam.",

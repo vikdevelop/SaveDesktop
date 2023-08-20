@@ -15,7 +15,6 @@
     "please_wait": "انتظر من فضلك …",
     "summary": "احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك",
     "description": "هل ترغب في حفظ التخصيصات الحالي الخاص بك بما في ذلك السمات والرموز والخلفيات وجميع إعدادات بيئة سطح المكتب والإضافات وما إلى ذلك؟ يمكن أن يساعدك SaveDesktop في ذلك. بنقرة واحدة فقط ويتم حفظ التخصيصات الخاص بك.",
-    "supported_environments_desc": "بيئات سطح المكتب المدعومة: {}",
     "translator_credits": "Translator github-link",
     "periodic_saving": "Periodic saving",
     "periodic_saving_desc": "Changes will only take effect after the next login",

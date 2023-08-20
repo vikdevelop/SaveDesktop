@@ -15,7 +15,6 @@
     "please_wait": "Lütfen bekleyin …",
     "summary": "Masaüstünün şuanki ayarlarını kayıt et",
     "description": "SaveDesktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.",
-    "supported_environments_desc": "Desteklenen masaüstü ortamları: {}",
     "translator_credits": "Batmanly https://github.com/batmanly\nSabri Ünal https://github.com/sabriunal",
     "periodic_saving": "Periyodik kaydetme",
     "periodic_saving_desc": "Değişiklikler yalnızca bir sonraki oturum açma işleminden sonra geçerli olacaktır",

@@ -15,7 +15,6 @@
     "please_wait": "Harap tunggu…",
     "summary": "Simpan konfigurasi lingkungan desktop Anda saat ini",
     "description": "SaveDesktop memungkinkan Anda menyimpan konfigurasi saat ini (tema, ikon, wallpaper, semua pengaturan lingkungan desktop, ekstensi, dll.) dengan satu klik.",
-    "supported_environments_desc": "Lingkungan desktop yang didukung: {}",
     "translator_credits": "Penerjemah github-tautan",
     "periodic_saving": "Simpan berkala",
     "periodic_saving_desc": "Perubahan hanya akan berlaku setelah login berikutnya",

@@ -15,7 +15,6 @@
     "please_wait": "Kérlek várj …",
     "summary": "Mentsd el az asztali környezeted jelenlegi konfigurációját",
     "description": "SaveDesktop lehetővé teszi, hogy egy gombnyomással elmentsd a jelenlegi konfigurációdat (témákat, ikonokat, háttereket, az összes asztali környezeti beállítást, kiegészítéseket, stb.).",
-    "supported_environments_desc": "Támogatott asztali környezetek: {}",
     "translator_credits": "Daniel Uhrinyi https://github.com/danieluhrinyi",
     "periodic_saving": "Időszakos mentés",
     "periodic_saving_desc": "A változtatások csak a következő belépéskor lépnek érvénybe",
