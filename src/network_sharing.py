@@ -75,9 +75,6 @@ class Syncing:
         elif settings["url-for-syncing"] == "":
             print("Synchronization is not set up.")
         else:
-            self.path = Path(settings["file-for-syncing"])
-            self.folder = self.path.parent.absolute()
-            
             if os.path.exists(f"{DATA}/sync-info.json"):
                 with open(f"{DATA}/sync-info.json") as s:
                     jl = json.load(s)
@@ -112,7 +109,7 @@ class Syncing:
             else:
                 print("Today is not second day of month.")
                
-    # Download file from URL
+    # Download archive from URL
     def download_config(self):
         os.system(f"wget {settings['url-for-syncing']}/{self.file}")
         if os.path.exists(f"{self.file}"):
