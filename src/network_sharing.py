@@ -192,7 +192,7 @@ class Syncing:
             s.write('{\n "sync-date": "%s"\n}' % date.today())
         os.system(f"rm -rf {CACHE}/syncing/*")
         print("Configuration has been synced successfully.")
-        os.system(f"notify-send 'SaveDesktop' '{_['config_imported']} ({self.file[:-10]})' -i io.github.vikdevelop.SaveDesktop")
+        os.system(f"notify-send 'SaveDesktop ({self.file[:-10]})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
         #os.system("pkill -15 python3 && pkill -15 python")
 
 Syncing()
