@@ -492,10 +492,14 @@ class MainWindow(Gtk.Window):
     def setDialog_closed(self, w, response):
         if response == 'ok':
             self.settings["file-for-syncing"] = self.file_row.get_subtitle()
-            self.path = Path(self.settings["file-for-syncing"])
-            self.folder = self.path.parent.absolute()
             self.file_name = os.path.basename(self.settings["file-for-syncing"])
             self.file = os.path.splitext(self.file_name)[0]
+            self.path = Path(self.settings["file-for-syncing"])
+            self.folder = self.path.parent.absolute()
+            
+            r_file = self.file.replace(".sd.tar", "")
+            self.settings["filename-format"] = r_file
+            
             selected_item = self.import_row.get_selected_item()
             if selected_item.get_string() == _["never"]:
                 import_item = "Never2"
