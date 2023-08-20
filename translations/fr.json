@@ -15,7 +15,6 @@
     "please_wait": "Veuillez patienter …",
     "summary": "Sauvegarder la configuration actuelle de votre environnement de bureau",
     "description": "SaveDesktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.",
-    "supported_environments_desc": "Environnements de bureau pris en charge : {}",
     "translator_credits": "Lien github des traducteurs",
     "periodic_saving": "Sauvegarde périodique",
     "periodic_saving_desc": "Les modifications ne prendront effet qu'après la prochaine connexion",
@@ -43,5 +42,15 @@
     "themes": "Thèmes",
     "items_for_archive": "Éléments à inclure dans l'archive de configuration",
     "fonts": "Polices de caractères",
-    "backgrounds": "Fonds d'écran"
+    "backgrounds": "Fonds d'écran",
+    "sync": "Sync",
+    "sync_title": "Sync with other computers in the network",
+    "sync_desc": "Sync your desktop environment configuration with other computers in the network. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>How it works?</a>",
+    "set_up_sync_file": "Set up the sync file",
+    "sync_file": "Synchronization file",
+    "periodic_sync": "Periodic synchronization",
+    "url_for_sync": "<b>URL for synchronization with other computers</b>",
+    "connect_with_other_computer": "Connect with other computer",
+    "connect_with_pc_desc": "On another computer, open the SaveDesktop application, and on this page, click on the \"Set up the sync file\" button and copy the URL for synchronization and enter it below.",
+    "pc_url_entry": "Enter a URL for synchronization"
 }

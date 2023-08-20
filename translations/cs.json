@@ -15,7 +15,6 @@
     "please_wait": "Počkejte prosím …",
     "summary": "Uložte aktuální konfiguraci vašeho desktopového prostředí",
     "description": "SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.",
-    "supported_environments_desc": "Podporovaná desktopová prostředí: {}",
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
     "periodic_saving": "Pravidelné ukládání",
     "periodic_saving_desc": "Změny se projeví až po dalším přihlášení",
@@ -43,5 +42,15 @@
     "items_desc": "Tato nastavení platí i pro pravidelné ukládání",
     "themes": "Motivy",
     "fonts": "Fonty",
-    "backgrounds": "Pozadí"
+    "backgrounds": "Pozadí",
+    "sync": "Synchronizovat",
+    "sync_title": "Synchronizovat s ostatními počítači v síti",
+    "sync_desc": "Synchronizujte konfiguraci vašeho desktopového prostředí s ostatními počítači v síti. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Jak to funguje?</a>",
+    "set_up_sync_file": "Nastavit synchronizační soubor",
+    "sync_file": "Synchronizační soubor",
+    "periodic_sync": "Pravidelná synchronizace",
+    "url_for_sync": "<b>URL pro synchronizaci s ostatními počítači</b>",
+    "connect_with_other_computer": "Připojit se k jinému počítači",
+    "connect_with_pc_desc": "Na jiném počítači otevřete aplikaci SaveDesktop a na této stránce klikněte na tlačítko \"Nastavit synchronizační soubor\", zkopírujte adresu URL pro synchronizaci a zadejte ji níže.",
+    "pc_url_entry": "Zadejte URL adresu pro synchronizaci"
 }
