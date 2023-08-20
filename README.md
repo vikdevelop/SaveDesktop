@@ -10,6 +10,9 @@
 ![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page_dark.png#gh-dark-mode-only)
 ![Import page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png#gh-light-mode-only)
 
+![Sync page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page_dark.png#gh-dark-mode-only)
+![Sync page](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png#gh-light-mode-only)
+
 <br>
 
 ## About
@@ -32,9 +35,9 @@
 - other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, etc.)
 
 <details>
-  <summary><b>Configuration files that will be included in the archive</b></summary>
+  <summary><b>Configuration directories that will be included in the archive</b></summary>
   
-  - **General files**
+  - **General directories**
   ```
   - ~/.config/dconf/user
   - ~/.local/share/backgrounds 
@@ -67,7 +70,7 @@
   ```
   - ~/.config/budgie-desktop
   - ~/.config/bugie-extras
-  - ~/.config/nemo ./")
+  - ~/.config/nemo
   ```
   - **Cosmic**
   ```

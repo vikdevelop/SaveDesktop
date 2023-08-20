@@ -51,5 +51,23 @@
 			<default>'config_{}'</default>
 			<summary>File name format (designed to periodic saving)</summary>
 		</key>
+		<key name="file-for-syncing" type="s">
+		  <default>''</default>
+		  <summary>File for synchronization with other computers in the network</summary>
+		</key>
+		<key name="url-for-syncing" type="s">
+		  <default>''</default>
+		  <summary>URL of local directory to be get file for importing configuration</summary>
+		</key>
+		<key name="periodic-import" type="s">
+		  <choices>
+				<choice value="Never2"/>
+				<choice value="Daily2"/>
+				<choice value="Weekly2"/>
+				<choice value="Monthly2"/>
+			</choices>
+			<default>"Never2"</default>
+			<summary>Periodic import</summary>
+		</key>
 	</schema>
 </schemalist>

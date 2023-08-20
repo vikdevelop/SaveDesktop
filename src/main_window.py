@@ -1,18 +1,17 @@
 #!/usr/bin/python3
 import os
-import subprocess
+import socket
 import gi
 import glob
 import sys
 import json
 import locale
-import filecmp
 from datetime import date
 from pathlib import Path
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, Adw, Gio, GLib, Gdk, GObject
+from gi.repository import Gtk, Adw, Gio, GLib
 
 # Load system language
 p_lang = locale.getlocale()[0]
@@ -24,6 +23,12 @@ elif 'zh' in p_lang:
     r_lang = 'zh_Hans'
 else:
     r_lang = p_lang[:-3]
+    
+# Get IP adress of user computer
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+IPAddr = s.getsockname()[0]
+s.close()
 
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 flatpak = os.path.exists("/.flatpak-info")
@@ -88,16 +93,19 @@ class MainWindow(Gtk.Window):
         
         # Stack
         self.stack =Adw.ViewStack(vexpand=True)
+        self.stack.set_hhomogeneous(True)
         self.headapp.append(self.stack)
         
         # Layout for saving and importing configuration
         self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=17)
         self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.imp_cfg_title = _["import_from_file"]
+        self.syncingBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         
         # Add pages
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
         self.stack.add_titled_with_icon(self.importBox,"importpage",_["import_title"],"document-open-symbolic")
+        self.stack.add_titled_with_icon(self.syncingBox,"syncpage",_["sync"],"emblem-synchronizing-symbolic")
         
         # Adw Switcher
         self.switcher_title=Adw.ViewSwitcherTitle()
@@ -124,51 +132,61 @@ class MainWindow(Gtk.Window):
             self.environment = 'GNOME'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
             self.environment = 'COSMIC'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
             self.environment = 'Pantheon'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
             self.environment = 'Cinnamon'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'Budgie:GNOME':
             self.environment = 'Budgie'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             self.environment = 'Xfce'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
             self.environment = 'MATE'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
             self.environment = 'KDE Plasma'
             self.save_desktop()
             self.import_desktop()
+            self.syncing_desktop()
             self.connect("close-request", self.on_close)
         else:
             self.set_child(self.pBox)
@@ -189,6 +207,7 @@ class MainWindow(Gtk.Window):
         # Set margin for save desktop layout
         self.saveBox.set_margin_start(40)
         self.saveBox.set_margin_end(40)
+        self.saveBox.set_valign(Gtk.Align.CENTER)
         
         # Tittle image for save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
@@ -273,18 +292,13 @@ class MainWindow(Gtk.Window):
     def import_desktop(self):
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
-        # Image for import page
-        self.importImage = Gtk.Image.new_from_icon_name("document-open-symbolic")
-        self.importImage.set_pixel_size(64)
-        self.importBox.append(self.importImage)
         
-        # Title and subtitle for import page
-        self.labelImport = Gtk.Label.new()
-        self.labelImport.set_markup(f"<big><b>{_['import_config']}</b></big>")
-        self.importBox.append(self.labelImport)
-        
-        self.labelDesc = Gtk.Label.new(str=_["import_config_desc"])
-        self.importBox.append(self.labelDesc)
+        self.statusPage_i = Adw.StatusPage.new()
+        self.statusPage_i.set_icon_name("document-open-symbolic")
+        self.statusPage_i.set_title(_['import_config'])
+        self.statusPage_i.set_description(_["import_config_desc"])
+        self.statusPage_i.set_child(self.syncingBox)
+        self.importBox.append(self.statusPage_i)
         
         # Box of this buttons: Import from file and Import from list
         self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=7)
@@ -376,7 +390,170 @@ class MainWindow(Gtk.Window):
             self.headerbar.remove(self.applyButton)
         except:
             print("")
+            
+    # Syncing desktop page
+    def syncing_desktop(self):
+        self.syncingBox.set_valign(Gtk.Align.CENTER)
+        self.syncingBox.set_halign(Gtk.Align.CENTER)
+        self.syncingBox.set_margin_start(40)
+        self.syncingBox.set_margin_end(40)
         
+        self.statusPage = Adw.StatusPage.new()
+        self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
+        self.statusPage.set_title(_["sync_title"])
+        self.statusPage.set_description(_["sync_desc"])
+        self.statusPage.set_child(self.syncingBox)
+        self.syncingBox.append(self.statusPage)
+        
+        self.setButton = Gtk.Button.new_with_label(_["set_up_sync_file"])
+        self.setButton.add_css_class("pill")
+        self.setButton.add_css_class("suggested-action")
+        self.setButton.connect("clicked", self.setButton_dialog)
+        self.setButton.set_valign(Gtk.Align.CENTER)
+        self.setButton.set_margin_start(70)
+        self.setButton.set_margin_end(70)
+        self.syncingBox.append(self.setButton)
+        
+        self.getButton = Gtk.Button.new_with_label(_["connect_with_other_computer"])
+        self.getButton.add_css_class("pill")
+        self.getButton.connect("clicked", self.open_urlDialog)
+        self.getButton.set_valign(Gtk.Align.CENTER)
+        self.getButton.set_margin_start(70)
+        self.getButton.set_margin_end(70)
+        self.syncingBox.append(self.getButton)
+        
+    # Set Dialog
+    def setButton_dialog(self, w):
+        self.open_setDialog()
+        
+    def open_setDialog(self):
+        self.setDialog = Adw.MessageDialog.new(self)
+        self.setDialog.set_heading(_["set_up_sync_file"])
+        self.setDialog.set_body_use_markup(True)
+
+        # Box for appending widgets
+        self.setdBox = Gtk.ListBox.new()
+        self.setdBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.setdBox.get_style_context().add_class(class_name='boxed-list')
+        self.setDialog.set_extra_child(self.setdBox)
+
+        # Button for choosing synchronization file
+        self.selsetButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
+        self.selsetButton.set_valign(Gtk.Align.CENTER)
+        self.selsetButton.connect("clicked", self.select_syncfile)
+
+        # Row for showing selected synchronization file
+        self.file_row = Adw.ActionRow.new()
+        self.file_row.set_title(_["sync_file"])
+        self.file_row.set_subtitle(self.settings["file-for-syncing"])
+        self.file_row.add_suffix(self.selsetButton)
+        self.setdBox.append(self.file_row)
+        
+        # Periodic import section
+        actions = Gtk.StringList.new(strings=[
+            _["never"], _["daily"], _["weekly"], _["monthly"]
+        ])
+        
+        self.import_row = Adw.ComboRow.new()
+        self.import_row.add_suffix(self.periodicButton)
+        self.import_row.set_use_markup(True)
+        self.import_row.set_use_underline(True)
+        self.import_row.set_title(_["periodic_sync"])
+        self.import_row.set_title_lines(2)
+        self.import_row.set_subtitle_lines(4)
+        self.import_row.set_model(model=actions)
+        self.setdBox.append(child=self.import_row)
+        
+        if self.settings["periodic-import"] == "Never2":
+            self.import_row.set_selected(0)
+        elif self.settings["periodic-import"] == "Daily2":
+            self.import_row.set_selected(1)
+        elif self.settings["periodic-import"] == "Weekly2":
+            self.import_row.set_selected(2)
+        elif self.settings["periodic-import"] == "Monthly2":
+            self.import_row.set_selected(3)
+
+        # Row for showing URL for synchronization with other computers
+        self.url_row = Adw.ActionRow.new()
+        self.url_row.set_title(_["url_for_sync"])
+        self.url_row.set_use_markup(True)
+        self.url_row.set_subtitle(f"http://{IPAddr}:8000")
+        self.url_row.set_subtitle_selectable(True)
+        self.setdBox.append(self.url_row)
+        
+        self.setDialog.add_response('cancel', _["cancel"])
+        self.setDialog.add_response('ok', _["apply"])
+        self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.setDialog.connect('response', self.setDialog_closed)
+        
+        self.setDialog.show()
+
+    # Action after closing dialog for setting synchronization file
+    def setDialog_closed(self, w, response):
+        if response == 'ok':
+            self.settings["file-for-syncing"] = self.file_row.get_subtitle()
+            self.path = Path(self.settings["file-for-syncing"])
+            self.folder = self.path.parent.absolute()
+            self.file_name = os.path.basename(self.settings["file-for-syncing"])
+            self.file = os.path.splitext(self.file_name)[0]
+            selected_item = self.import_row.get_selected_item()
+            if selected_item.get_string() == _["never"]:
+                import_item = "Never2"
+            elif selected_item.get_string() == _["daily"]:
+                import_item = "Daily2"
+                self.set_syncing()
+            elif selected_item.get_string() == _["weekly"]:
+                import_item = "Weekly2"
+                self.set_syncing()
+            elif selected_item.get_string() == _["monthly"]:
+                import_item = "Monthly2"
+                self.set_syncing()
+            with open(f"{self.folder}/file-settings.json", "w") as f:
+                f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
+            self.settings["periodic-import"] = import_item
+            self.show_warn_toast()
+                
+    # URL Dialog
+    def open_urlDialog(self, w):
+        self.urlDialog = Adw.MessageDialog.new(self)
+        self.urlDialog.set_heading(_["connect_with_other_computer"])
+        self.urlDialog.set_body(_["connect_with_pc_desc"])
+        
+        self.urlBox = Gtk.ListBox.new()
+        self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.urlBox.get_style_context().add_class(class_name='boxed-list')
+        self.urlDialog.set_extra_child(self.urlBox)
+        
+        self.urlEntry = Adw.EntryRow.new()
+        self.urlEntry.set_title(_["pc_url_entry"])
+        self.urlEntry.set_text(self.settings["url-for-syncing"])
+        self.urlBox.append(self.urlEntry)
+        
+        self.urlDialog.add_response('cancel', _["cancel"])
+        self.urlDialog.add_response('ok', _["apply"])
+        self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.urlDialog.connect('response', self.urlDialog_closed)
+        self.urlDialog.show()
+
+    # Action after closing URL dialog
+    def urlDialog_closed(self, w, response):
+        if response == 'ok':
+            self.settings["url-for-syncing"] = self.urlEntry.get_text()
+            self.folder = self.settings["file-for-syncing"]
+            self.set_syncing()
+            self.show_warn_toast()
+
+    # Set synchronization for running in the background
+    def set_syncing(self):
+        if not os.path.exists(f"{Path.home()}/.config/autostart"):
+            os.mkdir(f"{Path.home()}/.config/autostart")
+        if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
+            with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
+                sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --start-server')
+        if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
+            with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
+                pv.write('[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --sync')
+    
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
         self.dirdialog()
@@ -627,6 +804,30 @@ class MainWindow(Gtk.Window):
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
         self.file_chooser.open(self, None, open_selected, None)
+        
+    # Select file for syncing with other computers in the network
+    def select_syncfile(self, w):
+        def set_selected(source, res, data):
+            try:
+                file = source.open_finish(res)
+            except:
+                return
+            self.syncfile = file.get_path()
+            self.open_setDialog()
+            self.file_row.set_subtitle(self.syncfile)
+            
+        self.setDialog.close()
+        
+        self.syncfile_chooser = Gtk.FileDialog.new()
+        self.syncfile_chooser.set_modal(True)
+        self.syncfile_chooser.set_title(_["import_fileshooser"].format(self.environment))
+        self.file_filter_s = Gtk.FileFilter.new()
+        self.file_filter_s.set_name(_["savedesktop_f"])
+        self.file_filter_s.add_pattern('*.sd.tar.gz')
+        self.file_filter_list_s = Gio.ListStore.new(Gtk.FileFilter);
+        self.file_filter_list_s.append(self.file_filter_s)
+        self.syncfile_chooser.set_filters(self.file_filter_list_s)
+        self.syncfile_chooser.open(self, None, set_selected, None)
     
     # Save configuration
     def save_config(self):
@@ -754,7 +955,7 @@ class MainWindow(Gtk.Window):
         elif self.environment == 'Budgie':
             self.i_budgie_desktop = GLib.spawn_command_line_async(f'cp -R ./budgie-desktop {Path.home()}/.config/')
             self.i_budgie_extras = GLib.spawn_command_line_async(f'cp -R ./budgie-extras {Path.home()}/.config/')
-            GLib.spawn_command_line_async(f'cp -R ./nemo {Path.home()}/.config/')
+            self.i_nemo_b = GLib.spawn_command_line_async(f'cp -R ./nemo {Path.home()}/.config/')
         elif self.environment == 'COSMIC':
             self.i_popshell = GLib.spawn_command_line_async(f'cp -R ./pop-shell {Path.home()}/.config/')
             self.i_gshell_pop = GLib.spawn_command_line_async(f'cp -R ./gnome-shell {Path.home()}/.local/share/')
@@ -803,6 +1004,13 @@ class MainWindow(Gtk.Window):
     def please_wait_toast(self):
         self.toast_wait = Adw.Toast(title=_["please_wait"])
         self.toast_overlay.add_toast(self.toast_wait)
+       
+    # a warning indicating that the user must log out
+    def show_warn_toast(self):
+        self.warn_toast = Adw.Toast.new(title=_["periodic_saving_desc"])
+        self.warn_toast.set_button_label(_["logout"])
+        self.warn_toast.set_action_name("app.logout")
+        self.toast_overlay.add_toast(self.warn_toast)
     
     # Action after disappearancing toast
     def on_toast_dismissed(self, toast):
@@ -813,7 +1021,7 @@ class MainWindow(Gtk.Window):
         selected_item = self.adw_action_row_backups.get_selected_item()
         # Translate backup items to English because it is necessary for the proper functioning of periodic backups correctly
         if selected_item.get_string() == _["never"]:
-            backup_item = "Never" 
+            backup_item = "Never"
         elif selected_item.get_string() == _["daily"]:
             backup_item = "Daily"
             self.create_pb_desktop()
@@ -874,7 +1082,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.8.2"
+        version = "2.9"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
