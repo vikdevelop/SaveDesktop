@@ -7,6 +7,7 @@ import locale
 import json
 import gi
 import socket
+import shutil
 from gi.repository import Gio, GLib
 
 # Load system language
@@ -119,6 +120,13 @@ class Syncing:
         else:
             os.system(f"tar -xf {self.file}.1 ./")
         
+        # Create Dconf directory
+        if not os.path.exists("{}/.config/dconf".format(Path.home())):
+            os.mkdir(f"{Path.home()}/.config/dconf")
+        else:
+            shutil.rmtree(f"{Path.home()}/.config/dconf")
+            os.mkdir(f"{Path.home()}/.config/dconf")
+        
         self.import_config()
             
     # Import configuration
@@ -126,11 +134,6 @@ class Syncing:
         # Applying configuration for GNOME-based environments
         if not os.path.exists("{}/.config".format(Path.home())):
             os.system("mkdir ~/.config/")
-        # Create Dconf directory
-        if not os.path.exists("{}/.config/dconf".format(Path.home())):
-            os.system("mkdir ~/.config/dconf/")
-        else:
-            os.system('rm -rf ~/.config/dconf && mkdir ~/.config/dconf')
         os.system(f"cp ./user {Path.home()}/.config/dconf/")
         os.system(f'cp -R ./icons {Path.home()}/.local/share/')
         os.system(f'cp -R ./.themes {Path.home()}/')
