@@ -1,4 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="home">Home</str>
+  <str key="periodic_saving">Periodic Saving</str>
+  <str key="periodic_saving_article">### How it works?
+In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:
+- **Daily**: 
+  - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.
+- **Weekly**:
+  - SaveDesktop performs a configuration backup every Monday if "Weekly" is selected. If the computer is not running on that day, SaveDesktop does not do it the next day.
+- **Monthly**:
+  - If "Monthly" is selected, SaveDesktop makes the backup on the first day of the month, e.g. May 1, June 1, December 1, etc. As with "Weekly", if the computer is not running on that day, SaveDesktop does not perform it the next day.
+- **Never**:
+  - Nothing's happening
+
+### Where are the periodic saving files stored?
+Default directory for periodic saving is `/home/user/Downloads/SaveDesktop/archives`, but you can choose custom directory.
+
+### Filename format
+If you want to give periodic backup files names other than `config_{}`, you can set the filename format.
+The default name, as already mentioned, is `config_{}`. `{}` is a variable in SaveDesktop that sets the today date. If it's not there and the day of backup creation comes and a backup file with the filename format set by your filename format exists, SaveDesktop overwrites it with the new backup file. Otherwise, SaveDesktop creates a new backup file.</str>
 </root>
