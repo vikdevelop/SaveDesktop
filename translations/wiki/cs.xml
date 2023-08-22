@@ -17,7 +17,7 @@ Kromě ručního ukládání umožňuje SaveDesktop také pravidelné ukládán�
 Výchozí adresář pro pravidelné ukládání je `/home/user/Downloads/SaveDesktop/archives`, ale můžete si zvolit vlastní adresář.
 
 ### Formát názvu souboru
-Pokud chcete dát souborům periodického ukládání jiné názvy než `config_{}`, můžete nastavit formát názvu souboru.
+Pokud chcete dát souborům pravidelného ukládání jiné názvy než `config_{}`, můžete nastavit formát názvu souboru.
 Výchozí název, jak již bylo zmíněno, je `config_{}`. `{}` je proměnná v SaveDesktop, která nastavuje dnešní datum. Pokud tam není a nastane den vytvoření zálohy a existuje soubor zálohy s formátem názvu souboru nastaveným vaším formátem názvu souboru, SaveDesktop jej přepíše novým souborem zálohy. V opačném případě SaveDesktop vytvoří nový záložní soubor.</str>
   <str key="save_installed_flatpaks_title">Uložit nainstalované aplikace Flatpak a nainstalovat je ze seznamu</str>
   <str key="synchronization_between_computers_title">Synchronizace mezi počítači v síti</str>
