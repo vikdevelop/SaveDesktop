@@ -1,6 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home"></str>
-  <str key="periodic_saving"></str>
-  <str key="periodic_saving_article"></str>
+  <str key="home">Domovská stránka</str>
+  <str key="periodic_saving">Pravidelné ukládání</str>
+  <str key="periodic_saving_article">### Jak to funguje?
+Kromě ručního ukládání umožňuje SaveDesktop také pravidelné ukládání konfigurace desktopového prostředí. Můžete si vybrat z následujících možností:
+- **Denně**: 
+  - Po přihlášení do systému se SaveDesktop spustí na pozadí a zálohuje konfiguraci. Pokud se pak v tento den znovu přihlásíte, nebude to dělat znovu, protože pro tento den již byla vytvořena.
+- **Týdenní**:
+  - Pokud je vybrána možnost "Týdenní", SaveDesktop provede zálohu konfigurace každé pondělí. Pokud počítač v tento den není spuštěn, SaveDesktop ji následující den neprovede.
+- **Měsíčně**:
+  - Pokud je vybrána možnost "Monthly", SaveDesktop provede zálohu první den v měsíci, např. 1. května, 1. června, 1. prosince atd. Stejně jako u "Weekly", pokud počítač v tento den není spuštěn, SaveDesktop ji následující den neprovede.
+- **Nikdy**:
+  - Nic se neděje
+
+### Kam se ukládají soubory pravidelného ukládání?
+Výchozí adresář pro pravidelné ukládání je `/home/user/Downloads/SaveDesktop/archives`, ale můžete si zvolit vlastní adresář.
+
+### Formát názvu souboru
+Pokud chcete dát souborům periodického ukládání jiné názvy než `config_{}`, můžete nastavit formát názvu souboru.
+Výchozí název, jak již bylo zmíněno, je `config_{}`. `{}` je proměnná v SaveDesktop, která nastavuje dnešní datum. Pokud tam není a nastane den vytvoření zálohy a existuje soubor zálohy s formátem názvu souboru nastaveným vaším formátem názvu souboru, SaveDesktop jej přepíše novým souborem zálohy. V opačném případě SaveDesktop vytvoří nový záložní soubor.</str>
 </root>
