@@ -7,9 +7,9 @@ Kromě ručního ukládání umožňuje SaveDesktop také pravidelné ukládán�
 - **Denně**: 
   - Po přihlášení do systému se SaveDesktop spustí na pozadí a zálohuje konfiguraci. Pokud se pak v tento den znovu přihlásíte, nebude to dělat znovu, protože pro tento den již byla vytvořena.
 - **Týdně**:
-  - Pokud je vybrána možnost "Týdenní", SaveDesktop provede zálohu konfigurace každé pondělí. Pokud počítač v tento den není spuštěn, SaveDesktop ji následující den neprovede.
+  - Pokud je vybrána možnost "Týdně", SaveDesktop provede zálohu konfigurace každé pondělí. Pokud počítač v tento den není spuštěn, SaveDesktop ji následující den neprovede.
 - **Měsíčně**:
-  - Pokud je vybrána možnost "Monthly", SaveDesktop provede zálohu první den v měsíci, např. 1. května, 1. června, 1. prosince atd. Stejně jako u "Weekly", pokud počítač v tento den není spuštěn, SaveDesktop ji následující den neprovede.
+  - Pokud je vybrána možnost "Měsíčně", SaveDesktop provede zálohu první den v měsíci, např. 1. května, 1. června, 1. prosince atd. Stejně jako u možnosti "Týdně", pokud počítač v tento den není spuštěn, SaveDesktop ji následující den neprovede.
 - **Nikdy**:
   - Nic se neděje
 
@@ -17,24 +17,23 @@ Kromě ručního ukládání umožňuje SaveDesktop také pravidelné ukládán�
 Výchozí adresář pro pravidelné ukládání je `/home/user/Downloads/SaveDesktop/archives`, ale můžete si zvolit vlastní adresář.
 
 ### Formát názvu souboru
-Pokud chcete dát souborům pravidelného ukládání jiné názvy než `config_{}`, můžete nastavit formát názvu souboru.
+Pokud chcete dát souborům pravidelného ukládání jiný název než `config_{}`, můžete nastavit formát názvu souboru.
 Výchozí název, jak již bylo zmíněno, je `config_{}`. `{}` je proměnná v SaveDesktop, která nastavuje dnešní datum. Pokud tam není a nastane den vytvoření zálohy a existuje soubor zálohy s formátem názvu souboru nastaveným vaším formátem názvu souboru, SaveDesktop jej přepíše novým souborem zálohy. V opačném případě SaveDesktop vytvoří nový záložní soubor.</str>
   <str key="save_installed_flatpaks_title">Uložit nainstalované aplikace Flatpak a nainstalovat je ze seznamu</str>
   <str key="synchronization_between_computers_title">Synchronizace mezi počítači v síti</str>
-  <str key="synchronization_between_computers_article">## Jak ji nastavit?
-### Co potřebujete?
+  <str key="synchronization_between_computers_article">### Co potřebujete?
 - ručně přiřazené IP adresy zařízení, které chcete synchronizovat, aby se IP adresa neměnila při každém zapnutí počítače, je možné nastavit v nastavení routeru:
   - [pro routery Asus](https://www.asus.com/support/FAQ/1000906/)
-  - [pro routery Tp-link](https://www.tp-link.com/us/support/faq/170/).
+  - [pro routery Tp-link](https://www.tp-link.com/us/support/faq/170/)
   - [pro routery Tenda](https://www.tendacn.com/faq/3264.html)
-  - [pro routery Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router).
-  - pokud výše uvedené routery nemáte, otevřete nastavení routery (URL: [192.168.1.1](http://192.168.1.1) nebo příbuzné) a v části DHCP serveru vyhledejte něco ve tvaru "Manually assign an IP to the DHCP list" nebo "Static IP" apod.
+  - [pro routery Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
+  - pokud výše uvedené routery nemáte, otevřete nastavení routeru (URL: [192.168.1.1](http://192.168.1.1) nebo příbuzné) a v části DHCP serveru vyhledejte něco ve tvaru "Manually assign an IP to the DHCP list" nebo "Static IP" apod.
 - pokud chcete vybrat synchronizační soubor z jiné než domovské složky, musíte pro správnou funkčnost povolit přístup k souboru v aplikaci Flatseal (souvisí s verzí Flatpak (Sandbox))
 - zkontrolujte, zda je složka pro pravidelné ukládání stejná jako složka pro synchronizační soubor.
 ### Nastavení synchronizace v aplikaci SaveDesktop
-V počítači 1 a počítači 2 otevřete aplikaci SaveDesktop a přepněte na stránku Sync. V počítači 1 klikněte na tlačítko "Nastavit synchronizační soubor", vyberte synchronizační soubor a zvolte interval periodické synchronizace. Poté zkopírujte adresu URL pro synchronizaci a v počítači 2 klikněte na tlačítko "Připojit se k jinému počítači" a zadejte zkopírovanou adresu URL pro synchronizaci z počítače 1.
+V počítači 1 a počítači 2 otevřete aplikaci SaveDesktop a přepněte na stránku Synchronizovat. V počítači 1 klikněte na tlačítko "Nastavit synchronizační soubor", vyberte synchronizační soubor a zvolte interval pravidelné synchronizace. Poté zkopírujte adresu URL pro synchronizaci a v počítači 2 klikněte na tlačítko "Připojit se k jinému počítači" a zadejte zkopírovanou adresu URL pro synchronizaci z počítače 1.
 
-Pokud chcete synchronizovat konfiguraci DE z počítače 2 do počítače 1, postupujte stejně.
+Pokud chcete synchronizovat konfiguraci desktopového prostředí z počítače 2 do počítače 1, postupujte stejně.
 
 **Aby se změny projevily, je nutné se odhlásit ze systému**.
 
