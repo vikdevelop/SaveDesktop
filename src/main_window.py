@@ -6,6 +6,7 @@ import glob
 import sys
 import json
 import locale
+from open_wiki import *
 from datetime import date
 from pathlib import Path
 gi.require_version('Gtk', '4.0')
@@ -264,7 +265,7 @@ class MainWindow(Gtk.Window):
         self.adw_action_row_backups.set_use_markup(True)
         self.adw_action_row_backups.set_use_underline(True)
         self.adw_action_row_backups.set_title(_["periodic_saving"])
-        self.adw_action_row_backups.set_subtitle(f"{_['periodic_saving_desc']}\n<a href='https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving'>{_['learn_more']}</a>")
+        self.adw_action_row_backups.set_subtitle(f"{_['periodic_saving_desc']}\n<a href='{pb_wiki}'>{_['learn_more']}</a>")
         self.adw_action_row_backups.set_title_lines(2)
         self.adw_action_row_backups.set_subtitle_lines(4)
         self.adw_action_row_backups.set_model(model=actions)
@@ -639,7 +640,7 @@ class MainWindow(Gtk.Window):
         self.filefrmtEntry.set_text("config_{}")
         
     def open_fileformat_link(self, w):
-        os.system("xdg-open https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving#filename-format")
+        os.system(f"xdg-open {pb_wiki}#filename-format")
             
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
@@ -721,7 +722,7 @@ class MainWindow(Gtk.Window):
          
         self.flatpak_row = Adw.ActionRow.new()
         self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
-        self.flatpak_row.set_subtitle(f'<a href="https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list">{_["learn_more"]}</a>')
+        self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
         self.flatpak_row.set_use_markup(True)
         self.flatpak_row.set_title_lines(2)
         self.flatpak_row.set_subtitle_lines(3)
@@ -1086,7 +1087,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.9"
+        version = "2.9.2"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
