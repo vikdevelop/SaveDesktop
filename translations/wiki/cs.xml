@@ -56,4 +56,5 @@ Po importu uloženého konfiguračního souboru a opětovném přihlášení se 
 This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
 
 For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
+  <str key="select_language">Select language</str>
 </root>
