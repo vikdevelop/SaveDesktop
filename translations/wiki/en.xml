@@ -58,4 +58,5 @@ This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vi
 
 For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
   <str key="select_language">Select language</str>
+  <str key="savedesktop_wiki">SaveDesktop wiki</str>
 </root>
