@@ -42,6 +42,7 @@ finish-args:
     - --talk-name=org.freedesktop.FileManager1
     - --talk-name=org.freedesktop.portal.FileChooser
 modules:
+  - "python3-pyperclip.json"
   - name: savedesktop
     buildsystem: simple
     build-commands:
