@@ -51,6 +51,7 @@ modules:
        - install -Dm755 -t /app src/install_flatpak_from_script.py
        - install -Dm755 -t /app src/server.py
        - install -Dm755 -t /app src/network_sharing.py
+       - install -Dm755 -t /app src/open_wiki.py
        - install -Dm755 -t /app src/backup_flatpaks.sh
        - install -D -t /app/share build-beta.sh
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
