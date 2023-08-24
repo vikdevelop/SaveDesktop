@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home">Home</str>
+  <str key="home">Home page</str>
   <str key="periodic_saving">Periodic Saving</str>
   <str key="periodic_saving_article">### How it works?
 In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:
