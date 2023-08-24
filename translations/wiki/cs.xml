@@ -58,4 +58,5 @@ Tuto wiki je možné překládat prostřednictvím [Weblate](https://hosted.webl
 Pro snadnější orientaci je k dispozici postranní panel, kde můžete přepínat mezi jednotlivými jazyky a stránkami. Kromě postranního panelu si můžete zobrazit jednotlivé stránky níže:</str>
   <str key="select_language">Vybrat jazyk</str>
   <str key="savedesktop_wiki">SaveDesktop wiki</str>
+  <str key="localize-wiki">Localize SaveDesktop wiki (via Weblate)</str>
 </root>
