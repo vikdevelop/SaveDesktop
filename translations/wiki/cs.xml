@@ -51,4 +51,9 @@ Je možné ukládat do seznamu pouze aplikace nainstaloané v systémovém adres
 
 ### Instalace aplikací Flatpak ze seznamu
 Po importu uloženého konfiguračního souboru a opětovném přihlášení se **na pozadí začnou instalovat aplikace Flatpak.**</str>
+  <str key="wiki_description">SaveDesktop is a simple application written in Python using GTK and LibAdwaita libraries. This wiki is used to explain some of the features of the application (e.g. synchronization between computers).
+
+This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
+
+For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
 </root>
