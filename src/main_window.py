@@ -399,10 +399,16 @@ class MainWindow(Gtk.Window):
         self.syncingBox.set_margin_start(40)
         self.syncingBox.set_margin_end(40)
         
+        if "https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network" in _["sync_desc"]:
+            old_url = _["sync_desc"]
+            new_url = old_url.replace("https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network", f'{sync_wiki}')
+        else:
+            new_url = _["sync_desc"]
+        
         self.statusPage = Adw.StatusPage.new()
         self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
         self.statusPage.set_title(_["sync_title"])
-        self.statusPage.set_description(_["sync_desc"])
+        self.statusPage.set_description(new_url)
         self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
         
