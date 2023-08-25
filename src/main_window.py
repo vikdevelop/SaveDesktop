@@ -1105,6 +1105,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(f"{version}-native")
             dialog.set_application_icon(icon)
+        dialog.set_release_notes("<ul>\n<li>Updated translations</li>\n<li>Added support for localization SaveDesktop Github wiki. It is possible to translate using Weblate: https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki</li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
