@@ -20,6 +20,10 @@ if "The requested URL returned error: 404" in subprocess.getoutput(f"curl --head
     pb_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving"
     flatpak_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list"
     sync_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network"
+elif r_lang == "en":
+    pb_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving"
+    flatpak_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list"
+    sync_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network"
 else:
     pb_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving-{new_lang}" 
     flatpak_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list-{new_lang}"
