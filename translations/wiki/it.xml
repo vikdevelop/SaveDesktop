@@ -1,16 +1,63 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home"></str>
-  <str key="periodic_saving"></str>
-  <str key="periodic_saving_article"></str>
-  <str key="save_installed_flatpaks_title"></str>
-  <str key="synchronization_between_computers_title"></str>
-  <str key="synchronization_between_computers_article"></str>
-  <str key="pages"></str>
-  <str key="github_issues"></str>
-  <str key="save_installed_flatpaks_article"></str>
-  <str key="wiki_description"></str>
-  <str key="select_language"></str>
-  <str key="savedesktop_wiki"></str>
-  <str key="localize-wiki"></str>
+  <str key="home">Home page</str>
+  <str key="periodic_saving">Periodic Saving</str>
+  <str key="periodic_saving_article">### How it works?
+In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:
+- **Daily**: 
+  - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.
+- **Weekly**:
+  - SaveDesktop performs a configuration backup every Monday if "Weekly" is selected. If the computer is not running on that day, SaveDesktop does not do it the next day.
+- **Monthly**:
+  - If "Monthly" is selected, SaveDesktop makes the backup on the first day of the month, e.g. May 1, June 1, December 1, etc. As with "Weekly", if the computer is not running on that day, SaveDesktop does not perform it the next day.
+- **Never**:
+  - Nothing's happening
+
+### Where are the periodic saving files stored?
+Default directory for periodic saving is `/home/user/Downloads/SaveDesktop/archives`, but you can choose custom directory.
+
+### Filename format
+If you want to give periodic backup files names other than `config_{}`, you can set the filename format.
+The default name, as already mentioned, is `config_{}`. `{}` is a variable in SaveDesktop that sets the today date. If it's not there and the day of backup creation comes and a backup file with the filename format set by your filename format exists, SaveDesktop overwrites it with the new backup file. Otherwise, SaveDesktop creates a new backup file.</str>
+  <str key="save_installed_flatpaks_title">Save installed Flatpak apps and install it from list</str>
+  <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
+  <str key="synchronization_between_computers_article">## How to set up it?
+### What's your needing?
+- manually assigned IP addresses of your devices that you want to sync so that the IP address does not change every time the computer is turned on, it is possible to set up in your router settings:
+  - [for Asus routers](https://www.asus.com/support/FAQ/1000906/)
+  - [for Tp-link routers](https://www.tp-link.com/us/support/faq/170/)
+  - [for Tenda routers](https://www.tendacn.com/faq/3264.html)
+  - [for Netgear routers](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
+  - if you don't have the above routers, open your router settings (URL: [192.168.1.1](http://192.168.1.1) or related) and search in the DHCP server section something in the shape of "Manually assign an IP to the DHCP list" or "Static IP", etc.
+- if you want to select synchronization file from other than home folder, you need to allow access to file in Flatseal app for proper functionality (related to Flatpak (Sandbox) version)
+- check if the folder for periodic saving is same as folder for synchronization file
+### Set synchronization in SaveDesktop app
+On computer 1 and computer 2, open SaveDesktop application and switch to Sync page. On computer 1 click on button "Set up the sync file", select synchronization file and select periodic synchronization interval. Then copy the URL for synchronization and on computer 2, click on button "Connect with other computer" and enter copied URL for synchronization from computer 1.
+
+If you want to sync DE configuration from computer 2 to computer 1, follow the same procedure.
+
+**For the changes to take effect, it is necessary to logout from system**
+
+## Periodic synchronization
+You can choose between the following items:
+- Daily
+- Weekly (synchronization takes place every Tuesday)
+- Monthly (synchronization takes place every second day in the month)</str>
+  <str key="pages">Pages:</str>
+  <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
+  <str key="save_installed_flatpaks_article">Since version 2.5, SaveDesktop allows you to save installed Flatpak applications and install them from a list. So how does it work?
+
+### Saving installed Flatpak applications
+It is only possible to save a list of Flatpak applications installed in the system directory `/var/lib/flatpak/app`, not in the home directory `~/.local/share/flatpak/app`. In the saved configuration archive, the list of installed Flatpak applications is labeled as `installed_flatpaks.sh`.
+
+### Installing Flatpak applications from the list
+After importing the saved configuration file and logging back in, **the Flatpak applications will start installing in the background.**</str>
+  <str key="wiki_description">SaveDesktop is a simple application written in Python using GTK and LibAdwaita libraries. This wiki is used to explain some of the features of the application (e.g. synchronization between computers).
+
+This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
+
+For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
+  <str key="select_language">Select language</str>
+  <str key="savedesktop_wiki">SaveDesktop wiki</str>
+  <str key="localize-wiki">Localize SaveDesktop wiki (via Weblate)</str>
 </root>
