@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="home">Home page</str>
+  <str key="periodic_saving">Salvataggio periodico</str>
+  <str key="periodic_saving_article">### Come funziona?
+Oltre ai salvataggi manuali, SaveDesktop consente anche di salvare periodicamente la configurazione del desktop. Puoi scegliere tra le seguenti opzioni:
+- **Quotidiano**:
+   - Dopo aver effettuato l'accesso al sistema, SaveDesktop si avvia in background ed esegue il backup della configurazione. Se poi accedi nuovamente, non lo farà più, perché è già stato creato per quel giorno.
+- **Settimanalmente**:
+   - SaveDesktop esegue un backup della configurazione ogni lunedì se è selezionato "Settimanale". Se quel giorno il computer non è in funzione, SaveDesktop non lo farà il giorno successivo.
+- **Mensile**:
+   - Se è selezionato "Mensile", SaveDesktop esegue il backup il primo giorno del mese, ad es. 1 maggio, 1 giugno, 1 dicembre, ecc. Come per "Settimanale", se il computer non è in esecuzione quel giorno, SaveDesktop non lo eseguirà il giorno successivo.
+- **Mai**:
+   - Non succede nulla
+
+### Dove sono archiviati i file di salvataggio periodici?
+La directory predefinita per il salvataggio periodico è "/home/user/Downloads/SaveDesktop/archives", ma puoi scegliere una directory personalizzata.
+
+### Formato del nome file
+Se vuoi dare ai file di backup periodici nomi diversi da `config_{}`, puoi impostare il formato del nome file.
+Il nome predefinito, come già accennato, è `config_{}`. `{}` è una variabile in SaveDesktop che imposta la data odierna. Se non è presente e arriva il giorno della creazione del backup ed esiste un file di backup con il formato del nome file impostato dal formato del nome file, SaveDesktop lo sovrascrive con il nuovo file di backup. Altrimenti, SaveDesktop crea un nuovo file di backup.</str>
+  <str key="save_installed_flatpaks_title">Salva le app Flatpak installate e installale dall'elenco</str>
+  <str key="synchronization_between_computers_title">Sincronizzazione tra computer in rete</str>
+  <str key="synchronization_between_computers_article">## Come configurarlo?
+### Di cosa hai bisogno?
+- Assegnare manualmente gli indirizzi IP dei dispositivi che si desidera sincronizzare in modo che l'indirizzo IP non cambi ogni volta che si accende il computer, è possibile configurare nelle impostazioni del router:
+   - [per router Asus](https://www.asus.com/support/FAQ/1000906/)
+   - [per router Tp-link](https://www.tp-link.com/us/support/faq/170/)
+   - [per router Tenda](https://www.tendacn.com/faq/3264.html)
+   - [per router Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
+   - se non disponi dei router sopra indicati, apri le impostazioni del router (URL: [192.168.1.1](http://192.168.1.1) o correlato) e cerca nella sezione del server DHCP qualcosa sotto forma di "Assegna manualmente un IP nell'elenco DHCP" o "IP statico", ecc.
+- se si desidera selezionare un file di sincronizzazione da una cartella diversa dalla cartella Home, è necessario consentire l'accesso al file nell'app Flatseal per il corretto funzionamento (relativo alla versione Flatpak (Sandbox))
+- controlla se la cartella per il salvataggio periodico è la stessa cartella per il file di sincronizzazione
+### Imposta la sincronizzazione nell'app SaveDesktop
+Sul computer 1 e sul computer 2, apri l'applicazione SaveDesktop e passa alla pagina di sincronizzazione. Sul computer 1 fare clic sul pulsante "Imposta file di sincronizzazione", selezionare il file di sincronizzazione e selezionare l'intervallo di sincronizzazione periodica. Quindi copia l'URL per la sincronizzazione e sul computer 2, fai clic sul pulsante "Connetti con un altro computer" e inserisci l'URL copiato per la sincronizzazione dal computer 1.
+
+Se desideri sincronizzare la configurazione DE dal computer 2 al computer 1, segui la stessa procedura.
+
+**Affinché le modifiche abbiano effetto è necessario disconnettersi dal sistema**
+
+## Sincronizzazione periodica
+Puoi scegliere tra i seguenti articoli:
+- Quotidiano
+- Settimanale (la sincronizzazione avviene ogni martedì)
+- Mensile (la sincronizzazione avviene ogni secondo giorno del mese)</str>
+  <str key="pages">Pagine:</str>
+  <str key="github_issues">_Se hai domande, puoi usare GitHub issues._</str>
+  <str key="save_installed_flatpaks_article">Dalla versione 2.5, SaveDesktop consente di salvare le applicazioni Flatpak installate e installarle da un elenco. Quindi, come funziona?
+
+### Salvataggio delle applicazioni Flatpak installate
+È possibile salvare solo un elenco delle applicazioni Flatpak installate nella directory di sistema `/var/lib/flatpak/app`, non nella directory home `~/.local/share/flatpak/app`. Nell'archivio di configurazione salvato, l'elenco delle applicazioni Flatpak installate è etichettato come "installed_flatpaks.sh".
+
+### Installazione delle applicazioni Flatpak dall'elenco
+Dopo aver importato il file di configurazione salvato ed aver effettuato nuovamente l'accesso, **le applicazioni Flatpak inizieranno l'installazione in background.**</str>
+  <str key="wiki_description">SaveDesktop è una semplice applicazione scritta in Python utilizzando le librerie GTK e LibAdwaita. Questo wiki viene utilizzato per spiegare alcune delle funzionalità dell'applicazione (ad esempio la sincronizzazione tra computer).
+
+Questo wiki può essere tradotto tramite [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). I file di traduzione possono essere trovati in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
+
+Per una navigazione più semplice, è presente una barra laterale in cui è possibile passare da una lingua all'altra e da una pagina all'altra. Oltre alla barra laterale, puoi visualizzare le singole pagine di seguito:</str>
+  <str key="select_language">Seleziona lingua</str>
+  <str key="savedesktop_wiki">SaveDesktop wiki</str>
+  <str key="localize-wiki">Localizza la wiki di SaveDesktop (tramite Weblate)</str>
+</root>
