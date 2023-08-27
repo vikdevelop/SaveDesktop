@@ -14,7 +14,7 @@ body:
   - type: dropdown
     id: environment
     attributes:
-      label: Environment
+      label: Desktop Environment
       description: |
         What Desktop Environment are you using?
       options:
