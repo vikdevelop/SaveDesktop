@@ -1,6 +1,6 @@
 name: Bug report
 description: Report a bug of SaveDesktop app to developer
-title: ""
+title: "bug:"
 labels: [bug]
 body:
   - type: input
