@@ -31,7 +31,7 @@ Výchozí název, jak již bylo zmíněno, je `config_{}`. `{}` je proměnná v 
 - pokud chcete vybrat synchronizační soubor z jiné než domovské složky, musíte pro správnou funkčnost povolit přístup k souboru v aplikaci Flatseal (souvisí s verzí Flatpak (Sandbox))
 - zkontrolujte, zda je složka pro pravidelné ukládání stejná jako složka pro synchronizační soubor.
 ### Nastavení synchronizace v aplikaci SaveDesktop
-V počítači 1 a počítači 2 otevřete aplikaci SaveDesktop a přepněte na stránku Synchronizovat. V počítači 1 klikněte na tlačítko "Nastavit synchronizační soubor", vyberte synchronizační soubor a zvolte interval pravidelné synchronizace. Poté zkopírujte adresu URL pro synchronizaci a v počítači 2 klikněte na tlačítko "Připojit se k jinému počítači" a zadejte zkopírovanou adresu URL pro synchronizaci z počítače 1.
+Na počítači 1 a počítači 2 otevřete aplikaci SaveDesktop a přepněte na stránku Synchronizovat. Na počítači 1 klikněte na tlačítko "Nastavit synchronizační soubor", vyberte synchronizační soubor a zvolte interval pravidelné synchronizace. Poté zkopírujte adresu URL pro synchronizaci a na počítači 2 klikněte na tlačítko "Připojit se k jinému počítači" a zadejte zkopírovanou adresu URL pro synchronizaci z počítače 1.
 
 Pokud chcete synchronizovat konfiguraci desktopového prostředí z počítače 2 do počítače 1, postupujte stejně.
 
