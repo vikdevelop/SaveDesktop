@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a bug of SaveDesktop app to developer
+title: ""
+labels: [bug]
+body:
+  - type: input
+    id: distro
+    attributes:
+      label: Linux distribution
+      description: "Write the name and version of the distribution"
+      placeholder: "e.g. Fedora 37, Ubuntu 22.04"
+    validations:
+      required: true  
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: |
+        What Desktop Environment are you using?
+      options:
+        - GNOME
+        - KDE Plasma
+        - Xfce
+        - Cinnamon
+        - MATE
+        - Pantheon (elementaryOS)
+        - Budgie
+        - COSMIC (Pop!_OS)
+    validations:
+      required: true
+  - type: textarea
+    id: bugdesc
+    attributes:
+      label: Bug description
+      description: Describe the problem, steps to reproduce, or insert output from the terminal
+    validations:
+      required: true
