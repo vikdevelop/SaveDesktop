@@ -18,6 +18,7 @@ body:
       description: |
         What Desktop Environment are you using?
       options:
+        - Select
         - GNOME
         - KDE Plasma
         - Xfce
