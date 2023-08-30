@@ -113,10 +113,9 @@
 
 ## Translations
 If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
-
-<a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/">
-<img src="https://hosted.weblate.org/widgets/vikdevelop/-/savedesktop/open-graph.png" alt="Stav překladu" width=300 />
-</a>
+| <h4>SaveDesktop application</h4> (click on widget below) | <h4>SaveDesktop Github wiki</h4> (click on widget below) |
+| --- | --- |
+| <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Stav překladu" /></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Stav překladu" /></a> |
 
 ## Installation
 - Flathub (stable version)
