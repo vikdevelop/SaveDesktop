@@ -29,6 +29,18 @@ body:
         - COSMIC (Pop!_OS)
     validations:
       required: true
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package type
+      description: |
+        How did you install SaveDesktop?
+      options:
+        - Flatpak from Flathub
+        - Flatpak, which was built with Flatpak Builder
+        - Native version
+    validations:
+      required: true
   - type: textarea
     id: bugdesc
     attributes:
