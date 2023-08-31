@@ -1,12 +1,19 @@
 name: Feature request
 description: Suggestion to improve SaveDesktop
-title: "[Feature request]: "
+title: "feature_request: "
 labels: [enhancement]
 body:
   - type: textarea
+    id: problem
+    attributes:
+      label: The current problem or need
+      description: 
+    validations:
+      required: true
+  - type: textarea
     id: idea
     attributes:
-      label: Idea for improving an existing feature, adding a new feature ...
+      label: Describe the solution you'd like
       description: 
     validations:
       required: true
