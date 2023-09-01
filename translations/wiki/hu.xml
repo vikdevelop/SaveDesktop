@@ -43,7 +43,6 @@ You can choose between the following items:
 - Daily
 - Weekly (synchronization takes place every Tuesday)
 - Monthly (synchronization takes place every second day in the month)</str>
-  <str key="pages">Oldalak:</str>
   <str key="github_issues">_Ha bármi kérdésed lenne, használd a Github Issues-t._</str>
   <str key="save_installed_flatpaks_article">Since version 2.5, SaveDesktop allows you to save installed Flatpak applications and install them from a list. So how does it work?
 
