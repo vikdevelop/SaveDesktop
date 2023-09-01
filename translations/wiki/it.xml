@@ -43,7 +43,6 @@ Puoi scegliere tra i seguenti articoli:
 - Quotidiano
 - Settimanale (la sincronizzazione avviene ogni martedì)
 - Mensile (la sincronizzazione avviene ogni secondo giorno del mese)</str>
-  <str key="pages">Pagine:</str>
   <str key="github_issues">_Se hai domande, puoi usare GitHub issues._</str>
   <str key="save_installed_flatpaks_article">Dalla versione 2.5, SaveDesktop consente di salvare le applicazioni Flatpak installate e installarle da un elenco. Quindi, come funziona?
 

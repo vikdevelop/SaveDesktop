@@ -42,7 +42,6 @@ Můžete si vybrat mezi následujícími položkami:
 - Denně
 - Týdně (synchronizace probíhá každé úterý)
 - Měsíčně (synchronizace probíhá každý druhý den v měsíci)</str>
-  <str key="pages">Stránky:</str>
   <str key="github_issues">_Máte-li jakékoliv otázky, můžete použít Github issues._</str>
   <str key="save_installed_flatpaks_article">Od verze 2.5 umožňuje SaveDesktop ukládat nainstalované aplikace Flatpak a instalovat je ze seznamu. Jak to tedy funguje?
 
