@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="home"></str>
+  <str key="periodic_saving"></str>
+  <str key="periodic_saving_article"></str>
+  <str key="save_installed_flatpaks_title"></str>
+  <str key="synchronization_between_computers_title"></str>
+  <str key="synchronization_between_computers_article"></str>
+  <str key="github_issues"></str>
+  <str key="save_installed_flatpaks_article"></str>
+  <str key="wiki_description"></str>
+  <str key="select_language"></str>
+  <str key="savedesktop_wiki"></str>
+  <str key="localize-wiki"></str>
+</root>
