@@ -19,8 +19,8 @@ Az időszakos mentések alapértelmezett könyvtára a `/home/user/Letöltések/
 ### Fájlnév formátum
 Ha más nevet akarsz adni a mentéseknek, mint `config_{}`, beállíthatod a fájlnév formátumot.
 Az alapértelmezett név a fent említett `config_{}`. A `{}` egy változó a SaveDesktop alkalmazásban, amely a mai dátumot állítja be. Ha ez a változó nincs a fájlnévben, elérkezik a biztonsági mentés napja és egy biztonsági mentés már létezik a beállított fájlnévvel, az alkalmazás felülírja a meglévőt az új biztonsági mentéssel. Egyébként, új biztonsági mentés fájlt hoz létre az alkalmazás.</str>
-  <str key="save_installed_flatpaks_title">Save installed Flatpak apps and install it from list</str>
-  <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
+  <str key="save_installed_flatpaks_title">Telepített Flatpak alkalmazások mentése és listából telepítése</str>
+  <str key="synchronization_between_computers_title">Azonos hálózaton lévő számítógépek szinkronizálása</str>
   <str key="synchronization_between_computers_article">## How to set up it?
 ### What's your needing?
 - manually assigned IP addresses of your devices that you want to sync so that the IP address does not change every time the computer is turned on, it is possible to set up in your router settings:
