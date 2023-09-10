@@ -10,7 +10,7 @@
 		  <summary>Window maximization</summary>
 		</key>
 		<key name="save-installed-flatpaks" type="b">
-			<default>false</default>
+			<default>true</default>
 			<summary>Save installed Flatpak apps (option)</summary>
 		</key>
 		<key name="save-icons" type="b">
