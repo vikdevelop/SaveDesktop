@@ -1087,6 +1087,8 @@ class MyApp(Adw.Application):
         dialog.set_developer_name("vikdevelop")
         if not r_lang == "en":
             dialog.set_translator_credits(_["translator_credits"])
+        if not lang_list:
+            dialog.add_link("Translate SaveDesktop Github Wiki", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/")
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
