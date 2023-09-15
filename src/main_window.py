@@ -553,8 +553,12 @@ class MainWindow(Gtk.Window):
                 self.sync_btn.add_css_class("suggested-action")
                 self.sync_btn.set_valign(Gtk.Align.CENTER)
                 
+                self.spinner = Gtk.Spinner.new()
+                self.spinner.set_valign(Gtk.Align.CENTER)
+                
                 self.sync_row = Adw.ActionRow.new()
                 self.sync_row.set_title(_["sync_title"])
+                self.sync_row.add_suffix(self.spinner)
                 self.sync_row.add_suffix(self.sync_btn)
                 self.sync_row.set_activatable_widget(self.sync_btn)
                 self.urlBox.append(self.sync_row)
@@ -591,7 +595,12 @@ class MainWindow(Gtk.Window):
         self.show_warn_toast()
         
     def sync_cmp(self, w):
-        os.system("python3 /app/network_sharing.py")
+        def stop_spinner():
+            self.spinner.stop()
+        #os.system("python3 /app/network_sharing.py")
+        self.spinner.start()
+        self.sync_process = GLib.spawn_command_line_async("python3 /app/network_sharing.py")
+        self.sync_time = GLib.timeout_add_seconds(5, stop_spinner)
     
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
