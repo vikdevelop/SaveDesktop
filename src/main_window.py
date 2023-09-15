@@ -595,11 +595,7 @@ class MainWindow(Gtk.Window):
         self.show_warn_toast()
         
     def sync_cmp(self, w):
-        def stop_spinner():
-            self.spinner.stop()
-        self.spinner.start()
         os.system("python3 /app/network_sharing.py")
-        self.sync_time = GLib.timeout_add_seconds(5, stop_spinner)
     
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
@@ -1061,7 +1057,7 @@ class MainWindow(Gtk.Window):
         
     # message that says where will be run a synchronization
     def show_special_toast(self):
-        self.special_toast = Adw.Toast.new(title="You can now sync your configuration from this dialog")
+        self.special_toast = Adw.Toast.new(title="To synchronize the configuration now, open it again on the \"Connect with other computer\"")
         self.toast_overlay.add_toast(self.special_toast)
     
     # Action after disappearancing toast
