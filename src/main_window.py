@@ -597,9 +597,8 @@ class MainWindow(Gtk.Window):
     def sync_cmp(self, w):
         def stop_spinner():
             self.spinner.stop()
-        #os.system("python3 /app/network_sharing.py")
         self.spinner.start()
-        self.sync_process = GLib.spawn_command_line_async("python3 /app/network_sharing.py")
+        os.system("python3 /app/network_sharing.py")
         self.sync_time = GLib.timeout_add_seconds(5, stop_spinner)
     
     # Set custom folder for periodic saving dialog
