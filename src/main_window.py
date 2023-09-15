@@ -6,6 +6,7 @@ import glob
 import sys
 import json
 import locale
+from urllib.request import urlopen
 from open_wiki import *
 from datetime import date
 from pathlib import Path
@@ -451,21 +452,21 @@ class MainWindow(Gtk.Window):
 
         # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
-        self.file_row.set_title(_["sync_file"])
+        self.file_row.set_title("1 " + _["sync_file"])
         self.file_row.set_subtitle(self.settings["file-for-syncing"])
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
         
         # Periodic import section
         actions = Gtk.StringList.new(strings=[
-            _["never"], _["daily"], _["weekly"], _["monthly"]
+            _["never"], _["daily"], _["weekly"], _["monthly"], _["manually"]
         ])
         
         self.import_row = Adw.ComboRow.new()
         self.import_row.add_suffix(self.periodicButton)
         self.import_row.set_use_markup(True)
         self.import_row.set_use_underline(True)
-        self.import_row.set_title(_["periodic_sync"])
+        self.import_row.set_title("2 " + _["periodic_sync"])
         self.import_row.set_title_lines(2)
         self.import_row.set_subtitle_lines(4)
         self.import_row.set_model(model=actions)
@@ -479,10 +480,12 @@ class MainWindow(Gtk.Window):
             self.import_row.set_selected(2)
         elif self.settings["periodic-import"] == "Monthly2":
             self.import_row.set_selected(3)
+        elif self.settings["periodic-import"] == "Manually2":
+            self.import_row.set_selected(4)
 
         # Row for showing URL for synchronization with other computers
         self.url_row = Adw.ActionRow.new()
-        self.url_row.set_title(_["url_for_sync"])
+        self.url_row.set_title("3 " + _["url_for_sync"])
         self.url_row.set_use_markup(True)
         self.url_row.set_subtitle(f"http://{IPAddr}:8000")
         self.url_row.set_subtitle_selectable(True)
@@ -519,10 +522,11 @@ class MainWindow(Gtk.Window):
             elif selected_item.get_string() == _["monthly"]:
                 import_item = "Monthly2"
                 self.set_syncing()
+            elif selected_item.get_string() == _["manually"]:
+                import_item = "Manually2"
             with open(f"{self.folder}/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
             self.settings["periodic-import"] = import_item
-            self.show_warn_toast()
                 
     # URL Dialog
     def open_urlDialog(self, w):
@@ -540,6 +544,21 @@ class MainWindow(Gtk.Window):
         self.urlEntry.set_text(self.settings["url-for-syncing"])
         self.urlBox.append(self.urlEntry)
         
+        if not self.settings["url-for-syncing"] == "":
+            r_file = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
+            jS = json.load(r_file)
+            if jS["periodic-import"] == "Manually2":
+                self.sync_btn = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
+                self.sync_btn.connect("clicked", self.sync_cmp)
+                self.sync_btn.add_css_class("suggested-action")
+                self.sync_btn.set_valign(Gtk.Align.CENTER)
+                
+                self.sync_row = Adw.ActionRow.new()
+                self.sync_row.set_title(_["sync_title"])
+                self.sync_row.add_suffix(self.sync_btn)
+                self.sync_row.set_activatable_widget(self.sync_btn)
+                self.urlBox.append(self.sync_row)
+        
         self.urlDialog.add_response('cancel', _["cancel"])
         self.urlDialog.add_response('ok', _["apply"])
         self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
@@ -551,8 +570,13 @@ class MainWindow(Gtk.Window):
         if response == 'ok':
             self.settings["url-for-syncing"] = self.urlEntry.get_text()
             self.folder = self.settings["file-for-syncing"]
-            self.set_syncing()
-            self.show_warn_toast()
+            if not self.urlEntry.get_text() == "":
+                r_file = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
+                jS = json.load(r_file)
+                if jS["periodic-import"] == "Manually2":
+                    self.show_special_toast()
+                else:
+                    self.set_syncing()
 
     # Set synchronization for running in the background
     def set_syncing(self):
@@ -564,6 +588,10 @@ class MainWindow(Gtk.Window):
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
                 pv.write('[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --sync')
+        self.show_warn_toast()
+        
+    def sync_cmp(self, w):
+        os.system("python3 /app/network_sharing.py")
     
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
@@ -1022,6 +1050,11 @@ class MainWindow(Gtk.Window):
         self.warn_toast.set_button_label(_["logout"])
         self.warn_toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.warn_toast)
+        
+    # message that says where will be run a synchronization
+    def show_special_toast(self):
+        self.special_toast = Adw.Toast.new(title="You can now sync your configuration from this dialog")
+        self.toast_overlay.add_toast(self.special_toast)
     
     # Action after disappearancing toast
     def on_toast_dismissed(self, toast):
@@ -1087,6 +1120,7 @@ class MyApp(Adw.Application):
         dialog.set_developer_name("vikdevelop")
         if not r_lang == "en":
             dialog.set_translator_credits(_["translator_credits"])
+        print(lang_list)
         if not lang_list:
             dialog.add_link("Translate SaveDesktop Github Wiki", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/")
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
