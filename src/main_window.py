@@ -459,7 +459,7 @@ class MainWindow(Gtk.Window):
         
         # Periodic import section
         actions = Gtk.StringList.new(strings=[
-            _["never"], _["daily"], _["weekly"], _["monthly"], _["manually"]
+            _["never"], _["daily"], _["weekly"], _["monthly"], "Manually"
         ])
         
         self.import_row = Adw.ComboRow.new()
@@ -522,7 +522,7 @@ class MainWindow(Gtk.Window):
             elif selected_item.get_string() == _["monthly"]:
                 import_item = "Monthly2"
                 self.set_syncing()
-            elif selected_item.get_string() == _["manually"]:
+            elif selected_item.get_string() == "Manually":
                 import_item = "Manually2"
             with open(f"{self.folder}/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
