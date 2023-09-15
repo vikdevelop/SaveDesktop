@@ -108,6 +108,8 @@ class Syncing:
                 self.download_config()
             else:
                 print("Today is not second day of month.")
+        elif self.jF["periodic-import"] == "Manually2":
+            self.download_config()
                
     # Download archive from URL
     def download_config(self):
