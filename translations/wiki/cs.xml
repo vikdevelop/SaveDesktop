@@ -41,7 +41,8 @@ Pokud chcete synchronizovat konfiguraci desktopového prostředí z počítače 
 Můžete si vybrat mezi následujícími položkami:
 - Denně
 - Týdně (synchronizace probíhá každé úterý)
-- Měsíčně (synchronizace probíhá každý druhý den v měsíci)</str>
+- Měsíčně (synchronizace probíhá každý druhý den v měsíci)
+- Ručně (je možné synchronizovat konfiguraci z menu v záhlaví kliknutím na tři tečky)</str>
   <str key="github_issues">_Máte-li jakékoliv otázky, můžete použít Github issues._</str>
   <str key="save_installed_flatpaks_article">Od verze 2.5 umožňuje SaveDesktop ukládat nainstalované aplikace Flatpak a instalovat je ze seznamu. Jak to tedy funguje?
 
