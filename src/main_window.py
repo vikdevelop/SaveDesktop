@@ -563,6 +563,7 @@ class MainWindow(Gtk.Window):
                 r_file = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
                 jS = json.load(r_file)
                 if jS["periodic-import"] == "Manually2":
+                    self.menu_button_model.remove(0)
                     self.menu_button_model.prepend(_["sync"], 'app.m_sync')
                     self.settings["manually-sync"] = True
                     self.show_special_toast()
