@@ -42,7 +42,8 @@ Se desideri sincronizzare la configurazione DE dal computer 2 al computer 1, seg
 Puoi scegliere tra i seguenti articoli:
 - Quotidiano
 - Settimanale (la sincronizzazione avviene ogni martedì)
-- Mensile (la sincronizzazione avviene ogni secondo giorno del mese)</str>
+- Mensile (la sincronizzazione avviene ogni secondo giorno del mese)
+- Manualmente (è possibile sincronizzare la configurazione dal menu nella barra dell'intestazione cliccando sui tre punti)</str>
   <str key="github_issues">_Se hai domande, puoi usare GitHub issues._</str>
   <str key="save_installed_flatpaks_article">Dalla versione 2.5, SaveDesktop consente di salvare le applicazioni Flatpak installate e installarle da un elenco. Quindi, come funziona?
 
