@@ -52,5 +52,7 @@
     "url_for_sync": "<b>URL pro synchronizaci s ostatními počítači</b>",
     "connect_with_other_computer": "Připojit se k jinému počítači",
     "connect_with_pc_desc": "Na jiném počítači otevřete aplikaci SaveDesktop a na této stránce klikněte na tlačítko \"Nastavit synchronizační soubor\", zkopírujte adresu URL pro synchronizaci a zadejte ji níže.",
-    "pc_url_entry": "Zadejte URL adresu pro synchronizaci"
+    "pc_url_entry": "Zadejte URL adresu pro synchronizaci",
+    "manually": "Manually",
+    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar"
 }
