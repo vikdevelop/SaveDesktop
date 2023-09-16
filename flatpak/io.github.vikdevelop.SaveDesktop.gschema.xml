@@ -65,9 +65,14 @@
 				<choice value="Daily2"/>
 				<choice value="Weekly2"/>
 				<choice value="Monthly2"/>
+				<choice value="Manually2"/>
 			</choices>
 			<default>"Never2"</default>
 			<summary>Periodic import</summary>
+		</key>
+		<key name="manually-sync" type="b">
+		  <default>false</default>
+		  <summary>.</summary>
 		</key>
 	</schema>
 </schemalist>
