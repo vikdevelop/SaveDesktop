@@ -1109,6 +1109,8 @@ class MyApp(Adw.Application):
             
     # Sync config manually
     def sync_pc(self, action, param):
+        if os.path.exists(f"{DATA}/sync-info.json"):
+            os.remove(f"{DATA}/sync-info.json")
         os.system("python3 /app/network_sharing.py")
         
     # About dialog
