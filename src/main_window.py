@@ -505,6 +505,8 @@ class MainWindow(Gtk.Window):
     # Action after closing dialog for setting synchronization file
     def setDialog_closed(self, w, response):
         if response == 'ok':
+            if not self.file_row.get_subtitle() == f'{self.settings["file-for-syncing"]}':
+                self.set_syncing()
             self.settings["file-for-syncing"] = self.file_row.get_subtitle()
             self.file_name = os.path.basename(self.settings["file-for-syncing"])
             self.file = os.path.splitext(self.file_name)[0]
@@ -519,13 +521,10 @@ class MainWindow(Gtk.Window):
                 import_item = "Never2"
             elif selected_item.get_string() == _["daily"]:
                 import_item = "Daily2"
-                self.set_syncing()
             elif selected_item.get_string() == _["weekly"]:
                 import_item = "Weekly2"
-                self.set_syncing()
             elif selected_item.get_string() == _["monthly"]:
                 import_item = "Monthly2"
-                self.set_syncing()
             elif selected_item.get_string() == _["manually"]:
                 import_item = "Manually2"
             with open(f"{self.folder}/file-settings.json", "w") as f:
