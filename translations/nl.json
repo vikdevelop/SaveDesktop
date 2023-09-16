@@ -52,5 +52,7 @@
     "url_for_sync": "<b>Synchronisatie-url voor andere computers</b>",
     "connect_with_other_computer": "Verbinden met andere computer",
     "connect_with_pc_desc": "Ga naar de andere computer, open SaveDesktop, ga naar deze sectie en klik op ‘Synchronisatiebestand instellen’. Kopieer vervolgens de synchronisatie-url en voer deze hieronder in.",
-    "pc_url_entry": "Voer de synchronisatie-url in"
+    "pc_url_entry": "Voer de synchronisatie-url in",
+    "manually": "Manually",
+    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar"
 }
