@@ -81,6 +81,10 @@ class MainWindow(Gtk.Window):
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
         self.headerbar.pack_end(child=self.menu_button)
         
+        # Add Manually sync button
+        if self.settings["manually-sync"] == True:
+            self.menu_button_model.prepend(_["sync"], 'app.m_sync')
+        
         # Primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.headapp.set_margin_start(80)
@@ -544,25 +548,6 @@ class MainWindow(Gtk.Window):
         self.urlEntry.set_text(self.settings["url-for-syncing"])
         self.urlBox.append(self.urlEntry)
         
-        if not self.settings["url-for-syncing"] == "":
-            r_file = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
-            jS = json.load(r_file)
-            if jS["periodic-import"] == "Manually2":
-                self.sync_btn = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
-                self.sync_btn.connect("clicked", self.sync_cmp)
-                self.sync_btn.add_css_class("suggested-action")
-                self.sync_btn.set_valign(Gtk.Align.CENTER)
-                
-                self.spinner = Gtk.Spinner.new()
-                self.spinner.set_valign(Gtk.Align.CENTER)
-                
-                self.sync_row = Adw.ActionRow.new()
-                self.sync_row.set_title(_["sync_title"])
-                self.sync_row.add_suffix(self.spinner)
-                self.sync_row.add_suffix(self.sync_btn)
-                self.sync_row.set_activatable_widget(self.sync_btn)
-                self.urlBox.append(self.sync_row)
-        
         self.urlDialog.add_response('cancel', _["cancel"])
         self.urlDialog.add_response('ok', _["apply"])
         self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
@@ -578,9 +563,16 @@ class MainWindow(Gtk.Window):
                 r_file = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
                 jS = json.load(r_file)
                 if jS["periodic-import"] == "Manually2":
+                    self.menu_button_model.prepend(_["sync"], 'app.m_sync')
+                    self.settings["manually-sync"] = True
                     self.show_special_toast()
                 else:
                     self.set_syncing()
+                    self.settings["manually-sync"] = False
+                    self.menu_button_model.remove(1)
+            else:
+                self.settings["manually-sync"] = False
+                self.menu_button_model.remove(1)
 
     # Set synchronization for running in the background
     def set_syncing(self):
@@ -593,9 +585,6 @@ class MainWindow(Gtk.Window):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
                 pv.write('[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --sync')
         self.show_warn_toast()
-        
-    def sync_cmp(self, w):
-        os.system("python3 /app/network_sharing.py")
     
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
@@ -1057,7 +1046,7 @@ class MainWindow(Gtk.Window):
         
     # message that says where will be run a synchronization
     def show_special_toast(self):
-        self.special_toast = Adw.Toast.new(title="To synchronize the configuration now, open it again on the \"Connect with other computer\"")
+        self.special_toast = Adw.Toast.new(title="To synchronize the configuration now, open the menu on the header bar")
         self.toast_overlay.add_toast(self.special_toast)
     
     # Action after disappearancing toast
@@ -1099,6 +1088,7 @@ class MyApp(Adw.Application):
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open_dir', self.open_dir)
         self.create_action('logout', self.logout)
+        self.create_action('m_sync', self.sync_pc)
         self.connect('activate', self.on_activate)
         
     # Open directory (action after clicking button Open the folder on Adw.Toast)
@@ -1116,6 +1106,10 @@ class MyApp(Adw.Application):
             os.system("dbus-send --print-reply --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int32:0 int32:0")
         else:
             os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
+            
+    # Sync config manually
+    def sync_pc(self, action, param):
+        os.system("python3 /app/network_sharing.py")
         
     # About dialog
     def on_about_action(self, action, param):
