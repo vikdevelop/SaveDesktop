@@ -52,5 +52,7 @@
     "url_for_sync": "<b>Más számítógépekkel való szinkronizálás URL-je</b>",
     "connect_with_other_computer": "Csatlakozás más számítógéphez",
     "connect_with_pc_desc": "Egy másik számítógépen nyissa meg a SaveDesktop alkalmazást és ezen az oldalon kattintson a \"Szinkronizálási fájl beállítása\" gombra, másolja ki a szinkronizáláshoz szükséges URL-t, majd írja be alább.",
-    "pc_url_entry": "Add meg a szinkronizálás URL-jét"
+    "pc_url_entry": "Add meg a szinkronizálás URL-jét",
+    "manually": "Manually",
+    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar"
 }
