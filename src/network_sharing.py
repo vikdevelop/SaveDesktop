@@ -73,6 +73,7 @@ class Syncing:
         if IPAddr in settings["url-for-syncing"]:
             print("You have same IP adress.")
         elif settings["url-for-syncing"] == "":
+            self.get_sync_type()
             print("Synchronization is not set up.")
         else:
             if os.path.exists(f"{DATA}/sync-info.json"):
@@ -95,21 +96,29 @@ class Syncing:
             self.jF = json.load(j)
         self.file = self.jF["file-name"]
         if self.jF["periodic-import"] == "Never2":
+            self.get_sync_type()
             print("Synchronization is not set up.")
         elif self.jF["periodic-import"] == "Daily2":
+            self.get_sync_type()
             self.download_config()
         elif self.jF["periodic-import"] == "Weekly2":
+            self.get_sync_type()
             if date.today().weekday() == 1:
                 self.download_config()
             else:
                 print("Today is not Tuesday.")
         elif self.jF["periodic-import"] == "Monthly2":
+            self.get_sync_type()
             if dt.day == 2:
                 self.download_config()
             else:
                 print("Today is not second day of month.")
         elif self.jF["periodic-import"] == "Manually2":
             self.download_config()
+            
+    def get_sync_type(self):
+        if settings["manually-sync"] == True:
+            settings["manually-sync"] = False
                
     # Download archive from URL
     def download_config(self):
