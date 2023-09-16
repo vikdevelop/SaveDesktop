@@ -569,10 +569,10 @@ class MainWindow(Gtk.Window):
                 else:
                     self.set_syncing()
                     self.settings["manually-sync"] = False
-                    self.menu_button_model.remove(1)
+                    self.menu_button_model.remove(0)
             else:
                 self.settings["manually-sync"] = False
-                self.menu_button_model.remove(1)
+                self.menu_button_model.remove(0)
 
     # Set synchronization for running in the background
     def set_syncing(self):
