@@ -83,7 +83,7 @@ class MainWindow(Gtk.Window):
         
         # Add Manually sync button
         if self.settings["manually-sync"] == True:
-            self.menu_button_model.prepend(_["sync"], 'app.m_sync')
+            self.menu_button_model.append(_["sync"], 'app.m_sync')
         
         # Primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -463,7 +463,7 @@ class MainWindow(Gtk.Window):
         
         # Periodic import section
         actions = Gtk.StringList.new(strings=[
-            _["never"], _["daily"], _["weekly"], _["monthly"], "Manually"
+            _["never"], _["daily"], _["weekly"], _["monthly"], _["manually"]
         ])
         
         self.import_row = Adw.ComboRow.new()
@@ -526,7 +526,7 @@ class MainWindow(Gtk.Window):
             elif selected_item.get_string() == _["monthly"]:
                 import_item = "Monthly2"
                 self.set_syncing()
-            elif selected_item.get_string() == "Manually":
+            elif selected_item.get_string() == _["manually"]:
                 import_item = "Manually2"
             with open(f"{self.folder}/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
@@ -1047,7 +1047,7 @@ class MainWindow(Gtk.Window):
         
     # message that says where will be run a synchronization
     def show_special_toast(self):
-        self.special_toast = Adw.Toast.new(title="To synchronize the configuration now, open the menu on the header bar")
+        self.special_toast = Adw.Toast.new(title=_["m_sync_desc"])
         self.toast_overlay.add_toast(self.special_toast)
     
     # Action after disappearancing toast
