@@ -52,5 +52,7 @@
     "url_for_sync": "<b>Diğer bilgisayarlarla eşzamanlama için URL</b>",
     "connect_with_other_computer": "Diğer bilgisayara bağlan",
     "connect_with_pc_desc": "Diğer bilgisayarda SaveDesktop uygulamasını açın ve bu sayfada \"Eşzamanlama dosyasını ayarla\" düğmesine tıklayın ve eşzamanlama için URL'yi kopyalayıp aşağıya girin.",
-    "pc_url_entry": "Eşzamanlama için URL girin"
+    "pc_url_entry": "Eşzamanlama için URL girin",
+    "manually": "Manually",
+    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar"
 }

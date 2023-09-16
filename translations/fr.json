@@ -52,5 +52,7 @@
     "url_for_sync": "<b>URL pour la synchronisation avec d'autres ordinateurs</b>",
     "connect_with_other_computer": "Connexion avec un autre ordinateur",
     "connect_with_pc_desc": "Sur un autre ordinateur, ouvrez l'application SaveDesktop, et sur cette page, cliquez sur le bouton \" Configuration du fichier de synchronisation \" et copiez l'URL pour la synchronisation et entrez-la ci-dessous.",
-    "pc_url_entry": "Entrer une URL pour la synchronisation"
+    "pc_url_entry": "Entrer une URL pour la synchronisation",
+    "manually": "Manually",
+    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar"
 }
