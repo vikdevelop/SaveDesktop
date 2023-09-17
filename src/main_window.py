@@ -1078,7 +1078,7 @@ class MainWindow(Gtk.Window):
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
-        os.system(f"rm -rf {CACHE}/*")
+        os.system(f"rm -rf {CACHE}/.*")
         
     ## Create desktop file to make periodic backups work
     def create_pb_desktop(self):
