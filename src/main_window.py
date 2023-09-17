@@ -565,6 +565,7 @@ class MainWindow(Gtk.Window):
                     self.menu_button_model.append(_["sync"], 'app.m_sync')
                     self.settings["manually-sync"] = True
                     self.show_special_toast()
+                    self.set_syncing()
                     self.menu_button_model.remove(2)
                 else:
                     self.set_syncing()
