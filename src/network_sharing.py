@@ -41,6 +41,8 @@ CACHE = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp'
 DATA = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data'
 system_dir = "/app"
 
+os.system(f"rm -rf {CACHE}/*")
+
 # Check if syncing directory exists
 if not os.path.exists(f"{CACHE}/syncing"):
     os.mkdir(f"{CACHE}/syncing")
@@ -76,17 +78,7 @@ class Syncing:
             self.get_sync_type()
             print("Synchronization is not set up.")
         else:
-            if os.path.exists(f"{DATA}/sync-info.json"):
-                with open(f"{DATA}/sync-info.json") as s:
-                    jl = json.load(s)
-                if jl["sync-date"] == f'{date.today()}':
-                    self.get_sync_type()
-                    print("The configuration has already been imported today.")
-                    exit()
-                else:
-                    self.get_file_info()
-            else:
-                self.get_file_info()
+            self.get_file_info()
 
     # Get info about synchronization
     def get_file_info(self):
@@ -101,25 +93,42 @@ class Syncing:
             print("Synchronization is not set up.")
         elif self.jF["periodic-import"] == "Daily2":
             self.get_sync_type()
-            self.download_config()
+            self.check_sync()()
         elif self.jF["periodic-import"] == "Weekly2":
             self.get_sync_type()
             if date.today().weekday() == 1:
-                self.download_config()
+                self.self.check_sync()
             else:
                 print("Today is not Tuesday.")
         elif self.jF["periodic-import"] == "Monthly2":
             self.get_sync_type()
             if dt.day == 2:
-                self.download_config()
+                self.self.check_sync()
             else:
                 print("Today is not second day of month.")
         elif self.jF["periodic-import"] == "Manually2":
-            self.download_config()
+            self.get_sync_type_not()
+            self.check_sync()
             
     def get_sync_type(self):
         if settings["manually-sync"] == True:
             settings["manually-sync"] = False
+
+    def get_sync_type_not(self):
+        if settings["manually-sync"] == False:
+            settings["manually-sync"] = True
+
+    def check_sync(self):
+        if os.path.exists(f"{DATA}/sync-info.json"):
+            with open(f"{DATA}/sync-info.json") as s:
+                jl = json.load(s)
+            if jl["sync-date"] == f'{date.today()}':
+                print("The configuration has already been imported today.")
+                exit()
+            else:
+                self.download_config()
+        else:
+            self.download_config()
                
     # Download archive from URL
     def download_config(self):
@@ -205,3 +214,4 @@ class Syncing:
         #os.system("pkill -15 python3 && pkill -15 python")
 
 Syncing()
+
