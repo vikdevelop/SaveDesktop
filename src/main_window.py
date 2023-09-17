@@ -56,6 +56,9 @@ else:
 
 _ = json.load(locale)
 
+with open(f"{CACHE}/.from_app", "w") as d:
+    d.write("from_app = true")
+
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
