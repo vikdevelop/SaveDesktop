@@ -507,6 +507,7 @@ class MainWindow(Gtk.Window):
         if response == 'ok':
             if not self.file_row.get_subtitle() == f'{self.settings["file-for-syncing"]}':
                 self.set_syncing()
+                self.show_warn_toast()
             self.settings["file-for-syncing"] = self.file_row.get_subtitle()
             self.file_name = os.path.basename(self.settings["file-for-syncing"])
             self.file = os.path.splitext(self.file_name)[0]
@@ -564,11 +565,12 @@ class MainWindow(Gtk.Window):
                 if jS["periodic-import"] == "Manually2":
                     self.menu_button_model.append(_["sync"], 'app.m_sync')
                     self.settings["manually-sync"] = True
-                    self.show_special_toast()
                     self.set_syncing()
+                    self.show_special_toast()
                     self.menu_button_model.remove(2)
                 else:
                     self.set_syncing()
+                    self.show_warn_toast()
                     self.settings["manually-sync"] = False
                     self.menu_button_model.remove(1)
             else:
@@ -585,7 +587,6 @@ class MainWindow(Gtk.Window):
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
                 pv.write('[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --sync')
-        self.show_warn_toast()
     
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
