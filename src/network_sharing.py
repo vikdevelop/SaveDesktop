@@ -80,6 +80,7 @@ class Syncing:
                 with open(f"{DATA}/sync-info.json") as s:
                     jl = json.load(s)
                 if jl["sync-date"] == f'{date.today()}':
+                    self.get_sync_type()
                     print("The configuration has already been imported today.")
                     exit()
                 else:
