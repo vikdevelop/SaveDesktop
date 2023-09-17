@@ -126,9 +126,21 @@ class Syncing:
                 print("The configuration has already been imported today.")
                 exit()
             else:
-                self.download_config()
+                if self.jF["periodic-import"] == "Manually2":
+                    if os.path.exists(f"{CACHE}/.from_app"):
+                        self.download_config()
+                    else:
+                        print("Please sync from SaveDesktop app")
+                else:
+                    self.download_config()
         else:
-            self.download_config()
+            if self.jF["periodic-import"] == "Manually2":
+                if os.path.exists(f"{CACHE}/.from_app"):
+                    self.download_config()
+                else:
+                    print("Please sync from SaveDesktop app")
+            else:
+                self.download_config()
                
     # Download archive from URL
     def download_config(self):
@@ -209,6 +221,7 @@ class Syncing:
         with open(f"{DATA}/sync-info.json", "w") as s:
             s.write('{\n "sync-date": "%s"\n}' % date.today())
         os.system(f"rm -rf {CACHE}/syncing/*")
+        os.system(f"rm {CACHE}/.from_app")
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop ({self.file[:-10]})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
         #os.system("pkill -15 python3 && pkill -15 python")
