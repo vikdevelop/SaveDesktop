@@ -93,7 +93,7 @@ class Syncing:
             print("Synchronization is not set up.")
         elif self.jF["periodic-import"] == "Daily2":
             self.get_sync_type()
-            self.check_sync()()
+            self.check_sync()
         elif self.jF["periodic-import"] == "Weekly2":
             self.get_sync_type()
             if date.today().weekday() == 1:
