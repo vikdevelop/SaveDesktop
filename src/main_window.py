@@ -1138,7 +1138,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.9.4"
+        version = "2.9.5"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
@@ -1150,7 +1150,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(f"{version}-native")
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<ul>\n<li>Updated translations</li>\n<li>Fixed minor bugs</li></ul>")
+        #dialog.set_release_notes("<ul>\n<li></li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
