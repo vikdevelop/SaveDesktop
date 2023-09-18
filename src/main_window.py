@@ -1060,6 +1060,7 @@ class MainWindow(Gtk.Window):
     
     # action after closing window
     def on_close(self, widget, *args):
+        self.close()
         selected_item = self.adw_action_row_backups.get_selected_item()
         # Translate backup items to English because it is necessary for the proper functioning of periodic backups correctly
         if selected_item.get_string() == _["never"]:
@@ -1078,7 +1079,8 @@ class MainWindow(Gtk.Window):
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
-        os.system(f"rm -rf {CACHE}/.*")
+        os.system(f"rm {CACHE}/.from_app")
+        self.synccmp = GLib.spawn_command_line_async("python3 /app/network_sharing.py")
         
     ## Create desktop file to make periodic backups work
     def create_pb_desktop(self):
@@ -1106,6 +1108,7 @@ class MyApp(Adw.Application):
     # Logout (action after clicking button Log Out on Adw.Toast)
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
+        os.system("rm %s/.*" % CACHE)
         if os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
             os.system("dbus-send --session --type=method_call --print-reply --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
