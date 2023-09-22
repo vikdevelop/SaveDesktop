@@ -1128,7 +1128,7 @@ class MainWindow(Gtk.Window):
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
         os.system(f"rm {CACHE}/.from_app")
-        self.synccmp = GLib.spawn_command_line_async("python3 /app/network_sharing.py")
+        #self.synccmp = GLib.spawn_command_line_async("python3 /app/network_sharing.py")
         
     ## Create desktop file to make periodic backups work
     def create_pb_desktop(self):
@@ -1168,7 +1168,7 @@ class MyApp(Adw.Application):
     def sync_pc(self, action, param):
         if os.path.exists(f"{DATA}/sync-info.json"):
             os.remove(f"{DATA}/sync-info.json")
-        os.system("python3 /app/network_sharing.py")
+        os.system(f"python3 {system_dir}/network_sharing.py")
         
     # About dialog
     def on_about_action(self, action, param):
