@@ -32,33 +32,43 @@ s.connect(("8.8.8.8", 80))
 IPAddr = s.getsockname()[0]
 s.close()
 
+# Get user download dir
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
+
+# Check if app is running in Flatpak (sandbox) or natively
 flatpak = os.path.exists("/.flatpak-info")
 
 if flatpak:
+    # Check if the detected language is exists in the app language list
     try:
         locale = open(f"/app/translations/{r_lang}.json")
     except:
         locale = open(f"/app/translations/en.json")
+    # System, cache and data directories
     system_dir = "/app"
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
 else:
+    # Check if the detected language is exists in the app language list
     try:
         locale = open(f"translations/{r_lang}.json")
     except:
         locale = open("translations/en.json")
+    # System, cache and data directories
     system_dir = f"{Path.home()}/.local/share/savedesktop/src"
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
 
+# Load language file with JSON module
 _ = json.load(locale)
 
+# Create a .from_app file for sync from the menu in the header bar
 with open(f"{CACHE}/.from_app", "w") as d:
     d.write("from_app = true")
 
+# Application window
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -66,9 +76,11 @@ class MainWindow(Gtk.Window):
         self.headerbar = Adw.HeaderBar.new()
         self.set_titlebar(titlebar=self.headerbar)
         self.application = kwargs.get('application')
-        
+
+        # Load the GSettings database for saving user settings
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
-        
+
+        # Set the window size and maximization from the GSettings database
         self.set_size_request(750, 540)
         (width, height) = self.settings["window-size"]
         self.set_default_size(width, height)
@@ -100,8 +112,8 @@ class MainWindow(Gtk.Window):
         self.pBox.set_halign(Gtk.Align.CENTER)
         self.pBox.set_valign(Gtk.Align.CENTER)
         
-        # Stack
-        self.stack =Adw.ViewStack(vexpand=True)
+        # A view container for the menu switcher
+        self.stack = Adw.ViewStack(vexpand=True)
         self.stack.set_hhomogeneous(True)
         self.headapp.append(self.stack)
         
@@ -111,32 +123,34 @@ class MainWindow(Gtk.Window):
         self.imp_cfg_title = _["import_from_file"]
         self.syncingBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         
-        # Add pages
+        # Add pages to the menu switcher
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
         self.stack.add_titled_with_icon(self.importBox,"importpage",_["import_title"],"document-open-symbolic")
         self.stack.add_titled_with_icon(self.syncingBox,"syncpage",_["sync"],"emblem-synchronizing-symbolic")
         
-        # Adw Switcher
+        # menu Switcher
         self.switcher_title=Adw.ViewSwitcherTitle()
         self.switcher_title.set_stack(self.stack)
         self.switcher_title.set_title("")
         self.headerbar.set_title_widget(self.switcher_title)
         
-        # Toast
+        # Toast Overlay for showing the popup window
         self.toast_overlay = Adw.ToastOverlay.new()
         self.toast_overlay.set_margin_top(margin=1)
         self.toast_overlay.set_margin_end(margin=1)
         self.toast_overlay.set_margin_bottom(margin=1)
         self.toast_overlay.set_margin_start(margin=1)
         
+        # Set Toast Overlay as a application child
         self.set_child(self.toast_overlay)
         self.toast_overlay.set_child(self.headapp)
-        
+
+        # Popup window for showing messages about saved and imported configuration
         self.toast = Adw.Toast.new(title='')
         self.toast.set_timeout(5)
         self.toast.connect('dismissed', self.on_toast_dismissed)
         
-        # check of user current desktop
+        # Check of user current desktop
         if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
             self.environment = 'GNOME'
             self.save_desktop()
@@ -198,6 +212,7 @@ class MainWindow(Gtk.Window):
             self.syncing_desktop()
             self.connect("close-request", self.on_close)
         else:
+            # If the user uses another desktop environment
             self.set_child(self.pBox)
             self.pBox.set_margin_start(50)
             self.pBox.set_margin_end(50)
@@ -229,7 +244,7 @@ class MainWindow(Gtk.Window):
         self.label_title.set_justify(Gtk.Justification.CENTER)
         self.saveBox.append(self.label_title)
         
-        # Box for show this options: set the filename, save flatpak custom permissions and periodic saving
+        # Box for show this options: set the filename, set items that will be included to the config archive and periodic saving
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.lbox_e.add_css_class(css_class='boxed-list')
@@ -240,12 +255,14 @@ class MainWindow(Gtk.Window):
         self.saveEntry.set_title(_["set_filename"])
         self.saveEntry.set_text(self.settings["filename"])
         self.lbox_e.append(self.saveEntry)
-         
+
+        # Button for opening dialog for selecting items that will be included to the config archive
         self.itemsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.itemsButton.set_valign(Gtk.Align.CENTER)
         self.itemsButton.add_css_class("flat")
         self.itemsButton.connect("clicked", self.open_itemsDialog)
-        
+
+        # Action row for opening dialog for selecting items that will be included to the config archive
         self.items_row = Adw.ActionRow.new()
         self.items_row.set_title(title=_["items_for_archive"])
         self.items_row.set_use_markup(True)
@@ -257,7 +274,7 @@ class MainWindow(Gtk.Window):
         
         self.lbox_e.set_show_separators(True)
         
-        # Periodic backups section
+        # Periodic saving section
         actions = Gtk.StringList.new(strings=[
             _["never"], _["daily"], _["weekly"], _["monthly"]
         ])
@@ -278,7 +295,8 @@ class MainWindow(Gtk.Window):
         self.adw_action_row_backups.set_subtitle_lines(4)
         self.adw_action_row_backups.set_model(model=actions)
         self.lbox_e.append(child=self.adw_action_row_backups)
-        
+
+        # Load options from GSettings database
         if self.settings["periodic-saving"] == 'Never':
             self.adw_action_row_backups.set_selected(0)
         elif self.settings["periodic-saving"] == 'Daily':
@@ -288,7 +306,7 @@ class MainWindow(Gtk.Window):
         elif self.settings["periodic-saving"] == 'Monthly':
             self.adw_action_row_backups.set_selected(3)
         
-        # save configuration button
+        # Save configuration button
         self.saveButton = Gtk.Button.new_with_label(_["save"])
         self.saveButton.add_css_class("suggested-action")
         self.saveButton.add_css_class("pill")
@@ -302,6 +320,7 @@ class MainWindow(Gtk.Window):
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
         
+        # Image and title for Import page
         self.statusPage_i = Adw.StatusPage.new()
         self.statusPage_i.set_icon_name("document-open-symbolic")
         self.statusPage_i.set_title(_['import_config'])
@@ -326,9 +345,7 @@ class MainWindow(Gtk.Window):
         self.fromlistButton.add_css_class("pill")
         self.fromlistButton.connect("clicked", self.import_from_list)
         self.importbtnBox.append(self.fromlistButton)
-        
-        #self.pBox.append(self.importBox)
-        
+                
     # Import archive from list
     def import_from_list(self, w):
         self.set_child(self.pBox)
@@ -337,10 +354,12 @@ class MainWindow(Gtk.Window):
         self.backButton.connect("clicked", self.close_list)
         self.headerbar.set_title_widget(None)
         self.headerbar.pack_start(self.backButton)
-        
+
+        # Box for this section
         self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=20)
         self.pBox.append(self.flistBox)
-        
+
+        # Label for showing text in this section
         self.flistLabel = Gtk.Label.new()
         self.flistLabel.set_justify(Gtk.Justification.CENTER)
         if self.settings["periodic-saving-folder"] == '':
@@ -358,7 +377,8 @@ class MainWindow(Gtk.Window):
                 self.flistBox.append(self.flistLabel)
                 
                 self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
-        
+
+                # Button for applying selected archive
                 self.applyButton = Gtk.Button.new_with_label(_["apply"])
                 self.applyButton.add_css_class('suggested-action')
                 self.applyButton.connect('clicked', self.imp_cfg_from_list)
@@ -375,7 +395,8 @@ class MainWindow(Gtk.Window):
                 self.dir_row.set_subtitle(self.dir)
                 self.dir_row.set_icon_name("folder-open-symbolic")
                 self.listbox.append(self.dir_row)
-                
+
+                # Get SaveDesktop files from folder selected by the user
                 os.chdir(self.dir)
                 get_dir_content = glob.glob(f"*.sd.tar.gz")
                 archives_model = Gtk.StringList.new(strings=get_dir_content)
@@ -406,20 +427,23 @@ class MainWindow(Gtk.Window):
         self.syncingBox.set_halign(Gtk.Align.CENTER)
         self.syncingBox.set_margin_start(40)
         self.syncingBox.set_margin_end(40)
-        
+
+        # Replace the old URL about syncing in the translation string with a new URL
         if "https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network" in _["sync_desc"]:
             old_url = _["sync_desc"]
             new_url = old_url.replace("https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network", f'{sync_wiki}')
         else:
             new_url = _["sync_desc"]
-        
+
+        # Image and title for this page
         self.statusPage = Adw.StatusPage.new()
         self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
         self.statusPage.set_title(_["sync_title"])
         self.statusPage.set_description(new_url)
         self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
-        
+
+        # "Set up the sync file" button
         self.setButton = Gtk.Button.new_with_label(_["set_up_sync_file"])
         self.setButton.add_css_class("pill")
         self.setButton.add_css_class("suggested-action")
@@ -428,7 +452,8 @@ class MainWindow(Gtk.Window):
         self.setButton.set_margin_start(70)
         self.setButton.set_margin_end(70)
         self.syncingBox.append(self.setButton)
-        
+
+        # "Connect with other computer" button
         self.getButton = Gtk.Button.new_with_label(_["connect_with_other_computer"])
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_urlDialog)
@@ -437,10 +462,11 @@ class MainWindow(Gtk.Window):
         self.getButton.set_margin_end(70)
         self.syncingBox.append(self.getButton)
         
-    # Set Dialog
+    # Open set Dialog by clicking on "Set up the sync file" button
     def setButton_dialog(self, w):
         self.open_setDialog()
-        
+
+    # Dialog for setting the sync file, periodic synchronization interval and copying the URL for synchronization
     def open_setDialog(self):
         self.setDialog = Adw.MessageDialog.new(self)
         self.setDialog.set_heading(_["set_up_sync_file"])
@@ -464,7 +490,7 @@ class MainWindow(Gtk.Window):
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
         
-        # Periodic import section
+        # Periodic sync section
         actions = Gtk.StringList.new(strings=[
             _["never"], _["daily"], _["weekly"], _["monthly"], _["manually"]
         ])
@@ -478,7 +504,8 @@ class MainWindow(Gtk.Window):
         self.import_row.set_subtitle_lines(4)
         self.import_row.set_model(model=actions)
         self.setdBox.append(child=self.import_row)
-        
+
+        # Load periodic sync values form GSettings database
         if self.settings["periodic-import"] == "Never2":
             self.import_row.set_selected(0)
         elif self.settings["periodic-import"] == "Daily2":
@@ -490,7 +517,7 @@ class MainWindow(Gtk.Window):
         elif self.settings["periodic-import"] == "Manually2":
             self.import_row.set_selected(4)
 
-        # Row for showing URL for synchronization with other computers
+        # Action row for showing URL for synchronization with other computers
         self.url_row = Adw.ActionRow.new()
         self.url_row.set_title("3 " + _["url_for_sync"])
         self.url_row.set_use_markup(True)
@@ -508,18 +535,22 @@ class MainWindow(Gtk.Window):
     # Action after closing dialog for setting synchronization file
     def setDialog_closed(self, w, response):
         if response == 'ok':
+            # Check if the sync file has been changed or not
             if not self.file_row.get_subtitle() == f'{self.settings["file-for-syncing"]}':
                 self.set_syncing()
                 self.show_warn_toast()
+            # Save the sync file to the GSettings database
             self.settings["file-for-syncing"] = self.file_row.get_subtitle()
             self.file_name = os.path.basename(self.settings["file-for-syncing"])
             self.file = os.path.splitext(self.file_name)[0]
             self.path = Path(self.settings["file-for-syncing"])
             self.folder = self.path.parent.absolute()
-            
+
+            # Set filename format to same as the sync file name
             r_file = self.file.replace(".sd.tar", "")
             self.settings["filename-format"] = r_file
-            
+
+            # Save periodic synchronization interval to remote file and the GSettings database
             selected_item = self.import_row.get_selected_item()
             if selected_item.get_string() == _["never"]:
                 import_item = "Never2"
@@ -540,12 +571,14 @@ class MainWindow(Gtk.Window):
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading(_["connect_with_other_computer"])
         self.urlDialog.set_body(_["connect_with_pc_desc"])
-        
+
+        # Box for adding widgets in this dialog
         self.urlBox = Gtk.ListBox.new()
         self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.urlBox.get_style_context().add_class(class_name='boxed-list')
         self.urlDialog.set_extra_child(self.urlBox)
-        
+
+        # Entry for entering the URL for synchronization
         self.urlEntry = Adw.EntryRow.new()
         self.urlEntry.set_title(_["pc_url_entry"])
         self.urlEntry.set_text(self.settings["url-for-syncing"])
@@ -565,6 +598,7 @@ class MainWindow(Gtk.Window):
             if not self.urlEntry.get_text() == "":
                 r_file = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
                 jS = json.load(r_file)
+                # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
                 if jS["periodic-import"] == "Manually2":
                     self.menu_button_model.append(_["sync"], 'app.m_sync')
                     self.settings["manually-sync"] = True
@@ -584,9 +618,11 @@ class MainWindow(Gtk.Window):
     def set_syncing(self):
         if not os.path.exists(f"{Path.home()}/.config/autostart"):
             os.mkdir(f"{Path.home()}/.config/autostart")
+        # Create desktop file for running Python HTTP server
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
                 sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --start-server')
+        # Create desktop file for syncing the configuration from other computer
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
                 pv.write('[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --sync')
@@ -598,10 +634,10 @@ class MainWindow(Gtk.Window):
     # Dialog for changing directory for periodic backups
     def dirdialog(self):
         self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
-        #self.dirDialog.set_heading("Additional settings for periodic saving")
-        
+        # Gtk box for adding the label and list box widget
         self.dirBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-        
+
+        # Title
         self.pbLabel = Gtk.Label.new(str=f"<big><b>{_['more_settings_pb']}</b></big>\n")
         self.pbLabel.set_use_markup(True)
         self.pbLabel.set_wrap(True)
@@ -613,13 +649,15 @@ class MainWindow(Gtk.Window):
         self.dirLBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.dirLBox.get_style_context().add_class(class_name='boxed-list')
         self.dirBox.append(self.dirLBox)
-        
+
+        # Restore filename format text to default
         self.filefrmtButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
         self.filefrmtButton.add_css_class('destructive-action')
         self.filefrmtButton.set_valign(Gtk.Align.CENTER)
         self.filefrmtButton.set_tooltip_text(_["reset_button"])
         self.filefrmtButton.connect("clicked", self.set_default_filefrmtEntry)
-        
+
+        # Button for opening more information (on Wiki)
         self.helpButton = Gtk.Button.new_from_icon_name("help-about-symbolic")
         self.helpButton.add_css_class("flat")
         self.helpButton.set_valign(Gtk.Align.CENTER)
@@ -670,7 +708,8 @@ class MainWindow(Gtk.Window):
     # Set text of self.filefrmtEntry to default
     def set_default_filefrmtEntry(self, w):
         self.filefrmtEntry.set_text("config_{}")
-        
+
+    # Open Wiki by clicking on the self.helpButton
     def open_fileformat_link(self, w):
         os.system(f"xdg-open {pb_wiki}#filename-format")
             
@@ -771,6 +810,7 @@ class MainWindow(Gtk.Window):
     # Action after closing itemsDialog
     def itemsdialog_closed(self, w, response):
         if response == 'ok':
+            # Saving the selected options to GSettings database
             self.settings["save-icons"] = self.switch_01.get_active()
             self.settings["save-themes"] = self.switch_02.get_active()
             self.settings["save-fonts"] = self.switch_03.get_active()
