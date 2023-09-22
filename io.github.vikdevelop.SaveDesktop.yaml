@@ -53,6 +53,7 @@ modules:
        - install -Dm755 -t /app src/network_sharing.py
        - install -Dm755 -t /app src/open_wiki.py
        - install -Dm755 -t /app src/backup_flatpaks.sh
+       - install -Dm755 -t /app src/localization.py
        - install -D -t /app/share build-beta.sh
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
        - install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
