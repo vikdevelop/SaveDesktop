@@ -4,8 +4,7 @@ import socket
 import gi
 import glob
 import sys
-import json
-import locale
+from localization import *
 from urllib.request import urlopen
 from open_wiki import *
 from datetime import date
@@ -14,17 +13,6 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Adw, Gio, GLib
-
-# Load system language
-p_lang = locale.getlocale()[0]
-if p_lang == 'pt_BR':
-    r_lang = 'pt_BR'
-elif p_lang == 'nb_NO':
-    r_lang = 'nb_NO'
-elif 'zh' in p_lang:
-    r_lang = 'zh_Hans'
-else:
-    r_lang = p_lang[:-3]
     
 # Get IP adress of user computer
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -39,11 +27,6 @@ download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 flatpak = os.path.exists("/.flatpak-info")
 
 if flatpak:
-    # Check if the detected language is exists in the app language list
-    try:
-        locale = open(f"/app/translations/{r_lang}.json")
-    except:
-        locale = open(f"/app/translations/en.json")
     # System, cache and data directories
     system_dir = "/app"
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
@@ -53,11 +36,6 @@ if flatpak:
     sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
     server_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --start-server"
 else:
-    # Check if the detected language is exists in the app language list
-    try:
-        locale = open(f"translations/{r_lang}.json")
-    except:
-        locale = open("translations/en.json")
     # System, cache and data directories
     system_dir = f"{Path.home()}/.local/share/savedesktop/src"
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
@@ -68,9 +46,6 @@ else:
     periodic_saving_cmd = f'python3 {system_dir}/periodic_saving.py'
     sync_cmd = f"python3 {system_dir}/network_sharing.py"
     server_cmd = f"python3 {system_dir}/start_server.py"
-
-# Load language file with JSON module
-_ = json.load(locale)
 
 # Create a .from_app file for sync from the menu in the header bar
 with open(f"{CACHE}/.from_app", "w") as d:
