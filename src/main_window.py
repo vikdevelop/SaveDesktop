@@ -48,6 +48,10 @@ if flatpak:
     system_dir = "/app"
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
+    # Commands
+    periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
+    sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
+    server_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --start-server"
 else:
     # Check if the detected language is exists in the app language list
     try:
@@ -60,6 +64,10 @@ else:
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
+    # Commands
+    periodic_saving_cmd = f'python3 {system_dir}/periodic_saving.py'
+    sync_cmd = f"python3 {system_dir}/network_sharing.py"
+    server_cmd = f"python3 {system_dir}/start_server.py"
 
 # Load language file with JSON module
 _ = json.load(locale)
@@ -621,11 +629,11 @@ class MainWindow(Gtk.Window):
         # Create desktop file for running Python HTTP server
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
-                sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --start-server')
+                sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec={server_cmd}')
         # Create desktop file for syncing the configuration from other computer
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
-                pv.write('[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --sync')
+                pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
     
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
@@ -1128,7 +1136,7 @@ class MainWindow(Gtk.Window):
             os.mkdir(f'{Path.home}/.config/autostart')
         if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
             with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
-                cb.write('[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec=flatpak run io.github.vikdevelop.SaveDesktop --background')
+                cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
