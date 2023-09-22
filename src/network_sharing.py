@@ -2,6 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from datetime import date
+from localization import *
 import os
 import locale
 import json
@@ -9,24 +10,6 @@ import gi
 import socket
 import shutil
 from gi.repository import Gio, GLib
-
-# Load system language
-p_lang = locale.getlocale()[0]
-if p_lang == 'pt_BR':
-    r_lang = 'pt_BR'
-elif p_lang == 'nb_NO':
-    r_lang = 'nb_NO'
-elif 'zh' in p_lang:
-    r_lang = 'zh_Hans'
-else:
-    r_lang = p_lang[:-3]
-    
-try:
-    locale = open(f"/app/translations/{r_lang}.json")
-except:
-    locale = open("/app/translations/en.json")
-    
-_ = json.load(locale)
 
 # Get IP adress of user computer
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
