@@ -2,6 +2,8 @@
 import json
 import locale
 import os
+import socket
+from pathlib import Path
 
 # Load system language
 p_lang = locale.getlocale()[0]
@@ -14,17 +16,40 @@ elif 'zh' in p_lang:
 else:
     r_lang = p_lang[:-3]
 
+# Get IP adress of user computer
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.connect(("8.8.8.8", 80))
+IPAddr = s.getsockname()[0]
+s.close()
+
 flatpak = os.path.exists("/.flatpak-info")
 if flatpak:
-  try:
+    try:
       locale = open(f"/app/translations/{r_lang}.json")
-  except:
+    except:
       locale = open(f"/app/translations/en.json")
+    # System, cache and data directories
+    system_dir = "/app"
+    CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
+    DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
+    # Commands
+    periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
+    sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
+    server_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --start-server"
 else:
-  # Check if the detected language is exists in the app language list
-  try:
+    try:
       locale = open(f"translations/{r_lang}.json")
-  except:
-      locale = open("translations/en.json")
+    except:
+      locale = open(f"translations/en.json")
+    # System, cache and data directories
+    system_dir = f"{Path.home()}/.local/share/savedesktop/src"
+    os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
+    os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
+    CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
+    DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
+    # Commands
+    periodic_saving_cmd = f'python3 {system_dir}/periodic_saving.py'
+    sync_cmd = f"python3 {system_dir}/network_sharing.py"
+    server_cmd = f"python3 {system_dir}/start_server.py"
 
 _ = json.load(locale)
