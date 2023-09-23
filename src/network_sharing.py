@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from datetime import date
-from localization import _
+from localization import _, CACHE, DATA, IPAddr, system_dir
 import os
 import locale
 import json
@@ -201,4 +201,3 @@ class Syncing:
         #os.system("pkill -15 python3 && pkill -15 python")
 
 Syncing()
-
