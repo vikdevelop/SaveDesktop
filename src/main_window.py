@@ -13,39 +13,9 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Adw, Gio, GLib
-    
-# Get IP adress of user computer
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.connect(("8.8.8.8", 80))
-IPAddr = s.getsockname()[0]
-s.close()
 
 # Get user download dir
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
-
-# Check if app is running in Flatpak (sandbox) or natively
-flatpak = os.path.exists("/.flatpak-info")
-
-if flatpak:
-    # System, cache and data directories
-    system_dir = "/app"
-    CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
-    DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
-    # Commands
-    periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
-    sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
-    server_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --start-server"
-else:
-    # System, cache and data directories
-    system_dir = f"{Path.home()}/.local/share/savedesktop/src"
-    os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
-    os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
-    CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
-    DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
-    # Commands
-    periodic_saving_cmd = f'python3 {system_dir}/periodic_saving.py'
-    sync_cmd = f"python3 {system_dir}/network_sharing.py"
-    server_cmd = f"python3 {system_dir}/start_server.py"
 
 # Create a .from_app file for sync from the menu in the header bar
 with open(f"{CACHE}/.from_app", "w") as d:
