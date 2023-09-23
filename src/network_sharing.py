@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from datetime import date
-from localization import *
+from localization import _
 import os
 import locale
 import json
