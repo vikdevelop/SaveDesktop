@@ -11,18 +11,9 @@ import socket
 import shutil
 from gi.repository import Gio, GLib
 
-# Get IP adress of user computer
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.connect(("8.8.8.8", 80))
-IPAddr = s.getsockname()[0]
-s.close()
-
 dt = datetime.now()
 
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
-CACHE = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp'
-DATA = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data'
-system_dir = "/app"
 
 os.system(f"rm -rf {CACHE}/*")
 
