@@ -4,7 +4,7 @@ import socket
 import gi
 import glob
 import sys
-from localization import *
+from localization import _
 from urllib.request import urlopen
 from open_wiki import *
 from datetime import date
