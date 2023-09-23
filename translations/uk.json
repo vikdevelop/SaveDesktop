@@ -53,6 +53,6 @@
     "connect_with_other_computer": "З'єднатися з іншим комп'ютером",
     "connect_with_pc_desc": "На іншому комп'ютері відкрийте застосунок SaveDesktop і на цій сторінці натисніть кнопку \"Налаштувати файл синхронізації\", скопіюйте URL-адресу для синхронізації та введіть її нижче.",
     "pc_url_entry": "Введіть URL для синхронізації",
-    "manually": "Manually",
-    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar"
+    "manually": "Вручну",
+    "m_sync_desc": "Відтепер ви можете синхронізувати налаштування з меню на панелі заголовка"
 }
