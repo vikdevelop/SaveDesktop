@@ -13,8 +13,10 @@ from gi.repository import Gio, GLib
 
 dt = datetime.now()
 
+# Load GSettings database for show user app settings
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 
+# Remove content in CACHE folder before syncing
 os.system(f"rm -rf {CACHE}/*")
 
 # Check if syncing directory exists
@@ -83,15 +85,18 @@ class Syncing:
         elif self.jF["periodic-import"] == "Manually2":
             self.get_sync_type_not()
             self.check_sync()
-            
+
+    # Set manually sync to false if IS NOT selected Manually option
     def get_sync_type(self):
         if settings["manually-sync"] == True:
             settings["manually-sync"] = False
 
+    # Set manually sync to false if IS selected Manually option
     def get_sync_type_not(self):
         if settings["manually-sync"] == False:
             settings["manually-sync"] = True
 
+    # Check if whether the synchronization has already taken place on this day
     def check_sync(self):
         if os.path.exists(f"{DATA}/sync-info.json"):
             with open(f"{DATA}/sync-info.json") as s:
@@ -133,7 +138,7 @@ class Syncing:
         
         self.import_config()
             
-    # Import configuration
+    # Sync configuration
     def import_config(self):
         # Applying configuration for GNOME-based environments
         if not os.path.exists("{}/.config".format(Path.home())):
@@ -182,7 +187,8 @@ class Syncing:
             os.system(f'cp -R ./ {Path.home()}/.local/share/')
         self.create_flatpak_desktop()
         self.done()
-        
+
+    # Create desktop file for installing Flatpak apps
     def create_flatpak_desktop(self):
         os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
         if not os.path.exists(f"{Path.home()}/.config/autostart"):
@@ -190,7 +196,8 @@ class Syncing:
         if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
             with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
                 fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
-                
+
+    # Message about done synchronization
     def done(self):
         with open(f"{DATA}/sync-info.json", "w") as s:
             s.write('{\n "sync-date": "%s"\n}' % date.today())
