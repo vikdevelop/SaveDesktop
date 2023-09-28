@@ -4050,10 +4050,10 @@ textarea.form-control-lg {
   justify-content: space-between;
 }
 .navbar-brand {
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
-  margin-right: 1rem;
-  font-size: 1.25rem;
+  padding-top: 0.2125rem;
+  padding-bottom: 0.2125rem;
+  margin-right: 0.1rem;
+  font-size: 1.1rem;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -4804,7 +4804,7 @@ textarea.form-control-lg {
 .page-link {
   position: relative;
   display: block;
-  color: #1abc9c;
+  color: grey;
   text-decoration: none;
   background-color: #fff;
   border: 0.125rem solid #dee2e6;
@@ -4817,9 +4817,9 @@ textarea.form-control-lg {
 }
 .page-link:hover {
   z-index: 2;
-  color: #15967d;
-  background-color: #e9ecef;
-  border-color: #dee2e6;
+  color: grey;
+  background-color: grey;
+  border-color: grey;
 }
 .page-link:focus {
   z-index: 3;
@@ -7808,12 +7808,12 @@ textarea.form-control-lg {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: #0d5df0;
+  background-color: black;
 }
 
 .bg-secondary {
   --bs-bg-opacity: 1;
-  background-color: #0d5df0;
+  background-color: black;
 }
 
 .bg-success {
@@ -11397,7 +11397,7 @@ html {
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active {
     color: #fff;
-    background: #00bfff;
+    background: grey;
   }
   #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
     color: #fff;
