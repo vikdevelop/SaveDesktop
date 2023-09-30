@@ -19,8 +19,8 @@ else:
 if environment == 'GNOME':
     os.system("gsettings set org.gnome.shell disable-user-extensions false")
 
-os.system(f"cp -R {DATA_FLATPAK}/user {Path.home()}/.config/dconf/ && cp -R {DATA_FLATPAK}/user {Path.home()}/.config/dconf/")
-os.system(f"cp -R {DATA_NATIVE}/user {Path.home()}/.config/dconf/ && cp -R {DATA_NATIVE}/user {Path.home()}/.config/dconf/")
+#os.system(f"cp -R {DATA_FLATPAK}/user {Path.home()}/.config/dconf/ && cp -R {DATA_FLATPAK}/user {Path.home()}/.config/dconf/")
+#os.system(f"cp -R {DATA_NATIVE}/user {Path.home()}/.config/dconf/ && cp -R {DATA_NATIVE}/user {Path.home()}/.config/dconf/")
 
 # Install Flatpak apps from list
 if os.path.exists(f"{DATA_FLATPAK}/installed_flatpaks.sh"):
