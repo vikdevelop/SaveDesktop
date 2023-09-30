@@ -1147,7 +1147,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(f"{version}-native")
             dialog.set_application_icon(icon)
-        #dialog.set_release_notes("<ul>\n<li></li></ul>")
+        dialog.set_release_notes("<ul>\n<li>Updated translations and fixed bugs with synchronization</li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
