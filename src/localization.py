@@ -48,8 +48,8 @@ else:
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
     # Commands
-    periodic_saving_cmd = f'cd /home/liveuser/.local/share/savedesktop/ && python3 periodic_saving.py'
-    sync_cmd = f"cd /home/liveuser/.local/share/savedesktop/ && python3/network_sharing.py"
-    server_cmd = f"cd /home/liveuser/.local/share/savedesktop/ && python3/start_server.py"
+    periodic_saving_cmd = f'cd {Path.home()}/.local/share/savedesktop/ && python3 src/periodic_saving.py'
+    sync_cmd = f"cd {Path.home()}/.local/share/savedesktop/ && python3 src/network_sharing.py"
+    server_cmd = f"cd {Path.home()}/.local/share/savedesktop/ && python3 src/start_server.py"
 
 _ = json.load(locale)
