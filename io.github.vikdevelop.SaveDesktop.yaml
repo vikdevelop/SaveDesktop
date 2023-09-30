@@ -43,6 +43,7 @@ finish-args:
     - --talk-name=org.freedesktop.portal.FileChooser
     - --env=DCONF_USER_CONFIG_DIR=.config/dconf
     - --filesystem=xdg-run/dconf
+    - --talk-name=ca.desrt.dconf
 modules:
   - name: dconf
     buildsystem: meson
