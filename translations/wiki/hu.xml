@@ -21,41 +21,41 @@ Ha más nevet akarsz adni a mentéseknek, mint `config_{}`, beállíthatod a fá
 Az alapértelmezett név a fent említett `config_{}`. A `{}` egy változó a SaveDesktop alkalmazásban, amely a mai dátumot állítja be. Ha ez a változó nincs a fájlnévben, elérkezik a biztonsági mentés napja és egy biztonsági mentés már létezik a beállított fájlnévvel, az alkalmazás felülírja a meglévőt az új biztonsági mentéssel. Egyébként, új biztonsági mentés fájlt hoz létre az alkalmazás.</str>
   <str key="save_installed_flatpaks_title">Telepített Flatpak alkalmazások mentése és listából telepítése</str>
   <str key="synchronization_between_computers_title">Azonos hálózaton lévő számítógépek szinkronizálása</str>
-  <str key="synchronization_between_computers_article">## How to set up it?
-### What's your needing?
-- manually assigned IP addresses of your devices that you want to sync so that the IP address does not change every time the computer is turned on, it is possible to set up in your router settings:
-  - [for Asus routers](https://www.asus.com/support/FAQ/1000906/)
-  - [for Tp-link routers](https://www.tp-link.com/us/support/faq/170/)
-  - [for Tenda routers](https://www.tendacn.com/faq/3264.html)
-  - [for Netgear routers](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - if you don't have the above routers, open your router settings (URL: [192.168.1.1](http://192.168.1.1) or related) and search in the DHCP server section something in the shape of "Manually assign an IP to the DHCP list" or "Static IP", etc.
-- if you want to select synchronization file from other than home folder, you need to allow access to file in Flatseal app for proper functionality (related to Flatpak (Sandbox) version)
-- check if the folder for periodic saving is same as folder for synchronization file
-### Set synchronization in SaveDesktop app
-On computer 1 and computer 2, open SaveDesktop application and switch to Sync page. On computer 1 click on button "Set up the sync file", select synchronization file and select periodic synchronization interval. Then copy the URL for synchronization and on computer 2, click on button "Connect with other computer" and enter copied URL for synchronization from computer 1.
+  <str key="synchronization_between_computers_article">## Hogyan állítsd be?
+### Mire lesz szükséged?
+- a szinkronizálni kívánt eszközökhöz manuálisan hozzárendelt IP címek, amely biztosítja, hogy az IP cím nem változik meg minden alkalommal, amikor a számítógépet bekapcsolod. Ezt a router beállításaiban lehetséges:
+  - [Asus router esetén](https://www.asus.com/support/FAQ/1000906/)
+  - [Tp-link router esetén](https://www.tp-link.com/us/support/faq/170/)
+  - [Tenda router esetén](https://www.tendacn.com/faq/3264.html)
+  - [Netgear router esetén](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
+  - más márkák esetén, nyisd meg a router admin oldalát (URL: [192.168.1.1](http://192.168.1.1) or related) és a DHCP szerver résznél keress az alábbiakhoz hasonló beállításokat, mint "IP mmanuális hozzárendelése DHCP listához" vagy "Statikus IP", stb.
+- ha a szinkronizálási fájlt nem a saját mappából szeretnéd kiválasztani, akkor a megfelelő működés érdekében engedélyezned kell a hozzáférést a fájlhoz a Flatseal alkalmazásban (a Flatpak (Sandbox) verzióhoz kapcsolódóan)
+- ellenőrizd, hogy az időszakos mentés mappája megegyezik-e a szinkronizálási fájl mappájával
+### Állítsa be a szinkronizálást a SaveDesktop alkalmazásban
+Az 1-es és a 2-es számítógépen nyisd meg a SaveDesktop alkalmazást és válts a Szinkronizálás oldalra. Az 1-es számítógépen kattints a "Szinkronizálási fájl beállítása" gombra, válaszd ki a szinkronizálási fájlt és az időszakos szinkronizálási intervallumot. Ezután másoljd ki az URL-t a szinkronizáláshoz, majd a 2-es számítógépen kattints a "Csatlakozás másik számítógéppel" gombra és írd be a kimásolt URL-t az 1-es számítógépről történő szinkronizáláshoz.
 
-If you want to sync DE configuration from computer 2 to computer 1, follow the same procedure.
+Ha szinkronizálni szeretnéd az asztali környezet konfigurációját a 2-es számítógépről az 1-es számítógépre, kövesd ugyanezt az eljárást.
 
-**For the changes to take effect, it is necessary to logout from system**
+**A módosítások életbe lépéséhez ki kell jelentkezni a rendszerből**
 
-## Periodic synchronization
-You can choose between the following items:
-- Daily
-- Weekly (synchronization takes place every Tuesday)
-- Monthly (synchronization takes place every second day in the month)</str>
+## Időszakos szinkronizálás
+Az alábbi tételek közül választhatsz:
+- Naponta
+- Hetente (a szinkronizálás minden kedden történik)
+- Havonta (a szinkronizálás a hónap minden második napján történik)</str>
   <str key="github_issues">_Ha bármi kérdésed lenne, használd a Github Issues-t._</str>
-  <str key="save_installed_flatpaks_article">Since version 2.5, SaveDesktop allows you to save installed Flatpak applications and install them from a list. So how does it work?
+  <str key="save_installed_flatpaks_article">A 2.5-ös verzió óta a SaveDesktop lehetővé teszi a telepített Flatpak alkalmazások mentését és a listából történő telepítését. Hogyan is működik?
 
-### Saving installed Flatpak applications
-It is only possible to save a list of Flatpak applications installed in the system directory `/var/lib/flatpak/app`, not in the home directory `~/.local/share/flatpak/app`. In the saved configuration archive, the list of installed Flatpak applications is labeled as `installed_flatpaks.sh`.
+### A telepített Flatpak alkalmazások mentése
+A telepített Flatpak alkalmazások listája csak a `/var/lib/flatpak/app` rendszerkönyvtárba menthető, a `~/.local/share/flatpak/app` főkönyvtárba nem. A mentett konfigurációs archívumban a telepített Flatpak alkalmazások listája `installed_flatpaks.sh` címkével van ellátva.
 
-### Installing Flatpak applications from the list
-After importing the saved configuration file and logging back in, **the Flatpak applications will start installing in the background.**</str>
-  <str key="wiki_description">SaveDesktop is a simple application written in Python using GTK and LibAdwaita libraries. This wiki is used to explain some of the features of the application (e.g. synchronization between computers).
+### Flatpak alkalmazások telepítése a listából
+A mentett konfigurációs fájl importálása és újbóli bejelentkezés után **a Flatpak alkalmazások telepítése megkezdődik a háttérben.**</str>
+  <str key="wiki_description">A SaveDesktop egy egyszerű alkalmazás, amelyet Python nyelven írtak GTK és LibAdwaita könyvtárak használatával. Ez a wiki az alkalmazás egyes funkcióinak magyarázatára szolgál (például a számítógépek közötti szinkronizálás).
 
-This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
+Ez a wiki a [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/) segítségével lefordítható. A fordítási fájlok a [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki) helyen találhatók.
 
-For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
+A könnyebb navigáció érdekében az oldalsávon válthatunk a nyelvek és az oldalak között. Az oldalsávon kívül az alábbi oldalakat tekinthetőek meg még:</str>
   <str key="select_language">Nyelv kiválasztása</str>
   <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="localize-wiki">Honosítsd a SaveDesktop wiki oldalt (a Weblate-n)</str>
