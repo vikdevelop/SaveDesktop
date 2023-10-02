@@ -28,6 +28,7 @@ Výchozí název, jak již bylo zmíněno, je `config_{}`. `{}` je proměnná v 
   - [pro routery Tenda](https://www.tendacn.com/faq/3264.html)
   - [pro routery Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
   - pokud výše uvedené routery nemáte, otevřete nastavení routeru (URL: [192.168.1.1](http://192.168.1.1) nebo příbuzné) a v části DHCP serveru vyhledejte něco ve tvaru "Manually assign an IP to the DHCP list" nebo "Static IP" apod.
+  - pokud nechcete nastavovat IP adresu ručně z rozhraní routeru, máte tiskárnu a nainstalovaný balíček `system-config-printer`, zkontrolujte zda jste zaškrtli položku "Sdílené" kliknutím na kartu "Tiskárna" v záhlaví. Pokud ne, zaškrtněte jej a restartujte systém. [Zde](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) je snímek obrazovky, jak to má vypadat.
 - pokud chcete vybrat synchronizační soubor z jiné než domovské složky, musíte pro správnou funkčnost povolit přístup k souboru v aplikaci Flatseal (souvisí s verzí Flatpak (Sandbox))
 - zkontrolujte, zda je složka pro pravidelné ukládání stejná jako složka pro synchronizační soubor.
 ### Nastavení synchronizace v aplikaci SaveDesktop
