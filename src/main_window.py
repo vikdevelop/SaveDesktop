@@ -491,6 +491,7 @@ class MainWindow(Gtk.Window):
             # Check if the sync file has been changed or not
             if not self.file_row.get_subtitle() == f'{self.settings["file-for-syncing"]}':
                 self.set_syncing()
+                self.show_warn_toast()
             # Save the sync file to the GSettings database
             self.settings["file-for-syncing"] = self.file_row.get_subtitle()
             self.file_name = os.path.basename(self.settings["file-for-syncing"])
@@ -508,16 +509,12 @@ class MainWindow(Gtk.Window):
                 import_item = "Never2"
             elif selected_item.get_string() == _["daily"]:
                 import_item = "Daily2"
-                self.show_warn_toast()
             elif selected_item.get_string() == _["weekly"]:
                 import_item = "Weekly2"
-                self.show_warn_toast()
             elif selected_item.get_string() == _["monthly"]:
                 import_item = "Monthly2"
-                self.show_warn_toast()
             elif selected_item.get_string() == _["manually"]:
                 import_item = "Manually2"
-                self.show_warn_toast()
             with open(f"{self.folder}/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
             self.settings["periodic-import"] = import_item
