@@ -1082,7 +1082,7 @@ class MainWindow(Gtk.Window):
     ## Create desktop file to make periodic backups work
     def create_pb_desktop(self):
         if not os.path.exists(f'{Path.home()}/.config/autostart'):
-            os.mkdir(f'{Path.home}/.config/autostart')
+            os.mkdir(f'{Path.home()}/.config/autostart')
         if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
             with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
                 cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
