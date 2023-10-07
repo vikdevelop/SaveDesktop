@@ -146,7 +146,7 @@ class Syncing:
         if os.path.exists('user'):
             os.system(f"cp ./user {Path.home()}/.config/dconf/")
         else:
-            os.system("/app/bin/dconf load / < ./dconf-settings.ini")
+            os.system("dconf load / < ./dconf-settings.ini")
         os.system(f"cp -r ./user {DATA}/")
         os.system(f'cp -R ./icons {Path.home()}/.local/share/')
         os.system(f'cp -R ./.themes {Path.home()}/')
