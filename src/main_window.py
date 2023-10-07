@@ -866,7 +866,7 @@ class MainWindow(Gtk.Window):
             os.mkdir(f"{CACHE}/saved_config")
         os.chdir(f"{CACHE}/saved_config")
         #self.dconf = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/dconf/user ./")
-        os.system("/app/bin/dconf dump / > ./dconf-settings.ini")
+        os.system("dconf dump / > ./dconf-settings.ini")
         self.gtk4 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-4.0 ./")
         self.gtk3 = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.config/gtk-3.0 ./")
         if self.settings["save-backgrounds"] == True:
@@ -964,7 +964,7 @@ class MainWindow(Gtk.Window):
         if os.path.exists("user"):
             self.i_dconf = GLib.spawn_command_line_async(f"cp ./user {Path.home()}/.config/dconf/")
         else:
-            os.system("/app/bin/dconf load / < ./dconf-settings.ini")
+            os.system("dconf load / < ./dconf-settings.ini")
         self.i_icons = GLib.spawn_command_line_async(f'cp -R ./icons {Path.home()}/.local/share/')
         self.i_themes = GLib.spawn_command_line_async(f'cp -R ./.themes {Path.home()}/')
         self.i_icons_home = GLib.spawn_command_line_async(f'cp -R ./.icons {Path.home()}/')
