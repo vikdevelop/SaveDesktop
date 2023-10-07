@@ -118,7 +118,7 @@ class PeriodicBackups:
                 os.makedirs(f"{download_dir}/SaveDesktop/archives")
         os.system("mkdir -p {}/periodic-saving/{}".format(CACHE, date.today()))
         os.chdir('{}/periodic-saving/{}'.format(CACHE, date.today()))
-        os.system("/app/bin/dconf dump / > ./dconf-settings.ini")
+        os.system("dconf dump / > ./dconf-settings.ini")
         os.system('cp -R ~/.config/gtk-4.0 ./')
         os.system('cp -R ~/.config/gtk-3.0 ./')
         if self.settings["save-backgrounds"] == True:
