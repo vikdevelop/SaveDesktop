@@ -59,5 +59,4 @@ A könnyebb navigáció érdekében az oldalsávon válthatunk a nyelvek és az 
   <str key="select_language">Nyelv kiválasztása</str>
   <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="localize-wiki">Honosítsd a SaveDesktop wiki oldalt (a Weblate-n)</str>
-  <str key="on_computer_1">**On computer 1:**</str>
 </root>
