@@ -11,7 +11,7 @@
 - **Havonta**:
   - A SaveDesktop a hónap első napján készíti el a biztonsági mentést. Például, május elsején, június elsején, december elsején, stb. Hasonlóan a heti mentéshez, ha a számítógép nem fut az adott napon, az alkalmazás nem készíti el a mentést a következőn.
 - **Soha**:
-  - Semmi sem történik.</str>
+  - Semmi sem történik</str>
   <str key="pb_location">### Hol tárolódnak a biztonsági mentések?
 Az időszakos mentések alapértelmezett könyvtára a `/home/user/Letöltések/SaveDesktop/archives`, de választhatsz egyéni könyvtárat is.</str>
   <str key="pb_filename_title">### Fájlnév formátum</str>
