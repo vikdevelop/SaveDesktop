@@ -61,4 +61,5 @@ Per una navigazione più semplice, è presente una barra laterale in cui è poss
   <str key="select_language">Seleziona lingua</str>
   <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="localize-wiki">Localizza la wiki di SaveDesktop (tramite Weblate)</str>
+  <str key="on_computer_1">**On computer 1:**</str>
 </root>
