@@ -48,7 +48,7 @@ You can choose between the following items:
 - Never (nothing's happening)</str>
   <str key="save_installed_flatpaks_title">Save installed Flatpak apps and install it from list</str>
   <str key="save_flatpak_intro">Since version 2.5, SaveDesktop allows you to save installed Flatpak applications and install them from a list. So how does it work?</str>
-  <str key="saving_flatpaks">### Saving installed Flatpak applications
+  <str key="saving_flatpaks">### Saving installed Flatpak applications</str>
 It is only possible to save a list of Flatpak applications installed in the system directory `/var/lib/flatpak/app`, not in the home directory `~/.local/share/flatpak/app`. In the saved configuration archive, the list of installed Flatpak applications is labeled as `installed_flatpaks.sh`.
   <str key="installing_flatpaks">### Installing Flatpak applications from the list
 After importing the saved configuration file and logging back in, **the Flatpak applications will start installing in the background.**</str>
