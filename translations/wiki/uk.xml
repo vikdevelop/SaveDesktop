@@ -29,7 +29,7 @@
   - [для роутерів Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
   - якщо у вас немає перерахованих вище роутерів, відкрийте налаштування роутера (URL: [192.168.1.1](http://192.168.1.1) або пов'язані з ними) і шукайте в розділі DHCP сервера щось у формі «Вручну призначити IP списку DHCP» або «Статичний IP» і т.д.</str>
   <str key="sys_config_print">**`system-config-printer` package:**
-  - if you don't want to set the IP address manually from the router interface, and if you have a printer and installed `system-config-printer` package, check if you ticked the option "Shared" by clicking Printer tab on the header bar. If not, please tick it and reboot the system. [Here](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) is a screenshot, what it's supposed to look like.<str>
+  - if you don't want to set the IP address manually from the router interface, and if you have a printer and installed `system-config-printer` package, check if you ticked the option "Shared" by clicking Printer tab on the header bar. If not, please tick it and reboot the system. [Here](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) is a screenshot, what it's supposed to look like.</str>
   <str key="more_opts">- якщо ви хочете вибрати файл синхронізації з іншої, крім домашньої тек , вам потрібно дозволити доступ до файлу в застосунку Flatseal для належної функціональності (пов'язаної з версією Flatpak (Sandbox))
 - перевірте, чи тека для періодичного збереження збігається з текою для файлу синхронізації</str>
   <str key="on_computer_2">**On computer 2:**
