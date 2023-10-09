@@ -143,10 +143,11 @@ class Syncing:
         # Applying configuration for GNOME-based environments
         if not os.path.exists("{}/.config".format(Path.home())):
             os.system("mkdir ~/.config/")
-        if os.path.exists('user'):
-            os.system(f"cp ./user {Path.home()}/.config/dconf/")
-        else:
+        if flatpak:
             os.system("dconf load / < ./dconf-settings.ini")
+        else:
+            os.system("echo user-db:user > temporary-profile")
+            os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
         os.system(f"cp -r ./user {DATA}/")
         os.system(f'cp -R ./icons {Path.home()}/.local/share/')
         os.system(f'cp -R ./.themes {Path.home()}/')
