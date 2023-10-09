@@ -964,7 +964,11 @@ class MainWindow(Gtk.Window):
         if os.path.exists("user"):
             self.i_dconf = GLib.spawn_command_line_async(f"cp ./user {Path.home()}/.config/dconf/")
         else:
-            os.system("dconf load / < ./dconf-settings.ini")
+            if flatpak:
+                os.system("dconf load / < ./dconf-settings.ini")
+            else:
+                os.system("echo user-db:user > temporary-profile")
+                os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
         self.i_icons = GLib.spawn_command_line_async(f'cp -R ./icons {Path.home()}/.local/share/')
         self.i_themes = GLib.spawn_command_line_async(f'cp -R ./.themes {Path.home()}/')
         self.i_icons_home = GLib.spawn_command_line_async(f'cp -R ./.icons {Path.home()}/')
@@ -1135,7 +1139,7 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.9.5"
+        version = "2.9.6"
         icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
