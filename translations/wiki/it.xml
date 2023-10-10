@@ -20,9 +20,9 @@ Il nome predefinito, come già accennato, è `config_{}`. `{}` è una variabile 
   <str key="synchronization_between_computers_title">Sincronizzazione tra computer in rete</str>
   <str key="how_to_set_up_it">## Come configurarlo?</str>
   <str key="whats_your_needing"> ### Di cosa hai bisogno?</str>
-  <str key="on_computer_1">**On computer 1:**
-- Assegnare manualmente gli indirizzi IP dei dispositivi che si desidera sincronizzare in modo che l'indirizzo IP non cambi ogni volta che si accende il computer. It is possible to set it via:</str>
-  <str key="router_settings">**Router settings:**
+  <str key="on_computer_1">**Sul computer 1:**
+- assegna manualmente gli indirizzi IP dei tuoi dispositivi che desideri sincronizzare in modo che l'indirizzo IP non cambi ogni volta che accendi il computer. E' possibile impostarlo tramite:</str>
+  <str key="router_settings">**Impostazioni del router:**
    - [per router Asus](https://www.asus.com/support/FAQ/1000906/)
    - [per router Tp-link](https://www.tp-link.com/us/support/faq/170/)
    - [per router Tenda](https://www.tendacn.com/faq/3264.html)
@@ -32,8 +32,8 @@ Il nome predefinito, come già accennato, è `config_{}`. `{}` è una variabile 
    - se non vuoi impostare manualmente l'indirizzo IP dall'interfaccia del router e se hai una stampante e hai installato il pacchetto `system-config-printer`, controlla di aver selezionato l'opzione "Condivisa" facendo clic sulla scheda Stampante nella barra dell'intestazione. In caso contrario, spuntala e riavvia il sistema. [Qui](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) è uno screenshot di come dovrebbe essere.</str>
   <str key="more_opts">- se si desidera selezionare un file di sincronizzazione da una cartella diversa dalla cartella Home, è necessario consentire l'accesso al file nell'app Flatseal per il corretto funzionamento (relativo alla versione Flatpak (Sandbox))
 - controlla se la cartella per il salvataggio periodico è la stessa cartella per il file di sincronizzazione</str>
-  <str key="on_computer_2">**On computer 2:**
-- Check if you are connected to the same network as computer 1.</str>
+  <str key="on_computer_2">**Sul computer 2:**
+- Controlla se sei connesso alla stessa rete del computer 1.</str>
   <str key="sync_in_savedesktop">### Imposta la sincronizzazione nell'app SaveDesktop
 Sul computer 1 e sul computer 2, apri l'applicazione SaveDesktop e passa alla pagina di sincronizzazione. Sul computer 1 fare clic sul pulsante "Imposta file di sincronizzazione", selezionare il file di sincronizzazione e selezionare l'intervallo di sincronizzazione periodica. Quindi copia l'URL per la sincronizzazione e sul computer 2, fai clic sul pulsante "Connetti con un altro computer" e inserisci l'URL copiato per la sincronizzazione dal computer 1.</str>
   <str key="sync_warning">Se desideri sincronizzare la configurazione DE dal computer 2 al computer 1, segui la stessa procedura.
