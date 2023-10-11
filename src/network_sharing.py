@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from datetime import date
-from localization import _, CACHE, DATA, IPAddr, system_dir
+from localization import _, CACHE, DATA, IPAddr, system_dir, flatpak
 import os
 import locale
 import json
