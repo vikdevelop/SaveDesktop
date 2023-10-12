@@ -21,6 +21,10 @@ download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 with open(f"{CACHE}/.from_app", "w") as d:
     d.write("from_app = true")
 
+# Set application version and icon
+version = "2.9.6"
+icon = "io.github.vikdevelop.SaveDesktop"
+
 # Application window
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
@@ -1139,8 +1143,6 @@ class MyApp(Adw.Application):
         dialog.set_copyright("© 2023 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        version = "2.9.6"
-        icon = "io.github.vikdevelop.SaveDesktop"
         if flatpak:
             if os.path.exists("/app/share/build-beta.sh"):
                 dialog.set_version(f"{version}-beta")
