@@ -11,6 +11,7 @@ then
 		cp -R src ~/.local/share/savedesktop/
 		cp -R translations ~/.local/share/savedesktop/
 		install -D -t ~/.local/share/share/licenses/savedesktop LICENSE
+  		install -D -t ~/.local/bin native_updater.py
 		export GSETTINGS_SCHEMA_DIR="~/.local/share/glib-2.0/schemas:${GSETTINGS_SCHEMA_DIR}"
 		glib-compile-schemas ~/.local/share/glib-2.0/schemas
 		# Install app icons
