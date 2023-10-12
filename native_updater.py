@@ -9,6 +9,7 @@ github_version = response.json()["name"]
 sys.path.append(f"{Path.home()}/.local/share/savedesktop")
 os.chdir(f"{Path.home()}/.local/share/savedesktop")
 from src.localization import *
+os.chdir(f"{Path.home()}/.local/bin")
 
 d_ver = version.replace("-native", "")
 
