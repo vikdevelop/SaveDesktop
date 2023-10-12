@@ -12,6 +12,7 @@ then
 		cp -R translations ~/.local/share/savedesktop/
 		install -D -t ~/.local/share/share/licenses/savedesktop LICENSE
   		install -D -t ~/.local/bin native_updater.py
+    		echo -e "[Desktop Entry]\nName=SaveDesktop Native Updater\nType=Application\nExec=savedesktop --update" > ~/.config/autostart/io.github.vikdevelop.SaveDesktop.Updater.desktop
 		export GSETTINGS_SCHEMA_DIR="~/.local/share/glib-2.0/schemas:${GSETTINGS_SCHEMA_DIR}"
 		glib-compile-schemas ~/.local/share/glib-2.0/schemas
 		# Install app icons
