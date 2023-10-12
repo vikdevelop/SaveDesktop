@@ -1,9 +1,14 @@
 import requests
+import sys
+import os
+from pathlib import Path
 
 response = requests.get("https://api.github.com/repos/vikdevelop/SaveDesktop/releases/latest")
 github_version = response.json()["name"]
 
-from localization import *
+sys.path.append(f"{Path.home()}/.local/share/savedesktop")
+os.chdir(f"{Path.home()}/.local/share/savedesktop")
+from src.localization import *
 
 d_ver = version.replace("-native", "")
 
