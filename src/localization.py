@@ -22,6 +22,10 @@ s.connect(("8.8.8.8", 80))
 IPAddr = s.getsockname()[0]
 s.close()
 
+# Set application version and icon
+v = "2.9.5"
+icon = "io.github.vikdevelop.SaveDesktop"
+
 flatpak = os.path.exists("/.flatpak-info")
 if flatpak:
     try:
@@ -32,6 +36,7 @@ if flatpak:
     system_dir = "/app"
     CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
+    version = f"{v}"
     # Commands
     periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
     sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
@@ -47,6 +52,7 @@ else:
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
+    version = f"{v}-native"
     # Commands
     periodic_saving_cmd = f'savedesktop --background'
     sync_cmd = f"savedesktop --sync"
