@@ -22,12 +22,12 @@ El nom per defecte, com s'ha esmenat és `config_{}`. `{}` és una variable del 
   <str key="whats_your_needing"> ### Quins són els requisits?</str>
   <str key="on_computer_1">**A l'ordinador 1:**
 - Assigneu una IP manual als equips que voleu sincronitzar perquè aquesta no canviï cada vegada que els inicieu. Això és possible mitjançant:</str>
-  <str key="router_settings">**Router settings:**
-  - [for Asus routers](https://www.asus.com/support/FAQ/1000906/)
-  - [for Tp-link routers](https://www.tp-link.com/us/support/faq/170/)
-  - [for Tenda routers](https://www.tendacn.com/faq/3264.html)
-  - [for Netgear routers](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - if you don't have the above routers, open your router settings (URL: [192.168.1.1](http://192.168.1.1) or related) and search in the DHCP server section something in the shape of "Manually assign an IP to the DHCP list" or "Static IP", etc.</str>
+  <str key="router_settings">**Configuració de l'encaminador:**
+  - [Asus](https://www.asus.com/support/FAQ/1000906/)
+  - [Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
+  - [Tenda](https://www.tendacn.com/faq/3264.html)
+  - [Tp-link](https://www.tp-link.com/us/support/faq/170/)
+  - Si no teniu cap d'aquests fabricants, proveu accedint des d'un navegador com ara el Firefox a l'adreça del vostre dispositiu (URL: [192.168.1.1](http://192.168.1.1) o similars) i cerqueu dins la secció *DHCP* quelcom semblant a «IP estàtica», «exclusió DHCP», etc. O bé contacteu amb el fabricant de l'aparell o el proveïdor de la vostra connexió a Internet.</str>
   <str key="sys_config_print">  **`system-config-printer` package:**
   - if you don't want to set the IP address manually from the router interface, and if you have a printer and have installed `system-config-printer` package, check if you ticked the option "Shared" by clicking the Printer tab on the header bar. If not, please tick it and reboot the system. [Here](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) is a screenshot, what it's supposed to look like.</str>
   <str key="more_opts">- if you want to select a synchronization file from another folder than your home folder, you need to allow access to the file in the Flatseal app for proper functionality (related to the Flatpak (Sandbox) version)
