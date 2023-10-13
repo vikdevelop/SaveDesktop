@@ -20,6 +20,7 @@
     <summary xml:lang="tr_TR">Masaüstünün şuanki ayarlarını kayıt et</summary>
     <summary xml:lang="de_DE">Speichern Sie die aktuelle Konfiguration Ihrer Desktop-Umgebung</summary>
     <summary xml:lang="zh_CN">保存桌面环境的当前配置</summary>
+    <summary xml:lang="ca_ES">Desa la configuració actual del vostre entorn d'escriptori</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
@@ -41,6 +42,7 @@
       <p xml:lang="tr_TR">SaveDesktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.</p>
       <p xml:lang="de_DE">Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.</p>
       <p xml:lang="zh_CN">SaveDesktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。</p>
+      <p xml:lang="ca_ES">El SaveDesktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic.</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
@@ -69,7 +71,7 @@
        <release version="2.9" date="2023-08-20">
            <description>
                <ul>
-                   <li>Added support for synchronization between computers in the network. Information about how it works, is on <a href="https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network">Github wiki.</a></li>
+                   <li>Added support for synchronization between computers in the network. Information about how it works is on the GitHub wiki</li>
                </ul>
            </description>
        </release>
