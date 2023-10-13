@@ -1,27 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home">Home page</str>
-  <str key="periodic_saving">Periodic Saving</str>
-  <str key="how_it_works">### How it works?</str>
-  <str key="pb_desc">In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:</str>
-  <str key="pb_options">- **Daily**: 
-  - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.
-- **Weekly**:
-  - SaveDesktop performs a configuration backup every Monday if "Weekly" is selected. If the computer is not running on that day, SaveDesktop does not do it the next day.
-- **Monthly**:
-  - If "Monthly" is selected, SaveDesktop makes the backup on the first day of the month, e.g. May 1, June 1, December 1, etc. As with "Weekly", if the computer is not running on that day, SaveDesktop does not perform it the next day.
-- **Never**:
-  - Nothing's happening</str>
-  <str key="pb_location">### Where are the periodic saving files stored?
-Default directory for periodic saving is `/home/user/Downloads/SaveDesktop/archives`, but you can choose custom directory.</str>
-  <str key="pb_filename_title">### Filename format</str>
-  <str key="pb_filname_desc">If you want to give periodic backup files names other than `config_{}`, you can set the filename format.
-The default name, as already mentioned, is `config_{}`. `{}` is a variable in SaveDesktop that sets the today date. If it's not there and the day of backup creation comes and a backup file with the filename format set by your filename format exists, SaveDesktop overwrites it with the new backup file. Otherwise, SaveDesktop creates a new backup file.</str>
-  <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
-  <str key="how_to_set_up_it">## How to set up it?</str>
-  <str key="whats_your_needing"> ### What's your needing?</str>
-  <str key="on_computer_1">**On computer 1:**
-- manually assign the IP addresses of your devices that you want to sync so that the IP address does not change every time the computer is turned on. It is possible to set it via:</str>
+  <str key="home">Pàgina inicial</str>
+  <str key="periodic_saving">Desament automàtic</str>
+  <str key="how_it_works">### Com funciona?</str>
+  <str key="pb_desc">A més de les còpies manuals, el SaveDesktop també us permet automatitzar aquest procés. Podeu triar entre aquestes opcions disponibles:</str>
+  <str key="pb_options">- **Diàriament**: 
+  - Després d'iniciar la sessió al sistema, el SaveDesktop crea una còpia en rerefons de la configuració. Si torneu a iniciar la sessió, no crearà cap còpia atès que ja existeix una del mateix dia.
+- **Setmanalment**:
+  - El SaveDesktop crea una còpia de seguretat de la configuració cada dilluns en seleccionar aquest mode. Si no engegueu l'ordinador aquest dia, el SaveDesktop no en crearà cap còpia fins al dilluns següent.
+- **Mensualment**:
+  - En seleccionar aquest mode, el SaveDesktop crea una còpia el primer dia 1 del mes (p. ex. 1 d'octubre, 1 de novembre, etc.) i, de la mateixa forma que amb la còpia setmanal, si l'equip no està funcionant en aquest dia, no farà cap còpia fins al proper dia 1 del mes vinent.
+- **Mai**:
+  - No es crea cap còpia automàtica</str>
+  <str key="pb_location">### On es desen els fitxers de còpia automàtica?
+La carpeta per defecte d'emmagatzematge és `/home/user/Baixades/SaveDesktop/archives`, però podeu triar una ruta personalitzada.</str>
+  <str key="pb_filename_title">### Format del nom de fitxer</str>
+  <str key="pb_filname_desc">Si voleu crear còpies automàtiques amb altre nom diferent a `config_{}`, podeu fer-ho sense cap mena de problema.
+El nom per defecte, com s'ha esmenat és `config_{}`. `{}` és una variable del SaveDesktop que assigna la data del dia actual. Si s'omet aquesta variable, arriba el dia de la còpia automàtica i ja existeix un fitxer amb el mateix nom, el SaveDesktop el sobreescriurà amb la configuració actual. En cas contrari, el SaveDesktop crea un fitxer nou de còpia.</str>
+  <str key="synchronization_between_computers_title">Sincronització entre ordinadors de la xarxa</str>
+  <str key="how_to_set_up_it">## Com es configura?</str>
+  <str key="whats_your_needing"> ### Quins són els requisits?</str>
+  <str key="on_computer_1">**A l'ordinador 1:**
+- Assigneu una IP manual als equips que voleu sincronitzar perquè aquesta no canviï cada vegada que els inicieu. Això és possible mitjançant:</str>
   <str key="router_settings">**Router settings:**
   - [for Asus routers](https://www.asus.com/support/FAQ/1000906/)
   - [for Tp-link routers](https://www.tp-link.com/us/support/faq/170/)
