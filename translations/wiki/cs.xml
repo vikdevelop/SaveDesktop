@@ -15,8 +15,7 @@
   <str key="pb_location">### Kam se ukládají soubory pravidelného ukládání?
 Výchozí adresář pro pravidelné ukládání je `/home/user/Downloads/SaveDesktop/archives`, ale můžete si zvolit vlastní adresář.</str>
   <str key="pb_filename_title">### Formát názvu souboru</str>
-  <str key="pb_filname_desc">Pokud chcete dát souborům pravidelného ukládání jiný název než `config_{}`, můžete nastavit formát názvu souboru.
-Výchozí název, jak již bylo zmíněno, je `config_{}`. `{}` je proměnná v SaveDesktop, která nastavuje dnešní datum. Pokud tam není a nastane den vytvoření zálohy a existuje soubor zálohy s formátem názvu souboru nastaveným vaším formátem názvu souboru, SaveDesktop jej přepíše novým souborem zálohy. V opačném případě SaveDesktop vytvoří nový záložní soubor.</str>
+  <str key="pb_filname_desc">Chcete-li zadat jiný formát názvu souboru pro pravidelné ukládání než `Latest_configuration`, je to možné, a to i s mezerami. Od verze 2.9.6, nefunguje proměnná `{}`pro nastavení dnešního data, proto že je nyní při každém pravidelném ukládání přepsán původní soubor zálohy.</str>
   <str key="save_installed_flatpaks_title">Uložit nainstalované aplikace Flatpak a nainstalovat je ze seznamu</str>
   <str key="synchronization_between_computers_title">Synchronizace mezi počítači v síti</str>
   <str key="how_to_set_up_it">## Jak ji nastavit?</str>
