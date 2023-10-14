@@ -1081,7 +1081,18 @@ class MainWindow(Gtk.Window):
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
         os.system(f"rm {CACHE}/.from_app")
-        #self.synccmp = GLib.spawn_command_line_async("python3 /app/network_sharing.py")
+        self.close()
+        try:
+            os.system(f"wget -qO {CACHE}/.file-settings.json {self.settings['url-for-syncing']}/file-settings.json")
+            with open(f"{CACHE}/.file-settings.json") as s:
+                j = json.load(s)
+            if j["periodic-import"] == "Manually2":
+                self.settings["manually-sync"] = True
+            else:
+                self.settings["manually-sync"] = False
+        except:
+            self.settings["manually-sync"] = False
+            print("")
         
     ## Create desktop file to make periodic backups work
     def create_pb_desktop(self):
@@ -1145,7 +1156,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(version)
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<ul>\n<li>Updated translations and fixed bugs with synchronization</li></ul>")
+        dialog.set_release_notes("<ul>\n<li>Added Catalan translations, thanks to @BennyBeat</li>\n<li>Fixed minor bugs with periodic saving</li>\n<li>If you have periodic synchronization set to \"Manually\", if you change it to another type of periodic synchronization (e.g., daily), you don't need to log out and log back in on the second computer, just open and close the SaveDesktop application.</li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
