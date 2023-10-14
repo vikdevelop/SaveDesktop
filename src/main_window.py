@@ -660,7 +660,7 @@ class MainWindow(Gtk.Window):
             
     # Set text of self.filefrmtEntry to default
     def set_default_filefrmtEntry(self, w):
-        self.filefrmtEntry.set_text("config_{}")
+        self.filefrmtEntry.set_text("Latest_configuration")
 
     # Open Wiki by clicking on the self.helpButton
     def open_fileformat_link(self, w):
