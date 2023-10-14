@@ -5,6 +5,7 @@ import json
 import os
 import gi
 from gi.repository import GLib, Gio
+from localization import _, CACHE
 
 # get current datetime
 dt = datetime.now()
@@ -13,7 +14,6 @@ current_day = datetime.today()
 # get first day of month
 first_day = current_day.replace(day=1)
 
-CACHE = f'{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp'
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 
 class PeriodicBackups:
@@ -47,23 +47,6 @@ class PeriodicBackups:
             self.pbfolder = f'{download_dir}/SaveDesktop/archives'
         else:
             self.pbfolder = f'{self.settings["periodic-saving-folder"]}'
-                
-        # Get filename format     
-        if '{}' in self.settings["filename-format"]:
-            self.format_b = self.settings["filename-format"]
-            self.name_with_spaces = self.format_b.replace('{}', f'{date.today()}')
-            if ' ' in self.name_with_spaces:
-                self.filename = self.name_with_spaces.replace(' ', '_')
-            else:
-                self.filename = self.format_b.replace('{}', f'{date.today()}')
-            self.overwrite = False
-        else:
-            self.name_with_spaces = self.settings["filename-format"]
-            if ' ' in self.name_with_spaces:
-                self.filename = self.name_with_spaces.replace(' ', '_')
-            else:
-                self.filename = self.settings["filename-format"]
-            self.overwrite = True
         
         # Get periodic saving interval selected by the user
         if self.settings["periodic-saving"] == 'Never':
@@ -78,33 +61,21 @@ class PeriodicBackups:
          
     # Periodic backups: daily
     def daily(self):
-        self.before_backup()
+        self.backup()
         
     # Periodic backups: weekly
     def weekly(self):
         if date.today().weekday() == 0:
-            self.before_backup()
+            self.backup()
         else:
             print("Today is not Monday.")
-            exit()
             
     # Periodic backups: monthly
     def monthly(self):
         if dt.day == 1:
-            self.before_backup()
+            self.backup()
         else:
             print("Today is not first day of month.")
-    
-    # Check if it is possible to overwrite an existing file
-    def before_backup(self):
-        if os.path.exists('{}/{}.sd.tar.gz'.format(self.pbfolder, self.filename)):
-            if self.overwrite == True:
-                self.backup()
-            else:
-                print("File already exists.")
-                exit()
-        else:
-            self.backup()
     
     # Create backup
     def backup(self):
@@ -114,11 +85,12 @@ class PeriodicBackups:
                     os.makedirs(f"{download_dir}/SaveDesktop/archives")
             except:
                 os.system("mkdir ~/Downloads")
-                os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home}/Downloads")
+                os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home()}/Downloads")
                 os.makedirs(f"{download_dir}/SaveDesktop/archives")
-        os.system("mkdir -p {}/periodic-saving/{}".format(CACHE, date.today()))
-        os.chdir('{}/periodic-saving/{}'.format(CACHE, date.today()))
+        os.mkdir(f"{CACHE}/periodic-saving")
+        os.chdir(f"{CACHE}/periodic-saving")
         os.system("dconf dump / > ./dconf-settings.ini")
+        #os.system('cp -R ~/.config/dconf/user ./')
         os.system('cp -R ~/.config/gtk-4.0 ./')
         os.system('cp -R ~/.config/gtk-3.0 ./')
         if self.settings["save-backgrounds"] == True:
@@ -174,19 +146,25 @@ class PeriodicBackups:
             if self.settings["save-backgrounds"] == True:
                 os.system("cp -R ~/.local/share/wallpapers ./xdg-data/")
             os.system("cp -R ~/.local/share/plasma-systemmonitor ./xdg-data/")
+        if " " in self.settings["filename-format"]:
+            old_filename = f'{self.settings["filename-format"]}'
+            filename = old_filename.replace(" ", "_")
+        else:
+            filename = self.settings["filename-format"]
         # Create Tar.gz archive
-        os.system(f"tar --gzip -cf {self.filename}.sd.tar.gz ./")
+        os.system(f"tar --gzip -cf {filename}.sd.tar.gz ./")
         self.move_tarball()
         self.config_saved()
     
     # Move tarball to ~/Downloads/SaveDesktop/archives/
     def move_tarball(self):
-        os.chdir('{}/periodic-saving/{}'.format(CACHE, date.today()))
+        os.chdir('{}/periodic-saving/'.format(CACHE))
         os.system("mv ./*.tar.gz {}/".format(self.pbfolder))
       
     # Message about saved config
     def config_saved(self):
-        os.system("rm -rf {}/periodic-saving/*".format(CACHE, date.today()))
+        os.system(f"rm -rf {CACHE}/*")
         print("Configuration saved.")
+        exit()
     
 PeriodicBackups()
