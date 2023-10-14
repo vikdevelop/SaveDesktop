@@ -48,7 +48,7 @@
 			<summary>Filename text</summary>
 		</key>
 		<key name="filename-format" type="s">
-			<default>'config_{}'</default>
+			<default>'Latest_configuration'</default>
 			<summary>File name format (designed to periodic saving)</summary>
 		</key>
 		<key name="file-for-syncing" type="s">
