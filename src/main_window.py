@@ -1100,7 +1100,7 @@ class MainWindow(Gtk.Window):
             os.mkdir(f'{Path.home()}/.config/autostart')
         if not os.path.exists(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
             with open(f'{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
-                cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
+                cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd} && {periodic_saving_cmd}')
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
