@@ -15,8 +15,7 @@
   <str key="pb_location">### Dove sono archiviati i file di salvataggio periodici?
 La directory predefinita per il salvataggio periodico è "/home/user/Downloads/SaveDesktop/archives", ma puoi scegliere una directory personalizzata.</str>
   <str key="pb_filename_title">### Formato del nome file</str>
-  <str key="pb_filname_desc">Se vuoi dare ai file di backup periodici nomi diversi da `config_{}`, puoi impostare il formato del nome file.
-Il nome predefinito, come già accennato, è `config_{}`. `{}` è una variabile in SaveDesktop che imposta la data odierna. Se non è presente e arriva il giorno della creazione del backup ed esiste un file di backup con il formato del nome file impostato dal formato del nome file, SaveDesktop lo sovrascrive con il nuovo file di backup. Altrimenti, SaveDesktop crea un nuovo file di backup.</str>
+  <str key="pb_filname_desc">Se vuoi dare un formato di nome file per il salvataggio periodico dei file diverso da "Ultima_configurazione", è possibile, anche con gli spazi. Dalla versione 2.9.6, la variabile `{}` non funziona per impostare la data odierna perché ora, ad ogni salvataggio periodico, il file di backup originale viene sovrascritto.</str>
   <str key="synchronization_between_computers_title">Sincronizzazione tra computer in rete</str>
   <str key="how_to_set_up_it">## Come configurarlo?</str>
   <str key="whats_your_needing"> ### Di cosa hai bisogno?</str>
