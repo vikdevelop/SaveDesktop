@@ -87,7 +87,8 @@ class PeriodicBackups:
                 os.system("mkdir ~/Downloads")
                 os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home()}/Downloads")
                 os.makedirs(f"{download_dir}/SaveDesktop/archives")
-        os.mkdir(f"{CACHE}/periodic-saving")
+        if not os.path.exists(f"{CACHE}/periodic-saving"):
+        	os.mkdir(f"{CACHE}/periodic-saving")
         os.chdir(f"{CACHE}/periodic-saving")
         os.system("dconf dump / > ./dconf-settings.ini")
         #os.system('cp -R ~/.config/dconf/user ./')
@@ -153,17 +154,12 @@ class PeriodicBackups:
             filename = self.settings["filename-format"]
         # Create Tar.gz archive
         os.system(f"tar --gzip -cf {filename}.sd.tar.gz ./")
-        self.move_tarball()
-        self.config_saved()
-    
-    # Move tarball to ~/Downloads/SaveDesktop/archives/
-    def move_tarball(self):
-        os.chdir('{}/periodic-saving/'.format(CACHE))
         os.system("mv ./*.tar.gz {}/".format(self.pbfolder))
+        self.config_saved()
       
     # Message about saved config
     def config_saved(self):
-        os.system(f"rm -rf {CACHE}/*")
+        os.system(f"rm -rf {CACHE}/periodic-saving/*")
         print("Configuration saved.")
         exit()
     
