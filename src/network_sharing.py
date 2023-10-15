@@ -17,7 +17,7 @@ dt = datetime.now()
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 
 # Remove content in CACHE folder before syncing
-os.system(f"rm -rf {CACHE}/*")
+#os.system(f"rm -rf {CACHE}/*")
 
 # Check if syncing directory exists
 if not os.path.exists(f"{CACHE}/syncing"):
