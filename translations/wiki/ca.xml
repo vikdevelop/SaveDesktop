@@ -15,8 +15,7 @@
   <str key="pb_location">### On es desen els fitxers de còpia automàtica?
 La carpeta per defecte d'emmagatzematge és `/home/user/Baixades/SaveDesktop/archives`, però podeu triar una ruta personalitzada.</str>
   <str key="pb_filename_title">### Format del nom de fitxer</str>
-  <str key="pb_filname_desc">Si voleu crear còpies automàtiques amb altre nom diferent a `config_{}`, podeu fer-ho sense cap mena de problema.
-El nom per defecte, com s'ha esmenat és `config_{}`. `{}` és una variable del SaveDesktop que assigna la data del dia actual. Si s'omet aquesta variable, arriba el dia de la còpia automàtica i ja existeix un fitxer amb el mateix nom, el SaveDesktop el sobreescriurà amb la configuració actual. En cas contrari, el SaveDesktop crea un fitxer nou de còpia.</str>
+  <str key="pb_filname_desc">Si voleu crear còpies automàtiques amb altre nom diferent a `Darrera_configuració`, ja és possible, fins i tot amb espais. Des de la versió 2.9.6, la variable `{}` no s'admet per al dia actual, atès que ara totes les còpies automàtiques sobreescriuen el fitxer ja existent.</str>
   <str key="synchronization_between_computers_title">Sincronització entre ordinadors de la xarxa</str>
   <str key="how_to_set_up_it">## Com es configura?</str>
   <str key="whats_your_needing"> ### Quins són els requisits?</str>
