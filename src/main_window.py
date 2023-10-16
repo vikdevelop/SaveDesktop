@@ -201,6 +201,8 @@ class MainWindow(Gtk.Window):
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.lbox_e.add_css_class(css_class='boxed-list')
+        self.lbox_e.set_margin_start(27)
+        self.lbox_e.set_margin_end(27)
         self.saveBox.append(self.lbox_e)
         
         # set the filename section
@@ -1083,9 +1085,8 @@ class MainWindow(Gtk.Window):
         os.system(f"rm {CACHE}/.from_app")
         self.close()
         try:
-            os.system(f"wget -qO {CACHE}/.file-settings.json {self.settings['url-for-syncing']}/file-settings.json")
-            with open(f"{CACHE}/.file-settings.json") as s:
-                j = json.load(s)
+            url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
+            j = json.load(url)
             if j["periodic-import"] == "Manually2":
                 self.settings["manually-sync"] = True
             else:
