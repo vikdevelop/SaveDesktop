@@ -1082,7 +1082,7 @@ class MainWindow(Gtk.Window):
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
-        os.system(f"rm {CACHE}/.from_app")
+        os.system(f"rm -rf {CACHE}/*")
         self.close()
         try:
             url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
