@@ -73,13 +73,13 @@ class Syncing:
         elif self.jF["periodic-import"] == "Weekly2":
             self.get_sync_type()
             if date.today().weekday() == 1:
-                self.self.check_sync()
+                self.check_sync()
             else:
                 print("Today is not Tuesday.")
         elif self.jF["periodic-import"] == "Monthly2":
             self.get_sync_type()
             if dt.day == 2:
-                self.self.check_sync()
+                self.check_sync()
             else:
                 print("Today is not second day of month.")
         elif self.jF["periodic-import"] == "Manually2":
