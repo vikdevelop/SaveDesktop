@@ -1158,7 +1158,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(version)
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<ul>\n<li>Fixed minor bugs of daily and monthly synchronization</li></ul>")
+        dialog.set_release_notes("<ul>\n<li>Fixed minor bugs in daily and monthly synchronization.</li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
