@@ -1082,6 +1082,7 @@ class MainWindow(Gtk.Window):
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
+        os.system(f"rm -rf {CACHE}/.*")
         os.system(f"rm -rf {CACHE}/*")
         self.close()
         try:
@@ -1157,7 +1158,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(version)
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<ul>\n<li>Added Catalan translations, thanks to @BennyBeat</li>\n<li>Fixed minor bugs with periodic saving</li>\n<li>Set up overwriting the original backup file as a default option, so from now on it is not possible to set {} variable in the file name format entry (it is already not designed for setting the today date)</li>\n<li>If you have periodic synchronization set to \"Manually\", if you change it to another type of periodic synchronization (e.g., daily), you don't need to log out and log back in on the second computer for changes to take effect, just open and close the SaveDesktop application.</li></ul>")
+        dialog.set_release_notes("<ul>\n<li>Fixed minor bugs of daily and monthly synchronization</li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
