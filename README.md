@@ -42,6 +42,8 @@
 - your installed Flatpak apps
 - other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, etc.)
 
+NOTE: It can happen that a backup file will not be created, in that case, just allow access to the file in the Flatseal app.
+
 <details>
   <summary><b>Configuration directories that will be included in the archive</b></summary>
   
