@@ -130,13 +130,6 @@ class Syncing:
         else:
             os.system(f"tar -xf {self.file}.1 ./")
         
-        # Create Dconf directory
-        if not os.path.exists("{}/.config/dconf".format(Path.home())):
-            os.mkdir(f"{Path.home()}/.config/dconf")
-        else:
-            shutil.rmtree(f"{Path.home()}/.config/dconf")
-            os.mkdir(f"{Path.home()}/.config/dconf")
-        
         self.import_config()
             
     # Sync configuration
