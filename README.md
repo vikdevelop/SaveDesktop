@@ -42,7 +42,7 @@
 - your installed Flatpak apps
 - other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, etc.)
 
-NOTE: It can happen that a backup file will not be created, in that case, just allow access to the folder in the [Flatseal](https://flathub.org/cs/apps/com.github.tchx84.Flatseal) app.
+NOTE: It can happen that a backup file will not be created, in that case, just allow access to the folder in the [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal) app.
 
 <details>
   <summary><b>Configuration directories that will be included in the archive</b></summary>
