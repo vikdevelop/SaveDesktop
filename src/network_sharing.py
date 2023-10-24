@@ -66,24 +66,29 @@ class Syncing:
             self.jF = json.load(j)
         self.file = self.jF["file-name"]
         if self.jF["periodic-import"] == "Never2":
+            self.create_backup = False
             self.get_sync_type()
             print("Synchronization is not set up.")
         elif self.jF["periodic-import"] == "Daily2":
+            self.create_backup = True
             self.get_sync_type()
             self.check_sync()
         elif self.jF["periodic-import"] == "Weekly2":
+            self.create_backup = False
             self.get_sync_type()
             if date.today().weekday() == 1:
                 self.check_sync()
             else:
                 print("Today is not Tuesday.")
         elif self.jF["periodic-import"] == "Monthly2":
+            self.create_backup = False
             self.get_sync_type()
             if dt.day == 2:
                 self.check_sync()
             else:
                 print("Today is not second day of month.")
         elif self.jF["periodic-import"] == "Manually2":
+            self.create_backup = False
             self.get_sync_type_not()
             self.check_sync()
 
@@ -208,5 +213,7 @@ class Syncing:
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop ({self.file[:-10]})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
         #os.system("pkill -15 python3 && pkill -15 python")
+        if self.create_backup == True:
+            os.system("python3 /app/periodic_saving.py")
 
 Syncing()
