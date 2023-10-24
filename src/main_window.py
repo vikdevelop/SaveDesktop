@@ -1092,6 +1092,7 @@ class MainWindow(Gtk.Window):
                 self.settings["manually-sync"] = True
             else:
                 self.settings["manually-sync"] = False
+            os.system(f"rm {CACHE}/file-settings.json")
         except:
             self.settings["manually-sync"] = False
             print("")
