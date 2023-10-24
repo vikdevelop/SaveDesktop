@@ -200,8 +200,9 @@ class Syncing:
 
     # Message about done synchronization
     def done(self):
-        with open(f"{DATA}/sync-info.json", "w") as s:
-            s.write('{\n "sync-date": "%s"\n}' % date.today())
+        if not settings["manually-sync"] == True:
+            with open(f"{DATA}/sync-info.json", "w") as s:
+                s.write('{\n "sync-date": "%s"\n}' % date.today())
         os.system(f"rm -rf {CACHE}/syncing/*")
         #os.system(f"rm {CACHE}/.from_app")
         print("Configuration has been synced successfully.")
