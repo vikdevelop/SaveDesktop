@@ -141,9 +141,7 @@ class Syncing:
             os.system(f"cp -R ./user ~/.config/dconf/")
         else:
             if flatpak:
-            	os.system("dconf dump / > ./old-dconf-settings.ini")
-            	if not filecmp.cmp("old-dconf-settings.ini", "dconf-settings.ini"):
-                	os.system("dconf load / < ./dconf-settings.ini")
+                os.system("dconf load / < ./dconf-settings.ini")
             else:
                 os.system("echo user-db:user > temporary-profile")
                 os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
