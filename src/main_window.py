@@ -1083,8 +1083,8 @@ class MainWindow(Gtk.Window):
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
         self.close()
-        os.system(f"rm -rf {CACHE}/.*")
-        os.system(f"rm -rf {CACHE}/*")
+        os.popen(f"rm -rf {CACHE}/.*")
+        os.popen(f"rm -rf {CACHE}/*")
         try:
             url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
             j = json.load(url)
@@ -1092,7 +1092,7 @@ class MainWindow(Gtk.Window):
                 self.settings["manually-sync"] = True
             else:
                 self.settings["manually-sync"] = False
-            os.system(f"rm {CACHE}/file-settings.json")
+            os.popen(f"rm {CACHE}/file-settings.json")
         except:
             self.settings["manually-sync"] = False
             print("")
