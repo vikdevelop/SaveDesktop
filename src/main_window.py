@@ -1135,7 +1135,8 @@ class MyApp(Adw.Application):
     def sync_pc(self, action, param):
         if os.path.exists(f"{DATA}/sync-info.json"):
             os.remove(f"{DATA}/sync-info.json")
-        os.system(f"python3 {system_dir}/network_sharing.py")
+        os.system(f'notify-send "{_["please_wait"]}"')
+        os.popen(f"python3 {system_dir}/network_sharing.py")
         
     # About dialog
     def on_about_action(self, action, param):
@@ -1159,7 +1160,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(version)
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<ul>\n<li>Fixed minor bugs in daily and monthly synchronization.</li></ul>")
+        dialog.set_release_notes("<p>Fixed these bugs:</p><ul>\n<li>if you have selected manually synchronization and click on Sync button in the menu in the headerbar, the application no longer gets stuck</li>\n<li>if you close the application window, it no longer gets stuck</li>\n<li>fixed daily synchronization and saving where periodic saving did not work correctly</li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
