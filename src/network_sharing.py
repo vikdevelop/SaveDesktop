@@ -213,7 +213,5 @@ class Syncing:
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop ({self.file[:-10]})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
         #os.system("pkill -15 python3 && pkill -15 python")
-        if self.create_backup == True:
-            os.system("python3 /app/periodic_saving.py")
 
 Syncing()
