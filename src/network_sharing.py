@@ -61,7 +61,7 @@ class Syncing:
     def get_file_info(self):
         # Download file-settings.json file to getting information about it
         os.chdir(f"{CACHE}/syncing")
-        if os.path.exits("file-settings.json"):
+        if os.path.exists("file-settings.json"):
             os.remove("file-settings.json")
         os.system(f"wget {settings['url-for-syncing']}/file-settings.json")
         with open("file-settings.json") as j:
