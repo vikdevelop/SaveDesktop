@@ -1160,7 +1160,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(version)
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<p>Fixed these bugs:</p><ul>\n<li>if you have selected manually synchronization and click on Sync button in the menu in the headerbar, the application no longer gets stuck</li>\n<li>if you close the application window, it no longer gets stuck</li>\n<li>fixed daily synchronization and saving where periodic saving did not work correctly</li></ul>")
+        dialog.set_release_notes("<p>Fixed these bugs:</p><ul>\n<li>if you have selected manually synchronization and click on Sync button in the menu in the headerbar, the application no longer gets stuck</li>\n<li>if you close the application window, it no longer gets stuck</li>\n<li>fixed daily synchronization and saving where periodic saving did not work correctly</li>\n<li>if changes between synced computers are small, the configuration is no longer broken on the second computer</li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
