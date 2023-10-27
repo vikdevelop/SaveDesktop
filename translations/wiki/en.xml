@@ -33,8 +33,6 @@ Default directory for periodic saving is `/home/user/Downloads/SaveDesktop/archi
 - check if the folder for periodic saving is the same as the folder for the synchronization file</str>
   <str key="on_computer_2">**On computer 2:**
 - Check if you are connected to the same network as computer 1.</str>
-  <str key="yt_link_sync">&lt;b&gt;&lt;img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/youtube-1024.png" height="28"&gt;&lt;a href="https://www.youtube.com/watch?v=QccFR06oyXk"&gt; Watch video tutorial on YouTube →&lt;/a&gt;&lt;/h1&gt;
-&lt;/b&gt;</str>
   <str key="sync_in_savedesktop">### Set synchronization in the SaveDesktop app
 On computer 1 and 2, open the SaveDesktop application and switch to the Sync page. On computer 1, click on the button "Set up the sync file", select the synchronization file, and select a periodic synchronization interval. Then copy the URL for synchronization, and on computer 2, click on the button "Connect with other computer" and enter the copied URL for synchronization from computer 1.</str>
   <str key="sync_warning">If you want to sync the DE configuration from computer 2 to computer 1, follow the same procedure.
