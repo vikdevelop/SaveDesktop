@@ -60,4 +60,6 @@ Per a una navegació més fàcil, teniu una barra des d'on podeu canviar entre i
   <str key="savedesktop_wiki">Wiki del SaveDesktop</str>
   <str key="github_issues">_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._</str>
   <str key="localize-wiki">Traducció de la wiki del SaveDesktop (via Weblate)</str>
+  <str key="yt_link_sync">&lt;b&gt;&lt;img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/youtube-1024.png" height="28"&gt;&lt;a href="https://www.youtube.com/watch?v=QccFR06oyXk"&gt; Watch video tutorial on YouTube →&lt;/a&gt;
+&lt;/b&gt;</str>
 </root>

@@ -60,4 +60,6 @@ A könnyebb navigáció érdekében az oldalsávon válthatunk a nyelvek és az 
   <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="github_issues">_Ha bármi kérdésed lenne, használd a Github Issues-t._</str>
   <str key="localize-wiki">Honosítsd a SaveDesktop wiki oldalt (a Weblate-n)</str>
+  <str key="yt_link_sync">&lt;b&gt;&lt;img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/youtube-1024.png" height="28"&gt;&lt;a href="https://www.youtube.com/watch?v=QccFR06oyXk"&gt; Watch video tutorial on YouTube →&lt;/a&gt;
+&lt;/b&gt;</str>
 </root>
