@@ -3,6 +3,7 @@ import json
 import locale
 import os
 import socket
+import subprocess
 from pathlib import Path
 
 # Load system language
@@ -27,6 +28,8 @@ v = "2.9.8"
 icon = "io.github.vikdevelop.SaveDesktop"
 
 flatpak = os.path.exists("/.flatpak-info")
+snap = os.environ.get('SNAP_NAME', '') == 'savedesktop-vikdevelop'
+print(snap)
 if flatpak:
     try:
       locale = open(f"/app/translations/{r_lang}.json")
@@ -41,6 +44,20 @@ if flatpak:
     periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
     sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
     server_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --start-server"
+elif snap:
+    try:
+      locale = open(f"translations/{r_lang}.json")
+    except:
+      locale = open(f"translations/en.json")
+    system_dir = subprocess.getoutput("$[SNAP]")
+    version = f"{v}"
+    periodic_saving_cmd = 'savedesktop-vikdevelop --background'
+    sync_cmd = "savedesktop-vikdevelop --sync"
+    server_cmd = "savedesktop-vikdevelop --start-server"
+    CACHE = f"{Path.home()}/snap/savedesktop-vikdevelop/current"
+    DATA = f"{Path.home()}/snap/savedesktop-vikdevelop/current/.local/share"
+    os.system("mkdir -p " + CACHE)
+    os.system("mkdir -p " + DATA)
 else:
     try:
       locale = open(f"translations/{r_lang}.json")
