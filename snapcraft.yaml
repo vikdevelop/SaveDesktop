@@ -15,6 +15,7 @@ apps:
     plugs:
       - gsettings
       - home
+      - network
 
 parts:
   dconf:
