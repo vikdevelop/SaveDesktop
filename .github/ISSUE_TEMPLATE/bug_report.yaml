@@ -39,6 +39,7 @@ body:
         - Flatpak from Flathub
         - Flatpak, which was built with Flatpak Builder
         - Native version
+        - Snap package
     validations:
       required: true
   - type: textarea
