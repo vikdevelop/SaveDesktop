@@ -1,0 +1,27 @@
+name: savedesktop-vikdevelop
+grade: stable
+adopt-info: savedesktop-vikdevelop
+license: GPL-3.0+
+
+base: core22
+confinement: strict
+
+apps:
+  savedesktop-vikdevelop:
+    extensions: [gnome]
+    command: usr/bin/savedesktop.sh
+    desktop: usr/share/applications/io.github.vikdevelop.SaveDesktop.desktop
+    common-id: io.github.vikdevelop.SaveDesktop.desktop
+    plugs:
+      - gsettings
+      - home
+
+parts:
+  dconf:
+    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz
+    plugin: dump
+  savedesktop-vikdevelop:
+    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.8/savedesktop-snapcraft.tar.xz
+    plugin: dump
+    parse-info: [usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml]
+    
