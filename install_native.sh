@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-if [ "$1" == "--install" ]
+if [ "$1" = "--install" ]
 then
 		cd /tmp/SaveDesktop
 		sed -i "s\Exec=run.sh\Exec=/home/${USER}/.local/bin/savedesktop\ " flatpak/io.github.vikdevelop.SaveDesktop.desktop
@@ -27,7 +27,8 @@ then
 		cd
 		rm -rf /tmp/SaveDesktop
 		echo "SaveDesktop has been installed! You can run it with this command: \"savedesktop\" or \"~/.local/bin/savedesktop\"."
-elif [ "$1" == "--remove" ]
+fi
+if [ "$1" = "--remove" ]
 			then
 					rm ~/.local/bin/savedesktop
 					rm ~/.local/share/applications/io.github.vikdevelop.SaveDesktop.desktop
