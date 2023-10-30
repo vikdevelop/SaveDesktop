@@ -18,11 +18,13 @@ apps:
       - network
 
 parts:
+  savedesktop-necessary:
+    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.8/savedesktop-snapcraft-necessary-files.zip
+    plugin: dump
   dconf:
     source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz
     plugin: dump
   savedesktop-vikdevelop:
-    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.8/savedesktop-snapcraft.tar.xz
+    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8S.tar.gz
     plugin: dump
-    parse-info: [usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml]
-    
+    parse-info: [flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml]
