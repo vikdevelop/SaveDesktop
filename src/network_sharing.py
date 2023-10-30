@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from datetime import date
-from localization import _, CACHE, DATA, IPAddr, system_dir, flatpak
+from localization import _, CACHE, DATA, IPAddr, system_dir, flatpak, snap
 import os
 import locale
 import json
@@ -193,7 +193,8 @@ class Syncing:
             os.chdir("%s/syncing" % CACHE)
             os.chdir('xdg-data')
             os.system(f'cp -R ./ {Path.home()}/.local/share/')
-        self.create_flatpak_desktop()
+        if not snap:
+            self.create_flatpak_desktop()
         self.done()
 
     # Create desktop file for installing Flatpak apps
