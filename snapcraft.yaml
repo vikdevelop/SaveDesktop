@@ -30,6 +30,8 @@ apps:
       - gsettings
       - home
       - network
+    environment:
+      HOME: $SNAP_REAL_HOME
 
 parts:
   savedesktop-necessary:
