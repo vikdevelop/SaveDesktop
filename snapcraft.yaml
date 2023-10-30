@@ -6,6 +6,20 @@ license: GPL-3.0+
 base: core22
 confinement: strict
 
+slots:
+  gnome-dbus:
+    interface: dbus
+    bus: session
+    name: org.gnome.SessionManager
+  xfce-dbus:
+    interface: dbus
+    bus: session
+    name: org.xfce.SessionManager
+  kde-dbus:
+    interface: dbus
+    bus: session
+    name: org.kde.ksmserver
+
 apps:
   savedesktop-vikdevelop:
     extensions: [gnome]
