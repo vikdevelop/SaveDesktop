@@ -739,23 +739,24 @@ class MainWindow(Gtk.Window):
         self.backgrounds_row.add_suffix(self.switch_04)
         self.backgrounds_row.set_activatable_widget(self.switch_04)
         self.itemsBox.append(child=self.backgrounds_row)
-        
-        # Switch and row of option 'Save installed flatpaks'
-        self.switch_05 = Gtk.Switch.new()
-        if self.settings["save-installed-flatpaks"]:
-            self.switch_05.set_active(True)
-        self.switch_05.set_valign(align=Gtk.Align.CENTER)
-         
-        self.flatpak_row = Adw.ActionRow.new()
-        self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
-        self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
-        self.flatpak_row.set_use_markup(True)
-        self.flatpak_row.set_title_lines(2)
-        self.flatpak_row.set_subtitle_lines(3)
-        self.flatpak_row.add_suffix(self.switch_05)
-        self.flatpak_row.set_activatable_widget(self.switch_05)
-        self.itemsBox.append(child=self.flatpak_row)
-        
+
+        if not snap:
+            # Switch and row of option 'Save installed flatpaks'
+            self.switch_05 = Gtk.Switch.new()
+            if self.settings["save-installed-flatpaks"]:
+                self.switch_05.set_active(True)
+            self.switch_05.set_valign(align=Gtk.Align.CENTER)
+             
+            self.flatpak_row = Adw.ActionRow.new()
+            self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
+            self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
+            self.flatpak_row.set_use_markup(True)
+            self.flatpak_row.set_title_lines(2)
+            self.flatpak_row.set_subtitle_lines(3)
+            self.flatpak_row.add_suffix(self.switch_05)
+            self.flatpak_row.set_activatable_widget(self.switch_05)
+            self.itemsBox.append(child=self.flatpak_row)
+            
         self.itemsDialog.add_response('cancel', _["cancel"])
         self.itemsDialog.add_response('ok', _["apply"])
         self.itemsDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
