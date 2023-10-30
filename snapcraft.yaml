@@ -39,6 +39,6 @@ parts:
     source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz
     plugin: dump
   savedesktop-vikdevelop:
-    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8S.tar.gz
+    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8_snap.tar.gz
     plugin: dump
     parse-info: [flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml]
