@@ -881,8 +881,9 @@ class MainWindow(Gtk.Window):
             self.icons = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/icons ./")
         if self.settings["save-fonts"] == True:
             self.fonts = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.fonts ./")
-        if self.settings["save-installed-flatpaks"] == True:
-            os.popen(f"sh {system_dir}/backup_flatpaks.sh")
+        if not snap:
+            if self.settings["save-installed-flatpaks"] == True:
+                os.popen(f"sh {system_dir}/backup_flatpaks.sh")
         # Save configs on individual desktop environments
         if self.environment == 'GNOME':
             self.background_properties = GLib.spawn_command_line_async(f"cp -R {Path.home()}/.local/share/gnome-background-properties ./")
@@ -1013,7 +1014,8 @@ class MainWindow(Gtk.Window):
             os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-data')
             self.i_kdata = GLib.spawn_command_line_async(f'cp -R ./ {Path.home()}/.local/share/')
-        self.create_flatpak_desktop()
+        if not snap:
+            self.create_flatpak_desktop()
         self.applying_done()
     
     # Create desktop file for install Flatpaks from list
