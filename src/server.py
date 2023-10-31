@@ -15,4 +15,4 @@ else:
 
     sys.path.append(folder)
     os.chdir(folder)
-    os.system("python -m http.server")
+    os.system("python3 -m http.server")
