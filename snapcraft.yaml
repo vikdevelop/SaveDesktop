@@ -35,12 +35,15 @@ apps:
 
 parts:
   savedesktop-necessary:
-    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.8/savedesktop-snapcraft-necessary-files.zip
+    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.8_snap1/savedesktop-snapcraft-necessary-files.zip
     plugin: dump
   dconf:
     source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz
     plugin: dump
   savedesktop-vikdevelop:
-    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8_snap.tar.gz
+    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8_snap1.tar.gz
     plugin: dump
     parse-info: [flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml]
+    stage-packages:
+       - wget
+       - libnotify-bin
