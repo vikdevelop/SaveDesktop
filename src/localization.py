@@ -51,9 +51,9 @@ elif snap:
       locale = open(f"{os.getenv('SNAP')}/translations/en.json")
     system_dir = f"{os.getenv('SNAP')}/src"
     version = f"{v}"
-    periodic_saving_cmd = 'savedesktop-vikdevelop --background'
-    sync_cmd = "savedesktop-vikdevelop --sync"
-    server_cmd = "savedesktop-vikdevelop --start-server"
+    periodic_saving_cmd = 'savedesktop --background'
+    sync_cmd = "savedesktop --sync"
+    server_cmd = "savedesktop --start-server"
     CACHE = f"{os.getenv('SNAP_USER_COMMON')}/.cache"
     DATA = f"{Path.home()}/.local/share"
 else:
