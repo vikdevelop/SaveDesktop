@@ -1,6 +1,6 @@
-name: savedesktop-vikdevelop
+name: savedesktop
 grade: stable
-adopt-info: savedesktop-vikdevelop
+adopt-info: savedesktop
 license: GPL-3.0+
 
 base: core22
@@ -21,7 +21,7 @@ slots:
     name: org.kde.ksmserver
 
 apps:
-  savedesktop-vikdevelop:
+  savedesktop:
     extensions: [gnome]
     command: usr/bin/savedesktop.sh
     desktop: usr/share/applications/io.github.vikdevelop.SaveDesktop.desktop
@@ -35,13 +35,13 @@ apps:
 
 parts:
   savedesktop-necessary:
-    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.8_snap1/savedesktop-snapcraft-necessary-files.zip
+    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.8_snap2/savedesktop-snapcraft-necessary-files.zip
     plugin: dump
   dconf:
     source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz
     plugin: dump
-  savedesktop-vikdevelop:
-    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8_snap1.tar.gz
+  savedesktop:
+    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8_snap2.tar.gz
     plugin: dump
     parse-info: [flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml]
     stage-packages:
