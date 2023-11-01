@@ -5,7 +5,7 @@ import json
 import os
 import gi
 from gi.repository import GLib, Gio
-from localization import _, CACHE
+from localization import _, CACHE, home
 
 # get current datetime
 dt = datetime.now()
@@ -85,7 +85,7 @@ class PeriodicBackups:
                     os.makedirs(f"{download_dir}/SaveDesktop/archives")
             except:
                 os.system("mkdir ~/Downloads")
-                os.system(f"xdg-user-dirs-update --set DOWNLOAD {Path.home()}/Downloads")
+                os.system(f"xdg-user-dirs-update --set DOWNLOAD {home}/Downloads")
                 os.makedirs(f"{download_dir}/SaveDesktop/archives")
         if not os.path.exists(f"{CACHE}/periodic-saving"):
         	os.mkdir(f"{CACHE}/periodic-saving")

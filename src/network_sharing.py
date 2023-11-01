@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from datetime import date
-from localization import _, CACHE, DATA, IPAddr, system_dir, flatpak, snap
+from localization import _, CACHE, DATA, IPAddr, system_dir, flatpak, snap, home
 import os
 import locale
 import json
@@ -142,7 +142,7 @@ class Syncing:
     # Sync configuration
     def import_config(self):
         # Applying configuration for GNOME-based environments
-        if not os.path.exists("{}/.config".format(Path.home())):
+        if not os.path.exists("{}/.config".format(home)):
             os.system("mkdir ~/.config/")
         if os.path.exists("user"):
             os.system(f"cp -R ./user ~/.config/dconf/")
@@ -152,47 +152,47 @@ class Syncing:
             else:
                 os.system("echo user-db:user > temporary-profile")
                 os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
-        os.system(f'cp -R ./icons {Path.home()}/.local/share/')
-        os.system(f'cp -R ./.themes {Path.home()}/')
-        os.system(f'cp -R ./.icons {Path.home()}/')
-        os.system(f'cp -R ./backgrounds {Path.home()}/.local/share/')
-        os.system(f'cp -R ./.fonts {Path.home()}/')
-        os.system(f'cp -R ./gtk-4.0 {Path.home()}/.config/')
-        os.system(f'cp -R ./gtk-3.0 {Path.home()}/.config/')
+        os.system(f'cp -R ./icons {home}/.local/share/')
+        os.system(f'cp -R ./.themes {home}/')
+        os.system(f'cp -R ./.icons {home}/')
+        os.system(f'cp -R ./backgrounds {home}/.local/share/')
+        os.system(f'cp -R ./.fonts {home}/')
+        os.system(f'cp -R ./gtk-4.0 {home}/.config/')
+        os.system(f'cp -R ./gtk-3.0 {home}/.config/')
         os.system(f'cp ./installed_flatpaks.sh {DATA}/')
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
-            os.system(f'cp -R ./gnome-background-properties {Path.home()}/.local/share/')
-            os.system(f'cp -R ./gnome-shell {Path.home()}/.local/share/')
-            os.system(f'cp -R ./nautilus-python {Path.home()}/.local/share/')
-            os.system(f'cp -R ./gnome-control-center {Path.home()}/.config/')
+            os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
+            os.system(f'cp -R ./gnome-shell {home}/.local/share/')
+            os.system(f'cp -R ./nautilus-python {home}/.local/share/')
+            os.system(f'cp -R ./gnome-control-center {home}/.config/')
         elif environment == 'Pantheon':
-            os.system(f'cp -R ./plank {Path.home()}/.config/')
-            os.system(f'cp -R ./marlin {Path.home()}/.config/')
+            os.system(f'cp -R ./plank {home}/.config/')
+            os.system(f'cp -R ./marlin {home}/.config/')
         elif environment == 'Cinnamon':
-            os.system(f'cp -R ./nemo {Path.home()}/.config/')
-            os.system(f'cp -R ./cinnamon {Path.home()}/.local/share/')
-            os.system(f'cp -R ./.cinnamon {Path.home()}/')
+            os.system(f'cp -R ./nemo {home}/.config/')
+            os.system(f'cp -R ./cinnamon {home}/.local/share/')
+            os.system(f'cp -R ./.cinnamon {home}/')
         elif environment == 'Budgie':
-            os.system(f'cp -R ./budgie-desktop {Path.home()}/.config/')
-            os.system(f'cp -R ./budgie-extras {Path.home()}/.config/')
-            os.system(f'cp -R ./nemo {Path.home()}/.config/')
+            os.system(f'cp -R ./budgie-desktop {home}/.config/')
+            os.system(f'cp -R ./budgie-extras {home}/.config/')
+            os.system(f'cp -R ./nemo {home}/.config/')
         elif environment == 'COSMIC':
-            os.system(f'cp -R ./pop-shell {Path.home()}/.config/')
-            os.system(f'cp -R ./gnome-shell {Path.home()}/.local/share/')
+            os.system(f'cp -R ./pop-shell {home}/.config/')
+            os.system(f'cp -R ./gnome-shell {home}/.local/share/')
         elif environment == 'Xfce':
-            os.system(f'cp -R ./xfce4 {Path.home()}/.config/')
-            os.system(f'cp -R ./Thunar {Path.home()}/.config/')
-            os.system(f'cp -R ./.xfce4 {Path.home()}/')
+            os.system(f'cp -R ./xfce4 {home}/.config/')
+            os.system(f'cp -R ./Thunar {home}/.config/')
+            os.system(f'cp -R ./.xfce4 {home}/')
         elif environment == 'MATE':
-            os.system(f'cp -R ./caja {Path.home()}/.config/')
+            os.system(f'cp -R ./caja {home}/.config/')
         elif environment == 'KDE Plasma':
             os.chdir("%s/syncing" % CACHE)
             os.chdir('xdg-config')
-            os.system(f'cp -R ./ {Path.home()}/.config/')
+            os.system(f'cp -R ./ {home}/.config/')
             os.chdir("%s/syncing" % CACHE)
             os.chdir('xdg-data')
-            os.system(f'cp -R ./ {Path.home()}/.local/share/')
+            os.system(f'cp -R ./ {home}/.local/share/')
         if not snap:
             self.create_flatpak_desktop()
         self.done()
@@ -200,10 +200,10 @@ class Syncing:
     # Create desktop file for installing Flatpak apps
     def create_flatpak_desktop(self):
         os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
-        if not os.path.exists(f"{Path.home()}/.config/autostart"):
-            os.mkdir(f"{Path.home()}/.config/autostart")
-        if not os.path.exists(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
-            with open(f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
+        if not os.path.exists(f"{home}/.config/autostart"):
+            os.mkdir(f"{home}/.config/autostart")
+        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
+            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
                 fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
 
     # Message about done synchronization
