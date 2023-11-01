@@ -28,7 +28,7 @@ v = "2.9.8"
 icon = "io.github.vikdevelop.SaveDesktop"
 
 flatpak = os.path.exists("/.flatpak-info")
-snap = os.environ.get('SNAP_NAME', '') == 'savedesktop-vikdevelop'
+snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
 
 if flatpak:
     try:
@@ -46,16 +46,16 @@ if flatpak:
     server_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --start-server"
 elif snap:
     try:
-      locale = open(f"{os.getenv('SNAP')}/translations/{r_lang}.json")
+      locale = open(f"{os.getenv('SNAP')}/usr/translations/{r_lang}.json")
     except:
-      locale = open(f"{os.getenv('SNAP')}/translations/en.json")
+      locale = open(f"{os.getenv('SNAP')}/usr/translations/en.json")
     system_dir = f"{os.getenv('SNAP')}/src"
     version = f"{v}"
     periodic_saving_cmd = 'savedesktop --background'
     sync_cmd = "savedesktop --sync"
     server_cmd = "savedesktop --start-server"
     CACHE = f"{os.getenv('SNAP_USER_COMMON')}/.cache"
-    DATA = f"{Path.home()}/.local/share"
+    DATA = f"{os.getenv('SNAP_USER_DATA')}/.local/share"
 else:
     try:
       locale = open(f"translations/{r_lang}.json")
