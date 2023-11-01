@@ -6,44 +6,77 @@ license: GPL-3.0+
 base: core22
 confinement: strict
 
+plugs:
+  dot-local-and-config:
+    interface: personal-files
+    write:
+      - $HOME/.config
+      - $HOME/.local
+      - $HOME/.themes
+      - $HOME/.icons
+      - $HOME/.xfce4
+      - $HOME/.fonts
+
 slots:
-  gnome-dbus:
+  savedesktop:
     interface: dbus
     bus: session
-    name: org.gnome.SessionManager
-  xfce-dbus:
-    interface: dbus
-    bus: session
-    name: org.xfce.SessionManager
-  kde-dbus:
-    interface: dbus
-    bus: session
-    name: org.kde.ksmserver
+    name: io.github.vikdevelop.SaveDesktop
 
 apps:
   savedesktop:
     extensions: [gnome]
-    command: usr/bin/savedesktop.sh
+    command: usr/bin/run.sh
     desktop: usr/share/applications/io.github.vikdevelop.SaveDesktop.desktop
     common-id: io.github.vikdevelop.SaveDesktop.desktop
     plugs:
-      - gsettings
       - home
       - network
-    environment:
-      HOME: $SNAP_REAL_HOME
+      - login-session-control
 
 parts:
-  savedesktop-necessary:
-    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.8_snap2/savedesktop-snapcraft-necessary-files.zip
-    plugin: dump
   dconf:
-    source: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz
-    plugin: dump
+    source: https://gitlab.gnome.org/GNOME/dconf.git
+    plugin: meson
+    meson-parameters:
+      - --prefix=/usr
+      - -Dbash_completion=false
+      - -Dman=false
+      - -Dvapi=false
+    override-pull: |
+      craftctl default
+      patch -p1 < $CRAFT_PROJECT_DIR/dconf-override.patch
+    prime:
+      - -usr/lib/systemd
+      - -usr/lib/*/pkgconfig
+      - -usr/include
+
   savedesktop:
-    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8_snap2.tar.gz
-    plugin: dump
-    parse-info: [flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml]
-    stage-packages:
-       - wget
-       - libnotify-bin
+    #source: https://github.com/vikdevelop/SaveDesktop.git
+    source: .
+      #source-tag: 
+    plugin: nil
+    override-pull: |
+      craftctl default
+      sed -e "s|Icon=io.github.vikdevelop.SaveDesktop|Icon=usr/share/icons/hicolor/scalable/apps/io.github.vikdevelop.SaveDesktop.svg|" -i $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.desktop
+    override-build: |
+      set -eux
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/main_window.py
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/periodic_saving.py
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/server.py
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/network_sharing.py
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/open_wiki.py
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/localization.py
+      install -D -t $CRAFT_PART_INSTALL/usr/share/applications $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.desktop
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps $CRAFT_PART_SRC/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/exclamation_mark.png
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/desktop-symbolic.svg
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/list-view.png
+      install -D -t $CRAFT_PART_INSTALL/usr/share/metainfo $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
+      install -D -t $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
+      glib-compile-schemas $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas
+      cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
+    parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
+
+
+
