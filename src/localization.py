@@ -30,6 +30,14 @@ icon = "io.github.vikdevelop.SaveDesktop"
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
 
+#Checking for Snap and Real Home directories
+
+snap_home = Path.home()#keeping this value if it comes handy
+snap_real_home = os.getenv('SNAP_REAL_HOME')
+
+#Setting home as per the confinement
+home = snap_real_home if 'SNAP' in os.environ else snap_home
+
 if flatpak:
     try:
       locale = open(f"/app/translations/{r_lang}.json")
@@ -37,8 +45,8 @@ if flatpak:
       locale = open(f"/app/translations/en.json")
     # System, cache and data directories
     system_dir = "/app"
-    CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
-    DATA = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
+    CACHE = f"{home}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
+    DATA = f"{home}/.var/app/io.github.vikdevelop.SaveDesktop/data"
     version = f"{v}"
     # Commands
     periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
@@ -62,11 +70,11 @@ else:
     except:
       locale = open(f"translations/en.json")
     # System, cache and data directories
-    system_dir = f"{Path.home()}/.local/share/savedesktop/src"
+    system_dir = f"{home}/.local/share/savedesktop/src"
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
     os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
-    CACHE = f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
-    DATA = f"{Path.home()}/.local/share/io.github.vikdevelop.SaveDesktop"
+    CACHE = f"{home}/.cache/io.github.vikdevelop.SaveDesktop"
+    DATA = f"{home}/.local/share/io.github.vikdevelop.SaveDesktop"
     version = f"{v}-native"
     # Commands
     periodic_saving_cmd = f'savedesktop --background'
