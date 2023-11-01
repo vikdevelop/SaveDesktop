@@ -16,6 +16,7 @@ plugs:
       - $HOME/.icons
       - $HOME/.xfce4
       - $HOME/.fonts
+      - $HOME/.cinnamon
 
 slots:
   savedesktop:
@@ -52,9 +53,8 @@ parts:
       - -usr/include
 
   savedesktop:
-    #source: https://github.com/vikdevelop/SaveDesktop.git
-    source: .
-      #source-tag: 
+    source: https://github.com/vikdevelop/SaveDesktop.git
+    #source-tag: 
     plugin: nil
     override-pull: |
       craftctl default
