@@ -7,7 +7,7 @@ base: core22
 confinement: strict
 
 plugs:
-  dot-local-and-config:
+  dot-folders:
     interface: personal-files
     write:
       - $HOME/.config
@@ -53,7 +53,8 @@ parts:
       - -usr/include
 
   savedesktop:
-    source: https://github.com/vikdevelop/SaveDesktop.git
+    #source: https://github.com/vikdevelop/SaveDesktop.git
+    source: .
     #source-tag: 
     plugin: nil
     override-pull: |
@@ -78,5 +79,12 @@ parts:
       cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
 
-
+  deps:
+    plugin: nil
+    stage-packages:
+      - wget
+      - libnotify-bin
+    prime:
+      - usr/bin/notify-send
+      - usr/bin/wget
 
