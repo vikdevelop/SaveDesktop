@@ -143,9 +143,9 @@ class Syncing:
     def import_config(self):
         # Applying configuration for GNOME-based environments
         if not os.path.exists("{}/.config".format(home)):
-            os.system("mkdir ~/.config/")
+            os.system(f"mkdir {home}/.config/")
         if os.path.exists("user"):
-            os.system(f"cp -R ./user ~/.config/dconf/")
+            os.system(f"cp -R ./user {home}/.config/dconf/")
         else:
             if flatpak:
                 os.system("dconf load / < ./dconf-settings.ini")
