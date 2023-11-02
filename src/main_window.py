@@ -20,6 +20,7 @@ download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 
 
 # Create a .from_app file for sync from the menu in the header bar
+os.makedirs(f"{CACHE}", exist_ok=True)
 with open(f"{CACHE}/.from_app", "w") as d:
     d.write("from_app = true")
 
@@ -1089,8 +1090,11 @@ class MainWindow(Gtk.Window):
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
         self.close()
-        os.popen(f"rm -rf {CACHE}/.*")
-        os.popen(f"rm -rf {CACHE}/*")
+        for file in os.listdir(CACHE):
+            try:
+                os.remove(f"{CACHE}/{file}")
+            except:
+                os.removedirs(f"{CACHE}/{file}")                
         try:
             url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
             j = json.load(url)
