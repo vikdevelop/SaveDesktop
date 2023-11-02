@@ -44,16 +44,13 @@ parts:
       - -Dbash_completion=false
       - -Dman=false
       - -Dvapi=false
-    override-pull: |
-      craftctl default
-      patch -p1 < $CRAFT_PROJECT_DIR/dconf-override.patch
     prime:
       - -usr/lib/systemd
       - -usr/lib/*/pkgconfig
       - -usr/include
 
   savedesktop:
-    source: https://github.com/vikdevelop/SaveDesktop.git
+    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8_snap4.tar.gz
     #source-tag: 
     plugin: nil
     override-pull: |
@@ -76,6 +73,7 @@ parts:
       install -D -t $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
       glib-compile-schemas $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas
       cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr/bin $CRAFT_PART_SRC/run.sh
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
 
   deps:
