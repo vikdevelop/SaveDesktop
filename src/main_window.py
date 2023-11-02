@@ -915,7 +915,7 @@ class MainWindow(Gtk.Window):
             self.caja_mate = GLib.spawn_command_line_async(f"cp -R {home}/.config/caja ./")
         elif self.environment == 'KDE Plasma':
             os.system("mkdir xdg-config && mkdir xdg-data")
-            os.popen(f"cp -R ~/.config/[k]* ./xdg-config/")
+            os.popen(f"cp -R {home}/.config/[k]* ./xdg-config/")
             self.gtkrc = GLib.spawn_command_line_async(f"cp {home}/.config/gtkrc ./xdg-config/")
             self.dolphinrc = GLib.spawn_command_line_async(f"cp {home}/.config/dolphinrc ./xdg-config/")
             self.gwenviewrc = GLib.spawn_command_line_async(f"cp {home}/.config/gwenviewrc ./xdg-config/")
@@ -962,12 +962,12 @@ class MainWindow(Gtk.Window):
     def import_config(self):
         # Applying configuration for GNOME-based environments
         if not os.path.exists("{}/.config".format(home)):
-            os.system("mkdir ~/.config/")
+            os.system(f"mkdir {home}/.config/")
         # Create Dconf directory
         if not os.path.exists("{}/.config/dconf".format(home)):
-            os.system("mkdir ~/.config/dconf/")
+            os.system(f"mkdir {home}/.config/dconf/")
         else:
-            os.system('rm -rf ~/.config/dconf && mkdir ~/.config/dconf')
+            os.system(f'rm -rf {home}/.config/dconf && mkdir {home}/.config/dconf')
         if os.path.exists("user"):
             self.i_dconf = GLib.spawn_command_line_async(f"cp ./user {home}/.config/dconf/")
         else:
