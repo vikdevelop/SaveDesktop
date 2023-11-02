@@ -53,8 +53,7 @@ parts:
       - -usr/include
 
   savedesktop:
-    #source: https://github.com/vikdevelop/SaveDesktop.git
-    source: .
+    source: https://github.com/vikdevelop/SaveDesktop.git
     #source-tag: 
     plugin: nil
     override-pull: |

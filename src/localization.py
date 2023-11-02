@@ -62,7 +62,7 @@ elif snap:
     periodic_saving_cmd = 'savedesktop --background'
     sync_cmd = "savedesktop --sync"
     server_cmd = "savedesktop --start-server"
-    CACHE = f"{os.getenv('SNAP_USER_COMMON')}/.cache"
+    CACHE = f"{os.getenv('SNAP_USER_COMMON')}/.cache/tmp"
     DATA = f"{os.getenv('SNAP_USER_DATA')}/.local/share"
 else:
     try:
