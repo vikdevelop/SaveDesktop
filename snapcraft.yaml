@@ -7,7 +7,7 @@ base: core22
 confinement: strict
 
 plugs:
-  dot-local-and-config:
+  dot-folders:
     interface: personal-files
     write:
       - $HOME/.config
@@ -16,12 +16,13 @@ plugs:
       - $HOME/.icons
       - $HOME/.xfce4
       - $HOME/.fonts
+      - $HOME/.cinnamon
 
-slots:
-  savedesktop:
-    interface: dbus
-    bus: session
-    name: io.github.vikdevelop.SaveDesktop
+# slots:
+#   savedesktop:
+#     interface: dbus
+#     bus: session
+#     name: io.github.vikdevelop.SaveDesktop
 
 apps:
   savedesktop:
@@ -54,7 +55,7 @@ parts:
   savedesktop:
     #source: https://github.com/vikdevelop/SaveDesktop.git
     source: .
-      #source-tag: 
+    #source-tag: 
     plugin: nil
     override-pull: |
       craftctl default
@@ -78,5 +79,12 @@ parts:
       cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
 
-
+  deps:
+    plugin: nil
+    stage-packages:
+      - wget
+      - libnotify-bin
+    prime:
+      - usr/bin/notify-send
+      - usr/bin/wget
 

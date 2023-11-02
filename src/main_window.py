@@ -4,6 +4,7 @@ import socket
 import gi
 import glob
 import sys
+import dbus
 from localization import _, home
 from urllib.request import urlopen
 from open_wiki import *
@@ -981,7 +982,8 @@ class MainWindow(Gtk.Window):
         self.i_fonts = GLib.spawn_command_line_async(f'cp -R ./.fonts {home}/')
         self.i_gtk4 = GLib.spawn_command_line_async(f'cp -R ./gtk-4.0 {home}/.config/')
         self.i_gtk3 = GLib.spawn_command_line_async(f'cp -R ./gtk-3.0 {home}/.config/')
-        self.flatpak_apps = GLib.spawn_command_line_async(f'cp ./installed_flatpaks.sh {DATA}/')
+        if not 'SNAP' in os.environ:
+            self.flatpak_apps = GLib.spawn_command_line_async(f'cp ./installed_flatpaks.sh {DATA}/')
         # Apply configs for individual desktop environments
         if self.environment == 'GNOME':
             self.i_background_properties = GLib.spawn_command_line_async(f'cp -R ./gnome-background-properties {home}/.local/share/')
@@ -1129,13 +1131,12 @@ class MyApp(Adw.Application):
     def logout(self, action, param):
         os.system("rm %s/*" % CACHE)
         os.system("rm %s/.*" % CACHE)
-        if os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
-            os.system("dbus-send --session --type=method_call --print-reply --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
-            os.system("dbus-send --print-reply --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int32:0 int32:0")
-        else:
-            os.system("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1")
-            
+        bus = dbus.SystemBus()  
+        systemd1 = bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1")
+        manager = dbus.Interface(systemd1, 'org.freedesktop.login1.Manager')
+        sessions = manager.ListSessions()
+        manager.KillSession(sessions[0][0], 'all', 9)
+
     # Sync config manually
     def sync_pc(self, action, param):
         if os.path.exists(f"{DATA}/sync-info.json"):
