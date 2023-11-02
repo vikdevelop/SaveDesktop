@@ -57,7 +57,7 @@ elif snap:
       locale = open(f"{os.getenv('SNAP')}/usr/translations/{r_lang}.json")
     except:
       locale = open(f"{os.getenv('SNAP')}/usr/translations/en.json")
-    system_dir = f"{os.getenv('SNAP')}/src"
+    system_dir = f"{os.getenv('SNAP')}/usr"
     version = f"{v}"
     periodic_saving_cmd = 'savedesktop --background'
     sync_cmd = "savedesktop --sync"
