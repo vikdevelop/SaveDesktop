@@ -50,8 +50,8 @@ parts:
       - -usr/include
 
   savedesktop:
-    source: https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/2.9.8_snap4.tar.gz
-    #source-tag: 
+    source: https://github.com/vikdevelop/SaveDesktop.git
+    source-tag: 2.9.8_snap4
     plugin: nil
     override-pull: |
       craftctl default
