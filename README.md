@@ -135,8 +135,6 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   
   <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-
-
 - Install on the system (native version)
   
   ```bash
