@@ -135,10 +135,6 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   
   <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-- Snap store (currently edge version)
-
-  <a href="https://snapcraft.io/savedesktop-vikdevelop"><img src="https://nerdzoom.de/wp-content/uploads/2018/01/snap-store-badge-black.png" width="240"></a>
-
 
 
 - Install on the system (native version)
