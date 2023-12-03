@@ -33,8 +33,8 @@ El directorio por defecto para guardar los periódicamente es `/home/user/Downlo
 - Verifique si la carpeta de las copias automáticas es la misma que la utilizada para el archivo de sincronización</str>
   <str key="on_computer_2">**En el ordenador 2:**
 - Compruebe si está conectado a la misma red que el ordenador 1.</str>
-  <str key="sync_in_savedesktop">### Configuración de la sincronización en la aplicación SaveDesktop
-En los ordenadores 1 y 2, abra el programa SaveDesktop y vaya al apartado de sincronización. En el equipo 1, haga clic en el botón «Configurar archivo de sincronización», seleccione el archivo de sincronización y la frecuencia deseada. Copie la URL de sincronización y, en el ordenador 2, haga clic en el botón «Conexión con el otro ordenador» y escriba la URL de sincronización que ha copiado del ordenador 1.</str>
+  <str key="sync_in_savedesktop">### Configurar la sincronización en la aplicación SaveDesktop
+En los ordenadores 1 y 2, abra la aplicación SaveDesktop y vaya a la página Sincronización. En el ordenador 1, haga clic en el botón "Configurar el archivo de sincronización", seleccione el archivo de sincronización (su archivo de guardado periódico) y seleccione un intervalo de sincronización periódica. A continuación, copie la URL para la sincronización y, en el ordenador 2, haga clic en el botón "Conectar con otro ordenador" e introduzca la URL copiada para la sincronización desde el ordenador 1.</str>
   <str key="sync_warning">Si desea sincronizar el entorno de escritorio del ordenador 2 al 1, los pasos son los mismos.
 
 **Es necesario cerrar y volver a abrir la sesión para aplicar los cambios**</str>
