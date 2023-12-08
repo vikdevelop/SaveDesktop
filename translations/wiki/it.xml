@@ -33,8 +33,8 @@ La directory predefinita per il salvataggio periodico è "/home/user/Downloads/S
 - controlla se la cartella per il salvataggio periodico è la stessa cartella per il file di sincronizzazione</str>
   <str key="on_computer_2">**Sul computer 2:**
 - Controlla se sei connesso alla stessa rete del computer 1.</str>
-  <str key="sync_in_savedesktop">### Imposta la sincronizzazione nell'app SaveDesktop
-Sul computer 1 e sul computer 2, apri l'applicazione SaveDesktop e passa alla pagina di sincronizzazione. Sul computer 1 fare clic sul pulsante "Imposta file di sincronizzazione", selezionare il file di sincronizzazione e selezionare l'intervallo di sincronizzazione periodica. Quindi copia l'URL per la sincronizzazione e sul computer 2, fai clic sul pulsante "Connetti con un altro computer" e inserisci l'URL copiato per la sincronizzazione dal computer 1.</str>
+  <str key="sync_in_savedesktop">### Impostare la sincronizzazione nell'app SaveDesktop
+Sui computer 1 e 2, apri l'applicazione SaveDesktop e passa alla pagina di sincronizzazione. Sul computer 1, fai clic sul pulsante "Imposta il file di sincronizzazione", seleziona il file di sincronizzazione (il tuo file di salvataggio periodico) e seleziona un intervallo di sincronizzazione periodica. Quindi copia l'URL per la sincronizzazione e, sul computer 2, fai clic sul pulsante "Connetti con un altro computer" e inserisci l'URL copiato per la sincronizzazione dal computer 1.</str>
   <str key="sync_warning">Se desideri sincronizzare la configurazione DE dal computer 2 al computer 1, segui la stessa procedura.
 
 **Affinché le modifiche abbiano effetto è necessario disconnettersi dal sistema**</str>
