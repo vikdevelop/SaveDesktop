@@ -17,13 +17,7 @@ plugs:
       - $HOME/.xfce4
       - $HOME/.fonts
       - $HOME/.cinnamon
-
-# slots:
-#   savedesktop:
-#     interface: dbus
-#     bus: session
-#     name: io.github.vikdevelop.SaveDesktop
-
+      
 apps:
   savedesktop:
     extensions: [gnome]
