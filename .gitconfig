@@ -1,0 +1,10 @@
+[user]
+  name = vikdevelop
+  email = super-vik1@protonmail.com
+  signingkey = 34F62FF3094F948A102B7CEA4E99572EAA878B97
+[gpg]
+  program = /usr/bin/gpg
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true
