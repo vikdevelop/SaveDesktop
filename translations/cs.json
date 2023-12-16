@@ -47,7 +47,7 @@
     "sync_title": "Synchronizovat s ostatními počítači v síti",
     "sync_desc": "Synchronizujte konfiguraci vašeho desktopového prostředí s ostatními počítači v síti. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Jak to funguje?</a>",
     "set_up_sync_file": "Nastavit synchronizační soubor",
-    "sync_file": "Synchronizační soubor",
+    "sync_file": "Soubor pravidelného ukládání",
     "periodic_sync": "Pravidelná synchronizace",
     "url_for_sync": "<b>URL pro synchronizaci s ostatními počítači</b>",
     "connect_with_other_computer": "Připojit se k jinému počítači",
