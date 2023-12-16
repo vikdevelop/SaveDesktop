@@ -47,7 +47,7 @@
     "sync_title": "Sincronizza con altri computer nella rete",
     "sync_desc": "Sincronizza la configurazione del tuo ambiente desktop con altri computer nella rete. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Come funziona?</a>",
     "set_up_sync_file": "Imposta il file di sincronizzazione",
-    "sync_file": "File di sincronizzazione",
+    "sync_file": "File di salvataggio periodico",
     "periodic_sync": "Sincronizzazione periodica",
     "url_for_sync": "<b>URL per la sincronizzazione con altri computer</b>",
     "connect_with_other_computer": "Connettiti con un altro computer",
