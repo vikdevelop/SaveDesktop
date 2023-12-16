@@ -3,6 +3,7 @@ import sys
 import os
 from pathlib import Path
 
+# Get info about version
 response = requests.get("https://api.github.com/repos/vikdevelop/SaveDesktop/releases/latest")
 github_version = response.json()["name"]
 
