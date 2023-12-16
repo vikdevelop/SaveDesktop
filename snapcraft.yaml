@@ -47,7 +47,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: 2.9.8_snap4
+    source-tag: 2.9.9
     plugin: nil
     override-pull: |
       craftctl default
