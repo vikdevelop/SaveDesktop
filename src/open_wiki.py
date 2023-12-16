@@ -18,7 +18,7 @@ elif r_lang == "en":
     sync_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network"
     lang_list = False
 else:
-    pb_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving-{new_lang}" 
-    flatpak_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list-{new_lang}"
-    sync_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network-{new_lang}"
+    pb_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving-{r_lang}" 
+    flatpak_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list-{r_lang}"
+    sync_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network-{r_lang}"
     lang_list = True
