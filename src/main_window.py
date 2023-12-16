@@ -103,7 +103,7 @@ class MainWindow(Gtk.Window):
 
         # Popup window for showing messages about saved and imported configuration
         self.toast = Adw.Toast.new(title='')
-        self.toast.set_timeout(5)
+        self.toast.set_timeout(10)
         self.toast.connect('dismissed', self.on_toast_dismissed)
         
         # Check of user current desktop
@@ -891,7 +891,8 @@ class MainWindow(Gtk.Window):
         if self.environment == 'GNOME':
             self.background_properties = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/gnome-background-properties ./")
             self.gshell = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/gnome-shell ./")
-            self.nautilus = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/nautilus-python ./")
+            self.nautilus_python = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/nautilus-python ./")
+            self.nautilus = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/nautilus ./")
             self.gccenter = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/gnome-control-center ./")
         elif self.environment == 'Pantheon':
             self.plank = GLib.spawn_command_line_async(f"cp -R {home}/.config/plank ./")
@@ -948,7 +949,7 @@ class MainWindow(Gtk.Window):
             filename = f'{self.filename_text}'
         with open(f"{CACHE}/.filedialog.json", "w") as fd:
                 fd.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, filename))
-        self.tar_time = GLib.timeout_add_seconds(6, self.exporting_done)
+        self.tar_time = GLib.timeout_add_seconds(10, self.exporting_done)
         
     # Import config from list
     def imp_cfg_from_list(self, w):
@@ -989,7 +990,8 @@ class MainWindow(Gtk.Window):
         if self.environment == 'GNOME':
             self.i_background_properties = GLib.spawn_command_line_async(f'cp -R ./gnome-background-properties {home}/.local/share/')
             self.i_gshell = GLib.spawn_command_line_async(f'cp -R ./gnome-shell {home}/.local/share/')
-            self.i_nautilus = GLib.spawn_command_line_async(f'cp -R ./nautilus-python {home}/.local/share/')
+            self.i_nautilus_python = GLib.spawn_command_line_async(f'cp -R ./nautilus-python {home}/.local/share/')
+            self.i_nautilus = GLib.spawn_command_line_async(f'cp -R ./nautilus {home}/.local/share/')
             self.i_gccenter = GLib.spawn_command_line_async(f'cp -R ./gnome-control-center {home}/.config/')
         elif self.environment == 'Pantheon':
             self.i_plank = GLib.spawn_command_line_async(f'cp -R ./plank {home}/.config/')
@@ -1170,7 +1172,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(version)
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<p>Fixed these bugs:</p><ul>\n<li>if you have selected manually synchronization and click on Sync button in the menu in the headerbar, instead of the application no longer getting stuck, it shows the notification \"Please wait ...\"</li>\n<li>if you close the application window, it no longer \"bites\" </li>\n<li>fixed daily synchronization and saving where periodic saving did not work correctly</li>\n<li>if changes between synced computers are small, the configuration is no longer broken on the second computer</li></ul><p>And also:</p><ul><li>Updated translations</li></ul>")
+        dialog.set_release_notes("<p>Fixed a bug with slow launching of the app, updated translations, added support for Snap (but it is not yet available), and added support for saving the Nautilus scripts.</p>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
