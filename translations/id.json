@@ -53,5 +53,6 @@
     "connect_with_pc_desc": "Di komputer lain, buka aplikasi SaveDesktop, dan pada halaman ini, klik tombol \"Siapkan file sinkronisasi\" dan salin URL untuk sinkronisasi dan masukkan di bawah ini.",
     "pc_url_entry": "Masukkan URL untuk sinkronisasi",
     "manually": "Manual",
-    "m_sync_desc": "Mulai sekarang, Anda dapat menyinkronkan konfigurasi dari menu di bilah header"
+    "m_sync_desc": "Mulai sekarang, Anda dapat menyinkronkan konfigurasi dari menu di bilah header",
+    "periodic_saving_file": "Periodic saving file"
 }
