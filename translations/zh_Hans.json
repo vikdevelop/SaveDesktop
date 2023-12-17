@@ -53,5 +53,6 @@
     "connect_with_pc_desc": "On another computer, open the SaveDesktop application, and on this page, click on the \"Set up the sync file\" button and copy the URL for synchronization and enter it below.",
     "pc_url_entry": "输入一段URL以进行同步",
     "manually": "手动地",
-    "m_sync_desc": "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯"
+    "m_sync_desc": "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯",
+    "periodic_saving_file": "Periodic saving file"
 }
