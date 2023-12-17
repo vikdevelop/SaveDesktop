@@ -17,12 +17,8 @@ from gi.repository import Gtk, Adw, Gio, GLib
 
 # Get user download dir
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
-
-
-# Create a .from_app file for sync from the menu in the header bar
-os.makedirs(f"{CACHE}", exist_ok=True)
-with open(f"{CACHE}/.from_app", "w") as d:
-    d.write("from_app = true")
+if snap:
+    os.makedirs(f"{CACHE}", exist_ok=True)
 
 # Application window
 class MainWindow(Gtk.Window):
@@ -1155,6 +1151,8 @@ class MyApp(Adw.Application):
     def sync_pc(self, action, param):
         if os.path.exists(f"{DATA}/sync-info.json"):
             os.remove(f"{DATA}/sync-info.json")
+        with open(f"{CACHE}/.from_app", "w") as s:
+            s.write("from_app = True")
         os.system(f'notify-send "{_["please_wait"]}"')
         os.popen(f"python3 {system_dir}/network_sharing.py")
         
