@@ -53,5 +53,6 @@
     "connect_with_pc_desc": "Na jiném počítači otevřete aplikaci SaveDesktop a na této stránce klikněte na tlačítko \"Nastavit synchronizační soubor\", zkopírujte adresu URL pro synchronizaci a zadejte ji níže.",
     "pc_url_entry": "Zadejte URL adresu pro synchronizaci",
     "manually": "Ručně",
-    "m_sync_desc": "Od teď můžete synchronizovat konfiguraci z nabídky v záhlaví"
+    "m_sync_desc": "Od teď můžete synchronizovat konfiguraci z nabídky v záhlaví",
+    "periodic_saving_file": "Periodic saving file"
 }
