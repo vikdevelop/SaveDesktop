@@ -53,5 +53,6 @@
     "connect_with_pc_desc": "Diğer bilgisayarda SaveDesktop uygulamasını açın ve bu sayfada \"Eşzamanlama dosyasını ayarla\" düğmesine tıklayın ve eşzamanlama için URL'yi kopyalayıp aşağıya girin.",
     "pc_url_entry": "Eşzamanlama için URL girin",
     "manually": "Elle",
-    "m_sync_desc": "Artık yapılandırmayı başlık çubuğundaki menüden eşzamanlayabilirsiniz"
+    "m_sync_desc": "Artık yapılandırmayı başlık çubuğundaki menüden eşzamanlayabilirsiniz",
+    "periodic_saving_file": "Periodic saving file"
 }
