@@ -5,6 +5,7 @@ import gi
 import glob
 import sys
 import dbus
+import shutil
 from localization import _, home
 from urllib.request import urlopen
 from open_wiki import *
@@ -51,6 +52,7 @@ class MainWindow(Gtk.Window):
         # Add Manually sync button
         if self.settings["manually-sync"] == True:
             self.menu_button_model.append(_["sync"], 'app.m_sync')
+        self.menu_button_model.append(_["sync"], 'app.m_sync')
         
         # Primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -1092,6 +1094,7 @@ class MainWindow(Gtk.Window):
             try:
                 os.remove(f"{CACHE}/{file}")
             except:
+                shutil.rmtree(CACHE)
                 os.removedirs(f"{CACHE}/{file}")                
         try:
             url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
