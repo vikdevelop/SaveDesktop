@@ -53,5 +53,6 @@
     "set_up_sync_file": "Set up the sync file",
     "periodic_sync": "Periodic synchronization",
     "manually": "Manually",
-    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar"
+    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar",
+    "periodic_saving_file": "Periodic saving file"
 }
