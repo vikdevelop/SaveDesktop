@@ -47,12 +47,12 @@
     "sync_title": "Sinkronisasi dengan komputer lain dalam jaringan",
     "sync_desc": "Menyinkronkan konfigurasi lingkungan desktop Anda dengan komputer lain dalam jaringan. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Bagaimana cara kerjanya?</a>",
     "set_up_sync_file": "Atur file sinkronisasi",
-    "sync_file": "File sinkronisasi",
     "periodic_sync": "Sinkronisasi berkala",
     "url_for_sync": "<b>URL untuk sinkronisasi dengan komputer lain</b>",
     "connect_with_other_computer": "Hubungkan dengan komputer lain",
     "connect_with_pc_desc": "Di komputer lain, buka aplikasi SaveDesktop, dan pada halaman ini, klik tombol \"Siapkan file sinkronisasi\" dan salin URL untuk sinkronisasi dan masukkan di bawah ini.",
     "pc_url_entry": "Masukkan URL untuk sinkronisasi",
     "manually": "Manual",
-    "m_sync_desc": "Mulai sekarang, Anda dapat menyinkronkan konfigurasi dari menu di bilah header"
+    "m_sync_desc": "Mulai sekarang, Anda dapat menyinkronkan konfigurasi dari menu di bilah header",
+    "periodic_saving_file": "Periodic saving file"
 }

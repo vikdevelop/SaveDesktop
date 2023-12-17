@@ -47,12 +47,12 @@
     "sync_title": "Sincronizar con otros ordenadores de la red",
     "sync_desc": "Sincronizar la configuración de tu entorno de escritorio con otros ordenadores en la red. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>¿Cómo funciona?</a>",
     "set_up_sync_file": "Configurar el archivo de sincronización",
-    "sync_file": "Archivo de la sincronización",
     "periodic_sync": "Sincronización periódica",
     "url_for_sync": "<b>La dirección URL de la sincronización con otros ordenadores</b>",
     "connect_with_other_computer": "Conectar con otro ordenador",
     "connect_with_pc_desc": "En otro ordenador, abre la aplicación SaveDesktop, y en esta página, haz clic en el botón \"Configurar el archivo de la sincronización\" y copia la dirección URL para la sincronización e introdúcela a continuación.",
     "pc_url_entry": "Introduce una dirección URL para la sincronización",
     "manually": "Manualmente",
-    "m_sync_desc": "A partir de ahora, puedes sincronizar la configuración desde el menú de la barra de cabecera"
+    "m_sync_desc": "A partir de ahora, puedes sincronizar la configuración desde el menú de la barra de cabecera",
+    "periodic_saving_file": "Periodic saving file"
 }

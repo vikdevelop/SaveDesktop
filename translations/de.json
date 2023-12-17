@@ -43,7 +43,6 @@
     "themes": "Themen",
     "fonts": "Schriftarten",
     "backgrounds": "Hintergründe",
-    "sync_file": "Synchronization file",
     "sync": "Sync",
     "sync_title": "Sync with other computers in the network",
     "sync_desc": "Sync your desktop environment configuration with other computers in the network. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>How it works?</a>",
@@ -54,5 +53,6 @@
     "connect_with_pc_desc": "On another computer, open the SaveDesktop application, and on this page, click on the \"Set up the sync file\" button and copy the URL for synchronization and enter it below.",
     "pc_url_entry": "Enter a URL for synchronization",
     "manually": "Manually",
-    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar"
+    "m_sync_desc": "From now on, you can sync the config from the menu in the header bar",
+    "periodic_saving_file": "Periodic saving file"
 }
