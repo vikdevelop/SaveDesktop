@@ -53,5 +53,6 @@
     "connect_with_pc_desc": "En otro ordenador, abre la aplicación SaveDesktop, y en esta página, haz clic en el botón \"Configurar el archivo de la sincronización\" y copia la dirección URL para la sincronización e introdúcela a continuación.",
     "pc_url_entry": "Introduce una dirección URL para la sincronización",
     "manually": "Manualmente",
-    "m_sync_desc": "A partir de ahora, puedes sincronizar la configuración desde el menú de la barra de cabecera"
+    "m_sync_desc": "A partir de ahora, puedes sincronizar la configuración desde el menú de la barra de cabecera",
+    "periodic_saving_file": "Periodic saving file"
 }
