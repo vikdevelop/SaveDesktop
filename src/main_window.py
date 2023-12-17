@@ -1180,7 +1180,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(version)
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<p>Fixed a bug with slow launching of the app, updated translations, added support for Snap (but it is not yet available), and added support for saving the Nautilus scripts.</p>")
+        dialog.set_release_notes("<p>Fixed these bugs:</p><ul><li>logging out of the system in the flatpak and native versions is now working correctly</li><li>file CACHE/.from_app will be created only if the user clicks on the sync item in the header bar menu</li></ul>")
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
