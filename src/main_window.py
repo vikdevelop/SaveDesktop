@@ -52,7 +52,6 @@ class MainWindow(Gtk.Window):
         # Add Manually sync button
         if self.settings["manually-sync"] == True:
             self.menu_button_model.append(_["sync"], 'app.m_sync')
-        self.menu_button_model.append(_["sync"], 'app.m_sync')
         
         # Primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
