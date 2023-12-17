@@ -443,7 +443,7 @@ class MainWindow(Gtk.Window):
 
         # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
-        self.file_row.set_title("1 " + _["sync_file"])
+        self.file_row.set_title("1 " + _["periodic_saving_file"])
         self.file_row.set_subtitle(self.settings["file-for-syncing"])
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
