@@ -47,7 +47,7 @@
     "sync_title": "Szinkronizálás a hálózaton lévő számítógépekkel",
     "sync_desc": "Szinkronizálja az asztali környezet konfigurációját a hálózat többi számítógépével. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Hogyan működik?</a>",
     "set_up_sync_file": "Szinkronizálási fájl beállítása",
-    "sync_file": "Szinkronizálási fájl",
+    "sync_file": "Ideiglenes mentési fájl",
     "periodic_sync": "Időszakos szinkronizálás",
     "url_for_sync": "<b>Más számítógépekkel való szinkronizálás URL-je</b>",
     "connect_with_other_computer": "Csatlakozás más számítógéphez",
