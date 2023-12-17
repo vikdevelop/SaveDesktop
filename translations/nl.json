@@ -53,5 +53,6 @@
     "connect_with_pc_desc": "Ga naar de andere computer, open SaveDesktop, ga naar deze sectie en klik op ‘Synchronisatiebestand instellen’. Kopieer vervolgens de synchronisatie-url en voer deze hieronder in.",
     "pc_url_entry": "Voer de synchronisatie-url in",
     "manually": "Handmatig",
-    "m_sync_desc": "Voortaan kunt u de voorkeuren synchroniseren middels het menu op de kopbalk"
+    "m_sync_desc": "Voortaan kunt u de voorkeuren synchroniseren middels het menu op de kopbalk",
+    "periodic_saving_file": "Periodic saving file"
 }
