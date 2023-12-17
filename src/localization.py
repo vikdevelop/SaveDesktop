@@ -24,7 +24,7 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version and icon
-v = "2.9.8"
+v = "2.9.9"
 icon = "io.github.vikdevelop.SaveDesktop"
 
 flatpak = os.path.exists("/.flatpak-info")
