@@ -53,5 +53,6 @@
     "connect_with_pc_desc": "Egy másik számítógépen nyissa meg a SaveDesktop alkalmazást és ezen az oldalon kattintson a \"Szinkronizálási fájl beállítása\" gombra, másolja ki a szinkronizáláshoz szükséges URL-t, majd írja be alább.",
     "pc_url_entry": "Add meg a szinkronizálás URL-jét",
     "manually": "Manuálisan",
-    "m_sync_desc": "Ezentúl szinkronizálhatod a konfigurációt a fejlécsáv menüjéből"
+    "m_sync_desc": "Ezentúl szinkronizálhatod a konfigurációt a fejlécsáv menüjéből",
+    "periodic_saving_file": "Periodic saving file"
 }
