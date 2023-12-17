@@ -47,7 +47,6 @@
     "sync_title": "Ağdaki diğer bilgisayarla eşzamanla",
     "sync_desc": "Masaüstü ortamı yapılandırmanızı ağdaki diğer bilgisayarlarla eşzamanlayın. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Nasıl çalışır?</a>",
     "set_up_sync_file": "Eşzamanlama dosyası ayarla",
-    "sync_file": "Eşzamanlama dosyası",
     "periodic_sync": "Düzenli eşzamanlama",
     "url_for_sync": "<b>Diğer bilgisayarlarla eşzamanlama için URL</b>",
     "connect_with_other_computer": "Diğer bilgisayara bağlan",
