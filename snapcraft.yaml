@@ -29,8 +29,6 @@ apps:
       - network
       - login-session-control
 
-
-
 parts:
   dconf:
     source: https://gitlab.gnome.org/GNOME/dconf.git
@@ -80,4 +78,3 @@ parts:
     prime:
       - usr/bin/notify-send
       - usr/bin/wget
-
