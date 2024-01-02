@@ -31,45 +31,36 @@ finish-args:
     - --filesystem=~/.xfce4:create
     # save all fonts installed in home directory
     - --filesystem=~/.fonts:create
+    # save a list of installed flatpak apps
     - --filesystem=/var/lib/flatpak:ro
-    # logout from session for changes to the desktop configuration to take effect
-    - --talk-name=org.freedesktop.login1
+    # save user data of installed flatpak apps
+    - --filesystem=~/.var/app
+    # logout from session (GNOME-based environments) for changes to the desktop configuration to take effect
+    - --talk-name=org.gnome.SessionManager
+    # logout from session (Xfce) for changes to the Xfce desktop configuration to take effect
+    - --talk-name=org.xfce.SessionManager
+    # logout from session (KDE5) for changes to the KDE5 desktop configuration to take effect
+    - --talk-name=org.kde.ksmserver
+    # ensuring to FileChooserNative will work correctly
+    - --talk-name=org.freedesktop.FileManager1
     - --talk-name=org.freedesktop.portal.FileChooser
     - --env=DCONF_USER_CONFIG_DIR=.config/dconf
     - --filesystem=xdg-run/dconf
     - --talk-name=ca.desrt.dconf
 modules:
   - name: dconf
-    buildsystem: meson
-    config-opts:
-      - "-Dbash_completion=false"
-      - "-Dman=false"
-    cleanup:
-      - "/include"
-      - "/lib/pkgconfig"
-      - "/libexec"
-      - "/share/dbus-1"
+    buildsystem: simple
+    build-commands:
+      - cp -R * /app
     sources:
       - type: archive
-        url: https://download.gnome.org/sources/dconf/0.40/dconf-0.40.0.tar.xz
-        sha256: cf7f22a4c9200421d8d3325c5c1b8b93a36843650c9f95d6451e20f0bcb24533
-        x-checker-data:
-          type: gnome
-          name: dconf
-      - type: patch
-        path: dconf-override.patch
+        url: https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz
+        sha256: 164fc714f96ef4b348665fc3617f54cfa5acf12df5c039d7a9d21ba1d86a2f2d
   - name: savedesktop
     buildsystem: simple
     build-commands:
        - install -Dm755 -t /app/bin run.sh
-       - install -Dm755 -t /app src/main_window.py
-       - install -Dm755 -t /app src/periodic_saving.py
-       - install -Dm755 -t /app src/install_flatpak_from_script.py
-       - install -Dm755 -t /app src/server.py
-       - install -Dm755 -t /app src/network_sharing.py
-       - install -Dm755 -t /app src/open_wiki.py
-       - install -Dm755 -t /app src/backup_flatpaks.sh
-       - install -Dm755 -t /app src/localization.py
+       - cp -R src/* /app
        - install -D -t /app/share build-beta.sh
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
        - install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
