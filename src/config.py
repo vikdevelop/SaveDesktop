@@ -113,9 +113,10 @@ class Save:
         
 class Import:
     def __init__(self):
-        with open(f"{CACHE}/.impfile.json") as j:
-            j = json.load(j)
-        os.system("tar -xf %s ./" % j["import_file"])
+        if os.path.exists(f"{CACHE}/.impfile.json"):
+            with open(f"{CACHE}/.impfile.json") as j:
+                j = json.load(j)
+            os.system("tar -xf %s ./" % j["import_file"])
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
         if os.path.exists("user"):
