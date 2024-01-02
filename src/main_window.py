@@ -493,10 +493,8 @@ class MainWindow(Gtk.Window):
             self.set_syncing()
             
             # Check periodic synchronization variable BEFORE saving to GSettings database
-            if self.settings["periodic-import"] == "Never2":
-                never_import = False
-            else:
-                never_import = True
+            with open(f"{CACHE}/.sync", "w") as s:
+                s.write(f"{self.settings['periodic-import']}")
             
             # Save the sync file to the GSettings database
             self.file_name = os.path.basename(self.file_row.get_subtitle())
@@ -528,14 +526,11 @@ class MainWindow(Gtk.Window):
             with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
             self.settings["periodic-import"] = import_item
-            
-            # Check periodic synchronization variable AFTER saving to GSettings database
-            if not self.settings["periodic-import"] == "Never2":
-                never_import = True
-            else:
-                never_import = False
-            if never_import == True:
-                self.show_warn_toast()
+            sync_before = subprocess.getoutput(f"cat {CACHE}/.sync")
+            if sync_before == "Never2":
+                if not self.settings["periodic-import"] == "Never2":
+                    self.show_warn_toast()
+                
                 
     # URL Dialog
     def open_urlDialog(self, w):
@@ -1002,6 +997,7 @@ class MainWindow(Gtk.Window):
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
         os.popen(f"rm -rf {CACHE}/*")
+        os.popen(f"rm -rf {CACHE}/.*")
         try:
             url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
             j = json.load(url)
@@ -1056,8 +1052,6 @@ class MyApp(Adw.Application):
     def sync_pc(self, action, param):
         if os.path.exists(f"{DATA}/sync-info.json"):
             os.remove(f"{DATA}/sync-info.json")
-        with open(f"{CACHE}/.from_app", "w") as s:
-            s.write("from_app = True")
         os.system(f'notify-send "{_["please_wait"]}"')
         os.popen(f"python3 {system_dir}/network_sharing.py")
         
@@ -1074,7 +1068,7 @@ class MyApp(Adw.Application):
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
-        dialog.set_copyright("© 2023 vikdevelop")
+        dialog.set_copyright("© 2023-2024 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
         if os.path.exists("/app/share/build-beta.sh"):
