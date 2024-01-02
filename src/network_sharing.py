@@ -23,28 +23,6 @@ settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/g
 # Check if syncing directory exists
 if not os.path.exists(f"{CACHE}/syncing"):
     os.mkdir(f"{CACHE}/syncing")
-    
-# Check of user current desktop environment
-if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
-    environment = 'GNOME'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
-    environment = 'GNOME'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
-    environment = 'GNOME'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
-    environment = 'COSMIC'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
-    environment = 'Pantheon'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
-    environment = 'Cinnamon'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'Budgie:GNOME':
-    environment = 'Budgie'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
-    environment = 'Xfce'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
-    environment = 'MATE'
-elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
-    environment = 'KDE Plasma'
 
 class Syncing:
     def __init__(self):
@@ -141,7 +119,6 @@ class Syncing:
             
     # Sync configuration
     def import_config(self):
-        # Applying configuration for GNOME-based environments
         os.system(f"python3 {system_dir}/config.py --import_")
         self.done()
 
