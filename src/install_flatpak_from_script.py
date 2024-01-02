@@ -22,15 +22,15 @@ if environment == 'GNOME':
 if os.path.exists(f"{CACHE_FLATPAK}/import_config/app"):
     with open(f"{CACHE_FLATPAK}/copying_flatpak_data", "w") as f:
         f.write("copying flatpak data ...")
+    if os.path.exists(f"{CACHE_FLATPAK}/import_config/app/io.github.vikdevelop.SaveDesktop"):
+        os.system(f"cd {CACHE_FLATPAK}/import_config/app && rm -rf io.github.vikdevelop.SaveDesktop")
     os.system(f"cp -R {CACHE_FLATPAK}/import_config/app ~/.var/")
     os.system(f"rm -rf {CACHE_FLATPAK}/*")
-else:
-    print("A directory with user data for the installed Flatpak apps does not exist.")
 
 # Install Flatpak apps from list
 if os.path.exists(f"{DATA_FLATPAK}/installed_flatpaks.sh"):
     os.system(f"sh {DATA_FLATPAK}/installed_flatpaks.sh && sh {DATA_FLATPAK}/installed_user_flatpaks.sh")
     os.system(f"rm {DATA_FLATPAK}/*.sh")
 else:
-    print("A list of installed Flatpak apps does not exist.")
+    print("List with installed Flatpak apps is not exists.")
     
