@@ -56,8 +56,6 @@ class Save:
             os.system('sh /app/backup_flatpaks.sh')
         if settings["save-flatpak-data"] == True:
             os.system(f'cp -R {home}/.var/app ./')
-        if settings["save-savedesktop-settings"] == True:
-            os.system(f"cp {config}/keyfile ./savedesktop-user-settings.ini")
             
         # Save configs on individual desktop environments
         if environment == 'GNOME':
