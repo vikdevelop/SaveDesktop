@@ -33,6 +33,7 @@ finish-args:
     - --filesystem=~/.fonts:create
     # save a list of installed flatpak apps
     - --filesystem=/var/lib/flatpak:ro
+    - --filesystem=~/.local/share/flatpak/app
     # save user data of installed flatpak apps
     - --filesystem=~/.var/app
     # logout from session (GNOME-based environments) for changes to the desktop configuration to take effect
