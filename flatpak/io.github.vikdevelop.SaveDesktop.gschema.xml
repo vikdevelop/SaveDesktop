@@ -76,7 +76,7 @@
 		</key>
 		<key name="manually-sync" type="b">
 		  <default>false</default>
-		  <summary>.</summary>
+		  <summary>Setting manually sync</summary>
 		</key>
 	</schema>
 </schemalist>
