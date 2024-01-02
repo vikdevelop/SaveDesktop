@@ -18,28 +18,6 @@ download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 
 class PeriodicBackups:
     def __init__(self):
-        # check of user current desktop
-        if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
-            self.environment = 'GNOME'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
-            self.environment = 'GNOME'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
-            self.environment = 'GNOME'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
-            self.environment = 'COSMIC'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
-            self.environment = 'Pantheon'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
-            self.environment = 'Cinnamon'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'Budgie:GNOME':
-            self.environment = 'Budgie'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'XFCE':
-            self.environment = 'Xfce'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
-            self.environment = 'MATE'
-        elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
-            self.environment = 'KDE Plasma'
-        
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         
         # Get directory for storing periodic backups
