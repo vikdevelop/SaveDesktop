@@ -68,6 +68,15 @@
     </categories>
           
     <releases>
+       <release version="3.0" date="2024-01-02">
+           <description>
+               <ul>
+                   <li>Added support for saving user data of installed Flatpak apps. You can select if you want to save a list of installed Flatpak apps only or also save the data of your installed Flatpak apps.</li>
+                   <li>Improved saving and importing configuration</li>
+                   <li>Improved selecting the sync file; you don't need to allow permission in the Flatseal app and check if the folder for the sync file is the same as the periodic saving folder</li>
+               </ul>
+           </description>
+       </release>
        <release version="2.9" date="2023-08-20">
            <description>
                <ul>
