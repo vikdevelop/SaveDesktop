@@ -133,7 +133,6 @@ class Import:
         os.system(f'cp -R ./gtk-4.0 {home}/.config/')
         os.system(f'cp -R ./gtk-3.0 {home}/.config/')
         os.system(f'cp -R ./app {home}/.var/')
-        os.system(f'cp -R ./savedesktop-user-settings.ini {config}/keyfile')
         os.system(f'cp ./installed_flatpaks.sh {DATA}/')
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
