@@ -13,6 +13,10 @@
 			<default>true</default>
 			<summary>Save installed Flatpak apps (option)</summary>
 		</key>
+		<key name="save-flatpak-data" type="b">
+		  <default>false</default>
+		  <summary>Save data of installed Flatpak apps (row)</summary>
+		</key>
 		<key name="save-icons" type="b">
 			<default>true</default>
 			<summary>Save icons (option)</summary>
