@@ -136,7 +136,7 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   
   <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
-- Install on the system (native version)
+- Install on the system (native version) ⚠️**UNSTABLE**⚠️
   
   ```bash
   # Install
@@ -146,7 +146,7 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   ```
   NOTE: For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
   
-- Build with Flatpak builder (beta version)
+- Build with Flatpak builder (beta version) ⚠️**UNSTABLE**⚠️
   ```
   git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
   # Maybe you will need to install org.gnome.Sdk (version 44) with flatpak
