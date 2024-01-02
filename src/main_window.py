@@ -896,12 +896,8 @@ class MainWindow(Gtk.Window):
     
     # Save configuration
     def save_config(self):
-        if self.settings["save-flatpak-data"] == True:
-            with open(f"{CACHE}/.filedialog.json", "w") as w:
-                w.write('{\n "recent_file": "%s/%s.fd.sd.tar.gz"\n}' % (self.folder, self.filename_text))
-        else:
-            with open(f"{CACHE}/.filedialog.json", "w") as w:
-                w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
+        with open(f"{CACHE}/.filedialog.json", "w") as w:
+            w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
@@ -946,22 +942,10 @@ class MainWindow(Gtk.Window):
         if self.settings["save-flatpak-data"] == True:
             self.toast_wait = Adw.Toast(title="It'll take a few minutes ...")
             self.toast_wait.set_timeout(250)
-        elif os.path.exists(f"{CACHE}/import_config"):
-            self.get_flatpak_from_filename()
         else:
             self.toast_wait = Adw.Toast(title=_["please_wait"])
             self.toast_wait.set_timeout(14)
         self.toast_overlay.add_toast(self.toast_wait)
-        
-    def get_flatpak_from_filename(self):
-        with open(f'{CACHE}/.impfile.json') as j:
-            j = json.load(j)
-            if "fd" in j["import_file"]:
-                self.toast_wait = Adw.Toast(title="It'll take a few minutes ...")
-                self.toast_wait.set_timeout(300)
-            else:
-                self.toast_wait = Adw.Toast(title=_["please_wait"])
-                self.toast_wait.set_timeout(14)
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
@@ -996,8 +980,9 @@ class MainWindow(Gtk.Window):
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
-        os.popen(f"rm -rf {CACHE}/*")
-        os.popen(f"rm -rf {CACHE}/.*")
+        if not os.path.exists(f"{CACHE}/copying_flatpak_data"):
+            os.popen(f"rm -rf {CACHE}/*")
+            os.popen(f"rm -rf {CACHE}/.*")
         try:
             url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
             j = json.load(url)
