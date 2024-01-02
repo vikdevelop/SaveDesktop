@@ -101,7 +101,6 @@ class MainWindow(Gtk.Window):
         # Popup window for showing messages about saved and imported configuration
         self.toast = Adw.Toast.new(title='')
         self.toast.set_timeout(10)
-        self.toast.connect('dismissed', self.on_toast_dismissed)
         
         # Check of user current desktop
         if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
@@ -303,11 +302,12 @@ class MainWindow(Gtk.Window):
                 
     # Import archive from list
     def import_from_list(self, w):
-        self.set_child(self.pBox)
+        self.toast_overlay.set_child(self.pBox)
         self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
         self.backButton.add_css_class("flat")
         self.backButton.connect("clicked", self.close_list)
         self.headerbar.set_title_widget(None)
+        self.set_title(_["import_from_list"])
         self.headerbar.pack_start(self.backButton)
 
         # Box for this section
@@ -495,15 +495,19 @@ class MainWindow(Gtk.Window):
                 self.set_syncing()
                 self.show_warn_toast()
             # Save the sync file to the GSettings database
-            self.settings["file-for-syncing"] = self.file_row.get_subtitle()
-            self.file_name = os.path.basename(self.settings["file-for-syncing"])
+            self.file_name = os.path.basename(self.file_row.get_subtitle())
             self.file = os.path.splitext(self.file_name)[0]
-            self.path = Path(self.settings["file-for-syncing"])
+            self.path = Path(self.file_row.get_subtitle())
             self.folder = self.path.parent.absolute()
+            
+            self.settings["file-for-syncing"] = self.file_row.get_subtitle()
 
             # Set filename format to same as the sync file name
             r_file = self.file.replace(".sd.tar", "")
             self.settings["filename-format"] = r_file
+            
+            # Set periodic saving folder to same as the folder for the sync file
+            self.settings["periodic-saving-folder"] = f'{self.folder}'
 
             # Save periodic synchronization interval to remote file and the GSettings database
             selected_item = self.import_row.get_selected_item()
@@ -517,9 +521,10 @@ class MainWindow(Gtk.Window):
                 import_item = "Monthly2"
             elif selected_item.get_string() == _["manually"]:
                 import_item = "Manually2"
-            with open(f"{self.folder}/file-settings.json", "w") as f:
+            with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
             self.settings["periodic-import"] = import_item
+                
                 
     # URL Dialog
     def open_urlDialog(self, w):
@@ -739,23 +744,37 @@ class MainWindow(Gtk.Window):
         self.backgrounds_row.add_suffix(self.switch_04)
         self.backgrounds_row.set_activatable_widget(self.switch_04)
         self.itemsBox.append(child=self.backgrounds_row)
-
-        if not snap:
+        
+        if flatpak:
             # Switch and row of option 'Save installed flatpaks'
             self.switch_05 = Gtk.Switch.new()
             if self.settings["save-installed-flatpaks"]:
                 self.switch_05.set_active(True)
             self.switch_05.set_valign(align=Gtk.Align.CENTER)
-             
-            self.flatpak_row = Adw.ActionRow.new()
+                
+            self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
             self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
             self.flatpak_row.set_use_markup(True)
             self.flatpak_row.set_title_lines(2)
             self.flatpak_row.set_subtitle_lines(3)
             self.flatpak_row.add_suffix(self.switch_05)
-            self.flatpak_row.set_activatable_widget(self.switch_05)
             self.itemsBox.append(child=self.flatpak_row)
+            
+            # Switch and row of option 'Save SaveDesktop app settings'
+            self.switch_06 = Gtk.Switch.new()
+            if self.settings["save-flatpak-data"]:
+                self.switch_06.set_active(True)
+            self.switch_06.set_valign(align=Gtk.Align.CENTER)
+                
+            self.data_row = Adw.ActionRow.new()
+            self.data_row.set_title(title="User data of installed Flatpak apps")
+            self.data_row.set_use_markup(True)
+            self.data_row.set_title_lines(2)
+            self.data_row.set_subtitle_lines(3)
+            self.data_row.add_suffix(self.switch_06)
+            self.data_row.set_activatable_widget(self.switch_06)
+            self.flatpak_row.add_row(child=self.data_row)
             
         self.itemsDialog.add_response('cancel', _["cancel"])
         self.itemsDialog.add_response('ok', _["apply"])
@@ -772,6 +791,7 @@ class MainWindow(Gtk.Window):
             self.settings["save-fonts"] = self.switch_03.get_active()
             self.settings["save-backgrounds"] = self.switch_04.get_active()
             self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
+            self.settings["save-flatpak-data"] = self.switch_06.get_active()
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
@@ -802,11 +822,14 @@ class MainWindow(Gtk.Window):
             self.folder = file.get_path()
             self.save_config()
         
-        if " " in self.saveEntry.get_text():
-            self.with_spaces_text = self.saveEntry.get_text()
-            self.filename_text = self.with_spaces_text.replace(" ", "_")
+        if self.saveEntry.get_text() == "":
+            self.filename_text = "config"
         else:
-            self.filename_text = f'{self.saveEntry.get_text()}'
+            if " " in self.saveEntry.get_text():
+                self.with_spaces_text = self.saveEntry.get_text()
+                self.filename_text = self.with_spaces_text.replace(" ", "_")
+            else:
+                self.filename_text = f'{self.saveEntry.get_text()}'
         
         self.folderchooser = Gtk.FileDialog.new()
         self.folderchooser.set_modal(True)
@@ -821,11 +844,9 @@ class MainWindow(Gtk.Window):
             except:
                 return
             self.please_wait_toast()
-            if not os.path.exists(f'{CACHE}/import_config'):
-                os.mkdir(f'{CACHE}/import_config')
-            os.chdir(f'{CACHE}/import_config')
-            os.system("tar -xf %s ./" % file.get_path())
-            self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
+            with open(f"{CACHE}/.impfile.json", "w") as j:
+                j.write('{\n "import_file": "%s"\n}' % file.get_path())
+            self.import_config()
         
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
@@ -848,12 +869,16 @@ class MainWindow(Gtk.Window):
             self.syncfile = file.get_path()
             self.open_setDialog()
             self.file_row.set_subtitle(self.syncfile)
+            if not os.path.exists(f"{DATA}/synchronization"):
+                os.mkdir(f"{DATA}/synchronization")
+            os.chdir(f"{DATA}/synchronization")
+            os.popen(f"cp {self.syncfile} ./")
             
         self.setDialog.close()
         
         self.syncfile_chooser = Gtk.FileDialog.new()
         self.syncfile_chooser.set_modal(True)
-        self.syncfile_chooser.set_title(_["import_fileshooser"].format(self.environment))
+        self.syncfile_chooser.set_title(_["set_up_sync_file"])
         self.file_filter_s = Gtk.FileFilter.new()
         self.file_filter_s.set_name(_["savedesktop_f"])
         self.file_filter_s.add_pattern('*.sd.tar.gz')
@@ -864,176 +889,39 @@ class MainWindow(Gtk.Window):
     
     # Save configuration
     def save_config(self):
-        # Create and load directory for saving configuration in CACHE
-        if not os.path.exists(f"{CACHE}/saved_config"):
-            os.mkdir(f"{CACHE}/saved_config")
-        os.chdir(f"{CACHE}/saved_config")
-        #self.dconf = GLib.spawn_command_line_async(f"cp -R {home}/.config/dconf/user ./")
-        os.system("dconf dump / > ./dconf-settings.ini")
-        self.gtk4 = GLib.spawn_command_line_async(f"cp -R {home}/.config/gtk-4.0 ./")
-        self.gtk3 = GLib.spawn_command_line_async(f"cp -R {home}/.config/gtk-3.0 ./")
-        if self.settings["save-backgrounds"] == True:
-            self.backgrounds = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/backgrounds ./")
-        if self.settings["save-themes"] == True:
-            self.themes = GLib.spawn_command_line_async(f"cp -R {home}/.themes ./")
-        if self.settings["save-icons"] == True:
-            self.icons_home = GLib.spawn_command_line_async(f"cp -R {home}/.icons ./")
-            self.icons = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/icons ./")
-        if self.settings["save-fonts"] == True:
-            self.fonts = GLib.spawn_command_line_async(f"cp -R {home}/.fonts ./")
-        if not snap:
-            if self.settings["save-installed-flatpaks"] == True:
-                os.popen(f"sh {system_dir}/backup_flatpaks.sh")
-        # Save configs on individual desktop environments
-        if self.environment == 'GNOME':
-            self.background_properties = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/gnome-background-properties ./")
-            self.gshell = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/gnome-shell ./")
-            self.nautilus_python = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/nautilus-python ./")
-            self.nautilus = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/nautilus ./")
-            self.gccenter = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/gnome-control-center ./")
-        elif self.environment == 'Pantheon':
-            self.plank = GLib.spawn_command_line_async(f"cp -R {home}/.config/plank ./")
-            self.marlin = GLib.spawn_command_line_async(f"cp -R {home}/.config/marlin ./")
-        elif self.environment == 'Cinnamon':
-            self.nemo = GLib.spawn_command_line_async(f"cp -R {home}/.config/nemo ./")
-            self.data_cinn = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/cinnamon ./")
-            self.home_cinn = GLib.spawn_command_line_async(f"cp -R {home}/.cinnamon ./")
-        elif self.environment == 'Budgie':
-            self.budgie_desktop = GLib.spawn_command_line_async(f"cp -R {home}/.config/budgie-desktop ./")
-            self.budgie_extras = GLib.spawn_command_line_async(f"cp -R {home}/.config/bugie-extras ./")
-            self.nemo_budgie = GLib.spawn_command_line_async(f"cp -R {home}/.config/nemo ./")
-        elif self.environment == 'COSMIC':
-            self.pop_shell = GLib.spawn_command_line_async(f"cp -R {home}/.config/pop-shell ./")
-            self.gshellpop = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/gnome-shell ./")
-        elif self.environment == 'Xfce':
-            self.xfce4conf = GLib.spawn_command_line_async(f"cp -R {home}/.config/xfce4 ./")
-            self.thunarxf = GLib.spawn_command_line_async(f"cp -R {home}/.config/Thunar ./")
-            self.xfce4home = GLib.spawn_command_line_async(f"cp -R {home}/.xfce4 ./")
-        elif self.environment == 'MATE':
-            self.caja_mate = GLib.spawn_command_line_async(f"cp -R {home}/.config/caja ./")
-        elif self.environment == 'KDE Plasma':
-            os.system("mkdir xdg-config && mkdir xdg-data")
-            os.popen(f"cp -R {home}/.config/[k]* ./xdg-config/")
-            self.gtkrc = GLib.spawn_command_line_async(f"cp {home}/.config/gtkrc ./xdg-config/")
-            self.dolphinrc = GLib.spawn_command_line_async(f"cp {home}/.config/dolphinrc ./xdg-config/")
-            self.gwenviewrc = GLib.spawn_command_line_async(f"cp {home}/.config/gwenviewrc ./xdg-config/")
-            self.plasmashrc = GLib.spawn_command_line_async(f"cp {home}/.config/plasmashellrc ./xdg-config/")
-            self.spectaclerc = GLib.spawn_command_line_async(f"cp {home}/.config/spectaclerc ./xdg-config/")
-            self.plasmarc = GLib.spawn_command_line_async(f"cp {home}/.config/plasmarc ./xdg-config/")
-            self.kpanel = GLib.spawn_command_line_async(f"cp {home}/.config/plasma-org.kde.plasma.desktop-appletsrc ./xdg-config/")
-            self.kdata = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/konsole ./xdg-data/")
-            self.dolphin_data = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/dolphin ./xdg-data/")
-            self.sddm = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/sddm ./xdg-data/")
-            if self.settings["save-backgrounds"]:
-                self.wallpapers = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/wallpapers ./xdg-data/")
-            self.psysmonitor = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/plasma-systemmonitor ./xdg-data/")
-            self.plasma_data = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/plasma ./xdg-data/")
-            self.aurorae = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/aurorae ./xdg-data/")
-            self.kscreen = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/kscreen ./xdg-data/")
-            self.colors = GLib.spawn_command_line_async(f"cp -R {home}/.local/share/color-schemes ./xdg-data/")
-        self.create_archive()
-           
-    # Create tarball archive
-    def create_archive(self):
-        # Get self.saveEntry text
-        if self.saveEntry.get_text() == "":
-            #self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
-            os.popen(f"tar --gzip -cf config_{date.today()}.sd.tar.gz ./")
-            filename = f'config_{date.today()}'
+        if self.settings["save-flatpak-data"] == True:
+            with open(f"{CACHE}/.filedialog.json", "w") as w:
+                w.write('{\n "recent_file": "%s/%s.fd.sd.tar.gz"\n}' % (self.folder, self.filename_text))
         else:
-            #self.create_classic_tar = GLib.spawn_command_line_async(f"tar --gzip -cf {self.saveEntry.get_text()}.sd.tar.gz ./")
-            os.popen(f"tar --gzip -cf {self.filename_text}.sd.tar.gz ./")
-            filename = f'{self.filename_text}'
-        with open(f"{CACHE}/.filedialog.json", "w") as fd:
-                fd.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, filename))
-        self.tar_time = GLib.timeout_add_seconds(10, self.exporting_done)
+            with open(f"{CACHE}/.filedialog.json", "w") as w:
+                w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
+        if not os.path.exists(f"{CACHE}/save_config"):
+            os.mkdir(f"{CACHE}/save_config")
+        os.chdir(f"{CACHE}/save_config")
+        os.popen(f"python3 {system_dir}/config.py --save")
+        self.save_timeout = GLib.timeout_add_seconds(14, self.exporting_done)
         
     # Import config from list
     def imp_cfg_from_list(self, w):
         selected_archive = self.radio_row.get_selected_item()
         self.please_wait_toast()
-        os.chdir("%s" % CACHE)
-        os.popen("tar -xf %s/%s ./" % (self.dir, selected_archive.get_string()))
+        if not os.path.exists(f"{CACHE}/import_from_list"):
+            os.mkdir(f"{CACHE}/import_from_list")
+        os.chdir(f"{CACHE}/import_from_list")
+        with open(f"{CACHE}/.impfile.json", "w") as j:
+            j.write('{\n "import_file": "%s/%s"\n}' % (self.dir, selected_archive.get_string()))
         self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
             
     # Import configuration
     def import_config(self):
-        # Applying configuration for GNOME-based environments
-        if not os.path.exists("{}/.config".format(home)):
-            os.system(f"mkdir {home}/.config/")
-        # Create Dconf directory
-        if not os.path.exists("{}/.config/dconf".format(home)):
-            os.system(f"mkdir {home}/.config/dconf/")
-        else:
-            os.system(f'rm -rf {home}/.config/dconf && mkdir {home}/.config/dconf')
-        if os.path.exists("user"):
-            self.i_dconf = GLib.spawn_command_line_async(f"cp ./user {home}/.config/dconf/")
-        else:
-            if flatpak:
-                os.system("dconf load / < ./dconf-settings.ini")
-            else:
-                os.system("echo user-db:user > temporary-profile")
-                os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
-        self.i_icons = GLib.spawn_command_line_async(f'cp -R ./icons {home}/.local/share/')
-        self.i_themes = GLib.spawn_command_line_async(f'cp -R ./.themes {home}/')
-        self.i_icons_home = GLib.spawn_command_line_async(f'cp -R ./.icons {home}/')
-        self.i_backgrounds = GLib.spawn_command_line_async(f'cp -R ./backgrounds {home}/.local/share/')
-        self.i_fonts = GLib.spawn_command_line_async(f'cp -R ./.fonts {home}/')
-        self.i_gtk4 = GLib.spawn_command_line_async(f'cp -R ./gtk-4.0 {home}/.config/')
-        self.i_gtk3 = GLib.spawn_command_line_async(f'cp -R ./gtk-3.0 {home}/.config/')
-        if not 'SNAP' in os.environ:
-            self.flatpak_apps = GLib.spawn_command_line_async(f'cp ./installed_flatpaks.sh {DATA}/')
-        # Apply configs for individual desktop environments
-        if self.environment == 'GNOME':
-            self.i_background_properties = GLib.spawn_command_line_async(f'cp -R ./gnome-background-properties {home}/.local/share/')
-            self.i_gshell = GLib.spawn_command_line_async(f'cp -R ./gnome-shell {home}/.local/share/')
-            self.i_nautilus_python = GLib.spawn_command_line_async(f'cp -R ./nautilus-python {home}/.local/share/')
-            self.i_nautilus = GLib.spawn_command_line_async(f'cp -R ./nautilus {home}/.local/share/')
-            self.i_gccenter = GLib.spawn_command_line_async(f'cp -R ./gnome-control-center {home}/.config/')
-        elif self.environment == 'Pantheon':
-            self.i_plank = GLib.spawn_command_line_async(f'cp -R ./plank {home}/.config/')
-            self.i_marlin = GLib.spawn_command_line_async(f'cp -R ./marlin {home}/.config/')
-        elif self.environment == 'Cinnamon':
-            self.i_nemo = GLib.spawn_command_line_async(f'cp -R ./nemo {home}/.config/')
-            self.i_cinnamon_data = GLib.spawn_command_line_async(f'cp -R ./cinnamon {home}/.local/share/')
-            self.i_cinnamon_home = GLib.spawn_command_line_async(f'cp -R ./.cinnamon {home}/')
-        elif self.environment == 'Budgie':
-            self.i_budgie_desktop = GLib.spawn_command_line_async(f'cp -R ./budgie-desktop {home}/.config/')
-            self.i_budgie_extras = GLib.spawn_command_line_async(f'cp -R ./budgie-extras {home}/.config/')
-            self.i_nemo_b = GLib.spawn_command_line_async(f'cp -R ./nemo {home}/.config/')
-        elif self.environment == 'COSMIC':
-            self.i_popshell = GLib.spawn_command_line_async(f'cp -R ./pop-shell {home}/.config/')
-            self.i_gshell_pop = GLib.spawn_command_line_async(f'cp -R ./gnome-shell {home}/.local/share/')
-        elif self.environment == 'Xfce':
-            self.i_xfconf = GLib.spawn_command_line_async(f'cp -R ./xfce4 {home}/.config/')
-            self.i_thunar = GLib.spawn_command_line_async(f'cp -R ./Thunar {home}/.config/')
-            self.i_xfhome = GLib.spawn_command_line_async(f'cp -R ./.xfce4 {home}/')
-        elif self.environment == 'MATE':
-            self.i_caja = GLib.spawn_command_line_async(f'cp -R ./caja {home}/.config/')
-        elif self.environment == 'KDE Plasma':
-            os.chdir("%s/import_config" % CACHE)
-            os.chdir('xdg-config')
-            self.i_kconf = GLib.spawn_command_line_async(f'cp -R ./ {home}/.config/')
-            os.chdir("%s/import_config" % CACHE)
-            os.chdir('xdg-data')
-            self.i_kdata = GLib.spawn_command_line_async(f'cp -R ./ {home}/.local/share/')
-        if not snap:
-            self.create_flatpak_desktop()
-        self.applying_done()
-    
-    # Create desktop file for install Flatpaks from list
-    def create_flatpak_desktop(self):
-        os.popen(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
-        if not os.path.exists(f"{home}/.config/autostart"):
-            os.mkdir(f"{home}/.config/autostart")
-        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
-            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
-                fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
+        if not os.path.exists(f"{CACHE}/import_config"):
+            os.mkdir(f"{CACHE}/import_config")
+        os.chdir(f"{CACHE}/import_config")
+        os.popen(f"python3 {system_dir}/config.py --import_")
+        self.import_timeout = GLib.timeout_add_seconds(10, self.applying_done)
     
     # configuration has been exported action
     def exporting_done(self):
-        os.chdir(f"{CACHE}/saved_config")
-        os.system(f"mv *.tar.gz {self.folder}/")
         self.toast.set_title(title=_["config_saved"])
         self.toast.set_button_label(_["open_folder"])
         self.toast.set_action_name("app.open_dir")
@@ -1048,8 +936,25 @@ class MainWindow(Gtk.Window):
         
     # popup about message "Please wait ..."
     def please_wait_toast(self):
-        self.toast_wait = Adw.Toast(title=_["please_wait"])
+        if self.settings["save-flatpak-data"] == True:
+            self.toast_wait = Adw.Toast(title="It'll take a few minutes ...")
+            self.toast_wait.set_timeout(250)
+        elif os.path.exists(f"{CACHE}/import_config"):
+            self.get_flatpak_from_filename()
+        else:
+            self.toast_wait = Adw.Toast(title=_["please_wait"])
+            self.toast_wait.set_timeout(14)
         self.toast_overlay.add_toast(self.toast_wait)
+        
+    def get_flatpak_from_filename(self):
+        with open(f'{CACHE}/.impfile.json') as j:
+            j = json.load(j)
+            if "fd" in j["import_file"]:
+                self.toast_wait = Adw.Toast(title="It'll take a few minutes ...")
+                self.toast_wait.set_timeout(300)
+            else:
+                self.toast_wait = Adw.Toast(title=_["please_wait"])
+                self.toast_wait.set_timeout(14)
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
@@ -1062,10 +967,6 @@ class MainWindow(Gtk.Window):
     def show_special_toast(self):
         self.special_toast = Adw.Toast.new(title=_["m_sync_desc"])
         self.toast_overlay.add_toast(self.special_toast)
-    
-    # Action after disappearancing toast
-    def on_toast_dismissed(self, toast):
-        os.popen("rm -rf %s/*" % CACHE)
     
     # action after closing window
     def on_close(self, widget, *args):
@@ -1088,13 +989,7 @@ class MainWindow(Gtk.Window):
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
-        self.close()
-        for file in os.listdir(CACHE):
-            try:
-                os.remove(f"{CACHE}/{file}")
-            except:
-                shutil.rmtree(CACHE)
-                os.removedirs(f"{CACHE}/{file}")                
+        os.popen(f"rm -rf {CACHE}/*")
         try:
             url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
             j = json.load(url)
@@ -1105,7 +1000,6 @@ class MainWindow(Gtk.Window):
             os.popen(f"rm {CACHE}/file-settings.json")
         except:
             self.settings["manually-sync"] = False
-            print("")
         
     ## Create desktop file to make periodic backups work
     def create_pb_desktop(self):
@@ -1128,15 +1022,12 @@ class MyApp(Adw.Application):
     def open_dir(self, action, param):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
-        #print({jf["recent_file"]})
         Gtk.FileLauncher.new(Gio.File.new_for_path(jf["recent_file"])).open_containing_folder()
         
     # Logout (action after clicking button Log Out on Adw.Toast)
     def logout(self, action, param):
-        os.system("rm %s/*" % CACHE)
-        os.system("rm %s/.*" % CACHE)
         if snap:
-            bus = dbus.SystemBus()  
+            bus = dbus.SystemBus()
             systemd1 = bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1")
             manager = dbus.Interface(systemd1, 'org.freedesktop.login1.Manager')
             sessions = manager.ListSessions()
