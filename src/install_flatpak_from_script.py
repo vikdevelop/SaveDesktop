@@ -23,7 +23,7 @@ if os.path.exists(f"{CACHE_FLATPAK}/import_config/app"):
     with open(f"{CACHE_FLATPAK}/copying_flatpak_data", "w") as f:
         f.write("copying flatpak data ...")
     os.system(f"cp -R {CACHE_FLATPAK}/import_config/app ~/.var/")
-    os.system(f"rm {CACHE_FLATPAK}/*")
+    os.system(f"rm -rf {CACHE_FLATPAK}/*")
 else:
     print("A directory with user data for the installed Flatpak apps does not exist.")
 
