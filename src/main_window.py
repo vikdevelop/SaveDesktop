@@ -490,10 +490,14 @@ class MainWindow(Gtk.Window):
     # Action after closing dialog for setting synchronization file
     def setDialog_closed(self, w, response):
         if response == 'ok':
-            # Check if the sync file has been changed or not
-            if not self.file_row.get_subtitle() == f'{self.settings["file-for-syncing"]}':
-                self.set_syncing()
-                self.show_warn_toast()
+            self.set_syncing()
+            
+            # Check periodic synchronization variable BEFORE saving to GSettings database
+            if self.settings["periodic-import"] == "Never2":
+                never_import = False
+            else:
+                never_import = True
+            
             # Save the sync file to the GSettings database
             self.file_name = os.path.basename(self.file_row.get_subtitle())
             self.file = os.path.splitext(self.file_name)[0]
@@ -524,7 +528,14 @@ class MainWindow(Gtk.Window):
             with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
             self.settings["periodic-import"] = import_item
-                
+            
+            # Check periodic synchronization variable AFTER saving to GSettings database
+            if not self.settings["periodic-import"] == "Never2":
+                never_import = True
+            else:
+                never_import = False
+            if never_import == True:
+                self.show_warn_toast()
                 
     # URL Dialog
     def open_urlDialog(self, w):
@@ -586,6 +597,7 @@ class MainWindow(Gtk.Window):
         if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
             with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
                 pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
+            #self.show_warn_toast()
     
     # Set custom folder for periodic saving dialog
     def open_periodic_backups(self, w):
