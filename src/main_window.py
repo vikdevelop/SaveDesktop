@@ -949,7 +949,7 @@ class MainWindow(Gtk.Window):
             j = json.load(d)
         if ".fd.sd.tar.gz" in j["import_file"]:
             self.continue_timeout_yn = True
-            self.import_timeout = GLib.timeout_add_seconds(40, self.applying_done)
+            self.import_timeout = GLib.timeout_add_seconds(120, self.applying_done)
         else:
             self.continue_timeout_yn = False
             self.import_timeout = GLib.timeout_add_seconds(15, self.applying_done)
