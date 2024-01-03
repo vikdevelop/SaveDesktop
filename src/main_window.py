@@ -953,7 +953,7 @@ class MainWindow(Gtk.Window):
         else:
             self.continue_timeout_yn = False
             self.import_timeout = GLib.timeout_add_seconds(15, self.applying_done)
-        #os.popen(f"python3 {system_dir}/config.py --import_")
+        os.popen(f"python3 {system_dir}/config.py --import_")
         self.please_wait_toast()
         
     def check_if_file_exists(self):
