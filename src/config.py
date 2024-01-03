@@ -125,6 +125,8 @@ class Import:
             else:
                 os.system("echo user-db:user > temporary-profile")
                 os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
+        os.system(f'cp ./installed_flatpaks.sh {DATA}/')
+        os.system(f'cp ./installed_user_flatpaks.sh {DATA}/')
         os.system(f'cp -R ./icons {home}/.local/share/')
         os.system(f'cp -R ./.themes {home}/')
         os.system(f'cp -R ./.icons {home}/')
@@ -132,8 +134,6 @@ class Import:
         os.system(f'cp -R ./.fonts {home}/')
         os.system(f'cp -R ./gtk-4.0 {home}/.config/')
         os.system(f'cp -R ./gtk-3.0 {home}/.config/')
-        os.system(f'cp ./installed_flatpaks.sh {DATA}/')
-        os.system(f'cp ./installed_user_flatpaks.sh {DATA}/')
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
             os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
