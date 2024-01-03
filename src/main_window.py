@@ -825,7 +825,6 @@ class MainWindow(Gtk.Window):
                 file = source.select_folder_finish(res)
             except:
                 return
-            self.please_wait_toast()
             self.folder = file.get_path()
             self.save_config()
         
@@ -850,7 +849,6 @@ class MainWindow(Gtk.Window):
                 file = source.open_finish(res)
             except:
                 return
-            self.please_wait_toast()
             with open(f"{CACHE}/.impfile.json", "w") as j:
                 j.write('{\n "import_file": "%s"\n}' % file.get_path())
             self.import_config()
@@ -896,49 +894,67 @@ class MainWindow(Gtk.Window):
     
     # Save configuration
     def save_config(self):
-        with open(f"{CACHE}/.filedialog.json", "w") as w:
-            w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
+        if self.settings["save-flatpak-data"] == True:
+            with open(f"{CACHE}/.filedialog.json", "w") as w:
+                w.write('{\n "recent_file": "%s/%s.fd.sd.tar.gz"\n}' % (self.folder, self.filename_text))
+        else:
+            with open(f"{CACHE}/.filedialog.json", "w") as w:
+                w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
         os.popen(f"python3 {system_dir}/config.py --save")
         if self.settings["save-flatpak-data"] == True:
+            self.continue_timeout_yn = True
             self.save_timeout = GLib.timeout_add_seconds(120, self.first_continue_timeout)
         else:
+            self.continue_timeout_yn = False
             self.save_timeout = GLib.timeout_add_seconds(14, self.exporting_done)
+        self.please_wait_toast()
             
     def first_continue_timeout(self):
         if os.path.exists(f"{self.folder}/{self.filename_text}.sd.tar.gz"):
+            self.continue_timeout_yn = False
             self.exporting_done()
         else:
+            self.continue_timeout_yn = True
             self.please_wait_toast()
             self.continued_timeout = GLib.timeout_add_seconds(120, self.second_continue_timeout)
             
     def second_continue_timeout(self):
         if os.path.exists(f"{self.folder}/{self.filename_text}.sd.tar.gz"):
+            self.continue_timeout_yn = False
             self.exporting_done()
         else:
+            self.continue_timeout_yn = True
             self.please_wait_toast()
             self.continued_timeout_02 = GLib.timeout_add_seconds(120, self.exporting_done)
         
     # Import config from list
     def imp_cfg_from_list(self, w):
         selected_archive = self.radio_row.get_selected_item()
-        self.please_wait_toast()
         if not os.path.exists(f"{CACHE}/import_from_list"):
             os.mkdir(f"{CACHE}/import_from_list")
         os.chdir(f"{CACHE}/import_from_list")
         with open(f"{CACHE}/.impfile.json", "w") as j:
             j.write('{\n "import_file": "%s/%s"\n}' % (self.dir, selected_archive.get_string()))
-        self.tar_time = GLib.timeout_add_seconds(3, self.import_config)
+        self.import_config()
             
     # Import configuration
     def import_config(self):
         if not os.path.exists(f"{CACHE}/import_config"):
             os.mkdir(f"{CACHE}/import_config")
         os.chdir(f"{CACHE}/import_config")
+        with open(f"{CACHE}/.impfile.json") as d:
+            j = json.load(d)
+        if ".fd.sd.tar.gz" in j["import_file"]:
+            self.continue_timeout_yn = True
+            self.import_timeout = GLib.timeout_add_seconds(40, self.applying_done)
+        else:
+            self.continue_timeout_yn = False
+            self.import_timeout = GLib.timeout_add_seconds(15, self.applying_done)
         os.popen(f"python3 {system_dir}/config.py --import_")
-        self.import_timeout = GLib.timeout_add_seconds(10, self.applying_done)
+        self.please_wait_toast()
     
     # configuration has been exported action
     def exporting_done(self):
@@ -956,7 +972,7 @@ class MainWindow(Gtk.Window):
         
     # popup about message "Please wait ..."
     def please_wait_toast(self):
-        if self.settings["save-flatpak-data"] == True:
+        if self.continue_timeout_yn == True:
             self.toast_wait = Adw.Toast(title=_["few_minutes_msg"])
             self.toast_wait.set_timeout(120)
         else:
