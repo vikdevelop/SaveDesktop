@@ -55,6 +55,6 @@
     "pc_url_entry": "Zadejte URL adresu pro synchronizaci",
     "manually": "Ručně",
     "m_sync_desc": "Od teď můžete synchronizovat konfiguraci z nabídky v záhlaví",
-    "few_minutes_msg": "It'll take a few minutes ...",
-    "user_data_flatpak": "User data of installed Flatpak apps"
+    "few_minutes_msg": "Zabere to pár minut …",
+    "user_data_flatpak": "Uživatelská data nainstalovaných aplikací Flatpak"
 }
