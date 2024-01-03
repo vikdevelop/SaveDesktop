@@ -523,6 +523,8 @@ class MainWindow(Gtk.Window):
                 import_item = "Monthly2"
             elif selected_item.get_string() == _["manually"]:
                 import_item = "Manually2"
+            if not os.path.exists(f"{DATA}/synchronization"):
+                os.mkdir(f"{DATA}/synchronization")
             with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
             self.settings["periodic-import"] = import_item
