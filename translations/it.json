@@ -55,6 +55,6 @@
     "pc_url_entry": "Inserisci un URL per la sincronizzazione",
     "manually": "Manualmente",
     "m_sync_desc": "D'ora in poi, puoi sincronizzare la configurazione dal menu nella barra dell'intestazione",
-    "few_minutes_msg": "It'll take a few minutes ...",
-    "user_data_flatpak": "User data of installed Flatpak apps"
+    "few_minutes_msg": "Ci vorranno alcuni minuti…",
+    "user_data_flatpak": "Dati utente delle app Flatpak installate"
 }
