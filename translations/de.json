@@ -54,5 +54,7 @@
     "pc_url_entry": "Enter a URL for synchronization",
     "manually": "Manually",
     "m_sync_desc": "From now on, you can sync the config from the menu in the header bar",
-    "periodic_saving_file": "Periodic saving file"
+    "periodic_saving_file": "Periodic saving file",
+    "few_minutes_msg": "It'll take a few minutes ...",
+    "user_data_flatpak": "User data of installed Flatpak apps"
 }
