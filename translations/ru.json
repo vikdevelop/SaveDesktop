@@ -54,5 +54,7 @@
     "pc_url_entry": "Введите URL-адрес для синхронизации",
     "manually": "Вручную",
     "m_sync_desc": "Теперь вы можете синхронизировать конфиг из меню в панели заголовка",
-    "periodic_saving_file": "Periodic saving file"
+    "periodic_saving_file": "Periodic saving file",
+    "few_minutes_msg": "It'll take a few minutes ...",
+    "user_data_flatpak": "User data of installed Flatpak apps"
 }
