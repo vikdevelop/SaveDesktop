@@ -949,12 +949,20 @@ class MainWindow(Gtk.Window):
             j = json.load(d)
         if ".fd.sd.tar.gz" in j["import_file"]:
             self.continue_timeout_yn = True
-            self.import_timeout = GLib.timeout_add_seconds(120, self.applying_done)
+            self.import_timeout = GLib.timeout_add_seconds(120, self.check_if_file_exists)
         else:
             self.continue_timeout_yn = False
             self.import_timeout = GLib.timeout_add_seconds(15, self.applying_done)
-        os.popen(f"python3 {system_dir}/config.py --import_")
+        #os.popen(f"python3 {system_dir}/config.py --import_")
         self.please_wait_toast()
+        
+    def check_if_file_exists(self):
+        if os.path.exists(f"{CACHE}/import_config/done"):
+            self.applying_done()
+        else:
+            self.continue_timeout_yn = True
+            self.please_wait_toast()
+            self.import_timeout = GLib.timeout_add_seconds(120, self.applying_done)
     
     # configuration has been exported action
     def exporting_done(self):
@@ -1071,6 +1079,7 @@ class MyApp(Adw.Application):
         if os.path.exists(f"{DATA}/sync-info.json"):
             os.remove(f"{DATA}/sync-info.json")
         os.system(f'notify-send "{_["please_wait"]}"')
+        os.system(f"echo > {CACHE}/from_app")
         os.popen(f"python3 {system_dir}/network_sharing.py")
         
     # About dialog
