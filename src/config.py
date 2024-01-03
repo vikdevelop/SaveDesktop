@@ -134,6 +134,9 @@ class Import:
         os.system(f'cp -R ./.fonts {home}/')
         os.system(f'cp -R ./gtk-4.0 {home}/.config/')
         os.system(f'cp -R ./gtk-3.0 {home}/.config/')
+        if os.path.exists(f'{CACHE}/import_config/app'):
+            with open(f"copying_flatpak_data", "w") as c:
+                c.write("copying flatpak data ...")
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
             os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
