@@ -775,7 +775,7 @@ class MainWindow(Gtk.Window):
             self.switch_06.set_valign(align=Gtk.Align.CENTER)
                 
             self.data_row = Adw.ActionRow.new()
-            self.data_row.set_title(title="User data of installed Flatpak apps")
+            self.data_row.set_title(title=_["user_data_flatpak"])
             self.data_row.set_use_markup(True)
             self.data_row.set_title_lines(2)
             self.data_row.set_subtitle_lines(3)
@@ -902,7 +902,17 @@ class MainWindow(Gtk.Window):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
         os.popen(f"python3 {system_dir}/config.py --save")
-        self.save_timeout = GLib.timeout_add_seconds(14, self.exporting_done)
+        if self.settings["save-flatpak-data"] == True:
+            self.save_timeout = GLib.timeout_add_seconds(180, self.getting_archive)
+        else:
+            self.save_timeout = GLib.timeout_add_seconds(14, self.exporting_done)
+            
+    def getting_archive(self):
+        if os.path.exists(f"{self.folder}/{self.filename_text}.sd.tar.gz"):
+            self.exporting_done()
+        else:
+            self.please_wait_toast()
+            self.continued_timeout = GLib.timeout_add_seconds(180, self.exporting_done)
         
     # Import config from list
     def imp_cfg_from_list(self, w):
@@ -940,8 +950,8 @@ class MainWindow(Gtk.Window):
     # popup about message "Please wait ..."
     def please_wait_toast(self):
         if self.settings["save-flatpak-data"] == True:
-            self.toast_wait = Adw.Toast(title="It'll take a few minutes ...")
-            self.toast_wait.set_timeout(250)
+            self.toast_wait = Adw.Toast(title=_["few_minutes_msg"])
+            self.toast_wait.set_timeout(180)
         else:
             self.toast_wait = Adw.Toast(title=_["please_wait"])
             self.toast_wait.set_timeout(14)
