@@ -903,16 +903,23 @@ class MainWindow(Gtk.Window):
         os.chdir(f"{CACHE}/save_config")
         os.popen(f"python3 {system_dir}/config.py --save")
         if self.settings["save-flatpak-data"] == True:
-            self.save_timeout = GLib.timeout_add_seconds(180, self.getting_archive)
+            self.save_timeout = GLib.timeout_add_seconds(120, self.first_continue_timeout)
         else:
             self.save_timeout = GLib.timeout_add_seconds(14, self.exporting_done)
             
-    def getting_archive(self):
+    def first_continue_timeout(self):
         if os.path.exists(f"{self.folder}/{self.filename_text}.sd.tar.gz"):
             self.exporting_done()
         else:
             self.please_wait_toast()
-            self.continued_timeout = GLib.timeout_add_seconds(180, self.exporting_done)
+            self.continued_timeout = GLib.timeout_add_seconds(120, self.second_continue_timeout)
+            
+    def second_continue_timeout(self):
+        if os.path.exists(f"{self.folder}/{self.filename_text}.sd.tar.gz"):
+            self.exporting_done()
+        else:
+            self.please_wait_toast()
+            self.continued_timeout_02 = GLib.timeout_add_seconds(120, self.exporting_done)
         
     # Import config from list
     def imp_cfg_from_list(self, w):
@@ -951,7 +958,7 @@ class MainWindow(Gtk.Window):
     def please_wait_toast(self):
         if self.settings["save-flatpak-data"] == True:
             self.toast_wait = Adw.Toast(title=_["few_minutes_msg"])
-            self.toast_wait.set_timeout(180)
+            self.toast_wait.set_timeout(120)
         else:
             self.toast_wait = Adw.Toast(title=_["please_wait"])
             self.toast_wait.set_timeout(14)
