@@ -54,5 +54,7 @@
     "connect_with_pc_desc": "Su un altro computer, apri l'applicazione SaveDesktop e, in questa pagina, fai clic sul pulsante \"Configura il file di sincronizzazione\", copia l'URL per la sincronizzazione e inseriscilo di seguito.",
     "pc_url_entry": "Inserisci un URL per la sincronizzazione",
     "manually": "Manualmente",
-    "m_sync_desc": "D'ora in poi, puoi sincronizzare la configurazione dal menu nella barra dell'intestazione"
+    "m_sync_desc": "D'ora in poi, puoi sincronizzare la configurazione dal menu nella barra dell'intestazione",
+    "few_minutes_msg": "It'll take a few minutes ...",
+    "user_data_flatpak": "User data of installed Flatpak apps"
 }
