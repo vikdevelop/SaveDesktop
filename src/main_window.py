@@ -915,19 +915,21 @@ class MainWindow(Gtk.Window):
         self.please_wait_toast()
             
     def first_continue_timeout(self):
-        if os.path.exists(f"{self.folder}/{self.filename_text}.sd.tar.gz"):
+        if os.path.exists(f"{self.folder}/{self.filename_text}.fd.sd.tar.gz"):
             self.continue_timeout_yn = False
             self.exporting_done()
         else:
+            print("First")
             self.continue_timeout_yn = True
             self.please_wait_toast()
             self.continued_timeout = GLib.timeout_add_seconds(120, self.second_continue_timeout)
             
     def second_continue_timeout(self):
-        if os.path.exists(f"{self.folder}/{self.filename_text}.sd.tar.gz"):
+        if os.path.exists(f"{self.folder}/{self.filename_text}.fd.sd.tar.gz"):
             self.continue_timeout_yn = False
             self.exporting_done()
         else:
+            print("Second")
             self.continue_timeout_yn = True
             self.please_wait_toast()
             self.continued_timeout_02 = GLib.timeout_add_seconds(120, self.exporting_done)
