@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import os
 from pathlib import Path
-import filecmp
+import subprocess
 
 DATA_FLATPAK = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
 CACHE_FLATPAK = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
@@ -23,10 +23,16 @@ if environment == 'GNOME':
 if os.path.exists(f"{CACHE_FLATPAK}/import_config/app"):
     with open(f"{CACHE_FLATPAK}/copying_flatpak_data", "w") as f:
         f.write("copying flatpak data ...")
-    if os.path.exists(f"{CACHE_FLATPAK}/import_config/app/io.github.vikdevelop.SaveDesktop"):
-        os.system(f"cd {CACHE_FLATPAK}/import_config/app && rm -rf io.github.vikdevelop.SaveDesktop")
-    if not filecmp.filecmp(f"{Path.home()}/.var/app/", f"{CACHE}/import_config/app"):
+    if not subprocess.getoutput(f"diff -qr --exclude=io.github.vikdevelop.SaveDesktop {CACHE_FLATPAK}/syncing/app/") == "":
+        print("copying user data ...")
         os.system(f"cp -R {CACHE_FLATPAK}/import_config/app ~/.var/")
+    os.system(f"rm -rf {CACHE_FLATPAK}/*")
+elif os.path.exists(f"{CACHE_FLATPAK}/syncing/app"):
+    with open(f"{CACHE_FLATPAK}/copying_flatpak_data", "w") as f:
+        f.write("copying flatpak data ...")
+    if not subprocess.getoutput(f"diff -qr --exclude=io.github.vikdevelop.SaveDesktop {CACHE_FLATPAK}/syncing/app/") == "":
+        print("copying user data ...")
+        os.system(f"cp -R {CACHE_FLATPAK}/syncing/app ~/.var/")
     os.system(f"rm -rf {CACHE_FLATPAK}/*")
 
 # Install Flatpak apps from list
