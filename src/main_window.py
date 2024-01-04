@@ -1083,8 +1083,8 @@ class MyApp(Adw.Application):
         if os.path.exists(f"{DATA}/sync-info.json"):
             os.remove(f"{DATA}/sync-info.json")
         os.system(f'notify-send "{_["please_wait"]}"')
-        os.system(f"echo > {CACHE}/from_app")
-        os.popen(f"python3 {system_dir}/network_sharing.py")
+        os.system(f"echo > {CACHE}/.from_app")
+        self.sync_m = GLib.spawn_command_line_async(f"python3 {system_dir}/network_sharing.py")
         
     # About dialog
     def on_about_action(self, action, param):
