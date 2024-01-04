@@ -55,7 +55,7 @@ class Save:
         if settings["save-installed-flatpaks"] == True:
             os.system('sh /app/backup_flatpaks.sh')
         if settings["save-flatpak-data"] == True:
-            os.system(f'cp -R {home}/.var/app ./')
+            os.system(f'cd {home}/.var/app && mkdir {CACHE}/save_config/app && cp -r `ls -A | grep -v "io.github.vikdevelop.SaveDesktop"` {CACHE}/save_config/app/')
             
         # Save configs on individual desktop environments
         if environment == 'GNOME':
@@ -137,6 +137,9 @@ class Import:
         if os.path.exists(f'{CACHE}/import_config/app'):
             with open(f"copying_flatpak_data", "w") as c:
                 c.write("copying flatpak data ...")
+        elif os.path.exists(f'{CACHE}/syncing/app'):
+            with open(f"copying_flatpak_data", "w") as c:
+                c.write("copying flatpak data ...")
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
             os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
@@ -172,6 +175,7 @@ class Import:
             os.system(f'cp -R ./ {home}/.local/share/')
         if not snap:
             self.create_flatpak_desktop()
+        os.system(f"echo > {CACHE}/import_config/done")
             
     # Create desktop file for install Flatpaks from list
     def create_flatpak_desktop(self):
