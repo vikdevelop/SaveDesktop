@@ -115,6 +115,7 @@ class Syncing:
         else:
             os.system(f"tar -xf {self.file}.1 ./")
         
+        print("Downloading tar ...")
         self.import_config()
             
     # Sync configuration
@@ -127,7 +128,8 @@ class Syncing:
         if not settings["manually-sync"] == True:
             with open(f"{DATA}/sync-info.json", "w") as s:
                 s.write('{\n "sync-date": "%s"\n}' % date.today())
-        os.system(f"rm -rf {CACHE}/syncing/*")
+        if not os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
+            os.system(f"rm -rf {CACHE}/syncing/*")
         #os.system(f"rm {CACHE}/.from_app")
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop ({self.file[:-10]})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
