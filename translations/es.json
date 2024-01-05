@@ -55,6 +55,6 @@
     "manually": "Manualmente",
     "m_sync_desc": "A partir de ahora, puedes sincronizar la configuración desde el menú de la barra de cabecera",
     "periodic_saving_file": "Archivo de almacenamiento periódico",
-    "few_minutes_msg": "It'll take a few minutes ...",
-    "user_data_flatpak": "User data of installed Flatpak apps"
+    "few_minutes_msg": "Tardará unos minutos…",
+    "user_data_flatpak": "Datos de usuario de las aplicaciones Flatpak instaladas"
 }
