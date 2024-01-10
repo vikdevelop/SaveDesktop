@@ -45,16 +45,16 @@
     "backgrounds": "背景",
     "sync": "同步",
     "sync_title": "与网络中的其他电脑同步",
-    "sync_desc": "Sync your desktop environment configuration with other computers in the network. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>How it works?</a>",
+    "sync_desc": "将您的桌面环境配置与网络中的其他计算机同步。 <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>它是如何工作的？</a>",
     "set_up_sync_file": "设置同步文件",
     "periodic_sync": "周期性同步",
-    "url_for_sync": "<b>URL for synchronization with other computers</b>",
+    "url_for_sync": "<b>用于与其他计算机同步的 URL</b>",
     "connect_with_other_computer": "与其他计算机连接",
-    "connect_with_pc_desc": "On another computer, open the SaveDesktop application, and on this page, click on the \"Set up the sync file\" button and copy the URL for synchronization and enter it below.",
+    "connect_with_pc_desc": "在另一台计算机上，打开 SaveDesktop 应用程序，在此页面上，单击“设置同步文件”按钮并复制用于同步的 URL 并在下面输入。",
     "pc_url_entry": "输入一段URL以进行同步",
     "manually": "手动地",
     "m_sync_desc": "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯",
-    "periodic_saving_file": "Periodic saving file",
-    "few_minutes_msg": "It'll take a few minutes ...",
-    "user_data_flatpak": "User data of installed Flatpak apps"
+    "periodic_saving_file": "定期保存文件",
+    "few_minutes_msg": "这需要几分钟...…",
+    "user_data_flatpak": "使用已安装 Flatpak 程序的用户数据"
 }
