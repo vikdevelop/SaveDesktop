@@ -30,7 +30,9 @@ rel_notes = "<p>FIxed these bugs:</p>\
 <ul>\
 <li>If your archive has a directory with Flatpak app data, the cache will not be removed after closing the app; it will be removed after finished copying the data</li>\
 <li>If the content in the folder of Flatpak apps data in your configuration archive is the same as the ~/.var/app folder, the data will not be copy</li>\
-</ul>"
+</ul>\
+<p>And also:</p>\
+<ul><li>Updated translations</li></ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
