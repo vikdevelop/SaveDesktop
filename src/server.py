@@ -14,7 +14,7 @@ elif settings["periodic-import"] == "Never2":
 else:
     if not os.path.exists(f"{DATA}/synchronization"):
         os.mkdir(f"{DATA}/synchronization")
-    if not glob.glob(f"{DATA}/*.sd.tar.gz"):
+    if not glob.glob(f"{DATA}/synchronization/*.sd.tar.gz"):
         os.system(f"cp {settings['file-for-syncing']} {DATA}/synchronization/")
     if not os.path.exists(f"{DATA}/synchronization/file-settings.json"):
         file_name = os.path.basename(settings["file-for-syncing"])
