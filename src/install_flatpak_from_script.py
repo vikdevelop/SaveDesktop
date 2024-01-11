@@ -24,17 +24,14 @@ if os.path.exists(f"{CACHE_FLATPAK}/import_config/app"):
     if not os.path.exists(f"{CACHE_FLATPAK}/import_config/copying_flatpak_data"):
         with open(f"{CACHE_FLATPAK}/copying_flatpak_data", "w") as f:
             f.write("copying flatpak data ...")
-    if not subprocess.getoutput(f"diff -qr --exclude=io.github.vikdevelop.SaveDesktop {CACHE_FLATPAK}/syncing/app/") == "":
-        print("copying user data ...")
-        os.system(f"cp -R {CACHE_FLATPAK}/import_config/app ~/.var/")
+    os.system(f"cp -au {CACHE_FLATPAK}/import_config/app/ ~/.var/")
     os.system(f"rm -rf {CACHE_FLATPAK}/*")
 elif os.path.exists(f"{CACHE_FLATPAK}/syncing/app"):
-     if not os.path.exists(f"{CACHE_FLATPAK}/syncing/copying_flatpak_data"):
+    if not os.path.exists(f"{CACHE_FLATPAK}/syncing/copying_flatpak_data"):
         with open(f"{CACHE_FLATPAK}/copying_flatpak_data", "w") as f:
             f.write("copying flatpak data ...")
-    if not subprocess.getoutput(f"diff -qr --exclude=io.github.vikdevelop.SaveDesktop {CACHE_FLATPAK}/syncing/app/") == "":
-        print("copying user data ...")
-        os.system(f"cp -R {CACHE_FLATPAK}/syncing/app ~/.var/")
+    print("copying user data ...")
+    os.system(f"cp -au {CACHE_FLATPAK}/syncing/app/ ~/.var/")
     os.system(f"rm -rf {CACHE_FLATPAK}/*")
 
 # Install Flatpak apps from list
