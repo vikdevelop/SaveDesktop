@@ -1112,13 +1112,7 @@ class MyApp(Adw.Application):
         else:
             dialog.set_version(version)
             dialog.set_application_icon(icon)
-        dialog.set_release_notes("<ul>\
-                   <li>Added support for saving user data from installed Flatpak apps. You can select if you want to save a list of installed Flatpak apps only or also save the data of your installed Flatpak apps.</li>\
-                   <li>Added support for saving flatpaks installed in the home folder (~/.local/share/flatpak/app)</li>\
-                   <li>Improved saving and importing configuration</li>\
-                   <li>Improved selecting the sync file; you don't need to allow permission in the Flatseal app and check if the folder for the sync file is the same as the periodic saving folder</li>\
-                   <li>Now, there is no needing to log out of the system after selecting a different periodic saving file. A message of the necessity to log out of the system shows if you enable periodic synchronization (selecting another option instead of the \"Never\" option)</li>\
-               </ul>")
+        dialog.set_release_notes(rel_notes)
         dialog.show()    
     
     def create_action(self, name, callback, shortcuts=None):
