@@ -145,6 +145,7 @@ class Import:
             os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
             os.system(f'cp -R ./gnome-shell {home}/.local/share/')
             os.system(f'cp -R ./nautilus-python {home}/.local/share/')
+            os.system(f'cp -R ./nautilus {home}/.local/share/')
             os.system(f'cp -R ./gnome-control-center {home}/.config/')
         elif environment == 'Pantheon':
             os.system(f'cp -R ./plank {home}/.config/')
