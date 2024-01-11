@@ -1025,7 +1025,11 @@ class MainWindow(Gtk.Window):
         self.settings["maximized"] = self.is_maximized()
         self.settings["filename"] = self.saveEntry.get_text()
         self.settings["periodic-saving"] = backup_item
-        if not os.path.exists(f"{CACHE}/copying_flatpak_data"):
+        if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
+            print("Flatpak data exists.")
+        elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
+            print("Flatpak data exists.")
+        else:     
             os.popen(f"rm -rf {CACHE}/*")
             os.popen(f"rm -rf {CACHE}/.*")
         try:
