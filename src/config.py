@@ -107,6 +107,8 @@ class Save:
         elif os.path.exists(f"{CACHE}/.periodicfile.json"):
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
+            if not settings["periodic-import"] == "Never2":
+                os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{settings['filename-format']}.sd.tar.gz")
         os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
         
 class Import:
