@@ -25,7 +25,6 @@ then
 		mkdir ~/.cache/io.github.vikdevelop.SaveDesktop
 		mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop
 		cd
-		rm -rf /tmp/SaveDesktop
 		echo "SaveDesktop has been installed! You can run it with this command: \"savedesktop\" or \"~/.local/bin/savedesktop\"."
 fi
 if [ "$1" = "--remove" ]
