@@ -73,9 +73,9 @@ elif snap:
     DATA = f"{os.getenv('SNAP_USER_DATA')}/.local/share"
 else:
     try:
-      locale = open(f"translations/{r_lang}.json")
+      locale = open(f"{home}/.local/share/savedesktop/translations/{r_lang}.json")
     except:
-      locale = open(f"translations/en.json")
+      locale = open(f"{home}/.local/share/savedesktop/translations/en.json")
     # System, cache and data directories
     system_dir = f"{home}/.local/share/savedesktop/src"
     os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
