@@ -20,9 +20,10 @@ if args.install:
     os.chdir("/tmp/SaveDesktop")
     os.system(f"wget -c https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/{github_version}.tar.gz")
     os.system("tar -xf *.tar.gz")
-
+    os.chdir(f"SaveDesktop-{github_version}")
+    
     # Install files to needed folders
-    os.system(f"sh SaveDesktop-{github_version}/native/install_native.sh --install")
+    os.system(f"sh native/install_native.sh --install")
     os.system("rm -rf /tmp/SaveDesktop")
 
 if args.remove:
