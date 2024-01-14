@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 if [ "$1" = "--install" ]
 then
-		cd /tmp/SaveDesktop
 		sed -i "s\Exec=run.sh\Exec=/home/${USER}/.local/bin/savedesktop\ " flatpak/io.github.vikdevelop.SaveDesktop.desktop
 		install -Dm755 native/run_natively.sh ~/.local/bin/savedesktop
 		install -D -t ~/.local/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
