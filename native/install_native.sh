@@ -3,7 +3,7 @@ if [ "$1" = "--install" ]
 then
 		cd /tmp/SaveDesktop
 		sed -i "s\Exec=run.sh\Exec=/home/${USER}/.local/bin/savedesktop\ " flatpak/io.github.vikdevelop.SaveDesktop.desktop
-		install -Dm755 run_natively.sh ~/.local/bin/savedesktop
+		install -Dm755 native/run_natively.sh ~/.local/bin/savedesktop
 		install -D -t ~/.local/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
 		install -D -t ~/.local/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
 		install -D -t ~/.local/share/glib-2.0/schemas flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
@@ -11,7 +11,7 @@ then
 		cp -R src ~/.local/share/savedesktop/
 		cp -R translations ~/.local/share/savedesktop/
 		install -D -t ~/.local/share/share/licenses/savedesktop LICENSE
-  		install -D -t ~/.local/bin native_updater.py
+  		install -D -t ~/.local/bin native/native_updater.py
     		echo -e "[Desktop Entry]\nName=SaveDesktop Native Updater\nType=Application\nExec=savedesktop --update" > ~/.config/autostart/io.github.vikdevelop.SaveDesktop.Updater.desktop
 		export GSETTINGS_SCHEMA_DIR="~/.local/share/glib-2.0/schemas:${GSETTINGS_SCHEMA_DIR}"
 		glib-compile-schemas ~/.local/share/glib-2.0/schemas
