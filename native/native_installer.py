@@ -16,7 +16,8 @@ if args.install:
     github_version = response.json()["tag_name"]
 
     # Download and decompress archive from Github
-    os.makedirs("/tmp/SaveDesktop", exist_ok=True)
+    if not os.path.exists("/tmp/SaveDesktop"):
+        os.mkdir("/tmp/SaveDesktop")
     os.chdir("/tmp/SaveDesktop")
     os.system(f"wget -c https://github.com/vikdevelop/SaveDesktop/archive/refs/tags/{github_version}.tar.gz")
     os.system("tar -xf *.tar.gz")
@@ -27,7 +28,8 @@ if args.install:
     os.system("rm -rf /tmp/SaveDesktop")
 
 if args.remove:
-    os.makedirs("/tmp/SaveDesktop", exist_ok=True)
+    if not os.path.exists("/tmp/SaveDesktop"):
+        os.mkdir("/tmp/SaveDesktop")
     os.chdir("/tmp/SaveDesktop")
     
     os.system("wget -c https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/install_native.sh")
