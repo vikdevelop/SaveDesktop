@@ -5,18 +5,6 @@ license: GPL-3.0+
 
 base: core22
 confinement: strict
-
-plugs:
-  dot-folders:
-    interface: personal-files
-    write:
-      - $HOME/.config
-      - $HOME/.local
-      - $HOME/.themes
-      - $HOME/.icons
-      - $HOME/.xfce4
-      - $HOME/.fonts
-      - $HOME/.cinnamon
       
 apps:
   savedesktop:
@@ -27,7 +15,8 @@ apps:
     plugs:
       - home
       - network
-      - login-session-control
+    environment: 
+      HOME: $SNAP_REAL_HOME
 
 parts:
   dconf:
