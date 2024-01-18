@@ -49,6 +49,7 @@ parts:
       install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/network_sharing.py
       install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/open_wiki.py
       install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/localization.py
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/config.py
       install -D -t $CRAFT_PART_INSTALL/usr/share/applications $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.desktop
       install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps $CRAFT_PART_SRC/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
       install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/exclamation_mark.png
