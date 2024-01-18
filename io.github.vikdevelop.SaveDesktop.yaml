@@ -44,7 +44,6 @@ finish-args:
     - --talk-name=org.kde.ksmserver
     # ensuring to FileChooserNative will work correctly
     - --talk-name=org.freedesktop.FileManager1
-    - --talk-name=org.freedesktop.portal.FileChooser
     - --env=DCONF_USER_CONFIG_DIR=.config/dconf
     - --filesystem=xdg-run/dconf
     - --talk-name=ca.desrt.dconf
