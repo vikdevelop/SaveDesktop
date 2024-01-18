@@ -17,6 +17,8 @@ apps:
       - network
     environment: 
       HOME: $SNAP_REAL_HOME
+    command-chain:
+      - bin/homeishome-launch
 
 parts:
   dconf:
@@ -34,7 +36,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: 2.9.9.1j
+    source-tag: 3.0.1i
     plugin: nil
     override-pull: |
       craftctl default
@@ -58,7 +60,10 @@ parts:
       cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
       install -Dm755 -t $CRAFT_PART_INSTALL/usr/bin $CRAFT_PART_SRC/run.sh
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
-
+  homeishome-launch:
+    plugin: nil
+    stage-snaps:
+      - homeishome-launch
   deps:
     plugin: nil
     stage-packages:
