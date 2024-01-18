@@ -36,7 +36,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: 3.0.1i
+    source-tag: 3.0.1s
     plugin: nil
     override-pull: |
       craftctl default
