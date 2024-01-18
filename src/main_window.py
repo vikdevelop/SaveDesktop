@@ -978,8 +978,9 @@ class MainWindow(Gtk.Window):
     # Config has been imported action
     def applying_done(self):
         self.toast.set_title(title=_["config_imported"])
-        self.toast.set_button_label(_["logout"])
-        self.toast.set_action_name("app.logout")
+        if not snap:
+            self.toast.set_button_label(_["logout"])
+            self.toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.toast)
         
     # popup about message "Please wait ..."
@@ -995,8 +996,9 @@ class MainWindow(Gtk.Window):
     # a warning indicating that the user must log out
     def show_warn_toast(self):
         self.warn_toast = Adw.Toast.new(title=_["periodic_saving_desc"])
-        self.warn_toast.set_button_label(_["logout"])
-        self.warn_toast.set_action_name("app.logout")
+        if not snap:
+            self.warn_toast.set_button_label(_["logout"])
+            self.warn_toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.warn_toast)
         
     # message that says where will be run a synchronization
