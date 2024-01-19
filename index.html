@@ -26,7 +26,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#features">Features</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#download">Download</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-primary nav-link py-3 px-0 px-lg-3 rounded" href="/open-issue">Report issue</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-primary nav-link py-3 px-0 px-lg-3 rounded" href="/SaveDesktop/open-issue">Report issue</a></li>
                     </ul>
                 </div>
             </div>
@@ -38,36 +38,164 @@
             <p>Save the current configuration</p>
         </header>
         
+        <!-- Features Section-->
         <section class="page-section portfolio" id="features">
-            <h2>Saving configuration</h2>
-            <p>SaveDesktop allows you to save the current configuration of your Linux desktop environment. Simply, enter a name for the configuration file, select the items you want to save and click the "Save" button.</p>
-            
-            <h3>Periodic saving</h3>
-            <p>If you want SaveDesktop to save your environment settings for you, no problem. Simply choose whether you want to save your configuration daily, weekly, or monthly. You can also choose a folder for regular saving, for example to an external drive or the cloud, and be sure you won't lose your settings again.</p>
-            
-            <h2>Importing configuration</h2>
-            <p>Because the configuration files are saved in Tar Gzip format, you can easily see what configuration files are in the file and "tweak" them if necessary. Importing configuration in SaveDesktop is really a breeze. Simply switch to the Import tab and click the "Import from File" button, and once the configuration import is complete, you can log out of the application directly to make the changes take effect.</p>
-
-            <h2>Synchronizing configuration</h2>
-            <p>If you own multiple computers, SaveDesktop won't let you down either. With synchronization, you can keep the systems of two or more computers unified. To do this, just switch to the Sync tab in the app. On the first computer, click Set up the sync file, then select the periodic save file, the file where your settings are saved using the periodic save feature, and then just choose how often you'd like the sync to run or whether you want to do it manually from the app's interface. Then just paste the URL to sync to the other computer and you're ready to start syncing!</p>
-            <a href="https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network">Make sure the source computer uses an unchanging IP address</a>
+            <div class="container">
+                <!-- Features Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Features</h2>
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- Features card -->
+                <div class="row justify-content-center">
+                    <!-- save card -->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#save">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" width="256" src="https://cdn.pixabay.com/photo/2017/01/05/19/41/download-1956182_1280.png" alt="..." />
+                        </div>
+                    </div>
+                    <!-- import card -->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#import">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" width="256" src="https://cdn.pixabay.com/photo/2017/06/13/12/52/upload-2398771_1280.png" alt="..." />
+                        </div>
+                    </div>
+                    <!-- sync card -->
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#sync">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" width="256" src="https://cdn.pixabay.com/photo/2017/06/13/12/54/synchronous-2398786_1280.png" alt="..." />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        <hr>
-        <section class="page-section portfolio" id="download">
-            <h2>Download SaveDesktop</h2>
-            <h3>Flathub</h3>
-            <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
-            <h3>Native</h3>
-            <p>```bash
-  # Install
-  mkdir /tmp/savedesktop-tmp  && git clone https://github.com/vikdevelop/SaveDesktop /tmp/savedesktop-tmp && python3 /tmp/savedesktop-tmp/native/native_installer.py --install && rm -rf /tmp/savedesktop-tmp
-
-  # Remove
-  wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove
-  ```</p>    
-            
+        <!-- Download Section-->
+        <section class="page-section bg-primary text-white mb-0" id="download">
+            <div class="container">
+                <!-- Download Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-white">Download</h2>
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                <!-- About Section Content-->
+                <div class="row">
+                    <div class="col-lg-4 ms-auto"><p class="lead">Download from Flathub</p>
+                        <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+                    </div>
+                    <div class="col-lg-4 ms-auto"><p class="lead">Download from Snap Store</p><p style="color:red;">So far unstable!</p>
+                        <a href="https://snapcraft.io/savedesktop">
+  <img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" />
+</a>
+                    </div>
+                    <div class="col-lg-4 me-auto"><p class="lead">Download as native version</p>
+                        <h4>Install</h4>
+                        <code>mkdir /tmp/savedesktop-tmp  && git clone https://github.com/vikdevelop/SaveDesktop /tmp/savedesktop-tmp && python3 /tmp/savedesktop-tmp/native/native_installer.py --install && rm -rf /tmp/savedesktop-tmp</code>
+                        <h4>Remove</h4>
+                        <code>wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove</code>
+                    </div>
+                </div>
+            </div>
         </section>
-        <hr>
+        <!-- Features cards -->
+        <!-- save card -->
+        <div class="portfolio-modal modal fade" id="save" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Saving Configuration</h2>
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <img class="img-fluid rounded mb-5" src="https://github.com/vikdevelop/SaveDesktop/blob/main/flatpak/screenshots/main_window.png?raw=true" alt="..." />
+                                    <p class="mb-4">SaveDesktop allows you to save the current configuration of your Linux desktop environment. Simply, enter a name for the configuration file, select the items you want to save and click the "Save" button.</p>
+                                    <h3 class="mb-4">Periodic saving</h3>
+                                    <p class="mb-4">If you want SaveDesktop to save your environment settings for you, no problem. Simply choose whether you want to save your configuration daily, weekly, or monthly. You can also choose a folder for regular saving, for example to an external drive or the cloud, and be sure you won't lose your settings again.</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- import card-->
+        <div class="portfolio-modal modal fade" id="import" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Importing configuration</h2>
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <img class="img-fluid rounded mb-5" src="https://github.com/vikdevelop/SaveDesktop/blob/main/flatpak/screenshots/import_page.png?raw=true" alt="..." />
+                                    <p class="mb-4">Because the configuration files are saved in Tar Gzip format, you can easily see what configuration files are in the file and "tweak" them if necessary. Importing configuration in SaveDesktop is really a breeze. Simply switch to the Import tab and click the "Import from File" button, and once the configuration import is complete, you can log out of the application directly to make the changes take effect.</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- sync card -->
+        <div class="portfolio-modal modal fade" id="sync" tabindex="-1" aria-labelledby="portfolioModal3" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                    <div class="modal-body text-center pb-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Synchronization configurations</h2>
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                                        <div class="divider-custom-line"></div>
+                                    </div>
+                                    <img class="img-fluid rounded mb-5" src="https://github.com/vikdevelop/SaveDesktop/blob/main/flatpak/screenshots/sync_page.png?raw=true" alt="..." />
+                                    <p class="mb-4">If you own multiple computers, SaveDesktop won't let you down either. With synchronization, you can keep the systems of two or more computers unified. To do this, just switch to the Sync tab in the app. On the first computer, click Set up the sync file, then select the periodic save file, the file where your settings are saved using the periodic save feature, and then just choose how often you'd like the sync to run or whether you want to do it manually from the app's interface. Then just paste the URL to sync to the other computer and you're ready to start syncing!</p>
+                                    <button class="btn btn-primary" data-bs-dismiss="modal">
+                                        <i class="fas fa-xmark fa-fw"></i>
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <!-- Footer-->
         <!-- Copyright Section-->
