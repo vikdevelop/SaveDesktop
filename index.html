@@ -10,7 +10,7 @@
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="open-issue/css/styles.css" rel="stylesheet" />
         <script src="https://smtpjs.com/v3/smtp.js"></script>
     </head>
     <body id="page-top">
@@ -54,9 +54,18 @@
         </section>
         <hr>
         <section class="page-section portfolio" id="download">
-            <div class="container">
-                <script type="text/javascript" src="https://form.jotform.com/jsform/232703872503049"></script>
-            </div>
+            <h2>Download SaveDesktop</h2>
+            <h3>Flathub</h3>
+            <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+            <h3>Native</h3>
+            <p>```bash
+  # Install
+  mkdir /tmp/savedesktop-tmp  && git clone https://github.com/vikdevelop/SaveDesktop /tmp/savedesktop-tmp && python3 /tmp/savedesktop-tmp/native/native_installer.py --install && rm -rf /tmp/savedesktop-tmp
+
+  # Remove
+  wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove
+  ```</p>    
+            
         </section>
         <hr>
         
