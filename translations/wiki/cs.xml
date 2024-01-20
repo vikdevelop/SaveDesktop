@@ -49,7 +49,7 @@ Můžete si vybrat mezi následujícími položkami:
   <str key="github_issues">_Máte-li jakékoliv otázky, můžete použít Github issues._</str>
   <str key="save_flatpak_intro">Od verze 2.5 umožňuje SaveDesktop ukládat nainstalované aplikace Flatpak a instalovat je ze seznamu. Jak to tedy funguje?</str>
   <str key="saving_flatpaks">### Ukládání nainstalovaných aplikací Flatpak
-Seznam nainstalovaných aplikací Flatpak je možné uložit do systémového adresáře /var/lib/flatpak/app a domovského adresáře ~/.local/share/flatpak/app. Seznam nainstalovaných aplikací Flatpak je v konfiguračním archivu označen jako installed_flatpaks.sh pro systémový adresář a installed_user_flatpaks.sh pro domovský adresář.</str>
+Seznam nainstalovaných aplikací Flatpak je možné uložit ze systémového adresáře /var/lib/flatpak/app a domovského adresáře ~/.local/share/flatpak/app. Seznam nainstalovaných aplikací Flatpak je v konfiguračním archivu označen jako installed_flatpaks.sh pro systémový adresář a installed_user_flatpaks.sh pro domovský adresář.</str>
   <str key="installing_flatpaks">### Instalace aplikací Flatpak ze seznamu
 Po importu uloženého konfiguračního souboru a opětovném přihlášení se **na pozadí začnou instalovat aplikace Flatpak.**</str>
   <str key="wiki_description">SaveDesktop je jednoduchá aplikace napsaná v Pythonu a používající knihovny GTK a LibAdwaita. Tato wiki slouží k objasnění některých funkcí aplikace (např. synchronizace mezi počítači).
