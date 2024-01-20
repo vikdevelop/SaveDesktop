@@ -5,7 +5,7 @@ license: GPL-3.0+
 
 base: core22
 confinement: strict
-      
+
 apps:
   savedesktop:
     extensions: [gnome]
@@ -15,10 +15,6 @@ apps:
     plugs:
       - home
       - network
-    environment: 
-      HOME: $SNAP_REAL_HOME
-    command-chain:
-      - bin/homeishome-launch
 
 parts:
   dconf:
@@ -61,10 +57,7 @@ parts:
       cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
       install -Dm755 -t $CRAFT_PART_INSTALL/usr/bin $CRAFT_PART_SRC/run.sh
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
-  homeishome-launch:
-    plugin: nil
-    stage-snaps:
-      - homeishome-launch
+
   deps:
     plugin: nil
     stage-packages:
