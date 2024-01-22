@@ -185,12 +185,12 @@ class MainWindow(Gtk.Window):
         self.saveBox.set_margin_end(40)
         self.saveBox.set_valign(Gtk.Align.CENTER)
         
-        # Tittle image for save page
+        # Title image for save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
         self.titleImage.set_pixel_size(64)
         self.saveBox.append(self.titleImage)
         
-        # Tittle "Save Current configuration" for save page and subtitle "{user_desktop}"
+        # Title "Save Current configuration" for save page and subtitle "{user_desktop}"
         self.label_title = Gtk.Label.new()
         self.label_title.set_markup('<big><b>{}</b></big>\n{}'.format(_["save_config"], self.environment))
         self.label_title.set_justify(Gtk.Justification.CENTER)

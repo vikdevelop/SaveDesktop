@@ -17,7 +17,7 @@ elif 'zh' in p_lang:
 else:
     r_lang = p_lang[:-3]
 
-# Get IP adress of user computer
+# Get IP address of user computer
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 IPAddr = s.getsockname()[0]
