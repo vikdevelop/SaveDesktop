@@ -26,9 +26,9 @@ if not os.path.exists(f"{CACHE}/syncing"):
 
 class Syncing:
     def __init__(self):
-        # Check if user has same or empty IP adress property
+        # Check if user has same or empty IP address property
         if IPAddr in settings["url-for-syncing"]:
-            print("You have same IP adress.")
+            print("You have same IP address.")
         elif settings["url-for-syncing"] == "":
             self.get_sync_type()
             print("Synchronization is not set up.")
