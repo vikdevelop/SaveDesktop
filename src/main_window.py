@@ -822,10 +822,11 @@ class MainWindow(Gtk.Window):
             self.settings["save-themes"] = self.switch_02.get_active()
             self.settings["save-fonts"] = self.switch_03.get_active()
             self.settings["save-backgrounds"] = self.switch_04.get_active()
-            self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
-            self.settings["save-flatpak-data"] = self.switch_06.get_active()
             self.settings["save-extensions"] = self.switch_ext.get_active()
             self.settings["save-desktop-folder"] = self.switch_de.get_active()
+            if flatpak:
+                self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
+                self.settings["save-flatpak-data"] = self.switch_06.get_active()
             
     def show_extensions_row(self):
         # Switch and row of option 'Save backgrounds'
