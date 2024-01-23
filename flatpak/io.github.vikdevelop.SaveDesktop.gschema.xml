@@ -33,6 +33,14 @@
 			<default>true</default>
 			<summary>Save backgrounds (option)</summary>
 		</key>
+		<key name="save-extensions" type="b">
+			<default>true</default>
+			<summary>Save GNOME extensions (option)</summary>
+		</key>
+		<key name="save-desktop-folder" type="b">
+			<default>false</default>
+			<summary>Save User Desktop folder (option)</summary>
+		</key>
 		<key name="periodic-saving" type="s">
 		  <choices>
 				<choice value="Never"/>
