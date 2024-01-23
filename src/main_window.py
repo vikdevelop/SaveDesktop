@@ -532,8 +532,7 @@ class MainWindow(Gtk.Window):
             if sync_before == "Never2":
                 if not self.settings["periodic-import"] == "Never2":
                     self.show_warn_toast()
-                
-                
+
     # URL Dialog
     def open_urlDialog(self, w):
         self.urlDialog = Adw.MessageDialog.new(self)
@@ -754,6 +753,30 @@ class MainWindow(Gtk.Window):
         self.backgrounds_row.set_activatable_widget(self.switch_04)
         self.itemsBox.append(child=self.backgrounds_row)
         
+        # Switch and row of option 'Save backgrounds'
+        self.switch_de = Gtk.Switch.new()
+        if self.settings["save-desktop-folder"]:
+            self.switch_de.set_active(True)
+        self.switch_de.set_valign(align=Gtk.Align.CENTER)
+         
+        self.desktop_row = Adw.ActionRow.new()
+        self.desktop_row.set_title(title="Desktop")
+        self.desktop_row.set_subtitle(subtitle=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
+        self.desktop_row.set_subtitle_selectable(True)
+        self.desktop_row.set_use_markup(True)
+        self.desktop_row.set_title_lines(2)
+        self.desktop_row.set_subtitle_lines(3)
+        self.desktop_row.add_suffix(self.switch_de)
+        self.desktop_row.set_activatable_widget(self.switch_de)
+        self.itemsBox.append(child=self.desktop_row)
+        
+        if self.environment == "GNOME":
+            self.show_extensions_row()
+        elif self.environment == "KDE Plasma":
+            self.show_extensions_row()
+        elif self.environment == "Cinnamon":
+            self.show_extensions_row()
+        
         if flatpak:
             # Switch and row of option 'Save installed flatpaks'
             self.switch_05 = Gtk.Switch.new()
@@ -801,6 +824,24 @@ class MainWindow(Gtk.Window):
             self.settings["save-backgrounds"] = self.switch_04.get_active()
             self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
             self.settings["save-flatpak-data"] = self.switch_06.get_active()
+            self.settings["save-extensions"] = self.switch_ext.get_active()
+            self.settings["save-desktop-folder"] = self.switch_de.get_active()
+            
+    def show_extensions_row(self):
+        # Switch and row of option 'Save backgrounds'
+        self.switch_ext = Gtk.Switch.new()
+        if self.settings["save-extensions"]:
+            self.switch_ext.set_active(True)
+        self.switch_ext.set_valign(align=Gtk.Align.CENTER)
+         
+        self.ext_row = Adw.ActionRow.new()
+        self.ext_row.set_title(title="Extensions")
+        self.ext_row.set_use_markup(True)
+        self.ext_row.set_title_lines(2)
+        self.ext_row.set_subtitle_lines(3)
+        self.ext_row.add_suffix(self.switch_ext)
+        self.ext_row.set_activatable_widget(self.switch_ext)
+        self.itemsBox.append(child=self.ext_row)
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
@@ -978,9 +1019,8 @@ class MainWindow(Gtk.Window):
     # Config has been imported action
     def applying_done(self):
         self.toast.set_title(title=_["config_imported"])
-        if not snap:
-            self.toast.set_button_label(_["logout"])
-            self.toast.set_action_name("app.logout")
+        self.toast.set_button_label(_["logout"])
+        self.toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.toast)
         
     # popup about message "Please wait ..."
@@ -996,9 +1036,8 @@ class MainWindow(Gtk.Window):
     # a warning indicating that the user must log out
     def show_warn_toast(self):
         self.warn_toast = Adw.Toast.new(title=_["periodic_saving_desc"])
-        if not snap:
-            self.warn_toast.set_button_label(_["logout"])
-            self.warn_toast.set_action_name("app.logout")
+        self.warn_toast.set_button_label(_["logout"])
+        self.warn_toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.warn_toast)
         
     # message that says where will be run a synchronization
@@ -1059,7 +1098,8 @@ class MyApp(Adw.Application):
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open_dir', self.open_dir)
         self.create_action('logout', self.logout)
-        self.create_action('m_sync', self.sync_pc)
+        self.create_action('m_sync', self.sync_pc, ["<primary>s"])
+        self.create_action('quit', self.app_quit, ["<primary>q"])
         self.connect('activate', self.on_activate)
         
     # Open directory (action after clicking button Open the folder on Adw.Toast)
@@ -1115,7 +1155,17 @@ class MyApp(Adw.Application):
             dialog.set_version(version)
             dialog.set_application_icon(icon)
         dialog.set_release_notes(rel_notes)
-        dialog.show()    
+        dialog.show()
+        
+    def app_quit(self, action, param):
+        if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
+            print("Flatpak data exists.")
+        elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
+            print("Flatpak data exists.")
+        else:     
+            os.popen(f"rm -rf {CACHE}/*")
+            os.popen(f"rm -rf {CACHE}/.*")
+        app.quit()
     
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
