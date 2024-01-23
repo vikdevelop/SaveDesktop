@@ -52,15 +52,26 @@ class Save:
             os.system(f'cp -R {home}/.themes ./')
         if settings["save-fonts"] == True:
             os.system(f'cp -R {home}/.fonts ./')
+        if settings["save-desktop-folder"] == True:
+            if " " in GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP):
+                desktop_with_spaces = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
+                desktop_without_spaces = desktop_with_spaces.replace(" ", "*")
+            else:
+                desktop_without_spaces = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
+            os.system(f'cp -R {desktop_without_spaces} ./Desktop/ ')
         if settings["save-installed-flatpaks"] == True:
             os.system('sh /app/backup_flatpaks.sh')
         if settings["save-flatpak-data"] == True:
-            os.system(f'cd {home}/.var/app && mkdir {CACHE}/save_config/app && cp -r `ls -A | grep -v "io.github.vikdevelop.SaveDesktop"` {CACHE}/save_config/app/')
+            if os.path.exists(f"{CACHE}/save_config"):
+                os.system(f'cd {home}/.var/app && mkdir {CACHE}/save_config/app && cp -r `ls -A | grep -v "io.github.vikdevelop.SaveDesktop"` {CACHE}/save_config/app/')
+            elif os.path.exists(f"{CACHE}/periodic_saving"):
+                os.system(f'cd {home}/.var/app && mkdir {CACHE}/periodic_saving/app && cp -r `ls -A | grep -v "io.github.vikdevelop.SaveDesktop"` {CACHE}/periodic_saving/app/')
             
         # Save configs on individual desktop environments
         if environment == 'GNOME':
             os.system(f"cp -R {home}/.local/share/gnome-background-properties ./")
-            os.system(f"cp -R {home}/.local/share/gnome-shell ./")
+            if settings["save-extensions"] == True:
+                os.system(f"cp -R {home}/.local/share/gnome-shell ./")
             os.system(f"cp -R {home}/.local/share/nautilus-python ./")
             os.system(f"cp -R {home}/.local/share/nautilus ./")
             os.system(f"cp -R {home}/.config/gnome-control-center ./")
@@ -69,7 +80,8 @@ class Save:
             os.system(f"cp -R {home}/.config/marlin ./")
         elif environment == 'Cinnamon':
             os.system(f"cp -R {home}/.config/nemo ./")
-            os.system(f"cp -R {home}/.local/share/cinnamon ./")
+            if settings["save-extensions"] == True:
+                os.system(f"cp -R {home}/.local/share/cinnamon ./")
             os.system(f"cp -R {home}/.cinnamon ./")
         elif environment == 'Budgie':
             os.system(f"cp -R {home}/.config/budgie-desktop ./")
@@ -97,9 +109,12 @@ class Save:
             os.system(f"cp -R {home}/.local/share/[k]* ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/dolphin ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/sddm ./xdg-data/")
+            os.system(f"cp -R {home}/.local/share/aurorae ./xdg-data/")
+            os.system(f"cp -R {home}/.local/share/plasma-systemmonitor ./xdg-data/")
             if settings["save-backgrounds"] == True:
                 os.system(f"cp -R {home}/.local/share/wallpapers ./xdg-data/")
-            os.system(f"cp -R {home}/.local/share/plasma-systemmonitor ./xdg-data/")
+            if settings["save-extensions"] == True:
+                os.system(f"cp -R {home}/.local/share/plasma ./xdg-data/")
         os.system(f"tar --gzip -cf cfg.sd.tar.gz ./")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
             with open(f"{CACHE}/.filedialog.json") as j:
@@ -108,7 +123,8 @@ class Save:
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
             if not settings["periodic-import"] == "Never2":
-                os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{settings['filename-format']}.sd.tar.gz")
+                file = os.path.basename(j["recent_file"])
+                os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
         os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
         
 class Import:
@@ -136,6 +152,7 @@ class Import:
         os.system(f'cp -R ./.fonts {home}/')
         os.system(f'cp -R ./gtk-4.0 {home}/.config/')
         os.system(f'cp -R ./gtk-3.0 {home}/.config/')
+        os.system(f'cp -R ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
         if os.path.exists(f'{CACHE}/import_config/app'):
             with open(f"copying_flatpak_data", "w") as c:
                 c.write("copying flatpak data ...")
