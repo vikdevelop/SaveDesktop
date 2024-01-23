@@ -32,8 +32,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: SaveDesktop version
-      description: "You can find it by clicking on the three dots and then the "About app" button"
+      label: Version of the SaveDesktop app
+      description: "You can find it by clicking on the three dots and then the 'About app' button"
     validations:
       required: true
   - type: dropdown
