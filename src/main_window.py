@@ -760,7 +760,7 @@ class MainWindow(Gtk.Window):
         self.switch_de.set_valign(align=Gtk.Align.CENTER)
          
         self.desktop_row = Adw.ActionRow.new()
-        self.desktop_row.set_title(title="Desktop")
+        self.desktop_row.set_title(title=_["desktop_folder"])
         self.desktop_row.set_subtitle(subtitle=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
         self.desktop_row.set_subtitle_selectable(True)
         self.desktop_row.set_use_markup(True)
@@ -822,11 +822,10 @@ class MainWindow(Gtk.Window):
             self.settings["save-themes"] = self.switch_02.get_active()
             self.settings["save-fonts"] = self.switch_03.get_active()
             self.settings["save-backgrounds"] = self.switch_04.get_active()
+            self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
+            self.settings["save-flatpak-data"] = self.switch_06.get_active()
             self.settings["save-extensions"] = self.switch_ext.get_active()
             self.settings["save-desktop-folder"] = self.switch_de.get_active()
-            if flatpak:
-                self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
-                self.settings["save-flatpak-data"] = self.switch_06.get_active()
             
     def show_extensions_row(self):
         # Switch and row of option 'Save backgrounds'
@@ -836,7 +835,7 @@ class MainWindow(Gtk.Window):
         self.switch_ext.set_valign(align=Gtk.Align.CENTER)
          
         self.ext_row = Adw.ActionRow.new()
-        self.ext_row.set_title(title="Extensions")
+        self.ext_row.set_title(title=_["extensions"])
         self.ext_row.set_use_markup(True)
         self.ext_row.set_title_lines(2)
         self.ext_row.set_subtitle_lines(3)
@@ -1096,10 +1095,12 @@ class MainWindow(Gtk.Window):
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE)
+        self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open_dir', self.open_dir)
         self.create_action('logout', self.logout)
-        self.create_action('m_sync', self.sync_pc, ["<primary>s"])
+        if self.settings["manually-sync"]:
+            self.create_action('m_sync', self.sync_pc, ["<primary>s"])
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.connect('activate', self.on_activate)
         
