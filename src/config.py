@@ -115,7 +115,7 @@ class Save:
                 os.system(f"cp -R {home}/.local/share/wallpapers ./xdg-data/")
             if settings["save-extensions"] == True:
                 os.system(f"cp -R {home}/.local/share/plasma ./xdg-data/")
-        os.system(f"tar --gzip -cf cfg.sd.tar.gz ./")
+        os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
             with open(f"{CACHE}/.filedialog.json") as j:
                 j = json.load(j)
