@@ -31,6 +31,8 @@ rel_notes = "<ul>\
 <li>Added an option for selecting whether /home/user/Desktop should be saved or not</li>\
 <li>Added Ctrl+Q shortcut for closing the application</li>\
 <li>Added Ctrl+S shortcut for manually synchronization</li>\
+<li>Added Keyboard shortcuts window</li>\
+<li>The application menu in the headerbar divited to two sections</li>\
 </ul>\
 <p>And also:</p>\
 <ul><li>Updated translations</li></ul>"
