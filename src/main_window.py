@@ -577,19 +577,19 @@ class MainWindow(Gtk.Window):
                 jS = json.load(r_file)
                 # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
                 if jS["periodic-import"] == "Manually2":
-                    self.menu_button_model.append(_["sync"], 'app.m_sync')
                     self.settings["manually-sync"] = True
+                    self.menu_button_model.append(_["sync"], 'app.m_sync')
                     self.set_syncing()
                     self.show_special_toast()
-                    self.menu_button_model.remove(2)
+                    self.menu_button_model.remove(3)
                 else:
                     self.set_syncing()
                     self.show_warn_toast()
                     self.settings["manually-sync"] = False
-                    self.menu_button_model.remove(1)
+                    self.menu_button_model.remove(2)
             else:
                 self.settings["manually-sync"] = False
-                self.menu_button_model.remove(1)
+                self.menu_button_model.remove(2)
 
     # Set synchronization for running in the background
     def set_syncing(self):
@@ -696,6 +696,7 @@ class MainWindow(Gtk.Window):
         self.itemsDialog = Adw.MessageDialog.new(app.get_active_window())
         self.itemsDialog.set_heading(_["items_for_archive"])
         self.itemsDialog.set_body(_["items_desc"])
+        self.itemsDialog.set_default_size(400, 200)
         
         # Box for loading widgets in this dialog
         self.itemsBox = Gtk.ListBox.new()
@@ -768,7 +769,14 @@ class MainWindow(Gtk.Window):
         if self.settings["save-desktop-folder"]:
             self.switch_de.set_active(True)
         self.switch_de.set_valign(align=Gtk.Align.CENTER)
-         
+        
+        if self.environment == "GNOME":
+            self.show_extensions_row()
+        elif self.environment == "KDE Plasma":
+            self.show_extensions_row()
+        elif self.environment == "Cinnamon":
+            self.show_extensions_row()
+            
         self.desktop_row = Adw.ActionRow.new()
         self.desktop_row.set_title(title=_["desktop_folder"])
         self.desktop_row.set_subtitle(subtitle=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
@@ -779,13 +787,6 @@ class MainWindow(Gtk.Window):
         self.desktop_row.add_suffix(self.switch_de)
         self.desktop_row.set_activatable_widget(self.switch_de)
         self.itemsBox.append(child=self.desktop_row)
-        
-        if self.environment == "GNOME":
-            self.show_extensions_row()
-        elif self.environment == "KDE Plasma":
-            self.show_extensions_row()
-        elif self.environment == "Cinnamon":
-            self.show_extensions_row()
         
         if flatpak:
             # Switch and row of option 'Save installed flatpaks'
@@ -960,6 +961,9 @@ class MainWindow(Gtk.Window):
         if self.settings["save-flatpak-data"] == True:
             self.continue_timeout_yn = True
             self.save_timeout = GLib.timeout_add_seconds(120, self.first_continue_timeout)
+        elif self.settings["save-desktop-folder"] == True:
+            self.continue_timeout_yn = False
+            self.save_timeout = GLib.timeout_add_seconds(30, self.exporting_done)
         else:
             self.continue_timeout_yn = False
             self.save_timeout = GLib.timeout_add_seconds(14, self.exporting_done)
@@ -1109,8 +1113,9 @@ class MyApp(Adw.Application):
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open_dir', self.open_dir)
         self.create_action('logout', self.logout)
-        if self.settings["manually-sync"]:
-            self.create_action('m_sync', self.sync_pc, ["<primary>s"])
+        if self.settings["manually-sync"] == True:
+            self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"])
+        self.create_action('m_sync', self.sync_pc)
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.connect('activate', self.on_activate)
