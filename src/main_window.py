@@ -9,6 +9,7 @@ import shutil
 from localization import _, home
 from urllib.request import urlopen
 from open_wiki import *
+from shortcuts_window import *
 from datetime import date
 from pathlib import Path
 gi.require_version('Gtk', '4.0')
@@ -20,6 +21,14 @@ from gi.repository import Gtk, Adw, Gio, GLib
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 if snap:
     os.makedirs(f"{CACHE}", exist_ok=True)
+
+# Shortcuts window
+@Gtk.Template(string=SHORTCUTS_WINDOW) # from shortcuts_window.py
+class ShortcutsWindow(Gtk.ShortcutsWindow):
+    __gtype_name__ = 'ShortcutsWindow'
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
 # Application window
 class MainWindow(Gtk.Window):
@@ -44,6 +53,7 @@ class MainWindow(Gtk.Window):
         # App menu
         self.menu_button_model = Gio.Menu()
         self.menu_button_model.append(_["about_app"], 'app.about')
+        self.menu_button_model.append(_["keyboard_shortcuts"], 'app.shortcuts')
         self.menu_button = Gtk.MenuButton.new()
         self.menu_button.set_icon_name(icon_name='open-menu-symbolic')
         self.menu_button.set_menu_model(menu_model=self.menu_button_model)
@@ -1102,6 +1112,7 @@ class MyApp(Adw.Application):
         if self.settings["manually-sync"]:
             self.create_action('m_sync', self.sync_pc, ["<primary>s"])
         self.create_action('quit', self.app_quit, ["<primary>q"])
+        self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.connect('activate', self.on_activate)
         
     # Open directory (action after clicking button Open the folder on Adw.Toast)
@@ -1134,6 +1145,21 @@ class MyApp(Adw.Application):
         os.system(f"echo > {CACHE}/.from_app")
         self.sync_m = GLib.spawn_command_line_async(f"python3 {system_dir}/network_sharing.py")
         
+    def shortcuts(self, action, param):
+        shortcuts_window = ShortcutsWindow(
+            transient_for=self.get_active_window())
+        shortcuts_window.present()
+        
+    def app_quit(self, action, param):
+        if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
+            print("Flatpak data exists.")
+        elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
+            print("Flatpak data exists.")
+        else:     
+            os.popen(f"rm -rf {CACHE}/*")
+            os.popen(f"rm -rf {CACHE}/.*")
+        app.quit()
+        
     # About dialog
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
@@ -1158,16 +1184,6 @@ class MyApp(Adw.Application):
             dialog.set_application_icon(icon)
         dialog.set_release_notes(rel_notes)
         dialog.show()
-        
-    def app_quit(self, action, param):
-        if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
-            print("Flatpak data exists.")
-        elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
-            print("Flatpak data exists.")
-        else:     
-            os.popen(f"rm -rf {CACHE}/*")
-            os.popen(f"rm -rf {CACHE}/.*")
-        app.quit()
     
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
