@@ -32,7 +32,8 @@ rel_notes = "<ul>\
 <li>Added Ctrl+Q shortcut for closing the application</li>\
 <li>Added Ctrl+S shortcut for manually synchronization</li>\
 <li>Added Keyboard shortcuts window</li>\
-<li>The application menu in the headerbar divited to two sections</li>\
+<li>The application menu in the header bar is divided into two sections</li>\
+<li>Improved switch for including Flatpak apps in the configuration archive</li>\
 </ul>\
 <p>And also:</p>\
 <ul><li>Updated translations</li></ul>"
