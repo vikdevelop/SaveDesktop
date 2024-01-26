@@ -587,7 +587,7 @@ class MainWindow(Gtk.Window):
                     self.main_menu.append_section(None, self.sync_menu)
                     self.set_syncing()
                     self.show_special_toast()
-                    self.sync_menu.remove(0)
+                    self.sync_menu.remove(1)
                 else:
                     self.set_syncing()
                     self.show_warn_toast()
