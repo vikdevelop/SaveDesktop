@@ -51,17 +51,21 @@ class MainWindow(Gtk.Window):
             self.maximize()
         
         # App menu
-        self.menu_button_model = Gio.Menu()
-        self.menu_button_model.append(_["about_app"], 'app.about')
-        self.menu_button_model.append(_["keyboard_shortcuts"], 'app.shortcuts')
+        self.main_menu = Gio.Menu()
+        self.general_menu = Gio.Menu()
+        self.general_menu.append(_["about_app"], 'app.about')
+        self.general_menu.append(_["keyboard_shortcuts"], 'app.shortcuts')
+        self.main_menu.append_section(None, self.general_menu)
         self.menu_button = Gtk.MenuButton.new()
         self.menu_button.set_icon_name(icon_name='open-menu-symbolic')
-        self.menu_button.set_menu_model(menu_model=self.menu_button_model)
+        self.menu_button.set_menu_model(menu_model=self.main_menu)
         self.headerbar.pack_end(child=self.menu_button)
         
         # Add Manually sync button
         if self.settings["manually-sync"] == True:
-            self.menu_button_model.append(_["sync"], 'app.m_sync')
+            self.sync_menu = Gio.Menu()
+            self.sync_menu.append(_["sync"], 'app.m_sync')
+            self.main_menu.append_section(None, self.sync_menu)
         
         # Primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -578,18 +582,20 @@ class MainWindow(Gtk.Window):
                 # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
                 if jS["periodic-import"] == "Manually2":
                     self.settings["manually-sync"] = True
-                    self.menu_button_model.append(_["sync"], 'app.m_sync')
+                    self.sync_menu = Gio.Menu()
+                    self.sync_menu.append(_["sync"], 'app.m_sync')
+                    self.main_menu.append_section(None, self.sync_menu)
                     self.set_syncing()
                     self.show_special_toast()
-                    self.menu_button_model.remove(3)
+                    self.sync_menu.remove(0)
                 else:
                     self.set_syncing()
                     self.show_warn_toast()
                     self.settings["manually-sync"] = False
-                    self.menu_button_model.remove(2)
+                    self.sync_menu.remove(0)
             else:
                 self.settings["manually-sync"] = False
-                self.menu_button_model.remove(2)
+                self.sync_menu.remove(0)
 
     # Set synchronization for running in the background
     def set_syncing(self):
