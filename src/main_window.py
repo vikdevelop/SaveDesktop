@@ -794,21 +794,28 @@ class MainWindow(Gtk.Window):
         self.desktop_row.set_activatable_widget(self.switch_de)
         self.itemsBox.append(child=self.desktop_row)
         
-        if flatpak:
-            # Switch and row of option 'Save installed flatpaks'
-            self.switch_05 = Gtk.Switch.new()
-            if self.settings["save-installed-flatpaks"]:
-                self.switch_05.set_active(True)
-            self.switch_05.set_valign(align=Gtk.Align.CENTER)
-                
+        if flatpak: 
             self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
             self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
             self.flatpak_row.set_use_markup(True)
             self.flatpak_row.set_title_lines(2)
             self.flatpak_row.set_subtitle_lines(3)
-            self.flatpak_row.add_suffix(self.switch_05)
             self.itemsBox.append(child=self.flatpak_row)
+            
+            # Switch and row of option 'Save installed flatpaks'
+            self.switch_05 = Gtk.Switch.new()
+            if self.settings["save-installed-flatpaks"]:
+                self.switch_05.set_active(True)
+            self.switch_05.set_valign(align=Gtk.Align.CENTER)
+            
+            self.list_row = Adw.ActionRow.new()
+            self.list_row.set_title(title=_["list"])
+            self.list_row.set_use_markup(True)
+            self.list_row.set_title_lines(4)
+            self.list_row.add_suffix(self.switch_05)
+            self.list_row.set_activatable_widget(self.switch_05)
+            self.flatpak_row.add_row(child=self.list_row)
             
             # Switch and row of option 'Save SaveDesktop app settings'
             self.switch_06 = Gtk.Switch.new()
@@ -838,10 +845,11 @@ class MainWindow(Gtk.Window):
             self.settings["save-themes"] = self.switch_02.get_active()
             self.settings["save-fonts"] = self.switch_03.get_active()
             self.settings["save-backgrounds"] = self.switch_04.get_active()
-            self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
-            self.settings["save-flatpak-data"] = self.switch_06.get_active()
             self.settings["save-extensions"] = self.switch_ext.get_active()
             self.settings["save-desktop-folder"] = self.switch_de.get_active()
+            if flatpak:
+                self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
+                self.settings["save-flatpak-data"] = self.switch_06.get_active()
             
     def show_extensions_row(self):
         # Switch and row of option 'Save backgrounds'
@@ -1047,6 +1055,9 @@ class MainWindow(Gtk.Window):
         if self.continue_timeout_yn == True:
             self.toast_wait = Adw.Toast(title=_["few_minutes_msg"])
             self.toast_wait.set_timeout(120)
+        elif self.settings["save-desktop-folder"] == True:
+            self.toast_wait = Adw.Toast(title=_["please_wait"])
+            self.toast_wait.set_timeout(30)
         else:
             self.toast_wait = Adw.Toast(title=_["please_wait"])
             self.toast_wait.set_timeout(14)
