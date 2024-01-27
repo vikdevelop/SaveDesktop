@@ -24,7 +24,7 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version, and icon
-v = "3.0.1"
+v = "3.1"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
 <li>Added an option for selecting whether extensions of GNOME, KDE and Cinnamon DE should be saved or not</li>\
