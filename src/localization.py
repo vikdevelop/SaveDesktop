@@ -34,9 +34,7 @@ rel_notes = "<ul>\
 <li>Added Keyboard shortcuts window</li>\
 <li>The application menu in the header bar is divided into two sections</li>\
 <li>Improved switch for including Flatpak apps in the configuration archive</li>\
-</ul>\
-<p>And also:</p>\
-<ul><li>Updated translations</li></ul>"
+</ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
