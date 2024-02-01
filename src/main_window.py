@@ -9,8 +9,10 @@ import shutil
 from localization import _, home
 from urllib.request import urlopen
 from open_wiki import *
+from shortcuts_window import *
 from datetime import date
 from pathlib import Path
+from threading import Thread
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
@@ -20,6 +22,14 @@ from gi.repository import Gtk, Adw, Gio, GLib
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 if snap:
     os.makedirs(f"{CACHE}", exist_ok=True)
+
+# Shortcuts window
+@Gtk.Template(string=SHORTCUTS_WINDOW) # from shortcuts_window.py
+class ShortcutsWindow(Gtk.ShortcutsWindow):
+    __gtype_name__ = 'ShortcutsWindow'
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
 # Application window
 class MainWindow(Gtk.Window):
@@ -32,6 +42,8 @@ class MainWindow(Gtk.Window):
 
         # Load the GSettings database for saving user settings
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
+        
+        self.different_toast_msg = False
 
         # Set the window size and maximization from the GSettings database
         self.set_size_request(750, 540)
@@ -42,16 +54,21 @@ class MainWindow(Gtk.Window):
             self.maximize()
         
         # App menu
-        self.menu_button_model = Gio.Menu()
-        self.menu_button_model.append(_["about_app"], 'app.about')
+        self.main_menu = Gio.Menu()
+        self.general_menu = Gio.Menu()
+        self.general_menu.append(_["about_app"], 'app.about')
+        self.general_menu.append(_["keyboard_shortcuts"], 'app.shortcuts')
+        self.main_menu.append_section(None, self.general_menu)
         self.menu_button = Gtk.MenuButton.new()
         self.menu_button.set_icon_name(icon_name='open-menu-symbolic')
-        self.menu_button.set_menu_model(menu_model=self.menu_button_model)
+        self.menu_button.set_menu_model(menu_model=self.main_menu)
         self.headerbar.pack_end(child=self.menu_button)
         
         # Add Manually sync button
         if self.settings["manually-sync"] == True:
-            self.menu_button_model.append(_["sync"], 'app.m_sync')
+            self.sync_menu = Gio.Menu()
+            self.sync_menu.append(_["sync"], 'app.m_sync')
+            self.main_menu.append_section(None, self.sync_menu)
         
         # Primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -100,7 +117,7 @@ class MainWindow(Gtk.Window):
 
         # Popup window for showing messages about saved and imported configuration
         self.toast = Adw.Toast.new(title='')
-        self.toast.set_timeout(10)
+        self.toast.set_timeout(0)
         
         # Check of user current desktop
         if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
@@ -532,8 +549,7 @@ class MainWindow(Gtk.Window):
             if sync_before == "Never2":
                 if not self.settings["periodic-import"] == "Never2":
                     self.show_warn_toast()
-                
-                
+
     # URL Dialog
     def open_urlDialog(self, w):
         self.urlDialog = Adw.MessageDialog.new(self)
@@ -568,19 +584,21 @@ class MainWindow(Gtk.Window):
                 jS = json.load(r_file)
                 # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
                 if jS["periodic-import"] == "Manually2":
-                    self.menu_button_model.append(_["sync"], 'app.m_sync')
                     self.settings["manually-sync"] = True
+                    self.sync_menu = Gio.Menu()
+                    self.sync_menu.append(_["sync"], 'app.m_sync')
+                    self.main_menu.append_section(None, self.sync_menu)
                     self.set_syncing()
                     self.show_special_toast()
-                    self.menu_button_model.remove(2)
+                    self.sync_menu.remove(1)
                 else:
                     self.set_syncing()
                     self.show_warn_toast()
                     self.settings["manually-sync"] = False
-                    self.menu_button_model.remove(1)
+                    self.sync_menu.remove(0)
             else:
                 self.settings["manually-sync"] = False
-                self.menu_button_model.remove(1)
+                self.sync_menu.remove(0)
 
     # Set synchronization for running in the background
     def set_syncing(self):
@@ -687,6 +705,7 @@ class MainWindow(Gtk.Window):
         self.itemsDialog = Adw.MessageDialog.new(app.get_active_window())
         self.itemsDialog.set_heading(_["items_for_archive"])
         self.itemsDialog.set_body(_["items_desc"])
+        self.itemsDialog.set_default_size(400, 200)
         
         # Box for loading widgets in this dialog
         self.itemsBox = Gtk.ListBox.new()
@@ -754,21 +773,52 @@ class MainWindow(Gtk.Window):
         self.backgrounds_row.set_activatable_widget(self.switch_04)
         self.itemsBox.append(child=self.backgrounds_row)
         
-        if flatpak:
-            # Switch and row of option 'Save installed flatpaks'
-            self.switch_05 = Gtk.Switch.new()
-            if self.settings["save-installed-flatpaks"]:
-                self.switch_05.set_active(True)
-            self.switch_05.set_valign(align=Gtk.Align.CENTER)
-                
+        # Switch and row of option 'Save backgrounds'
+        self.switch_de = Gtk.Switch.new()
+        if self.settings["save-desktop-folder"]:
+            self.switch_de.set_active(True)
+        self.switch_de.set_valign(align=Gtk.Align.CENTER)
+        
+        if self.environment == "GNOME":
+            self.show_extensions_row()
+        elif self.environment == "KDE Plasma":
+            self.show_extensions_row()
+        elif self.environment == "Cinnamon":
+            self.show_extensions_row()
+            
+        self.desktop_row = Adw.ActionRow.new()
+        self.desktop_row.set_title(title=_["desktop_folder"])
+        self.desktop_row.set_subtitle(subtitle=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
+        self.desktop_row.set_subtitle_selectable(True)
+        self.desktop_row.set_use_markup(True)
+        self.desktop_row.set_title_lines(2)
+        self.desktop_row.set_subtitle_lines(3)
+        self.desktop_row.add_suffix(self.switch_de)
+        self.desktop_row.set_activatable_widget(self.switch_de)
+        self.itemsBox.append(child=self.desktop_row)
+        
+        if flatpak: 
             self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
             self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
             self.flatpak_row.set_use_markup(True)
             self.flatpak_row.set_title_lines(2)
             self.flatpak_row.set_subtitle_lines(3)
-            self.flatpak_row.add_suffix(self.switch_05)
             self.itemsBox.append(child=self.flatpak_row)
+            
+            # Switch and row of option 'Save installed flatpaks'
+            self.switch_05 = Gtk.Switch.new()
+            if self.settings["save-installed-flatpaks"]:
+                self.switch_05.set_active(True)
+            self.switch_05.set_valign(align=Gtk.Align.CENTER)
+            
+            self.list_row = Adw.ActionRow.new()
+            self.list_row.set_title(title=_["list"])
+            self.list_row.set_use_markup(True)
+            self.list_row.set_title_lines(4)
+            self.list_row.add_suffix(self.switch_05)
+            self.list_row.set_activatable_widget(self.switch_05)
+            self.flatpak_row.add_row(child=self.list_row)
             
             # Switch and row of option 'Save SaveDesktop app settings'
             self.switch_06 = Gtk.Switch.new()
@@ -779,8 +829,7 @@ class MainWindow(Gtk.Window):
             self.data_row = Adw.ActionRow.new()
             self.data_row.set_title(title=_["user_data_flatpak"])
             self.data_row.set_use_markup(True)
-            self.data_row.set_title_lines(2)
-            self.data_row.set_subtitle_lines(3)
+            self.data_row.set_title_lines(4)
             self.data_row.add_suffix(self.switch_06)
             self.data_row.set_activatable_widget(self.switch_06)
             self.flatpak_row.add_row(child=self.data_row)
@@ -799,8 +848,27 @@ class MainWindow(Gtk.Window):
             self.settings["save-themes"] = self.switch_02.get_active()
             self.settings["save-fonts"] = self.switch_03.get_active()
             self.settings["save-backgrounds"] = self.switch_04.get_active()
-            self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
-            self.settings["save-flatpak-data"] = self.switch_06.get_active()
+            self.settings["save-extensions"] = self.switch_ext.get_active()
+            self.settings["save-desktop-folder"] = self.switch_de.get_active()
+            if flatpak:
+                self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
+                self.settings["save-flatpak-data"] = self.switch_06.get_active()
+            
+    def show_extensions_row(self):
+        # Switch and row of option 'Save backgrounds'
+        self.switch_ext = Gtk.Switch.new()
+        if self.settings["save-extensions"]:
+            self.switch_ext.set_active(True)
+        self.switch_ext.set_valign(align=Gtk.Align.CENTER)
+         
+        self.ext_row = Adw.ActionRow.new()
+        self.ext_row.set_title(title=_["extensions"])
+        self.ext_row.set_use_markup(True)
+        self.ext_row.set_title_lines(2)
+        self.ext_row.set_subtitle_lines(3)
+        self.ext_row.add_suffix(self.switch_ext)
+        self.ext_row.set_activatable_widget(self.switch_ext)
+        self.itemsBox.append(child=self.ext_row)
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
@@ -897,6 +965,9 @@ class MainWindow(Gtk.Window):
     # Save configuration
     def save_config(self):
         if self.settings["save-flatpak-data"] == True:
+            self.different_toast_msg = True
+        self.please_wait_toast()
+        if self.settings["save-flatpak-data"] == True:
             with open(f"{CACHE}/.filedialog.json", "w") as w:
                 w.write('{\n "recent_file": "%s/%s.fd.sd.tar.gz"\n}' % (self.folder, self.filename_text))
         else:
@@ -905,34 +976,16 @@ class MainWindow(Gtk.Window):
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
-        os.popen(f"python3 {system_dir}/config.py --save")
-        if self.settings["save-flatpak-data"] == True:
-            self.continue_timeout_yn = True
-            self.save_timeout = GLib.timeout_add_seconds(120, self.first_continue_timeout)
-        else:
-            self.continue_timeout_yn = False
-            self.save_timeout = GLib.timeout_add_seconds(14, self.exporting_done)
-        self.please_wait_toast()
-            
-    def first_continue_timeout(self):
-        if os.path.exists(f"{self.folder}/{self.filename_text}.fd.sd.tar.gz"):
-            self.continue_timeout_yn = False
-            self.exporting_done()
-        else:
-            print("First")
-            self.continue_timeout_yn = True
-            self.please_wait_toast()
-            self.continued_timeout = GLib.timeout_add_seconds(120, self.second_continue_timeout)
-            
-    def second_continue_timeout(self):
-        if os.path.exists(f"{self.folder}/{self.filename_text}.fd.sd.tar.gz"):
-            self.continue_timeout_yn = False
-            self.exporting_done()
-        else:
-            print("Second")
-            self.continue_timeout_yn = True
-            self.please_wait_toast()
-            self.continued_timeout_02 = GLib.timeout_add_seconds(120, self.exporting_done)
+        copy_thread = Thread(target=self.open_config_save)
+        copy_thread.start()
+        
+    def open_config_save(self):
+        try:
+            os.system(f"python3 {system_dir}/config.py --save")
+        except Exception as e:
+            print("Can't run the config.py file!")
+        finally:
+            GLib.idle_add(self.exporting_done)
         
     # Import config from list
     def imp_cfg_from_list(self, w):
@@ -946,59 +999,71 @@ class MainWindow(Gtk.Window):
             
     # Import configuration
     def import_config(self):
-        if not os.path.exists(f"{CACHE}/import_config"):
-            os.mkdir(f"{CACHE}/import_config")
-        os.chdir(f"{CACHE}/import_config")
         with open(f"{CACHE}/.impfile.json") as d:
             j = json.load(d)
         if ".fd.sd.tar.gz" in j["import_file"]:
-            self.continue_timeout_yn = True
-            self.import_timeout = GLib.timeout_add_seconds(120, self.check_if_file_exists)
+            self.different_toast_msg = True
         else:
-            self.continue_timeout_yn = False
-            self.import_timeout = GLib.timeout_add_seconds(15, self.applying_done)
-        os.popen(f"python3 {system_dir}/config.py --import_")
+            self.different_toast_msg = False
         self.please_wait_toast()
+        if not os.path.exists(f"{CACHE}/import_config"):
+            os.mkdir(f"{CACHE}/import_config")
+        os.chdir(f"{CACHE}/import_config")
+        copy_thread = Thread(target=self.open_config_import)
+        copy_thread.start()
         
-    def check_if_file_exists(self):
-        if os.path.exists(f"{CACHE}/import_config/done"):
-            self.applying_done()
-        else:
-            self.continue_timeout_yn = True
-            self.please_wait_toast()
-            self.import_timeout = GLib.timeout_add_seconds(120, self.applying_done)
+    def open_config_import(self):
+        try:
+            os.system(f"python3 {system_dir}/config.py --import_")
+        except Exception as e:
+            print("Can't run the config.py file!")
+        finally:
+            GLib.idle_add(self.applying_done)
     
     # configuration has been exported action
     def exporting_done(self):
+        self.toast_wait.dismiss()
+        self.notification_save = Gio.Notification.new("SaveDesktop")
+        self.notification_save.set_body(_["config_saved"])
+        active_window = app.get_active_window()
+        if active_window is None or not active_window.is_active():
+            app.send_notification(None, self.notification_save)
         self.toast.set_title(title=_["config_saved"])
         self.toast.set_button_label(_["open_folder"])
-        self.toast.set_action_name("app.open_dir")
+        self.toast.set_action_name("app.open-dir")
         self.toast_overlay.add_toast(self.toast)
     
     # Config has been imported action
     def applying_done(self):
+        self.toast_wait.dismiss()
+        self.notification_import = Gio.Notification.new("SaveDesktop")
+        self.notification_import.set_body(_["config_imported"])
+        active_window = app.get_active_window()
+        if active_window is None or not active_window.is_active():
+            app.send_notification(None, self.notification_import)
         self.toast.set_title(title=_["config_imported"])
-        if not snap:
-            self.toast.set_button_label(_["logout"])
-            self.toast.set_action_name("app.logout")
+        self.toast.set_button_label(_["logout"])
+        self.toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.toast)
         
     # popup about message "Please wait ..."
     def please_wait_toast(self):
-        if self.continue_timeout_yn == True:
-            self.toast_wait = Adw.Toast(title=_["few_minutes_msg"])
-            self.toast_wait.set_timeout(120)
+        try:
+            self.toast.dismiss()
+        except:
+            print("")
+        if self.different_toast_msg == True:
+            self.toast_wait = Adw.Toast.new(title=_["few_minutes_msg"])
         else:
-            self.toast_wait = Adw.Toast(title=_["please_wait"])
-            self.toast_wait.set_timeout(14)
+            self.toast_wait = Adw.Toast.new(title=_["please_wait"])
+        self.toast_wait.set_timeout(0)
         self.toast_overlay.add_toast(self.toast_wait)
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
         self.warn_toast = Adw.Toast.new(title=_["periodic_saving_desc"])
-        if not snap:
-            self.warn_toast.set_button_label(_["logout"])
-            self.warn_toast.set_action_name("app.logout")
+        self.warn_toast.set_button_label(_["logout"])
+        self.warn_toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.warn_toast)
         
     # message that says where will be run a synchronization
@@ -1056,10 +1121,15 @@ class MainWindow(Gtk.Window):
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE)
+        self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         self.create_action('about', self.on_about_action, ["F1"])
-        self.create_action('open_dir', self.open_dir)
+        self.create_action('open-dir', self.open_dir)
         self.create_action('logout', self.logout)
+        if self.settings["manually-sync"] == True:
+            self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"])
         self.create_action('m_sync', self.sync_pc)
+        self.create_action('quit', self.app_quit, ["<primary>q"])
+        self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.connect('activate', self.on_activate)
         
     # Open directory (action after clicking button Open the folder on Adw.Toast)
@@ -1067,7 +1137,7 @@ class MyApp(Adw.Application):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
         Gtk.FileLauncher.new(Gio.File.new_for_path(jf["recent_file"])).open_containing_folder()
-        
+    
     # Logout (action after clicking button Log Out on Adw.Toast)
     def logout(self, action, param):
         if snap:
@@ -1092,6 +1162,21 @@ class MyApp(Adw.Application):
         os.system(f"echo > {CACHE}/.from_app")
         self.sync_m = GLib.spawn_command_line_async(f"python3 {system_dir}/network_sharing.py")
         
+    def shortcuts(self, action, param):
+        shortcuts_window = ShortcutsWindow(
+            transient_for=self.get_active_window())
+        shortcuts_window.present()
+        
+    def app_quit(self, action, param):
+        if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
+            print("Flatpak data exists.")
+        elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
+            print("Flatpak data exists.")
+        else:     
+            os.popen(f"rm -rf {CACHE}/*")
+            os.popen(f"rm -rf {CACHE}/.*")
+        app.quit()
+        
     # About dialog
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
@@ -1115,7 +1200,7 @@ class MyApp(Adw.Application):
             dialog.set_version(version)
             dialog.set_application_icon(icon)
         dialog.set_release_notes(rel_notes)
-        dialog.show()    
+        dialog.show()
     
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)

@@ -10,7 +10,7 @@ body:
       description: "Write the name and version of Linux distribution"
       placeholder: "e.g. Fedora 37, Ubuntu 22.04"
     validations:
-      required: true  
+      required: true
   - type: dropdown
     id: environment
     attributes:
@@ -27,6 +27,13 @@ body:
         - Pantheon (elementaryOS)
         - Budgie
         - COSMIC (Pop!_OS)
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version of the SaveDesktop app
+      description: "You can find it by clicking on the three dots and then the 'About app' button"
     validations:
       required: true
   - type: dropdown

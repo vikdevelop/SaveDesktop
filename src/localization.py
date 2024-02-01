@@ -24,15 +24,19 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version, and icon
-v = "3.0.1"
+v = "3.1"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>FIxed these bugs:</p>\
-<ul>\
-<li>If your archive has a directory with Flatpak app data, the cache will not be removed after closing the app; it will be removed after finished copying the data</li>\
-<li>If the content in the folder of Flatpak apps data in your configuration archive is the same as the ~/.var/app folder, the data will not be copy</li>\
-</ul>\
-<p>And also:</p>\
-<ul><li>Updated translations</li></ul>"
+rel_notes = "<ul>\
+<li>Added an option for selecting whether extensions of GNOME, KDE and Cinnamon DE should be saved or not</li>\
+<li>Added an option for selecting whether /home/user/Desktop should be saved or not</li>\
+<li>Added Ctrl+Q shortcut for closing the application</li>\
+<li>Added Ctrl+S shortcut for manually synchronization</li>\
+<li>Added Keyboard shortcuts window</li>\
+<li>The application menu in the header bar is divided into two sections</li>\
+<li>Improved switch for including Flatpak apps in the configuration archive</li>\
+<li>Added notification about saved and imported configuration</li>\
+<li>Improved saving and importing configuration</li>\
+</ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
