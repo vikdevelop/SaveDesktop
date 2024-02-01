@@ -12,6 +12,7 @@ from open_wiki import *
 from shortcuts_window import *
 from datetime import date
 from pathlib import Path
+from threading import Thread
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
@@ -41,6 +42,8 @@ class MainWindow(Gtk.Window):
 
         # Load the GSettings database for saving user settings
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
+        
+        self.different_toast_msg = False
 
         # Set the window size and maximization from the GSettings database
         self.set_size_request(750, 540)
@@ -114,7 +117,7 @@ class MainWindow(Gtk.Window):
 
         # Popup window for showing messages about saved and imported configuration
         self.toast = Adw.Toast.new(title='')
-        self.toast.set_timeout(10)
+        self.toast.set_timeout(0)
         
         # Check of user current desktop
         if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
@@ -962,6 +965,9 @@ class MainWindow(Gtk.Window):
     # Save configuration
     def save_config(self):
         if self.settings["save-flatpak-data"] == True:
+            self.different_toast_msg = True
+        self.please_wait_toast()
+        if self.settings["save-flatpak-data"] == True:
             with open(f"{CACHE}/.filedialog.json", "w") as w:
                 w.write('{\n "recent_file": "%s/%s.fd.sd.tar.gz"\n}' % (self.folder, self.filename_text))
         else:
@@ -970,37 +976,16 @@ class MainWindow(Gtk.Window):
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
-        os.popen(f"python3 {system_dir}/config.py --save")
-        if self.settings["save-flatpak-data"] == True:
-            self.continue_timeout_yn = True
-            self.save_timeout = GLib.timeout_add_seconds(120, self.first_continue_timeout)
-        elif self.settings["save-desktop-folder"] == True:
-            self.continue_timeout_yn = False
-            self.save_timeout = GLib.timeout_add_seconds(30, self.exporting_done)
-        else:
-            self.continue_timeout_yn = False
-            self.save_timeout = GLib.timeout_add_seconds(14, self.exporting_done)
-        self.please_wait_toast()
-            
-    def first_continue_timeout(self):
-        if os.path.exists(f"{self.folder}/{self.filename_text}.fd.sd.tar.gz"):
-            self.continue_timeout_yn = False
-            self.exporting_done()
-        else:
-            print("First")
-            self.continue_timeout_yn = True
-            self.please_wait_toast()
-            self.continued_timeout = GLib.timeout_add_seconds(120, self.second_continue_timeout)
-            
-    def second_continue_timeout(self):
-        if os.path.exists(f"{self.folder}/{self.filename_text}.fd.sd.tar.gz"):
-            self.continue_timeout_yn = False
-            self.exporting_done()
-        else:
-            print("Second")
-            self.continue_timeout_yn = True
-            self.please_wait_toast()
-            self.continued_timeout_02 = GLib.timeout_add_seconds(120, self.exporting_done)
+        copy_thread = Thread(target=self.open_config_save)
+        copy_thread.start()
+        
+    def open_config_save(self):
+        try:
+            os.system(f"python3 {system_dir}/config.py --save")
+        except Exception as e:
+            print("Can't run the config.py file!")
+        finally:
+            GLib.idle_add(self.exporting_done)
         
     # Import config from list
     def imp_cfg_from_list(self, w):
@@ -1014,37 +999,48 @@ class MainWindow(Gtk.Window):
             
     # Import configuration
     def import_config(self):
-        if not os.path.exists(f"{CACHE}/import_config"):
-            os.mkdir(f"{CACHE}/import_config")
-        os.chdir(f"{CACHE}/import_config")
         with open(f"{CACHE}/.impfile.json") as d:
             j = json.load(d)
         if ".fd.sd.tar.gz" in j["import_file"]:
-            self.continue_timeout_yn = True
-            self.import_timeout = GLib.timeout_add_seconds(120, self.check_if_file_exists)
+            self.different_toast_msg = True
         else:
-            self.continue_timeout_yn = False
-            self.import_timeout = GLib.timeout_add_seconds(15, self.applying_done)
-        os.popen(f"python3 {system_dir}/config.py --import_")
+            self.different_toast_msg = False
         self.please_wait_toast()
+        if not os.path.exists(f"{CACHE}/import_config"):
+            os.mkdir(f"{CACHE}/import_config")
+        os.chdir(f"{CACHE}/import_config")
+        copy_thread = Thread(target=self.open_config_import)
+        copy_thread.start()
         
-    def check_if_file_exists(self):
-        if os.path.exists(f"{CACHE}/import_config/done"):
-            self.applying_done()
-        else:
-            self.continue_timeout_yn = True
-            self.please_wait_toast()
-            self.import_timeout = GLib.timeout_add_seconds(120, self.applying_done)
+    def open_config_import(self):
+        try:
+            os.system(f"python3 {system_dir}/config.py --import_")
+        except Exception as e:
+            print("Can't run the config.py file!")
+        finally:
+            GLib.idle_add(self.applying_done)
     
     # configuration has been exported action
     def exporting_done(self):
+        self.toast_wait.dismiss()
+        self.notification_save = Gio.Notification.new("SaveDesktop")
+        self.notification_save.set_body(_["config_saved"])
+        active_window = app.get_active_window()
+        if active_window is None or not active_window.is_active():
+            app.send_notification(None, self.notification_save)
         self.toast.set_title(title=_["config_saved"])
         self.toast.set_button_label(_["open_folder"])
-        self.toast.set_action_name("app.open_dir")
+        self.toast.set_action_name("app.open-dir")
         self.toast_overlay.add_toast(self.toast)
     
     # Config has been imported action
     def applying_done(self):
+        self.toast_wait.dismiss()
+        self.notification_import = Gio.Notification.new("SaveDesktop")
+        self.notification_import.set_body(_["config_imported"])
+        active_window = app.get_active_window()
+        if active_window is None or not active_window.is_active():
+            app.send_notification(None, self.notification_import)
         self.toast.set_title(title=_["config_imported"])
         self.toast.set_button_label(_["logout"])
         self.toast.set_action_name("app.logout")
@@ -1052,15 +1048,15 @@ class MainWindow(Gtk.Window):
         
     # popup about message "Please wait ..."
     def please_wait_toast(self):
-        if self.continue_timeout_yn == True:
-            self.toast_wait = Adw.Toast(title=_["few_minutes_msg"])
-            self.toast_wait.set_timeout(120)
-        elif self.settings["save-desktop-folder"] == True:
-            self.toast_wait = Adw.Toast(title=_["please_wait"])
-            self.toast_wait.set_timeout(30)
+        try:
+            self.toast.dismiss()
+        except:
+            print("")
+        if self.different_toast_msg == True:
+            self.toast_wait = Adw.Toast.new(title=_["few_minutes_msg"])
         else:
-            self.toast_wait = Adw.Toast(title=_["please_wait"])
-            self.toast_wait.set_timeout(14)
+            self.toast_wait = Adw.Toast.new(title=_["please_wait"])
+        self.toast_wait.set_timeout(0)
         self.toast_overlay.add_toast(self.toast_wait)
        
     # a warning indicating that the user must log out
@@ -1127,7 +1123,7 @@ class MyApp(Adw.Application):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         self.create_action('about', self.on_about_action, ["F1"])
-        self.create_action('open_dir', self.open_dir)
+        self.create_action('open-dir', self.open_dir)
         self.create_action('logout', self.logout)
         if self.settings["manually-sync"] == True:
             self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"])
@@ -1141,7 +1137,7 @@ class MyApp(Adw.Application):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
         Gtk.FileLauncher.new(Gio.File.new_for_path(jf["recent_file"])).open_containing_folder()
-        
+    
     # Logout (action after clicking button Log Out on Adw.Toast)
     def logout(self, action, param):
         if snap:
