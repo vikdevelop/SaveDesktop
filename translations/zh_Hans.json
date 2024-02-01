@@ -56,5 +56,11 @@
     "m_sync_desc": "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯",
     "periodic_saving_file": "定期保存文件",
     "few_minutes_msg": "这需要几分钟...…",
-    "user_data_flatpak": "使用已安装 Flatpak 程序的用户数据"
+    "user_data_flatpak": "使用已安装 Flatpak 程序的用户数据",
+    "keyboard_shortcuts": "Keyboard shortcuts",
+    "quit": "Quit",
+    "extensions": "Extensions",
+    "sync_manually": "Synchronise manually",
+    "list": "List of installed Flatpak apps",
+    "desktop_folder": "Desktop"
 }
