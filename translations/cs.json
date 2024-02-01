@@ -57,10 +57,10 @@
     "m_sync_desc": "Od teď můžete synchronizovat konfiguraci z nabídky v záhlaví",
     "few_minutes_msg": "Zabere to pár minut …",
     "user_data_flatpak": "Uživatelská data nainstalovaných aplikací Flatpak",
-    "keyboard_shortcuts": "Keyboard shortcuts",
-    "quit": "Quit",
-    "extensions": "Extensions",
-    "sync_manually": "Synchronise manually",
-    "list": "List of installed Flatpak apps",
-    "desktop_folder": "Desktop"
+    "keyboard_shortcuts": "Klávesové zkratky",
+    "quit": "Ukončit",
+    "extensions": "Rozšíření",
+    "sync_manually": "Synchronizovat ručně",
+    "list": "Seznam nainstalovaných aplikací Flatpak",
+    "desktop_folder": "Plocha"
 }
