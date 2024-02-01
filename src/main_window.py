@@ -981,6 +981,7 @@ class MainWindow(Gtk.Window):
         
     def open_config_save(self):
         try:
+            os.system(f"rm -rf {CACHE}/save_config/*")
             os.system(f"python3 {system_dir}/config.py --save")
         except Exception as e:
             print("Can't run the config.py file!")
@@ -1014,6 +1015,7 @@ class MainWindow(Gtk.Window):
         
     def open_config_import(self):
         try:
+            os.system(f"rm -rf {CACHE}/import_config/*")
             os.system(f"python3 {system_dir}/config.py --import_")
         except Exception as e:
             print("Can't run the config.py file!")
@@ -1096,8 +1098,9 @@ class MainWindow(Gtk.Window):
             print("Flatpak data exists.")
         elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
             print("Flatpak data exists.")
-        else:     
-            os.popen(f"rm -rf {CACHE}/*")
+        else:
+            os.popen(f"rm -rf {CACHE}/periodic_saving")
+            os.popen(f"rm -rf {CACHE}/syncing")
             os.popen(f"rm -rf {CACHE}/.*")
         try:
             url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
