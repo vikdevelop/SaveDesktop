@@ -56,5 +56,11 @@
     "manually": "Manuálisan",
     "m_sync_desc": "Ezentúl szinkronizálhatod a konfigurációt a fejlécsáv menüjéből",
     "few_minutes_msg": "Eltart néhány percig…",
-    "user_data_flatpak": "Telepített Flatpak alkalmazások felhasználói adatai"
+    "user_data_flatpak": "Telepített Flatpak alkalmazások felhasználói adatai",
+    "keyboard_shortcuts": "Keyboard shortcuts",
+    "quit": "Quit",
+    "extensions": "Extensions",
+    "sync_manually": "Synchronise manually",
+    "list": "List of installed Flatpak apps",
+    "desktop_folder": "Desktop"
 }

@@ -56,5 +56,11 @@
     "m_sync_desc": "Відтепер ви можете синхронізувати налаштування з меню на панелі заголовка",
     "periodic_saving_file": "Periodic saving file",
     "few_minutes_msg": "It'll take a few minutes ...",
-    "user_data_flatpak": "User data of installed Flatpak apps"
+    "user_data_flatpak": "User data of installed Flatpak apps",
+    "keyboard_shortcuts": "Keyboard shortcuts",
+    "quit": "Quit",
+    "extensions": "Extensions",
+    "sync_manually": "Synchronise manually",
+    "list": "List of installed Flatpak apps",
+    "desktop_folder": "Desktop"
 }
