@@ -187,10 +187,16 @@ class Import:
         elif environment == 'MATE':
             os.system(f'cp -R ./caja {home}/.config/')
         elif environment == 'KDE Plasma':
-            os.chdir("%s/syncing" % CACHE)
+            if os.path.exists(f"{CACHE}/syncing"):
+                os.chdir("%s/syncing" % CACHE)
+            else:
+                os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-config')
             os.system(f'cp -R ./ {home}/.config/')
-            os.chdir("%s/syncing" % CACHE)
+            if os.path.exists(f"{CACHE}/syncing"):
+                os.chdir("%s/syncing" % CACHE)
+            else:
+                os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-data')
             os.system(f'cp -R ./ {home}/.local/share/')
         if not snap:
