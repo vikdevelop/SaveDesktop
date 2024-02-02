@@ -76,7 +76,7 @@
                   <li>Added Ctrl+Q shortcut for closing the application</li>
                   <li>Added Ctrl+S shortcut for manually synchronization</li>
                   <li>Added Keyboard shortcuts window</li>
-                  <li>The application menu in the header bar is divided into two sections</li>
+                  <li>The application menu in the header bar is divided into two sections (if manually synchronization is enabled)</li>
                   <li>Improved switch for including Flatpak apps in the configuration archive</li>
                   <li>Added notification about saved and imported configuration</li>
                   <li>Improved saving and importing configuration</li>
