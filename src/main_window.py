@@ -43,7 +43,8 @@ class MainWindow(Gtk.Window):
         # Load the GSettings database for saving user settings
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         
-        self.different_toast_msg = False
+        self.different_toast_msg = False # value that sets if popup should be with text "Please wait ..." or "It'll take a few minutes ..."
+        self.save_ext_switch_state = False # value that sets if state of the switch "Extensions" in the Items Dialog should be saved or not
 
         # Set the window size and maximization from the GSettings database
         self.set_size_request(750, 540)
@@ -780,10 +781,13 @@ class MainWindow(Gtk.Window):
         self.switch_de.set_valign(align=Gtk.Align.CENTER)
         
         if self.environment == "GNOME":
+            self.save_ext_switch_state = True
             self.show_extensions_row()
         elif self.environment == "KDE Plasma":
+            self.save_ext_switch_state = True
             self.show_extensions_row()
         elif self.environment == "Cinnamon":
+            self.save_ext_switch_state = True
             self.show_extensions_row()
             
         self.desktop_row = Adw.ActionRow.new()
@@ -848,14 +852,15 @@ class MainWindow(Gtk.Window):
             self.settings["save-themes"] = self.switch_02.get_active()
             self.settings["save-fonts"] = self.switch_03.get_active()
             self.settings["save-backgrounds"] = self.switch_04.get_active()
-            self.settings["save-extensions"] = self.switch_ext.get_active()
             self.settings["save-desktop-folder"] = self.switch_de.get_active()
             if flatpak:
                 self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
                 self.settings["save-flatpak-data"] = self.switch_06.get_active()
+            if self.save_ext_switch_state == True:
+                self.settings["save-extensions"] = self.switch_ext.get_active()
             
     def show_extensions_row(self):
-        # Switch and row of option 'Save backgrounds'
+        # Switch and row of option 'Save extensions'
         self.switch_ext = Gtk.Switch.new()
         if self.settings["save-extensions"]:
             self.switch_ext.set_active(True)
