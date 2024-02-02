@@ -1021,7 +1021,8 @@ class MainWindow(Gtk.Window):
     def open_config_import(self):
         try:
             os.system(f"python3 {system_dir}/config.py --import_")
-            os.system(f"rm -rf {CACHE}/import_config/*")
+            if not os.path.exists(f"{CACHE}/import_config/app"):
+                os.system(f"rm -rf {CACHE}/import_config/*")
         except Exception as e:
             print("Can't run the config.py file!")
         finally:
