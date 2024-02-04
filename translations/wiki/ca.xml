@@ -29,8 +29,6 @@ La carpeta per defecte d'emmagatzematge és `/home/user/Baixades/SaveDesktop/arc
   - Si no teniu cap d'aquests fabricants, proveu accedint des d'un navegador com ara el Firefox a l'adreça del vostre dispositiu (URL: [192.168.1.1](http://192.168.1.1) o similars) i cerqueu dins la secció *DHCP* quelcom semblant a «IP estàtica», «exclusió DHCP», etc. O bé contacteu amb el fabricant de l'aparell o el proveïdor de la vostra connexió a Internet.</str>
   <str key="sys_config_print">  **`system-config-printer` package:**
   - Si no voleu assignar una IP manual a l'encaminador i teniu una impressora instal·lada al vostre sistema, a més del paquet `system-config-printer`, verifiqueu que l'opció «Compartida» està activada al panell principal de la impressora. En cas contrari, activeu aquesta opció i reinicieu el sistema. [Aquí](https://raw.githubusercontent.com/BennyBeat/SaveDesktop/1602010b7ef88f3fb0eb1010af33571f0c548eb3/translations/wiki/ca-Printer.png) teniu una captura de pantalla amb la configuració idònia.</str>
-  <str key="more_opts">- Si voleu seleccionar altre fitxer de sincronització diferent del de la vostra carpeta d'usuari, habiliteu els permisos al SaveDesktop mitjançant l'aplicació Flatseal (relatiu a les restriccions en la versió Flatpak)
-- Verifiqueu si la carpeta de còpies automàtiques és la mateixa que la utilitzada per al fitxer de sincronització</str>
   <str key="on_computer_2">**A l'ordinador 2:**
 - Verifiqueu que està connectat a la mateixa xarxa que l'ordinador 1.</str>
   <str key="sync_in_savedesktop">### Configuració de la sincronització a l'aplicació SaveDesktop
