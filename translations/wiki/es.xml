@@ -29,8 +29,6 @@ El directorio por defecto para guardar los periódicamente es `/home/user/Downlo
   - si no tienes los routers mencionados, abre la configuración de tu router (URL: [192.168.1.1](http://192.168.1.1) o relacionadas) y busca en la sección del servidor DHCP algo en forma de "Asignar manualmente una IP a la lista DHCP" o "IP estática", etc.</str>
   <str key="sys_config_print">  **Paquete `system-config-printer`:**
   - Si no desea asignar una IP manual al router y tiene una impresora instalada en su sistema, además del paquete `system-config-printer`, verifique que la opción "Compartida" está activada en el panel principal de la impresora. De lo contrario, active esta opción y reinicie el sistema. [Aquí](https://raw.githubusercontent.com/BennyBeat/SaveDesktop/1602010b7ef88f3fb0eb1010af33571f0c548eb3/translations/wiki/es-Printer.png) tiene una captura de pantalla con la configuración idónea.</str>
-  <str key="more_opts">- Si desea seleccionar otro archivo de sincronización diferente al de su carpeta de usuario, habilite los permisos en SaveDesktop mediante la aplicación Flatseal (relativo a las restricciones en la versión Flatpak)
-- Verifique si la carpeta de las copias automáticas es la misma que la utilizada para el archivo de sincronización</str>
   <str key="on_computer_2">**En el ordenador 2:**
 - Compruebe si está conectado a la misma red que el ordenador 1.</str>
   <str key="sync_in_savedesktop">### Configurar la sincronización en la aplicación SaveDesktop
