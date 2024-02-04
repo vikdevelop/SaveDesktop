@@ -29,8 +29,6 @@ La directory predefinita per il salvataggio periodico è "/home/user/Downloads/S
    - se non disponi dei router sopra indicati, apri le impostazioni del router (URL: [192.168.1.1](http://192.168.1.1) o correlato) e cerca nella sezione del server DHCP qualcosa sotto forma di "Assegna manualmente un IP nell'elenco DHCP" o "IP statico", ecc.</str>
   <str key="sys_config_print">  **`system-config-printer` package:**
    - se non vuoi impostare manualmente l'indirizzo IP dall'interfaccia del router e se hai una stampante e hai installato il pacchetto `system-config-printer`, controlla di aver selezionato l'opzione "Condivisa" facendo clic sulla scheda Stampante nella barra dell'intestazione. In caso contrario, spuntala e riavvia il sistema. [Qui](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) è uno screenshot di come dovrebbe essere.</str>
-  <str key="more_opts">- se si desidera selezionare un file di sincronizzazione da una cartella diversa dalla cartella Home, è necessario consentire l'accesso al file nell'app Flatseal per il corretto funzionamento (relativo alla versione Flatpak (Sandbox))
-- controlla se la cartella per il salvataggio periodico è la stessa cartella per il file di sincronizzazione</str>
   <str key="on_computer_2">**Sul computer 2:**
 - Controlla se sei connesso alla stessa rete del computer 1.</str>
   <str key="sync_in_savedesktop">### Impostare la sincronizzazione nell'app SaveDesktop
