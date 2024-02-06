@@ -57,10 +57,10 @@
     "periodic_saving_file": "Archivo de almacenamiento periódico",
     "few_minutes_msg": "Tardará unos minutos…",
     "user_data_flatpak": "Datos de usuario de las aplicaciones Flatpak instaladas",
-    "keyboard_shortcuts": "Keyboard shortcuts",
-    "quit": "Quit",
-    "extensions": "Extensions",
-    "sync_manually": "Synchronise manually",
-    "list": "List of installed Flatpak apps",
-    "desktop_folder": "Desktop"
+    "keyboard_shortcuts": "Atajos de teclado",
+    "quit": "Dejar",
+    "extensions": "Extensiones",
+    "sync_manually": "Sincronizar manualmente",
+    "list": "Lista de aplicaciones Flatpak instaladas",
+    "desktop_folder": "Escritorio"
 }
