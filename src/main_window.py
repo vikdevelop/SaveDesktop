@@ -987,7 +987,8 @@ class MainWindow(Gtk.Window):
     def open_config_save(self):
         try:
             os.system(f"python3 {system_dir}/config.py --save")
-            os.system(f"rm -rf {CACHE}/save_config/*")
+            os.chdir(CACHE)
+            os.system(f"rm -rf {CACHE}/save_config/")
         except Exception as e:
             print("Can't run the config.py file!")
         finally:
@@ -1020,6 +1021,7 @@ class MainWindow(Gtk.Window):
         
     def open_config_import(self):
         try:
+            os.system(f"rm -rf {CACHE}/import_config/*")
             os.system(f"python3 {system_dir}/config.py --import_")
         except Exception as e:
             print("Can't run the config.py file!")
