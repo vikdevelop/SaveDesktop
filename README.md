@@ -40,7 +40,8 @@
 - your settings
 - your backgrounds (including dynamic wallpapers, provided that the same username is retained)
 - your GNOME and Nautilus extensions
-- your installed Flatpak apps
+- your installed Flatpak apps and its data
+- your Desktop folder in the home directory
 - other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, etc.)
 
 NOTE: It can happen that a backup file will not be created, in that case, just allow access to the folder in the [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal) app.
@@ -57,13 +58,16 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.local/share/icons 
   - ~/.fonts
   - ~/.config/gtk-4.0 
-  - ~/.config/gtk-3.0 
+  - ~/.config/gtk-3.0
+  - ~/.var/app
+  - /var/lib/flatpak/app
   ```
   - **GNOME**
   ```
    - ~/.local/share/gnome-background-properties
    - ~/.local/share/gnome-shell
    - ~/.local/share/nautilus-python
+   - ~/.local/share/nautilus
    - ~/.local/share/gnome-control-center
   ```
   - **Pantheon**
