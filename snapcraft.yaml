@@ -2,21 +2,21 @@ name: savedesktop
 grade: stable
 adopt-info: savedesktop
 license: GPL-3.0+
-
+icon: flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 base: core22
 confinement: strict
 
-#plugs:
-#  dot-folders:
-#    interface: personal-files
-#    write:
-#      - $HOME/.config
-#      - $HOME/.local
-#      - $HOME/.themes
-#      - $HOME/.icons
-#      - $HOME/.xfce4
-#      - $HOME/.fonts
-#      - $HOME/.cinnamon
+plugs:
+ dot-folders:
+   interface: personal-files
+   write:
+     - $HOME/.config
+     - $HOME/.local
+     - $HOME/.themes
+     - $HOME/.icons
+     - $HOME/.xfce4
+     - $HOME/.fonts
+     - $HOME/.cinnamon
       
 apps:
   savedesktop:
@@ -27,7 +27,7 @@ apps:
     plugs:
       - home
       - network
-#      - login-session-control
+      - login-session-control
 
 parts:
   dconf:
@@ -45,11 +45,9 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: 3.0.1s
+    source-tag: '3.1.1'
+    source-depth: 1
     plugin: nil
-    override-pull: |
-      craftctl default
-      sed -e "s|Icon=io.github.vikdevelop.SaveDesktop|Icon=usr/share/icons/hicolor/scalable/apps/io.github.vikdevelop.SaveDesktop.svg|" -i $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.desktop
     override-build: |
       set -eux
       install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/main_window.py
