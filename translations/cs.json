@@ -13,7 +13,7 @@
     "config_imported": "Konfigurace byla provedena!",
     "logout": "Odhlásit se",
     "please_wait": "Počkejte prosím …",
-    "summary": "Uložte aktuální konfiguraci vašeho desktopového prostředí",
+    "summary": "Uložte konfiguraci plochy",
     "description": "SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.",
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
     "periodic_saving": "Pravidelné ukládání",
