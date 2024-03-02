@@ -4,7 +4,7 @@
     <id>io.github.vikdevelop.SaveDesktop</id>
     <launchable type="desktop-id">io.github.vikdevelop.SaveDesktop.desktop</launchable>
     <name>SaveDesktop</name>
-    <summary>Save the current configuration of your desktop environment</summary>
+    <summary>Save your desktop configuration</summary>
     <summary xml:lang="cs_CZ">Uložte aktuální konfiguraci vašeho desktopového prostředí</summary>
     <summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
     <summary xml:lang="pt_BR">Salvar a configuração atual do seu ambiente desktop</summary>
