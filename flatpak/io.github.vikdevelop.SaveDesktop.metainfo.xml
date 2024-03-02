@@ -68,8 +68,8 @@
     </categories>
 
     <branding>
-        <color type="primary" scheme_preference="light">#89CFF0</color>
-        <color type="primary" scheme_preference="dark">#0a2351</color>
+        <color type="primary" scheme_preference="light">#b6d1eb</color>
+        <color type="primary" scheme_preference="dark">#061530</color>
     </branding>
           
     <releases>
