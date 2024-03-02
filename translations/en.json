@@ -60,7 +60,7 @@
     "sync_manually": "Synchronise manually",
     "quit": "Quit",
     "keyboard_shortcuts": "Keyboard shortcuts",
-    "summary": "Save the current configuration of your desktop environment",
+    "summary": "Save your desktop configuration",
     "description": "SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.",
     "translator_credits": "Translator github-link"
 }
