@@ -24,9 +24,9 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version, and icon
-v = "3.1.1"
+v = "3.1.2"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Fixed bug with saving Flatpak apps data during periodic saving</p>"
+rel_notes = "<p>Edited application data for passing the Flathub guidelines</p>"
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
