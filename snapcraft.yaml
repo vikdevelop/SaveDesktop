@@ -7,17 +7,36 @@ base: core22
 confinement: strict
 
 plugs:
- dot-folders:
-   interface: personal-files
-   write:
-     - $HOME/.config
-     - $HOME/.local
-     - $HOME/.themes
-     - $HOME/.icons
-     - $HOME/.xfce4
-     - $HOME/.fonts
-     - $HOME/.cinnamon
-      
+  dot-config:
+    interface: personal-files
+    write:
+      - $HOME/.config
+  dot-local:
+    interface: personal-files
+    write:
+      - $HOME/.local
+  dot-themes:
+    interface: personal-files
+    write:
+      - $HOME/.themes
+  dot-icons:
+    interface: personal-files
+    write:
+      - $HOME/.icons
+  dot-fonts:
+    interface: personal-files
+    write:
+      - $HOME/.fonts
+  #DE specific
+  dot-xfce4:
+    interface: personal-files
+    write:
+      - $HOME/.xfce4
+  dot-cinnamon:
+    interface: personal-files
+    write:
+      - $HOME/.cinnamon
+       
 apps:
   savedesktop:
     extensions: [gnome]
