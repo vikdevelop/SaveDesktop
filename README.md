@@ -19,7 +19,7 @@
 # Content
 - [About](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#about)
     - [Supported environments](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#supported-environments)
-    - [SaveDesktop can save](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#savedesktop-can-save)
+    - [SaveDesktop features](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#savedesktop-can-save)
     - [Translations](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#translations)
     - [Sending issues](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#sending-issues)
     - [Installation](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#installation)
@@ -51,7 +51,7 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   
   - **General directories**
   ```
-  - ~/.config/dconf/user
+  - ~/.config/dconf
   - ~/.local/share/backgrounds 
   - ~/.themes
   - ~/.icons
@@ -138,7 +138,7 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
 ## Installation
 - Flathub (stable version)
   
-  <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+  <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 
 - Snap (stable version)
 
@@ -154,7 +154,7 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   # Remove
   wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove
   ```
-  NOTE: For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
+  ****NOTE***: **For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.*
   
 - Build with Flatpak builder (beta version) ⚠️**UNSTABLE**⚠️
   ```
