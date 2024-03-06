@@ -140,6 +140,11 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   
   <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
 
+- Snap (stable version)
+
+  <a href="https://snapcraft.io/savedesktop"><img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" width='240' />
+  </a>
+
 - Install on the system (native version)
   
   ```bash
