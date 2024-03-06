@@ -2,7 +2,7 @@
 <p align="center">
   <img src="/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg">
   <h1 align="center">SaveDesktop</h1>
-  <p align="center">Save the current configuration of your desktop environment</p>
+  <p align="center">Save your desktop configuration</p>
 </p>
 
 ![Main Window](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window_dark.png#gh-dark-mode-only)
