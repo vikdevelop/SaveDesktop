@@ -19,7 +19,11 @@ elif [ "$1" == "--help" ]
    		echo -e '\033[1mArguments:\033[0m \n None | Run SaveDesktop app (GUI) \n --background | Start periodic saving \n --sync | Sync desktop configuration with other computer \n --start-server | Start HTTP server for synchronization DE config with other computers \n --help | Show this message'
 fi
 else
-	if [ "$1" == "" ]
+  for plug in "dot-config" "dot-local" "dot-themes" "dot-icons" "dot-fonts" "login-session-control"; do
+    if ! snapctl is-connected $plug; then
+      zenity --error --text="Please run the following command: \n\nsnap connect savedesktop:$plug"  
+    fi
+  if [ "$1" == "" ]
 	then 
 		python3 $SNAP/usr/main_window.py
 	elif [ "$1" == "--background" ]
