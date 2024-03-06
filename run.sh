@@ -21,7 +21,8 @@ fi
 else
   for plug in "dot-config" "dot-local" "dot-themes" "dot-icons" "dot-fonts" "login-session-control"; do
     if ! snapctl is-connected $plug; then
-      zenity --error --text="Please run the following command: \n\nsnap connect savedesktop:$plug"  
+      zenity --error --text="Please run the following command: \n\nsnap connect savedesktop:$plug"
+      exit
     fi
   if [ "$1" == "" ]
 	then 
