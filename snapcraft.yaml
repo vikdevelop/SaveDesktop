@@ -2,22 +2,41 @@ name: savedesktop
 grade: stable
 adopt-info: savedesktop
 license: GPL-3.0+
-
+icon: flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 base: core22
 confinement: strict
 
-#plugs:
-#  dot-folders:
-#    interface: personal-files
-#    write:
-#      - $HOME/.config
-#      - $HOME/.local
-#      - $HOME/.themes
-#      - $HOME/.icons
-#      - $HOME/.xfce4
-#      - $HOME/.fonts
-#      - $HOME/.cinnamon
-      
+plugs:
+  dot-config:
+    interface: personal-files
+    write:
+      - $HOME/.config
+  dot-local:
+    interface: personal-files
+    write:
+      - $HOME/.local
+  dot-themes:
+    interface: personal-files
+    write:
+      - $HOME/.themes
+  dot-icons:
+    interface: personal-files
+    write:
+      - $HOME/.icons
+  dot-fonts:
+    interface: personal-files
+    write:
+      - $HOME/.fonts
+  #DE specific
+  dot-xfce4:
+    interface: personal-files
+    write:
+      - $HOME/.xfce4
+  dot-cinnamon:
+    interface: personal-files
+    write:
+      - $HOME/.cinnamon
+       
 apps:
   savedesktop:
     extensions: [gnome]
@@ -27,7 +46,7 @@ apps:
     plugs:
       - home
       - network
-#      - login-session-control
+      - login-session-control
 
 parts:
   dconf:
@@ -45,20 +64,12 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: 3.0.1s
+    source-tag: '3.1.2'
+    source-depth: 1
     plugin: nil
-    override-pull: |
-      craftctl default
-      sed -e "s|Icon=io.github.vikdevelop.SaveDesktop|Icon=usr/share/icons/hicolor/scalable/apps/io.github.vikdevelop.SaveDesktop.svg|" -i $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.desktop
     override-build: |
       set -eux
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/main_window.py
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/periodic_saving.py
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/server.py
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/network_sharing.py
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/open_wiki.py
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/localization.py
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/config.py
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/* 
       install -D -t $CRAFT_PART_INSTALL/usr/share/applications $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.desktop
       install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps $CRAFT_PART_SRC/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
       install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/exclamation_mark.png
