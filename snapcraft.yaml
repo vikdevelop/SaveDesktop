@@ -83,12 +83,13 @@ parts:
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
 
   deps:
+    after: [ dconf, savedesktop ]
     plugin: nil
     stage-packages:
       - wget
       - libnotify-bin
       - zenity
-    prime:
+    stage:
       - usr/bin/notify-send
       - usr/bin/wget
       - usr/bin/zenity
