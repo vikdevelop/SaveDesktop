@@ -6,10 +6,6 @@ icon: flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 base: core22
 confinement: strict
 
-layout:
-  /usr/share/zenity:
-    symlink: $SNAP/usr/share/zenity
-
 plugs:
   dot-config:
     interface: personal-files
@@ -92,9 +88,6 @@ parts:
     stage-packages:
       - wget
       - libnotify-bin
-      - zenity
     stage:
       - usr/bin/notify-send
       - usr/bin/wget
-      - usr/bin/zenity
-      - usr/share/zenity
