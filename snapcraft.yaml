@@ -6,6 +6,10 @@ icon: flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 base: core22
 confinement: strict
 
+layout:
+  /usr/share/zenity:
+    symlink: $SNAP/usr/share/zenity
+
 plugs:
   dot-config:
     interface: personal-files
@@ -64,7 +68,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: '3.1.2_snap_2'
+    source-tag: '3.1.2_snap'
     source-depth: 1
     plugin: nil
     override-build: |
@@ -93,3 +97,4 @@ parts:
       - usr/bin/notify-send
       - usr/bin/wget
       - usr/bin/zenity
+      - usr/share/zenity
