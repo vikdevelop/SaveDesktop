@@ -197,10 +197,8 @@ class MainWindow(Gtk.Window):
             self.pBox.append(self.label_sorry)
             
         if snap:
-            result = subprocess.run(["snapctl", "is-connected", "dot-config"], stdout=subprocess.PIPE)
-            
             # If plug is not connected, display error message
-            if result.returncode != 0:
+            if not os.path.exists(f"{DATA}/first-run"):
                 self.set_child(self.pBox)
                 self.headerbar.set_title_widget(None)
                 self.pBox.set_margin_start(90)
@@ -225,6 +223,8 @@ class MainWindow(Gtk.Window):
                 self.cmdLabel.set_justify(Gtk.Justification.CENTER)
                 self.cmdLabel.set_wrap(True)
                 self.pBox.append(self.cmdLabel)
+
+                os.system(f"echo > {DATA}/first-run")
     
     # Show main layout
     def save_desktop(self):
