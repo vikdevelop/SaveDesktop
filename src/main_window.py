@@ -195,6 +195,36 @@ class MainWindow(Gtk.Window):
             self.label_sorry.set_wrap(True)
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
+            
+        if snap:
+            result = subprocess.run(["snapctl", "is-connected", "dot-config"], stdout=subprocess.PIPE)
+            
+            # If plug is not connected, display error message
+            if result.returncode != 0:
+                self.set_child(self.pBox)
+                self.headerbar.set_title_widget(None)
+                self.pBox.set_margin_start(90)
+                self.pBox.set_margin_end(90)
+                
+                # show exclamation mark icon
+                self.snapImage = Gtk.Image.new_from_icon_name("exclamation_mark")
+                self.snapImage.set_pixel_size(50)
+                self.pBox.append(self.snapImage)
+                
+                # show warning label
+                self.snapLabel = Gtk.Label.new(str="<big><b>Need to connect some plugs</b></big>\nIn order for SaveDesktop to work properly, you need to connect some plugs to access the files. You can do this by opening a terminal (Ctrl+Alt+T) and entering the following command: \n")
+                self.snapLabel.set_use_markup(True)
+                self.snapLabel.set_justify(Gtk.Justification.CENTER)
+                self.snapLabel.set_wrap(True)
+                self.pBox.append(self.snapLabel)
+                
+                # show command text
+                self.cmdLabel = Gtk.Label.new(str="<i>sudo snap connect savedesktop:dot-config &amp;&amp; sudo snap connect savedesktop:dot-local &amp;&amp; sudo snap connect savedesktop:dot-themes &amp;&amp; sudo snap connect savedesktop:dot-icons &amp;&amp; sudo snap connect savedesktop:dot-fonts &amp;&amp; sudo snap connect savedesktop:login-session-control</i>")
+                self.cmdLabel.set_use_markup(True)
+                self.cmdLabel.set_selectable(True)
+                self.cmdLabel.set_justify(Gtk.Justification.CENTER)
+                self.cmdLabel.set_wrap(True)
+                self.pBox.append(self.cmdLabel)
     
     # Show main layout
     def save_desktop(self):
