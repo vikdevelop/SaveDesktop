@@ -21,7 +21,7 @@ fi
 else
   for plug in "dot-config" "dot-local" "dot-themes" "dot-icons" "dot-fonts" "login-session-control"; do
     if ! snapctl is-connected $plug; then
-      zenity --error --text="Please run the following command: \n\nsnap connect savedesktop:$plug"
+      zenity --error --text="Please open the terminal (Ctrl+Alt+T) and run the following command: \n\nsudo snap connect savedesktop:dot-config &amp;&amp; sudo snap connect savedesktop:dot-local &amp;&amp; sudo snap connect savedesktop:dot-themes &amp;&amp; sudo snap connect savedesktop:dot-icons &amp;&amp; sudo snap connect savedesktop:dot-fonts &amp;&amp; sudo snap connect savedesktop:login-session-control"
       exit
     fi
   done
