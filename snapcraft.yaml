@@ -87,6 +87,8 @@ parts:
     stage-packages:
       - wget
       - libnotify-bin
+      - zenity
     prime:
       - usr/bin/notify-send
       - usr/bin/wget
+      - usr/bin/zenity
