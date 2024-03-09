@@ -68,7 +68,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: '3.1.2_snap_2'
+    source-tag: '3.1.2_snap_3'
     source-depth: 1
     plugin: nil
     override-build: |
