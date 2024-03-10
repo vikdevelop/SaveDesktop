@@ -197,11 +197,10 @@ class MainWindow(Gtk.Window):
             self.pBox.append(self.label_sorry)
             
         if snap:
-            plug = ["dot-config", "dot-local", "dot-themes", "dot-icons", "dot-fonts", "login-session-control"]
-            # If plug is not connected, display error message
-            result = subprocess.run(["snapctl", "is-connected", plug], stdout=subprocess.PIPE)
+            plugs = ["dot-config", "dot-local", "dot-themes", "dot-icons", "dot-fonts", "login-session-control"]            
 
-            for plugs in plug:
+            for plug in plugs:
+                result = subprocess.run(["snapctl", "is-connected", plug], stdout=subprocess.PIPE)
                 # If plug is not connected, display error message
                 if result.returncode != 0:
                     show_warning = True
