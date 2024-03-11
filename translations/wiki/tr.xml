@@ -1,20 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home">Home page</str>
-  <str key="periodic_saving">Periodic Saving</str>
-  <str key="how_it_works">### How it works?</str>
-  <str key="pb_desc">In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:</str>
-  <str key="pb_options">- **Daily**: 
-  - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.
-- **Weekly**:
-  - SaveDesktop performs a configuration backup every Monday if "Weekly" is selected. If the computer is not running on that day, SaveDesktop does not do it the next day.
-- **Monthly**:
-  - If "Monthly" is selected, SaveDesktop makes the backup on the first day of the month, e.g. May 1, June 1, December 1, etc. As with "Weekly", if the computer is not running on that day, SaveDesktop does not perform it the next day.
-- **Never**:
-  - Nothing's happening</str>
-  <str key="pb_location">### Where are the periodic saving files stored?
-Default directory for periodic saving is `/home/user/Downloads/SaveDesktop/archives`, but you can choose custom directory.</str>
-  <str key="pb_filename_title">### Filename format</str>
+  <str key="home">Ana sayfa</str>
+  <str key="periodic_saving">Periyodik kaydetme</str>
+  <str key="how_it_works">### Nasıl çalışır?</str>
+  <str key="pb_desc">Manuel kaydetmeye ek olarak SaveDesktop, masaüstü yapılandırmanızı düzenli aralıklarla kaydetmenize de olanak tanır. Aşağıdaki seçenekler arasından seçim yapabilirsiniz:</str>
+  <str key="pb_options">- **Günlük**:
+  - Sisteme giriş yapıldıktan sonra SaveDesktop arka planda çalışır ve yedeklemeyi yapar. Gün içinde tekrar giriş yapıldığında yeni yedek almaz, günlük yedek bir kere yapılır.
+- **Haftalık**:
+  - SaveDesktop, "Haftalık" ayarlanırsa, her pazartesi yedekleme yapar. Yedekleme günü giriş yapılmazsa ertesi gün yedekleme yapılmaz.
+- **Aylık**:
+  - SaveDesktop, "Aylık" ayarlanırsa, yedeklemeyi ayın ilk gününde yapar, örn. 1 Mayıs, 1 Haziran, 1 Aralık vb. "Haftalık"ta olduğu gibi yedekleme günü giriş yapılmazsa SaveDesktop ertesi gün yedekleme yapmaz.
+- **Asla**:
+  - Hiçbir şey yapmaz</str>
+  <str key="pb_location">### Periyodik kayıtta dosyalar nerede saklanıyor?
+Periyodik kayıtta varsayılan kaydetme dizini `/home/user/Downloads/SaveDesktop/archives`tır, ancak özel bir dizin seçilebilir.</str>
+  <str key="pb_filename_title">### Dosya adı formatı</str>
   <str key="pb_filname_desc">If you want to give a filename format for periodic saving files other than `Latest_configuration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.</str>
   <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
   <str key="how_to_set_up_it">## How to set up it?</str>
