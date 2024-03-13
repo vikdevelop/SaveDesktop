@@ -1155,7 +1155,7 @@ class MainWindow(Gtk.Window):
         self.importwaitBox.append(self.importwaitSpinner)
         
         self.idoneImage = Gtk.Image.new()
-        self.iavewaitBox.append(self.sdoneImage)
+        self.importwaitBox.append(self.idoneImage)
         
         self.importwaitLabel = Gtk.Label.new(str=f"<big><b>Importing configuration ...</b></big>\n {_['please_wait']}\n")
         self.importwaitLabel.set_use_markup(True)
@@ -1169,7 +1169,7 @@ class MainWindow(Gtk.Window):
         self.importwaitButton.connect("clicked", cancel_import)
         self.importwaitButton.set_margin_start(170)
         self.importwaitButton.set_margin_end(170)
-        self.importwaitBox.append(self.savewaitButton)
+        self.importwaitBox.append(self.importwaitButton)
         
     
     # Config has been imported action
@@ -1183,9 +1183,9 @@ class MainWindow(Gtk.Window):
             self.importwaitBox.remove(self.logoutButton)
             self.importwaitBox.remove(self.backtomButton)
             
-        if os.path.exists(f"{CACHE}/save_config/done_gui"):
+        if os.path.exists(f"{CACHE}/import_config/done"):
             self.importwaitSpinner.stop()
-            self.importwaitBox.remove(self.savewaitButton)
+            self.importwaitBox.remove(self.importwaitButton)
             
             # Done icon
             self.idoneImage.set_from_icon_name("done")
