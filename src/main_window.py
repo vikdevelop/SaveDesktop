@@ -1056,7 +1056,7 @@ class MainWindow(Gtk.Window):
     # "Please wait" information page on the "Save" page
     def please_wait_save(self):
         def cancel_save(w):
-            os.system("pkill -xf 'python3 /app/config.py --save'")
+            os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
             self.toast_overlay.set_child(self.headapp)
             self.savewaitBox.remove(self.savewaitSpinner)
             self.savewaitBox.remove(self.savewaitLabel)
@@ -1133,7 +1133,7 @@ class MainWindow(Gtk.Window):
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
         def cancel_import(w):
-            os.system("pkill -xf 'python3 /app/config.py --import'")
+            os.system(f"pkill -xf 'python3 {system_dir}/config.py --import'")
             self.toast_overlay.set_child(self.headapp)
             self.importwaitBox.remove(self.importwaitSpinner)
             self.importwaitBox.remove(self.importwaitLabel)
