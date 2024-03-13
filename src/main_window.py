@@ -1008,15 +1008,9 @@ class MainWindow(Gtk.Window):
     
     # Save configuration
     def save_config(self):
-        if self.settings["save-flatpak-data"] == True:
-            self.different_toast_msg = True
-        self.please_wait_toast()
-        if self.settings["save-flatpak-data"] == True:
-            with open(f"{CACHE}/.filedialog.json", "w") as w:
-                w.write('{\n "recent_file": "%s/%s.fd.sd.tar.gz"\n}' % (self.folder, self.filename_text))
-        else:
-            with open(f"{CACHE}/.filedialog.json", "w") as w:
-                w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
+        self.please_wait_save()
+        with open(f"{CACHE}/.filedialog.json", "w") as w:
+            w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
@@ -1026,8 +1020,6 @@ class MainWindow(Gtk.Window):
     def open_config_save(self):
         try:
             os.system(f"python3 {system_dir}/config.py --save")
-            os.chdir(CACHE)
-            os.system(f"rm -rf {CACHE}/save_config/")
         except Exception as e:
             print("Can't run the config.py file!")
         finally:
@@ -1045,13 +1037,7 @@ class MainWindow(Gtk.Window):
             
     # Import configuration
     def import_config(self):
-        with open(f"{CACHE}/.impfile.json") as d:
-            j = json.load(d)
-        if ".fd.sd.tar.gz" in j["import_file"]:
-            self.different_toast_msg = True
-        else:
-            self.different_toast_msg = False
-        self.please_wait_toast()
+        self.please_wait_import()
         if not os.path.exists(f"{CACHE}/import_config"):
             os.mkdir(f"{CACHE}/import_config")
         os.chdir(f"{CACHE}/import_config")
@@ -1066,45 +1052,160 @@ class MainWindow(Gtk.Window):
             print("Can't run the config.py file!")
         finally:
             GLib.idle_add(self.applying_done)
-    
+            
+    # "Please wait" information page on the "Save" page
+    def please_wait_save(self):
+        def cancel_save(w):
+            os.system("pkill -xf 'python3 /app/config.py --save'")
+            self.toast_overlay.set_child(self.headapp)
+            self.savewaitBox.remove(self.savewaitSpinner)
+            self.savewaitBox.remove(self.savewaitLabel)
+            self.savewaitBox.remove(self.savewaitButton)
+            self.savewaitBox.remove(self.sdoneImage)
+            self.savewaitBox.remove(self.opensaveButton)
+            self.savewaitBox.remove(self.backtomButton)
+        
+        self.savewaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.savewaitBox.set_halign(Gtk.Align.CENTER)
+        self.savewaitBox.set_valign(Gtk.Align.CENTER)
+        self.savewaitBox.set_margin_start(80)
+        self.savewaitBox.set_margin_end(80)
+        self.toast_overlay.set_child(self.savewaitBox)
+        
+        self.savewaitSpinner = Gtk.Spinner.new()
+        self.savewaitSpinner.set_size_request(100,100)
+        self.savewaitSpinner.start()
+        self.savewaitBox.append(self.savewaitSpinner)
+        
+        self.sdoneImage = Gtk.Image.new()
+        self.savewaitBox.append(self.sdoneImage)
+        
+        self.savewaitLabel = Gtk.Label.new(str=f"<big><b>Saving configuration ...</b></big>\n Your Desktop Environment configuration will be saved in this directory: {self.folder}/{self.filename_text}.sd.tar.gz\n")
+        self.savewaitLabel.set_use_markup(True)
+        self.savewaitLabel.set_justify(Gtk.Justification.CENTER)
+        self.savewaitLabel.set_wrap(True)
+        self.savewaitBox.append(self.savewaitLabel)
+        
+        self.savewaitButton = Gtk.Button.new_with_label(_["cancel"])
+        self.savewaitButton.add_css_class("pill")
+        self.savewaitButton.add_css_class("destructive-action")
+        self.savewaitButton.connect("clicked", cancel_save)
+        self.savewaitButton.set_margin_start(170)
+        self.savewaitButton.set_margin_end(170)
+        self.savewaitBox.append(self.savewaitButton)
+        
     # configuration has been exported action
     def exporting_done(self):
-        self.toast_wait.dismiss()
-        self.notification_save = Gio.Notification.new("SaveDesktop")
-        self.notification_save.set_body(_["config_saved"])
-        active_window = app.get_active_window()
-        if active_window is None or not active_window.is_active():
-            app.send_notification(None, self.notification_save)
-        self.toast.set_title(title=_["config_saved"])
-        self.toast.set_button_label(_["open_folder"])
-        self.toast.set_action_name("app.open-dir")
-        self.toast_overlay.add_toast(self.toast)
+        def back_to_main(w):
+            self.toast_overlay.set_child(self.headapp)
+            self.savewaitBox.remove(self.savewaitSpinner)
+            self.savewaitBox.remove(self.savewaitLabel)
+            self.savewaitBox.remove(self.savewaitButton)
+            self.savewaitBox.remove(self.sdoneImage)
+            self.savewaitBox.remove(self.opensaveButton)
+            self.savewaitBox.remove(self.backtomButton)
+            
+        if os.path.exists(f"{CACHE}/save_config/done_gui"):
+            self.savewaitSpinner.stop()
+            self.savewaitBox.remove(self.savewaitButton)
+            # Done icon
+            self.sdoneImage.set_from_icon_name("done")
+            self.sdoneImage.set_pixel_size(128)
+            
+            self.savewaitLabel.set_label(f"<big><b>{_['config_saved']}</b></big>\nYou can now open the folder with saved your configuration by clicking on the button below.\n")
+            self.opensaveButton = Gtk.Button.new_with_label(_["open_folder"])
+            self.opensaveButton.add_css_class('pill')
+            self.opensaveButton.add_css_class('suggested-action')
+            self.opensaveButton.set_action_name('app.open-dir')
+            self.opensaveButton.set_margin_start(170)
+            self.opensaveButton.set_margin_end(170)
+            self.savewaitBox.append(self.opensaveButton)
+            
+            self.backtomButton = Gtk.Button.new_with_label("Back to main page")
+            self.backtomButton.connect("clicked", back_to_main)
+            self.backtomButton.add_css_class("pill")
+            self.backtomButton.set_margin_start(170)
+            self.backtomButton.set_margin_end(170)
+            self.savewaitBox.append(self.backtomButton)
+            
+        os.popen(f"rm -rf {CACHE}/save_config/*")
+    
+    # "Please wait" information on the "Import" page
+    def please_wait_import(self):
+        def cancel_import(w):
+            os.system("pkill -xf 'python3 /app/config.py --import'")
+            self.toast_overlay.set_child(self.headapp)
+            self.importwaitBox.remove(self.importwaitSpinner)
+            self.importwaitBox.remove(self.importwaitLabel)
+            self.importwaitBox.remove(self.importwaitButton)
+            self.importwaitBox.remove(self.idoneImage)
+            self.importwaitBox.remove(self.logoutButton)
+            self.importwaitBox.remove(self.backtomButton)
+        
+        self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.importwaitBox.set_halign(Gtk.Align.CENTER)
+        self.importwaitBox.set_valign(Gtk.Align.CENTER)
+        self.importwaitBox.set_margin_start(80)
+        self.importwaitBox.set_margin_end(80)
+        self.toast_overlay.set_child(self.importwaitBox)
+        
+        self.importwaitSpinner = Gtk.Spinner.new()
+        self.importwaitSpinner.set_size_request(100,100)
+        self.importwaitSpinner.start()
+        self.importwaitBox.append(self.importwaitSpinner)
+        
+        self.idoneImage = Gtk.Image.new()
+        self.iavewaitBox.append(self.sdoneImage)
+        
+        self.importwaitLabel = Gtk.Label.new(str=f"<big><b>Importing configuration ...</b></big>\n {_['please_wait']}\n")
+        self.importwaitLabel.set_use_markup(True)
+        self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
+        self.importwaitLabel.set_wrap(True)
+        self.importwaitBox.append(self.importwaitLabel)
+        
+        self.importwaitButton = Gtk.Button.new_with_label(_["cancel"])
+        self.importwaitButton.add_css_class("pill")
+        self.importwaitButton.add_css_class("destructive-action")
+        self.importwaitButton.connect("clicked", cancel_import)
+        self.importwaitButton.set_margin_start(170)
+        self.importwaitButton.set_margin_end(170)
+        self.importwaitBox.append(self.savewaitButton)
+        
     
     # Config has been imported action
     def applying_done(self):
-        self.toast_wait.dismiss()
-        self.notification_import = Gio.Notification.new("SaveDesktop")
-        self.notification_import.set_body(_["config_imported"])
-        active_window = app.get_active_window()
-        if active_window is None or not active_window.is_active():
-            app.send_notification(None, self.notification_import)
-        self.toast.set_title(title=_["config_imported"])
-        self.toast.set_button_label(_["logout"])
-        self.toast.set_action_name("app.logout")
-        self.toast_overlay.add_toast(self.toast)
-        
-    # popup about message "Please wait ..."
-    def please_wait_toast(self):
-        try:
-            self.toast.dismiss()
-        except:
-            print("")
-        if self.different_toast_msg == True:
-            self.toast_wait = Adw.Toast.new(title=_["few_minutes_msg"])
-        else:
-            self.toast_wait = Adw.Toast.new(title=_["please_wait"])
-        self.toast_wait.set_timeout(0)
-        self.toast_overlay.add_toast(self.toast_wait)
+        def back_to_main(w):
+            self.toast_overlay.set_child(self.headapp)
+            self.importwaitBox.remove(self.importwaitSpinner)
+            self.importwaitBox.remove(self.importwaitLabel)
+            self.importwaitBox.remove(self.importwaitButton)
+            self.importwaitBox.remove(self.idoneImage)
+            self.importwaitBox.remove(self.logoutButton)
+            self.importwaitBox.remove(self.backtomButton)
+            
+        if os.path.exists(f"{CACHE}/save_config/done_gui"):
+            self.importwaitSpinner.stop()
+            self.importwaitBox.remove(self.savewaitButton)
+            
+            # Done icon
+            self.idoneImage.set_from_icon_name("done")
+            self.idoneImage.set_pixel_size(128)
+            
+            self.importwaitLabel.set_label(f"<big><b>{_['config_imported']}</b></big>\nFor the changes to take effect, you can log out of the system using the button below.\n")
+            self.logoutButton = Gtk.Button.new_with_label(_["logout"])
+            self.logoutButton.add_css_class('pill')
+            self.logoutButton.add_css_class('suggested-action')
+            self.logoutButton.set_action_name('app.logout')
+            self.logoutButton.set_margin_start(170)
+            self.logoutButton.set_margin_end(170)
+            self.importwaitBox.append(self.logoutButton)
+            
+            self.backtomButton = Gtk.Button.new_with_label("Back to main page")
+            self.backtomButton.connect("clicked", back_to_main)
+            self.backtomButton.add_css_class("pill")
+            self.backtomButton.set_margin_start(170)
+            self.backtomButton.set_margin_end(170)
+            self.importwaitBox.append(self.backtomButton)
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
