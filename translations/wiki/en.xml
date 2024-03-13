@@ -43,7 +43,7 @@ You can choose between the following items:
 - Monthly (synchronization takes place every second day in the month)
 - Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
 - Never (nothing's happening)</str>
-  <str key="save_installed_flatpaks_title">Save installed Flatpak apps and install it from list</str>
+  <str key="save_installed_flatpaks_title">Save installed Flatpak apps and install them from list</str>
   <str key="save_flatpak_intro">Since version 2.5, SaveDesktop allows you to save installed Flatpak applications and install them from a list. So how does it work?</str>
   <str key="saving_flatpaks">### Saving installed Flatpak applications
 It is possible to save a list of installed Flatpak applications installed in the system directory /var/lib/flatpak/app and the home directory ~/.local/share/flatpak/app. The list of installed Flatpak applications in the configuration archive is marked as installed_flatpaks.sh for the system directory and installed_user_flatpaks.sh for the home directory.</str>
