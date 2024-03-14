@@ -30,6 +30,75 @@ class ShortcutsWindow(Gtk.ShortcutsWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+   
+class FolderSwitchRow(Gtk.ListBoxRow):
+    def __init__(self, folder_name):
+        super().__init__()
+        self.folder_name = folder_name
+        
+        self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
+        
+        self.switch = Gtk.Switch()
+        self.switch.set_halign(Gtk.Align.END)
+        self.switch.set_valign(Gtk.Align.END)
+        self.switch.connect("state-set", self.on_switch_activated)
+        
+        if self.settings["selected-flatpak-apps-data"] == []:
+            self.switch.set_active(True)
+        else:
+            switch_state = folder_name in self.settings.get_strv("selected-flatpak-apps-data")
+            self.switch.set_active(switch_state)
+        
+        self.approw = Adw.ActionRow.new()
+        self.approw.set_title(folder_name)
+        self.approw.add_prefix(self.switch)
+        self.approw.set_hexpand(True)
+        
+        self.box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+        self.box.append(self.approw)
+        
+        self.set_child(self.box)
+    
+    def on_switch_activated(self, switch, state):
+        if state == True:
+            os.system(f"echo {self.folder_name} >> {DATA}/selected_flatpaks")
+            output = subprocess.getoutput(f"cat {DATA}/selected_flatpaks")
+            sp_out = output.split()
+        elif state == False:
+            os.system(f"sed -i 's\{self.folder_name}\ \ ' {DATA}/selected_flatpaks")
+            output = subprocess.getoutput(f"cat {DATA}/selected_flatpaks")
+            sp_out = output.split()
+        
+        self.settings["selected-flatpak-apps-data"] = sp_out
+            
+class FlatpakAppsDialog(Gtk.Dialog):
+    def __init__(self):
+        super().__init__(title="Flatpak apps data selection", transient_for=None, modal=True)
+        self.set_default_size(1200, 600)
+        self.set_resizable(True)
+        self.headerbar = Gtk.HeaderBar.new()
+        self.set_titlebar(self.headerbar)
+        
+        content_area = self.get_content_area()
+        
+        self.flowbox = Gtk.FlowBox()
+        self.flowbox.set_selection_mode(Gtk.SelectionMode.NONE)
+        self.flowbox.set_max_children_per_line(2)
+        
+        content_area.append(self.flowbox)
+        
+        self.load_folders()
+        
+    def load_folders(self):
+        folder_path = f"{home}/.var/app"
+        try:
+            folders = Gio.File.new_for_path(folder_path).enumerate_children('*', 0, None)
+            for info in folders:
+                folder_name = info.get_name()
+                folder_row = FolderSwitchRow(folder_name)
+                self.flowbox.append(folder_row)
+        except Exception as e:
+            print(f"Error loading folders: {e}")
 
 # Application window
 class MainWindow(Gtk.Window):
@@ -863,12 +932,10 @@ class MainWindow(Gtk.Window):
             self.list_row.set_activatable_widget(self.switch_05)
             self.flatpak_row.add_row(child=self.list_row)
             
-            # Switch and row of option 'Save SaveDesktop app settings'
+            # Switch, button and row of option 'Save SaveDesktop app settings'
             self.switch_06 = Gtk.Switch.new()
-            if self.settings["save-flatpak-data"]:
-                self.switch_06.set_active(True)
-            self.switch_06.set_valign(align=Gtk.Align.CENTER)
-                
+            self.appsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
+            
             self.data_row = Adw.ActionRow.new()
             self.data_row.set_title(title=_["user_data_flatpak"])
             self.data_row.set_use_markup(True)
@@ -876,6 +943,15 @@ class MainWindow(Gtk.Window):
             self.data_row.add_suffix(self.switch_06)
             self.data_row.set_activatable_widget(self.switch_06)
             self.flatpak_row.add_row(child=self.data_row)
+            
+            if self.settings["save-flatpak-data"]:
+                self.switch_06.set_active(True)
+                self.data_row.add_suffix(self.appsButton)
+            self.switch_06.set_valign(align=Gtk.Align.CENTER)
+            self.switch_06.connect('notify::active', self.show_appsbtn)
+            
+            self.appsButton.add_css_class("flat")
+            self.appsButton.connect("clicked", self.manage_data_list)
             
         self.itemsDialog.add_response('cancel', _["cancel"])
         self.itemsDialog.add_response('ok', _["apply"])
@@ -897,7 +973,20 @@ class MainWindow(Gtk.Window):
                 self.settings["save-flatpak-data"] = self.switch_06.get_active()
             if self.save_ext_switch_state == True:
                 self.settings["save-extensions"] = self.switch_ext.get_active()
-            
+    
+    # show dialog for managing Flatpak applications data
+    def manage_data_list(self, w):
+        self.itemsDialog.close()
+        self.appd = FlatpakAppsDialog()
+        self.appd.show()
+        
+    def show_appsbtn(self, w, GParamBoolean):
+        if self.switch_06.get_active() == True:
+            self.data_row.add_suffix(self.appsButton)
+        else:
+            self.data_row.remove(self.appsButton)
+        
+    # show extensions row, if user has installed GNOME, Cinnamon or KDE Plasma DE      
     def show_extensions_row(self):
         # Switch and row of option 'Save extensions'
         self.switch_ext = Gtk.Switch.new()
@@ -1251,6 +1340,9 @@ class MainWindow(Gtk.Window):
             self.backtomButton.set_margin_start(170)
             self.backtomButton.set_margin_end(170)
             self.importwaitBox.append(self.backtomButton)
+            
+        if not flatpak:
+            os.popen(f"rm -rf {CACHE}/import_config/*")
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
