@@ -1080,7 +1080,7 @@ class MainWindow(Gtk.Window):
         self.sdoneImage = Gtk.Image.new()
         self.savewaitBox.append(self.sdoneImage)
         
-        self.savewaitLabel = Gtk.Label.new(str=f"<big><b>Saving configuration ...</b></big>\n Your Desktop Environment configuration will be saved in this directory: {self.folder}/{self.filename_text}.sd.tar.gz\n")
+        self.savewaitLabel = Gtk.Label.new(str="<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n".format(self.folder, self.filename_text))
         self.savewaitLabel.set_use_markup(True)
         self.savewaitLabel.set_justify(Gtk.Justification.CENTER)
         self.savewaitLabel.set_wrap(True)
@@ -1112,7 +1112,7 @@ class MainWindow(Gtk.Window):
             self.sdoneImage.set_from_icon_name("done")
             self.sdoneImage.set_pixel_size(128)
             
-            self.savewaitLabel.set_label(f"<big><b>{_['config_saved']}</b></big>\nYou can now open the folder with saved your configuration by clicking on the button below.\n")
+            self.savewaitLabel.set_label(f"<big><b>{_['config_saved']}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n")
             self.opensaveButton = Gtk.Button.new_with_label(_["open_folder"])
             self.opensaveButton.add_css_class('pill')
             self.opensaveButton.add_css_class('suggested-action')
@@ -1121,7 +1121,7 @@ class MainWindow(Gtk.Window):
             self.opensaveButton.set_margin_end(170)
             self.savewaitBox.append(self.opensaveButton)
             
-            self.backtomButton = Gtk.Button.new_with_label("Back to main page")
+            self.backtomButton = Gtk.Button.new_with_label("Back to previous page")
             self.backtomButton.connect("clicked", back_to_main)
             self.backtomButton.add_css_class("pill")
             self.backtomButton.set_margin_start(170)
@@ -1141,6 +1141,10 @@ class MainWindow(Gtk.Window):
             self.importwaitBox.remove(self.idoneImage)
             self.importwaitBox.remove(self.logoutButton)
             self.importwaitBox.remove(self.backtomButton)
+            
+        with open(f'{CACHE}/.impfile.json') as i:
+            ij = json.load(i)
+        config_name = ij["import_file"]
         
         self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.importwaitBox.set_halign(Gtk.Align.CENTER)
@@ -1157,7 +1161,7 @@ class MainWindow(Gtk.Window):
         self.idoneImage = Gtk.Image.new()
         self.importwaitBox.append(self.idoneImage)
         
-        self.importwaitLabel = Gtk.Label.new(str=f"<big><b>Importing configuration ...</b></big>\n {_['please_wait']}\n")
+        self.importwaitLabel = Gtk.Label.new(str="<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n".format(config_name))
         self.importwaitLabel.set_use_markup(True)
         self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
         self.importwaitLabel.set_wrap(True)
@@ -1191,7 +1195,7 @@ class MainWindow(Gtk.Window):
             self.idoneImage.set_from_icon_name("done")
             self.idoneImage.set_pixel_size(128)
             
-            self.importwaitLabel.set_label(f"<big><b>{_['config_imported']}</b></big>\nFor the changes to take effect, you can log out of the system using the button below.\n")
+            self.importwaitLabel.set_label(f"<big><b>{_['config_imported']}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n")
             self.logoutButton = Gtk.Button.new_with_label(_["logout"])
             self.logoutButton.add_css_class('pill')
             self.logoutButton.add_css_class('suggested-action')
@@ -1200,7 +1204,7 @@ class MainWindow(Gtk.Window):
             self.logoutButton.set_margin_end(170)
             self.importwaitBox.append(self.logoutButton)
             
-            self.backtomButton = Gtk.Button.new_with_label("Back to main page")
+            self.backtomButton = Gtk.Button.new_with_label("Back to previous page")
             self.backtomButton.connect("clicked", back_to_main)
             self.backtomButton.add_css_class("pill")
             self.backtomButton.set_margin_start(170)
