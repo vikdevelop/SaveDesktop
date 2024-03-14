@@ -1133,7 +1133,7 @@ class MainWindow(Gtk.Window):
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
         def cancel_import(w):
-            os.system(f"pkill -xf 'python3 {system_dir}/config.py --import'")
+            os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
             self.toast_overlay.set_child(self.headapp)
             self.importwaitBox.remove(self.importwaitSpinner)
             self.importwaitBox.remove(self.importwaitLabel)
