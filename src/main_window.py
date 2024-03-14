@@ -1017,6 +1017,7 @@ class MainWindow(Gtk.Window):
         copy_thread = Thread(target=self.open_config_save)
         copy_thread.start()
         
+    # start process of saving the configuration
     def open_config_save(self):
         try:
             os.system(f"python3 {system_dir}/config.py --save")
@@ -1043,7 +1044,8 @@ class MainWindow(Gtk.Window):
         os.chdir(f"{CACHE}/import_config")
         copy_thread = Thread(target=self.open_config_import)
         copy_thread.start()
-        
+       
+    # start process of importing configuration
     def open_config_import(self):
         try:
             os.system(f"rm -rf {CACHE}/import_config/*")
@@ -1055,37 +1057,46 @@ class MainWindow(Gtk.Window):
             
     # "Please wait" information page on the "Save" page
     def please_wait_save(self):
+        # stop saving configuration
         def cancel_save(w):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
             self.toast_overlay.set_child(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
             self.savewaitBox.remove(self.savewaitSpinner)
             self.savewaitBox.remove(self.savewaitLabel)
             self.savewaitBox.remove(self.savewaitButton)
             self.savewaitBox.remove(self.sdoneImage)
             self.savewaitBox.remove(self.opensaveButton)
             self.savewaitBox.remove(self.backtomButton)
-        
+            
+        # create box widget for this page
         self.savewaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.savewaitBox.set_halign(Gtk.Align.CENTER)
         self.savewaitBox.set_valign(Gtk.Align.CENTER)
         self.savewaitBox.set_margin_start(80)
         self.savewaitBox.set_margin_end(80)
         self.toast_overlay.set_child(self.savewaitBox)
+        self.headerbar.set_title_widget(None)
+        self.set_title("Saving configuration ....")
         
+        # create spinner for this page
         self.savewaitSpinner = Gtk.Spinner.new()
         self.savewaitSpinner.set_size_request(100,100)
         self.savewaitSpinner.start()
         self.savewaitBox.append(self.savewaitSpinner)
         
+        # prepare Gtk.Image widget for the next page
         self.sdoneImage = Gtk.Image.new()
         self.savewaitBox.append(self.sdoneImage)
         
+        # create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str="<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n".format(self.folder, self.filename_text))
         self.savewaitLabel.set_use_markup(True)
         self.savewaitLabel.set_justify(Gtk.Justification.CENTER)
         self.savewaitLabel.set_wrap(True)
         self.savewaitBox.append(self.savewaitLabel)
         
+        # create button for cancel saving configuration
         self.savewaitButton = Gtk.Button.new_with_label(_["cancel"])
         self.savewaitButton.add_css_class("pill")
         self.savewaitButton.add_css_class("destructive-action")
@@ -1094,10 +1105,12 @@ class MainWindow(Gtk.Window):
         self.savewaitButton.set_margin_end(170)
         self.savewaitBox.append(self.savewaitButton)
         
-    # configuration has been exported action
+    # config has been exported action
     def exporting_done(self):
+        # back to the previous page from this page
         def back_to_main(w):
             self.toast_overlay.set_child(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
             self.savewaitBox.remove(self.savewaitSpinner)
             self.savewaitBox.remove(self.savewaitLabel)
             self.savewaitBox.remove(self.savewaitButton)
@@ -1105,13 +1118,19 @@ class MainWindow(Gtk.Window):
             self.savewaitBox.remove(self.opensaveButton)
             self.savewaitBox.remove(self.backtomButton)
             
+        # show the content below only if exists this file
         if os.path.exists(f"{CACHE}/save_config/done_gui"):
             self.savewaitSpinner.stop()
             self.savewaitBox.remove(self.savewaitButton)
-            # Done icon
+            
+            # set title to "Configuration has been saved!"
+            self.set_title(_['config_saved'])
+            
+            # use widget for showing done.svg icon
             self.sdoneImage.set_from_icon_name("done")
             self.sdoneImage.set_pixel_size(128)
             
+            # edit label for the purposes of this page
             self.savewaitLabel.set_label(f"<big><b>{_['config_saved']}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n")
             self.opensaveButton = Gtk.Button.new_with_label(_["open_folder"])
             self.opensaveButton.add_css_class('pill')
@@ -1121,52 +1140,64 @@ class MainWindow(Gtk.Window):
             self.opensaveButton.set_margin_end(170)
             self.savewaitBox.append(self.opensaveButton)
             
+            # create button for backing to the previous page
             self.backtomButton = Gtk.Button.new_with_label("Back to previous page")
             self.backtomButton.connect("clicked", back_to_main)
             self.backtomButton.add_css_class("pill")
             self.backtomButton.set_margin_start(170)
             self.backtomButton.set_margin_end(170)
             self.savewaitBox.append(self.backtomButton)
-            
+        
+        # remove content in the cache directory
         os.popen(f"rm -rf {CACHE}/save_config/*")
     
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
+        # stop importing configuration
         def cancel_import(w):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
             self.toast_overlay.set_child(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
             self.importwaitBox.remove(self.importwaitSpinner)
             self.importwaitBox.remove(self.importwaitLabel)
             self.importwaitBox.remove(self.importwaitButton)
             self.importwaitBox.remove(self.idoneImage)
             self.importwaitBox.remove(self.logoutButton)
             self.importwaitBox.remove(self.backtomButton)
-            
+        
+        # get information about filename from this file
         with open(f'{CACHE}/.impfile.json') as i:
             ij = json.load(i)
         config_name = ij["import_file"]
         
+        # create box widget for this page
         self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.importwaitBox.set_halign(Gtk.Align.CENTER)
         self.importwaitBox.set_valign(Gtk.Align.CENTER)
         self.importwaitBox.set_margin_start(80)
         self.importwaitBox.set_margin_end(80)
         self.toast_overlay.set_child(self.importwaitBox)
+        self.headerbar.set_title_widget(None)
+        self.set_title("Importing configuration ...")
         
+        # create spinner for this page
         self.importwaitSpinner = Gtk.Spinner.new()
         self.importwaitSpinner.set_size_request(100,100)
         self.importwaitSpinner.start()
         self.importwaitBox.append(self.importwaitSpinner)
         
+        # prepare Gtk.Image widget for this page
         self.idoneImage = Gtk.Image.new()
         self.importwaitBox.append(self.idoneImage)
         
+        # create label about configuration archive name
         self.importwaitLabel = Gtk.Label.new(str="<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n".format(config_name))
         self.importwaitLabel.set_use_markup(True)
         self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
         self.importwaitLabel.set_wrap(True)
         self.importwaitBox.append(self.importwaitLabel)
         
+        # create button for canceling importing configuration
         self.importwaitButton = Gtk.Button.new_with_label(_["cancel"])
         self.importwaitButton.add_css_class("pill")
         self.importwaitButton.add_css_class("destructive-action")
@@ -1174,28 +1205,37 @@ class MainWindow(Gtk.Window):
         self.importwaitButton.set_margin_start(170)
         self.importwaitButton.set_margin_end(170)
         self.importwaitBox.append(self.importwaitButton)
-        
     
     # Config has been imported action
     def applying_done(self):
+        # back to the previous page from this page
         def back_to_main(w):
             self.toast_overlay.set_child(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
             self.importwaitBox.remove(self.importwaitSpinner)
             self.importwaitBox.remove(self.importwaitLabel)
             self.importwaitBox.remove(self.importwaitButton)
             self.importwaitBox.remove(self.idoneImage)
             self.importwaitBox.remove(self.logoutButton)
             self.importwaitBox.remove(self.backtomButton)
-            
+            self.headerbar.set_title_widget(self.switcher_title)
+        
+        # show the content below only if exists this file
         if os.path.exists(f"{CACHE}/import_config/done"):
             self.importwaitSpinner.stop()
             self.importwaitBox.remove(self.importwaitButton)
             
-            # Done icon
+            # set title to "Configuration has been applied!"
+            self.set_title(_['config_imported'])
+            
+            # widget for showing done.svg icon
             self.idoneImage.set_from_icon_name("done")
             self.idoneImage.set_pixel_size(128)
             
+            # edit label for the purposes of this page
             self.importwaitLabel.set_label(f"<big><b>{_['config_imported']}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n")
+            
+            # create button for loging out of the system
             self.logoutButton = Gtk.Button.new_with_label(_["logout"])
             self.logoutButton.add_css_class('pill')
             self.logoutButton.add_css_class('suggested-action')
@@ -1204,6 +1244,7 @@ class MainWindow(Gtk.Window):
             self.logoutButton.set_margin_end(170)
             self.importwaitBox.append(self.logoutButton)
             
+            # create button for backing to the previous page
             self.backtomButton = Gtk.Button.new_with_label("Back to previous page")
             self.backtomButton.connect("clicked", back_to_main)
             self.backtomButton.add_css_class("pill")
