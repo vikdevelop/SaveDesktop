@@ -77,7 +77,6 @@ class Save:
             # add io.github.vikdevelop.SaveDesktop to blacklist, because during saving configuration the cache folder is too large
             blist += ["io.github.vikdevelop.SaveDesktop"]
             blacklist = blist
-            print(blacklist)
             
             # set destination dir
             if os.path.exists(f"{CACHE}/save_config"):
