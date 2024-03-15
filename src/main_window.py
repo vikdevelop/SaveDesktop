@@ -20,9 +20,12 @@ from gi.repository import Gtk, Adw, Gio, GLib
 
 # Get user download dir
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
+
+# FOR SNAP: create the cache directory
 if snap:
     os.makedirs(f"{CACHE}", exist_ok=True)
-    
+
+# load GSettings database for viewing and saving user settings of the app
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 
 # Shortcuts window
@@ -32,12 +35,14 @@ class ShortcutsWindow(Gtk.ShortcutsWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-   
+
+# Row for showing available apps
 class FolderSwitchRow(Gtk.ListBoxRow):
     def __init__(self, folder_name):
         super().__init__()
         self.folder_name = folder_name
         
+        # switch for all items
         self.switch = Gtk.Switch()
         self.switch.set_halign(Gtk.Align.END)
         self.switch.set_valign(Gtk.Align.END)
@@ -45,19 +50,23 @@ class FolderSwitchRow(Gtk.ListBoxRow):
         if settings["disabled-flatpak-apps-data"] == []:
             self.switch.set_active(True)
         
+        # row for all items
         self.approw = Adw.ActionRow.new()
         self.approw.set_title(folder_name)
         self.approw.add_prefix(self.switch)
         self.approw.set_hexpand(True)
         
+        # box for self.approw
         self.box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
         self.box.append(self.approw)
         
         self.set_child(self.box)
         
+        # set switch states from the Gsettings database
         switch_state = folder_name not in settings.get_strv("disabled-flatpak-apps-data")
         self.switch.set_active(switch_state)
     
+    # save switch state
     def on_switch_activated(self, switch, state):
         disabled_flatpaks = settings.get_strv("disabled-flatpak-apps-data")
         if not state:
@@ -74,29 +83,38 @@ class FlatpakAppsDialog(Adw.MessageDialog):
         self.set_heading("Flatpak apps data selection")
         self.set_default_size(300, 400)
         
+        # primary Gtk.Box for this dialog
         self.dialogBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         self.set_extra_child(self.dialogBox)
         
-        # Scrollovací oblast kolem seznamu
+        # widget for scrolling items list
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         scrolled_window.set_min_content_width(300)
         scrolled_window.set_min_content_height(380)
         self.dialogBox.append(scrolled_window)
         
+        # listbox for showing items
         self.flowbox = Gtk.ListBox.new()
         self.flowbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.flowbox.add_css_class(css_class='boxed-list')
         
+        # set self.flowbox as child for Gtk.ScrolledWindow widget
         scrolled_window.set_child(self.flowbox)
         
+        # add buttons to the dialog
         self.add_response('cancel', _["cancel"])
         self.add_response('ok', _["apply"])
         self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         
-        self.load_folders()
-        self.set_initial_switch_state()
-        
+        # if there are problems loading a folder, an error message is displayed
+        try:
+            self.load_folders()
+            self.set_initial_switch_state()
+        except Exception as e:
+            self.set_body(f"Error: \n{e}")
+    
+    # load items from ~/.var/app directory
     def load_folders(self):
         folder_path = f"{home}/.var/app"
         try:
@@ -111,7 +129,8 @@ class FlatpakAppsDialog(Adw.MessageDialog):
                 self.flowbox.append(folder_row)
         except Exception as e:
             print(f"Error loading folders: {e}")
-                
+       
+    # set default switch state
     def set_initial_switch_state(self):
         disabled_flatpaks = settings.get_strv("disabled-flatpak-apps-data")
         for child in self.flowbox.get_row_at_index(0):
