@@ -86,7 +86,7 @@
 		  <default>false</default>
 		  <summary>Manually sync</summary>
 		</key>
-		<key name="selected-flatpak-apps-data" type="as">
+		<key name="disabled-flatpak-apps-data" type="as">
 		  <default>[]</default>
 		  <summary>Select, what Flatpak applications data will be saved</summary>
 		</key>
