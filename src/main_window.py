@@ -22,6 +22,8 @@ from gi.repository import Gtk, Adw, Gio, GLib
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 if snap:
     os.makedirs(f"{CACHE}", exist_ok=True)
+    
+settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 
 # Shortcuts window
 @Gtk.Template(string=SHORTCUTS_WINDOW) # from shortcuts_window.py
@@ -36,18 +38,12 @@ class FolderSwitchRow(Gtk.ListBoxRow):
         super().__init__()
         self.folder_name = folder_name
         
-        self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
-        
         self.switch = Gtk.Switch()
         self.switch.set_halign(Gtk.Align.END)
         self.switch.set_valign(Gtk.Align.END)
         self.switch.connect("state-set", self.on_switch_activated)
-        
-        if self.settings["selected-flatpak-apps-data"] == []:
+        if settings["disabled-flatpak-apps-data"] == []:
             self.switch.set_active(True)
-        else:
-            switch_state = folder_name in self.settings.get_strv("selected-flatpak-apps-data")
-            self.switch.set_active(switch_state)
         
         self.approw = Adw.ActionRow.new()
         self.approw.set_title(folder_name)
@@ -58,48 +54,70 @@ class FolderSwitchRow(Gtk.ListBoxRow):
         self.box.append(self.approw)
         
         self.set_child(self.box)
+        
+        switch_state = folder_name not in settings.get_strv("disabled-flatpak-apps-data")
+        self.switch.set_active(switch_state)
     
     def on_switch_activated(self, switch, state):
-        if state == True:
-            os.system(f"echo {self.folder_name} >> {DATA}/selected_flatpaks")
-            output = subprocess.getoutput(f"cat {DATA}/selected_flatpaks")
-            sp_out = output.split()
-        elif state == False:
-            os.system(f"sed -i 's\{self.folder_name}\ \ ' {DATA}/selected_flatpaks")
-            output = subprocess.getoutput(f"cat {DATA}/selected_flatpaks")
-            sp_out = output.split()
-        
-        self.settings["selected-flatpak-apps-data"] = sp_out
+        disabled_flatpaks = settings.get_strv("disabled-flatpak-apps-data")
+        if not state:
+            if self.folder_name not in disabled_flatpaks:
+                disabled_flatpaks.append(self.folder_name)
+        else:
+            if self.folder_name in disabled_flatpaks:
+                disabled_flatpaks.remove(self.folder_name)
+        settings.set_strv("disabled-flatpak-apps-data", disabled_flatpaks)
             
-class FlatpakAppsDialog(Gtk.Dialog):
+class FlatpakAppsDialog(Adw.MessageDialog):
     def __init__(self):
-        super().__init__(title="Flatpak apps data selection", transient_for=None, modal=True)
-        self.set_default_size(1200, 600)
-        self.set_resizable(True)
-        self.headerbar = Gtk.HeaderBar.new()
-        self.set_titlebar(self.headerbar)
+        super().__init__(transient_for=app.get_active_window())
+        self.set_heading("Flatpak apps data selection")
+        self.set_default_size(300, 400)
         
-        content_area = self.get_content_area()
+        self.dialogBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        self.set_extra_child(self.dialogBox)
         
-        self.flowbox = Gtk.FlowBox()
-        self.flowbox.set_selection_mode(Gtk.SelectionMode.NONE)
-        self.flowbox.set_max_children_per_line(2)
+        # Scrollovací oblast kolem seznamu
+        scrolled_window = Gtk.ScrolledWindow()
+        scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        scrolled_window.set_min_content_width(300)
+        scrolled_window.set_min_content_height(380)
+        self.dialogBox.append(scrolled_window)
         
-        content_area.append(self.flowbox)
+        self.flowbox = Gtk.ListBox.new()
+        self.flowbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.flowbox.add_css_class(css_class='boxed-list')
+        
+        scrolled_window.set_child(self.flowbox)
+        
+        self.add_response('cancel', _["cancel"])
+        self.add_response('ok', _["apply"])
+        self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         
         self.load_folders()
+        self.set_initial_switch_state()
         
     def load_folders(self):
         folder_path = f"{home}/.var/app"
         try:
-            folders = Gio.File.new_for_path(folder_path).enumerate_children('*', 0, None)
-            for info in folders:
-                folder_name = info.get_name()
+            folder = Gio.File.new_for_path(folder_path)
+            files = folder.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, None)
+            while True:
+                file_info = files.next_file(None)
+                if file_info is None:
+                    break
+                folder_name = file_info.get_name()
                 folder_row = FolderSwitchRow(folder_name)
                 self.flowbox.append(folder_row)
         except Exception as e:
             print(f"Error loading folders: {e}")
-
+                
+    def set_initial_switch_state(self):
+        disabled_flatpaks = settings.get_strv("disabled-flatpak-apps-data")
+        for child in self.flowbox.get_row_at_index(0):
+            if isinstance(child, FolderSwitchRow):
+                child.switch.set_active(child.folder_name not in disabled_flatpaks)
+    
 # Application window
 class MainWindow(Gtk.Window):
     def __init__(self, *args, **kwargs):
@@ -109,18 +127,16 @@ class MainWindow(Gtk.Window):
         self.set_titlebar(titlebar=self.headerbar)
         self.application = kwargs.get('application')
 
-        # Load the GSettings database for saving user settings
-        self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         
         self.different_toast_msg = False # value that sets if popup should be with text "Please wait ..." or "It'll take a few minutes ..."
         self.save_ext_switch_state = False # value that sets if state of the switch "Extensions" in the Items Dialog should be saved or not
 
         # Set the window size and maximization from the GSettings database
         self.set_size_request(750, 540)
-        (width, height) = self.settings["window-size"]
+        (width, height) = settings["window-size"]
         self.set_default_size(width, height)
         
-        if self.settings["maximized"]:
+        if settings["maximized"]:
             self.maximize()
         
         # App menu
@@ -135,7 +151,7 @@ class MainWindow(Gtk.Window):
         self.headerbar.pack_end(child=self.menu_button)
         
         # Add Manually sync button
-        if self.settings["manually-sync"] == True:
+        if settings["manually-sync"] == True:
             self.sync_menu = Gio.Menu()
             self.sync_menu.append(_["sync"], 'app.m_sync')
             self.main_menu.append_section(None, self.sync_menu)
@@ -333,7 +349,7 @@ class MainWindow(Gtk.Window):
         # set the filename section
         self.saveEntry = Adw.EntryRow.new()
         self.saveEntry.set_title(_["set_filename"])
-        self.saveEntry.set_text(self.settings["filename"])
+        self.saveEntry.set_text(settings["filename"])
         self.lbox_e.append(self.saveEntry)
 
         # Button for opening dialog for selecting items that will be included to the config archive
@@ -377,13 +393,13 @@ class MainWindow(Gtk.Window):
         self.lbox_e.append(child=self.adw_action_row_backups)
 
         # Load options from GSettings database
-        if self.settings["periodic-saving"] == 'Never':
+        if settings["periodic-saving"] == 'Never':
             self.adw_action_row_backups.set_selected(0)
-        elif self.settings["periodic-saving"] == 'Daily':
+        elif settings["periodic-saving"] == 'Daily':
             self.adw_action_row_backups.set_selected(1)
-        elif self.settings["periodic-saving"] == 'Weekly':
+        elif settings["periodic-saving"] == 'Weekly':
             self.adw_action_row_backups.set_selected(2)
-        elif self.settings["periodic-saving"] == 'Monthly':
+        elif settings["periodic-saving"] == 'Monthly':
             self.adw_action_row_backups.set_selected(3)
         
         # Save configuration button
@@ -443,10 +459,10 @@ class MainWindow(Gtk.Window):
         # Label for showing text in this section
         self.flistLabel = Gtk.Label.new()
         self.flistLabel.set_justify(Gtk.Justification.CENTER)
-        if self.settings["periodic-saving-folder"] == '':
+        if settings["periodic-saving-folder"] == '':
             self.dir = f'{download_dir}/SaveDesktop/archives'
         else:
-            self.dir = f'{self.settings["periodic-saving-folder"]}'
+            self.dir = f'{settings["periodic-saving-folder"]}'
         if os.path.exists(self.dir):
             if glob.glob(f"{self.dir}/*.sd.tar.gz") == []:
                 self.flistLabel.set_text(_["import_from_list_error"])
@@ -567,7 +583,7 @@ class MainWindow(Gtk.Window):
         # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
         self.file_row.set_title("1 " + _["periodic_saving_file"])
-        self.file_row.set_subtitle(self.settings["file-for-syncing"])
+        self.file_row.set_subtitle(settings["file-for-syncing"])
         self.file_row.add_suffix(self.selsetButton)
         self.setdBox.append(self.file_row)
         
@@ -587,15 +603,15 @@ class MainWindow(Gtk.Window):
         self.setdBox.append(child=self.import_row)
 
         # Load periodic sync values form GSettings database
-        if self.settings["periodic-import"] == "Never2":
+        if settings["periodic-import"] == "Never2":
             self.import_row.set_selected(0)
-        elif self.settings["periodic-import"] == "Daily2":
+        elif settings["periodic-import"] == "Daily2":
             self.import_row.set_selected(1)
-        elif self.settings["periodic-import"] == "Weekly2":
+        elif settings["periodic-import"] == "Weekly2":
             self.import_row.set_selected(2)
-        elif self.settings["periodic-import"] == "Monthly2":
+        elif settings["periodic-import"] == "Monthly2":
             self.import_row.set_selected(3)
-        elif self.settings["periodic-import"] == "Manually2":
+        elif settings["periodic-import"] == "Manually2":
             self.import_row.set_selected(4)
 
         # Action row for showing URL for synchronization with other computers
@@ -620,7 +636,7 @@ class MainWindow(Gtk.Window):
             
             # Check periodic synchronization variable BEFORE saving to GSettings database
             with open(f"{CACHE}/.sync", "w") as s:
-                s.write(f"{self.settings['periodic-import']}")
+                s.write(f"{settings['periodic-import']}")
             
             # Save the sync file to the GSettings database
             self.file_name = os.path.basename(self.file_row.get_subtitle())
@@ -628,14 +644,14 @@ class MainWindow(Gtk.Window):
             self.path = Path(self.file_row.get_subtitle())
             self.folder = self.path.parent.absolute()
             
-            self.settings["file-for-syncing"] = self.file_row.get_subtitle()
+            settings["file-for-syncing"] = self.file_row.get_subtitle()
 
             # Set filename format to same as the sync file name
             r_file = self.file.replace(".sd.tar", "")
-            self.settings["filename-format"] = r_file
+            settings["filename-format"] = r_file
             
             # Set periodic saving folder to same as the folder for the sync file
-            self.settings["periodic-saving-folder"] = f'{self.folder}'
+            settings["periodic-saving-folder"] = f'{self.folder}'
 
             # Save periodic synchronization interval to remote file and the GSettings database
             selected_item = self.import_row.get_selected_item()
@@ -653,10 +669,10 @@ class MainWindow(Gtk.Window):
                 os.mkdir(f"{DATA}/synchronization")
             with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
                 f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
-            self.settings["periodic-import"] = import_item
+            settings["periodic-import"] = import_item
             sync_before = subprocess.getoutput(f"cat {CACHE}/.sync")
             if sync_before == "Never2":
-                if not self.settings["periodic-import"] == "Never2":
+                if not settings["periodic-import"] == "Never2":
                     self.show_warn_toast()
 
     # URL Dialog
@@ -674,7 +690,7 @@ class MainWindow(Gtk.Window):
         # Entry for entering the URL for synchronization
         self.urlEntry = Adw.EntryRow.new()
         self.urlEntry.set_title(_["pc_url_entry"])
-        self.urlEntry.set_text(self.settings["url-for-syncing"])
+        self.urlEntry.set_text(settings["url-for-syncing"])
         self.urlBox.append(self.urlEntry)
         
         self.urlDialog.add_response('cancel', _["cancel"])
@@ -686,14 +702,14 @@ class MainWindow(Gtk.Window):
     # Action after closing URL dialog
     def urlDialog_closed(self, w, response):
         if response == 'ok':
-            self.settings["url-for-syncing"] = self.urlEntry.get_text()
-            self.folder = self.settings["file-for-syncing"]
+            settings["url-for-syncing"] = self.urlEntry.get_text()
+            self.folder = settings["file-for-syncing"]
             if not self.urlEntry.get_text() == "":
-                r_file = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
+                r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
                 jS = json.load(r_file)
                 # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
                 if jS["periodic-import"] == "Manually2":
-                    self.settings["manually-sync"] = True
+                    settings["manually-sync"] = True
                     self.sync_menu = Gio.Menu()
                     self.sync_menu.append(_["sync"], 'app.m_sync')
                     self.main_menu.append_section(None, self.sync_menu)
@@ -703,10 +719,10 @@ class MainWindow(Gtk.Window):
                 else:
                     self.set_syncing()
                     self.show_warn_toast()
-                    self.settings["manually-sync"] = False
+                    settings["manually-sync"] = False
                     self.sync_menu.remove(0)
             else:
-                self.settings["manually-sync"] = False
+                settings["manually-sync"] = False
                 self.sync_menu.remove(0)
 
     # Set synchronization for running in the background
@@ -765,7 +781,7 @@ class MainWindow(Gtk.Window):
         self.filefrmtEntry.set_title(_["filename_format"])
         self.filefrmtEntry.add_suffix(self.filefrmtButton)
         self.filefrmtEntry.add_suffix(self.helpButton)
-        self.filefrmtEntry.set_text(self.settings["filename-format"])
+        self.filefrmtEntry.set_text(settings["filename-format"])
         self.dirLBox.append(self.filefrmtEntry)
         
         # Button for choosing folder for periodic saving
@@ -779,10 +795,10 @@ class MainWindow(Gtk.Window):
         self.dirRow.set_title(_["pb_folder"])
         self.dirRow.add_suffix(self.folderButton)
         self.dirRow.set_use_markup(True)
-        if self.settings["periodic-saving-folder"] == '':
+        if settings["periodic-saving-folder"] == '':
             self.dirRow.set_subtitle(f"{download_dir}/SaveDesktop/archives")
         else:
-            self.dirRow.set_subtitle(self.settings["periodic-saving-folder"])
+            self.dirRow.set_subtitle(settings["periodic-saving-folder"])
         self.dirLBox.append(self.dirRow)
         
         self.dirDialog.set_extra_child(self.dirBox)
@@ -796,10 +812,10 @@ class MainWindow(Gtk.Window):
     def dirdialog_closed(self, w, response):
         if response == 'ok':
             if self.dirRow.get_subtitle() == '':
-                self.settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
+                settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
             else:
-                self.settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
-            self.settings["filename-format"] = self.filefrmtEntry.get_text()
+                settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
+            settings["filename-format"] = self.filefrmtEntry.get_text()
             
     # Set text of self.filefrmtEntry to default
     def set_default_filefrmtEntry(self, w):
@@ -824,7 +840,7 @@ class MainWindow(Gtk.Window):
         
         # Switch and row of option 'Save icons'
         self.switch_01 = Gtk.Switch.new()
-        if self.settings["save-icons"]:
+        if settings["save-icons"]:
             self.switch_01.set_active(True)
         self.switch_01.set_valign(align=Gtk.Align.CENTER)
          
@@ -839,7 +855,7 @@ class MainWindow(Gtk.Window):
         
         # Switch and row of option 'Save themes'
         self.switch_02 = Gtk.Switch.new()
-        if self.settings["save-themes"]:
+        if settings["save-themes"]:
             self.switch_02.set_active(True)
         self.switch_02.set_valign(align=Gtk.Align.CENTER)
          
@@ -854,7 +870,7 @@ class MainWindow(Gtk.Window):
         
         # Switch and row of option 'Save fonts'
         self.switch_03 = Gtk.Switch.new()
-        if self.settings["save-fonts"]:
+        if settings["save-fonts"]:
             self.switch_03.set_active(True)
         self.switch_03.set_valign(align=Gtk.Align.CENTER)
          
@@ -869,7 +885,7 @@ class MainWindow(Gtk.Window):
         
         # Switch and row of option 'Save backgrounds'
         self.switch_04 = Gtk.Switch.new()
-        if self.settings["save-backgrounds"]:
+        if settings["save-backgrounds"]:
             self.switch_04.set_active(True)
         self.switch_04.set_valign(align=Gtk.Align.CENTER)
          
@@ -884,7 +900,7 @@ class MainWindow(Gtk.Window):
         
         # Switch and row of option 'Save backgrounds'
         self.switch_de = Gtk.Switch.new()
-        if self.settings["save-desktop-folder"]:
+        if settings["save-desktop-folder"]:
             self.switch_de.set_active(True)
         self.switch_de.set_valign(align=Gtk.Align.CENTER)
         
@@ -920,7 +936,7 @@ class MainWindow(Gtk.Window):
             
             # Switch and row of option 'Save installed flatpaks'
             self.switch_05 = Gtk.Switch.new()
-            if self.settings["save-installed-flatpaks"]:
+            if settings["save-installed-flatpaks"]:
                 self.switch_05.set_active(True)
             self.switch_05.set_valign(align=Gtk.Align.CENTER)
             
@@ -944,7 +960,7 @@ class MainWindow(Gtk.Window):
             self.data_row.set_activatable_widget(self.switch_06)
             self.flatpak_row.add_row(child=self.data_row)
             
-            if self.settings["save-flatpak-data"]:
+            if settings["save-flatpak-data"]:
                 self.switch_06.set_active(True)
                 self.data_row.add_suffix(self.appsButton)
             self.switch_06.set_valign(align=Gtk.Align.CENTER)
@@ -963,16 +979,16 @@ class MainWindow(Gtk.Window):
     def itemsdialog_closed(self, w, response):
         if response == 'ok':
             # Saving the selected options to GSettings database
-            self.settings["save-icons"] = self.switch_01.get_active()
-            self.settings["save-themes"] = self.switch_02.get_active()
-            self.settings["save-fonts"] = self.switch_03.get_active()
-            self.settings["save-backgrounds"] = self.switch_04.get_active()
-            self.settings["save-desktop-folder"] = self.switch_de.get_active()
+            settings["save-icons"] = self.switch_01.get_active()
+            settings["save-themes"] = self.switch_02.get_active()
+            settings["save-fonts"] = self.switch_03.get_active()
+            settings["save-backgrounds"] = self.switch_04.get_active()
+            settings["save-desktop-folder"] = self.switch_de.get_active()
             if flatpak:
-                self.settings["save-installed-flatpaks"] = self.switch_05.get_active()
-                self.settings["save-flatpak-data"] = self.switch_06.get_active()
+                settings["save-installed-flatpaks"] = self.switch_05.get_active()
+                settings["save-flatpak-data"] = self.switch_06.get_active()
             if self.save_ext_switch_state == True:
-                self.settings["save-extensions"] = self.switch_ext.get_active()
+                settings["save-extensions"] = self.switch_ext.get_active()
     
     # show dialog for managing Flatpak applications data
     def manage_data_list(self, w):
@@ -990,7 +1006,7 @@ class MainWindow(Gtk.Window):
     def show_extensions_row(self):
         # Switch and row of option 'Save extensions'
         self.switch_ext = Gtk.Switch.new()
-        if self.settings["save-extensions"]:
+        if settings["save-extensions"]:
             self.switch_ext.set_active(True)
         self.switch_ext.set_valign(align=Gtk.Align.CENTER)
          
@@ -1373,10 +1389,10 @@ class MainWindow(Gtk.Window):
             backup_item = "Monthly"
             self.create_pb_desktop()
         (width, height) = self.get_default_size()
-        self.settings["window-size"] = (width, height)
-        self.settings["maximized"] = self.is_maximized()
-        self.settings["filename"] = self.saveEntry.get_text()
-        self.settings["periodic-saving"] = backup_item
+        settings["window-size"] = (width, height)
+        settings["maximized"] = self.is_maximized()
+        settings["filename"] = self.saveEntry.get_text()
+        settings["periodic-saving"] = backup_item
         if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
             print("Flatpak data exists.")
         elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
@@ -1386,15 +1402,15 @@ class MainWindow(Gtk.Window):
             os.popen(f"rm -rf {CACHE}/syncing")
             os.popen(f"rm -rf {CACHE}/.*")
         try:
-            url = urlopen(f"{self.settings['url-for-syncing']}/file-settings.json")
+            url = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
             j = json.load(url)
             if j["periodic-import"] == "Manually2":
-                self.settings["manually-sync"] = True
+                settings["manually-sync"] = True
             else:
-                self.settings["manually-sync"] = False
+                settings["manually-sync"] = False
             os.popen(f"rm {CACHE}/file-settings.json")
         except:
-            self.settings["manually-sync"] = False
+            settings["manually-sync"] = False
         
     ## Create desktop file to make periodic backups work
     def create_pb_desktop(self):
@@ -1407,11 +1423,10 @@ class MainWindow(Gtk.Window):
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE)
-        self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open-dir', self.open_dir)
         self.create_action('logout', self.logout)
-        if self.settings["manually-sync"] == True:
+        if settings["manually-sync"] == True:
             self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"])
         self.create_action('m_sync', self.sync_pc)
         self.create_action('quit', self.app_quit, ["<primary>q"])
