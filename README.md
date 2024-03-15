@@ -159,5 +159,5 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
 - Build with Flatpak builder (beta version) ⚠️**UNSTABLE**⚠️
   ```
   git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
-  # Maybe you will need to install org.gnome.Sdk (version 44) with flatpak
+  # Maybe you will need to install org.gnome.Sdk (latest version) with flatpak
   ```
