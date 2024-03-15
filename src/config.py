@@ -4,6 +4,7 @@ import gi
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
 import argparse
+import shutil
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
@@ -69,11 +70,38 @@ class Save:
             print("saving list of installed Flatpak apps")
             os.system('sh /app/backup_flatpaks.sh')
         if settings["save-flatpak-data"] == True:
-            print("saving usert data of installed Flatpak apps")
+            print("saving user data of installed Flatpak apps")
+            blst = settings["disabled-flatpak-apps-data"]
+            # convert GSettings property to list
+            blist = blst
+            # add io.github.vikdevelop.SaveDesktop to blacklist, because during saving configuration the cache folder is too large
+            blist += ["io.github.vikdevelop.SaveDesktop"]
+            blacklist = blist
+            print(blacklist)
+            
+            # set destination dir
             if os.path.exists(f"{CACHE}/save_config"):
-                os.system(f'cd {home}/.var/app && mkdir {CACHE}/save_config/app && cp -r `ls -A | grep -v "io.github.vikdevelop.SaveDesktop"` {CACHE}/save_config/app/')
+                os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
+                destdir = f"{CACHE}/save_config/app"
             elif os.path.exists(f"{CACHE}/periodic_saving"):
-                os.system(f'cd {home}/.var/app && mkdir {CACHE}/periodic_saving/app && cp -r `ls -A | grep -v "io.github.vikdevelop.SaveDesktop"` {CACHE}/periodic_saving/app/')
+                os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
+                destdir = f"{CACHE}/periodic_saving/app"
+            
+            # copy Flatpak apps data
+            for item in os.listdir(f"{home}/.var/app"):
+                if item not in blacklist:
+                    source_path = os.path.join(f"{home}/.var/app", item)
+                    destination_path = os.path.join(destdir, item)
+                    if os.path.isdir(source_path):
+                        try:
+                            shutil.copytree(source_path, destination_path)
+                        except Exception as e:
+                            print(f"Error copying directory {source_path}: {e}")
+                    else:
+                        try:
+                            shutil.copy2(source_path, destination_path)
+                        except Exception as e:
+                            print(f"Error copying file {source_path}: {e}")
             
         print("saving desktop environment configuration files")
         # Save configs on individual desktop environments
