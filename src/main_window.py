@@ -1273,7 +1273,7 @@ class MainWindow(Gtk.Window):
             self.savewaitBox.append(self.backtomButton)
         
         # remove content in the cache directory
-        os.popen(f"rm -rf {CACHE}/save_config/*")
+        os.popen(f"rm -rf {CACHE}/save_config/")
     
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
