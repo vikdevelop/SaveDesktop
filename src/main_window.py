@@ -1015,11 +1015,13 @@ class MainWindow(Gtk.Window):
         self.appd = FlatpakAppsDialog()
         self.appd.show()
         
+    # show button after clicking on the switch "User data of Flatpak apps"
     def show_appsbtn(self, w, GParamBoolean):
         if self.switch_06.get_active() == True:
             self.data_row.add_suffix(self.appsButton)
         else:
             self.data_row.remove(self.appsButton)
+        settings["save-flatpak-data"] = self.switch_06.get_active()
         
     # show extensions row, if user has installed GNOME, Cinnamon or KDE Plasma DE      
     def show_extensions_row(self):
