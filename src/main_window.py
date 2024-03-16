@@ -87,6 +87,8 @@ class FlatpakAppsDialog(Adw.MessageDialog):
         self.dialogBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         self.set_extra_child(self.dialogBox)
         
+        self.old_disabled_flatpaks = settings["disabled-flatpak-apps-data"]
+        
         # widget for scrolling items list
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
@@ -106,13 +108,14 @@ class FlatpakAppsDialog(Adw.MessageDialog):
         self.add_response('cancel', _["cancel"])
         self.add_response('ok', _["apply"])
         self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.connect('response', self.apply_settings)
         
         # if there are problems loading a folder, an error message is displayed
         try:
             self.load_folders()
             self.set_initial_switch_state()
         except Exception as e:
-            self.set_body(f"Error: \n{e}")
+            self.set_body(f"Error: {e}")
     
     # load items from ~/.var/app directory
     def load_folders(self):
@@ -136,6 +139,10 @@ class FlatpakAppsDialog(Adw.MessageDialog):
         for child in self.flowbox.get_row_at_index(0):
             if isinstance(child, FolderSwitchRow):
                 child.switch.set_active(child.folder_name not in disabled_flatpaks)
+    
+    def apply_settings(self, w, response):
+        if response == 'cancel':
+            settings["disabled-flatpak-apps-data"] = self.old_disabled_flatpaks
     
 # Application window
 class MainWindow(Gtk.Window):
