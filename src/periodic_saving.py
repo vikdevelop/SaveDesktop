@@ -5,7 +5,7 @@ import json
 import os
 import gi
 from gi.repository import GLib, Gio
-from localization import _, CACHE, home, system_dir
+from localization import _, CACHE, DATA, home, system_dir
 
 # get current datetime
 dt = datetime.now()
@@ -25,7 +25,19 @@ class PeriodicBackups:
             self.pbfolder = f'{download_dir}/SaveDesktop/archives'
         else:
             self.pbfolder = f'{self.settings["periodic-saving-folder"]}'
+            
+        if os.path.exists(f"{DATA}/periodic-saving.json"):
+            with open(f"{DATA}/periodic-saving.json") as pb:
+                jp = json.load(pb)
+            if jp["saving-date"] == f'{date.today()}':
+                print("The configuration has already been saved today.")
+                exit()
+            else:
+                self.get_interval()
+        else:
+            self.get_interval()
         
+    def get_interval(self):
         # Get periodic saving interval selected by the user
         if self.settings["periodic-saving"] == 'Never':
             print("Periodic saving are not set up.")
@@ -86,6 +98,8 @@ class PeriodicBackups:
     # Message about saved config
     def config_saved(self):
         os.system(f"rm -rf {CACHE}/periodic-saving/*")
+        with open(f"{DATA}/periodic-saving.json", "w") as pb:
+            pb.write('{\n "saving-date": "%s"\n}' % date.today())
         print("Configuration saved.")
         exit()
     
