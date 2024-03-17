@@ -37,6 +37,7 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 cache_replacing = f'{CACHE}'
 config = cache_replacing.replace("cache/tmp", "config/glib-2.0/settings")
+flatpak_app_data = settings["disabled-flatpak-apps-data"]
 
 class Save:
     def __init__(self):
@@ -101,6 +102,14 @@ class Save:
                             shutil.copy2(source_path, destination_path)
                         except Exception as e:
                             print(f"Error copying file {source_path}: {e}")
+
+            # save user data except for the cache of the SaveDesktop app if the app is not in the "disabled-flatpak-apps-data" key of the GSettings database
+            if not "io.github.vikdevelop.SaveDesktop" in flatpak_app_data:
+                os.makedirs(f"{destdir}/io.github.vikdevelop.SaveDesktop", exist_ok=True)
+                os.chdir(f"{home}/.var/app/io.github.vikdevelop.SaveDesktop")
+                os.system(f"cp -R ./config {destdir}/io.github.vikdevelop.SaveDesktop/")
+                os.system(f"cp -R ./data {destdir}/io.github.vikdevelop.SaveDesktop/")
+                os.chdir(f"{CACHE}/save_config")
             
         print("saving desktop environment configuration files")
         # Save configs on individual desktop environments
