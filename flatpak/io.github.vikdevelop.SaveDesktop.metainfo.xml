@@ -73,6 +73,15 @@
     </branding>
           
     <releases>
+       <release version="3.2" date="2024-03-24">
+           <description>
+               <ul>
+                  <li>Added option for selecting what Flatpak applications data will be included in the configuration archive; just click on the button next to the User data of installed Flatpak apps switch</li>
+                  <li>Improved displaying status about saving and importing configuration</li>
+                  <li>From now on, periodic saving will take place only after the first login on a given day, not after further logins on the same day</li>
+                </ul>
+           </description>
+       </release>
        <release version="3.1" date="2024-02-02">
            <description>
                <ul>
