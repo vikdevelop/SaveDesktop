@@ -45,7 +45,7 @@ class FolderSwitchRow(Gtk.ListBoxRow):
         # switch for all items
         self.switch = Gtk.Switch()
         self.switch.set_halign(Gtk.Align.END)
-        self.switch.set_valign(Gtk.Align.END)
+        self.switch.set_valign(Gtk.Align.CENTER)
         self.switch.connect("state-set", self.on_switch_activated)
         if settings["disabled-flatpak-apps-data"] == []:
             self.switch.set_active(True)
@@ -53,7 +53,9 @@ class FolderSwitchRow(Gtk.ListBoxRow):
         # row for all items
         self.approw = Adw.ActionRow.new()
         self.approw.set_title(folder_name)
-        self.approw.add_prefix(self.switch)
+        self.approw.add_suffix(self.switch)
+        self.approw.set_title_lines(4)
+        self.approw.set_activatable_widget(self.switch)
         self.approw.set_hexpand(True)
         
         # box for self.approw
@@ -80,7 +82,7 @@ class FolderSwitchRow(Gtk.ListBoxRow):
 class FlatpakAppsDialog(Adw.MessageDialog):
     def __init__(self):
         super().__init__(transient_for=app.get_active_window())
-        self.set_heading("Flatpak apps data selection")
+        self.set_heading(_["flatpaks_data_tittle"])
         self.set_default_size(300, 400)
         
         # primary Gtk.Box for this dialog
@@ -1223,7 +1225,7 @@ class MainWindow(Gtk.Window):
         self.savewaitBox.append(self.sdoneImage)
         
         # create label about selected directory for saving the configuration
-        self.savewaitLabel = Gtk.Label.new(str="<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n".format(self.folder, self.filename_text))
+        self.savewaitLabel = Gtk.Label.new(str=_["saving_config_status"].format(self.folder, self.filename_text))
         self.savewaitLabel.set_use_markup(True)
         self.savewaitLabel.set_justify(Gtk.Justification.CENTER)
         self.savewaitLabel.set_wrap(True)
@@ -1270,7 +1272,7 @@ class MainWindow(Gtk.Window):
             self.sdoneImage.set_pixel_size(128)
             
             # edit label for the purposes of this page
-            self.savewaitLabel.set_label(f"<big><b>{_['config_saved']}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n")
+            self.savewaitLabel.set_label(_["config_saved_desc"].format(_['config_saved']))
             self.opensaveButton = Gtk.Button.new_with_label(_["open_folder"])
             self.opensaveButton.add_css_class('pill')
             self.opensaveButton.add_css_class('suggested-action')
@@ -1280,7 +1282,7 @@ class MainWindow(Gtk.Window):
             self.savewaitBox.append(self.opensaveButton)
             
             # create button for backing to the previous page
-            self.backtomButton = Gtk.Button.new_with_label("Back to previous page")
+            self.backtomButton = Gtk.Button.new_with_label(_["back_to_page"])
             self.backtomButton.connect("clicked", back_to_main)
             self.backtomButton.add_css_class("pill")
             self.backtomButton.set_margin_start(170)
@@ -1330,7 +1332,7 @@ class MainWindow(Gtk.Window):
         self.importwaitBox.append(self.idoneImage)
         
         # create label about configuration archive name
-        self.importwaitLabel = Gtk.Label.new(str="<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n".format(config_name))
+        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(config_name))
         self.importwaitLabel.set_use_markup(True)
         self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
         self.importwaitLabel.set_wrap(True)
@@ -1378,7 +1380,7 @@ class MainWindow(Gtk.Window):
             self.idoneImage.set_pixel_size(128)
             
             # edit label for the purposes of this page
-            self.importwaitLabel.set_label(f"<big><b>{_['config_imported']}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n")
+            self.importwaitLabel.set_label(_["config_imported_desc"].format(_['config_imported']))
             
             # create button for loging out of the system
             self.logoutButton = Gtk.Button.new_with_label(_["logout"])
