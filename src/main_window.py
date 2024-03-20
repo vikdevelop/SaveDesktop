@@ -1253,6 +1253,12 @@ class MainWindow(Gtk.Window):
             
         # show the content below only if exists this file
         if os.path.exists(f"{CACHE}/save_config/done_gui"):
+            self.notification_save = Gio.Notification.new("SaveDesktop")
+            self.notification_save.set_body(_["config_saved"])
+            active_window = app.get_active_window()
+            if active_window is None or not active_window.is_active():
+                app.send_notification(None, self.notification_save)
+            
             self.savewaitSpinner.stop()
             self.savewaitBox.remove(self.savewaitButton)
             
@@ -1355,6 +1361,12 @@ class MainWindow(Gtk.Window):
         
         # show the content below only if exists this file
         if os.path.exists(f"{CACHE}/import_config/done"):
+            self.notification_import = Gio.Notification.new("SaveDesktop")
+            self.notification_import.set_body(_["config_imported"])
+            active_window = app.get_active_window()
+            if active_window is None or not active_window.is_active():
+                app.send_notification(None, self.notification_import)
+            
             self.importwaitSpinner.stop()
             self.importwaitBox.remove(self.importwaitButton)
             
