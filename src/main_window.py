@@ -1392,7 +1392,7 @@ class MainWindow(Gtk.Window):
             self.importwaitBox.append(self.logoutButton)
             
             # create button for backing to the previous page
-            self.backtomButton = Gtk.Button.new_with_label("Back to previous page")
+            self.backtomButton = Gtk.Button.new_with_label(_["back_to_page"])
             self.backtomButton.connect("clicked", back_to_main)
             self.backtomButton.add_css_class("pill")
             self.backtomButton.set_margin_start(170)
