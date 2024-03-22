@@ -65,6 +65,7 @@ parts:
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
     source-tag: '3.1.2_snap_8'
+    #source-tag: '3.2'
     source-depth: 1
     plugin: nil
     override-build: |
@@ -80,7 +81,7 @@ parts:
       install -D -t $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
       glib-compile-schemas $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas
       cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr/bin $CRAFT_PART_SRC/run.sh
+      #install -Dm755 -t $CRAFT_PART_INSTALL/usr/bin $CRAFT_PART_SRC/run.sh for rel v3.2
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
 
   deps:
