@@ -55,7 +55,6 @@
     "description": "El SaveDesktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic.",
     "translator_credits": "BennyBeat https://github.com/BennyBeat",
     "periodic_saving_file": "Periodic saving file",
-    "few_minutes_msg": "It'll take a few minutes ...",
     "user_data_flatpak": "User data of installed Flatpak apps",
     "extensions": "Extensions",
     "keyboard_shortcuts": "Keyboard shortcuts",
