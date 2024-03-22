@@ -55,12 +55,17 @@
     "manually": "Manuellement",
     "m_sync_desc": "Désormais, vous pouvez synchroniser la configuration à partir du menu de la barre d'en-tête",
     "periodic_saving_file": "Periodic saving file",
-    "few_minutes_msg": "It'll take a few minutes ...",
     "user_data_flatpak": "User data of installed Flatpak apps",
     "keyboard_shortcuts": "Keyboard shortcuts",
     "quit": "Quit",
     "extensions": "Extensions",
     "sync_manually": "Synchronise manually",
     "list": "List of installed Flatpak apps",
-    "desktop_folder": "Desktop"
+    "desktop_folder": "Desktop",
+    "flatpaks_data_tittle": "Flatpak apps data selection",
+    "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
+    "saving_config_status": "<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n",
+    "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
+    "back_to_page": "Back to previous page",
+    "config_saved_desc": "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 }

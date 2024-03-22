@@ -55,12 +55,17 @@
     "manually": "Вручную",
     "m_sync_desc": "Теперь вы можете синхронизировать конфиг из меню в панели заголовка",
     "periodic_saving_file": "Файл периодического сохранения",
-    "few_minutes_msg": "Это займет несколько минут…",
     "user_data_flatpak": "Пользовательские данные установленных приложений Flatpak",
     "keyboard_shortcuts": "Комбинации клавиш",
     "quit": "Выйти",
     "extensions": "Расширения",
     "sync_manually": "Синхронизовать вручную",
     "list": "Список установленных Flatpak приложений",
-    "desktop_folder": "Рабочий стол"
+    "desktop_folder": "Рабочий стол",
+    "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
+    "saving_config_status": "<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n",
+    "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
+    "back_to_page": "Back to previous page",
+    "flatpaks_data_tittle": "Flatpak apps data selection",
+    "config_saved_desc": "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 }

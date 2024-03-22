@@ -55,12 +55,17 @@
     "manually": "Elle",
     "m_sync_desc": "Artık yapılandırmayı başlık çubuğundaki menüden eşzamanlayabilirsiniz",
     "periodic_saving_file": "Düzenli kayıt dosyası",
-    "few_minutes_msg": "Birkaç dakika alabilir…",
     "user_data_flatpak": "Kurulu Flatpak uygulamalarının kullanıcı verileri",
     "keyboard_shortcuts": "Klavye kısayolları",
     "quit": "Çık",
     "extensions": "Uzantılar",
     "sync_manually": "Elle eşzamanla",
     "list": "Kurulu Flatpak uygulamalarının listesi",
-    "desktop_folder": "Masaüstü"
+    "desktop_folder": "Masaüstü",
+    "flatpaks_data_tittle": "Flatpak apps data selection",
+    "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
+    "saving_config_status": "<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n",
+    "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
+    "back_to_page": "Back to previous page",
+    "config_saved_desc": "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 }
