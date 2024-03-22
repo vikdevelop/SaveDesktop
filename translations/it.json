@@ -61,5 +61,11 @@
     "quit": "Esci",
     "sync_manually": "Sincronizza manualmente",
     "list": "Elenco delle app Flatpak installate",
-    "desktop_folder": "Desktop"
+    "desktop_folder": "Desktop",
+    "flatpaks_data_tittle": "Flatpak apps data selection",
+    "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
+    "saving_config_status": "<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n",
+    "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
+    "back_to_page": "Back to previous page",
+    "config_saved_desc": "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 }
