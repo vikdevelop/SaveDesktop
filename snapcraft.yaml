@@ -75,6 +75,7 @@ parts:
       install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/exclamation_mark.png
       install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/desktop-symbolic.svg
       install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/list-view.png
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/done.svg
       install -D -t $CRAFT_PART_INSTALL/usr/share/metainfo $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
       install -D -t $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
       glib-compile-schemas $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas

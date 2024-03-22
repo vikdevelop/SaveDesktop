@@ -24,9 +24,13 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version, and icon
-v = "3.1.2"
+v = "3.2"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Edited application data for passing the Flathub guidelines</p>"
+rel_notes = "<ul>\
+<li>Added option for selecting what Flatpak applications data will be included in the configuration archive; just click on the button next to the \"User data of installed Flatpak apps\" switch</li>\
+<li>Improved displaying status about saving and importing configuration</li>\
+<li>From now on, periodic saving will take place only after the first login on a given day, not after further logins on the same day</li>\
+</ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'

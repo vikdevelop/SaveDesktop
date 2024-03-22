@@ -4,6 +4,7 @@ import gi
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
 import argparse
+import shutil
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
@@ -36,23 +37,30 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 cache_replacing = f'{CACHE}'
 config = cache_replacing.replace("cache/tmp", "config/glib-2.0/settings")
+flatpak_app_data = settings["disabled-flatpak-apps-data"]
 
 class Save:
     def __init__(self):
+        print("saving settings from the Dconf database")
         os.system("dconf dump / > ./dconf-settings.ini")
-        #os.system('cp -R {home}/.config/dconf/user ./')
+        print("saving Gtk settings")
         os.system(f'cp -R {home}/.config/gtk-4.0 ./')
         os.system(f'cp -R {home}/.config/gtk-3.0 ./')
         if settings["save-backgrounds"] == True:
+            print("saving backgrounds")
             os.system(f'cp -R {home}/.local/share/backgrounds ./')
         if settings["save-icons"] == True:
+            print("saving icons")
             os.system(f'cp -R {home}/.local/share/icons ./')
             os.system(f'cp -R {home}/.icons ./')
         if settings["save-themes"] == True:
+            print("saving themes")
             os.system(f'cp -R {home}/.themes ./')
         if settings["save-fonts"] == True:
+            print("saving fonts")
             os.system(f'cp -R {home}/.fonts ./')
         if settings["save-desktop-folder"] == True:
+            print("saving desktop folder")
             if " " in GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP):
                 desktop_with_spaces = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
                 desktop_without_spaces = desktop_with_spaces.replace(" ", "*")
@@ -60,13 +68,50 @@ class Save:
                 desktop_without_spaces = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
             os.system(f'cp -R {desktop_without_spaces} ./Desktop/ ')
         if settings["save-installed-flatpaks"] == True:
+            print("saving list of installed Flatpak apps")
             os.system('sh /app/backup_flatpaks.sh')
         if settings["save-flatpak-data"] == True:
-            if os.path.exists(f"{CACHE}/save_config"):
-                os.system(f'cd {home}/.var/app && mkdir {CACHE}/save_config/app && cp -r `ls -A | grep -v "io.github.vikdevelop.SaveDesktop"` {CACHE}/save_config/app/')
-            elif os.path.exists(f"{CACHE}/periodic_saving"):
-                os.system(f'cd {home}/.var/app && mkdir {CACHE}/periodic_saving/app && cp -r `ls -A | grep -v "io.github.vikdevelop.SaveDesktop"` {CACHE}/periodic_saving/app/')
+            print("saving user data of installed Flatpak apps")
+            blst = settings["disabled-flatpak-apps-data"]
+            # convert GSettings property to list
+            blist = blst
+            # add io.github.vikdevelop.SaveDesktop to blacklist, because during saving configuration the cache folder is too large
+            blist += ["io.github.vikdevelop.SaveDesktop"]
+            blacklist = blist
             
+            # set destination dir
+            if os.path.exists(f"{CACHE}/save_config"):
+                os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
+                destdir = f"{CACHE}/save_config/app"
+            elif os.path.exists(f"{CACHE}/periodic_saving"):
+                os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
+                destdir = f"{CACHE}/periodic_saving/app"
+            
+            # copy Flatpak apps data
+            for item in os.listdir(f"{home}/.var/app"):
+                if item not in blacklist:
+                    source_path = os.path.join(f"{home}/.var/app", item)
+                    destination_path = os.path.join(destdir, item)
+                    if os.path.isdir(source_path):
+                        try:
+                            shutil.copytree(source_path, destination_path)
+                        except Exception as e:
+                            print(f"Error copying directory {source_path}: {e}")
+                    else:
+                        try:
+                            shutil.copy2(source_path, destination_path)
+                        except Exception as e:
+                            print(f"Error copying file {source_path}: {e}")
+
+            # save user data except for the cache of the SaveDesktop app if the app is not in the "disabled-flatpak-apps-data" key of the GSettings database
+            if not "io.github.vikdevelop.SaveDesktop" in flatpak_app_data:
+                os.makedirs(f"{destdir}/io.github.vikdevelop.SaveDesktop", exist_ok=True)
+                os.chdir(f"{home}/.var/app/io.github.vikdevelop.SaveDesktop")
+                os.system(f"cp -R ./config {destdir}/io.github.vikdevelop.SaveDesktop/")
+                os.system(f"cp -R ./data {destdir}/io.github.vikdevelop.SaveDesktop/")
+                os.chdir(f"{CACHE}/save_config")
+            
+        print("saving desktop environment configuration files")
         # Save configs on individual desktop environments
         if environment == 'GNOME':
             os.system(f"cp -R {home}/.local/share/gnome-background-properties ./")
@@ -115,6 +160,7 @@ class Save:
                 os.system(f"cp -R {home}/.local/share/wallpapers ./xdg-data/")
             if settings["save-extensions"] == True:
                 os.system(f"cp -R {home}/.local/share/plasma ./xdg-data/")
+        print("creating configuration archive")
         os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
             with open(f"{CACHE}/.filedialog.json") as j:
@@ -125,7 +171,11 @@ class Save:
             if not settings["periodic-import"] == "Never2":
                 file = os.path.basename(j["recent_file"])
                 os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
+        print("moving the configuration archive to the user-defined directory")
         os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
+        if os.path.exists(f"{CACHE}/save_config"):
+            os.system("echo > done_gui")
+            print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
         
 class Import:
     def __init__(self):
@@ -135,6 +185,7 @@ class Import:
             os.system("tar -xf %s ./" % j["import_file"])
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
+        print("importing settings from the Dconf database")
         if os.path.exists("user"):
             os.system(f"cp -R ./user {home}/.config/dconf/")
         else:
@@ -143,15 +194,22 @@ class Import:
             else:
                 os.system("echo user-db:user > temporary-profile")
                 os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
+        print("importing list of installed Flatpak apps (them will be installed after the next login)")
         os.system(f'cp ./installed_flatpaks.sh {DATA}/')
         os.system(f'cp ./installed_user_flatpaks.sh {DATA}/')
+        print("importing icons")
         os.system(f'cp -R ./icons {home}/.local/share/')
-        os.system(f'cp -R ./.themes {home}/')
         os.system(f'cp -R ./.icons {home}/')
+        print("importing themes")
+        os.system(f'cp -R ./.themes {home}/')
+        print("importing backgrounds")
         os.system(f'cp -R ./backgrounds {home}/.local/share/')
+        print("importing fonts")
         os.system(f'cp -R ./.fonts {home}/')
+        print("importing Gtk settings")
         os.system(f'cp -R ./gtk-4.0 {home}/.config/')
         os.system(f'cp -R ./gtk-3.0 {home}/.config/')
+        print("importing desktop directory")
         os.system(f'cp -R ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
         if os.path.exists(f'{CACHE}/import_config/app'):
             with open(f"copying_flatpak_data", "w") as c:
@@ -159,6 +217,7 @@ class Import:
         elif os.path.exists(f'{CACHE}/syncing/app'):
             with open(f"copying_flatpak_data", "w") as c:
                 c.write("copying flatpak data ...")
+        print("importing desktop environment configuration files")
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
             os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
@@ -199,9 +258,10 @@ class Import:
                 os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-data')
             os.system(f'cp -R ./ {home}/.local/share/')
-        if not snap:
+        if flatpak:
             self.create_flatpak_desktop()
         os.system(f"echo > {CACHE}/import_config/done")
+        print("THE CONFIGURATION HAS BEEN IMPORTED SUCCESSFULLY!")
             
     # Create desktop file for install Flatpaks from list
     def create_flatpak_desktop(self):
