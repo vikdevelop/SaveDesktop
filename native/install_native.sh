@@ -20,6 +20,7 @@ then
 		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/desktop-symbolic.svg
 		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/edit-symbolic.svg
 		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/list-view.png
+  		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/done.svg
 		# Create cache and data dirs
 		mkdir ~/.cache/io.github.vikdevelop.SaveDesktop
 		mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop
