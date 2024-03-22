@@ -1212,7 +1212,10 @@ class MainWindow(Gtk.Window):
         self.savewaitBox.set_margin_end(80)
         self.toast_overlay.set_child(self.savewaitBox)
         self.headerbar.set_title_widget(None)
-        self.set_title("Saving configuration ....")
+        old_str = f'{_["saving_config_status"]}'
+        new_str = old_str.split('</b>')[0].split('<b>')[-1]
+        
+        self.set_title(new_str)
         
         # create spinner for this page
         self.savewaitSpinner = Gtk.Spinner.new()
@@ -1319,7 +1322,10 @@ class MainWindow(Gtk.Window):
         self.importwaitBox.set_margin_end(80)
         self.toast_overlay.set_child(self.importwaitBox)
         self.headerbar.set_title_widget(None)
-        self.set_title("Importing configuration ...")
+        old_str = f'{_["importing_config_status"]}'
+        new_str = old_str.split('</b>')[0].split('<b>')[-1]
+        
+        self.set_title(new_str)
         
         # create spinner for this page
         self.importwaitSpinner = Gtk.Spinner.new()
