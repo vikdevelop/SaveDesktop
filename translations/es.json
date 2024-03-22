@@ -63,9 +63,9 @@
     "list": "Lista de aplicaciones Flatpak instaladas",
     "desktop_folder": "Escritorio",
     "saving_config_status": "<big><b>Guardar la configuración ...</b></big>\nLa configuración de su entorno de escritorio se guardará en:\n <i>{}/{}.sd.tar.gz</i>\n",
-    "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
-    "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
-    "back_to_page": "Back to previous page",
-    "flatpaks_data_tittle": "Flatpak apps data selection",
+    "importing_config_status": "<big><b>Importación de la configuración ...</b></big>\nImportar configuración desde: {}\n",
+    "config_imported_desc": "<big><b>{}</b></big>\nPuede salir del sistema para que los cambios surtan efecto, o volver a la página anterior y salir más tarde.\n",
+    "back_to_page": "Volver a la página anterior",
+    "flatpaks_data_tittle": "Selección de datos de aplicaciones Flatpak",
     "config_saved_desc": "<big><b>{}</b></big>\nAhora puede ver el archivo con la configuración de su entorno de escritorio o volver a la página anterior.\n"
 }
