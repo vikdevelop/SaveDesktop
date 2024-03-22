@@ -1,8 +1,8 @@
 {
-    "about_app": "Acerca de SaveDesktop",
-    "unsuppurted_env_desc": "<big><b>Tiene instalado un entorno no compatible.</b></big> \nPor favor, use uno de estos entornos: {}.",
+    "about_app": "Acerca de la aplicación",
+    "unsuppurted_env_desc": "<big><b>Tiene instalado un entorno no compatible.</b></big> \nPor favor, utilice uno de estos entornos: {}.",
     "save_config": "Guardar la configuración actual",
-    "import_config": "Importar configuración guardada",
+    "import_config": "Importar la configuración guardada",
     "set_filename": "Establecer el nombre del archivo",
     "config_saved": "¡Se ha guardado la configuración!",
     "open_folder": "Abrir la carpeta",
