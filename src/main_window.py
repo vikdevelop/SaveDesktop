@@ -997,6 +997,7 @@ class MainWindow(Gtk.Window):
             self.switch_06.connect('notify::active', self.show_appsbtn)
             
             self.appsButton.add_css_class("flat")
+            self.appsButton.set_valign(Gtk.Align.CENTER)
             self.appsButton.connect("clicked", self.manage_data_list)
             
         self.itemsDialog.add_response('cancel', _["cancel"])
