@@ -998,8 +998,10 @@ class MainWindow(Gtk.Window):
             
             self.appsButton.add_css_class("flat")
             self.appsButton.set_valign(Gtk.Align.CENTER)
+            self.appsButton.set_tooltip_text(_["flatpaks_data_tittle"])
             self.appsButton.connect("clicked", self.manage_data_list)
-            
+        
+        # set responses of itemsDialog
         self.itemsDialog.add_response('cancel', _["cancel"])
         self.itemsDialog.add_response('ok', _["apply"])
         self.itemsDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
