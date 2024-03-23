@@ -12,7 +12,7 @@
     "open": "Open",
     "cancel": "Cancel",
     "savedesktop_f": "SaveDesktop files",
-    "importing_config_status": "<big><b>Importing configuration …</b></big>\nImporting configuration from: {}\n",
+    "importing_config_status": "<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n",
     "config_imported": "The configuration has been applied!",
     "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
     "back_to_page": "Back to previous page",

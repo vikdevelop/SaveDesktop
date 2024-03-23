@@ -63,7 +63,7 @@
     "list": "Seznam nainstalovaných aplikací Flatpak",
     "desktop_folder": "Plocha",
     "flatpaks_data_tittle": "Výběr dat aplikací Flatpak",
-    "importing_config_status": "<big><b>Importování konfigurace …</b></big>\nImportování konfigurace z:\n{}\n",
+    "importing_config_status": "<big><b>Importování konfigurace …</b></big>\nImportování konfigurace z: \n<i>{}</i>\n",
     "saving_config_status": "<big><b>Ukládání konfigurace … </b></big>\nKonfigurace vašeho desktopového prostředí bude uložena v:\n <i>{}/{}.sd.tar.gz</i>\n",
     "config_imported_desc": "<big><b>{}</b></big>\nAby se změny projevily, můžete se ze systému odhlásit, nebo se vrátit na předchozí stránku a odhlásit se později.\n",
     "back_to_page": "Vrátit se na předchozí stránku",
