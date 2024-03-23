@@ -158,7 +158,8 @@ class MainWindow(Gtk.Window):
         
         self.different_toast_msg = False # value that sets if popup should be with text "Please wait ..." or "It'll take a few minutes ..."
         self.save_ext_switch_state = False # value that sets if state of the switch "Extensions" in the Items Dialog should be saved or not
-
+        self.flatpak_data_sw_state = False
+        
         # Set the window size and maximization from the GSettings database
         self.set_size_request(750, 540)
         (width, height) = settings["window-size"]
@@ -991,6 +992,7 @@ class MainWindow(Gtk.Window):
             if settings["save-flatpak-data"]:
                 self.switch_06.set_active(True)
                 self.data_row.add_suffix(self.appsButton)
+            self.flatpak_data_sw_state = settings["save-flatpak-data"]
             self.switch_06.set_valign(align=Gtk.Align.CENTER)
             self.switch_06.connect('notify::active', self.show_appsbtn)
             
@@ -1017,7 +1019,10 @@ class MainWindow(Gtk.Window):
                 settings["save-flatpak-data"] = self.switch_06.get_active()
             if self.save_ext_switch_state == True:
                 settings["save-extensions"] = self.switch_ext.get_active()
-    
+        elif response == 'cancel':
+            switch_status = self.flatpak_data_sw_state
+            settings["save-flatpak-data"] = switch_status
+            
     # show dialog for managing Flatpak applications data
     def manage_data_list(self, w):
         self.itemsDialog.close()
@@ -1026,6 +1031,7 @@ class MainWindow(Gtk.Window):
         
     # show button after clicking on the switch "User data of Flatpak apps"
     def show_appsbtn(self, w, GParamBoolean):
+        self.flatpak_data_sw_state = settings["save-flatpak-data"]
         if self.switch_06.get_active() == True:
             self.data_row.add_suffix(self.appsButton)
         else:
@@ -1338,7 +1344,7 @@ class MainWindow(Gtk.Window):
         self.importwaitBox.append(self.idoneImage)
         
         # create label about configuration archive name
-        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(config_name))
+        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(f"\n<i>{config_name}</i>"))
         self.importwaitLabel.set_use_markup(True)
         self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
         self.importwaitLabel.set_wrap(True)
