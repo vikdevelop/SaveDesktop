@@ -1344,7 +1344,7 @@ class MainWindow(Gtk.Window):
         self.importwaitBox.append(self.idoneImage)
         
         # create label about configuration archive name
-        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(f"\n<i>{config_name}</i>"))
+        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(config_name))
         self.importwaitLabel.set_use_markup(True)
         self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
         self.importwaitLabel.set_wrap(True)
