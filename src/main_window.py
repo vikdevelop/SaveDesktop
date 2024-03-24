@@ -954,7 +954,7 @@ class MainWindow(Gtk.Window):
         self.desktop_row.set_activatable_widget(self.switch_de)
         self.itemsBox.append(child=self.desktop_row)
         
-        if flatpak: 
+        if flatpak:
             self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
             self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
@@ -1168,7 +1168,7 @@ class MainWindow(Gtk.Window):
         except Exception as e:
             print("Can't run the config.py file!")
         finally:
-            GLib.idle_add(self.exporting_done)
+            self.exporting_done()
         
     # Import config from list
     def imp_cfg_from_list(self, w):
@@ -1197,7 +1197,7 @@ class MainWindow(Gtk.Window):
         except Exception as e:
             print("Can't run the config.py file!")
         finally:
-            GLib.idle_add(self.applying_done)
+            self.applying_done()
             
     # "Please wait" information page on the "Save" page
     def please_wait_save(self):
@@ -1266,40 +1266,39 @@ class MainWindow(Gtk.Window):
             self.savewaitBox.remove(self.backtomButton)
             
         # show the content below only if exists this file
-        if os.path.exists(f"{CACHE}/save_config/done_gui"):
-            self.notification_save = Gio.Notification.new("SaveDesktop")
-            self.notification_save.set_body(_["config_saved"])
-            active_window = app.get_active_window()
-            if active_window is None or not active_window.is_active():
-                app.send_notification(None, self.notification_save)
-            
-            self.savewaitSpinner.stop()
-            self.savewaitBox.remove(self.savewaitButton)
-            
-            # set title to "Configuration has been saved!"
-            self.set_title(_['config_saved'])
-            
-            # use widget for showing done.svg icon
-            self.sdoneImage.set_from_icon_name("done")
-            self.sdoneImage.set_pixel_size(128)
-            
-            # edit label for the purposes of this page
-            self.savewaitLabel.set_label(_["config_saved_desc"].format(_['config_saved']))
-            self.opensaveButton = Gtk.Button.new_with_label(_["open_folder"])
-            self.opensaveButton.add_css_class('pill')
-            self.opensaveButton.add_css_class('suggested-action')
-            self.opensaveButton.set_action_name('app.open-dir')
-            self.opensaveButton.set_margin_start(170)
-            self.opensaveButton.set_margin_end(170)
-            self.savewaitBox.append(self.opensaveButton)
-            
-            # create button for backing to the previous page
-            self.backtomButton = Gtk.Button.new_with_label(_["back_to_page"])
-            self.backtomButton.connect("clicked", back_to_main)
-            self.backtomButton.add_css_class("pill")
-            self.backtomButton.set_margin_start(170)
-            self.backtomButton.set_margin_end(170)
-            self.savewaitBox.append(self.backtomButton)
+        self.notification_save = Gio.Notification.new("SaveDesktop")
+        self.notification_save.set_body(_["config_saved"])
+        active_window = app.get_active_window()
+        if active_window is None or not active_window.is_active():
+            app.send_notification(None, self.notification_save)
+
+        self.savewaitSpinner.stop()
+        self.savewaitBox.remove(self.savewaitButton)
+
+        # set title to "Configuration has been saved!"
+        self.set_title(_['config_saved'])
+
+        # use widget for showing done.svg icon
+        self.sdoneImage.set_from_icon_name("done")
+        self.sdoneImage.set_pixel_size(128)
+
+        # edit label for the purposes of this page
+        self.savewaitLabel.set_label(_["config_saved_desc"].format(_['config_saved']))
+        self.opensaveButton = Gtk.Button.new_with_label(_["open_folder"])
+        self.opensaveButton.add_css_class('pill')
+        self.opensaveButton.add_css_class('suggested-action')
+        self.opensaveButton.set_action_name('app.open-dir')
+        self.opensaveButton.set_margin_start(170)
+        self.opensaveButton.set_margin_end(170)
+        self.savewaitBox.append(self.opensaveButton)
+
+        # create button for backing to the previous page
+        self.backtomButton = Gtk.Button.new_with_label(_["back_to_page"])
+        self.backtomButton.connect("clicked", back_to_main)
+        self.backtomButton.add_css_class("pill")
+        self.backtomButton.set_margin_start(170)
+        self.backtomButton.set_margin_end(170)
+        self.savewaitBox.append(self.backtomButton)
         
         # remove content in the cache directory
         os.popen(f"rm -rf {CACHE}/save_config/")
@@ -1375,47 +1374,45 @@ class MainWindow(Gtk.Window):
             self.importwaitBox.remove(self.logoutButton)
             self.importwaitBox.remove(self.backtomButton)
             self.headerbar.set_title_widget(self.switcher_title)
-        
-        # show the content below only if exists this file
-        if os.path.exists(f"{CACHE}/import_config/done"):
-            self.notification_import = Gio.Notification.new("SaveDesktop")
-            self.notification_import.set_body(_["config_imported"])
-            active_window = app.get_active_window()
-            if active_window is None or not active_window.is_active():
-                app.send_notification(None, self.notification_import)
-            
-            self.importwaitSpinner.stop()
-            self.importwaitBox.remove(self.importwaitButton)
-            
-            # set title to "Configuration has been applied!"
-            self.set_title(_['config_imported'])
-            
-            # widget for showing done.svg icon
-            self.idoneImage.set_from_icon_name("done")
-            self.idoneImage.set_pixel_size(128)
-            
-            # edit label for the purposes of this page
-            self.importwaitLabel.set_label(_["config_imported_desc"].format(_['config_imported']))
-            
-            # create button for loging out of the system
-            self.logoutButton = Gtk.Button.new_with_label(_["logout"])
-            self.logoutButton.add_css_class('pill')
-            self.logoutButton.add_css_class('suggested-action')
-            self.logoutButton.set_action_name('app.logout')
-            self.logoutButton.set_margin_start(170)
-            self.logoutButton.set_margin_end(170)
-            self.importwaitBox.append(self.logoutButton)
-            
-            # create button for backing to the previous page
-            self.backtomButton = Gtk.Button.new_with_label(_["back_to_page"])
-            self.backtomButton.connect("clicked", back_to_main)
-            self.backtomButton.add_css_class("pill")
-            self.backtomButton.set_margin_start(170)
-            self.backtomButton.set_margin_end(170)
-            self.importwaitBox.append(self.backtomButton)
-            
-        if not flatpak:
-            os.popen(f"rm -rf {CACHE}/import_config/*")
+
+        self.notification_import = Gio.Notification.new("SaveDesktop")
+        self.notification_import.set_body(_["config_imported"])
+        active_window = app.get_active_window()
+        if active_window is None or not active_window.is_active():
+            app.send_notification(None, self.notification_import)
+
+        self.importwaitSpinner.stop()
+        self.importwaitBox.remove(self.importwaitButton)
+
+        # set title to "Configuration has been applied!"
+        self.set_title(_['config_imported'])
+
+        # widget for showing done.svg icon
+        self.idoneImage.set_from_icon_name("done")
+        self.idoneImage.set_pixel_size(128)
+
+        # edit label for the purposes of this page
+        self.importwaitLabel.set_label(_["config_imported_desc"].format(_['config_imported']))
+
+        # create button for loging out of the system
+        self.logoutButton = Gtk.Button.new_with_label(_["logout"])
+        self.logoutButton.add_css_class('pill')
+        self.logoutButton.add_css_class('suggested-action')
+        self.logoutButton.set_action_name('app.logout')
+        self.logoutButton.set_margin_start(170)
+        self.logoutButton.set_margin_end(170)
+        self.importwaitBox.append(self.logoutButton)
+
+        # create button for backing to the previous page
+        self.backtomButton = Gtk.Button.new_with_label(_["back_to_page"])
+        self.backtomButton.connect("clicked", back_to_main)
+        self.backtomButton.add_css_class("pill")
+        self.backtomButton.set_margin_start(170)
+        self.backtomButton.set_margin_end(170)
+        self.importwaitBox.append(self.backtomButton)
+
+    if not flatpak:
+        os.popen(f"rm -rf {CACHE}/import_config/*")
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
