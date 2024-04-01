@@ -109,7 +109,10 @@ class Save:
                 os.chdir(f"{home}/.var/app/io.github.vikdevelop.SaveDesktop")
                 os.system(f"cp -R ./config {destdir}/io.github.vikdevelop.SaveDesktop/")
                 os.system(f"cp -R ./data {destdir}/io.github.vikdevelop.SaveDesktop/")
-                os.chdir(f"{CACHE}/save_config")
+                if os.path.exists(f"{CACHE}/save_config"):
+                    os.chdir(f"{CACHE}/save_config")
+                elif os.path.exists(f"{CACHE}/periodic_saving"):
+                    os.chdir(f"{CACHE}/periodic_saving")
             
         print("saving desktop environment configuration files")
         # Save configs on individual desktop environments
