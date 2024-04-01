@@ -84,12 +84,8 @@ class PeriodicBackups:
             filename = old_filename.replace(" ", "_")
         else:
             filename = self.settings["filename-format"]
-        if self.settings["save-flatpak-data"] == True:
-            with open(f"{CACHE}/.periodicfile.json", "w") as p:
-                p.write('{\n "recent_file": "%s/%s.fd.sd.tar.gz"\n}' % (self.pbfolder, filename))
-        else:
-            with open(f"{CACHE}/.periodicfile.json", "w") as p:
-                p.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.pbfolder, filename))
+        with open(f"{CACHE}/.periodicfile.json", "w") as p:
+            p.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.pbfolder, filename))
         os.chdir(f"{CACHE}/periodic_saving")
         os.system(f"python3 {system_dir}/config.py --save")
         os.system(f"rm {CACHE}/.periodicfile.json")
