@@ -24,12 +24,11 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version, and icon
-v = "3.2"
+v = "3.2.1"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
-<li>Added option for selecting what Flatpak applications data will be included in the configuration archive; just click on the button next to the \"User data of installed Flatpak apps\" switch</li>\
-<li>Improved displaying status about saving and importing configuration</li>\
-<li>From now on, periodic saving will take place only after the first login on a given day, not after further logins on the same day</li>\
+<li>Fixed minor bug with saving the SaveDesktop app data to the configuration archive</li>\
+<li>Until now, the output of the periodic saving file was \"name.fd.sd.tar.gz\", if you had enabled the option for saving Flatpak user data. From now on, the output file is \"name.sd.tar.gz\"</li>\
 </ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
