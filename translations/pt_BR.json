@@ -1,9 +1,9 @@
 {
     "about_app": "Sobre o app",
-    "unsuppurted_env_desc": "<big><b>Você tem um ambiente não suportado instalado.</b></big>.\nPor favor, use estes ambientes: GNOME, COSMIC, Cinnamon, Budgie or Xfce.",
+    "unsuppurted_env_desc": "<big><b>Você tem instalado um ambiente sem suporte.</b></big> \nPor favor, use um desses ambientes: {}.",
     "save_config": "Salvar configuração atual",
     "import_config": "Importar configuração salva",
-    "set_filename": "Definir nome de arquivo",
+    "set_filename": "Definir o nome do arquivo",
     "config_saved": "A configuração foi salva!",
     "open_folder": "Abrir a pasta",
     "import_fileshooser": "Importar configuração {}",
@@ -33,7 +33,7 @@
     "pb_folder": "Pasta para salvamento periódico",
     "set_pb_folder_tooltip": "Escolha uma pasta para salvar periódicamente",
     "set_another": "Escolha outra pasta",
-    "reset_button": "Restaurar ao padrão",
+    "reset_button": "Restaurar para o padrão",
     "items_for_archive": "Itens à serem incluídos no arquivo de configuração",
     "icons": "Ícones",
     "more_settings_pb": "Configurações adicionais para salvamento periódico",
@@ -66,6 +66,6 @@
     "flatpaks_data_tittle": "Seleção de dados de aplicativos Flatpak",
     "importing_config_status": "<big><b>Importando configuração ...</b></big>\nImportando configuração de:\n<i>{}</i>\n",
     "saving_config_status": "<big><b>Salvando configuração …</b></big>\nA configuração do seu ambiente de desktop será salva em:\n<i>{}/{}.sd.tar.gz</i>\n",
-    "config_imported_desc": "<big><b>{}</b></big>\nVocê pode encerrar sessão para que as alterações tenham efeito, ou voltar para a página anterior e encerrar mais tarde.\n",
+    "config_imported_desc": "<big><b>{}</b></big>\nVocê pode encerrar a sessão para que as alterações tenham efeito, ou voltar para a página anterior e encerrar mais tarde.\n",
     "config_saved_desc": "<big><b>{}</b></big>\nAgora você pode visualizar o arquivo com a configuração do seu ambiente de desktop, ou retornar à página anterior.\n"
 }
