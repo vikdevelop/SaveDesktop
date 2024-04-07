@@ -1232,10 +1232,12 @@ class MainWindow(Adw.ApplicationWindow):
             self.savewaitBox.remove(self.sdoneImage)
             self.savewaitBox.remove(self.opensaveButton)
             self.savewaitBox.remove(self.backtomButton)
-            
+
+        # add headerbar for this page
         self.headerbar_save = Adw.HeaderBar.new()
         self.headerbar_save.pack_end(self.menu_button)
-        
+
+        # remove main headerbar
         self.toolbarview.add_top_bar(self.headerbar_save)
         self.toolbarview.remove(self.headerbar)
             
@@ -1348,12 +1350,17 @@ class MainWindow(Adw.ApplicationWindow):
         with open(f'{CACHE}/.impfile.json') as i:
             ij = json.load(i)
         config_name = ij["import_file"]
-        
+
+        # add new headerbar for this page
         self.headerbar_import = Adw.HeaderBar.new()
         self.headerbar_import.pack_end(self.menu_button)
-        
+
+        # remove main headerbar and headerbar for "Import from list" page
         self.toolbarview.add_top_bar(self.headerbar_import)
-        self.toolbarview.remove(self.headerbar)
+        try:
+            self.toolbarview.remove(self.headerbar_list)
+        except:
+            self.toolbarview.remove(self.headerbar)
         
         # create box widget for this page
         self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
