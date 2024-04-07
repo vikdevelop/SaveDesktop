@@ -1224,7 +1224,8 @@ class MainWindow(Adw.ApplicationWindow):
         def cancel_save(w):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
             self.toast_overlay.set_child(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
+            self.toolbarview.remove(self.headerbar_save)
+            self.toolbarview.add_top_bar(self.headerbar)
             self.savewaitBox.remove(self.savewaitSpinner)
             self.savewaitBox.remove(self.savewaitLabel)
             self.savewaitBox.remove(self.savewaitButton)
@@ -1232,14 +1233,19 @@ class MainWindow(Adw.ApplicationWindow):
             self.savewaitBox.remove(self.opensaveButton)
             self.savewaitBox.remove(self.backtomButton)
             
+        self.headerbar_save = Adw.HeaderBar.new()
+        self.headerbar_save.pack_end(self.menu_button)
+        
+        self.toolbarview.add_top_bar(self.headerbar_save)
+        self.toolbarview.remove(self.headerbar)
+            
         # create box widget for this page
         self.savewaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.savewaitBox.set_halign(Gtk.Align.CENTER)
         self.savewaitBox.set_valign(Gtk.Align.CENTER)
         self.savewaitBox.set_margin_start(80)
         self.savewaitBox.set_margin_end(80)
-        self.toast_overlay.set_child(self.savewaitBox)
-        self.headerbar.set_title_widget(None)
+        self.toolbarview.set_content(self.savewaitBox)
         old_str = f'{_["saving_config_status"]}'
         new_str = old_str.split('</b>')[0].split('<b>')[-1]
         
@@ -1275,8 +1281,9 @@ class MainWindow(Adw.ApplicationWindow):
     def exporting_done(self):
         # back to the previous page from this page
         def back_to_main(w):
-            self.toast_overlay.set_child(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
+            self.toolbarview.set_content(self.headapp)
+            self.toolbarview.remove(self.headerbar_save)
+            self.toolbarview.add_top_bar(self.headerbar)
             self.savewaitBox.remove(self.savewaitSpinner)
             self.savewaitBox.remove(self.savewaitLabel)
             self.savewaitBox.remove(self.savewaitButton)
@@ -1327,8 +1334,9 @@ class MainWindow(Adw.ApplicationWindow):
         # stop importing configuration
         def cancel_import(w):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
-            self.toast_overlay.set_child(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
+            self.toolbarview.set_content(self.headapp)
+            self.toolbarview.remove(self.headerbar_import)
+            self.toolbarview.add_top_bar(self.headerbar)
             self.importwaitBox.remove(self.importwaitSpinner)
             self.importwaitBox.remove(self.importwaitLabel)
             self.importwaitBox.remove(self.importwaitButton)
@@ -1341,14 +1349,19 @@ class MainWindow(Adw.ApplicationWindow):
             ij = json.load(i)
         config_name = ij["import_file"]
         
+        self.headerbar_import = Adw.HeaderBar.new()
+        self.headerbar_import.pack_end(self.menu_button)
+        
+        self.toolbarview.add_top_bar(self.headerbar_import)
+        self.toolbarview.remove(self.headerbar)
+        
         # create box widget for this page
         self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.importwaitBox.set_halign(Gtk.Align.CENTER)
         self.importwaitBox.set_valign(Gtk.Align.CENTER)
         self.importwaitBox.set_margin_start(80)
         self.importwaitBox.set_margin_end(80)
-        self.toast_overlay.set_child(self.importwaitBox)
-        self.headerbar.set_title_widget(None)
+        self.toolbarview.set_content(self.importwaitBox)
         old_str = f'{_["importing_config_status"]}'
         new_str = old_str.split('</b>')[0].split('<b>')[-1]
         
@@ -1384,8 +1397,9 @@ class MainWindow(Adw.ApplicationWindow):
     def applying_done(self):
         # back to the previous page from this page
         def back_to_main(w):
-            self.toast_overlay.set_child(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
+            self.toolbarview.set_content(self.headapp)
+            self.toolbarview.remove(self.headerbar_import)
+            self.toolbarview.add_top_bar(self.headerbar)
             self.importwaitBox.remove(self.importwaitSpinner)
             self.importwaitBox.remove(self.importwaitLabel)
             self.importwaitBox.remove(self.importwaitButton)
