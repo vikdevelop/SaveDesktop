@@ -78,7 +78,8 @@ class FolderSwitchRow(Gtk.ListBoxRow):
             if self.folder_name in disabled_flatpaks:
                 disabled_flatpaks.remove(self.folder_name)
         settings.set_strv("disabled-flatpak-apps-data", disabled_flatpaks)
-            
+
+# dialog for showing installed Flatpak apps
 class FlatpakAppsDialog(Adw.MessageDialog):
     def __init__(self):
         super().__init__(transient_for=app.get_active_window())
@@ -142,55 +143,64 @@ class FlatpakAppsDialog(Adw.MessageDialog):
             if isinstance(child, FolderSwitchRow):
                 child.switch.set_active(child.folder_name not in disabled_flatpaks)
     
+    # if user clicks on the cancel button, the settings will not saved
     def apply_settings(self, w, response):
         if response == 'cancel':
             settings["disabled-flatpak-apps-data"] = self.old_disabled_flatpaks
     
 # Application window
-class MainWindow(Gtk.Window):
+class MainWindow(Adw.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_title("SaveDesktop")
-        self.headerbar = Adw.HeaderBar.new()
-        self.set_titlebar(titlebar=self.headerbar)
         self.application = kwargs.get('application')
-
+        
+        # headerbar and toolbarview
+        self.headerbar = Adw.HeaderBar.new()
+        self.toolbarview = Adw.ToolbarView.new()
+        self.toolbarview.add_top_bar(self.headerbar)
         
         self.different_toast_msg = False # value that sets if popup should be with text "Please wait ..." or "It'll take a few minutes ..."
         self.save_ext_switch_state = False # value that sets if state of the switch "Extensions" in the Items Dialog should be saved or not
-        self.flatpak_data_sw_state = False
+        self.flatpak_data_sw_state = False # value that sets if state of the switch "User data of installed Flatpak apps will be saved or not"
         
         # Set the window size and maximization from the GSettings database
         self.set_size_request(750, 540)
         (width, height) = settings["window-size"]
         self.set_default_size(width, height)
         
+        # if value is TRUE, it enables window maximalization
         if settings["maximized"]:
             self.maximize()
         
-        # App menu
+        # App menu - primary menu
         self.main_menu = Gio.Menu()
+        
+        # primary menu section
         self.general_menu = Gio.Menu()
         self.general_menu.append(_["about_app"], 'app.about')
         self.general_menu.append(_["keyboard_shortcuts"], 'app.shortcuts')
         self.main_menu.append_section(None, self.general_menu)
+        
+        # menu button
         self.menu_button = Gtk.MenuButton.new()
         self.menu_button.set_icon_name(icon_name='open-menu-symbolic')
         self.menu_button.set_menu_model(menu_model=self.main_menu)
         self.headerbar.pack_end(child=self.menu_button)
         
-        # Add Manually sync button
+        # add Manually sync section
         if settings["manually-sync"] == True:
             self.sync_menu = Gio.Menu()
             self.sync_menu.append(_["sync"], 'app.m_sync')
             self.main_menu.append_section(None, self.sync_menu)
         
-        # Primary layout
+        # primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.headapp.set_margin_start(80)
         self.headapp.set_margin_end(80)
         self.headapp.set_valign(Gtk.Align.CENTER)
         self.headapp.set_halign(Gtk.Align.CENTER)
+        self.toolbarview.set_content(self.headapp)
         
         # Layout for import from list section
         self.pBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -205,7 +215,6 @@ class MainWindow(Gtk.Window):
         # Layout for saving and importing configuration
         self.saveBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=17)
         self.importBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.imp_cfg_title = _["import_from_file"]
         self.syncingBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         
         # Add pages to the menu switcher
@@ -213,7 +222,7 @@ class MainWindow(Gtk.Window):
         self.stack.add_titled_with_icon(self.importBox,"importpage",_["import_title"],"document-open-symbolic")
         self.stack.add_titled_with_icon(self.syncingBox,"syncpage",_["sync"],"emblem-synchronizing-symbolic")
         
-        # menu Switcher
+        # menu switcher
         self.switcher_title=Adw.ViewSwitcherTitle()
         self.switcher_title.set_stack(self.stack)
         self.switcher_title.set_title("")
@@ -225,11 +234,9 @@ class MainWindow(Gtk.Window):
         self.toast_overlay.set_margin_end(margin=1)
         self.toast_overlay.set_margin_bottom(margin=1)
         self.toast_overlay.set_margin_start(margin=1)
+        self.toast_overlay.set_child(self.toolbarview)
+        self.set_content(self.toast_overlay)
         
-        # Set Toast Overlay as a application child
-        self.set_child(self.toast_overlay)
-        self.toast_overlay.set_child(self.headapp)
-
         # Popup window for showing messages about saved and imported configuration
         self.toast = Adw.Toast.new(title='')
         self.toast.set_timeout(0)
@@ -309,7 +316,8 @@ class MainWindow(Gtk.Window):
             self.label_sorry.set_wrap(True)
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
-            
+        
+        # show warning about disconnected plugs
         if snap:
             plugs = ["dot-config", "dot-local", "dot-themes", "dot-icons", "dot-fonts", "login-session-control"]            
 
@@ -346,8 +354,6 @@ class MainWindow(Gtk.Window):
                 self.cmdLabel.set_justify(Gtk.Justification.CENTER)
                 self.cmdLabel.set_wrap(True)
                 self.pBox.append(self.cmdLabel)
-
-                os.system(f"echo > {DATA}/first-run")
     
     # Show main layout
     def save_desktop(self):
@@ -450,7 +456,7 @@ class MainWindow(Gtk.Window):
         self.statusPage_i.set_icon_name("document-open-symbolic")
         self.statusPage_i.set_title(_['import_config'])
         self.statusPage_i.set_description(_["import_config_desc"])
-        self.statusPage_i.set_child(self.syncingBox)
+        #self.statusPage_i.set_child(self.syncingBox)
         self.importBox.append(self.statusPage_i)
         
         # Box of this buttons: Import from file and Import from list
@@ -473,18 +479,29 @@ class MainWindow(Gtk.Window):
                 
     # Import archive from list
     def import_from_list(self, w):
-        self.toast_overlay.set_child(self.pBox)
+        # add back button for this page
         self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
         self.backButton.add_css_class("flat")
         self.backButton.connect("clicked", self.close_list)
-        self.headerbar.set_title_widget(None)
+        
+        # remove main headerbar
+        self.headerbar.remove(child=self.menu_button)
+        self.toolbarview.remove(self.headerbar)
+        
+        # create new headerbar for this page
+        self.headerbar_list = Adw.HeaderBar.new()
+        self.headerbar_list.pack_start(self.backButton)
+        self.headerbar_list.pack_end(child=self.menu_button)
+        self.toolbarview.add_top_bar(self.headerbar_list)
+        self.toolbarview.set_content(self.pBox)
+        
+        # set title for this page
         self.set_title(_["import_from_list"])
-        self.headerbar.pack_start(self.backButton)
-
+        
         # Box for this section
         self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=20)
         self.pBox.append(self.flistBox)
-
+        
         # Label for showing text in this section
         self.flistLabel = Gtk.Label.new()
         self.flistLabel.set_justify(Gtk.Justification.CENTER)
@@ -503,12 +520,12 @@ class MainWindow(Gtk.Window):
                 self.flistBox.append(self.flistLabel)
                 
                 self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
-
+                
                 # Button for applying selected archive
                 self.applyButton = Gtk.Button.new_with_label(_["apply"])
                 self.applyButton.add_css_class('suggested-action')
                 self.applyButton.connect('clicked', self.imp_cfg_from_list)
-                self.headerbar.pack_end(self.applyButton)
+                self.headerbar_list.pack_end(self.applyButton)
                 
                 self.radioBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
                 self.listbox = Gtk.ListBox.new()
@@ -538,10 +555,12 @@ class MainWindow(Gtk.Window):
     # Action after closing import from list page
     def close_list(self, w):
         self.pBox.remove(self.flistBox)
-        self.set_child(self.toast_overlay)
-        self.toast_overlay.set_child(self.headapp)
-        self.headerbar.remove(self.backButton)
-        self.headerbar.set_title_widget(self.switcher_title)
+        self.headerbar_list.remove(self.backButton)
+        self.headerbar_list.remove(child=self.menu_button)
+        self.headerbar.pack_end(child=self.menu_button)
+        self.toolbarview.remove(self.headerbar_list)
+        self.toolbarview.add_top_bar(self.headerbar)
+        self.toolbarview.set_content(self.headapp)
         try:
             self.headerbar.remove(self.applyButton)
         except:
@@ -566,7 +585,7 @@ class MainWindow(Gtk.Window):
         self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
         self.statusPage.set_title(_["sync_title"])
         self.statusPage.set_description(new_url)
-        self.statusPage.set_child(self.syncingBox)
+        #self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
 
         # "Set up the sync file" button
