@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+CACHE=${HOME}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp/
+CACHE_SNAP=$SNAP_USER_COMMON/.cache/tmp
+
 if [ "$SNAP" == "" ]
 then 
 	if [ "$1" == "" ]
@@ -14,9 +17,16 @@ elif [ "$1" == "--sync" ]
 elif [ "$1" == "--start-server" ]
 	then
 		python3 /app/server.py
+elif [ "$1" == "--import-config" ]
+	then
+		echo -e '{\n "import_file": "'$2'"\n}'> $CACHE/.impfile.json
+		mkdir $CACHE/import_config
+		rm -rf $CACHE/import_config/*
+		cd $CACHE/import_config
+		python3 /app/config.py --import_
 elif [ "$1" == "--help" ]
 	then
-   		echo -e '\033[1mArguments:\033[0m \n None | Run SaveDesktop app (GUI) \n --background | Start periodic saving \n --sync | Sync desktop configuration with other computer \n --start-server | Start HTTP server for synchronization DE config with other computers \n --help | Show this message'
+   		echo -e '\033[1mArguments:\033[0m \n None | Run SaveDesktop app (GUI) \n --background | Start periodic saving \n --sync | Sync desktop configuration with other computer \n --start-server | Start HTTP server for synchronization DE config with other computers \n --import-config /path/to/filename.sd.tar.gz | Import configuration of DE \n --help | Show this message'
 fi
 else
   if [ "$1" == "" ]
@@ -31,8 +41,15 @@ else
 	elif [ "$1" == "--start-server" ]
 		then
 			python3 $SNAP/usr/server.py
+	elif [ "$1" == "--import-config" ]
+	then
+		echo -e '{\n "import_file": "'$2'"\n}'> $CACHE/.impfile.json
+		mkdir $CACHE_SNAP/import_config
+		rm -rf $CACHE_SNAP/import_config/*
+		cd $CACHE_SNAP/import_config
+		python3 $SNAP/usr/config.py --import_
 	elif [ "$1" == "--help" ]
-		then
-		echo -e '\033[1mArguments:\033[0m \n None | Run SaveDesktop app (GUI) \n --background | Start periodic saving \n --sync | Sync desktop configuration with other computer \n --start-server | Start HTTP server for synchronization DE config with other computers \n --help | Show this message'
+	then
+   		echo -e '\033[1mArguments:\033[0m \n None | Run SaveDesktop app (GUI) \n --background | Start periodic saving \n --sync | Sync desktop configuration with other computer \n --start-server | Start HTTP server for synchronization DE config with other computers \n --import-config /path/to/filename.sd.tar.gz | Import configuration of DE \n --help | Show this message'
   fi
 fi 
