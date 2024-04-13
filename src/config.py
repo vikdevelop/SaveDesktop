@@ -221,46 +221,49 @@ class Import:
             with open(f"copying_flatpak_data", "w") as c:
                 c.write("copying flatpak data ...")
         print("importing desktop environment configuration files")
-        # Apply configs for individual desktop environments
-        if environment == 'GNOME':
-            os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
-            os.system(f'cp -R ./gnome-shell {home}/.local/share/')
-            os.system(f'cp -R ./nautilus-python {home}/.local/share/')
-            os.system(f'cp -R ./nautilus {home}/.local/share/')
-            os.system(f'cp -R ./gnome-control-center {home}/.config/')
-        elif environment == 'Pantheon':
-            os.system(f'cp -R ./plank {home}/.config/')
-            os.system(f'cp -R ./marlin {home}/.config/')
-        elif environment == 'Cinnamon':
-            os.system(f'cp -R ./nemo {home}/.config/')
-            os.system(f'cp -R ./cinnamon {home}/.local/share/')
-            os.system(f'cp -R ./.cinnamon {home}/')
-        elif environment == 'Budgie':
-            os.system(f'cp -R ./budgie-desktop {home}/.config/')
-            os.system(f'cp -R ./budgie-extras {home}/.config/')
-            os.system(f'cp -R ./nemo {home}/.config/')
-        elif environment == 'COSMIC':
-            os.system(f'cp -R ./pop-shell {home}/.config/')
-            os.system(f'cp -R ./gnome-shell {home}/.local/share/')
-        elif environment == 'Xfce':
-            os.system(f'cp -R ./xfce4 {home}/.config/')
-            os.system(f'cp -R ./Thunar {home}/.config/')
-            os.system(f'cp -R ./.xfce4 {home}/')
-        elif environment == 'MATE':
-            os.system(f'cp -R ./caja {home}/.config/')
-        elif environment == 'KDE Plasma':
-            if os.path.exists(f"{CACHE}/syncing"):
-                os.chdir("%s/syncing" % CACHE)
-            else:
-                os.chdir("%s/import_config" % CACHE)
-            os.chdir('xdg-config')
-            os.system(f'cp -R ./ {home}/.config/')
-            if os.path.exists(f"{CACHE}/syncing"):
-                os.chdir("%s/syncing" % CACHE)
-            else:
-                os.chdir("%s/import_config" % CACHE)
-            os.chdir('xdg-data')
-            os.system(f'cp -R ./ {home}/.local/share/')
+        if environment == None:
+            print("→ SKIPPING: SaveDesktop is loaded in TTY mode")
+        else:
+            # Apply configs for individual desktop environments
+            if environment == 'GNOME':
+                os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
+                os.system(f'cp -R ./gnome-shell {home}/.local/share/')
+                os.system(f'cp -R ./nautilus-python {home}/.local/share/')
+                os.system(f'cp -R ./nautilus {home}/.local/share/')
+                os.system(f'cp -R ./gnome-control-center {home}/.config/')
+            elif environment == 'Pantheon':
+                os.system(f'cp -R ./plank {home}/.config/')
+                os.system(f'cp -R ./marlin {home}/.config/')
+            elif environment == 'Cinnamon':
+                os.system(f'cp -R ./nemo {home}/.config/')
+                os.system(f'cp -R ./cinnamon {home}/.local/share/')
+                os.system(f'cp -R ./.cinnamon {home}/')
+            elif environment == 'Budgie':
+                os.system(f'cp -R ./budgie-desktop {home}/.config/')
+                os.system(f'cp -R ./budgie-extras {home}/.config/')
+                os.system(f'cp -R ./nemo {home}/.config/')
+            elif environment == 'COSMIC':
+                os.system(f'cp -R ./pop-shell {home}/.config/')
+                os.system(f'cp -R ./gnome-shell {home}/.local/share/')
+            elif environment == 'Xfce':
+                os.system(f'cp -R ./xfce4 {home}/.config/')
+                os.system(f'cp -R ./Thunar {home}/.config/')
+                os.system(f'cp -R ./.xfce4 {home}/')
+            elif environment == 'MATE':
+                os.system(f'cp -R ./caja {home}/.config/')
+            elif environment == 'KDE Plasma':
+                if os.path.exists(f"{CACHE}/syncing"):
+                    os.chdir("%s/syncing" % CACHE)
+                else:
+                    os.chdir("%s/import_config" % CACHE)
+                os.chdir('xdg-config')
+                os.system(f'cp -R ./ {home}/.config/')
+                if os.path.exists(f"{CACHE}/syncing"):
+                    os.chdir("%s/syncing" % CACHE)
+                else:
+                    os.chdir("%s/import_config" % CACHE)
+                os.chdir('xdg-data')
+                os.system(f'cp -R ./ {home}/.local/share/')
         if flatpak:
             self.create_flatpak_desktop()
         os.system(f"echo > {CACHE}/import_config/done")
