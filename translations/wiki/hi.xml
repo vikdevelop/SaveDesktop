@@ -59,4 +59,5 @@
   <str key="github_issues">_यदि आपके कोई प्रश्न हैं, तो आप GitHub मुद्दों का उपयोग कर सकते हैं।_</str>
   <str key="localize-wiki">SaveDesktop विकी को स्थानीयकृत करें (वेबलेट के माध्यम से)</str>
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
 </root>
