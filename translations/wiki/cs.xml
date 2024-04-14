@@ -58,4 +58,27 @@ Pro snadnější orientaci je k dispozici postranní panel, kde můžete přepí
   <str key="select_language">Vyberte jazyk</str>
   <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="localize-wiki">Lokalizovat SaveDesktop wiki (přes Weblate)</str>
+  <str key="version_warning">**Tato funkce je k dispozici od verze: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Import konfigurace v rozhraní CLI</str>
+  <str key="imp_cfg_cli_intro">Kromě importu konfigurace v grafickém uživatelském rozhraní umožňuje SaveDesktop také importovat konfiguraci v rozhraní příkazového řádku (CLI), které můžete použít v případě, že se vaše desktopové prostředí rozbije.</str>
+  <str key="imp_cfg_cli_steps">### Jak tedy postupovat?
+**1. Otevřete terminál**
+
+Můžete jej otevřít z nabídky aplikací nebo pomocí klávesové zkratky Ctrl+Alt+T.
+
+**2. Zadejte příkaz pro import konfigurace**
+
+Do terminálu zadejte následující příkaz:
+- Pokud máte SaveDesktop nainstalovaný jako balíček Flatpak, použijte následující příkaz:
+
+ ```
+ flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+ ```
+
+- pokud máte SaveDesktop nainstalovaný jako Snap nebo nativní balíček, použijte: 
+  ```
+  saveesktop --import-config /cesta/do/jméno souboru.sd.tar.gz
+  ```</str>
+  <str key="imp_cfg_cli_note">**Poznámka**:
+- místo `/path/to/filename.sd.tar.gz` zadejte cestu ke konfiguračnímu archivu, který chcete importovat, například: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
 </root>
