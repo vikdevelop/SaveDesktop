@@ -58,4 +58,5 @@ A könnyebb navigáció érdekében az oldalsávon válthatunk a nyelvek és az 
   <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="github_issues">_Ha bármi kérdésed lenne, használd a Github Issues-t._</str>
   <str key="localize-wiki">Honosítsd a SaveDesktop wiki oldalt (a Weblate-n)</str>
+  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
 </root>
