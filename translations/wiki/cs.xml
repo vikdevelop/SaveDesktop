@@ -61,4 +61,22 @@ Pro snadnější orientaci je k dispozici postranní panel, kde můžete přepí
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
   <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
+  <str key="imp_cfg_cli_steps">### So how to proceed?
+**1. Open a terminal**
+
+You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+
+**2. Type the command to import the configuration**
+
+Enter the following command in the terminal:
+- if you have SaveDesktop installed as a Flatpak package, use the following:
+
+     ```
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     ```
+
+- if you have SaveDesktop installed as a Snap or native package, use: 
+     ```
+     savedesktop --import-config /path/to/filename.sd.tar.gz
+     ```</str>
 </root>
