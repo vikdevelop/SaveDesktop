@@ -24,22 +24,25 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version, and icon
-v = "3.2.1"
+v = "3.2.2"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
-<li>Fixed minor bug with saving the SaveDesktop app data to the configuration archive</li>\
-<li>Until now, the output of the periodic saving file was \"name.fd.sd.tar.gz\", if you had enabled the option for saving Flatpak user data. From now on, the output file is \"name.sd.tar.gz\"</li>\
+<li>Improved application header bar style (#246)</li>\
+<li>Added support for importing configuration in CLI (Command line interface) (#254), more information is on the Github wiki</li>\
+<li>Added Hindi translations, thanks to @Scrambled777</li>\
+<li>Added Portuguese translations, thanks to @ezileicorreia</li>\
+<li>Added Romanian translations, thanks to @GabsEdits</li>\
 </ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
 
-#Checking for Snap and Real Home directories
+# Checking for Snap and Real Home directories
 
 snap_home = Path.home()#keeping this value if it comes handy
 snap_real_home = os.getenv('SNAP_REAL_HOME')
 
-#Setting home as per the confinement
+# Setting home as per the confinement
 home = snap_real_home if 'SNAP' in os.environ else snap_home
 
 if flatpak:
