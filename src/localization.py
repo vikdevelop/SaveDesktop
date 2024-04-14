@@ -32,6 +32,7 @@ rel_notes = "<ul>\
 <li>Added Hindi translations, thanks to @Scrambled777</li>\
 <li>Added Portuguese translations, thanks to @ezileicorreia</li>\
 <li>Added Romanian translations, thanks to @GabsEdits</li>\
+<li>Updated translations</li>\
 </ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
