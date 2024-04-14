@@ -60,4 +60,5 @@ For easier navigation, there is a sidebar where you can switch between languages
   <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
   <str key="localize-wiki">Localize SaveDesktop wiki (via Weblate)</str>
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
 </root>
