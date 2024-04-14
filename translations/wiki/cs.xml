@@ -58,4 +58,5 @@ Pro snadnější orientaci je k dispozici postranní panel, kde můžete přepí
   <str key="select_language">Vyberte jazyk</str>
   <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="localize-wiki">Lokalizovat SaveDesktop wiki (přes Weblate)</str>
+  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
 </root>
