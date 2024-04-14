@@ -58,4 +58,5 @@ Per a una navegació més fàcil, teniu una barra des d'on podeu canviar entre i
   <str key="savedesktop_wiki">Wiki del SaveDesktop</str>
   <str key="github_issues">_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._</str>
   <str key="localize-wiki">Traducció de la wiki del SaveDesktop (via Weblate)</str>
+  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
 </root>
