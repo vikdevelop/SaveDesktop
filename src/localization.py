@@ -28,7 +28,7 @@ v = "3.2.2"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
 <li>Improved application header bar style (#246)</li>\
-<li>Added support for importing configuration in CLI (Command line interface) (#254), more information is on the Github wiki</li>\
+<li>Added support for importing configuration in CLI (Command line interface) (#254), more informations are available on the Github wiki</li>\
 <li>Added Hindi translations, thanks to @Scrambled777</li>\
 <li>Added Portuguese translations, thanks to @ezileicorreia</li>\
 <li>Added Romanian translations, thanks to @GabsEdits</li>\
