@@ -58,4 +58,5 @@
   <str key="savedesktop_wiki">Вікі SaveDesktop</str>
   <str key="github_issues">_Якщо у вас є якісь запитання, відкрийте новий `Issues` у GitHub репозиторії._</str>
   <str key="localize-wiki">Перекласти вікі SaveDesktop (через Weblate)</str>
+  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
 </root>
