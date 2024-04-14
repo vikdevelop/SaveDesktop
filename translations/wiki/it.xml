@@ -59,4 +59,5 @@ Per una navigazione più semplice, è presente una barra laterale in cui è poss
   <str key="github_issues">_Se hai domande, puoi usare GitHub Issues._</str>
   <str key="localize-wiki">Localizza la wiki di SaveDesktop (tramite Weblate)</str>
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
 </root>
