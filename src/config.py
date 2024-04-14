@@ -34,7 +34,7 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
     environment = 'KDE Plasma'
 else:
-    environment = None
+    from tty_environments import *
     
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 cache_replacing = f'{CACHE}'
