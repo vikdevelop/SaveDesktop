@@ -12,3 +12,4 @@ Because there are a lot of files, this README helps you with navigate in this di
 - `periodic_saving.py` - saving configuration periodically
 - `server.py` - starting Python HTTP server for synchronization between computers in the network
 - `shortcuts_window.py` - showing available Keyboard shortcuts in the window
+- `tty_environments.py` - detecting desktop environemnt in the TTY mode
