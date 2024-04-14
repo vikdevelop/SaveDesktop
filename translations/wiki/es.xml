@@ -58,4 +58,5 @@ Para facilitar la navegación, hay una barra lateral en la que puedes cambiar en
   <str key="savedesktop_wiki">Wiki de SaveDesktop</str>
   <str key="github_issues">_Si tiene alguna duda, utilice el notificador de incidencias de GitHub._</str>
   <str key="localize-wiki">Localizar la wiki de SaveDesktop (a través de Weblate)</str>
+  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
 </root>
