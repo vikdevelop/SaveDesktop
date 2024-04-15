@@ -77,7 +77,7 @@ Do terminálu zadejte následující příkaz:
 
 - pokud máte SaveDesktop nainstalovaný jako Snap nebo nativní balíček, použijte: 
   ```
-  saveesktop --import-config /cesta/do/jméno souboru.sd.tar.gz
+  saveesktop --import-config /path/to/filename.sd.tar.gz
   ```</str>
   <str key="imp_cfg_cli_note">**Poznámka**:
 - místo `/path/to/filename.sd.tar.gz` zadejte cestu ke konfiguračnímu archivu, který chcete importovat, například: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
