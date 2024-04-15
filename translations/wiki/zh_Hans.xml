@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="home">主页</str>
+  <str key="periodic_saving">定期保存</str>
+  <str key="how_it_works">### 它是如何工作的？</str>
+  <str key="pb_desc">除了手动保存，SaveDesktop也允许您定期保存桌面环境配置。您可从以下选项中进行选择：</str>
+  <str key="pb_options">- **每天**: 
+  - 当您登录进系统后，SaveDesktop将开始在后台对配置进行备份。当您在同一天再次登录系统时，备份工作将不会重复进行，因为当日的备份文件已被创建。
+- **每周**:
+  - 如果您选择“每周备份”，那么SaveDesktop将在每周一进行备份。如果您周一没有登录系统，那么SaveDesktop也不会在下一次您登录系统时备份。
+- **每月**:
+  - 如果您选择“每月备份”，那么SaveDesktop将在每月的第一天进行备份，例如：5月1日，6月1日，12月1日等。正如“每周备份”那样，如果您在当月第一天没有登录系统，那么SaveDesktop也不会在下一次您登录系统时备份。
+- **从不**:
+  - 无事发生。</str>
+  <str key="pb_location">### 定期备份的文件保存在哪里？
+定期备份的存档路径默认在`/home/user/Downloads/SaveDesktop/archives`，但您可以自定义路径。</str>
+  <str key="pb_filename_title">### 文件名格式</str>
+  <str key="pb_filname_desc">如果您不想用`Latest_configuration`这一文件名，而使用一种文件名格式，这其实也是可行的，甚至可以包含空格。 自2.9.6版本之后，变量`{}`不再为当前日期进行设置，因为在定期备份中，原始备份将被覆盖。</str>
+  <str key="synchronization_between_computers_title">通过网络在不同计算机中同步</str>
+  <str key="how_to_set_up_it">## 如何设置？</str>
+  <str key="whats_your_needing"> ### 您有什么需求？</str>
+  <str key="on_computer_1">**在计算机1上:**
+- 手动设置您想同步的设备的IP地址，以便每次启动时，IP地址不会发生变化。您可通过以下方式进行设置：</str>
+  <str key="router_settings">**路由器设置**
+  - [Asus路由器](https://www.asus.com/support/FAQ/1000906/)
+  - [Tp-link路由器](https://www.tp-link.com/us/support/faq/170/)
+  - [Tenda路由器](https://www.tendacn.com/faq/3264.html)
+  - [Netgear路由器](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
+  - 如果您没有以上路由器，请打开您的路由器设置界面(URL: [192.168.1.1](http://192.168.1.1)或类似地址)然后搜索DHCP服务器部分，看是否有类似“手动设置IP地址至DHCP列表”或“静态IP”等。</str>
+  <str key="sys_config_print">  **关于`system-config-printer`包:**
+  - 如果您不想从路由器界面手动设置IP地址，并且您有连接打印机，且安装过`system-config-printer`包，请检查是否勾选了“共享”选项，您可从标题栏点击打印机选项卡以查看。如果您没有勾选，请勾选上它，并重启系统。[这里](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) 有一张实例截图.</str>
+  <str key="on_computer_2">**在计算机2上:**
+- 请检查此设备是否已与计算机1同处一个局域网内。</str>
+  <str key="sync_in_savedesktop">### 在SaveDesktop应用中设置同步
+在计算机1和2上同时打开SaveDesktop应用，并切换至同步页面。在计算机1上点击“配置同步文件，并选择同步文件（您的定期存档文件），并选择一个定期同步间隔。接着复制同步URL，到计算机2上，点击“连接至其他计算机”并填入从计算机1上复制好的URL。</str>
+  <str key="sync_warning">如果您想从计算机2同步桌面环境配置至计算机1，也是相同的步骤。
+
+**您需要注销以生效**</str>
+  <str key="periodic_sync">## 定期同步
+您可从以下方案中选择:
+- 每日
+- 每周（在每个周二会进行同步）
+- 每月（在每月第二天会进行同步）
+- 手动（可手动点击标题栏的三点按钮进行手动同步）
+- 从不（无事发生）</str>
+  <str key="save_installed_flatpaks_title">保存已安装的Flatpak应用并通过列表进行安装</str>
+  <str key="save_flatpak_intro">自2.5版本以后，SaveDesktop允许您保存已安装的Flatpak应用，并支持通过列表安装Flatpak应用。那么它是如何工作的呢？</str>
+  <str key="saving_flatpaks">### 保存已安装的Flatpak应用
+为已安装的Flatpak应用建立列表是可行的。列表将读取系统安装路径/var/lib/flatpak/app和用户安装路径~/.local/share/flatpak/app中的应用，而保存好的列表将位于存档文件中的installed_flatpaks.sh和installed_user_flatpaks.sh，它们同样分别对应系统安装和用户安装。</str>
+  <str key="installing_flatpaks">### 从列表安装Flatpak应用
+当完成导入并重新登录后，**Flatpak应用将在后台自动安装。**</str>
+  <str key="wiki_description">SaveDesktop is a simple application written in Python using GTK and LibAdwaita libraries. This wiki is used to explain some of the features of the application (e.g. synchronization between computers).
+
+This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
+
+For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
+  <str key="select_language">Select language</str>
+  <str key="savedesktop_wiki">SaveDesktop wiki</str>
+  <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
+  <str key="localize-wiki">Localize SaveDesktop wiki (via Weblate)</str>
+  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
+  <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
+  <str key="imp_cfg_cli_steps">### So how to proceed?
+**1. Open a terminal**
+
+You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+
+**2. Type the command to import the configuration**
+
+Enter the following command in the terminal:
+- if you have SaveDesktop installed as a Flatpak package, use the following:
+
+     ```
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     ```
+
+- if you have SaveDesktop installed as a Snap or native package, use: 
+     ```
+     savedesktop --import-config /path/to/filename.sd.tar.gz
+     ```</str>
+  <str key="imp_cfg_cli_note">**Note**:
+- instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
+</root>
