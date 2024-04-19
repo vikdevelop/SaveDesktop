@@ -58,27 +58,27 @@ Para facilitar la navegación, hay una barra lateral en la que puedes cambiar en
   <str key="savedesktop_wiki">Wiki de SaveDesktop</str>
   <str key="github_issues">_Si tiene alguna duda, utilice el notificador de incidencias de GitHub._</str>
   <str key="localize-wiki">Localizar la wiki de SaveDesktop (a través de Weblate)</str>
-  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
-  <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
-  <str key="imp_cfg_cli_steps">### So how to proceed?
-**1. Open a terminal**
+  <str key="version_warning">**Esta función está disponible a partir de la versión: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Importar la configuración en la interfaz CLI</str>
+  <str key="imp_cfg_cli_intro">Además de importar la configuración en la GUI, SaveDesktop también le permite importar la configuración en la interfaz de línea de comandos (CLI), que puede utilizar en caso de que su entorno de escritorio se rompa.</str>
+  <str key="imp_cfg_cli_steps">Entonces, ¿cómo proceder?
+**1. Abrir un terminal**
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+Puede abrirlo desde el menú de aplicaciones, o usando el atajo de teclado Ctrl+Alt+T.
 
-**2. Type the command to import the configuration**
+**2. Escriba el comando para importar la configuración**
 
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
+Introduzca el siguiente comando en el terminal:
+- si tiene SaveDesktop instalado como un paquete Flatpak, utilice lo siguiente:
 
      ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     Ejecute flatpak io.github.vikdevelop.SaveDesktop --import-config /ruta/a/nombre de archivo.sd.tar.gz
      ```
 
-- if you have SaveDesktop installed as a Snap or native package, use: 
+- si tiene SaveDesktop instalado como un paquete Snap o nativo, utilice: 
      ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
+     savedesktop --import-config /ruta/a/nombre de archivo.sd.tar.gz
      ```</str>
-  <str key="imp_cfg_cli_note">**Note**:
-- instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
+  <str key="imp_cfg_cli_note">**Nota**:
+- en lugar de `/path/to/filename.sd.tar.gz`, introduzca la ruta al archivo de configuración que desea importar, por ejemplo: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
 </root>
