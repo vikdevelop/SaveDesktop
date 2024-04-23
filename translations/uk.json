@@ -13,7 +13,7 @@
     "config_imported": "Конфігурацію застосовано!",
     "logout": "Вийти",
     "please_wait": "Будь ласка, зачекайте…",
-    "summary": "Збережіть поточну конфігурацію середовища робочого столу",
+    "summary": "Збережіть конфігурацію вашої стільниці",
     "description": "SaveDesktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, всі налаштування середовища робочого столу, розширення тощо) в один клац.",
     "translator_credits": "Kefir2105 https://github.com/Kefir2105\nvolkov <volkovissocool@gmail.com>",
     "periodic_saving": "Періодичне збереження",
@@ -62,10 +62,10 @@
     "sync_manually": "Синхронізувати вручну",
     "list": "Список встановлених додатків Flatpak",
     "desktop_folder": "Робочий стіл",
-    "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
-    "saving_config_status": "<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n",
-    "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
-    "back_to_page": "Back to previous page",
-    "flatpaks_data_tittle": "Flatpak apps data selection",
-    "config_saved_desc": "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+    "importing_config_status": "<big><b>Імпортування конфігурації...</b></big>\nІмпортування конфігурації з:\n<i>{}</i>\n",
+    "saving_config_status": "<big><b>Збереження конфігурації...</b></big>\nКонфігурація вашої стільниці буде збережена в:\n <i>{}/{}.sd.tar.gz</i>\n",
+    "config_imported_desc": "<big><b>{}</b></big>\nВи можете вийти із системи що зміни набули чинності, або повернутися до попередньої сторінки і вийти із системи пізніше.\n",
+    "back_to_page": "Повернутися до попередньої сторінки",
+    "flatpaks_data_tittle": "Обирання даних Flatpak додатків",
+    "config_saved_desc": "<big><b>{}</b></big>\nТепер ви можете переглянути архів з конфігурацією вашої стільниці або повернутися до попередньої сторінки.\n"
 }
