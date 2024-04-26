@@ -1292,7 +1292,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.savewaitBox.remove(self.sdoneImage)
             self.savewaitBox.remove(self.opensaveButton)
             self.savewaitBox.remove(self.backtomButton)
-            
+        
         # show the content below only if exists this file
         self.notification_save = Gio.Notification.new("SaveDesktop")
         self.notification_save.set_body(_["config_saved"])
@@ -1330,6 +1330,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         # remove content in the cache directory
         os.popen(f"rm -rf {CACHE}/save_config/")
+        os.popen(f"rm -rf {CACHE}/.filedialog.json")
     
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
