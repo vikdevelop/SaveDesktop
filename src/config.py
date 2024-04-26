@@ -82,12 +82,12 @@ class Save:
             blacklist = blist
             
             # set destination dir
-            if os.path.exists(f"{CACHE}/save_config"):
-                os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
-                destdir = f"{CACHE}/save_config/app"
-            elif os.path.exists(f"{CACHE}/periodic_saving"):
+            if os.path.exists(f"{CACHE}/.periodicfile.json"):
                 os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
                 destdir = f"{CACHE}/periodic_saving/app"
+            elif os.path.exists(f"{CACHE}/.filedialog.json"):
+                os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
+                destdir = f"{CACHE}/save_config/app"
             
             # copy Flatpak apps data
             for item in os.listdir(f"{home}/.var/app"):
