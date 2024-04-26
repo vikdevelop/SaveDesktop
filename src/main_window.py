@@ -1223,7 +1223,7 @@ class MainWindow(Adw.ApplicationWindow):
         # stop saving configuration
         def cancel_save(w):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
-            self.toast_overlay.set_child(self.headapp)
+            self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_save)
             self.toolbarview.add_top_bar(self.headerbar)
             self.savewaitBox.remove(self.savewaitSpinner)
