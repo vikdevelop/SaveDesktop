@@ -24,14 +24,10 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version, and icon
-v = "3.2.2"
+v = "3.2.3"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
-<li>Improved application header bar style (#246)</li>\
-<li>Added support for importing configuration in CLI (Command line interface) (#254), more informations are available on the Github wiki</li>\
-<li>Added Hindi translations, thanks to @Scrambled777</li>\
-<li>Added Portuguese translations, thanks to @ezileicorreia</li>\
-<li>Added Romanian translations, thanks to @GabsEdits</li>\
+<li>Fixed bug with stopping saving configuration</li>\
 <li>Updated translations</li>\
 </ul>"
 
