@@ -46,7 +46,6 @@ body:
         - Flatpak from Flathub
         - Flatpak, which was built with Flatpak Builder
         - Native from this repository
-        - Arch Linux package
         - Snap package
     validations:
       required: true
