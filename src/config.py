@@ -20,7 +20,9 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'ubuntu:GNOME':
     environment = 'GNOME'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
-    environment = 'COSMIC'
+    environment = 'COSMIC (Old)'
+elif os.getenv('XDG_CURRENT_DESKTOP') == 'COSMIC':
+    environment = 'COSMIC (New)'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'Pantheon':
     environment = 'Pantheon'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'X-Cinnamon':
@@ -137,9 +139,12 @@ class Save:
             os.system(f"cp -R {home}/.config/budgie-desktop ./")
             os.system(f"cp -R {home}/.config/budgie-extras ./")
             os.system(f"cp -R {home}/.config/nemo ./")
-        elif environment == 'COSMIC':
+        elif environment == 'COSMIC (Old)':
             os.system(f"cp -R {home}/.config/pop-shell ./")
             os.system(f"cp -R {home}/.local/share/gnome-shell ./")
+        elif environment == 'COSMIC (New)':
+            os.system(f"cp -R {home}/.config/cosmic ./")
+            os.system(f"cp -R {home}/.local/state/cosmic ./cosmic-state")
         elif environment == 'Xfce':
             os.system(f"cp -R {home}/.config/xfce4 ./")
             os.system(f"cp -R {home}/.config/Thunar ./")
@@ -241,9 +246,12 @@ class Import:
             os.system(f'cp -R ./budgie-desktop {home}/.config/')
             os.system(f'cp -R ./budgie-extras {home}/.config/')
             os.system(f'cp -R ./nemo {home}/.config/')
-        elif environment == 'COSMIC':
+        elif environment == 'COSMIC (Old)':
             os.system(f'cp -R ./pop-shell {home}/.config/')
             os.system(f'cp -R ./gnome-shell {home}/.local/share/')
+        elif environment == 'COSMIC (New)':
+            os.system(f"cp -R ./cosmic {home}/.config/")
+            os.system(f"cp -R ./cosmic-state {home}/.local/state/cosmic")
         elif environment == 'Xfce':
             os.system(f'cp -R ./xfce4 {home}/.config/')
             os.system(f'cp -R ./Thunar {home}/.config/')
