@@ -155,10 +155,13 @@ class MainWindow(Adw.ApplicationWindow):
         self.set_title("SaveDesktop")
         self.application = kwargs.get('application')
         
-        # headerbar and toolbarview
+        # header bar and toolbarview
         self.headerbar = Adw.HeaderBar.new()
         self.toolbarview = Adw.ToolbarView.new()
         self.toolbarview.add_top_bar(self.headerbar)
+        
+        # header bar for unsuppurtoed environment or disconnected some plugs in the Snap package
+        self.errHeaderbar = Adw.HeaderBar.new()
         
         self.different_toast_msg = False # value that sets if popup should be with text "Please wait ..." or "It'll take a few minutes ..."
         self.save_ext_switch_state = False # value that sets if state of the switch "Extensions" in the Items Dialog should be saved or not
@@ -261,7 +264,13 @@ class MainWindow(Adw.ApplicationWindow):
             self.syncing_desktop()
             self.connect("close-request", self.on_close)
         elif os.getenv('XDG_CURRENT_DESKTOP') == 'pop:GNOME':
-            self.environment = 'COSMIC'
+            self.environment = 'COSMIC (Old)'
+            self.save_desktop()
+            self.import_desktop()
+            self.syncing_desktop()
+            self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'COSMIC':
+            self.environment = 'COSMIC (New)'
             self.save_desktop()
             self.import_desktop()
             self.syncing_desktop()
@@ -304,10 +313,11 @@ class MainWindow(Adw.ApplicationWindow):
             self.connect("close-request", self.on_close)
         else:
             # If the user uses another desktop environment
-            self.set_child(self.pBox)
+            self.toolbarview.add_top_bar(self.errHeaderbar)
+            self.toolbarview.remove(self.headerbar)
+            self.toolbarview.set_content(self.pBox)
             self.pBox.set_margin_start(50)
             self.pBox.set_margin_end(50)
-            self.headerbar.set_title_widget(None)
             self.Image = Gtk.Image.new_from_icon_name("exclamation_mark")
             self.Image.set_pixel_size(50)
             self.pBox.append(self.Image)
@@ -330,8 +340,10 @@ class MainWindow(Adw.ApplicationWindow):
                     show_warning = False
 
             if show_warning == True:
-                self.set_child(self.pBox)
-                self.headerbar.set_title_widget(None)
+                self.toolbarview.add_top_bar(self.errHeaderbar)
+                self.toolbarview.remove(self.headerbar)
+                
+                self.toolbarview.set_content(self.pBox)
                 self.pBox.set_margin_start(90)
                 self.pBox.set_margin_end(90)
                 
