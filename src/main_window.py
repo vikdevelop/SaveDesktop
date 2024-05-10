@@ -1342,7 +1342,6 @@ class MainWindow(Adw.ApplicationWindow):
         
         # remove content in the cache directory
         os.popen(f"rm -rf {CACHE}/save_config/")
-        os.popen(f"rm -rf {CACHE}/.filedialog.json")
     
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
