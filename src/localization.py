@@ -24,10 +24,11 @@ IPAddr = s.getsockname()[0]
 s.close()
 
 # Set application version, and icon
-v = "3.2.3"
+v = "3.2.4"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
-<li>Fixed bug with stopping saving configuration</li>\
+<li>Added support for the Rust version of the COSMIC environment</li>\
+<li>Fixed bug with opening folder with saved configuration archive</li>\
 <li>Updated translations</li>\
 </ul>"
 
