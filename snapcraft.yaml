@@ -64,7 +64,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: '3.2.3'
+    source-tag: '3.2.4b'
     source-depth: 1
     plugin: nil
     override-build: |
