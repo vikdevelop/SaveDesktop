@@ -27,7 +27,7 @@ s.close()
 v = "3.2.4"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
-<li>Added support for the Rust version of the COSMIC environment</li>\
+<li>Added support for the Rust version of the COSMIC desktop environment</li>\
 <li>Fixed bug with opening folder with saved configuration archive</li>\
 <li>Updated translations</li>\
 </ul>"
