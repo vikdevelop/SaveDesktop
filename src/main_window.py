@@ -4,7 +4,6 @@ import socket
 import gi
 import glob
 import sys
-import dbus
 import shutil
 from localization import _, home
 from urllib.request import urlopen
@@ -23,6 +22,7 @@ download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 
 # FOR SNAP: create the cache directory
 if snap:
+    import dbus
     os.makedirs(f"{CACHE}", exist_ok=True)
 
 # load GSettings database for viewing and saving user settings of the app
