@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home">Home page</str>
-  <str key="periodic_saving">Periodic Saving</str>
-  <str key="how_it_works">### How it works?</str>
-  <str key="pb_desc">In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:</str>
+  <str key="home">Página Inicial</str>
+  <str key="periodic_saving">Guardar Periodicamente</str>
+  <str key="how_it_works">### Como funciona?</str>
+  <str key="pb_desc">Além de guardar manualmente,o  SaveDesktop permite-te também guardares a tua configuração de desktop periodicamente. Podes escolher uma das seguintes opções:</str>
   <str key="pb_options">- **Daily**: 
   - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.
 - **Weekly**:
