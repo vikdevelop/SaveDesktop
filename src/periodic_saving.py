@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime
 from datetime import date
 from pathlib import Path
@@ -19,14 +20,18 @@ download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 class PeriodicBackups:
     def __init__(self):
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
-        
+
+    def run(self, now: bool) -> None:
         # Get directory for storing periodic backups
         if self.settings["periodic-saving-folder"] == '':
             self.pbfolder = f'{download_dir}/SaveDesktop/archives'
         else:
             self.pbfolder = f'{self.settings["periodic-saving-folder"]}'
-            
-        if os.path.exists(f"{DATA}/periodic-saving.json"):
+
+        if now:
+            print("Saving immediately")
+            self.backup()
+        elif os.path.exists(f"{DATA}/periodic-saving.json"):
             with open(f"{DATA}/periodic-saving.json") as pb:
                 jp = json.load(pb)
             if jp["saving-date"] == f'{date.today()}':
@@ -36,7 +41,7 @@ class PeriodicBackups:
                 self.get_interval()
         else:
             self.get_interval()
-        
+
     def get_interval(self):
         # Get periodic saving interval selected by the user
         if self.settings["periodic-saving"] == 'Never':
@@ -48,25 +53,25 @@ class PeriodicBackups:
             self.weekly()
         elif self.settings["periodic-saving"] == 'Monthly':
             self.monthly()
-         
+
     # Periodic backups: daily
     def daily(self):
         self.backup()
-        
+
     # Periodic backups: weekly
     def weekly(self):
         if date.today().weekday() == 0:
             self.backup()
         else:
             print("Today is not Monday.")
-            
+
     # Periodic backups: monthly
     def monthly(self):
         if dt.day == 1:
             self.backup()
         else:
             print("Today is not first day of month.")
-    
+
     # Create backup
     def backup(self):
         if self.pbfolder == f'{download_dir}/SaveDesktop/archives':
@@ -90,7 +95,7 @@ class PeriodicBackups:
         os.system(f"python3 {system_dir}/config.py --save")
         os.system(f"rm {CACHE}/.periodicfile.json")
         self.config_saved()
-      
+
     # Message about saved config
     def config_saved(self):
         os.system(f"rm -rf {CACHE}/periodic-saving/*")
@@ -98,5 +103,11 @@ class PeriodicBackups:
             pb.write('{\n "saving-date": "%s"\n}' % date.today())
         print("Configuration saved.")
         exit()
-    
-PeriodicBackups()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--now", help="Save now", action="store_true")
+    args = parser.parse_args()
+
+    pb = PeriodicBackups()
+    pb.run(args.now)
