@@ -1,3 +1,4 @@
+import argparse
 from datetime import datetime
 from datetime import date
 from pathlib import Path
@@ -20,13 +21,17 @@ class PeriodicBackups:
     def __init__(self):
         self.settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
         
+    def run(self, now: bool) -> None:
         # Get directory for storing periodic backups
         if self.settings["periodic-saving-folder"] == '':
             self.pbfolder = f'{download_dir}/SaveDesktop/archives'
         else:
             self.pbfolder = f'{self.settings["periodic-saving-folder"]}'
-            
-        if os.path.exists(f"{DATA}/periodic-saving.json"):
+
+        if now:
+            print("Saving immediately")
+            self.backup()
+        elif os.path.exists(f"{DATA}/periodic-saving.json"):
             with open(f"{DATA}/periodic-saving.json") as pb:
                 jp = json.load(pb)
             if jp["saving-date"] == f'{date.today()}':
@@ -99,4 +104,10 @@ class PeriodicBackups:
         print("Configuration saved.")
         exit()
     
-PeriodicBackups()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--now", help="Save now", action="store_true")
+    args = parser.parse_args()
+
+    pb = PeriodicBackups()
+    pb.run(args.now)
