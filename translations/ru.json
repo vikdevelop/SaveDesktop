@@ -13,7 +13,7 @@
     "config_imported": "Конфигурация применена!",
     "logout": "Выйти",
     "please_wait": "Пожалуйста, подождите…",
-    "summary": "Сохраните текущую конфигурацию окружения рабочего стола",
+    "summary": "Сохраните конфигурацию вашего окружения рабочего стола",
     "description": "Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все настройки окружения рабочего стола, расширения и т.д.? SaveDesktop поможет вам в этом. Всего один клик - и ваша конфигурация сохранена.",
     "translator_credits": "Сергей Ворон https://github.com/vorons\nvolkov <volkovissocool@gmail.com>",
     "periodic_saving": "Периодическое сохранение",
@@ -62,10 +62,10 @@
     "sync_manually": "Синхронизовать вручную",
     "list": "Список установленных Flatpak приложений",
     "desktop_folder": "Рабочий стол",
-    "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
-    "saving_config_status": "<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n",
-    "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
-    "back_to_page": "Back to previous page",
-    "flatpaks_data_tittle": "Flatpak apps data selection",
-    "config_saved_desc": "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+    "importing_config_status": "<big><b>Импорт конфигурации ...</b></big>\nИмпорт конфигурации из: \n<i>{}</i>\n",
+    "saving_config_status": "<big><b>Сохранение конфигурации ...</b></big>\nКонфигурация среды рабочего стола будет сохранена в:\n <i>{}/{}.sd.tar.gz</i>\n",
+    "config_imported_desc": "<big><b>{}</b></big>\nВы можете выйти из системы, чтобы изменения вступили в силу, или вернуться на предыдущую страницу и выйти из системы позже.\n",
+    "back_to_page": "Вернуться на предыдущую страницу",
+    "flatpaks_data_tittle": "Выбор данных приложений Flatpak",
+    "config_saved_desc": "<big><b>{}</b></big>\nТеперь вы можете просмотреть архив с конфигурацией вашей среды рабочего стола или вернуться на предыдущую страницу.\n"
 }
