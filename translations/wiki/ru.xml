@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="home"></str>
+  <str key="periodic_saving"></str>
+  <str key="how_it_works"></str>
+  <str key="pb_desc"></str>
+  <str key="pb_options"></str>
+  <str key="pb_location"></str>
+  <str key="pb_filename_title"></str>
+  <str key="pb_filname_desc"></str>
+  <str key="synchronization_between_computers_title"></str>
+  <str key="how_to_set_up_it"></str>
+  <str key="whats_your_needing"></str>
+  <str key="on_computer_1"></str>
+  <str key="router_settings"></str>
+  <str key="sys_config_print"></str>
+  <str key="on_computer_2"></str>
+  <str key="sync_in_savedesktop"></str>
+  <str key="sync_warning"></str>
+  <str key="periodic_sync"></str>
+  <str key="save_installed_flatpaks_title"></str>
+  <str key="save_flatpak_intro"></str>
+  <str key="saving_flatpaks"></str>
+  <str key="installing_flatpaks"></str>
+  <str key="wiki_description"></str>
+  <str key="select_language"></str>
+  <str key="savedesktop_wiki"></str>
+  <str key="github_issues"></str>
+  <str key="localize-wiki"></str>
+  <str key="version_warning"></str>
+  <str key="import_cfg_in_cli_title"></str>
+  <str key="imp_cfg_cli_intro"></str>
+  <str key="imp_cfg_cli_steps"></str>
+  <str key="imp_cfg_cli_note"></str>
+</root>
