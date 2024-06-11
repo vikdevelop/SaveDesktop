@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="home">Home page</str>
+  <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="wiki_description">SaveDesktop is a simple application written in Python using GTK and LibAdwaita libraries. This wiki is used to explain some of the features of the application (e.g. synchronization between computers).
 
 This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
 
 For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
   <str key="select_language">Select language</str>
-  <str key="savedesktop_wiki">SaveDesktop wiki</str>
-  <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
   <str key="localize-wiki">Localize SaveDesktop wiki (via Weblate)</str>
+  <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
   <str key="periodic_saving">Periodic Saving</str>
   <str key="how_it_works">### How it works?</str>
   <str key="pb_desc">In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:</str>
