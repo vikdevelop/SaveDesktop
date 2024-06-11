@@ -1,6 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="home">Home page</str>
+  <str key="wiki_description">SaveDesktop is a simple application written in Python using GTK and LibAdwaita libraries. This wiki is used to explain some of the features of the application (e.g. synchronization between computers).
+
+This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
+
+For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
+  <str key="select_language">Select language</str>
+  <str key="savedesktop_wiki">SaveDesktop wiki</str>
+  <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
+  <str key="localize-wiki">Localize SaveDesktop wiki (via Weblate)</str>
   <str key="periodic_saving">Periodic Saving</str>
   <str key="how_it_works">### How it works?</str>
   <str key="pb_desc">In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:</str>
@@ -16,6 +25,12 @@
 Default directory for periodic saving is `/home/user/Downloads/SaveDesktop/archives`, but you can choose custom directory.</str>
   <str key="pb_filename_title">### Filename format</str>
   <str key="pb_filname_desc">If you want to give a filename format for periodic saving files other than `Latest_configuration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.</str>
+  <str key="save_installed_flatpaks_title">Save installed Flatpak apps and install them from list</str>
+  <str key="save_flatpak_intro">Since version 2.5, SaveDesktop allows you to save installed Flatpak applications and install them from a list. So how does it work?</str>
+  <str key="saving_flatpaks">### Saving installed Flatpak applications
+It is possible to save a list of installed Flatpak applications installed in the system directory /var/lib/flatpak/app and the home directory ~/.local/share/flatpak/app. The list of installed Flatpak applications in the configuration archive is marked as installed_flatpaks.sh for the system directory and installed_user_flatpaks.sh for the home directory.</str>
+  <str key="installing_flatpaks">### Installing Flatpak applications from the list
+After importing the saved configuration file and logging back in, **the Flatpak applications will start installing in the background.**</str>
   <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
   <str key="how_to_set_up_it">## How to set up it?</str>
   <str key="whats_your_needing"> ### What's your needing?</str>
@@ -43,21 +58,6 @@ You can choose between the following items:
 - Monthly (synchronization takes place every second day in the month)
 - Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
 - Never (nothing's happening)</str>
-  <str key="save_installed_flatpaks_title">Save installed Flatpak apps and install them from list</str>
-  <str key="save_flatpak_intro">Since version 2.5, SaveDesktop allows you to save installed Flatpak applications and install them from a list. So how does it work?</str>
-  <str key="saving_flatpaks">### Saving installed Flatpak applications
-It is possible to save a list of installed Flatpak applications installed in the system directory /var/lib/flatpak/app and the home directory ~/.local/share/flatpak/app. The list of installed Flatpak applications in the configuration archive is marked as installed_flatpaks.sh for the system directory and installed_user_flatpaks.sh for the home directory.</str>
-  <str key="installing_flatpaks">### Installing Flatpak applications from the list
-After importing the saved configuration file and logging back in, **the Flatpak applications will start installing in the background.**</str>
-  <str key="wiki_description">SaveDesktop is a simple application written in Python using GTK and LibAdwaita libraries. This wiki is used to explain some of the features of the application (e.g. synchronization between computers).
-
-This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
-
-For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
-  <str key="select_language">Select language</str>
-  <str key="savedesktop_wiki">SaveDesktop wiki</str>
-  <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
-  <str key="localize-wiki">Localize SaveDesktop wiki (via Weblate)</str>
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
   <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
