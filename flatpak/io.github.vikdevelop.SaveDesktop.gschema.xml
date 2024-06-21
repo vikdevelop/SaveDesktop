@@ -90,5 +90,9 @@
 		  <default>[]</default>
 		  <summary>Select, what Flatpak applications data will be saved</summary>
 		</key>
+		<key name="enable-encryption" type="b">
+		  <default>false</default>
+		  <summary>Enable/Disable encryption of the configuration archives</summary>
+		</key>
 	</schema>
 </schemalist>
