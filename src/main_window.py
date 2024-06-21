@@ -5,6 +5,8 @@ import gi
 import glob
 import sys
 import shutil
+import re
+import zipfile
 from localization import _, home
 from urllib.request import urlopen
 from open_wiki import *
@@ -311,6 +313,12 @@ class MainWindow(Adw.ApplicationWindow):
             self.import_desktop()
             self.syncing_desktop()
             self.connect("close-request", self.on_close)
+        elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
+            self.environment = 'Deepin'
+            self.save_desktop()
+            self.import_desktop()
+            self.syncing_desktop()
+            self.connect("close-request", self.on_close)
         else:
             # If the user uses another desktop environment
             self.toolbarview.add_top_bar(self.errHeaderbar)
@@ -367,8 +375,148 @@ class MainWindow(Adw.ApplicationWindow):
                 self.cmdLabel.set_wrap(True)
                 self.pBox.append(self.cmdLabel)
     
-    # Show main layout
+    # Show main page
     def save_desktop(self):
+        def more_options_dialog(w):
+            # create desktop file for enabling periodic saving at startup
+            def create_pb_desktop():
+                if not os.path.exists(f'{home}/.config/autostart'):
+                    os.mkdir(f'{home}/.config/autostart')
+                if not os.path.exists(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
+                    with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
+                        cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
+            # Action after closing dialog for showing more options
+            def msDialog_closed(w, response):
+                if response == 'ok':
+                    settings["filename-format"] = self.filefrmtEntry.get_text()
+                    settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
+                    settings["enable-encryption"] = self.encryptSwitch.get_active()
+                    
+                    selected_item = self.pbRow.get_selected_item()
+                    # Translate backup items to English because it is necessary for the proper functioning of periodic backups correctly
+                    if selected_item.get_string() == _["never"]:
+                        backup_item = "Never"
+                    elif selected_item.get_string() == _["daily"]:
+                        backup_item = "Daily"
+                        create_pb_desktop()
+                    elif selected_item.get_string() == _["weekly"]:
+                        backup_item = "Weekly"
+                        create_pb_desktop()
+                    elif selected_item.get_string() == _["monthly"]:
+                        backup_item = "Monthly"
+                        create_pb_desktop()
+                    settings["periodic-saving"] = backup_item
+
+            # open link to the wiki page about periodic saving
+            def open_pb_wiki(w):
+                os.system(f"xdg-open {pb_wiki}")
+
+            # reset file name format entry to the default value
+            def reset_fileformat(w):
+                self.filefrmtEntry.set_text("Latest_configuration")
+            
+            # Dialog for showing more options
+            self.msDialog = Adw.MessageDialog.new(self)
+            self.msDialog.set_default_size(500, 200)
+            self.msDialog.set_heading("More options")
+
+            # Box for this dialog
+            self.msBox = Gtk.ListBox.new()
+            self.msBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+            self.msBox.get_style_context().add_class(class_name='boxed-list')
+            self.msDialog.set_extra_child(self.msBox)
+            
+            # Learn more about periodic saving
+            self.pb_learnButton = Gtk.Button.new_from_icon_name("help-about-symbolic")
+            self.pb_learnButton.set_tooltip_text(_["learn_more"])
+            self.pb_learnButton.add_css_class("flat")
+            self.pb_learnButton.connect("clicked", open_pb_wiki)
+            
+            # Periodic saving section
+            # Expander row for showing options of the periodic saving
+            self.saving_eRow = Adw.ExpanderRow.new()
+            self.saving_eRow.set_title(_["periodic_saving"])
+            self.saving_eRow.add_suffix(self.pb_learnButton)
+            self.msBox.append(child=self.saving_eRow)
+            
+            options = Gtk.StringList.new(strings=[
+                _["never"], _["daily"], _["weekly"], _["monthly"]
+            ])
+            
+            self.pbRow = Adw.ComboRow.new()
+            self.pbRow.set_title("Interval")
+            self.pbRow.set_use_markup(True)
+            self.pbRow.set_subtitle(f"{_['periodic_saving_desc']}")
+            self.pbRow.set_model(model=options)
+            self.saving_eRow.add_row(self.pbRow)
+            
+            # Load options from GSettings database
+            if settings["periodic-saving"] == 'Never':
+                self.pbRow.set_selected(0)
+            elif settings["periodic-saving"] == 'Daily':
+                self.pbRow.set_selected(1)
+            elif settings["periodic-saving"] == 'Weekly':
+                self.pbRow.set_selected(2)
+            elif settings["periodic-saving"] == 'Monthly':
+                self.pbRow.set_selected(3)
+            
+            # Restore filename format text to default
+            self.filefrmtButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
+            self.filefrmtButton.add_css_class('destructive-action')
+            self.filefrmtButton.set_valign(Gtk.Align.CENTER)
+            self.filefrmtButton.set_tooltip_text(_["reset_button"])
+            self.filefrmtButton.connect("clicked", reset_fileformat)
+            
+            # Entry for selecting file name format
+            self.filefrmtEntry = Adw.EntryRow.new()
+            self.filefrmtEntry.set_title(_["filename_format"])
+            self.filefrmtEntry.add_suffix(self.filefrmtButton)
+            self.filefrmtEntry.set_text(settings["filename-format"])
+            self.saving_eRow.add_row(self.filefrmtEntry)
+            
+            # Button for choosing folder for periodic saving
+            self.folderButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
+            self.folderButton.set_valign(Gtk.Align.CENTER)
+            self.folderButton.set_tooltip_text(_["set_another"])
+            self.folderButton.connect("clicked", self.select_pb_folder)
+            
+            # Adw.ActionRow for showing folder for periodic saving
+            self.dirRow = Adw.ActionRow.new()
+            self.dirRow.set_title(_["pb_folder"])
+            self.dirRow.add_suffix(self.folderButton)
+            self.dirRow.set_use_markup(True)
+            if settings["periodic-saving-folder"] == '':
+                self.dirRow.set_subtitle(f"{download_dir}/SaveDesktop/archives")
+            else:
+                self.dirRow.set_subtitle(settings["periodic-saving-folder"])
+            self.saving_eRow.add_row(self.dirRow)
+                
+            # Archive Encryption section
+            # action row and switch for showing options of the archive encryption
+            self.encryptSwitch = Gtk.Switch.new()
+            self.encryptSwitch.set_valign(Gtk.Align.CENTER)
+            if settings["enable-encryption"] == True:
+                self.encryptSwitch.set_active(True)
+            
+            self.encryptRow = Adw.ActionRow.new()
+            self.encryptRow.set_title("Archive encryption")
+            self.encryptRow.set_subtitle("When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.")
+            self.encryptRow.set_subtitle_lines(5)
+            self.encryptRow.add_suffix(self.encryptSwitch)
+            self.encryptRow.set_activatable_widget(self.encryptSwitch)
+            self.msBox.append(self.encryptRow)
+
+            # add response of this dialog
+            self.msDialog.add_response('cancel', _["cancel"])
+            self.msDialog.add_response('ok', _["apply"])
+            self.msDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+            self.msDialog.connect('response', msDialog_closed)
+            
+            self.msDialog.show()
+
+        # =========
+        # Save page
+            
         # Set margin for save desktop layout
         self.saveBox.set_margin_start(40)
         self.saveBox.set_margin_end(40)
@@ -398,7 +546,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.saveEntry.set_title(_["set_filename"])
         self.saveEntry.set_text(settings["filename"])
         self.lbox_e.append(self.saveEntry)
-
+        
         # Button for opening dialog for selecting items that will be included to the config archive
         self.itemsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.itemsButton.set_valign(Gtk.Align.CENTER)
@@ -417,37 +565,20 @@ class MainWindow(Adw.ApplicationWindow):
         
         self.lbox_e.set_show_separators(True)
         
-        # Periodic saving section
-        actions = Gtk.StringList.new(strings=[
-            _["never"], _["daily"], _["weekly"], _["monthly"]
-        ])
-        
-        self.periodicButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
-        self.periodicButton.add_css_class("flat")
-        self.periodicButton.set_tooltip_text(_["more_settings_pb"])
-        self.periodicButton.set_valign(Gtk.Align.CENTER)
-        self.periodicButton.connect("clicked", self.open_periodic_backups)
-        
-        self.adw_action_row_backups = Adw.ComboRow.new()
-        self.adw_action_row_backups.add_suffix(self.periodicButton)
-        self.adw_action_row_backups.set_use_markup(True)
-        self.adw_action_row_backups.set_use_underline(True)
-        self.adw_action_row_backups.set_title(_["periodic_saving"])
-        self.adw_action_row_backups.set_subtitle(f"{_['periodic_saving_desc']}\n<a href='{pb_wiki}'>{_['learn_more']}</a>")
-        self.adw_action_row_backups.set_title_lines(2)
-        self.adw_action_row_backups.set_subtitle_lines(4)
-        self.adw_action_row_backups.set_model(model=actions)
-        self.lbox_e.append(child=self.adw_action_row_backups)
+        # section for showing dialog with more options
+        # button
+        self.msButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
+        self.msButton.add_css_class('flat')
+        self.msButton.set_valign(Gtk.Align.CENTER)
+        self.msButton.connect("clicked", more_options_dialog)
 
-        # Load options from GSettings database
-        if settings["periodic-saving"] == 'Never':
-            self.adw_action_row_backups.set_selected(0)
-        elif settings["periodic-saving"] == 'Daily':
-            self.adw_action_row_backups.set_selected(1)
-        elif settings["periodic-saving"] == 'Weekly':
-            self.adw_action_row_backups.set_selected(2)
-        elif settings["periodic-saving"] == 'Monthly':
-            self.adw_action_row_backups.set_selected(3)
+        # action row
+        self.moreSettings = Adw.ActionRow.new()
+        self.moreSettings.set_title("More options")
+        self.moreSettings.set_subtitle(f"{_['periodic_saving']}, Archive Encryption")
+        self.moreSettings.add_suffix(self.msButton)
+        self.moreSettings.set_activatable_widget(self.msButton)
+        self.lbox_e.append(self.moreSettings)
         
         # Save configuration button
         self.saveButton = Gtk.Button.new_with_label(_["save"])
@@ -458,7 +589,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.saveButton.set_halign(Gtk.Align.CENTER)
         self.saveBox.append(self.saveButton)
         
-    # Import configuration section
+    # Import configuration page
     def import_desktop(self):
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
@@ -653,7 +784,6 @@ class MainWindow(Adw.ApplicationWindow):
         ])
         
         self.import_row = Adw.ComboRow.new()
-        self.import_row.add_suffix(self.periodicButton)
         self.import_row.set_use_markup(True)
         self.import_row.set_use_underline(True)
         self.import_row.set_title("2 " + _["periodic_sync"])
@@ -799,92 +929,6 @@ class MainWindow(Adw.ApplicationWindow):
                 pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
             #self.show_warn_toast()
     
-    # Set custom folder for periodic saving dialog
-    def open_periodic_backups(self, w):
-        self.dirdialog()
-        
-    # Dialog for changing directory for periodic backups
-    def dirdialog(self):
-        self.dirDialog = Adw.MessageDialog.new(app.get_active_window())
-        # Gtk box for adding the label and list box widget
-        self.dirBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-
-        # Title
-        self.pbLabel = Gtk.Label.new(str=f"<big><b>{_['more_settings_pb']}</b></big>\n")
-        self.pbLabel.set_use_markup(True)
-        self.pbLabel.set_wrap(True)
-        self.pbLabel.set_justify(Gtk.Justification.CENTER)
-        self.dirBox.append(self.pbLabel)
-        
-        # Box for adding widgets in this dialog
-        self.dirLBox = Gtk.ListBox.new()
-        self.dirLBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.dirLBox.get_style_context().add_class(class_name='boxed-list')
-        self.dirBox.append(self.dirLBox)
-
-        # Restore filename format text to default
-        self.filefrmtButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
-        self.filefrmtButton.add_css_class('destructive-action')
-        self.filefrmtButton.set_valign(Gtk.Align.CENTER)
-        self.filefrmtButton.set_tooltip_text(_["reset_button"])
-        self.filefrmtButton.connect("clicked", self.set_default_filefrmtEntry)
-
-        # Button for opening more information (on Wiki)
-        self.helpButton = Gtk.Button.new_from_icon_name("help-about-symbolic")
-        self.helpButton.add_css_class("flat")
-        self.helpButton.set_valign(Gtk.Align.CENTER)
-        self.helpButton.set_tooltip_text(_["learn_more"])
-        self.helpButton.connect("clicked", self.open_fileformat_link)
-        
-        # Entry for selecting file name format
-        self.filefrmtEntry = Adw.EntryRow.new()
-        self.filefrmtEntry.set_title(_["filename_format"])
-        self.filefrmtEntry.add_suffix(self.filefrmtButton)
-        self.filefrmtEntry.add_suffix(self.helpButton)
-        self.filefrmtEntry.set_text(settings["filename-format"])
-        self.dirLBox.append(self.filefrmtEntry)
-        
-        # Button for choosing folder for periodic saving
-        self.folderButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
-        self.folderButton.set_valign(Gtk.Align.CENTER)
-        self.folderButton.set_tooltip_text(_["set_another"])
-        self.folderButton.connect("clicked", self.select_pb_folder)
-        
-        # Adw.ActionRow for showing folder for periodic saving
-        self.dirRow = Adw.ActionRow.new()
-        self.dirRow.set_title(_["pb_folder"])
-        self.dirRow.add_suffix(self.folderButton)
-        self.dirRow.set_use_markup(True)
-        if settings["periodic-saving-folder"] == '':
-            self.dirRow.set_subtitle(f"{download_dir}/SaveDesktop/archives")
-        else:
-            self.dirRow.set_subtitle(settings["periodic-saving-folder"])
-        self.dirLBox.append(self.dirRow)
-        
-        self.dirDialog.set_extra_child(self.dirBox)
-        self.dirDialog.add_response('cancel', _["cancel"])
-        self.dirDialog.add_response('ok', _["apply"])
-        self.dirDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.dirDialog.connect('response', self.dirdialog_closed)
-        self.dirDialog.show()
-        
-    # Action after closed dialog for choosing periodic backups folder
-    def dirdialog_closed(self, w, response):
-        if response == 'ok':
-            if self.dirRow.get_subtitle() == '':
-                settings["periodic-saving-folder"] = f'{download_dir}/SaveDesktop/archives'
-            else:
-                settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
-            settings["filename-format"] = self.filefrmtEntry.get_text()
-            
-    # Set text of self.filefrmtEntry to default
-    def set_default_filefrmtEntry(self, w):
-        self.filefrmtEntry.set_text("Latest_configuration")
-
-    # Open Wiki by clicking on the self.helpButton
-    def open_fileformat_link(self, w):
-        os.system(f"xdg-open {pb_wiki}#filename-format")
-            
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
         self.itemsDialog = Adw.MessageDialog.new(app.get_active_window())
@@ -1097,10 +1141,9 @@ class MainWindow(Adw.ApplicationWindow):
             except:
                 return
             self.folder_pb = file.get_path()
-            self.dirdialog()
             self.dirRow.set_subtitle(self.folder_pb)
             
-        self.dirDialog.close()
+        #self.msDialog.close()
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -1115,7 +1158,10 @@ class MainWindow(Adw.ApplicationWindow):
             except:
                 return
             self.folder = file.get_path()
-            self.save_config()
+            if settings["enable-encryption"] == True:
+                self.create_password_dialog()
+            else:
+                self.save_config()
         
         if self.saveEntry.get_text() == "":
             self.filename_text = "config"
@@ -1140,7 +1186,10 @@ class MainWindow(Adw.ApplicationWindow):
                 return
             with open(f"{CACHE}/.impfile.json", "w") as j:
                 j.write('{\n "import_file": "%s"\n}' % file.get_path())
-            self.import_config()
+            if ".zip" in file.get_path():
+                self.check_password()
+            else:
+                self.import_config()
         
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
@@ -1148,6 +1197,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
         self.file_filter.add_pattern('*.sd.tar.gz')
+        self.file_filter.add_pattern('*.sd.tar.gz.zip')
         self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
@@ -1180,6 +1230,50 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_filter_list_s.append(self.file_filter_s)
         self.syncfile_chooser.set_filters(self.file_filter_list_s)
         self.syncfile_chooser.open(self, None, set_selected, None)
+        
+    # Dialog for creating password for the config archive
+    def create_password_dialog(self):
+        def pswdDialog_closed(w, response):
+            if response == 'ok':
+                with open(f"{CACHE}/.pswd_temp", "w") as p:
+                    p.write(f"{self.pswdEntry.get_text()}")
+                self.save_config()
+        
+        def check_password(pswdEntry):
+            password = self.pswdEntry.get_text()
+            if len(password) < 8:
+                self.pswdDialog.set_response_enabled("ok", False)
+                print("The password is too short. It should has at least 8 characters")
+            elif not re.search(r'[A-Z]', password):
+                self.pswdDialog.set_response_enabled("ok", False)
+                print("The password should has at least one capital letter")
+            elif not re.search(r'[a-z]', password):
+                self.pswdDialog.set_response_enabled("ok", False)
+                print("The password should has at least one lowercase letter")
+            elif not re.search(r'\d', password):
+                self.pswdDialog.set_response_enabled("ok", False)
+                print("The password should has at least one number")
+            elif not re.search(r'[!@#$%^&*(),.?":{}|<>_-]', password):
+                self.pswdDialog.set_response_enabled("ok", False)
+                print("The password should has at least one special character")
+            else:
+                self.pswdDialog.set_response_enabled("ok", True)
+            
+        self.pswdDialog = Adw.MessageDialog.new(self)
+        self.pswdDialog.set_heading("Create new password")
+        self.pswdDialog.set_body("Please create new password for your archive. Criteria include a length of at least 8 characters, one uppercase letter, one lowercase letter, and one special character.")
+        
+        self.pswdEntry = Adw.PasswordEntryRow.new()
+        self.pswdEntry.set_title("Password")
+        self.pswdEntry.connect('changed', check_password)
+        self.pswdDialog.set_extra_child(self.pswdEntry)
+        
+        self.pswdDialog.add_response("cancel", _["cancel"])
+        self.pswdDialog.add_response("ok", _["apply"])
+        self.pswdDialog.set_response_enabled("ok", False)
+        self.pswdDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.pswdDialog.connect('response', pswdDialog_closed)
+        self.pswdDialog.show()
     
     # Save configuration
     def save_config(self):
@@ -1210,7 +1304,43 @@ class MainWindow(Adw.ApplicationWindow):
         with open(f"{CACHE}/.impfile.json", "w") as j:
             j.write('{\n "import_file": "%s/%s"\n}' % (self.dir, selected_archive.get_string()))
         self.import_config()
+     
+    # dialog for entering password of the archive
+    def check_password(self):
+        def checkDialog_closed(w, response):
+            if response == 'ok':
+                self.checkDialog.set_response_enabled("ok", False)
+                # UNVERTIFIED FUNCTIONALITY!!!
+                with open(f"{CACHE}/.impfile.json") as c:
+                    j = json.load(c)
+                pwd = bytes(self.checkEntry.get_text(), 'utf-8')
+                zipa = zipfile.ZipFile(j["import_file"])
+                zipa.setpassword(pwd)
+                try:
+                    bad_file = zipa.testzip() # if anything returned without error then password was correct
+                    return True  # ignore if bad file was found (integrity violated)
+                    with open(f"{CACHE}/.pswd_temp", "w") as p:
+                        p.write(self.checkEntry.get_text())
+                    p.write(f"{self.pswdEntry.get_text()}")
+                    self.import_config()
+                except RuntimeError as e:
+                    self.toast = Adw.Toast.new(title=f"err: {e}")
+                    self.toast_overlay.add_toast(self.toast)
             
+        self.checkDialog = Adw.MessageDialog.new(self)
+        self.checkDialog.set_heading("Unlock the archive with a password")
+        self.checkDialog.set_body("Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.")
+        
+        self.checkEntry = Adw.PasswordEntryRow.new()
+        self.checkEntry.set_title("Password")
+        self.checkDialog.set_extra_child(self.checkEntry)
+        
+        self.checkDialog.add_response("cancel", _["cancel"])
+        self.checkDialog.add_response("ok", _["apply"])
+        self.checkDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.checkDialog.connect('response', checkDialog_closed)
+        self.checkDialog.show()    
+        
     # Import configuration
     def import_config(self):
         self.please_wait_import()
@@ -1276,7 +1406,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.savewaitBox.append(self.sdoneImage)
         
         # create label about selected directory for saving the configuration
-        self.savewaitLabel = Gtk.Label.new(str=_["saving_config_status"].format(self.folder, self.filename_text))
+        self.savewaitLabel = Gtk.Label.new(str=_["saving_config_status"].format(self.folder, self.filename_text) + ".zip")
         self.savewaitLabel.set_use_markup(True)
         self.savewaitLabel.set_justify(Gtk.Justification.CENTER)
         self.savewaitLabel.set_wrap(True)
@@ -1342,6 +1472,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         # remove content in the cache directory
         os.popen(f"rm -rf {CACHE}/save_config/")
+        os.popen(f"rm {CACHE}/.pswd_temp")
     
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
@@ -1481,24 +1612,10 @@ class MainWindow(Adw.ApplicationWindow):
     # action after closing window
     def on_close(self, widget, *args):
         self.close()
-        selected_item = self.adw_action_row_backups.get_selected_item()
-        # Translate backup items to English because it is necessary for the proper functioning of periodic backups correctly
-        if selected_item.get_string() == _["never"]:
-            backup_item = "Never"
-        elif selected_item.get_string() == _["daily"]:
-            backup_item = "Daily"
-            self.create_pb_desktop()
-        elif selected_item.get_string() == _["weekly"]:
-            backup_item = "Weekly"
-            self.create_pb_desktop()
-        elif selected_item.get_string() == _["monthly"]:
-            backup_item = "Monthly"
-            self.create_pb_desktop()
         (width, height) = self.get_default_size()
         settings["window-size"] = (width, height)
         settings["maximized"] = self.is_maximized()
         settings["filename"] = self.saveEntry.get_text()
-        settings["periodic-saving"] = backup_item
         if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
             print("Flatpak data exists.")
         elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
@@ -1518,13 +1635,6 @@ class MainWindow(Adw.ApplicationWindow):
         except:
             settings["manually-sync"] = False
         
-    ## Create desktop file to make periodic backups work
-    def create_pb_desktop(self):
-        if not os.path.exists(f'{home}/.config/autostart'):
-            os.mkdir(f'{home}/.config/autostart')
-        if not os.path.exists(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
-            with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
-                cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
@@ -1543,7 +1653,10 @@ class MyApp(Adw.Application):
     def open_dir(self, action, param):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
-        Gtk.FileLauncher.new(Gio.File.new_for_path(jf["recent_file"])).open_containing_folder()
+        if settings["enable-encryption"] == True:
+            Gtk.FileLauncher.new(Gio.File.new_for_path(f'{jf["recent_file"]}.zip')).open_containing_folder()
+        else:
+            Gtk.FileLauncher.new(Gio.File.new_for_path(jf["recent_file"])).open_containing_folder()
     
     # Logout (action after clicking button Log Out on Adw.Toast)
     def logout(self, action, param):
