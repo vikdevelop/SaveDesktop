@@ -1,6 +1,8 @@
 import os
 import json
 import gi
+import subprocess
+import zipfile
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
 import argparse
@@ -35,6 +37,8 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
     environment = 'MATE'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
     environment = 'KDE Plasma'
+elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
+    environment = 'Deepin'
 else:
     from tty_environments import *
     
@@ -170,8 +174,15 @@ class Save:
                 os.system(f"cp -R {home}/.local/share/wallpapers ./xdg-data/")
             if settings["save-extensions"] == True:
                 os.system(f"cp -R {home}/.local/share/plasma ./xdg-data/")
+        elif environment == 'Deepin':
+            os.system(f"cp -R {home}/.config/deepin ./")
+            os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         print("creating configuration archive")
-        os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
+        if settings["enable-encryption"] == True:
+            password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
+            os.system(f"zip -9 -P {password} cfg.sd.zip * -r")
+        else:
+            os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
             with open(f"{CACHE}/.filedialog.json") as j:
                 j = json.load(j)
@@ -182,7 +193,10 @@ class Save:
                 file = os.path.basename(j["recent_file"])
                 os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
         print("moving the configuration archive to the user-defined directory")
-        os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
+        if settings["enable-encryption"] == True:
+            os.system(f"mv ./cfg.sd.zip {j['recent_file']}.zip")
+        else:
+            os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
         if os.path.exists(f"{CACHE}/save_config"):
             os.system("echo > done_gui")
             print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
@@ -192,7 +206,13 @@ class Import:
         if os.path.exists(f"{CACHE}/.impfile.json"):
             with open(f"{CACHE}/.impfile.json") as j:
                 j = json.load(j)
-            os.system("tar -xf %s ./" % j["import_file"])
+            if ".zip" in j["import_file"]:
+                password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
+                zipa = zipfile.ZipFile(j["import_file"])
+                zipa.setpassword(pwd)
+                zipa.extractall()
+            else:
+                os.system("tar -xf %s ./" % j["import_file"])
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
         print("importing settings from the Dconf database")
@@ -271,6 +291,9 @@ class Import:
                 os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-data')
             os.system(f'cp -R ./ {home}/.local/share/')
+        elif environment == 'Deepin':
+            os.system(f"cp -R ./deepin {home}/.config")
+            os.system(f"cp -R ./deepin-data {home}/.local/share/deepin")
         elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
