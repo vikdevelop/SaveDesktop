@@ -5,7 +5,9 @@ from localization import home
 if os.path.exists(f"{home}/.local/share/gnome-shell"):
     environment = 'GNOME'
 elif os.path.exists(f"{home}/.config/pop-shell"):
-    environment = 'COSMIC'
+    environment = 'COSMIC (Old)'
+elif os.path.exists(f"{home}/.config/cosmic"):
+    environment = 'COSMIC (New)'
 elif os.path.exists(f"{home}/.config/marlin"):
     environment = 'Pantheon'
 elif os.path.exists(f"{home}/.local/share/cinnamon"):
@@ -18,5 +20,7 @@ elif os.path.exists(f"{home}/.config/caja"):
     environment = 'MATE'
 elif os.path.exists(f"{home}/.config/kdeglobals"):
     environment = 'KDE Plasma'
+elif os.path.exists(f"{home}/.config/deepin"):
+    environment = 'Deepin'
 else:
     environment = None
