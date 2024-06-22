@@ -1189,6 +1189,7 @@ class MainWindow(Adw.ApplicationWindow):
             if ".zip" in file.get_path():
                 self.check_password()
             else:
+                self.please_wait_import()
                 self.import_config()
         
         self.file_chooser = Gtk.FileDialog.new()
@@ -1307,25 +1308,26 @@ class MainWindow(Adw.ApplicationWindow):
      
     # dialog for entering password of the archive
     def check_password(self):
+        def unzip_ar():
+            with open(f"{CACHE}/.impfile.json") as i:
+                j = json.load(i)
+            if not os.path.exists(f"{CACHE}/import_config"):
+                os.mkdir(f"{CACHE}/import_config")
+            file_name = j["import_file"]
+            try:
+                with zipfile.ZipFile(file_name, "r") as zip:
+                    zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
+                self.please_wait_import()
+                self.import_config()
+            except Exception as err:
+                self.toast_err = Adw.Toast.new(title=f"ERR: {err}")
+                self.toast_overlay.add_toast(self.toast_err)
+
         def checkDialog_closed(w, response):
             if response == 'ok':
                 self.checkDialog.set_response_enabled("ok", False)
-                # UNVERTIFIED FUNCTIONALITY!!!
-                with open(f"{CACHE}/.impfile.json") as c:
-                    j = json.load(c)
-                pwd = bytes(self.checkEntry.get_text(), 'utf-8')
-                zipa = zipfile.ZipFile(j["import_file"])
-                zipa.setpassword(pwd)
-                try:
-                    bad_file = zipa.testzip() # if anything returned without error then password was correct
-                    return True  # ignore if bad file was found (integrity violated)
-                    with open(f"{CACHE}/.pswd_temp", "w") as p:
-                        p.write(self.checkEntry.get_text())
-                    p.write(f"{self.pswdEntry.get_text()}")
-                    self.import_config()
-                except RuntimeError as e:
-                    self.toast = Adw.Toast.new(title=f"err: {e}")
-                    self.toast_overlay.add_toast(self.toast)
+                zip_thread = Thread(target=unzip_ar)
+                zip_thread.start()
             
         self.checkDialog = Adw.MessageDialog.new(self)
         self.checkDialog.set_heading("Unlock the archive with a password")
@@ -1343,7 +1345,6 @@ class MainWindow(Adw.ApplicationWindow):
         
     # Import configuration
     def import_config(self):
-        self.please_wait_import()
         if not os.path.exists(f"{CACHE}/import_config"):
             os.mkdir(f"{CACHE}/import_config")
         os.chdir(f"{CACHE}/import_config")
