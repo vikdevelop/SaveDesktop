@@ -1326,6 +1326,9 @@ class MainWindow(Adw.ApplicationWindow):
             except Exception as err:
                 self.toast_err = Adw.Toast.new(title=f"ERR: {err}")
                 self.toast_overlay.add_toast(self.toast_err)
+                self.toolbarview.set_content(self.headapp)
+                self.toolbarview.add_top_bar(self.headerbar)
+                self.toolbarview.remove(self.headerbar_import)
             finally:
                 self.import_config()
                 
