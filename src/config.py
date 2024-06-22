@@ -180,7 +180,7 @@ class Save:
         print("creating configuration archive")
         if settings["enable-encryption"] == True:
             password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
-            os.system(f"zip -9 -P {password} cfg.sd.zip * -r")
+            os.system(f"zip -9 -P {password} cfg.sd.zip . -r")
         else:
             os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
