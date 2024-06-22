@@ -1198,7 +1198,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
         self.file_filter.add_pattern('*.sd.tar.gz')
-        self.file_filter.add_pattern('*.sd.tar.gz.zip')
+        self.file_filter.add_pattern('*.sd.zip')
         self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
@@ -1279,8 +1279,12 @@ class MainWindow(Adw.ApplicationWindow):
     # Save configuration
     def save_config(self):
         self.please_wait_save()
-        with open(f"{CACHE}/.filedialog.json", "w") as w:
-            w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
+        if settings["enable-encryption"] == True:
+            with open(f"{CACHE}/.filedialog.json", "w") as w:
+                w.write('{\n "recent_file": "%s/%s.sd.zip"\n}' % (self.folder, self.filename_text))
+        else:
+            with open(f"{CACHE}/.filedialog.json", "w") as w:
+                w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
@@ -1405,9 +1409,16 @@ class MainWindow(Adw.ApplicationWindow):
         # prepare Gtk.Image widget for the next page
         self.sdoneImage = Gtk.Image.new()
         self.savewaitBox.append(self.sdoneImage)
+
+        if settings["enable-encryption"] == True:
+            old_status = _["saving_config_status"]
+            new_status = old_status.replace("sd.tar.gz", "sd.zip")
+            status = new_status
+        else:
+            status = _["saving_config_status"]
         
         # create label about selected directory for saving the configuration
-        self.savewaitLabel = Gtk.Label.new(str=_["saving_config_status"].format(self.folder, self.filename_text) + ".zip")
+        self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
         self.savewaitLabel.set_use_markup(True)
         self.savewaitLabel.set_justify(Gtk.Justification.CENTER)
         self.savewaitLabel.set_wrap(True)
