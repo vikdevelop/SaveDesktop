@@ -194,7 +194,7 @@ class Save:
                 os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
         print("moving the configuration archive to the user-defined directory")
         if settings["enable-encryption"] == True:
-            os.system(f"mv ./cfg.sd.zip {j['recent_file']}.zip")
+            os.system(f"mv ./cfg.sd.zip {j['recent_file']}")
         else:
             os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
         if os.path.exists(f"{CACHE}/save_config"):
