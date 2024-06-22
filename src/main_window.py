@@ -1184,7 +1184,6 @@ class MainWindow(Adw.ApplicationWindow):
                 file = source.open_finish(res)
             except:
                 return
-            os.popen(f"rm -rf {CACHE}/import_config/*")
             with open(f"{CACHE}/.impfile.json", "w") as j:
                 j.write('{\n "import_file": "%s"\n}' % file.get_path())
             if ".zip" in file.get_path():
@@ -1322,11 +1321,12 @@ class MainWindow(Adw.ApplicationWindow):
             try:
                 with zipfile.ZipFile(file_name, "r") as zip:
                     zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
-                self.please_wait_import()
-                self.import_config()
             except Exception as err:
                 self.toast_err = Adw.Toast.new(title=f"ERR: {err}")
                 self.toast_overlay.add_toast(self.toast_err)
+            finally:
+                self.please_wait_import()
+                self.import_config()
 
         def checkDialog_closed(w, response):
             if response == 'ok':
