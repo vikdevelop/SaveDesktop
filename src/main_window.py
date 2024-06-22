@@ -1317,10 +1317,11 @@ class MainWindow(Adw.ApplicationWindow):
                 j = json.load(i)
             if not os.path.exists(f"{CACHE}/import_config"):
                 os.mkdir(f"{CACHE}/import_config")
+            os.chdir(f"{CACHE}/import_config")
             file_name = j["import_file"]
             try:
                 with zipfile.ZipFile(file_name, "r") as zip:
-                    zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
+                    zip.extractall(pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
                 self.please_wait_import()
                 self.import_config()
             except Exception as err:
