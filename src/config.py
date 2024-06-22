@@ -207,10 +207,7 @@ class Import:
             with open(f"{CACHE}/.impfile.json") as j:
                 j = json.load(j)
             if ".zip" in j["import_file"]:
-                password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
-                zipa = zipfile.ZipFile(j["import_file"])
-                zipa.setpassword(pwd)
-                zipa.extractall()
+                print("")
             else:
                 os.system("tar -xf %s ./" % j["import_file"])
         if not os.path.exists("{}/.config".format(home)):
