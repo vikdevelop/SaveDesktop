@@ -1184,6 +1184,7 @@ class MainWindow(Adw.ApplicationWindow):
                 file = source.open_finish(res)
             except:
                 return
+            os.popen(f"{CACHE}/import_config/*")
             with open(f"{CACHE}/.impfile.json", "w") as j:
                 j.write('{\n "import_file": "%s"\n}' % file.get_path())
             if ".zip" in file.get_path():
