@@ -203,9 +203,6 @@ class Save:
         
 class Import:
     def __init__(self):
-        if not os.path.exists(f"{CACHE}/import_config"):
-            os.mkdir(f"{CACHE}/import_config")
-        os.chdir(f"{CACHE}/import_config")
         if os.path.exists(f"{CACHE}/.impfile.json"):
             with open(f"{CACHE}/.impfile.json") as j:
                 j = json.load(j)
