@@ -1184,6 +1184,7 @@ class MainWindow(Adw.ApplicationWindow):
                 file = source.open_finish(res)
             except:
                 return
+            os.popen(f"rm -rf {CACHE}/import_config/*")
             with open(f"{CACHE}/.impfile.json", "w") as j:
                 j.write('{\n "import_file": "%s"\n}' % file.get_path())
             if ".zip" in file.get_path():
@@ -1317,11 +1318,10 @@ class MainWindow(Adw.ApplicationWindow):
                 j = json.load(i)
             if not os.path.exists(f"{CACHE}/import_config"):
                 os.mkdir(f"{CACHE}/import_config")
-            os.chdir(f"{CACHE}/import_config")
             file_name = j["import_file"]
             try:
                 with zipfile.ZipFile(file_name, "r") as zip:
-                    zip.extractall(pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
+                    zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
                 self.please_wait_import()
                 self.import_config()
             except Exception as err:
@@ -1359,7 +1359,6 @@ class MainWindow(Adw.ApplicationWindow):
     # start process of importing configuration
     def open_config_import(self):
         try:
-            os.system(f"rm -rf {CACHE}/import_config/*")
             os.system(f"python3 {system_dir}/config.py --import_")
         except Exception as e:
             print("Can't run the config.py file!")
