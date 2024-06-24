@@ -1671,7 +1671,7 @@ class MyApp(Adw.Application):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
         if settings["enable-encryption"] == True:
-            Gtk.FileLauncher.new(Gio.File.new_for_path(f'{jf["recent_file"]}.zip')).open_containing_folder()
+            Gtk.FileLauncher.new(Gio.File.new_for_path(f'{jf["recent_file"]}')).open_containing_folder()
         else:
             Gtk.FileLauncher.new(Gio.File.new_for_path(jf["recent_file"])).open_containing_folder()
     
