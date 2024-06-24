@@ -756,6 +756,53 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Dialog for setting the sync file, periodic synchronization interval and copying the URL for synchronization
     def open_setDialog(self):
+        # Action after closing dialog for setting synchronization file
+        def setDialog_closed(w, response):
+            if response == 'ok':
+                self.set_syncing()
+
+                # Check periodic synchronization variable BEFORE saving to GSettings database
+                with open(f"{CACHE}/.sync", "w") as s:
+                    s.write(f"{settings['periodic-import']}")
+
+                # Save the sync file to the GSettings database
+                self.file_name = os.path.basename(self.file_row.get_subtitle())
+                self.file = os.path.splitext(self.file_name)[0]
+                self.path = Path(self.file_row.get_subtitle())
+                self.folder = self.path.parent.absolute()
+
+                settings["file-for-syncing"] = self.file_row.get_subtitle()
+
+                # Set filename format to same as the sync file name
+                r_file = self.file.replace(".sd.tar", "")
+                settings["filename-format"] = r_file
+
+                # Set periodic saving folder to same as the folder for the sync file
+                settings["periodic-saving-folder"] = f'{self.folder}'
+
+                # Save periodic synchronization interval to remote file and the GSettings database
+                selected_item = self.import_row.get_selected_item()
+                if selected_item.get_string() == _["never"]:
+                    import_item = "Never2"
+                elif selected_item.get_string() == _["daily"]:
+                    import_item = "Daily2"
+                elif selected_item.get_string() == _["weekly"]:
+                    import_item = "Weekly2"
+                elif selected_item.get_string() == _["monthly"]:
+                    import_item = "Monthly2"
+                elif selected_item.get_string() == _["manually"]:
+                    import_item = "Manually2"
+                if not os.path.exists(f"{DATA}/synchronization"):
+                    os.mkdir(f"{DATA}/synchronization")
+                with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
+                    f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
+                settings["periodic-import"] = import_item
+                sync_before = subprocess.getoutput(f"cat {CACHE}/.sync")
+                if sync_before == "Never2":
+                    if not settings["periodic-import"] == "Never2":
+                        self.show_warn_toast()
+
+        # self.setDialog
         self.setDialog = Adw.MessageDialog.new(self)
         self.setDialog.set_heading(_["set_up_sync_file"])
         self.setDialog.set_body_use_markup(True)
@@ -815,58 +862,52 @@ class MainWindow(Adw.ApplicationWindow):
         self.setDialog.add_response('cancel', _["cancel"])
         self.setDialog.add_response('ok', _["apply"])
         self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.setDialog.connect('response', self.setDialog_closed)
+        self.setDialog.connect('response', setDialog_closed)
         
         self.setDialog.show()
 
-    # Action after closing dialog for setting synchronization file
-    def setDialog_closed(self, w, response):
-        if response == 'ok':
-            self.set_syncing()
-            
-            # Check periodic synchronization variable BEFORE saving to GSettings database
-            with open(f"{CACHE}/.sync", "w") as s:
-                s.write(f"{settings['periodic-import']}")
-            
-            # Save the sync file to the GSettings database
-            self.file_name = os.path.basename(self.file_row.get_subtitle())
-            self.file = os.path.splitext(self.file_name)[0]
-            self.path = Path(self.file_row.get_subtitle())
-            self.folder = self.path.parent.absolute()
-            
-            settings["file-for-syncing"] = self.file_row.get_subtitle()
-
-            # Set filename format to same as the sync file name
-            r_file = self.file.replace(".sd.tar", "")
-            settings["filename-format"] = r_file
-            
-            # Set periodic saving folder to same as the folder for the sync file
-            settings["periodic-saving-folder"] = f'{self.folder}'
-
-            # Save periodic synchronization interval to remote file and the GSettings database
-            selected_item = self.import_row.get_selected_item()
-            if selected_item.get_string() == _["never"]:
-                import_item = "Never2"
-            elif selected_item.get_string() == _["daily"]:
-                import_item = "Daily2"
-            elif selected_item.get_string() == _["weekly"]:
-                import_item = "Weekly2"
-            elif selected_item.get_string() == _["monthly"]:
-                import_item = "Monthly2"
-            elif selected_item.get_string() == _["manually"]:
-                import_item = "Manually2"
-            if not os.path.exists(f"{DATA}/synchronization"):
-                os.mkdir(f"{DATA}/synchronization")
-            with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
-                f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
-            settings["periodic-import"] = import_item
-            sync_before = subprocess.getoutput(f"cat {CACHE}/.sync")
-            if sync_before == "Never2":
-                if not settings["periodic-import"] == "Never2":
-                    self.show_warn_toast()
-
     # URL Dialog
     def open_urlDialog(self, w):
+        # Set synchronization for running in the background
+        def set_syncing():
+            if not os.path.exists(f"{home}/.config/autostart"):
+                os.mkdir(f"{home}/.config/autostart")
+            # Create desktop file for running Python HTTP server
+            if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
+                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
+                    sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec={server_cmd}')
+            # Create desktop file for syncing the configuration from other computer
+            if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
+                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
+                    pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
+
+        # Action after closing URL dialog
+        def urlDialog_closed(w, response):
+            if response == 'ok':
+                settings["url-for-syncing"] = self.urlEntry.get_text()
+                self.folder = settings["file-for-syncing"]
+                if not self.urlEntry.get_text() == "":
+                    r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
+                    jS = json.load(r_file)
+                    # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
+                    if jS["periodic-import"] == "Manually2":
+                        settings["manually-sync"] = True
+                        self.sync_menu = Gio.Menu()
+                        self.sync_menu.append(_["sync"], 'app.m_sync')
+                        self.main_menu.append_section(None, self.sync_menu)
+                        set_syncing()
+                        self.show_special_toast()
+                        self.sync_menu.remove(1)
+                    else:
+                        set_syncing()
+                        self.show_warn_toast()
+                        settings["manually-sync"] = False
+                        self.sync_menu.remove(0)
+                else:
+                    settings["manually-sync"] = False
+                    self.sync_menu.remove(0)
+
+        # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading(_["connect_with_other_computer"])
         self.urlDialog.set_body(_["connect_with_pc_desc"])
@@ -886,51 +927,62 @@ class MainWindow(Adw.ApplicationWindow):
         self.urlDialog.add_response('cancel', _["cancel"])
         self.urlDialog.add_response('ok', _["apply"])
         self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.urlDialog.connect('response', self.urlDialog_closed)
+        self.urlDialog.connect('response', urlDialog_closed)
         self.urlDialog.show()
-
-    # Action after closing URL dialog
-    def urlDialog_closed(self, w, response):
-        if response == 'ok':
-            settings["url-for-syncing"] = self.urlEntry.get_text()
-            self.folder = settings["file-for-syncing"]
-            if not self.urlEntry.get_text() == "":
-                r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
-                jS = json.load(r_file)
-                # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
-                if jS["periodic-import"] == "Manually2":
-                    settings["manually-sync"] = True
-                    self.sync_menu = Gio.Menu()
-                    self.sync_menu.append(_["sync"], 'app.m_sync')
-                    self.main_menu.append_section(None, self.sync_menu)
-                    self.set_syncing()
-                    self.show_special_toast()
-                    self.sync_menu.remove(1)
-                else:
-                    self.set_syncing()
-                    self.show_warn_toast()
-                    settings["manually-sync"] = False
-                    self.sync_menu.remove(0)
-            else:
-                settings["manually-sync"] = False
-                self.sync_menu.remove(0)
-
-    # Set synchronization for running in the background
-    def set_syncing(self):
-        if not os.path.exists(f"{home}/.config/autostart"):
-            os.mkdir(f"{home}/.config/autostart")
-        # Create desktop file for running Python HTTP server
-        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
-            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
-                sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec={server_cmd}')
-        # Create desktop file for syncing the configuration from other computer
-        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
-            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
-                pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
-            #self.show_warn_toast()
     
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
+        # Action after closing itemsDialog
+        def itemsdialog_closed(w, response):
+            if response == 'ok':
+                # Saving the selected options to GSettings database
+                settings["save-icons"] = self.switch_01.get_active()
+                settings["save-themes"] = self.switch_02.get_active()
+                settings["save-fonts"] = self.switch_03.get_active()
+                settings["save-backgrounds"] = self.switch_04.get_active()
+                settings["save-desktop-folder"] = self.switch_de.get_active()
+                if flatpak:
+                    settings["save-installed-flatpaks"] = self.switch_05.get_active()
+                    settings["save-flatpak-data"] = self.switch_06.get_active()
+                if self.save_ext_switch_state == True:
+                    settings["save-extensions"] = self.switch_ext.get_active()
+            elif response == 'cancel':
+                switch_status = self.flatpak_data_sw_state
+                settings["save-flatpak-data"] = switch_status
+
+        # show dialog for managing Flatpak applications data
+        def manage_data_list(w):
+            self.itemsDialog.close()
+            self.appd = FlatpakAppsDialog()
+            self.appd.show()
+
+        # show button after clicking on the switch "User data of Flatpak apps"
+        def show_appsbtn(w, GParamBoolean):
+            self.flatpak_data_sw_state = settings["save-flatpak-data"]
+            if self.switch_06.get_active() == True:
+                self.data_row.add_suffix(self.appsButton)
+            else:
+                self.data_row.remove(self.appsButton)
+            settings["save-flatpak-data"] = self.switch_06.get_active()
+
+        # show extensions row, if user has installed GNOME, Cinnamon or KDE Plasma DE
+        def show_extensions_row():
+            # Switch and row of option 'Save extensions'
+            self.switch_ext = Gtk.Switch.new()
+            if settings["save-extensions"]:
+                self.switch_ext.set_active(True)
+            self.switch_ext.set_valign(align=Gtk.Align.CENTER)
+
+            self.ext_row = Adw.ActionRow.new()
+            self.ext_row.set_title(title=_["extensions"])
+            self.ext_row.set_use_markup(True)
+            self.ext_row.set_title_lines(2)
+            self.ext_row.set_subtitle_lines(3)
+            self.ext_row.add_suffix(self.switch_ext)
+            self.ext_row.set_activatable_widget(self.switch_ext)
+            self.itemsBox.append(child=self.ext_row)
+
+        # self.itemsDialog
         self.itemsDialog = Adw.MessageDialog.new(app.get_active_window())
         self.itemsDialog.set_heading(_["items_for_archive"])
         self.itemsDialog.set_body(_["items_desc"])
@@ -1010,13 +1062,13 @@ class MainWindow(Adw.ApplicationWindow):
         
         if self.environment == "GNOME":
             self.save_ext_switch_state = True
-            self.show_extensions_row()
+            show_extensions_row()
         elif self.environment == "KDE Plasma":
             self.save_ext_switch_state = True
-            self.show_extensions_row()
+            show_extensions_row()
         elif self.environment == "Cinnamon":
             self.save_ext_switch_state = True
-            self.show_extensions_row()
+            show_extensions_row()
             
         self.desktop_row = Adw.ActionRow.new()
         self.desktop_row.set_title(title=_["desktop_folder"])
@@ -1069,69 +1121,19 @@ class MainWindow(Adw.ApplicationWindow):
                 self.data_row.add_suffix(self.appsButton)
             self.flatpak_data_sw_state = settings["save-flatpak-data"]
             self.switch_06.set_valign(align=Gtk.Align.CENTER)
-            self.switch_06.connect('notify::active', self.show_appsbtn)
+            self.switch_06.connect('notify::active', show_appsbtn)
             
             self.appsButton.add_css_class("flat")
             self.appsButton.set_valign(Gtk.Align.CENTER)
             self.appsButton.set_tooltip_text(_["flatpaks_data_tittle"])
-            self.appsButton.connect("clicked", self.manage_data_list)
+            self.appsButton.connect("clicked", manage_data_list)
         
         # set responses of itemsDialog
         self.itemsDialog.add_response('cancel', _["cancel"])
         self.itemsDialog.add_response('ok', _["apply"])
         self.itemsDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.itemsDialog.connect('response', self.itemsdialog_closed)
+        self.itemsDialog.connect('response', itemsdialog_closed)
         self.itemsDialog.show()
-        
-    # Action after closing itemsDialog
-    def itemsdialog_closed(self, w, response):
-        if response == 'ok':
-            # Saving the selected options to GSettings database
-            settings["save-icons"] = self.switch_01.get_active()
-            settings["save-themes"] = self.switch_02.get_active()
-            settings["save-fonts"] = self.switch_03.get_active()
-            settings["save-backgrounds"] = self.switch_04.get_active()
-            settings["save-desktop-folder"] = self.switch_de.get_active()
-            if flatpak:
-                settings["save-installed-flatpaks"] = self.switch_05.get_active()
-                settings["save-flatpak-data"] = self.switch_06.get_active()
-            if self.save_ext_switch_state == True:
-                settings["save-extensions"] = self.switch_ext.get_active()
-        elif response == 'cancel':
-            switch_status = self.flatpak_data_sw_state
-            settings["save-flatpak-data"] = switch_status
-            
-    # show dialog for managing Flatpak applications data
-    def manage_data_list(self, w):
-        self.itemsDialog.close()
-        self.appd = FlatpakAppsDialog()
-        self.appd.show()
-        
-    # show button after clicking on the switch "User data of Flatpak apps"
-    def show_appsbtn(self, w, GParamBoolean):
-        self.flatpak_data_sw_state = settings["save-flatpak-data"]
-        if self.switch_06.get_active() == True:
-            self.data_row.add_suffix(self.appsButton)
-        else:
-            self.data_row.remove(self.appsButton)
-        settings["save-flatpak-data"] = self.switch_06.get_active()
-        
-    # show extensions row, if user has installed GNOME, Cinnamon or KDE Plasma DE      
-    def show_extensions_row(self):
-        # Switch and row of option 'Save extensions'
-        self.switch_ext = Gtk.Switch.new()
-        if settings["save-extensions"]:
-            self.switch_ext.set_active(True)
-        self.switch_ext.set_valign(align=Gtk.Align.CENTER)
-         
-        self.ext_row = Adw.ActionRow.new()
-        self.ext_row.set_title(title=_["extensions"])
-        self.ext_row.set_use_markup(True)
-        self.ext_row.set_title_lines(2)
-        self.ext_row.set_subtitle_lines(3)
-        self.ext_row.add_suffix(self.switch_ext)
-        self.ext_row.set_activatable_widget(self.switch_ext)
-        self.itemsBox.append(child=self.ext_row)
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
