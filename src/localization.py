@@ -30,6 +30,7 @@ rel_notes = "<ul>\
 <li>Added option to set archive protection with password (more information is available on the Github wiki)</li>\
 <li>Added option to save configuration from command-line interface (more information is also available on the Github wiki)</li>\
 <li>Added support for Deepin DE</li>\
+<li>Added support for saving Kvantum Manager and Latte dock configurations</li>\
 <li>Updated translations</li>\
 </ul>"
 
