@@ -87,10 +87,15 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.config/bugie-extras
   - ~/.config/nemo
   ```
-  - **Cosmic**
+  - **Cosmic (Old)**
   ```
   - ~/.config/pop-shell
   - ~/.local/share/gnome-shell
+  ```
+  - **Cosmic (Old)**
+  ```
+  - ~/.config/cosmic
+  - ~/.local/state/cosmic
   ```
   - **Xfce**
   ```
@@ -122,7 +127,11 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.local/share/kscreen
   - ~/.local/share/color-schemes
   ```
-  
+  - Deepin
+  ```
+  - ~/.config/deepin
+  - ~/.local/share/deepin
+  ```
   
 </details>
 
