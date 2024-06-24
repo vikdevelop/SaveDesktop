@@ -801,6 +801,9 @@ class MainWindow(Adw.ApplicationWindow):
                 if sync_before == "Never2":
                     if not settings["periodic-import"] == "Never2":
                         self.show_warn_toast()
+                if ".sd.zip" in settings["file-for-syncing"]:
+                    os.system("notify-send 'Encrypted archives are so far not supported for using in synchronization mode! Please select standard archive.' -i io.github.vikdevelop.SaveDesktop-symbolic")
+                    settings["file-for-syncing"] = ""
 
         # self.setDialog
         self.setDialog = Adw.MessageDialog.new(self)
@@ -868,19 +871,6 @@ class MainWindow(Adw.ApplicationWindow):
 
     # URL Dialog
     def open_urlDialog(self, w):
-        # Set synchronization for running in the background
-        def set_syncing():
-            if not os.path.exists(f"{home}/.config/autostart"):
-                os.mkdir(f"{home}/.config/autostart")
-            # Create desktop file for running Python HTTP server
-            if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
-                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
-                    sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec={server_cmd}')
-            # Create desktop file for syncing the configuration from other computer
-            if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
-                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
-                    pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
-
         # Action after closing URL dialog
         def urlDialog_closed(w, response):
             if response == 'ok':
@@ -895,11 +885,11 @@ class MainWindow(Adw.ApplicationWindow):
                         self.sync_menu = Gio.Menu()
                         self.sync_menu.append(_["sync"], 'app.m_sync')
                         self.main_menu.append_section(None, self.sync_menu)
-                        set_syncing()
+                        self.set_syncing()
                         self.show_special_toast()
                         self.sync_menu.remove(1)
                     else:
-                        set_syncing()
+                        self.set_syncing()
                         self.show_warn_toast()
                         settings["manually-sync"] = False
                         self.sync_menu.remove(0)
@@ -929,6 +919,19 @@ class MainWindow(Adw.ApplicationWindow):
         self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.urlDialog.connect('response', urlDialog_closed)
         self.urlDialog.show()
+
+    # Set synchronization for running in the background
+    def set_syncing(self):
+        if not os.path.exists(f"{home}/.config/autostart"):
+            os.mkdir(f"{home}/.config/autostart")
+        # Create desktop file for running Python HTTP server
+        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
+            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
+                sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec={server_cmd}')
+        # Create desktop file for syncing the configuration from other computer
+        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
+            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
+                pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
     
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
@@ -1209,6 +1212,18 @@ class MainWindow(Adw.ApplicationWindow):
         
     # Select file for syncing with other computers in the network
     def select_syncfile(self, w):
+        def copy_syncfile():
+            try:
+                if not os.path.exists(f"{DATA}/synchronization"):
+                    os.mkdir(f"{DATA}/synchronization")
+                os.chdir(f"{DATA}/synchronization")
+                os.system(f"rm *.sd.tar.gz")
+                os.system(f"cp {self.syncfile} ./")
+            except Exception as e:
+                print(f"Problem with setting up the sync file: {e}")
+            finally:
+                print("")
+
         def set_selected(source, res, data):
             try:
                 file = source.open_finish(res)
@@ -1217,10 +1232,8 @@ class MainWindow(Adw.ApplicationWindow):
             self.syncfile = file.get_path()
             self.open_setDialog()
             self.file_row.set_subtitle(self.syncfile)
-            if not os.path.exists(f"{DATA}/synchronization"):
-                os.mkdir(f"{DATA}/synchronization")
-            os.chdir(f"{DATA}/synchronization")
-            os.popen(f"cp {self.syncfile} ./")
+            sync_thred = Thread(target=copy_syncfile)
+            sync_thred.start()
             
         self.setDialog.close()
         
