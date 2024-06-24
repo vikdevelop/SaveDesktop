@@ -165,6 +165,8 @@ class Save:
             os.system(f"cp {home}/.config/spectaclerc ./xdg-config/")
             os.system(f"cp {home}/.config/plasmarc ./xdg-config/")
             os.system(f"cp {home}/.config/plasma-org.kde.plasma.desktop-appletsrc ./xdg-config/")
+            os.system(f"cp -R {home}/.config/Kvantum ./xdg-config/")
+            os.system(f"cp -R {home}/.config/latte ./xdg-config/")
             os.system(f"cp -R {home}/.local/share/[k]* ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/dolphin ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/sddm ./xdg-data/")
