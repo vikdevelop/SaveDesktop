@@ -197,9 +197,9 @@ class Save:
         elif os.path.exists(f"{CACHE}/.periodicfile.json"):
             os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
             print("moving the configuration archive to the user-defined directory")
-            os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
+            os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
             if not settings["periodic-import"] == "Never2":
                 file = os.path.basename(j["recent_file"])
                 os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
