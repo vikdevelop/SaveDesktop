@@ -67,6 +67,7 @@ class Save:
         if settings["save-fonts"] == True:
             print("saving fonts")
             os.system(f'cp -R {home}/.fonts ./')
+            os.system(f'cp -R {home}/.local/share/fonts ./')
         if settings["save-desktop-folder"] == True:
             print("saving desktop folder")
             if " " in GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP):
@@ -172,6 +173,7 @@ class Save:
             os.system(f"cp -R {home}/.local/share/sddm ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/aurorae ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/plasma-systemmonitor ./xdg-data/")
+            os.system(f"cp -R {home}/.local/share/color-schemes ./xdg-data/")
             if settings["save-backgrounds"] == True:
                 os.system(f"cp -R {home}/.local/share/wallpapers ./xdg-data/")
             if settings["save-extensions"] == True:
@@ -180,27 +182,28 @@ class Save:
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         print("creating configuration archive")
-        if settings["enable-encryption"] == True:
-            password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
-            os.system(f"zip -9 -P {password} cfg.sd.zip . -r")
-        else:
-            os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
             with open(f"{CACHE}/.filedialog.json") as j:
                 j = json.load(j)
+            if settings["enable-encryption"] == True:
+                password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
+                os.system(f"zip -9 -P {password} cfg.sd.zip . -r")
+                print("moving the configuration archive to the user-defined directory")
+                os.system(f"mv ./cfg.sd.zip {j['recent_file']}")
+            else:
+                os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
+                print("moving the configuration archive to the user-defined directory")
+                os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
         elif os.path.exists(f"{CACHE}/.periodicfile.json"):
+            os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
+            print("moving the configuration archive to the user-defined directory")
+            os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
             if not settings["periodic-import"] == "Never2":
                 file = os.path.basename(j["recent_file"])
                 os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
-        print("moving the configuration archive to the user-defined directory")
-        if settings["enable-encryption"] == True:
-            os.system(f"mv ./cfg.sd.zip {j['recent_file']}")
-        else:
-            os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
         if os.path.exists(f"{CACHE}/save_config"):
-            os.system("echo > done_gui")
             print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
         
 class Import:
