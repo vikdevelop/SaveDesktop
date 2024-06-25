@@ -92,7 +92,7 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.config/pop-shell
   - ~/.local/share/gnome-shell
   ```
-  - **Cosmic (Old)**
+  - **Cosmic (New)**
   ```
   - ~/.config/cosmic
   - ~/.local/state/cosmic
