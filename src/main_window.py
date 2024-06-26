@@ -418,7 +418,7 @@ class MainWindow(Adw.ApplicationWindow):
             # Dialog for showing more options
             self.msDialog = Adw.MessageDialog.new(self)
             self.msDialog.set_default_size(500, 200)
-            self.msDialog.set_heading("More options")
+            self.msDialog.set_heading(_["more_options"])
 
             # Box for this dialog
             self.msBox = Gtk.ListBox.new()
@@ -444,7 +444,7 @@ class MainWindow(Adw.ApplicationWindow):
             ])
             
             self.pbRow = Adw.ComboRow.new()
-            self.pbRow.set_title("Interval")
+            self.pbRow.set_title(_["pb_interval"])
             self.pbRow.set_use_markup(True)
             self.pbRow.set_subtitle(f"{_['periodic_saving_desc']}")
             self.pbRow.set_model(model=options)
@@ -499,8 +499,8 @@ class MainWindow(Adw.ApplicationWindow):
                 self.encryptSwitch.set_active(True)
             
             self.encryptRow = Adw.ActionRow.new()
-            self.encryptRow.set_title("Archive encryption")
-            self.encryptRow.set_subtitle("When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.")
+            self.encryptRow.set_title(_["archive_encryption"])
+            self.encryptRow.set_subtitle(_["archive_encryption_desc"])
             self.encryptRow.set_subtitle_lines(5)
             self.encryptRow.add_suffix(self.encryptSwitch)
             self.encryptRow.set_activatable_widget(self.encryptSwitch)
@@ -1277,11 +1277,11 @@ class MainWindow(Adw.ApplicationWindow):
                 self.pswdDialog.set_response_enabled("ok", True)
             
         self.pswdDialog = Adw.MessageDialog.new(self)
-        self.pswdDialog.set_heading("Create new password")
-        self.pswdDialog.set_body("Please create new password for your archive. Criteria include a length of at least 8 characters, one uppercase letter, one lowercase letter, and one special character.")
+        self.pswdDialog.set_heading(_["create_pwd_title"])
+        self.pswdDialog.set_body(_["create_pwd_desc"])
         
         self.pswdEntry = Adw.PasswordEntryRow.new()
-        self.pswdEntry.set_title("Password")
+        self.pswdEntry.set_title(_["password_entry"])
         self.pswdEntry.connect('changed', check_password)
         self.pswdDialog.set_extra_child(self.pswdEntry)
         
@@ -1355,11 +1355,11 @@ class MainWindow(Adw.ApplicationWindow):
                 zip_thread.start()
             
         self.checkDialog = Adw.MessageDialog.new(self)
-        self.checkDialog.set_heading("Unlock the archive with a password")
-        self.checkDialog.set_body("Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.")
+        self.checkDialog.set_heading(_["check_pwd_title"])
+        self.checkDialog.set_body(_["check_pwd_desc"])
         
         self.checkEntry = Adw.PasswordEntryRow.new()
-        self.checkEntry.set_title("Password")
+        self.checkEntry.set_title(_["password_entry"])
         self.checkDialog.set_extra_child(self.checkEntry)
         
         self.checkDialog.add_response("cancel", _["cancel"])
