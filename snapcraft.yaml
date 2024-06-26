@@ -89,6 +89,8 @@ parts:
     stage-packages:
       - wget
       - libnotify-bin
+      - zip
     stage:
       - usr/bin/notify-send
       - usr/bin/wget
+      - usr/bin/zip
