@@ -83,4 +83,6 @@
 - `/path/to/filename.sd.tar.gz` के बजाय, उस विन्यास संग्रह का पथ दर्ज करें जिसे आप आयात करना चाहते हैं, उदाहरण के लिए: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
   <str key="archive_encryption_">Archive encryption</str>
   <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
+  <str key="ac_intro">## How does it work?
+If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 8 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. </str>
 </root>
