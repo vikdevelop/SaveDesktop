@@ -574,8 +574,8 @@ class MainWindow(Adw.ApplicationWindow):
 
         # action row
         self.moreSettings = Adw.ActionRow.new()
-        self.moreSettings.set_title("More options")
-        self.moreSettings.set_subtitle(f"{_['periodic_saving']}, Archive Encryption")
+        self.moreSettings.set_title(_["more_options"])
+        self.moreSettings.set_subtitle(f"{_['periodic_saving']}, {_['archive_encryption']}")
         self.moreSettings.add_suffix(self.msButton)
         self.moreSettings.set_activatable_widget(self.msButton)
         self.lbox_e.append(self.moreSettings)
