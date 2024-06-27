@@ -802,8 +802,8 @@ class MainWindow(Adw.ApplicationWindow):
                     if not settings["periodic-import"] == "Never2":
                         self.show_warn_toast()
                 if ".sd.zip" in settings["file-for-syncing"]:
-                    os.system("notify-send ' ' 'Encrypted archives are so far not supported for using in synchronization mode! Please select standard archive.' -i io.github.vikdevelop.SaveDesktop-symbolic")
                     settings["file-for-syncing"] = ""
+                    self.open_setDialog()
 
         # self.setDialog
         self.setDialog = Adw.MessageDialog.new(self)
