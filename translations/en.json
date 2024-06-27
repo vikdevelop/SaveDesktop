@@ -54,7 +54,7 @@
     "flatpaks_data_tittle": "Flatpak apps data selection",
     "sync": "Sync",
     "sync_title": "Sync with other computers in the network",
-    "sync_desc": "Sync your desktop environment configuration with other computers in the network. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>How it works?</a>",
+    "sync_desc": "Sync your desktop environment configuration with other computers in the network.",
     "set_up_sync_file": "Set up the sync file",
     "periodic_saving_file": "Periodic saving file",
     "periodic_sync": "Periodic synchronization",
