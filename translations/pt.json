@@ -67,5 +67,14 @@
     "keyboard_shortcuts": "Atalhos do teclado",
     "summary": "Grave a sua configuração da área de trabalho",
     "description": "SaveDesktop permite gravar a sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um clique.",
-    "translator_credits": "Trandutor github-link"
+    "translator_credits": "Trandutor github-link",
+    "archive_encryption": "Archive encryption",
+    "password_entry": "Password",
+    "create_pwd_title": "Create new password",
+    "pb_interval": "Interval",
+    "archive_encryption_desc": "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.",
+    "create_pwd_desc": "Please create new password for your archive. Criteria include a length of at least 8 characters, one uppercase letter, one lowercase letter, and one special character.",
+    "more_options": "More options",
+    "check_pwd_desc": "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.",
+    "check_pwd_title": "Unlock the archive with a password"
 }

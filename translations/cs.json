@@ -67,5 +67,14 @@
     "saving_config_status": "<big><b>Ukládání konfigurace … </b></big>\nKonfigurace vašeho desktopového prostředí bude uložena v:\n <i>{}/{}.sd.tar.gz</i>\n",
     "config_imported_desc": "<big><b>{}</b></big>\nAby se změny projevily, můžete se ze systému odhlásit, nebo se vrátit na předchozí stránku a odhlásit se později.\n",
     "back_to_page": "Vrátit se na předchozí stránku",
-    "config_saved_desc": "<big><b>{}</b></big>\nNyní si můžete prohlédnout archiv s konfigurací svého desktopového prostředí nebo se vrátit na předchozí stránku.\n"
+    "config_saved_desc": "<big><b>{}</b></big>\nNyní si můžete prohlédnout archiv s konfigurací svého desktopového prostředí nebo se vrátit na předchozí stránku.\n",
+    "pb_interval": "Interval",
+    "more_options": "Více možností",
+    "create_pwd_title": "Vytvořit nové heslo",
+    "archive_encryption": "Šifrování archivu",
+    "archive_encryption_desc": "Při ručním ukládání konfigurace budete vyzváni k vytvoření hesla. To je užitečné při ukládání konfigurace na přenosné médium pro lepší zabezpečení dat.",
+    "create_pwd_desc": "Vytvořte si prosím nové heslo pro svůj archiv. Kritéria zahrnují délku alespoň 8 znaků, jedno velké písmeno, jedno malé písmeno a jeden speciální znak.",
+    "password_entry": "Heslo",
+    "check_pwd_desc": "Zadáním níže uvedeného hesla odemknete archiv s vaší konfigurací. Pokud jste ho zapomněli, nebudete moci archiv rozbalit a začít importovat konfiguraci.",
+    "check_pwd_title": "Odemknout archiv pomocí hesla"
 }
