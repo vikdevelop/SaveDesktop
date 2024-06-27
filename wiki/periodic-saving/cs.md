@@ -1,12 +1,19 @@
-# Šifrování archivu
-**Tato funkce je k dispozici od verze: 3.3**
+# Pravidelné ukládání
+### Jak to funguje?
+Kromě ručního ukládání umožňuje SaveDesktop také pravidelné ukládání konfigurace desktopového prostředí. Můžete si vybrat z následujících možností:
+- **Denně**: 
+  - Po přihlášení do systému se SaveDesktop spustí na pozadí a zálohuje konfiguraci. Pokud se pak v tento den znovu přihlásíte, nebude to dělat znovu, protože pro tento den již byla vytvořena.
+- **Týdně**:
+  - Pokud je vybrána možnost "Týdně", SaveDesktop provede zálohu konfigurace každé pondělí. Pokud počítač v tento den není spuštěn, SaveDesktop ji následující den neprovede.
+- **Měsíčně**:
+  - Pokud je vybrána možnost "Měsíčně", SaveDesktop provede zálohu první den v měsíci, např. 1. května, 1. června, 1. prosince atd. Stejně jako u možnosti "Týdně", pokud počítač v tento den není spuštěn, SaveDesktop ji následující den neprovede.
+- **Nikdy**:
+  - Nic se neděje
 
-Pokud chcete zašifrovat konfigurační archiv, ať už z důvodu ochrany dat nebo z jiných důvodů, můžete použít funkci šifrování archivu v aplikaci SaveDesktop. Jak tedy funguje a jak ji nastavit?
+### Kam se ukládají soubory pravidelného ukládání?
+Výchozí adresář pro pravidelné ukládání je `/home/user/Downloads/SaveDesktop/archives`, ale můžete si zvolit vlastní adresář.
 
-> [!WARNING]  
-> Soubory pro pravidelné ukládání (zatím) nelze chránit heslem. Šifrované archivy zatím není možné použít při synchronizaci.
-
-## Jak to funguje?
-Pokud je tato funkce povolena, SaveDesktop vás vždy požádá o vytvoření hesla pro nový archiv konfigurace. Kritéria pro heslo zahrnují alespoň 8 znaků, jedno velké písmeno, jedno malé písmeno a jeden speciální znak. Pokud heslo tato kritéria nesplňuje, nebude možné v ukládání konfigurace pokračovat.
+### Formát názvu souboru
+Chcete-li zadat jiný formát názvu souboru pro pravidelné ukládání než `Latest_configuration`, je to možné, a to i s mezerami. Od verze 2.9.6, nefunguje proměnná `{}`pro nastavení dnešního data, proto že je nyní při každém pravidelném ukládání přepsán původní soubor zálohy.
 
 _Máte-li jakékoliv otázky, můžete použít Github issues._
