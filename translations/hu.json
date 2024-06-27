@@ -67,5 +67,14 @@
     "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
     "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
     "back_to_page": "Back to previous page",
-    "config_saved_desc": "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+    "config_saved_desc": "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n",
+    "pb_interval": "Interval",
+    "archive_encryption": "Archive encryption",
+    "create_pwd_title": "Create new password",
+    "password_entry": "Password",
+    "create_pwd_desc": "Please create new password for your archive. Criteria include a length of at least 8 characters, one uppercase letter, one lowercase letter, and one special character.",
+    "more_options": "More options",
+    "archive_encryption_desc": "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.",
+    "check_pwd_desc": "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.",
+    "check_pwd_title": "Unlock the archive with a password"
 }
