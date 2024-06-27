@@ -45,7 +45,7 @@
     "backgrounds": "Hátterek",
     "sync": "Szinkronizálás",
     "sync_title": "Szinkronizálás a hálózaton lévő számítógépekkel",
-    "sync_desc": "Szinkronizálja az asztali környezet konfigurációját a hálózat többi számítógépével. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Hogyan működik?</a>",
+    "sync_desc": "Szinkronizálja az asztali környezet konfigurációját a hálózat többi számítógépével.</a>",
     "set_up_sync_file": "Szinkronizálási fájl beállítása",
     "periodic_saving_file": "Szinkronizálási fájl",
     "periodic_sync": "Időszakos szinkronizálás",
