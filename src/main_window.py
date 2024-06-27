@@ -500,7 +500,7 @@ class MainWindow(Adw.ApplicationWindow):
             
             self.encryptRow = Adw.ActionRow.new()
             self.encryptRow.set_title(_["archive_encryption"])
-            self.encryptRow.set_subtitle(_["archive_encryption_desc"])
+            self.encryptRow.set_subtitle(f'{_["archive_encryption_desc"]} <a href="{enc_wiki}">{_["learn_more"]}</a>')
             self.encryptRow.set_subtitle_lines(5)
             self.encryptRow.add_suffix(self.encryptSwitch)
             self.encryptRow.set_activatable_widget(self.encryptSwitch)
