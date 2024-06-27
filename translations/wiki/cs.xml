@@ -92,7 +92,7 @@ Ve verzi 3.3 bylo rozhraní mírně upraveno, konkrétně se nyní sekce pro pra
   <str key="saving_cfg_title">Ukládání konfigurace</str>
   <str key="saving_cfg_intro">Pokud dáváte přednost rozhraní příkazového řádku (CLI) před grafickým uživatelským rozhraním (GUI), SaveDesktop kromě ukládání konfigurace v grafickém uživatelském rozhraní umožňuje ukládat konfiguraci i v CLI.</str>
   <str key="save_cfg_outro">Při použití této metody se používají parametry z grafického uživatelského rozhraní, konkrétně parametry z režimu pravidelného ukládání, jako je formát názvu souboru a vybraná složka pro pravidelné ukládání souborů. Pomocí této metody můžete konfiguraci uložit kdykoli chcete, bez ohledu na zvolený interval periodického ukládání.</str>
-  <str key="enc">The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+  <str key="enc">Archiv bude uložen jako archiv ZIP (protože Tar nepodporuje funkci ochrany heslem), a pokud jej budete chtít rozbalit, budete vyzváni k zadání hesla, které jste použili při ukládání konfigurace. Totéž platí v případě importu konfigurace.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.</str>
+Pokud jste heslo zapomněli, nebude možné archiv rozbalit a použít jej v procesu importu konfigurace.</str>
 </root>
