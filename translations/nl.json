@@ -45,7 +45,7 @@
     "backgrounds": "Achtergronden",
     "sync": "Synchronisatie",
     "sync_title": "Synchroniseren met andere computers op netwerk",
-    "sync_desc": "Synchroniseer uw werkomgevingsvoorkeuren met andere computers op het netwerk. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Hoe werkt dit?</a>",
+    "sync_desc": "Synchroniseer uw werkomgevingsvoorkeuren met andere computers op het netwerk.",
     "set_up_sync_file": "Synchronisatiebestand instellen",
     "periodic_sync": "Periodieke synchronisatie",
     "url_for_sync": "<b>Synchronisatie-url voor andere computers</b>",
