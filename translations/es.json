@@ -45,7 +45,7 @@
     "more_settings_pb": "Ajustes adicionales para el ahorro periódico",
     "sync": "Sincronizar",
     "sync_title": "Sincronizar con otros ordenadores de la red",
-    "sync_desc": "Sincronizar la configuración de tu entorno de escritorio con otros ordenadores en la red. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>¿Cómo funciona?</a>",
+    "sync_desc": "Sincronizar la configuración de tu entorno de escritorio con otros ordenadores en la red.",
     "set_up_sync_file": "Configurar el archivo de sincronización",
     "periodic_sync": "Sincronización periódica",
     "url_for_sync": "<b>La dirección URL de la sincronización con otros ordenadores</b>",

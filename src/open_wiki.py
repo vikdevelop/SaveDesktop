@@ -11,14 +11,17 @@ if "The requested URL returned error: 404" in subprocess.getoutput(f"curl --head
     pb_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving"
     flatpak_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list"
     sync_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network"
+    enc_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Archive-encryption"
     lang_list = False
 elif r_lang == "en":
     pb_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving"
     flatpak_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list"
     sync_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network"
+    enc_wiki = "https://github.com/vikdevelop/SaveDesktop/wiki/Archive-encryption"
     lang_list = False
 else:
     pb_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Periodic-saving-{r_lang}" 
     flatpak_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Save-installed-Flatpak-apps-and-install-it-from-list-{r_lang}"
     sync_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network-{r_lang}"
+    enc_wiki = f"https://github.com/vikdevelop/SaveDesktop/wiki/Archive-encryption-{r_lang}"
     lang_list = True

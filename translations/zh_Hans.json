@@ -45,7 +45,7 @@
     "backgrounds": "背景",
     "sync": "同步",
     "sync_title": "与网络中的其他电脑同步",
-    "sync_desc": "将您的桌面环境配置与网络中的其他计算机同步。 <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>它是如何工作的？</a>",
+    "sync_desc": "将您的桌面环境配置与网络中的其他计算机同步。",
     "set_up_sync_file": "设置同步文件",
     "periodic_sync": "周期性同步",
     "url_for_sync": "<b>与其他计算机同步所需的URL</b>",

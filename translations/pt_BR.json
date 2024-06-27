@@ -45,7 +45,7 @@
     "backgrounds": "Papéis de parede",
     "sync": "Sincronizar",
     "sync_title": "Sincronize com outros computadores na rede",
-    "sync_desc": "Sincronize a configuração do seu ambiente de desktop com outros computadores na rede. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Como funciona?</a>",
+    "sync_desc": "Sincronize a configuração do seu ambiente de desktop com outros computadores na rede.",
     "set_up_sync_file": "Configurar o arquivo de sincronização",
     "periodic_sync": "Sincronização periódica",
     "url_for_sync": "<b>URL para sincronização com outros computadores</b>",

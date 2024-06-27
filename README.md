@@ -55,7 +55,8 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.local/share/backgrounds 
   - ~/.themes
   - ~/.icons
-  - ~/.local/share/icons 
+  - ~/.local/share/icons
+  - ~/.local/share/fonts
   - ~/.fonts
   - ~/.config/gtk-4.0 
   - ~/.config/gtk-3.0
@@ -87,10 +88,15 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.config/bugie-extras
   - ~/.config/nemo
   ```
-  - **Cosmic**
+  - **Cosmic (Old)**
   ```
   - ~/.config/pop-shell
   - ~/.local/share/gnome-shell
+  ```
+  - **Cosmic (New)**
+  ```
+  - ~/.config/cosmic
+  - ~/.local/state/cosmic
   ```
   - **Xfce**
   ```
@@ -122,7 +128,11 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.local/share/kscreen
   - ~/.local/share/color-schemes
   ```
-  
+  - Deepin
+  ```
+  - ~/.config/deepin
+  - ~/.local/share/deepin
+  ```
   
 </details>
 

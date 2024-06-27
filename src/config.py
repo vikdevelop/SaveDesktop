@@ -1,6 +1,8 @@
 import os
 import json
 import gi
+import subprocess
+import zipfile
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
 import argparse
@@ -35,6 +37,8 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'MATE':
     environment = 'MATE'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
     environment = 'KDE Plasma'
+elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
+    environment = 'Deepin'
 else:
     from tty_environments import *
     
@@ -45,6 +49,8 @@ flatpak_app_data = settings["disabled-flatpak-apps-data"]
 
 class Save:
     def __init__(self):
+        # create a txt file to prevent deleting the current saving by closing the application window
+        os.system("echo > saving_status")
         print("saving settings from the Dconf database")
         os.system("dconf dump / > ./dconf-settings.ini")
         print("saving Gtk settings")
@@ -63,6 +69,7 @@ class Save:
         if settings["save-fonts"] == True:
             print("saving fonts")
             os.system(f'cp -R {home}/.fonts ./')
+            os.system(f'cp -R {home}/.local/share/fonts ./')
         if settings["save-desktop-folder"] == True:
             print("saving desktop folder")
             if " " in GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP):
@@ -161,38 +168,56 @@ class Save:
             os.system(f"cp {home}/.config/spectaclerc ./xdg-config/")
             os.system(f"cp {home}/.config/plasmarc ./xdg-config/")
             os.system(f"cp {home}/.config/plasma-org.kde.plasma.desktop-appletsrc ./xdg-config/")
+            os.system(f"cp -R {home}/.config/Kvantum ./xdg-config/")
+            os.system(f"cp -R {home}/.config/latte ./xdg-config/")
             os.system(f"cp -R {home}/.local/share/[k]* ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/dolphin ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/sddm ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/aurorae ./xdg-data/")
             os.system(f"cp -R {home}/.local/share/plasma-systemmonitor ./xdg-data/")
+            os.system(f"cp -R {home}/.local/share/color-schemes ./xdg-data/")
             if settings["save-backgrounds"] == True:
                 os.system(f"cp -R {home}/.local/share/wallpapers ./xdg-data/")
             if settings["save-extensions"] == True:
                 os.system(f"cp -R {home}/.local/share/plasma ./xdg-data/")
+        elif environment == 'Deepin':
+            os.system(f"cp -R {home}/.config/deepin ./")
+            os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         print("creating configuration archive")
-        os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
             with open(f"{CACHE}/.filedialog.json") as j:
                 j = json.load(j)
+            if settings["enable-encryption"] == True:
+                password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
+                os.system(f"zip -9 -P {password} cfg.sd.zip . -r")
+                print("moving the configuration archive to the user-defined directory")
+                os.system(f"mv ./cfg.sd.zip {j['recent_file']}")
+            else:
+                os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
+                print("moving the configuration archive to the user-defined directory")
+                os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
         elif os.path.exists(f"{CACHE}/.periodicfile.json"):
+            os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
+            print("moving the configuration archive to the user-defined directory")
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
+            os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
             if not settings["periodic-import"] == "Never2":
                 file = os.path.basename(j["recent_file"])
                 os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
-        print("moving the configuration archive to the user-defined directory")
-        os.system(f"mv ./cfg.sd.tar.gz {j['recent_file']}")
         if os.path.exists(f"{CACHE}/save_config"):
-            os.system("echo > done_gui")
             print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
+        os.system("rm saving_status")
         
 class Import:
     def __init__(self):
         if os.path.exists(f"{CACHE}/.impfile.json"):
             with open(f"{CACHE}/.impfile.json") as j:
                 j = json.load(j)
-            os.system("tar -xf %s ./" % j["import_file"])
+            if ".zip" in j["import_file"]:
+                print("")
+            else:
+                os.system("tar -xf %s ./" % j["import_file"])
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
         print("importing settings from the Dconf database")
@@ -271,6 +296,9 @@ class Import:
                 os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-data')
             os.system(f'cp -R ./ {home}/.local/share/')
+        elif environment == 'Deepin':
+            os.system(f"cp -R ./deepin {home}/.config/")
+            os.system(f"cp -R ./deepin-data {home}/.local/share/deepin/")
         elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             

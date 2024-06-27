@@ -53,7 +53,7 @@
     "flatpaks_data_tittle": "Flatpak ऐप्स डेटा चयन",
     "sync": "समन्वयन",
     "sync_title": "नेटवर्क में अन्य कंप्यूटरों के साथ समन्वयित करें",
-    "sync_desc": "नेटवर्क में अन्य कंप्यूटरों के साथ अपने डेस्कटॉप वातावरण विन्यास को समन्वयित करें। <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>यह कैसे काम करता है?</a>",
+    "sync_desc": "नेटवर्क में अन्य कंप्यूटरों के साथ अपने डेस्कटॉप वातावरण विन्यास को समन्वयित करें।",
     "set_up_sync_file": "समन्वयन फाइल निर्धारित करें",
     "periodic_saving_file": "आवधिक फाइल सहेजना",
     "periodic_sync": "आवधिक समन्वयन",
