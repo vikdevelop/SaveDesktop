@@ -297,8 +297,8 @@ class Import:
             os.chdir('xdg-data')
             os.system(f'cp -R ./ {home}/.local/share/')
         elif environment == 'Deepin':
-            os.system(f"cp -R ./deepin {home}/.config")
-            os.system(f"cp -R ./deepin-data {home}/.local/share/deepin")
+            os.system(f"cp -R ./deepin {home}/.config/")
+            os.system(f"cp -R ./deepin-data {home}/.local/share/deepin/")
         elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
