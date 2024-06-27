@@ -302,6 +302,8 @@ class Import:
         if flatpak:
             self.create_flatpak_desktop()
         os.system(f"echo > {CACHE}/import_config/done")
+        if not os.path.exists(f"{CACHE}/import_config/app/"):
+            os.system(f"rm -rf {CACHE}/import_config/")
         print("THE CONFIGURATION HAS BEEN IMPORTED SUCCESSFULLY!")
             
     # Create desktop file for install Flatpaks from list
