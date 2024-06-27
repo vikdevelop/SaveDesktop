@@ -43,7 +43,7 @@
     "save_installed_flatpaks": "Programari Flatpak",
     "sync": "Sincronitza",
     "sync_title": "Sincronitza amb altres equips de la xarxa",
-    "sync_desc": "Sincronitzeu el vostre entorn d'escriptori amb altres equips de la xarxa. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Com funciona?</a>",
+    "sync_desc": "Sincronitzeu el vostre entorn d'escriptori amb altres equips de la xarxa.",
     "set_up_sync_file": "Configura el fitxer de sincronització",
     "periodic_sync": "Sincronització periòdica",
     "url_for_sync": "<b>URL per a la sincronització amb altres equips</b>",
