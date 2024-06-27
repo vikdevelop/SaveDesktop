@@ -81,13 +81,13 @@ Immettere il seguente comando nel terminale:
       ```</str>
   <str key="imp_cfg_cli_note">**Nota**:
 - invece di `/path/to/filename.sd.tar.gz`, inserisci il percorso dell'archivio di configurazione che desideri importare, ad esempio: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
-  <str key="archive_encryption_">Archive encryption</str>
-  <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
-  <str key="ac_intro">## How does it work?
-If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 8 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. </str>
-  <str key="ac_warn">&amp;gt; [!WARNING]  
-&amp;gt; The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.</str>
-  <str key="ac_setup">## How to set it up?
-In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.</str>
+  <str key="archive_encryption_">Cifratura dell'archivio</str>
+  <str key="archive_encryption_desc">Se desideri crittografare l'archivio di configurazione, sia per motivi di protezione dei dati che per altro, puoi utilizzare la funzione di crittografia dell'archivio nell'app SaveDesktop. Quindi, come funziona e come configurarlo?</str>
+  <str key="ac_intro">## Come funziona?
+Se questa funzione è abilitata, SaveDesktop ti chiederà sempre di creare una password per il tuo nuovo archivio della configurazione. I criteri per la password includono almeno 8 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale. Se la password non soddisfa questi criteri non sarà possibile continuare a salvare la configurazione. </str>
+  <str key="ac_warn">&amp;gt; [!WARNING]    
+&amp;gt; I file di salvataggio periodico non sono (finora) disponibili per essere protetti con una password. Ad oggi, non è possibile sincronizzare gli archivi crittografati.</str>
+  <str key="ac_setup">## Come configurarlo?
+Nella versione 3.3 l'interfaccia è stata leggermente modificata, nello specifico la sezione di salvataggio periodico si trova ora sotto il pulsante "Ulteriori opzioni". Nello stesso posto si trova la sezione di crittografia dell'archivio. Quindi fai clic sul pulsante già menzionato e abilita l'interruttore di crittografia dell'archivio.</str>
   <str key="saving_cfg_title">Saving configuration</str>
 </root>
