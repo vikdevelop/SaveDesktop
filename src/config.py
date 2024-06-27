@@ -49,6 +49,8 @@ flatpak_app_data = settings["disabled-flatpak-apps-data"]
 
 class Save:
     def __init__(self):
+        # create a txt file to prevent deleting the current saving by closing the application window
+        os.system("echo > saving_status")
         print("saving settings from the Dconf database")
         os.system("dconf dump / > ./dconf-settings.ini")
         print("saving Gtk settings")
@@ -205,6 +207,7 @@ class Save:
                 os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
         if os.path.exists(f"{CACHE}/save_config"):
             print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
+        os.system("rm saving_status")
         
 class Import:
     def __init__(self):
