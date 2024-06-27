@@ -81,4 +81,5 @@ Introduzca el siguiente comando en el terminal:
      ```</str>
   <str key="imp_cfg_cli_note">**Nota**:
 - en lugar de `/path/to/filename.sd.tar.gz`, introduzca la ruta al archivo de configuración que desea importar, por ejemplo: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
+  <str key="archive_encryption_">Archive encryption</str>
 </root>
