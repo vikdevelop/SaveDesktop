@@ -82,4 +82,5 @@
   <str key="imp_cfg_cli_note">**请注意**:
 - 应当输入您想导入的配置文件的实际路径以取代`/path/to/filename.sd.tar.gz`，比如：`/home/user/Downloads/myconfig.sd.tar.gz`</str>
   <str key="archive_encryption_">Archive encryption</str>
+  <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
 </root>
