@@ -67,5 +67,14 @@
     "config_imported_desc": "<big><b>{}</b></big>\nВы можете выйти из системы, чтобы изменения вступили в силу, или вернуться на предыдущую страницу и выйти из системы позже.\n",
     "back_to_page": "Вернуться на предыдущую страницу",
     "flatpaks_data_tittle": "Выбор данных приложений Flatpak",
-    "config_saved_desc": "<big><b>{}</b></big>\nТеперь вы можете просмотреть архив с конфигурацией вашей среды рабочего стола или вернуться на предыдущую страницу.\n"
+    "config_saved_desc": "<big><b>{}</b></big>\nТеперь вы можете просмотреть архив с конфигурацией вашей среды рабочего стола или вернуться на предыдущую страницу.\n",
+    "pb_interval": "Interval",
+    "archive_encryption": "Archive encryption",
+    "more_options": "More options",
+    "create_pwd_title": "Create new password",
+    "archive_encryption_desc": "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.",
+    "create_pwd_desc": "Please create new password for your archive. Criteria include a length of at least 8 characters, one uppercase letter, one lowercase letter, and one special character.",
+    "password_entry": "Password",
+    "check_pwd_desc": "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.",
+    "check_pwd_title": "Unlock the archive with a password"
 }
