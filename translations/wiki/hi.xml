@@ -82,4 +82,5 @@
   <str key="imp_cfg_cli_note">**टिप्पणी**:
 - `/path/to/filename.sd.tar.gz` के बजाय, उस विन्यास संग्रह का पथ दर्ज करें जिसे आप आयात करना चाहते हैं, उदाहरण के लिए: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
   <str key="archive_encryption_">Archive encryption</str>
+  <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
 </root>
