@@ -34,6 +34,7 @@
 - Pantheon
 - MATE
 - KDE Plasma
+- Deepin
 
 ### SaveDesktop can save:
 - your icons, fonts, and themes
@@ -128,7 +129,7 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.local/share/kscreen
   - ~/.local/share/color-schemes
   ```
-  - Deepin
+  - **Deepin**
   ```
   - ~/.config/deepin
   - ~/.local/share/deepin
