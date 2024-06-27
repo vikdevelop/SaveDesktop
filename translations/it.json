@@ -68,13 +68,13 @@
     "config_imported_desc": "<big><b>{}</b></big>\nÈ possibile disconnettersi dal sistema per rendere effettive le modifiche oppure tornare alla pagina precedente e disconnettersi in seguito.\n",
     "back_to_page": "Ritorno alla pagina precedente",
     "config_saved_desc": "<big><b>{}</b></big>\nOra puoi visualizzare l'archivio con la configurazione del tuo ambiente desktop oppure tornare alla pagina precedente.\n",
-    "archive_encryption": "Archive encryption",
+    "archive_encryption": "Cifratura dell'archivio",
     "password_entry": "Password",
-    "pb_interval": "Interval",
-    "archive_encryption_desc": "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.",
-    "create_pwd_desc": "Please create new password for your archive. Criteria include a length of at least 8 characters, one uppercase letter, one lowercase letter, and one special character.",
-    "more_options": "More options",
-    "check_pwd_desc": "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.",
-    "check_pwd_title": "Unlock the archive with a password",
-    "create_pwd_title": "Create new password"
+    "pb_interval": "Intervallo",
+    "archive_encryption_desc": "Quando salvi manualmente la configurazione, ti verrà richiesto di creare una password. Ciò è utile quando si salva la configurazione su un supporto portatile per una migliore sicurezza dei dati.",
+    "create_pwd_desc": "Crea una nuova password per il tuo archivio. I criteri includono una lunghezza di almeno 8 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale.",
+    "more_options": "Ulteriori opzioni",
+    "check_pwd_desc": "Inserisci la password qui sotto per sbloccare l'archivio con la tua configurazione. Se l'hai dimenticata, non potrai decomprimere l'archivio e iniziare a importare la tua configurazione.",
+    "check_pwd_title": "Sblocca l'archivio con una password",
+    "create_pwd_title": "Crea una nuova password"
 }
