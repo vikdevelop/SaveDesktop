@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="home">Pàgina inicial</str>
+  <str key="periodic_saving">Desament automàtic</str>
+  <str key="how_it_works">### Com funciona?</str>
+  <str key="pb_desc">A més de les còpies manuals, el SaveDesktop també us permet automatitzar aquest procés. Podeu triar entre aquestes opcions disponibles:</str>
+  <str key="pb_options">- **Diàriament**: 
+  - Després d'iniciar la sessió al sistema, el SaveDesktop crea una còpia en rerefons de la configuració. Si torneu a iniciar la sessió, no crearà cap còpia atès que ja existeix una del mateix dia.
+- **Setmanalment**:
+  - El SaveDesktop crea una còpia de seguretat de la configuració cada dilluns en seleccionar aquest mode. Si no engegueu l'ordinador aquest dia, el SaveDesktop no en crearà cap còpia fins al dilluns següent.
+- **Mensualment**:
+  - En seleccionar aquest mode, el SaveDesktop crea una còpia el primer dia 1 del mes (p. ex. 1 d'octubre, 1 de novembre, etc.) i, de la mateixa forma que amb la còpia setmanal, si l'equip no està funcionant en aquest dia, no farà cap còpia fins al proper dia 1 del mes vinent.
+- **Mai**:
+  - No es crea cap còpia automàtica</str>
+  <str key="pb_location">### On es desen els fitxers de còpia automàtica?
+La carpeta per defecte d'emmagatzematge és `/home/user/Baixades/SaveDesktop/archives`, però podeu triar una ruta personalitzada.</str>
+  <str key="pb_filename_title">### Format del nom de fitxer</str>
+  <str key="pb_filname_desc">Si voleu crear còpies automàtiques amb altre nom diferent a `Darrera_configuració`, ja és possible, fins i tot amb espais. Des de la versió 2.9.6, la variable `{}` no s'admet per al dia actual, atès que ara totes les còpies automàtiques sobreescriuen el fitxer ja existent.</str>
+  <str key="synchronization_between_computers_title">Sincronització entre ordinadors de la xarxa</str>
+  <str key="how_to_set_up_it">## Com es configura?</str>
+  <str key="whats_your_needing"> ### Quins són els requisits?</str>
+  <str key="on_computer_1">**A l'ordinador 1:**
+- Assigneu una IP manual als equips que voleu sincronitzar perquè aquesta no canviï cada vegada que els inicieu. Això és possible mitjançant:</str>
+  <str key="router_settings">**Configuració de l'encaminador:**
+  - [Asus](https://www.asus.com/support/FAQ/1000906/)
+  - [Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
+  - [Tenda](https://www.tendacn.com/faq/3264.html)
+  - [Tp-link](https://www.tp-link.com/us/support/faq/170/)
+  - Si no teniu cap d'aquests fabricants, proveu accedint des d'un navegador com ara el Firefox a l'adreça del vostre dispositiu (URL: [192.168.1.1](http://192.168.1.1) o similars) i cerqueu dins la secció *DHCP* quelcom semblant a «IP estàtica», «exclusió DHCP», etc. O bé contacteu amb el fabricant de l'aparell o el proveïdor de la vostra connexió a Internet.</str>
+  <str key="sys_config_print">  **`system-config-printer` package:**
+  - Si no voleu assignar una IP manual a l'encaminador i teniu una impressora instal·lada al vostre sistema, a més del paquet `system-config-printer`, verifiqueu que l'opció «Compartida» està activada al panell principal de la impressora. En cas contrari, activeu aquesta opció i reinicieu el sistema. [Aquí](https://raw.githubusercontent.com/BennyBeat/SaveDesktop/1602010b7ef88f3fb0eb1010af33571f0c548eb3/translations/wiki/ca-Printer.png) teniu una captura de pantalla amb la configuració idònia.</str>
+  <str key="on_computer_2">**A l'ordinador 2:**
+- Verifiqueu que està connectat a la mateixa xarxa que l'ordinador 1.</str>
+  <str key="sync_in_savedesktop">### Configuració de la sincronització a l'aplicació SaveDesktop
+Als ordinadors 1 i 2, obriu el programa SaveDesktop i aneu a l'apartat de sincronització. A l'ordinador 1, feu clic al botó «Configura el fitxer de sincronització», seleccioneu el fitxer de sincronització i la freqüència desitjada. Copieu l'URL de sincronització i, a l'ordinador 2, feu clic al botó «Connexió amb l'altre ordinador» i escriviu l'URL de sincronització que heu copiat de l'ordinador 1.</str>
+  <str key="sync_warning">Si voleu sincronitzar l'entorn d'escriptori de l'ordinador 2 a l'1, les passes són les mateixes.
+
+**És necessari tancar i tornar a obrir la sessió per aplicar els canvis**</str>
+  <str key="periodic_sync">## Sincronització periòdica
+Podeu triar entre els elements següents:
+- Diàriament
+- Setmanalment (la sincronització es duu a terme cada dimarts)
+- Mensualment (la sincronització es duu a terme el segon dia de cada mes)
+- Manualment (és possible realitzar la sincronització en qualsevol moment des del menú principal en fer clic als tres punts)
+- Mai (no es duu a terme cap canvi)</str>
+  <str key="save_installed_flatpaks_title">Desa el programari Flatpak per ser instal·lat des d'una llista</str>
+  <str key="save_flatpak_intro">Des de la versió 2.5, el SaveDesktop us permet desar el programari Flatpak existent i instal·lar-ho des d'una llista. Com funciona això?</str>
+  <str key="saving_flatpaks">### Desat del programari Flatpak instal·lat
+És possible crear una llista del programari Flatpak existent a la carpeta `/var/lib/flatpak/app` del sistema, però no a el que es trobi a `~/.local/share/flatpak/app`. Al fitxer de configuració desat, la llista del programari Flatpak està etiquetat com a `installed_flatpaks.sh`.</str>
+  <str key="installing_flatpaks">### Instal·lació de programari Flatpak des d'una llista
+Després d'importar el fitxer de configuració, en tornar a iniciar la sessió, **el programari Flatpak s'instal·larà en rerefons.**</str>
+  <str key="wiki_description">El SaveDesktop és una aplicació senzilla programada en Python que utilitza les llibreries GTK i LibAdwaita. Aquesta wiki us explica algunes de les característiques del programa (p.ex. la sincronització entre ordinadors).
+
+Aquesta wiki la podeu traduir mitjançant el [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). Els fitxers de traducció es troben a [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
+
+Per a una navegació més fàcil, teniu una barra des d'on podeu canviar entre idiomes i pàgines. A més, trobareu els temes següents:</str>
+  <str key="select_language">Selecció d'idioma</str>
+  <str key="savedesktop_wiki">Wiki del SaveDesktop</str>
+  <str key="github_issues">_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._</str>
+  <str key="localize-wiki">Traducció de la wiki del SaveDesktop (via Weblate)</str>
+  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
+  <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
+  <str key="imp_cfg_cli_steps">### So how to proceed?
+**1. Open a terminal**
+
+You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+
+**2. Type the command to import the configuration**
+
+Enter the following command in the terminal:
+- if you have SaveDesktop installed as a Flatpak package, use the following:
+
+     ```
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     ```
+
+- if you have SaveDesktop installed as a Snap or native package, use: 
+     ```
+     savedesktop --import-config /path/to/filename.sd.tar.gz
+     ```</str>
+  <str key="imp_cfg_cli_note">**Note**:
+- instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
+  <str key="archive_encryption_">Archive encryption</str>
+  <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
+  <str key="ac_intro">## How does it work?
+If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 8 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. </str>
+  <str key="ac_warn">&amp;gt; [!WARNING]  
+&amp;gt; The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.</str>
+  <str key="ac_setup">## How to set it up?
+In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.</str>
+  <str key="saving_cfg_title">Saving configuration</str>
+  <str key="saving_cfg_intro">If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.</str>
+  <str key="save_cfg_outro">When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.</str>
+</root>
