@@ -11,7 +11,7 @@
     <summary xml:lang="it_IT">Salva la configurazione del tuo desktop</summary>
     <summary xml:lang="nl_NL">Sla de huidige voorkeuren van uw werkomgeving op</summary>
     <summary xml:lang="ar_SA">احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك</summary>
-    <summary xml:lang="ru_RU">Сохранить текущую конфигурацию окружения рабочего стола</summary>
+    <summary xml:lang="ru_RU">Сохраните конфигурацию вашего окружения рабочего стола</summary>
     <summary xml:lang="id_ID">Simpan konfigurasi lingkungan desktop Anda saat ini</summary>
     <summary xml:lang="nb_NO">Lagre nåværende oppsett av skrivebordsmiljøet ditt</summary>
     <summary xml:lang="uk_UA">Збережіть конфігурацію вашої стільниці</summary>
@@ -55,12 +55,15 @@
     
     <screenshots>
         <screenshot type="default">
+            <caption>Page for saving configuration</caption>
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png</image>
         </screenshot>
         <screenshot>
+            <caption>Page for importing configuration</caption>
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png</image>
         </screenshot>
         <screenshot>
+            <caption>Page for config synchronization</caption>
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png</image>
         </screenshot>
     </screenshots>
@@ -77,6 +80,17 @@
     </branding>
           
     <releases>
+       <release version="3.3" date="2024-06-27">
+           <description>
+               <ul>
+                  <li>Added option to set archive protection with password (more information is available on the Github wiki)</li>
+                  <li>Added option to save configuration from command-line interface (more information is also available on the Github wiki)</li>
+                  <li>Added support for Deepin DE</li>
+                  <li>Added support for saving Kvantum Manager and Latte dock configurations</li>
+                  <li>Updated translations</li>
+                </ul>
+           </description>
+       </release>
        <release version="3.2" date="2024-03-24">
            <description>
                <ul>
