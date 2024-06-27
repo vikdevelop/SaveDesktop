@@ -89,4 +89,5 @@ If this feature is enabled, SaveDesktop will always ask you to create a password
 &amp;gt; The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization।</str>
   <str key="ac_setup">## How to set it up?
 In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch।</str>
+  <str key="saving_cfg_title">Saving configuration</str>
 </root>
