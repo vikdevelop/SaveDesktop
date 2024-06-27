@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home">होम पेज</str>
   <str key="periodic_saving">आवधिक सहेजना</str>
-  <str key="how_it_works">### यह कैसे काम करता है?</str>
   <str key="pb_desc">मैन्युअल सहेजने के अलावा, SaveDesktop आपको समय-समय पर अपने डेस्कटॉप विन्यास को सहेजने की भी अनुमति देता है। आप निम्नलिखित विकल्पों में से चुन सकते हैं:</str>
   <str key="pb_options">- **दैनिक**:
   - सिस्टम में लॉग इन करने के बाद, SaveDesktop बैकग्राउंड में शुरू होता है और विन्यास का बैकअप लेता है। यदि आप इस दिन वापस लॉग इन करते हैं, तो यह दोबारा ऐसा नहीं करेगा, क्योंकि यह उस दिन के लिए पहले ही बनाया जा चुका है।
@@ -49,15 +47,7 @@
 सिस्टम निर्देशिका /var/lib/flatpak/app और होम निर्देशिका ~/.local/share/flatpak/app में स्थापित Flatpak अनुप्रयोगों की सूची को सहेजना संभव है। विन्यास संग्रह में स्थापित Flatpak अनुप्रयोगों की सूची को सिस्टम निर्देशिका के लिए install_flatpaks.sh और होम निर्देशिका के लिए install_user_flatpaks.sh के रूप में चिह्नित किया गया है।</str>
   <str key="installing_flatpaks">### सूची से Flatpak अनुप्रयोगों को स्थापित करना
 सहेजी गई विन्यास फाइल को आयात करने और वापस लॉग इन करने के बाद, **Flatpak अनुप्रयोगों का पृष्ठभूमि में स्थापित होना शुरू हो जाएंगे।**</str>
-  <str key="wiki_description">SaveDesktop GTK और LibAdwaita लाइब्रेरी का उपयोग करके Python में लिखा गया एक सरल अनुप्रयोग है। इस विकी का उपयोग अनुप्रयोग की कुछ विशेषताओं (उदाहरण के लिए कंप्यूटर के बीच समन्वयन) को समझाने के लिए किया जाता है।
-
-इस विकि का अनुवाद [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/) के माध्यम से किया जा सकता है। अनुवाद फाइलें [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki) में पाई जा सकती हैं।
-
-आसान नेविगेशन के लिए, एक साइडबार है जहां आप भाषाओं और पृष्ठों के बीच स्विच कर सकते हैं। पार्श्वपट्टी के अलावा, आप नीचे दिए गए अलग-अलग पेज देख सकते हैं:</str>
-  <str key="select_language">भाषा चुने</str>
-  <str key="savedesktop_wiki">SaveDesktop विकी</str>
   <str key="github_issues">_यदि आपके कोई प्रश्न हैं, तो आप GitHub मुद्दों का उपयोग कर सकते हैं।_</str>
-  <str key="localize-wiki">SaveDesktop विकी को स्थानीयकृत करें (वेबलेट के माध्यम से)</str>
   <str key="version_warning">**यह सुविधा इस संस्करण से उपलब्ध है: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">CLI इंटरफ़ेस में विन्यास आयात कर रहे हैं</str>
   <str key="imp_cfg_cli_intro">GUI में विन्यास आयात करने के अलावा, SaveDesktop आपको कमांड लाइन इंटरफ़ेस (CLI) में विन्यास आयात करने की भी अनुमति देता है, जिसका उपयोग आप अपने डेस्कटॉप वातावरण के टूटने की स्थिति में कर सकते हैं।</str>

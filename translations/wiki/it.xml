@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home">Home page</str>
   <str key="periodic_saving">Salvataggio periodico</str>
-  <str key="how_it_works">### Come funziona?</str>
   <str key="pb_desc">Oltre ai salvataggi manuali, SaveDesktop consente anche di salvare periodicamente la configurazione del desktop. Puoi scegliere tra le seguenti opzioni:</str>
   <str key="pb_options">- **Quotidiano**:
    - Dopo aver effettuato l'accesso al sistema, SaveDesktop si avvia in background ed esegue il backup della configurazione. Se poi accedi nuovamente, non lo farà più, perché è già stato creato per quel giorno.
@@ -49,15 +47,7 @@ Puoi scegliere tra i seguenti articoli:
 È possibile salvare un elenco delle applicazioni Flatpak installate dalla directory di sistema /var/lib/flatpak/app e dalla directory home ~/.local/share/flatpak/app. Nell'archivio di configurazione salvato, l'elenco delle applicazioni Flatpak installate è etichettato come installato_flatpaks.sh (per la directory di sistema) e installato_utente_flatpaks.sh (per la cartella home).</str>
   <str key="installing_flatpaks">### Installazione delle applicazioni Flatpak dall'elenco
 Dopo aver importato il file di configurazione salvato ed aver effettuato nuovamente l'accesso, **le applicazioni Flatpak inizieranno l'installazione in background.**</str>
-  <str key="wiki_description">SaveDesktop è una semplice applicazione scritta in Python utilizzando le librerie GTK e LibAdwaita. Questo wiki viene utilizzato per spiegare alcune delle funzionalità dell'applicazione (ad esempio la sincronizzazione tra computer).
-
-Questo wiki può essere tradotto tramite [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). I file di traduzione possono essere trovati in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
-
-Per una navigazione più semplice, è presente una barra laterale in cui è possibile passare da una lingua all'altra e da una pagina all'altra. Oltre alla barra laterale, puoi visualizzare le singole pagine di seguito:</str>
-  <str key="select_language">Seleziona lingua</str>
-  <str key="savedesktop_wiki">SaveDesktop wiki</str>
   <str key="github_issues">_Se hai domande, puoi usare GitHub Issues._</str>
-  <str key="localize-wiki">Localizza la wiki di SaveDesktop (tramite Weblate)</str>
   <str key="version_warning">**Questa funzionalità è disponibile dalla versione: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">Importazione della configurazione nell'interfaccia CLI</str>
   <str key="imp_cfg_cli_intro">Oltre a importare la configurazione nella GUI, SaveDesktop ti consente anche di importare la configurazione nell'interfaccia a riga di comando (CLI), che puoi utilizzare nel caso in cui il tuo ambiente desktop si guasti.</str>

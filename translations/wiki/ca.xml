@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home">Pàgina inicial</str>
   <str key="periodic_saving">Desament automàtic</str>
-  <str key="how_it_works">### Com funciona?</str>
   <str key="pb_desc">A més de les còpies manuals, el SaveDesktop també us permet automatitzar aquest procés. Podeu triar entre aquestes opcions disponibles:</str>
   <str key="pb_options">- **Diàriament**: 
   - Després d'iniciar la sessió al sistema, el SaveDesktop crea una còpia en rerefons de la configuració. Si torneu a iniciar la sessió, no crearà cap còpia atès que ja existeix una del mateix dia.
@@ -49,15 +47,7 @@ Podeu triar entre els elements següents:
 És possible crear una llista del programari Flatpak existent a la carpeta `/var/lib/flatpak/app` del sistema, però no a el que es trobi a `~/.local/share/flatpak/app`. Al fitxer de configuració desat, la llista del programari Flatpak està etiquetat com a `installed_flatpaks.sh`.</str>
   <str key="installing_flatpaks">### Instal·lació de programari Flatpak des d'una llista
 Després d'importar el fitxer de configuració, en tornar a iniciar la sessió, **el programari Flatpak s'instal·larà en rerefons.**</str>
-  <str key="wiki_description">El SaveDesktop és una aplicació senzilla programada en Python que utilitza les llibreries GTK i LibAdwaita. Aquesta wiki us explica algunes de les característiques del programa (p.ex. la sincronització entre ordinadors).
-
-Aquesta wiki la podeu traduir mitjançant el [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). Els fitxers de traducció es troben a [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
-
-Per a una navegació més fàcil, teniu una barra des d'on podeu canviar entre idiomes i pàgines. A més, trobareu els temes següents:</str>
-  <str key="select_language">Selecció d'idioma</str>
-  <str key="savedesktop_wiki">Wiki del SaveDesktop</str>
   <str key="github_issues">_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._</str>
-  <str key="localize-wiki">Traducció de la wiki del SaveDesktop (via Weblate)</str>
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
   <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
