@@ -87,4 +87,6 @@ Introduzca el siguiente comando en el terminal:
 If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 8 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. </str>
   <str key="ac_warn">&amp;gt; [!WARNING]  
 &amp;gt; The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.</str>
+  <str key="ac_setup">## How to set it up?
+In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.</str>
 </root>
