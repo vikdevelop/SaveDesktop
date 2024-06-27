@@ -1,11 +1,11 @@
 # Ukládání a import konfigurace v rozhraní CLI
-## Saving configuration
+## Ukládání konfigurace
 
-**This feature is available from version: `3.3`**
+**Tato funkce je k dispozici od verze: `3.3`**
 
-If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.
+Pokud dáváte přednost rozhraní příkazového řádku (CLI) před grafickým uživatelským rozhraním (GUI), SaveDesktop kromě ukládání konfigurace v grafickém uživatelském rozhraní umožňuje ukládat konfiguraci i v CLI.
 
-## Jak tedy postupovat?
+### Jak tedy postupovat?
 **1. Otevřete terminál**
 
 Můžete jej otevřít z nabídky aplikací nebo pomocí klávesové zkratky Ctrl+Alt+T.
