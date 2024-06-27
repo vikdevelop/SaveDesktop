@@ -45,7 +45,7 @@
     "backgrounds": "Latar Belakang",
     "sync": "Sinkronisasi",
     "sync_title": "Sinkronisasi dengan komputer lain dalam jaringan",
-    "sync_desc": "Menyinkronkan konfigurasi lingkungan desktop Anda dengan komputer lain dalam jaringan. <a href='https://github.com/vikdevelop/SaveDesktop/wiki/Synchronization-between-computers-in-the-network'>Bagaimana cara kerjanya?</a>",
+    "sync_desc": "Menyinkronkan konfigurasi lingkungan desktop Anda dengan komputer lain dalam jaringan.",
     "set_up_sync_file": "Atur file sinkronisasi",
     "periodic_sync": "Sinkronisasi berkala",
     "url_for_sync": "<b>URL untuk sinkronisasi dengan komputer lain</b>",
