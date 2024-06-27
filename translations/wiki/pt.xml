@@ -97,4 +97,5 @@ If this feature is enabled, SaveDesktop will always ask you to create a password
   <str key="ac_setup">## How to set it up?
 In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.</str>
   <str key="saving_cfg_title">Saving configuration</str>
+  <str key="saving_cfg_intro">If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.</str>
 </root>
