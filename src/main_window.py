@@ -1642,9 +1642,10 @@ class MainWindow(Adw.ApplicationWindow):
             print("Flatpak data exists.")
         elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
             print("Flatpak data exists.")
+        elif os.path.exists(f"{CACHE}/periodic_saving/saving_status"):
+            print("Saving Flatpak apps data in the periodic saving mode in progress")
         else:
-            os.popen(f"rm -rf {CACHE}/periodic_saving")
-            os.popen(f"rm -rf {CACHE}/syncing")
+            os.popen(f"rm -rf {CACHE}/*")
             os.popen(f"rm -rf {CACHE}/.*")
         try:
             url = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
@@ -1714,6 +1715,8 @@ class MyApp(Adw.Application):
             print("Flatpak data exists.")
         elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
             print("Flatpak data exists.")
+        elif os.path.exists(f"{CACHE}/periodic_saving/saving_status"):
+            print("Saving Flatpak apps data in the periodic saving mode in progress")
         else:     
             os.popen(f"rm -rf {CACHE}/*")
             os.popen(f"rm -rf {CACHE}/.*")
