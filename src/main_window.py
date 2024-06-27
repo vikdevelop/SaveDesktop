@@ -1618,9 +1618,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.backtomButton.set_margin_start(170)
         self.backtomButton.set_margin_end(170)
         self.importwaitBox.append(self.backtomButton)
-
-    if not flatpak:
-        os.popen(f"rm -rf {CACHE}/import_config/*")
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
