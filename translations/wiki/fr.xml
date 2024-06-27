@@ -82,4 +82,5 @@ Enter the following command in the terminal:
      ```</str>
   <str key="imp_cfg_cli_note">**Note**:
 - instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
+  <str key="archive_encryption_">Archive encryption</str>
 </root>
