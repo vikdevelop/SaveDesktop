@@ -55,7 +55,8 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.local/share/backgrounds 
   - ~/.themes
   - ~/.icons
-  - ~/.local/share/icons 
+  - ~/.local/share/icons
+  - ~/.local/share/fonts
   - ~/.fonts
   - ~/.config/gtk-4.0 
   - ~/.config/gtk-3.0
