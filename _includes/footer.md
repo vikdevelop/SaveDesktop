@@ -1,0 +1,6 @@
+<footer>
+  <div class="container">
+    &copy; 2024 vikdevelop
+  </div>
+  <a href="https://github.com/vikdevelop/SaveDesktop">SaveDesktop</a>
+</footer>
