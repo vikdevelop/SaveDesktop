@@ -1,17 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="home">Home page</str>
-  <str key="savedesktop_wiki">SaveDesktop wiki</str>
-  <str key="wiki_description">SaveDesktop is a simple application written in Python using GTK and LibAdwaita libraries. This wiki is used to explain some of the features of the application (e.g. synchronization between computers).
-
-This wiki can be translated via [Weblate](https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/). The translation files can be found in [`translations/wiki`](https://github.com/vikdevelop/SaveDesktop/tree/main/translations/wiki).
-
-For easier navigation, there is a sidebar where you can switch between languages and pages. In addition to the sidebar, you can view the individual pages below:</str>
-  <str key="select_language">Select language</str>
-  <str key="localize-wiki">Localize SaveDesktop wiki (via Weblate)</str>
-  <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
   <str key="periodic_saving">Periodic Saving</str>
-  <str key="how_it_works">### How it works?</str>
   <str key="pb_desc">In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:</str>
   <str key="pb_options">- **Daily**: 
   - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.
@@ -58,6 +47,9 @@ You can choose between the following items:
 - Monthly (synchronization takes place every second day in the month)
 - Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
 - Never (nothing's happening)</str>
+  <str key="saving_cfg_title">Saving configuration</str>
+  <str key="saving_cfg_intro">If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.</str>
+  <str key="save_cfg_outro">When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.</str>
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
   <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
@@ -85,14 +77,12 @@ Enter the following command in the terminal:
   <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
   <str key="ac_intro">## How does it work?
 If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 8 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. </str>
+  <str key="enc">The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+
+If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.</str>
   <str key="ac_warn">&gt; [!WARNING]  
 &gt; The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.</str>
   <str key="ac_setup">## How to set it up?
 In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.</str>
-  <str key="saving_cfg_title">Saving configuration</str>
-  <str key="saving_cfg_intro">If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.</str>
-  <str key="save_cfg_outro">When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.</str>
-  <str key="enc">The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
-
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.</str>
+  <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
 </root>
