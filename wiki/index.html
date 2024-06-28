@@ -41,7 +41,6 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Size</th>
         <th>Last Modified</th>
       </tr>
     </thead>
@@ -49,19 +48,11 @@
       <tr>
         <td><a href="..">[Parent Directory]</a></td>
         <td>-</td>
-        <td>-</td>
       </tr>
-      {% for item in items %}
+      {% for folder in folders %}
       <tr>
-        <td>
-          {% if item.is_directory %}
-          <span class="directory"><a href="{{ item.path }}">{{ item.name }}/</a></span>
-          {% else %}
-          <a href="{{ item.path }}">{{ item.name }}</a>
-          {% endif %}
-        </td>
-        <td>{{ item.size }}</td>
-        <td>{{ item.modified }}</td>
+        <td><span class="directory"><a href="{{ folder.path }}">{{ folder.name }}/</a></span></td>
+        <td>{{ folder.modified }}</td>
       </tr>
       {% endfor %}
     </tbody>
