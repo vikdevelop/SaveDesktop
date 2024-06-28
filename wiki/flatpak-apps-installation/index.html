@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Saving and importing list of installed Flatpaks apps and install them from list | SaveDesktop Github wiki</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    a {
+      color: #0077b6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .directory {
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <h1>Saving and importing list of installed Flatpaks apps and install them from list | SaveDesktop Github wiki</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Language</th>
+      </tr>
+    </thead>
+    <tbody id="folder-list"></tbody>
+  </table>
+
+  <script>
+    fetch(`https://api.github.com/repos/vikdevelop/SaveDesktop/contents/wiki/flatpak-apps-installation?ref=webpage`)
+      .then(response => response.json())
+      .then(data => {
+        const folderListElement = document.getElementById('folder-list');
+
+        data.forEach(item => {
+          if (item.name.endsWith('.md')) {
+            const tr = document.createElement('tr');
+            const td1 = document.createElement('td');
+
+            td1.innerHTML = `<a href="${item.name.slice(0, -3)}">${item.name.slice(0, -3)}</a>`;
+
+            tr.appendChild(td1);
+            folderListElement.appendChild(tr);
+          }
+        });
+      })
+      .catch(error => console.error(error));
+  </script>
+
+  <br>
+  <a href="https://vikdevelop.github.io/SaveDesktop/wiki"><b>Back to Home page</b></a>
+</body>
+</html>
