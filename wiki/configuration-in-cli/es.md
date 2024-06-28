@@ -16,7 +16,7 @@ Introduzca el siguiente comando en el terminal:
 - si tiene SaveDesktop instalado como un paquete Flatpak, utilice lo siguiente:
 
      ```
-     Ejecute flatpak io.github.vikdevelop.SaveDesktop --save-now
+     flatpak run io.github.vikdevelop.SaveDesktop --save-now
      ```
 
 - si tiene SaveDesktop instalado como un paquete Snap o nativo, utilice: 
@@ -29,7 +29,7 @@ Al utilizar este método, utiliza parámetros de la GUI, concretamente parámetr
 
 ## Importar la configuración
 
-**Esta función está disponible a partir de la versión: `3.2.2`*
+**Esta función está disponible a partir de la versión: `3.2.2`**
 
 Además de importar la configuración en la GUI, SaveDesktop también le permite importar la configuración en la interfaz de línea de comandos (CLI), que puede utilizar en caso de que su entorno de escritorio se rompa.
 
