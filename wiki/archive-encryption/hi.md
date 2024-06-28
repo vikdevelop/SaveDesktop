@@ -1,19 +1,19 @@
-# Archive encryption
-**This feature is available from version: 3.3**
+# पुरालेख कूटलेखन
+**यह सुविधा इस संस्करण से उपलब्ध है: 3.3**
 
-If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?
+यदि आप विन्यास पुरालेख को कूटलेखित करना चाहते हैं, चाहे डेटा सुरक्षा कारणों से या किसी और कारण से, तो आप SaveDesktop ऐप में पुरालेख कूटलेखन सुविधा का उपयोग कर सकते हैं। तो, यह कैसे काम करता है, और इसे कैसे स्थापित करें?
 
-## How does it work?
-If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 8 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. 
+## यह कैसे काम करता है?
+यदि यह सुविधा सक्षम है, तो SaveDesktop हमेशा आपसे विन्यास के अपने नए पुरालेख के लिए पासवर्ड बनाने के लिए कहेगा। पासवर्ड के लिए मानदंड में कम से कम 8 वर्ण, एक बड़े अक्षर, एक छोटे अक्षर और एक विशेष वर्ण शामिल हैं। यदि पासवर्ड इन मानदंडों को पूरा नहीं करता है, तो विन्यास को सहेजना जारी रखना संभव नहीं होगा। 
 
-The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+पुरालेख को ZIP पुरालेख के रूप में सहेजा जाएगा (क्योंकि Tar पासवर्ड सुरक्षा सुविधा का समर्थन नहीं करता है), और यदि आप इसे निष्कर्षित करना चाहते हैं, तो आपसे वह पासवर्ड दर्ज करने के लिए कहा जाएगा जिसका उपयोग आपने विन्यास सहेजने की प्रक्रिया में किया था। विन्यास आयात के मामले में भी यही बात लागू होती है।
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.
+यदि आप पासवर्ड भूल गए हैं, तो पुरालेख निष्कर्षण और विन्यास आयात प्रक्रिया में इसका उपयोग करना संभव नहीं होगा।
 
-> [!WARNING]  
-> The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.
+> [!चेतावनी]  
+> आवधिक बचत फाइलें (अभी तक) पासवर्ड से सुरक्षित करने के लिए उपलब्ध नहीं हैं। कूटलेखित पुरालेख, अभी तक, समन्वयन में उपयोग करना संभव नहीं है।
 
-## How to set it up?
-In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.
+## इसे कैसे स्थापित करें?
+3.3 संस्करण में, इंटरफ़ेस को थोड़ा संशोधित किया गया है, विशेष रूप से, आवधिक बचत अनुभाग अब "अधिक विकल्प" बटन के नीचे स्थित है। उसी स्थान पर, पुरालेख कूटलेखन अनुभाग स्थित है। तो पहले से उल्लेखित बटन पर क्लिक करें, और पुरालेख कूटलेखन स्विच सक्षम करें।
 
-_If you have any questions, you can use Github issues._
+_यदि आपके कोई प्रश्न हैं, तो आप GitHub मुद्दों का उपयोग कर सकते हैं।_
