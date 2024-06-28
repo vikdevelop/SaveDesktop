@@ -1,33 +1,30 @@
-# CLI इंटरफ़ेस में विन्यास आयात कर रहे हैं<
-## Saving configuration
+## विन्यास सहेजा जा रहा है
 
-**This feature is available from version: `3.3`**
+**यह सुविधा इस संस्करण से उपलब्ध है: `3.3`**
 
-If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.
+यदि आप ग्राफिकल यूजर इंटरफेस (GUI) से पहले कमांड-लाइन इंटरफेस (CLI) को प्राथमिकता देते हैं, तो SaveDesktop, GUI में विन्यास को सहेजने के अतिरिक्त, आपको CLI में विन्यास को सहेजने की अनुमति देता है।
 
-### So how to proceed?
+### तो कैसे आगे बढ़ें?
+**1. एक टर्मिनल खोलें**
 
-**1. Open a terminal**
+आप इसे एप्लिकेशन मेनू से या Ctrl+Alt+T कीबोर्ड शॉर्टकट का उपयोग करके खोल सकते हैं।
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+**2. विन्यास आयात करने के लिए कमांड टाइप करें**
 
-**2. Type the command to import the configuration**
-
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
+टर्मिनल में निम्नलिखित कमांड दर्ज करें:
+- यदि आपने SaveDesktop को फ्लैटपैक पैकेज के रूप में स्थापित किया है, तो निम्नलिखित का उपयोग करें:
 
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --save-now
      ```
-
-- if you have SaveDesktop installed as a Snap or native package, use:
+- यदि आपने SaveDesktop को Snap या नेटिव पैकेज के रूप में स्थापित किया है, तो इसका उपयोग करें: 
      ```
      savedesktop --save-now
-     ```
+     ``
 
-When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.
+इस विधि का उपयोग करते समय, यह GUI से पैरामीटर का उपयोग करता है, विशेष रूप से आवधिक बचत मोड से पैरामीटर, जैसे फाइल नाम प्रारूप और आवधिक बचत फाइलों के लिए चयनित फोल्डर। आप जब चाहें इस विधि से विन्यास को सहेज सकते हैं, चाहे चयनित आवधिक बचत अंतराल कुछ भी हो।
 
-## Importing configuration
+## कॉन्फ़िगरेशन आयात करें
 
 **यह सुविधा इस संस्करण से उपलब्ध है: `3.2.2`**
 
