@@ -1,4 +1,3 @@
-# Saving and importing configuration in the CLI interface
 ## Saving configuration
 
 **This feature is available from version: `3.3`**
