@@ -30,6 +30,9 @@
     a:hover {
       text-decoration: underline;
     }
+    .directory {
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -48,11 +51,17 @@
         <td>-</td>
         <td>-</td>
       </tr>
-      {% for file in files %}
+      {% for item in items %}
       <tr>
-        <td><a href="{{ file.path }}">{{ file.name }}</a></td>
-        <td>{{ file.size }}</td>
-        <td>{{ file.modified }}</td>
+        <td>
+          {% if item.is_directory %}
+          <span class="directory"><a href="{{ item.path }}">{{ item.name }}/</a></span>
+          {% else %}
+          <a href="{{ item.path }}">{{ item.name }}</a>
+          {% endif %}
+        </td>
+        <td>{{ item.size }}</td>
+        <td>{{ item.modified }}</td>
       </tr>
       {% endfor %}
     </tbody>
