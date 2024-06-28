@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title>Directory Listing</title>
+  <title>Archive Encryption | SaveDesktop Github wiki</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -50,17 +49,17 @@
     fetch(`https://api.github.com/repos/vikdevelop/SaveDesktop/contents/wiki/archive-encryption?ref=webpage`)
       .then(response => response.json())
       .then(data => {
-        const fileListElement = document.getElementById('file-list');
+        const folderListElement = document.getElementById('folder-list');
 
         data.forEach(item => {
           if (item.name.endsWith('.md')) {
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
 
-            td1.innerHTML = `<a href="/wiki/archive-encryption/${item.name}">${item.name}</a>`;
+            td1.innerHTML = `<a href="${item.name}">${item.name}</a>`;
 
             tr.appendChild(td1);
-            fileListElement.appendChild(tr);
+            folderListElement.appendChild(tr);
           }
         });
       })
