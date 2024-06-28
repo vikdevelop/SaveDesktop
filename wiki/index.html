@@ -41,7 +41,6 @@
     <thead>
       <tr>
         <th>Page</th>
-        <th>Last Modified</th>
       </tr>
     </thead>
     <tbody id="folder-list"></tbody>
@@ -51,6 +50,7 @@
     const githubUser = 'vikdevelop';
     const githubRepo = 'SaveDesktop';
     const githubBranch = 'webpage';
+    const githubPagesUrl = `https://${githubUser}.github.io/${githubRepo}/wiki/`;
 
     fetch(`https://api.github.com/repos/${githubUser}/${githubRepo}/contents/wiki?ref=${githubBranch}`)
       .then(response => response.json())
@@ -61,13 +61,10 @@
           if (item.type === 'dir') {
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            const td2 = document.createElement('td');
 
-            td1.innerHTML = `<span class="directory"><a href="${item.html_url}">${item.name}/</a></span>`;
-            td2.textContent = item.updated_at;
+            td1.innerHTML = `<span class="directory"><a href="${githubPagesUrl}${item.name}/">${item.name}/</a></span>`;
 
             tr.appendChild(td1);
-            tr.appendChild(td2);
             folderListElement.appendChild(tr);
           }
         });
