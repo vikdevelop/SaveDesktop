@@ -47,11 +47,6 @@
   </table>
 
   <script>
-    const githubUser = 'vikdevelop';
-    const githubRepo = 'SaveDesktop';
-    const githubBranch = 'webpage';
-    const githubPagesUrl = `https://${githubUser}.github.io/${githubRepo}/wiki/archive-encryption`;
-
     fetch(`https://api.github.com/repos/vikdevelop/SaveDesktop/contents/wiki/archive-encryption?ref=webpage`)
       .then(response => response.json())
       .then(data => {
@@ -61,7 +56,6 @@
           if (item.name.endsWith('.md')) {
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            const td2 = document.createElement('td');
 
             td1.innerHTML = `<a href="${currentPath}/${item.name}">${item.name}</a>`;
 
