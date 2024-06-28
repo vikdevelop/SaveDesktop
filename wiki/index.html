@@ -36,26 +36,46 @@
   </style>
 </head>
 <body>
-  <h1>Directory Listing</h1>
+  <h1>SaveDesktop wiki viewer</h1>
   <table>
     <thead>
       <tr>
-        <th>Name</th>
+        <th>Page</th>
         <th>Last Modified</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><a href="..">[Parent Directory]</a></td>
+        <td><a href="..">Home page</a></td>
         <td>-</td>
       </tr>
-      {% for folder in folders %}
-      <tr>
-        <td><span class="directory"><a href="{{ folder.path }}">{{ folder.name }}/</a></span></td>
-        <td>{{ folder.modified }}</td>
-      </tr>
-      {% endfor %}
+      <tbody id="folder-list"></tbody>
     </tbody>
   </table>
+
+  <script>
+    fetch('/wiki')
+      .then(response => response.text())
+      .then(data => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, 'text/html');
+        const folderList = doc.querySelectorAll('a[href$="/"]');
+
+        const folderListElement = document.getElementById('folder-list');
+        folderList.forEach(folder => {
+          const tr = document.createElement('tr');
+          const td1 = document.createElement('td');
+          const td2 = document.createElement('td');
+
+          td1.innerHTML = `<span class="directory"><a href="${folder.href}">${folder.textContent}</a></span>`;
+          td2.textContent = '-';
+
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          folderListElement.appendChild(tr);
+        });
+      })
+      .catch(error => console.error(error));
+  </script>
 </body>
 </html>
