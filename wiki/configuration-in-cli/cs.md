@@ -1,4 +1,3 @@
-# Ukládání a import konfigurace v rozhraní CLI
 ## Ukládání konfigurace
 
 **Tato funkce je k dispozici od verze: `3.3`**
