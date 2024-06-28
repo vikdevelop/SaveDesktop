@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^wiki/(.*)$ https://vikdevelop.github.io/SaveDesktop/$1 [L,R=301]
