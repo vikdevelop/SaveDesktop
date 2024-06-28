@@ -44,35 +44,32 @@
         <th>Last Modified</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td><a href="..">Home page</a></td>
-        <td>-</td>
-      </tr>
-      <tbody id="folder-list"></tbody>
-    </tbody>
+    <tbody id="folder-list"></tbody>
   </table>
 
   <script>
-    fetch('/wiki')
-      .then(response => response.text())
+    const githubUser = 'vikdevelop';
+    const githubRepo = 'SaveDesktop';
+    const githubBranch = 'webpage';
+
+    fetch(`https://api.github.com/repos/${githubUser}/${githubRepo}/contents/wiki?ref=${githubBranch}`)
+      .then(response => response.json())
       .then(data => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(data, 'text/html');
-        const folderList = doc.querySelectorAll('a[href$="/"]');
-
         const folderListElement = document.getElementById('folder-list');
-        folderList.forEach(folder => {
-          const tr = document.createElement('tr');
-          const td1 = document.createElement('td');
-          const td2 = document.createElement('td');
 
-          td1.innerHTML = `<span class="directory"><a href="${folder.href}">${folder.textContent}</a></span>`;
-          td2.textContent = '-';
+        data.forEach(item => {
+          if (item.type === 'dir') {
+            const tr = document.createElement('tr');
+            const td1 = document.createElement('td');
+            const td2 = document.createElement('td');
 
-          tr.appendChild(td1);
-          tr.appendChild(td2);
-          folderListElement.appendChild(tr);
+            td1.innerHTML = `<span class="directory"><a href="${item.html_url}">${item.name}/</a></span>`;
+            td2.textContent = item.updated_at;
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            folderListElement.appendChild(tr);
+          }
         });
       })
       .catch(error => console.error(error));
