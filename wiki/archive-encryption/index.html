@@ -50,9 +50,9 @@
     const githubUser = 'vikdevelop';
     const githubRepo = 'SaveDesktop';
     const githubBranch = 'webpage';
-    const githubPagesUrl = `https://${githubUser}.github.io/${githubRepo}/wiki/`;
+    const githubPagesUrl = `https://${githubUser}.github.io/${githubRepo}/wiki/archive-encryption`;
 
-    fetch(`https://api.github.com/repos/${githubUser}/${githubRepo}/contents/wiki?ref=${githubBranch}`)
+    fetch(`https://api.github.com/repos/${githubUser}/${githubRepo}/contents/wiki/archive-enryption?ref=${githubBranch}`)
       .then(response => response.json())
       .then(data => {
         const folderListElement = document.getElementById('folder-list');
