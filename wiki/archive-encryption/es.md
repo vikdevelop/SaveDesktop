@@ -1,19 +1,19 @@
-# Archive encryption
-**This feature is available from version: 3.3**
+# Cifrado de archivos
+**Esta función está disponible a partir de la versión: 3.3**
 
-If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?
+Si quieres cifrar el archivo de configuración, ya sea por motivos de protección de datos o por cualquier otro motivo, puedes utilizar la función de cifrado de archivos de la aplicación SaveDesktop. Entonces, ¿cómo funciona y cómo se configura?
 
-## How does it work?
-If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 8 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. 
+## ¿Cómo funciona?
+Si esta función está activada, SaveDesktop siempre le pedirá que cree una contraseña para su nuevo archivo de la configuración. Los criterios para la contraseña incluyen al menos 8 caracteres, una letra mayúscula, una letra minúscula y un carácter especial. Si la contraseña no cumple estos criterios, no será posible continuar guardando la configuración.
 
-The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+El archivo se guardará como un archivo ZIP (porque Tar no soporta la función de protección por contraseña), y si desea extraerlo, se le pedirá que introduzca la contraseña que utilizó en el proceso de guardar la configuración. Lo mismo ocurre en el caso de la importación de la configuración.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.
+Si olvida la contraseña, no será posible extraer el archivo y utilizarlo en el proceso de importación de la configuración.
 
 > [!WARNING]  
 > The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.
 
-## How to set it up?
-In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.
+## ¿Cómo configurarlo?
+En la versión 3.3, la interfaz ha sido ligeramente modificada, en concreto, la sección de guardado periódico se encuentra ahora bajo el botón "Más opciones". En el mismo lugar, se encuentra la sección de encriptación de archivos. Así que haz click en el botón ya mencionado, y activa el interruptor de encriptación de archivos.
 
-_If you have any questions, you can use Github issues._
+_Si tiene alguna duda, utilice el notificador de incidencias de GitHub._
