@@ -1,3 +1,0 @@
-RewriteEngine On
-RewriteCond %{REQUEST_URI} ^/wiki/(.*)$
-RewriteRule ^ https://vikdevelop.github.io/SaveDesktop/wiki/%1 [L,R=301]
