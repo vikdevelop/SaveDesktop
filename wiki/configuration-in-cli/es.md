@@ -1,35 +1,35 @@
-# Importar la configuración en la interfaz CLI
-## Saving configuration
+## Guardando la configuración
 
-**This feature is available from version: `3.3`**
+**Esta función está disponible a partir de la versión: `3.3`**
 
-If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.
+Si prefiere la interfaz de línea de comandos (CLI) a la interfaz gráfica de usuario (GUI), SaveDesktop, además de guardar la configuración en la GUI, le permite guardar la configuración en la CLI.
 
-### So how to proceed?
+### Entonces, ¿cómo proceder?
 
-**1. Open a terminal**
+**1. Abrir un terminal**
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+Puede abrirlo desde el menú de aplicaciones, o usando el atajo de teclado Ctrl+Alt+T.
 
-**2. Type the command to import the configuration**
+**2. Escriba el comando para importar la configuración**
 
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
+Introduzca el siguiente comando en el terminal:
+- si tiene SaveDesktop instalado como un paquete Flatpak, utilice lo siguiente:
 
      ```
-     flatpak run io.github.vikdevelop.SaveDesktop --save-now
+     Ejecute flatpak io.github.vikdevelop.SaveDesktop --save-now
      ```
 
-- if you have SaveDesktop installed as a Snap or native package, use:
+- si tiene SaveDesktop instalado como un paquete Snap o nativo, utilice: 
      ```
      savedesktop --save-now
      ```
 
-When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.
 
-## Importing configuration
+Al utilizar este método, utiliza parámetros de la GUI, concretamente parámetros del modo de guardado periódico, como el formato del nombre de archivo y la carpeta seleccionada para los archivos de guardado periódico. Puede guardar la configuración con este método siempre que lo desee, independientemente del intervalo de guardado periódico seleccionado.
 
-*Esta función está disponible a partir de la versión: `3.2.2`*
+## Importar la configuración
+
+**Esta función está disponible a partir de la versión: `3.2.2`*
 
 Además de importar la configuración en la GUI, SaveDesktop también le permite importar la configuración en la interfaz de línea de comandos (CLI), que puede utilizar en caso de que su entorno de escritorio se rompa.
 
@@ -45,7 +45,7 @@ Introduzca el siguiente comando en el terminal:
 - si tiene SaveDesktop instalado como un paquete Flatpak, utilice lo siguiente:
 
      ```
-     Ejecute flatpak io.github.vikdevelop.SaveDesktop --import-config /ruta/a/nombre de archivo.sd.tar.gz
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /ruta/a/nombre de archivo.sd.tar.gz
      ```
 
 - si tiene SaveDesktop instalado como un paquete Snap o nativo, utilice: 
