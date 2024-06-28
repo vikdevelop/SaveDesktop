@@ -56,7 +56,7 @@
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
 
-            td1.innerHTML = `<a href="${item.name}">${item.name}</a>`;
+            td1.innerHTML = `<a href="${item.name.slice(0, -3)}">${item.name.slice(0, -3)}</a>`
 
             tr.appendChild(td1);
             folderListElement.appendChild(tr);
