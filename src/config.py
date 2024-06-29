@@ -217,7 +217,7 @@ class Import:
             if ".zip" in j["import_file"]:
                 print("")
             else:
-                os.system("tar -xf %s ./" % j["import_file"])
+                os.system('tar -xf "%s" ./' % j["import_file"])
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
         print("importing settings from the Dconf database")
