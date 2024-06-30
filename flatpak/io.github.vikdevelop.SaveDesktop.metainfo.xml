@@ -23,6 +23,7 @@
     <summary xml:lang="ca_ES">Desa la configuració actual del vostre entorn d'escriptori</summary>
     <summary xml:lang="hi_IN">अपना डेस्कटॉप विन्यास सहेजें</summary>
     <summary xml:lang="pt_PT">Grave a sua configuração da área de trabalho</summary>
+    <summary xml:lang="fi_FI">Tallenna työpöytäsi määritys</summary>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer_name>vikdevelop</developer_name>
@@ -47,6 +48,7 @@
       <p xml:lang="ca_ES">El SaveDesktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic.</p>
       <p xml:lang="hi_IN">SaveDesktop आपको एक क्लिक से अपने वर्तमान विन्यास (थीम, आइकन, वॉलपेपर, सभी डेस्कटॉप वातावरण सेटिंग्स, एक्सटेंशन इत्यादि) को सहेजने देता है।</p>
       <p xml:lang="pt_PT">SaveDesktop permite gravar a sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um clique.</p>
+      <p xml:lang="fi_FI">SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.</p>
     </description>
     
     <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
