@@ -7,7 +7,7 @@
     <summary>Save your desktop configuration</summary>
     <summary xml:lang="cs_CZ">Uložte konfiguraci plochy</summary>
     <summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
-    <summary xml:lang="pt_BR">Salvar a configuração atual do seu ambiente desktop</summary>
+    <summary xml:lang="pt_BR">Salve a configuração da sua área de trabalho</summary>
     <summary xml:lang="it_IT">Salva la configurazione del tuo desktop</summary>
     <summary xml:lang="nl_NL">Sla de huidige voorkeuren van uw werkomgeving op</summary>
     <summary xml:lang="ar_SA">احفظ التخصيصات الحالية لبيئة سطح المكتب الخاص بك</summary>
@@ -32,7 +32,7 @@
       <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
       <p xml:lang="cs_CZ">SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.</p>
       <p xml:lang="fr_FR">SaveDesktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.</p>
-      <p xml:lang="pt_BR">Gostaria de salvar sua configuração atual, incluindo temas, ícones, papéis de parede, todas as configurações do ambiente desktop, extensões e assim por diante? SaveDesktop pode ajudá-lo com isso. Apenas um clique e você terá sua configuração salva.</p>
+      <p xml:lang="pt_BR">SaveDesktop permite que você salve sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um único clique.</p>
       <p xml:lang="it_IT">Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? SaveDesktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata.</p>
       <p xml:lang="nl_NL">Wilt u uw huidige voorkeuren (thema's, pictogrammen, bureaubladachtergronden, systeemvoorkeuren, uitbreidingen, etc.) opslaan? SaveDesktop kan u hierbij helpen. Met slechts één muisklik wordt alles opgeslagen.</p>
       <p xml:lang="ar_EG">هل ترغب في حفظ التخصيصات الحالي الخاص بك بما في ذلك السمات والرموز والخلفيات وجميع إعدادات بيئة سطح المكتب والإضافات وما إلى ذلك؟ يمكن أن يساعدك SaveDesktop في ذلك. بنقرة واحدة فقط ويتم حفظ التخصيصات الخاص بك.</p>
