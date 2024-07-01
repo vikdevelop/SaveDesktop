@@ -1,5 +1,5 @@
 # Salvar configuração
-**Essa funcionalidade está disponível a partir da versão: `3.2.2`**
+**Essa funcionalidade está disponível a partir da versão: `3.3`**
 
 Se você preferir a interface de linha de comando (CLI) à interface gráfica de usuário (GUI), o SaveDesktop, além de salvar sua configuração pela GUI, também te permite salvar sua configuração pela CLI.
 
@@ -25,6 +25,8 @@ Insira o seguinte comando no terminal:
 Ao usar este método, ele usa parâmetros da GUI, especificamente parâmetros do modo de salvamento periódico, como o formato de nome de arquivo e a pasta selecionada para os arquivos de salvamento periódico. Você pode salvar a configuração com esse método quando quiser, independente do intervalo de salvamento periódico escolhido.
 
 # Importar configuração
+**Essa funcionalidade está disponível a partir da versão: `3.2.2`**
+
 Além de importar configurações pela GUI, o SaveDesktop também permite que você importe configurações pela interface de linha de comando (CLI), a qual você pode usar caso o seu ambiente de área de trabalho quebre.
 
 ### Então, como proceder?
