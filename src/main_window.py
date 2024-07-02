@@ -851,7 +851,10 @@ class MainWindow(Adw.ApplicationWindow):
         self.url_row = Adw.ActionRow.new()
         self.url_row.set_title("3 " + _["url_for_sync"])
         self.url_row.set_use_markup(True)
-        self.url_row.set_subtitle(f"http://{IPAddr}:8000")
+        if "ERR: You are not connected to the internet!" in IPAddr:
+            self.url_row.set_subtitle(f"<span color='red'>{IPAddr}</span>")
+        else:
+            self.url_row.set_subtitle(f"http://{IPAddr}:8000")
         self.url_row.set_subtitle_selectable(True)
         self.setdBox.append(self.url_row)
         
