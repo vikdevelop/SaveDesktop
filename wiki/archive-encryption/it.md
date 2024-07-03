@@ -6,9 +6,9 @@ Se desideri crittografare l'archivio di configurazione, sia per motivi di protez
 ## Come funziona?
 Se questa funzione è abilitata, SaveDesktop ti chiederà sempre di creare una password per il tuo nuovo archivio della configurazione. I criteri per la password includono almeno 8 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale. Se la password non soddisfa questi criteri non sarà possibile continuare a salvare la configurazione.
 
-The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+L'archivio verrà salvato come archivio ZIP (perché Tar non supporta la funzione di protezione tramite password) e, se desideri estrarlo, ti verrà chiesto di inserire la password che hai utilizzato nel processo di configurazione del salvataggio. Lo stesso vale in caso di importazione della configurazione.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.
+Se si dimentica la password non sarà possibile estrarre l'archivio ed utilizzarlo nel processo di importazione della configurazione.
 
 > [!WARNING]    
 > I file di salvataggio periodico non sono (finora) disponibili per essere protetti con una password. Ad oggi, non è possibile sincronizzare gli archivi crittografati.
