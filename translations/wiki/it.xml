@@ -79,10 +79,10 @@ Se questa funzione è abilitata, SaveDesktop ti chiederà sempre di creare una p
 &amp;gt; I file di salvataggio periodico non sono (finora) disponibili per essere protetti con una password. Ad oggi, non è possibile sincronizzare gli archivi crittografati.</str>
   <str key="ac_setup">## Come configurarlo?
 Nella versione 3.3 l'interfaccia è stata leggermente modificata, nello specifico la sezione di salvataggio periodico si trova ora sotto il pulsante "Ulteriori opzioni". Nello stesso posto si trova la sezione di crittografia dell'archivio. Quindi fai clic sul pulsante già menzionato e abilita l'interruttore di crittografia dell'archivio.</str>
-  <str key="saving_cfg_title">Saving configuration</str>
-  <str key="saving_cfg_intro">If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.</str>
-  <str key="save_cfg_outro">When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.</str>
-  <str key="enc">The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+  <str key="saving_cfg_title">Salvataggio della configurazione</str>
+  <str key="saving_cfg_intro">Se preferisci l'interfaccia della riga di comando (CLI) all'interfaccia utente grafica (GUI), SaveDesktop oltre a salvare la configurazione nella GUI, ti consente di salvare la configurazione nella CLI.</str>
+  <str key="save_cfg_outro">Quando si utilizza questo metodo, vengono utilizzati i parametri della GUI, in particolare i parametri della modalità di salvataggio periodico, come il formato del nome file e la cartella selezionata per il salvataggio periodico dei file. Puoi salvare la configurazione con questo metodo ogni volta che vuoi, indipendentemente dall'intervallo di salvataggio periodico selezionato.</str>
+  <str key="enc">L'archivio verrà salvato come archivio ZIP (perché Tar non supporta la funzione di protezione tramite password) e, se desideri estrarlo, ti verrà chiesto di inserire la password che hai utilizzato nel processo di configurazione del salvataggio. Lo stesso vale in caso di importazione della configurazione.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.</str>
+Se si dimentica la password non sarà possibile estrarre l'archivio ed utilizzarlo nel processo di importazione della configurazione.</str>
 </root>
