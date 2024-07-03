@@ -1,34 +1,31 @@
-# Importazione della configurazione nell'interfaccia CLI
+## Salvataggio della configurazione
 
-## Saving configuration
+**Questa funzionalità è disponibile dalla versione: `3.3`**
 
-**This feature is available from version: `3.3`**
+Se preferisci l'interfaccia della riga di comando (CLI) all'interfaccia utente grafica (GUI), SaveDesktop oltre a salvare la configurazione nella GUI, ti consente di salvare la configurazione nella CLI.
 
-If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.
+### Quindi, come procedere?
+**1. Apri un terminale**
 
-### So how to proceed?
+Puoi aprirlo dal menu delle applicazioni o utilizzando la scorciatoia da tastiera Ctrl+Alt+T.
 
-**1. Open a terminal**
+**2. Digita il comando per importare la configurazione**
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+Immettere il seguente comando nel terminale:
+- se hai SaveDesktop installato come pacchetto Flatpak, utilizza quanto segue:
 
-**2. Type the command to import the configuration**
+   ```
+   flatpak run io.github.vikdevelop.SaveDesktop --save-now
+   ```
 
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
+- se hai SaveDesktop installato come Snap o pacchetto nativo, utilizza:
+   ```
+   savedesktop --save-now
+   ```
 
-     ```
-     flatpak run io.github.vikdevelop.SaveDesktop --save-now
-     ```
+Quando si utilizza questo metodo, vengono utilizzati i parametri della GUI, in particolare i parametri della modalità di salvataggio periodico, come il formato del nome file e la cartella selezionata per il salvataggio periodico dei file. Puoi salvare la configurazione con questo metodo ogni volta che vuoi, indipendentemente dall'intervallo di salvataggio periodico selezionato.
 
-- if you have SaveDesktop installed as a Snap or native package, use:
-     ```
-     savedesktop --save-now
-     ```
-
-When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.
-
-## Importing configuration
+## Importazione della configurazione
 
 **Questa funzionalità è disponibile dalla versione: `3.2.2`**
 
