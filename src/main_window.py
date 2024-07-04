@@ -867,31 +867,48 @@ class MainWindow(Adw.ApplicationWindow):
 
     # URL Dialog
     def open_urlDialog(self, w):
+        self.urlDialog_fnc()
+
+    # URL Dialog
+    def urlDialog_fnc(self):
         # Action after closing URL dialog
         def urlDialog_closed(w, response):
             if response == 'ok':
                 settings["url-for-syncing"] = self.urlEntry.get_text()
                 self.folder = settings["file-for-syncing"]
-                if not self.urlEntry.get_text() == "":
-                    r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
-                    jS = json.load(r_file)
-                    # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
-                    if jS["periodic-import"] == "Manually2":
-                        settings["manually-sync"] = True
-                        self.sync_menu = Gio.Menu()
-                        self.sync_menu.append(_["sync"], 'app.m_sync')
-                        self.main_menu.append_section(None, self.sync_menu)
-                        self.set_syncing()
-                        self.show_special_toast()
-                        self.sync_menu.remove(1)
+                try:
+                    if not self.urlEntry.get_text() == "":
+                        r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
+                        jS = json.load(r_file)
+                        # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
+                        if jS["periodic-import"] == "Manually2":
+                            settings["manually-sync"] = True
+                            self.sync_menu = Gio.Menu()
+                            self.sync_menu.append(_["sync"], 'app.m_sync')
+                            self.main_menu.append_section(None, self.sync_menu)
+                            self.set_syncing()
+                            self.show_special_toast()
+                            self.sync_menu.remove(1)
+                        else:
+                            self.set_syncing()
+                            self.show_warn_toast()
+                            settings["manually-sync"] = False
+                            self.sync_menu.remove(0)
                     else:
-                        self.set_syncing()
-                        self.show_warn_toast()
                         settings["manually-sync"] = False
                         self.sync_menu.remove(0)
-                else:
-                    settings["manually-sync"] = False
-                    self.sync_menu.remove(0)
+                except Exception as e:
+                    if "<" in f"{e}":
+                        o_e = f"{e}"
+                        err = o_e.replace("<", "").replace(">", "")
+                    else:
+                        err = e
+                    self.errLabel = Gtk.Label.new(str=f"<span color='red'>{err}</span>")
+                    self.errLabel.set_use_markup(True)
+                    self.errLabel.set_selectable(True)
+                    self.urlDialog_fnc()
+                    self.urlBox.append(self.errLabel)
+                    settings["url-for-syncing"] = ""
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
