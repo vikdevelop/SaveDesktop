@@ -27,13 +27,13 @@ except Exception as err:
     IPAddr = f"ERR: {err}"
 
 # Set application version, and icon
-v = "3.3"
+v = "3.3.1"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
-<li>Added option to set archive protection with password (more information is available on the Github wiki)</li>\
-<li>Added option to save configuration from command-line interface (more information is also available on the Github wiki)</li>\
-<li>Added support for Deepin DE</li>\
-<li>Added support for saving Kvantum Manager and Latte dock configurations</li>\
+<li>Added support for saving configurations to the folders that has spaces (#279)</li>\
+<li>Added Finish translations, thanks to artnay</li>\
+<li>Fixed the problem with loading SaveDesktop in the case, if you are not connected to the internet</li>\
+<li>From now on, the app's documentation is now located at https://vikdevelop.github.io/SaveDesktop/wiki (links used in the application will refer to this website)</li>\
 <li>Updated translations</li>\
 </ul>"
 
