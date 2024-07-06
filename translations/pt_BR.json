@@ -15,7 +15,7 @@
     "please_wait": "Por favor, aguarde…",
     "summary": "Salve a configuração da sua área de trabalho",
     "description": "SaveDesktop permite que você salve sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um único clique.",
-    "translator_credits": "Felipe Nogueira https://github.com/fnogcps\nIsaac Dias https://hosted.weblate.org/user/IsaacDias/\nFilipe Motta luizfilipemotta@gmail.com",
+    "translator_credits": "Felipe Nogueira https://github.com/fnogcps\nIsaac Dias https://hosted.weblate.org/user/IsaacDias/\nFilipe Motta <luizfilipemotta@gmail.com>",
     "periodic_saving": "Salvamento periódico",
     "periodic_saving_desc": "As alterações só terão efeito após o próximo login",
     "never": "Nunca",
