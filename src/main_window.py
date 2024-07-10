@@ -876,39 +876,39 @@ class MainWindow(Adw.ApplicationWindow):
             if response == 'ok':
                 settings["url-for-syncing"] = self.urlEntry.get_text()
                 self.folder = settings["file-for-syncing"]
-                try:
-                    if not self.urlEntry.get_text() == "":
+                if not self.urlEntry.get_text() == "":
+                    try:
                         r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
                         jS = json.load(r_file)
-                        # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
-                        if jS["periodic-import"] == "Manually2":
-                            settings["manually-sync"] = True
-                            self.sync_menu = Gio.Menu()
-                            self.sync_menu.append(_["sync"], 'app.m_sync')
-                            self.main_menu.append_section(None, self.sync_menu)
-                            self.set_syncing()
-                            self.show_special_toast()
-                            self.sync_menu.remove(1)
+                    except Exception as e:
+                        if "<" in f"{e}":
+                            o_e = f"{e}"
+                            err = o_e.replace("<", "").replace(">", "")
                         else:
-                            self.set_syncing()
-                            self.show_warn_toast()
-                            settings["manually-sync"] = False
-                            self.sync_menu.remove(0)
+                            err = e
+                        self.errLabel = Gtk.Label.new(str=f"<span color='red'>{err}</span>")
+                        self.errLabel.set_use_markup(True)
+                        self.errLabel.set_selectable(True)
+                        self.urlDialog_fnc()
+                        self.urlBox.append(self.errLabel)
+                        settings["url-for-syncing"] = ""
+                    # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
+                    if jS["periodic-import"] == "Manually2":
+                        settings["manually-sync"] = True
+                        self.sync_menu = Gio.Menu()
+                        self.sync_menu.append(_["sync"], 'app.m_sync')
+                        self.main_menu.append_section(None, self.sync_menu)
+                        self.set_syncing()
+                        self.show_special_toast()
+                        self.sync_menu.remove(1)
                     else:
+                        self.set_syncing()
+                        self.show_warn_toast()
                         settings["manually-sync"] = False
                         self.sync_menu.remove(0)
-                except Exception as e:
-                    if "<" in f"{e}":
-                        o_e = f"{e}"
-                        err = o_e.replace("<", "").replace(">", "")
-                    else:
-                        err = e
-                    self.errLabel = Gtk.Label.new(str=f"<span color='red'>{err}</span>")
-                    self.errLabel.set_use_markup(True)
-                    self.errLabel.set_selectable(True)
-                    self.urlDialog_fnc()
-                    self.urlBox.append(self.errLabel)
-                    settings["url-for-syncing"] = ""
+                else:
+                    settings["manually-sync"] = False
+                    self.sync_menu.remove(0)
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
@@ -1271,6 +1271,12 @@ class MainWindow(Adw.ApplicationWindow):
         
         def check_password(pswdEntry):
             password = self.pswdEntry.get_text()
+            """
+            # Remove this criteria, because it is not defined in the "Create new password" dialog
+            elif not re.search(r'\d', password):
+                self.pswdDialog.set_response_enabled("ok", False)
+                print("The password should has at least one number")
+            """
             if len(password) < 8:
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password is too short. It should has at least 8 characters")
@@ -1280,9 +1286,6 @@ class MainWindow(Adw.ApplicationWindow):
             elif not re.search(r'[a-z]', password):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one lowercase letter")
-            elif not re.search(r'\d', password):
-                self.pswdDialog.set_response_enabled("ok", False)
-                print("The password should has at least one number")
             elif not re.search(r'[!@#$%^&*(),.?":{}|<>_-]', password):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one special character")
@@ -1681,7 +1684,7 @@ class MainWindow(Adw.ApplicationWindow):
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE)
+        super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, application_id="io.github.vikdevelop.SaveDesktop")
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open-dir', self.open_dir)
         self.create_action('logout', self.logout)
