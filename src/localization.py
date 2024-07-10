@@ -27,13 +27,11 @@ except Exception as err:
     IPAddr = f"ERR: {err}"
 
 # Set application version, and icon
-v = "3.3.1"
+v = "3.3.2"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
-<li>Added support for saving configurations to the folders that has spaces (#279)</li>\
-<li>Added Finish translations, thanks to artnay</li>\
-<li>Fixed the problem with loading SaveDesktop in the case, if you are not connected to the internet (#293)</li>\
-<li>From now on, the app's documentation is now located at https://vikdevelop.github.io/SaveDesktop/wiki (links used in the application will refer to this website)</li>\
+<li>Removed the criterion for at least one number when creating a password for the configuration archive, because it is not written in the dialog, so it could cause confusion. However, you still have the option to use a stronger password for your configuration archive.</li>\
+<li>Fixed an error when retrieving a URL for synchronization, an error unrelated to retrieving a URL no longer occurs</li>\
 <li>Updated translations</li>\
 </ul>"
 
