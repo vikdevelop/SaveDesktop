@@ -1297,10 +1297,7 @@ class MainWindow(Adw.ApplicationWindow):
             
         self.pswdDialog = Adw.MessageDialog.new(self)
         self.pswdDialog.set_heading(_["create_pwd_title"])
-        if "8" in _["create_pwd_desc"]:
-            old_desc = _["create_pwd_desc"]
-            desc = old_desc.replace("8", "12")
-        self.pswdDialog.set_body(desc)
+        self.pswdDialog.set_body(_["create_pwd_desc"])
         
         self.pswdEntry = Adw.PasswordEntryRow.new()
         self.pswdEntry.set_title(_["password_entry"])
