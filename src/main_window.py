@@ -22,7 +22,7 @@ from gi.repository import Gtk, Adw, Gio, GLib
 # Get user download dir
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 
-# FOR SNAP: create the cache directory
+# for SNAP: create the cache directory and import dbus module
 if snap:
     import dbus
     os.makedirs(f"{CACHE}", exist_ok=True)
@@ -169,7 +169,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.save_ext_switch_state = False # value that sets if state of the switch "Extensions" in the Items Dialog should be saved or not
         self.flatpak_data_sw_state = False # value that sets if state of the switch "User data of installed Flatpak apps will be saved or not"
         
-        # Set the window size and maximization from the GSettings database
+        # set the window size and maximization from the GSettings database
         self.set_size_request(750, 540)
         (width, height) = settings["window-size"]
         self.set_default_size(width, height)
@@ -385,6 +385,7 @@ class MainWindow(Adw.ApplicationWindow):
                 if not os.path.exists(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
                     with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
                         cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
+            
             # Action after closing dialog for showing more options
             def msDialog_closed(w, response):
                 if response == 'ok':
@@ -611,7 +612,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.fileButton = Gtk.Button.new_with_label(_["import_from_file"])
         self.fileButton.add_css_class("pill")
         self.fileButton.add_css_class("suggested-action")
-        self.fileButton.connect("clicked", self.select_import_folder)
+        self.fileButton.connect("clicked", self.select_folder_to_import)
         self.importbtnBox.append(self.fileButton)
         
         # Import from list button
@@ -622,10 +623,24 @@ class MainWindow(Adw.ApplicationWindow):
                 
     # Import archive from list
     def import_from_list(self, w):
+        # Action after closing import from list page
+        def close_list(w):
+            self.pBox.remove(self.flistBox)
+            self.headerbar_list.remove(self.backButton)
+            self.headerbar_list.remove(child=self.menu_button)
+            self.headerbar.pack_end(child=self.menu_button)
+            self.toolbarview.remove(self.headerbar_list)
+            self.toolbarview.add_top_bar(self.headerbar)
+            self.toolbarview.set_content(self.headapp)
+            try:
+                self.headerbar.remove(self.applyButton)
+            except:
+                print("")
+        
         # add back button for this page
         self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
         self.backButton.add_css_class("flat")
-        self.backButton.connect("clicked", self.close_list)
+        self.backButton.connect("clicked", close_list)
         
         # remove main headerbar
         self.headerbar.remove(child=self.menu_button)
@@ -694,20 +709,6 @@ class MainWindow(Adw.ApplicationWindow):
         else:
             self.flistLabel.set_text(_["import_from_list_error"])
             self.flistBox.append(self.flistLabel)
-    
-    # Action after closing import from list page
-    def close_list(self, w):
-        self.pBox.remove(self.flistBox)
-        self.headerbar_list.remove(self.backButton)
-        self.headerbar_list.remove(child=self.menu_button)
-        self.headerbar.pack_end(child=self.menu_button)
-        self.toolbarview.remove(self.headerbar_list)
-        self.toolbarview.add_top_bar(self.headerbar)
-        self.toolbarview.set_content(self.headapp)
-        try:
-            self.headerbar.remove(self.applyButton)
-        except:
-            print("")
             
     # Syncing desktop page
     def syncing_desktop(self):
@@ -851,6 +852,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.url_row = Adw.ActionRow.new()
         self.url_row.set_title("3 " + _["url_for_sync"])
         self.url_row.set_use_markup(True)
+        
+        # show error message while the network is unreachable
         if "ERR:" in IPAddr:
             self.url_row.set_subtitle(f"<span color='red'>{IPAddr}</span>")
         else:
@@ -865,7 +868,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         self.setDialog.show()
 
-    # URL Dialog
+    # URL Dialog (action after clicking on the "Connect with other computer" button)
     def open_urlDialog(self, w):
         self.urlDialog_fnc()
 
@@ -877,6 +880,7 @@ class MainWindow(Adw.ApplicationWindow):
                 settings["url-for-syncing"] = self.urlEntry.get_text()
                 self.folder = settings["file-for-syncing"]
                 if not self.urlEntry.get_text() == "":
+                    # check if the URL for synchronization is correct or not (if YES, the app shows error message in the dialog)
                     try:
                         r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
                         jS = json.load(r_file)
@@ -933,7 +937,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.urlDialog.connect('response', urlDialog_closed)
         self.urlDialog.show()
 
-    # Set synchronization for running in the background
+    # Set synchronization for setting up to run in the background
     def set_syncing(self):
         if not os.path.exists(f"{home}/.config/autostart"):
             os.mkdir(f"{home}/.config/autostart")
@@ -1070,12 +1074,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.backgrounds_row.set_activatable_widget(self.switch_04)
         self.itemsBox.append(child=self.backgrounds_row)
         
-        # Switch and row of option 'Save backgrounds'
-        self.switch_de = Gtk.Switch.new()
-        if settings["save-desktop-folder"]:
-            self.switch_de.set_active(True)
-        self.switch_de.set_valign(align=Gtk.Align.CENTER)
-        
+        # show extension switch and row if user has installed these environments
         if self.environment == "GNOME":
             self.save_ext_switch_state = True
             show_extensions_row()
@@ -1085,7 +1084,13 @@ class MainWindow(Adw.ApplicationWindow):
         elif self.environment == "Cinnamon":
             self.save_ext_switch_state = True
             show_extensions_row()
-            
+        
+        # Switch and row of option 'Save Desktop' (~/Desktop)
+        self.switch_de = Gtk.Switch.new()
+        if settings["save-desktop-folder"]:
+            self.switch_de.set_active(True)
+        self.switch_de.set_valign(align=Gtk.Align.CENTER)
+        
         self.desktop_row = Adw.ActionRow.new()
         self.desktop_row.set_title(title=_["desktop_folder"])
         self.desktop_row.set_subtitle(subtitle=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
@@ -1144,7 +1149,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.appsButton.set_tooltip_text(_["flatpaks_data_tittle"])
             self.appsButton.connect("clicked", manage_data_list)
         
-        # set responses of itemsDialog
         self.itemsDialog.add_response('cancel', _["cancel"])
         self.itemsDialog.add_response('ok', _["apply"])
         self.itemsDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
@@ -1160,8 +1164,6 @@ class MainWindow(Adw.ApplicationWindow):
                 return
             self.folder_pb = file.get_path()
             self.dirRow.set_subtitle(self.folder_pb)
-            
-        #self.msDialog.close()
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -1196,7 +1198,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.folderchooser.select_folder(self, None, save_selected, None)
             
     # Load file chooser
-    def select_import_folder(self, w):
+    def select_folder_to_import(self, w):
         def open_selected(source, res, data):
             try:
                 file = source.open_finish(res)
@@ -1206,7 +1208,7 @@ class MainWindow(Adw.ApplicationWindow):
             with open(f"{CACHE}/.impfile.json", "w") as j:
                 j.write('{\n "import_file": "%s"\n}' % file.get_path())
             if ".zip" in file.get_path():
-                self.check_password()
+                self.check_password_dialog()
             else:
                 self.please_wait_import()
                 self.import_config()
@@ -1223,7 +1225,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_chooser.set_filters(self.file_filter_list)
         self.file_chooser.open(self, None, open_selected, None)
         
-    # Select file for syncing with other computers in the network
+    # Select file for syncing cfg with other computers in the network
     def select_syncfile(self, w):
         def copy_syncfile():
             try:
@@ -1236,7 +1238,7 @@ class MainWindow(Adw.ApplicationWindow):
                 print(f"Problem with setting up the sync file: {e}")
             finally:
                 print("")
-
+        
         def set_selected(source, res, data):
             try:
                 file = source.open_finish(res)
@@ -1323,8 +1325,8 @@ class MainWindow(Adw.ApplicationWindow):
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
-        copy_thread = Thread(target=self.open_config_save)
-        copy_thread.start()
+        save_thread = Thread(target=self.open_config_save)
+        save_thread.start()
         
     # start process of saving the configuration
     def open_config_save(self):
@@ -1338,15 +1340,18 @@ class MainWindow(Adw.ApplicationWindow):
     # Import config from list
     def imp_cfg_from_list(self, w):
         selected_archive = self.radio_row.get_selected_item()
+        with open(f"{CACHE}/.impfile.json", "w") as j:
+            j.write('{\n "import_file": "%s/%s"\n}' % (self.dir, selected_archive.get_string()))
         if not os.path.exists(f"{CACHE}/import_from_list"):
             os.mkdir(f"{CACHE}/import_from_list")
         os.chdir(f"{CACHE}/import_from_list")
-        with open(f"{CACHE}/.impfile.json", "w") as j:
-            j.write('{\n "import_file": "%s/%s"\n}' % (self.dir, selected_archive.get_string()))
-        self.import_config()
+        self.please_wait_import()
+        import_thread = Thread(target=self.open_config_import)
+        import_thread.start()
      
     # dialog for entering password of the archive
-    def check_password(self):
+    def check_password_dialog(self):
+        # unzip archive if password is correct only
         def unzip_ar():
             with open(f"{CACHE}/.impfile.json") as i:
                 j = json.load(i)
@@ -1366,7 +1371,7 @@ class MainWindow(Adw.ApplicationWindow):
             finally:
                 self.import_config()
                 
-
+        # action after closing dialog for checking password
         def checkDialog_closed(w, response):
             if response == 'ok':
                 self.checkDialog.set_response_enabled("ok", False)
@@ -1392,8 +1397,8 @@ class MainWindow(Adw.ApplicationWindow):
         if not os.path.exists(f"{CACHE}/import_config"):
             os.mkdir(f"{CACHE}/import_config")
         os.chdir(f"{CACHE}/import_config")
-        copy_thread = Thread(target=self.open_config_import)
-        copy_thread.start()
+        import_thread = Thread(target=self.open_config_import)
+        import_thread.start()
        
     # start process of importing configuration
     def open_config_import(self):
@@ -1434,6 +1439,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.savewaitBox.set_margin_start(80)
         self.savewaitBox.set_margin_end(80)
         self.toolbarview.set_content(self.savewaitBox)
+        
+        # set bold title
         old_str = f'{_["saving_config_status"]}'
         new_str = old_str.split('</b>')[0].split('<b>')[-1]
         
@@ -1448,7 +1455,8 @@ class MainWindow(Adw.ApplicationWindow):
         # prepare Gtk.Image widget for the next page
         self.sdoneImage = Gtk.Image.new()
         self.savewaitBox.append(self.sdoneImage)
-
+        
+        # use text "sd.zip" instead of "sd.tar.gz" if Archive Encryption is enabled
         if settings["enable-encryption"] == True:
             old_status = _["saving_config_status"]
             new_status = old_status.replace("sd.tar.gz", "sd.zip")
@@ -1472,7 +1480,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.savewaitButton.set_margin_end(170)
         self.savewaitBox.append(self.savewaitButton)
         
-    # config has been exported action
+    # config has been saved action
     def exporting_done(self):
         # back to the previous page from this page
         def back_to_main(w):
@@ -1486,13 +1494,14 @@ class MainWindow(Adw.ApplicationWindow):
             self.savewaitBox.remove(self.opensaveButton)
             self.savewaitBox.remove(self.backtomButton)
         
-        # show the content below only if exists this file
+        # send notification about saved configuration if application window is inactive only
         self.notification_save = Gio.Notification.new("SaveDesktop")
         self.notification_save.set_body(_["config_saved"])
         active_window = app.get_active_window()
         if active_window is None or not active_window.is_active():
             app.send_notification(None, self.notification_save)
-
+        
+        # stop spinner animation
         self.savewaitSpinner.stop()
         self.savewaitBox.remove(self.savewaitButton)
 
@@ -1563,6 +1572,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.importwaitBox.set_margin_start(80)
         self.importwaitBox.set_margin_end(80)
         self.toolbarview.set_content(self.importwaitBox)
+        
+        # set bold title
         old_str = f'{_["importing_config_status"]}'
         new_str = old_str.split('</b>')[0].split('<b>')[-1]
         
@@ -1608,13 +1619,19 @@ class MainWindow(Adw.ApplicationWindow):
             self.importwaitBox.remove(self.logoutButton)
             self.importwaitBox.remove(self.backtomButton)
             self.headerbar.set_title_widget(self.switcher_title)
-
+            try:
+                self.pBox.remove(self.flistBox)
+            except:
+                print("")
+        
+        # send notification about imported configuration if application window is inactive only
         self.notification_import = Gio.Notification.new("SaveDesktop")
         self.notification_import.set_body(_["config_imported"])
         active_window = app.get_active_window()
         if active_window is None or not active_window.is_active():
             app.send_notification(None, self.notification_import)
-
+        
+        # stop spinner animation
         self.importwaitSpinner.stop()
         self.importwaitBox.remove(self.importwaitButton)
 
@@ -1660,10 +1677,14 @@ class MainWindow(Adw.ApplicationWindow):
     # action after closing window
     def on_close(self, widget, *args):
         self.close()
+        # save window size
         (width, height) = self.get_default_size()
         settings["window-size"] = (width, height)
+        # save window state
         settings["maximized"] = self.is_maximized()
+        # save filename text
         settings["filename"] = self.saveEntry.get_text()
+        # check if it is importing or saving configuration in the progress (if YES, the directories defined below wil not removed)
         if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
             print("Flatpak data exists.")
         elif os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
@@ -1673,6 +1694,7 @@ class MainWindow(Adw.ApplicationWindow):
         else:
             os.popen(f"rm -rf {CACHE}/*")
             os.popen(f"rm -rf {CACHE}/.*")
+        # get periodic synchronization type; if the type is "MANUALLY", it shows the Sync button in the app menu
         try:
             url = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
             j = json.load(url)
@@ -1683,7 +1705,6 @@ class MainWindow(Adw.ApplicationWindow):
             os.popen(f"rm {CACHE}/file-settings.json")
         except:
             settings["manually-sync"] = False
-        
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
@@ -1701,7 +1722,7 @@ class MyApp(Adw.Application):
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.connect('activate', self.on_activate)
         
-    # Open directory (action after clicking button Open the folder on Adw.Toast)
+    # Open directory (action after clicking "Open the folder" button)
     def open_dir(self, action, param):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
@@ -1734,11 +1755,13 @@ class MyApp(Adw.Application):
         os.system(f"echo > {CACHE}/.from_app")
         self.sync_m = GLib.spawn_command_line_async(f"python3 {system_dir}/network_sharing.py")
         
+    # display shortcuts window
     def shortcuts(self, action, param):
         shortcuts_window = ShortcutsWindow(
             transient_for=self.get_active_window())
         shortcuts_window.present()
         
+    # quit application using Ctrl+Q keyboard shortcut
     def app_quit(self, action, param):
         if os.path.exists(f"{CACHE}/import_config/copying_flatpak_data"):
             print("Flatpak data exists.")
@@ -1751,7 +1774,7 @@ class MyApp(Adw.Application):
             os.popen(f"rm -rf {CACHE}/.*")
         app.quit()
         
-    # About dialog
+    # About App dialog
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
