@@ -1279,7 +1279,7 @@ class MainWindow(Adw.ApplicationWindow):
             """
             if len(password) < 12:
                 self.pswdDialog.set_response_enabled("ok", False)
-                print("The password is too short. It should has at least 8 characters")
+                print("The password is too short. It should has at least 12 characters")
             elif not re.search(r'[A-Z]', password):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one capital letter")
@@ -1289,6 +1289,9 @@ class MainWindow(Adw.ApplicationWindow):
             elif not re.search(r'[@#$%^&*()":{}|<>_-]', password):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one special character")
+            elif " " in password:
+                self.pswdDialog.set_response_enabled("ok", False)
+                print("The password must not contain spaces")
             else:
                 self.pswdDialog.set_response_enabled("ok", True)
             
