@@ -1277,7 +1277,7 @@ class MainWindow(Adw.ApplicationWindow):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one number")
             """
-            if len(password) < 10:
+            if len(password) < 12:
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password is too short. It should has at least 8 characters")
             elif not re.search(r'[A-Z]', password):
@@ -1296,7 +1296,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.pswdDialog.set_heading(_["create_pwd_title"])
         if "8" in _["create_pwd_desc"]:
             old_desc = _["create_pwd_desc"]
-            desc = old_desc.replace("8", "10")
+            desc = old_desc.replace("8", "12")
         self.pswdDialog.set_body(desc)
         
         self.pswdEntry = Adw.PasswordEntryRow.new()
