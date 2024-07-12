@@ -880,7 +880,7 @@ class MainWindow(Adw.ApplicationWindow):
                 settings["url-for-syncing"] = self.urlEntry.get_text()
                 self.folder = settings["file-for-syncing"]
                 if not self.urlEntry.get_text() == "":
-                    # check if the URL for synchronization is correct or not (if YES, the app shows error message in the dialog)
+                    # check if the URL for synchronization is correct or not (if NOT, the app shows error message in the dialog)
                     try:
                         r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
                         jS = json.load(r_file)
@@ -1274,7 +1274,7 @@ class MainWindow(Adw.ApplicationWindow):
         def check_password(pswdEntry):
             password = self.pswdEntry.get_text()
             """
-            # Remove this criteria, because it is not defined in the "Create new password" dialog
+            # Remove this criterion, because it is not defined in the "Create new password" dialog
             elif not re.search(r'\d', password):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one number")
