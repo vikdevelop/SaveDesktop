@@ -1687,7 +1687,10 @@ class MainWindow(Adw.ApplicationWindow):
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, application_id="io.github.vikdevelop.SaveDesktop")
+        if snap:
+            super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE)
+        else:
+            super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, application_id="io.github.vikdevelop.SaveDesktop")
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open-dir', self.open_dir)
         self.create_action('logout', self.logout)
