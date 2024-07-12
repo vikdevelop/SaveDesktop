@@ -74,7 +74,7 @@ Immettere il seguente comando nel terminale:
   <str key="archive_encryption_">Cifratura dell'archivio</str>
   <str key="archive_encryption_desc">Se desideri crittografare l'archivio di configurazione, sia per motivi di protezione dei dati che per altro, puoi utilizzare la funzione di crittografia dell'archivio nell'app SaveDesktop. Quindi, come funziona e come configurarlo?</str>
   <str key="ac_intro">## Come funziona?
-Se questa funzione è abilitata, SaveDesktop ti chiederà sempre di creare una password per il tuo nuovo archivio della configurazione. I criteri per la password includono almeno 8 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale. Se la password non soddisfa questi criteri non sarà possibile continuare a salvare la configurazione. </str>
+Se questa funzione è abilitata, SaveDesktop ti chiederà sempre di creare una password per il tuo nuovo archivio della configurazione. I criteri per la password includono almeno 12 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale. Se la password non soddisfa questi criteri non sarà possibile continuare a salvare la configurazione. </str>
   <str key="ac_warn">&amp;gt; [!WARNING]    
 &amp;gt; I file di salvataggio periodico non sono (finora) disponibili per essere protetti con una password. Ad oggi, non è possibile sincronizzare gli archivi crittografati.</str>
   <str key="ac_setup">## Come configurarlo?

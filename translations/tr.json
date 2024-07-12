@@ -74,7 +74,7 @@
     "pb_interval": "Interval",
     "archive_encryption": "Archive encryption",
     "archive_encryption_desc": "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.",
-    "create_pwd_desc": "Please create new password for your archive. Criteria include a length of at least 8 characters, one uppercase letter, one lowercase letter, and one special character.",
+    "create_pwd_desc": "Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character.",
     "more_options": "More options",
     "check_pwd_title": "Unlock the archive with a password"
 }

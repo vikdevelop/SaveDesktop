@@ -72,7 +72,7 @@
     "password_entry": "Senha",
     "pb_interval": "Intervalo",
     "archive_encryption_desc": "Ao salvar manualmente a configuração, o app solicitará que você crie uma senha. Isso é útil ao salvar a configuração em uma mídia portátil, para aumentar a segurança de seus dados.",
-    "create_pwd_desc": "Por favor, crie uma nova senha para o seu arquivo. Os critérios incluem pelo menos 8 caracteres de tamanho, uma letra maiúscula, uma letra minúscula, e um caractere especial.",
+    "create_pwd_desc": "Por favor, crie uma nova senha para o seu arquivo. Os critérios incluem pelo menos 12 caracteres de tamanho, uma letra maiúscula, uma letra minúscula, e um caractere especial.",
     "more_options": "Mais opções",
     "check_pwd_desc": "Insira a senha abaixo para desbloquear o arquivo com a sua configuração. Se você tiver esquecido a senha, você não conseguirá descompactar o arquivo e começar a importar sua configuração.",
     "check_pwd_title": "Desbloqueie o arquivo com uma senha",

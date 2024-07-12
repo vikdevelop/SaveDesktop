@@ -72,7 +72,7 @@
     "password_entry": "Password",
     "pb_interval": "Intervallo",
     "archive_encryption_desc": "Quando salvi manualmente la configurazione, ti verrà richiesto di creare una password. Ciò è utile quando si salva la configurazione su un supporto portatile per una migliore sicurezza dei dati.",
-    "create_pwd_desc": "Crea una nuova password per il tuo archivio. I criteri includono una lunghezza di almeno 8 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale.",
+    "create_pwd_desc": "Crea una nuova password per il tuo archivio. I criteri includono una lunghezza di almeno 12 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale.",
     "more_options": "Ulteriori opzioni",
     "check_pwd_desc": "Inserisci la password qui sotto per sbloccare l'archivio con la tua configurazione. Se l'hai dimenticata, non potrai decomprimere l'archivio e iniziare a importare la tua configurazione.",
     "check_pwd_title": "Sblocca l'archivio con una password",

@@ -73,7 +73,7 @@
     "create_pwd_title": "Vytvořit nové heslo",
     "archive_encryption": "Šifrování archivu",
     "archive_encryption_desc": "Při ručním ukládání konfigurace budete vyzváni k vytvoření hesla. To je užitečné při ukládání konfigurace na přenosné médium pro lepší zabezpečení dat.",
-    "create_pwd_desc": "Vytvořte si prosím nové heslo pro svůj archiv. Kritéria zahrnují délku alespoň 8 znaků, jedno velké písmeno, jedno malé písmeno a jeden speciální znak.",
+    "create_pwd_desc": "Vytvořte si prosím nové heslo pro svůj archiv. Kritéria zahrnují délku alespoň 12 znaků, jedno velké písmeno, jedno malé písmeno a jeden speciální znak.",
     "password_entry": "Heslo",
     "check_pwd_desc": "Zadáním níže uvedeného hesla odemknete archiv s vaší konfigurací. Pokud jste ho zapomněli, nebudete moci archiv rozbalit a začít importovat konfiguraci.",
     "check_pwd_title": "Odemknout archiv pomocí hesla"
