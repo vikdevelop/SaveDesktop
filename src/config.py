@@ -189,7 +189,7 @@ class Save:
                 j = json.load(j)
             if settings["enable-encryption"] == True:
                 password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
-                os.system(f"zip -9 -P {password} cfg.sd.zip . -r -x 'saving_status'")
+                os.system(f"zip -9 -P '{password}' cfg.sd.zip . -r -x 'saving_status'")
                 print("moving the configuration archive to the user-defined directory")
                 os.system(f"mv ./cfg.sd.zip \"{j['recent_file']}\"")
             else:
