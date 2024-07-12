@@ -189,15 +189,15 @@ class Save:
                 j = json.load(j)
             if settings["enable-encryption"] == True:
                 password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
-                os.system(f"zip -9 -P {password} cfg.sd.zip . -r")
+                os.system(f"zip -9 -P {password} cfg.sd.zip . -r -x 'saving_status'")
                 print("moving the configuration archive to the user-defined directory")
                 os.system(f"mv ./cfg.sd.zip \"{j['recent_file']}\"")
             else:
-                os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
+                os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
                 print("moving the configuration archive to the user-defined directory")
                 os.system(f"mv ./cfg.sd.tar.gz \"{j['recent_file']}\"")
         elif os.path.exists(f"{CACHE}/.periodicfile.json"):
-            os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
+            os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
             print("moving the configuration archive to the user-defined directory")
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
