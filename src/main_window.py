@@ -1277,7 +1277,7 @@ class MainWindow(Adw.ApplicationWindow):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one number")
             """
-            if len(password) < 8:
+            if len(password) < 10:
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password is too short. It should has at least 8 characters")
             elif not re.search(r'[A-Z]', password):
@@ -1286,7 +1286,7 @@ class MainWindow(Adw.ApplicationWindow):
             elif not re.search(r'[a-z]', password):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one lowercase letter")
-            elif not re.search(r'[!@#$%^&*(),.?":{}|<>_-]', password):
+            elif not re.search(r'[@#$%^&*()":{}|<>_-]', password):
                 self.pswdDialog.set_response_enabled("ok", False)
                 print("The password should has at least one special character")
             else:
@@ -1294,7 +1294,10 @@ class MainWindow(Adw.ApplicationWindow):
             
         self.pswdDialog = Adw.MessageDialog.new(self)
         self.pswdDialog.set_heading(_["create_pwd_title"])
-        self.pswdDialog.set_body(_["create_pwd_desc"])
+        if "8" in _["create_pwd_desc"]:
+            old_desc = _["create_pwd_desc"]
+            desc = old_desc.replace("8", "10")
+        self.pswdDialog.set_body(desc)
         
         self.pswdEntry = Adw.PasswordEntryRow.new()
         self.pswdEntry.set_title(_["password_entry"])
@@ -1684,10 +1687,7 @@ class MainWindow(Adw.ApplicationWindow):
         
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
-        if snap:
-            super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE)
-        else:
-            super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, application_id="io.github.vikdevelop.SaveDesktop")
+        super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, application_id="io.github.vikdevelop.SaveDesktop")
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('open-dir', self.open_dir)
         self.create_action('logout', self.logout)
