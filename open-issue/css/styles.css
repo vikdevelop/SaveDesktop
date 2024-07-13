@@ -7819,12 +7819,12 @@ textarea.form-control-lg {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: black;
+  background-color: #d1e0ff;
 }
 
 .bg-secondary {
   --bs-bg-opacity: 1;
-  background-color: black;
+  background-color: #d1e0ff;
 }
 
 .bg-success {
@@ -11343,7 +11343,7 @@ html {
   font-size: 2rem;
 }
 .divider-custom.divider-light .divider-custom-line {
-  background-color: #fff;
+  background-color: black;
 }
 .divider-custom.divider-light .divider-custom-icon {
   color: #fff;
@@ -11368,39 +11368,40 @@ html {
   padding-top: 1rem;
   padding-bottom: 1rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 700;
+  font-weight: 300;
+  font-size: 1rem
 }
 #mainNav .navbar-brand {
-  color: #fff;
+  color: black;
 }
 #mainNav .navbar-nav {
   margin-top: 1rem;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link {
-  color: #fff;
+  color: black;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
-  color: white;
+  color: grey;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
-  color: #fff;
+  color: black;
 }
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
   color: grey;
 }
 #mainNav .navbar-toggler {
-  font-size: 80%;
+  font-size: 60%;
   padding: 0.8rem;
 }
 
 @media (min-width: 992px) {
   #mainNav {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+    padding-top: 0px;
+    padding-bottom: 0px;
     transition: padding-top 0.3s, padding-bottom 0.3s;
   }
   #mainNav .navbar-brand {
-    font-size: 1.75em;
+    font-size: 1rem;
     transition: font-size 0.3s;
   }
   #mainNav .navbar-nav {
