@@ -1,5 +1,4 @@
 # Sauvegardes régulière
-### Comment ça marche ?
 En plus des sauvegardes manuelles, SaveDesktop vous permets aussi de sauvegarder la configuration de votre bureau de façon périodique. Vous pouvez choisir parmi les options suivantes:
 - **Daily**: 
   - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.

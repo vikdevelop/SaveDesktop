@@ -1,5 +1,4 @@
 # Időszakos mentés
-### Hogyan működik?
 A manuális mentések mellett, a SaveDesktop lehetővé teszi, hogy időszakosan elmentsd a számítógéped beállításait. A következő lehetőségek közül választhatsz:
 - **Naponta**: 
   - Bejelentkezés után a SaveDesktop elindul a háttérben és elmenti a beállításokat. Ha ugyanazon a napon újra belépsz, a mentés nem fut le még egyszer, hiszen arra a napra már készült biztonsági mentés.

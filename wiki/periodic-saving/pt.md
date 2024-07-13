@@ -1,5 +1,4 @@
 # Guardar Periodicamente
-### Como funciona?
 Além de guardar manualmente,o  SaveDesktop permite-te também guardares a tua configuração de desktop periodicamente. Podes escolher uma das seguintes opções:
 - **Diariamente**: 
   - Depois de fazeres login, o SaveDesktop irá iniciar no fundo e guardará a configuração. Se voltares a fazer login no mesmo dia, não o voltará a fazer porque já foi executado uma vez no dia.

@@ -1,5 +1,4 @@
 # Guardado automático
-### ¿Cómo funciona?
 Además de los guardados manuales, SaveDesktop también le permite guardar regularmente la configuración de su escritorio. Puede elegir entre las siguientes opciones:
 - **Diariamente**: 
   - Después de iniciar la sesión en el sistema, SaveDesktop se inicia en segundo plano y realiza una copia de seguridad de la configuración. Si vuelve a iniciar sesión ese mismo día, no volverá a hacerlo, porque ya se ha creado para ese día.

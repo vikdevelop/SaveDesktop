@@ -1,5 +1,4 @@
 # Salvataggio periodico
-### Come funziona?
 Oltre ai salvataggi manuali, SaveDesktop consente anche di salvare periodicamente la configurazione del desktop. Puoi scegliere tra le seguenti opzioni:
 - **Quotidiano**:
    - Dopo aver effettuato l'accesso al sistema, SaveDesktop si avvia in background ed esegue il backup della configurazione. Se poi accedi nuovamente, non lo farà più, perché è già stato creato per quel giorno.

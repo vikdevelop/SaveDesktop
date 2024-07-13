@@ -1,5 +1,4 @@
 # Pravidelné ukládání
-### Jak to funguje?
 Kromě ručního ukládání umožňuje SaveDesktop také pravidelné ukládání konfigurace desktopového prostředí. Můžete si vybrat z následujících možností:
 - **Denně**: 
   - Po přihlášení do systému se SaveDesktop spustí na pozadí a zálohuje konfiguraci. Pokud se pak v tento den znovu přihlásíte, nebude to dělat znovu, protože pro tento den již byla vytvořena.

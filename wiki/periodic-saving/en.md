@@ -1,5 +1,4 @@
 # Periodic saving
-### How does it work?
 In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:
 - **Daily**: 
   - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.

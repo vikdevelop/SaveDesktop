@@ -1,5 +1,4 @@
 # Periyodik kaydetme
-### Nasıl çalışır?
 Manuel kaydetmeye ek olarak SaveDesktop, masaüstü yapılandırmanızı düzenli aralıklarla kaydetmenize de olanak tanır. Aşağıdaki seçenekler arasından seçim yapabilirsiniz:
 - **Günlük**:
   - Sisteme giriş yapıldıktan sonra SaveDesktop arka planda çalışır ve yedeklemeyi yapar. Gün içinde tekrar giriş yapıldığında yeni yedek almaz, günlük yedek bir kere yapılır.
