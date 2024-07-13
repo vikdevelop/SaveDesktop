@@ -4,7 +4,7 @@
 Se desideri crittografare l'archivio di configurazione, sia per motivi di protezione dei dati che per altro, puoi utilizzare la funzione di crittografia dell'archivio nell'app SaveDesktop. Quindi, come funziona e come configurarlo?
 
 ## Come funziona?
-Se questa funzione è abilitata, SaveDesktop ti chiederà sempre di creare una password per il tuo nuovo archivio della configurazione. I criteri per la password includono almeno 8 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale. Se la password non soddisfa questi criteri non sarà possibile continuare a salvare la configurazione.
+Se questa funzione è abilitata, SaveDesktop ti chiederà sempre di creare una password per il tuo nuovo archivio della configurazione. I criteri per la password includono almeno 12 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale. Se la password non soddisfa questi criteri non sarà possibile continuare a salvare la configurazione.
 
 L'archivio verrà salvato come archivio ZIP (perché Tar non supporta la funzione di protezione tramite password) e, se desideri estrarlo, ti verrà chiesto di inserire la password che hai utilizzato nel processo di configurazione del salvataggio. Lo stesso vale in caso di importazione della configurazione.
 
