@@ -160,7 +160,7 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   
   ```bash
   # Install
-  mkdir /tmp/savedesktop-tmp  && git clone https://github.com/vikdevelop/SaveDesktop /tmp/savedesktop-tmp && python3 /tmp/savedesktop-tmp/native/native_installer.py --install && rm -rf /tmp/savedesktop-tmp
+  wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --install
 
   # Remove
   wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove
