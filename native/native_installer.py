@@ -3,6 +3,15 @@ import requests
 import json
 import os
 import argparse
+try:
+    import gi
+    gi.require_version('Gtk', '4.0')
+    gi.require_version('Adw', '1')
+    from gi.repository import Gtk, Adw
+except Exception as e:
+    print('\033[1m' + 'You have not installed necessary libraries:' + '\033[0m')
+    print(e)
+    exit()
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--install", help="Install SaveDesktop", action="store_true")
@@ -28,10 +37,6 @@ if args.install:
     os.system("rm -rf /tmp/SaveDesktop")
 
 if args.remove:
-    if not os.path.exists("/tmp/SaveDesktop"):
-        os.mkdir("/tmp/SaveDesktop")
-    os.chdir("/tmp/SaveDesktop")
-    
     os.system("wget -c https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/install_native.sh")
     os.system("sh install_native.sh --remove")
     
