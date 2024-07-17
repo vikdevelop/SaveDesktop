@@ -11,6 +11,7 @@ try:
 except Exception as e:
     print('\033[1m' + 'You have not installed the necessary libraries:' + '\033[0m')
     print(e)
+    print("If you want a simple solution to this problem, please install the Flatpak or Snap packages, which have available the necessary libraries. The instructions are available here: https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#installation")
     exit()
 
 parser = argparse.ArgumentParser()
