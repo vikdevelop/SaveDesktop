@@ -9,7 +9,7 @@ try:
     gi.require_version('Adw', '1')
     from gi.repository import Gtk, Adw
 except Exception as e:
-    print('\033[1m' + 'You have not installed necessary libraries:' + '\033[0m')
+    print('\033[1m' + 'You have not installed the necessary libraries:' + '\033[0m')
     print(e)
     exit()
 
