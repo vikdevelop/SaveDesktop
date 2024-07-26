@@ -13,6 +13,6 @@ A més de les còpies manuals, el SaveDesktop també us permet automatitzar aque
 La carpeta per defecte d'emmagatzematge és `/home/user/Baixades/SaveDesktop/archives`, però podeu triar una ruta personalitzada.
 
 ### Format del nom de fitxer
-If you want to give a filename format for periodic saving files other than `Latest_configuration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.
+Si voleu crear còpies automàtiques amb altre nom diferent a `Darrera_configuració`, ja és possible, fins i tot amb espais. Des de la versió 2.9.6, la variable `{}` no s'admet per al dia actual, atès que ara totes les còpies automàtiques sobreescriuen el fitxer ja existent.
 
 _Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._

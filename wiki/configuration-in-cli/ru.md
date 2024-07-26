@@ -1,4 +1,3 @@
-# Импорт конфигурации в интерфейсе CLI## Saving configuration
 ## Saving configuration
 
 **This feature is available from version: `3.3`**
