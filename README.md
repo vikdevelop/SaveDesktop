@@ -20,9 +20,10 @@
 - [About](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#about)
     - [Supported environments](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#supported-environments)
     - [SaveDesktop features](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#savedesktop-can-save)
-    - [Translations](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#translations)
-    - [Sending issues](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#sending-issues)
-    - [Installation](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#installation)
+- [Contributing](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#contributing)
+  - [Translations](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#translations)
+  - [Sending issues](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#sending-issues)
+- [Installation](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#installation)
 
 ## About
 ### Supported environments:
@@ -137,13 +138,16 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   
 </details>
 
-## Translations
+## Contributing
+*See to the [CONTRIBUTING.md](https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md) for more information.*
+
+### Translations
 If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
 | <h4>SaveDesktop application</h4> (click on widget below) | <h4>SaveDesktop Github wiki</h4> (click on widget below) |
 | --- | --- |
 | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Stav překladu" /></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Stav překladu" title="For the language to be added to the Github Wiki, it should have translated at least seven of the 12 strings." /></a> |
 
-## Sending issues
+### Sending issues
 You can send an issue on GitHub, or if you are not registered on GitHub, you can use this [web page](https://vikdevelop.github.io/SaveDesktop/open-issue/).
 
 ## Installation
