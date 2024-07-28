@@ -31,7 +31,7 @@
 - Xfce
 - Cinnamon
 - Budgie
-- COSMIC (Pop!_OS)
+- COSMIC (Rust and GNOME version)
 - Pantheon
 - MATE
 - KDE Plasma
@@ -41,10 +41,9 @@
 - your icons, fonts, and themes
 - your settings
 - your backgrounds (including dynamic wallpapers, provided that the same username is retained)
-- your GNOME and Nautilus extensions
 - your installed Flatpak apps and their data
 - your Desktop folder in the home directory
-- other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, etc.)
+- other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, GNOME and Nautilus extensions, etc.)
 
 NOTE: It can happen that a backup file will not be created, in that case, just allow access to the folder in the [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal) app.
 
@@ -169,12 +168,10 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   # Remove
   wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove
   ```
-  **NOTE**: *For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
-  For checking the version of these libraries, you can use this command:*
+  **NOTE**: *For this installation method, you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed. To check versions of these libraries, you can use this command:*
   ```bash
   python3 -c "import gi; gi.require_version('Gtk', '4.0'); gi.require_version('Adw', '1');from gi.repository import Gtk, Adw; print(f'GTK version: {Gtk.MAJOR_VERSION}.{Gtk.MINOR_VERSION}'); print(f'LibAdwaita version: {Adw.MAJOR_VERSION}.{Adw.MINOR_VERSION}')"
-  ```
-
+  ``
   
 - Build with Flatpak builder (beta version) ⚠️**UNSTABLE**⚠️
   ```
