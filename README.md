@@ -42,7 +42,7 @@
 - your settings
 - your backgrounds (including dynamic wallpapers, provided that the same username is retained)
 - your GNOME and Nautilus extensions
-- your installed Flatpak apps and its data
+- your installed Flatpak apps and their data
 - your Desktop folder in the home directory
 - other items related to your desktop environment (e.g., Cinnamon extensions and applets, KDE Plasma widgets, etc.)
 
@@ -148,7 +148,7 @@ If you want to help localize SaveDesktop, you can use the Weblate tool (it is po
 | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Stav překladu" /></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Stav překladu" title="For the language to be added to the Github Wiki, it should have translated at least seven of the 12 strings." /></a> |
 
 ### Sending issues
-You can send an issue on GitHub, or if you are not registered on GitHub, you can use this [web page](https://vikdevelop.github.io/SaveDesktop/open-issue/).
+You can send an issue on GitHub, or if you are not registered on GitHub, you can use this [web page](https://vikdevelop.github.io/SaveDesktop/open-issue/). You can also use [Github Discussions](https://github.com/vikdevelop/SaveDesktop/discussions).
 
 ## Installation
 - Flathub (stable version)
@@ -169,7 +169,12 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   # Remove
   wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove
   ```
-  **NOTE**: *For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.*
+  **NOTE**: *For this installation method you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed.
+  For checking the version of these libraries, you can use this command:*
+  ```bash
+  python3 -c "import gi; gi.require_version('Gtk', '4.0'); gi.require_version('Adw', '1');from gi.repository import Gtk, Adw; print(f'GTK version: {Gtk.MAJOR_VERSION}.{Gtk.MINOR_VERSION}'); print(f'LibAdwaita version: {Adw.MAJOR_VERSION}.{Adw.MINOR_VERSION}')"
+  ```
+
   
 - Build with Flatpak builder (beta version) ⚠️**UNSTABLE**⚠️
   ```
