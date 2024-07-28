@@ -49,7 +49,7 @@
 当完成导入并重新登录后，**Flatpak应用将在后台自动安装。**</str>
   <str key="github_issues">_如果您遇到任何问题，可使用GitHub提交issues。_</str>
   <str key="version_warning">**自`3.2.2`版本起，该功能已实现。**</str>
-  <str key="import_cfg_in_cli_title">在命令行界面导入配置</str>
+  <str key="import_cfg_in_cli_title">导入配置</str>
   <str key="imp_cfg_cli_intro">除了通过图形界面导入配置，SaveDesktop也允许您通过命令行界面（CLI）导入配置，当您的桌面环境受损时，这也许会很有用。</str>
   <str key="imp_cfg_cli_steps">### 那么该如何实现呢?
 **1. 打开一个终端**

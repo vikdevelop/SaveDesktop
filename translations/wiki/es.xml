@@ -49,7 +49,7 @@ Es posible guardar una lista de aplicaciones Flatpak instaladas desde el directo
 Tras importar el archivo de configuración guardado y volver a conectarse, **las aplicaciones de Flatpak comenzarán a instalarse en segundo plano.**</str>
   <str key="github_issues">_Si tiene alguna duda, utilice el notificador de incidencias de GitHub._</str>
   <str key="version_warning">**Esta función está disponible a partir de la versión: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Importar la configuración en la interfaz CLI</str>
+  <str key="import_cfg_in_cli_title">Importar la configuración</str>
   <str key="imp_cfg_cli_intro">Además de importar la configuración en la GUI, SaveDesktop también le permite importar la configuración en la interfaz de línea de comandos (CLI), que puede utilizar en caso de que su entorno de escritorio se rompa.</str>
   <str key="imp_cfg_cli_steps">Entonces, ¿cómo proceder?
 **1. Abrir un terminal**

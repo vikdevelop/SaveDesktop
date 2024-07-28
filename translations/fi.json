@@ -70,7 +70,7 @@
     "archive_encryption": "Arkiston salaus",
     "archive_encryption_desc": "Kun tallennat määrityksen manuaalisesti, sinua pyydetään luomaan salasana. Tämä on hyödyllinen ominaisuus datan turvaamiseksi, kun määritys on tarkoitus tallentaa esimerkiksi erilliselle muistitikulle.",
     "create_pwd_title": "Luo uusi salasana",
-    "create_pwd_desc": "Luo uusi salasana arkistolle. Salasanan tulee sisältää vähintään kahdeksan merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi erikoismerkki.",
+    "create_pwd_desc": "Luo uusi salasana arkistoon. Salasanan on sisällettävä vähintään 12 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi erikoismerkki.",
     "password_entry": "Salasana",
     "check_pwd_title": "Avaa arkiston lukitus salasanalla",
     "check_pwd_desc": "Kirjoita määritysarkiston salasana alapuolelle. Jos olet unohtanut salasanan, et pysty avata arkistoa ja tuoda määritystä.",

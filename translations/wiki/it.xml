@@ -49,7 +49,7 @@ Puoi scegliere tra i seguenti articoli:
 Dopo aver importato il file di configurazione salvato ed aver effettuato nuovamente l'accesso, **le applicazioni Flatpak inizieranno l'installazione in background.**</str>
   <str key="github_issues">_Se hai domande, puoi usare GitHub Issues._</str>
   <str key="version_warning">**Questa funzionalità è disponibile dalla versione: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Importazione della configurazione nell'interfaccia CLI</str>
+  <str key="import_cfg_in_cli_title">Importazione della configurazione</str>
   <str key="imp_cfg_cli_intro">Oltre a importare la configurazione nella GUI, SaveDesktop ti consente anche di importare la configurazione nell'interfaccia a riga di comando (CLI), che puoi utilizzare nel caso in cui il tuo ambiente desktop si guasti.</str>
   <str key="imp_cfg_cli_steps">### Quindi, come procedere?
 **1. Apri un terminale**

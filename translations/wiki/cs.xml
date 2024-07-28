@@ -49,7 +49,7 @@ Seznam nainstalovaných aplikací Flatpak je možné uložit ze systémového ad
   <str key="installing_flatpaks">### Instalace aplikací Flatpak ze seznamu
 Po importu uloženého konfiguračního souboru a opětovném přihlášení se **na pozadí začnou instalovat aplikace Flatpak.**</str>
   <str key="version_warning">**Tato funkce je k dispozici od verze: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Import konfigurace v rozhraní CLI</str>
+  <str key="import_cfg_in_cli_title">Import konfigurace</str>
   <str key="imp_cfg_cli_intro">Kromě importu konfigurace v grafickém uživatelském rozhraní umožňuje SaveDesktop také importovat konfiguraci v rozhraní příkazového řádku (CLI), které můžete použít v případě, že se vaše desktopové prostředí rozbije.</str>
   <str key="imp_cfg_cli_steps">### Jak tedy postupovat?
 **1. Otevřete terminál**

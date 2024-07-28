@@ -49,7 +49,7 @@ It is possible to save a list of installed Flatpak applications installed in the
 After importing the saved configuration file and logging back in, **the Flatpak applications will start installing in the background.**</str>
   <str key="github_issues">_If you have any questions, you can use GitHub issues._</str>
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Importing configuration in the CLI interface</str>
+  <str key="import_cfg_in_cli_title">Importing configuration</str>
   <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
   <str key="imp_cfg_cli_steps">### So how to proceed?
 **1. Open a terminal**
