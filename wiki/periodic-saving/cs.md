@@ -17,7 +17,4 @@ Chcete-li zadat jiný formát názvu souboru pro pravidelné ukládání než `L
 
 _Máte-li jakékoliv otázky, můžete použít Github issues._
 
-
-{% include footer.html %}
-
 {% include footer.html %}

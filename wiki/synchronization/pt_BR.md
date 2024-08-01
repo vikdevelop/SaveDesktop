@@ -39,4 +39,5 @@ Você pode escolher entre as seguintes opções:
 - Nunca (nada acontece)
 
 _Se você tiver quaisquer questões, pode usar as issues do GitHub._
+
 {% include footer.html %}
