@@ -16,3 +16,6 @@ Výchozí adresář pro pravidelné ukládání je `/home/user/Downloads/SaveDes
 Chcete-li zadat jiný formát názvu souboru pro pravidelné ukládání než `Latest_configuration`, je to možné, a to i s mezerami. Od verze 2.9.6, nefunguje proměnná `{}`pro nastavení dnešního data, proto že je nyní při každém pravidelném ukládání přepsán původní soubor zálohy.
 
 _Máte-li jakékoliv otázky, můžete použít Github issues._
+
+
+{% include footer.html %}
