@@ -8,3 +8,5 @@ It is possible to save a list of installed Flatpak applications installed in the
 After importing the saved configuration file and logging back in, **the Flatpak applications will start installing in the background.**
 
 _If you have any questions, you can use Github issues._
+
+{% include footer.html %}

@@ -17,3 +17,4 @@ Se você esquecer a senha, não conseguirá extrair o arquivo e usá-lo no proce
 Na versão 3.3, a interface foi levemente modificada; especificamente, a seção de salvamento periódico agora pode ser acessada através do botão "Mais opções". No mesmo local é possível encontrar a seção de encriptação de arquivo. Então clique no botão mencionado, e ative o interruptor de Encriptação de arquivo.
 
 _Se você tiver quaisquer questões, pode usar as issues do GitHub._
+{% include footer.html %}

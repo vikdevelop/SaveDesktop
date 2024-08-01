@@ -55,3 +55,5 @@ When using this method, it uses parameters from the GUI, specifically parameters
 - 应当输入您想导入的配置文件的实际路径以取代`/path/to/filename.sd.tar.gz`，比如：`/home/user/Downloads/myconfig.sd.tar.gz`
 
 _如果您遇到任何问题，可使用GitHub提交issues。_
+
+{% include footer.html %}

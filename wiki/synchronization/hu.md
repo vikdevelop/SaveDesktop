@@ -34,3 +34,5 @@ Az alábbi tételek közül választhatsz:
 - Never (nothing's happening)
 
 _Ha bármi kérdésed lenne, használd a Github Issues-t._
+
+{% include footer.html %}

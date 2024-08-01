@@ -35,3 +35,5 @@ Puede elegir entre los siguientes elementos:
 - Nunca (no se realiza ningún cambio)
 
 _Si tiene alguna duda, utilice el notificador de incidencias de GitHub._
+
+{% include footer.html %}

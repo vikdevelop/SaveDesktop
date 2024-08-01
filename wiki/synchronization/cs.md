@@ -36,3 +36,5 @@ Můžete si vybrat mezi následujícími položkami:
 - Nikdy (nic se neděje)
 
 _Máte-li jakékoliv otázky, můžete použít Github issues._
+
+{% include footer.html %}

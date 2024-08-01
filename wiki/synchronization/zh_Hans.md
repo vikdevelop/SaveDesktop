@@ -38,3 +38,5 @@
 _如果您遇到任何问题，可使用GitHub提交issues。_
 
 
+
+{% include footer.html %}

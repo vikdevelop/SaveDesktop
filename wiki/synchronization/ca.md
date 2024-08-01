@@ -35,3 +35,5 @@ Podeu triar entre els elements següents:
 - Mai (no es duu a terme cap canvi)
 
 _Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._
+
+{% include footer.html %}

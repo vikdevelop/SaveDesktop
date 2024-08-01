@@ -17,3 +17,5 @@ If you forgot the password, it will not possible to extract the archive and use 
 In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.
 
 _If you have any questions, you can use Github issues._
+
+{% include footer.html %}

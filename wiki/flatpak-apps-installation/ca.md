@@ -8,3 +8,5 @@ It is possible to save a list of Flatpak applications installed in the system di
 Després d'importar el fitxer de configuració, en tornar a iniciar la sessió, **el programari Flatpak s'instal·larà en rerefons.**
 
 _Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._
+
+{% include footer.html %}

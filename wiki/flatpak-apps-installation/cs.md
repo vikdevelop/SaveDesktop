@@ -8,3 +8,5 @@ Seznam nainstalovaných aplikací Flatpak je možné uložit ze systémového ad
 Po importu uloženého konfiguračního souboru a opětovném přihlášení se **na pozadí začnou instalovat aplikace Flatpak.**
 
 _Máte-li jakékoliv otázky, můžete použít Github issues._
+
+{% include footer.html %}

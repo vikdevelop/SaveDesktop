@@ -38,3 +38,5 @@ You can choose between the following items:
 _If you have any questions, you can use GitHub issues._
 
 
+
+{% include footer.html %}

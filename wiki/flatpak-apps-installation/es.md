@@ -8,3 +8,5 @@ Es posible guardar una lista de aplicaciones Flatpak instaladas desde el directo
 Tras importar el archivo de configuración guardado y volver a conectarse, **las aplicaciones de Flatpak comenzarán a instalarse en segundo plano.**
 
 _Si tiene alguna duda, utilice el notificador de incidencias de GitHub._
+
+{% include footer.html %}

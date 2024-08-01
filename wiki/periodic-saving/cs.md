@@ -19,3 +19,5 @@ _Máte-li jakékoliv otázky, můžete použít Github issues._
 
 
 {% include footer.html %}
+
+{% include footer.html %}

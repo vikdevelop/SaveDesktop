@@ -16,3 +16,5 @@ La carpeta per defecte d'emmagatzematge és `/home/user/Baixades/SaveDesktop/arc
 Si voleu crear còpies automàtiques amb altre nom diferent a `Darrera_configuració`, ja és possible, fins i tot amb espais. Des de la versió 2.9.6, la variable `{}` no s'admet per al dia actual, atès que ara totes les còpies automàtiques sobreescriuen el fitxer ja existent.
 
 _Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._
+
+{% include footer.html %}

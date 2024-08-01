@@ -8,3 +8,5 @@
 当完成导入并重新登录后，**Flatpak应用将在后台自动安装。**
 
 _如果您遇到任何问题，可使用GitHub提交issues。_
+
+{% include footer.html %}

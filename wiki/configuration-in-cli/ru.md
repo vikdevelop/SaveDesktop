@@ -55,3 +55,5 @@ When using this method, it uses parameters from the GUI, specifically parameters
 - вместо `/path/to/filename.sd.tar.gz` введите путь к архиву конфигурации, который вы хотите импортировать, например: `/home/user/Downloads/myconfig.sd.tar.gz`
 
 _Если у вас есть вопросы, вы можете использовать задачи GitHub._
+
+{% include footer.html %}

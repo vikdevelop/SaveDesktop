@@ -34,3 +34,5 @@ Puoi scegliere tra i seguenti articoli:
 - Never (nothing's happening)
 
 _Se hai domande, puoi usare GitHub issues._
+
+{% include footer.html %}

@@ -8,3 +8,4 @@ Desde a versão 2.5, o SaveDesktop permite que você salve os aplicativos Flatpa
 Após importar o arquivo de configuração salvo e logar de volta no sistema, **os aplicativos Flatpak começarão a ser instalados em segundo plano.**
 
 _Se você tiver quaisquer questões, pode usar as issues do GitHub._
+{% include footer.html %}

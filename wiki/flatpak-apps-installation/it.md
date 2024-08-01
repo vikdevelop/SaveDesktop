@@ -8,3 +8,5 @@ Dalla versione 2.5, SaveDesktop consente di salvare le applicazioni Flatpak inst
 Dopo aver importato il file di configurazione salvato ed aver effettuato nuovamente l'accesso, **le applicazioni Flatpak inizieranno l'installazione in background.**
 
 _Se hai domande, puoi usare GitHub issues._
+
+{% include footer.html %}

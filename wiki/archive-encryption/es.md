@@ -17,3 +17,5 @@ Si olvida la contraseña, no será posible extraer el archivo y utilizarlo en el
 En la versión 3.3, la interfaz ha sido ligeramente modificada, en concreto, la sección de guardado periódico se encuentra ahora bajo el botón "Más opciones". En el mismo lugar, se encuentra la sección de encriptación de archivos. Así que haz click en el botón ya mencionado, y activa el interruptor de encriptación de archivos.
 
 _Si tiene alguna duda, utilice el notificador de incidencias de GitHub._
+
+{% include footer.html %}

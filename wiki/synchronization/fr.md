@@ -36,3 +36,5 @@ You can choose between the following items:
 - Never (nothing's happening)
 
 _If you have any questions, you can use GitHub issues._
+
+{% include footer.html %}

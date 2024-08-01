@@ -16,3 +16,5 @@ Az időszakos mentések alapértelmezett könyvtára a `/home/user/Letöltések/
 If you want to give a filename format for periodic saving files other than `Latest_configuration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.
 
 _Ha bármi kérdésed lenne, használd a Github Issues-t._
+
+{% include footer.html %}

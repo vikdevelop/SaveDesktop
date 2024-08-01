@@ -8,3 +8,5 @@ It is possible to save a list of Flatpak applications installed in the system di
 A mentett konfigurációs fájl importálása és újbóli bejelentkezés után **a Flatpak alkalmazások telepítése megkezdődik a háttérben.**
 
 _Ha bármi kérdésed lenne, használd a Github Issues-t._
+
+{% include footer.html %}
