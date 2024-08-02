@@ -13,66 +13,56 @@
         <link href="open-issue/css/styles.css" rel="stylesheet" />
         <script src="https://smtpjs.com/v3/smtp.js"></script>
     </head>
-    <body id="page-top">
+    <body id="top">
         <!-- Masthead-->
-        <header class="masthead bg-primary text-white text-center">
-            <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/94864c15b9ae0b82c37170b17caf95572446cfd8/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg">
-            <h1 class="text-black">SaveDesktop app</h1>
-            <p class="text-black">Save your desktop configuration</p>
+        <header class="masthead bg-primary text-black text-center">
             <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-            <div class="container">
-                <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#download">Download</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://vikdevelop.github.io/SaveDesktop/wiki/">Wiki</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="btn btn-primary nav-link py-3 px-0 px-lg-3 rounded" href="/SaveDesktop/open-issue">Report issue</a></li>
-                    </ul>
+                <div class="container">
+                    <a class="navbar-brand" href="#top"><img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/94864c15b9ae0b82c37170b17caf95572446cfd8/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg" width="32" ></a>
+                    <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-black rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        Menu
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/SaveDesktop/wiki/">Wiki</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/SaveDesktop/open-issue">Report an Issue</a></li>
+                            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://github.com/vikdevelop/SaveDesktop/tree/main?tab=readme-ov-file#savedesktop">Features</a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-        </header>
-        <!-- Navigation-->
-        <!-- Download Section-->
-        <section class="page-section portfolio" id="download">
+            </nav>
+            <!-- The app name and screenshot --->
+            <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png">
+            <h1 class="text-black">SaveDesktop</h1>
+            <p class="text-black">Save your desktop configuration</p>
             <div class="container">
-                <!-- Download Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-black">Download</h2>
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- About Section Content-->
+                <!-- Installation Section Content-->
                 <div class="row">
-                    <div class="col-lg-4 ms-auto"><p class="lead">Download from Flathub</p>
-                        <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
+                    <div class="col-lg-4 ms-auto">
+                        <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='180' height="100" alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
                     </div>
-                    <div class="col-lg-4 ms-auto"><p class="lead">Download from Snap Store</p>
-                        <a href="https://snapcraft.io/savedesktop">
-  <img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" />
-</a>
+                    <div class="col-lg-4 ms-auto">
+                        <br>
+                        <a href="https://snapcraft.io/savedesktop"><img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg"/></a>
                     </div>
-                    <div class="col-lg-4 me-auto"><p class="lead">Download as native version</p>
-                        <h4>Install</h4>
-                        <code>wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-tmp/native/native_installer.py --install</code>
-                        <h4>Remove</h4>
-                        <code>wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove</code>
+                    <div class="col-lg-4 me-auto">
+                        <a class="btn btn-primary" href="https://github.com/vikdevelop/SaveDesktop/tree/main?tab=readme-ov-file#installation">Show other installation <br> methods</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </header>
         <!-- Footer-->
         <!-- Copyright Section-->
-        <div class="copyright py-4 text-center text-white">
-            <a href="https://github.com/vikdevelop/SaveDesktop">SaveDesktop app source code</a> - <a href="https://github.com/vikdevelop/SaveDesktop/tree/webpage">Source code of this page</a>
-            <div class="container"><small>&copy; 2023 vikdevelop (<a href="https://github.com/vikdevelop">Github</a>)</small></div>
+        <div class="masthead bg-primary text-center text-black">
+            <hr>
+            <br>
+            <a href="https://github.com/vikdevelop/SaveDesktop">SaveDesktop app source code</a><a href="https://github.com/vikdevelop/SaveDesktop/tree/webpage">Source code of this page</a>
+            <div class="container"><small>&copy; 2023-2024 vikdevelop</small></div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 </html>
+

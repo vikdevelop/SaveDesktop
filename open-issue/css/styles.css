@@ -90,11 +90,11 @@ body {
 }
 
 hr {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   color: inherit;
   background-color: currentColor;
   border: 0;
-  opacity: 0.25;
+  opacity: 0.05;
 }
 
 hr:not([size]) {
@@ -7819,12 +7819,12 @@ textarea.form-control-lg {
 
 .bg-primary {
   --bs-bg-opacity: 1;
-  background-color: #d1e0ff;
+  background-color: #eeeeee;
 }
 
 .bg-secondary {
   --bs-bg-opacity: 1;
-  background-color: #d1e0ff;
+  background-color: #eeeeee;
 }
 
 .bg-success {
@@ -11380,6 +11380,7 @@ html {
 #mainNav .navbar-nav li.nav-item a.nav-link {
   color: black;
 }
+
 #mainNav .navbar-nav li.nav-item a.nav-link:hover {
   color: grey;
 }
