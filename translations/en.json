@@ -34,7 +34,6 @@
     "monthly": "Monthly",
     "manually": "Manually",
     "learn_more": "Learn more",
-    "more_settings_pb": "Additional settings for periodic saving",
     "pb_folder": "Folder for periodic saving",
     "set_pb_folder_tooltip": "Choose custom folder for periodic saving",
     "set_another": "Choose another folder",
@@ -74,7 +73,6 @@
     "password_entry": "Password",
     "check_pwd_title": "Unlock the archive with a password",
     "check_pwd_desc": "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.",
-    
     "summary": "Save your desktop configuration",
     "description": "SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.",
     "translator_credits": "Translator github-link"
