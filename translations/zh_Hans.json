@@ -34,7 +34,6 @@
     "set_pb_folder_tooltip": "手动选择定期保存目录",
     "set_another": "选择其他目录",
     "import_title": "导入",
-    "more_settings_pb": "定期保存的附加设置",
     "filename_format": "文件名称格式",
     "reset_button": "恢复默认",
     "items_for_archive": "要包含在配置存档中的项目",
