@@ -20,7 +20,7 @@
 ### Configuració de la sincronització a l'aplicació SaveDesktop
 <a href="https://www.youtube.com/watch?v=QccFR06oyXk"><img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/a4f8da24-7183-49e1-9a58-82092a42f124" height="32"></a>
 
-On computer 1 and 2, open the SaveDesktop application and switch to the Sync page. On computer 1, click on the button "Set up the sync file", select the synchronization file (your periodic saving file), and select a periodic synchronization interval. Then copy the URL for synchronization, and on computer 2, click on the button "Connect with other computer" and enter the copied URL for synchronization from computer 1.
+Als ordinadors 1 i 2, obriu el programa SaveDesktop i aneu a l'apartat de sincronització. A l'ordinador 1, feu clic al botó «Configura el fitxer de sincronització», seleccioneu el fitxer de sincronització i la freqüència desitjada. Copieu l'URL de sincronització i, a l'ordinador 2, feu clic al botó «Connexió amb l'altre ordinador» i escriviu l'URL de sincronització que heu copiat de l'ordinador 1.
 
 Si voleu sincronitzar l'entorn d'escriptori de l'ordinador 2 a l'1, les passes són les mateixes.
 
