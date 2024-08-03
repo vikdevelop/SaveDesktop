@@ -1,6 +1,6 @@
 # Synchronization between computers in the network
 ## Como configurar?
-### What's your needing?
+### What do you need?
 **On computer 1:**
 - manually assign the IP addresses of your devices that you want to sync so that the IP address does not change every time the computer is turned on. It is possible to set it via:
 
