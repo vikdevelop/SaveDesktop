@@ -16,7 +16,7 @@ Default directory for periodic saving is `/home/user/Downloads/SaveDesktop/archi
   <str key="pb_filname_desc">If you want to give periodic backup files names other than `config_{}`, you can set the filename format.
 The default name, as already mentioned, is `config_{}`. `{}` is a variable in SaveDesktop that sets the today date. If it's not there and the day of backup creation comes and a backup file with the filename format set by your filename format exists, SaveDesktop overwrites it with the new backup file. Otherwise, SaveDesktop creates a new backup file.</str>
   <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
-  <str key="how_to_set_up_it">## How to set up it?</str>
+  <str key="how_to_set_up_it">## How to set it up?</str>
   <str key="whats_your_needing"> ### What do you need?</str>
   <str key="on_computer_1">**On computer 1:**
 - manually assign the IP addresses of your devices that you want to sync so that the IP address does not change every time the computer is turned on. It is possible to set it via:</str>
