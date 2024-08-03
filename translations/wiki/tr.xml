@@ -33,7 +33,7 @@ Periyodik kayıtta varsayılan kaydetme dizini `/home/user/Downloads/SaveDesktop
 On computer 1 and 2, open the SaveDesktop application and switch to the Sync page. On computer 1, click on the button "Set up the sync file", select the synchronization file (your periodic saving file), and select a periodic synchronization interval. Then copy the URL for synchronization, and on computer 2, click on the button "Connect with other computer" and enter the copied URL for synchronization from computer 1.</str>
   <str key="sync_warning">If you want to sync the DE configuration from computer 2 to computer 1, follow the same procedure.
 
-**For the changes to take effect, it is necessary to logout from system**</str>
+**For the changes to take effect, it is necessary to logout of the system**</str>
   <str key="periodic_sync">## Periodic synchronization
 You can choose between the following items:
 - Daily
