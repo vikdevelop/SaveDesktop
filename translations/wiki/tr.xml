@@ -16,7 +16,7 @@ Periyodik kayıtta varsayılan kaydetme dizini `/home/user/Downloads/SaveDesktop
   <str key="pb_filname_desc">If you want to give a filename format for periodic saving files other than `Latest_configuration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.</str>
   <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
   <str key="how_to_set_up_it">## How to set up it?</str>
-  <str key="whats_your_needing"> ### What's your needing?</str>
+  <str key="whats_your_needing"> ### What do you need?</str>
   <str key="on_computer_1">**On computer 1:**
 - manually assign the IP addresses of your devices that you want to sync so that the IP address does not change every time the computer is turned on. It is possible to set it via:</str>
   <str key="router_settings">**Router settings:**
