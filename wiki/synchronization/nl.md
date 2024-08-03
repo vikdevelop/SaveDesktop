@@ -25,7 +25,7 @@ On computer 1 and 2, open the SaveDesktop application and switch to the Sync pag
 
 If you want to sync the DE configuration from computer 2 to computer 1, follow the same procedure.
 
-**For the changes to take effect, it is necessary to logout from system**
+**For the changes to take effect, it is necessary to logout of the system**
 
 ## Periodic synchronization
 You can choose between the following items:
