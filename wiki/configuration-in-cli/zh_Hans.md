@@ -10,7 +10,7 @@ If you prefer command-line interface (CLI) before graphical user interface (GUI)
 
 You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
 
-**2. Type the command to import the configuration**
+**2. Enter the command**
 
 Enter the following command in the terminal:
 - if you have SaveDesktop installed as a Flatpak package, use the following:
@@ -37,7 +37,7 @@ When using this method, it uses parameters from the GUI, specifically parameters
 
 您可通过应用菜单，或者通过快捷键比如Ctrl+Alt+T来打开。
 
-**2. 输入命令以导入配置**
+**2. Enter the command**
 
 在终端里输入以下命令:
 - 如果您通过Flatpak安装了SaveDesktop，则输入：

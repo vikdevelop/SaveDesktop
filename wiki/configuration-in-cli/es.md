@@ -10,7 +10,7 @@ Si prefiere la interfaz de línea de comandos (CLI) a la interfaz gráfica de us
 
 Puede abrirlo desde el menú de aplicaciones, o usando el atajo de teclado Ctrl+Alt+T.
 
-**2. Escriba el comando para importar la configuración**
+**2. Enter the command**
 
 Introduzca el siguiente comando en el terminal:
 - si tiene SaveDesktop instalado como un paquete Flatpak, utilice lo siguiente:
@@ -39,7 +39,7 @@ Además de importar la configuración en la GUI, SaveDesktop también le permite
 
 Puede abrirlo desde el menú de aplicaciones, o usando el atajo de teclado Ctrl+Alt+T.
 
-**2. Escriba el comando para importar la configuración**
+**2. Enter the command**
 
 Introduzca el siguiente comando en el terminal:
 - si tiene SaveDesktop instalado como un paquete Flatpak, utilice lo siguiente:

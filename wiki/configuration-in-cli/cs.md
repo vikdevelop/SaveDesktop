@@ -9,7 +9,7 @@ Pokud dáváte přednost rozhraní příkazového řádku (CLI) před grafickým
 
 Můžete jej otevřít z nabídky aplikací nebo pomocí klávesové zkratky Ctrl+Alt+T.
 
-**2. Zadejte příkaz pro import konfigurace**
+**2. Zadejte příkaz**
 
 Do terminálu zadejte následující příkaz:
 - Pokud máte SaveDesktop nainstalovaný jako balíček Flatpak, použijte následující příkaz:
@@ -36,7 +36,7 @@ Kromě importu konfigurace v grafickém uživatelském rozhraní umožňuje Save
 
 Můžete jej otevřít z nabídky aplikací nebo pomocí klávesové zkratky Ctrl+Alt+T.
 
-**2. Zadejte příkaz pro import konfigurace**
+**2. Zadejte příkaz**
 
 Do terminálu zadejte následující příkaz:
 - Pokud máte SaveDesktop nainstalovaný jako balíček Flatpak, použijte následující příkaz:
