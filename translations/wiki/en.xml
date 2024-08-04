@@ -58,19 +58,13 @@ You can choose between the following items:
 
 You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
 
-**2. Type the command to import the configuration**
+**2. Enter the command**
 
 Enter the following command in the terminal:
 - if you have SaveDesktop installed as a Flatpak package, use the following:
 
-     ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
-     ```
-
 - if you have SaveDesktop installed as a Snap or native package, use: 
-     ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
-     ```</str>
+</str>
   <str key="imp_cfg_cli_note">**Note**:
 - instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
   <str key="archive_encryption_">Archive encryption</str>
