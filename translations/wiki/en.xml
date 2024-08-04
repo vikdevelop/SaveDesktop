@@ -58,7 +58,7 @@ You can choose between the following items:
 
 You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
 
-**2. Type the command to import the configuration**
+**2. Enter the command**
 
 Enter the following command in the terminal:
 - if you have SaveDesktop installed as a Flatpak package, use the following:
