@@ -7,7 +7,7 @@ body:
     id: distro
     attributes:
       label: Linux distribution
-      description: "Write the name and version of Linux distribution"
+      description: "What Linux distribution (name and version) are you using?"
       placeholder: "e.g. Fedora 40, Ubuntu 24.04"
     validations:
       required: true
@@ -16,7 +16,7 @@ body:
     attributes:
       label: Desktop Environment
       description: |
-        What Desktop Environment are you using?
+        What desktop environment are you using?
       options:
         - Select
         - GNOME
@@ -34,7 +34,7 @@ body:
     id: version
     attributes:
       label: Version of the SaveDesktop app
-      description: "You can find it by clicking on the three dots and then the 'About app' button"
+      description: "You can find it by clicking on the three dots in the header bar and then the 'About app' button."
     validations:
       required: true
   - type: dropdown
@@ -47,7 +47,8 @@ body:
         - Flatpak from Flathub
         - Flatpak, which was built with Flatpak Builder
         - Native from this repository
-        - Snap package
+        - Snap from Snap Store
+        - Other
     validations:
       required: true
   - type: textarea
