@@ -56,19 +56,17 @@ Po importu uloženého konfiguračního souboru a opětovném přihlášení se 
 
 Můžete jej otevřít z nabídky aplikací nebo pomocí klávesové zkratky Ctrl+Alt+T.
 
-**2. Zadejte příkaz pro import konfigurace**
+**2. Zadejte příkaz**
 
 Do terminálu zadejte následující příkaz:
-- Pokud máte SaveDesktop nainstalovaný jako balíček Flatpak, použijte následující příkaz:
-
- ```
- flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
- ```
-
-- pokud máte SaveDesktop nainstalovaný jako Snap nebo nativní balíček, použijte: 
-  ```
-  saveesktop --import-config /path/to/filename.sd.tar.gz
-  ```</str>
+- pokud máte SaveDesktop nainstalovaný jako balíček Flatpak, zadejte následující:
+     ```
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     ```
+- pokud máte SaveDesktop nainstalovaný jako Snap nebo nativní balíček, použijte:
+     ```
+     savedesktop --import-config /path/to/filename.sd.tar.gz
+     ```</str>
   <str key="imp_cfg_cli_note">**Poznámka**:
 - místo `/path/to/filename.sd.tar.gz` zadejte cestu ke konfiguračnímu archivu, který chcete importovat, například: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
   <str key="archive_encryption_">Šifrování archivu</str>
