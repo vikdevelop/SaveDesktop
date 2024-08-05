@@ -56,15 +56,13 @@
 
 आप इसे एप्लिकेशन मेनू से या Ctrl+Alt+T कीबोर्ड शॉर्टकट का उपयोग करके खोल सकते हैं।
 
-**2. विन्यास आयात करने के लिए कमांड टाइप करें**
+**2. कमांड दर्ज करें**
 
 टर्मिनल में निम्नलिखित कमांड दर्ज करें:
 - यदि आपने SaveDesktop को फ्लैटपैक पैकेज के रूप में स्थापित किया है, तो निम्नलिखित का उपयोग करें:
-
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
      ```
-
 - यदि आपने SaveDesktop को Snap या नेटिव पैकेज के रूप में स्थापित किया है, तो इसका उपयोग करें: 
      ```
      savedesktop --import-config /path/to/filename.sd.tar.gz
