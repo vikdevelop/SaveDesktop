@@ -149,6 +149,7 @@ class Save:
         elif environment == 'COSMIC (Old)':
             os.system(f"cp -R {home}/.config/pop-shell ./")
             os.system(f"cp -R {home}/.local/share/gnome-shell ./")
+            os.system(f"cp -R {home}/.local/share/nautilus")
         elif environment == 'COSMIC (New)':
             os.system(f"cp -R {home}/.config/cosmic ./")
             os.system(f"cp -R {home}/.local/state/cosmic ./cosmic-state")
@@ -201,12 +202,14 @@ class Save:
             print("moving the configuration archive to the user-defined directory")
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
-            os.system(f"mv ./cfg.sd.tar.gz \"{j['recent_file']}\"")
-            if not settings["periodic-import"] == "Never2":
-                file = os.path.basename(j["recent_file"])
-                os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
-        if os.path.exists(f"{CACHE}/save_config"):
-            print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
+            os.system(f"cp ./cfg.sd.tar.gz \"{j['recent_file']}\"")
+            if not settings["url-for-syncing"] == "":
+                if not settings["periodic-import"] == "Never2":
+                    file = os.path.basename(j["recent_file"])
+                    os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
+            elif not settings["file-for-syncing"] == "":
+                os.system(f"echo '{settings['filename-format']}.sd.tar.gz' > {settings['periodic-saving-folder']}/SaveDesktop-sync-file")
+        print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
         os.system("rm saving_status")
         
 class Import:
