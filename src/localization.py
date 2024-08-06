@@ -28,7 +28,7 @@ except Exception as err:
 
 # Set application version, and icon
 v = "3.4"
-icon = "io.github.vikdevelop.SaveDesktop"
+icon = "io.github.vikdevelop.SaveDesktop.Devel"
 rel_notes = "<ul>\
 <li>Added support for the cloud synchronization - however, you need to have a folder on your computer that will be synchronized with your cloud storage, for example via GNOME Online Accounts.</li>\
 <li>Added an option to generate a password for the configuration archive, about 24 characters long</li>\
