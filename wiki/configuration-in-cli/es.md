@@ -5,21 +5,18 @@
 Si prefiere la interfaz de línea de comandos (CLI) a la interfaz gráfica de usuario (GUI), SaveDesktop, además de guardar la configuración en la GUI, le permite guardar la configuración en la CLI.
 
 ### Entonces, ¿cómo proceder?
-
 **1. Abrir un terminal**
 
 Puede abrirlo desde el menú de aplicaciones, o usando el atajo de teclado Ctrl+Alt+T.
 
-**2. Enter the command**
+**2. Introduce el comando**
 
-Introduzca el siguiente comando en el terminal:
-- si tiene SaveDesktop instalado como un paquete Flatpak, utilice lo siguiente:
-
+Introduce el siguiente comando en el terminal:
+- si tienes SaveDesktop instalado como un paquete de Flatpak, utiliza lo siguiente:
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --save-now
      ```
-
-- si tiene SaveDesktop instalado como un paquete Snap o nativo, utilice: 
+- si tienes SaveDesktop instalado como un paquete Snap o nativo, utiliza: 
      ```
      savedesktop --save-now
      ```
@@ -34,23 +31,20 @@ Al utilizar este método, utiliza parámetros de la GUI, concretamente parámetr
 Además de importar la configuración en la GUI, SaveDesktop también le permite importar la configuración en la interfaz de línea de comandos (CLI), que puede utilizar en caso de que su entorno de escritorio se rompa.
 
 ### Entonces, ¿cómo proceder?
-
 **1. Abrir un terminal**
 
 Puede abrirlo desde el menú de aplicaciones, o usando el atajo de teclado Ctrl+Alt+T.
 
-**2. Enter the command**
+**2. Introduce el comando**
 
-Introduzca el siguiente comando en el terminal:
-- si tiene SaveDesktop instalado como un paquete Flatpak, utilice lo siguiente:
-
+Introduce el siguiente comando en el terminal:
+- si tienes SaveDesktop instalado como un paquete de Flatpak, utiliza lo siguiente:
      ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /ruta/a/nombre de archivo.sd.tar.gz
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
      ```
-
-- si tiene SaveDesktop instalado como un paquete Snap o nativo, utilice: 
+- si tienes SaveDesktop instalado como un paquete Snap o nativo, utiliza: 
      ```
-     savedesktop --import-config /ruta/a/nombre de archivo.sd.tar.gz
+     savedesktop --import-config /path/to/filename.sd.tar.gz
      ```
 
 **Nota**:
