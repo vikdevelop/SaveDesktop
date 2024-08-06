@@ -922,8 +922,8 @@ class MainWindow(Adw.ApplicationWindow):
         
         # Row for connecting cloud drive
         self.cloudRow = Adw.ExpanderRow.new()
-        self.cloudRow.set_title("Select Cloud Drive Folder")
-        self.cloudRow.set_subtitle("On another computer, open SaveDesktop, click on multiple options, select periodic saving, and choose a folder to sync with your cloud storage. Also on this computer, select the same synced folder.")
+        self.cloudRow.set_title("Connect with the cloud storage")
+        self.cloudRow.set_subtitle("On another computer, open the SaveDesktop application, then click More options, in the periodic saving section, select the folder you have synchronized as the periodic saving folder, and set the periodic saving interval.")
         self.urlBox.append(self.cloudRow)
         
         self.cloudButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
@@ -931,7 +931,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudButton.connect("clicked", self.select_sync_file)
         
         self.fileRow = Adw.ActionRow.new()
-        self.fileRow.set_title(_["set_up_sync_file"])
+        self.fileRow.set_title("Select cloud drive folder")
         self.fileRow.set_subtitle(settings["file-for-syncing"])
         self.fileRow.set_subtitle_selectable(True)
         self.fileRow.add_suffix(self.cloudButton)
