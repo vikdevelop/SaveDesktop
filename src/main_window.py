@@ -923,7 +923,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Row for connecting cloud drive
         self.cloudRow = Adw.ExpanderRow.new()
         self.cloudRow.set_title("Connect with the cloud storage")
-        self.cloudRow.set_subtitle("On another computer, open the SaveDesktop application, then click More options, in the periodic saving section, select the folder you have synchronized as the periodic saving folder, and set the periodic saving interval.")
+        self.cloudRow.set_subtitle("On another computer, open the SaveDesktop application, then click More options, in the periodic saving section, select the folder you have synchronized with the cloud storage as the periodic saving folder, and set the periodic saving interval.")
         self.urlBox.append(self.cloudRow)
         
         self.cloudButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
