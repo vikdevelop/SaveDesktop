@@ -27,7 +27,7 @@ except Exception as err:
     IPAddr = f"ERR: {err}"
 
 # Set application version, and icon
-v = "3.4"
+v = "3.4-beta"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
 rel_notes = "<ul>\
 <li>Added support for the cloud synchronization - however, you need to have a folder on your computer that will be synchronized with your cloud storage, for example via GNOME Online Accounts.</li>\
