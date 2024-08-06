@@ -7,6 +7,8 @@ import sys
 import shutil
 import re
 import zipfile
+import random
+import string
 from localization import _, home
 from urllib.request import urlopen
 from open_wiki import *
@@ -750,54 +752,37 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Dialog for setting the sync file, periodic synchronization interval and copying the URL for synchronization
     def open_setDialog(self):
+        # copy the sync file to the app data folder for proper funcionality
+        def copy_sync_file():
+            try:
+                if not os.path.exists(f"{DATA}/synchronization"):
+                    os.mkdir(f"{DATA}/synchronization")
+                os.chdir(f"{DATA}/synchronization")
+                os.system(f"rm *.sd.tar.gz")
+                os.system(f"cp {self.file_row.get_subtitle()} ./")
+            except Exception as e:
+                print(f"Problem with setting up the sync file: {e}")
+            finally:
+                print("")
+        
         # Action after closing dialog for setting synchronization file
         def setDialog_closed(w, response):
             if response == 'ok':
                 self.set_syncing()
+                
+                if "fuse" in subprocess.getoutput(f"df -T {self.file_row.get_subtitle()}"):
+                    print("")
+                else:
+                    # start copying the synchronization file process
+                    setup_thread = Thread(target=copy_sync_file)
+                    setup_thread.start()
 
-                # Check periodic synchronization variable BEFORE saving to GSettings database
-                with open(f"{CACHE}/.sync", "w") as s:
-                    s.write(f"{settings['periodic-import']}")
-
-                # Save the sync file to the GSettings database
-                self.file_name = os.path.basename(self.file_row.get_subtitle())
-                self.file = os.path.splitext(self.file_name)[0]
-                self.path = Path(self.file_row.get_subtitle())
-                self.folder = self.path.parent.absolute()
-
-                settings["file-for-syncing"] = self.file_row.get_subtitle()
-
-                # Set filename format to same as the sync file name
-                r_file = self.file.replace(".sd.tar", "")
-                settings["filename-format"] = r_file
-
-                # Set periodic saving folder to same as the folder for the sync file
-                settings["periodic-saving-folder"] = f'{self.folder}'
-
-                # Save periodic synchronization interval to remote file and the GSettings database
-                selected_item = self.import_row.get_selected_item()
-                if selected_item.get_string() == _["never"]:
-                    import_item = "Never2"
-                elif selected_item.get_string() == _["daily"]:
-                    import_item = "Daily2"
-                elif selected_item.get_string() == _["weekly"]:
-                    import_item = "Weekly2"
-                elif selected_item.get_string() == _["monthly"]:
-                    import_item = "Monthly2"
-                elif selected_item.get_string() == _["manually"]:
-                    import_item = "Manually2"
-                if not os.path.exists(f"{DATA}/synchronization"):
-                    os.mkdir(f"{DATA}/synchronization")
-                with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
-                    f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (self.file, import_item))
-                settings["periodic-import"] = import_item
-                sync_before = subprocess.getoutput(f"cat {CACHE}/.sync")
-                if sync_before == "Never2":
-                    if not settings["periodic-import"] == "Never2":
+                    # Save the sync file to the GSettings database
+                    settings["file-for-syncing"] = self.file_row.get_subtitle()
+                    
+                    # Check if the Python HTTP Server is running - if not, it shows popup window of the need to log out of the system
+                    if "Couldn't connect to server" in subprocess.getoutput(f"curl --head --fail {self.url_row.get_subtitle()}"):
                         self.show_warn_toast()
-                if ".sd.zip" in settings["file-for-syncing"]:
-                    settings["file-for-syncing"] = ""
-                    self.open_setDialog()
 
         # self.setDialog
         self.setDialog = Adw.MessageDialog.new(self)
@@ -809,57 +794,37 @@ class MainWindow(Adw.ApplicationWindow):
         self.setdBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.setdBox.get_style_context().add_class(class_name='boxed-list')
         self.setDialog.set_extra_child(self.setdBox)
-
-        # Button for choosing synchronization file
-        self.selsetButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
-        self.selsetButton.set_valign(Gtk.Align.CENTER)
-        self.selsetButton.connect("clicked", self.select_syncfile)
-
+        
+        # Check the periodic saving interval to see if a periodic saving file exists or not.
+        if settings["periodic-saving"] == "Never":
+            folder = f'Periodic saving are not set up'
+        else:
+            if os.path.exists(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'):
+                folder = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'
+            else:
+                folder = f'Periodic saving file does not exist.'
+        
         # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
-        self.file_row.set_title("1 " + _["periodic_saving_file"])
-        self.file_row.set_subtitle(settings["file-for-syncing"])
-        self.file_row.add_suffix(self.selsetButton)
+        self.file_row.set_title(_["periodic_saving_file"])
+        self.file_row.set_subtitle(folder)
+        self.file_row.set_subtitle_selectable(True)
         self.setdBox.append(self.file_row)
-        
-        # Periodic sync section
-        actions = Gtk.StringList.new(strings=[
-            _["never"], _["daily"], _["weekly"], _["monthly"], _["manually"]
-        ])
-        
-        self.import_row = Adw.ComboRow.new()
-        self.import_row.set_use_markup(True)
-        self.import_row.set_use_underline(True)
-        self.import_row.set_title("2 " + _["periodic_sync"])
-        self.import_row.set_title_lines(2)
-        self.import_row.set_subtitle_lines(4)
-        self.import_row.set_model(model=actions)
-        self.setdBox.append(child=self.import_row)
-
-        # Load periodic sync values form GSettings database
-        if settings["periodic-import"] == "Never2":
-            self.import_row.set_selected(0)
-        elif settings["periodic-import"] == "Daily2":
-            self.import_row.set_selected(1)
-        elif settings["periodic-import"] == "Weekly2":
-            self.import_row.set_selected(2)
-        elif settings["periodic-import"] == "Monthly2":
-            self.import_row.set_selected(3)
-        elif settings["periodic-import"] == "Manually2":
-            self.import_row.set_selected(4)
 
         # Action row for showing URL for synchronization with other computers
         self.url_row = Adw.ActionRow.new()
-        self.url_row.set_title("3 " + _["url_for_sync"])
+        self.url_row.set_title(_["url_for_sync"])
         self.url_row.set_use_markup(True)
         
         # show error message while the network is unreachable
         if "ERR:" in IPAddr:
             self.url_row.set_subtitle(f"<span color='red'>{IPAddr}</span>")
         else:
-            self.url_row.set_subtitle(f"http://{IPAddr}:8000")
+            self.url_row.set_subtitle(f"http://{IPAddr}:8000/{settings['filename-format']}.sd.tar.gz")
         self.url_row.set_subtitle_selectable(True)
-        self.setdBox.append(self.url_row)
+        if not (folder == 'Periodic saving are not set up' or folder == 'Periodic saving file does not exist.'):
+            if not "fuse" in subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}"):
+                self.setdBox.append(self.url_row)
         
         self.setDialog.add_response('cancel', _["cancel"])
         self.setDialog.add_response('ok', _["apply"])
@@ -877,13 +842,47 @@ class MainWindow(Adw.ApplicationWindow):
         # Action after closing URL dialog
         def urlDialog_closed(w, response):
             if response == 'ok':
-                settings["url-for-syncing"] = self.urlEntry.get_text()
-                self.folder = settings["file-for-syncing"]
-                if not self.urlEntry.get_text() == "":
+                settings["periodic-import"] = self.psyncRow.get_selected_item().get_string() + "2"
+                
+                # if the selected option of the periodic synchronization is "Manually2" it adds an option to the menu in the header bar
+                if settings["periodic-import"] == "Manually2":
+                    settings["manually-sync"] = True
+                    self.sync_menu = Gio.Menu()
+                    self.sync_menu.append(_["sync"], 'app.m_sync')
+                    self.main_menu.append_section(None, self.sync_menu)
+                    self.sync_menu.remove(1)
+                    self.show_special_toast()
+                else:
+                    settings["manually-sync"] = False
+                    try:
+                        self.sync_menu.remove(0)
+                    except:
+                        print("")
+                        
+                # set up cloud sync
+                if not self.fileRow.get_subtitle() == "":
+                    if not settings["periodic-import"] == "Manually2":
+                        if "gvfs" in self.fileRow.get_subtitle():
+                            get_host_cmd = subprocess.run(
+                                ['sed', '-n', r's|.*/gvfs/\([^:]*\):host=\([^,]*\),user=\([^/]*\).*|\1 \2 \3|p'],
+                                input=self.fileRow.get_subtitle(), text=True, capture_output=True
+                            )
+
+                            output = get_host_cmd.stdout.strip()
+                            get_host_user = output.split()
+                            if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop"):
+                                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
+                                    m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {get_host_user[0]}://{get_host_user[2]}@{get_host_user[1]}")
+                    settings["file-for-syncing"] = self.fileRow.get_subtitle()
+                # set up local network sync
+                elif not self.urlEntry.get_text() == "":
+                    settings["url-for-syncing"] = self.urlEntry.get_text()
                     # check if the URL for synchronization is correct or not (if NOT, the app shows error message in the dialog)
                     try:
-                        r_file = urlopen(f"{settings['url-for-syncing']}/file-settings.json")
+                        r_file = urlopen(f"{settings['url-for-syncing']}")
                         jS = json.load(r_file)
+                        self.set_syncing()
+                        self.show_warn_toast()
                     except Exception as e:
                         if "<" in f"{e}":
                             o_e = f"{e}"
@@ -896,40 +895,75 @@ class MainWindow(Adw.ApplicationWindow):
                         self.urlDialog_fnc()
                         self.urlBox.append(self.errLabel)
                         settings["url-for-syncing"] = ""
-                    # Check if periodic synchronization interval is Manually option => if YES, add Sync button to the menu in the headerbar
-                    if jS["periodic-import"] == "Manually2":
-                        settings["manually-sync"] = True
-                        self.sync_menu = Gio.Menu()
-                        self.sync_menu.append(_["sync"], 'app.m_sync')
-                        self.main_menu.append_section(None, self.sync_menu)
-                        self.set_syncing()
-                        self.show_special_toast()
-                        self.sync_menu.remove(1)
-                    else:
-                        self.set_syncing()
-                        self.show_warn_toast()
-                        settings["manually-sync"] = False
-                        self.sync_menu.remove(0)
                 else:
-                    settings["manually-sync"] = False
-                    self.sync_menu.remove(0)
+                    print("Nothing changed.")
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading(_["connect_with_other_computer"])
-        self.urlDialog.set_body(_["connect_with_pc_desc"])
 
         # Box for adding widgets in this dialog
         self.urlBox = Gtk.ListBox.new()
         self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.urlBox.get_style_context().add_class(class_name='boxed-list')
         self.urlDialog.set_extra_child(self.urlBox)
+        
+        # Row for connecting to computer in the local network
+        self.localRow = Adw.ExpanderRow.new()
+        self.localRow.set_title("Connect to computer in the local network")
+        self.localRow.set_subtitle(_["connect_with_pc_desc"])
+        self.urlBox.append(self.localRow)
 
         # Entry for entering the URL for synchronization
         self.urlEntry = Adw.EntryRow.new()
         self.urlEntry.set_title(_["pc_url_entry"])
         self.urlEntry.set_text(settings["url-for-syncing"])
-        self.urlBox.append(self.urlEntry)
+        self.localRow.add_row(self.urlEntry)
+        
+        # Row for connecting cloud drive
+        self.cloudRow = Adw.ExpanderRow.new()
+        self.cloudRow.set_title("Select Cloud Drive Folder")
+        self.cloudRow.set_subtitle("On another computer, open SaveDesktop, click on multiple options, select periodic saving, and choose a folder to sync with your cloud storage. Also on this computer, select the same synced folder.")
+        self.urlBox.append(self.cloudRow)
+        
+        self.cloudButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
+        self.cloudButton.add_css_class('flat')
+        self.cloudButton.connect("clicked", self.select_sync_file)
+        
+        self.fileRow = Adw.ActionRow.new()
+        self.fileRow.set_title(_["set_up_sync_file"])
+        self.fileRow.set_subtitle(settings["file-for-syncing"])
+        self.fileRow.set_subtitle_selectable(True)
+        self.fileRow.add_suffix(self.cloudButton)
+        self.fileRow.set_activatable_widget(self.cloudButton)
+        self.cloudRow.add_row(self.fileRow)
+        
+        # Periodic sync section
+        actions = Gtk.StringList.new(strings=[
+            _["never"], _["daily"], _["weekly"], _["monthly"], _["manually"]
+        ])
+        
+        self.psyncRow = Adw.ComboRow.new()
+        self.psyncRow.set_use_markup(True)
+        self.psyncRow.set_use_underline(True)
+        self.psyncRow.set_title(_["periodic_sync"])
+        self.psyncRow.set_subtitle("Select how often to synchronise")
+        self.psyncRow.set_title_lines(2)
+        self.psyncRow.set_subtitle_lines(4)
+        self.psyncRow.set_model(model=actions)
+        self.urlBox.append(self.psyncRow)
+
+        # Load periodic sync values form GSettings database
+        if settings["periodic-import"] == "Never2":
+            self.psyncRow.set_selected(0)
+        elif settings["periodic-import"] == "Daily2":
+            self.psyncRow.set_selected(1)
+        elif settings["periodic-import"] == "Weekly2":
+            self.psyncRow.set_selected(2)
+        elif settings["periodic-import"] == "Monthly2":
+            self.psyncRow.set_selected(3)
+        elif settings["periodic-import"] == "Manually2":
+            self.psyncRow.set_selected(4)
         
         self.urlDialog.add_response('cancel', _["cancel"])
         self.urlDialog.add_response('ok', _["apply"])
@@ -1084,6 +1118,9 @@ class MainWindow(Adw.ApplicationWindow):
         elif self.environment == "Cinnamon":
             self.save_ext_switch_state = True
             show_extensions_row()
+        elif self.environment == "COSMIC (Old)":
+            self.save_ext_switch_state = True
+            show_extensions_row()
         
         # Switch and row of option 'Save Desktop' (~/Desktop)
         self.switch_de = Gtk.Switch.new()
@@ -1226,51 +1263,30 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_chooser.open(self, None, open_selected, None)
         
     # Select file for syncing cfg with other computers in the network
-    def select_syncfile(self, w):
-        def copy_syncfile():
-            try:
-                if not os.path.exists(f"{DATA}/synchronization"):
-                    os.mkdir(f"{DATA}/synchronization")
-                os.chdir(f"{DATA}/synchronization")
-                os.system(f"rm *.sd.tar.gz")
-                os.system(f"cp {self.syncfile} ./")
-            except Exception as e:
-                print(f"Problem with setting up the sync file: {e}")
-            finally:
-                print("")
-        
+    def select_sync_file(self, w):
         def set_selected(source, res, data):
             try:
-                file = source.open_finish(res)
+                file = source.select_folder_finish(res)
             except:
                 return
             self.syncfile = file.get_path()
-            self.open_setDialog()
-            self.file_row.set_subtitle(self.syncfile)
-            sync_thred = Thread(target=copy_syncfile)
-            sync_thred.start()
+            self.fileRow.set_subtitle(self.syncfile)
             
-        self.setDialog.close()
-        
         self.syncfile_chooser = Gtk.FileDialog.new()
         self.syncfile_chooser.set_modal(True)
-        self.syncfile_chooser.set_title(_["set_up_sync_file"])
-        self.file_filter_s = Gtk.FileFilter.new()
-        self.file_filter_s.set_name(_["savedesktop_f"])
-        self.file_filter_s.add_pattern('*.sd.tar.gz')
-        self.file_filter_list_s = Gio.ListStore.new(Gtk.FileFilter);
-        self.file_filter_list_s.append(self.file_filter_s)
-        self.syncfile_chooser.set_filters(self.file_filter_list_s)
-        self.syncfile_chooser.open(self, None, set_selected, None)
+        self.syncfile_chooser.set_title("Select Cloud Drive Folder")
+        self.syncfile_chooser.select_folder(self, None, set_selected, None)
         
     # Dialog for creating password for the config archive
     def create_password_dialog(self):
+        # Action after closing pswdDialog
         def pswdDialog_closed(w, response):
             if response == 'ok':
                 with open(f"{CACHE}/.pswd_temp", "w") as p:
                     p.write(f"{self.pswdEntry.get_text()}")
                 self.save_config()
         
+        # Check the password to see if it meets the criteria
         def check_password(pswdEntry):
             password = self.pswdEntry.get_text()
             """
@@ -1296,14 +1312,33 @@ class MainWindow(Adw.ApplicationWindow):
                 print("The password must not contain spaces")
             else:
                 self.pswdDialog.set_response_enabled("ok", True)
+               
+        # Generate Password
+        def pswd_generator(w):
+            # define characters that will be included in the password
+            characters = string.ascii_letters + string.digits + string.punctuation
+
+            # generate password about lenght 24 characters
+            password = ''.join(random.choice(characters) for i in range(24))
             
+            self.pswdEntry.set_text(password)
+        
+        # dialog itself
         self.pswdDialog = Adw.MessageDialog.new(self)
         self.pswdDialog.set_heading(_["create_pwd_title"])
         self.pswdDialog.set_body(_["create_pwd_desc"])
         
+        # button for generating strong password
+        self.pswdgenButton = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
+        self.pswdgenButton.set_tooltip_text("Generate a password")
+        self.pswdgenButton.add_css_class("flat")
+        self.pswdgenButton.connect("clicked", pswd_generator)
+        
+        # entry for entering passsword
         self.pswdEntry = Adw.PasswordEntryRow.new()
         self.pswdEntry.set_title(_["password_entry"])
         self.pswdEntry.connect('changed', check_password)
+        self.pswdEntry.add_suffix(self.pswdgenButton)
         self.pswdDialog.set_extra_child(self.pswdEntry)
         
         self.pswdDialog.add_response("cancel", _["cancel"])
