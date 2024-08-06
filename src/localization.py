@@ -27,14 +27,11 @@ except Exception as err:
     IPAddr = f"ERR: {err}"
 
 # Set application version, and icon
-v = "3.3.2"
+v = "3.4"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
-<li>Removed the criterion for at least one number when creating a password for the configuration archive, because it is not written in the dialog, so it could cause confusion. However, the password will now have to be at least 12 characters long, it will not be allowed to contain spaces, and the question mark, exclamation mark, period, and comma have been removed from the special characters.</li>\
-<li>Fixed an error when retrieving a URL for synchronization, an error unrelated to retrieving a URL no longer occurs</li>\
-<li>Fixed bug with saving periodic backup files to the folders with spaces</li>\
-<li>Fixed other related minor bugs</li>\
-<li>Updated translations</li>\
+<li>Added support for the cloud synchronization - however, you need to have a folder on your computer that will be synchronized with your cloud storage, for example via GNOME Online Accounts.</li>\
+<li>Added an option to generate a password for the configuration archive, about 24 characters long</li>\
 </ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
