@@ -48,41 +48,41 @@ Podeu triar entre els elements següents:
   <str key="installing_flatpaks">### Instal·lació de programari Flatpak des d'una llista
 Després d'importar el fitxer de configuració, en tornar a iniciar la sessió, **el programari Flatpak s'instal·larà en rerefons.**</str>
   <str key="github_issues">_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._</str>
-  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Importing configuration</str>
-  <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
-  <str key="imp_cfg_cli_steps">### So how to proceed?
-**1. Open a terminal**
+  <str key="version_warning">**Aquesta característica és disponible des de la versió: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Important la configuració</str>
+  <str key="imp_cfg_cli_intro">A més de la importació mitjançant la interfície gràfica (GUI), el SaveDesktop també us permet importar la configuració mitjançant la línia d'ordres (CLI), que podeu utilitzar en cas que el vostre entorn d'escriptori es trenqui.</str>
+  <str key="imp_cfg_cli_steps">### Com procedir?
+**1. Obriu la terminal**
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+Es pot fer des del menú d'aplicacions, o mitjançant la drecera de teclat Ctrl+Alt+T.
 
-**2. Type the command to import the configuration**
+**2. Inseriu l'ordre per a importar la configuració**
 
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
+Inseriu l'ordre següent a la consola d'ordres:
+- Si heu instal·lat el SaveDesktop com a paquet Flatpak, utilitzeu aquesta ordre:
 
      ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /ruta/del/fitxer.sd.tar.gz
      ```
 
-- if you have SaveDesktop installed as a Snap or native package, use: 
+- Si heu instal·lat el SaveDesktop com a paquet Snap o paquet natiu, llavors empreu: 
      ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
+     savedesktop --import-config /ruta/del/fitxer.sd.tar.gz
      ```</str>
-  <str key="imp_cfg_cli_note">**Note**:
-- instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
-  <str key="archive_encryption_">Archive encryption</str>
-  <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
-  <str key="ac_intro">## How does it work?
-If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 12 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. </str>
-  <str key="ac_warn">&amp;gt; [!WARNING]  
-&amp;gt; The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.</str>
-  <str key="ac_setup">## How to set it up?
-In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.</str>
-  <str key="saving_cfg_title">Saving configuration</str>
-  <str key="saving_cfg_intro">If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.</str>
-  <str key="save_cfg_outro">When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.</str>
-  <str key="enc">The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+  <str key="imp_cfg_cli_note">**Nota**:
+- En comptes de `/ruta/del/fitxer.sd.tar.gz`, indiqueu la ruta real on es troba el fitxer de configuració que voleu importar, com ara: `/home/benet/Documents/config.sd.tar.gz`</str>
+  <str key="archive_encryption_">Xifrat del fitxer</str>
+  <str key="archive_encryption_desc">Si, per raons de seguretat o qualsevol altre motiu, voleu xifrar el fitxer de configuració, podeu utilitzar la característica inclosa al SaveDesktop. Com es fa, llavors?</str>
+  <str key="ac_intro">## Com funciona?
+En habilitar aquesta característica, el SaveDesktop us demanarà sempre crear-ne una contrasenya per als fitxers de configuració nous que es generin. Perquè la contrasenya sigui forta, ha de tenir almenys 12 caràcters, contenir una majúscula i una minúscula, a més d'un caràcter especial. Si la contrasenya no compleix aquests requisits, no serà possible continuar desant la configuració. </str>
+  <str key="ac_warn">&amp;gt; [!ATENCIÓ]  
+&amp;gt; El desament periòdic crea sempre fitxers sense contrasenya. Els fitxers xifrats no es poden emprar en tasques de sincronització.</str>
+  <str key="ac_setup">## Com es configura?
+A partir de la versió 3.3, la interfície ha canviat significativament, en concret la secció del desament periòdic que ara es troba al botó «Més opcions». Al mateix lloc, es troba la secció de xifratge. Feu clic al botó esmenat i habiliteu l'opció Xifrat del fitxer.</str>
+  <str key="saving_cfg_title">Desant la configuració</str>
+  <str key="saving_cfg_intro">Tant si preferiu la línia d'ordres (CLI) com ara un entorn gràfic (GUI), el SaveDesktop us permet dur a terme la tasca de totes dues formes.</str>
+  <str key="save_cfg_outro">En utilitzar aquest mètode, s'empraran els paràmetres de la interfície gràfica (GUI). Específicament els paràmetres del desament periòdic, com ara el format de nom de fitxer i la carpeta de destinació on desar els fitxers. Podeu desar la configuració amb aquest mètode sempre que vulgueu, independentment de l'interval de desament automàtic triat.</str>
+  <str key="enc">El fitxer es desarà com a format ZIP (perquè un Tar no suporta protecció per contrasenya) i, en intentar extreure el seu contingut, si us demanarà la contrasenya que vau utilitzar durant el procés de creació. També si us demanarà quan vulgueu importar-ne la configuració.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.</str>
+Si oblideu la contrasenya, no serà possible de cap manera extreure el contingut o importar cap configuració continguda al fitxer.</str>
 </root>
