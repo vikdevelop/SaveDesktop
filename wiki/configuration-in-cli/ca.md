@@ -1,58 +1,57 @@
-## Saving configuration
+## Desant la configuració
 
-**This feature is available from version: `3.3`**
+**Aquesta característica és disponible des de la versió: `3.3`**
 
-If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.
+Tant si preferiu la línia d'ordres (CLI) com ara un entorn gràfic (GUI), el SaveDesktop us permet dur a terme la tasca de totes dues formes.
 
-### So how to proceed?
+### Com procedir?
+**1. Obriu la terminal**
 
-**1. Open a terminal**
+Es pot fer des del menú d'aplicacions, o mitjançant la drecera de teclat Ctrl+Alt+T.
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+**2. Inseriu l'ordre per a importar la configuració**
 
-**2. Enter the command**
-
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
+Inseriu l'ordre següent a la consola d'ordres:
+- Si heu instal·lat el SaveDesktop com a paquet Flatpak, utilitzeu aquesta ordre:
 
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --save-now
      ```
 
-- if you have SaveDesktop installed as a Snap or native package, use:
+- Si heu instal·lat el SaveDesktop com a paquet Snap o paquet natiu, llavors empreu:  
      ```
      savedesktop --save-now
      ```
 
-When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.
+En utilitzar aquest mètode, s'empraran els paràmetres de la interfície gràfica (GUI). Específicament els paràmetres del desament periòdic, com ara el format de nom de fitxer i la carpeta de destinació on desar els fitxers. Podeu desar la configuració amb aquest mètode sempre que vulgueu, independentment de l'interval de desament automàtic triat.
 
-## Importing configuration
+## Important la configuració
 
-**This feature is available from version: `3.2.2`**
+**Aquesta característica és disponible des de la versió: `3.2.2`**
 
-In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.
+A més de la importació mitjançant la interfície gràfica (GUI), el SaveDesktop també us permet importar la configuració mitjançant la línia d'ordres (CLI), que podeu utilitzar en cas que el vostre entorn d'escriptori es trenqui.
 
-### So how to proceed?
-**1. Open a terminal**
+### Com procedir?
+**1. Obriu la terminal**
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+Es pot fer des del menú d'aplicacions, o mitjançant la drecera de teclat Ctrl+Alt+T.
 
-**2. Enter the command**
+**2. Inseriu l'ordre per a importar la configuració**
 
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
+Inseriu l'ordre següent a la consola d'ordres:
+- Si heu instal·lat el SaveDesktop com a paquet Flatpak, utilitzeu aquesta ordre:
 
      ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /ruta/del/fitxer.sd.tar.gz
      ```
 
-- if you have SaveDesktop installed as a Snap or native package, use: 
+- Si heu instal·lat el SaveDesktop com a paquet Snap o paquet natiu, llavors empreu:  
      ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
+     savedesktop --import-config /ruta/del/fitxer.sd.tar.gz
      ```
 
-**Note**:
-- instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`
+**Nota**:
+- En comptes de `/ruta/del/fitxer.sd.tar.gz`, indiqueu la ruta real on es troba el fitxer de configuració que voleu importar, com ara: `/home/benet/Documents/config.sd.tar.gz`
 
 _Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._
 
