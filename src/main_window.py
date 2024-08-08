@@ -167,12 +167,12 @@ class MainWindow(Adw.ApplicationWindow):
         # header bar for unsuppurtoed environment or disconnected some plugs in the Snap package
         self.errHeaderbar = Adw.HeaderBar.new()
         
-        self.different_toast_msg = False # value that sets if popup should be with text "Please wait ..." or "It'll take a few minutes ..."
         self.save_ext_switch_state = False # value that sets if state of the switch "Extensions" in the Items Dialog should be saved or not
         self.flatpak_data_sw_state = False # value that sets if state of the switch "User data of installed Flatpak apps will be saved or not"
+        self.open_setdialog_tf = False # value that sets if whether whether to reopen the self.setDialog
+        self.set_button_sensitive = False # value that sets if the Apply button in self.setDialog will be enabled or not
         
         # set the window size and maximization from the GSettings database
-        self.set_size_request(750, 540)
         (width, height) = settings["window-size"]
         self.set_default_size(width, height)
         
@@ -203,8 +203,8 @@ class MainWindow(Adw.ApplicationWindow):
         
         # primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.headapp.set_margin_start(80)
-        self.headapp.set_margin_end(80)
+        #self.headapp.set_margin_start(80)
+        #self.headapp.set_margin_end(80)
         self.headapp.set_valign(Gtk.Align.CENTER)
         self.headapp.set_halign(Gtk.Align.CENTER)
         self.toolbarview.set_content(self.headapp)
@@ -332,7 +332,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.Image.set_pixel_size(50)
             self.pBox.append(self.Image)
             self.label_sorry = Gtk.Label()
-            self.label_sorry.set_markup(_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE"))
+            self.label_sorry.set_markup(_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE, Deepin"))
             self.label_sorry.set_wrap(True)
             self.label_sorry.set_justify(Gtk.Justification.CENTER)
             self.pBox.append(self.label_sorry)
@@ -409,6 +409,9 @@ class MainWindow(Adw.ApplicationWindow):
                         backup_item = "Monthly"
                         create_pb_desktop()
                     settings["periodic-saving"] = backup_item
+                    if self.open_setdialog_tf == True:
+                        self.setDialog.close()
+                        self.open_setDialog()
 
             # open link to the wiki page about periodic saving
             def open_pb_wiki(w):
@@ -420,7 +423,7 @@ class MainWindow(Adw.ApplicationWindow):
             
             # Dialog for showing more options
             self.msDialog = Adw.MessageDialog.new(self)
-            self.msDialog.set_default_size(500, 200)
+            self.msDialog.set_default_size(400, 200)
             self.msDialog.set_heading(_["more_options"])
 
             # Box for this dialog
@@ -450,6 +453,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.pbRow.set_title(_["pb_interval"])
             self.pbRow.set_use_markup(True)
             self.pbRow.set_subtitle(f"{_['periodic_saving_desc']}")
+            self.pbRow.set_subtitle_lines(4)
             self.pbRow.set_model(model=options)
             self.saving_eRow.add_row(self.pbRow)
             
@@ -519,6 +523,9 @@ class MainWindow(Adw.ApplicationWindow):
 
         # =========
         # Save page
+
+        # Open the More options dialog from the self.setDialog
+        self.more_options_dialog = more_options_dialog
             
         # Set margin for save desktop layout
         self.saveBox.set_margin_start(40)
@@ -761,13 +768,31 @@ class MainWindow(Adw.ApplicationWindow):
                 os.system(f"rm *.sd.tar.gz")
                 os.system(f"cp {self.file_row.get_subtitle()} ./")
             except Exception as e:
-                print(f"Problem with setting up the sync file: {e}")
+                os.system(f"notify-send 'SaveDesktop' 'ERR: {e}'")
             finally:
                 print("")
+
+        # Create periodic saving file if not exists
+        def save_now():
+            try:
+                os.system(f"notify-send 'SaveDesktop' \'{_['please_wait']}\'")
+                os.system(f"{system_dir}/bin/run.sh --save-now")
+            except Exception as e:
+                os.system(f"notify-send 'SaveDesktop' 'ERR: {e}'")
+            finally:
+                self.file_row.remove(self.setupButton)
+                self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
+                os.system(f"notify-send 'SaveDesktop' '{_['config_saved']}'")
+                
+        def make_pb_file(w):
+            self.setupButton.set_sensitive(False)
+            pb_thread = Thread(target=save_now)
+            pb_thread.start()
         
         # Action after closing dialog for setting synchronization file
         def setDialog_closed(w, response):
             if response == 'ok':
+                self.open_setdialog_tf = False
                 self.set_syncing()
                 
                 if "fuse" in subprocess.getoutput(f"df -T {self.file_row.get_subtitle()}"):
@@ -776,59 +801,107 @@ class MainWindow(Adw.ApplicationWindow):
                     # start copying the synchronization file process
                     setup_thread = Thread(target=copy_sync_file)
                     setup_thread.start()
-
-                    # Save the sync file to the GSettings database
-                    settings["file-for-syncing"] = self.file_row.get_subtitle()
                     
                     # Check if the Python HTTP Server is running - if not, it shows popup window of the need to log out of the system
                     if "Couldn't connect to server" in subprocess.getoutput(f"curl --head --fail {self.url_row.get_subtitle()}"):
-                        self.show_warn_toast()
+                        if not settings["periodic-saving"] == 'Never':
+                            self.show_warn_toast()
+            else:
+                self.open_setdialog_tf = False
 
         # self.setDialog
         self.setDialog = Adw.MessageDialog.new(self)
         self.setDialog.set_heading(_["set_up_sync_file"])
         self.setDialog.set_body_use_markup(True)
-
-        # Box for appending widgets
-        self.setdBox = Gtk.ListBox.new()
-        self.setdBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.setdBox.get_style_context().add_class(class_name='boxed-list')
-        self.setDialog.set_extra_child(self.setdBox)
+        self.setDialog.set_default_size(450, 200)
         
+        # Check if the periodic saving file path has spaces or not
+        path_with_spaces = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'
+        if " " in path_with_spaces:
+            path = path_with_spaces.replace(" ", "_")
+        else:
+            path = path_with_spaces
+            
         # Check the periodic saving interval to see if a periodic saving file exists or not.
         if settings["periodic-saving"] == "Never":
-            folder = f'Periodic saving are not set up'
+            folder = f'<span color="red">Periodic saving is not set up.</span>'
+            self.set_button_sensitive = True
         else:
-            if os.path.exists(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'):
-                folder = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'
+            if os.path.exists(path):
+                folder = path
+                self.set_button_sensitive = False
             else:
-                folder = f'Periodic saving file does not exist.'
+                folder = f'<span color="red">Periodic saving file does not exist.</span>'
+                self.set_button_sensitive = True
+        
+        # Gtk main Box
+        self.setdBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.setDialog.set_extra_child(self.setdBox)
+        
+        # List Box for appending widgets
+        self.l_setdBox = Gtk.ListBox.new()
+        self.l_setdBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.l_setdBox.get_style_context().add_class(class_name='boxed-list')
+        self.setdBox.append(self.l_setdBox)
         
         # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
         self.file_row.set_title(_["periodic_saving_file"])
         self.file_row.set_subtitle(folder)
+        self.file_row.set_subtitle_lines(4)
+        self.file_row.set_use_markup(True)
         self.file_row.set_subtitle_selectable(True)
-        self.setdBox.append(self.file_row)
+        self.l_setdBox.append(self.file_row)
+        
+        # Button for creating a periodic saving file if it does not exist
+        if folder == "<span color=\"red\">Periodic saving file does not exist.</span>":
+            self.setupButton = Gtk.Button.new_with_label("Create")
+            self.setupButton.set_valign(Gtk.Align.CENTER)
+            self.setupButton.add_css_class("suggested-action")
+            self.setupButton.connect("clicked", make_pb_file)
+            self.file_row.add_suffix(self.setupButton)
+        
+        # Button, that opens More options dialog
+        ## change this value to TRUE for opening this dialog again after closing the More options dialog
+        self.open_setdialog_tf = True
+        self.ps_button = Gtk.Button.new_with_label("Change")
+        self.ps_button.connect('clicked', self.more_options_dialog)
+        self.ps_button.set_valign(Gtk.Align.CENTER)
+        
+        # Row for showing the selected periodic saving interval
+        self.ps_row = Adw.ActionRow.new()
+        self.ps_row.set_title(f'{_["periodic_saving"]} ({_["pb_interval"]})')
+        self.ps_row.set_use_markup(True)
+        self.ps_row.add_suffix(self.ps_button)
+        if settings["periodic-saving"] == "Never":
+            self.ps_row.set_subtitle(f'<span color="red">{_["never"]}</span>')
+            self.ps_button.add_css_class('suggested-action')
+        else:
+            self.ps_row.set_subtitle(f'<span color="green">{settings["periodic-saving"]}</span>')
+        self.l_setdBox.append(self.ps_row)
 
-        # Action row for showing URL for synchronization with other computers
+        # Action row for showing URL for synchronization with other computers in the local network
         self.url_row = Adw.ActionRow.new()
         self.url_row.set_title(_["url_for_sync"])
         self.url_row.set_use_markup(True)
         
-        # show error message while the network is unreachable
+        ## show error message while the network is unreachable
         if "ERR:" in IPAddr:
             self.url_row.set_subtitle(f"<span color='red'>{IPAddr}</span>")
         else:
             self.url_row.set_subtitle(f"http://{IPAddr}:8000/{settings['filename-format']}.sd.tar.gz")
         self.url_row.set_subtitle_selectable(True)
-        if not (folder == 'Periodic saving are not set up' or folder == 'Periodic saving file does not exist.'):
+        
+        # If the folder string does not contain problems with the periodic saving, or it does not detect the FUSE filesystem, shows the row, which contains a URL for syncing with other computers in the network
+        if not (folder == '<span color="red">Periodic saving is not set up.</span>' or folder == '<span color="red">Periodic saving file does not exist.</span>'):
             if not "fuse" in subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}"):
-                self.setdBox.append(self.url_row)
+                self.l_setdBox.append(self.url_row)
         
         self.setDialog.add_response('cancel', _["cancel"])
         self.setDialog.add_response('ok', _["apply"])
         self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        if self.set_button_sensitive == True:
+            self.setDialog.set_response_enabled('ok', False)
         self.setDialog.connect('response', setDialog_closed)
         
         self.setDialog.show()
@@ -901,6 +974,7 @@ class MainWindow(Adw.ApplicationWindow):
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading(_["connect_with_other_computer"])
+        self.urlDialog.set_default_size(500, 200)
 
         # Box for adding widgets in this dialog
         self.urlBox = Gtk.ListBox.new()
@@ -912,6 +986,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.localRow = Adw.ExpanderRow.new()
         self.localRow.set_title("Connect to computer in the local network")
         self.localRow.set_subtitle(_["connect_with_pc_desc"])
+        self.localRow.set_subtitle_lines(6)
         self.urlBox.append(self.localRow)
 
         # Entry for entering the URL for synchronization
@@ -923,11 +998,13 @@ class MainWindow(Adw.ApplicationWindow):
         # Row for connecting cloud drive
         self.cloudRow = Adw.ExpanderRow.new()
         self.cloudRow.set_title("Connect with the cloud storage")
-        self.cloudRow.set_subtitle("On another computer, open the SaveDesktop application, then click More options, in the periodic saving section, select the folder you have synchronized with the cloud storage as the periodic saving folder, and set the periodic saving interval.")
+        self.cloudRow.set_subtitle("On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.")
+        self.cloudRow.set_subtitle_lines(6)
         self.urlBox.append(self.cloudRow)
         
         self.cloudButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.cloudButton.add_css_class('flat')
+        self.cloudButton.set_valign(Gtk.Align.CENTER)
         self.cloudButton.connect("clicked", self.select_sync_file)
         
         self.fileRow = Adw.ActionRow.new()
@@ -940,7 +1017,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         # Periodic sync section
         actions = Gtk.StringList.new(strings=[
-            _["never"], _["daily"], _["weekly"], _["monthly"], _["manually"]
+           _["manually"], _["daily"], _["weekly"], _["monthly"]
         ])
         
         self.psyncRow = Adw.ComboRow.new()
@@ -954,20 +1031,20 @@ class MainWindow(Adw.ApplicationWindow):
         self.urlBox.append(self.psyncRow)
 
         # Load periodic sync values form GSettings database
-        if settings["periodic-import"] == "Never2":
-            self.psyncRow.set_selected(0)
-        elif settings["periodic-import"] == "Daily2":
+        if settings["periodic-import"] == "Manually2":
             self.psyncRow.set_selected(1)
-        elif settings["periodic-import"] == "Weekly2":
+        elif settings["periodic-import"] == "Daily2":
             self.psyncRow.set_selected(2)
-        elif settings["periodic-import"] == "Monthly2":
+        elif settings["periodic-import"] == "Weekly2":
             self.psyncRow.set_selected(3)
-        elif settings["periodic-import"] == "Manually2":
+        elif settings["periodic-import"] == "Monthly2":
             self.psyncRow.set_selected(4)
         
         self.urlDialog.add_response('cancel', _["cancel"])
         self.urlDialog.add_response('ok', _["apply"])
         self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        if not self.urlEntry.get_text() or not self.fileRow.get_subtitle():
+            self.urlDialog.set_response_enabled('ok', False)
         self.urlDialog.connect('response', urlDialog_closed)
         self.urlDialog.show()
 
@@ -1274,7 +1351,7 @@ class MainWindow(Adw.ApplicationWindow):
             
         self.syncfile_chooser = Gtk.FileDialog.new()
         self.syncfile_chooser.set_modal(True)
-        self.syncfile_chooser.set_title("Select Cloud Drive Folder")
+        self.syncfile_chooser.set_title("Select cloud drive folder")
         self.syncfile_chooser.select_folder(self, None, set_selected, None)
         
     # Dialog for creating password for the config archive
