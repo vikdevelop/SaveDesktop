@@ -150,11 +150,12 @@ If you want to help localize SaveDesktop, you can use the Weblate tool (it is po
 You can send an issue on GitHub, or if you are not registered on GitHub, you can use this [web page](https://vikdevelop.github.io/SaveDesktop/open-issue/). You can also use [Github Discussions](https://github.com/vikdevelop/SaveDesktop/discussions).
 
 ## Installation
-- Flathub (stable version)
+### Stable releases
+- Flathub
   
   <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 
-- Snap (stable version)
+- Snap
 
   <a href="https://snapcraft.io/savedesktop"><img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" width='240' />
   </a>
@@ -171,10 +172,31 @@ You can send an issue on GitHub, or if you are not registered on GitHub, you can
   **NOTE**: *For this installation method, you need to have GTK4 (v4.10) and LibAdwaita (v1.3) installed. To check versions of these libraries, you can use this command:*
   ```bash
   python3 -c "import gi; gi.require_version('Gtk', '4.0'); gi.require_version('Adw', '1');from gi.repository import Gtk, Adw; print(f'GTK version: {Gtk.MAJOR_VERSION}.{Gtk.MINOR_VERSION}'); print(f'LibAdwaita version: {Adw.MAJOR_VERSION}.{Adw.MINOR_VERSION}')"
-  ``
-  
-- Build with Flatpak builder (beta version) ⚠️**UNSTABLE**⚠️
   ```
-  git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
-  # Maybe you will need to install org.gnome.Sdk (latest version) with flatpak
-  ```
+
+### Beta releases
+If you want to help with the testing of the future releases of this app, you can use one of these options:
+
+#### 1. Flathub Beta
+Add the Flathub Beta repository to your system:
+```
+flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+```
+Install the SaveDesktop Beta from this repository:
+
+```
+flatpak install flathub-beta io.github.vikdevelop.SaveDesktop
+```
+#### 2. Snap
+To install the SaveDesktop Beta, run the following command:
+```
+snap install savedesktop --beta
+```
+#### 3. Flatpak Builder
+Before building this app using Flatpak Builder, ensure if you have installed org.gnome.Sdk runtime. If not, use this command: `flatpak install org.gnome.Sdk//46`
+
+Then, you can continue in building this app using Flatpak Builder by entering this command:
+
+```
+git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
+```
