@@ -1,21 +1,21 @@
-# Archive encryption
-**This feature is available from version: 3.3**
+# Xifrat del fitxer
+**Aquesta característica és disponible des de la versió: 3.3**
 
-If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?
+Si, per raons de seguretat o qualsevol altre motiu, voleu xifrar el fitxer de configuració, podeu utilitzar la característica inclosa al SaveDesktop. Com es fa, llavors?
 
-## How does it work?
-If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 12 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. 
+## Com funciona?
+En habilitar aquesta característica, el SaveDesktop us demanarà sempre crear-ne una contrasenya per als fitxers de configuració nous que es generin. Perquè la contrasenya sigui forta, ha de tenir almenys 12 caràcters, contenir una majúscula i una minúscula, a més d'un caràcter especial. Si la contrasenya no compleix aquests requisits, no serà possible continuar desant la configuració.
 
-The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+The archive will be saved as a ZIP El fitxer es desarà com a format ZIP (perquè un Tar no suporta protecció per contrasenya) i, en intentar extreure el seu contingut, si us demanarà la contrasenya que vau utilitzar durant el procés de creació. També si us demanarà quan vulgueu importar-ne la configuració.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.
+Si oblideu la contrasenya, no serà possible de cap manera extreure el contingut o importar cap configuració continguda al fitxer.
 
-> [!WARNING]  
-> The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.
+> [!ATENCIÓ]
+> El desament periòdic crea sempre fitxers sense contrasenya. Els fitxers xifrats no es poden emprar en tasques de sincronització.
 
-## How to set it up?
-In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.
+## Com es configura?
+A partir de la versió 3.3, la interfície ha canviat significativament, en concret la secció del desament periòdic que ara es troba al botó «Més opcions». Al mateix lloc, es troba la secció de xifratge. Feu clic al botó esmenat i habiliteu l'opció Xifrat del fitxer.
 
-_If you have any questions, you can use Github issues._
+_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._
 
 {% include footer.html %}
