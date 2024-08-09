@@ -681,7 +681,7 @@ class MainWindow(Adw.ApplicationWindow):
                 os.chdir(f"{DATA}/synchronization")
                 os.system(f"rm *.sd.tar.gz")
                 os.system(f"cp {self.file_row.get_subtitle()} ./")
-                self.settings["file-for-syncing"] == self.file_row.get_subtitle()
+                settings["file-for-syncing"] == self.file_row.get_subtitle()
             except Exception as e:
                 os.system(f"notify-send 'SaveDesktop' 'ERR: {e}'")
             finally:
