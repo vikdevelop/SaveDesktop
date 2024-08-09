@@ -31,7 +31,7 @@ v = "3.4-beta-03"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
 rel_notes = "<p>3.4-beta-03</p>\
 <ul>\
-<li>Improved setting up the synchronization with the cloud folder process: on the Sync page, just click on the \"Set up the sync file\" button and make the changes required by the application</li>\
+<li>Simplified setting up the synchronization with the cloud folder process: on the Sync page, just click on the \"Set up the sync file\" button and make the changes required by the application</li>\
 <li>Added possibility to set up smaller window size</li>\
 </ul>\
 <p>3.4-beta-02</p>\
