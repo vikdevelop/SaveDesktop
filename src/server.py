@@ -7,19 +7,16 @@ from localization import _, DATA
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 
 if settings["file-for-syncing"] == "":
-    print("Synchronization is not set up.")
+    print("Synchronization is not set up. The synchronization file is missing.")
     exit()
-elif settings["periodic-import"] == "Never2":
-    print("Synchronization is not set up.")
+elif settings["periodic-saving"] == "Never":
+    print("Periodic saving is set to the Never. Please change it.")
+    exit()
 else:
     if not os.path.exists(f"{DATA}/synchronization"):
         os.mkdir(f"{DATA}/synchronization")
     if not glob.glob(f"{DATA}/synchronization/*.sd.tar.gz"):
         os.system(f"cp {settings['file-for-syncing']} {DATA}/synchronization/")
-    if not os.path.exists(f"{DATA}/synchronization/file-settings.json"):
-        file_name = os.path.basename(settings["file-for-syncing"])
-        with open(f"{DATA}/synchronization/file-settings.json", "w") as f:
-            f.write('{\n "file-name": "%s.gz",\n "periodic-import": "%s"\n}' % (file_name, settings["periodic-import"]))
     
     path = Path(f'{DATA}/synchronization')
 
