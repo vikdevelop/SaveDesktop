@@ -60,29 +60,27 @@
 
 Введите следующую команду в терминале:
 - если SaveDesktop у вас установлен как пакет Flatpak, используйте следующее:
-
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
      ```
-
 - если SaveDesktop у вас установлен как Snap или нативный пакет, используйте: 
      ```
      savedesktop --import-config /path/to/filename.sd.tar.gz
      ```</str>
   <str key="imp_cfg_cli_note">**Примечание**:
 - вместо `/path/to/filename.sd.tar.gz` введите путь к архиву конфигурации, который вы хотите импортировать, например: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
-  <str key="archive_encryption_">Archive encryption</str>
-  <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
-  <str key="ac_intro">## How does it work?
-If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 12 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. </str>
+  <str key="archive_encryption_">Шифрование архива</str>
+  <str key="archive_encryption_desc">Если вы хотите зашифровать архив конфигурации, будь то по соображениям защиты данных или по каким-либо другим причинам, вы можете использовать функцию шифрования архива в приложении SaveDesktop. Итак, как это работает и как это настроить?</str>
+  <str key="ac_intro">## Как это работает?
+Если эта функция включена, SaveDesktop всегда будет запрашивать у вас создание пароля для вашего нового архива конфигурации. Критерии для пароля включают не менее 12 символов, одну заглавную букву, одну строчную букву и один специальный символ. Если пароль не соответствует этим критериям, продолжить сохранение конфигурации будет невозможно.. </str>
   <str key="ac_warn">&amp;gt; [!WARNING]  
-&amp;gt; The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.</str>
-  <str key="ac_setup">## How to set it up?
-In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.</str>
-  <str key="saving_cfg_title">Saving configuration</str>
-  <str key="saving_cfg_intro">If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.</str>
-  <str key="save_cfg_outro">When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.</str>
-  <str key="enc">The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+&amp;gt; Файлы периодического сохранения (пока) недоступны для защиты паролем. Зашифрованные архивы пока невозможно использовать для синхронизации.</str>
+  <str key="ac_setup">## Как это настроить?
+В версии 3.3 интерфейс был немного изменен, в частности, раздел периодического сохранения теперь расположен под кнопкой "Дополнительные параметры". Там же расположен раздел шифрования архива. Итак, нажмите на уже упомянутую кнопку и включите переключатель шифрования архива.</str>
+  <str key="saving_cfg_title">Сохранение конфигурации</str>
+  <str key="saving_cfg_intro">Если вы предпочитаете интерфейс командной строки (CLI) графическому интерфейсу пользователя (GUI), SaveDesktop в дополнение к сохранению конфигурации в GUI позволяет вам сохранять конфигурацию в CLI.</str>
+  <str key="save_cfg_outro">При использовании этого метода он использует параметры из графического интерфейса пользователя, в частности параметры из режима периодического сохранения, такие как формат имени файла и выбранная папка для периодического сохранения файлов. Вы можете сохранить конфигурацию с помощью этого метода в любое удобное для вас время, независимо от выбранного интервала периодического сохранения.</str>
+  <str key="enc">Архив будет сохранен в виде ZIP-архива (поскольку Tar не поддерживает функцию защиты паролем), и если вы захотите его извлечь, вам будет предложено ввести пароль, который вы использовали в процессе сохранения конфигурации. То же самое относится и к импорту конфигурации.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.</str>
+Если вы забыли пароль, извлечь архив и использовать его в процессе импорта конфигурации будет невозможно.</str>
 </root>
