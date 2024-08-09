@@ -1462,8 +1462,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.savewaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.savewaitBox.set_halign(Gtk.Align.CENTER)
         self.savewaitBox.set_valign(Gtk.Align.CENTER)
-        self.savewaitBox.set_margin_start(80)
-        self.savewaitBox.set_margin_end(80)
         self.toolbarview.set_content(self.savewaitBox)
 
         # Set bold title
@@ -1582,8 +1580,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.importwaitBox.set_halign(Gtk.Align.CENTER)
         self.importwaitBox.set_valign(Gtk.Align.CENTER)
-        self.importwaitBox.set_margin_start(80)
-        self.importwaitBox.set_margin_end(80)
         self.toolbarview.set_content(self.importwaitBox)
 
         # Set bold title
@@ -1714,17 +1710,13 @@ class MyApp(Adw.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, 
                          application_id="io.github.vikdevelop.SaveDesktop" if not snap else None)
-        actions = [
-            ('about', self.on_about_action, ["F1"]),
-            ('open-dir', self.open_dir),
-            ('logout', self.logout),
-            ('m_sync_with_key', self.sync_pc, ["<primary>s"]) if settings["manually-sync"] else None,
-            ('m_sync', self.sync_pc),
-            ('quit', self.app_quit, ["<primary>q"]),
-            ('shortcuts', self.shortcuts, ["<primary>question"])
-        ]
-        for action in filter(None, actions):
-            self.create_action(*action)
+        self.create_action('about', self.on_about_action, ["F1"])
+        self.create_action('open-dir', self.open_dir)
+        self.create_action('logout', self.logout)
+        self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"] if settings["manually-sync"] else None)
+        self.create_action('m_sync', self.sync_pc)
+        self.create_action('quit', self.app_quit, ["<primary>q"])
+        self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.connect('activate', self.on_activate)
 
     def open_dir(self, action, param):
@@ -1739,13 +1731,12 @@ class MyApp(Adw.Application):
             manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
             manager.KillSession(manager.ListSessions()[0][0], 'all', 9)
         else:
-            desktop_env = os.getenv('XDG_CURRENT_DESKTOP')
-            commands = {
-                'XFCE': "dbus-send --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false",
-                'KDE': "dbus-send --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int32:0 int32:0",
-                'GNOME': "dbus-send --session --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1"
-            }
-            os.system(commands.get(desktop_env, ""))
+            if os.getenv("XDG_CURRENT_DESKTOP") == 'XFCE':
+                os.system("dbus-send --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
+            elif os.getenv("XDG_CURRENT_DESKTOP") == 'KDE':
+                os.system("dbus-send --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int32:0 int32:0")
+            else:
+                os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
 
     def sync_pc(self, action, param):
         sync_info_path = f"{DATA}/sync-info.json"
@@ -1773,18 +1764,16 @@ class MyApp(Adw.Application):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
         dialog.set_developer_name("vikdevelop")
-        if not r_lang == "en":
-            dialog.set_translator_credits(_["translator_credits"])
-        if lang_list:
-            dialog.add_link("Translate SaveDesktop Github Wiki", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/")
+        r_lang != "en" and dialog.set_translator_credits(_["translator_credits"]) # add the translator credits section if the system language is not English
+        lang_list and dialog.add_link("SaveDesktop Github Wiki (Weblate)", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/") # add a link to translate the SaveDesktop Github wiki on Weblate
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
         dialog.set_copyright("© 2023-2024 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
-        dialog.set_version(f"{version}-beta" if os.path.exists("/app/share/build-beta.sh") else version)
-        dialog.set_application_icon(f"{icon}.Devel" if os.path.exists("/app/share/build-beta.sh") else icon)
+        dialog.set_version(version)
+        dialog.set_application_icon(icon)
         dialog.set_release_notes(rel_notes)
         dialog.show()
 
