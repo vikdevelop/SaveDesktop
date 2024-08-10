@@ -1,32 +1,29 @@
-## Saving configuration
+## Сохранение конфигурации
 
-**This feature is available from version: `3.3`**
+**Эта функция доступна начиная с версии: `3.3`**
 
-If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.
+Если вы предпочитаете интерфейс командной строки (CLI) графическому интерфейсу пользователя (GUI), SaveDesktop в дополнение к сохранению конфигурации в GUI позволяет вам сохранять конфигурацию в CLI.
 
-### So how to proceed?
+### Итак, как действовать?
+**1. Откройте терминал**
 
-**1. Open a terminal**
+Открыть его можно из меню приложений или с помощью комбинации клавиш Ctrl+Alt+T.
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+**2. Введите команду для импорта конфигурации**
 
-**2. Enter the command**
-
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
-
+Введите следующую команду в терминале:
+- если SaveDesktop у вас установлен как пакет Flatpak, используйте следующее:
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --save-now
      ```
-
-- if you have SaveDesktop installed as a Snap or native package, use:
+- если SaveDesktop у вас установлен как Snap или нативный пакет, используйте: 
      ```
      savedesktop --save-now
      ```
 
-When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.
+При использовании этого метода он использует параметры из графического интерфейса пользователя, в частности параметры из режима периодического сохранения, такие как формат имени файла и выбранная папка для периодического сохранения файлов. Вы можете сохранить конфигурацию с помощью этого метода в любое удобное для вас время, независимо от выбранного интервала периодического сохранения.
 
-## Importing configuration
+## Импорт конфигурации
 
 **Эта функция доступна начиная с версии: `3.2.2`**
 
@@ -37,7 +34,7 @@ When using this method, it uses parameters from the GUI, specifically parameters
 
 Открыть его можно из меню приложений или с помощью комбинации клавиш Ctrl+Alt+T.
 
-**2. Enter the command**
+**2. Введите команду для импорта конфигурации**
 
 Введите следующую команду в терминале:
 - если SaveDesktop у вас установлен как пакет Flatpak, используйте следующее:
