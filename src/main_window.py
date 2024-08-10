@@ -885,8 +885,7 @@ class MainWindow(Adw.ApplicationWindow):
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading(_["connect_with_other_computer"])
-        self.urlDialog.set_default_size(500, 300)
-
+          
         # Box for adding widgets in this dialog
         self.urlBox = Gtk.ListBox.new()
         self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
