@@ -51,22 +51,22 @@ Dopo aver importato il file di configurazione salvato ed aver effettuato nuovame
   <str key="version_warning">**Questa funzionalità è disponibile dalla versione: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">Importazione della configurazione</str>
   <str key="imp_cfg_cli_intro">Oltre a importare la configurazione nella GUI, SaveDesktop ti consente anche di importare la configurazione nell'interfaccia a riga di comando (CLI), che puoi utilizzare nel caso in cui il tuo ambiente desktop si guasti.</str>
-  <str key="imp_cfg_cli_steps">### Quindi come procedere?
+  <str key="imp_cfg_cli_steps">### Quindi, come procedere?
 **1. Apri un terminale**
 
 Puoi aprirlo dal menu delle applicazioni o usando la scorciatoia da tastiera Ctrl+Alt+T.
 
-**2. Digita il comando per importare la configurazione**
+**2. Inserisci il comando**
 
 Inserisci il seguente comando nel terminale:
 - se hai installato SaveDesktop come pacchetto Flatpak, usa quanto segue:
-```
+     ```
 flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
-```
+     ```
 - se hai installato SaveDesktop come pacchetto Snap o nativo, usa:
-```
-savedesktop --import-config /path/to/filename.sd.tar.gz
-```</str>
+     ```
+     savedesktop --import-config /path/to/filename.sd.tar.gz
+     ```</str>
   <str key="imp_cfg_cli_note">**Nota**:
 - invece di `/path/to/filename.sd.tar.gz`, inserisci il percorso dell'archivio di configurazione che desideri importare, ad esempio: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
   <str key="archive_encryption_">Cifratura dell'archivio</str>
