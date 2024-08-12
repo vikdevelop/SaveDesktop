@@ -7,21 +7,19 @@ Se preferisci l'interfaccia della riga di comando (CLI) all'interfaccia utente g
 ### Quindi, come procedere?
 **1. Apri un terminale**
 
-Puoi aprirlo dal menu delle applicazioni o utilizzando la scorciatoia da tastiera Ctrl+Alt+T.
+Puoi aprirlo dal menu delle applicazioni o usando la scorciatoia da tastiera Ctrl+Alt+T.
 
-**2. Enter the command**
+**2. Inserisci il comando**
 
-Immettere il seguente comando nel terminale:
-- se hai SaveDesktop installato come pacchetto Flatpak, utilizza quanto segue:
-
-   ```
-   flatpak run io.github.vikdevelop.SaveDesktop --save-now
-   ```
-
-- se hai SaveDesktop installato come Snap o pacchetto nativo, utilizza:
-   ```
-   savedesktop --save-now
-   ```
+Inserisci il seguente comando nel terminale:
+- se hai installato SaveDesktop come pacchetto Flatpak, usa quanto segue:
+     ```
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     ```
+- se hai installato SaveDesktop come pacchetto Snap o nativo, usa:
+     ```
+     savedesktop --import-config /path/to/filename.sd.tar.gz
+     ```
 
 Quando si utilizza questo metodo, vengono utilizzati i parametri della GUI, in particolare i parametri della modalità di salvataggio periodico, come il formato del nome file e la cartella selezionata per il salvataggio periodico dei file. Puoi salvare la configurazione con questo metodo ogni volta che vuoi, indipendentemente dall'intervallo di salvataggio periodico selezionato.
 
@@ -34,21 +32,19 @@ Oltre a importare la configurazione nella GUI, SaveDesktop ti consente anche di 
 ### Quindi, come procedere?
 **1. Apri un terminale**
 
-Puoi aprirlo dal menu delle applicazioni o utilizzando la scorciatoia da tastiera Ctrl+Alt+T.
+Puoi aprirlo dal menu delle applicazioni o usando la scorciatoia da tastiera Ctrl+Alt+T.
 
-**2. Enter the command**
+**2. Inserisci il comando**
 
-Immettere il seguente comando nel terminale:
-- se hai SaveDesktop installato come pacchetto Flatpak, utilizza quanto segue:
-
-   ```
-   flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
-   ```
-
-- se hai SaveDesktop installato come Snap o pacchetto nativo, utilizza:
-   ```
-   savedesktop --import-config /percorso/del/nomefile.sd.tar.gz
-   ```
+Inserisci il seguente comando nel terminale:
+- se hai installato SaveDesktop come pacchetto Flatpak, usa quanto segue:
+     ```
+     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     ```
+- se hai installato SaveDesktop come pacchetto Snap o nativo, usa:
+     ```
+     savedesktop --import-config /path/to/filename.sd.tar.gz
+     ```
       
 **Nota**:
 - invece di `/path/to/filename.sd.tar.gz`, inserisci il percorso dell'archivio di configurazione che desideri importare, ad esempio: `/home/user/Downloads/myconfig.sd.tar.gz`
