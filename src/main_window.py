@@ -713,7 +713,7 @@ class MainWindow(Adw.ApplicationWindow):
                 self.set_syncing()
                 
                 if "fuse" in subprocess.getoutput(f"df -T {self.file_row.get_subtitle()}"):
-                    print("")
+                    os.system(f"echo '{settings['filename-format']}.sd.tar.gz' > {settings['periodic-saving-folder']}/SaveDesktop-sync-file")
                 else:
                     # start copying the synchronization file process
                     setup_thread = Thread(target=copy_sync_file)
@@ -851,16 +851,22 @@ class MainWindow(Adw.ApplicationWindow):
                 cfile_subtitle = self.cfileRow.get_subtitle()
                 if cfile_subtitle:
                     if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
-                        output = subprocess.run(
-                            ['sed', '-n', r's|.*/gvfs/$[^:]*$:host=$[^,]*$,user=$[^/]*$.*|\1 \2 \3|p'],
-                            input=cfile_subtitle, text=True, capture_output=True
-                        ).stdout.strip()
-                        get_host_user = output.split()
-                        desktop_file_path = f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop"
-                        if not os.path.exists(desktop_file_path):
-                            with open(desktop_file_path, "w") as m:
-                                m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {get_host_user[0]}://{get_host_user[2]}@{get_host_user[1]}")
+                        pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*'
+                        match = re.search(pattern, cfile_subtitle)
 
+                        if match:
+                            cloud_service = match.group(1)
+                            host = match.group(2)
+                            user = match.group(3)
+                            
+                            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
+                                m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{user}@{host}")
+                        else:
+                            print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
+                    if "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
+                        with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
+                            m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}")
+                        
                     # Check if the selected cloud drive folder is correct
                     if "fuse" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
                         settings["file-for-syncing"] = cfile_subtitle
