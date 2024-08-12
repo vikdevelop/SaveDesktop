@@ -14,11 +14,11 @@ Puoi aprirlo dal menu delle applicazioni o usando la scorciatoia da tastiera Ctr
 Inserisci il seguente comando nel terminale:
 - se hai installato SaveDesktop come pacchetto Flatpak, usa quanto segue:
      ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
+     flatpak run io.github.vikdevelop.SaveDesktop --save-now
      ```
 - se hai installato SaveDesktop come pacchetto Snap o nativo, usa:
      ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
+     savedesktop --save-now
      ```
 
 Quando si utilizza questo metodo, vengono utilizzati i parametri della GUI, in particolare i parametri della modalità di salvataggio periodico, come il formato del nome file e la cartella selezionata per il salvataggio periodico dei file. Puoi salvare la configurazione con questo metodo ogni volta che vuoi, indipendentemente dall'intervallo di salvataggio periodico selezionato.
