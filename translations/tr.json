@@ -67,13 +67,13 @@
     "config_imported_desc": "<big><b>{}</b></big>\nDeğişikliklerin geçerli olması için oturumu şimdi kapatabilir ya da önceki sayfaya geri dönüp daha sonra oturumu kapatabilirsiniz.\n",
     "back_to_page": "Önceki sayfaya dön",
     "config_saved_desc": "<big><b>{}</b></big>\nArtık arşivi masaüstü ortamınızın yapılandırmasıyla görüntüleyebilir ya da önceki sayfaya dönebilirsiniz.\n",
-    "create_pwd_title": "Create new password",
-    "password_entry": "Password",
-    "check_pwd_desc": "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.",
-    "pb_interval": "Interval",
-    "archive_encryption": "Archive encryption",
-    "archive_encryption_desc": "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.",
-    "create_pwd_desc": "Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character.",
-    "more_options": "More options",
-    "check_pwd_title": "Unlock the archive with a password"
+    "create_pwd_title": "Yeni parola oluştur",
+    "password_entry": "Parola",
+    "check_pwd_desc": "Yapılandırmanızın bulunduğu arşivin kilidini açmak için aşağıya parolayı girin. Parolayı unuttuysanız, arşivi açamaz ve yapılandırmanızı içe aktarmaya başlayamazsınız.",
+    "pb_interval": "Aralık",
+    "archive_encryption": "Arşiv şifreleme",
+    "archive_encryption_desc": "Yapılandırmayı elle kaydederken parola oluşturmanız istenir. Bu, verilerinizin daha iyi güvenliği için yapılandırmayı taşınabilir ortama kaydederken kullanışlıdır.",
+    "create_pwd_desc": "Lütfen arşiviniz için yeni parola oluşturun. Parolanız en az 12 karakter uzunluğunda olmalı, bir büyük harf, bir küçük harf ve bir özel karakter içermelidir.",
+    "more_options": "Daha çok seçenek",
+    "check_pwd_title": "Arşiv kilidini parolayla aç"
 }
