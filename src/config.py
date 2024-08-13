@@ -192,17 +192,17 @@ class Save:
                 password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
                 os.system(f"zip -9 -P '{password}' cfg.sd.zip . -r -x 'saving_status'")
                 print("moving the configuration archive to the user-defined directory")
-                os.system(f"mv ./cfg.sd.zip \"{j['recent_file']}\"")
+                shutil.copyfile('cfg.sd.zip', j['recent_file'])
             else:
                 os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
                 print("moving the configuration archive to the user-defined directory")
-                os.system(f"mv ./cfg.sd.tar.gz \"{j['recent_file']}\"")
+                shutil.copyfile('cfg.sd.tar.gz', j['recent_file'])
         elif os.path.exists(f"{CACHE}/.periodicfile.json"):
             os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
             print("moving the configuration archive to the user-defined directory")
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
-            os.system(f"cp ./cfg.sd.tar.gz \"{j['recent_file']}\"")
+            shutil.copyfile('cfg.sd.tar.gz', j['recent_file'])
             if not settings["url-for-syncing"] == "":
                 if not settings["periodic-import"] == "Never2":
                     file = os.path.basename(j["recent_file"])
@@ -236,19 +236,20 @@ class Import:
         os.system(f'cp ./installed_flatpaks.sh {DATA}/')
         os.system(f'cp ./installed_user_flatpaks.sh {DATA}/')
         print("importing icons")
-        os.system(f'cp -R ./icons {home}/.local/share/')
-        os.system(f'cp -R ./.icons {home}/')
+        os.system(f'cp -au ./icons {home}/.local/share/')
+        os.system(f'cp -au ./.icons {home}/')
         print("importing themes")
-        os.system(f'cp -R ./.themes {home}/')
+        os.system(f'cp -au ./.themes {home}/')
         print("importing backgrounds")
-        os.system(f'cp -R ./backgrounds {home}/.local/share/')
+        os.system(f'cp -au ./backgrounds {home}/.local/share/')
         print("importing fonts")
-        os.system(f'cp -R ./.fonts {home}/')
+        os.system(f'cp -au ./.fonts {home}/')
         print("importing Gtk settings")
-        os.system(f'cp -R ./gtk-4.0 {home}/.config/')
-        os.system(f'cp -R ./gtk-3.0 {home}/.config/')
+        os.system(f'cp -au ./gtk-4.0 {home}/.config/')
+        os.system(f'cp -au ./gtk-3.0 {home}/.config/')
         print("importing desktop directory")
-        os.system(f'cp -R ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
+        os.system(f'cp -au ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
+        # create this file to prevent removing the cache directory during importing configuration
         if os.path.exists(f'{CACHE}/import_config/app'):
             with open(f"copying_flatpak_data", "w") as c:
                 c.write("copying flatpak data ...")
@@ -258,50 +259,50 @@ class Import:
         print("importing desktop environment configuration files")
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
-            os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
-            os.system(f'cp -R ./gnome-shell {home}/.local/share/')
-            os.system(f'cp -R ./nautilus-python {home}/.local/share/')
-            os.system(f'cp -R ./nautilus {home}/.local/share/')
-            os.system(f'cp -R ./gnome-control-center {home}/.config/')
+            os.system(f'cp -au ./gnome-background-properties {home}/.local/share/')
+            os.system(f'cp -au ./gnome-shell {home}/.local/share/')
+            os.system(f'cp -au ./nautilus-python {home}/.local/share/')
+            os.system(f'cp -au ./nautilus {home}/.local/share/')
+            os.system(f'cp -au ./gnome-control-center {home}/.config/')
         elif environment == 'Pantheon':
-            os.system(f'cp -R ./plank {home}/.config/')
-            os.system(f'cp -R ./marlin {home}/.config/')
+            os.system(f'cp -au ./plank {home}/.config/')
+            os.system(f'cp -au ./marlin {home}/.config/')
         elif environment == 'Cinnamon':
-            os.system(f'cp -R ./nemo {home}/.config/')
-            os.system(f'cp -R ./cinnamon {home}/.local/share/')
-            os.system(f'cp -R ./.cinnamon {home}/')
+            os.system(f'cp -au ./nemo {home}/.config/')
+            os.system(f'cp -au ./cinnamon {home}/.local/share/')
+            os.system(f'cp -au ./.cinnamon {home}/')
         elif environment == 'Budgie':
-            os.system(f'cp -R ./budgie-desktop {home}/.config/')
-            os.system(f'cp -R ./budgie-extras {home}/.config/')
-            os.system(f'cp -R ./nemo {home}/.config/')
+            os.system(f'cp -au ./budgie-desktop {home}/.config/')
+            os.system(f'cp -au ./budgie-extras {home}/.config/')
+            os.system(f'cp -au ./nemo {home}/.config/')
         elif environment == 'COSMIC (Old)':
-            os.system(f'cp -R ./pop-shell {home}/.config/')
-            os.system(f'cp -R ./gnome-shell {home}/.local/share/')
+            os.system(f'cp -au ./pop-shell {home}/.config/')
+            os.system(f'cp -au ./gnome-shell {home}/.local/share/')
         elif environment == 'COSMIC (New)':
-            os.system(f"cp -R ./cosmic {home}/.config/")
-            os.system(f"cp -R ./cosmic-state {home}/.local/state/cosmic")
+            os.system(f"cp -au ./cosmic {home}/.config/")
+            os.system(f"cp -au ./cosmic-state {home}/.local/state/cosmic")
         elif environment == 'Xfce':
-            os.system(f'cp -R ./xfce4 {home}/.config/')
-            os.system(f'cp -R ./Thunar {home}/.config/')
-            os.system(f'cp -R ./.xfce4 {home}/')
+            os.system(f'cp -au ./xfce4 {home}/.config/')
+            os.system(f'cp -au ./Thunar {home}/.config/')
+            os.system(f'cp -au ./.xfce4 {home}/')
         elif environment == 'MATE':
-            os.system(f'cp -R ./caja {home}/.config/')
+            os.system(f'cp -au ./caja {home}/.config/')
         elif environment == 'KDE Plasma':
             if os.path.exists(f"{CACHE}/syncing"):
                 os.chdir("%s/syncing" % CACHE)
             else:
                 os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-config')
-            os.system(f'cp -R ./ {home}/.config/')
+            os.system(f'cp -au ./ {home}/.config/')
             if os.path.exists(f"{CACHE}/syncing"):
                 os.chdir("%s/syncing" % CACHE)
             else:
                 os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-data')
-            os.system(f'cp -R ./ {home}/.local/share/')
+            os.system(f'cp -au ./ {home}/.local/share/')
         elif environment == 'Deepin':
-            os.system(f"cp -R ./deepin {home}/.config/")
-            os.system(f"cp -R ./deepin-data {home}/.local/share/deepin/")
+            os.system(f"cp -au ./deepin {home}/.config/")
+            os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
         elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
