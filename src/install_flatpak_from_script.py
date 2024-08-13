@@ -41,3 +41,4 @@ if os.path.exists(f"{DATA_FLATPAK}/installed_flatpaks.sh"):
 else:
     print("List with installed Flatpak apps is not exists.")
     
+os.system("rm ~/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop")
