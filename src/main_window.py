@@ -27,7 +27,7 @@ settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/g
 @Gtk.Template(string=SHORTCUTS_WINDOW) # from shortcuts_window.py
 class ShortcutsWindow(Gtk.ShortcutsWindow):
     __gtype_name__ = 'ShortcutsWindow'
-
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -187,7 +187,7 @@ class MainWindow(Adw.ApplicationWindow):
         # add Manually sync section
         if settings["manually-sync"] == True:
             self.sync_menu = Gio.Menu()
-            self.sync_menu.append(_["sync"], 'app.m_sync')
+            self.sync_menu.append(_["sync"], 'app.m_sync_with_key')
             self.main_menu.append_section(None, self.sync_menu)
         
         # primary layout
@@ -558,7 +558,7 @@ class MainWindow(Adw.ApplicationWindow):
             try:
                 self.headerbar.remove(self.applyButton)
             except:
-                print("")
+                pass
         
         # add back button for this page
         self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
@@ -685,7 +685,7 @@ class MainWindow(Adw.ApplicationWindow):
             except Exception as e:
                 os.system(f"notify-send 'SaveDesktop' 'ERR: {e}'")
             finally:
-                print("")
+                print("The sync file has been copied to the SaveDesktop data folder successfully.")
 
         # Create periodic saving file if not exists
         def save_now():
@@ -826,13 +826,22 @@ class MainWindow(Adw.ApplicationWindow):
         def urlDialog_closed(w, response):
             if response == 'ok':
                 check_psync = settings["periodic-import"]
-                settings["periodic-import"] = self.psyncRow.get_selected_item().get_string() + "2"
-                settings["manually-sync"] = settings["periodic-import"] == "Manually2"
+                
+                # translate the periodic sync options to English
+                selected_item = self.psyncRow.get_selected_item()
+                sync = {_["never"]: "Never2", _["manually"]: "Manually2", _["daily"]: "Daily2", _["weekly"]: "Weekly2", _["monthly"]: "Monthly2"}
+                
+                sync_item = sync.get(selected_item.get_string(), "Never2")
+
+                settings["periodic-import"] = sync_item
+                
+                # if the selected periodic saving interval is "Manually2", it enables the manually-sync value
+                settings["manually-sync"] = True and settings["periodic-import"] == "Manually2"
                 
                 # if it is selected to manually sync, it creates an option in the app menu in the header bar
                 if settings["manually-sync"]:
                     self.sync_menu = Gio.Menu()
-                    self.sync_menu.append(_["sync"], 'app.m_sync')
+                    self.sync_menu.append(_["sync"], 'app.m_sync_with_key')
                     self.main_menu.append_section(None, self.sync_menu)
                     self.sync_menu.remove(1)
                     self.show_special_toast()
@@ -891,6 +900,7 @@ class MainWindow(Adw.ApplicationWindow):
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading(_["connect_with_other_computer"])
+        self.urlDialog.set_default_size(400,400)
           
         # Box for adding widgets in this dialog
         self.urlBox = Gtk.ListBox.new()
@@ -1708,15 +1718,6 @@ class MainWindow(Adw.ApplicationWindow):
         else:
             os.system(f"rm -rf {CACHE}/* {CACHE}/.*")
         
-        # Get periodic synchronization type
-        try:
-            with urlopen(f"{settings['url-for-syncing']}/file-settings.json") as url:
-                j = json.load(url)
-                settings["manually-sync"] = j.get("periodic-import") == "Manually2"
-            os.remove(f"{CACHE}/file-settings.json")
-        except:
-            settings["manually-sync"] = False
-        
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, 
@@ -1725,7 +1726,6 @@ class MyApp(Adw.Application):
         self.create_action('open-dir', self.open_dir)
         self.create_action('logout', self.logout)
         self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"] if settings["manually-sync"] else None)
-        self.create_action('m_sync', self.sync_pc)
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.connect('activate', self.on_activate)
