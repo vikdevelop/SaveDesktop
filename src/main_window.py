@@ -1012,6 +1012,7 @@ class MainWindow(Adw.ApplicationWindow):
                     settings["save-flatpak-data"] = self.switch_06.get_active()
                 if self.save_ext_switch_state == True:
                     settings["save-extensions"] = self.switch_ext.get_active()
+                    self.save_ext_switch_state = False
             elif response == 'cancel':
                 switch_status = self.flatpak_data_sw_state
                 settings["save-flatpak-data"] = switch_status
@@ -1122,6 +1123,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         # show extension switch and row if user has installed these environments
         if self.environment in ["GNOME", "KDE Plasma", "Cinnamon", "COSMIC (Old)"]:
+            self.save_ext_switch_state = True
             show_extensions_row()
         
         # Switch and row of option 'Save Desktop' (~/Desktop)
@@ -1285,64 +1287,53 @@ class MainWindow(Adw.ApplicationWindow):
         def pswdDialog_closed(w, response):
             if response == 'ok':
                 with open(f"{CACHE}/.pswd_temp", "w") as p:
-                    p.write(f"{self.pswdEntry.get_text()}")
+                    p.write(self.pswdEntry.get_text())
                 self.save_config()
-        
+
         # Check the password to see if it meets the criteria
         def check_password(pswdEntry):
             password = self.pswdEntry.get_text()
-            """
-            # Remove this criterion, because it is not defined in the "Create new password" dialog
-            elif not re.search(r'\d', password):
-                self.pswdDialog.set_response_enabled("ok", False)
-                print("The password should has at least one number")
-            """
-            if len(password) < 12:
-                self.pswdDialog.set_response_enabled("ok", False)
-                print("The password is too short. It should has at least 12 characters")
-            elif not re.search(r'[A-Z]', password):
-                self.pswdDialog.set_response_enabled("ok", False)
-                print("The password should has at least one capital letter")
-            elif not re.search(r'[a-z]', password):
-                self.pswdDialog.set_response_enabled("ok", False)
-                print("The password should has at least one lowercase letter")
-            elif not re.search(r'[@#$%^&*()":{}|<>_-]', password):
-                self.pswdDialog.set_response_enabled("ok", False)
-                print("The password should has at least one special character")
-            elif " " in password:
-                self.pswdDialog.set_response_enabled("ok", False)
-                print("The password must not contain spaces")
-            else:
-                self.pswdDialog.set_response_enabled("ok", True)
-               
+            criteria = [
+                (len(password) < 12, "The password is too short. It should has at least 12 characters"),
+                (not re.search(r'[A-Z]', password), "The password should has at least one capital letter"),
+                (not re.search(r'[a-z]', password), "The password should has at least one lowercase letter"),
+                (not re.search(r'[@#$%^&*()":{}|<>_-]', password), "The password should has at least one special character"),
+                (" " in password, "The password must not contain spaces")
+            ]
+            
+            for condition, message in criteria:
+                if condition:
+                    self.pswdDialog.set_response_enabled("ok", False)
+                    print(message)
+                    return
+                    
+            self.pswdDialog.set_response_enabled("ok", True)
+
         # Generate Password
         def pswd_generator(w):
-            # define characters that will be included in the password
             characters = string.ascii_letters + string.digits + string.punctuation
-
-            # generate password about lenght 24 characters
-            password = ''.join(random.choice(characters) for i in range(24))
-            
+            password = ''.join(random.choice(characters) for _ in range(24))
             self.pswdEntry.set_text(password)
-        
+
         # dialog itself
         self.pswdDialog = Adw.MessageDialog.new(self)
         self.pswdDialog.set_heading(_["create_pwd_title"])
         self.pswdDialog.set_body(_["create_pwd_desc"])
-        
+
         # button for generating strong password
         self.pswdgenButton = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
         self.pswdgenButton.set_tooltip_text("Generate Password")
         self.pswdgenButton.add_css_class("flat")
+        self.pswdgenButton.set_valign(Gtk.Align.CENTER)
         self.pswdgenButton.connect("clicked", pswd_generator)
-        
-        # entry for entering passsword
+
+        # entry for entering password
         self.pswdEntry = Adw.PasswordEntryRow.new()
         self.pswdEntry.set_title(_["password_entry"])
         self.pswdEntry.connect('changed', check_password)
         self.pswdEntry.add_suffix(self.pswdgenButton)
         self.pswdDialog.set_extra_child(self.pswdEntry)
-        
+
         self.pswdDialog.add_response("cancel", _["cancel"])
         self.pswdDialog.add_response("ok", _["apply"])
         self.pswdDialog.set_response_enabled("ok", False)
@@ -1362,89 +1353,25 @@ class MainWindow(Adw.ApplicationWindow):
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
-        save_thread = Thread(target=self.open_config_save)
+        save_thread = Thread(target=self.start_saving)
         save_thread.start()
         
     # start process of saving the configuration
-    def open_config_save(self):
+    def start_saving(self):
         try:
-            os.system(f"python3 {system_dir}/config.py --save")
+            e_o = False
+            from config import Save
+            Save()
         except Exception as e:
-            print("Can't run the config.py file!")
+            e_o = True
+            error = e
+            GLib.idle_add(self.show_err_msg, error)
+            self.toolbarview.set_content(self.headapp)
+            self.toolbarview.remove(self.headerbar_save)
+            self.toolbarview.add_top_bar(self.headerbar)
         finally:
-            self.exporting_done()
-        
-    # Import config from list
-    def imp_cfg_from_list(self, w):
-        selected_archive = self.radio_row.get_selected_item()
-        with open(f"{CACHE}/.impfile.json", "w") as j:
-            j.write('{\n "import_file": "%s/%s"\n}' % (self.dir, selected_archive.get_string()))
-        if not os.path.exists(f"{CACHE}/import_from_list"):
-            os.mkdir(f"{CACHE}/import_from_list")
-        os.chdir(f"{CACHE}/import_from_list")
-        self.please_wait_import()
-        import_thread = Thread(target=self.open_config_import)
-        import_thread.start()
-     
-    # dialog for entering password of the archive
-    def check_password_dialog(self):
-        # unzip archive if password is correct only
-        def unzip_ar():
-            with open(f"{CACHE}/.impfile.json") as i:
-                j = json.load(i)
-            if not os.path.exists(f"{CACHE}/import_config"):
-                os.mkdir(f"{CACHE}/import_config")
-            file_name = j["import_file"]
-            self.please_wait_import()
-            try:
-                with zipfile.ZipFile(file_name, "r") as zip:
-                    zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
-            except Exception as err:
-                self.toast_err = Adw.Toast.new(title=f"ERR: {err}")
-                self.toast_overlay.add_toast(self.toast_err)
-                self.toolbarview.set_content(self.headapp)
-                self.toolbarview.add_top_bar(self.headerbar)
-                self.toolbarview.remove(self.headerbar_import)
-            finally:
-                self.import_config()
-                
-        # action after closing dialog for checking password
-        def checkDialog_closed(w, response):
-            if response == 'ok':
-                self.checkDialog.set_response_enabled("ok", False)
-                zip_thread = Thread(target=unzip_ar)
-                zip_thread.start()
-            
-        self.checkDialog = Adw.MessageDialog.new(self)
-        self.checkDialog.set_heading(_["check_pwd_title"])
-        self.checkDialog.set_body(_["check_pwd_desc"])
-        
-        self.checkEntry = Adw.PasswordEntryRow.new()
-        self.checkEntry.set_title(_["password_entry"])
-        self.checkDialog.set_extra_child(self.checkEntry)
-        
-        self.checkDialog.add_response("cancel", _["cancel"])
-        self.checkDialog.add_response("ok", _["apply"])
-        self.checkDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.checkDialog.connect('response', checkDialog_closed)
-        self.checkDialog.show()    
-        
-    # Import configuration
-    def import_config(self):
-        if not os.path.exists(f"{CACHE}/import_config"):
-            os.mkdir(f"{CACHE}/import_config")
-        os.chdir(f"{CACHE}/import_config")
-        import_thread = Thread(target=self.open_config_import)
-        import_thread.start()
-       
-    # start process of importing configuration
-    def open_config_import(self):
-        try:
-            os.system(f"python3 {system_dir}/config.py --import_")
-        except Exception as e:
-            print("Can't run the config.py file!")
-        finally:
-            self.applying_done()
+            if not e_o:
+                self.exporting_done()
             
     # "Please wait" information page on the "Save" page
     def please_wait_save(self):
@@ -1508,12 +1435,9 @@ class MainWindow(Adw.ApplicationWindow):
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_save)
             self.toolbarview.add_top_bar(self.headerbar)
-            self.savewaitBox.remove(self.savewaitSpinner)
-            self.savewaitBox.remove(self.savewaitLabel)
-            self.savewaitBox.remove(self.savewaitButton)
-            self.savewaitBox.remove(self.sdoneImage)
-            self.savewaitBox.remove(self.opensaveButton)
-            self.savewaitBox.remove(self.backtomButton)
+            
+            for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
+                self.savewaitBox.remove(widget)
         
         # send notification about saved configuration if application window is inactive only
         self.notification_save = Gio.Notification.new("SaveDesktop")
@@ -1554,6 +1478,86 @@ class MainWindow(Adw.ApplicationWindow):
         # remove content in the cache directory
         os.popen(f"rm -rf {CACHE}/save_config/")
         os.popen(f"rm {CACHE}/.pswd_temp")
+    
+    # Import config from list
+    def imp_cfg_from_list(self, w):
+        selected_archive = self.radio_row.get_selected_item()
+        with open(f"{CACHE}/.impfile.json", "w") as j:
+            j.write('{\n "import_file": "%s/%s"\n}' % (self.dir, selected_archive.get_string()))
+        if not os.path.exists(f"{CACHE}/import_from_list"):
+            os.mkdir(f"{CACHE}/import_from_list")
+        os.chdir(f"{CACHE}/import_from_list")
+        self.please_wait_import()
+        import_thread = Thread(target=self.start_importing)
+        import_thread.start()
+     
+    # dialog for entering password of the archive
+    def check_password_dialog(self):
+        # unzip archive if password is correct only
+        def unzip_ar():
+            with open(f"{CACHE}/.impfile.json") as i:
+                j = json.load(i)
+            if not os.path.exists(f"{CACHE}/import_config"):
+                os.mkdir(f"{CACHE}/import_config")
+            file_name = j["import_file"]
+            self.please_wait_import()
+            try:
+                with zipfile.ZipFile(file_name, "r") as zip:
+                    zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
+            except Exception as err:
+                self.toast_err = Adw.Toast.new(title=f"ERR: {err}")
+                self.toast_overlay.add_toast(self.toast_err)
+                self.toolbarview.set_content(self.headapp)
+                self.toolbarview.add_top_bar(self.headerbar)
+                self.toolbarview.remove(self.headerbar_import)
+            finally:
+                self.import_config()
+                
+        # action after closing dialog for checking password
+        def checkDialog_closed(w, response):
+            if response == 'ok':
+                self.checkDialog.set_response_enabled("ok", False)
+                zip_thread = Thread(target=unzip_ar)
+                zip_thread.start()
+            
+        self.checkDialog = Adw.MessageDialog.new(self)
+        self.checkDialog.set_heading(_["check_pwd_title"])
+        self.checkDialog.set_body(_["check_pwd_desc"])
+        
+        self.checkEntry = Adw.PasswordEntryRow.new()
+        self.checkEntry.set_title(_["password_entry"])
+        self.checkDialog.set_extra_child(self.checkEntry)
+        
+        self.checkDialog.add_response("cancel", _["cancel"])
+        self.checkDialog.add_response("ok", _["apply"])
+        self.checkDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.checkDialog.connect('response', checkDialog_closed)
+        self.checkDialog.show()    
+        
+    # Import configuration
+    def import_config(self):
+        if not os.path.exists(f"{CACHE}/import_config"):
+            os.mkdir(f"{CACHE}/import_config")
+        os.chdir(f"{CACHE}/import_config")
+        import_thread = Thread(target=self.start_importing)
+        import_thread.start()
+       
+    # start process of importing configuration
+    def start_importing(self):
+        try:
+            e_o = False
+            from config import Import
+            Import()
+        except Exception as e:
+            e_o = True
+            error = e
+            GLib.idle_add(self.show_err_msg, error)
+            self.toolbarview.set_content(self.headapp)
+            self.toolbarview.remove(self.headerbar_import)
+            self.toolbarview.add_top_bar(self.headerbar)
+        finally:
+            if not e_o:
+                self.applying_done()
     
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
@@ -1623,17 +1627,10 @@ class MainWindow(Adw.ApplicationWindow):
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_import)
             self.toolbarview.add_top_bar(self.headerbar)
-            self.importwaitBox.remove(self.importwaitSpinner)
-            self.importwaitBox.remove(self.importwaitLabel)
-            self.importwaitBox.remove(self.importwaitButton)
-            self.importwaitBox.remove(self.idoneImage)
-            self.importwaitBox.remove(self.logoutButton)
-            self.importwaitBox.remove(self.backtomButton)
+            [self.importwaitBox.remove(widget) for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]]
             self.headerbar.set_title_widget(self.switcher_title)
-            try:
+            if hasattr(self, 'flistBox'):
                 self.pBox.remove(self.flistBox)
-            except:
-                print("")
         
         # send notification about imported configuration if application window is inactive only
         self.notification_import = Gio.Notification.new("SaveDesktop")
@@ -1672,6 +1669,14 @@ class MainWindow(Adw.ApplicationWindow):
         self.backtomButton.set_margin_start(170)
         self.backtomButton.set_margin_end(170)
         self.importwaitBox.append(self.backtomButton)
+        
+    # show message dialog in the error case
+    def show_err_msg(self, error):
+        self.errDialog = Adw.MessageDialog.new(app.get_active_window())
+        self.errDialog.set_heading(heading="An error occured")
+        self.errDialog.set_body(body=f"{error}")
+        self.errDialog.add_response('cancel', _["cancel"])
+        self.errDialog.show()
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
@@ -1685,6 +1690,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.special_toast = Adw.Toast.new(title=_["m_sync_desc"])
         self.toast_overlay.add_toast(self.special_toast)
     
+    # action after closing the main window
     def on_close(self, widget, *args):
         self.close()
         # Save window size, state, and filename
