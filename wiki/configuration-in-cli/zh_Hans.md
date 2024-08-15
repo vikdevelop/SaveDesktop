@@ -1,6 +1,6 @@
 ## Saving configuration
 
-**This feature is available from version: `3.3`**
+**自`3.3`版本起，该功能已实现。**
 
 If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.
 

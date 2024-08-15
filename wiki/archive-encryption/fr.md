@@ -1,5 +1,5 @@
 # Archive encryption
-**This feature is available from version: **
+**This feature is available from version: 3.3**
 
 If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?
 
