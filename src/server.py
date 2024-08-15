@@ -1,13 +1,14 @@
 import os
 import sys
 import glob
+import subprocess
 from pathlib import Path
 from gi.repository import Gio
 from localization import _, DATA
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 
-if settings["file-for-syncing"] == "":
-    print("Synchronization is not set up. The synchronization file is missing.")
+if "fuse" in subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}"):
+    print("It looks like the folder that is synced with your cloud storage is set up as a periodic saving folder. Nothing to do.")
     exit()
 elif settings["periodic-saving"] == "Never":
     print("Periodic saving is set to the Never. Please change it.")
