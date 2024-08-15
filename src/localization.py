@@ -31,7 +31,7 @@ v = "3.4-beta-04"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
 rel_notes = "<p>3.4-beta-04</p>\
 <ul>\
-<li>Fixed some bugs with setting up synchronization such as periodic synchronization interval selection</li>\
+<li>Fixed some bugs with setting up synchronization such as periodic synchronization interval selection or starting the HTTP server even if the folder set as the periodic saving folder is synchronized with the cloud storage</li>\
 <li>Speeding up the configuration import, because files that are unchanged will no longer be copied</li>\
 <li>If an error occurs during saving or importing configuration while copying the archive to the user-defined folder, it shows a message in the graphical user interface</li>\
 </ul>\
