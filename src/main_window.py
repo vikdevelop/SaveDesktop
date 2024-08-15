@@ -308,17 +308,10 @@ class MainWindow(Adw.ApplicationWindow):
                     settings["enable-encryption"] = self.encryptSwitch.get_active()
                     
                     selected_item = self.pbRow.get_selected_item()
-                    backup_mapping = {
-                        _["never"]: "Never",
-                        _["daily"]: "Daily",
-                        _["weekly"]: "Weekly",
-                        _["monthly"]: "Monthly"
-                    }
-
+                    backup_mapping = {_["never"]: "Never", _["daily"]: "Daily", _["weekly"]: "Weekly", _["monthly"]: "Monthly"}
                     backup_item = backup_mapping.get(selected_item.get_string(), "Never")
 
-                    if backup_item != "Never":
-                        create_pb_desktop()
+                    create_pb_desktop() if not backup_item == "Never" else None
 
                     settings["periodic-saving"] = backup_item
 
@@ -738,6 +731,9 @@ class MainWindow(Adw.ApplicationWindow):
                   if settings["periodic-saving"] == "Never" 
                   else path if os.path.exists(path) 
                   else f'<span color="red">Periodic saving file does not exist.</span>')
+        
+        check_filesystem = subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}")
+        
         self.set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
 
         # List Box for appending widgets
@@ -749,6 +745,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
         self.file_row.set_title(_["periodic_saving_file"])
+        self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic")) if "fuse" in check_filesystem and not settings["periodic-saving"] == "Never" else None
         self.file_row.set_subtitle(folder)
         self.file_row.set_subtitle_lines(4)
         self.file_row.set_use_markup(True)
@@ -770,14 +767,15 @@ class MainWindow(Adw.ApplicationWindow):
         self.ps_button.set_valign(Gtk.Align.CENTER)
 
         # Row for showing the selected periodic saving interval
+        ## translate the value of the periodic-saving key to the user language
+        pb = next((key for key, value in {_["never"]: "Never", _["daily"]: "Daily", _["weekly"]: "Weekly", _["monthly"]: "Monthly"}.items() if settings["periodic-saving"] == value), None)
         self.ps_row = Adw.ActionRow.new()
         self.ps_row.set_title(f'{_["periodic_saving"]} ({_["pb_interval"]})')
         self.ps_row.set_use_markup(True)
         self.ps_row.add_suffix(self.ps_button)
         self.ps_row.set_subtitle(f'<span color="red">{_["never"]}</span>' if settings["periodic-saving"] == "Never" 
-                                 else f'<span color="green">{settings["periodic-saving"]}</span>')
-        if settings["periodic-saving"] == "Never":
-            self.ps_button.add_css_class('suggested-action')
+                                 else f'<span color="green">{pb}</span>')
+        self.ps_button.add_css_class('suggested-action') if settings["periodic-saving"] == "Never" else None
         self.l_setdBox.append(self.ps_row)
 
         # Action row for showing URL for synchronization
@@ -789,7 +787,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.url_row.set_subtitle_selectable(True)
 
         # Append URL row if conditions are met
-        if not ("red" in folder or "fuse" in subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}")):
+        if not ("red" in folder or "fuse" in check_filesystem):
             self.l_setdBox.append(self.url_row)
 
         # Dialog responses
@@ -882,6 +880,7 @@ class MainWindow(Adw.ApplicationWindow):
                     else:
                         os.system("notify-send 'SaveDesktop' 'You have not selected the cloud drive folder!'")
                         settings["file-for-syncing"] = ""
+                    settings["url-for-syncing"] = ""
 
                 # Set up local network sync
                 elif (url := self.urlEntry.get_text()):
@@ -894,6 +893,7 @@ class MainWindow(Adw.ApplicationWindow):
                         err = str(e).replace("<", "").replace(">", "") if "<" in str(e) else str(e)
                         os.system(f"notify-send 'SaveDesktop' 'ERR: {err}'")
                         settings["url-for-syncing"] = ""
+                    settings["file-for-syncing"] = ""
                 else:
                     print("Nothing changed.")
 
