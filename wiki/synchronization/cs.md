@@ -35,6 +35,6 @@ Můžete si vybrat mezi následujícími položkami:
 - Ručně (je možné synchronizovat konfiguraci z menu v záhlaví kliknutím na tři tečky)
 - Nikdy (nic se neděje)
 
-_Máte-li jakékoliv otázky, můžete použít Github issues._
+
 
 {% include footer.html %}

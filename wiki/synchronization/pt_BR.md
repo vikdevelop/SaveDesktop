@@ -38,6 +38,6 @@ Você pode escolher entre as seguintes opções:
 - Manualmente (é possível sincronizar a configuração a partir do menu na barra de cabeçalho, clicando nos três pontos)
 - Nunca (nada acontece)
 
-_Se você tiver quaisquer questões, pode usar as issues do GitHub._
+
 
 {% include footer.html %}

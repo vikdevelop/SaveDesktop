@@ -54,6 +54,6 @@ Enter the following command in the terminal:
 **Note**:
 - instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`
 
-_Якщо у вас є якісь запитання, відкрийте новий `Issues` у GitHub репозиторії._
+
 
 {% include footer.html %}

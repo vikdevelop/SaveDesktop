@@ -53,6 +53,6 @@ Enter the following command in the terminal:
 > [!NOTE]
 > instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`
 
-_If you have any questions, you can use Github issues._
+
 
 {% include footer.html %}

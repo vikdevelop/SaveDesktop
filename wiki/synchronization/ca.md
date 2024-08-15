@@ -34,6 +34,6 @@ Podeu triar entre els elements següents:
 - Manualment (és possible realitzar la sincronització en qualsevol moment des del menú principal en fer clic als tres punts)
 - Mai (no es duu a terme cap canvi)
 
-_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._
+
 
 {% include footer.html %}

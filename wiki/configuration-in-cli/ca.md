@@ -53,6 +53,6 @@ Inseriu l'ordre següent a la consola d'ordres:
 **Nota**:
 - En comptes de `/ruta/del/fitxer.sd.tar.gz`, indiqueu la ruta real on es troba el fitxer de configuració que voleu importar, com ara: `/home/benet/Documents/config.sd.tar.gz`
 
-_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._
+
 
 {% include footer.html %}

@@ -16,6 +16,6 @@ Pokud jste heslo zapomněli, nebude možné archiv rozbalit a použít jej v pro
 ## Jak to nastavit?
 Ve verzi 3.3 bylo rozhraní mírně upraveno, konkrétně se nyní sekce pro pravidelné ukládání nachází pod tlačítkem "Další možnosti". Na stejném místě se nachází sekce šifrování archivu. Klikněte tedy na již zmíněné tlačítko a zapněte přepínač Šifrování archivu.
 
-_Máte-li jakékoliv otázky, můžete použít Github issues._
+
 
 {% include footer.html %}

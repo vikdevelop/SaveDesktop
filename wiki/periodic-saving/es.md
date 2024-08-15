@@ -13,8 +13,8 @@ Además de los guardados manuales, SaveDesktop también le permite guardar regul
 El directorio por defecto para guardar los periódicamente es `/home/user/Downloads/SaveDesktop/archives`, pero puede elegir un directorio personalizado.
 
 ### Formato del archivo
-Si desea crear copias automáticas con otro nombre diferente a `Última_configuración`, ya es posible, incluso con espacios. Desde la versión 2.9.6, la variable `{}` no se admite para el día actual, dado que ahora todas las copias automáticas sobrescriben el archivo ya existente.
+Si desea crear copias automáticas con otro nombre diferente a `Últimaconfiguración`, ya es posible, incluso con espacios. Desde la versión 2.9.6, la variable `{}` no se admite para el día actual, dado que ahora todas las copias automáticas sobrescriben el archivo ya existente.
 
-_Si tiene alguna duda, utilice el notificador de incidencias de GitHub._
+
 
 {% include footer.html %}

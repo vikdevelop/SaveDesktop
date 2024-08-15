@@ -13,8 +13,8 @@ Além dos salvamentos manuais, o SaveDesktop também permite que você salve sua
 O diretório padrão para o salvamento periódico é `/home/user/Downloads/SaveDesktop/archives`, mas você pode escolher um diretório personalizado.
 
 ### Formato do nome do arquivo
-Se você deseja definir um formato de nome de arquivo para arquivos de salvamento periódico diferente de `Latest_configuration`, isso é possível, até mesmo com espaços. Desde a versão 2.9.6, a variável `{}` não funciona para inserir a data atual porque agora, em todo salvamento periódico, o arquivo de backup original é sobrescrito.
+Se você deseja definir um formato de nome de arquivo para arquivos de salvamento periódico diferente de `Latestconfiguration`, isso é possível, até mesmo com espaços. Desde a versão 2.9.6, a variável `{}` não funciona para inserir a data atual porque agora, em todo salvamento periódico, o arquivo de backup original é sobrescrito.
 
-_Se você tiver quaisquer questões, pode usar as issues do GitHub._
+
 
 {% include footer.html %}

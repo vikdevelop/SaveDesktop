@@ -53,6 +53,6 @@ Do terminálu zadejte následující příkaz:
 **Poznámka**:
 - místo `/path/to/filename.sd.tar.gz` zadejte cestu ke konfiguračnímu archivu, který chcete importovat, například: `/home/user/Downloads/myconfig.sd.tar.gz`
 
-_Máte-li jakékoliv otázky, můžete použít Github issues._
+
 
 {% include footer.html %}

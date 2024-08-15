@@ -33,6 +33,6 @@ Az alábbi tételek közül választhatsz:
 - Havonta (a szinkronizálás a hónap minden második napján történik)
 - Never (nothing's happening)
 
-_Ha bármi kérdésed lenne, használd a Github Issues-t._
+
 
 {% include footer.html %}

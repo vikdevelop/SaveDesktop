@@ -13,8 +13,8 @@ Oltre ai salvataggi manuali, SaveDesktop consente anche di salvare periodicament
 La directory predefinita per il salvataggio periodico è "/home/user/Downloads/SaveDesktop/archives", ma puoi scegliere una directory personalizzata.
 
 ### Formato del nome file
-Se vuoi dare un formato di nome file per il salvataggio periodico dei file diverso da "Ultima_configurazione", è possibile, anche con gli spazi. Dalla versione 2.9.6, la variabile `{}` non funziona per impostare la data odierna perché ora, ad ogni salvataggio periodico, il file di backup originale viene sovrascritto.
+Se vuoi dare un formato di nome file per il salvataggio periodico dei file diverso da "Ultimaconfigurazione", è possibile, anche con gli spazi. Dalla versione 2.9.6, la variabile `{}` non funziona per impostare la data odierna perché ora, ad ogni salvataggio periodico, il file di backup originale viene sovrascritto.
 
-_Se hai domande, puoi usare GitHub issues._
+
 
 {% include footer.html %}

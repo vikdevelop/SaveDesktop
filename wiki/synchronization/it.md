@@ -33,6 +33,6 @@ Puoi scegliere tra i seguenti articoli:
 - Manualmente (è possibile sincronizzare la configurazione dal menu nella barra dell'intestazione cliccando sui tre punti)
 - Never (nothing's happening)
 
-_Se hai domande, puoi usare GitHub issues._
+
 
 {% include footer.html %}

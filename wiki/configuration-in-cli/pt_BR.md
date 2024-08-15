@@ -51,6 +51,6 @@ Insira o seguinte comando no terminal:
 **Nota**:
 - em vez de `/caminho/para/nomedoarquivo.sd.tar.gz`, insira o caminho para o arquivo de configuração que você deseja importar, por exemplo: `/home/usuário/Downloads/minhaconfiguração.sd.tar.gz`
 
-_Se você tiver quaisquer questões, pode usar as issues do GitHub._
+
 
 {% include footer.html %}

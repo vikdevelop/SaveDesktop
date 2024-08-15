@@ -16,6 +16,6 @@ Se si dimentica la password non sarà possibile estrarre l'archivio ed utilizzar
 ## Come configurarlo?
 Nella versione 3.3 l'interfaccia è stata leggermente modificata, nello specifico la sezione di salvataggio periodico si trova ora sotto il pulsante "Ulteriori opzioni". Nello stesso posto si trova la sezione di crittografia dell'archivio. Quindi fai clic sul pulsante già menzionato e abilita l'interruttore di crittografia dell'archivio.
 
-_Se hai domande, puoi usare GitHub issues._
+
 
 {% include footer.html %}

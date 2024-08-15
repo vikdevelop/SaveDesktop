@@ -34,6 +34,6 @@ Puede elegir entre los siguientes elementos:
 - Manualmente (es posible realizar la sincronización en cualquier momento desde el menú principal al hacer clic en los tres puntos)
 - Nunca (no se realiza ningún cambio)
 
-_Si tiene alguna duda, utilice el notificador de incidencias de GitHub._
+
 
 {% include footer.html %}

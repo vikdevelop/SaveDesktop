@@ -35,6 +35,6 @@ You can choose between the following items:
 - Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
 - Never (nothing's happening)
 
-_If you have any questions, you can use GitHub issues._
+
 
 {% include footer.html %}

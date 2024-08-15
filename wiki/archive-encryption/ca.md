@@ -16,6 +16,6 @@ Si oblideu la contrasenya, no serà possible de cap manera extreure el contingut
 ## Com es configura?
 A partir de la versió 3.3, la interfície ha canviat significativament, en concret la secció del desament periòdic que ara es troba al botó «Més opcions». Al mateix lloc, es troba la secció de xifratge. Feu clic al botó esmenat i habiliteu l'opció Xifrat del fitxer.
 
-_Si teniu cap dubte, utilitzeu el notificador d'incidències del GitHub._
+
 
 {% include footer.html %}

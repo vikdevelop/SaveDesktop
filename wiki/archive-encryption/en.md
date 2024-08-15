@@ -1,5 +1,5 @@
 # Archive encryption
-**This feature is available from version: _3.3_**
+**This feature is available from version: **
 
 If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?
 
@@ -16,6 +16,6 @@ If you forgot the password, it will not possible to extract the archive and use 
 ## How to set it up?
 In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.
 
-_If you have any questions, you can use Github issues._
+
 
 {% include footer.html %}
