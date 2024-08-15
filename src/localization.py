@@ -27,7 +27,7 @@ except Exception as err:
     IPAddr = f"ERR: {err}"
 
 # Set application version, and icon
-v = "3.4-beta-03"
+v = "3.4-beta-04"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
 rel_notes = "<p>3.4-beta-04</p>\
 <ul>\
