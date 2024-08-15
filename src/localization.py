@@ -34,7 +34,7 @@ rel_notes = "<p>3.4-beta-04</p>\
 <li>Fixed some bugs with setting up synchronization such as periodic synchronization interval selection or starting the HTTP server in the case if the selected synchronization in the local network</li>\
 <li>Sped up the configuration import, because files that are unchanged will no longer be copied (this also applies to Flatpak app installations)</li>\
 <li>If an error occurs during saving or importing configuration while copying the archive to the user-defined folder, it shows a message in the graphical user interface</li>\
-<li>In the cloud folder detection case, the application will let you know by the icon next to the periodic saving file row in the 'Set up the sync file' dialog</li>\
+<li>In the cloud folder detection as the periodic saving folder case, the application will let you know by the icon next to the periodic saving file row in the 'Set up the sync file' dialog</li>\
 </ul>\
 <p>3.4-beta-03</p>\
 <ul>\
