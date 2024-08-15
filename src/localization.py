@@ -31,9 +31,9 @@ v = "3.4-beta-04"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
 rel_notes = "<p>3.4-beta-04</p>\
 <ul>\
-<li>Fixed some bugs with setting up synchronization such as periodic synchronization interval selection or starting the HTTP server in the case if the selected synchronization in the local network</li>\
+<li>Fixed some bugs with setting up synchronization such as periodic synchronization interval selection or starting the HTTP server in the case if the selected synchronization in the local network only</li>\
 <li>Sped up the configuration import, because files that are unchanged will no longer be copied (this also applies to Flatpak app installations)</li>\
-<li>If an error occurs during saving or importing configuration while copying the archive to the user-defined folder, it shows a message in the graphical user interface</li>\
+<li>If an error occurs during saving or importing configuration, e.g., while copying the archive to the user-defined folder, it shows a message in the graphical user interface</li>\
 <li>In the cloud folder detection as the periodic saving folder case, the application will let you know by the icon next to the periodic saving file row in the 'Set up the sync file' dialog</li>\
 </ul>\
 <p>3.4-beta-03</p>\
@@ -65,11 +65,11 @@ if flatpak:
       locale = open(f"/app/translations/{r_lang}.json")
     except:
       locale = open(f"/app/translations/en.json")
-    # System, cache and data directories
+    version = f"{v}"
+    # Directories
     system_dir = "/app"
     CACHE = f"{home}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
     DATA = f"{home}/.var/app/io.github.vikdevelop.SaveDesktop/data"
-    version = f"{v}"
     # Commands
     periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
     sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
@@ -79,25 +79,25 @@ elif snap:
       locale = open(f"{os.getenv('SNAP')}/usr/translations/{r_lang}.json")
     except:
       locale = open(f"{os.getenv('SNAP')}/usr/translations/en.json")
-    system_dir = f"{os.getenv('SNAP')}/usr"
     version = f"{v}"
+    # Directories
+    system_dir = f"{os.getenv('SNAP')}/usr"
+    CACHE = f"{os.getenv('SNAP_USER_COMMON')}/.cache/tmp"
+    DATA = f"{os.getenv('SNAP_USER_DATA')}/.local/share"
+    # Commands
     periodic_saving_cmd = 'savedesktop --background'
     sync_cmd = "savedesktop --sync"
     server_cmd = "savedesktop --start-server"
-    CACHE = f"{os.getenv('SNAP_USER_COMMON')}/.cache/tmp"
-    DATA = f"{os.getenv('SNAP_USER_DATA')}/.local/share"
 else:
     try:
       locale = open(f"{home}/.local/share/savedesktop/translations/{r_lang}.json")
     except:
       locale = open(f"{home}/.local/share/savedesktop/translations/en.json")
-    # System, cache and data directories
+    version = f"{v}-native"
+    # Directories
     system_dir = f"{home}/.local/share/savedesktop/src"
-    os.system("mkdir ~/.cache/io.github.vikdevelop.SaveDesktop")
-    os.system("mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop")
     CACHE = f"{home}/.cache/io.github.vikdevelop.SaveDesktop"
     DATA = f"{home}/.local/share/io.github.vikdevelop.SaveDesktop"
-    version = f"{v}-native"
     # Commands
     periodic_saving_cmd = f'savedesktop --background'
     sync_cmd = f"savedesktop --sync"
