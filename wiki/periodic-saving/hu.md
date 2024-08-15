@@ -13,7 +13,7 @@ A manuális mentések mellett, a SaveDesktop lehetővé teszi, hogy időszakosan
 Az időszakos mentések alapértelmezett könyvtára a `/home/user/Letöltések/SaveDesktop/archives`, de választhatsz egyéni könyvtárat is.
 
 ### Fájlnév formátum
-If you want to give a filename format for periodic saving files other than `Latestconfiguration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.
+If you want to give a filename format for periodic saving files other than `Latest_configuration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.
 
 
 

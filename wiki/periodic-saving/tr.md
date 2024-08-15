@@ -13,7 +13,7 @@ Manuel kaydetmeye ek olarak SaveDesktop, masaüstü yapılandırmanızı düzenl
 Periyodik kayıtta varsayılan kaydetme dizini `/home/user/Downloads/SaveDesktop/archives`tır, ancak özel bir dizin seçilebilir.
 
 ### Dosya adı formatı
-If you want to give a filename format for periodic saving files other than `Latestconfiguration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.
+If you want to give a filename format for periodic saving files other than `Latest_configuration`, it is possible, even with spaces. Since version 2.9.6, variable `{}` doesn't work for setting the today date because now, in every periodic saving, the original backup file is overwritten.
 
 
 

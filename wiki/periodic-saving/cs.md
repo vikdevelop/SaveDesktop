@@ -13,7 +13,7 @@ Kromě ručního ukládání umožňuje SaveDesktop také pravidelné ukládán�
 Výchozí adresář pro pravidelné ukládání je `/home/user/Downloads/SaveDesktop/archives`, ale můžete si zvolit vlastní adresář.
 
 ### Formát názvu souboru
-Chcete-li zadat jiný formát názvu souboru pro pravidelné ukládání než `Latestconfiguration`, je to možné, a to i s mezerami. Od verze 2.9.6, nefunguje proměnná `{}`pro nastavení dnešního data, proto že je nyní při každém pravidelném ukládání přepsán původní soubor zálohy.
+Chcete-li zadat jiný formát názvu souboru pro pravidelné ukládání než `Latest_configuration`, je to možné, a to i s mezerami. Od verze 2.9.6, nefunguje proměnná `{}`pro nastavení dnešního data, proto že je nyní při každém pravidelném ukládání přepsán původní soubor zálohy.
 
 
 
