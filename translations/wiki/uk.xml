@@ -47,7 +47,6 @@
 Є можливим зберегти список встановлених Flatpak додатків, встановлених у системній теці `/var/lib/flatpak/app`, а не у домашній теці `~/.local/share/flatpak/app`. Список встановлених Flatpak додатків в архіві конфігурації буде названо `installed_flatpaks.sh` для системної теки та `installed_user_flatpaks.sh` для домашньої теки.</str>
   <str key="installing_flatpaks">### Встановлення Flatpak додатків зі списку
 Після імпорту збереженого файлу конфігурації та входу назад в систему, **додатки Flatpak почнуть встановлюватися у фоновому режимі.**</str>
-  <str key="github_issues">_Якщо у вас є якісь запитання, відкрийте новий `Issues` у GitHub репозиторії._</str>
   <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">Importing configuration</str>
   <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
