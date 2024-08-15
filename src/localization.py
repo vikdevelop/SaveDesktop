@@ -29,7 +29,13 @@ except Exception as err:
 # Set application version, and icon
 v = "3.4-beta-03"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
-rel_notes = "<p>3.4-beta-03</p>\
+rel_notes = "<p>3.4-beta-04</p>\
+<ul>\
+<li>Fixed some bugs with setting up synchronization such as periodic synchronization interval selection</li>\
+<li>Speeding up the configuration import, because files that are unchanged will no longer be copied</li>\
+<li>If an error occurs during saving or importing configuration while copying the archive to the user-defined folder, it shows a message in the graphical user interface</li>\
+</ul>\
+<p>3.4-beta-03</p>\
 <ul>\
 <li>Simplified setting up the synchronization with the cloud folder process: on the Sync page, just click on the \"Set up the sync file\" button and make the changes required by the application</li>\
 <li>Added possibility to set up smaller window size</li>\
