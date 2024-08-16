@@ -1,6 +1,6 @@
 # Sincronização entre computadores na rede
 ## Como configurar?
-### Quais as suas necessidades?</str>
+### Quais as suas necessidades?
 
 **No computador 1:**
 - atribua manualmente o endereço IP dos seus dispositivos que você deseja sincronizar de modo que o endereço IP deles não mude toda ver que o computador for ligado. É possível definir isso por meio de:
