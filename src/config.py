@@ -3,6 +3,7 @@ import json
 import gi
 import subprocess
 import zipfile
+import tarfile
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
 import argparse
@@ -66,6 +67,7 @@ class Save:
         if settings["save-themes"] == True:
             print("saving themes")
             os.system(f'cp -R {home}/.themes ./')
+            os.system(f'cp -R {home}/.local/share/themes ./')
         if settings["save-fonts"] == True:
             print("saving fonts")
             os.system(f'cp -R {home}/.fonts ./')
@@ -83,47 +85,7 @@ class Save:
             os.system('sh /app/backup_flatpaks.sh')
         if settings["save-flatpak-data"] == True:
             print("saving user data of installed Flatpak apps")
-            blst = settings["disabled-flatpak-apps-data"]
-            # convert GSettings property to list
-            blist = blst
-            # add io.github.vikdevelop.SaveDesktop to blacklist, because during saving configuration the cache folder is too large
-            blist += ["io.github.vikdevelop.SaveDesktop"]
-            blacklist = blist
-            
-            # set destination dir
-            if os.path.exists(f"{CACHE}/.periodicfile.json"):
-                os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
-                destdir = f"{CACHE}/periodic_saving/app"
-            elif os.path.exists(f"{CACHE}/.filedialog.json"):
-                os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
-                destdir = f"{CACHE}/save_config/app"
-            
-            # copy Flatpak apps data
-            for item in os.listdir(f"{home}/.var/app"):
-                if item not in blacklist:
-                    source_path = os.path.join(f"{home}/.var/app", item)
-                    destination_path = os.path.join(destdir, item)
-                    if os.path.isdir(source_path):
-                        try:
-                            shutil.copytree(source_path, destination_path)
-                        except Exception as e:
-                            print(f"Error copying directory {source_path}: {e}")
-                    else:
-                        try:
-                            shutil.copy2(source_path, destination_path)
-                        except Exception as e:
-                            print(f"Error copying file {source_path}: {e}")
-
-            # save user data except for the cache of the SaveDesktop app if the app is not in the "disabled-flatpak-apps-data" key of the GSettings database
-            if not "io.github.vikdevelop.SaveDesktop" in flatpak_app_data:
-                os.makedirs(f"{destdir}/io.github.vikdevelop.SaveDesktop", exist_ok=True)
-                os.chdir(f"{home}/.var/app/io.github.vikdevelop.SaveDesktop")
-                os.system(f"cp -R ./config {destdir}/io.github.vikdevelop.SaveDesktop/")
-                os.system(f"cp -R ./data {destdir}/io.github.vikdevelop.SaveDesktop/")
-                if os.path.exists(f"{CACHE}/save_config"):
-                    os.chdir(f"{CACHE}/save_config")
-                elif os.path.exists(f"{CACHE}/periodic_saving"):
-                    os.chdir(f"{CACHE}/periodic_saving")
+            self.save_flatpak_data()
             
         print("saving desktop environment configuration files")
         # Save configs on individual desktop environments
@@ -207,10 +169,55 @@ class Save:
                 if not settings["periodic-import"] == "Never2":
                     file = os.path.basename(j["recent_file"])
                     os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
-            elif not settings["file-for-syncing"] == "":
-                os.system(f"echo '{settings['filename-format']}.sd.tar.gz' > {settings['periodic-saving-folder']}/SaveDesktop-sync-file")
+            elif "fuse" in subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}"):
+                with open(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file", "w") as pf:
+                    pf.write(f"{settings['filename-format']}.sd.tar.gz")
         print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
         os.system("rm saving_status")
+    
+    # save Flatpak apps data
+    def save_flatpak_data(self):
+        blst = settings["disabled-flatpak-apps-data"]
+        # convert GSettings property to a list
+        blist = blst
+        # add io.github.vikdevelop.SaveDesktop to blacklist because, during saving configuration, their cache folder is too large
+        blist += ["io.github.vikdevelop.SaveDesktop"]
+        blacklist = blist
+        
+        # set destination dir
+        if os.path.exists(f"{CACHE}/.periodicfile.json"):
+            os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
+            destdir = f"{CACHE}/periodic_saving/app"
+        elif os.path.exists(f"{CACHE}/.filedialog.json"):
+            os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
+            destdir = f"{CACHE}/save_config/app"
+        
+        # copy Flatpak apps data
+        for item in os.listdir(f"{home}/.var/app"):
+            if item not in blacklist:
+                source_path = os.path.join(f"{home}/.var/app", item)
+                destination_path = os.path.join(destdir, item)
+                if os.path.isdir(source_path):
+                    try:
+                        shutil.copytree(source_path, destination_path)
+                    except Exception as e:
+                        print(f"Error copying directory {source_path}: {e}")
+                else:
+                    try:
+                        shutil.copy2(source_path, destination_path)
+                    except Exception as e:
+                        print(f"Error copying file {source_path}: {e}")
+
+        # save user data except for the cache of the SaveDesktop app if the app is not in the "disabled-flatpak-apps-data" key of the GSettings database
+        if not "io.github.vikdevelop.SaveDesktop" in flatpak_app_data:
+            os.makedirs(f"{destdir}/io.github.vikdevelop.SaveDesktop", exist_ok=True)
+            os.chdir(f"{home}/.var/app/io.github.vikdevelop.SaveDesktop")
+            os.system(f"cp -R ./config {destdir}/io.github.vikdevelop.SaveDesktop/")
+            os.system(f"cp -R ./data {destdir}/io.github.vikdevelop.SaveDesktop/")
+            if os.path.exists(f"{CACHE}/save_config"):
+                os.chdir(f"{CACHE}/save_config")
+            elif os.path.exists(f"{CACHE}/periodic_saving"):
+                os.chdir(f"{CACHE}/periodic_saving")
         
 class Import:
     def __init__(self):
@@ -220,7 +227,7 @@ class Import:
             if ".zip" in j["import_file"]:
                 print("")
             else:
-                os.system('tar -xf "%s" ./' % j["import_file"])
+                tarfile.open(f'{j["import_file"]}', 'r:gz').extractall()
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
         print("importing settings from the Dconf database")
@@ -240,10 +247,12 @@ class Import:
         os.system(f'cp -au ./.icons {home}/')
         print("importing themes")
         os.system(f'cp -au ./.themes {home}/')
+        os.system(f'cp -au ./themes {home}/.local/share/')
         print("importing backgrounds")
         os.system(f'cp -au ./backgrounds {home}/.local/share/')
         print("importing fonts")
         os.system(f'cp -au ./.fonts {home}/')
+        os.system(f'cp -au ./fonts {home}/.local/share/')
         print("importing Gtk settings")
         os.system(f'cp -au ./gtk-4.0 {home}/.config/')
         os.system(f'cp -au ./gtk-3.0 {home}/.config/')
