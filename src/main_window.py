@@ -683,7 +683,9 @@ class MainWindow(Adw.ApplicationWindow):
         # Create periodic saving file if it does not exist
         def save_now():
             try:
-                subprocess.run([f"{system_dir}/bin/run.sh", "--save-now"], check=True)
+                subprocess.run(['notify-send', 'SaveDesktop', _["please_wait"]])
+                self.file_row.set_use_markup(False)
+                subprocess.run([f"{system_dir}/bin/run.sh", "--save-now"] if (flatpak or snap) else ["savedesktop", "--save-now"], check=True)
             except subprocess.CalledProcessError as e:
                 subprocess.run(subprocess.run(['notify-send', 'An error occurred', str(e.stderr)]))
             finally:
@@ -744,8 +746,8 @@ class MainWindow(Adw.ApplicationWindow):
         # Row for showing selected synchronization file
         self.file_row = Adw.ActionRow.new()
         self.file_row.set_title(_["periodic_saving_file"])
-        self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic")) if "fuse" in check_filesystem and not settings["periodic-saving"] == "Never" else None
         self.file_row.set_subtitle(folder)
+        self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic")) if "fuse" in check_filesystem and not "red" in folder else None
         self.file_row.set_subtitle_lines(4)
         self.file_row.set_use_markup(True)
         self.file_row.set_subtitle_selectable(True)
