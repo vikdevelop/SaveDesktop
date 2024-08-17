@@ -671,23 +671,22 @@ class MainWindow(Adw.ApplicationWindow):
             try:
                 if not os.path.exists(f"{DATA}/synchronization"):
                     os.mkdir(f"{DATA}/synchronization")
-                os.chdir(f"{DATA}/synchronization")
-                os.system(f"rm *.sd.tar.gz")
-                os.system(f"cp {self.file_row.get_subtitle()} ./")
+                if not os.path.exists(f"{DATA}/synchronization/{settings['filename-format']}.sd.tar.gz"):
+                    os.chdir(f"{DATA}/synchronization")
+                    os.system(f"rm *.sd.tar.gz")
+                    shutil.copyfile(self.file_row.get_subtitle(), f"{DATA}/synchronization/{settings['filename-format']}.sd.tar.gz")
                 settings["file-for-syncing"] == self.file_row.get_subtitle()
             except Exception as e:
-                os.system(f"notify-send 'SaveDesktop' 'ERR: {e}'")
+                os.system(f"notify-send 'An error occured' '{e}'")
             finally:
                 print("The sync file has been copied to the SaveDesktop data folder successfully.")
 
         # Create periodic saving file if not exists
         def save_now():
             try:
-                self.file_row.set_use_markup(False)
-                os.system(f"notify-send 'SaveDesktop' \'{_['please_wait']}\'")
-                os.system(f"{system_dir}/bin/run.sh --save-now")
-            except Exception as e:
-                os.system(f"notify-send 'SaveDesktop' 'ERR: {e}'")
+                subprocess.run([f"{system_dir}/bin/run.sh", "--save-now"], check=True)
+            except subprocess.CalledProcessError as e:
+                subprocess.run(['notify-send', f'Error occurred: {e.stderr}'])
             finally:
                 self.file_row.remove(self.setupButton)
                 self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
@@ -706,7 +705,8 @@ class MainWindow(Adw.ApplicationWindow):
                 self.set_syncing()
                 
                 if "fuse" in subprocess.getoutput(f"df -T {self.file_row.get_subtitle()}"):
-                    os.system(f"echo '{settings['filename-format']}.sd.tar.gz' > {settings['periodic-saving-folder']}/SaveDesktop-sync-file")
+                    open(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file", "w").write(f"{settings['filename-format']}.sd.tar.gz")
+                    self.set_up_auto_mount()
                 else:
                     # start copying the synchronization file process
                     setup_thread = Thread(target=copy_sync_file)
@@ -767,7 +767,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.ps_button.set_valign(Gtk.Align.CENTER)
 
         # Row for showing the selected periodic saving interval
-        ## translate the value of the periodic-saving key to the user language
+        ## translate the periodic-saving key to the user language
         pb = next((key for key, value in {_["never"]: "Never", _["daily"]: "Daily", _["weekly"]: "Weekly", _["monthly"]: "Monthly"}.items() if settings["periodic-saving"] == value), None)
         self.ps_row = Adw.ActionRow.new()
         self.ps_row.set_title(f'{_["periodic_saving"]} ({_["pb_interval"]})')
@@ -857,22 +857,7 @@ class MainWindow(Adw.ApplicationWindow):
                 # Set up cloud sync
                 cfile_subtitle = self.cfileRow.get_subtitle()
                 if cfile_subtitle:
-                    if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
-                        pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*'
-                        match = re.search(pattern, cfile_subtitle)
-
-                        if match:
-                            cloud_service = match.group(1)
-                            host = match.group(2)
-                            user = match.group(3)
-                            
-                            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
-                                m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{user}@{host}")
-                        else:
-                            print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
-                    if "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
-                        with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
-                            m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}")
+                    self.set_up_auto_mount()
                         
                     # Check if the selected cloud drive folder is correct
                     if "fuse" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
@@ -993,7 +978,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.urlDialog.connect('response', urlDialog_closed)
         self.urlDialog.show()
 
-    # Set synchronization for setting up to run in the background
+    # Set synchronization for running in the background
     def set_syncing(self):
         if not os.path.exists(f"{home}/.config/autostart"):
             os.mkdir(f"{home}/.config/autostart")
@@ -1005,6 +990,29 @@ class MainWindow(Adw.ApplicationWindow):
         if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
             with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
                 pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
+      
+    # set up auto-mounting of the cloud drives after logging in to the system
+    def set_up_auto_mount(self):
+        try:
+            cfile_subtitle = self.fileRow.get_subtitle()
+        except:
+            cfile_subtitle = settings["periodic-saving-folder"]
+        if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
+            pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*'
+            match = re.search(pattern, cfile_subtitle)
+
+            if match:
+                cloud_service = match.group(1)
+                host = match.group(2)
+                user = match.group(3)
+                
+                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
+                    m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{user}@{host}")
+            else:
+                print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
+        elif "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
+            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
+                m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}")
     
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
@@ -1512,16 +1520,19 @@ class MainWindow(Adw.ApplicationWindow):
             file_name = j["import_file"]
             self.please_wait_import()
             try:
+                e_o = False
                 with zipfile.ZipFile(file_name, "r") as zip:
                     zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
             except Exception as err:
-                self.toast_err = Adw.Toast.new(title=f"ERR: {err}")
-                self.toast_overlay.add_toast(self.toast_err)
+                e_o = True
+                error = err
+                GLib.idle_add(self.show_err_msg, error)
                 self.toolbarview.set_content(self.headapp)
                 self.toolbarview.add_top_bar(self.headerbar)
                 self.toolbarview.remove(self.headerbar_import)
             finally:
-                self.import_config()
+                if not e_o:
+                    self.import_config()
                 
         # action after closing dialog for checking password
         def checkDialog_closed(w, response):
