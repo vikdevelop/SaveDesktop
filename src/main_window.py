@@ -681,12 +681,12 @@ class MainWindow(Adw.ApplicationWindow):
             finally:
                 print("The sync file has been copied to the SaveDesktop data folder successfully.")
 
-        # Create periodic saving file if not exists
+        # Create periodic saving file if it does not exist
         def save_now():
             try:
                 subprocess.run([f"{system_dir}/bin/run.sh", "--save-now"], check=True)
             except subprocess.CalledProcessError as e:
-                subprocess.run(['notify-send', f'Error occurred: {e.stderr}'])
+                subprocess.run(subprocess.run(['notify-send', 'An error occurred', str(e.stderr)]))
             finally:
                 self.file_row.remove(self.setupButton)
                 self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
@@ -863,7 +863,7 @@ class MainWindow(Adw.ApplicationWindow):
                     if "fuse" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
                         settings["file-for-syncing"] = cfile_subtitle
                     else:
-                        os.system("notify-send 'SaveDesktop' 'You have not selected the cloud drive folder!'")
+                        os.system("notify-send 'An error occured' 'You did not select the cloud drive folder!'")
                         settings["file-for-syncing"] = ""
                     settings["url-for-syncing"] = ""
 
@@ -919,20 +919,21 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.cloudButton.add_css_class('flat')
         self.cloudButton.set_valign(Gtk.Align.CENTER)
+        self.cloudButton.set_tooltip_text(_["set_another"])
         self.cloudButton.connect("clicked", self.select_sync_file)
         
         ## button for reseting the selected cloud drive folder
         self.resetButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
         self.resetButton.add_css_class('destructive-action')
         self.resetButton.connect("clicked", reset_cloud_folder)
+        self.resetButton.set_tooltip_text(_["reset_button"])
         self.resetButton.set_valign(Gtk.Align.CENTER)
         
         ## the row itself
         self.cfileRow = Adw.ActionRow.new()
         
         ### add the reset button if the subtitle is not empty
-        if not settings["file-for-syncing"] == "":
-            self.cfileRow.add_suffix(self.resetButton)
+        self.cfileRow.add_suffix(self.resetButton) if not settings["file-for-syncing"] == "" else None
         
         self.cfileRow.set_title("Select cloud drive folder")
         self.cfileRow.set_subtitle(settings["file-for-syncing"])
