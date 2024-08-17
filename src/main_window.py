@@ -944,7 +944,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudRow.add_row(self.cfileRow)
         
         # Periodic sync section
-        actions = Gtk.StringList.new(strings=[
+        options = Gtk.StringList.new(strings=[
            _["never"], _["manually"], _["daily"], _["weekly"], _["monthly"]
         ])
         
@@ -952,10 +952,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.psyncRow.set_use_markup(True)
         self.psyncRow.set_use_underline(True)
         self.psyncRow.set_title(_["periodic_sync"])
-        self.psyncRow.set_subtitle("Select how often to synchronise")
         self.psyncRow.set_title_lines(2)
-        self.psyncRow.set_subtitle_lines(4)
-        self.psyncRow.set_model(model=actions)
+        self.psyncRow.set_model(model=options)
         self.urlBox.append(self.psyncRow)
 
         # Load periodic sync values form GSettings database
