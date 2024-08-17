@@ -675,7 +675,6 @@ class MainWindow(Adw.ApplicationWindow):
                     os.chdir(f"{DATA}/synchronization")
                     os.system(f"rm *.sd.tar.gz")
                     shutil.copyfile(self.file_row.get_subtitle(), f"{DATA}/synchronization/{settings['filename-format']}.sd.tar.gz")
-                settings["file-for-syncing"] == self.file_row.get_subtitle()
             except Exception as e:
                 os.system(f"notify-send 'An error occured' '{e}'")
             finally:
@@ -885,7 +884,7 @@ class MainWindow(Adw.ApplicationWindow):
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
         self.urlDialog.set_heading(_["connect_with_other_computer"])
-        self.urlDialog.set_default_size(400,400)
+        self.urlDialog.set_default_size(500,370)
           
         # Box for adding widgets in this dialog
         self.urlBox = Gtk.ListBox.new()
@@ -931,6 +930,8 @@ class MainWindow(Adw.ApplicationWindow):
         
         ## the row itself
         self.cfileRow = Adw.ActionRow.new()
+        
+        settings["file-for-syncing"] = "" if "sd.tar.gz" in settings["file-for-syncing"] else settings["file-for-syncing"]
         
         ### add the reset button if the subtitle is not empty
         self.cfileRow.add_suffix(self.resetButton) if not settings["file-for-syncing"] == "" else None
