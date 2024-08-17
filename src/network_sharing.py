@@ -93,21 +93,26 @@ class Syncing:
             filename = url.split('/')[-1]
             self.file = filename.split('.')[0]
             if ".sd.tar.gz" in url:
+                print("Downloading tar ...")
                 if os.path.exists(f"{self.file}"):
                     os.system(f"tar -xf {self.file} ./")
                 else:
                     os.system(f"tar -xf {self.file}.1 ./")
-                
-                print("Downloading tar ...")
                 self.import_config()
             else:
                 os.system("notify-send 'SaveDesktop Synchronization' 'An error occurred while downloading the configuration archive. Please set up the synchronization in the app again.'")
                 exit()
-        elif not settings['file-for-syncing'] == "":
+        elif not settings['file-for-syncing'] == "" and not "sd.tar.gz" in settings["file-for-syncing"]:
             filename = subprocess.getoutput(f"cat {settings['file-for-syncing']}/SaveDesktop-sync-file")
-            os.system(f"tar -xf {settings['file-for-syncing']}/{filename} ./")
+            try:
+                tarfile.open(f"{settings['file-for-syncing']}/{filename}", 'r:gz').extractall()
+            except Exception as e:
+                os.system(f"notify-send 'An error occured' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
             self.file = filename
             self.import_config()
+        else:
+            os.system("notify-send 'SaveDesktop' 'You have not set up the synchronization correctly. Please set it up in the app again.'")
+            exit()
             
     # Sync configuration
     def import_config(self):
