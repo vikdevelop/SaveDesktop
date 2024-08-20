@@ -104,4 +104,3 @@ parts:
       - usr/bin/notify-send
       - usr/bin/wget
       - usr/bin/zip
-      - usr/bin/df
