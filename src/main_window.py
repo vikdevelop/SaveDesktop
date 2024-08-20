@@ -268,7 +268,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.toolbarview.set_content(self.pBox)
             self.pBox.set_margin_start(50)
             self.pBox.set_margin_end(50)
-            self.pBox.append(Gtk.Image.new_from_icon_name("exclamation_mark", Gtk.IconSize.DIALOG))
+            self.pBox.append(Gtk.Image.new_from_icon_name("exclamation_mark"))
             self.pBox.append(Gtk.Label(markup=_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE, Deepin")))
 
         # Show warning about disconnected plugs
@@ -284,9 +284,9 @@ class MainWindow(Adw.ApplicationWindow):
                 self.pBox.set_margin_end(90)
 
                 # Show warning message
-                self.pBox.append(Gtk.Image.new_from_icon_name("exclamation_mark", Gtk.IconSize.DIALOG))
-                self.pBox.append(Gtk.Label(markup="<big><b>Need to connect some plugs</b></big>\nIn order for SaveDesktop to work properly, you need to connect some plugs to access the files. You can do this by opening a terminal (Ctrl+Alt+T) and entering the following command: \n"))
-                self.pBox.append(Gtk.Label(markup="<i>sudo snap connect savedesktop:dot-config &amp;&amp; sudo snap connect savedesktop:dot-local &amp;&amp; sudo snap connect savedesktop:dot-themes &amp;&amp; sudo snap connect savedesktop:dot-icons &amp;&amp; sudo snap connect savedesktop:dot-fonts &amp;&amp; sudo snap connect savedesktop:login-session-control</i>"))
+                self.pBox.append(Gtk.Image.new_from_icon_name("exclamation_mark"))
+                self.pBox.append(Gtk.Label(str="<big><b>Need to connect some plugs</b></big>\nIn order for SaveDesktop to work properly, you need to connect some plugs to access the files. You can do this by opening a terminal (Ctrl+Alt+T) and entering the following command: \n").set_use_markup(True))
+                self.pBox.append(Gtk.Label(str="<i>sudo snap connect savedesktop:dot-config &amp;&amp; sudo snap connect savedesktop:dot-local &amp;&amp; sudo snap connect savedesktop:dot-themes &amp;&amp; sudo snap connect savedesktop:dot-icons &amp;&amp; sudo snap connect savedesktop:dot-fonts &amp;&amp; sudo snap connect savedesktop:login-session-control</i>").set_use_markup(True))
     
     # Show main page
     def save_desktop(self):
