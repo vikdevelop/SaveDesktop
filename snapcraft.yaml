@@ -43,8 +43,8 @@ architectures:
 - build-on: armhf
 
 layout:
-  /run/user/1000/gvfs:
-    bind: $SNAP_USER_DATA/gvfs
+  /usr/share/gvfs:
+    bind: $SNAP/usr/share/gvfs
 
 apps:
   savedesktop:
