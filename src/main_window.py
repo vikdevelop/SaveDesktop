@@ -235,7 +235,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.toast = Adw.Toast.new(title='')
         self.toast.set_timeout(0)
         
-        # Check of user current desktop
+        # Check the user's current desktop
         desktop_env = os.getenv('XDG_CURRENT_DESKTOP')
         desktop_map = {
             'GNOME': 'GNOME',
@@ -252,11 +252,12 @@ class MainWindow(Adw.ApplicationWindow):
             'Deepin': 'Deepin'
         }
 
+        # If the user has a supported environment, it shows the app window, otherwise, it shows the window with information about an unsupported environment
         def setup_environment(env_name):
             self.environment = env_name
             self.save_desktop()
             self.import_desktop()
-            self.syncing_desktop()
+            self.sync_desktop()
             self.connect("close-request", self.on_close)
 
         if desktop_env in desktop_map:
@@ -269,7 +270,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.pBox.set_margin_start(50)
             self.pBox.set_margin_end(50)
             self.pBox.append(Gtk.Image.new_from_icon_name("exclamation_mark"))
-            self.pBox.append(Gtk.Label(markup=_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE, Deepin")))
+            self.pBox.append(Gtk.Label(str=_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE, Deepin")).set_use_markup(True))
 
         # Show warning about disconnected plugs
         if snap:
@@ -319,15 +320,15 @@ class MainWindow(Adw.ApplicationWindow):
                         self.setDialog.close()
                         self.open_setDialog()
 
-            # open link to the wiki page about periodic saving
+            # open a link to the wiki page about periodic saving
             def open_pb_wiki(w):
                 os.system(f"xdg-open {pb_wiki}")
 
-            # reset file name format entry to the default value
+            # reset the file name format entry to the default value
             def reset_fileformat(w):
                 self.filefrmtEntry.set_text("Latest_configuration")
             
-            # Dialog for showing more options
+            # Dialog for showing more options itself
             self.msDialog = Adw.MessageDialog.new(self)
             self.msDialog.set_default_size(400, 200)
             self.msDialog.set_heading(_["more_options"])
@@ -508,10 +509,101 @@ class MainWindow(Adw.ApplicationWindow):
         
     # Import configuration page
     def import_desktop(self):
+        # Import archive from list
+        def import_from_list(w):
+            # Action after closing import from list page
+            def close_list(w):
+                self.pBox.remove(self.flistBox)
+                self.headerbar_list.remove(self.backButton)
+                self.headerbar_list.remove(child=self.menu_button)
+                self.headerbar.pack_end(child=self.menu_button)
+                self.toolbarview.remove(self.headerbar_list)
+                self.toolbarview.add_top_bar(self.headerbar)
+                self.toolbarview.set_content(self.headapp)
+                try:
+                    self.headerbar.remove(self.applyButton)
+                except:
+                    pass
+            
+            # add back button for this page
+            self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
+            self.backButton.add_css_class("flat")
+            self.backButton.connect("clicked", close_list)
+            
+            # remove main headerbar
+            self.headerbar.remove(child=self.menu_button)
+            self.toolbarview.remove(self.headerbar)
+            
+            # create new headerbar for this page
+            self.headerbar_list = Adw.HeaderBar.new()
+            self.headerbar_list.pack_start(self.backButton)
+            self.headerbar_list.pack_end(child=self.menu_button)
+            self.toolbarview.add_top_bar(self.headerbar_list)
+            self.toolbarview.set_content(self.pBox)
+            
+            # set title for this page
+            self.set_title(_["import_from_list"])
+            
+            # Box for this section
+            self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=20)
+            self.pBox.append(self.flistBox)
+            
+            # Label for showing text in this section
+            self.flistLabel = Gtk.Label.new()
+            self.flistLabel.set_justify(Gtk.Justification.CENTER)
+            if settings["periodic-saving-folder"] == '':
+                self.dir = f'{download_dir}/SaveDesktop/archives'
+            else:
+                self.dir = f'{settings["periodic-saving-folder"]}'
+            if os.path.exists(self.dir):
+                if glob.glob(f"{self.dir}/*.sd.tar.gz") == []:
+                    self.flistLabel.set_text(_["import_from_list_error"])
+                    self.flistBox.append(self.flistLabel)
+                else:
+                    self.flistImage = Gtk.Image.new_from_icon_name("list-view")
+                    self.flistImage.set_pixel_size(128)
+                    self.flistBox.append(self.flistImage)
+                    self.flistBox.append(self.flistLabel)
+                    
+                    self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
+                    
+                    # Button for applying selected archive
+                    self.applyButton = Gtk.Button.new_with_label(_["apply"])
+                    self.applyButton.add_css_class('suggested-action')
+                    self.applyButton.connect('clicked', self.imp_cfg_from_list)
+                    self.headerbar_list.pack_end(self.applyButton)
+                    
+                    self.radioBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+                    self.listbox = Gtk.ListBox.new()
+                    self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+                    self.listbox.get_style_context().add_class(class_name='boxed-list')
+                    self.flistBox.append(self.listbox)
+                    
+                    self.dir_row = Adw.ActionRow.new()
+                    self.dir_row.set_title(_["pb_folder"])
+                    self.dir_row.set_subtitle(self.dir)
+                    self.dir_row.set_icon_name("folder-open-symbolic")
+                    self.listbox.append(self.dir_row)
+    
+                    # Get SaveDesktop files from folder selected by the user
+                    os.chdir(self.dir)
+                    get_dir_content = glob.glob(f"*.sd.tar.gz")
+                    archives_model = Gtk.StringList.new(strings=get_dir_content)
+    
+                    self.radio_row = Adw.ComboRow.new()
+                    self.radio_row.set_model(model=archives_model)
+                    self.radio_row.set_icon_name('document-properties-symbolic')
+                    self.listbox.append(self.radio_row)
+            else:
+                self.flistLabel.set_text(_["import_from_list_error"])
+                self.flistBox.append(self.flistLabel)
+
+        # =======
+        # Import page itself
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
         
-        # Image and title for Import page
+        # Image and title for the Import page
         self.statusPage_i = Adw.StatusPage.new()
         self.statusPage_i.set_icon_name("document-open-symbolic")
         self.statusPage_i.set_title(_['import_config'])
@@ -519,7 +611,7 @@ class MainWindow(Adw.ApplicationWindow):
         #self.statusPage_i.set_child(self.syncingBox)
         self.importBox.append(self.statusPage_i)
         
-        # Box of this buttons: Import from file and Import from list
+        # Box of Import from file and Import from list buttons
         self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=7)
         self.importbtnBox.set_halign(Gtk.Align.CENTER)
         self.importBox.append(self.importbtnBox)
@@ -534,100 +626,11 @@ class MainWindow(Adw.ApplicationWindow):
         # Import from list button
         self.fromlistButton = Gtk.Button.new_with_label(_["import_from_list"])
         self.fromlistButton.add_css_class("pill")
-        self.fromlistButton.connect("clicked", self.import_from_list)
+        self.fromlistButton.connect("clicked", import_from_list)
         self.importbtnBox.append(self.fromlistButton)
-                
-    # Import archive from list
-    def import_from_list(self, w):
-        # Action after closing import from list page
-        def close_list(w):
-            self.pBox.remove(self.flistBox)
-            self.headerbar_list.remove(self.backButton)
-            self.headerbar_list.remove(child=self.menu_button)
-            self.headerbar.pack_end(child=self.menu_button)
-            self.toolbarview.remove(self.headerbar_list)
-            self.toolbarview.add_top_bar(self.headerbar)
-            self.toolbarview.set_content(self.headapp)
-            try:
-                self.headerbar.remove(self.applyButton)
-            except:
-                pass
-        
-        # add back button for this page
-        self.backButton = Gtk.Button.new_from_icon_name("go-next-symbolic-rtl")
-        self.backButton.add_css_class("flat")
-        self.backButton.connect("clicked", close_list)
-        
-        # remove main headerbar
-        self.headerbar.remove(child=self.menu_button)
-        self.toolbarview.remove(self.headerbar)
-        
-        # create new headerbar for this page
-        self.headerbar_list = Adw.HeaderBar.new()
-        self.headerbar_list.pack_start(self.backButton)
-        self.headerbar_list.pack_end(child=self.menu_button)
-        self.toolbarview.add_top_bar(self.headerbar_list)
-        self.toolbarview.set_content(self.pBox)
-        
-        # set title for this page
-        self.set_title(_["import_from_list"])
-        
-        # Box for this section
-        self.flistBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=20)
-        self.pBox.append(self.flistBox)
-        
-        # Label for showing text in this section
-        self.flistLabel = Gtk.Label.new()
-        self.flistLabel.set_justify(Gtk.Justification.CENTER)
-        if settings["periodic-saving-folder"] == '':
-            self.dir = f'{download_dir}/SaveDesktop/archives'
-        else:
-            self.dir = f'{settings["periodic-saving-folder"]}'
-        if os.path.exists(self.dir):
-            if glob.glob(f"{self.dir}/*.sd.tar.gz") == []:
-                self.flistLabel.set_text(_["import_from_list_error"])
-                self.flistBox.append(self.flistLabel)
-            else:
-                self.flistImage = Gtk.Image.new_from_icon_name("list-view")
-                self.flistImage.set_pixel_size(128)
-                self.flistBox.append(self.flistImage)
-                self.flistBox.append(self.flistLabel)
-                
-                self.flistLabel.set_markup(f"<big><b>{_['import_from_list']}</b></big>")
-                
-                # Button for applying selected archive
-                self.applyButton = Gtk.Button.new_with_label(_["apply"])
-                self.applyButton.add_css_class('suggested-action')
-                self.applyButton.connect('clicked', self.imp_cfg_from_list)
-                self.headerbar_list.pack_end(self.applyButton)
-                
-                self.radioBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-                self.listbox = Gtk.ListBox.new()
-                self.listbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-                self.listbox.get_style_context().add_class(class_name='boxed-list')
-                self.flistBox.append(self.listbox)
-                
-                self.dir_row = Adw.ActionRow.new()
-                self.dir_row.set_title(_["pb_folder"])
-                self.dir_row.set_subtitle(self.dir)
-                self.dir_row.set_icon_name("folder-open-symbolic")
-                self.listbox.append(self.dir_row)
-
-                # Get SaveDesktop files from folder selected by the user
-                os.chdir(self.dir)
-                get_dir_content = glob.glob(f"*.sd.tar.gz")
-                archives_model = Gtk.StringList.new(strings=get_dir_content)
-
-                self.radio_row = Adw.ComboRow.new()
-                self.radio_row.set_model(model=archives_model)
-                self.radio_row.set_icon_name('document-properties-symbolic')
-                self.listbox.append(self.radio_row)
-        else:
-            self.flistLabel.set_text(_["import_from_list_error"])
-            self.flistBox.append(self.flistLabel)
             
     # Syncing desktop page
-    def syncing_desktop(self):
+    def sync_desktop(self):
         self.syncingBox.set_valign(Gtk.Align.CENTER)
         self.syncingBox.set_halign(Gtk.Align.CENTER)
         self.syncingBox.set_margin_start(40)
