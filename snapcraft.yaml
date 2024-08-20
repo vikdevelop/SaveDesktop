@@ -42,6 +42,10 @@ architectures:
 - build-on: arm64
 - build-on: armhf
 
+layout:
+  /run/user/1000/gvfs:
+    bind: $SNAP_USER_DATA/gvfs
+
 apps:
   savedesktop:
     extensions: [gnome]
@@ -95,7 +99,9 @@ parts:
       - wget
       - libnotify-bin
       - zip
+      - coreutils
     stage:
       - usr/bin/notify-send
       - usr/bin/wget
       - usr/bin/zip
+      - usr/bin/df
