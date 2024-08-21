@@ -27,9 +27,11 @@ except Exception as err:
     IPAddr = f"ERR: {err}"
 
 # Set application version, and icon
-v = "3.4-beta-04"
+v = "3.4-beta-05"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
-rel_notes = "<p>3.4-beta-04</p>\
+rel_notes = "<p>3.4-beta-05</p>\
+<p>Fixed bugs related to importing encrypted archives in the CLI interface and added more error messages in the GUI.</p>\
+<p>3.4-beta-04</p>\
 <ul>\
 <li>Fixed some bugs with setting up synchronization such as periodic synchronization interval selection or starting the HTTP server in the case if the selected synchronization in the local network only</li>\
 <li>Sped up the configuration import, because files that are unchanged will no longer be copied (this also applies to Flatpak app installations)</li>\
