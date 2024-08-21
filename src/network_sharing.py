@@ -11,6 +11,7 @@ import gi
 import socket
 import shutil
 import filecmp
+import tarfile
 from gi.repository import Gio, GLib
 
 dt = datetime.now()
@@ -104,10 +105,12 @@ class Syncing:
                 exit()
         elif not settings['file-for-syncing'] == "" and not "sd.tar.gz" in settings["file-for-syncing"]:
             filename = subprocess.getoutput(f"cat {settings['file-for-syncing']}/SaveDesktop-sync-file")
+            print("extracting the archive")
             try:
                 tarfile.open(f"{settings['file-for-syncing']}/{filename}", 'r:gz').extractall()
             except Exception as e:
                 os.system(f"notify-send 'An error occured' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
+                exit()
             self.file = filename
             self.import_config()
         else:
