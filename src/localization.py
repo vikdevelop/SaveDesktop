@@ -30,7 +30,7 @@ except Exception as err:
 v = "3.4-beta-05"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
 rel_notes = "<p>3.4-beta-05</p>\
-<p>Fixed bugs related to importing encrypted archives in the CLI interface, added more error messages in the GUI, and excluded the cache directories of Flatpak apps.</p>\
+<p>Fixed bugs related to importing encrypted archives in the CLI interface, added more messages in the GUI in the error occur case, and excluded the cache directories of Flatpak apps in the configuration archive.</p>\
 <p>3.4-beta-04</p>\
 <ul>\
 <li>Fixed some bugs with setting up synchronization such as periodic synchronization interval selection or starting the HTTP server in the case if the selected synchronization in the local network only</li>\
