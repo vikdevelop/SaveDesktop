@@ -179,10 +179,7 @@ class Save:
     def save_flatpak_data(self):
         blst = settings["disabled-flatpak-apps-data"]
         # convert GSettings property to a list
-        blist = blst
-        # add io.github.vikdevelop.SaveDesktop to blacklist because, during saving configuration, their cache folder is too large
-        blist += ["io.github.vikdevelop.SaveDesktop"]
-        blacklist = blist
+        blacklist = blst
         
         # set destination dir
         if os.path.exists(f"{CACHE}/.periodicfile.json"):
@@ -194,12 +191,12 @@ class Save:
         
         # copy Flatpak apps data
         for item in os.listdir(f"{home}/.var/app"):
-            if item not in blacklist:
+            if item not in blacklist and item != "cache":  # Exclude 'cache' directory
                 source_path = os.path.join(f"{home}/.var/app", item)
                 destination_path = os.path.join(destdir, item)
                 if os.path.isdir(source_path):
                     try:
-                        shutil.copytree(source_path, destination_path)
+                        shutil.copytree(source_path, destination_path, ignore=shutil.ignore_patterns('cache'))  # Ignore 'cache' in subdirectories
                     except Exception as e:
                         print(f"Error copying directory {source_path}: {e}")
                 else:
@@ -207,18 +204,7 @@ class Save:
                         shutil.copy2(source_path, destination_path)
                     except Exception as e:
                         print(f"Error copying file {source_path}: {e}")
-
-        # save user data except for the cache of the SaveDesktop app if the app is not in the "disabled-flatpak-apps-data" key of the GSettings database
-        if not "io.github.vikdevelop.SaveDesktop" in flatpak_app_data:
-            os.makedirs(f"{destdir}/io.github.vikdevelop.SaveDesktop", exist_ok=True)
-            os.chdir(f"{home}/.var/app/io.github.vikdevelop.SaveDesktop")
-            os.system(f"cp -R ./config {destdir}/io.github.vikdevelop.SaveDesktop/")
-            os.system(f"cp -R ./data {destdir}/io.github.vikdevelop.SaveDesktop/")
-            if os.path.exists(f"{CACHE}/save_config"):
-                os.chdir(f"{CACHE}/save_config")
-            elif os.path.exists(f"{CACHE}/periodic_saving"):
-                os.chdir(f"{CACHE}/periodic_saving")
-        
+                        
 class Import:
     def __init__(self):
         if os.path.exists(f"{CACHE}/.impfile.json"):
