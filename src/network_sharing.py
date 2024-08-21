@@ -107,7 +107,12 @@ class Syncing:
             filename = subprocess.getoutput(f"cat {settings['file-for-syncing']}/SaveDesktop-sync-file")
             print("extracting the archive")
             try:
-                tarfile.open(f"{settings['file-for-syncing']}/{filename}", 'r:gz').extractall()
+                with tarfile.open(f"{settings['file-for-syncing']}/{filename}", 'r:gz') as tar:
+                    for member in tar.getmembers():
+                        try:
+                            tar.extract(member)
+                        except PermissionError as e:
+                            print(f"Permission denied for {member.name}: {e}")
             except Exception as e:
                 os.system(f"notify-send 'An error occured' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
                 exit()
