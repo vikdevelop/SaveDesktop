@@ -709,7 +709,7 @@ class MainWindow(Adw.ApplicationWindow):
                 self.set_syncing()
                 
                 if "fuse" in subprocess.getoutput(f"df -T \"{self.file_row.get_subtitle()}\""):
-                    open(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file", "w").write(f"{settings['filename-format']}.sd.tar.gz")
+                    open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s.sd.tar.gz"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
                     self.set_up_auto_mount()
                 else:
                     # start copying the synchronization file process
@@ -737,7 +737,6 @@ class MainWindow(Adw.ApplicationWindow):
                   else f'<span color="red">Periodic saving file does not exist.</span>')
         
         check_filesystem = subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\"")
-        print(check_filesystem)
         
         self.set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
 
