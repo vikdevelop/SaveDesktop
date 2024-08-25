@@ -104,7 +104,7 @@ class Syncing:
                 os.system("notify-send 'SaveDesktop Synchronization' 'An error occurred while downloading the configuration archive. Please set up the synchronization in the app again.'")
                 exit()
         elif not settings['file-for-syncing'] == "" and not "sd.tar.gz" in settings["file-for-syncing"]:
-            filename = subprocess.getoutput(f"cat {settings['file-for-syncing']}/SaveDesktop-sync-file")
+            filename = subprocess.getoutput(f"cat \"{settings['file-for-syncing']}/SaveDesktop-sync-file\"")
             print("extracting the archive")
             try:
                 with tarfile.open(f"{settings['file-for-syncing']}/{filename}", 'r:gz') as tar:
