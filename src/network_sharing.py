@@ -104,10 +104,14 @@ class Syncing:
                 os.system("notify-send 'SaveDesktop Synchronization' 'An error occurred while downloading the configuration archive. Please set up the synchronization in the app again.'")
                 exit()
         elif not settings['file-for-syncing'] == "" and not "sd.tar.gz" in settings["file-for-syncing"]:
-            filename = subprocess.getoutput(f"cat \"{settings['file-for-syncing']}/SaveDesktop-sync-file\"")
+            if os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
+                self.get_pb_info()
+            else:
+                subprocess.run([f"{system_dir}/bin/run.sh", "--save-now"] if (flatpak or snap) else ["savedesktop", "--save-now"])
+                self.get_pb_info()
             print("extracting the archive")
             try:
-                with tarfile.open(f"{settings['file-for-syncing']}/{filename}", 'r:gz') as tar:
+                with tarfile.open(f"{settings['file-for-syncing']}/{self.file}", 'r:gz') as tar:
                     for member in tar.getmembers():
                         try:
                             tar.extract(member)
@@ -116,12 +120,20 @@ class Syncing:
             except Exception as e:
                 os.system(f"notify-send 'An error occured' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
                 exit()
-            self.file = filename
             self.import_config()
         else:
             os.system("notify-send 'SaveDesktop' 'You have not set up the synchronization correctly. Please set it up in the app again.'")
             exit()
-            
+    
+    # Get info about selected periodic saving interval, periodic saving folder and filename from the {cloud_folder}/SaveDesktop.json
+    def get_pb_info(self):
+        with open(os.path.join(settings['file-for-syncing'], "SaveDesktop.json")) as data:
+            info = json.load(data)
+        
+        self.file = info["filename"]
+        settings["periodic-saving"] = info["periodic-saving-interval"]
+        settings["periodic-saving-folder"] = info["periodic-saving-folder"]
+        
     # Sync configuration
     def import_config(self):
         os.system(f"python3 {system_dir}/config.py --import_")
