@@ -169,9 +169,10 @@ class Save:
                 if not settings["periodic-import"] == "Never2":
                     file = os.path.basename(j["recent_file"])
                     os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
-            elif "fuse" in subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}"):
-                with open(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file", "w") as pf:
-                    pf.write(f"{settings['filename-format']}.sd.tar.gz")
+            elif "fuse" in subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\""):
+                os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file") and os.remove(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file")
+                with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
+                    pf.write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s.sd.tar.gz"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
         print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
         os.system("rm saving_status")
     
