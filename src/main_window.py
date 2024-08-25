@@ -708,7 +708,7 @@ class MainWindow(Adw.ApplicationWindow):
                 self.open_setdialog_tf = False
                 self.set_syncing()
                 
-                if "fuse" in subprocess.getoutput(f"df -T {self.file_row.get_subtitle()}"):
+                if "fuse" in subprocess.getoutput(f"df -T \"{self.file_row.get_subtitle()}\""):
                     open(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file", "w").write(f"{settings['filename-format']}.sd.tar.gz")
                     self.set_up_auto_mount()
                 else:
@@ -730,13 +730,14 @@ class MainWindow(Adw.ApplicationWindow):
         self.setDialog.set_default_size(450, 200)
 
         # Check periodic saving file path and existence
-        path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'.replace(" ", "_")
+        path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz' if "onedrive" in settings["periodic-saving-folder"] else f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'.replace(" ", "_")
         folder = (f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>' 
                   if settings["periodic-saving"] == "Never" 
                   else path if os.path.exists(path) 
                   else f'<span color="red">Periodic saving file does not exist.</span>')
         
-        check_filesystem = subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}")
+        check_filesystem = subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\"")
+        print(check_filesystem)
         
         self.set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
 
@@ -864,7 +865,7 @@ class MainWindow(Adw.ApplicationWindow):
                     self.set_up_auto_mount()
                         
                     # Check if the selected cloud drive folder is correct
-                    if "fuse" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
+                    if "fuse" in subprocess.getoutput(f"df -T \"{cfile_subtitle}\""):
                         settings["file-for-syncing"] = cfile_subtitle
                     else:
                         os.system("notify-send 'An error occured' 'You did not select the cloud drive folder!'")
@@ -1003,16 +1004,16 @@ class MainWindow(Adw.ApplicationWindow):
         except:
             cfile_subtitle = settings["periodic-saving-folder"]
         if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
-            pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*'
+            pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*'
             match = re.search(pattern, cfile_subtitle)
 
             if match:
                 cloud_service = match.group(1)
                 host = match.group(2)
-                user = match.group(3)
+                user = match.group(3) if "onedrive" not in cfile_subtitle else None
                 
                 with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
-                    m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{user}@{host}")
+                    m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{user}@{host}") if not "onedrive" in cfile_subtitle else m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{host}")
             else:
                 print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
         elif "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
