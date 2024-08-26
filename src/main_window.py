@@ -159,7 +159,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.errHeaderbar = Adw.HeaderBar.new()
         
         # values that set if state of the switch "Extensions" in the Items, state of the switch "User data of installed Flatpak apps will be saved or not", if whether whether to reopen the self.setDialog and if the Apply button in self.setDialog will be enabled or not
-        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.set_button_sensitive = False
+        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.cancel_process = self.set_button_sensitive = False
         
         # set the window size and maximization from the GSettings database
         (width, height) = settings["window-size"]
@@ -434,6 +434,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Open the More options dialog from the self.setDialog
         self.more_options_dialog = more_options_dialog
+        self.cancel_process = False
             
         # Set margin for save desktop layout
         self.saveBox.set_margin_start(40)
@@ -600,6 +601,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # =======
         # Import page itself
+        self.cancel_process = False
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
         
@@ -823,6 +825,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.cfileRow.remove(self.resetButton)
             self.urlDialog.set_response_enabled('ok', True)
             settings["file-for-syncing"] = self.cfileRow.get_subtitle()
+            os.remove(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop")
         
         # Action after closing URL dialog
         def urlDialog_closed(w, response):
@@ -1388,7 +1391,7 @@ class MainWindow(Adw.ApplicationWindow):
         except Exception as e:
             e_o = True
             error = e
-            GLib.idle_add(self.show_err_msg, error)
+            GLib.idle_add(self.show_err_msg, error) if not self.cancel_process else None
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_save)
             self.toolbarview.add_top_bar(self.headerbar)
@@ -1400,7 +1403,8 @@ class MainWindow(Adw.ApplicationWindow):
     def please_wait_save(self):
         # Stop saving configuration
         def cancel_save(w):
-            os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
+            cancel_thread_save = Thread(target=self.cancel_saving_or_importing)
+            cancel_thread_save.start()
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_save)
             self.toolbarview.add_top_bar(self.headerbar)
@@ -1558,7 +1562,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.checkDialog.add_response("ok", _["apply"])
         self.checkDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.checkDialog.connect('response', checkDialog_closed)
-        self.checkDialog.show()    
+        self.checkDialog.show()
         
     # Import configuration
     def import_config(self):
@@ -1577,7 +1581,7 @@ class MainWindow(Adw.ApplicationWindow):
         except Exception as e:
             e_o = True
             error = e
-            GLib.idle_add(self.show_err_msg, error)
+            GLib.idle_add(self.show_err_msg, error) if not self.cancel_process else None
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_import)
             self.toolbarview.add_top_bar(self.headerbar)
@@ -1589,7 +1593,8 @@ class MainWindow(Adw.ApplicationWindow):
     def please_wait_import(self):
         # Stop importing configuration
         def cancel_import(w):
-            os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
+            cancel_thread_import = Thread(target=self.cancel_saving_or_importing)
+            cancel_thread_import.start()
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_import)
             self.toolbarview.add_top_bar(self.headerbar)
@@ -1695,6 +1700,16 @@ class MainWindow(Adw.ApplicationWindow):
         self.backtomButton.set_margin_start(170)
         self.backtomButton.set_margin_end(170)
         self.importwaitBox.append(self.backtomButton)
+    
+    # Cancel saving or importing configuration if the "Cancel" button has been clicked
+    def cancel_saving_or_importing(self):
+        try:
+            self.cancel_process = True
+            os.system(f"rm -rf {CACHE}/save_config/ && rm -rf {CACHE}/import_config/")
+        except:
+            print("Can not remove the CACHE directory")
+        finally:
+            pass
         
     # show message dialog in the error case
     def show_err_msg(self, error):
