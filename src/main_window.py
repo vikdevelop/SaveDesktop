@@ -36,6 +36,8 @@ class MainWindow(Adw.ApplicationWindow):
         # if value is TRUE, it enables window maximalization
         if settings["maximized"]:
             self.maximize()
+            
+        self.set_size_request(555, 584)
         
         # App menu - primary menu
         self.main_menu = Gio.Menu()
@@ -137,8 +139,8 @@ class MainWindow(Adw.ApplicationWindow):
             self.toolbarview.set_content(self.pBox)
             self.pBox.set_margin_start(50)
             self.pBox.set_margin_end(50)
-            self.pBox.append(Gtk.Image.new_from_icon_name("exclamation_mark"))
-            self.pBox.append(Gtk.Label(str=_["unsuppurted_env_desc"].format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE, Deepin")).set_use_markup(True))
+            self.unsupp_img = Gtk.Image.new_from_icon_name("exclamation_mark"); self.unsupp_img.set_pixel_size(128); self.pBox.append(self.unsupp_img)
+            self.unsupp_label = Gtk.Label.new(str=f'<big>{_["unsuppurted_env_desc"]}</big>'.format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE, Deepin")); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
 
         # Show warning about disconnected plugs
         if snap:
@@ -153,9 +155,9 @@ class MainWindow(Adw.ApplicationWindow):
                 self.pBox.set_margin_end(90)
 
                 # Show warning message
-                self.pBox.append(Gtk.Image.new_from_icon_name("exclamation_mark"))
-                self.pBox.append(Gtk.Label(str="<big><b>Need to connect some plugs</b></big>\nIn order for SaveDesktop to work properly, you need to connect some plugs to access the files. You can do this by opening a terminal (Ctrl+Alt+T) and entering the following command: \n").set_use_markup(True))
-                self.pBox.append(Gtk.Label(str="<i>sudo snap connect savedesktop:dot-config &amp;&amp; sudo snap connect savedesktop:dot-local &amp;&amp; sudo snap connect savedesktop:dot-themes &amp;&amp; sudo snap connect savedesktop:dot-icons &amp;&amp; sudo snap connect savedesktop:dot-fonts &amp;&amp; sudo snap connect savedesktop:login-session-control</i>").set_use_markup(True))
+                self.unsupp_img = Gtk.Image.new_from_icon_name("exclamation_mark"); self.unsupp_img.set_pixel_size(128); self.pBox.append(self.unsupp_img)
+                self.unplug_label = Gtk.Label.new(str="<big><b>Need to connect some plugs</b></big>\nIn order for SaveDesktop to work properly, you need to connect some plugs to access the files. You can do this by opening a terminal (Ctrl+Alt+T) and entering the following command: \n"); self.unplug_label.set_use_markup(True); self.unplug_label.set_justify(Gtk.Justification.CENTER); self.unplug_label.set_wrap(True); self.pBox.append(self.unplug_label)
+                self.plugs_list_label = Gtk.Label.new(str="<i>sudo snap connect savedesktop:dot-config &amp;&amp; sudo snap connect savedesktop:dot-local &amp;&amp; sudo snap connect savedesktop:dot-themes &amp;&amp; sudo snap connect savedesktop:dot-icons &amp;&amp; sudo snap connect savedesktop:dot-fonts &amp;&amp; sudo snap connect savedesktop:login-session-control</i>"); self.plugs_list_label.set_use_markup(True); self.plugs_list_label.set_selectable(True); self.plugs_list_label.set_justify(Gtk.Justification.CENTER); self.plugs_list_label.set_wrap(True); self.pBox.append(self.plugs_list_label)
     
     # Show main page
     def save_desktop(self):
@@ -324,8 +326,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.lbox_e.add_css_class(css_class='boxed-list')
-        self.lbox_e.set_margin_start(27)
-        self.lbox_e.set_margin_end(27)
+        self.lbox_e.set_margin_start(60)
+        self.lbox_e.set_margin_end(60)
         self.saveBox.append(self.lbox_e)
         
         # set the filename section
