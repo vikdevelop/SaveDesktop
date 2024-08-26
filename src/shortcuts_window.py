@@ -1,3 +1,6 @@
+import gi
+gi.require_version('Gtk', '4.0')
+from gi.repository import Gtk
 from localization import _
 
 SHORTCUTS_WINDOW = '<?xml version="1.0" encoding="UTF-8"?>\
@@ -46,3 +49,11 @@ SHORTCUTS_WINDOW = '<?xml version="1.0" encoding="UTF-8"?>\
     </child>\
   </template>\
 </interface>' % (_["about_app"], _["sync_manually"], _["keyboard_shortcuts"], _["quit"])
+
+# Load the shortcuts window
+@Gtk.Template(string=SHORTCUTS_WINDOW) # from shortcuts_window.py
+class ShortcutsWindow(Gtk.ShortcutsWindow):
+    __gtype_name__ = 'ShortcutsWindow'
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
