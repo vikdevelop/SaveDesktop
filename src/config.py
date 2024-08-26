@@ -80,9 +80,11 @@ class Save:
             else:
                 desktop_without_spaces = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
             os.system(f'cp -R {desktop_without_spaces} ./Desktop/ ')
-        if settings["save-installed-flatpaks"] == True:
-            print("saving list of installed Flatpak apps")
-            os.system('sh /app/backup_flatpaks.sh')
+        if flatpak:
+            if settings["save-installed-flatpaks"] == True:
+                print("saving list of installed Flatpak apps")
+                os.system("ls /var/lib/flatpak/app/ | awk '{print \"flatpak install --system \" $1 \" -y\"}' > ./installed_flatpaks.sh")
+                os.system("ls ~/.local/share/flatpak/app | awk '{print \"flatpak install --user \" $1 \" -y\"}' > ./installed_user_flatpaks.sh")
         if settings["save-flatpak-data"] == True:
             print("saving user data of installed Flatpak apps")
             self.save_flatpak_data()
