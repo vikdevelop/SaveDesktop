@@ -1,10 +1,7 @@
 #!/usr/bin/python3
-import json
-import locale
-import os
-import socket
-import subprocess
+import json, locale, os, socket, subprocess, gi
 from pathlib import Path
+from gi.repository import Gio, GLib
 
 # Load system language
 p_lang = locale.getlocale()[0]
@@ -62,6 +59,13 @@ snap_real_home = os.getenv('SNAP_REAL_HOME')
 # Setting home as per the confinement
 home = snap_real_home if 'SNAP' in os.environ else snap_home
 
+# Load GSettings database
+settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
+
+# Get user download dir
+download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
+
+# Check, if the app is running in the sandbox (Flatpak or Snap)
 if flatpak:
     try:
       locale = open(f"/app/translations/{r_lang}.json")
@@ -83,6 +87,8 @@ elif snap:
       locale = open(f"{os.getenv('SNAP')}/usr/translations/en.json")
     version = f"{v}"
     # Directories
+    import dbus
+    os.makedirs(f"{CACHE}", exist_ok=True)
     system_dir = f"{os.getenv('SNAP')}/usr"
     CACHE = f"{os.getenv('SNAP_USER_COMMON')}/.cache/tmp"
     DATA = f"{os.getenv('SNAP_USER_DATA')}/.local/share"
@@ -105,4 +111,5 @@ else:
     sync_cmd = f"savedesktop --sync"
     server_cmd = f"savedesktop --start-server"
 
+# Load the translation file
 _ = json.load(locale)
