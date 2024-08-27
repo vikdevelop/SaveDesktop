@@ -85,10 +85,10 @@ elif snap:
     version = f"{v}"
     # Directories
     import dbus
-    os.makedirs(f"{CACHE}", exist_ok=True)
     system_dir = f"{os.getenv('SNAP')}/usr"
     CACHE = f"{os.getenv('SNAP_USER_COMMON')}/.cache/tmp"
     DATA = f"{os.getenv('SNAP_USER_DATA')}/.local/share"
+    os.makedirs(f"{CACHE}", exist_ok=True)
     # Commands
     periodic_saving_cmd = 'savedesktop --background'
     sync_cmd = "savedesktop --sync"
