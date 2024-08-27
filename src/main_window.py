@@ -643,7 +643,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.setDialog.add_response('cancel', _["cancel"])
         self.setDialog.add_response('ok', _["apply"])
         self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        if "red" in folder and not "fuse" in subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}"):
+        if "red" in folder:
             self.setDialog.set_response_enabled('ok', False)
         self.setDialog.connect('response', setDialog_closed)
 
@@ -817,7 +817,7 @@ class MainWindow(Adw.ApplicationWindow):
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
         try:
-            cfile_subtitle = self.fileRow.get_subtitle()
+            cfile_subtitle = self.cfileRow.get_subtitle()
         except:
             cfile_subtitle = settings["periodic-saving-folder"]
         if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
