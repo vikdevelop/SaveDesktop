@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from datetime import date
-from localization import _, CACHE, DATA, IPAddr, system_dir, flatpak, snap, home
+from localization import _, CACHE, DATA, system_dir, flatpak, snap, home
 import subprocess
 import os
 import locale
@@ -22,9 +22,10 @@ settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/g
 class Syncing:
     def __init__(self):
         # Check if user has same or empty IP address property
-        if settings["url-for-syncing"] or settings["file-for-syncing"] == "":
+        if settings["file-for-syncing"] == "":
             settings["manually-sync"] = False
             print("Synchronization is not set up.")
+            exit()
         else:
             self.get_file_info()
 
@@ -88,22 +89,7 @@ class Syncing:
                
     # Download archive from URL
     def download_config(self):
-        if not settings['url-for-syncing'] == "":
-            url = f"{settings['url-for-syncing']}"
-            os.system(f"wget {url}")
-            filename = url.split('/')[-1]
-            self.file = filename.split('.')[0]
-            if ".sd.tar.gz" in url:
-                print("Downloading tar ...")
-                if os.path.exists(f"{self.file}"):
-                    os.system(f"tar -xf {self.file} ./")
-                else:
-                    os.system(f"tar -xf {self.file}.1 ./")
-                self.import_config()
-            else:
-                os.system("notify-send 'SaveDesktop Synchronization' 'An error occurred while downloading the configuration archive. Please set up the synchronization in the app again.'")
-                exit()
-        elif not settings['file-for-syncing'] == "" and not "sd.tar.gz" in settings["file-for-syncing"]:
+       if not settings['file-for-syncing'] == "" and not "sd.tar.gz" in settings["file-for-syncing"]:
             if os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
                 self.get_pb_info()
             else:
@@ -111,7 +97,7 @@ class Syncing:
                 self.get_pb_info()
             print("extracting the archive")
             try:
-                with tarfile.open(f"{settings['file-for-syncing']}/{self.file}", 'r:gz') as tar:
+                with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
                     for member in tar.getmembers():
                         try:
                             tar.extract(member)
@@ -121,7 +107,7 @@ class Syncing:
                 os.system(f"notify-send 'An error occured' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
                 exit()
             self.import_config()
-        else:
+       else:
             os.system("notify-send 'SaveDesktop' 'You have not set up the synchronization correctly. Please set it up in the app again.'")
             exit()
     
@@ -131,8 +117,10 @@ class Syncing:
             info = json.load(data)
         
         self.file = info["filename"]
-        settings["periodic-saving"] = info["periodic-saving-interval"]
-        settings["periodic-saving-folder"] = info["periodic-saving-folder"]
+        if settings["bidirectional-sync"] == True:
+            settings["filename-format"] = info["filename"]
+            settings["periodic-saving"] = info["periodic-saving-interval"]
+            settings["periodic-saving-folder"] = settings["file-for-syncing"]
         
     # Sync configuration
     def import_config(self):
@@ -147,6 +135,6 @@ class Syncing:
         if not os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
             os.system(f"rm -rf {CACHE}/syncing/*")
         print("Configuration has been synced successfully.")
-        os.system(f"notify-send 'SaveDesktop ({self.file[:-10]})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
+        os.system(f"notify-send 'SaveDesktop ({self.file})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
 Syncing()
