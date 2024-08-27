@@ -679,6 +679,9 @@ class MainWindow(Adw.ApplicationWindow):
                 # if the selected periodic saving interval is "Manually2", it enables the manually-sync value
                 settings["manually-sync"] = True and settings["periodic-import"] == "Manually2"
                 
+                # save the status of the Bidirectional Synchronization switch
+                settings["bidirectional-sync"] = self.bsSwitch.get_active()
+                
                 # if it is selected to manually sync, it creates an option in the app menu in the header bar
                 if settings["manually-sync"]:
                     self.sync_menu = Gio.Menu()
