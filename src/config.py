@@ -156,11 +156,9 @@ class Save:
                 password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
                 os.system(f"zip -9 -P '{password}' cfg.sd.zip . -r -x 'saving_status'")
                 print("moving the configuration archive to the user-defined directory")
-                shutil.copyfile('cfg.sd.zip', j['recent_file'])
             else:
                 os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
                 print("moving the configuration archive to the user-defined directory")
-                shutil.copyfile('cfg.sd.tar.gz', j['recent_file'])
         elif os.path.exists(f"{CACHE}/.periodicfile.json"):
             os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
             print("moving the configuration archive to the user-defined directory")
@@ -206,20 +204,7 @@ class Save:
                         print(f"Error copying file {source_path}: {e}")
                         
 class Import:
-    def __init__(self):
-        if os.path.exists(f"{CACHE}/.impfile.json"):
-            with open(f"{CACHE}/.impfile.json") as j:
-                j = json.load(j)
-            if ".zip" in j["import_file"]:
-                pass
-            else:
-                with tarfile.open(j['import_file'], 'r:gz') as tar:
-                    for member in tar.getmembers():
-                        try:
-                            tar.extract(member)
-                        except PermissionError as e:
-                            print(f"Permission denied for {member.name}: {e}")
-                
+    def __init__(self):      
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
         print("importing settings from the Dconf database")
