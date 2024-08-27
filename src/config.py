@@ -211,9 +211,15 @@ class Import:
             with open(f"{CACHE}/.impfile.json") as j:
                 j = json.load(j)
             if ".zip" in j["import_file"]:
-                print("")
+                pass
             else:
-                tarfile.open(f'{j["import_file"]}', 'r:gz').extractall()
+                with tarfile.open(j['import_file'], 'r:gz') as tar:
+                    for member in tar.getmembers():
+                        try:
+                            tar.extract(member)
+                        except PermissionError as e:
+                            print(f"Permission denied for {member.name}: {e}")
+                
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
         print("importing settings from the Dconf database")
