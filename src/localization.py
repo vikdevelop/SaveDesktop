@@ -14,15 +14,6 @@ elif 'zh' in p_lang:
 else:
     r_lang = p_lang[:-3]
 
-# Get IP address of device for synchronizing computers in the network
-try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    IPAddr = s.getsockname()[0]
-    s.close()
-except Exception as err:
-    IPAddr = f"ERR: {err}"
-
 # Set application version, and icon
 v = "3.4-beta-05"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
