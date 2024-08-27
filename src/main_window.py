@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, socket, glob, sys, shutil, re, zipfile, random, string, gi
+import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from urllib.request import urlopen
@@ -10,6 +10,9 @@ from gi.repository import Gtk, Adw, Gio, GLib
 from localization import _, home, download_dir
 from open_wiki import *
 from shortcuts_window import *
+
+# Ignore the deprecation warnings by Gtk
+warnings.filterwarnings("ignore", category=DeprecationWarning)
     
 # Application window
 class MainWindow(Adw.ApplicationWindow):
@@ -527,7 +530,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.syncingBox.append(self.setButton)
 
         # "Connect with other computer" button
-        self.getButton = Gtk.Button.new_with_label(_["connect_with_other_computer"])
+        self.getButton = Gtk.Button.new_with_label("Connect to the cloud storage")
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_urlDialog)
         self.getButton.set_valign(Gtk.Align.CENTER)
@@ -541,20 +544,6 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Dialog for setting the sync file, periodic synchronization interval and copying the URL for synchronization
     def open_setDialog(self):
-        # copy the sync file to the app data folder for proper funcionality
-        def copy_sync_file():
-            try:
-                if not os.path.exists(f"{DATA}/synchronization"):
-                    os.mkdir(f"{DATA}/synchronization")
-                if not os.path.exists(f"{DATA}/synchronization/{settings['filename-format']}.sd.tar.gz"):
-                    os.chdir(f"{DATA}/synchronization")
-                    os.system(f"rm *.sd.tar.gz")
-                    shutil.copyfile(self.file_row.get_subtitle(), f"{DATA}/synchronization/{settings['filename-format']}.sd.tar.gz")
-            except Exception as e:
-                os.system(f"notify-send 'An error occured' '{e}'")
-            finally:
-                print("The sync file has been copied to the SaveDesktop data folder successfully.")
-
         # Create periodic saving file if it does not exist
         def save_now():
             try:
@@ -581,17 +570,10 @@ class MainWindow(Adw.ApplicationWindow):
                 self.set_syncing()
                 
                 if "fuse" in subprocess.getoutput(f"df -T \"{self.file_row.get_subtitle()}\""):
-                    open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s.sd.tar.gz"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
+                    open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
                     self.set_up_auto_mount()
                 else:
-                    # start copying the synchronization file process
-                    setup_thread = Thread(target=copy_sync_file)
-                    setup_thread.start()
-                    
-                    # Check if the Python HTTP Server is running - if not, it shows popup window of the need to log out of the system
-                    if "Couldn't connect to server" in subprocess.getoutput(f"curl --head --fail {self.url_row.get_subtitle()}"):
-                        if not settings["periodic-saving"] == 'Never':
-                            self.show_warn_toast()
+                    print("Nothing changed.")
             else:
                 self.open_setdialog_tf = False
 
@@ -600,16 +582,19 @@ class MainWindow(Adw.ApplicationWindow):
         self.setDialog.set_heading(_["set_up_sync_file"])
         self.setDialog.set_body_use_markup(True)
         self.setDialog.set_default_size(450, 200)
-
+        
+        # check if the periodic saving folder uses the FUSE (File system in user space) file system
+        check_filesystem = subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\"")
+        
         # Check periodic saving file path and existence
         path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz' if "onedrive" in settings["periodic-saving-folder"] else f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'.replace(" ", "_")
         folder = (f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>' 
-                  if settings["periodic-saving"] == "Never" 
-                  else path if os.path.exists(path) 
-                  else f'<span color="red">Periodic saving file does not exist.</span>')
+          if settings["periodic-saving"] == "Never" 
+          else (path if os.path.exists(path) 
+                else f'<span color="red">Periodic saving file does not exist.</span>' 
+                if "fuse" in check_filesystem else f"<span color=\"red\">You didn't select the cloud drive folder!</span>"))
         
-        check_filesystem = subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\"")
-        
+        # Set the button sensitive if selected periodic saving interval is never or path does not exist
         self.set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
 
         # List Box for appending widgets
@@ -654,23 +639,11 @@ class MainWindow(Adw.ApplicationWindow):
         self.ps_button.add_css_class('suggested-action') if settings["periodic-saving"] == "Never" else None
         self.l_setdBox.append(self.ps_row)
 
-        # Action row for showing URL for synchronization
-        self.url_row = Adw.ActionRow.new()
-        self.url_row.set_title(_["url_for_sync"])
-        self.url_row.set_use_markup(True)
-        self.url_row.set_subtitle(f"<span color='red'>{IPAddr}</span>" if "ERR:" in IPAddr 
-                                  else f"http://{IPAddr}:8000/{settings['filename-format']}.sd.tar.gz")
-        self.url_row.set_subtitle_selectable(True)
-
-        # Append URL row if conditions are met
-        if not ("red" in folder or "fuse" in check_filesystem):
-            self.l_setdBox.append(self.url_row)
-
         # Dialog responses
         self.setDialog.add_response('cancel', _["cancel"])
         self.setDialog.add_response('ok', _["apply"])
         self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        if "red" in folder:
+        if "red" in folder and not "fuse" in subprocess.getoutput(f"df -T {settings['periodic-saving-folder']}"):
             self.setDialog.set_response_enabled('ok', False)
         self.setDialog.connect('response', setDialog_closed)
 
@@ -681,14 +654,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.urlDialog_fnc()
 
     # URL Dialog iself
-    def urlDialog_fnc(self):
-        # if self.urlEntry is not empty, it enables the Apply button
-        def enable_response_urlEntry(urlEntry):
-            if not self.urlEntry.get_text() == "":
-                self.urlDialog.set_response_enabled('ok', True)
-            else:
-                self.urlDialog.set_response_enabled('ok', False)
-        
+    def urlDialog_fnc(self): 
         # reset the cloud folder selection to the default value
         def reset_cloud_folder(w):
             self.cfileRow.set_subtitle("")
@@ -742,26 +708,13 @@ class MainWindow(Adw.ApplicationWindow):
                     else:
                         os.system("notify-send 'An error occured' 'You did not select the cloud drive folder!'")
                         settings["file-for-syncing"] = ""
-                    settings["url-for-syncing"] = ""
-
-                # Set up local network sync
-                elif (url := self.urlEntry.get_text()):
-                    settings["url-for-syncing"] = url
-                    try:
-                        urlopen(url)  # Check if the URL is correct
-                        self.set_syncing()
-                        self.show_warn_toast()
-                    except Exception as e:
-                        err = str(e).replace("<", "").replace(">", "") if "<" in str(e) else str(e)
-                        os.system(f"notify-send 'SaveDesktop' 'ERR: {err}'")
-                        settings["url-for-syncing"] = ""
-                    settings["file-for-syncing"] = ""
                 else:
                     print("Nothing changed.")
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
-        self.urlDialog.set_heading(_["connect_with_other_computer"])
+        self.urlDialog.set_heading("Connect to the cloud storage")
+        self.urlDialog.set_body("On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.")
         self.urlDialog.set_default_size(500,370)
           
         # Box for adding widgets in this dialog
@@ -769,27 +722,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.urlBox.get_style_context().add_class(class_name='boxed-list')
         self.urlDialog.set_extra_child(self.urlBox)
-        
-        # Row for connecting to computer in the local network
-        self.localRow = Adw.ExpanderRow.new()
-        self.localRow.set_title("Connect to computer in the local network")
-        self.localRow.set_subtitle(_["connect_with_pc_desc"])
-        self.localRow.set_subtitle_lines(6)
-        self.urlBox.append(self.localRow)
-
-        # Entry for entering the URL for synchronization
-        self.urlEntry = Adw.EntryRow.new()
-        self.urlEntry.set_title(_["pc_url_entry"])
-        self.urlEntry.connect("changed", enable_response_urlEntry)
-        self.urlEntry.set_text(settings["url-for-syncing"])
-        self.localRow.add_row(self.urlEntry)
-        
-        # Row for connecting cloud drive
-        self.cloudRow = Adw.ExpanderRow.new()
-        self.cloudRow.set_title("Connect with the cloud storage")
-        self.cloudRow.set_subtitle("On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.")
-        self.cloudRow.set_subtitle_lines(6)
-        self.urlBox.append(self.cloudRow)
         
         # Row and buttons for selecting the cloud drive folder
         ## button for selecting the cloud drive folder
@@ -813,13 +745,12 @@ class MainWindow(Adw.ApplicationWindow):
         
         ### add the reset button if the subtitle is not empty
         self.cfileRow.add_suffix(self.resetButton) if not settings["file-for-syncing"] == "" else None
-        
         self.cfileRow.set_title("Select cloud drive folder")
         self.cfileRow.set_subtitle(settings["file-for-syncing"])
         self.cfileRow.set_subtitle_selectable(True)
         self.cfileRow.add_suffix(self.cloudButton)
         self.cfileRow.set_activatable_widget(self.cloudButton)
-        self.cloudRow.add_row(self.cfileRow)
+        self.urlBox.append(self.cfileRow)
         
         # Periodic sync section
         options = Gtk.StringList.new(strings=[
@@ -845,11 +776,26 @@ class MainWindow(Adw.ApplicationWindow):
             self.psyncRow.set_selected(3)
         elif settings["periodic-import"] == "Monthly2":
             self.psyncRow.set_selected(4)
+            
+        # Bidirectional Synchronization section
+        ## Switch
+        self.bsSwitch = Gtk.Switch.new()
+        if settings["bidirectional-sync"] == True:
+            self.bsSwitch.set_active(True)
+        self.bsSwitch.set_valign(Gtk.Align.CENTER)
+        
+        ## Action Row
+        self.bsyncRow = Adw.ActionRow.new()
+        self.bsyncRow.set_title("Bidirectional synchronization")
+        self.bsyncRow.set_title_lines(2)
+        self.bsyncRow.add_suffix(self.bsSwitch)
+        self.bsyncRow.set_activatable_widget(self.bsSwitch)
+        self.urlBox.append(self.bsyncRow)
         
         self.urlDialog.add_response('cancel', _["cancel"])
         self.urlDialog.add_response('ok', _["apply"])
         self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        if not self.urlEntry.get_text() and not self.cfileRow.get_subtitle():
+        if not self.cfileRow.get_subtitle():
             self.urlDialog.set_response_enabled('ok', False)
         else:
             self.urlDialog.set_response_enabled('ok', True)
@@ -860,10 +806,6 @@ class MainWindow(Adw.ApplicationWindow):
     def set_syncing(self):
         if not os.path.exists(f"{home}/.config/autostart"):
             os.mkdir(f"{home}/.config/autostart")
-        # Create desktop file for running Python HTTP server
-        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop"):
-            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", "w") as sv:
-                sv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing server)\nType=Application\nExec={server_cmd}')
         # Create desktop file for syncing the configuration from other computer
         if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
             with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
