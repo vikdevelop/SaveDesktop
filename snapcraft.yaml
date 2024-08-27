@@ -49,7 +49,7 @@ layout:
 apps:
   savedesktop:
     extensions: [gnome]
-    command: usr/bin/run.sh
+    command: usr/bin/savedesktop
     desktop: usr/share/applications/io.github.vikdevelop.SaveDesktop.desktop
     common-id: io.github.vikdevelop.SaveDesktop.desktop
     plugs:
@@ -73,7 +73,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: '3.4-beta-05'
+    source-tag: '3.4-beta-06'
     source-depth: 1
     plugin: nil
     override-build: |
@@ -89,7 +89,7 @@ parts:
       install -D -t $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
       glib-compile-schemas $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas
       cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
-      install -Dm755 -t $CRAFT_PART_INSTALL/usr/bin $CRAFT_PART_SRC/run.sh
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr/bin $CRAFT_PART_SRC/savedesktop
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
 
   deps:
