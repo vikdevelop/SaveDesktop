@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings
+import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from urllib.request import urlopen
@@ -1085,9 +1085,8 @@ class MainWindow(Adw.ApplicationWindow):
                 file = source.open_finish(res)
             except:
                 return
-            with open(f"{CACHE}/.impfile.json", "w") as j:
-                j.write('{\n "import_file": "%s"\n}' % file.get_path())
-            if ".zip" in file.get_path():
+            self.import_file = file.get_path()
+            if ".zip" in self.import_file:
                 self.check_password_dialog()
             else:
                 self.please_wait_import()
@@ -1200,8 +1199,11 @@ class MainWindow(Adw.ApplicationWindow):
     def start_saving(self):
         try:
             e_o = False
-            from config import Save
-            Save()
+            os.system(f"python3 {system_dir}/config.py --save")
+            try:
+                shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
+            except:
+                shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
         except Exception as e:
             e_o = True
             error = e
@@ -1217,8 +1219,7 @@ class MainWindow(Adw.ApplicationWindow):
     def please_wait_save(self):
         # Stop saving configuration
         def cancel_save(w):
-            cancel_thread_save = Thread(target=self.cancel_saving_or_importing)
-            cancel_thread_save.start()
+            os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_save)
             self.toolbarview.add_top_bar(self.headerbar)
@@ -1322,9 +1323,7 @@ class MainWindow(Adw.ApplicationWindow):
     
     # Import config from list
     def imp_cfg_from_list(self, w):
-        selected_archive = self.radio_row.get_selected_item()
-        with open(f"{CACHE}/.impfile.json", "w") as j:
-            j.write('{\n "import_file": "%s/%s"\n}' % (self.dir, selected_archive.get_string()))
+        self.import_file = f"{self.dir}/{self.radio_row.get_selected_item().get_string()}"
         if not os.path.exists(f"{CACHE}/import_from_list"):
             os.mkdir(f"{CACHE}/import_from_list")
         os.chdir(f"{CACHE}/import_from_list")
@@ -1336,15 +1335,12 @@ class MainWindow(Adw.ApplicationWindow):
     def check_password_dialog(self):
         # unzip archive if password is correct only
         def unzip_ar():
-            with open(f"{CACHE}/.impfile.json") as i:
-                j = json.load(i)
             if not os.path.exists(f"{CACHE}/import_config"):
                 os.mkdir(f"{CACHE}/import_config")
-            file_name = j["import_file"]
             self.please_wait_import()
             try:
                 e_o = False
-                with zipfile.ZipFile(file_name, "r") as zip:
+                with zipfile.ZipFile(self.import_file, "r") as zip:
                     zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
             except Exception as err:
                 e_o = True
@@ -1390,8 +1386,16 @@ class MainWindow(Adw.ApplicationWindow):
     def start_importing(self):
         try:
             e_o = False
-            from config import Import
-            Import()
+            if "zip" in self.import_file:
+                pass
+            else:
+                with tarfile.open(self.import_file, 'r:gz') as tar:
+                    for member in tar.getmembers():
+                        try:
+                            tar.extract(member)
+                        except PermissionError as e:
+                            print(f"Permission denied for {member.name}: {e}")
+            os.system(f"python3 {system_dir}/config.py --import_")
         except Exception as e:
             e_o = True
             error = e
@@ -1407,17 +1411,12 @@ class MainWindow(Adw.ApplicationWindow):
     def please_wait_import(self):
         # Stop importing configuration
         def cancel_import(w):
-            cancel_thread_import = Thread(target=self.cancel_saving_or_importing)
-            cancel_thread_import.start()
+            os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_import)
             self.toolbarview.add_top_bar(self.headerbar)
             for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]:
                 self.importwaitBox.remove(widget)
-
-        # Get information about filename from this file
-        with open(f'{CACHE}/.impfile.json') as i:
-            config_name = json.load(i)["import_file"]
 
         # Add new headerbar for this page
         self.headerbar_import = Adw.HeaderBar.new()
@@ -1450,7 +1449,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.importwaitBox.append(self.idoneImage)
 
         # Create label about configuration archive name
-        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(config_name))
+        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(self.import_file))
         self.importwaitLabel.set_use_markup(True)
         self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
         self.importwaitLabel.set_wrap(True)
