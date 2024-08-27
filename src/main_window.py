@@ -1574,13 +1574,15 @@ class MyApp(Adw.Application):
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.connect('activate', self.on_activate)
-
+    
+    # open directory with created configuration archive after clicking on the "Open the folder" button
     def open_dir(self, action, param):
         with open(f"{CACHE}/.filedialog.json") as fd:
             jf = json.load(fd)
         path = jf["recent_file"]
         Gtk.FileLauncher.new(Gio.File.new_for_path(path)).open_containing_folder()
-
+    
+    # log out of the system after clicking on the "Log Out" button
     def logout(self, action, param):
         if snap:
             bus = dbus.SystemBus()
@@ -1593,7 +1595,8 @@ class MyApp(Adw.Application):
                 os.system("dbus-send --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int32:0 int32:0")
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
-
+    
+    # Synchronize configuation manually after clicking on the "Sync" button in the header bar menu
     def sync_pc(self, action, param):
         sync_info_path = f"{DATA}/sync-info.json"
         if os.path.exists(sync_info_path):
@@ -1601,10 +1604,12 @@ class MyApp(Adw.Application):
         os.system(f'notify-send "{_["please_wait"]}"')
         os.system(f"echo > {CACHE}/.from_app")
         self.sync_m = GLib.spawn_command_line_async(f"python3 {system_dir}/network_sharing.py")
-
+    
+    # Show Keyboard Shortcuts window
     def shortcuts(self, action, param):
         ShortcutsWindow(transient_for=self.get_active_window()).present()
-
+    
+    # Action after closing the application using Ctrl+Q keyboard shortcut
     def app_quit(self, action, param):
         if any(os.path.exists(f"{CACHE}/{path}") for path in [
             "import_config/copying_flatpak_data",
@@ -1615,7 +1620,8 @@ class MyApp(Adw.Application):
         else:
             os.system(f"rm -rf {CACHE}/* {CACHE}/.*")
         app.quit()
-
+    
+    # "About app" dialog
     def on_about_action(self, action, param):
         dialog = Adw.AboutWindow(transient_for=app.get_active_window())
         dialog.set_application_name("SaveDesktop")
@@ -1632,14 +1638,16 @@ class MyApp(Adw.Application):
         dialog.set_application_icon(icon)
         dialog.set_release_notes(rel_notes)
         dialog.show()
-
+    
+    # create Gio actions for opening the folder, logging out of the system, etc.
     def create_action(self, name, callback, shortcuts=None):
         action = Gio.SimpleAction.new(name, None)
         action.connect('activate', callback)
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f'app.{name}', shortcuts)
-
+    
+    # Show the main window of the application
     def on_activate(self, app):
         self.win = MainWindow(application=app)
         self.win.present()
