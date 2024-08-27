@@ -1217,7 +1217,6 @@ class MainWindow(Adw.ApplicationWindow):
     def please_wait_save(self):
         # Stop saving configuration
         def cancel_save(w):
-            # VYRESIT PROBLEM S UKONCENIM UKLADANI!!!!
             cancel_thread_save = Thread(target=self.cancel_saving_or_importing)
             cancel_thread_save.start()
             self.toolbarview.set_content(self.headapp)
@@ -1408,7 +1407,6 @@ class MainWindow(Adw.ApplicationWindow):
     def please_wait_import(self):
         # Stop importing configuration
         def cancel_import(w):
-            # VYRESIT PROBLEM S UKONCENIM IMPORTU!!!!
             cancel_thread_import = Thread(target=self.cancel_saving_or_importing)
             cancel_thread_import.start()
             self.toolbarview.set_content(self.headapp)
