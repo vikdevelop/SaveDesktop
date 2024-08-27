@@ -15,9 +15,15 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.4-beta-05"
+v = "3.4-beta-06"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
-rel_notes = "<p>3.4-beta-05</p>\
+rel_notes = "<p>3.4-beta-06</p>\
+<ul>\
+<li>Removed support for synchronization using the URL in the local network, so it is only possible to use synchronization using the cloud drive folder, because it is untenable for me</li>\
+<li>Fixed bug with the canceling saving or importing configuation</li>\
+<li>Simplified setting up the bidirectional synchronization: just click on the 'Bidirectional synchronization' switch in the 'Connect to the cloud storage' dialog, and on the computer that makes periodic saving, select the same cloud drive folder in the already mentioned dialog.</li>\
+</ul>\
+<p>3.4-beta-05</p>\
 <p>Fixed bugs related to importing encrypted archives in the CLI interface, added more messages in the GUI in the error occur case, and excluded the cache directories of Flatpak apps in the configuration archive.</p>\
 <p>3.4-beta-04</p>\
 <ul>\
