@@ -73,7 +73,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: '3.4-beta-06_fix-snap'
+    source-tag: '3.4-beta-06-hotfix-1'
     source-depth: 1
     plugin: nil
     override-build: |
