@@ -13,7 +13,7 @@ from shortcuts_window import *
 
 # Ignore the deprecation warnings by Gtk
 warnings.filterwarnings("ignore", category=DeprecationWarning)
-    
+
 # Application window
 class MainWindow(Adw.ApplicationWindow):
     def __init__(self, *args, **kwargs):
@@ -203,7 +203,7 @@ class MainWindow(Adw.ApplicationWindow):
             
             # Dialog for showing more options itself
             self.msDialog = Adw.MessageDialog.new(self)
-            self.msDialog.set_default_size(400, 200)
+            self.msDialog.set_default_size(450, 200)
             self.msDialog.set_heading(_["more_options"])
 
             # Box for this dialog
@@ -547,21 +547,68 @@ class MainWindow(Adw.ApplicationWindow):
         # Create periodic saving file if it does not exist
         def save_now():
             try:
+                e_o = False
                 subprocess.run(['notify-send', 'SaveDesktop', _["please_wait"]])
                 self.file_row.set_use_markup(False)
-                subprocess.run([f"{system_dir}/bin/run.sh", "--save-now"] if (flatpak or snap) else ["savedesktop", "--save-now"], check=True)
-            except subprocess.CalledProcessError as e:
-                subprocess.run(subprocess.run(['notify-send', 'An error occurred', str(e.stderr)]))
+                subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
+            except Exception as e:
+                e_o = True
+                subprocess.run(['notify-send', 'An error occured', f'{e}'])
             finally:
-                self.file_row.remove(self.setupButton)
-                self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
-                os.system(f"notify-send 'SaveDesktop' '{_['config_saved']}'")
-                self.setDialog.set_response_enabled('ok', True)
-                
+                if not e_o:
+                    self.file_row.remove(self.setupButton)
+                    self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
+                    os.system(f"notify-send 'SaveDesktop' '{_['config_saved']}'")
+                    self.setDialog.set_response_enabled('ok', True)
+        
+        # make the periodic saving file if it does not exist
         def make_pb_file(w):
             self.setupButton.set_sensitive(False)
             pb_thread = Thread(target=save_now)
             pb_thread.start()
+        
+        def update_gui():
+            global folder, path, check_filesystem
+            self.file_row = Adw.ActionRow()
+            self.file_row.set_title(_["periodic_saving_file"])
+            self.file_row.set_subtitle(folder)
+            if "fuse" in check_filesystem and "red" not in folder:
+                self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic"))
+            self.file_row.set_subtitle_lines(4)
+            self.file_row.set_use_markup(True)
+            self.file_row.set_subtitle_selectable(True)
+            self.l_setdBox.append(self.file_row)
+            self.l_setdBox.append(self.ps_row)
+            
+            set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
+            if "red" in folder:
+                self.setDialog.set_response_enabled('ok', False)
+            if "Periodic saving file does not exist." in folder:
+                self.setupButton = Gtk.Button.new_with_label("Create")
+                self.setupButton.set_valign(Gtk.Align.CENTER)
+                self.setupButton.add_css_class("suggested-action")
+                self.setupButton.connect("clicked", make_pb_file)
+                self.file_row.add_suffix(self.setupButton)
+        
+        # check filesystem
+        def check_filesystem_fnc():
+            global folder, path, check_filesystem
+            check_filesystem = subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\"")
+            
+            path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz' if "onedrive" in settings["periodic-saving-folder"] else f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'.replace(" ", "_")
+            
+            folder = (f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>' 
+                      if settings["periodic-saving"] == "Never" 
+                      else (path if os.path.exists(path) 
+                            else f'<span color="red">Periodic saving file does not exist.</span>' 
+                            if "fuse" in check_filesystem else f"<span color=\"red\">You didn't select the cloud drive folder!</span>"))
+            
+            update_gui()
+        
+        # save the SaveDesktop.json file to the periodic saving folder and set up the auto-mounting the cloud drive
+        def save_file():
+            open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
+            self.set_up_auto_mount()
         
         # Action after closing dialog for setting synchronization file
         def setDialog_closed(w, response):
@@ -570,8 +617,8 @@ class MainWindow(Adw.ApplicationWindow):
                 self.set_syncing()
                 
                 if "fuse" in subprocess.getoutput(f"df -T \"{self.file_row.get_subtitle()}\""):
-                    open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
-                    self.set_up_auto_mount()
+                    thread = Thread(target=save_file)
+                    thread.start()
                 else:
                     print("Nothing changed.")
             else:
@@ -583,44 +630,15 @@ class MainWindow(Adw.ApplicationWindow):
         self.setDialog.set_body_use_markup(True)
         self.setDialog.set_default_size(450, 200)
         
-        # check if the periodic saving folder uses the FUSE (File system in user space) file system
-        check_filesystem = subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\"")
-        
-        # Check periodic saving file path and existence
-        path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz' if "onedrive" in settings["periodic-saving-folder"] else f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'.replace(" ", "_")
-        folder = (f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>' 
-          if settings["periodic-saving"] == "Never" 
-          else (path if os.path.exists(path) 
-                else f'<span color="red">Periodic saving file does not exist.</span>' 
-                if "fuse" in check_filesystem else f"<span color=\"red\">You didn't select the cloud drive folder!</span>"))
-        
-        # Set the button sensitive if selected periodic saving interval is never or path does not exist
-        self.set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
-
         # List Box for appending widgets
         self.l_setdBox = Gtk.ListBox.new()
         self.l_setdBox.set_selection_mode(Gtk.SelectionMode.NONE)
         self.l_setdBox.get_style_context().add_class('boxed-list')
         self.setDialog.set_extra_child(self.l_setdBox)
-
-        # Row for showing selected synchronization file
-        self.file_row = Adw.ActionRow.new()
-        self.file_row.set_title(_["periodic_saving_file"])
-        self.file_row.set_subtitle(folder)
-        self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic")) if "fuse" in check_filesystem and not "red" in folder else None
-        self.file_row.set_subtitle_lines(4)
-        self.file_row.set_use_markup(True)
-        self.file_row.set_subtitle_selectable(True)
-        self.l_setdBox.append(self.file_row)
-
-        # Button for creating a periodic saving file if it does not exist
-        if "Periodic saving file does not exist." in folder:
-            self.setupButton = Gtk.Button.new_with_label("Create")
-            self.setupButton.set_valign(Gtk.Align.CENTER)
-            self.setupButton.add_css_class("suggested-action")
-            self.setupButton.connect("clicked", make_pb_file)
-            self.file_row.add_suffix(self.setupButton)
-
+        
+        check_thread = Thread(target=check_filesystem_fnc)
+        check_thread.start()
+        
         # Button for opening More options dialog
         self.open_setdialog_tf = True
         self.ps_button = Gtk.Button.new_with_label("Change")
@@ -637,14 +655,11 @@ class MainWindow(Adw.ApplicationWindow):
         self.ps_row.set_subtitle(f'<span color="red">{_["never"]}</span>' if settings["periodic-saving"] == "Never" 
                                  else f'<span color="green">{pb}</span>')
         self.ps_button.add_css_class('suggested-action') if settings["periodic-saving"] == "Never" else None
-        self.l_setdBox.append(self.ps_row)
 
         # Dialog responses
         self.setDialog.add_response('cancel', _["cancel"])
         self.setDialog.add_response('ok', _["apply"])
         self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        if "red" in folder:
-            self.setDialog.set_response_enabled('ok', False)
         self.setDialog.connect('response', setDialog_closed)
 
         self.setDialog.show()
@@ -816,26 +831,29 @@ class MainWindow(Adw.ApplicationWindow):
       
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
-        try:
-            cfile_subtitle = self.cfileRow.get_subtitle()
-        except:
+        if not settings["periodic-saving-folder"] == "":
             cfile_subtitle = settings["periodic-saving-folder"]
-        if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
-            pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*'
-            match = re.search(pattern, cfile_subtitle)
+        elif not self.cfileRow.get_subtitle() == "":
+            cfile_subtitle = self.cfileRow.get_subtitle()
+        else:
+            cfile_subtitle = ""
+        if not cfile_subtitle == "":
+            if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
+                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*'
+                match = re.search(pattern, cfile_subtitle)
 
-            if match:
-                cloud_service = match.group(1)
-                host = match.group(2)
-                user = match.group(3) if "onedrive" not in cfile_subtitle else None
-                
+                if match:
+                    cloud_service = match.group(1)
+                    host = match.group(2)
+                    user = match.group(3) if "onedrive" not in cfile_subtitle else None
+                    
+                    with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
+                        m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{user}@{host}") if not "onedrive" in cfile_subtitle else m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{host}")
+                else:
+                    print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
+            elif "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
                 with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
-                    m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{user}@{host}") if not "onedrive" in cfile_subtitle else m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{host}")
-            else:
-                print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
-        elif "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
-            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
-                m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}")
+                    m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}")
     
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
