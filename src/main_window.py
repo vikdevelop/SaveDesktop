@@ -595,13 +595,13 @@ class MainWindow(Adw.ApplicationWindow):
             global folder, path, check_filesystem
             check_filesystem = subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\"")
             
-            path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz' if "onedrive" in settings["periodic-saving-folder"] else f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz'.replace(" ", "_")
-            
-            folder = (f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>' 
-                      if settings["periodic-saving"] == "Never" 
-                      else (path if os.path.exists(path) 
-                            else f'<span color="red">Periodic saving file does not exist.</span>' 
-                            if "fuse" in check_filesystem else f"<span color=\"red\">You didn't select the cloud drive folder!</span>"))
+            path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.tar.gz'
+            folder = (
+                f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>' 
+                if settings["periodic-saving"] == "Never" 
+                else (path if os.path.exists(path) 
+                      else f'<span color="red">Periodic saving file does not exist.</span>' 
+                      if "fuse" in check_filesystem else f"<span color=\"red\">You didn't select the cloud drive folder!</span>"))
             
             update_gui()
         
