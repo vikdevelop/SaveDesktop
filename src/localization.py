@@ -15,9 +15,11 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.4-beta-06"
+v = "3.4-beta-06-hotfix-1"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
-rel_notes = "<p>3.4-beta-06</p>\
+rel_notes = "<p>3.4-beta-06-hotfix-1</p>\
+<p>Fixed a bug with creating the periodic saving file in the 'Set up the sync file' dialog and freezing the GUI during loading the mentioned dialog</p>\
+<p>3.4-beta-06</p>\
 <ul>\
 <li>Removed support for synchronization using the URL in the local network, so it is only possible to use synchronization using the cloud drive folder, because it is untenable for me</li>\
 <li>Fixed bug with the canceling saving or importing configuation</li>\
