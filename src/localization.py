@@ -78,7 +78,6 @@ if flatpak:
     # Commands
     periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
     sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
-    server_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --start-server"
 elif snap:
     try:
       locale = open(f"{os.getenv('SNAP')}/usr/translations/{r_lang}.json")
@@ -94,7 +93,6 @@ elif snap:
     # Commands
     periodic_saving_cmd = 'savedesktop --background'
     sync_cmd = "savedesktop --sync"
-    server_cmd = "savedesktop --start-server"
 else:
     try:
       locale = open(f"{home}/.local/share/savedesktop/translations/{r_lang}.json")
@@ -108,7 +106,6 @@ else:
     # Commands
     periodic_saving_cmd = f'savedesktop --background'
     sync_cmd = f"savedesktop --sync"
-    server_cmd = f"savedesktop --start-server"
 
 # Load the translation file
 _ = json.load(locale)
