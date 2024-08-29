@@ -150,8 +150,6 @@ class Save:
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         print("creating configuration archive")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
-            with open(f"{CACHE}/.filedialog.json") as j:
-                j = json.load(j)
             if settings["enable-encryption"] == True:
                 password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
                 os.system(f"zip -9 -P '{password}' cfg.sd.zip . -r -x 'saving_status'")
