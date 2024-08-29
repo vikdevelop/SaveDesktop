@@ -60,8 +60,8 @@ On the first computer:
 2. Go to the Sync page and click the "Connect to the cloud storage" button.
 3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
 4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
-5. Bidirectional synchronization is enabled by default, but if you only want to synchronize in one direction, e.g. from the first computer to the second computer, turn it off.</str>
-  <str key="periodic_sync">### Periodic synchronization
+To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.</str>
+    <str key="periodic_sync">### Periodic synchronization
 You can choose between the following options:
 - Daily
 - Weekly (synchronization takes place every Tuesday)
