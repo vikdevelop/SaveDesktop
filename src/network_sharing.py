@@ -2,7 +2,7 @@
 from pathlib import Path
 from datetime import datetime
 from datetime import date
-from localization import _, CACHE, DATA, system_dir, flatpak, snap, home
+from localization import _, CACHE, DATA, system_dir, home, settings
 import subprocess
 import os
 import locale
@@ -16,16 +16,15 @@ from gi.repository import Gio, GLib
 
 dt = datetime.now()
 
-# Load GSettings database for show user app settings
-settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
-
 class Syncing:
     def __init__(self):
         # Check if user has same or empty IP address property
-        if settings["file-for-syncing"] == "":
+        if not settings["file-for-syncing"]:
             settings["manually-sync"] = False
             print("Synchronization is not set up.")
-            exit()
+        elif not settings["bidirectional-sync"]:
+            settings["manually-sync"] = False
+            print("The bidirectional synchronization is turned off.")
         else:
             self.get_file_info()
 
@@ -93,7 +92,7 @@ class Syncing:
             if os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
                 self.get_pb_info()
             else:
-                subprocess.run([f"{system_dir}/bin/run.sh", "--save-now"] if (flatpak or snap) else ["savedesktop", "--save-now"])
+                subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
                 self.get_pb_info()
             print("extracting the archive")
             try:
@@ -116,10 +115,24 @@ class Syncing:
         with open(os.path.join(settings['file-for-syncing'], "SaveDesktop.json")) as data:
             info = json.load(data)
         
-        self.file = info["filename"]
+        # check if the filename has spaces or not
+        if " " in info["filename"]:
+            old_filename = info["filename"]
+            self.file = old_filename.replace(" ", "_")
+        else:
+            self.file = info["filename"]
+        
+        # If bidirectional synchronization is enabled, set the periodic saving interval, folder, and filename format, and folder for synchronizaton from the SaveDesktop.json file
         if settings["bidirectional-sync"] == True:
             settings["filename-format"] = info["filename"]
             settings["periodic-saving"] = info["periodic-saving-interval"]
+            if not settings["file-for-syncing"]:
+                if not os.path.exists(info["periodic-saving-folder"]) and "gvfs" in info["periodic-saving-folder"]:
+                    uid = os.getuid() # get user ID
+                    periodic_saving_folder = re.sub(r'user/\d+/', f'user/{uid}/', periodic_saving_folder)
+                else:
+                    periodic_saving_folder = info["periodic-saving-folder"]
+                settings["file-for-syncing"] = periodic_saving_folder
             settings["periodic-saving-folder"] = settings["file-for-syncing"]
         
     # Sync configuration
@@ -127,13 +140,14 @@ class Syncing:
         os.system(f"python3 {system_dir}/config.py --import_")
         self.done()
 
-    # Message about done synchronization
+    # Message about finished synchronization
     def done(self):
         if not settings["manually-sync"] == True:
             with open(f"{DATA}/sync-info.json", "w") as s:
                 s.write('{\n "sync-date": "%s"\n}' % date.today())
         if not os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
             os.system(f"rm -rf {CACHE}/syncing/*")
+        [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop"] if os.path.exists(path)]
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop ({self.file})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
