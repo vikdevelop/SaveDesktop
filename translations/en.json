@@ -66,6 +66,7 @@
     "cloud_folder_err": "You didn't select the cloud drive folder!",
     "periodic_sync": "Periodic synchronization",
     "bidirectional_sync": "Bidirectional synchronization",
+    "bidirectional_sync_desc": "When this feature is enabled, the information from the other computer, such as the periodic saving interval, folder, and periodic saving file name, is set on this computer, so there is no need to set anything on this computer regarding synchronization.",
     "m_sync_desc": "From now on, you can sync the config from the menu in the header bar",
     "sync_manually": "Synchronise manually",
     "quit": "Quit",
