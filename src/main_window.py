@@ -170,9 +170,10 @@ class MainWindow(Adw.ApplicationWindow):
             def create_pb_desktop():
                 if not os.path.exists(f'{home}/.config/autostart'):
                     os.mkdir(f'{home}/.config/autostart')
-                if not os.path.exists(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
-                    with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
-                        cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
+                if not os.path.exists(f"{home}/.config/autostart/savedesktop-synchronization.sh"):
+                    if not os.path.exists(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
+                        with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
+                            cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
             
             # Action after closing dialog for showing more options
             def msDialog_closed(w, response):
@@ -614,7 +615,6 @@ class MainWindow(Adw.ApplicationWindow):
         def setDialog_closed(w, response):
             if response == 'ok':
                 self.open_setdialog_tf = False
-                self.set_syncing()
                 
                 if "fuse" in subprocess.getoutput(f"df -T \"{self.file_row.get_subtitle()}\""):
                     thread = Thread(target=save_file)
@@ -747,7 +747,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudButton.add_css_class('flat')
         self.cloudButton.set_valign(Gtk.Align.CENTER)
         self.cloudButton.set_tooltip_text(_["set_another"])
-        self.cloudButton.connect("clicked", self.select_sync_file)
+        self.cloudButton.connect("clicked", self.select_sync_folder)
         
         ## button for reseting the selected cloud drive folder
         self.resetButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
@@ -805,6 +805,7 @@ class MainWindow(Adw.ApplicationWindow):
         ## Action Row
         self.bsyncRow = Adw.ActionRow.new()
         self.bsyncRow.set_title("Bidirectional synchronization")
+        self.bsyncRow.set_subtitle("When this feature is enabled, the information from the other computer, such as the periodic saving interval, folder, and periodic saving file name, is set on this computer, so there is no need to set anything on this computer regarding synchronization.")
         self.bsyncRow.set_title_lines(2)
         self.bsyncRow.add_suffix(self.bsSwitch)
         self.bsyncRow.set_activatable_widget(self.bsSwitch)
@@ -819,15 +820,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.urlDialog.set_response_enabled('ok', True)
         self.urlDialog.connect('response', urlDialog_closed)
         self.urlDialog.show()
-
-    # Set synchronization for running in the background
-    def set_syncing(self):
-        if not os.path.exists(f"{home}/.config/autostart"):
-            os.mkdir(f"{home}/.config/autostart")
-        # Create desktop file for syncing the configuration from other computer
-        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop"):
-            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w") as pv:
-                pv.write(f'[Desktop Entry]\nName=SaveDesktop (syncing tool)\nType=Application\nExec={sync_cmd}')
       
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
@@ -847,13 +839,15 @@ class MainWindow(Adw.ApplicationWindow):
                     host = match.group(2)
                     user = match.group(3) if "onedrive" not in cfile_subtitle else None
                     
-                    with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
-                        m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{user}@{host}") if not "onedrive" in cfile_subtitle else m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=gio mount {cloud_service}://{host}")
+                    cmd = f"gio mount {cloud_service}://{user}@{host}" if not "onedrive" in cfile_subtitle else f"gio mount {cloud_service}://{host}"
                 else:
                     print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
             elif "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
-                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", "w") as m:
-                    m.write(f"[Desktop Entry]\nName=SaveDesktop (Mount Cloud Drive)\nType=Application\nExec=rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}")
+                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}"
+            # set up the running the synchronization and periodic saving at start up
+            open(f"{home}/.config/autostart/savedesktop-synchronization.sh", "w").write(f'#!/usr/bin/bash\n{cmd}\n{periodic_saving_cmd}\n{sync_cmd}')
+            open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {home}/.config/autostart/savedesktop-synchronization.sh")
+            [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop"] if os.path.exists(path)]
     
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
@@ -1126,7 +1120,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_chooser.open(self, None, open_selected, None)
         
     # Select file for syncing cfg with other computers in the network
-    def select_sync_file(self, w):
+    def select_sync_folder(self, w):
         def set_selected(source, res, data):
             try:
                 file = source.select_folder_finish(res)
