@@ -53,7 +53,7 @@ After importing the saved configuration file and logging back in, **the Flatpak 
 On the first computer:
 1. Open the SaveDesktop app
 2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
-3. Click on the "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
+3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
 4. If the periodic saving file does not exist, click on the Create button</str>
   <str key="set_up_second_computer">On the second computer:
 1. Open the SaveDesktop app
