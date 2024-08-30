@@ -298,11 +298,12 @@ class Import:
     # Create desktop file for install Flatpaks from list
     def create_flatpak_desktop(self):
         os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
-        if not os.path.exists(f"{home}/.config/autostart"):
-            os.mkdir(f"{home}/.config/autostart")
-        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
-            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
-                fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
+        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") and not os.path.exists(f"{CACHE}/syncing"):
+            if not os.path.exists(f"{home}/.config/autostart"):
+                os.mkdir(f"{home}/.config/autostart")
+            if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
+                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
+                    fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
         
 if args.save:
     Save()
