@@ -15,25 +15,6 @@
   <str key="pb_filename_title">### Формат имени файла</str>
   <str key="pb_filname_desc">Если вы хотите задать формат имени файла для периодического сохранения файлов, отличный от `Latest_configuration`, это возможно, даже с пробелами. Начиная с версии 2.9.6, переменная `{}` не работает для установки сегодняшней даты, поскольку теперь при каждом периодическом сохранении исходный файл резервной копии перезаписывается.</str>
   <str key="synchronization_between_computers_title">Синхронизация между компьютерами в сети</str>
-  <str key="how_to_set_up_it">## Как это настроить?</str>
-  <str key="whats_your_needing"> ### Что вам нужно?</str>
-  <str key="on_computer_1">**На компьютере 1:**
-- вручную назначьте IP-адреса ваших устройств, которые вы хотите синхронизировать, чтобы IP-адрес не менялся каждый раз при включении компьютера. Установить его можно через:</str>
-  <str key="router_settings">**Настройки роутера:**
-  - [для роутеров Asus](https://www.asus.com/ru/support/faq/1000906/)
-  - [для роутеров Tp-link](https://www.tp-link.com/ru/support/faq/170/)
-  - [для роутеров Tenda](https://www.tendacn.com/faq/3264.html)
-  - [для роутеров Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - если у вас нет вышеуказанных маршрутизаторов, откройте настройки маршрутизатора (URL: [192.168.1.1](http://192.168.1.1) или аналогичный) и найдите в разделе DHCP-сервера что-то вроде "Назначить вручную IP в список DHCP" или "Статический IP" и т. д.</str>
-  <str key="sys_config_print">  **пакет `system-config-printer`:**
-  - если вы не хотите устанавливать IP-адрес вручную из интерфейса роутера, и если у вас есть принтер и установлен пакет `system-config-printer`, проверьте, отметили ли вы опцию "Общий", щелкнув вкладку "Принтер" на панели заголовка. Если нет, отметьте его и перезагрузите систему. [Здесь](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) — скриншот, как это должно выглядеть.</str>
-  <str key="on_computer_2">**На компьютере 2:**
-- Проверьте, подключены ли вы к той же сети, что и компьютер 1.</str>
-  <str key="sync_in_savedesktop">### Установите синхронизацию в приложении SaveDesktop
-На компьютерах 1 и 2 откройте приложение SaveDesktop и переключитесь на страницу синхронизации. На компьютере 1 нажмите кнопку "Настроить файл синхронизации", выберите файл синхронизации (ваш файл периодического сохранения) и выберите интервал периодической синхронизации. Затем скопируйте URL для синхронизации, а на компьютере 2 нажмите кнопку "Подключиться к другому компьютеру" и введите скопированный URL для синхронизации с компьютера 1.</str>
-  <str key="sync_warning">Если вы хотите синхронизировать конфигурацию DE с компьютера 2 на компьютер 1, выполните ту же процедуру.
-
-**Чтобы изменения вступили в силу необходимо выйти из системы**</str>
   <str key="periodic_sync">## Периодическая синхронизация
 Вы можете выбрать между следующими вариантами:
 - Ежедневно
@@ -82,4 +63,76 @@
   <str key="enc">Архив будет сохранен в виде ZIP-архива (поскольку Tar не поддерживает функцию защиты паролем), и если вы захотите его извлечь, вам будет предложено ввести пароль, который вы использовали в процессе сохранения конфигурации. То же самое относится и к импорту конфигурации.
 
 Если вы забыли пароль, извлечь архив и использовать его в процессе импорта конфигурации будет невозможно.</str>
+  <str key="requirements">#### Requirements
+- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
+  <str key="set_up_first_computer">## Setting up synchronization in the SaveDesktop app
+On the first computer:
+1. Open the SaveDesktop app
+2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
+3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
+4. If the periodic saving file does not exist, click on the Create button</str>
+  <str key="rclone">
+    Rclone(for other desktop environments)
+
+    - Install Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+      ```
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      ```
+      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+
+    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  <details>
+      <summary>
+        <b>Rclone</b>
+        <p>(for other desktop environments)</p>
+      </summary>
+
+    - Install Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+      ```
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      ```
+      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+
+    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  </details>
+  </str>
+  <str key="set_up_second_computer">On the second computer:
+1. Open the SaveDesktop app
+2. Go to the Sync page and click the "Connect to the cloud storage" button.
+3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
+4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
+
+To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
+</str>
+  <str key="gnome_online_accounts">
+    GNOME Online Accounts(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)
+
+    - Open the GNOME Settings
+    - Go to the Online Accounts section and select your cloud drive service
+
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  <details>
+      <summary>
+        <b>GNOME Online Accounts</b>
+        <p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p>
+      </summary>
+
+    - Open the GNOME Settings
+    - Go to the Online Accounts section and select your cloud drive service
+
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  </details>
+  </str>
 </root>
