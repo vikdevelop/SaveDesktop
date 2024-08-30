@@ -103,7 +103,7 @@ class Syncing:
                         except PermissionError as e:
                             print(f"Permission denied for {member.name}: {e}")
             except Exception as e:
-                os.system(f"notify-send 'An error occured' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
+                os.system(f"notify-send '{_['err_occured']}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
                 exit()
             self.import_config()
        else:
