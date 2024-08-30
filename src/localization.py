@@ -15,9 +15,15 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.4-beta-06-hotfix-1"
+v = "3.4-beta-07"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
-rel_notes = "<p>3.4-beta-06-hotfix-1</p>\
+rel_notes = "<p>3.4-beta-07</p>\
+<ul>\
+<li>This beta version is the last beta version before releasing the stable release version</li>\
+<li>Fixed a bug with auto-mounting the cloud drive folders when the folder mounts after the synchronization, so this is why the synchronization didn't work</li>\
+<li>In the synchronization mode, the Flatpak apps and their data will be installed immediately after the finished synchronization, so it is not necessary to log out of the system</li>\
+</ul>\
+<p>3.4-beta-06-hotfix-1</p>\
 <p>Fixed a bug with creating the periodic saving file in the 'Set up the sync file' dialog and freezing the GUI during loading the mentioned dialog</p>\
 <p>3.4-beta-06</p>\
 <ul>\
