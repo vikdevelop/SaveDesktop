@@ -531,7 +531,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.syncingBox.append(self.setButton)
 
         # "Connect with other computer" button
-        self.getButton = Gtk.Button.new_with_label("Connect to the cloud storage")
+        self.getButton = Gtk.Button.new_with_label(_["connect_cloud_storage"])
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_urlDialog)
         self.getButton.set_valign(Gtk.Align.CENTER)
@@ -557,7 +557,7 @@ class MainWindow(Adw.ApplicationWindow):
                 pb.run(now=True)
             except Exception as e:
                 e_o = True
-                subprocess.run(['notify-send', 'An error occured', f'{e}'])
+                subprocess.run(['notify-send', _["err_occured"], f'{e}'])
             finally:
                 if not e_o:
                     self.file_row.remove(self.setupButton)
@@ -587,8 +587,8 @@ class MainWindow(Adw.ApplicationWindow):
             set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
             if "red" in folder:
                 self.setDialog.set_response_enabled('ok', False)
-            if "Periodic saving file does not exist." in folder:
-                self.setupButton = Gtk.Button.new_with_label("Create")
+            if _["periodic_saving_file_err"] in folder:
+                self.setupButton = Gtk.Button.new_with_label(_["create"])
                 self.setupButton.set_valign(Gtk.Align.CENTER)
                 self.setupButton.add_css_class("suggested-action")
                 self.setupButton.connect("clicked", make_pb_file)
@@ -606,10 +606,10 @@ class MainWindow(Adw.ApplicationWindow):
                 folder = f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>'
             # Check if the periodic saving file exists
             elif not os.path.exists(path):
-                folder = f'<span color="red">Periodic saving file does not exist.</span>'
+                folder = f'<span color="red">{_["periodic_saving_file_err"]}</span>'
             # Check if the filesystem is not FUSE
             elif "fuse" not in check_filesystem:
-                folder = f'<span color="red">You didn\'t select the cloud drive folder!</span>'
+                folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             else:
                 folder = path
             
@@ -647,7 +647,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         # Button for opening More options dialog
         self.open_setdialog_tf = True
-        self.ps_button = Gtk.Button.new_with_label("Change")
+        self.ps_button = Gtk.Button.new_with_label(_["change"])
         self.ps_button.connect('clicked', self.more_options_dialog)
         self.ps_button.set_valign(Gtk.Align.CENTER)
 
@@ -716,7 +716,7 @@ class MainWindow(Adw.ApplicationWindow):
                         if "fuse" in subprocess.getoutput(f"df -T \"{cfile_subtitle}\""):
                             settings["file-for-syncing"] = cfile_subtitle
                         else:
-                            os.system("notify-send 'An error occured' 'You did not select the cloud drive folder!'")
+                            os.system(f"notify-send '{_['err_occured']}' '{_['cloud_folder_err']}'")
                             settings["file-for-syncing"] = ""
                     else:
                         print("Nothing changed.")
@@ -736,15 +736,15 @@ class MainWindow(Adw.ApplicationWindow):
                             settings["file-for-syncing"] = cfile_subtitle
                             self.set_up_auto_mount()
                         else:
-                            os.system("notify-send 'An error occured' 'You did not select the cloud drive folder!'")
+                            os.system(f"notify-send '{_['err_occured']}' '{_['cloud_folder_err']}'")
                             settings["file-for-syncing"] = ""
                     else:
                         print("Nothing changed.")
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
-        self.urlDialog.set_heading("Connect to the cloud storage")
-        self.urlDialog.set_body("On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.")
+        self.urlDialog.set_heading(_["connect_cloud_storage"])
+        self.urlDialog.set_body(_["connect_cloud_storage_desc"])
         self.urlDialog.set_default_size(500,370)
           
         # Box for adding widgets in this dialog
@@ -775,7 +775,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         ### add the reset button if the subtitle is not empty
         self.cfileRow.add_suffix(self.resetButton) if not settings["file-for-syncing"] == "" else None
-        self.cfileRow.set_title("Select cloud drive folder")
+        self.cfileRow.set_title(_["select_cloud_folder_btn"])
         self.cfileRow.set_subtitle(settings["file-for-syncing"])
         self.cfileRow.set_subtitle_selectable(True)
         self.cfileRow.add_suffix(self.cloudButton)
@@ -816,8 +816,8 @@ class MainWindow(Adw.ApplicationWindow):
         
         ## Action Row
         self.bsyncRow = Adw.ActionRow.new()
-        self.bsyncRow.set_title("Bidirectional synchronization")
-        self.bsyncRow.set_subtitle("If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer.")
+        self.bsyncRow.set_title(_["bidirectional_sync"])
+        self.bsyncRow.set_subtitle(_["bidirectional_sync_desc"])
         self.bsyncRow.set_title_lines(2)
         self.bsyncRow.add_suffix(self.bsSwitch)
         self.bsyncRow.set_activatable_widget(self.bsSwitch)
@@ -1145,7 +1145,7 @@ class MainWindow(Adw.ApplicationWindow):
             
         self.syncfile_chooser = Gtk.FileDialog.new()
         self.syncfile_chooser.set_modal(True)
-        self.syncfile_chooser.set_title("Select cloud drive folder")
+        self.syncfile_chooser.set_title(_["select_cloud_folder_btn"])
         self.syncfile_chooser.select_folder(self, None, set_selected, None)
         
     # Dialog for creating password for the config archive
@@ -1189,7 +1189,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # button for generating strong password
         self.pswdgenButton = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
-        self.pswdgenButton.set_tooltip_text("Generate Password")
+        self.pswdgenButton.set_tooltip_text(_["gen_password"])
         self.pswdgenButton.add_css_class("flat")
         self.pswdgenButton.set_valign(Gtk.Align.CENTER)
         self.pswdgenButton.connect("clicked", pswd_generator)
@@ -1541,21 +1541,11 @@ class MainWindow(Adw.ApplicationWindow):
         self.backtomButton.set_margin_start(170)
         self.backtomButton.set_margin_end(170)
         self.importwaitBox.append(self.backtomButton)
-    
-    # Cancel saving or importing configuration if the "Cancel" button has been clicked
-    def cancel_saving_or_importing(self):
-        try:
-            self.cancel_process = True
-            os.system(f"rm -rf {CACHE}/save_config/ && rm -rf {CACHE}/import_config/")
-        except:
-            print("Can not remove the CACHE directory")
-        finally:
-            pass
         
     # show message dialog in the error case
     def show_err_msg(self, error):
         self.errDialog = Adw.MessageDialog.new(app.get_active_window())
-        self.errDialog.set_heading(heading="An error occured")
+        self.errDialog.set_heading(heading=_["err_occured"])
         self.errDialog.set_body(body=f"{error}")
         self.errDialog.add_response('cancel', _["cancel"])
         self.errDialog.show()
