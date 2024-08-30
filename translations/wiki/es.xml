@@ -63,7 +63,6 @@ En la versión 3.3, la interfaz ha sido ligeramente modificada, en concreto, la 
   <str key="enc">El archivo se guardará como un archivo ZIP (porque Tar no soporta la función de protección por contraseña), y si desea extraerlo, se le pedirá que introduzca la contraseña que utilizó en el proceso de guardar la configuración. Lo mismo ocurre en el caso de la importación de la configuración.
 
 Si olvida la contraseña, no será posible extraer el archivo y utilizarlo en el proceso de importación de la configuración.</str>
-  <str key="synchronization_between_computers_desc">For synchronization your desktop environment configuration with other computers, you can use one of these options:</str>
   <str key="set_up_first_computer">## Setting up synchronization in the SaveDesktop app
 On the first computer:
 1. Open the SaveDesktop app
