@@ -73,8 +73,8 @@ if flatpak:
     version = f"{v}"
     # Directories
     system_dir = "/app"
-    CACHE = f"{home}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
-    DATA = f"{home}/.var/app/io.github.vikdevelop.SaveDesktop/data"
+    CACHE = f"{GLib.get_user_cache_dir()}/tmp"
+    DATA = f"{GLib.get_user_data_dir()}"
     # Commands
     periodic_saving_cmd = 'flatpak run io.github.vikdevelop.SaveDesktop --background'
     sync_cmd = "flatpak run io.github.vikdevelop.SaveDesktop --sync"
@@ -101,8 +101,9 @@ else:
     version = f"{v}-native"
     # Directories
     system_dir = f"{home}/.local/share/savedesktop/src"
-    CACHE = f"{home}/.cache/io.github.vikdevelop.SaveDesktop"
-    DATA = f"{home}/.local/share/io.github.vikdevelop.SaveDesktop"
+    CACHE = f"{GLib.get_user_cache_dir()}/io.github.vikdevelop.SaveDesktop"
+    DATA = f"{GLib.get_user_data_dir()}/io.github.vikdevelop.SaveDesktop"
+    [os.makedirs(path, exist_ok=True) for path in (CACHE, DATA)]
     # Commands
     periodic_saving_cmd = f'savedesktop --background'
     sync_cmd = f"savedesktop --sync"
