@@ -1,0 +1,57 @@
+#!/usr/bin/python3
+import os, sys, shutil, zipfile, tarfile, argparse
+from pathlib import Path
+
+flatpak = os.path.exists("/.flatpak-info")
+snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
+
+# Cache directory
+cache_path = f"{Path.home()}/.var/app/io.github.vikdevelop/SaveDesktop/cache/tmp" if flatpak else f"{os.getenv('SNAP_USER_COMMON')}/.cache/tmp" if snap else f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
+
+# Init dir for loading the Python scripts
+init_dir = "/app" if flatpak else f"{os.getenv('SNAP')}/usr" if snap else f"{Path.home()}/.local/share/savedesktop/src"
+sys.path.append(init_dir)
+
+# Command-line arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("--background", action="store_true", help="Start periodic saving")
+parser.add_argument("--sync", action="store_true", help="Sync desktop configuration")
+parser.add_argument("--save-now", action="store_true", help="Save configuration using UI parameters")
+parser.add_argument("--import-config", help="Import configuration from a file", type=str)
+args = parser.parse_args()
+
+# Run Python scripts from the listed command-line arguments
+if args.background:
+    from periodic_saving import PeriodicBackups
+    pb = PeriodicBackups()
+    pb.run(None)
+    exit()
+elif args.sync:
+    from network_sharing import Syncing
+    exit()
+elif args.save_now:
+    from periodic_saving import PeriodicBackups
+    pb = PeriodicBackups()
+    pb.run(now=True)
+if args.import_config:
+    file_path = args.import_config
+    if not os.path.exists(file_path):
+        print(f"File not found: {file_path}")
+        exit(1)
+    
+    shutil.rmtree(os.path.join(cache_path, "import_config"), ignore_errors=True)
+    os.makedirs(os.path.join(cache_path, "import_config"), exist_ok=True)
+    os.chdir(os.path.join(cache_path, "import_config"))
+    
+    if file_path.endswith('.sd.zip'):
+        os.system(f"unzip {file_path}")
+    elif file_path.endswith('.sd.tar.gz'):
+        os.system(f"tar -xf {file_path}")
+    else:
+        print("Unsupported file type. Use *.sd.tar.gz or *.sd.zip.")
+        exit(1)
+    
+    os.system(f"python3 {init_dir}/config.py --import_")
+    exit()
+else:
+    import main_window

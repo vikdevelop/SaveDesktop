@@ -2,7 +2,7 @@
 if [ "$1" = "--install" ]
 then
 		sed -i "s\Exec=run.sh\Exec=/home/${USER}/.local/bin/savedesktop\ " flatpak/io.github.vikdevelop.SaveDesktop.desktop
-		install -Dm755 native/run_natively.sh ~/.local/bin/savedesktop
+		install -Dm755 savedesktop ~/.local/bin/
 		install -D -t ~/.local/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
 		install -D -t ~/.local/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
 		install -D -t ~/.local/share/glib-2.0/schemas flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
@@ -18,9 +18,9 @@ then
 		install -D -t ~/.local/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
 		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/icons/io.github.vikdevelop.SaveDesktop-symbolic.svg
 		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/desktop-symbolic.svg
-		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/edit-symbolic.svg
 		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/list-view.png
   		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/done.svg
+    		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/preferences-system-symbolic.svg
 		# Create cache and data dirs
 		mkdir ~/.cache/io.github.vikdevelop.SaveDesktop
 		mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop
@@ -41,6 +41,8 @@ if [ "$1" = "--remove" ]
 					rm ~/.local/share/icons/hicolor/symbolic/apps/desktop-symbolic.svg
 					rm ~/.local/share/icons/hicolor/symbolic/apps/edit-symbolic.svg
 					rm ~/.local/share/icons/hicolor/symbolic/apps/list-view.png
+     					rm ~/.local/share/icons/hicolor/symbolic/apps/done.svg
+	  				rm ~/.local/share/icons/hicolor/symbolic/apps/preferences-system-symbolic.svg
 					rm -rf /tmp/SaveDesktop
 					echo "SaveDesktop has been removed."
 fi

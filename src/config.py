@@ -3,6 +3,7 @@ import json
 import gi
 import subprocess
 import zipfile
+import tarfile
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
 import argparse
@@ -66,6 +67,7 @@ class Save:
         if settings["save-themes"] == True:
             print("saving themes")
             os.system(f'cp -R {home}/.themes ./')
+            os.system(f'cp -R {home}/.local/share/themes ./')
         if settings["save-fonts"] == True:
             print("saving fonts")
             os.system(f'cp -R {home}/.fonts ./')
@@ -78,52 +80,14 @@ class Save:
             else:
                 desktop_without_spaces = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
             os.system(f'cp -R {desktop_without_spaces} ./Desktop/ ')
-        if settings["save-installed-flatpaks"] == True:
-            print("saving list of installed Flatpak apps")
-            os.system('sh /app/backup_flatpaks.sh')
+        if flatpak:
+            if settings["save-installed-flatpaks"] == True:
+                print("saving list of installed Flatpak apps")
+                os.system("ls /var/lib/flatpak/app/ | awk '{print \"flatpak install --system \" $1 \" -y\"}' > ./installed_flatpaks.sh")
+                os.system("ls ~/.local/share/flatpak/app | awk '{print \"flatpak install --user \" $1 \" -y\"}' > ./installed_user_flatpaks.sh")
         if settings["save-flatpak-data"] == True:
             print("saving user data of installed Flatpak apps")
-            blst = settings["disabled-flatpak-apps-data"]
-            # convert GSettings property to list
-            blist = blst
-            # add io.github.vikdevelop.SaveDesktop to blacklist, because during saving configuration the cache folder is too large
-            blist += ["io.github.vikdevelop.SaveDesktop"]
-            blacklist = blist
-            
-            # set destination dir
-            if os.path.exists(f"{CACHE}/.periodicfile.json"):
-                os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
-                destdir = f"{CACHE}/periodic_saving/app"
-            elif os.path.exists(f"{CACHE}/.filedialog.json"):
-                os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
-                destdir = f"{CACHE}/save_config/app"
-            
-            # copy Flatpak apps data
-            for item in os.listdir(f"{home}/.var/app"):
-                if item not in blacklist:
-                    source_path = os.path.join(f"{home}/.var/app", item)
-                    destination_path = os.path.join(destdir, item)
-                    if os.path.isdir(source_path):
-                        try:
-                            shutil.copytree(source_path, destination_path)
-                        except Exception as e:
-                            print(f"Error copying directory {source_path}: {e}")
-                    else:
-                        try:
-                            shutil.copy2(source_path, destination_path)
-                        except Exception as e:
-                            print(f"Error copying file {source_path}: {e}")
-
-            # save user data except for the cache of the SaveDesktop app if the app is not in the "disabled-flatpak-apps-data" key of the GSettings database
-            if not "io.github.vikdevelop.SaveDesktop" in flatpak_app_data:
-                os.makedirs(f"{destdir}/io.github.vikdevelop.SaveDesktop", exist_ok=True)
-                os.chdir(f"{home}/.var/app/io.github.vikdevelop.SaveDesktop")
-                os.system(f"cp -R ./config {destdir}/io.github.vikdevelop.SaveDesktop/")
-                os.system(f"cp -R ./data {destdir}/io.github.vikdevelop.SaveDesktop/")
-                if os.path.exists(f"{CACHE}/save_config"):
-                    os.chdir(f"{CACHE}/save_config")
-                elif os.path.exists(f"{CACHE}/periodic_saving"):
-                    os.chdir(f"{CACHE}/periodic_saving")
+            self.save_flatpak_data()
             
         print("saving desktop environment configuration files")
         # Save configs on individual desktop environments
@@ -149,6 +113,7 @@ class Save:
         elif environment == 'COSMIC (Old)':
             os.system(f"cp -R {home}/.config/pop-shell ./")
             os.system(f"cp -R {home}/.local/share/gnome-shell ./")
+            os.system(f"cp -R {home}/.local/share/nautilus")
         elif environment == 'COSMIC (New)':
             os.system(f"cp -R {home}/.config/cosmic ./")
             os.system(f"cp -R {home}/.local/state/cosmic ./cosmic-state")
@@ -185,39 +150,59 @@ class Save:
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         print("creating configuration archive")
         if os.path.exists(f"{CACHE}/.filedialog.json"):
-            with open(f"{CACHE}/.filedialog.json") as j:
-                j = json.load(j)
             if settings["enable-encryption"] == True:
                 password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
                 os.system(f"zip -9 -P '{password}' cfg.sd.zip . -r -x 'saving_status'")
                 print("moving the configuration archive to the user-defined directory")
-                os.system(f"mv ./cfg.sd.zip \"{j['recent_file']}\"")
             else:
                 os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
                 print("moving the configuration archive to the user-defined directory")
-                os.system(f"mv ./cfg.sd.tar.gz \"{j['recent_file']}\"")
         elif os.path.exists(f"{CACHE}/.periodicfile.json"):
             os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
             print("moving the configuration archive to the user-defined directory")
             with open(f"{CACHE}/.periodicfile.json") as j:
                 j = json.load(j)
-            os.system(f"mv ./cfg.sd.tar.gz \"{j['recent_file']}\"")
+            shutil.copyfile('cfg.sd.tar.gz', j['recent_file'])
             if not settings["periodic-import"] == "Never2":
-                file = os.path.basename(j["recent_file"])
-                os.system(f"cp -R ./cfg.sd.tar.gz {DATA}/synchronization/{file}")
-        if os.path.exists(f"{CACHE}/save_config"):
-            print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
+                if "fuse" in subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\""):
+                    os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file") and os.remove(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file")
+                    with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
+                        pf.write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
+        print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
         os.system("rm saving_status")
+    
+    # save Flatpak apps data
+    def save_flatpak_data(self):
+        blst = settings["disabled-flatpak-apps-data"]
+        # convert GSettings property to a list
+        blacklist = blst
         
+        # set destination dir
+        if os.path.exists(f"{CACHE}/.periodicfile.json"):
+            os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
+            destdir = f"{CACHE}/periodic_saving/app"
+        elif os.path.exists(f"{CACHE}/.filedialog.json"):
+            os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
+            destdir = f"{CACHE}/save_config/app"
+        
+        # copy Flatpak apps data
+        for item in os.listdir(f"{home}/.var/app"):
+            if item not in blacklist and item != "cache":  # Exclude 'cache' directory
+                source_path = os.path.join(f"{home}/.var/app", item)
+                destination_path = os.path.join(destdir, item)
+                if os.path.isdir(source_path):
+                    try:
+                        shutil.copytree(source_path, destination_path, ignore=shutil.ignore_patterns('cache'))  # Ignore 'cache' in subdirectories
+                    except Exception as e:
+                        print(f"Error copying directory {source_path}: {e}")
+                else:
+                    try:
+                        shutil.copy2(source_path, destination_path)
+                    except Exception as e:
+                        print(f"Error copying file {source_path}: {e}")
+                        
 class Import:
-    def __init__(self):
-        if os.path.exists(f"{CACHE}/.impfile.json"):
-            with open(f"{CACHE}/.impfile.json") as j:
-                j = json.load(j)
-            if ".zip" in j["import_file"]:
-                print("")
-            else:
-                os.system('tar -xf "%s" ./' % j["import_file"])
+    def __init__(self):      
         if not os.path.exists("{}/.config".format(home)):
             os.system(f"mkdir {home}/.config/")
         print("importing settings from the Dconf database")
@@ -233,19 +218,22 @@ class Import:
         os.system(f'cp ./installed_flatpaks.sh {DATA}/')
         os.system(f'cp ./installed_user_flatpaks.sh {DATA}/')
         print("importing icons")
-        os.system(f'cp -R ./icons {home}/.local/share/')
-        os.system(f'cp -R ./.icons {home}/')
+        os.system(f'cp -au ./icons {home}/.local/share/')
+        os.system(f'cp -au ./.icons {home}/')
         print("importing themes")
-        os.system(f'cp -R ./.themes {home}/')
+        os.system(f'cp -au ./.themes {home}/')
+        os.system(f'cp -au ./themes {home}/.local/share/')
         print("importing backgrounds")
-        os.system(f'cp -R ./backgrounds {home}/.local/share/')
+        os.system(f'cp -au ./backgrounds {home}/.local/share/')
         print("importing fonts")
-        os.system(f'cp -R ./.fonts {home}/')
+        os.system(f'cp -au ./.fonts {home}/')
+        os.system(f'cp -au ./fonts {home}/.local/share/')
         print("importing Gtk settings")
-        os.system(f'cp -R ./gtk-4.0 {home}/.config/')
-        os.system(f'cp -R ./gtk-3.0 {home}/.config/')
+        os.system(f'cp -au ./gtk-4.0 {home}/.config/')
+        os.system(f'cp -au ./gtk-3.0 {home}/.config/')
         print("importing desktop directory")
-        os.system(f'cp -R ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
+        os.system(f'cp -au ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
+        # create this file to prevent removing the cache directory during importing configuration
         if os.path.exists(f'{CACHE}/import_config/app'):
             with open(f"copying_flatpak_data", "w") as c:
                 c.write("copying flatpak data ...")
@@ -255,50 +243,50 @@ class Import:
         print("importing desktop environment configuration files")
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
-            os.system(f'cp -R ./gnome-background-properties {home}/.local/share/')
-            os.system(f'cp -R ./gnome-shell {home}/.local/share/')
-            os.system(f'cp -R ./nautilus-python {home}/.local/share/')
-            os.system(f'cp -R ./nautilus {home}/.local/share/')
-            os.system(f'cp -R ./gnome-control-center {home}/.config/')
+            os.system(f'cp -au ./gnome-background-properties {home}/.local/share/')
+            os.system(f'cp -au ./gnome-shell {home}/.local/share/')
+            os.system(f'cp -au ./nautilus-python {home}/.local/share/')
+            os.system(f'cp -au ./nautilus {home}/.local/share/')
+            os.system(f'cp -au ./gnome-control-center {home}/.config/')
         elif environment == 'Pantheon':
-            os.system(f'cp -R ./plank {home}/.config/')
-            os.system(f'cp -R ./marlin {home}/.config/')
+            os.system(f'cp -au ./plank {home}/.config/')
+            os.system(f'cp -au ./marlin {home}/.config/')
         elif environment == 'Cinnamon':
-            os.system(f'cp -R ./nemo {home}/.config/')
-            os.system(f'cp -R ./cinnamon {home}/.local/share/')
-            os.system(f'cp -R ./.cinnamon {home}/')
+            os.system(f'cp -au ./nemo {home}/.config/')
+            os.system(f'cp -au ./cinnamon {home}/.local/share/')
+            os.system(f'cp -au ./.cinnamon {home}/')
         elif environment == 'Budgie':
-            os.system(f'cp -R ./budgie-desktop {home}/.config/')
-            os.system(f'cp -R ./budgie-extras {home}/.config/')
-            os.system(f'cp -R ./nemo {home}/.config/')
+            os.system(f'cp -au ./budgie-desktop {home}/.config/')
+            os.system(f'cp -au ./budgie-extras {home}/.config/')
+            os.system(f'cp -au ./nemo {home}/.config/')
         elif environment == 'COSMIC (Old)':
-            os.system(f'cp -R ./pop-shell {home}/.config/')
-            os.system(f'cp -R ./gnome-shell {home}/.local/share/')
+            os.system(f'cp -au ./pop-shell {home}/.config/')
+            os.system(f'cp -au ./gnome-shell {home}/.local/share/')
         elif environment == 'COSMIC (New)':
-            os.system(f"cp -R ./cosmic {home}/.config/")
-            os.system(f"cp -R ./cosmic-state {home}/.local/state/cosmic")
+            os.system(f"cp -au ./cosmic {home}/.config/")
+            os.system(f"cp -au ./cosmic-state {home}/.local/state/cosmic")
         elif environment == 'Xfce':
-            os.system(f'cp -R ./xfce4 {home}/.config/')
-            os.system(f'cp -R ./Thunar {home}/.config/')
-            os.system(f'cp -R ./.xfce4 {home}/')
+            os.system(f'cp -au ./xfce4 {home}/.config/')
+            os.system(f'cp -au ./Thunar {home}/.config/')
+            os.system(f'cp -au ./.xfce4 {home}/')
         elif environment == 'MATE':
-            os.system(f'cp -R ./caja {home}/.config/')
+            os.system(f'cp -au ./caja {home}/.config/')
         elif environment == 'KDE Plasma':
             if os.path.exists(f"{CACHE}/syncing"):
                 os.chdir("%s/syncing" % CACHE)
             else:
                 os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-config')
-            os.system(f'cp -R ./ {home}/.config/')
+            os.system(f'cp -au ./ {home}/.config/')
             if os.path.exists(f"{CACHE}/syncing"):
                 os.chdir("%s/syncing" % CACHE)
             else:
                 os.chdir("%s/import_config" % CACHE)
             os.chdir('xdg-data')
-            os.system(f'cp -R ./ {home}/.local/share/')
+            os.system(f'cp -au ./ {home}/.local/share/')
         elif environment == 'Deepin':
-            os.system(f"cp -R ./deepin {home}/.config/")
-            os.system(f"cp -R ./deepin-data {home}/.local/share/deepin/")
+            os.system(f"cp -au ./deepin {home}/.config/")
+            os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
         elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
@@ -310,11 +298,12 @@ class Import:
     # Create desktop file for install Flatpaks from list
     def create_flatpak_desktop(self):
         os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
-        if not os.path.exists(f"{home}/.config/autostart"):
-            os.mkdir(f"{home}/.config/autostart")
-        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
-            with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
-                fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
+        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") and not os.path.exists(f"{CACHE}/syncing"):
+            if not os.path.exists(f"{home}/.config/autostart"):
+                os.mkdir(f"{home}/.config/autostart")
+            if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
+                with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
+                    fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
         
 if args.save:
     Save()

@@ -2,7 +2,7 @@ app-id: io.github.vikdevelop.SaveDesktop
 runtime: org.gnome.Platform
 runtime-version: '46'
 sdk: org.gnome.Sdk
-command: run.sh
+command: savedesktop
 finish-args:
     - --share=ipc
     - --share=network
@@ -59,7 +59,7 @@ modules:
   - name: savedesktop
     buildsystem: simple
     build-commands:
-       - install -Dm755 -t /app/bin run.sh
+       - install -Dm755 -t /app/bin savedesktop
        - cp -R src/* /app
        - install -D -t /app/share build-beta.sh
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
