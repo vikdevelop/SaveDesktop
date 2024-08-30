@@ -550,8 +550,11 @@ class MainWindow(Adw.ApplicationWindow):
             try:
                 e_o = False
                 subprocess.run(['notify-send', 'SaveDesktop', _["please_wait"]])
+                self.file_row.set_subtitle(_["please_wait"])
                 self.file_row.set_use_markup(False)
-                subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
+                from periodic_saving import PeriodicBackups
+                pb = PeriodicBackups()
+                pb.run(now=True)
             except Exception as e:
                 e_o = True
                 subprocess.run(['notify-send', 'An error occured', f'{e}'])
@@ -591,18 +594,24 @@ class MainWindow(Adw.ApplicationWindow):
                 self.setupButton.connect("clicked", make_pb_file)
                 self.file_row.add_suffix(self.setupButton)
         
-        # check filesystem
+        # Check the file system of the periodic saving folder and their existation
         def check_filesystem_fnc():
             global folder, path, check_filesystem
-            check_filesystem = subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\"")
+            check_filesystem = subprocess.getoutput(f'df -T "{settings["periodic-saving-folder"]}"')
             
             path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.tar.gz'
-            folder = (
-                f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>' 
-                if settings["periodic-saving"] == "Never" 
-                else (path if os.path.exists(path) 
-                      else f'<span color="red">Periodic saving file does not exist.</span>' 
-                      if "fuse" in check_filesystem else f"<span color=\"red\">You didn't select the cloud drive folder!</span>"))
+            
+            # Check if periodic saving is set to "Never"
+            if settings["periodic-saving"] == "Never":
+                folder = f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>'
+            # Check if the periodic saving file exists
+            elif not os.path.exists(path):
+                folder = f'<span color="red">Periodic saving file does not exist.</span>'
+            # Check if the filesystem is not FUSE
+            elif "fuse" not in check_filesystem:
+                folder = f'<span color="red">You didn\'t select the cloud drive folder!</span>'
+            else:
+                folder = path
             
             update_gui()
         
@@ -616,11 +625,8 @@ class MainWindow(Adw.ApplicationWindow):
             if response == 'ok':
                 self.open_setdialog_tf = False
                 
-                if "fuse" in subprocess.getoutput(f"df -T \"{self.file_row.get_subtitle()}\""):
-                    thread = Thread(target=save_file)
-                    thread.start()
-                else:
-                    print("Nothing changed.")
+                thread = Thread(target=save_file)
+                thread.start()
             else:
                 self.open_setdialog_tf = False
 
@@ -676,7 +682,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.cfileRow.remove(self.resetButton)
             self.urlDialog.set_response_enabled('ok', True)
             settings["file-for-syncing"] = self.cfileRow.get_subtitle()
-            os.remove(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop")
+            [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)]
         
         # Action after closing URL dialog
         def urlDialog_closed(w, response):
@@ -700,34 +706,40 @@ class MainWindow(Adw.ApplicationWindow):
                 # if it is selected to manually sync, it creates an option in the app menu in the header bar
                 if settings["manually-sync"]:
                     self.sync_menu = Gio.Menu()
-                    self.sync_menu.append(_["sync"], 'app.m_sync_with_key')
+                    self.sync_menu.append(_["sync"], 'app.m_sync_with_key') if settings["manually-sync"] else None
                     self.main_menu.append_section(None, self.sync_menu)
-                    self.sync_menu.remove(1)
                     self.show_special_toast()
+                    # Set up cloud sync
+                    cfile_subtitle = self.cfileRow.get_subtitle()
+                    if cfile_subtitle:
+                        # Check if the selected cloud drive folder is correct
+                        if "fuse" in subprocess.getoutput(f"df -T \"{cfile_subtitle}\""):
+                            settings["file-for-syncing"] = cfile_subtitle
+                        else:
+                            os.system("notify-send 'An error occured' 'You did not select the cloud drive folder!'")
+                            settings["file-for-syncing"] = ""
+                    else:
+                        print("Nothing changed.")
                 else:
-                    try:
-                        self.sync_menu.remove(0)
-                    except:
-                        pass  # silently handle the exception
+                    self.sync_menu.remove(0)
                     
                     # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
                     if check_psync == "Never2":
                         if not settings["periodic-import"] == "Never2":
                             self.show_warn_toast()
-
-                # Set up cloud sync
-                cfile_subtitle = self.cfileRow.get_subtitle()
-                if cfile_subtitle:
-                    self.set_up_auto_mount()
-                        
-                    # Check if the selected cloud drive folder is correct
-                    if "fuse" in subprocess.getoutput(f"df -T \"{cfile_subtitle}\""):
-                        settings["file-for-syncing"] = cfile_subtitle
+                    
+                    # Set up cloud sync
+                    cfile_subtitle = self.cfileRow.get_subtitle()
+                    if cfile_subtitle:
+                        # Check if the selected cloud drive folder is correct
+                        if "fuse" in subprocess.getoutput(f"df -T \"{cfile_subtitle}\""):
+                            settings["file-for-syncing"] = cfile_subtitle
+                            self.set_up_auto_mount()
+                        else:
+                            os.system("notify-send 'An error occured' 'You did not select the cloud drive folder!'")
+                            settings["file-for-syncing"] = ""
                     else:
-                        os.system("notify-send 'An error occured' 'You did not select the cloud drive folder!'")
-                        settings["file-for-syncing"] = ""
-                else:
-                    print("Nothing changed.")
+                        print("Nothing changed.")
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
@@ -829,7 +841,8 @@ class MainWindow(Adw.ApplicationWindow):
             cfile_subtitle = self.cfileRow.get_subtitle()
         else:
             cfile_subtitle = ""
-        if not cfile_subtitle == "":
+        
+        if cfile_subtitle:
             if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
                 pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*'
                 match = re.search(pattern, cfile_subtitle)
