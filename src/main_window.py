@@ -706,7 +706,7 @@ class MainWindow(Adw.ApplicationWindow):
                 # if it is selected to manually sync, it creates an option in the app menu in the header bar
                 if settings["manually-sync"]:
                     self.sync_menu = Gio.Menu()
-                    self.sync_menu.append(_["sync"], 'app.m_sync_with_key') if settings["manually-sync"] else None
+                    self.sync_menu.append(_["sync"], 'app.m_sync_with_key')
                     self.main_menu.append_section(None, self.sync_menu)
                     self.show_special_toast()
                     # Set up cloud sync
@@ -721,7 +721,7 @@ class MainWindow(Adw.ApplicationWindow):
                     else:
                         print("Nothing changed.")
                 else:
-                    self.sync_menu.remove(0)
+                    self.sync_menu.remove_all()
                     
                     # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
                     if check_psync == "Never2":
