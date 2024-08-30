@@ -805,7 +805,7 @@ class MainWindow(Adw.ApplicationWindow):
         ## Action Row
         self.bsyncRow = Adw.ActionRow.new()
         self.bsyncRow.set_title("Bidirectional synchronization")
-        self.bsyncRow.set_subtitle("When this feature is enabled, the information from the other computer, such as the periodic saving interval, folder, and periodic saving file name, is set on this computer, so there is no need to set anything on this computer regarding synchronization.")
+        self.bsyncRow.set_subtitle("If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer.")
         self.bsyncRow.set_title_lines(2)
         self.bsyncRow.add_suffix(self.bsSwitch)
         self.bsyncRow.set_activatable_widget(self.bsSwitch)
@@ -845,9 +845,9 @@ class MainWindow(Adw.ApplicationWindow):
             elif "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
                  cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}"
             # set up the running the synchronization and periodic saving at start up
-            open(f"{home}/.config/autostart/savedesktop-synchronization.sh", "w").write(f'#!/usr/bin/bash\n{cmd}\n{periodic_saving_cmd}\n{sync_cmd}')
-            open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {home}/.config/autostart/savedesktop-synchronization.sh")
-            [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop"] if os.path.exists(path)]
+            open(f"{DATA}/savedesktop-synchronization.sh", "w").write(f'#!/usr/bin/bash\n{cmd}\n{periodic_saving_cmd}\n{sync_cmd}\n' + 'python3 ~/.var/app/io.github.vikdevelop.SaveDesktop/data/install_flatpak_from_script.py' if flatpak else None)
+            open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
+            [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
     
     # Dialog: items to include in the configuration archive
     def open_itemsDialog(self, w):
