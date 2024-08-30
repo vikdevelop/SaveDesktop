@@ -10,6 +10,5 @@ Because there are a lot of files, this README helps you with navigate in this di
 - `network_sharing.py` - synchronization between computers in the network within Python HTTP server or cloud drive folder
 - `open_wiki.py` - opening the Github wiki of this app in the system language (if it is not available in the list of available languages, English opens)
 - `periodic_saving.py` - saving configuration periodically
-- `server.py` - starting Python HTTP server for synchronization between computers in the network
 - `shortcuts_window.py` - showing available Keyboard shortcuts in the window
 - `tty_environments.py` - detecting desktop environemnt in the TTY mode
