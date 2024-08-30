@@ -15,25 +15,6 @@
   <str key="pb_filename_title">### Формат назви файлу</str>
   <str key="pb_filname_desc">Якщо ви хочете надати формат імені файлу для періодичного збереження файлів, відмінний від `Latest_configuration`, це можливо, навіть з пробілами. Починаючи з версії 2.9.6, змінна `{}` не працює для встановлення поточної дати, оскільки тепер під час кожного періодичного збереження вихідний файл резервної копії перезаписується.</str>
   <str key="synchronization_between_computers_title">Синхронізація між комп'ютерами в мережі</str>
-  <str key="how_to_set_up_it">## Як налаштувати?</str>
-  <str key="whats_your_needing"> ### Що вам потрібно?</str>
-  <str key="on_computer_1">**На комп'ютері 1:**
-- вручну призначте IP-адреси ваших пристроїв, які ви хочете синхронізувати, щоб IP-адреса не змінювалася при кожному включенні комп'ютера. Це можливо налаштувати через:</str>
-  <str key="router_settings">**Router settings:**
-  - [для роутерів Asus](https://www.asus.com/support/FAQ/1000906/)
-  - [для роутерів Tp-link](https://www.tp-link.com/us/support/faq/170/)
-  - [для роутерів Tenda](https://www.tendacn.com/faq/3264.html)
-  - [для роутерів Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - якщо у вас немає перерахованих вище роутерів, відкрийте налаштування роутера (URL: [192.168.1.1](http://192.168.1.1) або пов'язані з ними) і шукайте в розділі DHCP сервера щось у формі «Вручну призначити IP списку DHCP» або «Статичний IP» і т.д.</str>
-  <str key="sys_config_print">**`system-config-printer` package:**
-  - if you don't want to set the IP address manually from the router interface, and if you have a printer and installed `system-config-printer` package, check if you ticked the option "Shared" by clicking Printer tab on the header bar. If not, please tick it and reboot the system. [Here](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) is a screenshot, what it's supposed to look like.</str>
-  <str key="on_computer_2">**На комп'ютері 2:**
-- Перевірте, чи під'єднані ви тієї мережі, що і комп'ютер 1.</str>
-  <str key="sync_in_savedesktop">### Встановити синхронізацію в додатку SaveDesktop
-На комп'ютерах 1 і 2 відкрийте додаток SaveDesktop і перейдіть на сторінку «Синхронізувати». На комп'ютері 1 натисніть кнопку «Налаштувати файл синхронізації», виберіть файл синхронізації і виберіть періодичний інтервал синхронізації. Потім скопіюйте URL для синхронізації і на комп'ютері 1, натисніть на кнопку «З'єднатися з іншим комп'ютером» і введіть скопійований URL для синхронізації з комп'ютера 1.</str>
-  <str key="sync_warning">Якщо ви хочете синхронізувати конфігурацію середовища стільниці з комп'ютера 2 з комп'ютером 1, виконайте ту ж процедуру.
-
-**Щоб зміни набули чинності, необхідно вийти з системи**</str>
   <str key="periodic_sync">## Періодична синхронізація
 Ви можете вибрати один з наступних пунктів:
 - Щодня

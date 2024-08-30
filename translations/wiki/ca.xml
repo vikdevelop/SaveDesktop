@@ -15,25 +15,6 @@ La carpeta per defecte d'emmagatzematge és `/home/user/Baixades/SaveDesktop/arc
   <str key="pb_filename_title">### Format del nom de fitxer</str>
   <str key="pb_filname_desc">Si voleu crear còpies automàtiques amb altre nom diferent a `Darrera_configuració`, ja és possible, fins i tot amb espais. Des de la versió 2.9.6, la variable `{}` no s'admet per al dia actual, atès que ara totes les còpies automàtiques sobreescriuen el fitxer ja existent.</str>
   <str key="synchronization_between_computers_title">Sincronització entre ordinadors de la xarxa</str>
-  <str key="how_to_set_up_it">## Com es configura?</str>
-  <str key="whats_your_needing"> ### Quins són els requisits?</str>
-  <str key="on_computer_1">**A l'ordinador 1:**
-- Assigneu una IP manual als equips que voleu sincronitzar perquè aquesta no canviï cada vegada que els inicieu. Això és possible mitjançant:</str>
-  <str key="router_settings">**Configuració de l'encaminador:**
-  - [Asus](https://www.asus.com/support/FAQ/1000906/)
-  - [Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - [Tenda](https://www.tendacn.com/faq/3264.html)
-  - [Tp-link](https://www.tp-link.com/us/support/faq/170/)
-  - Si no teniu cap d'aquests fabricants, proveu accedint des d'un navegador com ara el Firefox a l'adreça del vostre dispositiu (URL: [192.168.1.1](http://192.168.1.1) o similars) i cerqueu dins la secció *DHCP* quelcom semblant a «IP estàtica», «exclusió DHCP», etc. O bé contacteu amb el fabricant de l'aparell o el proveïdor de la vostra connexió a Internet.</str>
-  <str key="sys_config_print">  **`system-config-printer` package:**
-  - Si no voleu assignar una IP manual a l'encaminador i teniu una impressora instal·lada al vostre sistema, a més del paquet `system-config-printer`, verifiqueu que l'opció «Compartida» està activada al panell principal de la impressora. En cas contrari, activeu aquesta opció i reinicieu el sistema. [Aquí](https://raw.githubusercontent.com/BennyBeat/SaveDesktop/1602010b7ef88f3fb0eb1010af33571f0c548eb3/translations/wiki/ca-Printer.png) teniu una captura de pantalla amb la configuració idònia.</str>
-  <str key="on_computer_2">**A l'ordinador 2:**
-- Verifiqueu que està connectat a la mateixa xarxa que l'ordinador 1.</str>
-  <str key="sync_in_savedesktop">### Configuració de la sincronització a l'aplicació SaveDesktop
-Als ordinadors 1 i 2, obriu el programa SaveDesktop i aneu a l'apartat de sincronització. A l'ordinador 1, feu clic al botó «Configura el fitxer de sincronització», seleccioneu el fitxer de sincronització i la freqüència desitjada. Copieu l'URL de sincronització i, a l'ordinador 2, feu clic al botó «Connexió amb l'altre ordinador» i escriviu l'URL de sincronització que heu copiat de l'ordinador 1.</str>
-  <str key="sync_warning">Si voleu sincronitzar l'entorn d'escriptori de l'ordinador 2 a l'1, les passes són les mateixes.
-
-**És necessari tancar i tornar a obrir la sessió per aplicar els canvis**</str>
   <str key="periodic_sync">## Sincronització periòdica
 Podeu triar entre els elements següents:
 - Diàriament

@@ -16,25 +16,6 @@ Az időszakos mentések alapértelmezett könyvtára a `/home/user/Letöltések/
   <str key="pb_filname_desc">Ha más nevet akarsz adni a mentéseknek, mint `config_{}`, beállíthatod a fájlnév formátumot.
 Az alapértelmezett név a fent említett `config_{}`. A `{}` egy változó a SaveDesktop alkalmazásban, amely a mai dátumot állítja be. Ha ez a változó nincs a fájlnévben, elérkezik a biztonsági mentés napja és egy biztonsági mentés már létezik a beállított fájlnévvel, az alkalmazás felülírja a meglévőt az új biztonsági mentéssel. Egyébként, új biztonsági mentés fájlt hoz létre az alkalmazás.</str>
   <str key="synchronization_between_computers_title">Azonos hálózaton lévő számítógépek szinkronizálása</str>
-  <str key="how_to_set_up_it">## Hogyan állítsd be?</str>
-  <str key="whats_your_needing">### Mire lesz szükséged?</str>
-  <str key="on_computer_1">**On computer 1:**
-- a szinkronizálni kívánt eszközökhöz manuálisan hozzárendelt IP címek, amely biztosítja, hogy az IP cím nem változik meg minden alkalommal, amikor a számítógépet bekapcsolod. It is possible to set it via:</str>
-  <str key="router_settings">**Router settings:**
-  - [Asus router esetén](https://www.asus.com/support/FAQ/1000906/)
-  - [Tp-link router esetén](https://www.tp-link.com/us/support/faq/170/)
-  - [Tenda router esetén](https://www.tendacn.com/faq/3264.html)
-  - [Netgear router esetén](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - más márkák esetén, nyisd meg a router admin oldalát (URL: [192.168.1.1](http://192.168.1.1) or related) és a DHCP szerver résznél keress az alábbiakhoz hasonló beállításokat, mint "IP manuális hozzárendelése DHCP listához" vagy "Statikus IP", stb.</str>
-  <str key="sys_config_print">  **`system-config-printer` package:**
-  - if you don't want to set the IP address manually from the router interface, and if you have a printer and have installed `system-config-printer` package, check if you ticked the option "Shared" by clicking the Printer tab on the header bar. If not, please tick it and reboot the system. [Here](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) is a screenshot, what it's supposed to look like.</str>
-  <str key="on_computer_2">**On computer 2:**
-- Check if you are connected to the same network as computer 1.</str>
-  <str key="sync_in_savedesktop">### Állítsa be a szinkronizálást a SaveDesktop alkalmazásban
-Az 1-es és a 2-es számítógépen nyisd meg a SaveDesktop alkalmazást és válts a Szinkronizálás oldalra. Az 1-es számítógépen kattints a "Szinkronizálási fájl beállítása" gombra, válaszd ki a szinkronizálási fájlt és az időszakos szinkronizálási intervallumot. Ezután másoljd ki az URL-t a szinkronizáláshoz, majd a 2-es számítógépen kattints a "Csatlakozás másik számítógéppel" gombra és írd be a kimásolt URL-t az 1-es számítógépről történő szinkronizáláshoz.</str>
-  <str key="sync_warning">Ha szinkronizálni szeretnéd az asztali környezet konfigurációját a 2-es számítógépről az 1-es számítógépre, kövesd ugyanezt az eljárást.
-
-**A módosítások életbe lépéséhez ki kell jelentkezni a rendszerből**</str>
   <str key="periodic_sync">## Időszakos szinkronizálás
 Az alábbi tételek közül választhatsz:
 - Naponta
