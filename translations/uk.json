@@ -71,5 +71,16 @@
     "check_pwd_desc": "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration.",
     "archive_encryption_desc": "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.",
     "check_pwd_title": "Unlock the archive with a password",
-    "create_pwd_title": "Create new password"
+    "create_pwd_title": "Create new password",
+    "create": "Create",
+    "select_cloud_folder_btn": "Select the cloud drive folder",
+    "err_occured": "An error occurred",
+    "change": "Change",
+    "periodic_saving_file_err": "Periodic saving file does not exist.",
+    "cloud_folder_err": "You didn't select the cloud drive folder!",
+    "gen_password": "Generate Password",
+    "bidirectional_sync_desc": "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer.",
+    "connect_cloud_storage_desc": "On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.",
+    "bidirectional_sync": "Bidirectional synchronization",
+    "connect_cloud_storage": "Connect to the cloud storage"
 }
