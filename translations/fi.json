@@ -71,5 +71,16 @@
     "check_pwd_desc": "Kirjoita määritysarkiston salasana alapuolelle. Jos olet unohtanut salasanan, et pysty avata arkistoa ja tuoda määritystä.",
     "summary": "Tallenna työpöytäsi määritys",
     "description": "SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.",
-    "translator_credits": "Name jiri.gronroos+l10n@iki.fi"
+    "translator_credits": "Name jiri.gronroos+l10n@iki.fi",
+    "select_cloud_folder_btn": "Select the cloud drive folder",
+    "err_occured": "An error occurred",
+    "create": "Create",
+    "change": "Change",
+    "periodic_saving_file_err": "Periodic saving file does not exist.",
+    "cloud_folder_err": "You didn't select the cloud drive folder!",
+    "gen_password": "Generate Password",
+    "bidirectional_sync_desc": "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer.",
+    "connect_cloud_storage_desc": "On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.",
+    "bidirectional_sync": "Bidirectional synchronization",
+    "connect_cloud_storage": "Connect to the cloud storage"
 }
