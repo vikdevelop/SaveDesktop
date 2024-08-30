@@ -15,13 +15,13 @@ El directorio por defecto para guardar los periódicamente es `/home/user/Downlo
   <str key="pb_filename_title">### Formato del archivo</str>
   <str key="pb_filname_desc">Si desea crear copias automáticas con otro nombre diferente a `Última_configuración`, ya es posible, incluso con espacios. Desde la versión 2.9.6, la variable `{}` no se admite para el día actual, dado que ahora todas las copias automáticas sobrescriben el archivo ya existente.</str>
   <str key="synchronization_between_computers_title">Sincronización entre ordenadores de la red</str>
-  <str key="periodic_sync">## Sincronización periódica
-Puede elegir entre los siguientes elementos:
+  <str key="periodic_sync">### Sincronización periódica
+Puede elegir entre las siguientes opciones:
 - Diariamente
-- Semanalmente (la sincronización se lleva a cabo cada martes)
-- Mensualmente (la sincronización se lleva a cabo el segundo día de cada mes)
-- Manualmente (es posible realizar la sincronización en cualquier momento desde el menú principal al hacer clic en los tres puntos)
-- Nunca (no se realiza ningún cambio)</str>
+- Semanal (la sincronización tiene lugar cada martes)
+- Mensualmente (la sincronización tiene lugar cada dos días del mes)
+- Manualmente (es posible sincronizar la configuración desde el menú de la barra de cabecera haciendo clic en los tres puntos)
+- Nunca (no ocurre nada)</str>
   <str key="save_installed_flatpaks_title">Guarde las aplicaciones instaladas de Flatpak e instálelas desde la lista</str>
   <str key="save_flatpak_intro">Desde la versión 2.5, SaveDesktop permite guardar las aplicaciones de Flatpak instaladas e instalarlas desde una lista. ¿Cómo funciona?</str>
   <str key="saving_flatpaks">### Guardar las aplicaciones Flatpak instaladas
@@ -63,27 +63,32 @@ En la versión 3.3, la interfaz ha sido ligeramente modificada, en concreto, la 
   <str key="enc">El archivo se guardará como un archivo ZIP (porque Tar no soporta la función de protección por contraseña), y si desea extraerlo, se le pedirá que introduzca la contraseña que utilizó en el proceso de guardar la configuración. Lo mismo ocurre en el caso de la importación de la configuración.
 
 Si olvida la contraseña, no será posible extraer el archivo y utilizarlo en el proceso de importación de la configuración.</str>
-  <str key="set_up_first_computer">## Setting up synchronization in the SaveDesktop app
-On the first computer:
-1. Open the SaveDesktop app
-2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
-3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
-4. If the periodic saving file does not exist, click on the Create button</str>
+  <str key="set_up_first_computer">## Configurar la sincronización en la aplicación SaveDesktop
+En la primera computadora:
+1. Abra la aplicación SaveDesktop
+2. En la página Sync, haga clic en el botón "Configurar el archivo de sincronización" y luego en el botón "Cambiar"
+3. Haga clic en "Guardar periódicamente" y seleccione la carpeta que se sincroniza con su almacenamiento en la nube como una carpeta de ahorro periódico
+4. Si el archivo de guardado periódico no existe, haga clic en el botón Crear</str>
   <str key="rclone">
-    Rclone(for other desktop environments)
+    
+      
+        Rclone
+        (para otros entornos de escritorio)
+      
 
-    - Install Rclone
+    - Instalar Rclone
       ```
       sudo -v ; curl https://rclone.org/install.sh | sudo bash
       ```
       
-    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+    - Configurar Rclone usando este comando, que crea la carpeta de la unidad de la nube, configura Rclone y monta la carpeta
       ```
-      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode escribe &amp; echo "La unidad ha sido montada correctamente"
       ```
-      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+      * En lugar de `your-cloud-drive-service` use el nombre de su servicio de disco en la nube, como `drive` (para Google Drive), `onedrive`, `dropbox`, etc.
 
-    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+    - Permitir el acceso a la carpeta creada en la [aplicación Flatseal] (https://flathub.org/apps/com.github.tchx84.Flatseal).
+  
   <details>
       <summary>
         <b>Rclone</b>
@@ -104,22 +109,27 @@ On the first computer:
     - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
   </details>
   </str>
-  <str key="set_up_second_computer">On the second computer:
-1. Open the SaveDesktop app
-2. Go to the Sync page and click the "Connect to the cloud storage" button.
-3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
-4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
+  <str key="set_up_second_computer">En el segundo ordenador:
+1. Abra la aplicación SaveDesktop
+2. Vaya a la página Sincronizar y haga clic en el botón "Conectar con el almacenamiento en la nube".
+3. Haz clic en el botón "Seleccionar carpeta de unidad en la nube" y selecciona la carpeta que está sincronizada con el mismo almacenamiento en la nube que el primer ordenador.
+4. Selecciona el intervalo de sincronización periódica, ya que si lo dejas en Nunca, la sincronización no funcionará.
 
-To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
+Para configurar la sincronización bidireccional, asegúrate de tener seleccionada la misma carpeta en la nube en el cuadro de diálogo "Conectar con el almacenamiento en la nube" en el primer ordenador, el intervalo de sincronización periódica seleccionado y el interruptor de "Sincronización bidireccional" activado.
 </str>
   <str key="gnome_online_accounts">
-    GNOME Online Accounts(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)
-
-    - Open the GNOME Settings
-    - Go to the Online Accounts section and select your cloud drive service
-
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
     
+      
+        Cuentas en línea de GNOME
+        (para entornos de escritorio GNOME, Cinnamon, COSMIC (antiguo) y Budgie)
+      
+
+    - Abrir la configuración de GNOME
+    - Vaya a la sección Cuentas en línea y seleccione su servicio de unidad en la nube
+
+      ![OnlineAccounts.png] (https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  
   <details>
       <summary>
         <b>GNOME Online Accounts</b>
@@ -133,6 +143,6 @@ To set up bidirectional synchronization, make sure you have the same cloud folde
     
   </details>
   </str>
-  <str key="requirements">#### Requirements
-- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
+  <str key="requirements">#### Requisitos
+- Debes tener una carpeta creada que se sincronice con tu almacenamiento en la nube en cada ordenador que quieras sincronizar. Esto se puede hacer usando:</str>
 </root>
