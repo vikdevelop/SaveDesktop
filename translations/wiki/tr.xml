@@ -137,5 +137,4 @@ To set up bidirectional synchronization, make sure you have the same cloud folde
   </str>
   <str key="requirements">#### Requirements
 - You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
-  <str key="synchronization_between_computers_desc">For synchronization your desktop environment configuration with other computers, you can use one of these options:</str>
 </root>
