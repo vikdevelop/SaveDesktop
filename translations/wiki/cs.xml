@@ -83,7 +83,7 @@ Pokud jste heslo zapomněli, nebude možné archiv rozbalit a použít jej v pro
     - Open the GNOME Settings
     - Go to the Online Accounts section and select your cloud drive service
 
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)</default>
   </str>
   <str key="set_up_first_computer">## Nastavení synchronizace v aplikaci SaveDesktop
 V prvním počítači:
