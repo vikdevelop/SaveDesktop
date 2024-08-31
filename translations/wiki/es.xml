@@ -82,7 +82,7 @@ En la primera computadora:
       
     - Configurar Rclone usando este comando, que crea la carpeta de la unidad de la nube, configura Rclone y monta la carpeta
       ```
-      mkdir -p ~/drive && rclone config create drive your-cloud-drive-service && nohup rclone mount drive: ~/drive --vfs-cache-mode escribe & echo "La unidad ha sido montada correctamente"
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode escribe &amp; echo "La unidad ha sido montada correctamente"
       ```
       * En lugar de `your-cloud-drive-service` use el nombre de su servicio de disco en la nube, como `drive` (para Google Drive), `onedrive`, `dropbox`, etc.
 
