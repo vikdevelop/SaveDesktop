@@ -21,6 +21,9 @@ finish-args:
     - --filesystem=xdg-public-share
     - --filesystem=xdg-pictures
     - --filesystem=xdg-desktop
+    # for selecting the cloud drive folders
+    - --filesystem=xdg-run/gvfs
+    - --filesystem=xdg-run/gvfsd
     # save all themes installed in home folder
     - --filesystem=~/.themes:create
     # save all icons installed in home folder
