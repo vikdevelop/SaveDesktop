@@ -597,19 +597,19 @@ class MainWindow(Adw.ApplicationWindow):
         # Check the file system of the periodic saving folder and their existation
         def check_filesystem_fnc():
             global folder, path, check_filesystem
-            check_filesystem = subprocess.getoutput(f'df -T "{settings["periodic-saving-folder"]}"')
+            check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"])
             
             path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.tar.gz'
             
             # Check if periodic saving is set to "Never"
             if settings["periodic-saving"] == "Never":
                 folder = f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>'
+            # Check if the filesystem is not FUSE
+            elif not "fuse" in check_filesystem:
+                folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             # Check if the periodic saving file exists
             elif not os.path.exists(path):
                 folder = f'<span color="red">{_["periodic_saving_file_err"]}</span>'
-            # Check if the filesystem is not FUSE
-            elif "fuse" not in check_filesystem:
-                folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             else:
                 folder = path
             
@@ -713,15 +713,18 @@ class MainWindow(Adw.ApplicationWindow):
                     cfile_subtitle = self.cfileRow.get_subtitle()
                     if cfile_subtitle:
                         # Check if the selected cloud drive folder is correct
-                        if "fuse" in subprocess.getoutput(f"df -T \"{cfile_subtitle}\""):
+                        if "fuse" in subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle):
                             settings["file-for-syncing"] = cfile_subtitle
                         else:
-                            os.system(f"notify-send '{_['err_occured']}' '{_['cloud_folder_err']}'")
+                            os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
                             settings["file-for-syncing"] = ""
                     else:
-                        print("Nothing changed.")
+                        pass
                 else:
-                    self.sync_menu.remove_all()
+                    try:
+                        self.sync_menu.remove_all()
+                    except:
+                        pass
                     
                     # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
                     if check_psync == "Never2":
@@ -732,14 +735,14 @@ class MainWindow(Adw.ApplicationWindow):
                     cfile_subtitle = self.cfileRow.get_subtitle()
                     if cfile_subtitle:
                         # Check if the selected cloud drive folder is correct
-                        if "fuse" in subprocess.getoutput(f"df -T \"{cfile_subtitle}\""):
+                        if "fuse" in subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle):
                             settings["file-for-syncing"] = cfile_subtitle
                             self.set_up_auto_mount()
                         else:
-                            os.system(f"notify-send '{_['err_occured']}' '{_['cloud_folder_err']}'")
+                            os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
                             settings["file-for-syncing"] = ""
                     else:
-                        print("Nothing changed.")
+                        pass
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
@@ -855,7 +858,7 @@ class MainWindow(Adw.ApplicationWindow):
                     cmd = f"gio mount {cloud_service}://{user}@{host}" if not "onedrive" in cfile_subtitle else f"gio mount {cloud_service}://{host}"
                 else:
                     print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
-            elif "rclone" in subprocess.getoutput(f"df -T {cfile_subtitle}"):
+            elif "rclone" in subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle):
                  cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}"
             # set up the running the synchronization and periodic saving at start up
             open(f"{DATA}/savedesktop-synchronization.sh", "w").write(f'#!/usr/bin/bash\n{cmd}\n{periodic_saving_cmd}\n{sync_cmd}\n' + 'python3 ~/.var/app/io.github.vikdevelop.SaveDesktop/data/install_flatpak_from_script.py' if flatpak else None)
