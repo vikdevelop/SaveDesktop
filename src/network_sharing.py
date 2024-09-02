@@ -18,13 +18,10 @@ dt = datetime.now()
 
 class Syncing:
     def __init__(self):
-        # Check if user has same or empty IP address property
+        # Check, if the user has filled out the file-for-syncing property
         if not settings["file-for-syncing"]:
             settings["manually-sync"] = False
             print("Synchronization is not set up.")
-        elif not settings["bidirectional-sync"]:
-            settings["manually-sync"] = False
-            print("The bidirectional synchronization is turned off.")
         else:
             self.get_file_info()
 
@@ -35,29 +32,24 @@ class Syncing:
             os.mkdir(f"{CACHE}/syncing")
         os.chdir(f"{CACHE}/syncing")
         if settings["periodic-import"] == "Never2":
-            self.create_backup = False
             settings["manually-sync"] = False
             print("Synchronization is not set up.")
         elif settings["periodic-import"] == "Daily2":
-            self.create_backup = True
             settings["manually-sync"] = False
             self.check_sync()
         elif settings["periodic-import"] == "Weekly2":
-            self.create_backup = False
             settings["manually-sync"] = False
             if date.today().weekday() == 1:
                 self.check_sync()
             else:
                 print("Today is not Tuesday.")
         elif settings["periodic-import"] == "Monthly2":
-            self.create_backup = False
             settings["manually-sync"] = False
             if dt.day == 2:
                 self.check_sync()
             else:
                 print("Today is not second day of month.")
         elif settings["periodic-import"] == "Manually2":
-            self.create_backup = False
             settings["manually-sync"] = True
             self.check_sync()
 
@@ -88,12 +80,15 @@ class Syncing:
                
     # Download archive from URL
     def download_config(self):
+       # check, if the selected cloud drive folder is empty or not and if contains the "sd.tar.gz" or not
        if not settings['file-for-syncing'] == "" and not "sd.tar.gz" in settings["file-for-syncing"]:
+            # check, if the selected cloud drive folder contains the SaveDesktop.json file or not
             if os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
                 self.get_pb_info()
             else:
                 subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
                 self.get_pb_info()
+            # extract the configuration archive
             print("extracting the archive")
             try:
                 with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
