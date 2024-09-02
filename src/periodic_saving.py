@@ -92,7 +92,8 @@ class PeriodicBackups:
         with open(f"{CACHE}/.periodicfile.json", "w") as p:
             p.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.pbfolder, filename))
         os.chdir(f"{CACHE}/periodic_saving")
-        from configuration import Save
+        from config import Save
+        Save()
         os.system(f"rm {CACHE}/.periodicfile.json")
         self.config_saved()
 
