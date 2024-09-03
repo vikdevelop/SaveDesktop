@@ -308,7 +308,6 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Open the More options dialog from the self.setDialog
         self.more_options_dialog = more_options_dialog
-        self.cancel_process = False
             
         # Set margin for save desktop layout
         self.saveBox.set_margin_start(40)
@@ -475,7 +474,6 @@ class MainWindow(Adw.ApplicationWindow):
 
         # =======
         # Import page itself
-        self.cancel_process = False
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
         
@@ -1250,6 +1248,7 @@ class MainWindow(Adw.ApplicationWindow):
     def please_wait_save(self):
         # Stop saving configuration
         def cancel_save(w):
+            self.cancel_process = True
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_save)
@@ -1442,6 +1441,7 @@ class MainWindow(Adw.ApplicationWindow):
     def please_wait_import(self):
         # Stop importing configuration
         def cancel_import(w):
+            self.cancel_process = True
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_import)
@@ -1649,7 +1649,7 @@ class MyApp(Adw.Application):
         r_lang != "en" and dialog.set_translator_credits(_["translator_credits"]) # add the translator credits section if the system language is not English
         lang_list and dialog.add_link("SaveDesktop Github Wiki (Weblate)", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/") # add a link to translate the SaveDesktop Github wiki on Weblate
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
-        dialog.set_website("https://github.com/vikdevelop/SaveDesktop")
+        dialog.set_website("https://vikdevelop.github.io/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
         dialog.set_copyright("© 2023-2024 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
