@@ -70,7 +70,6 @@ On the first computer:
 3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
 4. If the periodic saving file does not exist, click on the Create button</str>
   <str key="rclone">
-    <str key="rclone">
     &lt;summary&gt;
         &lt;b&gt;Rclone&lt;/b&gt;
         &lt;p&gt;(for other desktop environments)&lt;/p&gt;
