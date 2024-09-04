@@ -63,8 +63,8 @@ Nella versione 3.3 l'interfaccia è stata leggermente modificata, nello specific
   <str key="enc">L'archivio verrà salvato come archivio ZIP (perché Tar non supporta la funzione di protezione tramite password) e, se desideri estrarlo, ti verrà chiesto di inserire la password che hai utilizzato nel processo di configurazione del salvataggio. Lo stesso vale in caso di importazione della configurazione.
 
 Se si dimentica la password non sarà possibile estrarre l'archivio ed utilizzarlo nel processo di importazione della configurazione.</str>
-  <str key="requirements">#### Requirements
-- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
+  <str key="requirements">#### Requisiti
+- È necessario che sia stata creata una cartella da sincronizzare con l'archivio cloud su ciascun computer che si desidera sincronizzare. Questo può essere fatto utilizzando:</str>
   <str key="set_up_first_computer">## Setting up synchronization in the SaveDesktop app
 On the first computer:
 1. Open the SaveDesktop app
