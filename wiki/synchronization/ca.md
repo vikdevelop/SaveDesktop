@@ -1,39 +1,55 @@
 # Sincronització entre ordinadors de la xarxa
-## Com es configura?
-###  Quins són els requisits?
-**A l'ordinador 1:**
-- Assigneu una IP manual als equips que voleu sincronitzar perquè aquesta no canviï cada vegada que els inicieu. Això és possible mitjançant:
+## Requirements
+- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:
 
-  **Configuració de l'encaminador:**
-  - [Asus](https://www.asus.com/support/FAQ/1000906/)
-  - [Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - [Tenda](https://www.tendacn.com/faq/3264.html)
-  - [Tp-link](https://www.tp-link.com/us/support/faq/170/)
-  - Si no teniu cap d'aquests fabricants, proveu accedint des d'un navegador com ara el Firefox a l'adreça del vostre dispositiu (URL: [192.168.1.1](http://192.168.1.1) o similars) i cerqueu dins la secció *DHCP* quelcom semblant a «IP estàtica», «exclusió DHCP», etc. O bé contacteu amb el fabricant de l'aparell o el proveïdor de la vostra connexió a Internet.
+  <details>
+    <summary><b>GNOME Online Accounts</b><p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p></summary>
 
-  **`system-config-printer` package:**  <img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/ff4e742d-07e2-453f-8ace-b51b4f52d1dd" width="85">
-  - Si no voleu assignar una IP manual a l'encaminador i teniu una impressora instal·lada al vostre sistema, a més del paquet `system-config-printer`, verifiqueu que l'opció «Compartida» està activada al panell principal de la impressora. En cas contrari, activeu aquesta opció i reinicieu el sistema. [Aquí](https://raw.githubusercontent.com/BennyBeat/SaveDesktop/1602010b7ef88f3fb0eb1010af33571f0c548eb3/translations/wiki/ca-Printer.png) teniu una captura de pantalla amb la configuració idònia.
+    - Open the GNOME Settings
+    - Go to the Online Accounts section and select your cloud drive service
 
-**A l'ordinador 2:**
-- Verifiqueu que està connectat a la mateixa xarxa que l'ordinador 1.
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  </details>
 
-### Configuració de la sincronització a l'aplicació SaveDesktop
-<a href="https://www.youtube.com/watch?v=QccFR06oyXk"><img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/a4f8da24-7183-49e1-9a58-82092a42f124" height="32"></a>
+  <details>
+    <summary><b>Rclone</b><p>(for other desktop environments)</p></summary>
 
-Als ordinadors 1 i 2, obriu el programa SaveDesktop i aneu a l'apartat de sincronització. A l'ordinador 1, feu clic al botó «Configura el fitxer de sincronització», seleccioneu el fitxer de sincronització i la freqüència desitjada. Copieu l'URL de sincronització i, a l'ordinador 2, feu clic al botó «Connexió amb l'altre ordinador» i escriviu l'URL de sincronització que heu copiat de l'ordinador 1.
+    - Install Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+      ```
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      ```
+      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
 
-Si voleu sincronitzar l'entorn d'escriptori de l'ordinador 2 a l'1, les passes són les mateixes.
+    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  </details>
+  
+## Setting up synchronization in the SaveDesktop app
+On the first computer:
+1. Open the SaveDesktop app
+2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
+3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
+4. If the periodic saving file does not exist, click on the Create button
 
-**És necessari tancar i tornar a obrir la sessió per aplicar els canvis**
+On the second computer:
+1. Open the SaveDesktop app
+2. Go to the Sync page and click the "Connect to the cloud storage" button.
+3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
+4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
 
-## Sincronització periòdica
-Podeu triar entre els elements següents:
-- Diàriament
-- Setmanalment (la sincronització es duu a terme cada dimarts)
-- Mensualment (la sincronització es duu a terme el segon dia de cada mes)
-- Manualment (és possible realitzar la sincronització en qualsevol moment des del menú principal en fer clic als tres punts)
-- Mai (no es duu a terme cap canvi)
+To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
 
-
+### Periodic synchronization
+You can choose between the following options:
+- Daily
+- Weekly (synchronization takes place every Tuesday)
+- Monthly (synchronization takes place every second day in the month)
+- Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
+- Never (nothing's happening)
 
 {% include footer.html %}

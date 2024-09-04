@@ -1,38 +1,63 @@
 # Sincronizzazione tra computer in rete
-## Come configurarlo?
-### Di cosa hai bisogno?
-**Sul computer 1:**
-- assegna manualmente gli indirizzi IP dei tuoi dispositivi che desideri sincronizzare in modo che l'indirizzo IP non cambi ogni volta che accendi il computer. E' possibile impostarlo tramite:
+#### Requisiti
+- È necessario che sia stata creata una cartella da sincronizzare con l'archivio cloud su ciascun computer che si desidera sincronizzare. Questo può essere fatto utilizzando:
 
-   **Impostazioni del router:**
-   - [per router Asus](https://www.asus.com/support/FAQ/1000906/)
-   - [per router Tp-link](https://www.tp-link.com/us/support/faq/170/)
-   - [per router Tenda](https://www.tendacn.com/faq/3264.html)
-   - [per router Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-   - se non disponi dei router sopra indicati, apri le impostazioni del router (URL: [192.168.1.1](http://192.168.1.1) o correlato) e cerca nella sezione del server DHCP qualcosa sotto forma di "Assegna manualmente un IP nell'elenco DHCP" o "IP statico", ecc.
-   
-   **`system-config-printer` package:** <img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/ff4e742d-07e2-453f-8ace-b51b4f52d1dd" width="85">
-   - se non vuoi impostare manualmente l'indirizzo IP dall'interfaccia del router e se hai una stampante e hai installato il pacchetto `system-config-printer`, controlla di aver selezionato l'opzione "Condivisa" facendo clic sulla scheda Stampante nella barra dell'intestazione. In caso contrario, spuntala e riavvia il sistema. [Qui](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) è uno screenshot di come dovrebbe essere.
+  <details>
+    <summary>
+    <b>Account online GNOME</b>
+    <p>(per gli ambienti desktop GNOME, Cinnamon, COSMIC (vecchio) e Budgie)</p>
+    </summary>
 
-**Sul computer 2:**
-- Controlla se sei connesso alla stessa rete del computer 1.
+    - Apri le Impostazioni GNOME
+    - Vai alla sezione Account online e seleziona il tuo servizio di cloud storage
 
-### Impostare la sincronizzazione nell'app SaveDesktop
-<a href="https://www.youtube.com/watch?v=QccFR06oyXk"><img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/a4f8da24-7183-49e1-9a58-82092a42f124" height="32"></a>
+    ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)
 
-Sui computer 1 e 2, apri l'applicazione SaveDesktop e passa alla pagina di sincronizzazione. Sul computer 1, fai clic sul pulsante "Imposta il file di sincronizzazione", seleziona il file di sincronizzazione (il tuo file di salvataggio periodico) e seleziona un intervallo di sincronizzazione periodica. Quindi copia l'URL per la sincronizzazione e, sul computer 2, fai clic sul pulsante "Connetti con un altro computer" e inserisci l'URL copiato per la sincronizzazione dal computer 1.
-Se desideri sincronizzare la configurazione DE dal computer 2 al computer 1, segui la stessa procedura.
+  </details>
 
-**Affinché le modifiche abbiano effetto è necessario disconnettersi dal sistema**
 
-## Sincronizzazione periodica
-Puoi scegliere tra i seguenti articoli:
-- Quotidiano
+  <details>
+    <summary>
+    <b>Rclone</b>
+    <p>(per altri ambienti desktop)</p>
+    </summary>
+
+    - Installa Rclone
+    ```
+    sudo -v ; curl https://rclone.org/install.sh | sudo bash
+    ```
+
+    - Imposta Rclone usando questo comando, che crea la cartella cloud drive, imposta Rclone e monta la cartella
+    ```
+    mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "L'unità è stata montata correttamente"
+    ```
+    * Invece di `your-cloud-drive-service` usa il nome del tuo servizio cloud drive, come `drive` (per Google Drive), `onedrive`, `dropbox`, ecc.
+
+    - Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).
+    </details>
+
+  
+## Impostazione della sincronizzazione nell'app SaveDesktop
+Sul primo computer:
+1. Apri l'app SaveDesktop
+2. Nella pagina Sincronizzazione, fai clic sul pulsante "Imposta file di sincronizzazione" e poi sul pulsante "Modifica"
+3. Fai clic su "Salvataggio periodico" e seleziona la cartella sincronizzata con il tuo archivio cloud come cartella di salvataggio periodico
+4. Se il file di salvataggio periodico non esiste, fai clic sul pulsante Crea
+
+Sul secondo computer:
+1. Apri l'app SaveDesktop
+2. Vai alla pagina Sincronizzazione e clicca sul pulsante "Connetti allo storage cloud".
+3. Clicca sul pulsante "Seleziona cartella unità cloud" e seleziona la cartella sincronizzata con lo stesso storage cloud del primo computer.
+4. Seleziona l'intervallo di sincronizzazione periodica, perché se lo lasci su Mai, la sincronizzazione non funziona.
+
+Per impostare la sincronizzazione bidirezionale, assicurati di aver selezionato la stessa cartella cloud nella finestra di dialogo "Connetti allo storage cloud" sul primo computer, di aver selezionato l'intervallo di sincronizzazione periodica e di aver abilitato l'opzione "Sincronizzazione bidirezionale".
+
+### Sincronizzazione periodica
+Puoi scegliere tra le seguenti opzioni:
+- Giornaliera
 - Settimanale (la sincronizzazione avviene ogni martedì)
 - Mensile (la sincronizzazione avviene ogni secondo giorno del mese)
-- Manualmente (è possibile sincronizzare la configurazione dal menu nella barra dell'intestazione cliccando sui tre punti)
-- Never (nothing's happening)
-
-
+- Manuale (è possibile sincronizzare la configurazione dal menu nella barra dell'intestazione cliccando sui tre puntini)
+- Mai (non succede nulla)
 
 {% include footer.html %}

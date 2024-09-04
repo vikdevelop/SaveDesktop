@@ -1,40 +1,61 @@
 # Synchronizace mezi počítači v síti
-## Jak ji nastavit?
-### Co potřebujete?
+#### Požadavky
+- Na každém počítači, který chcete synchronizovat, musíte mít vytvořenou složku, která se bude synchronizovat s cloudovým úložištěm. To lze provést pomocí:
 
-**Na počítači 1:**
-- ručně přiřazené IP adresy zařízení, které chcete synchronizovat, aby se IP adresa neměnila při každém zapnutí počítače. Je možné to nastavit prostřednictvím:
+  <details>
+      <summary>
+        <b>Online účty GNOME</b>
+        <p>(pro prostředí GNOME, Cinnamon, COSMIC (Old) a Budgie)</p>
+      </summary>
 
-  **Nastavení routeru:**
-  - [pro routery Asus](https://www.asus.com/support/FAQ/1000906/)
-  - [pro routery Tp-link](https://www.tp-link.com/us/support/faq/170/)
-  - [pro routery Tenda](https://www.tendacn.com/faq/3264.html)
-  - [pro routery Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - pokud výše uvedené routery nemáte, otevřete nastavení routeru (URL: [192.168.1.1](http://192.168.1.1) nebo příbuzné) a v části DHCP serveru vyhledejte něco ve tvaru "Manually assign an IP to the DHCP list" nebo "Static IP" apod.
+    - Otevřete Nastavení prostředí GNOME
+    - Přejděte do části Online účty a vyberte službu cloudového disku.
+
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)
+    
+  </details>
+
+  <details>
+      <summary>
+        <b>Rclone</b>
+        <p>(pro jiná desktopová prostředí)</p>
+      </summary>
+
+    - Nainstalujte Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Nastavte Rclone pomocí tohoto příkazu, který vytvoří složku cloudové jednotky, nastaví Rclone a připojí složku
+      ```
+      mkdir -p ~/drive && rclone config create drive your-cloud-drive-service && nohup rclone mount drive: ~/drive --vfs-cache-mode writes & echo „Disk byl úspěšně připojen“
+      ```
+      * Namísto `your-cloud-drive-service` použijte název služby cloudového disku, například `drive` (pro Google Drive), `onedrive`, `dropbox` atd.
+
+    - Povolte přístup k vytvořené složce v aplikaci [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  </details>
   
-  **Balíčku `system-config-printer`:** <img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/ff4e742d-07e2-453f-8ace-b51b4f52d1dd" width="85">
-  - pokud nechcete nastavovat IP adresu ručně z rozhraní routeru, máte tiskárnu a nainstalovaný balíček `system-config-printer`, zkontrolujte zda jste zaškrtli položku "Sdílené" kliknutím na kartu "Tiskárna" v záhlaví. Pokud ne, zaškrtněte ji a restartujte systém. [Zde](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) je snímek obrazovky, jak to má vypadat.
+## Nastavení synchronizace v aplikaci SaveDesktop
+V prvním počítači:
+1. Otevřete aplikaci SaveDesktop
+2. Na stránce Synchronizace klikněte na tlačítko „Nastavit synchronizační soubor“ a poté na tlačítko „Změnit“. 3. Klikněte na tlačítko „Nastavit synchronizační soubor“.
+3. Klikněte na možnost „Periodické ukládání“ a vyberte složku, která je synchronizována s cloudovým úložištěm, jako složku pro pravidelné ukládání.
+4. Pokud soubor pro pravidelné ukládání neexistuje, klikněte na tlačítko Vytvořit
 
-**Na počítači 2:**
-- Zkontrolujte, zda jste připojeni ke stejné síti jako počítač 1.
+V druhém počítači:
+1. Otevřete aplikaci SaveDesktop
+2. Přejděte na stránku Synchronizace a klikněte na tlačítko „Připojit ke cloudovému úložišti“.
+3. Klikněte na tlačítko „Select cloud drive folder“ (Vybrat složku cloudové jednotky) a vyberte složku, která je synchronizována se stejným cloudovým úložištěm jako první počítač.
+4. Vyberte interval pravidelné synchronizace, protože pokud ponecháte hodnotu Nikdy, synchronizace nebude fungovat.
 
-### Nastavení synchronizace v aplikaci SaveDesktop
-<a href="https://www.youtube.com/watch?v=QccFR06oyXk"><img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/a4f8da24-7183-49e1-9a58-82092a42f124" height="32"></a>
+Chcete-li nastavit obousměrnou synchronizaci, ujistěte se, že máte v dialogovém okně „Připojit ke cloudovému úložišti“ na prvním počítači vybranou stejnou složku cloudového úložiště, zvolený interval periodické synchronizace a povolený přepínač „Obousměrná synchronizace“.
 
-Na počítači 1 a 2 otevřete aplikaci SaveDesktop a přepněte na stránku Synchronizovat. Na počítači 1 klikněte na tlačítko "Nastavit synchronizační soubor", vyberte synchronizační soubor (váš soubor pravidelného ukládání) a zvolte interval pravidelné synchronizace. Poté zkopírujte adresu URL pro synchronizaci a na počítači 2 klikněte na tlačítko "Připojit se k jinému počítači" a zadejte zkopírovanou adresu URL pro synchronizaci z počítače 1.
-
-Pokud chcete synchronizovat konfiguraci desktopového prostředí z počítače 2 do počítače 1, postupujte stejně.
-
-**Aby se změny projevily, je nutné se odhlásit ze systému**.
-
-## Pravidelná synchronizace
-Můžete si vybrat mezi následujícími položkami:
+### Pravidelná synchronizace
+Můžete si vybrat mezi následujícími možnostmi:
 - Denně
 - Týdně (synchronizace probíhá každé úterý)
 - Měsíčně (synchronizace probíhá každý druhý den v měsíci)
 - Ručně (je možné synchronizovat konfiguraci z menu v záhlaví kliknutím na tři tečky)
 - Nikdy (nic se neděje)
-
-
 
 {% include footer.html %}

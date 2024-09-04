@@ -1,40 +1,55 @@
 # नेटवर्क में कंप्यूटरों के बीच समन्वयन
-## इसे कैसे सेट करें?
-### आपकी क्या आवश्यकता है?
+## Requirements
+- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:
 
-**कंप्यूटर 1 पर:**
-- अपने उपकरण के IP पते को मैन्युअल रूप से निर्दिष्ट करें जिन्हें आप समन्वयित करना चाहते हैं ताकि हर बार कंप्यूटर चालू होने पर IP पता न बदले। इसे इसके माध्यम से निर्धारित करना संभव है:
+  <details>
+    <summary><b>GNOME Online Accounts</b><p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p></summary>
 
-  **राउटर सेटिंग्स:**
-   - [Asus राउटर्स के लिए](https://www.asus.com/support/FAQ/1000906/)
-   - [TP-Link राउटर के लिए](https://www.tp-link.com/us/support/faq/170/)
-   - [Tenda राउटर्स के लिए](https://www.tendacn.com/faq/3264.html)
-   - [NetGear राउटर्स के लिए](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-   - यदि आपके पास उपरोक्त राउटर नहीं हैं, तो अपनी राउटर सेटिंग्स खोलें (URL: [192.168.1.1](http://192.168.1.1) या संबंधित) और DHCP सर्वर अनुभाग में "मैन्युअल रूप से DHCP सूची में एक IP असाइन करें" या "स्टेटिक IP", आदि के आकार में कुछ खोजें।
+    - Open the GNOME Settings
+    - Go to the Online Accounts section and select your cloud drive service
+
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  </details>
+
+  <details>
+    <summary><b>Rclone</b><p>(for other desktop environments)</p></summary>
+
+    - Install Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+      ```
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      ```
+      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+
+    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  </details>
   
-  **`system-config-printer` पैकेज:**
-  - यदि आप राउटर इंटरफ़ेस से मैन्युअल रूप से IP पता निर्धारित नहीं करना चाहते हैं, और यदि आपके पास एक प्रिंटर है और आपने `system-config-printer` पैकेज स्थापित किया है, तो जांचें कि क्या आपने प्रिंटर टैब पर क्लिक करके "साझा" विकल्प पर टिक लगाया है या नहीं शीर्षलेख पट्टी पर. यदि नहीं, तो कृपया इसे टिक करें और सिस्टम को रीबूट करें। [यहां](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) एक स्क्रीनशॉट है, यह कैसा दिखना चाहिए ।।
+## Setting up synchronization in the SaveDesktop app
+On the first computer:
+1. Open the SaveDesktop app
+2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
+3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
+4. If the periodic saving file does not exist, click on the Create button
 
-**कंप्यूटर 2 पर:**
-- जांचें कि क्या आप कंप्यूटर के समान नेटवर्क से जुड़े हैं 1।
+On the second computer:
+1. Open the SaveDesktop app
+2. Go to the Sync page and click the "Connect to the cloud storage" button.
+3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
+4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
 
-### SaveDesktop ऐप में समन्वयन निर्धारित करें
-<a href="https://www.youtube.com/watch?v=QccFR06oyXk"><img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/a4f8da24-7183-49e1-9a58-82092a42f124" height="32"></a>
+To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
 
-कंप्यूटर 1 और 2 पर, SaveDesktop अनुप्रयोग खोलें और समन्वयन पेज पर स्विच करें। कंप्यूटर 1 पर, "समन्वयन फाइल निर्धारित करें" बटन पर क्लिक करें, समन्वयन फाइल (आपकी आवधिक बचत फाइल) का चयन करें, और एक आवधिक समन्वयन अंतराल का चयन करें। फिर समन्वयन के लिए URL कॉपी करें, और कंप्यूटर 2 पर, "अन्य कंप्यूटर से जुड़ें" बटन पर क्लिक करें और कंप्यूटर 1 से समन्वयन के लिए कॉपी किया गया URL दर्ज करें।
-
-यदि आप DE विन्यास को कंप्यूटर 2 से कंप्यूटर 1 में समन्वयित करना चाहते हैं, तो उसी प्रक्रिया का पालन करें।
-
-**परिवर्तनों को प्रभावी बनाने के लिए, सिस्टम से लॉगआउट करना आवश्यक है**
-
-## आवधिक समन्वयन
-आप निम्नलिखित वस्तुओं के बीच चयन कर सकते हैं:
-- दैनिक
-- साप्ताहिक (प्रत्येक मंगलवार को समन्वयन होता है)
-- मासिक (समन्वयन महीने में हर दूसरे दिन होता है)
-- मैन्युअल रूप से (तीन बिंदुओं पर क्लिक करके शीर्षलेख पट्टी में मेनू से समन्वयन को निर्धारित करना संभव है)
-- कभी नहीं (कुछ नहीं हो रहा है)
-
-
+### Periodic synchronization
+You can choose between the following options:
+- Daily
+- Weekly (synchronization takes place every Tuesday)
+- Monthly (synchronization takes place every second day in the month)
+- Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
+- Never (nothing's happening)
 
 {% include footer.html %}

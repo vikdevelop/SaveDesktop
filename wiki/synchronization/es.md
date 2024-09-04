@@ -1,39 +1,61 @@
 # Sincronización entre ordenadores de la red
-## ¿Cómo se configura?
-### ¿Qué necesitas?
-**En el ordenador 1:**
-- asigna manualmente las direcciones IP de los dispositivos que quieras sincronizar para que la dirección IP no cambie cada vez que se encienda el ordenador. Es posible configurarlo a través de:
+#### Requisitos
+- Debes tener una carpeta creada que se sincronice con tu almacenamiento en la nube en cada ordenador que quieras sincronizar. Esto se puede hacer usando:
 
-  **Configuración del router:**
-  - [para routers Asus](https://www.asus.com/support/FAQ/1000906/)
-  - [para routers Tp-link](https://www.tp-link.com/us/support/faq/170/)
-  - [para routers Tenda](https://www.tendacn.com/faq/3264.html)
-  - [para routers Netgear](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - si no tienes los routers mencionados, abre la configuración de tu router (URL: [192.168.1.1](http://192.168.1.1) o relacionadas) y busca en la sección del servidor DHCP algo en forma de "Asignar manualmente una IP a la lista DHCP" o "IP estática", etc.
+  <details>
+      <summary>
+        <b>Cuentas en línea de GNOME</b>
+        <p>(para entornos de escritorio GNOME, Cinnamon, COSMIC (antiguo) y Budgie)</p>
+      </summary>
 
-  **Paquete `system-config-printer`:** <img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/ff4e742d-07e2-453f-8ace-b51b4f52d1dd" width="85">
-  - Si no desea asignar una IP manual al router y tiene una impresora instalada en su sistema, además del paquete `system-config-printer`, verifique que la opción "Compartida" está activada en el panel principal de la impresora. De lo contrario, active esta opción y reinicie el sistema. [Aquí](https://raw.githubusercontent.com/BennyBeat/SaveDesktop/1602010b7ef88f3fb0eb1010af33571f0c548eb3/translations/wiki/es-Printer.png) tiene una captura de pantalla con la configuración idónea.
+    - Abrir la configuración de GNOME
+    - Vaya a la sección Cuentas en línea y seleccione su servicio de unidad en la nube
 
-**En el ordenador 2:**
-- Compruebe si está conectado a la misma red que el ordenador 1.
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)
+    
+  </details>
 
-### Configuración de la sincronización en la aplicación SaveDesktop
-<a href="https://www.youtube.com/watch?v=QccFR06oyXk"><img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/a4f8da24-7183-49e1-9a58-82092a42f124" height="32"></a>
+  <details>
+      <summary>
+        <b>Rclone</b>
+        <p>(para otros entornos de escritorio)</p>
+      </summary>
 
-En los ordenadores 1 y 2, abra la aplicación SaveDesktop y vaya a la página Sincronización. En el ordenador 1, haga clic en el botón "Configurar el archivo de sincronización", seleccione el archivo de sincronización (su archivo de guardado periódico) y seleccione un intervalo de sincronización periódica. A continuación, copie la URL para la sincronización y, en el ordenador 2, haga clic en el botón "Conectar con otro ordenador" e introduzca la URL copiada para la sincronización desde el ordenador 1.
+    - Instalar Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Configurar Rclone usando este comando, que crea la carpeta de la unidad de la nube, configura Rclone y monta la carpeta
+      ```
+      mkdir -p ~/drive && rclone config create drive your-cloud-drive-service && nohup rclone mount drive: ~/drive --vfs-cache-mode escribe & echo "La unidad ha sido montada correctamente"
+      ```
+      * En lugar de `your-cloud-drive-service` use el nombre de su servicio de disco en la nube, como `drive` (para Google Drive), `onedrive`, `dropbox`, etc.
 
-Si desea sincronizar el entorno de escritorio del ordenador 2 al 1, los pasos son los mismos.
+    - Permitir el acceso a la carpeta creada en la [aplicación Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  </details>
+  
+## Configurar la sincronización en la aplicación SaveDesktop
+En la primera computadora:
+1. Abra la aplicación SaveDesktop
+2. En la página Sync, haga clic en el botón "Configurar el archivo de sincronización" y luego en el botón "Cambiar"
+3. Haga clic en "Guardar periódicamente" y seleccione la carpeta que se sincroniza con su almacenamiento en la nube como una carpeta de ahorro periódico
+4. Si el archivo de guardado periódico no existe, haga clic en el botón Crear
 
-**Es necesario cerrar y volver a abrir la sesión para aplicar los cambios**
+En el segundo ordenador:
+1. Abra la aplicación SaveDesktop
+2. Vaya a la página Sincronizar y haga clic en el botón "Conectar con el almacenamiento en la nube".
+3. Haz clic en el botón "Seleccionar carpeta de unidad en la nube" y selecciona la carpeta que está sincronizada con el mismo almacenamiento en la nube que el primer ordenador.
+4. Selecciona el intervalo de sincronización periódica, ya que si lo dejas en Nunca, la sincronización no funcionará.
 
-## Sincronización periódica
-Puede elegir entre los siguientes elementos:
+Para configurar la sincronización bidireccional, asegúrate de tener seleccionada la misma carpeta en la nube en el cuadro de diálogo "Conectar con el almacenamiento en la nube" en el primer ordenador, el intervalo de sincronización periódica seleccionado y el interruptor de "Sincronización bidireccional" activado.
+
+### Sincronización periódica
+Puede elegir entre las siguientes opciones:
 - Diariamente
-- Semanalmente (la sincronización se lleva a cabo cada martes)
-- Mensualmente (la sincronización se lleva a cabo el segundo día de cada mes)
-- Manualmente (es posible realizar la sincronización en cualquier momento desde el menú principal al hacer clic en los tres puntos)
-- Nunca (no se realiza ningún cambio)
-
-
+- Semanal (la sincronización tiene lugar cada martes)
+- Mensualmente (la sincronización tiene lugar cada dos días del mes)
+- Manualmente (es posible sincronizar la configuración desde el menú de la barra de cabecera haciendo clic en los tres puntos)
+- Nunca (no ocurre nada)
 
 {% include footer.html %}

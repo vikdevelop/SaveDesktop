@@ -1,42 +1,56 @@
 # Synchronization between computers in the network
-## How to set up it?
-### What do you need?
-**On computer 1:**
-- manually assign the IP addresses of your devices that you want to sync so that the IP address does not change every time the computer is turned on. It is possible to set it via:
+## Requirements
+- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:
 
-  **Router settings:**
-  - [for Asus routers](https://www.asus.com/support/FAQ/1000906/)
-  - [for Tp-link routers](https://www.tp-link.com/us/support/faq/170/)
-  - [for Tenda routers](https://www.tendacn.com/faq/3264.html)
-  - [for Netgear routers](https://kb.netgear.com/25722/How-do-I-reserve-an-IP-address-on-my-NETGEAR-router)
-  - if you don't have the above routers, open your router settings (URL: [192.168.1.1](http://192.168.1.1) or related) and search in the DHCP server section something in the shape of "Manually assign an IP to the DHCP list" or "Static IP", etc.
+  <details>
+    <summary><b>GNOME Online Accounts</b><p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p></summary>
 
-  **`system-config-printer` package:**  <img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/ff4e742d-07e2-453f-8ace-b51b4f52d1dd" width="85">
+    - Open the GNOME Settings
+    - Go to the Online Accounts section and select your cloud drive service
 
-  - if you don't want to set the IP address manually from the router interface, and if you have a printer and have installed `system-config-printer` package, check if you ticked the option "Shared" by clicking the Printer tab on the header bar. If not, please tick it and reboot the system. [Here](https://github-production-user-asset-6210df.s3.amazonaws.com/83600218/272054218-ff17c19b-98f5-41fe-8f34-40de275f0da4.png) is a screenshot, what it's supposed to look like.
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  </details>
 
-**On computer 2:**
-- Check if you are connected to the same network as computer 1.
+  <details>
+    <summary><b>Rclone</b><p>(for other desktop environments)</p></summary>
 
-### Set synchronization in the SaveDesktop app
-<a href="https://www.youtube.com/watch?v=QccFR06oyXk"><img src="https://github.com/vikdevelop/SaveDesktop/assets/83600218/a4f8da24-7183-49e1-9a58-82092a42f124" height="32"></a>
+    - Install Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+      ```
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      ```
+      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
 
-On computer 1 and 2, open the SaveDesktop application and switch to the Sync page. On computer 1, click on the button "Set up the sync file", select the synchronization file (your periodic saving file), and select a periodic synchronization interval. Then copy the URL for synchronization, and on computer 2, click on the button "Connect with other computer" and enter the copied URL for synchronization from computer 1.
+    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  </details>
+  
+## Setting up synchronization in the SaveDesktop app
+On the first computer:
+1. Open the SaveDesktop app
+2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
+3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
+4. If the periodic saving file does not exist, click on the Create button
 
-If you want to sync the DE configuration from computer 2 to computer 1, follow the same procedure.
+On the second computer:
+1. Open the SaveDesktop app
+2. Go to the Sync page and click the "Connect to the cloud storage" button.
+3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
+4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
 
-**For the changes to take effect, it is necessary to logout of the system**
+To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
 
-## Periodic synchronization
-You can choose between the following items:
+### Periodic synchronization
+You can choose between the following options:
 - Daily
 - Weekly (synchronization takes place every Tuesday)
 - Monthly (synchronization takes place every second day in the month)
 - Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
 - Never (nothing's happening)
 
-
-
-
-
 {% include footer.html %}
+
