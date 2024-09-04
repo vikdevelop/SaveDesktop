@@ -88,7 +88,7 @@
                     <li>Synchronisation has been redesigned from the ground up - instead of using URLs to synchronise between computers on the local network, a folder synchronised with cloud storage (using GNOME Online Accounts or Rclone) is used - find out more here: https://vikdevelop.github.io/SaveDesktop/wiki/synchronization/en</li>
                     <li>Added support for comparing installed Flatpak apps, which means that only apps that have not yet been installed on the system will be installed</li>
                     <li>Added option to generate password for configuration archive</li>
-                    <li>AAdded SaveDesktop to the Flathub/Snap Beta channel, so if you want, you can participate in beta testing to prevent bugs in a future stable releases. More informations are here: https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#beta-releases</li>
+                    <li>Added SaveDesktop to the Flathub/Snap Beta channel, so if you want, you can participate in beta testing to prevent bugs in a future stable releases. More informations are here: https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#beta-releases</li>
                     <li>Improved support for displaying possible error messages in the GUI</li>
                     <li>Other minor UI improvements</li>
                 </ul>
