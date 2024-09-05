@@ -15,104 +15,130 @@
   <str key="pb_filename_title">### Формат назви файлу</str>
   <str key="pb_filname_desc">Якщо ви хочете надати формат імені файлу для періодичного збереження файлів, відмінний від `Latest_configuration`, це можливо, навіть з пробілами. Починаючи з версії 2.9.6, змінна `{}` не працює для встановлення поточної дати, оскільки тепер під час кожного періодичного збереження вихідний файл резервної копії перезаписується.</str>
   <str key="synchronization_between_computers_title">Синхронізація між комп'ютерами в мережі</str>
-  <str key="periodic_sync">## Періодична синхронізація
-Ви можете вибрати один з наступних пунктів:
+  <str key="periodic_sync">### Періодична синхронізація
+Ви можете вибрати один з наступних варіантів:
 - Щодня
-- Щотижня (синхронізація відбувається щовівторка)
-- Щомісяця (синхронізація відбувається кожен другий день місяця)
-- Вручну (можна синхронізувати конфігурацію з меню в рядку заголовка, натиснувши на три точки)
-- Ніколи (нічого не буде відбуватися)</str>
+- Щотижня (синхронізація відбувається кожного вівторка)
+- Щомісяця (синхронізація відбувається кожного другого дня місяця)
+- Вручну (можна синхронізувати конфігурацію через меню на панелі інструментів, натиснувши на три крапки)
+- Ніколи (нічого не відбувається)</str>
   <str key="save_installed_flatpaks_title">Зберегти встановлені додатки Flatpak і встановити його зі списку</str>
   <str key="save_flatpak_intro">Починаючи з версії 2.5, SaveDesktop дозволяє зберігати встановлені додатки Flatpak і встановлювати їх зі списку. То, як це працює?</str>
   <str key="saving_flatpaks">### Збереження встановлених додатків Flatpak
 Є можливим зберегти список встановлених Flatpak додатків, встановлених у системній теці `/var/lib/flatpak/app`, а не у домашній теці `~/.local/share/flatpak/app`. Список встановлених Flatpak додатків в архіві конфігурації буде названо `installed_flatpaks.sh` для системної теки та `installed_user_flatpaks.sh` для домашньої теки.</str>
   <str key="installing_flatpaks">### Встановлення Flatpak додатків зі списку
 Після імпорту збереженого файлу конфігурації та входу назад в систему, **додатки Flatpak почнуть встановлюватися у фоновому режимі.**</str>
-  <str key="version_warning">**This feature is available from version: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Importing configuration</str>
-  <str key="imp_cfg_cli_intro">In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.</str>
-  <str key="imp_cfg_cli_steps">### So how to proceed?
-**1. Open a terminal**
+  <str key="version_warning">**Ця функція доступна з версії: `3.2.2`**</str>
+  <str key="import_cfg_in_cli_title">Імпорт конфігурації</str>
+  <str key="imp_cfg_cli_intro">Окрім імпорту конфігурації через графічний інтерфейс (GUI), SaveDesktop також дозволяє імпортувати конфігурацію через командний рядок (CLI), що може бути корисно, якщо ваше середовище робочого столу зламається.</str>
+  <str key="imp_cfg_cli_steps">### Що робити далі?
+**1. Відкрийте термінал**
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+Ви можете відкрити його з меню додатків або скористатися комбінацією клавіш Ctrl+Alt+T.
 
-**2. Type the command to import the configuration**
+**2. Введіть команду**
 
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
-
+Введіть наступну команду в терміналі:
+- Якщо у вас встановлений SaveDesktop як пакет Flatpak, використовуйте:
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
      ```
-
-- if you have SaveDesktop installed as a Snap or native package, use: 
+- Якщо у вас встановлений SaveDesktop як пакет Snap або рідний пакет, використовуйте:
      ```
      savedesktop --import-config /path/to/filename.sd.tar.gz
      ```</str>
-  <str key="imp_cfg_cli_note">**Note**:
-- instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
-  <str key="archive_encryption_">Archive encryption</str>
-  <str key="archive_encryption_desc">If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?</str>
-  <str key="ac_intro">## How does it work?
-If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 12 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. </str>
+  <str key="imp_cfg_cli_note">**Примітка**:
+- Замість `/path/to/filename.sd.tar.gz` введіть шлях до архіву конфігурації, який ви хочете імпортувати, наприклад: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
+  <str key="archive_encryption_">Шифрування архіву</str>
+  <str key="archive_encryption_desc">Якщо ви хочете зашифрувати архів конфігурації, будь то для захисту даних або з інших причин, ви можете скористатися функцією шифрування архівів у додатку SaveDesktop. Як це працює і як це налаштувати?</str>
+  <str key="ac_intro">## Як це працює?
+Якщо ця функція увімкнена, SaveDesktop завжди буде запитувати вас створити пароль для нового архіву конфігурації. Критерії для пароля включають як мінімум 12 символів, одну велику літеру, одну малу літеру та один спеціальний символ. Якщо пароль не відповідає цим критеріям, збереження конфігурації не буде можливим. </str>
   <str key="ac_warn">&amp;gt; [!WARNING]  
-&amp;gt; The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.</str>
-  <str key="ac_setup">## How to set it up?
-In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.</str>
-  <str key="saving_cfg_title">Saving configuration</str>
-  <str key="saving_cfg_intro">If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.</str>
-  <str key="save_cfg_outro">When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.</str>
-  <str key="enc">The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+&amp;gt; Файли періодичного збереження (на даний момент) не доступні для захисту паролем. Зашифровані архіви наразі не можна використовувати для синхронізації.</str>
+  <str key="ac_setup">## Як налаштувати?
+У версії 3.3 інтерфейс був дещо змінений: розділ періодичного збереження тепер знаходиться під кнопкою "Більше опцій". На тому ж місці розташований розділ шифрування архівів. Тому натисніть на вже згадану кнопку і увімкніть перемикач "Шифрування архіву".</str>
+  <str key="saving_cfg_title">Збереження конфігурації</str>
+  <str key="saving_cfg_intro">Якщо ви віддаєте перевагу командному рядку (CLI) перед графічним інтерфейсом (GUI), SaveDesktop, крім збереження конфігурації в GUI, дозволяє також зберігати конфігурацію через CLI.</str>
+  <str key="save_cfg_outro">При використанні цього методу застосовуються параметри з GUI, зокрема параметри з режиму періодичного збереження, такі як формат імені файлу та вибрана папка для файлів періодичного збереження. Ви можете зберігати конфігурацію за допомогою цього методу в будь-який час, незалежно від вибраного інтервалу періодичного збереження.</str>
+  <str key="enc">Архів буде збережено у форматі ZIP (оскільки формат Tar не підтримує функцію захисту паролем), і якщо ви захочете його розпакувати, вам буде запропоновано ввести пароль, який ви використали під час збереження конфігурації. Те ж саме стосується імпорту конфігурації.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.</str>
-  <str key="requirements">#### Requirements
-- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
-  <str key="set_up_first_computer">## Setting up synchronization in the SaveDesktop app
-On the first computer:
-1. Open the SaveDesktop app
-2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
-3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
-4. If the periodic saving file does not exist, click on the Create button</str>
-  <str key="rclone">
-    &lt;summary&gt;
+Якщо ви забудете пароль, ви не зможете розпакувати архів і використати його для процесу імпорту конфігурації.</str>
+  <str key="requirements">#### Вимоги
+- Ви повинні створити папку, яка буде синхронізуватися з вашим хмарним сховищем на кожному комп'ютері, який ви хочете синхронізувати. Це можна зробити за допомогою:</str>
+  <str key="set_up_first_computer">## Налаштування синхронізації у додатку SaveDesktop
+На першому комп'ютері:
+1. Відкрийте додаток SaveDesktop.
+2. На сторінці Синхронізація натисніть кнопку "Налаштувати файл синхронізації", а потім кнопку "Змінити".
+3. Натисніть "Періодичне збереження" і виберіть папку, що синхронізується з вашим хмарним сховищем, як папку для періодичного збереження.
+4. Якщо файл періодичного збереження не існує, натисніть кнопку "Створити"</str>
+  <str key="rclone">&lt;details&gt;
+      &lt;summary&gt;
         &lt;b&gt;Rclone&lt;/b&gt;
-        &lt;p&gt;(for other desktop environments)&lt;/p&gt;
+        &lt;p&gt;(для інших середовищ робочого столу)&lt;/p&gt;
       &lt;/summary&gt;
 
-    - Install Rclone
+    - Встановіть Rclone
       ```
       sudo -v ; curl https://rclone.org/install.sh | sudo bash
       ```
       
-    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+    - Налаштуйте Rclone за допомогою цієї команди, яка створює папку для хмарного диска, налаштовує Rclone та монтує папку:
       ```
       mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "The drive has been mounted successfully"
       ```
-      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+      * Замість `your-cloud-drive-service` використовуйте назву вашого сервісу хмарного диска, наприклад, `drive` (для Google Drive), `onedrive`, `dropbox` тощо.
 
-    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+    - Дайте доступ до створеної папки у [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
   &lt;/details&gt;
-  </str>
-  <str key="set_up_second_computer">On the second computer:
-1. Open the SaveDesktop app
-2. Go to the Sync page and click the "Connect to the cloud storage" button.
-3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
-4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
+      
+        Rclone
+        (для інших середовищ робочого столу)
+      
 
-To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
+    - Встановіть Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Налаштуйте Rclone за допомогою цієї команди, яка створює папку для хмарного диска, налаштовує Rclone та монтує папку
+      ```
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      ```
+      * Замість `your-cloud-drive-service` використовуйте назву вашого сервісу хмарного диска, наприклад, `drive` (для Google Drive), `onedrive`, `dropbox` тощо.
+
+    - Дайте доступ до створеної папки у [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  
+  </str>
+  <str key="set_up_second_computer">На другому комп'ютері:
+1. Відкрийте додаток SaveDesktop.
+2. Перейдіть на сторінку Синхронізація та натисніть кнопку "Підключитися до хмарного сховища".
+3. Натисніть кнопку "Вибрати папку хмарного диска" та виберіть папку, що синхронізується з тим же хмарним сховищем, що й на першому комп'ютері.
+4. Виберіть інтервал періодичної синхронізації, оскільки якщо ви залишите його на "Ніколи", синхронізація не буде працювати.
+
+Щоб налаштувати двосторонню синхронізацію, переконайтеся, що ви вибрали ту ж папку хмари в діалоговому вікні "Підключитися до хмарного сховища" на першому комп'ютері, вибрано інтервал періодичної синхронізації, і перемикач "Двостороння синхронізація" увімкнуто.
 </str>
-  <str key="gnome_online_accounts">
-    &lt;details&gt;
+  <str key="gnome_online_accounts">&lt;details&gt;
       &lt;summary&gt;
         &lt;b&gt;GNOME Online Accounts&lt;/b&gt;
-        &lt;p&gt;(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)&lt;/p&gt;
+        &lt;p&gt;(для GNOME, Cinnamon, COSMIC (Old) та Budgie середовищ робочого столу)&lt;/p&gt;
       &lt;/summary&gt;
 
-    - Open the GNOME Settings
-    - Go to the Online Accounts section and select your cloud drive service
+    - Відкрийте Налаштування GNOME
+    - Перейдіть до розділу Онлайн-акаунти та виберіть свій сервіс хмарного диска
 
       ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
     
   &lt;/details&gt;
+      
+        GNOME Online Accounts
+        (для GNOME, Cinnamon, COSMIC (Old) та Budgie середовищ робочого столу)
+      
+
+    - Відкрийте Налаштування GNOME
+    - Перейдіть до розділу Онлайн-акаунти та виберіть свій сервіс хмарного диска
+
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  
   </str>
 </root>
