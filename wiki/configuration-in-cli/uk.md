@@ -1,59 +1,52 @@
-## Saving configuration
+## Збереження конфігурації
 
-**This feature is available from version: `3.3`**
+**Ця функція доступна з версії: `3.3`**
 
-If you prefer command-line interface (CLI) before graphical user interface (GUI), SaveDesktop in addition to saving configuration in the GUI, allows you save configuration in the CLI.
+Якщо ви віддаєте перевагу командному рядку (CLI) перед графічним інтерфейсом (GUI), SaveDesktop, крім збереження конфігурації в GUI, дозволяє також зберігати конфігурацію через CLI.
 
-### So how to proceed?
+### Що робити далі?
+**1. Відкрийте термінал**
 
-**1. Open a terminal**
+Ви можете відкрити його з меню додатків або скористатися комбінацією клавіш Ctrl+Alt+T.
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+**2. Введіть команду**
 
-**2. Enter the command**
-
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
-
+Введіть наступну команду в терміналі:
+- Якщо у вас встановлений SaveDesktop як пакет Flatpak, використовуйте:
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --save-now
      ```
-
-- if you have SaveDesktop installed as a Snap or native package, use:
+- Якщо у вас встановлений SaveDesktop як пакет Snap або рідний пакет, використовуйте:
      ```
      savedesktop --save-now
      ```
 
-When using this method, it uses parameters from the GUI, specifically parameters from the periodic saving mode, such as filename format and selected folder for periodic saving files. You can save the configuration with this method whenever you want, regardless of the selected periodic saving interval.
+При використанні цього методу застосовуються параметри з GUI, зокрема параметри з режиму періодичного збереження, такі як формат імені файлу та вибрана папка для файлів періодичного збереження. Ви можете зберігати конфігурацію за допомогою цього методу в будь-який час, незалежно від вибраного інтервалу періодичного збереження.
 
-## Importing configuration
+## Імпорт конфігурації
 
-**This feature is available from version: `3.2.2`**
+**Ця функція доступна з версії: `3.2.2`**
 
-In addition to importing configuration in the GUI, SaveDesktop also allows you to import configuration in the command line interface (CLI), which you can use in case your desktop environment breaks.
+Окрім імпорту конфігурації через графічний інтерфейс (GUI), SaveDesktop також дозволяє імпортувати конфігурацію через командний рядок (CLI), що може бути корисно, якщо ваше середовище робочого столу зламається.
 
-### So how to proceed?
-**1. Open a terminal**
+### Що робити далі?
+**1. Відкрийте термінал**
 
-You can open it from the applications menu, or by using the Ctrl+Alt+T keyboard shortcut.
+Ви можете відкрити його з меню додатків або скористатися комбінацією клавіш Ctrl+Alt+T.
 
-**2. Enter the command**
+**2. Введіть команду**
 
-Enter the following command in the terminal:
-- if you have SaveDesktop installed as a Flatpak package, use the following:
-
+Введіть наступну команду в терміналі:
+- Якщо у вас встановлений SaveDesktop як пакет Flatpak, використовуйте:
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
      ```
-
-- if you have SaveDesktop installed as a Snap or native package, use: 
+- Якщо у вас встановлений SaveDesktop як пакет Snap або рідний пакет, використовуйте:
      ```
      savedesktop --import-config /path/to/filename.sd.tar.gz
      ```
 
-**Note**:
-- instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`
-
-
+**Примітка**:
+- Замість `/path/to/filename.sd.tar.gz` введіть шлях до архіву конфігурації, який ви хочете імпортувати, наприклад: `/home/user/Downloads/myconfig.sd.tar.gz`
 
 {% include footer.html %}
