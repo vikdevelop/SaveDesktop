@@ -1,55 +1,61 @@
 # Синхронізація між комп'ютерами в мережі
-## Requirements
-- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:
+#### Вимоги
+- Ви повинні створити папку, яка буде синхронізуватися з вашим хмарним сховищем на кожному комп'ютері, який ви хочете синхронізувати. Це можна зробити за допомогою:
 
   <details>
-    <summary><b>GNOME Online Accounts</b><p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p></summary>
+      <summary>
+        <b>GNOME Online Accounts</b>
+        <p>(для GNOME, Cinnamon, COSMIC (Old) та Budgie середовищ робочого столу)</p>
+      </summary>
 
-    - Open the GNOME Settings
-    - Go to the Online Accounts section and select your cloud drive service
+    - Відкрийте Налаштування GNOME
+    - Перейдіть до розділу Онлайн-акаунти та виберіть свій сервіс хмарного диска
 
       ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
     
   </details>
 
   <details>
-    <summary><b>Rclone</b><p>(for other desktop environments)</p></summary>
+      <summary>
+        <b>Rclone</b>
+        <p>(для інших середовищ робочого столу)</p>
+      </summary>
 
-    - Install Rclone
+    - Встановіть Rclone
       ```
       sudo -v ; curl https://rclone.org/install.sh | sudo bash
       ```
       
-    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+    - Налаштуйте Rclone за допомогою цієї команди, яка створює папку для хмарного диска, налаштовує Rclone та монтує папку:
       ```
       mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
       ```
-      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+      * Замість `your-cloud-drive-service` використовуйте назву вашого сервісу хмарного диска, наприклад, `drive` (для Google Drive), `onedrive`, `dropbox` тощо.
 
-    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+    - Дайте доступ до створеної папки у [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
   </details>
   
-## Setting up synchronization in the SaveDesktop app
-On the first computer:
-1. Open the SaveDesktop app
-2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
-3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
-4. If the periodic saving file does not exist, click on the Create button
+## Налаштування синхронізації у додатку SaveDesktop
+На першому комп'ютері:
+1. Відкрийте додаток SaveDesktop.
+2. На сторінці Синхронізація натисніть кнопку "Налаштувати файл синхронізації", а потім кнопку "Змінити".
+3. Натисніть "Періодичне збереження" і виберіть папку, що синхронізується з вашим хмарним сховищем, як папку для періодичного збереження.
+4. Якщо файл періодичного збереження не існує, натисніть кнопку "Створити"
 
-On the second computer:
-1. Open the SaveDesktop app
-2. Go to the Sync page and click the "Connect to the cloud storage" button.
-3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
-4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
+На другому комп'ютері:
+1. Відкрийте додаток SaveDesktop.
+2. Перейдіть на сторінку Синхронізація та натисніть кнопку "Підключитися до хмарного сховища".
+3. Натисніть кнопку "Вибрати папку хмарного диска" та виберіть папку, що синхронізується з тим же хмарним сховищем, що й на першому комп'ютері.
+4. Виберіть інтервал періодичної синхронізації, оскільки якщо ви залишите його на "Ніколи", синхронізація не буде працювати.
 
-To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
+Щоб налаштувати двосторонню синхронізацію, переконайтеся, що ви вибрали ту ж папку хмари в діалоговому вікні "Підключитися до хмарного сховища" на першому комп'ютері, вибрано інтервал періодичної синхронізації, і перемикач "Двостороння синхронізація" увімкнуто.
 
-### Periodic synchronization
-You can choose between the following options:
-- Daily
-- Weekly (synchronization takes place every Tuesday)
-- Monthly (synchronization takes place every second day in the month)
-- Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
-- Never (nothing's happening)
+### Періодична синхронізація
+Ви можете вибрати один з наступних варіантів:
+- Щодня
+- Щотижня (синхронізація відбувається кожного вівторка)
+- Щомісяця (синхронізація відбувається кожного другого дня місяця)
+- Вручну (можна синхронізувати конфігурацію через меню на панелі інструментів, натиснувши на три крапки)
+- Ніколи (нічого не відбувається)
 
 {% include footer.html %}
