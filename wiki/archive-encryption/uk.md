@@ -1,21 +1,19 @@
-# Archive encryption
-**This feature is available from version: 3.3**
+# Шифрування архіву
+**Ця функція доступна з версії: `3.3`**
 
-If you want to encrypt the configuration archive, whether for data protection reasons or something else, you can use the archive encryption feature in the SaveDesktop app. So, how does it work, and how to set it up?
+Якщо ви хочете зашифрувати архів конфігурації, будь то для захисту даних або з інших причин, ви можете скористатися функцією шифрування архівів у додатку SaveDesktop. Як це працює і як це налаштувати?
 
-## How does it work?
-If this feature is enabled, SaveDesktop will always ask you to create a password for your new archive of the configuration. The criteria for the password include at least 12 characters, one uppercase letter, one lowercase letter, and one special character. If the password doesn't meet these criteria, it will not be possible to continue saving configuration. 
+## Як це працює?
+Якщо ця функція увімкнена, SaveDesktop завжди буде запитувати вас створити пароль для нового архіву конфігурації. Критерії для пароля включають як мінімум 12 символів, одну велику літеру, одну малу літеру та один спеціальний символ. Якщо пароль не відповідає цим критеріям, збереження конфігурації не буде можливим. 
 
-The archive will be saved as a ZIP archive (because Tar doesn't support the password protection feature), and if you want to extract it, you will be asked to enter the password that you used in the saving configuration process. The same applies in the case of configuration import.
+Архів буде збережено у форматі ZIP (оскільки формат Tar не підтримує функцію захисту паролем), і якщо ви захочете його розпакувати, вам буде запропоновано ввести пароль, який ви використали під час збереження конфігурації. Те ж саме стосується імпорту конфігурації.
 
-If you forgot the password, it will not possible to extract the archive and use it in the importing configuration process.
+Якщо ви забудете пароль, ви не зможете розпакувати архів і використати його для процесу імпорту конфігурації.
 
 > [!WARNING]  
-> The periodic saving files are (so far) not available to protect with a password. Encrypted archives are, so far, not possible to use in synchronization.
+> Файли періодичного збереження (на даний момент) не доступні для захисту паролем. Зашифровані архіви наразі не можна використовувати для синхронізації.
 
-## How to set it up?
-In the 3.3 version, the interface has been slightly modified, specifically, periodic saving section is now located under the "More options" button. On the same place, is located archive encryption section. So click on the already mentioned button, and enable Archive encryption switch.
-
-
+## Як налаштувати?
+У версії 3.3 інтерфейс був дещо змінений: розділ періодичного збереження тепер знаходиться під кнопкою "Більше опцій". На тому ж місці розташований розділ шифрування архівів. Тому натисніть на вже згадану кнопку і увімкніть перемикач "Шифрування архіву".
 
 {% include footer.html %}
