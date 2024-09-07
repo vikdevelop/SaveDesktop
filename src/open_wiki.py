@@ -1,11 +1,6 @@
 #!/usr/bin/python3
-import locale
-import json
-import os
+import locale, json, os, subprocess
 from localization import *
-import subprocess
-    
-new_lang = p_lang.replace("_", "-")
 
 if "The requested URL returned error: 404" in subprocess.getoutput(f"curl --head --fail https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/translations/wiki/{r_lang}.xml"):
     pb_wiki = "https://vikdevelop.github.io/SaveDesktop/wiki/periodic-saving/en"
