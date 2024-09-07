@@ -1,4 +1,4 @@
-import os, json, gi, subprocess, zipfile, tarfile, argparse, shutil
+import os, json, gi, subprocess, zipfile, tarfile, argparse, shutil, argparse
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap, settings
 
