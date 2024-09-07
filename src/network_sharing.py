@@ -124,8 +124,7 @@ class Syncing:
         
     # Sync configuration
     def import_config(self):
-        from config import Import
-        Import()
+        os.system("python3 /app/config.py --import_")
         self.done()
 
     # Message about finished synchronization
