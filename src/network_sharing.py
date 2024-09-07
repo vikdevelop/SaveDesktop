@@ -3,15 +3,7 @@ from pathlib import Path
 from datetime import datetime
 from datetime import date
 from localization import _, CACHE, DATA, system_dir, home, settings
-import subprocess
-import os
-import locale
-import json
-import gi
-import socket
-import shutil
-import filecmp
-import tarfile
+import subprocess, os, locale, json, gi, socket, shutil, tarfile
 from gi.repository import Gio, GLib
 
 dt = datetime.now()
