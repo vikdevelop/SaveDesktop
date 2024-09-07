@@ -2,12 +2,6 @@ import os, json, gi, subprocess, zipfile, tarfile, argparse, shutil
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap, settings
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
-parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
-
-args = parser.parse_args()
-
 # check of user current desktop
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
     environment = 'GNOME'
@@ -295,8 +289,3 @@ class Import:
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
                 with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
                     fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
-        
-if args.save:
-    Save()
-elif args.import_:
-    Import()

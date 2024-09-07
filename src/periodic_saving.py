@@ -103,7 +103,8 @@ class PeriodicBackups:
         
         # Start saving the configuration
         os.chdir(f"{CACHE}/periodic_saving")
-        os.system(f"python3 {init_dir}/config.py --save")
+        from config import Save
+        Save()
 
         # Remove the file below after done saving configuration and start the self.config_saved() function
         os.system(f"rm {CACHE}/.periodicfile.json")
