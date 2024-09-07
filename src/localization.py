@@ -15,9 +15,11 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.4"
+v = "3.4-hotfix-1"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<ul>\
+rel_notes = "<p>3.4-hotfix-1</p>\
+<p>Fixed a bug with starting periodic saving and updated translations.</p>\
+<p>3.4</p><ul>\
 <li>Synchronisation has been redesigned from the ground up - instead of using URLs to synchronise between computers on the local network, a folder synchronised with cloud storage (using GNOME Online Accounts or Rclone) is used - find out more here: https://vikdevelop.github.io/SaveDesktop/wiki/synchronization/en</li>\
 <li>Added support for comparing installed Flatpak apps, which means that only apps that have not yet been installed on the system will be installed</li>\
 <li>Added option to generate password for configuration archive</li>\
