@@ -124,7 +124,7 @@ class Syncing:
         
     # Sync configuration
     def import_config(self):
-        from config import Import()
+        from config import Import
         Import()
         self.done()
 
