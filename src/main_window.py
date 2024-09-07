@@ -1581,7 +1581,7 @@ class MainWindow(Adw.ApplicationWindow):
         ]):
             print("Flatpak data exists.")
         else:
-            os.system(f"rm -rf {CACHE}/* {CACHE}/.*")
+            os.popen(f"rm -rf {CACHE}/* {CACHE}/.*")
 
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
@@ -1638,7 +1638,7 @@ class MyApp(Adw.Application):
         ]):
             print("Flatpak data exists." if "import_config" in path else "Saving Flatpak apps data in progress")
         else:
-            os.system(f"rm -rf {CACHE}/* {CACHE}/.*")
+            os.popen(f"rm -rf {CACHE}/* {CACHE}/.*")
         app.quit()
     
     # "About app" dialog
