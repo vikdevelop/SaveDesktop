@@ -1,13 +1,6 @@
-import os
-import json
-import gi
-import subprocess
-import zipfile
-import tarfile
+import os, json, gi, subprocess, zipfile, tarfile, argparse, shutil
 from gi.repository import GLib, Gio
-from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
-import argparse
-import shutil
+from localization import _, CACHE, DATA, home, system_dir, flatpak, snap, settings
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
@@ -42,10 +35,8 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
 else:
     from tty_environments import *
-    
-settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
-cache_replacing = f'{CACHE}'
-config = cache_replacing.replace("cache/tmp", "config/glib-2.0/settings")
+
+# Get disabled Flatpak apps data from GSettings
 flatpak_app_data = settings["disabled-flatpak-apps-data"]
 
 class Save:
