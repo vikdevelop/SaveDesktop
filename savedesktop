@@ -22,17 +22,13 @@ args = parser.parse_args()
 
 # Run Python scripts from the listed command-line arguments
 if args.background:
-    from periodic_saving import PeriodicBackups
-    pb = PeriodicBackups()
-    pb.run(None)
+    os.system(f"python3 {init_dir}/periodic_saving.py")
     exit()
 elif args.sync:
-    from network_sharing import Syncing
+    os.system(f"python3 {init_dir}/network_sharing.py")
     exit()
 elif args.save_now:
-    from periodic_saving import PeriodicBackups
-    pb = PeriodicBackups()
-    pb.run(now=True)
+    os.system(f"python3 {init_dir}/periodic_saving.py --now")
     exit()
 if args.import_config:
     file_path = args.import_config
@@ -52,8 +48,7 @@ if args.import_config:
         print("Unsupported file type. Use *.sd.tar.gz or *.sd.zip.")
         exit(1)
     
-    from config import Import
-    Import()
+    os.system(f"python3 {init_dir}/config.py --import_")
     exit()
 else:
     import main_window
