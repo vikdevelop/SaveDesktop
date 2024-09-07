@@ -118,6 +118,7 @@ class PeriodicBackups:
         os.system(f"rm -rf {CACHE}/periodic-saving/*")
         with open(f"{DATA}/periodic-saving.json", "w") as pb:
             pb.write('{\n "saving-date": "%s"\n}' % date.today())
+        os.system("rm saving_status")
         print("Configuration saved.")
         exit()
 
