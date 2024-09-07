@@ -856,10 +856,13 @@ class MainWindow(Adw.ApplicationWindow):
                     cmd = f"gio mount {cloud_service}://{user}@{host}" if not "onedrive" in cfile_subtitle else f"gio mount {cloud_service}://{host}"
                 else:
                     print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
-            elif "rclone" in subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle):
-                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}"
-            # set up the running the synchronization and periodic saving at start up
-            open(f"{DATA}/savedesktop-synchronization.sh", "w").write(f'#!/usr/bin/bash\n{cmd}\n{periodic_saving_cmd}\n{sync_cmd}\n' + 'python3 ~/.var/app/io.github.vikdevelop.SaveDesktop/data/install_flatpak_from_script.py' if flatpak else None)
+            else:
+                cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}"
+            synchronization_content = f'#!/usr/bin/bash\n{cmd}\n{periodic_saving_cmd}\n{sync_cmd}\n'
+            if flatpak:
+                synchronization_content += 'python3 ~/.var/app/io.github.vikdevelop.SaveDesktop/data/install_flatpak_from_script.py'
+            with open(f"{DATA}/savedesktop-synchronization.sh", "w") as f:
+                f.write(synchronization_content)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
     
@@ -1154,8 +1157,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Action after closing pswdDialog
         def pswdDialog_closed(w, response):
             if response == 'ok':
-                with open(f"{CACHE}/.pswd_temp", "w") as p:
-                    p.write(self.pswdEntry.get_text())
+                self.password = self.pswdEntry.get_text()
                 self.save_config()
 
         # Check the password to see if it meets the criteria
@@ -1212,12 +1214,6 @@ class MainWindow(Adw.ApplicationWindow):
     # Save configuration
     def save_config(self):
         self.please_wait_save()
-        if settings["enable-encryption"] == True:
-            with open(f"{CACHE}/.filedialog.json", "w") as w:
-                w.write('{\n "recent_file": "%s/%s.sd.zip"\n}' % (self.folder, self.filename_text))
-        else:
-            with open(f"{CACHE}/.filedialog.json", "w") as w:
-                w.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.folder, self.filename_text))
         if not os.path.exists(f"{CACHE}/save_config"):
             os.mkdir(f"{CACHE}/save_config")
         os.chdir(f"{CACHE}/save_config")
@@ -1229,10 +1225,13 @@ class MainWindow(Adw.ApplicationWindow):
         try:
             e_o = False
             os.system(f"python3 {system_dir}/config.py --save")
-            try:
+            if settings["enable-encryption"] == True:
+                os.system(f"zip -9 -P '{self.password}' cfg.sd.zip . -r -x 'saving_status'")
                 shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
-            except:
+            else:
+                os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
                 shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
+            print("Configuration saved successfully.")
         except Exception as e:
             e_o = True
             error = e
@@ -1243,6 +1242,7 @@ class MainWindow(Adw.ApplicationWindow):
         finally:
             if not e_o:
                 self.exporting_done()
+                os.system("rm saving_status")
             
     # "Please wait" information page on the "Save" page
     def please_wait_save(self):
@@ -1334,7 +1334,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.opensaveButton = Gtk.Button.new_with_label(_["open_folder"])
         self.opensaveButton.add_css_class('pill')
         self.opensaveButton.add_css_class('suggested-action')
-        self.opensaveButton.set_action_name('app.open-dir')
+        self.opensaveButton.connect("clicked", self.open_dir)
         self.opensaveButton.set_margin_start(170)
         self.opensaveButton.set_margin_end(170)
         self.savewaitBox.append(self.opensaveButton)
@@ -1349,7 +1349,6 @@ class MainWindow(Adw.ApplicationWindow):
         
         # remove content in the cache directory
         os.popen(f"rm -rf {CACHE}/save_config/")
-        os.popen(f"rm {CACHE}/.pswd_temp")
     
     # Import config from list
     def imp_cfg_from_list(self, w):
@@ -1426,6 +1425,7 @@ class MainWindow(Adw.ApplicationWindow):
                         except PermissionError as e:
                             print(f"Permission denied for {member.name}: {e}")
             os.system(f"python3 {system_dir}/config.py --import_")
+            print("Configuration imported successfully.")
         except Exception as e:
             e_o = True
             error = e
@@ -1557,13 +1557,31 @@ class MainWindow(Adw.ApplicationWindow):
     def show_warn_toast(self):
         self.warn_toast = Adw.Toast.new(title=_["periodic_saving_desc"])
         self.warn_toast.set_button_label(_["logout"])
-        self.warn_toast.set_action_name("app.logout")
+        self.warn_toast.connect("clicked", self.logout)
         self.toast_overlay.add_toast(self.warn_toast)
         
     # message that says where will be run a synchronization
     def show_special_toast(self):
         self.special_toast = Adw.Toast.new(title=_["m_sync_desc"])
         self.toast_overlay.add_toast(self.special_toast)
+        
+    # open directory with created configuration archive after clicking on the "Open the folder" button
+    def open_dir(self, w):
+        Gtk.FileLauncher.new(Gio.File.new_for_path(f"{self.folder}/{self.filename_text}.sd.tar.gz" if not settings["enable-encryption"] else f"{self.folder}/{self.filename_text}.sd.zip")).open_containing_folder()
+        
+    # log out of the system after clicking on the "Log Out" button
+    def logout(self, w):
+        if snap:
+            bus = dbus.SystemBus()
+            manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
+            manager.KillSession(manager.ListSessions()[0][0], 'all', 9)
+        else:
+            if os.getenv("XDG_CURRENT_DESKTOP") == 'XFCE':
+                os.system("dbus-send --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
+            elif os.getenv("XDG_CURRENT_DESKTOP") == 'KDE':
+                os.system("dbus-send --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int32:0 int32:0")
+            else:
+                os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
     # action after closing the main window
     def on_close(self, widget, *args):
@@ -1588,33 +1606,10 @@ class MyApp(Adw.Application):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, 
                          application_id="io.github.vikdevelop.SaveDesktop" if not snap else None)
         self.create_action('about', self.on_about_action, ["F1"])
-        self.create_action('open-dir', self.open_dir)
-        self.create_action('logout', self.logout)
         self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"] if settings["manually-sync"] else None)
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.connect('activate', self.on_activate)
-    
-    # open directory with created configuration archive after clicking on the "Open the folder" button
-    def open_dir(self, action, param):
-        with open(f"{CACHE}/.filedialog.json") as fd:
-            jf = json.load(fd)
-        path = jf["recent_file"]
-        Gtk.FileLauncher.new(Gio.File.new_for_path(path)).open_containing_folder()
-    
-    # log out of the system after clicking on the "Log Out" button
-    def logout(self, action, param):
-        if snap:
-            bus = dbus.SystemBus()
-            manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
-            manager.KillSession(manager.ListSessions()[0][0], 'all', 9)
-        else:
-            if os.getenv("XDG_CURRENT_DESKTOP") == 'XFCE':
-                os.system("dbus-send --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
-            elif os.getenv("XDG_CURRENT_DESKTOP") == 'KDE':
-                os.system("dbus-send --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int32:0 int32:0")
-            else:
-                os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
     # Synchronize configuation manually after clicking on the "Sync" button in the header bar menu
     def sync_pc(self, action, param):

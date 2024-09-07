@@ -1,6 +1,19 @@
-import os, json, gi, subprocess, zipfile, tarfile, argparse, shutil
+import os
+import json
+import gi
+import subprocess
+import zipfile
+import tarfile
 from gi.repository import GLib, Gio
-from localization import _, CACHE, DATA, home, system_dir, flatpak, snap, settings
+from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
+import argparse
+import shutil
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
+parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
+
+args = parser.parse_args()
 
 # check of user current desktop
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
@@ -29,8 +42,10 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
 else:
     from tty_environments import *
-
-# Get disabled Flatpak apps data from GSettings
+    
+settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
+cache_replacing = f'{CACHE}'
+config = cache_replacing.replace("cache/tmp", "config/glib-2.0/settings")
 flatpak_app_data = settings["disabled-flatpak-apps-data"]
 
 class Save:
@@ -133,28 +148,6 @@ class Save:
         elif environment == 'Deepin':
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
-        print("creating configuration archive")
-        if os.path.exists(f"{CACHE}/.filedialog.json"):
-            if settings["enable-encryption"] == True:
-                password = subprocess.getoutput(f"cat {CACHE}/.pswd_temp")
-                os.system(f"zip -9 -P '{password}' cfg.sd.zip . -r -x 'saving_status'")
-                print("moving the configuration archive to the user-defined directory")
-            else:
-                os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
-                print("moving the configuration archive to the user-defined directory")
-        elif os.path.exists(f"{CACHE}/.periodicfile.json"):
-            os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
-            print("moving the configuration archive to the user-defined directory")
-            with open(f"{CACHE}/.periodicfile.json") as j:
-                j = json.load(j)
-            shutil.copyfile('cfg.sd.tar.gz', j['recent_file'])
-            if not settings["periodic-import"] == "Never2":
-                if "fuse" in subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\""):
-                    os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file") and os.remove(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file")
-                    with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
-                        pf.write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
-        print("THE CONFIGURATION HAS BEEN SAVED SUCCESSFULLY!")
-        os.system("rm saving_status")
     
     # save Flatpak apps data
     def save_flatpak_data(self):
@@ -278,7 +271,6 @@ class Import:
         if flatpak:
             self.create_flatpak_desktop()
         os.system(f"echo > {CACHE}/import_config/done")
-        print("THE CONFIGURATION HAS BEEN IMPORTED SUCCESSFULLY!")
             
     # Create desktop file for install Flatpaks from list
     def create_flatpak_desktop(self):
@@ -289,3 +281,9 @@ class Import:
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
                 with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
                     fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
+        
+if args.save:
+    Save()
+elif args.import_:
+    Import()
+

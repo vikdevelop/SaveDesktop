@@ -1,4 +1,4 @@
-import argparse, json, os, gi
+import argparse, json, os, gi, shutil
 from datetime import datetime
 from datetime import date
 from pathlib import Path
@@ -96,18 +96,21 @@ class PeriodicBackups:
             filename = old_filename.replace(" ", "_")
         else:
             filename = settings["filename-format"]
-
-        # Write path to the periodic saving file to the file below
-        with open(f"{CACHE}/.periodicfile.json", "w") as p:
-            p.write('{\n "recent_file": "%s/%s.sd.tar.gz"\n}' % (self.pbfolder, filename))
         
         # Start saving the configuration
         os.chdir(f"{CACHE}/periodic_saving")
-        from config import Save
-        Save()
-
-        # Remove the file below after done saving configuration and start the self.config_saved() function
-        os.system(f"rm {CACHE}/.periodicfile.json")
+        os.system(f"python3 {system_dir}/config.py --save")
+        
+        if os.path.exists(f"{CACHE}/.periodicfile.json"):
+            os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
+            print("moving the configuration archive to the user-defined directory")
+            shutil.copyfile('cfg.sd.tar.gz', f'{self.pbfolder}/{filename}.sd.tar.gz')
+            if not settings["periodic-import"] == "Never2":
+                if "fuse" in subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\""):
+                    os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file") and os.remove(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file")
+                    with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
+                        pf.write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
+        
         self.config_saved()
 
     # Message about saved config
