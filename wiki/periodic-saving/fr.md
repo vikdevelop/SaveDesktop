@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Sauvegardes régulière
 En plus des sauvegardes manuelles, SaveDesktop vous permets aussi de sauvegarder la configuration de votre bureau de façon périodique. Vous pouvez choisir parmi les options suivantes:
 - **Daily**: 

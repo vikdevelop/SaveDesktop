@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Pravidelné ukládání
 Kromě ručního ukládání umožňuje SaveDesktop také pravidelné ukládání konfigurace desktopového prostředí. Můžete si vybrat z následujících možností:
 - **Denně**: 

@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # नेटवर्क में कंप्यूटरों के बीच समन्वयन
 ## Requirements
 - You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:

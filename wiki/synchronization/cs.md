@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Synchronizace mezi počítači v síti
 #### Požadavky
 - Na každém počítači, který chcete synchronizovat, musíte mít vytvořenou složku, která se bude synchronizovat s cloudovým úložištěm. To lze provést pomocí:

@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Periodiek opslaan
 In addition to manual saves, SaveDesktop also allows you to save your desktop configuration periodically. You can choose from the following options:
 - **Daily**: 

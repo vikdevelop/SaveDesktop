@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Időszakos mentés
 A manuális mentések mellett, a SaveDesktop lehetővé teszi, hogy időszakosan elmentsd a számítógéped beállításait. A következő lehetőségek közül választhatsz:
 - **Naponta**: 

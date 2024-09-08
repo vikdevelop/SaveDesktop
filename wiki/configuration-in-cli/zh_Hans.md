@@ -1,3 +1,5 @@
+{% include head.html %}
+
 ## Saving configuration
 
 **自`3.3`版本起，该功能已实现。**

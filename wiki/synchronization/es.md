@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Sincronización entre ordenadores de la red
 #### Requisitos
 - Debes tener una carpeta creada que se sincronice con tu almacenamiento en la nube en cada ordenador que quieras sincronizar. Esto se puede hacer usando:

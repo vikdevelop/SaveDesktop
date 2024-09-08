@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Salvamento Periódico
 Além dos salvamentos manuais, o SaveDesktop também permite que você salve sua configuração de desktop periodicamente. Você pode escolher entre as seguintes opções:
 - **Diariamente**: 

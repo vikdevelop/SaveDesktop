@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Sincronizzazione tra computer in rete
 #### Requisiti
 - È necessario che sia stata creata una cartella da sincronizzare con l'archivio cloud su ciascun computer che si desidera sincronizzare. Questo può essere fatto utilizzando:

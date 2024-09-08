@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Encriptação de arquivo
 **Essa funcionalidade está disponível a partir da versão: `3.3`**
 

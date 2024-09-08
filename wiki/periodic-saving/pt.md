@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Guardar Periodicamente
 Além de guardar manualmente,o  SaveDesktop permite-te também guardares a tua configuração de desktop periodicamente. Podes escolher uma das seguintes opções:
 - **Diariamente**: 

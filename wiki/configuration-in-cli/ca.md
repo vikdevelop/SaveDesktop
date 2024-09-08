@@ -1,3 +1,5 @@
+{% include head.html %}
+
 ## Desant la configuració
 
 **Aquesta característica és disponible des de la versió: `3.3`**

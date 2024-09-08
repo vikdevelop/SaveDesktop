@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Guardado automático
 Además de los guardados manuales, SaveDesktop también le permite guardar regularmente la configuración de su escritorio. Puede elegir entre las siguientes opciones:
 - **Diariamente**: 

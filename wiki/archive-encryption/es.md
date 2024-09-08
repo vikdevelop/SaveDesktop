@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Cifrado de archivos
 **Esta función está disponible a partir de la versión: 3.3**
 

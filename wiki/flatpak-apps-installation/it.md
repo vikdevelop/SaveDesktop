@@ -1,3 +1,5 @@
+{% include head.html %}
+
 # Salva le app Flatpak installate e installale dall'elenco
 Dalla versione 2.5, SaveDesktop consente di salvare le applicazioni Flatpak installate e installarle da un elenco. Quindi, come funziona?
 

@@ -1,3 +1,5 @@
+{% include head.html %}
+
 ## Guardando la configuración
 
 **Esta función está disponible a partir de la versión: `3.3`**
