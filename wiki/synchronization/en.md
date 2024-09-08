@@ -5,9 +5,10 @@
 - You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:
 
   <details>
-    <summary><b>GNOME Online Accounts</b><p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p></summary>
+    <summary><b>GNOME Online Accounts</b> (for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</summary>
 
     - Open the GNOME Settings
+    
     - Go to the Online Accounts section and select your cloud drive service
 
       ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
@@ -15,7 +16,7 @@
   </details>
 
   <details>
-    <summary><b>Rclone</b><p>(for other desktop environments)</p></summary>
+    <summary><b>Rclone</b> (for other desktop environments)</summary>
 
     - Install Rclone
       ```
@@ -29,6 +30,7 @@
       * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
 
     - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+    
   </details>
   
 ## Setting up synchronization in the SaveDesktop app
