@@ -106,9 +106,7 @@
       ```
       * Замість `your-cloud-drive-service` використовуйте назву вашого сервісу хмарного диска, наприклад, `drive` (для Google Drive), `onedrive`, `dropbox` тощо.
 
-    - Дайте доступ до створеної папки у [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
-  
-  </str>
+    - Дайте доступ до створеної папки у [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).</str>
   <str key="set_up_second_computer">На другому комп'ютері:
 1. Відкрийте додаток SaveDesktop.
 2. Перейдіть на сторінку Синхронізація та натисніть кнопку "Підключитися до хмарного сховища".
@@ -137,8 +135,5 @@
     - Відкрийте Налаштування GNOME
     - Перейдіть до розділу Онлайн-акаунти та виберіть свій сервіс хмарного диска
 
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
-    
-  
-  </str>
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)</str>
 </root>
