@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # 保存已安装的Flatpak应用并通过列表进行安装
 自2.5版本以后，SaveDesktop允许您保存已安装的Flatpak应用，并支持通过列表安装Flatpak应用。那么它是如何工作的呢？

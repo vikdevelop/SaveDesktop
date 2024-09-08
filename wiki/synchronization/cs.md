@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Synchronizace mezi počítači v síti
 #### Požadavky

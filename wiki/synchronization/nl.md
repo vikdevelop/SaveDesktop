@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Synchronization between computers in the network
 ## Requirements

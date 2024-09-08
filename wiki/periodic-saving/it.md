@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Salvataggio periodico
 Oltre ai salvataggi manuali, SaveDesktop consente anche di salvare periodicamente la configurazione del desktop. Puoi scegliere tra le seguenti opzioni:

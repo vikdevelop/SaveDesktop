@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Xifrat del fitxer
 **Aquesta característica és disponible des de la versió: 3.3**

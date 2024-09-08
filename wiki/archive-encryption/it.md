@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Cifratura dell'archivio
 **Questa funzionalità è disponibile dalla versione: 3.3**

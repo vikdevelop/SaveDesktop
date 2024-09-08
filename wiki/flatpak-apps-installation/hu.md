@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Telepített Flatpak alkalmazások mentése és listából telepítése
 A 2.5-ös verzió óta a SaveDesktop lehetővé teszi a telepített Flatpak alkalmazások mentését és a listából történő telepítését. Hogyan is működik?

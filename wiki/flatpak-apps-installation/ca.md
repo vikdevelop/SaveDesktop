@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Desa el programari Flatpak per ser instal·lat des d'una llista
 Des de la versió 2.5, el SaveDesktop us permet desar el programari Flatpak existent i instal·lar-ho des d'una llista. Com funciona això?

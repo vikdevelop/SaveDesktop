@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Desament automàtic
 A més de les còpies manuals, el SaveDesktop també us permet automatitzar aquest procés. Podeu triar entre aquestes opcions disponibles:

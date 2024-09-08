@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # नेटवर्क में कंप्यूटरों के बीच समन्वयन
 ## Requirements

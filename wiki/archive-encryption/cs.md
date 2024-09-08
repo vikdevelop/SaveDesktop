@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Šifrování archivu
 **Tato funkce je k dispozici od verze: 3.3**

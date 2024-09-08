@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Archive encryption
 **This feature is available from version: 3.3**

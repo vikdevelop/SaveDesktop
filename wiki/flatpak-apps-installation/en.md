@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Save installed Flatpak apps and install them from list
 Since version 2.5, SaveDesktop allows you to save installed Flatpak applications and install them from a list. So how does it work?

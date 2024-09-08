@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Sincronizzazione tra computer in rete
 #### Requisiti

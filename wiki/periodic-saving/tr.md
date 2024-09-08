@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Periyodik kaydetme
 Manuel kaydetmeye ek olarak SaveDesktop, masaüstü yapılandırmanızı düzenli aralıklarla kaydetmenize de olanak tanır. Aşağıdaki seçenekler arasından seçim yapabilirsiniz:

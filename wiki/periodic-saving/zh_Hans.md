@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # 定期保存
 除了手动保存，SaveDesktop也允许您定期保存桌面环境配置。您可从以下选项中进行选择：

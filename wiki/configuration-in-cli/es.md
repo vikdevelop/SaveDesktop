@@ -1,4 +1,3 @@
-{% include head.html %}
 
 ## Guardando la configuración
 

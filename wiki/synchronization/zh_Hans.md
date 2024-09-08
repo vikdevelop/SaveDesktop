@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # 通过网络在不同计算机中同步
 ## Requirements

@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Azonos hálózaton lévő számítógépek szinkronizálása
 ## Requirements

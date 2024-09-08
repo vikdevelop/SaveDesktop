@@ -1,4 +1,3 @@
-{% include head.html %}
 
 # Uložit nainstalované aplikace Flatpak a nainstalovat je ze seznamu
 Od verze 2.5 umožňuje SaveDesktop ukládat nainstalované aplikace Flatpak a instalovat je ze seznamu. Jak to tedy funguje?
