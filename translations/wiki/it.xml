@@ -105,9 +105,7 @@ mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service 
 ```
 * Invece di `your-cloud-drive-service` usa il nome del tuo servizio cloud drive, come `drive` (per Google Drive), `onedrive`, `dropbox`, ecc.
 
-- Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).
-  
-  </str>
+- Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).</str>
   <str key="set_up_second_computer">Sul secondo computer:
 1. Apri l'app SaveDesktop
 2. Vai alla pagina Sincronizzazione e clicca sul pulsante "Connetti allo storage cloud".
@@ -135,8 +133,5 @@ Account online GNOME
 - Apri le Impostazioni GNOME
 - Vai alla sezione Account online e seleziona il tuo servizio di cloud storage
 
-![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
-    
-  
-  </str>
+![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)</str>
 </root>
