@@ -1,1 +1,0 @@
-remote_theme: jekyll-theme-chirpy
