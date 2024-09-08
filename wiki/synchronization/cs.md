@@ -2,38 +2,27 @@
 # Synchronizace mezi počítači v síti
 #### Požadavky
 - Na každém počítači, který chcete synchronizovat, musíte mít vytvořenou složku, která se bude synchronizovat s cloudovým úložištěm. To lze provést pomocí:
-
+  
   <details>
-      <summary>
-        <b>Online účty GNOME</b>
-        <p>(pro prostředí GNOME, Cinnamon, COSMIC (Old) a Budgie)</p>
-      </summary>
-
-    - Otevřete Nastavení prostředí GNOME
-    - Přejděte do části Online účty a vyberte službu cloudového disku.
-
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)
+    <summary><b>Online účty GNOME</b><p>(pro prostředí GNOME, Cinnamon, COSMIC (Old) a Budgie)</p></summary>
+    <ul>
+      <li>Otevřete Nastavení prostředí GNOME</li>
+      <li>Přejděte do části Online účty a vyberte službu cloudového disku</li>
+    </ul>
+    <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
     
   </details>
 
   <details>
-      <summary>
-        <b>Rclone</b>
-        <p>(pro jiná desktopová prostředí)</p>
-      </summary>
-
-    - Nainstalujte Rclone
-      ```
-      sudo -v ; curl https://rclone.org/install.sh | sudo bash
-      ```
-      
-    - Nastavte Rclone pomocí tohoto příkazu, který vytvoří složku cloudové jednotky, nastaví Rclone a připojí složku
-      ```
-      mkdir -p ~/drive && rclone config create drive your-cloud-drive-service && nohup rclone mount drive: ~/drive --vfs-cache-mode writes & echo „Disk byl úspěšně připojen“
-      ```
-      * Namísto `your-cloud-drive-service` použijte název služby cloudového disku, například `drive` (pro Google Drive), `onedrive`, `dropbox` atd.
-
-    - Povolte přístup k vytvořené složce v aplikaci [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).
+    <summary><b>Rclone</b><p>(pro jiná desktopová prostředí)</p></summary>
+    <ul>
+      <li>Nainstalujte Rclone</li>
+      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
+      <li>Nastavte Rclone pomocí tohoto příkazu, který vytvoří složku cloudové jednotky, nastaví Rclone a připojí složku
+      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
+      <p>* Namísto `your-cloud-drive-service` použijte název služby cloudového disku, například `drive` (pro Google Drive), `onedrive`, `dropbox` atd.</p></li>
+      <li>Povolte přístup k vytvořené složce v aplikaci [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).</li>
+    </ul>
   </details>
   
 ## Nastavení synchronizace v aplikaci SaveDesktop

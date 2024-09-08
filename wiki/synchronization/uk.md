@@ -2,38 +2,27 @@
 # Синхронізація між комп'ютерами в мережі
 #### Вимоги
 - Ви повинні створити папку, яка буде синхронізуватися з вашим хмарним сховищем на кожному комп'ютері, який ви хочете синхронізувати. Це можна зробити за допомогою:
-
+  
   <details>
-      <summary>
-        <b>GNOME Online Accounts</b>
-        <p>(для GNOME, Cinnamon, COSMIC (Old) та Budgie середовищ робочого столу)</p>
-      </summary>
-
-    - Відкрийте Налаштування GNOME
-    - Перейдіть до розділу Онлайн-акаунти та виберіть свій сервіс хмарного диска
-
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    <summary><b>GNOME Online Accounts</b><p>(для GNOME, Cinnamon, COSMIC (Old) та Budgie середовищ робочого столу)</p></summary>
+    <ul>
+      <li>Відкрийте Налаштування GNOME</li>
+      <li>Перейдіть до розділу Онлайн-акаунти та виберіть свій сервіс хмарного диска</li>
+    </ul>
+    <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
     
   </details>
 
   <details>
-      <summary>
-        <b>Rclone</b>
-        <p>(для інших середовищ робочого столу)</p>
-      </summary>
-
-    - Встановіть Rclone
-      ```
-      sudo -v ; curl https://rclone.org/install.sh | sudo bash
-      ```
-      
-    - Налаштуйте Rclone за допомогою цієї команди, яка створює папку для хмарного диска, налаштовує Rclone та монтує папку:
-      ```
-      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
-      ```
-      * Замість `your-cloud-drive-service` використовуйте назву вашого сервісу хмарного диска, наприклад, `drive` (для Google Drive), `onedrive`, `dropbox` тощо.
-
-    - Дайте доступ до створеної папки у [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+    <summary><b>Rclone</b><p>(для інших середовищ робочого столу)</p></summary>
+    <ul>
+      <li>Встановіть Rclone</li>
+      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
+      <li>Налаштуйте Rclone за допомогою цієї команди, яка створює папку для хмарного диска, налаштовує Rclone та монтує папку:
+      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
+      <p>* Замість `your-cloud-drive-service` використовуйте назву вашого сервісу хмарного диска, наприклад, `drive` (для Google Drive), `onedrive`, `dropbox` тощо.</p></li>
+      <li>Дайте доступ до створеної папки у [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).</li>
+    </ul>
   </details>
   
 ## Налаштування синхронізації у додатку SaveDesktop

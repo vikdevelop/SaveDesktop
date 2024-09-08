@@ -2,41 +2,28 @@
 # Sincronizzazione tra computer in rete
 #### Requisiti
 - È necessario che sia stata creata una cartella da sincronizzare con l'archivio cloud su ciascun computer che si desidera sincronizzare. Questo può essere fatto utilizzando:
-
+    
   <details>
-    <summary>
-    <b>Account online GNOME</b>
-    <p>(per gli ambienti desktop GNOME, Cinnamon, COSMIC (vecchio) e Budgie)</p>
-    </summary>
-
-    - Apri le Impostazioni GNOME
-    - Vai alla sezione Account online e seleziona il tuo servizio di cloud storage
-
-    ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)
-
+    <summary><b>Account online GNOME</b><p>(per gli ambienti desktop GNOME, Cinnamon, COSMIC (vecchio) e Budgie)</p></summary>
+    <ul>
+      <li>Apri le Impostazioni GNOME</li>
+      <li>Vai alla sezione Account online e seleziona il tuo servizio di cloud storage</li>
+    </ul>
+    <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
+    
   </details>
 
-
   <details>
-    <summary>
-    <b>Rclone</b>
-    <p>(per altri ambienti desktop)</p>
-    </summary>
-
-    - Installa Rclone
-    ```
-    sudo -v ; curl https://rclone.org/install.sh | sudo bash
-    ```
-
-    - Imposta Rclone usando questo comando, che crea la cartella cloud drive, imposta Rclone e monta la cartella
-    ```
-    mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "L'unità è stata montata correttamente"
-    ```
-    * Invece di `your-cloud-drive-service` usa il nome del tuo servizio cloud drive, come `drive` (per Google Drive), `onedrive`, `dropbox`, ecc.
-
-    - Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).
-    </details>
-
+    <summary><b>Rclone</b><p>(per altri ambienti desktop)</p></summary>
+    <ul>
+      <li>Installa Rclone</li>
+      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
+      <li>Imposta Rclone usando questo comando, che crea la cartella cloud drive, imposta Rclone e monta la cartella
+      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "L'unità è stata montata correttamente"</code></pre>
+      <p>* Invece di `your-cloud-drive-service` usa il nome del tuo servizio cloud drive, come `drive` (per Google Drive), `onedrive`, `dropbox`, ecc.</p></li>
+      <li>Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).</li>
+    </ul>
+  </details>
   
 ## Impostazione della sincronizzazione nell'app SaveDesktop
 Sul primo computer:
