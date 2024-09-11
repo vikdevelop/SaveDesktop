@@ -70,41 +70,16 @@ En la primera computadora:
 3. Haga clic en "Guardar periódicamente" y seleccione la carpeta que se sincroniza con su almacenamiento en la nube como una carpeta de ahorro periódico
 4. Si el archivo de guardado periódico no existe, haga clic en el botón Crear</str>
   <str key="rclone">&lt;details&gt;
-      &lt;summary&gt;
-        &lt;b&gt;Rclone&lt;/b&gt;
-        &lt;p&gt;(para otros entornos de escritorio)&lt;/p&gt;
-      &lt;/summary&gt;
-
-    - Instalar Rclone
-      ```
-      sudo -v ; curl https://rclone.org/install.sh | sudo bash
-      ```
-      
-    - Configurar Rclone usando este comando, que crea la carpeta de la unidad de la nube, configura Rclone y monta la carpeta
-      ```
-      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode escribe &amp; echo "La unidad ha sido montada correctamente"
-      ```
-      * En lugar de `your-cloud-drive-service` use el nombre de su servicio de disco en la nube, como `drive` (para Google Drive), `onedrive`, `dropbox`, etc.
-
-    - Permitir el acceso a la carpeta creada en la [aplicación Flatseal] (https://flathub.org/apps/com.github.tchx84.Flatseal).
-  &lt;/details&gt;
-      
-        Rclone
-        (for other desktop environments)
-      
-
-    - Install Rclone
-      ```
-      sudo -v ; curl https://rclone.org/install.sh | sudo bash
-      ```
-      
-    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
-      ```
-      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
-      ```
-      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
-
-    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).<details>
+    &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(para otros entornos de escritorio)&lt;/p&gt;&lt;/summary&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Instalar Rclone&lt;/li&gt;
+      &lt;pre&gt;&lt;code&gt;sudo -v ; curl https://rclone.org/install.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
+      &lt;li&gt;Configure Rclone utilizando este comando, que crea la carpeta de la unidad en la nube, configura Rclone y monta la carpeta
+      &lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "The drive has been mounted successfully"&lt;/code&gt;&lt;/pre&gt;
+      &lt;p&gt;* En lugar de `your-cloud-drive-service` utilice el nombre de tu servicio de disco en la nube, por ejemplo `drive` (for Google Drive), `onedrive`, `dropbox`, etc.&lt;/p&gt;&lt;/li&gt;
+      Permitir el acceso a la carpeta creada en [Aplicación Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/details&gt;<details>
       <summary>
         <b>Rclone</b>
         <p>(for other desktop environments)</p>
@@ -133,26 +108,14 @@ En la primera computadora:
 Para configurar la sincronización bidireccional, asegúrate de tener seleccionada la misma carpeta en la nube en el cuadro de diálogo "Conectar con el almacenamiento en la nube" en el primer ordenador, el intervalo de sincronización periódica seleccionado y el interruptor de "Sincronización bidireccional" activado.
 </str>
   <str key="gnome_online_accounts">&lt;details&gt;
-      &lt;summary&gt;
-        &lt;b&gt;Cuentas en línea de GNOME&lt;/b&gt;
-        &lt;p&gt;(para entornos de escritorio GNOME, Cinnamon, COSMIC (antiguo) y Budgie)&lt;/p&gt;
-      &lt;/summary&gt;
-
-    - Abrir la configuración de GNOME
-    - Vaya a la sección Cuentas en línea y seleccione su servicio de unidad en la nube
-
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)
+    &lt;summary&gt;&lt;b&gt;Cuentas en línea de GNOME&lt;/b&gt; &lt;p&gt;(para entornos de escritorio GNOME, Cinnamon, COSMIC (antiguo) y Budgie)&lt;/p&gt;&lt;/summary&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Abra la configuración de GNOME&lt;/li&gt;
+      &lt;li&gt;Vaya a la sección Cuentas en línea y seleccione su servicio de unidad en la nube&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png"&gt;
     
-  &lt;/details&gt;
-      
-        GNOME Online Accounts
-        (for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)
-      
-
-    - Open the GNOME Settings
-    - Go to the Online Accounts section and select your cloud drive service
-
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)<details>
+  &lt;/details&gt;<details>
       <summary>
         <b>GNOME Online Accounts</b>
         <p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p>
