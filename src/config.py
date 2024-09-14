@@ -156,10 +156,10 @@ class Save:
         blacklist = blst
         
         # set destination dir
-        if os.path.exists(f"{CACHE}/.periodicfile.json"):
+        if os.path.exists(f"{CACHE}/periodic_saving/saving_status"):
             os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
             destdir = f"{CACHE}/periodic_saving/app"
-        elif os.path.exists(f"{CACHE}/.filedialog.json"):
+        else:
             os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
             destdir = f"{CACHE}/save_config/app"
         
@@ -286,4 +286,3 @@ if args.save:
     Save()
 elif args.import_:
     Import()
-
