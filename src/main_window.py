@@ -1458,7 +1458,10 @@ class MainWindow(Adw.ApplicationWindow):
         try:
             self.toolbarview.remove(self.headerbar_list)
         except:
-            self.toolbarview.remove(self.headerbar)
+            try:
+                self.toolbarview.remove(self.headerbar)
+            except:
+                pass
 
         # Create box widget for this page
         self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -1532,9 +1535,9 @@ class MainWindow(Adw.ApplicationWindow):
         self.logoutButton = Gtk.Button.new_with_label(_["logout"])
         self.logoutButton.add_css_class('pill')
         self.logoutButton.add_css_class('suggested-action')
-        self.logoutButton.set_action_name('app.logout')
         self.logoutButton.set_margin_start(170)
         self.logoutButton.set_margin_end(170)
+        self.logoutButton.connect("clicked", self.logout)
         self.importwaitBox.append(self.logoutButton)
 
         # create button for backing to the previous page
@@ -1576,10 +1579,12 @@ class MainWindow(Adw.ApplicationWindow):
             manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
             manager.KillSession(manager.ListSessions()[0][0], 'all', 9)
         else:
-            if os.getenv("XDG_CURRENT_DESKTOP") == 'XFCE':
-                os.system("dbus-send --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
-            elif os.getenv("XDG_CURRENT_DESKTOP") == 'KDE':
-                os.system("dbus-send --dest=org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout int32:0 int32:0 int32:0")
+            if self.environment == 'Xfce':
+                os.system("dbus-send --print-reply --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
+            elif self.environment == 'KDE Plasma':
+                os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
+            elif self.environment == 'COSMIC (New)':
+                os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
