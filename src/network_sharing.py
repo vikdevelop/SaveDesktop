@@ -113,14 +113,6 @@ class Syncing:
         if settings["bidirectional-sync"] == True:
             settings["filename-format"] = info["filename"]
             settings["periodic-saving"] = info["periodic-saving-interval"]
-            if not settings["file-for-syncing"]:
-                if not os.path.exists(info["periodic-saving-folder"]) and "gvfs" in info["periodic-saving-folder"]:
-                    uid = os.getuid() # get user ID
-                    periodic_saving_folder = re.sub(r'user/\d+/', f'user/{uid}/', periodic_saving_folder)
-                else:
-                    periodic_saving_folder = info["periodic-saving-folder"]
-                settings["file-for-syncing"] = periodic_saving_folder
-            settings["periodic-saving-folder"] = settings["file-for-syncing"]
         
     # Sync configuration
     def import_config(self):
