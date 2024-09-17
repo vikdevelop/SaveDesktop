@@ -2,7 +2,6 @@
 import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
-from urllib.request import urlopen
 from datetime import date
 from pathlib import Path
 from threading import Thread
@@ -482,7 +481,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.statusPage_i.set_icon_name("document-open-symbolic")
         self.statusPage_i.set_title(_['import_config'])
         self.statusPage_i.set_description(_["import_config_desc"])
-        #self.statusPage_i.set_child(self.syncingBox)
         self.importBox.append(self.statusPage_i)
         
         # Box of Import from file and Import from list buttons
@@ -515,7 +513,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.statusPage.set_icon_name("emblem-synchronizing-symbolic")
         self.statusPage.set_title(_["sync_title"])
         self.statusPage.set_description(f'{_["sync_desc"]} <a href="{sync_wiki}">{_["learn_more"]}</a>')
-        #self.statusPage.set_child(self.syncingBox)
         self.syncingBox.append(self.statusPage)
 
         # "Set up the sync file" button
@@ -556,6 +553,7 @@ class MainWindow(Adw.ApplicationWindow):
             except Exception as e:
                 e_o = True
                 subprocess.run(['notify-send', _["err_occured"], f'{e}'])
+                self.file_row.set_subtitle(f'{e}')
             finally:
                 if not e_o:
                     self.file_row.remove(self.setupButton)
@@ -568,6 +566,10 @@ class MainWindow(Adw.ApplicationWindow):
             self.setupButton.set_sensitive(False)
             pb_thread = Thread(target=save_now)
             pb_thread.start()
+            
+        # Refer to the article about synchronization
+        def open_sync_link(w):
+            os.system(f"xdg-open {sync_wiki}")
         
         def update_gui():
             global folder, path, check_filesystem
@@ -591,6 +593,12 @@ class MainWindow(Adw.ApplicationWindow):
                 self.setupButton.add_css_class("suggested-action")
                 self.setupButton.connect("clicked", make_pb_file)
                 self.file_row.add_suffix(self.setupButton)
+            if _["cloud_folder_err"] in folder:
+                self.lmButton = Gtk.Button.new_with_label(_["learn_more"])
+                self.lmButton.set_valign(Gtk.Align.CENTER)
+                self.lmButton.add_css_class("suggested-action")
+                self.lmButton.connect("clicked", open_sync_link)
+                self.file_row.add_suffix(self.lmButton)
         
         # Check the file system of the periodic saving folder and their existation
         def check_filesystem_fnc():
@@ -627,7 +635,7 @@ class MainWindow(Adw.ApplicationWindow):
                 thread.start()
             else:
                 self.open_setdialog_tf = False
-
+        
         # self.setDialog
         self.setDialog = Adw.MessageDialog.new(self)
         self.setDialog.set_heading(_["set_up_sync_file"])
@@ -640,6 +648,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.l_setdBox.get_style_context().add_class('boxed-list')
         self.setDialog.set_extra_child(self.l_setdBox)
         
+        # Check the synchronization matters
         check_thread = Thread(target=check_filesystem_fnc)
         check_thread.start()
         
@@ -665,9 +674,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.setDialog.add_response('ok', _["apply"])
         self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.setDialog.connect('response', setDialog_closed)
-
         self.setDialog.show()
-
+        
     # URL Dialog (action after clicking on the "Connect with other computer" button)
     def open_urlDialog(self, w):
         self.urlDialog_fnc()
@@ -1353,12 +1361,8 @@ class MainWindow(Adw.ApplicationWindow):
     # Import config from list
     def imp_cfg_from_list(self, w):
         self.import_file = f"{self.dir}/{self.radio_row.get_selected_item().get_string()}"
-        if not os.path.exists(f"{CACHE}/import_from_list"):
-            os.mkdir(f"{CACHE}/import_from_list")
-        os.chdir(f"{CACHE}/import_from_list")
         self.please_wait_import()
-        import_thread = Thread(target=self.start_importing)
-        import_thread.start()
+        self.import_config()
      
     # dialog for entering password of the archive
     def check_password_dialog(self):
@@ -1631,6 +1635,9 @@ class MyApp(Adw.Application):
     
     # Action after closing the application using Ctrl+Q keyboard shortcut
     def app_quit(self, action, param):
+        settings["window-size"] = self.win.get_default_size()
+        settings["maximized"] = self.win.is_maximized()
+        settings["filename"] = self.win.saveEntry.get_text()
         if any(os.path.exists(f"{CACHE}/{path}") for path in [
             "import_config/copying_flatpak_data",
             "syncing/copying_flatpak_data",
@@ -1651,6 +1658,7 @@ class MyApp(Adw.Application):
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://vikdevelop.github.io/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
+        dialog.add_link("Flathub Beta", "https://github.com/vikdevelop/savedesktop?tab=readme-ov-file#1-flathub-beta") if flatpak else dialog.add_link("Snap Beta", "https://github.com/vikdevelop/savedesktop?tab=readme-ov-file#2-snap") if snap else None # add link to download the beta version of SaveDesktop
         dialog.set_copyright("© 2023-2024 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
