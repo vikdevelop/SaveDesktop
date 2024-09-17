@@ -108,7 +108,7 @@ class PeriodicBackups:
             if "fuse" in subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\""):
                 os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file") and os.remove(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file")
                 with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
-                    pf.write('{\n "periodic-saving-interval": "%s",\n "periodic-saving-folder": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["periodic-saving-folder"], settings["filename-format"]))
+                    pf.write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
         
         self.config_saved()
 
