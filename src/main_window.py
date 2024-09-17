@@ -223,6 +223,7 @@ class MainWindow(Adw.ApplicationWindow):
             # Expander row for showing options of the periodic saving
             self.saving_eRow = Adw.ExpanderRow.new()
             self.saving_eRow.set_title(_["periodic_saving"])
+            self.saving_eRow.set_expanded(True) if self.open_setdialog_tf else None
             self.saving_eRow.add_suffix(self.pb_learnButton)
             self.msBox.append(child=self.saving_eRow)
             
