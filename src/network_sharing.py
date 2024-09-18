@@ -19,10 +19,6 @@ class Syncing:
 
     # Get info about synchronization
     def get_file_info(self):
-        # Check if syncing directory exists
-        if not os.path.exists(f"{CACHE}/syncing"):
-            os.mkdir(f"{CACHE}/syncing")
-        os.chdir(f"{CACHE}/syncing")
         if settings["periodic-import"] == "Never2":
             settings["manually-sync"] = False
             print("Synchronization is not set up.")
@@ -73,13 +69,22 @@ class Syncing:
     # Download archive from URL
     def download_config(self):
        # check, if the selected cloud drive folder is empty or not and if contains the "sd.tar.gz" or not
-       if not settings['file-for-syncing'] == "" and not "sd.tar.gz" in settings["file-for-syncing"]:
+       if not settings['file-for-syncing'] == "" or not "sd.tar.gz" in settings["file-for-syncing"]:
             # check, if the selected cloud drive folder contains the SaveDesktop.json file or not
             if os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
                 self.get_pb_info()
             else:
                 subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
                 self.get_pb_info()
+            
+            # Check if syncing directory exists
+            if not os.path.exists(f"{CACHE}/syncing"):
+                os.mkdir(f"{CACHE}/syncing")
+            os.chdir(f"{CACHE}/syncing")
+            
+            # create a txt file to prevent removing the progressing synchronization after closing the app window
+            os.system("echo > sync_status")
+            
             # extract the configuration archive
             print("extracting the archive")
             try:
@@ -127,6 +132,7 @@ class Syncing:
         if not os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
             os.system(f"rm -rf {CACHE}/syncing/*")
         [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
+        os.system("rm sync_status")
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop ({self.file})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
