@@ -612,7 +612,7 @@ class MainWindow(Adw.ApplicationWindow):
             if settings["periodic-saving"] == "Never":
                 folder = f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>'
             # Check if the filesystem is not FUSE
-            elif not "fuse" in check_filesystem:
+            elif not ("gvfs" in check_filesystem or "rclone" in check_filesystem):
                 folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             # Check if the periodic saving file exists
             elif not os.path.exists(path):
@@ -716,17 +716,6 @@ class MainWindow(Adw.ApplicationWindow):
                     self.sync_menu.append(_["sync"], 'app.m_sync_with_key')
                     self.main_menu.append_section(None, self.sync_menu)
                     self.show_special_toast()
-                    # Set up cloud sync
-                    cfile_subtitle = self.cfileRow.get_subtitle()
-                    if cfile_subtitle:
-                        # Check if the selected cloud drive folder is correct
-                        if "fuse" in subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle):
-                            settings["file-for-syncing"] = cfile_subtitle
-                        else:
-                            os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
-                            settings["file-for-syncing"] = ""
-                    else:
-                        pass
                 else:
                     try:
                         self.sync_menu.remove_all()
@@ -737,19 +726,19 @@ class MainWindow(Adw.ApplicationWindow):
                     if check_psync == "Never2":
                         if not settings["periodic-import"] == "Never2":
                             self.show_warn_toast()
-                    
-                    # Set up cloud sync
-                    cfile_subtitle = self.cfileRow.get_subtitle()
-                    if cfile_subtitle:
-                        # Check if the selected cloud drive folder is correct
-                        if "fuse" in subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle):
-                            settings["file-for-syncing"] = cfile_subtitle
-                            self.set_up_auto_mount()
-                        else:
-                            os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
-                            settings["file-for-syncing"] = ""
+                 
+                cfile_subtitle = self.cfileRow.get_subtitle()
+                check_filesystem = subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle)
+                print(check_filesystem)
+                if cfile_subtitle:
+                    # Check if the selected cloud drive folder is correct
+                    if ("gvfs" in check_filesystem or "rclone" in check_filesystem):
+                        settings["file-for-syncing"] = cfile_subtitle
                     else:
-                        pass
+                        os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
+                        settings["file-for-syncing"] = ""
+                else:
+                    pass
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
@@ -1604,7 +1593,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Check for ongoing operations before clearing cache
         if any(os.path.exists(f"{CACHE}/{path}") for path in [
             "import_config/copying_flatpak_data",
-            "syncing/copying_flatpak_data",
+            "syncing/sync_status",
             "periodic_saving/saving_status"
         ]):
             print("Flatpak data exists.")
@@ -1641,7 +1630,7 @@ class MyApp(Adw.Application):
         settings["filename"] = self.win.saveEntry.get_text()
         if any(os.path.exists(f"{CACHE}/{path}") for path in [
             "import_config/copying_flatpak_data",
-            "syncing/copying_flatpak_data",
+            "syncing/sync_status",
             "periodic_saving/saving_status"
         ]):
             print("Flatpak data exists." if "import_config" in path else "Saving Flatpak apps data in progress")
