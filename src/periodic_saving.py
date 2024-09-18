@@ -99,6 +99,7 @@ class PeriodicBackups:
         
         # Start saving the configuration
         os.chdir(f"{CACHE}/periodic_saving")
+        os.system("echo > saving_status")
         os.system(f"python3 {system_dir}/config.py --save")
         
         os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
