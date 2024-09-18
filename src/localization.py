@@ -15,9 +15,16 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.4.1-beta"
+v = "3.4.1-beta-2024.09.18"
 icon = "io.github.vikdevelop.SaveDesktop.Devel"
-rel_notes = "<p>3.4.1-beta</p>\
+rel_notes = "<p>3.4.1-beta-2024.09.18</p>\
+<ul>\
+<li>Added \"Learn more\" button to the \"Set up the sync file\" dialog in the case, if you are don't selected the cloud drive folder</li>\
+<li>Now, if you are click on Change button in the already mentioned dialog, the Periodic saving row will expand</li>\
+<li>Updated translations</li>\
+<li>Improved checking the file system of the folder for synchronization</li>\
+</ul>\
+<p>3.4-beta</p>\
 <p>Fixed bugs with saving and installing Flatpak apps data, and logging out of the system after importing the configuration.</p>\
 <p>3.4-hotfix-1</p>\
 <p>Fixed a bug with starting periodic saving and updated translations.</p>\
