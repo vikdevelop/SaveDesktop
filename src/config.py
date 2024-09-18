@@ -51,7 +51,6 @@ flatpak_app_data = settings["disabled-flatpak-apps-data"]
 class Save:
     def __init__(self):
         # create a txt file to prevent deleting the current saving by closing the application window
-        os.system("echo > saving_status")
         print("saving settings from the Dconf database")
         os.system("dconf dump / > ./dconf-settings.ini")
         print("saving Gtk settings")
@@ -85,9 +84,9 @@ class Save:
                 print("saving list of installed Flatpak apps")
                 os.system("ls /var/lib/flatpak/app/ | awk '{print \"flatpak install --system \" $1 \" -y\"}' > ./installed_flatpaks.sh")
                 os.system("ls ~/.local/share/flatpak/app | awk '{print \"flatpak install --user \" $1 \" -y\"}' > ./installed_user_flatpaks.sh")
-        if settings["save-flatpak-data"] == True:
-            print("saving user data of installed Flatpak apps")
-            self.save_flatpak_data()
+            if settings["save-flatpak-data"] == True:
+                print("saving user data of installed Flatpak apps")
+                self.save_flatpak_data()
             
         print("saving desktop environment configuration files")
         # Save configs on individual desktop environments
@@ -180,9 +179,7 @@ class Save:
                         print(f"Error copying file {source_path}: {e}")
                         
 class Import:
-    def __init__(self):      
-        if not os.path.exists("{}/.config".format(home)):
-            os.system(f"mkdir {home}/.config/")
+    def __init__(self):
         print("importing settings from the Dconf database")
         if os.path.exists("user"):
             os.system(f"cp -R ./user {home}/.config/dconf/")
@@ -213,9 +210,6 @@ class Import:
         os.system(f'cp -au ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
         # create this file to prevent removing the cache directory during importing configuration
         if os.path.exists(f'{CACHE}/import_config/app'):
-            with open(f"copying_flatpak_data", "w") as c:
-                c.write("copying flatpak data ...")
-        elif os.path.exists(f'{CACHE}/syncing/app'):
             with open(f"copying_flatpak_data", "w") as c:
                 c.write("copying flatpak data ...")
         print("importing desktop environment configuration files")
@@ -270,12 +264,11 @@ class Import:
             
         if flatpak:
             self.create_flatpak_desktop()
-        os.system(f"echo > {CACHE}/import_config/done")
             
     # Create desktop file for install Flatpaks from list
     def create_flatpak_desktop(self):
         os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
-        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") and not os.path.exists(f"{CACHE}/syncing"):
+        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") or not os.path.exists(f"{CACHE}/syncing"):
             if not os.path.exists(f"{home}/.config/autostart"):
                 os.mkdir(f"{home}/.config/autostart")
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
