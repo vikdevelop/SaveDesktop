@@ -305,7 +305,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # =========
         # Save page
-
+        
         # Open the More options dialog from the self.setDialog
         self.more_options_dialog = more_options_dialog
             
@@ -1332,7 +1332,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.opensaveButton = Gtk.Button.new_with_label(_["open_folder"])
         self.opensaveButton.add_css_class('pill')
         self.opensaveButton.add_css_class('suggested-action')
-        self.opensaveButton.connect("clicked", self.open_dir)
+        self.opensaveButton.set_action_name("app.open_dir")
         self.opensaveButton.set_margin_start(170)
         self.opensaveButton.set_margin_end(170)
         self.savewaitBox.append(self.opensaveButton)
@@ -1531,7 +1531,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.logoutButton.add_css_class('suggested-action')
         self.logoutButton.set_margin_start(170)
         self.logoutButton.set_margin_end(170)
-        self.logoutButton.connect("clicked", self.logout)
+        self.logoutButton.set_action_name("app.logout")
         self.importwaitBox.append(self.logoutButton)
 
         # create button for backing to the previous page
@@ -1554,33 +1554,13 @@ class MainWindow(Adw.ApplicationWindow):
     def show_warn_toast(self):
         self.warn_toast = Adw.Toast.new(title=_["periodic_saving_desc"])
         self.warn_toast.set_button_label(_["logout"])
-        self.warn_toast.connect("clicked", self.logout)
+        self.warn_toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.warn_toast)
         
     # message that says where will be run a synchronization
     def show_special_toast(self):
         self.special_toast = Adw.Toast.new(title=_["m_sync_desc"])
         self.toast_overlay.add_toast(self.special_toast)
-        
-    # open directory with created configuration archive after clicking on the "Open the folder" button
-    def open_dir(self, w):
-        Gtk.FileLauncher.new(Gio.File.new_for_path(f"{self.folder}/{self.filename_text}.sd.tar.gz" if not settings["enable-encryption"] else f"{self.folder}/{self.filename_text}.sd.zip")).open_containing_folder()
-        
-    # log out of the system after clicking on the "Log Out" button
-    def logout(self, w):
-        if snap:
-            bus = dbus.SystemBus()
-            manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
-            manager.KillSession(manager.ListSessions()[0][0], 'all', 9)
-        else:
-            if self.environment == 'Xfce':
-                os.system("dbus-send --print-reply --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
-            elif self.environment == 'KDE Plasma':
-                os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
-            elif self.environment == 'COSMIC (New)':
-                os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
-            else:
-                os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
     # action after closing the main window
     def on_close(self, widget, *args):
@@ -1608,6 +1588,8 @@ class MyApp(Adw.Application):
         self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"] if settings["manually-sync"] else None)
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
+        self.create_action('logout', self.logout)
+        self.create_action('open_dir', self.open_dir)
         self.connect('activate', self.on_activate)
     
     # Synchronize configuation manually after clicking on the "Sync" button in the header bar menu
@@ -1637,6 +1619,26 @@ class MyApp(Adw.Application):
         else:
             os.popen(f"rm -rf {CACHE}/* {CACHE}/.*")
         app.quit()
+        
+    # log out of the system after clicking on the "Log Out" button
+    def logout(self, action, param):
+        if snap:
+            bus = dbus.SystemBus()
+            manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
+            manager.KillSession(manager.ListSessions()[0][0], 'all', 9)
+        else:
+            if self.win.environment == 'Xfce':
+                os.system("dbus-send --print-reply --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
+            elif self.win.environment == 'KDE Plasma':
+                os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
+            elif self.win.environment == 'COSMIC (New)':
+                os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
+            else:
+                os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
+    
+    # open directory with created configuration archive after clicking on the "Open the folder" button
+    def open_dir(self, action, param):
+        Gtk.FileLauncher.new(Gio.File.new_for_path(f"{self.win.folder}/{self.win.filename_text}.sd.tar.gz" if not settings["enable-encryption"] else f"{self.win.folder}/{self.win.filename_text}.sd.zip")).open_containing_folder()
     
     # "About app" dialog
     def on_about_action(self, action, param):
