@@ -80,7 +80,9 @@ If you forgot the password, it will not possible to extract the archive and use 
     &lt;/ul&gt;
     &lt;img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png"&gt;
     
-  &lt;/details&gt;
+  &lt;/details&gt; 
+    
+  
   </str>
   <str key="set_up_first_computer">## Setting up synchronization in the SaveDesktop app
 On the first computer:
@@ -99,6 +101,7 @@ On the first computer:
       &lt;li&gt;Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/details&gt;
+  
   </str>
   <str key="set_up_second_computer">On the second computer:
 1. Open the SaveDesktop app
