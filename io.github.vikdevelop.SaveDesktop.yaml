@@ -1,6 +1,7 @@
 app-id: io.github.vikdevelop.SaveDesktop
+desktop-file-name-suffix: ' (Master)'
 runtime: org.gnome.Platform
-runtime-version: '46'
+runtime-version: '47'
 sdk: org.gnome.Sdk
 command: savedesktop
 finish-args:
@@ -9,6 +10,9 @@ finish-args:
     - --socket=wayland
     - --socket=fallback-x11
     - --device=dri
+    # for opening cloud folders properly
+    - --filesystem=xdg-run/gvfs
+    - --filesystem=xdg-run/gvfsd
     # load Desktop environment config files
     - --filesystem=~/.config
     # load Desktop environment data files (e.g. backgrounds, extensions, etc.)
@@ -21,9 +25,6 @@ finish-args:
     - --filesystem=xdg-public-share
     - --filesystem=xdg-pictures
     - --filesystem=xdg-desktop
-    # for selecting the cloud drive folders
-    - --filesystem=xdg-run/gvfs
-    - --filesystem=xdg-run/gvfsd
     # save all themes installed in home folder
     - --filesystem=~/.themes:create
     # save all icons installed in home folder
@@ -36,15 +37,17 @@ finish-args:
     - --filesystem=~/.fonts:create
     # save a list of installed flatpak apps
     - --filesystem=/var/lib/flatpak:ro
-    - --filesystem=~/.local/share/flatpak/app
+    - --filesystem=~/.local/share/flatpak/app:ro
     # save user data of installed flatpak apps
-    - --filesystem=~/.var/app
-    # logout from session (GNOME-based environments) for changes to the desktop configuration to take effect
+    - --filesystem=~/.var/app:ro
+    # log out from session (GNOME-based environments) for changes to the desktop configuration to take effect
     - --talk-name=org.gnome.SessionManager
-    # logout from session (Xfce) for changes to the Xfce desktop configuration to take effect
+    # log out from session (Xfce) for changes to the Xfce desktop configuration to take effect
     - --talk-name=org.xfce.SessionManager
-    # logout from session (KDE5) for changes to the KDE5 desktop configuration to take effect
-    - --talk-name=org.kde.ksmserver
+    # log out from session (KDE5) for changes to the KDE5 desktop configuration to take effect
+    - --talk-name=org.kde.LogoutPrompt
+    # log out from session (COSMIC Rust) for changes to the COSMIC Rust desktop configuration to take effect
+    - --talk-name=com.system76.CosmicSession
     # ensuring to FileChooserNative will work correctly
     - --talk-name=org.freedesktop.FileManager1
     - --env=DCONF_USER_CONFIG_DIR=.config/dconf
@@ -64,7 +67,6 @@ modules:
     build-commands:
        - install -Dm755 -t /app/bin savedesktop
        - cp -R src/* /app
-       - install -D -t /app/share build-beta.sh
        - install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
        - install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
        - install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.Devel.svg
@@ -80,7 +82,3 @@ modules:
     sources:
           - type: dir
             path: .
-          - type: script
-            dest-filename: build-beta.sh
-            commands:
-              - echo "build-type:beta"
