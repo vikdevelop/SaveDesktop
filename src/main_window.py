@@ -666,7 +666,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.ps_row.set_title(f'{_["periodic_saving"]} ({_["pb_interval"]})')
         self.ps_row.set_use_markup(True)
         self.ps_row.add_suffix(self.ps_button)
-        self.ps_row.set_subtitle(f'<span color="red">{_["never"]}</span>' if settings["periodic-saving"] == "Never" 
+        self.ps_row.set_subtitle(f'<span color="red">{_["never"]}</span>' if settings["periodic-saving"] == "Never"
                                  else f'<span color="green">{pb}</span>')
         self.ps_button.add_css_class('suggested-action') if settings["periodic-saving"] == "Never" else None
 
@@ -682,7 +682,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.urlDialog_fnc()
 
     # URL Dialog iself
-    def urlDialog_fnc(self): 
+    def urlDialog_fnc(self):
         # reset the cloud folder selection to the default value
         def reset_cloud_folder(w):
             self.cfileRow.set_subtitle("")
@@ -710,6 +710,20 @@ class MainWindow(Adw.ApplicationWindow):
                 # save the status of the Bidirectional Synchronization switch
                 settings["bidirectional-sync"] = self.bsSwitch.get_active()
                 
+                cfile_subtitle = self.cfileRow.get_subtitle()
+                check_filesystem = subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle)
+                
+                if cfile_subtitle:
+                    # Check if the selected cloud drive folder is correct
+                    if ("gvfs" in check_filesystem or "rclone" in check_filesystem):
+                        settings["file-for-syncing"] = cfile_subtitle
+                    else:
+                        os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
+                        settings["file-for-syncing"] = ""
+                        break
+                else:
+                    pass
+
                 # if it is selected to manually sync, it creates an option in the app menu in the header bar
                 if settings["manually-sync"]:
                     self.sync_menu = Gio.Menu()
@@ -721,24 +735,13 @@ class MainWindow(Adw.ApplicationWindow):
                         self.sync_menu.remove_all()
                     except:
                         pass
+
+                    self.set_up_auto_mount()
                     
-                    # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
-                    if check_psync == "Never2":
-                        if not settings["periodic-import"] == "Never2":
-                            self.show_warn_toast()
-                 
-                cfile_subtitle = self.cfileRow.get_subtitle()
-                check_filesystem = subprocess.getoutput("df -T \"%s\" | awk 'NR==2 {print $2}'" % cfile_subtitle)
-                print(check_filesystem)
-                if cfile_subtitle:
-                    # Check if the selected cloud drive folder is correct
-                    if ("gvfs" in check_filesystem or "rclone" in check_filesystem):
-                        settings["file-for-syncing"] = cfile_subtitle
-                    else:
-                        os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
-                        settings["file-for-syncing"] = ""
-                else:
-                    pass
+                # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
+                if check_psync == "Never2":
+                    if not settings["periodic-import"] == "Never2":
+                        self.show_warn_toast()
 
         # self.urlDialog
         self.urlDialog = Adw.MessageDialog.new(self)
@@ -1578,7 +1581,7 @@ class MainWindow(Adw.ApplicationWindow):
 
 class MyApp(Adw.Application):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE, 
+        super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE,
                          application_id="io.github.vikdevelop.SaveDesktop" if not snap else None)
         self.create_action('about', self.on_about_action, ["F1"])
         self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"] if settings["manually-sync"] else None)
