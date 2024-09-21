@@ -720,7 +720,6 @@ class MainWindow(Adw.ApplicationWindow):
                     else:
                         os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
                         settings["file-for-syncing"] = ""
-                        break
                 else:
                     pass
 
