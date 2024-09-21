@@ -1223,13 +1223,18 @@ class MainWindow(Adw.ApplicationWindow):
         try:
             e_o = False
             os.system(f"python3 {system_dir}/config.py --save")
-            if settings["enable-encryption"] == True:
-                os.system(f"zip -9 -P '{self.password}' cfg.sd.zip . -r -x 'saving_status'")
-                shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
-            else:
-                os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
-                shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
-            print("Configuration saved successfully.")
+            while True:
+                if self.cancel_process:
+                    break
+                
+                if settings["enable-encryption"] == True:
+                    os.system(f"zip -9 -P '{self.password}' cfg.sd.zip . -r -x 'saving_status'")
+                    shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
+                else:
+                    os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
+                    shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
+                print("Configuration saved successfully.")
+                break
         except Exception as e:
             e_o = True
             error = e
@@ -1240,7 +1245,6 @@ class MainWindow(Adw.ApplicationWindow):
         finally:
             if not e_o:
                 self.exporting_done()
-                os.system("rm saving_status")
             
     # "Please wait" information page on the "Save" page
     def please_wait_save(self):
@@ -1281,7 +1285,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Use "sd.zip" if Archive Encryption is enabled
         status = _["saving_config_status"].replace("sd.tar.gz", "sd.zip") if settings["enable-encryption"] else _["saving_config_status"]
-
+                
         # Create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
         self.savewaitLabel.set_use_markup(True)
@@ -1361,20 +1365,7 @@ class MainWindow(Adw.ApplicationWindow):
             if not os.path.exists(f"{CACHE}/import_config"):
                 os.mkdir(f"{CACHE}/import_config")
             self.please_wait_import()
-            try:
-                e_o = False
-                with zipfile.ZipFile(self.import_file, "r") as zip:
-                    zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
-            except Exception as err:
-                e_o = True
-                error = err
-                GLib.idle_add(self.show_err_msg, error)
-                self.toolbarview.set_content(self.headapp)
-                self.toolbarview.add_top_bar(self.headerbar)
-                self.toolbarview.remove(self.headerbar_import)
-            finally:
-                if not e_o:
-                    self.import_config()
+            self.import_config()
                 
         # action after closing dialog for checking password
         def checkDialog_closed(w, response):
@@ -1408,18 +1399,23 @@ class MainWindow(Adw.ApplicationWindow):
     # start process of importing configuration
     def start_importing(self):
         try:
-            e_o = False
-            if "zip" in self.import_file:
-                pass
-            else:
-                with tarfile.open(self.import_file, 'r:gz') as tar:
-                    for member in tar.getmembers():
-                        try:
-                            tar.extract(member)
-                        except PermissionError as e:
-                            print(f"Permission denied for {member.name}: {e}")
-            os.system(f"python3 {system_dir}/config.py --import_")
-            print("Configuration imported successfully.")
+            while True:
+                if self.cancel_process:
+                    break
+                e_o = False
+                if ".sd.zip" in self.import_file:
+                    with zipfile.ZipFile(self.import_file, "r") as zip:
+                        zip.extractall(path=f"{CACHE}/import_config", pwd=f"{self.checkEntry.get_text()}".encode("utf-8"))
+                else:
+                    with tarfile.open(self.import_file, 'r:gz') as tar:
+                        for member in tar.getmembers():
+                            try:
+                                tar.extract(member)
+                            except PermissionError as e:
+                                print(f"Permission denied for {member.name}: {e}")
+                os.system(f"python3 {system_dir}/config.py --import_")
+                print("Configuration imported successfully.")
+                break
         except Exception as e:
             e_o = True
             error = e
