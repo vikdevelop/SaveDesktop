@@ -1233,7 +1233,7 @@ class MainWindow(Adw.ApplicationWindow):
                     os.system(f"zip -9 -P '{self.password}' cfg.sd.zip . -r -x 'saving_status'")
                     shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
                 else:
-                    os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
+                    os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
                     shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
                 print("Configuration saved successfully.")
                 break
@@ -1254,6 +1254,7 @@ class MainWindow(Adw.ApplicationWindow):
         def cancel_save(w):
             self.cancel_process = True
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
+            os.system(f"pkill -xf 'tar --exclude=\'cfg.sd.tar.gz\' --gzip -cf cfg.sd.tar.gz ./'") if not settings["enable-encryption"] else os.system("pkill -xf 'zip -9 -P \'{self.password}\' cfg.sd.zip . -r -x \'saving_status\''")
             self.toolbarview.set_content(self.headapp)
             self.toolbarview.remove(self.headerbar_save)
             self.toolbarview.add_top_bar(self.headerbar)
