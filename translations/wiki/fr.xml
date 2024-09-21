@@ -74,7 +74,9 @@ If you forgot the password, it will not possible to extract the archive and use 
     &lt;/ul&gt;
     &lt;img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png"&gt;
     
-  &lt;/details&gt;
+  &lt;/details&gt; 
+    
+  
   </str>
   <str key="requirements">#### Requirements
 - You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
@@ -88,13 +90,14 @@ On the first computer:
     &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(for other desktop environments)&lt;/p&gt;&lt;/summary&gt;
     &lt;ul&gt;
       &lt;li&gt;Install Rclone&lt;/li&gt;
-      &lt;pre&gt;&lt;code&gt;sudo -v ; curl https://rclone.org/install.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
+      &lt;pre&gt;&lt;code&gt;sudo -v ; curl https://rclone.org/install.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
       &lt;li&gt;Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
       &lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "The drive has been mounted successfully"&lt;/code&gt;&lt;/pre&gt;
       &lt;p&gt;* Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.&lt;/p&gt;&lt;/li&gt;
       &lt;li&gt;Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/details&gt;
+  
   </str>
   <str key="set_up_second_computer">On the second computer:
 1. Open the SaveDesktop app

@@ -82,6 +82,7 @@ On the first computer:
       &lt;li&gt;Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/details&gt;
+  
   </str>
   <str key="set_up_second_computer">On the second computer:
 1. Open the SaveDesktop app
@@ -99,7 +100,9 @@ To set up bidirectional synchronization, make sure you have the same cloud folde
     &lt;/ul&gt;
     &lt;img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png"&gt;
     
-  &lt;/details&gt;
+  &lt;/details&gt; 
+    
+  
   </str>
   <str key="requirements">#### Requirements
 - You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
