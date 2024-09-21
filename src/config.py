@@ -1,21 +1,15 @@
-import os
-import json
-import gi
-import subprocess
-import zipfile
-import tarfile
+import os, json, gi, argparse, shutil
 from gi.repository import GLib, Gio
-from localization import _, CACHE, DATA, home, system_dir, flatpak, snap
-import argparse
-import shutil
+from localization import _, CACHE, DATA, home, system_dir, flatpak, snap, settings
 
+# add command-line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
 parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
 
 args = parser.parse_args()
 
-# check of user current desktop
+# check of the user's current DE
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
     environment = 'GNOME'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'zorin:GNOME':
@@ -42,11 +36,6 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
 else:
     from tty_environments import *
-    
-settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
-cache_replacing = f'{CACHE}'
-config = cache_replacing.replace("cache/tmp", "config/glib-2.0/settings")
-flatpak_app_data = settings["disabled-flatpak-apps-data"]
 
 class Save:
     def __init__(self):
@@ -274,7 +263,7 @@ class Import:
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
                 with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
                     fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
-        
+
 if args.save:
     Save()
 elif args.import_:
