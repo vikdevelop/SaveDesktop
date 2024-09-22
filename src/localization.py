@@ -15,10 +15,9 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.4.1"
-icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>3.4.1</p>\
-<ul>\
+v = "3.4.1-beta-2024.09.22"
+icon = "io.github.vikdevelop.SaveDesktop.Devel"
+rel_notes = "<ul>\
 <li>Added \"Learn more\" button to the \"Set up the sync file\" dialog in the case, if you have not selected the cloud drive folder</li>\
 <li>Fixed bugs with saving and installing Flatpak apps and their data and logging out of the system after importing the configuration</li>\
 <li>Fixed a bug with stopping saving and importing configuration</li>\
