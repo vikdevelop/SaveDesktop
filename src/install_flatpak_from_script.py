@@ -57,7 +57,7 @@ flatpaks_to_install = installed_flatpaks - installed_apps
 
 if flatpaks_to_install:
     for app in flatpaks_to_install:
-        subprocess.run(['flatpak', 'install', '--user', app, '-y'])
+        subprocess.run(['flatpak', 'install', '--user', 'flathub', app, '-y'])
     os.system(f"rm -rf {DATA_FLATPAK}/*.sh")
 else:
     print('All Flatpak apps are installed.')
