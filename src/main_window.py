@@ -10,9 +10,6 @@ from localization import _, home, download_dir
 from open_wiki import *
 from shortcuts_window import *
 
-# Ignore the deprecation warnings by Gtk
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
 # Application window
 class MainWindow(Adw.ApplicationWindow):
     def __init__(self, *args, **kwargs):
@@ -143,23 +140,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.pBox.set_margin_end(50)
             self.unsupp_img = Gtk.Image.new_from_icon_name("exclamation_mark"); self.unsupp_img.set_pixel_size(128); self.pBox.append(self.unsupp_img)
             self.unsupp_label = Gtk.Label.new(str=f'<big>{_["unsuppurted_env_desc"]}</big>'.format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE, Deepin")); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
-
-        # Show warning about disconnected plugs
-        if snap:
-            plugs = ["dot-config", "dot-local", "dot-themes", "dot-icons", "dot-fonts", "login-session-control"]
-            show_warning = any(subprocess.run(["snapctl", "is-connected", plug], stdout=subprocess.PIPE).returncode != 0 for plug in plugs)
-
-            if show_warning:
-                self.toolbarview.add_top_bar(self.errHeaderbar)
-                self.toolbarview.remove(self.headerbar)
-                self.toolbarview.set_content(self.pBox)
-                self.pBox.set_margin_start(90)
-                self.pBox.set_margin_end(90)
-
-                # Show warning message
-                self.unsupp_img = Gtk.Image.new_from_icon_name("exclamation_mark"); self.unsupp_img.set_pixel_size(128); self.pBox.append(self.unsupp_img)
-                self.unplug_label = Gtk.Label.new(str="<big><b>Need to connect some plugs</b></big>\nIn order for SaveDesktop to work properly, you need to connect some plugs to access the files. You can do this by opening a terminal (Ctrl+Alt+T) and entering the following command: \n"); self.unplug_label.set_use_markup(True); self.unplug_label.set_justify(Gtk.Justification.CENTER); self.unplug_label.set_wrap(True); self.pBox.append(self.unplug_label)
-                self.plugs_list_label = Gtk.Label.new(str="<i>sudo snap connect savedesktop:dot-config &amp;&amp; sudo snap connect savedesktop:dot-local &amp;&amp; sudo snap connect savedesktop:dot-themes &amp;&amp; sudo snap connect savedesktop:dot-icons &amp;&amp; sudo snap connect savedesktop:dot-fonts &amp;&amp; sudo snap connect savedesktop:login-session-control</i>"); self.plugs_list_label.set_use_markup(True); self.plugs_list_label.set_selectable(True); self.plugs_list_label.set_justify(Gtk.Justification.CENTER); self.plugs_list_label.set_wrap(True); self.pBox.append(self.plugs_list_label)
     
     # Show main page
     def save_desktop(self):
@@ -169,7 +149,7 @@ class MainWindow(Adw.ApplicationWindow):
             def create_pb_desktop():
                 if not os.path.exists(f'{home}/.config/autostart'):
                     os.mkdir(f'{home}/.config/autostart')
-                if not os.path.exists(f"{home}/.config/autostart/savedesktop-synchronization.sh"):
+                if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
                     if not os.path.exists(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
                         with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
                             cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
@@ -191,7 +171,8 @@ class MainWindow(Adw.ApplicationWindow):
 
                     if self.open_setdialog_tf:
                         self.setDialog.close()
-                        self.open_setDialog()
+                        w = ""
+                        self.open_setDialog(w)
 
             # open a link to the wiki page about periodic saving
             def open_pb_wiki(w):
@@ -202,14 +183,15 @@ class MainWindow(Adw.ApplicationWindow):
                 self.filefrmtEntry.set_text("Latest_configuration")
             
             # Dialog for showing more options itself
-            self.msDialog = Adw.MessageDialog.new(self)
-            self.msDialog.set_default_size(450, 200)
+            self.msDialog = Adw.AlertDialog.new()
             self.msDialog.set_heading(_["more_options"])
+            self.msDialog.choose(self, None, None, None)
 
             # Box for this dialog
             self.msBox = Gtk.ListBox.new()
             self.msBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-            self.msBox.get_style_context().add_class(class_name='boxed-list')
+            self.msBox.add_css_class('boxed-list')
+            self.msBox.set_size_request(380, 370) if self.open_setdialog_tf else self.msBox.set_size_request(380, 185)
             self.msDialog.set_extra_child(self.msBox)
             
             # Learn more about periodic saving
@@ -301,7 +283,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.msDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
             self.msDialog.connect('response', msDialog_closed)
             
-            self.msDialog.show()
+            self.msDialog.present()
 
         # =========
         # Save page
@@ -328,7 +310,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Box for show this options: set the filename, set items that will be included to the config archive and periodic saving
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.lbox_e.add_css_class(css_class='boxed-list')
+        self.lbox_e.add_css_class(css_class='boxed-list-separate')
         self.lbox_e.set_margin_start(60)
         self.lbox_e.set_margin_end(60)
         self.saveBox.append(self.lbox_e)
@@ -520,7 +502,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.setButton = Gtk.Button.new_with_label(_["set_up_sync_file"])
         self.setButton.add_css_class("pill")
         self.setButton.add_css_class("suggested-action")
-        self.setButton.connect("clicked", self.setButton_dialog)
+        self.setButton.connect("clicked", self.open_setDialog)
         self.setButton.set_valign(Gtk.Align.CENTER)
         self.setButton.set_margin_start(70)
         self.setButton.set_margin_end(70)
@@ -529,18 +511,14 @@ class MainWindow(Adw.ApplicationWindow):
         # "Connect with other computer" button
         self.getButton = Gtk.Button.new_with_label(_["connect_cloud_storage"])
         self.getButton.add_css_class("pill")
-        self.getButton.connect("clicked", self.open_urlDialog)
+        self.getButton.connect("clicked", self.open_cloudDialog)
         self.getButton.set_valign(Gtk.Align.CENTER)
         self.getButton.set_margin_start(70)
         self.getButton.set_margin_end(70)
         self.syncingBox.append(self.getButton)
-        
-    # Open set Dialog by clicking on "Set up the sync file" button
-    def setButton_dialog(self, w):
-        self.open_setDialog()
 
     # Dialog for setting the sync file, periodic synchronization interval and copying the URL for synchronization
-    def open_setDialog(self):
+    def open_setDialog(self, w):
         # Create periodic saving file if it does not exist
         def save_now():
             try:
@@ -637,16 +615,17 @@ class MainWindow(Adw.ApplicationWindow):
             else:
                 self.open_setdialog_tf = False
         
-        # self.setDialog
-        self.setDialog = Adw.MessageDialog.new(self)
+        # Dialog itself
+        self.setDialog = Adw.AlertDialog.new()
         self.setDialog.set_heading(_["set_up_sync_file"])
         self.setDialog.set_body_use_markup(True)
-        self.setDialog.set_default_size(450, 200)
+        self.setDialog.choose(self, None, None, None)
         
         # List Box for appending widgets
         self.l_setdBox = Gtk.ListBox.new()
         self.l_setdBox.set_selection_mode(Gtk.SelectionMode.NONE)
         self.l_setdBox.get_style_context().add_class('boxed-list')
+        self.l_setdBox.set_size_request(300, 130)
         self.setDialog.set_extra_child(self.l_setdBox)
         
         # Check the synchronization matters
@@ -675,24 +654,24 @@ class MainWindow(Adw.ApplicationWindow):
         self.setDialog.add_response('ok', _["apply"])
         self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.setDialog.connect('response', setDialog_closed)
-        self.setDialog.show()
-        
-    # URL Dialog (action after clicking on the "Connect with other computer" button)
-    def open_urlDialog(self, w):
-        self.urlDialog_fnc()
+        self.setDialog.present()
 
-    # URL Dialog iself
-    def urlDialog_fnc(self):
+    # Dialog for selecting the cloud drive folder and periodic synchronization interval
+    def open_cloudDialog(self, w):
         # reset the cloud folder selection to the default value
         def reset_cloud_folder(w):
             self.cfileRow.set_subtitle("")
             self.cfileRow.remove(self.resetButton)
-            self.urlDialog.set_response_enabled('ok', True)
+            self.cloudDialog.set_response_enabled('ok', True)
             settings["file-for-syncing"] = self.cfileRow.get_subtitle()
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)]
+            
+        # enable or disable the response of this dialog in depending on the selected periodic synchronization interval
+        def on_psync_changed(psyncRow, GParamObject):
+            self.cloudDialog.set_response_enabled('ok', True) if not self.psyncRow.get_selected_item().get_string() == _["never"] else self.cloudDialog.set_response_enabled('ok', False)
         
         # Action after closing URL dialog
-        def urlDialog_closed(w, response):
+        def cloudDialog_closed(w, response):
             if response == 'ok':
                 check_psync = settings["periodic-import"]
                 
@@ -717,42 +696,43 @@ class MainWindow(Adw.ApplicationWindow):
                     # Check if the selected cloud drive folder is correct
                     if ("gvfs" in check_filesystem or "rclone" in check_filesystem):
                         settings["file-for-syncing"] = cfile_subtitle
+                        
+                        # if it is selected to manually sync, it creates an option in the app menu in the header bar
+                        if settings["manually-sync"]:
+                            self.sync_menu = Gio.Menu()
+                            self.sync_menu.append(_["sync"], 'app.m_sync_with_key')
+                            self.main_menu.append_section(None, self.sync_menu)
+                            self.show_special_toast()
+                        else:
+                            try:
+                                self.sync_menu.remove_all()
+                            except:
+                                pass
+
+                            self.set_up_auto_mount()
+                            
+                            # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
+                            if check_psync == "Never2":
+                                if not settings["periodic-import"] == "Never2":
+                                    self.show_warn_toast()
                     else:
                         os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
                         settings["file-for-syncing"] = ""
                 else:
                     pass
 
-                # if it is selected to manually sync, it creates an option in the app menu in the header bar
-                if settings["manually-sync"]:
-                    self.sync_menu = Gio.Menu()
-                    self.sync_menu.append(_["sync"], 'app.m_sync_with_key')
-                    self.main_menu.append_section(None, self.sync_menu)
-                    self.show_special_toast()
-                else:
-                    try:
-                        self.sync_menu.remove_all()
-                    except:
-                        pass
-
-                    self.set_up_auto_mount()
-                    
-                # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
-                if check_psync == "Never2":
-                    if not settings["periodic-import"] == "Never2":
-                        self.show_warn_toast()
-
-        # self.urlDialog
-        self.urlDialog = Adw.MessageDialog.new(self)
-        self.urlDialog.set_heading(_["connect_cloud_storage"])
-        self.urlDialog.set_body(_["connect_cloud_storage_desc"])
-        self.urlDialog.set_default_size(500,370)
+        # Dialog itself
+        self.cloudDialog = Adw.AlertDialog.new()
+        self.cloudDialog.set_heading(_["connect_cloud_storage"])
+        self.cloudDialog.set_body(_["connect_cloud_storage_desc"])
+        self.cloudDialog.choose(self, None, None, None)
           
         # Box for adding widgets in this dialog
-        self.urlBox = Gtk.ListBox.new()
-        self.urlBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.urlBox.get_style_context().add_class(class_name='boxed-list')
-        self.urlDialog.set_extra_child(self.urlBox)
+        self.cloudBox = Gtk.ListBox.new()
+        self.cloudBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.cloudBox.get_style_context().add_class(class_name='boxed-list')
+        self.cloudBox.set_size_request(400, 260)
+        self.cloudDialog.set_extra_child(self.cloudBox)
         
         # Row and buttons for selecting the cloud drive folder
         ## button for selecting the cloud drive folder
@@ -781,7 +761,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cfileRow.set_subtitle_selectable(True)
         self.cfileRow.add_suffix(self.cloudButton)
         self.cfileRow.set_activatable_widget(self.cloudButton)
-        self.urlBox.append(self.cfileRow)
+        self.cloudBox.append(self.cfileRow)
         
         # Periodic sync section
         options = Gtk.StringList.new(strings=[
@@ -794,9 +774,11 @@ class MainWindow(Adw.ApplicationWindow):
         self.psyncRow.set_title(_["periodic_sync"])
         self.psyncRow.set_title_lines(2)
         self.psyncRow.set_model(model=options)
-        self.urlBox.append(self.psyncRow)
+        self.psyncRow.connect('notify::selected-item', on_psync_changed)
+        self.cloudBox.append(self.psyncRow)
 
         # Load periodic sync values form GSettings database
+        old_psync = settings["periodic-import"]
         if settings["periodic-import"] == "Never2":
             self.psyncRow.set_selected(0)
         elif settings["periodic-import"] == "Manually2":
@@ -822,17 +804,17 @@ class MainWindow(Adw.ApplicationWindow):
         self.bsyncRow.set_title_lines(2)
         self.bsyncRow.add_suffix(self.bsSwitch)
         self.bsyncRow.set_activatable_widget(self.bsSwitch)
-        self.urlBox.append(self.bsyncRow)
+        self.cloudBox.append(self.bsyncRow)
         
-        self.urlDialog.add_response('cancel', _["cancel"])
-        self.urlDialog.add_response('ok', _["apply"])
-        self.urlDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.cloudDialog.add_response('cancel', _["cancel"])
+        self.cloudDialog.add_response('ok', _["apply"])
+        self.cloudDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         if not self.cfileRow.get_subtitle():
-            self.urlDialog.set_response_enabled('ok', False)
+            self.cloudDialog.set_response_enabled('ok', False)
         else:
-            self.urlDialog.set_response_enabled('ok', True)
-        self.urlDialog.connect('response', urlDialog_closed)
-        self.urlDialog.show()
+            self.cloudDialog.set_response_enabled('ok', True)
+        self.cloudDialog.connect('response', cloudDialog_closed)
+        self.cloudDialog.present()
       
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
@@ -892,8 +874,8 @@ class MainWindow(Adw.ApplicationWindow):
             from flatpak_apps_dialog import FolderSwitchRow, FlatpakAppsDialog
             self.itemsDialog.close()
             self.appd = FlatpakAppsDialog()
-            self.appd.set_transient_for(app.get_active_window())
-            self.appd.show()
+            self.appd.choose(self, None, None, None)
+            self.appd.present()
 
         # show button after clicking on the switch "User data of Flatpak apps"
         def show_appsbtn(w, GParamBoolean):
@@ -922,10 +904,10 @@ class MainWindow(Adw.ApplicationWindow):
             self.itemsBox.append(child=self.ext_row)
 
         # self.itemsDialog
-        self.itemsDialog = Adw.MessageDialog.new(app.get_active_window())
+        self.itemsDialog = Adw.AlertDialog.new()
         self.itemsDialog.set_heading(_["items_for_archive"])
         self.itemsDialog.set_body(_["items_desc"])
-        self.itemsDialog.set_default_size(400, 200)
+        self.itemsDialog.choose(self, None, None, None)
         
         # Box for loading widgets in this dialog
         self.itemsBox = Gtk.ListBox.new()
@@ -1066,16 +1048,16 @@ class MainWindow(Adw.ApplicationWindow):
         self.itemsDialog.add_response('ok', _["apply"])
         self.itemsDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.itemsDialog.connect('response', itemsdialog_closed)
-        self.itemsDialog.show()
+        self.itemsDialog.present()
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
         def save_selected(source, res, data):
             try:
-                file = source.select_folder_finish(res)
+                folder = source.select_folder_finish(res)
             except:
                 return
-            self.folder_pb = file.get_path()
+            self.folder_pb = folder.get_path()
             self.dirRow.set_subtitle(self.folder_pb)
         
         self.pb_chooser = Gtk.FileDialog.new()
@@ -1087,10 +1069,10 @@ class MainWindow(Adw.ApplicationWindow):
     def select_folder(self, w):
         def save_selected(source, res, data):
             try:
-                file = source.select_folder_finish(res)
+                folder = source.select_folder_finish(res)
             except:
                 return
-            self.folder = file.get_path()
+            self.folder = folder.get_path()
             if settings["enable-encryption"] == True:
                 self.create_password_dialog()
             else:
@@ -1120,7 +1102,7 @@ class MainWindow(Adw.ApplicationWindow):
             except:
                 return
             self.import_file = file.get_path()
-            if ".zip" in self.import_file:
+            if ".sd.zip" in self.import_file:
                 self.check_password_dialog()
             else:
                 self.import_config()
@@ -1143,17 +1125,17 @@ class MainWindow(Adw.ApplicationWindow):
     def select_sync_folder(self, w):
         def set_selected(source, res, data):
             try:
-                file = source.select_folder_finish(res)
+                folder = source.select_folder_finish(res)
             except:
                 return
-            self.syncfile = file.get_path()
-            self.cfileRow.set_subtitle(self.syncfile)
-            self.urlDialog.set_response_enabled('ok', True)
+            self.sync_folder = folder.get_path()
+            self.cfileRow.set_subtitle(self.sync_folder)
+            self.cloudDialog.set_response_enabled('ok', True) if not self.psyncRow.get_selected_item().get_string() == _["never"] else None
             
-        self.syncfile_chooser = Gtk.FileDialog.new()
-        self.syncfile_chooser.set_modal(True)
-        self.syncfile_chooser.set_title(_["select_cloud_folder_btn"])
-        self.syncfile_chooser.select_folder(self, None, set_selected, None)
+        self.sync_folder_chooser = Gtk.FileDialog.new()
+        self.sync_folder_chooser.set_modal(True)
+        self.sync_folder_chooser.set_title(_["select_cloud_folder_btn"])
+        self.sync_folder_chooser.select_folder(self, None, set_selected, None)
         
     # Dialog for creating password for the config archive
     def create_password_dialog(self):
@@ -1189,9 +1171,10 @@ class MainWindow(Adw.ApplicationWindow):
             self.pswdEntry.set_text(password)
 
         # dialog itself
-        self.pswdDialog = Adw.MessageDialog.new(self)
+        self.pswdDialog = Adw.AlertDialog.new()
         self.pswdDialog.set_heading(_["create_pwd_title"])
         self.pswdDialog.set_body(_["create_pwd_desc"])
+        self.pswdDialog.choose(self, None, None, None)
 
         # button for generating strong password
         self.pswdgenButton = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
@@ -1212,7 +1195,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.pswdDialog.set_response_enabled("ok", False)
         self.pswdDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.pswdDialog.connect('response', pswdDialog_closed)
-        self.pswdDialog.show()
+        self.pswdDialog.present()
     
     # Save configuration
     def save_config(self):
@@ -1231,12 +1214,14 @@ class MainWindow(Adw.ApplicationWindow):
                 os.system(f"zip -9 -P '{self.password}' cfg.sd.zip . -r -x 'saving_status'")
                 if self.cancel_process:
                     return
-                shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
+                else:
+                    shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
             else:
                 os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
                 if self.cancel_process:
                     return
-                shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
+                else:
+                    shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
             print("Configuration saved successfully.")
         except Exception as e:
             e_o = True
@@ -1359,25 +1344,20 @@ class MainWindow(Adw.ApplicationWindow):
     # Import config from list
     def imp_cfg_from_list(self, w):
         self.import_file = f"{self.dir}/{self.radio_row.get_selected_item().get_string()}"
-        self.please_wait_import()
         self.import_config()
      
     # dialog for entering password of the archive
-    def check_password_dialog(self):
-        # unzip archive if password is correct only
-        def unzip_ar():
-            self.import_config()
-                
+    def check_password_dialog(self):     
         # action after closing dialog for checking password
         def checkDialog_closed(w, response):
             if response == 'ok':
                 self.checkDialog.set_response_enabled("ok", False)
-                zip_thread = Thread(target=unzip_ar)
-                zip_thread.start()
+                self.import_config()
             
-        self.checkDialog = Adw.MessageDialog.new(self)
+        self.checkDialog = Adw.AlertDialog.new()
         self.checkDialog.set_heading(_["check_pwd_title"])
         self.checkDialog.set_body(_["check_pwd_desc"])
+        self.checkDialog.choose(self, None, None, None)
         
         self.checkEntry = Adw.PasswordEntryRow.new()
         self.checkEntry.set_title(_["password_entry"])
@@ -1387,7 +1367,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.checkDialog.add_response("ok", _["apply"])
         self.checkDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.checkDialog.connect('response', checkDialog_closed)
-        self.checkDialog.show()
+        self.checkDialog.present()
         
     # Import configuration
     def import_config(self):
@@ -1402,11 +1382,11 @@ class MainWindow(Adw.ApplicationWindow):
         try:
             e_o = False
             if ".sd.zip" in self.import_file:
-                with zipfile.ZipFile(self.import_file, "r") as zip:
-                    for member in zip.namelist():
+                with zipfile.ZipFile(self.import_file, "r") as zip_ar:
+                    for member in zip_ar.namelist():
                         if self.cancel_process:
                             return
-                        zip.extract(member, path=f"{CACHE}/import_config", pwd=self.checkEntry.get_text().encode("utf-8"))
+                        zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=self.checkEntry.get_text().encode("utf-8"))
             else:
                 with tarfile.open(self.import_file, 'r:gz') as tar:
                     for member in tar.getmembers():
@@ -1542,11 +1522,12 @@ class MainWindow(Adw.ApplicationWindow):
         
     # show message dialog in the error case
     def show_err_msg(self, error):
-        self.errDialog = Adw.MessageDialog.new(app.get_active_window())
+        self.errDialog = Adw.AlertDialog.new()
+        self.errDialog.choose(self, None, None, None)
         self.errDialog.set_heading(heading=_["err_occured"])
         self.errDialog.set_body(body=f"{error}")
         self.errDialog.add_response('cancel', _["cancel"])
-        self.errDialog.show()
+        self.errDialog.present()
        
     # a warning indicating that the user must log out
     def show_warn_toast(self):
@@ -1640,7 +1621,7 @@ class MyApp(Adw.Application):
     
     # "About app" dialog
     def on_about_action(self, action, param):
-        dialog = Adw.AboutWindow(transient_for=app.get_active_window())
+        dialog = Adw.AboutDialog()
         dialog.set_application_name("SaveDesktop")
         dialog.set_developer_name("vikdevelop")
         r_lang != "en" and dialog.set_translator_credits(_["translator_credits"]) # add the translator credits section if the system language is not English
@@ -1655,7 +1636,7 @@ class MyApp(Adw.Application):
         dialog.set_version(version)
         dialog.set_application_icon(icon)
         dialog.set_release_notes(rel_notes)
-        dialog.show()
+        dialog.present(app.get_active_window())
     
     # create Gio actions for opening the folder, logging out of the system, etc.
     def create_action(self, name, callback, shortcuts=None):

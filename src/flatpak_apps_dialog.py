@@ -5,7 +5,7 @@ from gi.repository import Gtk, Adw, Gio
 from localization import _, settings, home
 
 # Row for showing available apps
-class FolderSwitchRow(Gtk.ListBoxRow):
+class FolderSwitchRow(Adw.ActionRow):
     def __init__(self, folder_name):
         super().__init__()
         self.folder_name = folder_name
@@ -19,18 +19,11 @@ class FolderSwitchRow(Gtk.ListBoxRow):
             self.switch.set_active(True)
         
         # row for all items
-        self.approw = Adw.ActionRow.new()
-        self.approw.set_title(folder_name)
-        self.approw.add_suffix(self.switch)
-        self.approw.set_title_lines(4)
-        self.approw.set_activatable_widget(self.switch)
-        self.approw.set_hexpand(True)
-        
-        # box for self.approw
-        self.box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
-        self.box.append(self.approw)
-        
-        self.set_child(self.box)
+        self.set_title(folder_name)
+        self.add_suffix(self.switch)
+        self.set_title_lines(4)
+        self.set_activatable_widget(self.switch)
+        self.set_hexpand(True)
         
         # set switch states from the Gsettings database
         switch_state = folder_name not in settings.get_strv("disabled-flatpak-apps-data")
@@ -48,11 +41,10 @@ class FolderSwitchRow(Gtk.ListBoxRow):
         settings.set_strv("disabled-flatpak-apps-data", disabled_flatpaks)
 
 # dialog for showing installed Flatpak apps
-class FlatpakAppsDialog(Adw.MessageDialog):
+class FlatpakAppsDialog(Adw.AlertDialog):
     def __init__(self):
-        super().__init__(transient_for=None)
+        super().__init__()
         self.set_heading(_["flatpaks_data_tittle"])
-        self.set_default_size(300, 400)
         
         # primary Gtk.Box for this dialog
         self.dialogBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)

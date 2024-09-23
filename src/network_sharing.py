@@ -15,34 +15,34 @@ class Syncing:
             settings["manually-sync"] = False
             print("Synchronization is not set up.")
         else:
-            self.get_file_info()
+            self.get_sync_interval()
 
     # Get info about synchronization
-    def get_file_info(self):
+    def get_sync_interval(self):
         if settings["periodic-import"] == "Never2":
             settings["manually-sync"] = False
             print("Synchronization is not set up.")
         elif settings["periodic-import"] == "Daily2":
             settings["manually-sync"] = False
-            self.check_sync()
+            self.check_sync_date()
         elif settings["periodic-import"] == "Weekly2":
             settings["manually-sync"] = False
             if date.today().weekday() == 1:
-                self.check_sync()
+                self.check_sync_date()
             else:
                 print("Today is not Tuesday.")
         elif settings["periodic-import"] == "Monthly2":
             settings["manually-sync"] = False
             if dt.day == 2:
-                self.check_sync()
+                self.check_sync_date()
             else:
                 print("Today is not second day of month.")
         elif settings["periodic-import"] == "Manually2":
             settings["manually-sync"] = True
-            self.check_sync()
+            self.check_sync_date()
 
     # Check if whether the synchronization has already taken place on this day
-    def check_sync(self):
+    def check_sync_date(self):
         if os.path.exists(f"{DATA}/sync-info.json"):
             with open(f"{DATA}/sync-info.json") as s:
                 jl = json.load(s)
@@ -78,8 +78,7 @@ class Syncing:
                 self.get_pb_info()
             
             # Check if syncing directory exists
-            if not os.path.exists(f"{CACHE}/syncing"):
-                os.mkdir(f"{CACHE}/syncing")
+            os.makedirs(f"{CACHE}/syncing", exist_ok=True)
             os.chdir(f"{CACHE}/syncing")
             
             # create a txt file to prevent removing the progressing synchronization after closing the app window

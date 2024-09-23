@@ -254,10 +254,10 @@ class Import:
         if flatpak:
             self.create_flatpak_desktop()
             
-    # Create desktop file for install Flatpaks from list
+    # Create desktop file for install Flatpaks from a list
     def create_flatpak_desktop(self):
         os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
-        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") or not os.path.exists(f"{CACHE}/syncing"):
+        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") or not os.path.exists(f"{CACHE}/syncing/sync_status"):
             if not os.path.exists(f"{home}/.config/autostart"):
                 os.mkdir(f"{home}/.config/autostart")
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):

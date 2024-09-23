@@ -85,17 +85,16 @@ class PeriodicBackups:
                 os.system(f"mkdir {home}/Downloads")
                 os.system(f"xdg-user-dirs-update --set DOWNLOAD {home}/Downloads")
                 os.makedirs(f"{download_dir}/SaveDesktop/archives")
-
-        # Check if the path {CACHE}/periodic_saving exists or not
-        if not os.path.exists(f"{CACHE}/periodic_saving"):
-            os.mkdir(f"{CACHE}/periodic_saving")
-
+        
         # Check if the filename format has spaces or not
         if " " in settings["filename-format"]:
             old_filename = f'{settings["filename-format"]}'
             filename = old_filename.replace(" ", "_")
         else:
             filename = settings["filename-format"]
+        
+        # Check if the path {CACHE}/periodic_saving exists or not
+        os.makedirs(f"{CACHE}/periodic_saving", exist_ok=True)
         
         # Start saving the configuration
         os.chdir(f"{CACHE}/periodic_saving")
@@ -105,11 +104,12 @@ class PeriodicBackups:
         os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
         print("moving the configuration archive to the user-defined directory")
         shutil.copyfile('cfg.sd.tar.gz', f'{self.pbfolder}/{filename}.sd.tar.gz')
-        if not settings["periodic-import"] == "Never2":
-            if "fuse" in subprocess.getoutput(f"df -T \"{settings['periodic-saving-folder']}\""):
-                os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file") and os.remove(f"{settings['periodic-saving-folder']}/SaveDesktop-sync-file")
-                with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
-                    pf.write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
+        
+        # Check the filesystem type and create the SaveDesktop.json file, which contains the selected periodic saving filename and interval
+        check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"])
+        if ("gvfs" in check_filesystem or "rclone" in check_filesystem):
+            with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
+                pf.write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
         
         self.config_saved()
 
