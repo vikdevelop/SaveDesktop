@@ -51,7 +51,7 @@
       <p xml:lang="fi_FI">SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.</p>
     </description>
     
-    <url type="homepage">https://github.com/vikdevelop/SaveDesktop</url>
+    <url type="homepage">https://vikdevelop.github.io/SaveDesktop</url>
     <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
     <url type="translate">https://hosted.weblate.org/projects/vikdevelop/savedesktop/</url>
     
