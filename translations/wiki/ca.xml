@@ -16,7 +16,7 @@ La carpeta per defecte d'emmagatzematge és `/home/user/Baixades/SaveDesktop/arc
   <str key="pb_filname_desc">Si voleu crear còpies automàtiques amb altre nom diferent a `Darrera_configuració`, ja és possible, fins i tot amb espais. Des de la versió 2.9.6, la variable `{}` no s'admet per al dia actual, atès que ara totes les còpies automàtiques sobreescriuen el fitxer ja existent.</str>
   <str key="synchronization_between_computers_title">Sincronització entre ordinadors de la xarxa</str>
   <str key="periodic_sync">## Sincronització periòdica
-Podeu triar entre els elements següents:
+Podeu triar entre les opcions següents:
 - Diàriament
 - Setmanalment (la sincronització es duu a terme cada dimarts)
 - Mensualment (la sincronització es duu a terme el segon dia de cada mes)
@@ -40,11 +40,9 @@ Es pot fer des del menú d'aplicacions, o mitjançant la drecera de teclat Ctrl+
 
 Inseriu l'ordre següent a la consola d'ordres:
 - Si heu instal·lat el SaveDesktop com a paquet Flatpak, utilitzeu aquesta ordre:
-
      ```
      flatpak run io.github.vikdevelop.SaveDesktop --import-config /ruta/del/fitxer.sd.tar.gz
      ```
-
 - Si heu instal·lat el SaveDesktop com a paquet Snap o paquet natiu, llavors empreu: 
      ```
      savedesktop --import-config /ruta/del/fitxer.sd.tar.gz
@@ -65,44 +63,53 @@ A partir de la versió 3.3, la interfície ha canviat significativament, en conc
   <str key="enc">El fitxer es desarà com a format ZIP (perquè un Tar no suporta protecció per contrasenya) i, en intentar extreure el seu contingut, si us demanarà la contrasenya que vau utilitzar durant el procés de creació. També si us demanarà quan vulgueu importar-ne la configuració.
 
 Si oblideu la contrasenya, no serà possible de cap manera extreure el contingut o importar cap configuració continguda al fitxer.</str>
-  <str key="requirements">#### Requirements
-- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
-  <str key="set_up_first_computer">## Setting up synchronization in the SaveDesktop app
-On the first computer:
-1. Open the SaveDesktop app
-2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
-3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
-4. If the periodic saving file does not exist, click on the Create button</str>
+  <str key="requirements">#### Requisits
+- Heu de crear prèviament una carpeta que sincronitzi amb el vostre emmagatzematge al núvol i que sigui disponible a cada ordinador que voleu aplicar la sincronització. Es pot dur a terme utilitzant:</str>
+  <str key="set_up_first_computer">## Configuració de la sincronització a l'aplicació SaveDesktop
+Al primer ordinador:
+1. Obriu l'aplicació SaveDesktop
+2. A la pàgina de sincronització, feu clic al botó «Configura el fitxer de sincronització» i després al botó «Canvia»
+3. Feu clic a «Desat periòdic» i seleccioneu la carpeta que sincronitza amb l'emmagatzematge al núvol com a carpeta de desat periòdic
+4. Si el fitxer de configuració no existeix, feu clic al botó «Crea»</str>
   <str key="rclone">&lt;details&gt;
-    &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(for other desktop environments)&lt;/p&gt;&lt;/summary&gt;
+    &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(per a altres entorns d'escriptori)&lt;/p&gt;&lt;/summary&gt;
     &lt;ul&gt;
-      &lt;li&gt;Install Rclone&lt;/li&gt;
+      &lt;li&gt;Instal·leu el Rclone&lt;/li&gt;
       &lt;pre&gt;&lt;code&gt;sudo -v ; curl https://rclone.org/install.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
-      &lt;li&gt;Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
-      &lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "The drive has been mounted successfully"&lt;/code&gt;&lt;/pre&gt;
-      &lt;p&gt;* Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.&lt;/p&gt;&lt;/li&gt;
-      &lt;li&gt;Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
+      &lt;li&gt;Utilitzeu aquesta ordre que crearà la carpeta al núvol, configura el Rclone i munta la carpeta
+      &lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive el-vostre-servei-al-núvol &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "S'ha muntat la unitat correctament"&lt;/code&gt;&lt;/pre&gt;
+      &lt;p&gt;* En comptes d' `el-vostre-servei-al-núvol ` indiqueu el nom del proveïdor de serveis, com ara `drive` (per al Google Drive), `onedrive`, `dropbox`, etc.&lt;/p&gt;&lt;/li&gt;
+      &lt;li&gt;Permeteu l'accés a la carpeta creada mitjançant l'aplicació [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/details&gt;
   
   </str>
-  <str key="set_up_second_computer">On the second computer:
-1. Open the SaveDesktop app
-2. Go to the Sync page and click the "Connect to the cloud storage" button.
-3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
-4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
+  <str key="set_up_second_computer">Al segon ordinador:
+1. Inicieu el SaveDesktop
+2. Aneu a la pàgina de sincronització i feu clic al botó «Connecta amb l'emmagatzematge al núvol».
+3. Feu clic al botó «Selecciona la carpeta al núvol» i trieu la carpeta del mateix emmagatzematge al núvol que té el primer ordinador.
+4. Seleccioneu la periodicitat de la sincronització perquè, si ho deixeu en blanc, la sincronització no funcionarà.
 
-To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
+Per a configurar una sincronització bidireccional, assegureu-vos que teniu configurada la mateixa carpeta de l'apartat «Connectat amb l'emmagatzematge al núvol» del primer ordinador, que existeix un interval de sincronització periòdica seleccionat i que està habilitada l'opció «Sincronització bidireccional».
 </str>
   <str key="gnome_online_accounts">&lt;details&gt;
-    &lt;summary&gt;&lt;b&gt;GNOME Online Accounts&lt;/b&gt;&lt;p&gt;(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)&lt;/p&gt;&lt;/summary&gt;
+    &lt;summary&gt;&lt;b&gt;Comptes en línia del GNOME&lt;/b&gt;&lt;p&gt;(per a entorns d'escriptori GNOME, Cinnamon, COSMIC (obsolet) i Budgie)&lt;/p&gt;&lt;/summary&gt;
     &lt;ul&gt;
-      &lt;li&gt;Open the GNOME Settings&lt;/li&gt;
-      &lt;li&gt;Go to the Online Accounts section and select your cloud drive service&lt;/li&gt;
+      &lt;li&gt;Obriu la configuració del GNOME&lt;/li&gt;
+      &lt;li&gt;Aneu a la secció dels comptes en línia i trieu el servei al núvol de la vostra preferència&lt;/li&gt;
     &lt;/ul&gt;
     &lt;img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png"&gt;
     
-  &lt;/details&gt; 
+  &lt;/details&gt;
+      
+        Comptes en línia del GNOME
+        (per a entorns d'escriptori GNOME, Cinnamon, COSMIC (obsolet) i Budgie)
+      
+
+    - Obriu la configuració del GNOME
+    - Aneu a la secció dels comptes en línia i trieu el servei al núvol de la vostra preferència
+
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
     
   
   </str>
