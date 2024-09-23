@@ -3,7 +3,7 @@ grade: stable
 adopt-info: savedesktop
 license: GPL-3.0+
 icon: flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
-base: core22
+base: core24
 confinement: strict
 
 plugs:
