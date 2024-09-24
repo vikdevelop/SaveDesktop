@@ -37,10 +37,13 @@ plugs:
     write:
       - $HOME/.cinnamon
 
-architectures:
-- build-on: amd64
-- build-on: arm64
-- build-on: armhf
+platforms:
+  amd64:
+    build-on: [amd64]
+  arm64:
+    build-on: [arm64]
+  armhf:
+    build-on: [armhf]
 
 layout:
   /usr/share/gvfs:
