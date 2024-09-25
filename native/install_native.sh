@@ -1,8 +1,6 @@
 #!/usr/bin/bash
 if [ "$1" = "--install" ]
-then
-		sed -i "s\Exec=run.sh\Exec=/home/${USER}/.local/bin/savedesktop\ " flatpak/io.github.vikdevelop.SaveDesktop.desktop
-		install -Dm755 savedesktop ~/.local/bin/
+		install -Dm755 -t ~/.local/bin savedesktop
 		install -D -t ~/.local/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
 		install -D -t ~/.local/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
 		install -D -t ~/.local/share/glib-2.0/schemas flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
@@ -20,7 +18,7 @@ then
 		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/desktop-symbolic.svg
 		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/list-view.png
   		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/done.svg
-    		install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/preferences-system-symbolic.svg
+                install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/exclamation_mark.png
 		# Create cache and data dirs
 		mkdir ~/.cache/io.github.vikdevelop.SaveDesktop
 		mkdir ~/.local/share/io.github.vikdevelop.SaveDesktop
@@ -34,7 +32,7 @@ if [ "$1" = "--remove" ]
 					rm ~/.local/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml
 					rm ~/.local/share/glib-2.0/schemas/io.github.vikdevelop.SaveDesktop.gschema.xml
 					rm -rf ~/.local/share/savedesktop
-					rm -rf LICENSE ~/.local/share/licenses/savedesktop
+					rm -rf ~/.local/share/licenses/savedesktop
 					# Remove app icons
 					rm ~/.local/share/icons/hicolor/scalable/apps/io.github.vikdevelop.SaveDesktop.svg
 					rm ~/.local/share/icons/hicolor/symbolic/apps/io.github.vikdevelop.SaveDesktop-symbolic.svg
@@ -42,7 +40,7 @@ if [ "$1" = "--remove" ]
 					rm ~/.local/share/icons/hicolor/symbolic/apps/edit-symbolic.svg
 					rm ~/.local/share/icons/hicolor/symbolic/apps/list-view.png
      					rm ~/.local/share/icons/hicolor/symbolic/apps/done.svg
-	  				rm ~/.local/share/icons/hicolor/symbolic/apps/preferences-system-symbolic.svg
+	  				rm ~/.local/share/icons/hicolor/symbolic/apps/exclamation_mark.png
 					rm -rf /tmp/SaveDesktop
 					echo "SaveDesktop has been removed."
 fi
