@@ -406,6 +406,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # "Set up the sync file" button
         self.setButton = Gtk.Button.new_with_label(_["set_up_sync_file"])
+        self.setButton.set_name("set-button")
         self.setButton.add_css_class("pill")
         self.setButton.add_css_class("suggested-action")
         self.setButton.connect("clicked", self.open_setDialog if not settings["first-synchronization-setup"] else self.open_initsetupDialog)
@@ -416,6 +417,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # "Connect with other computer" button
         self.getButton = Gtk.Button.new_with_label(_["connect_cloud_storage"])
+        self.getButton.set_name("get-button")
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_cloudDialog if not settings["first-synchronization-setup"] else self.open_initsetupDialog)
         self.getButton.set_valign(Gtk.Align.CENTER)
@@ -425,15 +427,16 @@ class MainWindow(Adw.ApplicationWindow):
     
     # Dialog for initial setting up the synchronization
     def open_initsetupDialog(self, w):
+        self.get_button_type = w.get_name()
         # show the message about finished setup the synchronization
         def almost_done():
             self.initsetupDialog.remove_response('ok')
             self.initsetupDialog.set_extra_child(None)
             self.initsetupDialog.remove_response('next')
             self.initsetupDialog.set_heading("Almost done!")
-            self.initsetupDialog.set_body("You've now created the cloud folder! Click on the Next button to create the periodic saving file.")
+            self.initsetupDialog.set_body("You've now created the cloud folder! Click on the Next button to complete the setup.")
             self.initsetupDialog.set_can_close(True)
-            self.initsetupDialog.add_response('open-setdialog', 'Next')
+            self.initsetupDialog.add_response('open-setdialog', 'Next') if self.get_button_type == 'set-button' else self.initsetupDialog.add_response('open-clouddialog', 'Next')
             self.initsetupDialog.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED)
         
         # Set the Rclone setup command
@@ -448,18 +451,21 @@ class MainWindow(Adw.ApplicationWindow):
         # Responses of this dialog
         def initsetupDialog_closed(w, response):
             if response == 'next': # open the Gtk.FileDialog in the GNOME Online accounts case
-                self.select_pb_folder(w)
+                self.select_pb_folder(w) if self.get_button_type == 'set-button' else self.select_sync_folder(w)
                 almost_done()
             elif response == 'ok': # set the periodic saving folder in the Rclone case
                 settings["periodic-saving-folder"] = f"{download_dir}/SaveDesktop/rclone_drive"
                 almost_done()
             elif response == 'cancel': # if the user clicks on the Cancel button
                 self.initsetupDialog.set_can_close(True)
-            elif response == 'open-setdialog': # open the Set up the sync file dialog after clicking on the Next button in "Almost done! page"
+            elif response == 'open-setdialog': # open the "Set up the sync file" dialog after clicking on the Next button in "Almost done!" page
                 self.start_saving = True
                 settings["periodic-saving"] = "Daily"
                 settings["first-synchronization-setup"] = False
                 self.open_setDialog(w)
+            elif response == 'open-clouddialog': # open the "Connect to the cloud" folder dialog after clicking on the Next button in "Almost done!" page
+                self.open_cloudDialog(w)
+                settings["first-synchronization-setup"] = False
         
         # Dialog itself
         self.initsetupDialog = Adw.AlertDialog.new()
@@ -1046,8 +1052,8 @@ class MainWindow(Adw.ApplicationWindow):
             except:
                 return
             self.folder_pb = folder.get_path()
-            settings["periodic-saving-folder"] = self.folder_pb if not settings["first-synchronization-setup"] else None
             self.dirRow.set_subtitle(self.folder_pb)
+            settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] else None
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -1120,6 +1126,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.sync_folder = folder.get_path()
             self.cfileRow.set_subtitle(self.sync_folder)
             self.cloudDialog.set_response_enabled('ok', True) if not self.psyncRow.get_selected_item().get_string() == _["never"] else None
+            settings["file-for-syncing"] = self.sync_folder if settings["first-synchronization-setup"] else None
             
         self.sync_folder_chooser = Gtk.FileDialog.new()
         self.sync_folder_chooser.set_modal(True)
