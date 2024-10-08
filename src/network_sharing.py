@@ -68,38 +68,33 @@ class Syncing:
                
     # Download archive from URL
     def download_config(self):
-       # check, if the selected cloud drive folder is empty or not and if contains the "sd.tar.gz" or not
-       if not settings['file-for-syncing'] == "" or not "sd.tar.gz" in settings["file-for-syncing"]:
-            # check, if the selected cloud drive folder contains the SaveDesktop.json file or not
-            if os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
-                self.get_pb_info()
-            else:
-                subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
-                self.get_pb_info()
-            
-            # Check if syncing directory exists
-            os.makedirs(f"{CACHE}/syncing", exist_ok=True)
-            os.chdir(f"{CACHE}/syncing")
-            
-            # create a txt file to prevent removing the progressing synchronization after closing the app window
-            os.system("echo > sync_status")
-            
-            # extract the configuration archive
-            print("extracting the archive")
-            try:
-                with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
-                    for member in tar.getmembers():
-                        try:
-                            tar.extract(member)
-                        except PermissionError as e:
-                            print(f"Permission denied for {member.name}: {e}")
-            except Exception as e:
-                os.system(f"notify-send '{_['err_occured']}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
-                exit()
-            self.import_config()
-       else:
-            os.system("notify-send 'SaveDesktop' 'You have not set up the synchronization correctly. Please set it up in the app again.'")
+        # check, if the selected cloud drive folder contains the SaveDesktop.json file or not
+        if os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
+            self.get_pb_info()
+        else:
+            subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
+            self.get_pb_info()
+        
+        # Check if syncing directory exists
+        os.makedirs(f"{CACHE}/syncing", exist_ok=True)
+        os.chdir(f"{CACHE}/syncing")
+        
+        # create a txt file to prevent removing the progressing synchronization after closing the app window
+        os.system("echo > sync_status")
+        
+        # extract the configuration archive
+        print("extracting the archive")
+        try:
+            with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
+                for member in tar.getmembers():
+                    try:
+                        tar.extract(member)
+                    except PermissionError as e:
+                        print(f"Permission denied for {member.name}: {e}")
+        except Exception as e:
+            os.system(f"notify-send '{_['err_occured']}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
             exit()
+        self.import_config()
     
     # Get info about selected periodic saving interval, periodic saving folder and filename from the {cloud_folder}/SaveDesktop.json
     def get_pb_info(self):
@@ -117,6 +112,7 @@ class Syncing:
         if settings["bidirectional-sync"] == True:
             settings["filename-format"] = info["filename"]
             settings["periodic-saving"] = info["periodic-saving-interval"]
+            settings["periodic-saving-folder"] = settings["file-for-syncing"]
         
     # Sync configuration
     def import_config(self):
@@ -128,10 +124,8 @@ class Syncing:
         if not settings["manually-sync"] == True:
             with open(f"{DATA}/sync-info.json", "w") as s:
                 s.write('{\n "sync-date": "%s"\n}' % date.today())
-        if not os.path.exists(f"{CACHE}/syncing/copying_flatpak_data"):
-            os.system(f"rm -rf {CACHE}/syncing/*")
         [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
-        os.system("rm sync_status")
+        os.system("rm sync_status") if not os.path.exists(f"{CACHE}/syncing/app") else None
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop ({self.file})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
