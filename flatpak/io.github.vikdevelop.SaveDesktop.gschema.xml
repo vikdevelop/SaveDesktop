@@ -86,6 +86,10 @@
 		    <default>true</default>
 		    <summary>Enable/Disable bidirectional synchronization</summary>
 		</key>
+		<key name="first-synchronization-setup" type="b">
+		    <default>true</default>
+		    <summary>Set showing the synchronization first setup dialog</summary>
+		</key>
 		<key name="disabled-flatpak-apps-data" type="as">
 		  <default>[]</default>
 		  <summary>Select, what Flatpak applications data will be saved</summary>
