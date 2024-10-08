@@ -197,10 +197,6 @@ class Import:
         os.system(f'cp -au ./gtk-3.0 {home}/.config/')
         print("importing desktop directory")
         os.system(f'cp -au ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
-        # create this file to prevent removing the cache directory during importing configuration
-        if os.path.exists(f'{CACHE}/import_config/app'):
-            with open(f"copying_flatpak_data", "w") as c:
-                c.write("copying flatpak data ...")
         print("importing desktop environment configuration files")
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
