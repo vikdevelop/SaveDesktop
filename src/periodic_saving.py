@@ -3,7 +3,7 @@ from datetime import datetime
 from datetime import date
 from pathlib import Path
 from gi.repository import GLib, Gio
-from localization import _, CACHE, DATA, home, system_dir, settings
+from localization import _, CACHE, DATA, home, system_dir, settings, download_dir, snap
 
 # Get the current date
 dt = datetime.now()
@@ -13,9 +13,6 @@ current_day = datetime.today()
 
 # Get the first day of month
 first_day = current_day.replace(day=1)
-
-# Get the user downloads directory
-download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 
 class PeriodicBackups:
     def __init__(self):
@@ -101,13 +98,14 @@ class PeriodicBackups:
         os.system("echo > saving_status")
         os.system(f"python3 {system_dir}/config.py --save")
         
+        print("creating the configuration archive")
         os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
         print("moving the configuration archive to the user-defined directory")
         shutil.copyfile('cfg.sd.tar.gz', f'{self.pbfolder}/{filename}.sd.tar.gz')
         
         # Check the filesystem type and create the SaveDesktop.json file, which contains the selected periodic saving filename and interval
-        check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"])
-        if ("gvfs" in check_filesystem or "rclone" in check_filesystem):
+        check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"] if not snap else subprocess.getoutput('stat -f "%s"' % settings["periodic-saving-folder"]))
+        if (not snap and ("gvfs" in check_filesystem or "rclone" in check_filesystem)) or (snap and "fuse" in check_filesystem):
             with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
                 pf.write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
         
