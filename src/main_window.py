@@ -9,7 +9,7 @@ from threading import Thread
 from localization import _, home, download_dir, snap, flatpak
 from open_wiki import *
 from shortcuts_window import *
-from flatpak_apps_dialog import FolderSwitchRow, FlatpakAppsDialog
+from items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
 
 # Application window
 class MainWindow(Adw.ApplicationWindow):
@@ -51,8 +51,8 @@ class MainWindow(Adw.ApplicationWindow):
         # add Manually sync section
         if settings["manually-sync"] == True:
             self.sync_menu = Gio.Menu()
-            self.sync_menu.append(_["sync"], 'app.m_sync_with_key')
-            self.main_menu.append_section(None, self.sync_menu)
+            self.sync_menu.append(_["sync"], 'app.m-sync-with-key')
+            self.main_menu.prepend_section(None, self.sync_menu)
         
         # primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -290,12 +290,18 @@ class MainWindow(Adw.ApplicationWindow):
             self.msDialog.connect('response', msDialog_closed)
             
             self.msDialog.present()
+            
+        def open_itemsDialog(w):
+            self.itemsd = itemsDialog()
+            self.itemsd.choose(self, None, None, None)
+            self.itemsd.present()
 
         # =========
         # Save page
         
         # Open the More options dialog from the self.setDialog
         self.more_options_dialog = more_options_dialog
+        self.items_dialog = open_itemsDialog
             
         # Set valign for save desktop layout
         self.saveBox.set_valign(Gtk.Align.CENTER)
@@ -329,7 +335,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.itemsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.itemsButton.set_valign(Gtk.Align.CENTER)
         self.itemsButton.add_css_class("flat")
-        self.itemsButton.connect("clicked", self.open_itemsDialog)
+        self.itemsButton.connect("clicked", open_itemsDialog)
 
         # Action row for opening dialog for selecting items that will be included to the config archive
         self.items_row = Adw.ActionRow.new()
@@ -696,7 +702,7 @@ class MainWindow(Adw.ApplicationWindow):
                         if settings["manually-sync"]:
                             self.sync_menu = Gio.Menu()
                             self.sync_menu.append(_["sync"], 'app.m-sync-with-key')
-                            self.main_menu.append_section(None, self.sync_menu)
+                            self.main_menu.prepend_section(None, self.sync_menu)
                             self.show_special_toast()
                         else:
                             try:
@@ -842,207 +848,6 @@ class MainWindow(Adw.ApplicationWindow):
                 f.write(synchronization_content)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
-    
-    # Dialog: items to include in the configuration archive
-    def open_itemsDialog(self, w):
-        # Action after closing itemsDialog
-        def itemsdialog_closed(w, response):
-            if response == 'ok':
-                # Saving the selected options to GSettings database
-                settings["save-icons"] = self.switch_01.get_active()
-                settings["save-themes"] = self.switch_02.get_active()
-                settings["save-fonts"] = self.switch_03.get_active()
-                settings["save-backgrounds"] = self.switch_04.get_active()
-                settings["save-desktop-folder"] = self.switch_de.get_active()
-                if flatpak:
-                    settings["save-installed-flatpaks"] = self.switch_05.get_active()
-                    settings["save-flatpak-data"] = self.switch_06.get_active()
-                if self.save_ext_switch_state == True:
-                    settings["save-extensions"] = self.switch_ext.get_active()
-                    self.save_ext_switch_state = False
-            elif response == 'cancel':
-                switch_status = self.flatpak_data_sw_state
-                settings["save-flatpak-data"] = switch_status
-
-        # show dialog for managing Flatpak applications data
-        def manage_data_list(w):
-            self.itemsDialog.close()
-            self.appd = FlatpakAppsDialog()
-            self.appd.choose(self, None, None, None)
-            self.appd.present()
-
-        # show button after clicking on the switch "User data of Flatpak apps"
-        def show_appsbtn(w, GParamBoolean):
-            self.flatpak_data_sw_state = settings["save-flatpak-data"]
-            if self.switch_06.get_active() == True:
-                self.data_row.add_suffix(self.appsButton)
-            else:
-                self.data_row.remove(self.appsButton)
-            settings["save-flatpak-data"] = self.switch_06.get_active()
-
-        # show extensions row, if user has installed GNOME, Cinnamon or KDE Plasma DE
-        def show_extensions_row():
-            # Switch and row of option 'Save extensions'
-            self.switch_ext = Gtk.Switch.new()
-            if settings["save-extensions"]:
-                self.switch_ext.set_active(True)
-            self.switch_ext.set_valign(align=Gtk.Align.CENTER)
-
-            self.ext_row = Adw.ActionRow.new()
-            self.ext_row.set_title(title=_["extensions"])
-            self.ext_row.set_use_markup(True)
-            self.ext_row.set_title_lines(2)
-            self.ext_row.set_subtitle_lines(3)
-            self.ext_row.add_suffix(self.switch_ext)
-            self.ext_row.set_activatable_widget(self.switch_ext)
-            self.itemsBox.append(child=self.ext_row)
-
-        # self.itemsDialog
-        self.itemsDialog = Adw.AlertDialog.new()
-        self.itemsDialog.set_heading(_["items_for_archive"])
-        self.itemsDialog.set_body(_["items_desc"])
-        self.itemsDialog.choose(self, None, None, None)
-        
-        # Box for loading widgets in this dialog
-        self.itemsBox = Gtk.ListBox.new()
-        self.itemsBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.itemsBox.get_style_context().add_class(class_name='boxed-list')
-        self.itemsDialog.set_extra_child(self.itemsBox)
-        
-        # Switch and row of option 'Save icons'
-        self.switch_01 = Gtk.Switch.new()
-        if settings["save-icons"]:
-            self.switch_01.set_active(True)
-        self.switch_01.set_valign(align=Gtk.Align.CENTER)
-         
-        self.icons_row = Adw.ActionRow.new()
-        self.icons_row.set_title(title=_["icons"])
-        self.icons_row.set_use_markup(True)
-        self.icons_row.set_title_lines(2)
-        self.icons_row.set_subtitle_lines(3)
-        self.icons_row.add_suffix(self.switch_01)
-        self.icons_row.set_activatable_widget(self.switch_01)
-        self.itemsBox.append(child=self.icons_row)
-        
-        # Switch and row of option 'Save themes'
-        self.switch_02 = Gtk.Switch.new()
-        if settings["save-themes"]:
-            self.switch_02.set_active(True)
-        self.switch_02.set_valign(align=Gtk.Align.CENTER)
-         
-        self.themes_row = Adw.ActionRow.new()
-        self.themes_row.set_title(title=_["themes"])
-        self.themes_row.set_use_markup(True)
-        self.themes_row.set_title_lines(2)
-        self.themes_row.set_subtitle_lines(3)
-        self.themes_row.add_suffix(self.switch_02)
-        self.themes_row.set_activatable_widget(self.switch_02)
-        self.itemsBox.append(child=self.themes_row)
-        
-        # Switch and row of option 'Save fonts'
-        self.switch_03 = Gtk.Switch.new()
-        if settings["save-fonts"]:
-            self.switch_03.set_active(True)
-        self.switch_03.set_valign(align=Gtk.Align.CENTER)
-         
-        self.fonts_row = Adw.ActionRow.new()
-        self.fonts_row.set_title(title=_["fonts"])
-        self.fonts_row.set_use_markup(True)
-        self.fonts_row.set_title_lines(2)
-        self.fonts_row.set_subtitle_lines(3)
-        self.fonts_row.add_suffix(self.switch_03)
-        self.fonts_row.set_activatable_widget(self.switch_03)
-        self.itemsBox.append(child=self.fonts_row)
-        
-        # Switch and row of option 'Save backgrounds'
-        self.switch_04 = Gtk.Switch.new()
-        if settings["save-backgrounds"]:
-            self.switch_04.set_active(True)
-        self.switch_04.set_valign(align=Gtk.Align.CENTER)
-         
-        self.backgrounds_row = Adw.ActionRow.new()
-        self.backgrounds_row.set_title(title=_["backgrounds"])
-        self.backgrounds_row.set_use_markup(True)
-        self.backgrounds_row.set_title_lines(2)
-        self.backgrounds_row.set_subtitle_lines(3)
-        self.backgrounds_row.add_suffix(self.switch_04)
-        self.backgrounds_row.set_activatable_widget(self.switch_04)
-        self.itemsBox.append(child=self.backgrounds_row)
-        
-        # show extension switch and row if user has installed these environments
-        if self.environment in ["GNOME", "KDE Plasma", "Cinnamon", "COSMIC (Old)"]:
-            self.save_ext_switch_state = True
-            show_extensions_row()
-        
-        # Switch and row of option 'Save Desktop' (~/Desktop)
-        self.switch_de = Gtk.Switch.new()
-        if settings["save-desktop-folder"]:
-            self.switch_de.set_active(True)
-        self.switch_de.set_valign(align=Gtk.Align.CENTER)
-        
-        self.desktop_row = Adw.ActionRow.new()
-        self.desktop_row.set_title(title=_["desktop_folder"])
-        self.desktop_row.set_subtitle(subtitle=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
-        self.desktop_row.set_subtitle_selectable(True)
-        self.desktop_row.set_use_markup(True)
-        self.desktop_row.set_title_lines(2)
-        self.desktop_row.set_subtitle_lines(3)
-        self.desktop_row.add_suffix(self.switch_de)
-        self.desktop_row.set_activatable_widget(self.switch_de)
-        self.itemsBox.append(child=self.desktop_row)
-        
-        if flatpak:
-            self.flatpak_row = Adw.ExpanderRow.new()
-            self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
-            self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
-            self.flatpak_row.set_use_markup(True)
-            self.flatpak_row.set_title_lines(2)
-            self.flatpak_row.set_subtitle_lines(3)
-            self.itemsBox.append(child=self.flatpak_row)
-            
-            # Switch and row of option 'Save installed flatpaks'
-            self.switch_05 = Gtk.Switch.new()
-            if settings["save-installed-flatpaks"]:
-                self.switch_05.set_active(True)
-            self.switch_05.set_valign(align=Gtk.Align.CENTER)
-            
-            self.list_row = Adw.ActionRow.new()
-            self.list_row.set_title(title=_["list"])
-            self.list_row.set_use_markup(True)
-            self.list_row.set_title_lines(4)
-            self.list_row.add_suffix(self.switch_05)
-            self.list_row.set_activatable_widget(self.switch_05)
-            self.flatpak_row.add_row(child=self.list_row)
-            
-            # Switch, button and row of option 'Save SaveDesktop app settings'
-            self.switch_06 = Gtk.Switch.new()
-            self.appsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
-            
-            self.data_row = Adw.ActionRow.new()
-            self.data_row.set_title(title=_["user_data_flatpak"])
-            self.data_row.set_use_markup(True)
-            self.data_row.set_title_lines(4)
-            self.data_row.add_suffix(self.switch_06)
-            self.data_row.set_activatable_widget(self.switch_06)
-            self.flatpak_row.add_row(child=self.data_row)
-            
-            if settings["save-flatpak-data"]:
-                self.switch_06.set_active(True)
-                self.data_row.add_suffix(self.appsButton)
-            self.flatpak_data_sw_state = settings["save-flatpak-data"]
-            self.switch_06.set_valign(align=Gtk.Align.CENTER)
-            self.switch_06.connect('notify::active', show_appsbtn)
-            
-            self.appsButton.add_css_class("flat")
-            self.appsButton.set_valign(Gtk.Align.CENTER)
-            self.appsButton.set_tooltip_text(_["flatpaks_data_tittle"])
-            self.appsButton.connect("clicked", manage_data_list)
-        
-        self.itemsDialog.add_response('cancel', _["cancel"])
-        self.itemsDialog.add_response('ok', _["apply"])
-        self.itemsDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.itemsDialog.connect('response', itemsdialog_closed)
-        self.itemsDialog.present()
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
@@ -1569,7 +1374,7 @@ class MyApp(Adw.Application):
     # Open the "Items to include in the configuration archive" dialog using Ctrl+Shift+I keyboard shortcut
     def call_items_dialog(self, action, param):
         w = ""
-        self.win.open_itemsDialog(w)
+        self.win.items_dialog(w)
     
     # Open the "Set up the sync file" dialog using Ctrl+Shift+S keyboard shortcut
     def call_setDialog(self, action, param):
