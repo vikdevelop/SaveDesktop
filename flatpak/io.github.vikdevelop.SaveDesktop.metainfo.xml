@@ -69,12 +69,23 @@
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png</image>
         </screenshot>
     </screenshots>
-    
-    <content_rating type="oars-1.1"/>
-    
+
     <categories>
         <category>Utility</category>
     </categories>
+    
+    <content_rating type="oars-1.1"/>
+
+    <requires>
+        <display_length compare="ge">600</display_length>
+        <display_width compare="ge">400</display_width>
+    </requires>
+
+    <supports>
+        <control>keyboard</control>
+        <control>pointing</control>
+        <control>touch</control>
+    </supports>
 
     <branding>
         <color type="primary" scheme_preference="light">#b6d1eb</color>
