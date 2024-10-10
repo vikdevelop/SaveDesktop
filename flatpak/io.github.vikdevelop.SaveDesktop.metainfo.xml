@@ -94,6 +94,16 @@
     </branding>
           
     <releases>
+       <release version="3.5" type="development" date="2024-10-10">
+            <description>
+                <ul>
+                    <li>Simplified the initial setting up synchronization: in that case, it shows the dialog window, which helps you to set it up</li>
+                    <li>Added more keyboard shortcuts</li>
+                    <li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>
+                    <li>The UI is now more responsive</li>
+                </ul>
+            </description>
+       </release>
        <release version="3.4" date="2024-09-04">
            <description>
                <ul>
