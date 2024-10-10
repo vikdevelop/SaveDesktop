@@ -436,7 +436,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.get_button_type = w.get_name()
         # show the message about finished setup the synchronization
         def almost_done():
-            self.initsetupDialog.remove_response('ok')
+            self.initsetupDialog.remove_response('ok-rclone')
             self.initsetupDialog.set_extra_child(None)
             self.initsetupDialog.remove_response('next')
             self.initsetupDialog.set_heading("Almost done!")
@@ -452,14 +452,14 @@ class MainWindow(Adw.ApplicationWindow):
             self.initsetupDialog.set_body("")
             os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True)
             self.cmdRow.set_title(f"Now, open the terminal using Ctrl+Alt+T keyboard shortcut, and enter this command that sets up Rclone and mounts the folder:\n <i><u>rclone config create drive {cloud_service} &amp;&amp; rclone mount drive: {download_dir}/SaveDesktop/rclone_drive</u></i>")
-            self.initsetupDialog.set_response_enabled('ok', True)
+            self.initsetupDialog.set_response_enabled('ok-rclone', True)
             
         # Responses of this dialog
         def initsetupDialog_closed(w, response):
             if response == 'next': # open the Gtk.FileDialog in the GNOME Online accounts case
                 self.select_pb_folder(w) if self.get_button_type == 'set-button' else self.select_sync_folder(w)
                 almost_done()
-            elif response == 'ok': # set the periodic saving folder in the Rclone case
+            elif response == 'ok-rclone': # set the periodic saving folder in the Rclone case
                 settings["periodic-saving-folder"] = f"{download_dir}/SaveDesktop/rclone_drive"
                 almost_done()
             elif response == 'cancel': # if the user clicks on the Cancel button
@@ -486,14 +486,14 @@ class MainWindow(Adw.ApplicationWindow):
         # if the user has GNOME, Cinnamon, COSMIC (Old) or Budgie environment, it shows text about setting up GNOME Online Accounts.
         # otherwise, it shows the text about setting up Rclone
         if self.environment in ["GNOME", "Cinnamon", "COSMIC (Old)", "Budgie"]:
-            self.initsetupDialog.set_body("For synchronization to works properly, you need to have the folder, that is synced with your cloud service using GNOME Online Accounts.\nTo setup it, <b>go to the system settings and then to the Online Accounts section and select the service you want</b> (e.g., Google, Microsoft 365, Nextcloud).\nIn the next step, select the created cloud folder, which can be found in the Networks section.")
+            self.initsetupDialog.set_body("For synchronization to works properly, you need to have the folder, that is synced with your cloud service using GNOME Online Accounts.\nTo setup it, <b>go to the system settings and then to the Online Accounts section and select the service you want</b> (e.g., Google, Microsoft 365, Nextcloud).\nThen, click on the Next button and select the created cloud folder, which can be found in the Networks section.")
             self.initsetupDialog.add_response('next', 'Next')
             self.initsetupDialog.set_response_appearance('next', Adw.ResponseAppearance.SUGGESTED)
         else:
             self.initsetupDialog.set_body("For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>")
             
             # create a list with available services, which can be connected via Rclone
-            services = Gtk.StringList.new(strings=['Google Drive', 'Microsoft OneDrive', 'DropBox'])
+            services = Gtk.StringList.new(strings=['Select', 'Google Drive', 'Microsoft OneDrive', 'DropBox'])
             
             # create a ListBox for the combo row below
             self.initBox = Gtk.ListBox.new()
@@ -514,9 +514,9 @@ class MainWindow(Adw.ApplicationWindow):
             self.initBox.append(self.cmdRow)
             
             # add the Apply button to the dialog
-            self.initsetupDialog.add_response('ok', _["apply"])
-            self.initsetupDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-            self.initsetupDialog.set_response_enabled('ok', False)
+            self.initsetupDialog.add_response('ok-rclone', _["apply"])
+            self.initsetupDialog.set_response_appearance('ok-rclone', Adw.ResponseAppearance.SUGGESTED)
+            self.initsetupDialog.set_response_enabled('ok-rclone', False)
     
     # Dialog for setting the sync file, periodic synchronization interval and copying the URL for synchronization
     def open_setDialog(self, w):
