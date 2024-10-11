@@ -321,8 +321,10 @@ class MainWindow(Adw.ApplicationWindow):
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.lbox_e.add_css_class(css_class='boxed-list-separate')
-        self.lbox_e.set_margin_start(60)
-        self.lbox_e.set_margin_end(60)
+        self.lbox_e.set_margin_start(20)
+        self.lbox_e.set_margin_end(20)
+        self.lbox_e.set_halign(Gtk.Align.CENTER)
+        self.lbox_e.set_valign(Gtk.Align.CENTER)
         self.saveBox.append(self.lbox_e)
         
         # set the filename section
@@ -383,20 +385,17 @@ class MainWindow(Adw.ApplicationWindow):
         self.importPage.set_icon_name("document-open-symbolic")
         self.importPage.set_title(_['import_config'])
         self.importPage.set_description("Import the configuration by clicking on the button below.")
-        self.importPage.set_size_request(300, 200)
+        self.importPage.set_size_request(300, 300)
         self.importBox.append(self.importPage)
-        
-        # Box of Import from file and Import from list buttons
-        self.importbtnBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=7)
-        self.importbtnBox.set_halign(Gtk.Align.CENTER)
-        self.importBox.append(self.importbtnBox)
         
         # Import configuration button
         self.fileButton = Gtk.Button.new_with_label(_["import_from_file"])
         self.fileButton.add_css_class("pill")
         self.fileButton.add_css_class("suggested-action")
+        self.fileButton.set_halign(Gtk.Align.CENTER)
+        self.fileButton.set_valign(Gtk.Align.CENTER)
         self.fileButton.connect("clicked", self.select_folder_to_import)
-        self.importbtnBox.append(self.fileButton)
+        self.importBox.append(self.fileButton)
             
     # Syncing desktop page
     def sync_desktop(self):
@@ -408,6 +407,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.syncPage.set_icon_name("emblem-synchronizing-symbolic")
         self.syncPage.set_title(_["sync_title"])
         self.syncPage.set_description(f'{_["sync_desc"]} <a href="{sync_wiki}">{_["learn_more"]}</a>')
+        self.syncPage.set_size_request(-1, 500)
         self.syncingBox.append(self.syncPage)
 
         # "Set up the sync file" button
@@ -417,8 +417,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.setButton.add_css_class("suggested-action")
         self.setButton.connect("clicked", self.open_setDialog if not settings["first-synchronization-setup"] else self.open_initsetupDialog)
         self.setButton.set_valign(Gtk.Align.CENTER)
-        self.setButton.set_margin_start(70)
-        self.setButton.set_margin_end(70)
+        self.setButton.set_halign(Gtk.Align.CENTER)
         self.syncingBox.append(self.setButton)
 
         # "Connect with other computer" button
@@ -427,8 +426,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.getButton.add_css_class("pill")
         self.getButton.connect("clicked", self.open_cloudDialog if not settings["first-synchronization-setup"] else self.open_initsetupDialog)
         self.getButton.set_valign(Gtk.Align.CENTER)
-        self.getButton.set_margin_start(70)
-        self.getButton.set_margin_end(70)
+        self.getButton.set_halign(Gtk.Align.CENTER)
         self.syncingBox.append(self.getButton)
     
     # Dialog for initial setting up the synchronization
@@ -1043,11 +1041,14 @@ class MainWindow(Adw.ApplicationWindow):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
             os.system(f"pkill tar") if not settings["enable-encryption"] else os.system("pkill zip")
             self.toolbarview.set_content(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
+            self.switcher_bar.set_reveal(True)
             self.set_title("SaveDesktop")
             for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
                 self.savewaitBox.remove(widget)
         
         self.headerbar.set_title_widget(None)
+        self.switcher_bar.set_reveal(False)
 
         # Create box widget for this page
         self.savewaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -1065,6 +1066,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.savewaitBox.append(self.savewaitSpinner)
 
         # Prepare Gtk.Image widget for the next page
+        self.sdoneImage = Gtk.Image.new()
+        self.savewaitBox.append(self.sdoneImage)
 
         # Use "sd.zip" if Archive Encryption is enabled
         status = _["saving_config_status"].replace("sd.tar.gz", "sd.zip") if settings["enable-encryption"] else _["saving_config_status"]
@@ -1090,6 +1093,8 @@ class MainWindow(Adw.ApplicationWindow):
         # back to the previous page from this page
         def back_to_main(w):
             self.toolbarview.set_content(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
+            self.switcher_bar.set_reveal(True)
             self.set_title("SaveDesktop")
             for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
                 self.savewaitBox.remove(widget)
@@ -1205,12 +1210,15 @@ class MainWindow(Adw.ApplicationWindow):
             self.cancel_process = True
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
             self.toolbarview.set_content(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
+            self.switcher_bar.set_reveal(True)
             self.set_title("SaveDesktop")
             for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]:
                 self.importwaitBox.remove(widget)
 
         # Add new headerbar for this page
         self.headerbar.set_title_widget(None)
+        self.switcher_bar.set_reveal(False)
 
         # Create box widget for this page
         self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -1252,6 +1260,8 @@ class MainWindow(Adw.ApplicationWindow):
         # back to the previous page from this page
         def back_to_main(w):
             self.toolbarview.set_content(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
+            self.switcher_bar.set_reveal(True)
             self.set_title("SaveDesktop")
             [self.importwaitBox.remove(widget) for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]]
             if hasattr(self, 'flistBox'):
