@@ -197,7 +197,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.msBox = Gtk.ListBox.new()
             self.msBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
             self.msBox.add_css_class('boxed-list')
-            self.msBox.set_size_request(380, 380) if self.open_setdialog_tf else self.msBox.set_size_request(380, 200)
+            self.msBox.set_size_request(-1, 500) if self.open_setdialog_tf else self.msBox.set_size_request(-1, 300)
             self.msDialog.set_extra_child(self.msBox)
             
             # Learn more about periodic saving
@@ -278,7 +278,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.encryptRow = Adw.ActionRow.new()
             self.encryptRow.set_title(_["archive_encryption"])
             self.encryptRow.set_subtitle(f'{_["archive_encryption_desc"]} <a href="{enc_wiki}">{_["learn_more"]}</a>')
-            self.encryptRow.set_subtitle_lines(5)
+            self.encryptRow.set_subtitle_lines(8)
             self.encryptRow.add_suffix(self.encryptSwitch)
             self.encryptRow.set_activatable_widget(self.encryptSwitch)
             self.msBox.append(self.encryptRow)
@@ -407,7 +407,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.syncPage.set_icon_name("emblem-synchronizing-symbolic")
         self.syncPage.set_title(_["sync_title"])
         self.syncPage.set_description(f'{_["sync_desc"]} <a href="{sync_wiki}">{_["learn_more"]}</a>')
-        self.syncPage.set_size_request(-1, 500)
+        self.syncPage.set_size_request(-1, 450)
         self.syncingBox.append(self.syncPage)
 
         # "Set up the sync file" button
@@ -449,7 +449,7 @@ class MainWindow(Adw.ApplicationWindow):
             cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox"
             self.initsetupDialog.set_body("")
             os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True)
-            self.cmdRow.set_title(f"Now, open the terminal using Ctrl+Alt+T keyboard shortcut, and enter this command that sets up Rclone and mounts the folder:\n <i><u>rclone config create drive {cloud_service} &amp;&amp; rclone mount drive: {download_dir}/SaveDesktop/rclone_drive</u></i>")
+            self.cmdRow.set_title(f"Now, open the terminal using Ctrl+Alt+T keyboard shortcut, and enter this command that sets up Rclone and mounts the folder:\n<i><u>rclone &amp;> /dev/null &amp;&amp; rclone config create drive {cloud_service} &amp;&amp; rclone mount drive: {download_dir}/SaveDesktop/rclone_drive || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'</u></i>")
             self.initsetupDialog.set_response_enabled('ok-rclone', True)
             
         # Responses of this dialog
@@ -625,7 +625,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.l_setdBox = Gtk.ListBox.new()
         self.l_setdBox.set_selection_mode(Gtk.SelectionMode.NONE)
         self.l_setdBox.get_style_context().add_class('boxed-list')
-        self.l_setdBox.set_size_request(300, 160)
+        self.l_setdBox.set_size_request(-1, 160)
         self.setDialog.set_extra_child(self.l_setdBox)
         
         # Check the synchronization matters
@@ -730,7 +730,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudBox = Gtk.ListBox.new()
         self.cloudBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.cloudBox.get_style_context().add_class(class_name='boxed-list')
-        self.cloudBox.set_size_request(400, 260)
+        self.cloudBox.set_size_request(-1, 400)
         self.cloudDialog.set_extra_child(self.cloudBox)
         
         # Row and buttons for selecting the cloud drive folder
