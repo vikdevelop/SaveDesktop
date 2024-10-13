@@ -462,7 +462,8 @@ class MainWindow(Adw.ApplicationWindow):
             self.copyButton.add_css_class("circular")
             self.copyButton.set_valign(Gtk.Align.CENTER)
             self.copyButton.connect("clicked", copy_rclone_command)
-            self.cmdRow.add_suffix(self.copyButton)
+            if not self.cmdRow.get_activatable_widget() == self.copyButton:
+                self.cmdRow.add_suffix(self.copyButton)
         
         # Set the Rclone setup command
         def get_service(comborow, GParamObject):
@@ -573,6 +574,7 @@ class MainWindow(Adw.ApplicationWindow):
                     self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
                     os.system(f"notify-send 'SaveDesktop' '{_['config_saved']}'")
                     self.setDialog.set_response_enabled('ok', True)
+                    self.start_saving = False
         
         # make the periodic saving file if it does not exist
         def make_pb_file(w):
@@ -589,8 +591,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.file_row = Adw.ActionRow()
             self.file_row.set_title(_["periodic_saving_file"])
             self.file_row.set_subtitle(folder)
-            if "fuse" in check_filesystem and "red" not in folder:
-                self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic"))
+            self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic")) if "red" not in folder else None
             self.file_row.set_subtitle_lines(4)
             self.file_row.set_use_markup(True)
             self.file_row.set_subtitle_selectable(True)
@@ -606,13 +607,14 @@ class MainWindow(Adw.ApplicationWindow):
                 self.setupButton.add_css_class("suggested-action")
                 self.setupButton.connect("clicked", make_pb_file)
                 self.file_row.add_suffix(self.setupButton)
-                make_pb_file(w) if self.start_saving else None
+                make_pb_file(w) if self.start_saving else None # start creating the periodic saving file if the self.start_saving value is TRUE
             if _["cloud_folder_err"] in folder:
                 self.lmButton = Gtk.Button.new_with_label(_["learn_more"])
                 self.lmButton.set_valign(Gtk.Align.CENTER)
                 self.lmButton.add_css_class("suggested-action")
                 self.lmButton.connect("clicked", open_sync_link)
                 self.file_row.add_suffix(self.lmButton)
+            self.setDialog.set_body("") # set the body as empty after loading the periodic saving information
         
         # Check the file system of the periodic saving folder and their existation
         def check_filesystem_fnc():
@@ -625,7 +627,7 @@ class MainWindow(Adw.ApplicationWindow):
             if settings["periodic-saving"] == "Never":
                 folder = f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>'
             # Check if the filesystem is not FUSE
-            elif (not snap and (not "gvfs" in check_filesystem or not "rclone" in check_filesystem)) or (snap and not "fuse" in check_filesystem):
+            elif (not snap and not("gvfsd" in check_filesystem or "rclone" in check_filesystem)) or (snap and not "fuse" in check_filesystem):
                 folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             # Check if the periodic saving file exists
             elif not os.path.exists(path):
@@ -653,6 +655,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Dialog itself
         self.setDialog = Adw.AlertDialog.new()
         self.setDialog.set_heading(_["set_up_sync_file"])
+        self.setDialog.set_body(_["please_wait"])
         self.setDialog.set_body_use_markup(True)
         self.setDialog.choose(self, None, None, None)
         
@@ -891,7 +894,7 @@ class MainWindow(Adw.ApplicationWindow):
                 return
             self.folder_pb = folder.get_path()
             self.dirRow.set_subtitle(self.folder_pb)
-            settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] else None
+            settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] == True else ""
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -1370,7 +1373,7 @@ class MainWindow(Adw.ApplicationWindow):
         settings["filename"] = self.saveEntry.get_text()
         
         # Check for ongoing operations before clearing cache
-        if any(os.path.exists(f"{CACHE}/{path}") for path in ["import_config/import_status", "syncing/sync_status""periodic_saving/saving_status"]):
+        if any(os.path.exists(f"{CACHE}/{path}") for path in ["import_config/import_status", "syncing/sync_status", "periodic_saving/saving_status"]):
             print("saving/importing/syncing configuration in progress...")
         else:
             os.popen(f"rm -rf {CACHE}/* {CACHE}/.*")
@@ -1402,34 +1405,28 @@ class MyApp(Adw.Application):
     
     # Start saving the configuration using Ctrl+S keyboard shortcut
     def call_saving_config(self, action, param):
-        w = ""
-        self.win.select_folder(w)
+        self.win.select_folder(w="")
     
     # Start importing the configuration using Ctrl+I keyboard shortcut
     def call_importing_config(self, action, param):
-        w = ""
-        self.win.select_folder_to_import(w)
+        self.win.select_folder_to_import(w="")
     
     # Open the More options dialog using Ctrl+Shift+M keyboard shortcut
     def call_ms_dialog(self, action, param):
-        w = ""
-        self.win.more_options_dialog(w)
+        self.win.more_options_dialog(w="")
         self.win.msDialog.present()
         
     # Open the "Items to include in the configuration archive" dialog using Ctrl+Shift+I keyboard shortcut
     def call_items_dialog(self, action, param):
-        w = ""
-        self.win.items_dialog(w)
+        self.win.items_dialog(w="")
     
     # Open the "Set up the sync file" dialog using Ctrl+Shift+S keyboard shortcut
     def call_setDialog(self, action, param):
-        w = "set-button"
-        self.win.open_setDialog(w) if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w)
+        self.win.open_setDialog(w="set-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w)
         
     # Open the "Connect to the cloud drive" dialog using Ctrl+Shift+C keyboard shortcut
     def call_cloudDialog(self, action, param):
-        w = "get-button"
-        self.win.open_cloudDialog(w) if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w)
+        self.win.open_cloudDialog(w="get-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w)
     
     # Open the application wiki using F1 keyboard shortcut
     def open_wiki(self, action, param):
@@ -1437,8 +1434,7 @@ class MyApp(Adw.Application):
     
     # Action after closing the application using Ctrl+Q keyboard shortcut
     def app_quit(self, action, param):
-        w = ""
-        self.win.on_close(w)
+        self.win.on_close(w="")
         self.quit()
     
     # Show Keyboard Shortcuts window
