@@ -440,8 +440,8 @@ class MainWindow(Adw.ApplicationWindow):
         # show the message about finished setup the synchronization
         def almost_done():
             self.initsetupDialog.remove_response('ok-rclone')
-            self.initsetupDialog.set_extra_child(None)
             self.initsetupDialog.remove_response('next')
+            self.initsetupDialog.set_extra_child(None)
             self.initsetupDialog.set_heading("Almost done!")
             self.initsetupDialog.set_body("You've now created the cloud folder! Click on the Next button to complete the setup.")
             self.initsetupDialog.set_can_close(True)
@@ -453,7 +453,8 @@ class MainWindow(Adw.ApplicationWindow):
             clipboard = Gdk.Display.get_default().get_clipboard()
             Gdk.Clipboard.set(clipboard, f"rclone &> /dev/null && rclone config create drive {self.cloud_service} && rclone mount drive: {download_dir}/SaveDesktop/rclone_drive || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
             self.copyButton.set_icon_name("done")
-            self.copyButton.set_tooltip_text("Copied to clipboard")
+            self.cmdRow.set_title("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button")
+            self.initsetupDialog.set_response_enabled('ok-rclone', True)
             
         # button for copying the command for setting up Rclone
         def copy_button():
@@ -469,9 +470,8 @@ class MainWindow(Adw.ApplicationWindow):
             get_servrow = self.servRow.get_selected_item().get_string()
             self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox"
             os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True)
-            self.cmdRow.set_title(f"Now, copy the command to setup Rclone using the side button and open the terminal app using Ctrl+Alt+T keyboard shortcut or finding it in the apps menu.")
+            self.cmdRow.set_title(f"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu.")
             copy_button()
-            self.initsetupDialog.set_response_enabled('ok-rclone', True)
             
         # Responses of this dialog
         def initsetupDialog_closed(w, response):
@@ -502,10 +502,30 @@ class MainWindow(Adw.ApplicationWindow):
         self.initsetupDialog.connect('response', initsetupDialog_closed)
         self.initsetupDialog.present()
         
+        # create a ListBox for the rows below
+        self.initBox = Gtk.ListBox.new()
+        self.initBox.set_selection_mode(Gtk.SelectionMode.NONE)
+        self.initBox.add_css_class("boxed-list")
+        self.initBox.set_size_request(-1, 350)
+        self.initsetupDialog.set_extra_child(self.initBox)
+        
         # if the user has GNOME, Cinnamon, COSMIC (Old) or Budgie environment, it shows text about setting up GNOME Online Accounts.
         # otherwise, it shows the text about setting up Rclone
         if self.environment in ["GNOME", "Cinnamon", "COSMIC (Old)", "Budgie"]:
-            self.initsetupDialog.set_body("For synchronization to works properly, you need to have the folder, that is synced with your cloud service using GNOME Online Accounts.\nTo setup it, <b>go to the system settings and then to the Online Accounts section and select the service you want</b> (e.g., Google, Microsoft 365, Nextcloud).\n<b>Then, click on the Next button and select the created cloud folder, which can be found in the Other locations > Networks.</b>")
+            self.firstRow = Adw.ActionRow.new()
+            self.firstRow.set_title("1. Open the system settings")
+            self.initBox.append(self.firstRow)
+            
+            self.secondRow = Adw.ActionRow.new()
+            self.secondRow.set_title("2. Go to the Online Accounts section")
+            self.secondRow.set_subtitle("In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud.")
+            self.initBox.append(self.secondRow)
+            
+            self.thirdRow = Adw.ActionRow.new()
+            self.thirdRow.set_title("3. Click on the Next button and select the created cloud drive folder")
+            self.thirdRow.set_subtitle("The created cloud drive folder can be found in the side panel under the Videos folder.")
+            self.initBox.append(self.thirdRow)
+            
             self.initsetupDialog.add_response('next', 'Next')
             self.initsetupDialog.set_response_appearance('next', Adw.ResponseAppearance.SUGGESTED)
         else:
@@ -513,12 +533,6 @@ class MainWindow(Adw.ApplicationWindow):
             
             # create a list with available services, which can be connected via Rclone
             services = Gtk.StringList.new(strings=['Select', 'Google Drive', 'Microsoft OneDrive', 'DropBox'])
-            
-            # create a ListBox for the combo row below
-            self.initBox = Gtk.ListBox.new()
-            self.initBox.set_selection_mode(Gtk.SelectionMode.NONE)
-            self.initBox.get_style_context().add_class('boxed-list')
-            self.initsetupDialog.set_extra_child(self.initBox)
             
             # row for selecting the cloud service
             self.servRow = Adw.ComboRow.new()
