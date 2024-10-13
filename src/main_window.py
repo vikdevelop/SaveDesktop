@@ -2,7 +2,7 @@
 import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
-from gi.repository import Gtk, Adw, Gio, GLib
+from gi.repository import Gtk, Adw, Gio, GLib, Gdk
 from datetime import date
 from pathlib import Path
 from threading import Thread
@@ -278,7 +278,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.encryptRow = Adw.ActionRow.new()
             self.encryptRow.set_title(_["archive_encryption"])
             self.encryptRow.set_subtitle(f'{_["archive_encryption_desc"]} <a href="{enc_wiki}">{_["learn_more"]}</a>')
-            self.encryptRow.set_subtitle_lines(8)
+            self.encryptRow.set_subtitle_lines(15)
             self.encryptRow.add_suffix(self.encryptSwitch)
             self.encryptRow.set_activatable_widget(self.encryptSwitch)
             self.msBox.append(self.encryptRow)
@@ -431,7 +431,12 @@ class MainWindow(Adw.ApplicationWindow):
     
     # Dialog for initial setting up the synchronization
     def open_initsetupDialog(self, w):
-        self.get_button_type = w.get_name()
+        # set the self.get_button_type variable before starting the dialog
+        try:
+            self.get_button_type = w.get_name()
+        except AttributeError:
+            self.get_button_type = w
+        
         # show the message about finished setup the synchronization
         def almost_done():
             self.initsetupDialog.remove_response('ok-rclone')
@@ -441,15 +446,31 @@ class MainWindow(Adw.ApplicationWindow):
             self.initsetupDialog.set_body("You've now created the cloud folder! Click on the Next button to complete the setup.")
             self.initsetupDialog.set_can_close(True)
             self.initsetupDialog.add_response('open-setdialog', 'Next') if self.get_button_type == 'set-button' else self.initsetupDialog.add_response('open-clouddialog', 'Next')
-            self.initsetupDialog.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED)
+            self.initsetupDialog.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED) if self.get_button_type == 'set-button' else self.initsetupDialog.set_response_appearance('open-clouddialog', Adw.ResponseAppearance.SUGGESTED)
+            
+        # copy the command for setting up the Rclone using Gdk.Clipboard()
+        def copy_rclone_command(w):
+            clipboard = Gdk.Display.get_default().get_clipboard()
+            Gdk.Clipboard.set(clipboard, f"rclone &> /dev/null && rclone config create drive {self.cloud_service} && rclone mount drive: {download_dir}/SaveDesktop/rclone_drive || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
+            self.copyButton.set_icon_name("done")
+            self.copyButton.set_tooltip_text("Copied to clipboard")
+            
+        # button for copying the command for setting up Rclone
+        def copy_button():
+            self.copyButton = Gtk.Button.new_from_icon_name("edit-copy-symbolic")
+            self.copyButton.add_css_class("circular")
+            self.copyButton.set_valign(Gtk.Align.CENTER)
+            self.copyButton.connect("clicked", copy_rclone_command)
+            self.cmdRow.add_suffix(self.copyButton)
         
         # Set the Rclone setup command
         def get_service(comborow, GParamObject):
-            get_servrow = self.servRow.get_selected_item().get_string()
-            cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox"
             self.initsetupDialog.set_body("")
+            get_servrow = self.servRow.get_selected_item().get_string()
+            self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox"
             os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True)
-            self.cmdRow.set_title(f"Now, open the terminal using Ctrl+Alt+T keyboard shortcut, and enter this command that sets up Rclone and mounts the folder:\n<i><u>rclone &amp;> /dev/null &amp;&amp; rclone config create drive {cloud_service} &amp;&amp; rclone mount drive: {download_dir}/SaveDesktop/rclone_drive || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'</u></i>")
+            self.cmdRow.set_title(f"Now, copy the command to setup Rclone using the side button and open the terminal app using Ctrl+Alt+T keyboard shortcut or finding it in the apps menu.")
+            copy_button()
             self.initsetupDialog.set_response_enabled('ok-rclone', True)
             
         # Responses of this dialog
@@ -467,7 +488,7 @@ class MainWindow(Adw.ApplicationWindow):
                 settings["periodic-saving"] = "Daily"
                 settings["first-synchronization-setup"] = False
                 self.open_setDialog(w)
-            elif response == 'open-clouddialog': # open the "Connect to the cloud" folder dialog after clicking on the Next button in "Almost done!" page
+            elif response == 'open-clouddialog': # open the "Connect to the cloud folder" dialog after clicking on the Next button in "Almost done!" page
                 self.open_cloudDialog(w)
                 settings["first-synchronization-setup"] = False
         
@@ -484,7 +505,7 @@ class MainWindow(Adw.ApplicationWindow):
         # if the user has GNOME, Cinnamon, COSMIC (Old) or Budgie environment, it shows text about setting up GNOME Online Accounts.
         # otherwise, it shows the text about setting up Rclone
         if self.environment in ["GNOME", "Cinnamon", "COSMIC (Old)", "Budgie"]:
-            self.initsetupDialog.set_body("For synchronization to works properly, you need to have the folder, that is synced with your cloud service using GNOME Online Accounts.\nTo setup it, <b>go to the system settings and then to the Online Accounts section and select the service you want</b> (e.g., Google, Microsoft 365, Nextcloud).\nThen, click on the Next button and select the created cloud folder, which can be found in the Networks section.")
+            self.initsetupDialog.set_body("For synchronization to works properly, you need to have the folder, that is synced with your cloud service using GNOME Online Accounts.\nTo setup it, <b>go to the system settings and then to the Online Accounts section and select the service you want</b> (e.g., Google, Microsoft 365, Nextcloud).\n<b>Then, click on the Next button and select the created cloud folder, which can be found in the Other locations > Networks.</b>")
             self.initsetupDialog.add_response('next', 'Next')
             self.initsetupDialog.set_response_appearance('next', Adw.ResponseAppearance.SUGGESTED)
         else:
@@ -1388,13 +1409,13 @@ class MyApp(Adw.Application):
     
     # Open the "Set up the sync file" dialog using Ctrl+Shift+S keyboard shortcut
     def call_setDialog(self, action, param):
-        w = ""
-        self.win.open_setDialog(w)
+        w = "set-button"
+        self.win.open_setDialog(w) if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w)
         
     # Open the "Connect to the cloud drive" dialog using Ctrl+Shift+C keyboard shortcut
     def call_cloudDialog(self, action, param):
-        w = ""
-        self.win.open_cloudDialog(w)
+        w = "get-button"
+        self.win.open_cloudDialog(w) if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w)
     
     # Open the application wiki using F1 keyboard shortcut
     def open_wiki(self, action, param):
