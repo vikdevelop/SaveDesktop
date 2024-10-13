@@ -401,7 +401,9 @@ class MainWindow(Adw.ApplicationWindow):
     def sync_desktop(self):
         self.syncingBox.set_valign(Gtk.Align.CENTER)
         self.syncingBox.set_halign(Gtk.Align.CENTER)
-
+        
+        #settings["first-synchronization-setup"] = False if os.path.exists(f"{DATA}/savedesktop-synchronization.sh") else True
+        
         # Image and title for this page
         self.syncPage = Adw.StatusPage.new()
         self.syncPage.set_icon_name("emblem-synchronizing-symbolic")
@@ -768,7 +770,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudBox = Gtk.ListBox.new()
         self.cloudBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.cloudBox.get_style_context().add_class(class_name='boxed-list')
-        self.cloudBox.set_size_request(-1, 400)
+        self.cloudBox.set_size_request(-1, 500)
         self.cloudDialog.set_extra_child(self.cloudBox)
         
         # Row and buttons for selecting the cloud drive folder
@@ -893,8 +895,8 @@ class MainWindow(Adw.ApplicationWindow):
             except:
                 return
             self.folder_pb = folder.get_path()
-            self.dirRow.set_subtitle(self.folder_pb)
             settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] == True else ""
+            self.dirRow.set_subtitle(self.folder_pb) if hasattr(self, 'dirRow') else None
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -965,9 +967,10 @@ class MainWindow(Adw.ApplicationWindow):
             except:
                 return
             self.sync_folder = folder.get_path()
-            self.cfileRow.set_subtitle(self.sync_folder)
-            self.cloudDialog.set_response_enabled('ok', True) if not self.psyncRow.get_selected_item().get_string() == _["never"] else None
             settings["file-for-syncing"] = self.sync_folder if settings["first-synchronization-setup"] else None
+            self.cfileRow.set_subtitle(self.sync_folder) if hasattr(self, 'cfileRow') else None
+            if hasattr(self, 'cloudDialog'):
+                self.cloudDialog.set_response_enabled('ok', True) if not self.psyncRow.get_selected_item().get_string() == _["never"] else None
             
         self.sync_folder_chooser = Gtk.FileDialog.new()
         self.sync_folder_chooser.set_modal(True)
@@ -1422,11 +1425,11 @@ class MyApp(Adw.Application):
     
     # Open the "Set up the sync file" dialog using Ctrl+Shift+S keyboard shortcut
     def call_setDialog(self, action, param):
-        self.win.open_setDialog(w="set-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w)
+        self.win.open_setDialog(w="set-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w="set-button")
         
     # Open the "Connect to the cloud drive" dialog using Ctrl+Shift+C keyboard shortcut
     def call_cloudDialog(self, action, param):
-        self.win.open_cloudDialog(w="get-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w)
+        self.win.open_cloudDialog(w="get-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w="get-button")
     
     # Open the application wiki using F1 keyboard shortcut
     def open_wiki(self, action, param):
