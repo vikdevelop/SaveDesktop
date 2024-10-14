@@ -33,7 +33,6 @@ elif cmd.save_now:
     exit()
 elif cmd.sync:
     from network_sharing import Syncing
-    Syncing()
     exit()
 elif cmd.import_config:
     file_path = cmd.import_config
