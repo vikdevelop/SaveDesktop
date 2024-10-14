@@ -702,7 +702,7 @@ class MainWindow(Adw.ApplicationWindow):
             
         # enable or disable the response of this dialog in depending on the selected periodic synchronization interval
         def on_psync_changed(psyncRow, GParamObject):
-            self.cloudDialog.set_response_enabled('ok', True) if not self.psyncRow.get_selected_item().get_string() == _["never"] else self.cloudDialog.set_response_enabled('ok', False)
+            self.cloudDialog.set_response_enabled('ok', not (self.psyncRow.get_selected_item().get_string() == _["never"] or not self.cfileRow.get_subtitle()))
         
         # Action after closing URL dialog
         def cloudDialog_closed(w, response):
@@ -889,7 +889,7 @@ class MainWindow(Adw.ApplicationWindow):
             except:
                 return
             self.folder_pb = folder.get_path()
-            settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] == True else ""
+            settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] else settings["periodic-saving-folder"]
             self.dirRow.set_subtitle(self.folder_pb) if hasattr(self, 'dirRow') else None
         
         self.pb_chooser = Gtk.FileDialog.new()
@@ -961,7 +961,7 @@ class MainWindow(Adw.ApplicationWindow):
             except:
                 return
             self.sync_folder = folder.get_path()
-            settings["file-for-syncing"] = self.sync_folder if settings["first-synchronization-setup"] else None
+            settings["file-for-syncing"] = self.sync_folder if settings["first-synchronization-setup"] else settings["file-for-syncing"]
             self.cfileRow.set_subtitle(self.sync_folder) if hasattr(self, 'cfileRow') else None
             if hasattr(self, 'cloudDialog'):
                 self.cloudDialog.set_response_enabled('ok', True) if not self.psyncRow.get_selected_item().get_string() == _["never"] else None
