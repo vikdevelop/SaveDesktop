@@ -399,17 +399,13 @@ class MainWindow(Adw.ApplicationWindow):
             
     # Syncing desktop page
     def sync_desktop(self):
-        self.syncingBox.set_valign(Gtk.Align.CENTER)
-        self.syncingBox.set_halign(Gtk.Align.CENTER)
-        
-        #settings["first-synchronization-setup"] = False if os.path.exists(f"{DATA}/savedesktop-synchronization.sh") else True
+        settings["first-synchronization-setup"] = False if ("/gvfs/" in settings["periodic-saving-folder"] or "/drive" in settings["periodic-saving-folder"]) else True
         
         # Image and title for this page
         self.syncPage = Adw.StatusPage.new()
         self.syncPage.set_icon_name("emblem-synchronizing-symbolic")
         self.syncPage.set_title(_["sync_title"])
         self.syncPage.set_description(f'{_["sync_desc"]} <a href="{sync_wiki}">{_["learn_more"]}</a>')
-        self.syncPage.set_size_request(-1, 450)
         self.syncingBox.append(self.syncPage)
 
         # "Set up the sync file" button
@@ -594,7 +590,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.file_row.set_title(_["periodic_saving_file"])
             self.file_row.set_subtitle(folder)
             self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic")) if "red" not in folder else None
-            self.file_row.set_subtitle_lines(4)
+            self.file_row.set_subtitle_lines(8)
             self.file_row.set_use_markup(True)
             self.file_row.set_subtitle_selectable(True)
             self.l_setdBox.append(self.file_row)
@@ -660,6 +656,11 @@ class MainWindow(Adw.ApplicationWindow):
         self.setDialog.set_body(_["please_wait"])
         self.setDialog.set_body_use_markup(True)
         self.setDialog.choose(self, None, None, None)
+        self.setDialog.add_response('cancel', _["cancel"])
+        self.setDialog.add_response('ok', _["apply"])
+        self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.setDialog.connect('response', setDialog_closed)
+        self.setDialog.present()
         
         # List Box for appending widgets
         self.l_setdBox = Gtk.ListBox.new()
@@ -673,7 +674,7 @@ class MainWindow(Adw.ApplicationWindow):
         check_thread.start()
         
         # Button for opening More options dialog
-        self.open_setdialog_tf = True
+        self.open_setdialog_tf = True # set this value to TRUE for expanding the Periodic saving row
         self.ps_button = Gtk.Button.new_with_label(_["change"])
         self.ps_button.connect('clicked', self.more_options_dialog)
         self.ps_button.set_valign(Gtk.Align.CENTER)
@@ -688,14 +689,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.ps_row.set_subtitle(f'<span color="red">{_["never"]}</span>' if settings["periodic-saving"] == "Never"
                                  else f'<span color="green">{pb}</span>')
         self.ps_button.add_css_class('suggested-action') if settings["periodic-saving"] == "Never" else None
-
-        # Dialog responses
-        self.setDialog.add_response('cancel', _["cancel"])
-        self.setDialog.add_response('ok', _["apply"])
-        self.setDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.setDialog.connect('response', setDialog_closed)
-        self.setDialog.present()
-    
+        
     # Dialog for selecting the cloud drive folder and periodic synchronization interval
     def open_cloudDialog(self, w):
         # reset the cloud folder selection to the default value
@@ -765,6 +759,11 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudDialog.set_heading(_["connect_cloud_storage"])
         self.cloudDialog.set_body(_["connect_cloud_storage_desc"])
         self.cloudDialog.choose(self, None, None, None)
+        self.cloudDialog.add_response('cancel', _["cancel"])
+        self.cloudDialog.add_response('ok', _["apply"])
+        self.cloudDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.cloudDialog.connect('response', cloudDialog_closed)
+        self.cloudDialog.present()
           
         # Box for adding widgets in this dialog
         self.cloudBox = Gtk.ListBox.new()
@@ -801,6 +800,11 @@ class MainWindow(Adw.ApplicationWindow):
         self.cfileRow.add_suffix(self.cloudButton)
         self.cfileRow.set_activatable_widget(self.cloudButton)
         self.cloudBox.append(self.cfileRow)
+        
+        if not self.cfileRow.get_subtitle():
+            self.cloudDialog.set_response_enabled('ok', False)
+        else:
+            self.cloudDialog.set_response_enabled('ok', True)
         
         # Periodic sync section
         options = Gtk.StringList.new(strings=[
@@ -844,16 +848,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.bsyncRow.add_suffix(self.bsSwitch)
         self.bsyncRow.set_activatable_widget(self.bsSwitch)
         self.cloudBox.append(self.bsyncRow)
-        
-        self.cloudDialog.add_response('cancel', _["cancel"])
-        self.cloudDialog.add_response('ok', _["apply"])
-        self.cloudDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        if not self.cfileRow.get_subtitle():
-            self.cloudDialog.set_response_enabled('ok', False)
-        else:
-            self.cloudDialog.set_response_enabled('ok', True)
-        self.cloudDialog.connect('response', cloudDialog_closed)
-        self.cloudDialog.present()
       
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
@@ -1010,13 +1004,19 @@ class MainWindow(Adw.ApplicationWindow):
             password = ''.join(random.choice(characters) for _ in range(24))
             self.pswdEntry.set_text(password)
 
-        # dialog itself
+        # Dialog itself
         self.pswdDialog = Adw.AlertDialog.new()
         self.pswdDialog.set_heading(_["create_pwd_title"])
         self.pswdDialog.set_body(_["create_pwd_desc"])
         self.pswdDialog.choose(self, None, None, None)
+        self.pswdDialog.add_response("cancel", _["cancel"])
+        self.pswdDialog.add_response("ok", _["apply"])
+        self.pswdDialog.set_response_enabled("ok", False)
+        self.pswdDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.pswdDialog.connect('response', pswdDialog_closed)
+        self.pswdDialog.present()
 
-        # button for generating strong password
+        # Button for generating strong password
         self.pswdgenButton = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
         self.pswdgenButton.set_tooltip_text(_["gen_password"])
         self.pswdgenButton.add_css_class("flat")
@@ -1029,13 +1029,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.pswdEntry.connect('changed', check_password)
         self.pswdEntry.add_suffix(self.pswdgenButton)
         self.pswdDialog.set_extra_child(self.pswdEntry)
-
-        self.pswdDialog.add_response("cancel", _["cancel"])
-        self.pswdDialog.add_response("ok", _["apply"])
-        self.pswdDialog.set_response_enabled("ok", False)
-        self.pswdDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.pswdDialog.connect('response', pswdDialog_closed)
-        self.pswdDialog.present()
     
     # Save configuration
     def save_config(self):
@@ -1050,8 +1043,9 @@ class MainWindow(Adw.ApplicationWindow):
         try:
             e_o = False
             os.system(f"python3 {system_dir}/config.py --save")
+            print("creating and moving the configuration archive to the user-defined directory")
             if settings["enable-encryption"] == True:
-                os.system(f"zip -9 -P '{self.password}' cfg.sd.zip . -r -x 'saving_status'")
+                os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
                 if self.cancel_process:
                     return
                 else:
@@ -1067,9 +1061,9 @@ class MainWindow(Adw.ApplicationWindow):
             e_o = True
             error = e
             GLib.idle_add(self.show_err_msg, error) if not self.cancel_process else None
+            self.headerbar.set_title_widget(self.switcher_title)
+            self.switcher_bar.set_reveal(True)
             self.toolbarview.set_content(self.headapp)
-            self.toolbarview.remove(self.headerbar_save)
-            self.toolbarview.add_top_bar(self.headerbar)
         finally:
             if not e_o:
                 self.exporting_done()
@@ -1082,8 +1076,6 @@ class MainWindow(Adw.ApplicationWindow):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
             os.system(f"pkill tar") if not settings["enable-encryption"] else os.system("pkill zip")
             self.toolbarview.set_content(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True)
             self.set_title("SaveDesktop")
             for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
                 self.savewaitBox.remove(widget)
@@ -1186,21 +1178,21 @@ class MainWindow(Adw.ApplicationWindow):
             if response == 'ok':
                 self.checkDialog.set_response_enabled("ok", False)
                 self.import_config()
-            
+        
+        # Dialog itself
         self.checkDialog = Adw.AlertDialog.new()
         self.checkDialog.set_heading(_["check_pwd_title"])
         self.checkDialog.set_body(_["check_pwd_desc"])
         self.checkDialog.choose(self, None, None, None)
-        
-        self.checkEntry = Adw.PasswordEntryRow.new()
-        self.checkEntry.set_title(_["password_entry"])
-        self.checkDialog.set_extra_child(self.checkEntry)
-        
         self.checkDialog.add_response("cancel", _["cancel"])
         self.checkDialog.add_response("ok", _["apply"])
         self.checkDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.checkDialog.connect('response', checkDialog_closed)
         self.checkDialog.present()
+        
+        self.checkEntry = Adw.PasswordEntryRow.new()
+        self.checkEntry.set_title(_["password_entry"])
+        self.checkDialog.set_extra_child(self.checkEntry)
         
     # Import configuration
     def import_config(self):
@@ -1238,8 +1230,8 @@ class MainWindow(Adw.ApplicationWindow):
             error = e
             GLib.idle_add(self.show_err_msg, error) if not self.cancel_process else None
             self.toolbarview.set_content(self.headapp)
-            self.toolbarview.remove(self.headerbar_import)
-            self.toolbarview.add_top_bar(self.headerbar)
+            self.headerbar.set_title_widget(self.switcher_title)
+            self.switcher_bar.set_reveal(True)
         finally:
             if not e_o:
                 self.applying_done()
