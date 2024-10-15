@@ -15,9 +15,10 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5-beta-2024.10.10"
+v = "3.5-beta-2024.10.15"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<ul>\
+rel_notes = "<p>Improved the Initial synchronization setup dialog and other minor UI changes. Also fixed a bug with showing the page about saved or imported configuration</p>\
+<p>--- 3.5-beta-2024.10.10 ---</p><ul>\
 <li>Simplified the initial setting up synchronization: in that case, it shows the dialog window, which helps you to set it up</li>\
 <li>Added more keyboard shortcuts</li>\
 <li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>\
