@@ -73,7 +73,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Add pages to the menu switcher
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_["save"],"document-save-symbolic")
         self.stack.add_titled_with_icon(self.importBox,"importpage",_["import_title"],"document-open-symbolic")
-        self.stack.add_titled_with_icon(self.syncingBox,"syncpage",_["sync"],"emblem-synchronizing-symbolic")
+        self.stack.add_titled_with_icon(self.syncingBox,"syncpage",_["sync"],"emblem-synchronizing-symbolic") if not snap else None
         
         # menu switcher
         self.switcher_title = Adw.ViewSwitcherTitle.new()
@@ -122,7 +122,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.environment = env_name
             self.save_desktop()
             self.import_desktop()
-            self.sync_desktop()
+            self.sync_desktop() if not snap else print("Synchronization in the Snap environment is temporarily disabled.")
             self.connect("close-request", self.on_close)
 
         if desktop_env in desktop_map:
@@ -399,7 +399,8 @@ class MainWindow(Adw.ApplicationWindow):
             
     # Syncing desktop page
     def sync_desktop(self):
-        settings["first-synchronization-setup"] = False if ("/gvfs/" in settings["periodic-saving-folder"] or "/drive" in settings["periodic-saving-folder"]) else True
+        # Set showing the Initial synchronization setup dialog only if the periodic saving folder or cloud drive folder does not use GVFS or Rclone filesystem
+        settings["first-synchronization-setup"] = False if ("/gvfs/" in settings["periodic-saving-folder"] or "/drive" in settings["periodic-saving-folder"] or "/gvfs/" in settings["file-for-syncing"] or "/drive" in settings["file-for-syncing"]) else True
         
         # Image and title for this page
         self.syncPage = Adw.StatusPage.new()
@@ -449,19 +450,10 @@ class MainWindow(Adw.ApplicationWindow):
         # copy the command for setting up the Rclone using Gdk.Clipboard()
         def copy_rclone_command(w):
             clipboard = Gdk.Display.get_default().get_clipboard()
-            Gdk.Clipboard.set(clipboard, f"rclone &> /dev/null && rclone config create drive {self.cloud_service} && rclone mount drive: {download_dir}/SaveDesktop/rclone_drive || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
+            Gdk.Clipboard.set(clipboard, f"command -v rclone &> /dev/null && (rclone config create savedesktop {self.cloud_service} && rclone mount savedesktop: /var/home/viktor/Downloads/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
             self.copyButton.set_icon_name("done")
             self.cmdRow.set_title("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button")
             self.initsetupDialog.set_response_enabled('ok-rclone', True)
-            
-        # button for copying the command for setting up Rclone
-        def copy_button():
-            self.copyButton = Gtk.Button.new_from_icon_name("edit-copy-symbolic")
-            self.copyButton.add_css_class("circular")
-            self.copyButton.set_valign(Gtk.Align.CENTER)
-            self.copyButton.connect("clicked", copy_rclone_command)
-            if not self.cmdRow.get_activatable_widget() == self.copyButton:
-                self.cmdRow.add_suffix(self.copyButton)
         
         # Set the Rclone setup command
         def get_service(comborow, GParamObject):
@@ -470,7 +462,11 @@ class MainWindow(Adw.ApplicationWindow):
             self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox"
             os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True)
             self.cmdRow.set_title(f"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu.")
-            copy_button()
+            # set the copyButton properties
+            self.copyButton.set_sensitive(True)
+            self.copyButton.set_icon_name("edit-copy-symbolic")
+            self.copyButton.set_tooltip_text("Copy")
+            self.copyButton.connect("clicked", copy_rclone_command)
             
         # Responses of this dialog
         def initsetupDialog_closed(w, response):
@@ -505,12 +501,13 @@ class MainWindow(Adw.ApplicationWindow):
         self.initBox = Gtk.ListBox.new()
         self.initBox.set_selection_mode(Gtk.SelectionMode.NONE)
         self.initBox.add_css_class("boxed-list")
-        self.initBox.set_size_request(-1, 350)
+        self.initBox.set_vexpand(True)
         self.initsetupDialog.set_extra_child(self.initBox)
         
         # if the user has GNOME, Cinnamon, COSMIC (Old) or Budgie environment, it shows text about setting up GNOME Online Accounts.
         # otherwise, it shows the text about setting up Rclone
-        if self.environment in ["GNOME", "Cinnamon", "COSMIC (Old)", "Budgie"]:
+        if self.environment in ["GNOMEg", "Cinnamon", "COSMIC (Old)", "Budgie"]:
+            self.initBox.set_size_request(-1, 330)
             self.firstRow = Adw.ActionRow.new()
             self.firstRow.set_title("1. Open the system settings")
             self.initBox.append(self.firstRow)
@@ -539,10 +536,17 @@ class MainWindow(Adw.ApplicationWindow):
             self.servRow.connect("notify::selected-item", get_service)
             self.initBox.append(self.servRow)
             
+            # button for copying the Rclone command to clipboard
+            self.copyButton = Gtk.Button.new()
+            self.copyButton.add_css_class('flat')
+            self.copyButton.set_valign(Gtk.Align.CENTER)
+            self.copyButton.set_sensitive(False)
+            
             # row for showing the command for setting up the Rclone
             self.cmdRow = Adw.ActionRow.new()
             self.cmdRow.set_title_selectable(True)
             self.cmdRow.set_use_markup(True)
+            self.cmdRow.add_suffix(self.copyButton)
             self.initBox.append(self.cmdRow)
             
             # add the Apply button to the dialog
@@ -1417,11 +1421,13 @@ class MyApp(Adw.Application):
     
     # Open the "Set up the sync file" dialog using Ctrl+Shift+S keyboard shortcut
     def call_setDialog(self, action, param):
-        self.win.open_setDialog(w="set-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w="set-button")
+        if not snap:
+            self.win.open_setDialog(w="set-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w="set-button")
         
     # Open the "Connect to the cloud drive" dialog using Ctrl+Shift+C keyboard shortcut
     def call_cloudDialog(self, action, param):
-        self.win.open_cloudDialog(w="get-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w="get-button")
+        if not snap:
+            self.win.open_cloudDialog(w="get-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w="get-button")
     
     # Open the application wiki using F1 keyboard shortcut
     def open_wiki(self, action, param):
