@@ -506,7 +506,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         # if the user has GNOME, Cinnamon, COSMIC (Old) or Budgie environment, it shows text about setting up GNOME Online Accounts.
         # otherwise, it shows the text about setting up Rclone
-        if self.environment in ["GNOMEg", "Cinnamon", "COSMIC (Old)", "Budgie"]:
+        if self.environment in ["GNOME", "Cinnamon", "COSMIC (Old)", "Budgie"]:
             self.initBox.set_size_request(-1, 330)
             self.firstRow = Adw.ActionRow.new()
             self.firstRow.set_title("1. Open the system settings")
