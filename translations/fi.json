@@ -76,7 +76,7 @@
     "err_occured": "Tapahtui virhe",
     "create": "Luo",
     "change": "Vaihda",
-    "periodic_saving_file_err": "Periodic saving file does not exist.",
+    "periodic_saving_file_err": "Jaksottaisen tallennuksen tiedostoa ei ole olemassa.",
     "cloud_folder_err": "Et valinnut pilviaseman kansiota!",
     "gen_password": "Luo salasana",
     "bidirectional_sync_desc": "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer.",
