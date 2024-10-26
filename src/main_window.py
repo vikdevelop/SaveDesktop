@@ -400,7 +400,7 @@ class MainWindow(Adw.ApplicationWindow):
     # Syncing desktop page
     def sync_desktop(self):
         # Set showing the Initial synchronization setup dialog only if the periodic saving folder or cloud drive folder does not use GVFS or Rclone filesystem
-        settings["first-synchronization-setup"] = False if ("/gvfs/" in settings["periodic-saving-folder"] or "/drive" in settings["periodic-saving-folder"] or "/gvfs/" in settings["file-for-syncing"] or "/drive" in settings["file-for-syncing"]) else True
+        settings["first-synchronization-setup"] = True if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") else False
         
         # Image and title for this page
         self.syncPage = Adw.StatusPage.new()
@@ -449,8 +449,9 @@ class MainWindow(Adw.ApplicationWindow):
             
         # copy the command for setting up the Rclone using Gdk.Clipboard()
         def copy_rclone_command(w):
+            os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True) # create the requested folder before copying the command for setting up Rclone to the clipboard
             clipboard = Gdk.Display.get_default().get_clipboard()
-            Gdk.Clipboard.set(clipboard, f"command -v rclone &> /dev/null && (rclone config create savedesktop {self.cloud_service} && rclone mount savedesktop: /var/home/viktor/Downloads/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
+            Gdk.Clipboard.set(clipboard, f"command -v rclone &> /dev/null && (rclone config create savedesktop {self.cloud_service} && rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'") # copy the command for setting up Rclone to the clipboard
             self.copyButton.set_icon_name("done")
             self.cmdRow.set_title("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button")
             self.initsetupDialog.set_response_enabled('ok-rclone', True)
@@ -460,7 +461,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.initsetupDialog.set_body("")
             get_servrow = self.servRow.get_selected_item().get_string()
             self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox"
-            os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True)
             self.cmdRow.set_title(f"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu.")
             # set the copyButton properties
             self.copyButton.set_sensitive(True)
@@ -474,7 +474,10 @@ class MainWindow(Adw.ApplicationWindow):
                 self.select_pb_folder(w) if self.get_button_type == 'set-button' else self.select_sync_folder(w)
                 almost_done()
             elif response == 'ok-rclone': # set the periodic saving folder in the Rclone case
-                settings["periodic-saving-folder"] = f"{download_dir}/SaveDesktop/rclone_drive"
+                if self.get_button_type == 'set-button':
+                    settings["periodic-saving-folder"] = f"{download_dir}/SaveDesktop/rclone_drive"
+                else:
+                    settings["file-for-syncing"] = f"{download_dir}/SaveDesktop/rclone_drive"
                 almost_done()
             elif response == 'cancel': # if the user clicks on the Cancel button
                 self.initsetupDialog.set_can_close(True)
@@ -1467,6 +1470,7 @@ class MyApp(Adw.Application):
         dialog = Adw.AboutDialog()
         dialog.set_application_name("SaveDesktop")
         dialog.set_developer_name("vikdevelop")
+        dialog.set_comments(_["summary"])
         r_lang != "en" and dialog.set_translator_credits(_["translator_credits"]) # add the translator credits section if the system language is not English
         lang_list and dialog.add_link("SaveDesktop Github Wiki (Weblate)", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/") # add a link to translate the SaveDesktop Github wiki on Weblate
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
