@@ -8,7 +8,7 @@ parser.add_argument("-s", "--save", help="Save the current configuration", actio
 parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
 
 args = parser.parse_args()
-
+packages = []
 # check of the user's current DE
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
     environment = 'GNOME'
@@ -34,6 +34,8 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
     environment = 'KDE Plasma'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
+elif os.getenv('XDG_CURRENT_DESKTOP') == 'Hyprland':
+    environment = 'Hyprland'
 else:
     from tty_environments import *
 
@@ -136,6 +138,7 @@ class Save:
         elif environment == 'Deepin':
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
+        elif environment == 'Hyprland':
     
     # save Flatpak apps data
     def save_flatpak_data(self):
