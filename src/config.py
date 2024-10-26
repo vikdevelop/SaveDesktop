@@ -1,4 +1,4 @@
-import os, json, gi, argparse, shutil
+import os, json, gi, argparse, shutil, psutil
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, flatpak, snap, settings
 
@@ -7,8 +7,28 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
 parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
 
+#get all system processes
 args = parser.parse_args()
+processes = psutil.process_iter()
+
+#initialize a var
 packages = []
+
+#creating a lambda functin to get the path to the package config folder
+pathto=lambda package:os.getenv("HOME")+'.config/'+package+"/"
+
+#a list of available packages for a wayland windowmanager
+available_packages = ["waybar","swaybg","wpaperd","mpvpaper","swww","waypaper","eww"]
+
+#getting only the names of the processes
+names = [x.name for x in processes]
+
+#selecting the found packages and appending them to the package list
+for name in names:
+    for package in available_packages:
+        if package in name:
+            packages.append(pathto(package))
+            
 # check of the user's current DE
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
     environment = 'GNOME'
