@@ -4,6 +4,33 @@
     <id>io.github.vikdevelop.SaveDesktop</id>
     <launchable type="desktop-id">io.github.vikdevelop.SaveDesktop.desktop</launchable>
     <name>SaveDesktop</name>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-3.0-or-later</project_license>
+    <developer id="tld.vendor">
+      <name>vikdevelop</name>
+    </developer>
+
+    <categories>
+        <category>Utility</category>
+    </categories>
+    
+    <content_rating type="oars-1.1"/>
+
+    <requires>
+        <display_length compare="ge">360</display_length>
+    </requires>
+
+    <supports>
+        <control>keyboard</control>
+        <control>pointing</control>
+        <control>touch</control>
+    </supports>
+
+    <branding>
+        <color type="primary" scheme_preference="light">#b6d1eb</color>
+        <color type="primary" scheme_preference="dark">#061530</color>
+    </branding>
+
     <summary>Save your desktop configuration</summary>
     <summary xml:lang="cs_CZ">Uložte konfiguraci plochy</summary>
     <summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
@@ -24,11 +51,6 @@
     <summary xml:lang="hi_IN">अपना डेस्कटॉप विन्यास सहेजें</summary>
     <summary xml:lang="pt_PT">Grave a sua configuração da área de trabalho</summary>
     <summary xml:lang="fi_FI">Tallenna työpöytäsi määritys</summary>
-    <metadata_license>CC0-1.0</metadata_license>
-    <project_license>GPL-3.0-or-later</project_license>
-    <developer id="tld.vendor">
-      <name>vikdevelop</name>
-    </developer>
     
     <description>
       <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
@@ -70,28 +92,7 @@
             <caption>Page for config synchronization</caption>
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png</image>
         </screenshot>
-    </screenshots>
-
-    <categories>
-        <category>Utility</category>
-    </categories>
-    
-    <content_rating type="oars-1.1"/>
-
-    <requires>
-        <display_length compare="ge">400</display_length>
-    </requires>
-
-    <supports>
-        <control>keyboard</control>
-        <control>pointing</control>
-        <control>touch</control>
-    </supports>
-
-    <branding>
-        <color type="primary" scheme_preference="light">#b6d1eb</color>
-        <color type="primary" scheme_preference="dark">#061530</color>
-    </branding>
+    </screenshots
           
     <releases>
        <release version="3.5" type="development" date="2024-10-10">
