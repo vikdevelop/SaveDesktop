@@ -15,7 +15,7 @@ processes = psutil.process_iter()
 packages = []
 
 #creating a lambda functin to get the path to the package config folder
-pathto=lambda package:os.getenv("HOME")+'.config/'+package+"/"
+pathto=lambda package:home+'.config/'+package+"/"
 
 #a list of available packages for a wayland windowmanager
 available_packages = ["waybar","swaybg","wpaperd","mpvpaper","swww","waypaper","eww"]
@@ -159,6 +159,9 @@ class Save:
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         elif environment == 'Hyprland':
+            os.system(f"cp -R {getpath("hyprland")} ./hyprland")
+            for x in packages:
+                os.system(f"cp -R {getpath(x)} ./{x}")
     
     # save Flatpak apps data
     def save_flatpak_data(self):
@@ -271,6 +274,12 @@ class Import:
         elif environment == 'Deepin':
             os.system(f"cp -au ./deepin {home}/.config/")
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
+        elif environment = 'Hyprland':
+            os.system(f"cp -au ./hyprland {home}/.config/")
+            #if the package variable isn't empty
+            if packages:
+                for x in packages:
+                    os.system(f"cp -au ./{x} {home}/.config/")
         elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
