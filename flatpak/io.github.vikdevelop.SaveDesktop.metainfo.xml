@@ -6,7 +6,7 @@
     <name>SaveDesktop</name>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
-    <developer id="tld.vendor">
+    <developer id="io.github.vikdevelop">
       <name>vikdevelop</name>
     </developer>
 
@@ -30,6 +30,11 @@
         <color type="primary" scheme_preference="light">#b6d1eb</color>
         <color type="primary" scheme_preference="dark">#061530</color>
     </branding>
+    
+    <url type="homepage">https://vikdevelop.github.io/SaveDesktop</url>
+    <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
+    <url type="translate">https://hosted.weblate.org/projects/vikdevelop/savedesktop/</url>
+    <url type="contribute">https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md</url>
 
     <summary>Save your desktop configuration</summary>
     <summary xml:lang="cs_CZ">Uložte konfiguraci plochy</summary>
@@ -75,10 +80,6 @@
       <p xml:lang="fi_FI">SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.</p>
     </description>
     
-    <url type="homepage">https://vikdevelop.github.io/SaveDesktop</url>
-    <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
-    <url type="translate">https://hosted.weblate.org/projects/vikdevelop/savedesktop/</url>
-    
     <screenshots>
         <screenshot type="default">
             <caption>Page for saving configuration</caption>
@@ -92,7 +93,7 @@
             <caption>Page for config synchronization</caption>
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png</image>
         </screenshot>
-    </screenshots
+    </screenshots>
           
     <releases>
        <release version="3.5" type="development" date="2024-10-10">
