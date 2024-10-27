@@ -39,7 +39,6 @@ else:
 
 class Save:
     def __init__(self):
-        # create a txt file to prevent deleting the current saving by closing the application window
         print("saving settings from the Dconf database")
         os.system("dconf dump / > ./dconf-settings.ini")
         print("saving Gtk settings")
@@ -178,9 +177,6 @@ class Import:
             else:
                 os.system("echo user-db:user > temporary-profile")
                 os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
-        print("importing list of installed Flatpak apps (them will be installed after the next login)")
-        os.system(f'cp ./installed_flatpaks.sh {DATA}/')
-        os.system(f'cp ./installed_user_flatpaks.sh {DATA}/')
         print("importing icons")
         os.system(f'cp -au ./icons {home}/.local/share/')
         os.system(f'cp -au ./.icons {home}/')
@@ -244,8 +240,6 @@ class Import:
         elif environment == 'Deepin':
             os.system(f"cp -au ./deepin {home}/.config/")
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
-        elif environment == None:
-            print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
         if flatpak:
             self.create_flatpak_desktop()

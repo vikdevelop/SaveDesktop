@@ -1070,7 +1070,7 @@ class MainWindow(Adw.ApplicationWindow):
             error = e
             GLib.idle_add(self.show_err_msg, error) if not self.cancel_process else None
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True)
+            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
             self.toolbarview.set_content(self.headapp)
         finally:
             if not e_o:
@@ -1084,6 +1084,8 @@ class MainWindow(Adw.ApplicationWindow):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
             os.system(f"pkill tar") if not settings["enable-encryption"] else os.system("pkill zip")
             self.toolbarview.set_content(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
+            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
             self.set_title("SaveDesktop")
             for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
                 self.savewaitBox.remove(widget)
@@ -1135,7 +1137,7 @@ class MainWindow(Adw.ApplicationWindow):
         def back_to_main(w):
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True)
+            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
             self.set_title("SaveDesktop")
             for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
                 self.savewaitBox.remove(widget)
@@ -1239,7 +1241,7 @@ class MainWindow(Adw.ApplicationWindow):
             GLib.idle_add(self.show_err_msg, error) if not self.cancel_process else None
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True)
+            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
         finally:
             if not e_o:
                 self.applying_done()
@@ -1252,7 +1254,7 @@ class MainWindow(Adw.ApplicationWindow):
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True)
+            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
             self.set_title("SaveDesktop")
             for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]:
                 self.importwaitBox.remove(widget)
@@ -1302,7 +1304,7 @@ class MainWindow(Adw.ApplicationWindow):
         def back_to_main(w):
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True)
+            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
             self.set_title("SaveDesktop")
             [self.importwaitBox.remove(widget) for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]]
             if hasattr(self, 'flistBox'):
