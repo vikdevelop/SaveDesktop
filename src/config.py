@@ -159,9 +159,9 @@ class Save:
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         elif environment == 'Hyprland':
-            os.system("cp -R "+getpath('hypr')+" ./hypr")
+            os.system("cp -R "+pathto('hypr')+" ./hypr")
             #for x in packages:
-                #os.system(f"cp -R {getpath(x)} ./{x}")
+                #os.system(f"cp -R {pathto(x)} ./{x}")
 
     # save Flatpak apps data
     def save_flatpak_data(self):
