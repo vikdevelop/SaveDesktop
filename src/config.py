@@ -159,9 +159,9 @@ class Save:
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         elif environment == 'Hyprland':
-            os.system(f"cp -R {getpath('hypr'} ./hypr")
-            for x in packages:
-                os.system(f"cp -R {getpath(x)} ./{x}")
+            os.system("cp -R "+getpath('hypr')+" ./hypr")
+            #for x in packages:
+                #os.system(f"cp -R {getpath(x)} ./{x}")
 
     # save Flatpak apps data
     def save_flatpak_data(self):
@@ -277,9 +277,9 @@ class Import:
         elif environment = 'Hyprland':
             os.system(f"cp -aur ./hypr {home}/.config/")
             #if the package variable isn't empty
-            if packages:
-                for x in packages:
-                    os.system(f"cp -aur ./{x} {home}/.config/")
+            #if packages:
+            #    for x in packages:
+            #        os.system(f"cp -aur ./{x} {home}/.config/")
         elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
