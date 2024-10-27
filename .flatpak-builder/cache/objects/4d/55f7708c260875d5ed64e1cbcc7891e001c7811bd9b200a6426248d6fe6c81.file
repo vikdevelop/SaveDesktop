@@ -1,0 +1,5 @@
+[Runtime]
+name=io.github.vikdevelop.SaveDesktop.Debug
+
+[ExtensionOf]
+ref=app/io.github.vikdevelop.SaveDesktop/x86_64/master

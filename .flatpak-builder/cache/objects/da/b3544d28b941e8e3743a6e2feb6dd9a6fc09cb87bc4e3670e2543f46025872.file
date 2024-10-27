@@ -1,0 +1,87 @@
+{
+  "id" : "io.github.vikdevelop.SaveDesktop",
+  "runtime" : "org.gnome.Platform",
+  "runtime-version" : "47",
+  "runtime-commit" : "d0713d7de6307db2dc27087a7d46fc4eabdda0e5ea637efd66e1282a9fa0088c",
+  "sdk" : "org.gnome.Sdk",
+  "sdk-commit" : "68bd720467615d892663d4493ca42c5583ae92d210c6dcb9c298e0f47c5e0d6a",
+  "command" : "savedesktop",
+  "modules" : [
+    {
+      "name" : "dconf",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz",
+          "sha256" : "164fc714f96ef4b348665fc3617f54cfa5acf12df5c039d7a9d21ba1d86a2f2d",
+          "type" : "archive"
+        }
+      ],
+      "build-commands" : [
+        "cp -R * /app"
+      ]
+    },
+    {
+      "name" : "savedesktop",
+      "buildsystem" : "simple",
+      "sources" : [
+        {
+          "path" : ".",
+          "type" : "dir"
+        }
+      ],
+      "build-commands" : [
+        "install -Dm755 -t /app/bin savedesktop",
+        "cp -R src/* /app",
+        "install -D -t /app/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop",
+        "install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.svg",
+        "install -D -t /app/share/icons/hicolor/scalable/apps flatpak/icons/io.github.vikdevelop.SaveDesktop.Devel.svg",
+        "install -D -t /app/share/icons/hicolor/symbolic/apps flatpak/icons/io.github.vikdevelop.SaveDesktop-symbolic.svg",
+        "install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/exclamation_mark.png",
+        "install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/desktop-symbolic.svg",
+        "install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/list-view.png",
+        "install -D -t /app/share/icons/hicolor/128x128/apps flatpak/symbolic-icons/done.svg",
+        "install -D -t /app/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml",
+        "install -D -t /app/share/glib-2.0/schemas flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml",
+        "glib-compile-schemas /app/share/glib-2.0/schemas",
+        "cp -R translations /app/"
+      ]
+    }
+  ],
+  "finish-args" : [
+    "--share=ipc",
+    "--share=network",
+    "--socket=wayland",
+    "--socket=fallback-x11",
+    "--device=dri",
+    "--filesystem=xdg-run/gvfs",
+    "--filesystem=xdg-run/gvfsd",
+    "--filesystem=~/.config",
+    "--filesystem=~/.local/share",
+    "--filesystem=xdg-download",
+    "--filesystem=xdg-music",
+    "--filesystem=xdg-videos",
+    "--filesystem=xdg-documents",
+    "--filesystem=xdg-public-share",
+    "--filesystem=xdg-pictures",
+    "--filesystem=xdg-desktop",
+    "--filesystem=~/.themes:create",
+    "--filesystem=~/.icons:create",
+    "--filesystem=~/.cinnamon:create",
+    "--filesystem=~/.xfce4:create",
+    "--filesystem=~/.fonts:create",
+    "--filesystem=/var/lib/flatpak:ro",
+    "--filesystem=~/.local/share/flatpak/app:ro",
+    "--filesystem=~/.var/app:ro",
+    "--talk-name=org.gnome.SessionManager",
+    "--talk-name=org.xfce.SessionManager",
+    "--talk-name=org.kde.LogoutPrompt",
+    "--talk-name=com.system76.CosmicSession",
+    "--talk-name=org.freedesktop.FileManager1",
+    "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+    "--filesystem=xdg-run/dconf",
+    "--talk-name=ca.desrt.dconf"
+  ],
+  "desktop-file-name-suffix" : " (Master)",
+  "source-date-epoch" : 1729945277
+}

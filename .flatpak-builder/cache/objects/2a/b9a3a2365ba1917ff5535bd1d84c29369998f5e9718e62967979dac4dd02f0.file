@@ -118,8 +118,7 @@ class MainWindow(Adw.ApplicationWindow):
             'XFCE': 'Xfce',
             'MATE': 'MATE',
             'KDE': 'KDE Plasma',
-            'Deepin': 'Deepin',
-            'Hyprland': 'Hyprland'
+            'Deepin': 'Deepin'
         }
 
         # If the user has a supported environment, it shows the app window, otherwise, it shows the window with information about an unsupported environment

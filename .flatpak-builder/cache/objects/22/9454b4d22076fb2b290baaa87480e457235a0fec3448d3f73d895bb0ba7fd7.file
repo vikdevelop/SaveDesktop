@@ -1,0 +1,8 @@
+[Unit]
+Description=User preferences database
+Documentation=man:dconf-service(1)
+
+[Service]
+ExecStart=/app/libexec/dconf-service
+Type=dbus
+BusName=ca.desrt.dconf

@@ -15,7 +15,7 @@ processes = psutil.process_iter()
 packages = []
 
 #creating a lambda functin to get the path to the package config folder
-pathto=lambda package:home+'/.config/'+package
+pathto=lambda package:home+'.config/'+package+"/"
 
 #a list of available packages for a wayland windowmanager
 available_packages = ["waybar","swaybg","wpaperd","mpvpaper","swww","waypaper","eww"]
@@ -28,7 +28,7 @@ for name in names:
     for package in available_packages:
         if package in name:
             packages.append(pathto(package))
-
+            
 # check of the user's current DE
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
     environment = 'GNOME'
@@ -56,8 +56,8 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'Hyprland':
     environment = 'Hyprland'
-#else:
-#    from tty_environments import *
+else:
+    from tty_environments import *
 
 class Save:
     def __init__(self):
@@ -98,7 +98,7 @@ class Save:
             if settings["save-flatpak-data"] == True:
                 print("saving user data of installed Flatpak apps")
                 self.save_flatpak_data()
-
+            
         print("saving desktop environment configuration files")
         # Save configs on individual desktop environments
         if environment == 'GNOME':
@@ -159,10 +159,10 @@ class Save:
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         elif environment == 'Hyprland':
-            os.system(f"cp -R {getpath('hypr'} ./hypr")
+            os.system(f"cp -R {getpath("hyprland")} ./hyprland")
             for x in packages:
                 os.system(f"cp -R {getpath(x)} ./{x}")
-
+    
     # save Flatpak apps data
     def save_flatpak_data(self):
         blst = settings["disabled-flatpak-apps-data"]
@@ -275,7 +275,7 @@ class Import:
             os.system(f"cp -au ./deepin {home}/.config/")
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
         elif environment = 'Hyprland':
-            os.system(f"cp -au ./hypr {home}/.config/")
+            os.system(f"cp -au ./hyprland {home}/.config/")
             #if the package variable isn't empty
             if packages:
                 for x in packages:

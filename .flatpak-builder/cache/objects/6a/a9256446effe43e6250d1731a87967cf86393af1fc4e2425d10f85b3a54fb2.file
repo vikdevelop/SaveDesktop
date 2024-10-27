@@ -15,7 +15,7 @@ processes = psutil.process_iter()
 packages = []
 
 #creating a lambda functin to get the path to the package config folder
-pathto=lambda package:home+'/.config/'+package
+pathto=lambda package:home+'.config/'+package+"/"
 
 #a list of available packages for a wayland windowmanager
 available_packages = ["waybar","swaybg","wpaperd","mpvpaper","swww","waypaper","eww"]
