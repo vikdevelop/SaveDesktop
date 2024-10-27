@@ -134,6 +134,10 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.config/deepin
   - ~/.local/share/deepin
   ```
+  - **Hyprland**
+  ```
+  - ~/.config/hypr
+  ```
   
 </details>
 
