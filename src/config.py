@@ -26,7 +26,7 @@ names = [x.name for x in processes]
 #selecting the found packages and appending them to the package list
 for name in names:
     for package in available_packages:
-        if package in name:
+        if package in str(name):
             packages.append(pathto(package))
 
 # check of the user's current DE
