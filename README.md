@@ -36,6 +36,7 @@
 - MATE
 - KDE Plasma
 - Deepin
+- Hyprland
 
 ### SaveDesktop can save:
 - your icons, fonts, and themes
