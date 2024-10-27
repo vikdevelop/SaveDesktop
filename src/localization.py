@@ -15,9 +15,12 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5-beta-2024.10.20"
+v = "3.5-beta-2024.10.27"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Fixed minor bugs with showing the button for copying the command for setting up Rclone and temporarily disabled the synchronization option in the Snap environment due to unreliable file system type detection.</p>\
+rel_notes = "<p>3.5-beta-2024.10.27</p>\
+<p>Fixed a minor bug with showing the correct directory in the command for setting up Rclone and minor changes with the app data file.</p>\
+<p>3.5-beta-2024.10.20</p>\
+<p>Fixed minor bugs with showing the button for copying the command for setting up Rclone and temporarily disabled the synchronization option in the Snap environment due to unreliable file system type detection.</p>\
 <p>--- 3.5-beta-2024.10.15 ---</p>\
 <p>Improved the Initial synchronization setup dialog and other minor UI changes. Also fixed a bug with showing the page about saved or imported configuration</p>\
 <p>--- 3.5-beta-2024.10.10 ---</p><ul>\
