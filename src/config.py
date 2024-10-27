@@ -1,4 +1,4 @@
-import os, json, gi, argparse, shutil, psutil
+import os, json, gi, argparse, shutil
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, system_dir, flatpak, snap, settings
 home = os.getenv('HOME')
@@ -275,10 +275,10 @@ class Import:
         elif environment == 'Deepin':
             os.system(f"cp -au ./deepin {home}/.config/")
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
-        elif environment = 'Hyprland':
+        elif environment == 'Hyprland':
             #os.system(f'mkdir {home}/.config/import-savedesktop')
-            shutil.copytree("./hypr",f"{home}/.config/hypr",dirs_exist_ok=True)
-            #os.system(f"cp -aur ./hypr {home}/.config/")
+            #shutil.copytree("./hypr",f"{home}/.config/hypr",dirs_exist_ok=True)
+            os.system(f"cp -aur ./hypr {home}/.config/ -v")
             #if the package variable isn't empty
             #if packages:
             #    for x in packages:

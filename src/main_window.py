@@ -1602,6 +1602,7 @@ class MyApp(Adw.Application):
         
     # log out of the system after clicking on the "Log Out" button
     def logout(self, action, param):
+        print(self.win.environment)
         if snap:
             bus = dbus.SystemBus()
             manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
@@ -1613,6 +1614,8 @@ class MyApp(Adw.Application):
                 os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
             elif self.win.environment == 'COSMIC (New)':
                 os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
+            elif self.win.environment == 'Hyprland':
+                os.system("hyprctl dispatch exit")
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
