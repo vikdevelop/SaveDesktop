@@ -606,6 +606,7 @@ class MainWindow(Adw.ApplicationWindow):
             set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
             if "red" in folder:
                 self.setDialog.set_response_enabled('ok', False)
+                [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)] # remove these files if the periodic saving folder is not a cloud drive folder
             if _["periodic_saving_file_err"] in folder:
                 self.setupButton = Gtk.Button.new_with_label(_["create"])
                 self.setupButton.set_valign(Gtk.Align.CENTER)
