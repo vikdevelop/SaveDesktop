@@ -1615,7 +1615,7 @@ class MyApp(Adw.Application):
             elif self.win.environment == 'COSMIC (New)':
                 os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
             elif self.win.environment == 'Hyprland':
-                os.system("hyprctl dispatch exit")
+                os.system("hyprctl dispatch exit") #does logout without prompting the user because i couldn't find a good way to do it
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     

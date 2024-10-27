@@ -1,4 +1,0 @@
-[Application]
-name=io.github.vikdevelop.SaveDesktop
-runtime=org.gnome.Platform/x86_64/47
-sdk=org.gnome.Sdk/x86_64/47
