@@ -36,6 +36,7 @@
 - MATE
 - KDE Plasma
 - Deepin
+- Hyprland
 
 ### SaveDesktop can save:
 - your icons, fonts, and themes
@@ -134,7 +135,10 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.config/deepin
   - ~/.local/share/deepin
   ```
-  
+  - **Hyprland**
+  ```
+  - ~/.config/hypr
+  ```
 </details>
 
 ## Contributing
