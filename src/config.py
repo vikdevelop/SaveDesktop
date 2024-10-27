@@ -1,33 +1,33 @@
 import os, json, gi, argparse, shutil, psutil
 from gi.repository import GLib, Gio
-from localization import _, CACHE, DATA, home, system_dir, flatpak, snap, settings
-
-# add command-line arguments
+from localization import _, CACHE, DATA, system_dir, flatpak, snap, settings
+home = os.getenv('HOME')
+#add command-line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
 parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
+args = parser.parse_args()
 
 #get all system processes
-args = parser.parse_args()
-processes = psutil.process_iter()
+#processes = psutil.process_iter()
 
 #initialize a var
-packages = []
+#packages = []
 
 #creating a lambda functin to get the path to the package config folder
 pathto=lambda package:home+'/.config/'+package
 
 #a list of available packages for a wayland windowmanager
-available_packages = ["waybar","swaybg","wpaperd","mpvpaper","swww","waypaper","eww"]
+#available_packages = ["waybar","swaybg","wpaperd","mpvpaper","swww","waypaper","eww"]
 
 #getting only the names of the processes
-names = [x.name for x in processes]
+#names = [x.name for x in processes]
 
 #selecting the found packages and appending them to the package list
-for name in names:
-    for package in available_packages:
-        if package in str(name):
-            packages.append(pathto(package))
+#for name in names:
+#    for package in available_packages:
+#        if package in str(name):
+#            packages.append(pathto(package))
 
 # check of the user's current DE
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
@@ -159,7 +159,8 @@ class Save:
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
         elif environment == 'Hyprland':
-            os.system("cp -R "+pathto('hypr')+" ./hypr")
+            shutil.copytree(f"{home}/.config/hypr","./hypr",dirs_exist_ok=True)
+            #os.system("cp -R "+pathto('hypr')+" ./hypr")
             #for x in packages:
                 #os.system(f"cp -R {pathto(x)} ./{x}")
 
@@ -275,7 +276,9 @@ class Import:
             os.system(f"cp -au ./deepin {home}/.config/")
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
         elif environment = 'Hyprland':
-            os.system(f"cp -aur ./hypr {home}/.config/")
+            #os.system(f'mkdir {home}/.config/import-savedesktop')
+            shutil.copytree("./hypr",f"{home}/.config/hypr",dirs_exist_ok=True)
+            #os.system(f"cp -aur ./hypr {home}/.config/")
             #if the package variable isn't empty
             #if packages:
             #    for x in packages:
