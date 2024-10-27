@@ -275,11 +275,11 @@ class Import:
             os.system(f"cp -au ./deepin {home}/.config/")
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
         elif environment = 'Hyprland':
-            os.system(f"cp -au ./hypr {home}/.config/")
+            os.system(f"cp -aur ./hypr {home}/.config/")
             #if the package variable isn't empty
             if packages:
                 for x in packages:
-                    os.system(f"cp -au ./{x} {home}/.config/")
+                    os.system(f"cp -aur ./{x} {home}/.config/")
         elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
