@@ -256,7 +256,7 @@ class Import:
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
         elif environment == 'Hyprland':
             os.system(f"cp -aur ./hypr {home}/.config/ -v")
-	elif environment == None:
+        elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
         if flatpak:
