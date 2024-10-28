@@ -8,8 +8,6 @@ parser.add_argument("-s", "--save", help="Save the current configuration", actio
 parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
 args = parser.parse_args()
 
-#creating a lambda functin to get the path to the package config folder
-
 #check of the user's current DE
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
     environment = 'GNOME'
@@ -255,7 +253,7 @@ class Import:
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
         elif environment == 'Hyprland':
             os.system(f"cp -aur ./hypr {home}/.config/ -v")
-	elif environment == None:
+        elif environment == None:
             print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
         if flatpak:
