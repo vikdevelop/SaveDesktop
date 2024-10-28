@@ -242,17 +242,18 @@ class Import:
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
             
         if flatpak:
-            self.create_flatpak_desktop()
+            if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
+                self.create_flatpak_desktop()
             
     # Create desktop file for install Flatpaks from a list
     def create_flatpak_desktop(self):
-        os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
+        os.system(f"cp {system_dir}/install_flatpak_from_script.py {CACHE}/")
         if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") or not os.path.exists(f"{CACHE}/syncing/sync_status"):
             if not os.path.exists(f"{home}/.config/autostart"):
                 os.mkdir(f"{home}/.config/autostart")
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
                 with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
-                    fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
+                    fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {CACHE}/install_flatpak_from_script.py")
 
 if args.save:
     Save()
