@@ -1,6 +1,6 @@
 import os, json, gi, argparse, shutil
 from gi.repository import GLib, Gio
-from localization import _, CACHE, DATA, system_dir, flatpak, snap, settings
+from localization import _, CACHE, DATA, system_dir, flatpak, snap, settings, home
 #add command-line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
