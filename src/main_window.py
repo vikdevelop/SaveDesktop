@@ -114,8 +114,8 @@ class MainWindow(Adw.ApplicationWindow):
             'XFCE': 'Xfce',
             'MATE': 'MATE',
             'KDE': 'KDE Plasma',
-            'Deepin': 'Deepin'
-        }
+            'Deepin': 'Deepin',
+            'Hyprland': 'Hyprland'}
 
         # If the user has a supported environment, it shows the app window, otherwise, it shows the window with information about an unsupported environment
         def setup_environment(env_name):
@@ -1397,7 +1397,8 @@ class MyApp(Adw.Application):
         self.create_action('open-wiki', self.open_wiki, ["F1"])
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
-        self.create_action('logout', self.logout)
+        if not (flatpak and self.win.environment('Hyprland')):
+             self.create_action('logout', self.logout)
         self.create_action('open_dir', self.open_dir)
         self.create_action('about', self.on_about_action)
         self.connect('activate', self.on_activate)
@@ -1461,6 +1462,8 @@ class MyApp(Adw.Application):
                 os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
             elif self.win.environment == 'COSMIC (New)':
                 os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
+            elif (not flatpak) and self.win.environment == 'Hyprland':
+                os.system("hyprctl dispatch exit")
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
