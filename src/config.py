@@ -34,8 +34,8 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'Hyprland':
     environment = 'Hyprland'
-#else:
-#    from tty_environments import *
+else:
+    from tty_environments import *
 
 class Save:
     def __init__(self):
