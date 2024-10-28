@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile
+import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, signal, psutil
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from datetime import date
@@ -1614,8 +1614,10 @@ class MyApp(Adw.Application):
             elif self.win.environment == 'COSMIC (New)':
                 os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
             elif self.win.environment == 'Hyprland':
-                os.system("hyprctl dispatch exit") #does logout without prompting the user because i couldn't find a good way to do it
+                #os.system("hyprctl dispatch exit") #does logout without prompting the user because i couldn't find a good way to do it
 		#needs to be fixed for flatpak unfortunately I do not know how to make this call on flatpak via Python
+                dict_pids = {p.info["pid"]: p.info["name"] for p in psutil.process_iter(attrs=["pid", "name"]) if 'Hyprland' in p.info["name"]}
+                os.kill(dict_pids[0], signal.SIGUSR1)
             else:
                 print(f'{self.win.environment} is not found in our database it would be of great value if you would leave a issue on our github page: https://github.com/vikdevelop/SaveDesktop')
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")

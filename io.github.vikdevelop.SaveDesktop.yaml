@@ -54,6 +54,14 @@ finish-args:
     - --filesystem=xdg-run/dconf
     - --talk-name=ca.desrt.dconf
 modules:
+  - name: psutil
+    buildsystem: simple
+    build-commands:
+      - pip install --no-build-isolation --prefix=/app .
+    sources:
+      - type: archive
+        url: https://github.com/giampaolo/psutil/archive/refs/tags/release-6.1.0.tar.gz
+        sha256: 0ffb8a92fac0e89c10b0beb152acae27975fd488d0b9938e441106f319e7599c
   - name: dconf
     buildsystem: simple
     build-commands:
