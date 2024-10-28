@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, signal, psutil
+import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, signal
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from datetime import date
