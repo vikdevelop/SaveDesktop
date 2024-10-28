@@ -1,7 +1,7 @@
 import os, json, gi, argparse, shutil
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, system_dir, flatpak, snap, settings
-home = os.getenv('HOME')
+
 #add command-line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
@@ -38,8 +38,8 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'Hyprland':
     environment = 'Hyprland'
-#else:
-#    from tty_environments import *
+else:
+    from tty_environments import *
 
 class Save:
     def __init__(self):
