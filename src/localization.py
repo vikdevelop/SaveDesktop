@@ -46,6 +46,8 @@ snap_real_home = os.getenv('SNAP_REAL_HOME')
 # Setting home as per the confinement
 home = snap_real_home if 'SNAP' in os.environ else snap_home
 
+# Setting Desktop variable
+desktopenv = os.getenv("XDG_CURRENT_DESKTOP")
 # Load GSettings database
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 

@@ -6,17 +6,16 @@ from datetime import date
 from pathlib import Path
 from threading import Thread
 from gi.repository import Gtk, Adw, Gio, GLib
-from localization import _, home, download_dir
+from localization import _, home, download_dir, desktopenv
 from open_wiki import *
 from shortcuts_window import *
-
 # Application window
 class MainWindow(Adw.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_title("SaveDesktop")
         self.application = kwargs.get('application')
-        
+
         # header bar and toolbarview
         self.headerbar = Adw.HeaderBar.new()
         self.toolbarview = Adw.ToolbarView.new()
@@ -31,7 +30,23 @@ class MainWindow(Adw.ApplicationWindow):
         # set the window size and maximization from the GSettings database
         (width, height) = settings["window-size"]
         self.set_default_size(width, height)
-        
+
+        # Check the user's current desktop
+        desktop_map = {
+            'GNOME': 'GNOME',
+            'zorin:GNOME': 'GNOME',
+            'ubuntu:GNOME': 'GNOME',
+            'pop:GNOME': 'COSMIC (Old)',
+            'COSMIC': 'COSMIC (New)',
+            'Pantheon': 'Pantheon',
+            'X-Cinnamon': 'Cinnamon',
+            'Budgie:GNOME': 'Budgie',
+            'XFCE': 'Xfce',
+            'MATE': 'MATE',
+            'KDE': 'KDE Plasma',
+            'Deepin': 'Deepin',
+            'Hyprland': 'Hyprland'}
+
         # if value is TRUE, it enables window maximalization
         if settings["maximized"]:
             self.maximize()
@@ -104,25 +119,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.toast = Adw.Toast.new(title='')
         self.toast.set_timeout(0)
         
-        # Check the user's current desktop
-        desktop_env = os.getenv('XDG_CURRENT_DESKTOP')
-        desktop_map = {
-            'GNOME': 'GNOME',
-            'zorin:GNOME': 'GNOME',
-            'ubuntu:GNOME': 'GNOME',
-            'pop:GNOME': 'COSMIC (Old)',
-            'COSMIC': 'COSMIC (New)',
-            'Pantheon': 'Pantheon',
-            'X-Cinnamon': 'Cinnamon',
-            'Budgie:GNOME': 'Budgie',
-            'XFCE': 'Xfce',
-            'MATE': 'MATE',
-            'KDE': 'KDE Plasma',
-            'Deepin': 'Deepin',
-            'Hyprland': 'Hyprland'
-        }
-
-        # If the user has a supported environment, it shows the app window, otherwise, it shows the window with information about an unsupported environment
+	# If the user has a supported environment, it shows the app window, otherwise, it shows the window with information about an unsupported environment
         def setup_environment(env_name):
             self.environment = env_name
             self.save_desktop()
@@ -130,8 +127,8 @@ class MainWindow(Adw.ApplicationWindow):
             self.sync_desktop()
             self.connect("close-request", self.on_close)
 
-        if desktop_env in desktop_map:
-            setup_environment(desktop_map[desktop_env])
+        if desktopenv in desktop_map:
+            setup_environment(desktop_map[desktopenv])
         else:
             # Handle unsupported desktop environments
             self.toolbarview.add_top_bar(self.errHeaderbar)
@@ -1489,7 +1486,7 @@ class MainWindow(Adw.ApplicationWindow):
         active_window = app.get_active_window()
         if active_window is None or not active_window.is_active():
             app.send_notification(None, self.notification_import)
-        
+
         # stop spinner animation
         self.importwaitSpinner.stop()
         self.importwaitBox.remove(self.importwaitButton)
@@ -1568,7 +1565,8 @@ class MyApp(Adw.Application):
         self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"] if settings["manually-sync"] else None)
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
-        self.create_action('logout', self.logout)
+        if desktopenv in {'GNOME': 'GNOME','zorin:GNOME': 'GNOME','ubuntu:GNOME': 'GNOME','pop:GNOME': 'COSMIC (Old)','COSMIC': 'COSMIC (New)','Pantheon': 'Pantheon','X-Cinnamon': 'Cinnamon','Budgie:GNOME': 'Budgie','XFCE': 'Xfce','MATE': 'MATE','KDE': 'KDE Plasma','Deepin': 'Deepin'}.keys():
+             self.create_action('logout', self.logout)
         self.create_action('open_dir', self.open_dir)
         self.connect('activate', self.on_activate)
     
