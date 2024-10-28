@@ -6,7 +6,7 @@ from datetime import date
 from pathlib import Path
 from threading import Thread
 from gi.repository import Gtk, Adw, Gio, GLib
-from localization import _, home, download_dir, desktopenv
+from localization import _, home, download_dir, desktopenv, flatpak
 from open_wiki import *
 from shortcuts_window import *
 # Application window
@@ -1565,7 +1565,7 @@ class MyApp(Adw.Application):
         self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"] if settings["manually-sync"] else None)
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
-        if not self.win.environment('Hyprland'):
+        if not (flatpak and self.win.environment('Hyprland')):
              self.create_action('logout', self.logout)
         self.create_action('open_dir', self.open_dir)
         self.connect('activate', self.on_activate)
@@ -1611,8 +1611,8 @@ class MyApp(Adw.Application):
                 os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
             elif self.win.environment == 'COSMIC (New)':
                 os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
-            elif self.win.environment == 'Hyprland':
-                pass
+            elif (not flatpak) and self.win.environment == 'Hyprland':
+                os.system("hyprctl dispatch exit")
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
