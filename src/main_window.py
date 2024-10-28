@@ -1602,7 +1602,6 @@ class MyApp(Adw.Application):
         
     # log out of the system after clicking on the "Log Out" button
     def logout(self, action, param):
-        print(self.win.environment)
         if snap:
             bus = dbus.SystemBus()
             manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
@@ -1618,6 +1617,7 @@ class MyApp(Adw.Application):
                 #os.system("hyprctl dispatch exit") #does logout without prompting the user because i couldn't find a good way to do it
 		pass #needs to be fixed but i do not know how to make this call on flatpak via python
             else:
+                print(f'{self.win.environment} is not found in our database it would be of great value if you would leave a issue on our github page: https://github.com/vikdevelop/SaveDesktop')
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
     # open directory with created configuration archive after clicking on the "Open the folder" button
