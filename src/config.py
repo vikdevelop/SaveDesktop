@@ -9,7 +9,6 @@ parser.add_argument("-i", "--import_", help="Import saved configuration", action
 args = parser.parse_args()
 
 #creating a lambda functin to get the path to the package config folder
-pathto=lambda package:home+'/.config/'+package
 
 #check of the user's current DE
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
