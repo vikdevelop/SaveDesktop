@@ -34,6 +34,8 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
     environment = 'KDE Plasma'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
+elif os.getenv('XDG_CURRENT_DESKTOP') == 'Hyprland':
+    environment = 'Hyprland'
 else:
     from tty_environments import *
 
@@ -135,6 +137,8 @@ class Save:
         elif environment == 'Deepin':
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
+        elif environment == 'Hyprland':
+            shutil.copytree(f"{home}/.config/hypr","./hypr",dirs_exist_ok=True)
     
     # save Flatpak apps data
     def save_flatpak_data(self):
@@ -240,6 +244,10 @@ class Import:
         elif environment == 'Deepin':
             os.system(f"cp -au ./deepin {home}/.config/")
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
+        elif environment == 'Hyprland':
+            os.system(f"cp -aur ./hypr {home}/.config/ -v")
+        elif environment == None:
+            print("→ SKIPPING: SaveDesktop is running in the TTY mode")
             
         if flatpak:
             if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
