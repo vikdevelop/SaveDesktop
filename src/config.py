@@ -8,9 +8,6 @@ parser.add_argument("-s", "--save", help="Save the current configuration", actio
 parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
 args = parser.parse_args()
 
-#creating a lambda functin to get the path to the package config folder
-pathto=lambda package:home+'/.config/'+package
-
 #check of the user's current DE
 if os.getenv('XDG_CURRENT_DESKTOP') == 'GNOME':
     environment = 'GNOME'
