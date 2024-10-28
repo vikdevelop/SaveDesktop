@@ -1565,7 +1565,7 @@ class MyApp(Adw.Application):
         self.create_action('m_sync_with_key', self.sync_pc, ["<primary>s"] if settings["manually-sync"] else None)
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
-        if desktopenv in {'GNOME': 'GNOME','zorin:GNOME': 'GNOME','ubuntu:GNOME': 'GNOME','pop:GNOME': 'COSMIC (Old)','COSMIC': 'COSMIC (New)','Pantheon': 'Pantheon','X-Cinnamon': 'Cinnamon','Budgie:GNOME': 'Budgie','XFCE': 'Xfce','MATE': 'MATE','KDE': 'KDE Plasma','Deepin': 'Deepin'}.keys():
+        if not self.win.environment('Hyprland'):
              self.create_action('logout', self.logout)
         self.create_action('open_dir', self.open_dir)
         self.connect('activate', self.on_activate)
