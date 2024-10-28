@@ -1619,7 +1619,6 @@ class MyApp(Adw.Application):
                 dict_pids = {p.info["pid"]: p.info["name"] for p in psutil.process_iter(attrs=["pid", "name"]) if 'Hyprland' in p.info["name"]}
                 os.kill(dict_pids[0], signal.SIGUSR1)
             else:
-                print(f'{self.win.environment} is not found in our database it would be of great value if you would leave a issue on our github page: https://github.com/vikdevelop/SaveDesktop')
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
     # open directory with created configuration archive after clicking on the "Open the folder" button
