@@ -1616,8 +1616,9 @@ class MyApp(Adw.Application):
             elif self.win.environment == 'Hyprland':
                 #os.system("hyprctl dispatch exit") #does logout without prompting the user because i couldn't find a good way to do it
 		#needs to be fixed for flatpak unfortunately I do not know how to make this call on flatpak via Python
-                dict_pids = {p.info["pid"]: p.info["name"] for p in psutil.process_iter(attrs=["pid", "name"]) if 'Hyprland' in p.info["name"]}
-                os.kill(dict_pids[0], signal.SIGUSR1)
+                dict_pids = {p.info["pid"]: p.info["name"] for p in psutil.process_iter(attrs=["pid", "name"])}
+                #os.kill(dict_pids[0], signal.SIGUSR1)
+                print(dict_pids)
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
