@@ -883,7 +883,7 @@ class MainWindow(Adw.ApplicationWindow):
                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}"
             synchronization_content = f'#!/usr/bin/bash\n{cmd}\n{periodic_saving_cmd}\n{sync_cmd}\n'
             if flatpak:
-                synchronization_content += 'python3 ~/.var/app/io.github.vikdevelop.SaveDesktop/data/install_flatpak_from_script.py'
+                synchronization_content += f'python3 {CACHE}/install_flatpak_from_script.py'
             with open(f"{DATA}/savedesktop-synchronization.sh", "w") as f:
                 f.write(synchronization_content)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
