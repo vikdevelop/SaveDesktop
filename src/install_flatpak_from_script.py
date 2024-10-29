@@ -32,9 +32,11 @@ if not dest_dir == None:
         print("copying the Flatpak apps' user data to the ~/.var/app directory")
         os.system(f"cp -au {dest_dir}/app/ ~/.var/")
     
-    # If the Bash scripts for installing Flatpak apps to the system, install them
+    # If the Bash scripts for installing Flatpak apps to the system exist, install them
     if os.path.exists(f"{dest_dir}/installed_flatpaks.sh") or os.path.exists(f"{dest_dir}/installed_user_flatpaks.sh"):
         print("installing the Flatpak apps on the system")
+        # If the Flathub repository in user installation doesn't exist, add it
+        os.system("flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo")
         # Install Flatpak apps from list
         installed_flatpaks_files = [f'{dest_dir}/installed_flatpaks.sh', f'{dest_dir}/installed_user_flatpaks.sh']
         system_flatpak_dir = '/var/lib/flatpak/app'
