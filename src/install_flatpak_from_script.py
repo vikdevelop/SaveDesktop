@@ -30,7 +30,7 @@ if not dest_dir == None:
     # If the destination directory has a directory with installed Flatpak apps user data, install them
     if os.path.exists(f"{dest_dir}/app"):
         print("copying the Flatpak apps' user data to the ~/.var/app directory")
-        os.system(f"cp -au {dest_dir}/app/ ~/.var/app/")
+        os.system(f"cp -au {dest_dir}/app/ ~/.var/")
     
     # If the Bash scripts for installing Flatpak apps to the system exist, install them
     if os.path.exists(f"{dest_dir}/installed_flatpaks.sh") or os.path.exists(f"{dest_dir}/installed_user_flatpaks.sh"):
