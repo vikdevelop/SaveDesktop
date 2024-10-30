@@ -18,6 +18,7 @@ parser.add_argument("--background", action="store_true", help="Start periodic sa
 parser.add_argument("--sync", action="store_true", help="Sync desktop configuration")
 parser.add_argument("--save-now", action="store_true", help="Save configuration using UI parameters (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/configuration-in-cli/en)")
 parser.add_argument("--import-config", help="Import configuration from a file (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/configuration-in-cli/en)", type=str)
+parser.add_argument("--update", action="store_true", help="Update SaveDesktop (Native version only)") if not (flatpak or snap) else None
 cmd = parser.parse_args()
 
 # Run Python scripts from the listed command-line arguments
@@ -54,5 +55,23 @@ elif cmd.import_config:
     
     os.system(f"python3 {init_dir}/config.py --import_")
     exit()
+elif cmd.update:
+    if not (flatpak or snap):
+        import requests
+        # Get info about version
+        response = requests.get("https://api.github.com/repos/vikdevelop/SaveDesktop/releases/latest")
+        github_version = response.json()["tag_name"]
+        
+        sys.path.append(f"{Path.home()}/.local/share/savedesktop")
+        os.chdir(f"{Path.home()}/.local/share/savedesktop")
+        from src.localization import *
+        os.chdir(f"{Path.home()}/.local/bin")
+        
+        d_ver = subprocess.getoutput("cat ~/.local/share/io.github.vikdevelop.SaveDesktop/version.txt")
+        
+        if not d_ver == f"{github_version}":
+            os.system("wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove")
+            os.system("wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --install")
+            os.system(f'echo "{github_version}" > ~/.local/share/io.github.vikdevelop.SaveDesktop/version.txt')
 else:
     import main_window
