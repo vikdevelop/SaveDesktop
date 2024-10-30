@@ -1338,7 +1338,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.logoutButton.set_halign(Gtk.Align.CENTER)
         self.logoutButton.set_valign(Gtk.Align.CENTER)
         self.logoutButton.set_action_name("app.logout")
-        self.importwaitBox.append(self.logoutButton)
+        self.importwaitBox.append(self.logoutButton) if not flatpak and self.environment == 'Hyprland' else None
 
         # create button for backing to the previous page
         self.backtomButton = Gtk.Button.new_with_label(_["back_to_page"])
@@ -1397,8 +1397,7 @@ class MyApp(Adw.Application):
         self.create_action('open-wiki', self.open_wiki, ["F1"])
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
-        if not (flatpak and self.win.environment('Hyprland')):
-             self.create_action('logout', self.logout)
+        self.create_action('logout', self.logout)
         self.create_action('open_dir', self.open_dir)
         self.create_action('about', self.on_about_action)
         self.connect('activate', self.on_activate)
@@ -1452,9 +1451,7 @@ class MyApp(Adw.Application):
     # log out of the system after clicking on the "Log Out" button
     def logout(self, action, param):
         if snap:
-            bus = dbus.SystemBus()
-            manager = dbus.Interface(bus.get_object("org.freedesktop.login1", "/org/freedesktop/login1"), 'org.freedesktop.login1.Manager')
-            manager.KillSession(manager.ListSessions()[0][0], 'all', 9)
+            os.system("dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.TerminateSession string:$(dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.ListSessions | awk -F 'string \"' '/string \"/ {print $2; exit}' | awk -F '\"' '{print $1}')")
         else:
             if self.win.environment == 'Xfce':
                 os.system("dbus-send --print-reply --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
@@ -1462,7 +1459,7 @@ class MyApp(Adw.Application):
                 os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
             elif self.win.environment == 'COSMIC (New)':
                 os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
-            elif (not flatpak) and self.win.environment == 'Hyprland':
+            elif not flatpak and self.win.environment == 'Hyprland':
                 os.system("hyprctl dispatch exit")
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
@@ -1482,7 +1479,7 @@ class MyApp(Adw.Application):
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://vikdevelop.github.io/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
-        dialog.add_link("Flathub Beta", "https://github.com/vikdevelop/savedesktop?tab=readme-ov-file#1-flathub-beta") if flatpak else dialog.add_link("Snap Beta", "https://github.com/vikdevelop/savedesktop?tab=readme-ov-file#2-snap") if snap else None # add link to download the beta version of SaveDesktop
+        dialog.add_link("Flathub Beta", "https://github.com/vikdevelop/savedesktop?tab=readme-ov-file#1-flathub-beta") if flatpak else dialog.add_link("Snap Beta", "https://github.com/vikdevelop/savedesktop?tab=readme-ov-file#2-snap") if snap else None # add a link to download the beta version of SaveDesktop
         dialog.set_copyright("© 2023-2024 vikdevelop")
         dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
         dialog.set_artists(["Brage Fuglseth"])
