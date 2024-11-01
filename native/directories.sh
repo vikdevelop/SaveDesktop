@@ -8,11 +8,12 @@ if [ "$1" = "--install" ]; then
     install -D -t ~/.local/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
     install -D -t ~/.local/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
     install -D -t ~/.local/share/glib-2.0/schemas flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
+    install -D -t ~/.local/share/licenses/savedesktop LICENSE
     mkdir -p ~/.local/share/savedesktop
     cp -R src ~/.local/share/savedesktop/
     cp -R translations ~/.local/share/savedesktop/
-    install -D -t ~/.local/share/licenses/savedesktop LICENSE
-    echo -e "[Desktop Entry]\nName=SaveDesktop Native Updater\nType=Application\nExec=savedesktop --update" > ~/.config/autostart/io.github.vikdevelop.SaveDesktop.Updater.desktop
+    cp -R native/native_installer.py ~/.local/share/savedesktop/
+    echo -e "[Desktop Entry]\nName=SaveDesktop Native Updater\nType=Application\nExec=python3 ${HOME}/.local/share/savedesktop/native_installer.py --update" > ~/.config/autostart/io.github.vikdevelop.SaveDesktop.Updater.desktop
     export GSETTINGS_SCHEMA_DIR="$HOME/.local/share/glib-2.0/schemas:${GSETTINGS_SCHEMA_DIR}"
     glib-compile-schemas ~/.local/share/glib-2.0/schemas
     # Install app icons
@@ -40,5 +41,6 @@ if [ "$1" = "--remove" ]; then
     rm ~/.local/share/icons/hicolor/symbolic/apps/list-view.png
     rm ~/.local/share/icons/hicolor/symbolic/apps/done.svg
     rm ~/.local/share/icons/hicolor/symbolic/apps/exclamation_mark.png
+    cd
     echo "SaveDesktop has been removed."
 fi
