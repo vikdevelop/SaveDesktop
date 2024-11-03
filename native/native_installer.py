@@ -3,6 +3,7 @@ import requests, json, os, sys, argparse, gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw
+from pathlib import Path
 
 # Check GTK and LibAdwaita versions
 gtk_ver = f"{Gtk.MAJOR_VERSION}.{Gtk.MINOR_VERSION}"
@@ -27,14 +28,14 @@ def install(github_version):
     os.system("tar -xf *.tar.gz")
     os.chdir(f"SaveDesktop-{github_version}")
     
-    os.system("wget -c https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/install_native.sh")
+    os.system("wget -c https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/directories.sh")
     os.system("sh directories.sh --install")
     os.system("rm -rf /tmp/SaveDesktop")
 
 def remove():
     os.makedirs("/tmp/SaveDesktop", exist_ok=True)
     os.chdir("/tmp/SaveDesktop")
-    os.system("wget -c https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/install_native.sh")
+    os.system("wget -c https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/directories.sh")
     os.system("sh directories.sh --remove")
     os.system("rm -rf /tmp/SaveDesktop")
 
@@ -64,3 +65,4 @@ if args.update:
         
         with open(Path.home() / ".local/share/io.github.vikdevelop.SaveDesktop/version.txt", "w") as version_file:
             version_file.write(github_version)
+

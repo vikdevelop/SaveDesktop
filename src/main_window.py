@@ -22,8 +22,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.toolbarview = Adw.ToolbarView.new()
         self.toolbarview.add_top_bar(self.headerbar)
         
-        # values that set if state of the switch "Extensions" in the Items, state of the switch "User data of installed Flatpak apps will be saved or not", if whether whether to reopen the self.setDialog and if the Apply button in self.setDialog will be enabled or not
-        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.cancel_process = self.set_button_sensitive = False
+        # Values that are set if state of the switch "Extensions" in the Items, state of the switch "User data of installed Flatpak apps" will be saved or not, if whether to reopen the self.setDialog, if restarts the app window. Whether the Apply button in self.setDialog will be enabled or not.
+        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.cancel_process = self.set_button_sensitive = self.restart_app_win = False
         
         # set the window size and maximization from the GSettings database
         (width, height) = settings["window-size"]
@@ -138,7 +138,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.pBox.set_margin_end(50)
             self.toolbarview.set_content(self.pBox)
             self.unsupp_img = Gtk.Image.new_from_icon_name("exclamation_mark"); self.unsupp_img.set_pixel_size(128); self.pBox.append(self.unsupp_img)
-            self.unsupp_label = Gtk.Label.new(str=f'<big>{_["unsuppurted_env_desc"]}</big>'.format("GNOME, Xfce, Budgie, Cinnamon, COSMIC, Pantheon, KDE Plasma, MATE, Deepin")); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
+            self.unsupp_label = Gtk.Label.new(str=f'<big>{_["unsuppurted_env_desc"]}</big>'.format(', '.join(set(desktop_map.values())))); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
     
     # Switch between ViewSwitcherTitle and ViewSwitcherBar based on the title visible
     def change_bar(self, *data):
@@ -471,7 +471,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Responses of this dialog
         def initsetupDialog_closed(w, response):
             if response == 'next': # open the Gtk.FileDialog in the GNOME Online accounts case
-                self.select_pb_folder(w) if self.get_button_type == 'set-button' else self.select_sync_folder(w)
+                self.select_pb_folder(w) if self.get_button_type == 'set-button' else self.select_folder_to_sync(w)
                 almost_done()
             elif response == 'ok-rclone': # set the periodic saving folder in the Rclone case
                 if self.get_button_type == 'set-button':
@@ -484,11 +484,12 @@ class MainWindow(Adw.ApplicationWindow):
             elif response == 'open-setdialog': # open the "Set up the sync file" dialog after clicking on the Next button in "Almost done!" page
                 self.start_saving = True
                 settings["periodic-saving"] = "Daily"
-                settings["first-synchronization-setup"] = False
+                self.restart_app_win = True
                 self.open_setDialog(w)
             elif response == 'open-clouddialog': # open the "Connect to the cloud folder" dialog after clicking on the Next button in "Almost done!" page
-                self.open_cloudDialog(w)
                 settings["first-synchronization-setup"] = False
+                self.restart_app_win = True
+                self.open_cloudDialog(w)
         
         # Dialog itself
         self.initsetupDialog = Adw.AlertDialog.new()
@@ -522,7 +523,7 @@ class MainWindow(Adw.ApplicationWindow):
             
             self.thirdRow = Adw.ActionRow.new()
             self.thirdRow.set_title("3. Click on the Next button and select the created cloud drive folder")
-            self.thirdRow.set_subtitle("The created cloud drive folder can be found in the side panel under the Videos folder.")
+            self.thirdRow.set_subtitle("The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com.")
             self.initBox.append(self.thirdRow)
             
             self.initsetupDialog.add_response('next', 'Next')
@@ -657,6 +658,7 @@ class MainWindow(Adw.ApplicationWindow):
                 thread.start()
             else:
                 self.open_setdialog_tf = False
+            os.execv(sys.argv[0], sys.argv) if self.restart_app_win else None
         
         # Dialog itself
         self.setDialog = Adw.AlertDialog.new()
@@ -714,6 +716,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         # Action after closing URL dialog
         def cloudDialog_closed(w, response):
+            os.execv(sys.argv[0], sys.argv) if self.restart_app_win else None
             if response == 'ok':
                 check_psync = settings["periodic-import"]
                 
@@ -786,7 +789,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudButton.add_css_class('flat')
         self.cloudButton.set_valign(Gtk.Align.CENTER)
         self.cloudButton.set_tooltip_text(_["set_another"])
-        self.cloudButton.connect("clicked", self.select_sync_folder)
+        self.cloudButton.connect("clicked", self.select_folder_to_sync)
         
         ## button for reseting the selected cloud drive folder
         self.resetButton = Gtk.Button.new_from_icon_name("view-refresh-symbolic")
@@ -961,8 +964,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_chooser.set_filters(self.file_filter_list)
         self.file_chooser.open(self, None, open_selected, None)
         
-    # Select file for syncing cfg with other computers in the network
-    def select_sync_folder(self, w):
+    # Select folder for syncing the configuration with other computers in the network
+    def select_folder_to_sync(self, w):
         def set_selected(source, res, data):
             try:
                 folder = source.select_folder_finish(res)
@@ -1338,7 +1341,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.logoutButton.set_halign(Gtk.Align.CENTER)
         self.logoutButton.set_valign(Gtk.Align.CENTER)
         self.logoutButton.set_action_name("app.logout")
-        self.importwaitBox.append(self.logoutButton) if not flatpak and self.environment == 'Hyprland' else None
+        self.importwaitBox.append(self.logoutButton) if not (flatpak and self.environment == "Hyprland") else None
 
         # create button for backing to the previous page
         self.backtomButton = Gtk.Button.new_with_label(_["back_to_page"])
@@ -1459,7 +1462,7 @@ class MyApp(Adw.Application):
                 os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
             elif self.win.environment == 'COSMIC (New)':
                 os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
-            elif not flatpak and self.win.environment == 'Hyprland':
+            elif self.win.environment == 'Hyprland':
                 os.system("hyprctl dispatch exit")
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")

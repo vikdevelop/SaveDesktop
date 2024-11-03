@@ -11,4 +11,3 @@ Because there are a lot of files, this README helps you with navigate in this di
 - `open_wiki.py` - opening the Github wiki of this app in the system language (if it is not available in the list of available languages, English opens)
 - `periodic_saving.py` - saving configuration periodically
 - `shortcuts_window.py` - showing available Keyboard shortcuts in the window
-- `tty_environments.py` - detecting desktop environemnt in the TTY mode
