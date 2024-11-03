@@ -380,14 +380,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
         
-        # Image and title for the Import page
-        self.importPage = Adw.StatusPage.new()
-        self.importPage.set_icon_name("document-open-symbolic")
-        self.importPage.set_title(_['import_config'])
-        self.importPage.set_description("Import the configuration by clicking on the button below.")
-        self.importPage.set_size_request(300, 300)
-        self.importBox.append(self.importPage)
-        
         # Import configuration button
         self.fileButton = Gtk.Button.new_with_label(_["import_from_file"])
         self.fileButton.add_css_class("pill")
@@ -395,18 +387,28 @@ class MainWindow(Adw.ApplicationWindow):
         self.fileButton.set_halign(Gtk.Align.CENTER)
         self.fileButton.set_valign(Gtk.Align.CENTER)
         self.fileButton.connect("clicked", self.select_folder_to_import)
-        self.importBox.append(self.fileButton)
+        
+        # Image and title for the Import page
+        self.importPage = Adw.StatusPage.new()
+        self.importPage.set_icon_name("document-open-symbolic")
+        self.importPage.set_title(_['import_config'])
+        self.importPage.set_description("Import the configuration by clicking on the button below.")
+        self.importPage.set_size_request(360, -1)
+        self.importPage.set_child(self.fileButton)
+        self.importBox.append(self.importPage)
             
     # Syncing desktop page
     def sync_desktop(self):
         # Set showing the Initial synchronization setup dialog only if the periodic saving folder or cloud drive folder does not use GVFS or Rclone filesystem
         settings["first-synchronization-setup"] = True if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") else False
         
-        # Image and title for this page
+        # Box, image and title for this page
+        self.sync_btn_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.syncPage = Adw.StatusPage.new()
         self.syncPage.set_icon_name("emblem-synchronizing-symbolic")
         self.syncPage.set_title(_["sync_title"])
         self.syncPage.set_description(f'{_["sync_desc"]} <a href="{sync_wiki}">{_["learn_more"]}</a>')
+        self.syncPage.set_child(self.sync_btn_box)
         self.syncingBox.append(self.syncPage)
 
         # "Set up the sync file" button
@@ -417,7 +419,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.setButton.connect("clicked", self.open_setDialog if not settings["first-synchronization-setup"] else self.open_initsetupDialog)
         self.setButton.set_valign(Gtk.Align.CENTER)
         self.setButton.set_halign(Gtk.Align.CENTER)
-        self.syncingBox.append(self.setButton)
+        self.sync_btn_box.append(self.setButton)
 
         # "Connect with other computer" button
         self.getButton = Gtk.Button.new_with_label(_["connect_cloud_storage"])
@@ -426,7 +428,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.getButton.connect("clicked", self.open_cloudDialog if not settings["first-synchronization-setup"] else self.open_initsetupDialog)
         self.getButton.set_valign(Gtk.Align.CENTER)
         self.getButton.set_halign(Gtk.Align.CENTER)
-        self.syncingBox.append(self.getButton)
+        self.sync_btn_box.append(self.getButton)
     
     # Dialog for initial setting up the synchronization
     def open_initsetupDialog(self, w):
