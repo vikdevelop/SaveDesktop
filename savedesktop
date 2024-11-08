@@ -16,8 +16,8 @@ sys.path.append(init_dir)
 parser = argparse.ArgumentParser()
 parser.add_argument("--background", action="store_true", help="Start periodic saving")
 parser.add_argument("--sync", action="store_true", help="Sync desktop configuration")
-parser.add_argument("--save-now", action="store_true", help="Save configuration using UI parameters (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/configuration-in-cli/en)")
-parser.add_argument("--import-config", help="Import configuration from a file (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/configuration-in-cli/en)", type=str)
+parser.add_argument("--save-now", action="store_true", help="Save configuration using UI parameters (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/saving-importing-configuration-in-cli/en)")
+parser.add_argument("--import-config", help="Import configuration from a file (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/saving-importing-configuration-in-cli/en)", type=str)
 cmd = parser.parse_args()
 
 # Run Python scripts from the listed command-line arguments
