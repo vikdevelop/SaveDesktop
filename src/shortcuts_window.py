@@ -90,7 +90,7 @@ SHORTCUTS_WINDOW = '<?xml version="1.0" encoding="UTF-8"?>\
       </object>\
     </child>\
   </template>\
-</interface>' % ("Open the application wiki", _["save_config"], _["import_config"], _["sync_manually"], _["keyboard_shortcuts"], _["quit"], _["more_options"], _["items_for_archive"], _["set_up_sync_file"], _["connect_cloud_storage"])
+</interface>' % (_["open_wiki"], _["save_config"], _["import_config"], _["sync_manually"], _["keyboard_shortcuts"], _["quit"], _["more_options"], _["items_for_archive"], _["set_up_sync_file"], _["connect_cloud_storage"])
 
 # Load the shortcuts window
 @Gtk.Template(string=SHORTCUTS_WINDOW)
