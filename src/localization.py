@@ -15,25 +15,25 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.4.1"
+v = "3.5-beta-2024.11.01"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<ul>\
-<li>Fixed bugs with saving and installing Flatpak apps and their data and logging out of the system after importing the configuration</li>\
-<li>Added \"Learn more\" button to the \"Set up the sync file\" dialog in the case, if you have not selected the cloud drive folder</li>\
-<li>Fixed a bug with stopping saving and importing configuration</li>\
-<li>Improved filesystem type detection of the cloud drive folder</li>\
-<li>Updates to the GNOME Platform 47 runtime and related changes</li>\
-<li>Updated translations</li>\
+rel_notes = "\
+<ul>\
+<li>Added support for the Hyprland window manager (thanks to @pyclicker) (#336)</li>\
+<li>Improved installing the Flatpak apps from the Bash scripts</li>\
+<li>UI improvements</li>\
 </ul>\
-<p>3.4-hotfix-1</p>\
-<p>Fixed a bug with starting periodic saving and updated translations.</p>\
-<p>3.4</p><ul>\
-<li>Synchronisation has been redesigned from the ground up - instead of using URLs to synchronise between computers on the local network, a folder synchronised with cloud storage (using GNOME Online Accounts or Rclone) is used - find out more here: https://vikdevelop.github.io/SaveDesktop/wiki/synchronization/en</li>\
-<li>Added support for comparing installed Flatpak apps, which means that only apps that have not yet been installed on the system will be installed</li>\
-<li>Added option to generate password for configuration archive</li>\
-<li>Added SaveDesktop to the Flathub/Snap Beta channel, so if you want, you can participate in beta testing to prevent bugs in a future stable releases. More informations are here: https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#beta-releases</li>\
-<li>Improved support for displaying possible error messages in the GUI</li>\
-<li>Other minor UI improvements</li>\
+<p>--- 3.5-beta-2024.10.27 ---</p>\
+<p>Fixed a minor bug with showing the correct directory in the command for setting up Rclone and minor changes with the app data file.</p>\
+<p>--- 3.5-beta-2024.10.20 ---</p>\
+<p>Fixed minor bugs with showing the button for copying the command for setting up Rclone and temporarily disabled the synchronization option in the Snap environment due to unreliable file system type detection.</p>\
+<p>--- 3.5-beta-2024.10.15 ---</p>\
+<p>Improved the Initial synchronization setup dialog and other minor UI changes. Also fixed a bug with showing the page about saved or imported configuration</p>\
+<p>--- 3.5-beta-2024.10.10 ---</p><ul>\
+<li>Simplified the initial setting up synchronization: in that case, it shows the dialog window, which helps you to set it up</li>\
+<li>Added more keyboard shortcuts</li>\
+<li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>\
+<li>The UI is now more responsive</li>\
 </ul>"
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'

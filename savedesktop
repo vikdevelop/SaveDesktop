@@ -16,22 +16,26 @@ sys.path.append(init_dir)
 parser = argparse.ArgumentParser()
 parser.add_argument("--background", action="store_true", help="Start periodic saving")
 parser.add_argument("--sync", action="store_true", help="Sync desktop configuration")
-parser.add_argument("--save-now", action="store_true", help="Save configuration using UI parameters")
-parser.add_argument("--import-config", help="Import configuration from a file", type=str)
-args = parser.parse_args()
+parser.add_argument("--save-now", action="store_true", help="Save configuration using UI parameters (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/configuration-in-cli/en)")
+parser.add_argument("--import-config", help="Import configuration from a file (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/configuration-in-cli/en)", type=str)
+cmd = parser.parse_args()
 
 # Run Python scripts from the listed command-line arguments
-if args.background:
-    os.system(f"python3 {init_dir}/periodic_saving.py")
+if cmd.background:
+    from periodic_saving import PeriodicBackups
+    pb = PeriodicBackups()
+    pb.run(None)
     exit()
-elif args.sync:
-    os.system(f"python3 {init_dir}/network_sharing.py")
+elif cmd.save_now:
+    from periodic_saving import PeriodicBackups
+    pb = PeriodicBackups()
+    pb.run(now=True)
     exit()
-elif args.save_now:
-    os.system(f"python3 {init_dir}/periodic_saving.py --now")
+elif cmd.sync:
+    from network_sharing import Syncing
     exit()
-if args.import_config:
-    file_path = args.import_config
+elif cmd.import_config:
+    file_path = cmd.import_config
     if not os.path.exists(file_path):
         print(f"File not found: {file_path}")
         exit(1)

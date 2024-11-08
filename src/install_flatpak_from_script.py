@@ -3,61 +3,68 @@ import os
 from pathlib import Path
 import subprocess
 
-DATA_FLATPAK = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/data"
 CACHE_FLATPAK = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
 
 # Check Desktop Environment
-if os.getenv("XDG_CURRENT_DESKTOP") == 'GNOME':
-    environment = 'GNOME'
-elif os.getenv("XDG_CURRENT_DESKTOP") == 'ubuntu:GNOME':
-    environment = 'GNOME'
-elif os.getenv("XDG_CURRENT_DESKTOP") == 'zorin:GNOME':
+desktop_env = os.getenv("XDG_CURRENT_DESKTOP")
+if desktop_env in ['GNOME', 'ubuntu:GNOME', 'zorin:GNOME']:
     environment = 'GNOME'
 else:
-    environment = 'None'
+    environment = None
 
 # Activate gsettings property
-if environment == 'GNOME':
+if environment:
     if not subprocess.getoutput("gsettings get org.gnome.shell disable-user-extensions") == "false":
         os.system("gsettings set org.gnome.shell disable-user-extensions false")
-
-if os.path.exists(f"{CACHE_FLATPAK}/import_config/app"):
-    if not os.path.exists(f"{CACHE_FLATPAK}/import_config/copying_flatpak_data"):
-        with open(f"{CACHE_FLATPAK}/copying_flatpak_data", "w") as f:
-            f.write("copying flatpak data ...")
-    os.system(f"cp -au {CACHE_FLATPAK}/import_config/app/ ~/.var/")
-    os.system(f"rm -rf {CACHE_FLATPAK}/*")
-elif os.path.exists(f"{CACHE_FLATPAK}/syncing/app"):
-    if not os.path.exists(f"{CACHE_FLATPAK}/syncing/copying_flatpak_data"):
-        with open(f"{CACHE_FLATPAK}/copying_flatpak_data", "w") as f:
-            f.write("copying flatpak data ...")
-    print("copying user data ...")
-    os.system(f"cp -au {CACHE_FLATPAK}/syncing/app/ ~/.var/")
-    os.system(f"rm -rf {CACHE_FLATPAK}/*")
-
-# Install Flatpak apps from list
-installed_flatpaks_files = [f'{DATA_FLATPAK}/installed_flatpaks.sh', f'{DATA_FLATPAK}/installed_user_flatpaks.sh']
-system_flatpak_dir = '/var/lib/flatpak/app'
-user_flatpak_dir = os.path.expanduser('~/.local/share/flatpak/app')
-# Load Flatpaks from bash scripts
-installed_flatpaks = set()
-for file in installed_flatpaks_files:
-    if os.path.exists(file):
-        with open(file, 'r') as f:
-            installed_flatpaks.update(line.split()[3] for line in f if line.startswith('flatpak install'))
-
-# Get installed Flatpaks in the specified directories
-installed_apps = set()
-for directory in [system_flatpak_dir, user_flatpak_dir]:
-    if os.path.exists(directory):
-        installed_apps.update(app for app in os.listdir(directory) if os.path.isdir(os.path.join(directory, app)))
-
-# Compare Flatpaks listed in the Bash scripts with the installed ones
-flatpaks_to_install = installed_flatpaks - installed_apps
-
-if flatpaks_to_install:
-    for app in flatpaks_to_install:
-        subprocess.run(['flatpak', 'install', '--user', 'flathub', app, '-y'])
-    os.system(f"rm -rf {DATA_FLATPAK}/*.sh")
+    
+# Check if the required directories exist in the cache directory
+if os.path.exists(f"{CACHE_FLATPAK}/import_config"):
+    dest_dir = f"{CACHE_FLATPAK}/import_config"
+elif os.path.exists(f"{CACHE_FLATPAK}/syncing"):
+    dest_dir = f"{CACHE_FLATPAK}/syncing"
 else:
-    print('All Flatpak apps are installed.')
+    dest_dir = None
+   
+# If the destination directory variable is not 'None', continue in installing Flatpak apps
+if not dest_dir == None:
+    # If the destination directory has a directory with installed Flatpak apps user data, install them
+    if os.path.exists(f"{dest_dir}/app"):
+        print("copying the Flatpak apps' user data to the ~/.var/app directory")
+        os.system(f"cp -au {dest_dir}/app/ ~/.var/")
+    
+    # If the Bash scripts for installing Flatpak apps to the system exist, install them
+    if os.path.exists(f"{dest_dir}/installed_flatpaks.sh") or os.path.exists(f"{dest_dir}/installed_user_flatpaks.sh"):
+        print("installing the Flatpak apps on the system")
+        # If the Flathub repository in user installation doesn't exist, add it
+        os.system("flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo")
+        # Install Flatpak apps from list
+        installed_flatpaks_files = [f'{dest_dir}/installed_flatpaks.sh', f'{dest_dir}/installed_user_flatpaks.sh']
+        system_flatpak_dir = '/var/lib/flatpak/app'
+        user_flatpak_dir = os.path.expanduser('~/.local/share/flatpak/app')
+        # Load Flatpaks from bash scripts
+        installed_flatpaks = set()
+        for file in installed_flatpaks_files:
+            if os.path.exists(file):
+                with open(file, 'r') as f:
+                    installed_flatpaks.update(line.split()[3] for line in f if line.startswith('flatpak install'))
+
+        # Get installed Flatpaks in the specified directories
+        installed_apps = set()
+        for directory in [system_flatpak_dir, user_flatpak_dir]:
+            if os.path.exists(directory):
+                installed_apps.update(app for app in os.listdir(directory) if os.path.isdir(os.path.join(directory, app)))
+
+        # Compare Flatpaks listed in the Bash scripts with the installed ones
+        flatpaks_to_install = installed_flatpaks - installed_apps
+
+        if flatpaks_to_install:
+            for app in flatpaks_to_install:
+                subprocess.run(['flatpak', 'install', '--user', 'flathub', app, '-y'])
+        else:
+            print('All Flatpak apps are installed.')
+
+    # Remove these directories in the cache folder after finishing operations
+    os.system(f"rm -rf {CACHE_FLATPAK}/import_config")
+    os.system(f"rm -rf {CACHE_FLATPAK}/syncing")
+else:
+    print("Nothing to do.")

@@ -1,16 +1,19 @@
 #!/usr/bin/bash
 
 if [ "$1" = "--install" ]; then
+    # Create cache and data dirs
+    mkdir -p ~/.cache/io.github.vikdevelop.SaveDesktop
+    mkdir -p ~/.local/share/io.github.vikdevelop.SaveDesktop
     install -Dm755 -t ~/.local/bin savedesktop
     install -D -t ~/.local/share/applications flatpak/io.github.vikdevelop.SaveDesktop.desktop
     install -D -t ~/.local/share/metainfo flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
     install -D -t ~/.local/share/glib-2.0/schemas flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
+    install -D -t ~/.local/share/licenses/savedesktop LICENSE
     mkdir -p ~/.local/share/savedesktop
     cp -R src ~/.local/share/savedesktop/
     cp -R translations ~/.local/share/savedesktop/
-    install -D -t ~/.local/share/licenses/savedesktop LICENSE
-    install -D -t ~/.local/bin native/native_updater.py
-    echo -e "[Desktop Entry]\nName=SaveDesktop Native Updater\nType=Application\nExec=savedesktop --update" > ~/.config/autostart/io.github.vikdevelop.SaveDesktop.Updater.desktop
+    cp -R native/native_installer.py ~/.local/share/savedesktop/
+    echo -e "[Desktop Entry]\nName=SaveDesktop Native Updater\nType=Application\nExec=python3 ${HOME}/.local/share/savedesktop/native_installer.py --update" > ~/.config/autostart/io.github.vikdevelop.SaveDesktop.Updater.desktop
     export GSETTINGS_SCHEMA_DIR="$HOME/.local/share/glib-2.0/schemas:${GSETTINGS_SCHEMA_DIR}"
     glib-compile-schemas ~/.local/share/glib-2.0/schemas
     # Install app icons
@@ -20,9 +23,6 @@ if [ "$1" = "--install" ]; then
     install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/list-view.png
     install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/done.svg
     install -D -t ~/.local/share/icons/hicolor/symbolic/apps flatpak/symbolic-icons/exclamation_mark.png
-    # Create cache and data dirs
-    mkdir -p ~/.cache/io.github.vikdevelop.SaveDesktop
-    mkdir -p ~/.local/share/io.github.vikdevelop.SaveDesktop
     cd
     echo "SaveDesktop has been installed! You can run it with this command: \"savedesktop\" or \"~/.local/bin/savedesktop\"."
 fi
@@ -41,6 +41,6 @@ if [ "$1" = "--remove" ]; then
     rm ~/.local/share/icons/hicolor/symbolic/apps/list-view.png
     rm ~/.local/share/icons/hicolor/symbolic/apps/done.svg
     rm ~/.local/share/icons/hicolor/symbolic/apps/exclamation_mark.png
-    rm -rf /tmp/SaveDesktop
+    cd
     echo "SaveDesktop has been removed."
 fi

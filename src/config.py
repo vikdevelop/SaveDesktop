@@ -34,12 +34,11 @@ elif os.getenv('XDG_CURRENT_DESKTOP') == 'KDE':
     environment = 'KDE Plasma'
 elif os.getenv('XDG_CURRENT_DESKTOP') == 'Deepin':
     environment = 'Deepin'
-else:
-    from tty_environments import *
+elif os.getenv('XDG_CURRENT_DESKTOP') == 'Hyprland':
+    environment = 'Hyprland'
 
 class Save:
     def __init__(self):
-        # create a txt file to prevent deleting the current saving by closing the application window
         print("saving settings from the Dconf database")
         os.system("dconf dump / > ./dconf-settings.ini")
         print("saving Gtk settings")
@@ -136,6 +135,8 @@ class Save:
         elif environment == 'Deepin':
             os.system(f"cp -R {home}/.config/deepin ./")
             os.system(f"cp -R {home}/.local/share/deepin ./deepin-data")
+        elif environment == 'Hyprland':
+            shutil.copytree(f"{home}/.config/hypr","./hypr",dirs_exist_ok=True)
     
     # save Flatpak apps data
     def save_flatpak_data(self):
@@ -178,9 +179,6 @@ class Import:
             else:
                 os.system("echo user-db:user > temporary-profile")
                 os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
-        print("importing list of installed Flatpak apps (them will be installed after the next login)")
-        os.system(f'cp ./installed_flatpaks.sh {DATA}/')
-        os.system(f'cp ./installed_user_flatpaks.sh {DATA}/')
         print("importing icons")
         os.system(f'cp -au ./icons {home}/.local/share/')
         os.system(f'cp -au ./.icons {home}/')
@@ -197,10 +195,6 @@ class Import:
         os.system(f'cp -au ./gtk-3.0 {home}/.config/')
         print("importing desktop directory")
         os.system(f'cp -au ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
-        # create this file to prevent removing the cache directory during importing configuration
-        if os.path.exists(f'{CACHE}/import_config/app'):
-            with open(f"copying_flatpak_data", "w") as c:
-                c.write("copying flatpak data ...")
         print("importing desktop environment configuration files")
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
@@ -248,21 +242,22 @@ class Import:
         elif environment == 'Deepin':
             os.system(f"cp -au ./deepin {home}/.config/")
             os.system(f"cp -au ./deepin-data {home}/.local/share/deepin/")
-        elif environment == None:
-            print("→ SKIPPING: SaveDesktop is running in the TTY mode")
+        elif environment == 'Hyprland':
+            os.system(f"cp -aur ./hypr {home}/.config/ -v")
             
         if flatpak:
-            self.create_flatpak_desktop()
+            if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
+                self.create_flatpak_desktop()
             
     # Create desktop file for install Flatpaks from a list
     def create_flatpak_desktop(self):
-        os.system(f"cp {system_dir}/install_flatpak_from_script.py {DATA}/")
+        os.system(f"cp {system_dir}/install_flatpak_from_script.py {CACHE}/")
         if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") or not os.path.exists(f"{CACHE}/syncing/sync_status"):
             if not os.path.exists(f"{home}/.config/autostart"):
                 os.mkdir(f"{home}/.config/autostart")
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
                 with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
-                    fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {DATA}/install_flatpak_from_script.py")
+                    fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {CACHE}/install_flatpak_from_script.py")
 
 if args.save:
     Save()

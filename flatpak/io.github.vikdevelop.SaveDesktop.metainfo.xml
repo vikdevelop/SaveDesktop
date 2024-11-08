@@ -4,6 +4,38 @@
     <id>io.github.vikdevelop.SaveDesktop</id>
     <launchable type="desktop-id">io.github.vikdevelop.SaveDesktop.desktop</launchable>
     <name>SaveDesktop</name>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-3.0-or-later</project_license>
+    <developer id="io.github.vikdevelop">
+      <name>vikdevelop</name>
+    </developer>
+
+    <categories>
+        <category>Utility</category>
+    </categories>
+    
+    <content_rating type="oars-1.1"/>
+
+    <requires>
+        <display_length compare="ge">360</display_length>
+    </requires>
+
+    <supports>
+        <control>keyboard</control>
+        <control>pointing</control>
+        <control>touch</control>
+    </supports>
+
+    <branding>
+        <color type="primary" scheme_preference="light">#b6d1eb</color>
+        <color type="primary" scheme_preference="dark">#061530</color>
+    </branding>
+    
+    <url type="homepage">https://vikdevelop.github.io/SaveDesktop</url>
+    <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
+    <url type="translate">https://hosted.weblate.org/projects/vikdevelop/savedesktop/</url>
+    <url type="contribute">https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md</url>
+
     <summary>Save your desktop configuration</summary>
     <summary xml:lang="cs_CZ">Uložte konfiguraci plochy</summary>
     <summary xml:lang="fr_FR">Sauvegarder la configuration actuelle de votre environnement de bureau</summary>
@@ -24,9 +56,6 @@
     <summary xml:lang="hi_IN">अपना डेस्कटॉप विन्यास सहेजें</summary>
     <summary xml:lang="pt_PT">Grave a sua configuração da área de trabalho</summary>
     <summary xml:lang="fi_FI">Tallenna työpöytäsi määritys</summary>
-    <metadata_license>CC0-1.0</metadata_license>
-    <project_license>GPL-3.0-or-later</project_license>
-    <developer_name>vikdevelop</developer_name>
     
     <description>
       <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
@@ -51,14 +80,10 @@
       <p xml:lang="fi_FI">SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.</p>
     </description>
     
-    <url type="homepage">https://vikdevelop.github.io/SaveDesktop</url>
-    <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
-    <url type="translate">https://hosted.weblate.org/projects/vikdevelop/savedesktop/</url>
-    
     <screenshots>
         <screenshot type="default">
             <caption>Page for saving configuration</caption>
-            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/main_window.png</image>
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/save_page.png</image>
         </screenshot>
         <screenshot>
             <caption>Page for importing configuration</caption>
@@ -69,26 +94,25 @@
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png</image>
         </screenshot>
     </screenshots>
-    
-    <content_rating type="oars-1.1"/>
-    
-    <categories>
-        <category>Utility</category>
-    </categories>
-
-    <branding>
-        <color type="primary" scheme_preference="light">#b6d1eb</color>
-        <color type="primary" scheme_preference="dark">#061530</color>
-    </branding>
           
     <releases>
+       <release version="3.5" type="development" date="2024-10-10">
+            <description>
+                <ul>
+                    <li>Simplified the initial setting up synchronization: in that case, it shows the dialog window, which helps you to set it up</li>
+                    <li>Added more keyboard shortcuts</li>
+                    <li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>
+                    <li>The UI is now more responsive</li>
+                </ul>
+            </description>
+       </release>
        <release version="3.4" date="2024-09-04">
            <description>
                <ul>
-                    <li>Synchronisation has been redesigned from the ground up - instead of using URLs to synchronise between computers on the local network, a folder synchronised with cloud storage (using GNOME Online Accounts or Rclone) is used - find out more here: https://vikdevelop.github.io/SaveDesktop/wiki/synchronization/en</li>
+                    <li>Synchronisation has been redesigned from the ground up - instead of using URLs to synchronise between computers on the local network, a folder synchronised with cloud storage (using GNOME Online Accounts or Rclone) is used - find out more here: vikdevelop.github.io/SaveDesktop/wiki/synchronization/en</li>
                     <li>Added support for comparing installed Flatpak apps, which means that only apps that have not yet been installed on the system will be installed</li>
                     <li>Added option to generate password for configuration archive</li>
-                    <li>Added SaveDesktop to the Flathub/Snap Beta channel, so if you want, you can participate in beta testing to prevent bugs in a future stable releases. More informations are here: https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#beta-releases</li>
+                    <li>Added SaveDesktop to the Flathub/Snap Beta channel, so if you want, you can participate in beta testing to prevent bugs in a future stable releases. More informations are here: github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#beta-releases</li>
                     <li>Improved support for displaying possible error messages in the GUI</li>
                     <li>Other minor UI improvements</li>
                 </ul>
