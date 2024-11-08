@@ -61,7 +61,7 @@
     "rclone_copy_cmd": "Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu.",
     "rclone_cmd_copied_msg": "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button",
     "almost_done_title": "Almost done!",
-    "almost_done_desc": "You've now created the cloud folder! Click on the Next button to complete the setup.",
+    "almost_done_desc": "You've now created the cloud drive folder! Click on the Next button to complete the setup.",
     "select": "Select",
     "next": "Next",
     "set_up_sync_file": "Set up the sync file",
