@@ -392,7 +392,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.importPage = Adw.StatusPage.new()
         self.importPage.set_icon_name("document-open-symbolic")
         self.importPage.set_title(_['import_config'])
-        self.importPage.set_description("Import the configuration by clicking on the button below.")
+        self.importPage.set_description(_["import_config_desc2"])
         self.importPage.set_size_request(360, -1)
         self.importPage.set_child(self.fileButton)
         self.importBox.append(self.importPage)
@@ -443,10 +443,10 @@ class MainWindow(Adw.ApplicationWindow):
             self.initsetupDialog.remove_response('ok-rclone')
             self.initsetupDialog.remove_response('next')
             self.initsetupDialog.set_extra_child(None)
-            self.initsetupDialog.set_heading("Almost done!")
-            self.initsetupDialog.set_body("You've now created the cloud folder! Click on the Next button to complete the setup.")
+            self.initsetupDialog.set_heading(_["almost_done_title"])
+            self.initsetupDialog.set_body(_["almost_done_desc"])
             self.initsetupDialog.set_can_close(True)
-            self.initsetupDialog.add_response('open-setdialog', 'Next') if self.get_button_type == 'set-button' else self.initsetupDialog.add_response('open-clouddialog', 'Next')
+            self.initsetupDialog.add_response('open-setdialog', _["next"]) if self.get_button_type == 'set-button' else self.initsetupDialog.add_response('open-clouddialog', _["next"])
             self.initsetupDialog.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED) if self.get_button_type == 'set-button' else self.initsetupDialog.set_response_appearance('open-clouddialog', Adw.ResponseAppearance.SUGGESTED)
             
         # copy the command for setting up the Rclone using Gdk.Clipboard()
@@ -455,7 +455,7 @@ class MainWindow(Adw.ApplicationWindow):
             clipboard = Gdk.Display.get_default().get_clipboard()
             Gdk.Clipboard.set(clipboard, f"command -v rclone &> /dev/null && (rclone config create savedesktop {self.cloud_service} && rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'") # copy the command for setting up Rclone to the clipboard
             self.copyButton.set_icon_name("done")
-            self.cmdRow.set_title("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button")
+            self.cmdRow.set_title(_["rclone_cmd_copied_msg"])
             self.initsetupDialog.set_response_enabled('ok-rclone', True)
         
         # Set the Rclone setup command
@@ -463,7 +463,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.initsetupDialog.set_body("")
             get_servrow = self.servRow.get_selected_item().get_string()
             self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox"
-            self.cmdRow.set_title(f"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu.")
+            self.cmdRow.set_title(_["rclone_copy_cmd"])
             # set the copyButton properties
             self.copyButton.set_sensitive(True)
             self.copyButton.set_icon_name("edit-copy-symbolic")
@@ -495,7 +495,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         # Dialog itself
         self.initsetupDialog = Adw.AlertDialog.new()
-        self.initsetupDialog.set_heading("Initial synchronization setup")
+        self.initsetupDialog.set_heading(_["initial_setup"])
         self.initsetupDialog.choose(self, None, None, None)
         self.initsetupDialog.set_body_use_markup(True)
         self.initsetupDialog.set_can_close(False)
@@ -515,26 +515,26 @@ class MainWindow(Adw.ApplicationWindow):
         if self.environment in ["GNOME", "Cinnamon", "COSMIC (Old)", "Budgie"]:
             self.initBox.set_size_request(-1, 330)
             self.firstRow = Adw.ActionRow.new()
-            self.firstRow.set_title("1. Open the system settings")
+            self.firstRow.set_title(_["gnome_oa_1st_step"])
             self.initBox.append(self.firstRow)
             
             self.secondRow = Adw.ActionRow.new()
-            self.secondRow.set_title("2. Go to the Online Accounts section")
-            self.secondRow.set_subtitle("In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud.")
+            self.secondRow.set_title(_["gnome_oa_2nd_step"])
+            self.secondRow.set_subtitle(_["gnome_oa_2nd_step_desc"])
             self.initBox.append(self.secondRow)
             
             self.thirdRow = Adw.ActionRow.new()
-            self.thirdRow.set_title("3. Click on the Next button and select the created cloud drive folder")
-            self.thirdRow.set_subtitle("The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com.")
+            self.thirdRow.set_title(_["gnome_oa_3rd_step"])
+            self.thirdRow.set_subtitle(_["gnome_oa_3rd_step_desc"])
             self.initBox.append(self.thirdRow)
             
-            self.initsetupDialog.add_response('next', 'Next')
+            self.initsetupDialog.add_response('next', _["next"])
             self.initsetupDialog.set_response_appearance('next', Adw.ResponseAppearance.SUGGESTED)
         else:
-            self.initsetupDialog.set_body("For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>")
+            self.initsetupDialog.set_body(_["rclone_intro_desc"])
             
             # create a list with available services, which can be connected via Rclone
-            services = Gtk.StringList.new(strings=['Select', 'Google Drive', 'Microsoft OneDrive', 'DropBox'])
+            services = Gtk.StringList.new(strings=[_["select"], 'Google Drive', 'Microsoft OneDrive', 'DropBox'])
             
             # row for selecting the cloud service
             self.servRow = Adw.ComboRow.new()
@@ -660,7 +660,6 @@ class MainWindow(Adw.ApplicationWindow):
                 thread.start()
             else:
                 self.open_setdialog_tf = False
-            os.execv(sys.argv[0], sys.argv) if self.restart_app_win else None
         
         # Dialog itself
         self.setDialog = Adw.AlertDialog.new()
@@ -718,7 +717,6 @@ class MainWindow(Adw.ApplicationWindow):
         
         # Action after closing URL dialog
         def cloudDialog_closed(w, response):
-            os.execv(sys.argv[0], sys.argv) if self.restart_app_win else None
             if response == 'ok':
                 check_psync = settings["periodic-import"]
                 
