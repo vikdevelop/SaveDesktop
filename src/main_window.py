@@ -515,17 +515,17 @@ class MainWindow(Adw.ApplicationWindow):
         if self.environment in ["GNOME", "Cinnamon", "COSMIC (Old)", "Budgie"]:
             self.initBox.set_size_request(-1, 330)
             self.firstRow = Adw.ActionRow.new()
-            self.firstRow.set_title(_["gnome_oa_1st_step"])
+            self.firstRow.set_title(_["gnome_oa_settings"])
             self.initBox.append(self.firstRow)
             
             self.secondRow = Adw.ActionRow.new()
-            self.secondRow.set_title(_["gnome_oa_2nd_step"])
-            self.secondRow.set_subtitle(_["gnome_oa_2nd_step_desc"])
+            self.secondRow.set_title(_["gnome_oa_section"])
+            self.secondRow.set_subtitle(_["gnome_oa_section_desc"])
             self.initBox.append(self.secondRow)
             
             self.thirdRow = Adw.ActionRow.new()
-            self.thirdRow.set_title(_["gnome_oa_3rd_step"])
-            self.thirdRow.set_subtitle(_["gnome_oa_3rd_step_desc"])
+            self.thirdRow.set_title(_["gnome_oa_chooser"])
+            self.thirdRow.set_subtitle(_["gnome_oa_chooser_desc"])
             self.initBox.append(self.thirdRow)
             
             self.initsetupDialog.add_response('next', _["next"])
