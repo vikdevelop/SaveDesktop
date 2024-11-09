@@ -158,7 +158,7 @@ You can report an issue on GitHub, or if you are not registered on GitHub, you c
 ### Stable releases
 - Flathub
   
-  <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
+  <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 
 - Snap
 
@@ -173,10 +173,6 @@ You can report an issue on GitHub, or if you are not registered on GitHub, you c
 
   # Remove
   wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove
-  ```
-  **NOTE**: *For this installation method, you need to have GTK4 (v4.14) and LibAdwaita (v1.5) installed. To check versions of these libraries, you can use this command:*
-  ```bash
-  python3 -c "import gi; gi.require_version('Gtk', '4.0'); gi.require_version('Adw', '1');from gi.repository import Gtk, Adw; print(f'GTK version: {Gtk.MAJOR_VERSION}.{Gtk.MINOR_VERSION}'); print(f'LibAdwaita version: {Adw.MAJOR_VERSION}.{Adw.MINOR_VERSION}')"
   ```
 
 ### Beta releases

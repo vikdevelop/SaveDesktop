@@ -15,9 +15,13 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5-beta-2024.11.01"
+v = "3.5-beta-2024.11.09"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "\
+<ul>\
+<li>New translation strings for this version of SaveDesktop have been added to Weblate. If you're interested, you can translate them before releasing the stable version.</li>\
+<li>The user interface has been further optimized for responsiveness, resulting in an improved appearance on smaller screens.</li></ul>\
+<p>3.5-beta-2024.11.01</p>\
 <ul>\
 <li>Added support for the Hyprland window manager (thanks to @pyclicker) (#336)</li>\
 <li>Improved installing the Flatpak apps from the Bash scripts</li>\
