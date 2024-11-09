@@ -158,7 +158,7 @@ You can report an issue on GitHub, or if you are not registered on GitHub, you c
 ### Stable releases
 - Flathub
   
-  <a href='https://beta.flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
+  <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 
 - Snap
 
