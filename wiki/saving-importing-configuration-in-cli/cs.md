@@ -21,7 +21,7 @@ Do terminálu zadejte následující příkaz:
 
 - pokud máte SaveDesktop nainstalovaný jako Snap nebo nativní balíček, použijte: 
   ```
-  saveesktop --save-now
+  savedesktop --save-now
   ```
 
 Při použití této metody se používají parametry z grafického uživatelského rozhraní, konkrétně parametry z režimu pravidelného ukládání, jako je formát názvu souboru a vybraná složka pro pravidelné ukládání souborů. Pomocí této metody můžete konfiguraci uložit kdykoli chcete, bez ohledu na zvolený interval periodického ukládání.
@@ -48,7 +48,7 @@ Do terminálu zadejte následující příkaz:
 
 - pokud máte SaveDesktop nainstalovaný jako Snap nebo nativní balíček, použijte: 
   ```
-  saveesktop --import-config /path/to/filename.sd.tar.gz
+  savedesktop --import-config /path/to/filename.sd.tar.gz
   ```
 
 **Poznámka**:
