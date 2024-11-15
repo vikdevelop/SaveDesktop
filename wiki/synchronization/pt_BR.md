@@ -1,7 +1,6 @@
-
 # Sincronização entre computadores na rede
-## Requirements
-- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:
+#### Requisitos
+- Você deve criar uma pasta que será sincronizada com seu armazenamento em nuvem em cada computador que deseja sincronizar. Isso pode ser feito usando:
 
   <details>
     <summary><b>GNOME Online Accounts</b><p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p></summary>
@@ -25,28 +24,28 @@
     </ul>
   </details>
   
-## Setting up synchronization in the SaveDesktop app
-On the first computer:
-1. Open the SaveDesktop app
-2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
-3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
-4. If the periodic saving file does not exist, click on the Create button
+## Configurando a sincronização no aplicativo SaveDesktop
+No primeiro computador:
+1. Abra o aplicativo SaveDesktop
+2. Na página Sincronizar, clique no botão "Configurar o arquivo de sincronização" e depois no botão "Alterar"
+3. Clique em "Salvamento periódico" e selecione a pasta que está sincronizada com seu armazenamento em nuvem como uma pasta de salvamento periódico
+4. Caso o arquivo de salvamento periódico não exista, clique no botão Criar
 
-On the second computer:
-1. Open the SaveDesktop app
-2. Go to the Sync page and click the "Connect to the cloud storage" button.
-3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
-4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
+No segundo computador:
+1. Abra o aplicativo SaveDesktop
+2. Vá para a página Sincronizar e clique no botão "Conectar ao armazenamento em nuvem".
+3. Clique no botão "Selecionar pasta da unidade em nuvem" e selecione a pasta que está sincronizada com o mesmo armazenamento em nuvem do primeiro computador.
+4. Selecione o intervalo de sincronização periódica, pois se deixar como Nunca a sincronização não funciona.
 
-To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
+Para configurar a sincronização bidirecional, certifique-se de ter a mesma pasta de nuvem selecionada na caixa de diálogo "Conectar ao armazenamento em nuvem" no primeiro computador, o intervalo de sincronização periódica selecionado e a opção "Sincronização bidirecional" ativada.
 
-### Periodic synchronization
-You can choose between the following options:
-- Daily
-- Weekly (synchronization takes place every Tuesday)
-- Monthly (synchronization takes place every second day in the month)
-- Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
-- Never (nothing's happening)
+## Sincronização periódica
+Você pode escolher entre as seguintes opções:
+- Diariamente
+- Semanalmente (a sincronização acontece toda terça-feira)
+- Mensalmente (a sincronização acontece todo segundo dia do mês)
+- Manualmente (é possível sincronizar a configuração a partir do menu na barra de cabeçalho, clicando nos três pontos)
+- Nunca (nada acontece)
 
 {% include footer.html %}
 
