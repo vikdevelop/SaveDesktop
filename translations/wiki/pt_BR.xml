@@ -65,14 +65,14 @@ Se você esquecer a senha, não conseguirá extrair o arquivo e usá-lo no proce
 &amp;gt; Os arquivos de salvamento periódico não estão (por ora) disponíveis para proteção com senha. Arquivos encriptados não podem, por ora, ser utilizados para sincronização.</str>
   <str key="ac_setup">## Como configurar?
 Na versão 3.3, a interface foi levemente modificada; especificamente, a seção de salvamento periódico agora pode ser acessada através do botão "Mais opções". No mesmo local é possível encontrar a seção de encriptação de arquivo. Então clique no botão mencionado, e ative o interruptor de Encriptação de arquivo.</str>
-  <str key="requirements">#### Requirements
-- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:</str>
-  <str key="set_up_first_computer">## Setting up synchronization in the SaveDesktop app
-On the first computer:
-1. Open the SaveDesktop app
-2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
-3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
-4. If the periodic saving file does not exist, click on the Create button</str>
+  <str key="requirements">#### Requisitos
+- Você deve criar uma pasta que será sincronizada com seu armazenamento em nuvem em cada computador que deseja sincronizar. Isso pode ser feito usando:</str>
+  <str key="set_up_first_computer">## Configurando a sincronização no aplicativo SaveDesktop
+No primeiro computador:
+1. Abra o aplicativo SaveDesktop
+2. Na página Sincronizar, clique no botão "Configurar o arquivo de sincronização" e depois no botão "Alterar"
+3. Clique em "Salvamento periódico" e selecione a pasta que está sincronizada com seu armazenamento em nuvem como uma pasta de salvamento periódico
+4. Caso o arquivo de salvamento periódico não exista, clique no botão Criar</str>
   <str key="rclone">&lt;details&gt;
     &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(for other desktop environments)&lt;/p&gt;&lt;/summary&gt;
     &lt;ul&gt;
@@ -86,13 +86,13 @@ On the first computer:
   &lt;/details&gt;
   
   </str>
-  <str key="set_up_second_computer">On the second computer:
-1. Open the SaveDesktop app
-2. Go to the Sync page and click the "Connect to the cloud storage" button.
-3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
-4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
+  <str key="set_up_second_computer">No segundo computador:
+1. Abra o aplicativo SaveDesktop
+2. Vá para a página Sincronizar e clique no botão "Conectar ao armazenamento em nuvem".
+3. Clique no botão "Selecionar pasta da unidade em nuvem" e selecione a pasta que está sincronizada com o mesmo armazenamento em nuvem do primeiro computador.
+4. Selecione o intervalo de sincronização periódica, pois se deixar como Nunca a sincronização não funciona.
 
-To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
+Para configurar a sincronização bidirecional, certifique-se de ter a mesma pasta de nuvem selecionada na caixa de diálogo "Conectar ao armazenamento em nuvem" no primeiro computador, o intervalo de sincronização periódica selecionado e a opção "Sincronização bidirecional" ativada.
 </str>
   <str key="gnome_online_accounts">&lt;details&gt;
     &lt;summary&gt;&lt;b&gt;GNOME Online Accounts&lt;/b&gt;&lt;p&gt;(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)&lt;/p&gt;&lt;/summary&gt;
