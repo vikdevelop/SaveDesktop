@@ -891,6 +891,9 @@ class MainWindow(Adw.ApplicationWindow):
                 f.write(synchronization_content)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh\nX-GNOME-Autostart-Delay=60")
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
+            
+        self.syncingBox.remove(self.syncPage)
+        self.sync_desktop()
     
     # Select folder for periodic backups (Gtk.FileDialog)
     def select_pb_folder(self, w):
@@ -1236,7 +1239,7 @@ class MainWindow(Adw.ApplicationWindow):
                         except PermissionError as e:
                             print(f"Permission denied for {member.name}: {e}")
             os.system(f"python3 {system_dir}/config.py --import_")
-            os.system("rm import_status") if not os.path.exists(f"{CACHE}/import_config/app") else None
+            os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]) else None
             print("Configuration imported successfully.")
         except Exception as e:
             e_o = True

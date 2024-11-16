@@ -124,8 +124,8 @@ class Syncing:
         if not settings["manually-sync"] == True:
             with open(f"{DATA}/sync-info.json", "w") as s:
                 s.write('{\n "sync-date": "%s"\n}' % date.today())
+        os.system("rm sync_status") if all(not os.path.exists(app_path) for app_path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]) else None
         [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
-        os.system("rm sync_status") if not os.path.exists(f"{CACHE}/syncing/app") else None
         print("Configuration has been synced successfully.")
         os.system(f"notify-send 'SaveDesktop ({self.file})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
