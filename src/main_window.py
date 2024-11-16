@@ -153,12 +153,10 @@ class MainWindow(Adw.ApplicationWindow):
         def more_options_dialog(w):
             # create desktop file for enabling periodic saving at startup
             def create_pb_desktop():
-                if not os.path.exists(f'{home}/.config/autostart'):
-                    os.mkdir(f'{home}/.config/autostart')
+                os.makedirs(f'{home}/.config/autostart', exist_ok=True)
                 if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
-                    if not os.path.exists(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop'):
-                        with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
-                            cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
+                    with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
+                        cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
             
             # Action after closing dialog for showing more options
             def msDialog_closed(w, response):
@@ -884,11 +882,12 @@ class MainWindow(Adw.ApplicationWindow):
                     print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
             else:
                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle.split('/')[-1]}"
-            synchronization_content = f'#!/usr/bin/bash\n{cmd}\n{periodic_saving_cmd}\n{sync_cmd}\n'
+            synchronization_content = f'#!/usr/bin/bash\n{cmd}\n{sync_cmd}\n{periodic_saving_cmd}'
             if flatpak:
-                synchronization_content += f'python3 {CACHE}/install_flatpak_from_script.py'
+                synchronization_content += f'\npython3 {CACHE}/install_flatpak_from_script.py'
             with open(f"{DATA}/savedesktop-synchronization.sh", "w") as f:
                 f.write(synchronization_content)
+            os.makedirs(f'{home}/.config/autostart', exist_ok=True)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh\nX-GNOME-Autostart-Delay=60")
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
             
