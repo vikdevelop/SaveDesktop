@@ -96,13 +96,14 @@
     </screenshots>
           
     <releases>
-       <release version="3.5" type="development" date="2024-10-10">
+       <release version="3.5" date="2024-11-17">
             <description>
                 <ul>
-                    <li>Simplified the initial setting up synchronization: in that case, it shows the dialog window, which helps you to set it up</li>
+                    <li>Added dialog for the initial setting up synchronization; if you have set up synchronization before, it doesn't show</li>
                     <li>Added more keyboard shortcuts</li>
+                    <li>Added support for the Hyprland window manager, thanks to @pyclicker</li>
                     <li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>
-                    <li>The UI is now more responsive</li>
+                    <li>The UI is now more adaptive on the smaller screens</li>
                 </ul>
             </description>
        </release>
