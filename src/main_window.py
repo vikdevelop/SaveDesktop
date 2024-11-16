@@ -860,7 +860,7 @@ class MainWindow(Adw.ApplicationWindow):
       
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
-        if not settings["periodic-saving-folder"] == "":
+        if not settings.get_default_value("periodic-saving-folder"):
             cfile_subtitle = settings["periodic-saving-folder"]
         elif not self.cfileRow.get_subtitle() == "":
             cfile_subtitle = self.cfileRow.get_subtitle()
