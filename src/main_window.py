@@ -1239,7 +1239,7 @@ class MainWindow(Adw.ApplicationWindow):
                         except PermissionError as e:
                             print(f"Permission denied for {member.name}: {e}")
             os.system(f"python3 {system_dir}/config.py --import_")
-            os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]) else None
+            os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in [f"{CACHE}/import_config/app", f"{CACHE}/import_config/installed_flatpaks.sh", f"{CACHE}/import_config/installed_user_flatpaks.sh"]) else None
             print("Configuration imported successfully.")
         except Exception as e:
             e_o = True
