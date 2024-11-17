@@ -19,6 +19,7 @@ v = "3.5"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
 <li>Added dialog for the initial setting up synchronization; if you have set up synchronization before, it doesn't show</li>\
+<li>Temporarily disabled support for synchronization in the Snap environment due to unreliability</li>\
 <li>Added more keyboard shortcuts</li>\
 <li>Added support for the Hyprland window manager, thanks to @pyclicker</li>\
 <li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>\
