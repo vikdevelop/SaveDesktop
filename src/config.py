@@ -67,6 +67,8 @@ class Save:
             else:
                 desktop_without_spaces = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
             os.system(f'cp -R {desktop_without_spaces} ./Desktop/ ')
+            print("saving the GVFS metadata files")
+            os.system(f"cp -R {home}/.local/share/gvfs-metadata ./")
         if flatpak:
             if settings["save-installed-flatpaks"] == True:
                 print("saving list of installed Flatpak apps")
@@ -195,6 +197,8 @@ class Import:
         os.system(f'cp -au ./gtk-3.0 {home}/.config/')
         print("importing desktop directory")
         os.system(f'cp -au ./Desktop/* {GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)}/')
+        print("importing the GVFS metadata files")
+        os.system(f"cp -au ./gvfs-metadata {home}/.local/share/")
         print("importing desktop environment configuration files")
         # Apply configs for individual desktop environments
         if environment == 'GNOME':
