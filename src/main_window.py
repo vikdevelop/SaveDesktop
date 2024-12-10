@@ -869,17 +869,34 @@ class MainWindow(Adw.ApplicationWindow):
         
         if cfile_subtitle:
             if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
-                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*'
+                # Regular expression for Google Drive, OneDrive, and DAV
+                pattern = (
+                    r'.*/gvfs/(google-drive|onedrive):host=([^,]*),user=([^,]*).*'  # for Google Drive and OneDrive
+                    r'|.*?/gvfs/dav:host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'  # for DAV
+                )
+                
                 match = re.search(pattern, cfile_subtitle)
-
+            
                 if match:
-                    cloud_service = match.group(1)
-                    host = match.group(2)
-                    user = match.group(3) if "onedrive" not in cfile_subtitle else None
-                    
-                    cmd = f"gio mount {cloud_service}://{user}@{host}" if not "onedrive" in cfile_subtitle else f"gio mount {cloud_service}://{host}"
+                    if match.group(1):  # Google Drive or OneDrive
+                        cloud_service = match.group(1)  # cloud_service for Google Drive or OneDrive
+                        host = match.group(2)  # host for Google Drive or OneDrive
+                        user = match.group(3)  # user for Google Drive or OneDrive
+                        ssl = None  # ssl is not relevant for Google Drive and OneDrive
+                        prefix = None  # prefix is not relevant for Google Drive and OneDrive
+                    else:  # DAV
+                        cloud_service = "dav"  # cloud_service for DAV
+                        host = match.group(4)  # host for DAV
+                        ssl = match.group(5)  # ssl for DAV
+                        user = match.group(6)  # user for DAV
+                        prefix = match.group(7) if match.group(7) else None  # prefix for DAV, can be None
+                        # Example command for connecting
+                        if cloud_service in ["google-drive", "onedrive"]:
+                            cmd = f"gio mount {cloud_service}://{user}@{host}"
+                        elif cloud_service == "dav":
+                            cmd = f"gio mount dav://{user}@{host}/{prefix}" if prefix else f"gio mount dav://{user}@{host}"
                 else:
-                    print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
+                    raise AttributeError("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
             else:
                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle}" if not os.path.exists(f"{download_dir}/SaveDesktop/rclone_drive") else f"rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive"
             synchronization_content = f'#!/usr/bin/bash\n{cmd}\nsleep 60s\n{sync_cmd}\n{periodic_saving_cmd}'
