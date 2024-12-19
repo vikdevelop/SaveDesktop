@@ -871,20 +871,20 @@ class MainWindow(Adw.ApplicationWindow):
             if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
                 # Regular expression for Google Drive, OneDrive, and DAV
                 pattern = (
-                    r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "dav" not in cfile_subtitle else r'.*/gvfs/dav:host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
+                    r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "dav" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
                 )
                 
                 match = re.search(pattern, cfile_subtitle)
             
                 if match:
-                    if match.group(1): # Google Drive or OneDrive
+                    if "google-drive" in cfile_subtitle or "onedrive" in cfile_subtitle: # Google Drive or OneDrive
                         cloud_service = match.group(1)  # cloud_service for Google Drive or OneDrive
                         host = match.group(2)  # host for Google Drive or OneDrive
                         user = match.group(3)  if not "onedrive" in cfile_subtitle else None
                         ssl = None  # ssl is not relevant for Google Drive and OneDrive
                         prefix = None  # prefix is not relevant for Google Drive and OneDrive
-                    else:  # DAV
-                        cloud_service = "dav"  # cloud_service for DAV
+                    else:
+                        cloud_service = match.group(1)  # cloud_service for DAV
                         host = match.group(4)  # host for DAV
                         ssl = match.group(5)  # ssl for DAV
                         user = match.group(6)  # user for DAV
@@ -894,7 +894,7 @@ class MainWindow(Adw.ApplicationWindow):
                     elif cloud_service == "onedrive":
                         cmd = f"gio mount {cloud_service}://{host}"
                     elif cloud_service == "dav":
-                        cmd = f"gio mount dav://{user}@{host}/{prefix}" if prefix else f"gio mount dav://{user}@{host}"
+                        cmd = f"gio mount {cloud_service}://{user}@{host}/{prefix}" if prefix else f"gio mount dav://{user}@{host}"
                 else:
                     extracted_values = {
                         "cloud_service": cloud_service,
