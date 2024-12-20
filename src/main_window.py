@@ -892,12 +892,12 @@ class MainWindow(Adw.ApplicationWindow):
                         prefix = None  # prefix is not relevant for OneDrive
                         cmd = f"gio mount {cloud_service}://{host}" # command for OneDrive
                     elif "dav" in cfile_subtitle or "davs" in cfile_subtitle: # DAV
-                        cloud_service = match.group(1)  # cloud_service for DAV
+                        cloud_service = "davs" if "davs" in cfile_subtitle else "dav"  # cloud_service for DAV
                         host = match.group(2)  # host for DAV
                         ssl = match.group(3)  # ssl for DAV
                         user = match.group(4)  # user for DAV
                         prefix = match.group(5) if match.group(5) else None  # prefix for DAV, can be None
-                        cmd = f"gio mount {cloud_service}://{user}@{host}/{prefix}" if prefix else f"gio mount dav://{user}@{host}"
+                        cmd = f"gio mount {cloud_service}://{user}@{host}/{prefix}" if prefix else f"gio mount {cloud_service}://{user}@{host}"
                     else:
                         print("It looks like, you don't use a compatible service with GNOME Online Accounts. Compatible services: Google Drive, OneDrive, Nextcloud (DAV).")
                 else:
