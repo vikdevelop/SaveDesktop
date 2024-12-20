@@ -15,9 +15,11 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5.1-beta_2024.12.17"
+v = "3.5.1-beta_2024.12.20"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled, and fixed a bug with setting up the Nextcloud folder</p>\
+rel_notes = "<p>Attempting to fix a persistent bug related to Nextcloud settings</p>\
+<p>3.5-beta_2024.12.17</p>\
+<p>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled, and fixed a bug with setting up the Nextcloud folder</p>\
 <p>3.5</p><ul>\
 <li>Added dialog for the initial setting up synchronization; if you have set up synchronization before, it doesn't show</li>\
 <li>Temporarily disabled support for synchronization in the Snap environment due to unreliability</li>\
