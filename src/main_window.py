@@ -868,11 +868,9 @@ class MainWindow(Adw.ApplicationWindow):
             cfile_subtitle = ""
         
         if cfile_subtitle:
-            if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
+            if "gvfs" in cfile_subtitle:
                 # Regular expression for Google Drive, OneDrive, and DAV
-                pattern = (
-                    r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "dav" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
-                )
+                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
                 
                 match = re.search(pattern, cfile_subtitle)
             
