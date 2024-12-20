@@ -877,31 +877,37 @@ class MainWindow(Adw.ApplicationWindow):
                 match = re.search(pattern, cfile_subtitle)
             
                 if match:
-                    if "google-drive" in cfile_subtitle or "onedrive" in cfile_subtitle: # Google Drive or OneDrive
-                        cloud_service = match.group(1)  # cloud_service for Google Drive or OneDrive
-                        host = match.group(2)  # host for Google Drive or OneDrive
-                        user = match.group(3)  if not "onedrive" in cfile_subtitle else None
-                        ssl = None  # ssl is not relevant for Google Drive and OneDrive
-                        prefix = None  # prefix is not relevant for Google Drive and OneDrive
-                    else:
+                    if "google-drive" in cfile_subtitle: # Google Drive
+                        cloud_service = match.group(1)  # cloud_service for Google Drive
+                        host = match.group(2)  # host for Google Drive
+                        user = match.group(3)
+                        ssl = None  # ssl is not relevant for Google Drive
+                        prefix = None  # prefix is not relevant for Google Drive
+                        cmd = f"gio mount {cloud_service}://{user}@{host}" # command for Google Drive
+                    elif "onedrive" in cfile_subtitle: # OneDrive
+                        cloud_service = match.group(1)  # cloud_service for OneDrive
+                        host = match.group(2)  # host for OneDrive
+                        user = None # user is not relevant for OneDrive
+                        ssl = None  # ssl is not relevant for OneDrive
+                        prefix = None  # prefix is not relevant for OneDrive
+                        cmd = f"gio mount {cloud_service}://{host}" # command for OneDrive
+                    elif "dav" in cfile_subtitle or "davs" in cfile_subtitle: # DAV
                         cloud_service = match.group(1)  # cloud_service for DAV
                         host = match.group(4)  # host for DAV
                         ssl = match.group(5)  # ssl for DAV
                         user = match.group(6)  # user for DAV
                         prefix = match.group(7) if match.group(7) else None  # prefix for DAV, can be None
-                    if cloud_service == "google-drive":
-                        cmd = f"gio mount {cloud_service}://{user}@{host}"
-                    elif cloud_service == "onedrive":
-                        cmd = f"gio mount {cloud_service}://{host}"
-                    elif cloud_service == "dav":
                         cmd = f"gio mount {cloud_service}://{user}@{host}/{prefix}" if prefix else f"gio mount dav://{user}@{host}"
+                    else:
+                        print("It looks like, you don't use a compatible service with GNOME Online Accounts. Compatible services: Google Drive, OneDrive, Nextcloud (DAV).")
                 else:
                     extracted_values = {
                         "cloud_service": cloud_service,
                         "host": host,
                         "user": user,
                         "ssl": ssl,
-                        "prefix": prefix
+                        "prefix": prefix,
+                        "cmd": cmd
                     }
             else:
                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle}" if not os.path.exists(f"{download_dir}/SaveDesktop/rclone_drive") else f"rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive"
