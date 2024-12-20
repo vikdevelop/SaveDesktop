@@ -721,24 +721,24 @@ class MainWindow(Adw.ApplicationWindow):
                 # translate the periodic sync options to English
                 selected_item = self.psyncRow.get_selected_item()
                 sync = {_["never"]: "Never2", _["manually"]: "Manually2", _["daily"]: "Daily2", _["weekly"]: "Weekly2", _["monthly"]: "Monthly2"}
-                
+
                 sync_item = sync.get(selected_item.get_string(), "Never2")
 
                 settings["periodic-import"] = sync_item
-                
+
                 # if the selected periodic saving interval is "Manually2", it enables the manually-sync value
                 settings["manually-sync"] = True and settings["periodic-import"] == "Manually2"
-                
+
                 # save the status of the Bidirectional Synchronization switch
                 settings["bidirectional-sync"] = self.bsSwitch.get_active()
-                
+
                 check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % self.cfileRow.get_subtitle()) if not snap else subprocess.getoutput('stat -f "%s"' % self.cfileRow.get_subtitle())
-                
+
                 if self.cfileRow.get_subtitle():
                     # Check if the selected cloud drive folder is correct
                     if (not snap and ("gvfs" in check_filesystem or "rclone" in check_filesystem)) or (snap and "fuse" in check_filesystem):
                         settings["file-for-syncing"] = self.cfileRow.get_subtitle()
-                        
+
                         # if it is selected to manually sync, it creates an option in the app menu in the header bar
                         if settings["manually-sync"]:
                             self.sync_menu = Gio.Menu()
@@ -752,7 +752,7 @@ class MainWindow(Adw.ApplicationWindow):
                                 pass
 
                             self.set_up_auto_mount()
-                            
+
                         # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
                         if check_psync == "Never2":
                             if not settings["periodic-import"] == "Never2":
@@ -860,16 +860,10 @@ class MainWindow(Adw.ApplicationWindow):
       
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
-        if not settings.get_default_value("periodic-saving-folder"):
-            cfile_subtitle = settings["periodic-saving-folder"]
-        elif not self.cfileRow.get_subtitle() == "":
-            cfile_subtitle = self.cfileRow.get_subtitle()
-        else:
-            cfile_subtitle = ""
+        cfile_subtitle = settings.get_default_value("periodic-saving-folder") or self.cfileRow.get_subtitle() or ""
         
         if cfile_subtitle:
             if "gvfs" in cfile_subtitle:
-                # Regular expression for Google Drive, OneDrive, and DAV
                 pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
                 
                 match = re.search(pattern, cfile_subtitle)
@@ -889,8 +883,8 @@ class MainWindow(Adw.ApplicationWindow):
                         ssl = None  # ssl is not relevant for OneDrive
                         prefix = None  # prefix is not relevant for OneDrive
                         cmd = f"gio mount {cloud_service}://{host}" # command for OneDrive
-                    elif "dav" in cfile_subtitle or "davs" in cfile_subtitle: # DAV
-                        cloud_service = "davs" if "davs" in cfile_subtitle else "dav"  # cloud_service for DAV
+                    elif "dav" in cfile_subtitle: # DAV
+                        cloud_service = "dav"  # cloud_service for DAV
                         host = match.group(2)  # host for DAV
                         ssl = match.group(3)  # ssl for DAV
                         user = match.group(4)  # user for DAV
