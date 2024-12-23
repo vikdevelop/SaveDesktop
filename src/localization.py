@@ -15,9 +15,9 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5.1-beta_2024.12.20"
+v = "3.5.1-beta_2024.12.23"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Attempting to fix a persistent bug related to Nextcloud settings</p>\
+rel_notes = "<p>Partially fixed a problem with setting up Nextcloud; in some cases, it is necessary to connect manually due to password protection.</p>\
 <p>3.5-beta_2024.12.17</p>\
 <p>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled, and fixed a bug with setting up the Nextcloud folder</p>\
 <p>3.5</p><ul>\
