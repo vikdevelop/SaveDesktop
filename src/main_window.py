@@ -739,7 +739,12 @@ class MainWindow(Adw.ApplicationWindow):
                     # Check if the selected cloud drive folder is correct
                     if (not snap and ("gvfs" in check_filesystem or "rclone" in check_filesystem)) or (snap and "fuse" in check_filesystem):
                         settings["file-for-syncing"] = self.cfileRow.get_subtitle()
-
+                        
+                        # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
+                        if check_psync == "Never2":
+                            if not settings["periodic-import"] == "Never2":
+                                self.show_warn_toast()
+                        
                         # if it is selected to manually sync, it creates an option in the app menu in the header bar
                         if settings["manually-sync"]:
                             self.sync_menu = Gio.Menu()
@@ -751,14 +756,9 @@ class MainWindow(Adw.ApplicationWindow):
                                 self.sync_menu.remove_all()
                             except:
                                 pass
-
-                            self.mount_type = "cloud-receiver"
-                            self.set_up_auto_mount()
-
-                        # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
-                        if check_psync == "Never2":
-                            if not settings["periodic-import"] == "Never2":
-                                self.show_warn_toast()
+                        
+                        self.mount_type = "cloud-receiver"
+                        self.set_up_auto_mount()
                     else:
                         os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
                         settings["file-for-syncing"] = ""
@@ -874,7 +874,7 @@ class MainWindow(Adw.ApplicationWindow):
                 pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
                 
                 match = re.search(pattern, cfile_subtitle)
-            
+                
                 if match:
                     if "google-drive" in cfile_subtitle: # Google Drive
                         cloud_service = match.group(1)  # cloud_service for Google Drive
@@ -897,14 +897,11 @@ class MainWindow(Adw.ApplicationWindow):
                         user = match.group(4)  # user for DAV
                         prefix = match.group(5) if match.group(5) else None  # prefix for DAV, can be None
                         cmd = f"gio mount {cloud_service}://{user}@{host}/{prefix}" if prefix else f"gio mount {cloud_service}://{user}@{host}"
-                    else:
-                        print("It looks like, you don't use a compatible service with GNOME Online Accounts. Compatible services: Google Drive, OneDrive, Nextcloud (DAV).")
                 else:
                     extracted_values = {
                         "cloud_service": cloud_service,
                         "host": host,
                         "user": user,
-                        "ssl": ssl,
                         "prefix": prefix,
                         "cmd": cmd
                     }
