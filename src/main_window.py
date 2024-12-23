@@ -647,6 +647,7 @@ class MainWindow(Adw.ApplicationWindow):
         # save the SaveDesktop.json file to the periodic saving folder and set up the auto-mounting the cloud drive
         def save_file():
             open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
+            self.mount_type = "periodic-saving"
             self.set_up_auto_mount()
         
         # Action after closing dialog for setting synchronization file
@@ -751,6 +752,7 @@ class MainWindow(Adw.ApplicationWindow):
                             except:
                                 pass
 
+                            self.mount_type = "cloud-receiver"
                             self.set_up_auto_mount()
 
                         # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
@@ -860,9 +862,14 @@ class MainWindow(Adw.ApplicationWindow):
       
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
-        cfile_subtitle = settings.get_default_value("periodic-saving-folder") or self.cfileRow.get_subtitle() or ""
+        if self.mount_type == "periodic-saving":
+            cfile_subtitle = settings["periodic-saving-folder"]
+        elif self.mount_type == "cloud-receiver":
+            cfile_subtitle = settings["file-for-syncing"]
+        else:
+            cfile_subtitle = "none"
         
-        if cfile_subtitle:
+        if not cfile_subtitle == "none":
             if "gvfs" in cfile_subtitle:
                 pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
                 
@@ -884,7 +891,7 @@ class MainWindow(Adw.ApplicationWindow):
                         prefix = None  # prefix is not relevant for OneDrive
                         cmd = f"gio mount {cloud_service}://{host}" # command for OneDrive
                     elif "dav" in cfile_subtitle: # DAV
-                        cloud_service = "dav"  # cloud_service for DAV
+                        cloud_service = match.group(1)  # cloud_service for DAV
                         host = match.group(2)  # host for DAV
                         ssl = match.group(3)  # ssl for DAV
                         user = match.group(4)  # user for DAV
@@ -911,6 +918,8 @@ class MainWindow(Adw.ApplicationWindow):
             os.makedirs(f'{home}/.config/autostart', exist_ok=True)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
+        else:
+            raise AttributeError("It aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")
             
         self.syncingBox.remove(self.syncPage)
         self.sync_desktop()
