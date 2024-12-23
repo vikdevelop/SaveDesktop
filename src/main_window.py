@@ -895,8 +895,10 @@ class MainWindow(Adw.ApplicationWindow):
                         host = match.group(2)  # host for DAV
                         ssl = match.group(3)  # ssl for DAV
                         user = match.group(4)  # user for DAV
-                        prefix = match.group(5) if match.group(5) else None  # prefix for DAV, can be None
-                        cmd = f"gio mount {cloud_service}://{user}@{host}/{prefix}" if prefix else f"gio mount {cloud_service}://{user}@{host}"
+                        if match.group(5):
+                            prefix_old = match.group(5) # prefix for DAV
+                            prefix = re.sub(r'gio mount |%2F', '/', prefix_old).replace('//', '').strip()
+                        cmd = f"gio mount {cloud_service}://{user}@{host}{prefix}" if prefix else f"gio mount {cloud_service}://{user}@{host}"
                 else:
                     extracted_values = {
                         "cloud_service": cloud_service,
