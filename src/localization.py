@@ -15,11 +15,10 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5.1-beta_2025.01.01"
+v = "3.5.1"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Fixed a bug with auto-mounting Nextcloud; in the first synchronization run, it opens the Nautilus window to entering a password to the Nextcloud drive and in the next runs, it will be mounted automatically at login.</p>\
-<p>3.5-beta_2024.12.17</p>\
-<p>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled, and fixed a bug with setting up the Nextcloud folder</p>\
+rel_notes = "<ul><li>Fix the UnboundLocalError when the user selects the Nextcloud drive as a periodic saving folder or cloud drive folder</li>\
+<li>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled</li></ul>\
 <p>3.5</p><ul>\
 <li>Added dialog for the initial setting up synchronization; if you have set up synchronization before, it doesn't show</li>\
 <li>Temporarily disabled support for synchronization in the Snap environment due to unreliability</li>\
