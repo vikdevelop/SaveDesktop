@@ -18,7 +18,8 @@ else:
 v = "3.5.1"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul><li>Fix the UnboundLocalError when the user selects the Nextcloud drive as a periodic saving folder or cloud drive folder</li>\
-<li>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled</li></ul>\
+<li>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled</li>\
+<li>Added Swedish translations, thanks to @bittin</li></ul>\
 <p>3.5</p><ul>\
 <li>Added dialog for the initial setting up synchronization; if you have set up synchronization before, it doesn't show</li>\
 <li>Temporarily disabled support for synchronization in the Snap environment due to unreliability</li>\
