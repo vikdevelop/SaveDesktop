@@ -15,9 +15,9 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5.1-beta_2024.12.23"
+v = "3.5.1-beta_2025.01.01"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Partially fixed a problem with setting up Nextcloud; in some cases, it is necessary to connect manually due to password protection.</p>\
+rel_notes = "<p>Fixed a bug with auto-mounting Nextcloud; in the first synchronization run, it opens the Nautilus window to entering a password to the Nextcloud drive and in the next runs, it will be mounted automatically at login.</p>\
 <p>3.5-beta_2024.12.17</p>\
 <p>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled, and fixed a bug with setting up the Nextcloud folder</p>\
 <p>3.5</p><ul>\
