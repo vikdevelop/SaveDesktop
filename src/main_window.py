@@ -647,6 +647,7 @@ class MainWindow(Adw.ApplicationWindow):
         # save the SaveDesktop.json file to the periodic saving folder and set up the auto-mounting the cloud drive
         def save_file():
             open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
+            self.mount_type = "periodic-saving"
             self.set_up_auto_mount()
         
         # Action after closing dialog for setting synchronization file
@@ -721,23 +722,28 @@ class MainWindow(Adw.ApplicationWindow):
                 # translate the periodic sync options to English
                 selected_item = self.psyncRow.get_selected_item()
                 sync = {_["never"]: "Never2", _["manually"]: "Manually2", _["daily"]: "Daily2", _["weekly"]: "Weekly2", _["monthly"]: "Monthly2"}
-                
+
                 sync_item = sync.get(selected_item.get_string(), "Never2")
 
                 settings["periodic-import"] = sync_item
-                
+
                 # if the selected periodic saving interval is "Manually2", it enables the manually-sync value
                 settings["manually-sync"] = True and settings["periodic-import"] == "Manually2"
-                
+
                 # save the status of the Bidirectional Synchronization switch
                 settings["bidirectional-sync"] = self.bsSwitch.get_active()
-                
+
                 check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % self.cfileRow.get_subtitle()) if not snap else subprocess.getoutput('stat -f "%s"' % self.cfileRow.get_subtitle())
-                
+
                 if self.cfileRow.get_subtitle():
                     # Check if the selected cloud drive folder is correct
                     if (not snap and ("gvfs" in check_filesystem or "rclone" in check_filesystem)) or (snap and "fuse" in check_filesystem):
                         settings["file-for-syncing"] = self.cfileRow.get_subtitle()
+                        
+                        # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
+                        if check_psync == "Never2":
+                            if not settings["periodic-import"] == "Never2":
+                                self.show_warn_toast()
                         
                         # if it is selected to manually sync, it creates an option in the app menu in the header bar
                         if settings["manually-sync"]:
@@ -750,13 +756,9 @@ class MainWindow(Adw.ApplicationWindow):
                                 self.sync_menu.remove_all()
                             except:
                                 pass
-
-                            self.set_up_auto_mount()
-                            
-                        # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
-                        if check_psync == "Never2":
-                            if not settings["periodic-import"] == "Never2":
-                                self.show_warn_toast()
+                        
+                        self.mount_type = "cloud-receiver"
+                        self.set_up_auto_mount()
                     else:
                         os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
                         settings["file-for-syncing"] = ""
@@ -860,26 +862,53 @@ class MainWindow(Adw.ApplicationWindow):
       
     # set up auto-mounting of the cloud drives after logging in to the system
     def set_up_auto_mount(self):
-        if not settings.get_default_value("periodic-saving-folder"):
+        if self.mount_type == "periodic-saving":
             cfile_subtitle = settings["periodic-saving-folder"]
-        elif not self.cfileRow.get_subtitle() == "":
-            cfile_subtitle = self.cfileRow.get_subtitle()
+        elif self.mount_type == "cloud-receiver":
+            cfile_subtitle = settings["file-for-syncing"]
         else:
-            cfile_subtitle = ""
+            cfile_subtitle = "none"
         
-        if cfile_subtitle:
-            if settings["periodic-import"] != "Manually2" and "gvfs" in cfile_subtitle:
-                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "onedrive" not in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*'
+        if not cfile_subtitle == "none":
+            if "gvfs" in cfile_subtitle:
+                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
+                
                 match = re.search(pattern, cfile_subtitle)
-
+                
                 if match:
-                    cloud_service = match.group(1)
-                    host = match.group(2)
-                    user = match.group(3) if "onedrive" not in cfile_subtitle else None
-                    
-                    cmd = f"gio mount {cloud_service}://{user}@{host}" if not "onedrive" in cfile_subtitle else f"gio mount {cloud_service}://{host}"
+                    if "google-drive" in cfile_subtitle: # Google Drive
+                        cloud_service = match.group(1)  # cloud_service for Google Drive
+                        host = match.group(2)  # host for Google Drive
+                        user = match.group(3)
+                        ssl = None  # ssl is not relevant for Google Drive
+                        prefix = None  # prefix is not relevant for Google Drive
+                        cmd = f"gio mount {cloud_service}://{user}@{host}" # command for Google Drive
+                    elif "onedrive" in cfile_subtitle: # OneDrive
+                        cloud_service = match.group(1)  # cloud_service for OneDrive
+                        host = match.group(2)  # host for OneDrive
+                        user = None # user is not relevant for OneDrive
+                        ssl = None  # ssl is not relevant for OneDrive
+                        prefix = None  # prefix is not relevant for OneDrive
+                        cmd = f"gio mount {cloud_service}://{host}" # command for OneDrive
+                    elif "dav" in cfile_subtitle: # DAV
+                        cloud_service = match.group(1)  # cloud_service for DAV
+                        host = match.group(2)  # host for DAV
+                        ssl = match.group(3)  # ssl for DAV
+                        user = match.group(4)  # user for DAV
+                        if match.group(5): # prefix for DAV
+                            prefix_old = match.group(5)
+                            prefix = re.sub(r'gio mount |%2F', '/', prefix_old).replace('//', '').strip() # Replace 2%F with /
+                        else:
+                            prefix = ""
+                        cmd = "[ -f %s/.pwd_auth ] && gio mount davs://%s@%s%s || { nautilus davs://%s@%s%s & touch %s/.pwd_auth; }" % (DATA, user, host, prefix, user, host, prefix, DATA)
                 else:
-                    print("Failed to extract the necessary values to set up automatic cloud storage connection after logging into the system.")
+                    extracted_values = {
+                        "cloud_service": cloud_service,
+                        "host": host,
+                        "user": user,
+                        "prefix": prefix,
+                        "cmd": cmd
+                    }
             else:
                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle}" if not os.path.exists(f"{download_dir}/SaveDesktop/rclone_drive") else f"rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive"
             synchronization_content = f'#!/usr/bin/bash\n{cmd}\nsleep 60s\n{sync_cmd}\n{periodic_saving_cmd}'
@@ -890,6 +919,8 @@ class MainWindow(Adw.ApplicationWindow):
             os.makedirs(f'{home}/.config/autostart', exist_ok=True)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
+        else:
+            raise AttributeError("It aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")
             
         self.syncingBox.remove(self.syncPage)
         self.sync_desktop()
