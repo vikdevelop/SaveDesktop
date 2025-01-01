@@ -23,7 +23,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.toolbarview.add_top_bar(self.headerbar)
         
         # Values that are set if state of the switch "Extensions" in the Items, state of the switch "User data of installed Flatpak apps" will be saved or not, if whether to reopen the self.setDialog, if restarts the app window. Whether the Apply button in self.setDialog will be enabled or not.
-        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.cancel_process = self.set_button_sensitive = self.restart_app_win = self.start_saving = False
+        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.cancel_process = self.set_button_sensitive = self.restart_app_win = False
         
         # set the window size and maximization from the GSettings database
         (width, height) = settings["window-size"]
