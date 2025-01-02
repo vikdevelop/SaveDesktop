@@ -12,7 +12,7 @@
     - Откройте настройки GNOME
     - Перейдите в раздел «Сетевые учетные записи» и выберите свой облачный сервис
 
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)
+      <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
       
   </details> 
 
