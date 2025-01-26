@@ -900,7 +900,8 @@ class MainWindow(Adw.ApplicationWindow):
                             prefix = re.sub(r'gio mount |%2F', '/', prefix_old).replace('//', '').strip() # Replace 2%F with /
                         else:
                             prefix = ""
-                        cmd = "[ -f %s/.pwd_auth ] && gio mount davs://%s@%s%s || { nautilus davs://%s@%s%s & touch %s/.pwd_auth; }" % (DATA, user, host, prefix, user, host, prefix, DATA)
+                        fm = "nautilus" if not self.environment == "Cinnamon" else "nemo"
+                        cmd = "output=$(secret-tool lookup object Nextcloud) && output=\"Positive signal\" || output=\"Negative signal\"\nif [[ \"$output\" == Positive* ]]; then\n    gio mount davs://%s@%s%s\nelse\n    %s davs://%s@%s%s\nfi" % (user, host, prefix, fm, user, host, prefix)
                 else:
                     extracted_values = {
                         "cloud_service": cloud_service,
