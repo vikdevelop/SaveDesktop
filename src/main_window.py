@@ -460,7 +460,7 @@ class MainWindow(Adw.ApplicationWindow):
         def get_service(comborow, GParamObject):
             self.initsetupDialog.set_body("")
             get_servrow = self.servRow.get_selected_item().get_string()
-            self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox"
+            self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox" if get_servrow == "DropBox" else "pcloud"
             self.cmdRow.set_title(_["rclone_copy_cmd"])
             # set the copyButton properties
             self.copyButton.set_sensitive(True)
@@ -532,7 +532,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.initsetupDialog.set_body(_["rclone_intro_desc"])
             
             # create a list with available services, which can be connected via Rclone
-            services = Gtk.StringList.new(strings=[_["select"], 'Google Drive', 'Microsoft OneDrive', 'DropBox'])
+            services = Gtk.StringList.new(strings=[_["select"], 'Google Drive', 'Microsoft OneDrive', 'DropBox', 'pCloud'])
             
             # row for selecting the cloud service
             self.servRow = Adw.ComboRow.new()
