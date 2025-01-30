@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 from datetime import date
 from localization import _, CACHE, DATA, system_dir, home, settings
-import subprocess, os, locale, json, gi, socket, shutil, tarfile
+import subprocess, os, locale, json, gi, socket, shutil, tarfile, re
 from gi.repository import Gio, GLib
 
 dt = datetime.now()
@@ -68,6 +68,10 @@ class Syncing:
                
     # Download archive from URL
     def download_config(self):
+        # send a notification about progressing synchronization
+        subtitle = (lambda s: re.sub(r'<.*?>', '', s).split('…')[-1].strip())(_["importing_config_status"].format(settings["file-for-syncing"]))
+        os.system(f'notify-send "SaveDesktop Synchronization" "{subtitle}"')
+        
         # check, if the selected cloud drive folder contains the SaveDesktop.json file or not
         if os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
             self.get_pb_info()
