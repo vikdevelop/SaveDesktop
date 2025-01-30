@@ -23,7 +23,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.toolbarview.add_top_bar(self.headerbar)
         
         # Values that are set if state of the switch "Extensions" in the Items, state of the switch "User data of installed Flatpak apps" will be saved or not, if whether to reopen the self.setDialog, if restarts the app window. Whether the Apply button in self.setDialog will be enabled or not.
-        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.cancel_process = self.set_button_sensitive = self.restart_app_win = False
+        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.cancel_process = self.set_button_sensitive = self.restart_app_win = self.auto_save_start = False
         
         # set the window size and maximization from the GSettings database
         (width, height) = settings["window-size"]
@@ -482,7 +482,7 @@ class MainWindow(Adw.ApplicationWindow):
             elif response == 'cancel': # if the user clicks on the Cancel button
                 self.initsetupDialog.set_can_close(True)
             elif response == 'open-setdialog': # open the "Set up the sync file" dialog after clicking on the Next button in "Almost done!" page
-                self.start_saving = True
+                self.auto_save_start = True
                 settings["periodic-saving"] = "Daily"
                 self.restart_app_win = True
                 self.open_setDialog(w)
@@ -580,7 +580,7 @@ class MainWindow(Adw.ApplicationWindow):
                     self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
                     os.system(f"notify-send 'SaveDesktop' '{_['config_saved']}'")
                     self.setDialog.set_response_enabled('ok', True)
-                    self.start_saving = False
+                    self.auto_save_start = False
         
         # make the periodic saving file if it does not exist
         def make_pb_file(w):
@@ -614,7 +614,7 @@ class MainWindow(Adw.ApplicationWindow):
                 self.setupButton.add_css_class("suggested-action")
                 self.setupButton.connect("clicked", make_pb_file)
                 self.file_row.add_suffix(self.setupButton)
-                make_pb_file(w) if self.start_saving else None # start creating the periodic saving file if the self.start_saving value is TRUE
+                make_pb_file(w) if self.auto_save_start else None # start creating the periodic saving file if the self.start_saving value is TRUE
             if _["cloud_folder_err"] in folder:
                 self.lmButton = Gtk.Button.new_with_label(_["learn_more"])
                 self.lmButton.set_valign(Gtk.Align.CENTER)
