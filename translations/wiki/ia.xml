@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="periodic_saving"></str>
+  <str key="pb_desc"></str>
+  <str key="pb_options"></str>
+  <str key="pb_location"></str>
+  <str key="pb_filename_title"></str>
+  <str key="pb_filname_desc"></str>
+  <str key="save_installed_flatpaks_title"></str>
+  <str key="save_flatpak_intro"></str>
+  <str key="saving_flatpaks"></str>
+  <str key="installing_flatpaks"></str>
+  <str key="synchronization_between_computers_title"></str>
+  <str key="requirements"></str>
+  <str key="gnome_online_accounts">
+    <details>
+      <summary>
+        <b>GNOME Online Accounts</b>
+        <p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p>
+      </summary>
+
+    - Open the GNOME Settings
+    - Go to the Online Accounts section and select your cloud drive service
+
+      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  </details>
+  </str>
+  <str key="rclone">
+    <details>
+      <summary>
+        <b>Rclone</b>
+        <p>(for other desktop environments)</p>
+      </summary>
+
+    - Install Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+      ```
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      ```
+      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+
+    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  </details>
+  </str>
+  <str key="set_up_first_computer"></str>
+  <str key="set_up_second_computer"></str>
+  <str key="periodic_sync"></str>
+  <str key="saving_cfg_title"></str>
+  <str key="saving_cfg_intro"></str>
+  <str key="save_cfg_outro"></str>
+  <str key="version_warning"></str>
+  <str key="import_cfg_in_cli_title"></str>
+  <str key="imp_cfg_cli_intro"></str>
+  <str key="imp_cfg_cli_steps"></str>
+  <str key="imp_cfg_cli_note"></str>
+  <str key="archive_encryption_"></str>
+  <str key="archive_encryption_desc"></str>
+  <str key="ac_intro"></str>
+  <str key="enc"></str>
+  <str key="ac_warn"></str>
+  <str key="ac_setup"></str>
+</root>
