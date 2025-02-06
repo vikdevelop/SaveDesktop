@@ -15,9 +15,11 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5.1"
+v = "3.5.2"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<ul><li>Fix the UnboundLocalError when the user selects the Nextcloud drive as a periodic saving folder or cloud drive folder</li>\
+rel_notes = "<p>Fixed a bug with loading the password requirement in the Cinnamon DE for unlocking the Nextcloud folder, and added a notification about starting synchronization.</p>\
+<p>3.5.1</p>\
+<ul><li>Fixed the UnboundLocalError when the user selects the Nextcloud drive as a periodic saving folder or cloud drive folder</li>\
 <li>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled</li>\
 <li>Added Swedish translations, thanks to @bittin</li></ul>\
 <p>3.5</p><ul>\
