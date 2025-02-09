@@ -72,23 +72,15 @@ Sul primo computer:
 3. Fai clic su "Salvataggio periodico" e seleziona la cartella sincronizzata con il tuo archivio cloud come cartella di salvataggio periodico
 4. Se il file di salvataggio periodico non esiste, fai clic sul pulsante Crea</str>
   <str key="rclone">&lt;details&gt;
-&lt;sommary&gt;
-&lt;b&gt;Rclone&lt;/b&gt;
-&lt;p&gt;(per altri ambienti desktop)&lt;/p&gt;
-&lt;/sommary&gt;
-
-- Installa Rclone
-```
-sudo -v ; curl https://rclone.org/install.sh | sudo bash
-```
-
-- Imposta Rclone usando questo comando, che crea la cartella cloud drive, imposta Rclone e monta la cartella
-```
-mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "L'unità è stata montata correttamente"
-```
-* Invece di `your-cloud-drive-service` usa il nome del tuo servizio cloud drive, come `drive` (per Google Drive), `onedrive`, `dropbox`, ecc.
-
-- Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).
+&lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(per altri ambienti desktop)&lt;/p&gt;&lt;/summary&gt;
+&lt;ul&gt;
+&lt;li&gt;Installa Rclone&lt;/li&gt;
+&lt;pre&gt;&lt;code&gt;sudo -v ; curl https://rclone.org/install.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
+&lt;li&gt;Imposta Rclone usando questo comando, che crea la cartella cloud drive, imposta Rclone e monta la cartella
+&lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "L'unità è stata montata correttamente"&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;* Invece di `your-cloud-drive-service` usa il nome del tuo servizio cloud drive, come `drive` (per Google Drive), `onedrive`, `dropbox`, ecc.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/details&gt;
 
 Rclone
@@ -105,7 +97,9 @@ mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service 
 ```
 * Invece di `your-cloud-drive-service` usa il nome del tuo servizio cloud drive, come `drive` (per Google Drive), `onedrive`, `dropbox`, ecc.
 
-- Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).</str>
+- Consenti l'accesso alla cartella creata nell'[app Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  
+  </str>
   <str key="set_up_second_computer">Sul secondo computer:
 1. Apri l'app SaveDesktop
 2. Vai alla pagina Sincronizzazione e clicca sul pulsante "Connetti allo storage cloud".
@@ -128,10 +122,15 @@ Per impostare la sincronizzazione bidirezionale, assicurati di aver selezionato 
 &lt;/details&gt;
 
 Account online GNOME
+
 (per gli ambienti desktop GNOME, Cinnamon, COSMIC (vecchio) e Budgie)
 
-- Apri le Impostazioni GNOME
-- Vai alla sezione Account online e seleziona il tuo servizio di cloud storage
+- Apri le impostazioni GNOME
 
-![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png)</str>
+- Vai alla sezione Account online e seleziona il tuo servizio di cloud drive
+
+![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
+    
+  
+  </str>
 </root>
