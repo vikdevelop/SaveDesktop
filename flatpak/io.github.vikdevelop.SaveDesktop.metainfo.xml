@@ -57,6 +57,7 @@
     <summary xml:lang="pt_PT">Grave a sua configuração da área de trabalho</summary>
     <summary xml:lang="fi_FI">Tallenna työpöytäsi määritys</summary>
     <summary xml:lang="sv_SE">Spara din skrivbordskonfiguration</summary>
+    <summary xml:lang="et_EE">Salvesta oma töölaua seadistused</summary>
     
     <description>
       <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
@@ -80,19 +81,20 @@
       <p xml:lang="pt_PT">SaveDesktop permite gravar a sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um clique.</p>
       <p xml:lang="fi_FI">SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.</p>
       <p xml:lang="sv_SE">SaveDesktop låter dig spara din nuvarande konfiguration (teman, ikoner, bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett klick.</p>
+      <p xml:lang="et_EE">SaveDesktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne).</p>
     </description>
     
     <screenshots>
         <screenshot type="default">
-            <caption>Page for saving configuration</caption>
+            <caption>Configuration save page</caption>
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/save_page.png</image>
         </screenshot>
         <screenshot>
-            <caption>Page for importing configuration</caption>
+            <caption>Configuration import page</caption>
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png</image>
         </screenshot>
         <screenshot>
-            <caption>Page for config synchronization</caption>
+            <caption>Configuration synchronization page</caption>
             <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png</image>
         </screenshot>
     </screenshots>
