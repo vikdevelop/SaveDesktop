@@ -30,7 +30,7 @@ No Python knowledge? Never mind. For example, you can contribute to the [applica
       cd SaveDesktop
       ```
     - build the application using Flatpak Builder
-      - if you have not installed org.gnome.Sdk (version 46) runtime, install it using this command: `flatpak install runtime/org.gnome.Sdk/x86_64/46 -y`
+      - if you have not installed org.gnome.Sdk (the latest version) runtime, install it using this command: `flatpak install runtime/org.gnome.Sdk/x86_64/[GNOME's latest version] -y`
       ```bash
       flatpak-builder build *.yaml --install --user
       ```

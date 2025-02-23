@@ -1443,7 +1443,7 @@ class MyApp(Adw.Application):
     def sync_pc(self, action, param):
         os.system(f'notify-send "{_["please_wait"]}"')
         os.system(f"echo > {CACHE}/.from_app")
-        self.sync_m = GLib.spawn_command_line_async(f"python3 {system_dir}/network_sharing.py")
+        self.sync_m = GLib.spawn_command_line_async(f"python3 {system_dir}/synchronization.py")
     
     # Start saving the configuration using Ctrl+S keyboard shortcut
     def call_saving_config(self, action, param):

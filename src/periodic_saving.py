@@ -1,6 +1,5 @@
 import argparse, json, os, gi, shutil, subprocess
-from datetime import datetime
-from datetime import date
+from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio
 from localization import _, CACHE, DATA, home, system_dir, settings, download_dir, snap
@@ -16,11 +15,17 @@ first_day = current_day.replace(day=1)
 
 class PeriodicBackups:
     def __init__(self):
-        pass
+        self.last_backup_date = self.load_last_backup_date()
 
-    # Check, if the entered command has a --now argument or not
+    def load_last_backup_date(self):
+        backup_file = f"{DATA}/periodic-saving.json"
+        if os.path.exists(backup_file):
+            with open(backup_file) as pb:
+                jp = json.load(pb)
+            return date.fromisoformat(jp.get("last-saved", "2000-01-01"))
+        return date(2000, 1, 1)
+
     def run(self, now: bool) -> None:
-        # If the periodic saving value returns the default value, set the correct directory for the periodic saving file
         if settings["periodic-saving-folder"] == '':
             self.pbfolder = f'{download_dir}/SaveDesktop/archives'
         else:
@@ -29,51 +34,28 @@ class PeriodicBackups:
         if now:
             print("Saving immediately")
             self.backup()
-        elif os.path.exists(f"{DATA}/periodic-saving.json"):
-            with open(f"{DATA}/periodic-saving.json") as pb:
-                jp = json.load(pb)
-            if jp["saving-date"] == f'{date.today()}':
-                print("The configuration has already been saved today.")
-                exit()
-            else:
-                self.get_interval()
         else:
             self.get_interval()
 
-    # Get selected periodic saving interval
     def get_interval(self):
-        # Get periodic saving interval selected by the user
         if settings["periodic-saving"] == 'Never':
             print("Periodic saving is not set up.")
             exit()
         elif settings["periodic-saving"] == 'Daily':
-            self.daily()
+            self.check_and_backup(1)
         elif settings["periodic-saving"] == 'Weekly':
-            self.weekly()
+            self.check_and_backup(7)
         elif settings["periodic-saving"] == 'Monthly':
-            self.monthly()
+            self.check_and_backup(30)
 
-    # Periodic backups: daily
-    def daily(self):
-        self.backup()
-
-    # Periodic backups: weekly
-    def weekly(self):
-        if date.today().weekday() == 0:
+    def check_and_backup(self, interval):
+        today = date.today()
+        if (today - self.last_backup_date).days >= interval:
             self.backup()
         else:
-            print("Today is not Monday.")
+            print(f"Backup not needed today. Last backup was on {self.last_backup_date}.")
 
-    # Periodic backups: monthly
-    def monthly(self):
-        if dt.day == 1:
-            self.backup()
-        else:
-            print("Today is not first day of month.")
-
-    # Create backup
     def backup(self):
-        # Check if the default folder for periodic saving exists or not
         if self.pbfolder == f'{download_dir}/SaveDesktop/archives':
             try:
                 if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
@@ -82,40 +64,31 @@ class PeriodicBackups:
                 os.system(f"mkdir {home}/Downloads")
                 os.system(f"xdg-user-dirs-update --set DOWNLOAD {home}/Downloads")
                 os.makedirs(f"{download_dir}/SaveDesktop/archives")
-        
-        # Check if the filename format has spaces or not
+
         if " " in settings["filename-format"]:
-            old_filename = f'{settings["filename-format"]}'
-            filename = old_filename.replace(" ", "_")
+            filename = settings["filename-format"].replace(" ", "_")
         else:
             filename = settings["filename-format"]
-        
-        # Check if the path {CACHE}/periodic_saving exists or not
+
         os.makedirs(f"{CACHE}/periodic_saving", exist_ok=True)
-        
-        # Start saving the configuration
         os.chdir(f"{CACHE}/periodic_saving")
         os.system("echo > saving_status")
         os.system(f"python3 {system_dir}/config.py --save")
-        
+
         print("creating the configuration archive")
         os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
         print("moving the configuration archive to the user-defined directory")
         shutil.copyfile('cfg.sd.tar.gz', f'{self.pbfolder}/{filename}.sd.tar.gz')
-        
-        # Check the filesystem type and create the SaveDesktop.json file, which contains the selected periodic saving filename and interval
-        check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"] if not snap else subprocess.getoutput('stat -f "%s"' % settings["periodic-saving-folder"]))
-        if (not snap and ("gvfs" in check_filesystem or "rclone" in check_filesystem)) or (snap and "fuse" in check_filesystem):
-            with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as pf:
-                pf.write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
-        
+
+        self.save_last_backup_date()
         self.config_saved()
 
-    # Message about saved config
+    def save_last_backup_date(self):
+        with open(f"{DATA}/periodic-saving.json", "w") as pb:
+            json.dump({"last-saved": date.today().isoformat()}, pb)
+
     def config_saved(self):
         os.system(f"rm -rf {CACHE}/periodic-saving/*")
-        with open(f"{DATA}/periodic-saving.json", "w") as pb:
-            pb.write('{\n "saving-date": "%s"\n}' % date.today())
         os.system("rm saving_status")
         print("Configuration saved.")
         exit()
