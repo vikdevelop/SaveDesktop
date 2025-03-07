@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 import os, sys, shutil, argparse
 from pathlib import Path
+from datetime import date
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
 
 # Cache directory
-cache_path = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp" if flatpak else f"{os.getenv('SNAP_USER_COMMON')}/.cache/tmp" if snap else f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
+CACHE = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp" if flatpak else f"{os.getenv('SNAP_USER_COMMON')}/.cache/tmp" if snap else f"{Path.home()}/.cache/io.github.vikdevelop.SaveDesktop"
 
 # Init dir for loading the Python scripts
 init_dir = "/app" if flatpak else f"{os.getenv('SNAP')}/usr" if snap else f"{Path.home()}/.local/share/savedesktop/src"
@@ -15,34 +16,42 @@ sys.path.append(init_dir)
 # Command-line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("--background", action="store_true", help="Start periodic saving")
-parser.add_argument("--sync", action="store_true", help="Sync desktop configuration")
-parser.add_argument("--save-now", action="store_true", help="Save configuration using UI parameters (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/saving-importing-configuration-in-cli/en)")
-parser.add_argument("--import-config", help="Import configuration from a file (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/saving-importing-configuration-in-cli/en)", type=str)
+parser.add_argument("--sync", action="store_true", help="Sync a desktop configuration")
+parser.add_argument("--save-now", action="store_true", help="Save a configuration using UI parameters (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/saving-importing-configuration-in-cli/en#saving-configuration)")
+parser.add_argument("--save-without-archive", type=str, help="Save a configuration without an archive", dest="FOLDER_PATH")
+parser.add_argument("--import-config", help="Import a configuration from a file (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/saving-importing-configuration-in-cli/en#importing-configuration)", type=str, dest="CFG_ARCHIVE_PATH")
 cmd = parser.parse_args()
 
 # Run Python scripts from the listed command-line arguments
-if cmd.background:
+if cmd.background: # start periodic saving
     from periodic_saving import PeriodicBackups
     pb = PeriodicBackups()
     pb.run(None)
     exit()
-elif cmd.save_now:
+elif cmd.sync: # sync a desktop configuration
+    from network_sharing import Syncing
+    exit()
+elif cmd.save_now: # save a configuration using UI parameters
     from periodic_saving import PeriodicBackups
     pb = PeriodicBackups()
     pb.run(now=True)
     exit()
-elif cmd.sync:
-    from network_sharing import Syncing
-    exit()
-elif cmd.import_config:
-    file_path = cmd.import_config
+elif cmd.FOLDER_PATH: # save a configuration without an archive
+    folder_path = cmd.FOLDER_PATH
+    os.makedirs(f"{CACHE}/save_config", exist_ok=True)
+    os.chdir(f"{CACHE}/save_config")
+    os.system(f"python3 {init_dir}/config.py --save")
+    print(f"moving the configuration folder to the {folder_path} folder")
+    os.system(f"cp -R {CACHE}/save_config/* {folder_path}/configuration_{date.today()}/ && rm -rf {CACHE}/save_config")
+elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file
+    file_path = cmd.CFG_ARCHIVE_PATH
     if not os.path.exists(file_path):
         print(f"File not found: {file_path}")
         exit(1)
     
-    shutil.rmtree(os.path.join(cache_path, "import_config"), ignore_errors=True)
-    os.makedirs(os.path.join(cache_path, "import_config"), exist_ok=True)
-    os.chdir(os.path.join(cache_path, "import_config"))
+    shutil.rmtree(os.path.join(CACHE, "import_config"), ignore_errors=True)
+    os.makedirs(os.path.join(CACHE, "import_config"), exist_ok=True)
+    os.chdir(os.path.join(CACHE, "import_config"))
     
     if file_path.endswith('.sd.zip'):
         os.system(f"unzip {file_path}")
@@ -54,5 +63,5 @@ elif cmd.import_config:
     
     os.system(f"python3 {init_dir}/config.py --import_")
     exit()
-else:
+else: # show the app window
     import main_window
