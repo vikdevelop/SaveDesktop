@@ -198,19 +198,11 @@ class MainWindow(Adw.ApplicationWindow):
             self.msBox.set_size_request(-1, 500) if self.open_setdialog_tf else self.msBox.set_size_request(-1, 300)
             self.msDialog.set_extra_child(self.msBox)
             
-            # Learn more about periodic saving
-            self.pb_learnButton = Gtk.Button.new_from_icon_name("help-about-symbolic")
-            self.pb_learnButton.set_tooltip_text(_["learn_more"])
-            self.pb_learnButton.add_css_class("flat")
-            self.pb_learnButton.set_valign(Gtk.Align.CENTER)
-            self.pb_learnButton.connect("clicked", open_pb_wiki)
-            
             # Periodic saving section
             # Expander row for showing options of the periodic saving
             self.saving_eRow = Adw.ExpanderRow.new()
             self.saving_eRow.set_title(_["periodic_saving"])
             self.saving_eRow.set_expanded(True) if self.open_setdialog_tf else None
-            self.saving_eRow.add_suffix(self.pb_learnButton)
             self.msBox.append(child=self.saving_eRow)
             
             options = Gtk.StringList.new(strings=[
