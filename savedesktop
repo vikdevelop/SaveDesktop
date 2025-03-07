@@ -42,7 +42,7 @@ elif cmd.FOLDER_PATH: # save a configuration without an archive
     os.chdir(f"{CACHE}/save_config")
     os.system(f"python3 {init_dir}/config.py --save")
     print(f"moving the configuration folder to the {folder_path} folder")
-    os.system(f"cp -R {CACHE}/save_config/* {folder_path}/configuration_{date.today()}/ && rm -rf {CACHE}/save_config")
+    os.system(f"mkdir {folder_path}/configuration_{date.today()}/ && cp -R {CACHE}/save_config/* {folder_path}/configuration_{date.today()}/ && rm -rf {CACHE}/save_config")
 elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file
     file_path = cmd.CFG_ARCHIVE_PATH
     if not os.path.exists(file_path):
