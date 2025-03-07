@@ -29,7 +29,7 @@ if cmd.background: # start periodic saving
     pb.run(None)
     exit()
 elif cmd.sync: # sync a desktop configuration
-    from network_sharing import Syncing
+    from synchronization import Syncing
     exit()
 elif cmd.save_now: # save a configuration using UI parameters
     from periodic_saving import PeriodicBackups
