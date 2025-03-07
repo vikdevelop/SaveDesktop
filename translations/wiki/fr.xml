@@ -1,20 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="periodic_saving">Sauvegardes régulières</str>
-  <str key="pb_desc">En plus des sauvegardes manuelles, SaveDesktop vous permets aussi de sauvegarder la configuration de votre bureau de façon périodique. Vous pouvez choisir parmi les options suivantes:</str>
-  <str key="pb_options">- **Daily**: 
-  - After logging into the system, SaveDesktop starts in the background and backs up the configuration. If you then log back in this day, it will not do it again, because it has already been created for that day.
-- **Weekly**:
-  - SaveDesktop performs a configuration backup every Monday if "Weekly" is selected. If the computer is not running on that day, SaveDesktop does not do it the next day.
-- **Monthly**:
-  - If "Monthly" is selected, SaveDesktop makes the backup on the first day of the month, e.g. May 1, June 1, December 1, etc. As with "Weekly", if the computer is not running on that day, SaveDesktop does not perform it the next day.
-- **Never**:
-  - Nothing's happening</str>
-  <str key="pb_location">### Where are the periodic saving files stored?
-Default directory for periodic saving is `/home/user/Downloads/SaveDesktop/archives`, but you can choose custom directory.</str>
-  <str key="pb_filename_title">### Filename format</str>
-  <str key="pb_filname_desc">If you want to give periodic backup files names other than `config_{}`, you can set the filename format.
-The default name, as already mentioned, is `config_{}`. `{}` is a variable in SaveDesktop that sets the today date. If it's not there and the day of backup creation comes and a backup file with the filename format set by your filename format exists, SaveDesktop overwrites it with the new backup file. Otherwise, SaveDesktop creates a new backup file.</str>
   <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
   <str key="periodic_sync">## Periodic synchronization
 You can choose between the following items:
