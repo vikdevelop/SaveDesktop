@@ -17,7 +17,7 @@ else:
 # Set application version, and icon
 v = "3.5.3"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Improved an interval logic for periodic saving and synchronization (#373), added Estonian translations thanks to Priit Jõerüüt (Weblate) and fixed minor bugs.</p>\
+rel_notes = "<p>Improved an interval logic for periodic saving and synchronization (#373), added support for saving the configuration without an archive (terminal only yet) (#368), added Estonian translations thanks to Priit Jõerüüt (Weblate), and fixed minor bugs.</p>\
 <p>3.5.2</p>\
 <p>Fixed a bug with loading the password requirement in the Cinnamon DE for unlocking the Nextcloud folder, and added a notification about starting synchronization.</p>\
 <p>3.5.1</p>\
