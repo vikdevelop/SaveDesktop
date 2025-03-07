@@ -18,8 +18,8 @@ Periyodik kayıtta varsayılan kaydetme dizini `/home/user/Downloads/SaveDesktop
   <str key="periodic_sync">## Periodic synchronization
 You can choose between the following items:
 - Daily
-- Weekly (synchronization takes place every Tuesday)
-- Monthly (synchronization takes place every second day in the month)
+- Weekly
+- Monthly
 - Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
 - Never (nothing's happening)</str>
   <str key="save_installed_flatpaks_title">Save installed Flatpak apps and install it from list</str>

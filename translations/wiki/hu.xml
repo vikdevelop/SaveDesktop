@@ -19,8 +19,8 @@ Az alapértelmezett név a fent említett `config_{}`. A `{}` egy változó a Sa
   <str key="periodic_sync">## Időszakos szinkronizálás
 Az alábbi tételek közül választhatsz:
 - Naponta
-- Hetente (a szinkronizálás minden kedden történik)
-- Havonta (a szinkronizálás a hónap minden második napján történik)
+- Hetente
+- Havonta
 - Never (nothing's happening)</str>
   <str key="save_installed_flatpaks_title">Telepített Flatpak alkalmazások mentése és listából telepítése</str>
   <str key="save_flatpak_intro">A 2.5-ös verzió óta a SaveDesktop lehetővé teszi a telepített Flatpak alkalmazások mentését és a listából történő telepítését. Hogyan is működik?</str>

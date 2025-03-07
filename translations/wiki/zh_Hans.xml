@@ -18,8 +18,8 @@
   <str key="periodic_sync">## 定期同步
 您可从以下方案中选择:
 - 每日
-- 每周（在每个周二会进行同步）
-- 每月（在每月第二天会进行同步）
+- 每周
+- 每月
 - 手动（可手动点击标题栏的三点按钮进行手动同步）
 - 从不（无事发生）</str>
   <str key="save_installed_flatpaks_title">保存已安装的Flatpak应用并通过列表进行安装</str>

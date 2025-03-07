@@ -18,8 +18,8 @@ El directorio por defecto para guardar los periódicamente es `/home/user/Downlo
   <str key="periodic_sync">### Sincronización periódica
 Puede elegir entre las siguientes opciones:
 - Diariamente
-- Semanal (la sincronización tiene lugar cada martes)
-- Mensualmente (la sincronización tiene lugar cada dos días del mes)
+- Semanal
+- Mensualmente
 - Manualmente (es posible sincronizar la configuración desde el menú de la barra de cabecera haciendo clic en los tres puntos)
 - Nunca (no ocurre nada)</str>
   <str key="save_installed_flatpaks_title">Guarde las aplicaciones instaladas de Flatpak e instálelas desde la lista</str>

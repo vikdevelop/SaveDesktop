@@ -24,8 +24,8 @@ Após importar o arquivo de configuração salvo e logar de volta no sistema, **
   <str key="periodic_sync">## Sincronização periódica
 Você pode escolher entre as seguintes opções:
 - Diariamente
-- Semanalmente (a sincronização acontece toda terça-feira)
-- Mensalmente (a sincronização acontece todo segundo dia do mês)
+- Semanalmente
+- Mensalmente
 - Manualmente (é possível sincronizar a configuração a partir do menu na barra de cabeçalho, clicando nos três pontos)
 - Nunca (nada acontece)</str>
   <str key="saving_cfg_title">Salvar configuração</str>

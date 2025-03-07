@@ -19,8 +19,8 @@ Výchozí adresář pro pravidelné ukládání je `/home/user/Downloads/SaveDes
   <str key="periodic_sync">### Pravidelná synchronizace
 Můžete si vybrat mezi následujícími možnostmi:
 - Denně
-- Týdně (synchronizace probíhá každé úterý)
-- Měsíčně (synchronizace probíhá každý druhý den v měsíci)
+- Týdně
+- Měsíčně
 - Ručně (je možné synchronizovat konfiguraci z menu v záhlaví kliknutím na tři tečky)
 - Nikdy (nic se neděje)</str>
   <str key="save_flatpak_intro">Od verze 2.5 umožňuje SaveDesktop ukládat nainstalované aplikace Flatpak a instalovat je ze seznamu. Jak to tedy funguje?</str>
