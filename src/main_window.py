@@ -901,12 +901,12 @@ class MainWindow(Adw.ApplicationWindow):
                         else:
                             prefix = ""
                         fm = "nautilus" if not self.environment == "Cinnamon" else "nemo"
-                        cmd = """output=$(secret-tool lookup object Nextcloud)
-                        if [[ "$output" == "Positive signal" ]]; then
-                            gio mount davs://%s@%s%s
-                        else
-                            %s davs://%s@%s%s
-                        fi""" % (user, host, prefix, fm, user, host, prefix)
+                        cmd = """output=$(secret-tool lookup object Nextcloud) && output="Positive signal" || output="Negative signal"
+if [[ "$output" == "Positive signal" ]]; then
+    gio mount davs://%s@%s%s
+else
+    %s davs://%s@%s%s
+fi""" % (user, host, prefix, fm, user, host, prefix)
                 else:
                     extracted_values = {
                         "cloud_service": cloud_service,
