@@ -1,19 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="periodic_saving">定期保存</str>
-  <str key="pb_desc">除了手动保存，SaveDesktop也允许您定期保存桌面环境配置。您可从以下选项中进行选择：</str>
-  <str key="pb_options">- **每天**：
-- 当您登录进系统后，SaveDesktop将开始在后台对配置进行备份。当您在同一天再次登录系统时，备份工作将不会重复进行，因为当日的备份文件已被创建。
-- **每周**：
-- 如果您选择“每周备份”，那么SaveDesktop将在每周一进行备份。如果您周一没有登录系统，那么SaveDesktop也不会在下一次您登录系统时备份。
-- **每月**：
-- 如果您选择“每月备份”，那么SaveDesktop将在每月的第一天进行备份，例如：5月1日，6月1日，12月1日等。正如“每周备份”那样，如果您在当月第一天没有登录系统，那么SaveDesktop也不会在下一次您登录系统时备份。
-- **从不**：
-- 无事发生。</str>
-  <str key="pb_location">### 定期备份的文件保存在哪里？
-定期备份的存档路径默认在`/home/user/Downloads/SaveDesktop/archives`，但您可以自定义路径。</str>
-  <str key="pb_filename_title">### 文件名格式</str>
-  <str key="pb_filname_desc">如果您不想用`Latest_configuration`这一文件名，而使用一种文件名格式，这其实也是可行的，甚至可以包含空格。 自2.9.6版本之后，变量`{}`不再为当前日期进行设置，因为在定期备份中，原始备份将被覆盖。</str>
   <str key="synchronization_between_computers_title">通过网络在不同计算机中同步</str>
   <str key="periodic_sync">## 定期同步
 您可从以下方案中选择:

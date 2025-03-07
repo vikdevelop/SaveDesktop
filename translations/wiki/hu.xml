@@ -1,20 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="periodic_saving">Időszakos mentés</str>
-  <str key="pb_desc">A manuális mentések mellett, a SaveDesktop lehetővé teszi, hogy időszakosan elmentsd a számítógéped beállításait. A következő lehetőségek közül választhatsz:</str>
-  <str key="pb_options">- **Naponta**: 
-  - Bejelentkezés után a SaveDesktop elindul a háttérben és elmenti a beállításokat. Ha ugyanazon a napon újra belépsz, a mentés nem fut le még egyszer, hiszen arra a napra már készült biztonsági mentés.
-- **Hetente**:
-  - A SaveDesktop minden hétfőn biztonsági mentést készít. Ha a számítógép nem fut azon a napon, a SaveDesktop nem készít mentést a következő napon.
-- **Havonta**:
-  - A SaveDesktop a hónap első napján készíti el a biztonsági mentést. Például, május elsején, június elsején, december elsején, stb. Hasonlóan a heti mentéshez, ha a számítógép nem fut az adott napon, az alkalmazás nem készíti el a mentést a következőn.
-- **Soha**:
-  - Semmi sem történik</str>
-  <str key="pb_location">### Hol tárolódnak a biztonsági mentések?
-Az időszakos mentések alapértelmezett könyvtára a `/home/user/Letöltések/SaveDesktop/archives`, de választhatsz egyéni könyvtárat is.</str>
-  <str key="pb_filename_title">### Fájlnév formátum</str>
-  <str key="pb_filname_desc">Ha más nevet akarsz adni a mentéseknek, mint `config_{}`, beállíthatod a fájlnév formátumot.
-Az alapértelmezett név a fent említett `config_{}`. A `{}` egy változó a SaveDesktop alkalmazásban, amely a mai dátumot állítja be. Ha ez a változó nincs a fájlnévben, elérkezik a biztonsági mentés napja és egy biztonsági mentés már létezik a beállított fájlnévvel, az alkalmazás felülírja a meglévőt az új biztonsági mentéssel. Egyébként, új biztonsági mentés fájlt hoz létre az alkalmazás.</str>
   <str key="synchronization_between_computers_title">Azonos hálózaton lévő számítógépek szinkronizálása</str>
   <str key="periodic_sync">## Időszakos szinkronizálás
 Az alábbi tételek közül választhatsz:
