@@ -19,9 +19,8 @@
       <li>Nainstalujte Rclone</li>
       <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
       <li>Nastavte Rclone pomocí tohoto příkazu, který vytvoří složku cloudové jednotky, nastaví Rclone a připojí složku
-      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
-      <p>* Namísto `your-cloud-drive-service` použijte název služby cloudového disku, například `drive` (pro Google Drive), `onedrive`, `dropbox` atd.</p></li>
-      <li>Povolte přístup k vytvořené složce v aplikaci [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal).</li>
+      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
+      <p>* Namísto <code>your-cloud-drive-service</code> použijte název služby cloudového disku, například <code>drive</code> (pro Google Drive), <code>onedrive</code>, <code>dropbox</code> atd.</p></li>
     </ul>
   </details>
   

@@ -18,9 +18,8 @@
       <li>Instal·leu el Rclone</li>
       <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
       <li>Utilitzeu aquesta ordre que crearà la carpeta al núvol, configura el Rclone i munta la carpeta
-      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config create drive el-vostre-servei-al-núvol &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "S'ha muntat la unitat correctament"</code></pre>
-      <p>* En comptes d' `el-vostre-servei-al-núvol ` indiqueu el nom del proveïdor de serveis, com ara `drive` (per al Google Drive), `onedrive`, `dropbox`, etc.</p></li>
-      <li>Permeteu l'accés a la carpeta creada mitjançant l'aplicació [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).</li>
+      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "S'ha muntat la unitat correctament"</code></pre>
+      <p>* En comptes d'  <code>el-vostre-servei-al-núvol</code> indiqueu el nom del proveïdor de serveis, com ara <code>drive</code> (per al Google Drive), <code>onedrive</code>, <code>dropbox</code>, etc.</p></li>
     </ul>
   </details>
   

@@ -3,24 +3,23 @@
 - Você deve criar uma pasta que será sincronizada com seu armazenamento em nuvem em cada computador que deseja sincronizar. Isso pode ser feito usando:
 
   <details>
-    <summary><b>GNOME Online Accounts</b><p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p></summary>
+    <summary> <b> Contas on -line gnome </b> <p> (para ambientes Gnome, Cinnamon, Cosmic (antigo) e de desktop) </p> </summary>
     <ul>
-      <li>Open the GNOME Settings</li>
-      <li>Go to the Online Accounts section and select your cloud drive service</li>
+        <li> Abra as configurações do Gnome </li>
+        <li> Vá para a seção de contas on -line e selecione seu serviço de unidade de nuvem </li>
     </ul>
     <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
     
   </details>
 
   <details>
-    <summary><b>Rclone</b><p>(for other desktop environments)</p></summary>
+    <summary><b>Rclone</b><p>(para outros ambientes de mesa)</p></summary>
     <ul>
-      <li>Install Rclone</li>
+      <li>Instale o rclone</li>
       <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
-      <li>Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
-      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
-      <p>* Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.</p></li>
-      <li>Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).</li>
+      <li>Configure o RCLONE usando este comando, que cria a pasta de unidade de nuvem, configura Rclone e monta a pasta</li>
+      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "a unidade foi montada com sucesso"</code></pre>
+      <p>* Em vez de <code>your-cloud-drive-service</code> use o nome do seu serviço de unidade em nuvem, como <code>drive</code> (para o Google Drive), <code>onedrive</code>, <code>dropbox</code>, etc.</p></li>
     </ul>
   </details>
   

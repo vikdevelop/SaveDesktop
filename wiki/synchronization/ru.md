@@ -22,9 +22,8 @@
       <li>Установка Rclone</li>
       <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
       <li>Настройте Rclone с помощью этой команды, которая создаст папку облачного диска, настроит Rclone и смонтирует папку
-      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "Диск успешно смонтирован"</code></pre>
-      <p>* Вместо `your-cloud-drive-service` используйте название вашего облачного сервиса, например `drive` (для Google Drive), `onedrive`, `dropbox` и т. д.</p></li>
-      <li>Разрешите доступ к созданной папке в [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).</li>
+      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "Диск успешно смонтирован"</code></pre>
+      <p>* Вместо <code>your-cloud-drive-service</code> используйте название вашего облачного сервиса, например <code>drive</code> (для Google Drive), <code>onedrive</code>, <code>dropbox</code> и т. д.</p></li>
     </ul>
   </details>
   
