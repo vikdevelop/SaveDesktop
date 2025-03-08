@@ -42,8 +42,8 @@ Para configurar a sincronização bidirecional, certifique-se de ter a mesma pas
 ## Sincronização periódica
 Você pode escolher entre as seguintes opções:
 - Diariamente
-- Semanalmente (a sincronização acontece toda terça-feira)
-- Mensalmente (a sincronização acontece todo segundo dia do mês)
+- Semanalmente
+- Mensalmente
 - Manualmente (é possível sincronizar a configuração a partir do menu na barra de cabeçalho, clicando nos três pontos)
 - Nunca (nada acontece)
 

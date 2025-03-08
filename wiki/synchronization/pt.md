@@ -43,8 +43,8 @@ To set up bidirectional synchronization, make sure you have the same cloud folde
 ### Periodic synchronization
 You can choose between the following options:
 - Daily
-- Weekly (synchronization takes place every Tuesday)
-- Monthly (synchronization takes place every second day in the month)
+- Weekly 
+- Monthly 
 - Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
 - Never (nothing's happening)
 

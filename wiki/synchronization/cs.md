@@ -43,8 +43,8 @@ Chcete-li nastavit obousměrnou synchronizaci, ujistěte se, že máte v dialogo
 ### Pravidelná synchronizace
 Můžete si vybrat mezi následujícími možnostmi:
 - Denně
-- Týdně (synchronizace probíhá každé úterý)
-- Měsíčně (synchronizace probíhá každý druhý den v měsíci)
+- Týdně 
+- Měsíčně 
 - Ručně (je možné synchronizovat konfiguraci z menu v záhlaví kliknutím na tři tečky)
 - Nikdy (nic se neděje)
 

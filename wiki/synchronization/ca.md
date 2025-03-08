@@ -42,8 +42,8 @@ Per a configurar una sincronització bidireccional, assegureu-vos que teniu conf
 ## Sincronització periòdica
 Podeu triar entre les opcions següents:
 - Diàriament
-- Setmanalment (la sincronització es duu a terme cada dimarts)
-- Mensualment (la sincronització es duu a terme el segon dia de cada mes)
+- Setmanalment
+- Mensualment
 - Manualment (és possible realitzar la sincronització en qualsevol moment des del menú principal en fer clic als tres punts)
 - Mai (no es duu a terme cap canvi)
 
