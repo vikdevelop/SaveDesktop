@@ -19,9 +19,8 @@
       <li>Install Rclone</li>
       <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
       <li>Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
-      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
+      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
       <p>* Instead of <code>your-cloud-drive-service</code> use the name of your cloud drive service, such as <code>drive</code> (for Google Drive), <code>onedrive</code>, <code>dropbox</code>, etc.</p></li>
-      <li>Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).</li>
     </ul>
   </details>
   

@@ -8,9 +8,10 @@
         <b>GNOME Online Accounts</b>
         <p>(для окружений рабочего стола GNOME, Cinnamon, COSMIC (Old) и Budgie)</p>
       </summary>
-
-    - Откройте настройки GNOME
-    - Перейдите в раздел «Сетевые учетные записи» и выберите свой облачный сервис
+      <ul>
+        <li>Откройте настройки GNOME</li>
+        <li>Перейдите в раздел «Сетевые учетные записи» и выберите свой облачный сервис</li>
+      </ul>
 
       <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
       
