@@ -58,6 +58,7 @@
     <summary xml:lang="fi">Tallenna työpöytäsi määritys</summary>
     <summary xml:lang="sv">Spara din skrivbordskonfiguration</summary>
     <summary xml:lang="et">Salvesta oma töölaua seadistused</summary>
+    <summary xml:lang="ta">உங்கள் டெச்க்டாப் உள்ளமைவைச் சேமிக்கவும்</summary>
     
     <description>
       <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
@@ -82,6 +83,7 @@
       <p xml:lang="fi">SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.</p>
       <p xml:lang="sv">SaveDesktop låter dig spara din nuvarande konfiguration (teman, ikoner, bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett klick.</p>
       <p xml:lang="et">SaveDesktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne).</p>
+      <p xml:lang="ta">உங்கள் தற்போதைய உள்ளமைவை (கருப்பொருள்கள், சின்னங்கள், வால்பேப்பர்கள், அனைத்து டெச்க்டாப் சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே கிளிக்கில் சேமிக்க சேமிப்பக்டாப் உங்களை அனுமதிக்கிறது.</p>
     </description>
     
     <screenshots>
