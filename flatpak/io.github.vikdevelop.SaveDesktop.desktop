@@ -23,6 +23,7 @@ Comment[pt]=Grave a sua configuração da área de trabalho
 Comment[fi]=Tallenna työpöytäsi määritys
 Comment[sv]=Spara din skrivbordskonfiguration
 Comment[et]=Salvesta oma töölaua seadistused
+Comment[ta]=உங்கள் டெச்க்டாப் உள்ளமைவைச் சேமிக்கவும்
 Exec=savedesktop
 Type=Application
 Icon=io.github.vikdevelop.SaveDesktop
