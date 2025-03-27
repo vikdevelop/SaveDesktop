@@ -32,11 +32,18 @@ jobs:
             if [ -d "$dir" ]; then
               json_file="$dir/languages.json"
               echo '{ "languages": [' > "$json_file"
-              ls "$dir"/*.md 2>/dev/null | sed 's#.*/##' | sed 's/\.md//g' | jq -R -s -c 'split("\n")[:-1]' >> "$json_file"
+              
+              md_files=$(ls "$dir"/*.md 2>/dev/null | wc -l)
+              if [ "$md_files" -gt 0 ]; then
+                ls "$dir"/*.md | sed 's#.*/##' | sed 's/\.md//g' | jq -R -s -c 'split("\n")[:-1]' >> "$json_file"
+              else
+                echo '  "en"' >> "$json_file" # Výchozí jazyk
+              fi
+
               echo ']}' >> "$json_file"
             fi
           done
-
+          
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
