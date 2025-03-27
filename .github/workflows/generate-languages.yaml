@@ -16,6 +16,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Debug: List wiki folders and Markdown files
+        run: |
+          echo "Checking wiki directories..."
+          for dir in wiki/*; do
+            if [ -d "$dir" ]; then
+              echo "Found directory: $dir"
+              ls -l "$dir"/*.md 2>/dev/null || echo "No Markdown files in $dir"
+            fi
+          done
+
       - name: Generate languages.json for each directory
         run: |
           for dir in wiki/*; do
