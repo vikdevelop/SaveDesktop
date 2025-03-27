@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Archive Encryption | SaveDesktop wiki</title>
-  <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta charset="UTF-8">
+  <title>Archive Encryption | SaveDesktop Wiki</title>
+  <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -25,7 +27,7 @@
       margin: 40px auto;
     }
     th, td {
-      padding: 20px;
+      padding: 15px;
       text-align: left;
       border-bottom: 1px solid #f0f0f0;
     }
@@ -41,11 +43,7 @@
     a:hover {
       text-decoration: underline;
     }
-    .directory {
-      font-weight: normal;
-      font-size: 16px;
-    }
-    .about-link {
+    .back-link {
       display: block;
       text-align: center;
       margin-top: 30px;
@@ -53,40 +51,63 @@
       font-weight: bold;
     }
   </style>
+
+  <!-- Redirecting to another page -->
+  <script defer>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch("languages.json")
+            .then(response => {
+                if (!response.ok) throw new Error("languages.json not found");
+                return response.json();
+            })
+            .then(data => {
+                const validLangs = data.languages || [];
+                const path = window.location.pathname;
+                const parts = path.split("/");
+                const lastPart = parts[parts.length - 1];
+
+                // If the entered page doesn't exist, redirect to the English page
+                if (!validLangs.includes(lastPart)) {
+                    const newPath = path.replace(/[^\/]+$/, "en");
+                    window.location.replace(newPath);
+                }
+            })
+            .catch(error => console.warn("An error with loading the language list:", error));
+    });
+  </script>
 </head>
+
 <body>
-  <h1>Archive encryption | SaveDesktop wiki</h1>
+  <h1>Archive Encryption | SaveDesktop Wiki</h1>
+
   <table>
     <thead>
       <tr>
-        <th>Language</th>
+        <th>Available Languages</th>
       </tr>
     </thead>
     <tbody id="folder-list"></tbody>
   </table>
 
-  <script>
-    fetch(`https://api.github.com/repos/vikdevelop/SaveDesktop/contents/wiki/archive-encryption?ref=webpage`)
+  <!-- List of available language versions -->
+  <script defer>
+    fetch("languages.json")
       .then(response => response.json())
       .then(data => {
         const folderListElement = document.getElementById('folder-list');
-
-        data.forEach(item => {
-          if (item.name.endsWith('.md')) {
-            const tr = document.createElement('tr');
-            const td1 = document.createElement('td');
-
-            td1.innerHTML = `<a href="${item.name.slice(0, -3)}">${item.name.slice(0, -3)}</a>`;
-
-            tr.appendChild(td1);
-            folderListElement.appendChild(tr);
-          }
+        data.languages.forEach(lang => {
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.innerHTML = `<a href="${lang}">${lang}</a>`;
+          tr.appendChild(td);
+          folderListElement.appendChild(tr);
         });
       })
-      .catch(error => console.error(error));
+      .catch(error => console.error("An error occured while loading the languages.json file:", error));
   </script>
-  
+
   <br>
-  <a href="https://vikdevelop.github.io/SaveDesktop/wiki"><b>Back to Home page</b></a>
+  <a href="https://vikdevelop.github.io/SaveDesktop/wiki" class="back-link">Back to Home page</a>
 </body>
 </html>
+
