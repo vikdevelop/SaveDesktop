@@ -45,14 +45,21 @@
             color: #777;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var currentUrl = window.location.href;
+            if (currentUrl.includes("/wiki/")) {
+                var newUrl = currentUrl.replace(/\/wiki\/(.+?)\/ts/, '/wiki/$1/en');
+                window.location.href = newUrl;
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="container">
-        <h1>Page in this language is not available!</h1>
-        <p>The selected language of this page isn't available in the list of supported languages</p>
-        <p>But don't worry, just go to the <a href="en">English version</a> of this page.</p>
+        <h1>404 - Page doesn't exist!</h1>
         <div class="footer">
-            <p>Alternatively, visit the <a href="/">Website Homepage</a>.</p>
+            <p>Go to the <a href="/">Website Homepage</a>.</p>
         </div>
     </div>
 </body>
