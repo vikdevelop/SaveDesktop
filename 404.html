@@ -49,20 +49,25 @@
         document.addEventListener("DOMContentLoaded", function() {
             var currentUrl = window.location.href;
             if (currentUrl.includes("/wiki/")) {
-                var xhr = new XMLHttpRequest();
-                xhr.open('HEAD', currentUrl, true);
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 404) {
-                            // Replace the last segment with 'en'
-                            var newUrl = currentUrl.replace(/\/wiki\/([^\/]+)\/?$/, '/wiki/$1/en');
-                            window.location.href = newUrl;
-                        } else {
-                            document.querySelector('.container').style.display = 'block';
+                // Check if the current URL already ends with '/en', to prevent infinite redirection
+                if (!currentUrl.endsWith("/en")) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('HEAD', currentUrl, true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 404) {
+                                // Replace the last segment with 'en'
+                                var newUrl = currentUrl.replace(/\/wiki\/([^\/]+)\/?$/, '/wiki/en');
+                                window.location.href = newUrl;
+                            } else {
+                                document.querySelector('.container').style.display = 'block';
+                            }
                         }
-                    }
-                };
-                xhr.send();
+                    };
+                    xhr.send();
+                } else {
+                    document.querySelector('.container').style.display = 'block';
+                }
             } else {
                 document.querySelector('.container').style.display = 'block';
             }
