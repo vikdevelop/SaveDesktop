@@ -50,10 +50,11 @@
             var currentUrl = window.location.href;
             if (currentUrl.includes("/wiki/")) {
                 var urlParts = currentUrl.split("/");
-                var lastSegment = urlParts[urlParts.length - 1];
+                var lastSegment = urlParts.pop();
                 
                 if (lastSegment !== 'en') {
-                    var newUrl = currentUrl.endsWith('/') ? currentUrl + 'en' : currentUrl + '/en';
+                    urlParts.push('en');
+                    var newUrl = urlParts.join("/");
                     
                     fetch(newUrl, { method: 'HEAD' })
                         .then(response => {
