@@ -49,21 +49,16 @@
         document.addEventListener("DOMContentLoaded", function() {
             var currentUrl = window.location.href;
             if (currentUrl.includes("/wiki/")) {
-                var urlParts = currentUrl.split("/");
-                var lastSegment = urlParts.pop();
-                
-                if (lastSegment !== 'en') {
-                    urlParts.push('en');
-                    var newUrl = urlParts.join("/");
-                    
-                    fetch(newUrl, { method: 'HEAD' })
-                        .then(response => {
-                            if (!response.ok) {
-                                window.location.href = newUrl;
-                            }
-                        })
-                        .catch(error => console.error('Error checking URL:', error));
-                }
+                fetch(currentUrl, { method: 'HEAD' })
+                    .then(response => {
+                        if (response.status === 404) {
+                            var urlParts = currentUrl.split("/");
+                            urlParts[urlParts.length - 1] = 'en'; // Nahradíme poslední část URL
+                            var newUrl = urlParts.join("/");
+                            window.location.href = newUrl;
+                        }
+                    })
+                    .catch(error => console.error('Error checking URL:', error));
             }
         });
     </script>
