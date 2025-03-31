@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Page Not Found - SaveDesktop</title>
-    <link rel="stylesheet" href="css/html-style.css">
+    <!-- Define a CSS style of this page -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -45,6 +45,7 @@
             color: #777;
         }
     </style>
+    <!-- JS for redirecting to the correct wiki page (if the user enters an incorrect URL) -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var currentUrl = window.location.href;
@@ -53,7 +54,7 @@
                     .then(response => {
                         if (response.status === 404) {
                             var urlParts = currentUrl.split("/");
-                            urlParts[urlParts.length - 1] = 'en'; // Nahradíme poslední část URL
+                            urlParts[urlParts.length - 1] = 'en'; // Replace with 'en'
                             var newUrl = urlParts.join("/");
                             window.location.href = newUrl;
                         }
@@ -63,9 +64,10 @@
         });
     </script>
 </head>
+<!-- Show a message about non-exist page (if the entered URL doesn't contain the 'wiki' word) -->
 <body>
     <div class="container">
-        <h1>404 - Page doesn't exist!</h1>
+        <h1>404 - The entered page doesn't exist!</h1>
         <div class="footer">
             <p>Go to the <a href="/SaveDesktop">Website Homepage</a>.</p>
         </div>
