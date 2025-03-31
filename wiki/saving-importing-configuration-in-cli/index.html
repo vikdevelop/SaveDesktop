@@ -73,26 +73,6 @@
       .catch(error => console.error("Error fetching file list:", error));
   </script>
   
-  <!-- Language redirection using wiki/languages.json -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        fetch("/wiki/languages.json")
-            .then(response => response.json())
-            .then(data => {
-                const validLangs = data.languages; 
-                const path = window.location.pathname;
-                const parts = path.split("/");
-                const lastPart = parts[parts.length - 1];
-
-                if (!validLangs.includes(lastPart)) {
-                    const newPath = path.replace(/[^\/]+$/, "en");
-                    window.location.href = newPath;
-                }
-            })
-            .catch(error => console.error("Error loading language list:", error));
-    });
-  </script>
-  
   <br>
   <a href="https://vikdevelop.github.io/SaveDesktop/wiki"><b>Back to Home page</b></a>
 </body>
