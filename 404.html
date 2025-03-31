@@ -51,20 +51,30 @@
             if (currentUrl.includes("/wiki/")) {
                 // Check if the current URL already ends with '/en', to prevent infinite redirection
                 if (!currentUrl.endsWith("/en")) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('HEAD', currentUrl, true);
-                    xhr.onreadystatechange = function() {
-                        if (xhr.readyState === 4) {
-                            if (xhr.status === 404) {
-                                // Replace the last segment with 'en'
-                                var newUrl = currentUrl.replace(/\/wiki\/([^\/]+)\/?$/, '/wiki/en');
-                                window.location.href = newUrl;
-                            } else {
-                                document.querySelector('.container').style.display = 'block';
+                    // Extract the base URL and the last segment
+                    var baseUrl = currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1);
+                    var lastSegment = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
+                    
+                    // Check if the last segment is not 'en'
+                    if (lastSegment !== 'en') {
+                        var newUrl = baseUrl + 'en';
+                        
+                        // Make an XMLHttpRequest to check the existence of the new URL
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('HEAD', newUrl, true);
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState === 4) {
+                                if (xhr.status === 404) {
+                                    window.location.href = newUrl;
+                                } else {
+                                    document.querySelector('.container').style.display = 'block';
+                                }
                             }
-                        }
-                    };
-                    xhr.send();
+                        };
+                        xhr.send();
+                    } else {
+                        document.querySelector('.container').style.display = 'block';
+                    }
                 } else {
                     document.querySelector('.container').style.display = 'block';
                 }
