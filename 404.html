@@ -49,8 +49,21 @@
         document.addEventListener("DOMContentLoaded", function() {
             var currentUrl = window.location.href;
             if (currentUrl.includes("/wiki/")) {
-                var newUrl = currentUrl.replace(/\/wiki\/(.+?)\/ts/, '/wiki/$1/en');
-                window.location.href = newUrl;
+                var xhr = new XMLHttpRequest();
+                xhr.open('HEAD', currentUrl, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 404) {
+                            var newUrl = currentUrl.replace(/\/wiki\/(.*?)(\/|$)/, '/wiki/$1/en$2');
+                            window.location.href = newUrl;
+                        } else {
+                            document.querySelector('.container').style.display = 'block';
+                        }
+                    }
+                };
+                xhr.send();
+            } else {
+                document.querySelector('.container').style.display = 'block';
             }
         });
     </script>
