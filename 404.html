@@ -54,7 +54,8 @@
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 404) {
-                            var newUrl = currentUrl.replace(/\/wiki\/(.*?)(\/|$)/, '/wiki/$1/en$2');
+                            // Replace the last segment with 'en'
+                            var newUrl = currentUrl.replace(/\/wiki\/([^\/]+)\/?$/, '/wiki/$1/en');
                             window.location.href = newUrl;
                         } else {
                             document.querySelector('.container').style.display = 'block';
