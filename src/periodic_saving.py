@@ -2,7 +2,7 @@ import argparse, json, os, gi, shutil, subprocess
 from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio
-from localization import _, CACHE, DATA, home, system_dir, settings, download_dir, snap
+from localization import *
 
 # Get the current date
 dt = datetime.now()

@@ -2,8 +2,7 @@ import gi, sys, os
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib
-from localization import _, settings, home, flatpak, snap
-from open_wiki import *
+from localization import *
 
 # Row for showing available apps
 class FolderSwitchRow(Adw.ActionRow):
@@ -112,6 +111,7 @@ class FlatpakAppsDialog(Adw.AlertDialog):
 class itemsDialog(Adw.AlertDialog):
     def __init__(self):
         super().__init__()
+        self.app_wiki = "https://vikdevelop.github.io/SaveDesktop/wiki"
         self.set_heading(_["items_for_archive"])
         self.set_body(_["items_desc"])
         
@@ -206,7 +206,7 @@ class itemsDialog(Adw.AlertDialog):
         if flatpak:
             self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_["save_installed_flatpaks"])
-            self.flatpak_row.set_subtitle(f'<a href="{flatpak_wiki}">{_["learn_more"]}</a>')
+            self.flatpak_row.set_subtitle(f'<a href="{self.app_wiki}/flatpak-apps-installation/{r_lang}">{_["learn_more"]}</a>')
             self.flatpak_row.set_use_markup(True)
             self.flatpak_row.set_title_lines(2)
             self.flatpak_row.set_subtitle_lines(3)

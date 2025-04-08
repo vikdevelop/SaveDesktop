@@ -8,7 +8,6 @@ What are the individual scripts used for?
 - `items_dialog.py` - selecting what items should be included in the configuration archive
 - `localization.py` - setting up the app's language, cache, data directories, and more
 - `main_window.py` - showing a GUI of the app
-- `open_wiki.py` - opening pages of the Github wiki for this app in the system language (if it's not available in the list of available languages, English opens)
 - `periodic_saving.py` - saving a configuration periodically
 - `shortcuts_window.py` - showing available keyboard shortcuts in the window
 - `synchronization.py` - importing a configuration archive from the cloud storage folder

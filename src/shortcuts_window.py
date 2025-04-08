@@ -1,7 +1,7 @@
 import gi
 gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
-from localization import _
+from localization import *
 
 SHORTCUTS_WINDOW = '<?xml version="1.0" encoding="UTF-8"?>\
 <interface>\

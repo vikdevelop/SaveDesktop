@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 from pathlib import Path
 from datetime import datetime, date, timedelta
-from localization import _, CACHE, DATA, system_dir, home, settings
 import subprocess, os, locale, json, gi, socket, shutil, tarfile, re
 from gi.repository import Gio, GLib
+from localization import *
 
 dt = datetime.now()
 

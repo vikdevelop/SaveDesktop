@@ -6,8 +6,7 @@ from gi.repository import Gtk, Adw, Gio, GLib, Gdk
 from datetime import date
 from pathlib import Path
 from threading import Thread
-from localization import _, home, download_dir, snap, flatpak
-from open_wiki import *
+from localization import *
 from shortcuts_window import *
 from items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
 
@@ -16,6 +15,7 @@ class MainWindow(Adw.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_title("SaveDesktop")
+        self.app_wiki = "https://vikdevelop.github.io/SaveDesktop/wiki"
         
         # header bar and toolbarview
         self.headerbar = Adw.HeaderBar.new()
@@ -267,7 +267,7 @@ class MainWindow(Adw.ApplicationWindow):
             
             self.encryptRow = Adw.ActionRow.new()
             self.encryptRow.set_title(_["archive_encryption"])
-            self.encryptRow.set_subtitle(f'{_["archive_encryption_desc"]} <a href="{enc_wiki}">{_["learn_more"]}</a>')
+            self.encryptRow.set_subtitle(f'{_["archive_encryption_desc"]} <a href="{self.app_wiki}/archive-encryption/{r_lang}">{_["learn_more"]}</a>')
             self.encryptRow.set_subtitle_lines(15)
             self.encryptRow.add_suffix(self.encryptSwitch)
             self.encryptRow.set_activatable_widget(self.encryptSwitch)
@@ -397,7 +397,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.syncPage = Adw.StatusPage.new()
         self.syncPage.set_icon_name("emblem-synchronizing-symbolic")
         self.syncPage.set_title(_["sync_title"])
-        self.syncPage.set_description(f'{_["sync_desc"]} <a href="{sync_wiki}">{_["learn_more"]}</a>')
+        self.syncPage.set_description(f'{_["sync_desc"]} <a href="{self.app_wiki}/synchronization/{r_lang}">{_["learn_more"]}</a>')
         self.syncPage.set_child(self.sync_btn_box)
         self.syncingBox.append(self.syncPage)
 
@@ -1509,7 +1509,7 @@ class MyApp(Adw.Application):
         dialog.set_developer_name("vikdevelop")
         dialog.set_comments(_["summary"])
         r_lang != "en" and dialog.set_translator_credits(_["translator_credits"]) # add the translator credits section if the system language is not English
-        lang_list and dialog.add_link("SaveDesktop Github Wiki (Weblate)", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/") # add a link to translate the SaveDesktop Github wiki on Weblate
+        dialog.add_link("SaveDesktop Github Wiki (Weblate)", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/") # add a link to translate the SaveDesktop Github wiki on Weblate
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://vikdevelop.github.io/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")

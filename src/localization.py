@@ -3,6 +3,9 @@ import json, locale, os, socket, subprocess, gi
 from pathlib import Path
 from gi.repository import Gio, GLib
 
+# For simpler import this script to the other scripts
+__all__ = ['_', 'home', 'download_dir', 'snap', 'flatpak', 'settings', 'DATA', 'CACHE', 'r_lang', 'version', 'icon', 'rel_notes']
+
 # Load system language
 p_lang = locale.getlocale()[0]
 if p_lang == 'pt_BR':
@@ -15,7 +18,7 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5.3"
+v = "3.5.3-beta"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<p>Improved an interval logic for periodic saving and synchronization (#373), added support for saving the configuration without an archive (terminal only yet) (#368), added Estonian translations thanks to Priit Jõerüüt (Weblate), and fixed minor bugs.</p>\
 <p>3.5.2</p>\

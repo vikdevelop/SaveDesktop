@@ -1,6 +1,6 @@
 import os, json, gi, argparse, shutil
 from gi.repository import GLib, Gio
-from localization import _, CACHE, DATA, home, system_dir, flatpak, snap, settings
+from localization import *
 
 # add command-line arguments
 parser = argparse.ArgumentParser()
