@@ -1,12 +1,11 @@
 app-id: io.github.vikdevelop.SaveDesktop
 desktop-file-name-suffix: ' (Master)'
 runtime: org.gnome.Platform
-runtime-version: '47'
+runtime-version: '48'
 sdk: org.gnome.Sdk
 command: savedesktop
 finish-args:
     - --share=ipc
-    - --share=network
     - --socket=wayland
     - --socket=fallback-x11
     - --device=dri

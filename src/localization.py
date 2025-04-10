@@ -4,7 +4,7 @@ from pathlib import Path
 from gi.repository import Gio, GLib
 
 # For simpler import this script to the other scripts
-__all__ = ['_', 'home', 'download_dir', 'snap', 'flatpak', 'settings', 'DATA', 'CACHE', 'r_lang', 'version', 'icon', 'rel_notes', 'system_dir']
+__all__ = ['_', 'home', 'download_dir', 'snap', 'flatpak', 'settings', 'DATA', 'CACHE', 'r_lang', 'version', 'icon', 'rel_notes', 'system_dir', 'periodic_saving_cmd', 'sync_cmd']
 
 # Load system language
 p_lang = locale.getlocale()[0]
