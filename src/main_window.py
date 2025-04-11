@@ -446,6 +446,7 @@ class MainWindow(Adw.ApplicationWindow):
             Gdk.Clipboard.set(clipboard, f"command -v rclone &> /dev/null && (rclone config create savedesktop {self.cloud_service} && rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'") # copy the command for setting up Rclone to the clipboard
             self.copyButton.set_icon_name("done")
             self.cmdRow.set_title(_["rclone_cmd_copied_msg"])
+            self.cmdRow.set_subtitle("")
             self.initsetupDialog.set_response_enabled('ok-rclone', True)
         
         # Set the Rclone setup command
@@ -455,7 +456,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox" if get_servrow == "DropBox" else "pcloud"
             self.cmdRow.set_title(_["rclone_copy_cmd"])
             self.cmdRow.set_subtitle(f"command -v rclone &amp;> /dev/null &amp;&amp; (rclone config create savedesktop {self.cloud_service} &amp;&amp; rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
-            self.cmdRow.set_subtitle_selectable(True)
             # set the copyButton properties
             self.copyButton.set_sensitive(True)
             self.copyButton.set_icon_name("edit-copy-symbolic")
@@ -584,7 +584,7 @@ class MainWindow(Adw.ApplicationWindow):
             
         # Refer to the article about synchronization
         def open_sync_link(w):
-            os.system(f"xdg-open {sync_wiki}")
+            os.system(f"xdg-open {self.app_wiki}/synchronization/{r_lang}")
         
         def update_gui():
             global folder, path, check_filesystem
