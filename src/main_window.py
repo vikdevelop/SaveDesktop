@@ -454,6 +454,8 @@ class MainWindow(Adw.ApplicationWindow):
             get_servrow = self.servRow.get_selected_item().get_string()
             self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox" if get_servrow == "DropBox" else "pcloud"
             self.cmdRow.set_title(_["rclone_copy_cmd"])
+            self.cmdRow.set_subtitle(f"command -v rclone &amp;> /dev/null &amp;&amp; (rclone config create savedesktop {self.cloud_service} &amp;&amp; rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
+            self.cmdRow.set_subtitle_selectable(True)
             # set the copyButton properties
             self.copyButton.set_sensitive(True)
             self.copyButton.set_icon_name("edit-copy-symbolic")
