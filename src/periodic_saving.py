@@ -3,6 +3,7 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio
 from localization import *
+from password_store import *
 
 # Get the current date
 dt = datetime.now()
@@ -66,9 +67,9 @@ class PeriodicBackups:
                 os.makedirs(f"{download_dir}/SaveDesktop/archives")
 
         if " " in settings["filename-format"]:
-            filename = settings["filename-format"].replace(" ", "_")
+            self.filename = settings["filename-format"].replace(" ", "_")
         else:
-            filename = settings["filename-format"]
+            self.filename = settings["filename-format"]
 
         os.makedirs(f"{CACHE}/periodic_saving", exist_ok=True)
         os.chdir(f"{CACHE}/periodic_saving")
@@ -76,12 +77,26 @@ class PeriodicBackups:
         os.system(f"python3 {system_dir}/config.py --save")
 
         print("creating the configuration archive")
-        os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
         print("moving the configuration archive to the user-defined directory")
-        shutil.copyfile('cfg.sd.tar.gz', f'{self.pbfolder}/{filename}.sd.tar.gz')
+        if os.path.exists(f"{DATA}/password"):
+            self.get_password_from_file()
+        else:
+            os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
+            shutil.copyfile('cfg.sd.tar.gz', f'{self.pbfolder}/{self.filename}.sd.tar.gz')
 
         self.save_last_backup_date()
         self.config_saved()
+        
+    def get_password_from_file(self):
+        if os.path.exists(f"{DATA}/password"):
+            ps = PasswordStore()
+            self.password = ps.password
+            os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
+            shutil.copyfile('cfg.sd.zip', f'{self.pbfolder}/{self.filename}.sd.zip')
+        else:
+            error = f"The {DATA}/password file does not exist! Please set up an encryption of the periodic saving files in the app again."
+            os.system(f'notify-send \"{_["err_occured"]}\" "{error}"')
+            raise FileNotFoundError(error)
 
     def save_last_backup_date(self):
         with open(f"{DATA}/periodic-saving.json", "w") as pb:
