@@ -4,6 +4,7 @@ from datetime import datetime, date, timedelta
 import subprocess, os, locale, json, gi, socket, shutil, tarfile, re
 from gi.repository import Gio, GLib
 from localization import *
+from password_store import *
 
 dt = datetime.now()
 
@@ -72,12 +73,24 @@ class Syncing:
         os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
         print("extracting the archive")
         try:
-            with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
-                for member in tar.getmembers():
-                    try:
-                        tar.extract(member)
-                    except PermissionError as e:
-                        print(f"Permission denied for {member.name}: {e}")
+            if ".sd.zip" in self.file:
+                if os.path.exists(f"{DATA}/password"):
+                    p = PasswordStore()
+                    password = p.password
+                    with zipfile.ZipFile(self.file, "r") as zip_ar:
+                        for member in zip_ar.namelist():
+                            if self.cancel_process:
+                                return
+                            zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=password.encode("utf-8"))
+                else:
+                    raise AttributeError("The password for unlocking the archive is probably empty. Did you enter it in the \"Connect to the cloud storage\" dialog in the app?")
+            else:
+                with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
+                    for member in tar.getmembers():
+                        try:
+                            tar.extract(member)
+                        except PermissionError as e:
+                            print(f"Permission denied for {member.name}: {e}")
         except Exception as e:
             os.system(f"notify-send '{_['err_occured']}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
             exit()
