@@ -9,6 +9,7 @@ from threading import Thread
 from localization import *
 from shortcuts_window import *
 from items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
+from password_store import PasswordStore
 
 # Application window
 class MainWindow(Adw.ApplicationWindow):
@@ -161,18 +162,21 @@ class MainWindow(Adw.ApplicationWindow):
             # Action after closing dialog for showing more options
             def msDialog_closed(w, response):
                 if response == 'ok':
+                    # Save the periodic backup settings
                     settings["filename-format"] = self.filefrmtEntry.get_text()
                     settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
-                    settings["enable-encryption"] = self.encryptSwitch.get_active()
-                    
                     selected_item = self.pbRow.get_selected_item()
                     backup_mapping = {_["never"]: "Never", _["daily"]: "Daily", _["weekly"]: "Weekly", _["monthly"]: "Monthly"}
                     backup_item = backup_mapping.get(selected_item.get_string(), "Never")
-
                     create_pb_desktop() if not backup_item == "Never" else None
-
                     settings["periodic-saving"] = backup_item
-
+                    # Save Archive encryption creditionals
+                    settings["enable-encryption"] = self.encryptSwitch.get_active()
+                    if self.cpwdRow.get_text():
+                        password = self.cpwdRow.get_text()
+                        PasswordStore(password)
+                    del self.password # delete a password for encryption after closing this dialog
+                    
                     if self.open_setdialog_tf:
                         self.setDialog.close()
                         w = ""
@@ -257,9 +261,21 @@ class MainWindow(Adw.ApplicationWindow):
             else:
                 self.dirRow.set_subtitle(settings["periodic-saving-folder"])
             self.saving_eRow.add_row(self.dirRow)
+            
+            # Adw.ActionRow for entering a password for the archive encryption
+            self.get_password_from_file()
+            
+            self.cpwdRow = Adw.PasswordEntryRow.new()
+            self.cpwdRow.set_title("Password for encryption")
+            self.cpwdRow.set_text(self.password)
+            self.saving_eRow.add_row(self.cpwdRow)
                 
-            # Archive Encryption section
+            # Manual saving section
             # action row and switch for showing options of the archive encryption
+            self.manRow = Adw.ExpanderRow.new()
+            self.manRow.set_title("Manual saving")
+            self.msBox.append(self.manRow)
+            
             self.encryptSwitch = Gtk.Switch.new()
             self.encryptSwitch.set_valign(Gtk.Align.CENTER)
             if settings["enable-encryption"] == True:
@@ -271,7 +287,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.encryptRow.set_subtitle_lines(15)
             self.encryptRow.add_suffix(self.encryptSwitch)
             self.encryptRow.set_activatable_widget(self.encryptSwitch)
-            self.msBox.append(self.encryptRow)
+            self.manRow.add_row(self.encryptRow)
 
             # add response of this dialog
             self.msDialog.add_response('cancel', _["cancel"])
@@ -734,6 +750,12 @@ class MainWindow(Adw.ApplicationWindow):
                     if (not snap and ("gvfs" in check_filesystem or "rclone" in check_filesystem)) or (snap and "fuse" in check_filesystem):
                         settings["file-for-syncing"] = self.cfileRow.get_subtitle()
                         
+                        # save the entered archive's password to the {DATA}/password file
+                        if self.cloudpwdEntry.get_text():
+                            password = self.cpwdRow.get_text()
+                            PasswordStore(password)
+                            del password
+                        
                         # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
                         if check_psync == "Never2":
                             if not settings["periodic-import"] == "Never2":
@@ -774,7 +796,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudBox = Gtk.ListBox.new()
         self.cloudBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.cloudBox.get_style_context().add_class(class_name='boxed-list')
-        self.cloudBox.set_size_request(-1, 500)
+        self.cloudBox.set_size_request(-1, 400)
         self.cloudDialog.set_extra_child(self.cloudBox)
         
         # Row and buttons for selecting the cloud drive folder
@@ -794,10 +816,6 @@ class MainWindow(Adw.ApplicationWindow):
         
         ## the row itself
         self.cfileRow = Adw.ActionRow.new()
-        
-        settings["file-for-syncing"] = "" if "sd.tar.gz" in settings["file-for-syncing"] else settings["file-for-syncing"]
-        
-        ### add the reset button if the subtitle is not empty
         self.cfileRow.add_suffix(self.resetButton) if not settings["file-for-syncing"] == "" else None
         self.cfileRow.set_title(_["select_cloud_folder_btn"])
         self.cfileRow.set_subtitle(settings["file-for-syncing"])
@@ -810,6 +828,14 @@ class MainWindow(Adw.ApplicationWindow):
             self.cloudDialog.set_response_enabled('ok', False)
         else:
             self.cloudDialog.set_response_enabled('ok', True)
+        
+        # Entry for entering an archive's password
+        self.get_password_from_file()
+        self.cloudpwdEntry = Adw.PasswordEntryRow.new()
+        self.cloudpwdEntry.set_title("Password to unlock an archive")
+        self.cloudpwdEntry.set_tooltip_text("If you don't want to use an encrypted ZIP archive for synchronization, leave empty")
+        self.cloudpwdEntry.set_text(self.password)
+        self.cloudBox.append(self.cloudpwdEntry)
         
         # Periodic sync section
         options = Gtk.StringList.new(strings=[
@@ -990,6 +1016,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
+        self.file_filter.add_pattern('*.sd.tgz')
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_filter.add_pattern('*.sd.zip')
         self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
@@ -1015,6 +1042,15 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.sync_folder_chooser.set_title(_["select_cloud_folder_btn"])
         self.sync_folder_chooser.select_folder(self, None, set_selected, None)
         
+    
+    def get_password_from_file(self):
+        try:
+            p = PasswordStore()
+            self.password = p.password
+        except Exception as e:
+            self.password = ""
+            print(f"E: {e}")
+    
     # Dialog for creating password for the config archive
     def create_password_dialog(self):
         # Action after closing pswdDialog
@@ -1095,11 +1131,11 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 else:
                     shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
             else:
-                os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
+                os.system(f"tar --exclude='cfg.sd.tgz' --gzip -cf cfg.sd.tgz ./")
                 if self.cancel_process:
                     return
                 else:
-                    shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
+                    shutil.copyfile('cfg.sd.tgz', f"{self.folder}/{self.filename_text}.sd.tgz")
             print("Configuration saved successfully.")
         except Exception as e:
             e_o = True
@@ -1149,7 +1185,9 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.savewaitBox.append(self.sdoneImage)
 
         # Use "sd.zip" if Archive Encryption is enabled
-        status = _["saving_config_status"].replace("sd.tar.gz", "sd.zip") if settings["enable-encryption"] else _["saving_config_status"]
+        status = _["saving_config_status"].replace("sd.tar.gz", "sd.tgz")
+        if settings["enable-encryption"]:
+            status = status.replace("sd.tgz", "sd.zip")
                 
         # Create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
@@ -1502,7 +1540,7 @@ class MyApp(Adw.Application):
     
     # open directory with created configuration archive after clicking on the "Open the folder" button
     def open_dir(self, action, param):
-        Gtk.FileLauncher.new(Gio.File.new_for_path(f"{self.win.folder}/{self.win.filename_text}.sd.tar.gz" if not settings["enable-encryption"] else f"{self.win.folder}/{self.win.filename_text}.sd.zip")).open_containing_folder()
+        Gtk.FileLauncher.new(Gio.File.new_for_path(f"{self.win.folder}/{self.win.filename_text}.sd.tgz" if not settings["enable-encryption"] else f"{self.win.folder}/{self.win.filename_text}.sd.zip")).open_containing_folder()
     
     # "About app" dialog
     def on_about_action(self, action, param):
