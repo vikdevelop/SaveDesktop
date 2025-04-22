@@ -18,24 +18,12 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5.4"
+v = "3.6"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Added Tamil translations (thanks to @TamilNeram) and fixed minor bugs.</p>\
-<p>3.5.3</p>\
-<p>Improved an interval logic for periodic saving and synchronization (#373), added support for saving the configuration without an archive (terminal only yet) (#368), added Estonian translations thanks to Priit Jõerüüt (Weblate), and fixed minor bugs.</p>\
-<p>3.5.2</p>\
-<p>Fixed a bug with loading the password requirement in the Cinnamon DE for unlocking the Nextcloud folder, and added a notification about starting synchronization.</p>\
-<p>3.5.1</p>\
-<ul><li>Fixed the UnboundLocalError when the user selects the Nextcloud drive as a periodic saving folder or cloud drive folder</li>\
-<li>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled</li>\
-<li>Added Swedish translations, thanks to @bittin</li></ul>\
-<p>3.5</p><ul>\
-<li>Added dialog for the initial setting up synchronization; if you have set up synchronization before, it doesn't show</li>\
-<li>Temporarily disabled support for synchronization in the Snap environment due to unreliability</li>\
-<li>Added more keyboard shortcuts</li>\
-<li>Added support for the Hyprland window manager, thanks to @pyclicker</li>\
-<li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>\
-<li>The UI is now more adaptive on the smaller screens</li>\
+rel_notes = "<ul>\
+<li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization</li>\
+<li>Changed the archive format from *.tar.gz to *.tgz (only for manual saving yet)</li>\
+<li>Minor UI improvements</li>\
 </ul>"
 
 flatpak = os.path.exists("/.flatpak-info")
