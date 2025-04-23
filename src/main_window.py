@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, subprocess
+import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, subprocess, hashlib, getpass, platform, uuid
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk
@@ -175,7 +175,8 @@ class MainWindow(Adw.ApplicationWindow):
                     if self.cpwdRow.get_text():
                         password = self.cpwdRow.get_text()
                         PasswordStore(password)
-                    del self.password # delete a password for encryption after closing this dialog
+                    else:
+                        os.remove(f"{DATA}/password")
                     
                     if self.open_setdialog_tf:
                         self.setDialog.close()
@@ -754,7 +755,8 @@ class MainWindow(Adw.ApplicationWindow):
                         if self.cloudpwdEntry.get_text():
                             password = self.cpwdRow.get_text()
                             PasswordStore(password)
-                            del password
+                        else:
+                            os.remove(f"{DATA}/password")
                         
                         # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
                         if check_psync == "Never2":
@@ -1042,14 +1044,13 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.sync_folder_chooser.set_title(_["select_cloud_folder_btn"])
         self.sync_folder_chooser.select_folder(self, None, set_selected, None)
         
-    
+    # Get a password from the {DATA}/password file
     def get_password_from_file(self):
-        try:
+        if os.path.exists(f"{DATA}/password"):
             p = PasswordStore()
             self.password = p.password
-        except Exception as e:
+        else:
             self.password = ""
-            print(f"E: {e}")
     
     # Dialog for creating password for the config archive
     def create_password_dialog(self):
