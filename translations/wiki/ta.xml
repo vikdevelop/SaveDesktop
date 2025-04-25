@@ -41,8 +41,36 @@
     
   </details>
   </str>
-  <str key="rclone">
-    <details>
+  <str key="rclone">&lt;details&gt;
+    &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(for other desktop environments)&lt;/p&gt;&lt;/summary&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Install Rclone&lt;/li&gt;
+      &lt;pre&gt;&lt;code&gt;sudo -v ; curl https://rclone.org/install.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
+      &lt;li&gt;Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+      &lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "The drive has been mounted successfully"&lt;/code&gt;&lt;/pre&gt;
+      &lt;p&gt;* Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.&lt;/p&gt;&lt;/li&gt;
+      &lt;li&gt;Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/details&gt;
+      
+        Rclone
+        (for other desktop environments)
+      
+
+    - Install Rclone
+      ```
+      sudo -v ; curl https://rclone.org/install.sh | sudo bash
+      ```
+      
+    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
+      ```
+      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
+      ```
+      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+
+    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+  
+  <details>
       <summary>
         <b>Rclone</b>
         <p>(for other desktop environments)</p>
@@ -105,8 +133,8 @@
  `` `
  savedesktop --import-config /path/to/filename.sd.tar.gz
  `` `</str>
-  <str key="imp_cfg_cli_note">** குறிப்பு **:
- .</str>
+  <str key="imp_cfg_cli_note">**குறிப்பு**:
+- instead of `/path/to/filename.sd.tar.gz`, enter the path to the configuration archive you want to import, for example: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
   <str key="archive_encryption_">காப்பக குறியாக்கம்</str>
   <str key="archive_encryption_desc">தரவு பாதுகாப்பு காரணங்களுக்காகவோ அல்லது வேறு ஏதாவது அல்லது காப்பக குறியாக்க அம்சத்தைப் பயன்படுத்தலாம், நீங்கள் காப்பக குறியாக்க அம்சத்தைப் பயன்படுத்தலாம். எனவே, அது எவ்வாறு செயல்படுகிறது, அதை எவ்வாறு அமைப்பது?</str>
   <str key="ac_intro">## இது எவ்வாறு செயல்படுகிறது?
