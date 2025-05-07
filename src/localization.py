@@ -18,9 +18,10 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.6"
+v = "3.6_2"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<ul>\
+rel_notes = "<p>Added support for saving a configuration without creating the archive and changed the archive format from *.tgz to *.tzst</p>\
+<p>3.6_1-beta</p><ul>\
 <li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization</li>\
 <li>Changed the archive format from *.tar.gz to *.tgz (only for manual saving yet)</li>\
 <li>Minor UI improvements</li>\
