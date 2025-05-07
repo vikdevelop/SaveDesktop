@@ -162,22 +162,24 @@ class MainWindow(Adw.ApplicationWindow):
             # Action after closing dialog for showing more options
             def msDialog_closed(w, response):
                 if response == 'ok':
-                    # Save the periodic backup settings
-                    settings["filename-format"] = self.filefrmtEntry.get_text()
-                    settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
+                    settings["filename-format"] = self.filefrmtEntry.get_text() # save the file name format entry
+                    settings["periodic-saving-folder"] = self.dirRow.get_subtitle() # save the selected periodic saving folder
+                    # save the periodic saving interval
                     selected_item = self.pbRow.get_selected_item()
                     backup_mapping = {_["never"]: "Never", _["daily"]: "Daily", _["weekly"]: "Weekly", _["monthly"]: "Monthly"}
                     backup_item = backup_mapping.get(selected_item.get_string(), "Never")
                     create_pb_desktop() if not backup_item == "Never" else None
                     settings["periodic-saving"] = backup_item
-                    # Save Archive encryption creditionals
-                    settings["enable-encryption"] = self.encryptSwitch.get_active()
+                    settings["enable-encryption"] = self.encryptSwitch.get_active() # save the archive encryption's switch state
+                    settings["save-without-archive"] = self.archSwitch.get_active() # save the switch state of the "Save a configuration without creating the configuration archive" option
+                    # save the entered password to the file
                     if self.cpwdRow.get_text():
                         password = self.cpwdRow.get_text()
                         PasswordStore(password)
                     else:
                         os.remove(f"{DATA}/password")
                     
+                    # restart the SetDialog() after closing this dialog
                     if self.open_setdialog_tf:
                         self.setDialog.close()
                         w = ""
@@ -191,7 +193,7 @@ class MainWindow(Adw.ApplicationWindow):
             def reset_fileformat(w):
                 self.filefrmtEntry.set_text("Latest_configuration")
             
-            # Dialog for showing more options itself
+            # Dialog itself
             self.msDialog = Adw.AlertDialog.new()
             self.msDialog.set_heading(_["more_options"])
             self.msDialog.choose(self, None, None, None)
@@ -272,11 +274,11 @@ class MainWindow(Adw.ApplicationWindow):
             self.saving_eRow.add_row(self.cpwdRow)
                 
             # Manual saving section
-            # action row and switch for showing options of the archive encryption
             self.manRow = Adw.ExpanderRow.new()
             self.manRow.set_title("Manual saving")
             self.msBox.append(self.manRow)
             
+            # action row and switch for showing options of the archive encryption
             self.encryptSwitch = Gtk.Switch.new()
             self.encryptSwitch.set_valign(Gtk.Align.CENTER)
             if settings["enable-encryption"] == True:
@@ -289,6 +291,20 @@ class MainWindow(Adw.ApplicationWindow):
             self.encryptRow.add_suffix(self.encryptSwitch)
             self.encryptRow.set_activatable_widget(self.encryptSwitch)
             self.manRow.add_row(self.encryptRow)
+            
+            # action row and switch for showing the "Save a configuration without creating the archive" option
+            self.archSwitch = Gtk.Switch.new()
+            self.archSwitch.set_valign(Gtk.Align.CENTER)
+            if settings["save-without-archive"] == True:
+                self.archSwitch.set_active(True)
+            
+            self.archRow = Adw.ActionRow.new()
+            self.archRow.set_title("Save a configuration without creating the archive")
+            #self.archRow.set_subtitle()
+            #self.archRow.set_subtitle_lines(15)
+            self.archRow.add_suffix(self.archSwitch)
+            self.archRow.set_activatable_widget(self.archSwitch)
+            self.manRow.add_row(self.archRow)
 
             # add response of this dialog
             self.msDialog.add_response('cancel', _["cancel"])
@@ -298,6 +314,7 @@ class MainWindow(Adw.ApplicationWindow):
             
             self.msDialog.present()
             
+        # open a dialog for selecting the items to include in the configuration archive
         def open_itemsDialog(w):
             self.itemsd = itemsDialog()
             self.itemsd.choose(self, None, None, None)
@@ -1018,9 +1035,10 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
-        self.file_filter.add_pattern('*.sd.tgz')
+        self.file_filter.add_pattern('*.sd.tzst')
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_filter.add_pattern('*.sd.zip')
+        self.file_filter.add_pattern('SELECT_THIS_FILE_TO_IMPORT_CFG')
         self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
@@ -1125,18 +1143,21 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             e_o = False
             os.system(f"python3 {system_dir}/config.py --save")
             print("creating and moving the configuration archive to the user-defined directory")
-            if settings["enable-encryption"] == True:
-                os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
-                if self.cancel_process:
-                    return
-                else:
-                    shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
+            if settings["save-without-archive"] == True:
+                os.system(f"echo > {CACHE}/save_config/SELECT_THIS_FILE_TO_IMPORT_CFG && mv {CACHE}/save_config '{self.folder}/{self.filename_text}'")
             else:
-                os.system(f"tar --exclude='cfg.sd.tgz' --gzip -cf cfg.sd.tgz ./")
-                if self.cancel_process:
-                    return
+                if settings["enable-encryption"] == True:
+                    os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
+                    if self.cancel_process:
+                        return
+                    else:
+                        shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
                 else:
-                    shutil.copyfile('cfg.sd.tgz', f"{self.folder}/{self.filename_text}.sd.tgz")
+                    os.system(f"tar --exclude='cfg.sd.tzst' -I 'zstd -T0 -10' -cf cfg.sd.tzst ./")
+                    if self.cancel_process:
+                        return
+                    else:
+                        shutil.copyfile('cfg.sd.tzst', f"{self.folder}/{self.filename_text}.sd.tzst")
             print("Configuration saved successfully.")
         except Exception as e:
             e_o = True
@@ -1186,9 +1207,9 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.savewaitBox.append(self.sdoneImage)
 
         # Use "sd.zip" if Archive Encryption is enabled
-        status = _["saving_config_status"].replace("sd.tar.gz", "sd.tgz")
+        status = _["saving_config_status"].replace("sd.tar.gz", "sd.tzst") if not settings["save-without-archive"] else _["saving_config_status"].replace("sd.tar.gz", "")
         if settings["enable-encryption"]:
-            status = status.replace("sd.tgz", "sd.zip")
+            status = status.replace("sd.tzst", "sd.zip")
                 
         # Create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
@@ -1292,21 +1313,26 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         try:
             e_o = False
             os.system("echo > import_status")
-            if ".sd.zip" in self.import_file:
-                with zipfile.ZipFile(self.import_file, "r") as zip_ar:
-                    for member in zip_ar.namelist():
-                        if self.cancel_process:
-                            return
-                        zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=self.checkEntry.get_text().encode("utf-8"))
+            if "SELECT_THIS_FILE_TO_IMPORT_CFG" in self.import_file:
+                shutil.copytree(self.import_file[:-31], f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
             else:
-                with tarfile.open(self.import_file, 'r:gz') as tar:
-                    for member in tar.getmembers():
-                        try:
+                if ".sd.zip" in self.import_file:
+                    with zipfile.ZipFile(self.import_file, "r") as zip_ar:
+                        for member in zip_ar.namelist():
                             if self.cancel_process:
                                 return
-                            tar.extract(member, path=f"{CACHE}/import_config")
-                        except PermissionError as e:
-                            print(f"Permission denied for {member.name}: {e}")
+                            zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=self.checkEntry.get_text().encode("utf-8"))
+                elif ".sd.tar.gz" in self.import_file:
+                    with tarfile.open(self.import_file, 'r:gz') as tar:
+                        for member in tar.getmembers():
+                            try:
+                                if self.cancel_process:
+                                    return
+                                tar.extract(member, path=f"{CACHE}/import_config")
+                            except PermissionError as e:
+                                print(f"Permission denied for {member.name}: {e}")
+                else:
+                    os.system(f"tar -xf {self.import_file} -C {CACHE}/import_config")
             os.system(f"python3 {system_dir}/config.py --import_")
             os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in [f"{CACHE}/import_config/app", f"{CACHE}/import_config/installed_flatpaks.sh", f"{CACHE}/import_config/installed_user_flatpaks.sh"]) else None
             print("Configuration imported successfully.")
@@ -1539,9 +1565,15 @@ class MyApp(Adw.Application):
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
-    # open directory with created configuration archive after clicking on the "Open the folder" button
+    # open a directory with created configuration archive after clicking on the "Open the folder" button
     def open_dir(self, action, param):
-        Gtk.FileLauncher.new(Gio.File.new_for_path(f"{self.win.folder}/{self.win.filename_text}.sd.tgz" if not settings["enable-encryption"] else f"{self.win.folder}/{self.win.filename_text}.sd.zip")).open_containing_folder()
+        if settings["save-without-archive"]:
+            path = f"{self.win.folder}/{self.win.filename_text}"
+        else:
+            ext = "tzst" if not settings["enable-encryption"] else "zip"
+            path = f"{self.win.folder}/{self.win.filename_text}.sd.{ext}"
+
+        Gtk.FileLauncher.new(Gio.File.new_for_path(path)).open_containing_folder()
     
     # "About app" dialog
     def on_about_action(self, action, param):
