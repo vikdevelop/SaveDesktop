@@ -78,11 +78,7 @@ class PeriodicBackups:
 
         print("creating the configuration archive")
         print("moving the configuration archive to the user-defined directory")
-        if os.path.exists(f"{DATA}/password"):
-            self.get_password_from_file()
-        else:
-            os.system(f"tar --exclude='cfg.sd.tar.gz' --exclude='saving_status' --gzip -cf cfg.sd.tar.gz ./")
-            shutil.copyfile('cfg.sd.tar.gz', f'{self.pbfolder}/{self.filename}.sd.tar.gz')
+        self.get_password_from_file()
 
         self.save_last_backup_date()
         self.config_saved()
@@ -92,11 +88,9 @@ class PeriodicBackups:
             ps = PasswordStore()
             self.password = ps.password
             os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
-            shutil.copyfile('cfg.sd.zip', f'{self.pbfolder}/{self.filename}.sd.zip')
         else:
-            error = f"The {DATA}/password file does not exist! Please set up an encryption of the periodic saving files in the app again."
-            os.system(f'notify-send \"{_["err_occured"]}\" "{error}"')
-            raise FileNotFoundError(error)
+            os.system(f"zip -9 cfg.sd.zip . -r")
+        shutil.copyfile('cfg.sd.zip', f'{self.pbfolder}/{self.filename}.sd.zip')
 
     def save_last_backup_date(self):
         with open(f"{DATA}/periodic-saving.json", "w") as pb:
