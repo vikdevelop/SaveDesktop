@@ -73,18 +73,16 @@ class Syncing:
         os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
         print("extracting the archive")
         try:
-            if ".sd.zip" in self.file:
-                if os.path.exists(f"{DATA}/password"):
-                    p = PasswordStore()
-                    password = p.password
-                    with zipfile.ZipFile(self.file, "r") as zip_ar:
-                        for member in zip_ar.namelist():
-                            if self.cancel_process:
-                                return
-                            zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=password.encode("utf-8"))
-                else:
-                    raise AttributeError("The password for unlocking the archive is probably empty. Did you enter it in the \"Connect to the cloud storage\" dialog in the app?")
-            else:
+            try:
+                with zipfile.ZipFile(f"{settings['file-for-syncing']}/{self.file}.sd.zip", "r") as zip_ar:
+                    for member in zip_ar.namelist():
+                        if os.path.exists(f"{DATA}/password"):
+                            p = PasswordStore()
+                            password = p.password
+                            zip_ar.extract(member, path=f"{CACHE}/syncing", pwd=password.encode("utf-8"))
+                        else:
+                            zip_ar.extract(member, path=f"{CACHE}/syncing")
+            except:
                 with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
                     for member in tar.getmembers():
                         try:
