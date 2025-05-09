@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, subprocess, hashlib, getpass, platform, uuid
+import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, subprocess
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk
@@ -605,7 +605,7 @@ class MainWindow(Adw.ApplicationWindow):
             finally:
                 if not e_o:
                     self.file_row.remove(self.setupButton)
-                    self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
+                    self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.zip')
                     os.system(f"notify-send 'SaveDesktop' '{_['config_saved']}'")
                     self.setDialog.set_response_enabled('ok', True)
                     self.auto_save_start = False
@@ -656,7 +656,7 @@ class MainWindow(Adw.ApplicationWindow):
             global folder, path, check_filesystem
             check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"] if not snap else subprocess.getoutput('stat -f "%s"' % settings["periodic-saving-folder"]))
             
-            path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.tar.gz'
+            path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.zip'
             
             # Check if periodic saving is set to "Never"
             if settings["periodic-saving"] == "Never":
@@ -665,7 +665,7 @@ class MainWindow(Adw.ApplicationWindow):
             elif (not snap and not("gvfsd" in check_filesystem or "rclone" in check_filesystem)) or (snap and not "fuse" in check_filesystem):
                 folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             # Check if the periodic saving file exists
-            elif not os.path.exists(path):
+            elif not os.path.exists(path) or not os.path.exists(path.replace(".sd.zip", "sd.tar.gz"))::
                 folder = f'<span color="red">{_["periodic_saving_file_err"]}</span>'
             else:
                 folder = path
@@ -1017,16 +1017,27 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             
     # Load file chooser
     def select_folder_to_import(self, w):
+        def show_please_wait_toast():
+            wait_toast = Adw.Toast.new(title=_["please_wait"])
+            wait_toast.set_timeout(10)
+            self.toast_overlay.add_toast(wait_toast)
+        
+        def get_status_of_encryption():
+            status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.import_file).infolist() if not z.filename.endswith("/"))
+            if status == True:
+                GLib.idle_add(self.check_password_dialog)
+            else:
+                self.import_config()
+        
         def open_selected(source, res, data):
             try:
                 file = source.open_finish(res)
             except:
                 return
             self.import_file = file.get_path()
-            if ".sd.zip" in self.import_file:
-                self.check_password_dialog()
-            else:
-                self.import_config()
+            show_please_wait_toast()
+            check_thread = Thread(target=get_status_of_encryption)
+            check_thread.start()
                 
         self.cancel_process = False # set this value to False before importing the configuration, as it may already be set to True due to the recent cancellation of the configuration import
         
@@ -1035,7 +1046,6 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
-        self.file_filter.add_pattern('*.sd.tzst')
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_filter.add_pattern('*.sd.zip')
         self.file_filter.add_pattern('SELECT_THIS_FILE_TO_IMPORT_CFG')
@@ -1148,16 +1158,12 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             else:
                 if settings["enable-encryption"] == True:
                     os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
-                    if self.cancel_process:
-                        return
-                    else:
-                        shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
                 else:
-                    os.system(f"tar --exclude='cfg.sd.tzst' -I 'zstd -T0 -10' -cf cfg.sd.tzst ./")
-                    if self.cancel_process:
-                        return
-                    else:
-                        shutil.copyfile('cfg.sd.tzst', f"{self.folder}/{self.filename_text}.sd.tzst")
+                    os.system(f"zip -9 cfg.sd.zip . -r")
+                if self.cancel_process:
+                    return
+                else:
+                    shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
             print("Configuration saved successfully.")
         except Exception as e:
             e_o = True
@@ -1207,9 +1213,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.savewaitBox.append(self.sdoneImage)
 
         # Use "sd.zip" if Archive Encryption is enabled
-        status = _["saving_config_status"].replace("sd.tar.gz", "sd.tzst") if not settings["save-without-archive"] else _["saving_config_status"].replace("sd.tar.gz", "")
-        if settings["enable-encryption"]:
-            status = status.replace("sd.tzst", "sd.zip")
+        status_old = _["saving_config_status"]
+        status = status_old.replace("sd.tar.gz", "sd.zip")
                 
         # Create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
@@ -1321,7 +1326,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                         for member in zip_ar.namelist():
                             if self.cancel_process:
                                 return
-                            zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=self.checkEntry.get_text().encode("utf-8"))
+                            password = self.pswdEntry.get_text() if hasattr(self, 'pswdEntry') else ""
+                            zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=password)
                 elif ".sd.tar.gz" in self.import_file:
                     with tarfile.open(self.import_file, 'r:gz') as tar:
                         for member in tar.getmembers():
@@ -1331,8 +1337,6 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                                 tar.extract(member, path=f"{CACHE}/import_config")
                             except PermissionError as e:
                                 print(f"Permission denied for {member.name}: {e}")
-                else:
-                    os.system(f"tar -xf {self.import_file} -C {CACHE}/import_config")
             os.system(f"python3 {system_dir}/config.py --import_")
             os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in [f"{CACHE}/import_config/app", f"{CACHE}/import_config/installed_flatpaks.sh", f"{CACHE}/import_config/installed_user_flatpaks.sh"]) else None
             print("Configuration imported successfully.")
