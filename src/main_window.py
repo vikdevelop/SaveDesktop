@@ -665,7 +665,7 @@ class MainWindow(Adw.ApplicationWindow):
             elif (not snap and not("gvfsd" in check_filesystem or "rclone" in check_filesystem)) or (snap and not "fuse" in check_filesystem):
                 folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             # Check if the periodic saving file exists
-            elif not os.path.exists(path) or not os.path.exists(path.replace(".sd.zip", "sd.tar.gz"))::
+            elif not os.path.exists(path) or not os.path.exists(path.replace(".sd.zip", "sd.tar.gz")):
                 folder = f'<span color="red">{_["periodic_saving_file_err"]}</span>'
             else:
                 folder = path
