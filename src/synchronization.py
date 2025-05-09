@@ -73,7 +73,7 @@ class Syncing:
         os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
         print("extracting the archive")
         try:
-            try:
+            if os.path.exists(f"{settings['file-for-syncing']}/{self.file}.sd.zip"):
                 with zipfile.ZipFile(f"{settings['file-for-syncing']}/{self.file}.sd.zip", "r") as zip_ar:
                     for member in zip_ar.namelist():
                         if os.path.exists(f"{DATA}/password"):
@@ -82,7 +82,7 @@ class Syncing:
                             zip_ar.extract(member, path=f"{CACHE}/syncing", pwd=password.encode("utf-8"))
                         else:
                             zip_ar.extract(member, path=f"{CACHE}/syncing")
-            except:
+            else:
                 with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
                     for member in tar.getmembers():
                         try:
