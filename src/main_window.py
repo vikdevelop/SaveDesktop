@@ -1160,6 +1160,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                     os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
                 else:
                     os.system(f"zip -9 cfg.sd.zip . -r")
+                    #os.system('echo \'{"Type": "SaveDesktop Archive","AppVer": "%s","Mode": "manual","Encryption": "%s"}\' | zip -z cfg.sd.zip' % (version, settings['enable-encryption']))
                 if self.cancel_process:
                     return
                 else:
@@ -1214,7 +1215,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
 
         # Use "sd.zip" if Archive Encryption is enabled
         status_old = _["saving_config_status"]
-        status = status_old.replace("sd.tar.gz", "sd.zip")
+        status = status_old.replace("sd.tar.gz", "sd.zip" if not settings["save-without-archive"] else None)
                 
         # Create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
