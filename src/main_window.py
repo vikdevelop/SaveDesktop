@@ -1326,7 +1326,11 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                         for member in zip_ar.namelist():
                             if self.cancel_process:
                                 return
-                            password = self.pswdEntry.get_text() if hasattr(self, 'pswdEntry') else ""
+                            try:
+                                p = self.checkEntry.get_text()
+                                password = p.encode("utf-8") if p else None  # None instead of b""
+                            except Exception as e:
+                                password = None
                             zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=password)
                 elif ".sd.tar.gz" in self.import_file:
                     with tarfile.open(self.import_file, 'r:gz') as tar:
@@ -1574,8 +1578,7 @@ class MyApp(Adw.Application):
         if settings["save-without-archive"]:
             path = f"{self.win.folder}/{self.win.filename_text}"
         else:
-            ext = "tzst" if not settings["enable-encryption"] else "zip"
-            path = f"{self.win.folder}/{self.win.filename_text}.sd.{ext}"
+            path = f"{self.win.folder}/{self.win.filename_text}.sd.zip"
 
         Gtk.FileLauncher.new(Gio.File.new_for_path(path)).open_containing_folder()
     
