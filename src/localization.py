@@ -18,9 +18,10 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.6_3"
+v = "3.6_4"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>From now on, it will be used only ZIP format in all operations, including manual saving configuration and periodic saving, but it will be retained backward compatibility for the *.sd.tar.gz archive format.</p>\
+rel_notes = "<p>Added support for using the syncthing folders in the synchronization (#392) and fixed a bug with saving or importing configuration in the CLI and related bugs.</p>\
+<p>3.6_3-beta</p><p>From now on, it will be used only ZIP format in all operations, including manual saving configuration and periodic saving, but it will be retained backward compatibility for the *.sd.tar.gz archive format.</p>\
 <p>3.6_2</p>\
 <p>Added support for saving a configuration without creating the archive and changed the archive format from *.tgz to *.tzst</p>\
 <p>3.6_1-beta</p><ul>\
