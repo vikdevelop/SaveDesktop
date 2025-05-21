@@ -177,7 +177,10 @@ class MainWindow(Adw.ApplicationWindow):
                         password = self.cpwdRow.get_text()
                         PasswordStore(password)
                     else:
-                        os.remove(f"{DATA}/password")
+                        try:
+                            os.remove(f"{DATA}/password")
+                        except:
+                            pass
                     
                     # restart the SetDialog() after closing this dialog
                     if self.open_setdialog_tf:
@@ -465,6 +468,7 @@ class MainWindow(Adw.ApplicationWindow):
         # show the message about finished setup the synchronization
         def almost_done():
             self.initsetupDialog.remove_response('ok-rclone')
+            self.initsetupDialog.remove_response('ok-syncthing')
             self.initsetupDialog.remove_response('next')
             self.initsetupDialog.set_extra_child(None)
             self.initsetupDialog.set_heading(_["almost_done_title"])
@@ -498,7 +502,7 @@ class MainWindow(Adw.ApplicationWindow):
             
         # Responses of this dialog
         def initsetupDialog_closed(w, response):
-            if response == 'next': # open the Gtk.FileDialog in the GNOME Online accounts case
+            if response == 'next' or response == 'ok-syncthing': # open the Gtk.FileDialog in the GNOME Online accounts case
                 self.select_pb_folder(w) if self.get_button_type == 'set-button' else self.select_folder_to_sync(w)
                 almost_done()
             elif response == 'ok-rclone': # set the periodic saving folder in the Rclone case
@@ -526,6 +530,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.initsetupDialog.set_body_use_markup(True)
         self.initsetupDialog.set_can_close(False)
         self.initsetupDialog.add_response('cancel', _["cancel"])
+        self.initsetupDialog.set_response_appearance('cancel', Adw.ResponseAppearance.DESTRUCTIVE)
+        self.initsetupDialog.add_response('ok-syncthing', "Use Syncthing folder instead")
         self.initsetupDialog.connect('response', initsetupDialog_closed)
         self.initsetupDialog.present()
         
@@ -662,10 +668,10 @@ class MainWindow(Adw.ApplicationWindow):
             if settings["periodic-saving"] == "Never":
                 folder = f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>'
             # Check if the filesystem is not FUSE
-            elif (not snap and not("gvfsd" in check_filesystem or "rclone" in check_filesystem)) or (snap and not "fuse" in check_filesystem):
+            elif snap or not(("gvfsd" in check_filesystem or "rclone" in check_filesystem) or os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder")):
                 folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             # Check if the periodic saving file exists
-            elif not os.path.exists(path) or not os.path.exists(path.replace(".sd.zip", "sd.tar.gz")):
+            elif not os.path.exists(path):
                 folder = f'<span color="red">{_["periodic_saving_file_err"]}</span>'
             else:
                 folder = path
@@ -765,7 +771,10 @@ class MainWindow(Adw.ApplicationWindow):
 
                 if self.cfileRow.get_subtitle():
                     # Check if the selected cloud drive folder is correct
-                    if (not snap and ("gvfs" in check_filesystem or "rclone" in check_filesystem)) or (snap and "fuse" in check_filesystem):
+                    if snap or not(("gvfsd" in check_filesystem or "rclone" in check_filesystem) or os.path.exists(f"{self.cfileRow.get_subtitle()}/.stfolder")):
+                        os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
+                        settings["file-for-syncing"] = ""
+                    else:
                         settings["file-for-syncing"] = self.cfileRow.get_subtitle()
                         
                         # save the entered archive's password to the {DATA}/password file
@@ -773,7 +782,10 @@ class MainWindow(Adw.ApplicationWindow):
                             password = self.cpwdRow.get_text()
                             PasswordStore(password)
                         else:
-                            os.remove(f"{DATA}/password")
+                            try:
+                                os.remove(f"{DATA}/password")
+                            except:
+                                pass
                         
                         # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
                         if check_psync == "Never2":
@@ -794,9 +806,6 @@ class MainWindow(Adw.ApplicationWindow):
                         
                         self.mount_type = "cloud-receiver"
                         self.set_up_auto_mount()
-                    else:
-                        os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
-                        settings["file-for-syncing"] = ""
                 else:
                     pass
 
@@ -910,7 +919,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         if not cfile_subtitle == "none":
             if "gvfs" in cfile_subtitle:
-                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
+                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]+):host=([^,]+),user=([^/]+)' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
                 
                 match = re.search(pattern, cfile_subtitle)
                 
@@ -925,10 +934,10 @@ class MainWindow(Adw.ApplicationWindow):
                     elif "onedrive" in cfile_subtitle: # OneDrive
                         cloud_service = match.group(1)  # cloud_service for OneDrive
                         host = match.group(2)  # host for OneDrive
-                        user = None # user is not relevant for OneDrive
+                        user = match.group(3) # user is not relevant for OneDrive
                         ssl = None  # ssl is not relevant for OneDrive
                         prefix = None  # prefix is not relevant for OneDrive
-                        cmd = f"gio mount {cloud_service}://{host}" # command for OneDrive
+                        cmd = f"gio mount {cloud_service}://{user}@{host}" # command for OneDrive
                     elif "dav" in cfile_subtitle: # DAV
                         cloud_service = match.group(1)  # cloud_service for DAV
                         host = match.group(2)  # host for DAV
@@ -954,6 +963,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                         "prefix": prefix,
                         "cmd": cmd
                     }
+            elif os.path.exists(f"{cfile_subtitle}/.stfolder"):
+                cmd = ""
             else:
                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle}" if not os.path.exists(f"{download_dir}/SaveDesktop/rclone_drive") else f"rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive"
             synchronization_content = f'#!/usr/bin/bash\n{cmd}\nsleep 60s\n{sync_cmd}\n{periodic_saving_cmd}'
@@ -977,8 +988,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 folder = source.select_folder_finish(res)
             except:
                 return
-            self.folder_pb = folder.get_path()
             settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] else settings["periodic-saving-folder"]
+            settings["periodic-saving-folder"] = self.folder_pb
             self.dirRow.set_subtitle(self.folder_pb) if hasattr(self, 'dirRow') else None
         
         self.pb_chooser = Gtk.FileDialog.new()
@@ -1160,7 +1171,6 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                     os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
                 else:
                     os.system(f"zip -9 cfg.sd.zip . -r")
-                    #os.system('echo \'{"Type": "SaveDesktop Archive","AppVer": "%s","Mode": "manual","Encryption": "%s"}\' | zip -z cfg.sd.zip' % (version, settings['enable-encryption']))
                 if self.cancel_process:
                     return
                 else:
