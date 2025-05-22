@@ -988,9 +988,9 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 folder = source.select_folder_finish(res)
             except:
                 return
+            self.folder_pb = folder.get_path()
             settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] else settings["periodic-saving-folder"]
-            settings["periodic-saving-folder"] = self.folder_pb
-            self.dirRow.set_subtitle(self.folder_pb) if hasattr(self, 'dirRow') else None
+            self.dirRow.set_subtitle(f"{self.folder_pb}") if hasattr(self, 'dirRow') else None
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -1034,7 +1034,10 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             self.toast_overlay.add_toast(wait_toast)
         
         def get_status_of_encryption():
-            status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.import_file).infolist() if not z.filename.endswith("/"))
+            try:
+                status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.import_file).infolist() if not z.filename.endswith("/"))
+            except:
+                status = False
             if status == True:
                 GLib.idle_add(self.check_password_dialog)
             else:
@@ -1225,7 +1228,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
 
         # Use "sd.zip" if Archive Encryption is enabled
         status_old = _["saving_config_status"]
-        status = status_old.replace("sd.tar.gz", "sd.zip" if not settings["save-without-archive"] else None)
+        status = status_old.replace("sd.tar.gz", "sd.zip")
                 
         # Create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
