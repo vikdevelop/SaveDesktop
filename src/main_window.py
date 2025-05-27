@@ -195,6 +195,20 @@ class MainWindow(Adw.ApplicationWindow):
             # reset the file name format entry to the default value
             def reset_fileformat(w):
                 self.filefrmtEntry.set_text("Latest_configuration")
+                
+            # set sensitivity of the encryptSwitch
+            def set_encryptswitch_sensitivity(GParamBoolean, encryptSwitch):
+                if self.encryptSwitch.get_active():
+                    self.archSwitch.set_sensitive(False)
+                else:
+                    self.archSwitch.set_sensitive(True)
+                    
+            # set sensitivity of the archSwitch
+            def set_archswitch_sensitivity(GParamBoolean, archSwitch):
+                if self.archSwitch.get_active():
+                    self.encryptSwitch.set_sensitive(False)
+                else:
+                    self.encryptSwitch.set_sensitive(True)
             
             # Dialog itself
             self.msDialog = Adw.AlertDialog.new()
@@ -279,13 +293,17 @@ class MainWindow(Adw.ApplicationWindow):
             # Manual saving section
             self.manRow = Adw.ExpanderRow.new()
             self.manRow.set_title("Manual saving")
+            self.manRow.set_expanded(True)
             self.msBox.append(self.manRow)
             
             # action row and switch for showing options of the archive encryption
             self.encryptSwitch = Gtk.Switch.new()
+            self.archSwitch = Gtk.Switch.new()
             self.encryptSwitch.set_valign(Gtk.Align.CENTER)
+            self.encryptSwitch.connect('notify::active', set_encryptswitch_sensitivity)
             if settings["enable-encryption"] == True:
                 self.encryptSwitch.set_active(True)
+                self.archSwitch.set_sensitive(False)
             
             self.encryptRow = Adw.ActionRow.new()
             self.encryptRow.set_title(_["archive_encryption"])
@@ -296,15 +314,14 @@ class MainWindow(Adw.ApplicationWindow):
             self.manRow.add_row(self.encryptRow)
             
             # action row and switch for showing the "Save a configuration without creating the archive" option
-            self.archSwitch = Gtk.Switch.new()
             self.archSwitch.set_valign(Gtk.Align.CENTER)
+            self.archSwitch.connect('notify::active', set_archswitch_sensitivity)
             if settings["save-without-archive"] == True:
                 self.archSwitch.set_active(True)
+                self.encryptSwitch.set_sensitive(False)
             
             self.archRow = Adw.ActionRow.new()
             self.archRow.set_title("Save a configuration without creating the archive")
-            #self.archRow.set_subtitle()
-            #self.archRow.set_subtitle_lines(15)
             self.archRow.add_suffix(self.archSwitch)
             self.archRow.set_activatable_widget(self.archSwitch)
             self.manRow.add_row(self.archRow)
