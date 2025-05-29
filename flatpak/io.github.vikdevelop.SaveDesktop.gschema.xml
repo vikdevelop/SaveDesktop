@@ -56,7 +56,7 @@
 			<summary>Periodic saving</summary>
 		</key>
 		<key name="periodic-saving-folder" type="s">
-		  	<default>''</default>
+		  	<default>'{}/SaveDesktop/archives'</default>
 		  	<summary>Folder for periodic backups</summary>
 		</key>
 		<key name="filename" type="s">
