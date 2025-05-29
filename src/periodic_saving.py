@@ -27,10 +27,7 @@ class PeriodicBackups:
         return date(2000, 1, 1)
 
     def run(self, now: bool) -> None:
-        if settings["periodic-saving-folder"] == '':
-            self.pbfolder = f'{download_dir}/SaveDesktop/archives'
-        else:
-            self.pbfolder = f'{settings["periodic-saving-folder"]}'
+        self.pbfolder = f'{settings["periodic-saving-folder"].format(download_dir)}'
 
         if now:
             print("Saving immediately")
