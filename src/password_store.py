@@ -1,11 +1,9 @@
-import hashlib, uuid, os, subprocess
+import hashlib, os
 from localization import *
 
 def xor(data: bytes, key: bytes) -> bytes:
-    # Repeated XOR with SHA-256-hashed key
     return bytes([b ^ key[i % len(key)] for i, b in enumerate(data)])
 
-# Get CPU Model
 def get_cpu():
     try:
         with open("/proc/cpuinfo") as f:
@@ -13,7 +11,6 @@ def get_cpu():
     except:
         return ""
 
-# Get Motherboard Name
 def get_board_name():
     try:
         with open("/sys/devices/virtual/dmi/id/board_name") as f:
@@ -21,7 +18,6 @@ def get_board_name():
     except:
         return ""
 
-# Get BIOS Version   
 def get_bios_version():
     try:
         with open("/sys/devices/virtual/dmi/id/bios_version") as f:
@@ -29,37 +25,41 @@ def get_bios_version():
     except:
         return ""
 
-# Create a device hash based on the CPU model, the motherboard name and the BIOS version
-def get_device_hash():
-    parts = [get_cpu(), get_board_name(), get_bios_version()]
-    return hashlib.sha256("::".join(parts).encode()).hexdigest()  # returns the hex string
+def get_device_fingerprint():
+    return "::".join([get_cpu(), get_board_name(), get_bios_version()])
 
 class PasswordStore:
     def __init__(self, password=None):
-        self.device_hash = get_device_hash()
-        self.key = hashlib.sha256(self.device_hash.encode()).digest()
+        self.device_fingerprint = get_device_fingerprint()
 
         if password:
             self.password = password
             self.store_pwd()
         else:
             self.password = self.load_pwd()
-    
-    # Encrypt the device hash and the entered password to the {DATA}/password file
+
     def store_pwd(self):
-        encrypted = xor(self.password.encode(), self.key)
+        salt = os.urandom(16)  # 128-bit salt
+        key_material = f"{self.device_fingerprint}::{salt.hex()}"
+        key = hashlib.sha256(key_material.encode()).digest()
+
+        encrypted = xor(self.password.encode(), key)
+
         with open(f"{DATA}/password", "wb") as f:
-            f.write(self.device_hash.encode() + b"::" + encrypted)
-    
-    # Load the password from the {DATA}/password file and check the hashes
+            f.write(salt + b"::" + encrypted)
+
     def load_pwd(self):
         try:
             with open(f"{DATA}/password", "rb") as f:
                 stored = f.read()
-                stored_hash, encrypted = stored.split(b"::", 1)
-                if stored_hash.decode() != self.device_hash:
-                    raise ValueError("Device mismatch!")
-                return xor(encrypted, self.key).decode()
+                salt, encrypted = stored.split(b"::", 1)
+                try:
+                    key_material = f"{self.device_fingerprint}::{salt.hex()}"
+                    key = hashlib.sha256(key_material.encode()).digest()
+                except:
+                    key = None
+
+                return xor(encrypted, key).decode()
         except Exception as e:
             print("[ERROR]", e)
             return None
