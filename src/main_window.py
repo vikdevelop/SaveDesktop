@@ -276,10 +276,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.dirRow.set_title(_["pb_folder"])
             self.dirRow.add_suffix(self.folderButton)
             self.dirRow.set_use_markup(True)
-            if settings["periodic-saving-folder"] == '':
-                self.dirRow.set_subtitle(f"{download_dir}/SaveDesktop/archives")
-            else:
-                self.dirRow.set_subtitle(settings["periodic-saving-folder"])
+            self.dirRow.set_subtitle(settings["periodic-saving-folder"].format(download_dir))
             self.saving_eRow.add_row(self.dirRow)
             
             # Adw.ActionRow for entering a password for the archive encryption
@@ -993,7 +990,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
         else:
-            raise AttributeError("It aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")
+            raise AttributeError("There aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")
             
         self.syncingBox.remove(self.syncPage)
         self.sync_desktop()
