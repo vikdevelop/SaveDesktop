@@ -1154,7 +1154,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.pswdDialog.present()
 
         # Button for generating strong password
-        self.pswdgenButton = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
+        self.pswdgenButton = Gtk.Button.new_from_icon_name("dialog-password-symbolic")
         self.pswdgenButton.set_tooltip_text(_["gen_password"])
         self.pswdgenButton.add_css_class("flat")
         self.pswdgenButton.set_valign(Gtk.Align.CENTER)
@@ -1242,7 +1242,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
 
         # Use "sd.zip" if Archive Encryption is enabled
         status_old = _["saving_config_status"]
-        status = status_old.replace("sd.tar.gz", "sd.zip")
+        status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
                 
         # Create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
