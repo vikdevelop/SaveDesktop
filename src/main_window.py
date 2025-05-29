@@ -284,7 +284,10 @@ class MainWindow(Adw.ApplicationWindow):
             
             self.cpwdRow = Adw.PasswordEntryRow.new()
             self.cpwdRow.set_title("Password for encryption")
-            self.cpwdRow.set_text(self.password)
+            try:
+                self.cpwdRow.set_text(self.password)
+            except:
+                self.cpwdRow.set_text("")
             self.saving_eRow.add_row(self.cpwdRow)
                 
             # Manual saving section
