@@ -81,9 +81,12 @@ class PeriodicBackups:
         self.config_saved()
         
     def get_password_from_file(self):
-        if os.path.exists(f"{DATA}/password"):
+        try:
             ps = PasswordStore()
             self.password = ps.password
+        except:
+            self.password = None
+        if self.password != None:
             os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
         else:
             os.system(f"zip -9 cfg.sd.zip . -r")
