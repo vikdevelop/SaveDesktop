@@ -424,21 +424,33 @@ class MainWindow(Adw.ApplicationWindow):
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
         
+        # Box for the below buttons
+        self.btnBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        
         # Import configuration button
         self.fileButton = Gtk.Button.new_with_label(_["import_from_file"])
         self.fileButton.add_css_class("pill")
         self.fileButton.add_css_class("suggested-action")
         self.fileButton.set_halign(Gtk.Align.CENTER)
         self.fileButton.set_valign(Gtk.Align.CENTER)
-        self.fileButton.connect("clicked", self.select_folder_to_import)
+        self.fileButton.connect("clicked", self.select_file_to_import)
+        self.btnBox.append(self.fileButton)
+        
+        # Import configuration from folder button
+        self.folderButton = Gtk.Button.new_with_label(_["import_from_file"])
+        self.folderButton.add_css_class("pill")
+        self.folderButton.set_halign(Gtk.Align.CENTER)
+        self.folderButton.set_valign(Gtk.Align.CENTER)
+        self.folderButton.connect("clicked", self.select_folder_to_import)
+        self.btnBox.append(self.folderButton)
         
         # Image and title for the Import page
         self.importPage = Adw.StatusPage.new()
         self.importPage.set_icon_name("document-open-symbolic")
-        self.importPage.set_title(_['import_config'])
-        self.importPage.set_description(_["import_config_desc2"])
+        self.importPage.set_title(_["import_title"])
+        self.importPage.set_description(_["import_config"])
         self.importPage.set_size_request(360, -1)
-        self.importPage.set_child(self.fileButton)
+        self.importPage.set_child(self.btnBox)
         self.importBox.append(self.importPage)
             
     # Syncing desktop page
@@ -1043,14 +1055,17 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.folderchooser.set_title(_["save_config"])
         self.folderchooser.select_folder(self, None, save_selected, None)
             
-    # Load file chooser
-    def select_folder_to_import(self, w):
+    # Select a ZIP or TAR.GZ file to import
+    def select_file_to_import(self, w):
+        # Show a "Please wait" pop-up window while checking the archive type
         def show_please_wait_toast():
             wait_toast = Adw.Toast.new(title=_["please_wait"])
             wait_toast.set_timeout(10)
             self.toast_overlay.add_toast(wait_toast)
         
+        # Check, if the archive is encrypted or not
         def get_status_of_encryption():
+            self.is_folder = False
             try:
                 status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.import_file).infolist() if not z.filename.endswith("/"))
             except:
@@ -1060,6 +1075,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             else:
                 self.import_config()
         
+        # Get path from the dialog
         def open_selected(source, res, data):
             try:
                 file = source.open_finish(res)
@@ -1079,11 +1095,28 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.file_filter.set_name(_["savedesktop_f"])
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_filter.add_pattern('*.sd.zip')
-        self.file_filter.add_pattern('SELECT_THIS_FILE_TO_IMPORT_CFG')
         self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
         self.file_chooser.open(self, None, open_selected, None)
+        
+    # Select folder to import configuration    
+    def select_folder_to_import(self, w):
+        def import_selected(source, res, data):
+            try:
+                folder = source.select_folder_finish(res)
+            except:
+                return
+            self.import_folder = folder.get_path()
+            self.is_folder = True if os.path.exists(f"{self.import_folder}/.folder.sd") else False
+            self.import_config()
+            
+        self.cancel_process = False # set this value to False before importing the configuration, as it may already be set to True due to the recent cancellation of the configuration import
+        
+        self.file_chooser = Gtk.FileDialog.new()
+        self.file_chooser.set_modal(True)
+        self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
+        self.file_chooser.select_folder(self, None, import_selected, None)
         
     # Select folder for syncing the configuration with other computers in the network
     def select_folder_to_sync(self, w):
@@ -1185,7 +1218,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             os.system(f"python3 {system_dir}/config.py --save")
             print("creating and moving the configuration archive to the user-defined directory")
             if settings["save-without-archive"] == True:
-                os.system(f"echo > {CACHE}/save_config/SELECT_THIS_FILE_TO_IMPORT_CFG && mv {CACHE}/save_config '{self.folder}/{self.filename_text}'")
+                os.system(f"echo > {CACHE}/save_config/.folder.sd && mv {CACHE}/save_config '{self.folder}/{self.filename_text}'")
             else:
                 if settings["enable-encryption"] == True:
                     os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
@@ -1349,8 +1382,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         try:
             e_o = False
             os.system("echo > import_status")
-            if "SELECT_THIS_FILE_TO_IMPORT_CFG" in self.import_file:
-                shutil.copytree(self.import_file[:-31], f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
+            if self.is_folder == True:
+                shutil.copytree(self.import_folder, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
             else:
                 if ".sd.zip" in self.import_file:
                     with zipfile.ZipFile(self.import_file, "r") as zip_ar:
@@ -1423,7 +1456,10 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.importwaitBox.append(self.idoneImage)
 
         # Create label about configuration archive name
-        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(self.import_file))
+        try:
+            self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(self.import_file))
+        except:
+            self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(self.import_folder))
         self.importwaitLabel.set_use_markup(True)
         self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
         self.importwaitLabel.set_wrap(True)
@@ -1554,7 +1590,7 @@ class MyApp(Adw.Application):
     
     # Start importing the configuration using Ctrl+I keyboard shortcut
     def call_importing_config(self, action, param):
-        self.win.select_folder_to_import(w="")
+        self.win.select_file_to_import(w="")
     
     # Open the More options dialog using Ctrl+Shift+M keyboard shortcut
     def call_ms_dialog(self, action, param):
