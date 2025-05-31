@@ -437,7 +437,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.btnBox.append(self.fileButton)
         
         # Import configuration from folder button
-        self.folderButton = Gtk.Button.new_with_label(_["import_from_file"])
+        self.folderButton = Gtk.Button.new_with_label("Import from folder")
         self.folderButton.add_css_class("pill")
         self.folderButton.set_halign(Gtk.Align.CENTER)
         self.folderButton.set_valign(Gtk.Align.CENTER)
