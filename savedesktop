@@ -57,10 +57,10 @@ elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
         os.system(f"unzip {file_path}")
     elif file_path.endswith('.sd.tar.gz'):
         os.system(f"tar -xf {file_path}")
-    elif file_path.endswith('SELECT_THIS_FILE_TO_IMPORT_CFG'):
-        shutil.copytree(self.import_file[:-31], f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
+    elif os.path.exists(f"{file_path}/.folder.sd"):
+        shutil.copytree(file_path, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
     else:
-        print("Unsupported file type. Use *.sd.tar.gz, *.sd.zip or /path/to/SELECT_THIS_FILE_TO_IMPORT_CFG.")
+        print("Unsupported file type. Use *.sd.tar.gz, *.sd.zip or folder which contains the \".folder.sd\" file.")
         exit(1)
     
     os.system(f"python3 {init_dir}/config.py --import_")
