@@ -808,7 +808,7 @@ class MainWindow(Adw.ApplicationWindow):
                         
                         # save the entered archive's password to the {DATA}/password file
                         if self.cloudpwdEntry.get_text():
-                            password = self.cpwdRow.get_text()
+                            password = self.cloudpwdEntry.get_text()
                             PasswordStore(password)
                         else:
                             try:
