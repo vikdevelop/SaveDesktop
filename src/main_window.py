@@ -806,16 +806,6 @@ class MainWindow(Adw.ApplicationWindow):
                     else:
                         settings["file-for-syncing"] = self.cfileRow.get_subtitle()
                         
-                        # save the entered archive's password to the {DATA}/password file
-                        if self.cloudpwdEntry.get_text():
-                            password = self.cloudpwdEntry.get_text()
-                            PasswordStore(password)
-                        else:
-                            try:
-                                os.remove(f"{DATA}/password")
-                            except:
-                                pass
-                        
                         # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
                         if check_psync == "Never2":
                             if not settings["periodic-import"] == "Never2":
@@ -885,14 +875,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.cloudDialog.set_response_enabled('ok', False)
         else:
             self.cloudDialog.set_response_enabled('ok', True)
-        
-        # Entry for entering an archive's password
-        self.get_password_from_file()
-        self.cloudpwdEntry = Adw.PasswordEntryRow.new()
-        self.cloudpwdEntry.set_title("Password to unlock an archive")
-        self.cloudpwdEntry.set_tooltip_text("If you don't want to use an encrypted ZIP archive for synchronization, leave empty")
-        self.cloudpwdEntry.set_text(self.password)
-        self.cloudBox.append(self.cloudpwdEntry)
         
         # Periodic sync section
         options = Gtk.StringList.new(strings=[
