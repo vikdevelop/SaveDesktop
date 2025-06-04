@@ -41,34 +41,61 @@
     
   </details>
   </str>
-  <str key="rclone">&lt;details&gt;
-    &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(for other desktop environments)&lt;/p&gt;&lt;/summary&gt;
+  <str key="rclone">&lt;விவரங்கள்&gt;
+
+    &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(பிற டெஸ்க்டாப் சூழல்களுக்கு)&lt;/p&gt;&lt;/summary&gt;
+
     &lt;ul&gt;
-      &lt;li&gt;Install Rclone&lt;/li&gt;
-      &lt;pre&gt;&lt;code&gt;sudo -v ; curl https://rclone.org/install.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
-      &lt;li&gt;Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
-      &lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "The drive has been mounted successfully"&lt;/code&gt;&lt;/pre&gt;
-      &lt;p&gt;* Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.&lt;/p&gt;&lt;/li&gt;
-      &lt;li&gt;Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
+
+      &lt;li&gt;Rclone-ஐ நிறுவு&lt;/li&gt;
+
+      &lt;pre&gt;&lt;code&gt;sudo -v ; சுருட்டு https://rclone.org/install.sh | sudo bash &lt;/code&gt;&lt;/pre&gt;
+
+      &lt;li&gt;இந்த கட்டளையைப் பயன்படுத்தி Rclone ஐ அமைக்கவும், இது கிளவுட் டிரைவ் கோப்புறையை உருவாக்குகிறது, Rclone ஐ அமைத்து கோப்புறையை ஏற்றுகிறது.
+
+      &lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config drive create your-cloud-drive-service &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode எழுதுகிறது &amp;amp; எதிரொலி "இயக்கி வெற்றிகரமாக ஏற்றப்பட்டுள்ளது"&lt;/code&gt;&lt;/pre&gt;
+
+      &lt;p&gt;* `your-cloud-drive-service` என்பதற்குப் பதிலாக, `drive` (Google Drive-க்கு), `onedrive`, `dropbox` போன்ற உங்கள் கிளவுட் டிரைவ் சேவையின் பெயரைப் பயன்படுத்தவும்.&lt;/p&gt;&lt;/li&gt;
+
+      &lt;li&gt;[Flatseal பயன்பாட்டில்](https://flathub.org/apps/com.github.tchx84.Flatseal) உருவாக்கப்பட்ட கோப்புறையை அணுக அனுமதிக்கவும்.&lt;/li&gt;
+
     &lt;/ul&gt;
-  &lt;/details&gt;
-      
-        Rclone
-        (for other desktop environments)
+
+  &lt;/விவரங்கள்&gt;
+
       
 
-    - Install Rclone
-      ```
-      sudo -v ; curl https://rclone.org/install.sh | sudo bash
-      ```
-      
-    - Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
-      ```
-      mkdir -p ~/drive &amp;&amp; rclone config create drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"
-      ```
-      * Instead of `your-cloud-drive-service` use the name of your cloud drive service, such as `drive` (for Google Drive), `onedrive`, `dropbox`, etc.
+        ஆர்குளோன்
 
-    - Allow access to the created folder in the [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).
+        (பிற டெஸ்க்டாப் சூழல்களுக்கு)
+
+      
+
+
+
+    - Rclone ஐ நிறுவவும்
+
+      ````
+
+      சூடோ -வி ; சுருட்டு https://rclone.org/install.sh | சூடோ பாஷ்
+
+      ````
+
+      
+
+    - இந்தக் கட்டளையைப் பயன்படுத்தி Rclone ஐ அமைக்கவும், இது கிளவுட் டிரைவ் கோப்புறையை உருவாக்குகிறது, Rclone ஐ அமைத்து கோப்புறையை ஏற்றுகிறது.
+
+      ````
+
+      mkdir -p ~/drive &amp;&amp; rclone config drive your-cloud-drive-service &amp;&amp; nohup rclone mount drive ஐ உருவாக்கு: ~/drive --vfs-cache-mode "டிரைவ் வெற்றிகரமாக ஏற்றப்பட்டது" என்று எழுதி எதிரொலிக்கிறது.
+
+      ````
+
+      * `your-cloud-drive-service` என்பதற்குப் பதிலாக, `drive` (Google Drive-க்கு), `onedrive`, `dropbox` போன்ற உங்கள் கிளவுட் டிரைவ் சேவையின் பெயரைப் பயன்படுத்தவும்.
+
+
+
+    - [Flatseal பயன்பாட்டில்](https://flathub.org/apps/com.github.tchx84.Flatseal) உருவாக்கப்பட்ட கோப்புறையை அணுக அனுமதிக்கவும்.
   
   <details>
       <summary>
