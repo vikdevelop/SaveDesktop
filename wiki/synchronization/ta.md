@@ -15,9 +15,9 @@
        <summary><b>Rclone</b><p>(பிற டெஸ்க்டாப் சூழல்களுக்கு)</p> </summary>
     <ul>
       <li>Rclone-ஐ நிறுவு</li>
-      <pre><code>sudo -v ; சுருட்டு https://rclone.org/install.sh | sudo bash </code></pre>
+      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash </code></pre>
       <li>இந்த கட்டளையைப் பயன்படுத்தி Rclone ஐ அமைக்கவும், இது கிளவுட் டிரைவ் கோப்புறையை உருவாக்குகிறது, Rclone ஐ அமைத்து கோப்புறையை ஏற்றுகிறது.
-      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config drive create your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode எழுதுகிறது &amp; எதிரொலி "இயக்கி வெற்றிகரமாக ஏற்றப்பட்டுள்ளது"</code></pre>
+      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive && rclone config create savedesktop your-cloud-drive-service && nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes & echo "இயக்கி வெற்றிகரமாக ஏற்றப்பட்டுள்ளது"</code></pre>
       <p>* <code>your-cloud-drive-service</code> என்பதற்குப் பதிலாக, <code>drive</code> (Google Drive-க்கு), <code>onedrive</code>, <code>dropbox</code> போன்ற உங்கள் கிளவுட் டிரைவ் சேவையின் பெயரைப் பயன்படுத்தவும்.</p></li>
       <li><a href="https://flathub.org/apps/com.github.tchx84.Flatseal">Flatseal பயன்பாட்டில்</a> உருவாக்கப்பட்ட கோப்புறையை அணுக அனுமதிக்கவும்.</li>
       </ul>
