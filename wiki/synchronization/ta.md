@@ -3,24 +3,25 @@
 - நீங்கள் ஒத்திசைக்க விரும்பும் ஒவ்வொரு கணினியிலும் உங்கள் முகில் சேமிப்பகத்துடன் ஒத்திசைக்கும் ஒரு கோப்புறை உருவாக்கப்பட வேண்டும். இதைப் பயன்படுத்தி செய்ய முடியும்:
 
   <details>
-    <summary><b>GNOME இணைய கணக்குகள்</b><p>(GNOME, Cinnamon, COSMIC (பழைய) மற்றும் Budgie desktop சூழல்களுக்கு)</p></summary>
+  <summary><b>GNOME இணைய கணக்குகள்</b><p>(GNOME, Cinnamon, COSMIC (பழைய) மற்றும் Budgie desktop சூழல்களுக்கு)</p></summary>
     <ul>
       <li>GNOME அமைப்புகளைத் திற</li>
       <li>இணைய கணக்குகள் பிரிவுக்குச் சென்று உங்கள் முகில் இயக்கி சேவையைத் தேர்ந்தெடு</li>
     </ul>
     <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
-    
    </details>
+    
     <details>
-        <summary><b>Rclone</b><p>(for other desktop environments)</p></summary>
-        <ul>
-          <li>Install Rclone</li>
-          <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
-          <li>Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
-          <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
-          <p>* Instead of <code>your-cloud-drive-service</code> use the name of your cloud drive service, such as <code>drive</code> (for Google Drive), <code>onedrive</code>, <code>dropbox</code>, etc.</p></li>
-        </ul>
-      </details>
+       <summary><b>Rclone</b><p>(பிற டெஸ்க்டாப் சூழல்களுக்கு)</p> </summary>
+    <ul>
+      <li>Rclone-ஐ நிறுவு</li>
+      <pre><code>sudo -v ; சுருட்டு https://rclone.org/install.sh | sudo bash </code></pre>
+      <li>இந்த கட்டளையைப் பயன்படுத்தி Rclone ஐ அமைக்கவும், இது கிளவுட் டிரைவ் கோப்புறையை உருவாக்குகிறது, Rclone ஐ அமைத்து கோப்புறையை ஏற்றுகிறது.
+      <pre><code>mkdir -p ~/drive &amp;&amp; rclone config drive create your-cloud-drive-service &amp;&amp; nohup rclone mount drive: ~/drive --vfs-cache-mode எழுதுகிறது &amp; எதிரொலி "இயக்கி வெற்றிகரமாக ஏற்றப்பட்டுள்ளது"</code></pre>
+      <p>* <code>your-cloud-drive-service</code> என்பதற்குப் பதிலாக, <code>drive</code> (Google Drive-க்கு), <code>onedrive</code>, <code>dropbox</code> போன்ற உங்கள் கிளவுட் டிரைவ் சேவையின் பெயரைப் பயன்படுத்தவும்.</p></li>
+      <li><a href="https://flathub.org/apps/com.github.tchx84.Flatseal">Flatseal பயன்பாட்டில்</a> உருவாக்கப்பட்ட கோப்புறையை அணுக அனுமதிக்கவும்.</li>
+      </ul>
+    </details>
 
 ## சேமிபணிமேடை பயன்பாட்டில் ஒத்திசைவை அமைத்தல்
 முதல் கணினியில்:
