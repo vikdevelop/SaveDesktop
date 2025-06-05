@@ -111,7 +111,7 @@ class Syncing:
         # #1 First attempt
         self.password = try_passwordstore()
 
-        # #2 If it fails, spustíme GUI
+        # #2 If it fails, run GUI
         if not self.password:
             os.system("python3 /app/password_check_gui.py")
             self.password = try_passwordstore()
@@ -132,7 +132,7 @@ class Syncing:
                 
     # Extract the configuration archive
     def extract_archive(self):
-        print("No errors detected.")
+        print("No errors with getting a password detected.")
         try:
             if os.path.exists(f"{settings['file-for-syncing']}/{self.file}.sd.zip"):
                 with zipfile.ZipFile(f"{settings['file-for-syncing']}/{self.file}.sd.zip", "r") as zip_ar:
