@@ -124,6 +124,7 @@ class Syncing:
         # #4 Final check
         if not self.password:
             print("[Error] Password not enterred. Unable to continue.")
+            os.system('notify-send "SaveDesktop Synchronization" "Password not entered. Unable to continue."')
             exit()
 
         # #5 Continue in extraction
