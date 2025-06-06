@@ -8,6 +8,7 @@ What are the individual scripts used for?
 - `items_dialog.py` - selecting what items should be included in the configuration archive
 - `localization.py` - setting up the app's language, cache, data directories, and more
 - `main_window.py` - showing a GUI of the app
+- `password_check_gui.py` - showing a dialog for entering a password to the encrypted archive in the synchronization mode
 - `password_store.py` - storing the entered password in the More options dialog or the Connect to the cloud storage dialog to the file
 - `periodic_saving.py` - saving a configuration periodically
 - `shortcuts_window.py` - showing available keyboard shortcuts in the window
