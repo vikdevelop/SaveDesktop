@@ -18,19 +18,16 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.6_5"
+v = "3.6_6"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Improved security of the password saved in the app's data directory and importing a configuration from the folder.</p>\
+rel_notes = "<p>Added a dialog window to entering a password for the encrypted archive used in the synchronization mode and fixed related bugs.</p>\
+<p>3.6_5-beta</p><p>Improved security of the password saved in the app's data directory and importing a configuration from the folder.</p>\
 <p>3.6_4-HOTFIX-beta</p><p>Fixed bugs with file chooser dialog and showing a text in the Saving configuration page</p>\
 <p>3.6_4-beta</p><p>Added support for using the syncthing folders in the synchronization (#392) and fixed a bug with saving or importing configuration in the CLI and related bugs.</p>\
 <p>3.6_3-beta</p><p>From now on, it will be used only ZIP format in all operations, including manual saving configuration and periodic saving, but it will be retained backward compatibility for the *.sd.tar.gz archive format.</p>\
-<p>3.6_2-beta</p>\
-<p>Added support for saving a configuration without creating the archive and changed the archive format from *.tgz to *.tzst</p>\
-<p>3.6_1-beta</p><ul>\
-<li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization</li>\
-<li>Changed the archive format from *.tar.gz to *.tgz (only for manual saving yet)</li>\
-<li>Minor UI improvements</li>\
-</ul>"
+<p>3.6_2-beta</p><p>Added support for saving a configuration without creating the archive and changed the archive format from *.tgz to *.tzst</p>\
+<p>3.6_1-beta</p><ul><li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization</li>\<li>Changed the archive format from *.tar.gz to *.tgz (only for manual saving yet)</li>\<li>Minor UI improvements</li></ul>\
+"
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
