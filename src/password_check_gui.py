@@ -8,13 +8,17 @@ from password_store import *
 class PasswordWindow(Gtk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.set_title("SaveDesktop Synchronization")
+        self.set_title(f"{_['sync']} | SaveDesktop")
+        
+        # Header bar
         self.headerbar = Gtk.HeaderBar.new()
+        self.headerbar.pack_start(Gtk.Image.new_from_icon_name("io.github.vikdevelop.SaveDesktop-symbolic"))
         self.set_titlebar(self.headerbar)
         
+        self.set_default_size(400, 200)
         self.set_resizable(False)
         
-        # the main box
+        # The main box
         self.winBox = Gtk.ListBox.new()
         self.winBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.winBox.add_css_class('boxed-list')
@@ -27,8 +31,9 @@ class PasswordWindow(Gtk.ApplicationWindow):
         
         # Label
         self.titleRow = Adw.ActionRow.new()
-        self.titleRow.set_title("Enter a password to unlock the archive for sync the configuration")
-        self.titleRow.set_subtitle("An encrypted archive has been selected for synchronization \nusing the SaveDesktop app. Please enter the password below \nto unlock it and start synchronization.")
+        self.titleRow.set_title("Please enter a password to unlock the archive for sync the configuration")
+        self.titleRow.set_title_lines(3)
+        self.titleRow.set_subtitle("An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization.")
         self.titleRow.set_size_request(10, -1)
         self.titleRow.set_subtitle_lines(10)
         self.winBox.append(self.titleRow)
@@ -40,11 +45,11 @@ class PasswordWindow(Gtk.ApplicationWindow):
         
         # Switch and row for showing the "Remember a password" option
         self.remSwitch = Gtk.Switch.new()
-        self.remSwitch.set_valign(True)
+        self.remSwitch.set_valign(Gtk.Align.CENTER)
         self.remSwitch.set_active(True)
         
         self.remRow = Adw.ActionRow.new()
-        self.remRow.set_title("Remember a password")
+        self.remRow.set_title("Remember Password")
         self.remRow.add_suffix(self.remSwitch)
         self.remRow.set_activatable_widget(self.remSwitch)
         self.winBox.append(self.remRow)
@@ -56,6 +61,7 @@ class PasswordWindow(Gtk.ApplicationWindow):
         self.applyButton.connect("clicked", self.save_password)
         self.winBox.append(self.applyButton)
         
+    # Save the entered password to the file
     def save_password(self, w):
         if self.remSwitch.get_active():
             PasswordStore(self.passEntry.get_text())
@@ -70,7 +76,7 @@ class App(Adw.Application):
                          application_id="io.github.vikdevelop.SaveDesktop" if not snap else None)
         self.connect('activate', self.on_activate)
     
-    # Show the main window
+    # Show the main window of the application
     def on_activate(self, app):
         self.win = PasswordWindow(application=app)
         self.win.present()
