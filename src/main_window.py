@@ -689,7 +689,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Check the file system of the periodic saving folder and their existation
         def check_filesystem_fnc():
             global folder, path, check_filesystem
-            check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"] if not snap else subprocess.getoutput('stat -f "%s"' % settings["periodic-saving-folder"]))
+            check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"])
             
             path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.zip'
             
@@ -697,7 +697,7 @@ class MainWindow(Adw.ApplicationWindow):
             if settings["periodic-saving"] == "Never":
                 folder = f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>'
             # Check if the filesystem is not FUSE
-            elif snap or not(("gvfsd" in check_filesystem or "rclone" in check_filesystem) or os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder")):
+            elif ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder"):
                 folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             # Check if the periodic saving file exists
             elif not os.path.exists(path):
@@ -796,11 +796,11 @@ class MainWindow(Adw.ApplicationWindow):
                 # save the status of the Bidirectional Synchronization switch
                 settings["bidirectional-sync"] = self.bsSwitch.get_active()
 
-                check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % self.cfileRow.get_subtitle()) if not snap else subprocess.getoutput('stat -f "%s"' % self.cfileRow.get_subtitle())
+                check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % self.cfileRow.get_subtitle())
 
                 if self.cfileRow.get_subtitle():
                     # Check if the selected cloud drive folder is correct
-                    if snap or not(("gvfsd" in check_filesystem or "rclone" in check_filesystem) or os.path.exists(f"{self.cfileRow.get_subtitle()}/.stfolder")):
+                    if ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder")
                         os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
                         settings["file-for-syncing"] = ""
                     else:
