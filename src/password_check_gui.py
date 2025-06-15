@@ -31,9 +31,9 @@ class PasswordWindow(Gtk.ApplicationWindow):
         
         # Label
         self.titleRow = Adw.ActionRow.new()
-        self.titleRow.set_title("Please enter a password to unlock the archive for sync the configuration")
+        self.titleRow.set_title(_["enter_password_title"])
         self.titleRow.set_title_lines(3)
-        self.titleRow.set_subtitle("An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization.")
+        self.titleRow.set_subtitle(_["enter_password_desc"])
         self.titleRow.set_size_request(10, -1)
         self.titleRow.set_subtitle_lines(10)
         self.winBox.append(self.titleRow)
@@ -49,7 +49,7 @@ class PasswordWindow(Gtk.ApplicationWindow):
         self.remSwitch.set_active(True)
         
         self.remRow = Adw.ActionRow.new()
-        self.remRow.set_title("Remember Password")
+        self.remRow.set_title(_["remember_password"])
         self.remRow.add_suffix(self.remSwitch)
         self.remRow.set_activatable_widget(self.remSwitch)
         self.winBox.append(self.remRow)
