@@ -219,7 +219,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.msBox = Gtk.ListBox.new()
             self.msBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
             self.msBox.add_css_class('boxed-list')
-            self.msBox.set_size_request(-1, 500) if self.open_setdialog_tf else self.msBox.set_size_request(-1, 300)
+            self.msBox.set_size_request(-1, 520) if self.open_setdialog_tf else self.msBox.set_size_request(-1, 320)
             self.msDialog.set_extra_child(self.msBox)
             
             # Periodic saving section
@@ -283,7 +283,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.get_password_from_file()
             
             self.cpwdRow = Adw.PasswordEntryRow.new()
-            self.cpwdRow.set_title("Password for encryption")
+            self.cpwdRow.set_title(_["pwd_for_encryption"])
             try:
                 self.cpwdRow.set_text(self.password)
             except:
@@ -292,7 +292,7 @@ class MainWindow(Adw.ApplicationWindow):
                 
             # Manual saving section
             self.manRow = Adw.ExpanderRow.new()
-            self.manRow.set_title("Manual saving")
+            self.manRow.set_title(_["manual_saving"])
             self.manRow.set_expanded(True)
             self.msBox.append(self.manRow)
             
@@ -321,7 +321,7 @@ class MainWindow(Adw.ApplicationWindow):
                 self.encryptSwitch.set_sensitive(False)
             
             self.archRow = Adw.ActionRow.new()
-            self.archRow.set_title("Save a configuration without creating the archive")
+            self.archRow.set_title(_["save_without_archive"])
             self.archRow.add_suffix(self.archSwitch)
             self.archRow.set_activatable_widget(self.archSwitch)
             self.manRow.add_row(self.archRow)
@@ -404,7 +404,7 @@ class MainWindow(Adw.ApplicationWindow):
         # action row
         self.moreSettings = Adw.ActionRow.new()
         self.moreSettings.set_title(_["more_options"])
-        self.moreSettings.set_subtitle(f"{_['periodic_saving']}, {_['archive_encryption']}")
+        self.moreSettings.set_subtitle(f"{_['periodic_saving']}, {_['manual_saving']}")
         self.moreSettings.set_subtitle_lines(3)
         self.moreSettings.add_suffix(self.msButton)
         self.moreSettings.set_activatable_widget(self.msButton)
@@ -437,7 +437,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.btnBox.append(self.fileButton)
         
         # Import configuration from folder button
-        self.folderButton = Gtk.Button.new_with_label("Import from folder")
+        self.folderButton = Gtk.Button.new_with_label(_["import_from_folder"])
         self.folderButton.add_css_class("pill")
         self.folderButton.set_halign(Gtk.Align.CENTER)
         self.folderButton.set_valign(Gtk.Align.CENTER)
@@ -560,7 +560,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.initsetupDialog.set_can_close(False)
         self.initsetupDialog.add_response('cancel', _["cancel"])
         self.initsetupDialog.set_response_appearance('cancel', Adw.ResponseAppearance.DESTRUCTIVE)
-        self.initsetupDialog.add_response('ok-syncthing', "Use Syncthing folder instead")
+        self.initsetupDialog.add_response('ok-syncthing', _["syncthing_folder"])
         self.initsetupDialog.connect('response', initsetupDialog_closed)
         self.initsetupDialog.present()
         
@@ -800,7 +800,7 @@ class MainWindow(Adw.ApplicationWindow):
 
                 if self.cfileRow.get_subtitle():
                     # Check if the selected cloud drive folder is correct
-                    if ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder")
+                    if ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder"):
                         os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
                         settings["file-for-syncing"] = ""
                     else:
