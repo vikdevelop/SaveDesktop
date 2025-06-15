@@ -347,10 +347,10 @@ class MainWindow(Adw.ApplicationWindow):
         self.more_options_dialog = more_options_dialog
         self.items_dialog = open_itemsDialog
             
-        # Set valign for save desktop layout
+        # Set valign for the save desktop layout
         self.saveBox.set_valign(Gtk.Align.CENTER)
         
-        # Title image for save page
+        # Title image for the save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
         self.titleImage.set_pixel_size(64)
         self.saveBox.append(self.titleImage)
@@ -361,7 +361,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.label_title.set_justify(Gtk.Justification.CENTER)
         self.saveBox.append(self.label_title)
         
-        # Box for show this options: set the filename, set items that will be included to the config archive and periodic saving
+        # Box for show these options: set the filename, set items that will be included to the config archive and periodic saving
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.lbox_e.add_css_class(css_class='boxed-list-separate')
@@ -462,7 +462,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.sync_btn_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.syncPage = Adw.StatusPage.new()
         self.syncPage.set_icon_name("emblem-synchronizing-symbolic")
-        self.syncPage.set_title(_["sync_title"])
+        self.syncPage.set_title(_["sync"])
         self.syncPage.set_description(f'{_["sync_desc"]} <a href="{self.app_wiki}/synchronization/{r_lang}">{_["learn_more"]}</a>')
         self.syncPage.set_child(self.sync_btn_box)
         self.syncingBox.append(self.syncPage)
@@ -1072,7 +1072,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
-        self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
+        self.file_chooser.set_title(_["import_config"])
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
         self.file_filter.add_pattern('*.sd.tar.gz')
@@ -1097,7 +1097,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
-        self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
+        self.file_chooser.set_title(_["import_config"])
         self.file_chooser.select_folder(self, None, import_selected, None)
         
     # Select folder for syncing the configuration with other computers in the network
