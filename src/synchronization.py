@@ -123,9 +123,10 @@ class Syncing:
 
         # #4 Final check
         if not self.password:
-            msg = "Password not entered, or it's incorrect. Unable to continue."
+            msg = _["password_store_err"]
+            err_occured = _['err_occured']
             print(msg)
-            os.system(f'notify-send "{_['err_occured']}" "{msg}"')
+            os.system(f'notify-send "{err_occured}" "{msg}"')
             exit()
 
         # #5 Continue in extraction
