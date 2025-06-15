@@ -37,6 +37,7 @@
     "set_another": "Choose another folder",
     "filename_format": "File name format",
     "reset_button": "Reset to default",
+    "manual_saving": "Manual saving",
     "archive_encryption": "Archive encryption",
     "archive_encryption_desc": "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.",
     "create_pwd_title": "Create new password",
