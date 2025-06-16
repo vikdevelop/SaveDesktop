@@ -90,5 +90,14 @@
     "check_pwd_desc": "Ange lösenordet nedan för att låsa upp arkivet med din konfiguration. Om du har glömt det kommer du inte att kunna packa upp arkivet och börja importera din konfiguration.",
     "summary": "Spara din skrivbordskonfiguration",
     "description": "SaveDesktop låter dig spara din nuvarande konfiguration (teman, ikoner, bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett klick.",
-    "translator_credits": "Luna Jernberg https://github.com/bittin/"
+    "translator_credits": "Luna Jernberg https://github.com/bittin/",
+    "save_without_archive": "Save the configuration without creating an archive",
+    "syncthing_folder": "Use syncthing folder instead",
+    "remember_password": "Remember Password",
+    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
+    "import_from_folder": "Import from folder",
+    "pwd_for_encryption": "Password for encryption",
+    "manual_saving": "Manual saving",
+    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
 }
