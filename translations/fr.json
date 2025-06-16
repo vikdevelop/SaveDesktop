@@ -90,5 +90,14 @@
     "initial_setup": "Initial synchronization setup",
     "select": "Select",
     "gnome_oa_section_desc": "In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud.",
-    "gnome_oa_settings": "1. Open the system settings"
+    "gnome_oa_settings": "1. Open the system settings",
+    "pwd_for_encryption": "Password for encryption",
+    "save_without_archive": "Save the configuration without creating an archive",
+    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
+    "remember_password": "Remember Password",
+    "syncthing_folder": "Use syncthing folder instead",
+    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
+    "import_from_folder": "Import from folder",
+    "manual_saving": "Manual saving",
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
 }
