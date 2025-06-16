@@ -91,13 +91,13 @@
     "gnome_oa_section_desc": "In questa sezione seleziona il servizio cloud desiderato, ad esempio Google, Microsoft 365 o Nextcloud.",
     "gnome_oa_settings": "1. Aprire le impostazioni di sistema",
     "gnome_oa_chooser": "3. Fare clic sul pulsante Avanti e selezionare la cartella dell'unità cloud creata",
-    "save_without_archive": "Save the configuration without creating an archive",
-    "pwd_for_encryption": "Password for encryption",
-    "remember_password": "Remember Password",
-    "syncthing_folder": "Use syncthing folder instead",
-    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
-    "import_from_folder": "Import from folder",
-    "manual_saving": "Manual saving",
-    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "save_without_archive": "Salvare la configurazione senza creare un archivio",
+    "pwd_for_encryption": "Password per la crittografia",
+    "remember_password": "Ricorda password",
+    "syncthing_folder": "Utilizzare invece la cartella di sincronizzazione",
+    "password_store_err": "Password non inserita o errata. Impossibile continuare.",
+    "import_from_folder": "Importa dalla cartella",
+    "manual_saving": "Salvataggio manuale",
+    "enter_password_title": "Inserisci una password per sbloccare l'archivio e sincronizzare la configurazione",
+    "enter_password_desc": "È stato selezionato un archivio crittografato per la sincronizzazione tramite l'app SaveDesktop. Inserisci la password qui sotto per sbloccarlo e avviare la sincronizzazione."
 }
