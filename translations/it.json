@@ -90,5 +90,14 @@
     "select": "Seleziona",
     "gnome_oa_section_desc": "In questa sezione seleziona il servizio cloud desiderato, ad esempio Google, Microsoft 365 o Nextcloud.",
     "gnome_oa_settings": "1. Aprire le impostazioni di sistema",
-    "gnome_oa_chooser": "3. Fare clic sul pulsante Avanti e selezionare la cartella dell'unità cloud creata"
+    "gnome_oa_chooser": "3. Fare clic sul pulsante Avanti e selezionare la cartella dell'unità cloud creata",
+    "save_without_archive": "Save the configuration without creating an archive",
+    "pwd_for_encryption": "Password for encryption",
+    "remember_password": "Remember Password",
+    "syncthing_folder": "Use syncthing folder instead",
+    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
+    "import_from_folder": "Import from folder",
+    "manual_saving": "Manual saving",
+    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
 }
