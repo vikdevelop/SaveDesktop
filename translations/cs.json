@@ -91,13 +91,13 @@
     "open_wiki": "Otevřít wiki aplikace",
     "gnome_oa_settings": "1. Otevřete nastavení systému",
     "gnome_oa_chooser": "3. Klikněte na tlačítko Další a vyberte vytvořenou složku cloudové jednotky",
-    "pwd_for_encryption": "Password for encryption",
-    "remember_password": "Remember Password",
-    "syncthing_folder": "Use syncthing folder instead",
-    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
-    "save_without_archive": "Save the configuration without creating an archive",
-    "import_from_folder": "Import from folder",
-    "manual_saving": "Manual saving",
-    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "pwd_for_encryption": "Heslo pro šifrování",
+    "remember_password": "Zapamatovat heslo",
+    "syncthing_folder": "Použít místo toho složku Syncthing",
+    "password_store_err": "Heslo nebylo zadáno, nebo je nesprávné. Nelze pokračovat.",
+    "save_without_archive": "Uložit konfiguraci bez vytváření archivu",
+    "import_from_folder": "Importovat ze složky",
+    "manual_saving": "Ruční ukládání",
+    "enter_password_title": "Zadejte prosím heslo k odemknutí archivu pro synchronizaci konfigurace",
+    "enter_password_desc": "Pro synchronizaci pomocí aplikace SaveDesktop byl vybrán šifrovaný archiv. Pro jeho odemčení a spuštění synchronizace zadejte níže uvedené heslo."
 }
