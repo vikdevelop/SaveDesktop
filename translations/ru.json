@@ -90,5 +90,14 @@
     "gnome_oa_section_desc": "В этом разделе выберите нужный облачный сервис, например Google, Microsoft 365 или Nextcloud.",
     "open_wiki": "Открыть Wiki-страницу приложения",
     "gnome_oa_settings": "1. Откройте системные настройки",
-    "gnome_oa_chooser": "3. Нажмите кнопку «Далее» и выберите имеющуюся папку облачного диска"
+    "gnome_oa_chooser": "3. Нажмите кнопку «Далее» и выберите имеющуюся папку облачного диска",
+    "remember_password": "Remember Password",
+    "syncthing_folder": "Use syncthing folder instead",
+    "save_without_archive": "Save the configuration without creating an archive",
+    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
+    "import_from_folder": "Import from folder",
+    "pwd_for_encryption": "Password for encryption",
+    "manual_saving": "Manual saving",
+    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
 }
