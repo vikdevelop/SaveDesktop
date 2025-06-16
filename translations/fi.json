@@ -90,5 +90,14 @@
     "gnome_oa_section_desc": "Valitse haluamasi pilvipalvelu kuten Google, Microsoft 365 tai Nextcloud.",
     "open_wiki": "Avaa sovelluksen wiki",
     "gnome_oa_settings": "1. Avaa järjestelmän asetukset",
-    "gnome_oa_chooser": "3. Napsauta Seuraava-painiketta ja valitse luotu kansio pilvestä"
+    "gnome_oa_chooser": "3. Napsauta Seuraava-painiketta ja valitse luotu kansio pilvestä",
+    "save_without_archive": "Save the configuration without creating an archive",
+    "pwd_for_encryption": "Password for encryption",
+    "manual_saving": "Manual saving",
+    "import_from_folder": "Import from folder",
+    "syncthing_folder": "Use syncthing folder instead",
+    "remember_password": "Remember Password",
+    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
+    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
 }
