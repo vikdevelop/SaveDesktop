@@ -22,7 +22,7 @@ v = "3.6"
 icon = "io.github.vikdevelop.SaveDesktop"
 rel_notes = "<ul>\
 <li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization mode</li>\
-<li>Migrated from the *.sd.tar.gz to the *.sd.zip archive format, but for backward compatibility reasons, it will still possible to select the first named archive format</li>\
+<li>Migrated from the *.sd.tar.gz to the *.sd.zip archive format, but for backward compatibility reasons, it will still be possible to select the first named archive format</li>\
 <li>Added support for using the syncthing folders in the synchronization mode (#392)</li>\
 <li>Fixed other minor bugs</li>\
 </ul>"
