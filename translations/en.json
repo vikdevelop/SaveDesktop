@@ -51,7 +51,7 @@
     "import_title": "Import",
     "import_config": "Import saved configuration",
     "import_from_file": "Import from file",
-    "import_from_folder": "Import from folder"
+    "import_from_folder": "Import from folder",
     "cancel": "Cancel",
     "savedesktop_f": "SaveDesktop files",
     "importing_config_status": "<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n",
@@ -59,7 +59,7 @@
     "config_imported_desc": "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n",
     "back_to_page": "Back to previous page",
     "logout": "Log Out",
-    "err_occured": "An error occurred",,
+    "err_occured": "An error occurred",
     "apply": "Apply",
     "sync": "Sync",
     "sync_desc": "Sync your desktop environment configuration with other computers in the network.",
