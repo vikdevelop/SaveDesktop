@@ -92,7 +92,7 @@
     "gnome_oa_settings": "1. Open the system settings",
     "gnome_oa_chooser": "3. Click on the Next button and select the created cloud drive folder",
     "remember_password": "Remember Password",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
     "save_without_archive": "Save the configuration without creating an archive",
     "import_from_folder": "Import from folder",

@@ -93,7 +93,7 @@
     "gnome_oa_chooser": "3. Haz clic en el botón \"Siguiente\" y seleccione la carpeta de la unidad de la nube creada",
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
     "remember_password": "Remember Password",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "save_without_archive": "Save the configuration without creating an archive",
     "import_from_folder": "Import from folder",
     "pwd_for_encryption": "Password for encryption",

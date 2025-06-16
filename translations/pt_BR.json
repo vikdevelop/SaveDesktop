@@ -91,7 +91,7 @@
     "gnome_oa_section_desc": "Nesta seção, selecione o serviço de nuvem desejado, como Google, Microsoft 365 ou Nextcloud.",
     "gnome_oa_settings": "1. Abra as configurações do sistema",
     "gnome_oa_chooser": "3. Clique no botão Avançar e selecione a pasta da unidade criada na nuvem",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "remember_password": "Remember Password",
     "save_without_archive": "Save the configuration without creating an archive",
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",

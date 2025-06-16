@@ -95,7 +95,7 @@
     "import_from_folder": "Import from folder",
     "remember_password": "Remember Password",
     "pwd_for_encryption": "Password for encryption",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "save_without_archive": "Save the configuration without creating an archive",
     "manual_saving": "Manual saving",
     "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",

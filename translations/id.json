@@ -94,7 +94,7 @@
     "save_without_archive": "Save the configuration without creating an archive",
     "remember_password": "Remember Password",
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "import_from_folder": "Import from folder",
     "pwd_for_encryption": "Password for encryption",
     "manual_saving": "Manual saving",

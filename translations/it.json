@@ -94,7 +94,7 @@
     "save_without_archive": "Salvare la configurazione senza creare un archivio",
     "pwd_for_encryption": "Password per la crittografia",
     "remember_password": "Ricorda password",
-    "syncthing_folder": "Utilizzare invece la cartella di sincronizzazione",
+    "syncthing_folder": "Utilizzare invece la cartella Syncthing",
     "password_store_err": "Password non inserita o errata. Impossibile continuare.",
     "import_from_folder": "Importa dalla cartella",
     "manual_saving": "Salvataggio manuale",

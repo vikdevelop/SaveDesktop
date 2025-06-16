@@ -92,7 +92,7 @@
     "description": "SaveDesktop låter dig spara din nuvarande konfiguration (teman, ikoner, bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett klick.",
     "translator_credits": "Luna Jernberg https://github.com/bittin/",
     "save_without_archive": "Save the configuration without creating an archive",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "remember_password": "Remember Password",
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
     "import_from_folder": "Import from folder",

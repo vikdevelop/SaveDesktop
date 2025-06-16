@@ -92,7 +92,7 @@
     "description": "SaveDesktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne).",
     "translator_credits": "Priit Jõerüüt 2025",
     "remember_password": "Remember Password",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "save_without_archive": "Save the configuration without creating an archive",
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
     "import_from_folder": "Import from folder",

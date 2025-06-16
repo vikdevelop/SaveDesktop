@@ -94,7 +94,7 @@
     "pwd_for_encryption": "Password for encryption",
     "import_from_folder": "Import from folder",
     "remember_password": "Remember Password",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "save_without_archive": "Save the configuration without creating an archive",
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
     "manual_saving": "Manual saving",

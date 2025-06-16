@@ -96,7 +96,7 @@
     "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
     "remember_password": "Remember Password",
     "import_from_folder": "Import from folder",
-    "syncthing_folder": "Use syncthing folder instead",
+    "syncthing_folder": "Use Syncthing folder instead",
     "save_without_archive": "Save the configuration without creating an archive",
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
     "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
