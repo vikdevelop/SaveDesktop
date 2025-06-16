@@ -6,7 +6,6 @@
     "set_filename": "Dosya adını ayarla",
     "config_saved": "Ayarlar kayıt edildi!",
     "open_folder": "Klasörü aç",
-    "import_fileshooser": "Ayarları {} yükle",
     "cancel": "İptal et",
     "savedesktop_f": "SaveDesktop dosyaları",
     "config_imported": "Ayarlar uygulandı !",
@@ -39,7 +38,6 @@
     "items_for_archive": "Yapılandırma arşivine eklenecek ögeler",
     "icons": "Simgeler",
     "sync": "Eşzamanla",
-    "sync_title": "Ağdaki diğer bilgisayarla eşzamanla",
     "sync_desc": "Masaüstü ortamı yapılandırmanızı ağdaki diğer bilgisayarlarla eşzamanlayın.",
     "set_up_sync_file": "Eşzamanlama dosyası ayarla",
     "periodic_sync": "Düzenli eşzamanlama",
@@ -90,7 +88,6 @@
     "almost_done_desc": "Bulut sürücü klasörünü oluşturdunuz! Kurulumu tamamlamak için İleri düğmesine tıklayın.",
     "initial_setup": "İlk senkronizasyon kurulumu",
     "select": "Seç",
-    "import_config_desc2": "Aşağıdaki butona tıklayarak yapılandırmayı içe aktarın.",
     "gnome_oa_section_desc": "Bu bölümde Google, Microsoft 365 veya Nextcloud gibi istediğiniz bulut hizmetini seçin.",
     "gnome_oa_settings": "1. Sistem ayarlarını açın.",
     "gnome_oa_chooser": "3. İleri düğmesine tıklayın ve oluşturulan bulut sürücü klasörünü seçin"
