@@ -90,5 +90,14 @@
     "gnome_oa_section_desc": "V této sekci vyberte požadovanou cloudovou službu, jako je Google, Microsoft 365 nebo Nextcloud.",
     "open_wiki": "Otevřít wiki aplikace",
     "gnome_oa_settings": "1. Otevřete nastavení systému",
-    "gnome_oa_chooser": "3. Klikněte na tlačítko Další a vyberte vytvořenou složku cloudové jednotky"
+    "gnome_oa_chooser": "3. Klikněte na tlačítko Další a vyberte vytvořenou složku cloudové jednotky",
+    "pwd_for_encryption": "Password for encryption",
+    "remember_password": "Remember Password",
+    "syncthing_folder": "Use syncthing folder instead",
+    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
+    "save_without_archive": "Save the configuration without creating an archive",
+    "import_from_folder": "Import from folder",
+    "manual_saving": "Manual saving",
+    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
 }
