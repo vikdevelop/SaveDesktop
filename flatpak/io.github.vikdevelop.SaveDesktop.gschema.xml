@@ -56,7 +56,7 @@
 			<summary>Periodic saving</summary>
 		</key>
 		<key name="periodic-saving-folder" type="s">
-		  	<default>''</default>
+		  	<default>'{}/SaveDesktop/archives'</default>
 		  	<summary>Folder for periodic backups</summary>
 		</key>
 		<key name="filename" type="s">
@@ -69,7 +69,7 @@
 		</key>
 		<key name="enable-encryption" type="b">
 		  <default>false</default>
-		  <summary>Enable/Disable encryption of the configuration archives</summary>
+		  <summary>Enable/Disable encryption of the configuration archives in the manually mode</summary>
 		</key>
 		<key name="file-for-syncing" type="s">
 		  <default>''</default>
@@ -96,7 +96,11 @@
 		</key>
 		<key name="first-synchronization-setup" type="b">
 		    <default>true</default>
-		    <summary>Set showing the synchronization first setup dialog</summary>
+		    <summary>Set showing the initial synchronization setup dialog</summary>
+		</key>
+		<key name="save-without-archive" type="b">
+		    <default>false</default>
+		    <summary>Disable creating an archive in the manual saving mode</summary>
 		</key>
 	</schema>
 </schemalist>

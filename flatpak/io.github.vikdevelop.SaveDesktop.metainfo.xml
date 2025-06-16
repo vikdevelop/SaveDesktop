@@ -102,6 +102,15 @@
     </screenshots>
           
     <releases>
+       <release version="3.6-beta" type="development" date="2025-04-22">
+           <description>
+               <ul>
+                   <li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization</li>
+                   <li>Changed the archive format from *.tar.gz to *.tgz (only for manual saving yet)</li>
+                   <li>Minor UI improvements</li>
+               </ul>
+           </description>
+       </release>
        <release version="3.5" date="2024-11-17">
             <description>
                 <ul>

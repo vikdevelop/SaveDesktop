@@ -9,6 +9,7 @@ from threading import Thread
 from localization import *
 from shortcuts_window import *
 from items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
+from password_store import PasswordStore
 
 # Application window
 class MainWindow(Adw.ApplicationWindow):
@@ -161,18 +162,27 @@ class MainWindow(Adw.ApplicationWindow):
             # Action after closing dialog for showing more options
             def msDialog_closed(w, response):
                 if response == 'ok':
-                    settings["filename-format"] = self.filefrmtEntry.get_text()
-                    settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
-                    settings["enable-encryption"] = self.encryptSwitch.get_active()
-                    
+                    settings["filename-format"] = self.filefrmtEntry.get_text() # save the file name format entry
+                    settings["periodic-saving-folder"] = self.dirRow.get_subtitle() # save the selected periodic saving folder
+                    # save the periodic saving interval
                     selected_item = self.pbRow.get_selected_item()
                     backup_mapping = {_["never"]: "Never", _["daily"]: "Daily", _["weekly"]: "Weekly", _["monthly"]: "Monthly"}
                     backup_item = backup_mapping.get(selected_item.get_string(), "Never")
-
                     create_pb_desktop() if not backup_item == "Never" else None
-
                     settings["periodic-saving"] = backup_item
-
+                    settings["enable-encryption"] = self.encryptSwitch.get_active() # save the archive encryption's switch state
+                    settings["save-without-archive"] = self.archSwitch.get_active() # save the switch state of the "Save a configuration without creating the configuration archive" option
+                    # save the entered password to the file
+                    if self.cpwdRow.get_text():
+                        password = self.cpwdRow.get_text()
+                        PasswordStore(password)
+                    else:
+                        try:
+                            os.remove(f"{DATA}/password")
+                        except:
+                            pass
+                    
+                    # restart the SetDialog() after closing this dialog
                     if self.open_setdialog_tf:
                         self.setDialog.close()
                         w = ""
@@ -185,8 +195,22 @@ class MainWindow(Adw.ApplicationWindow):
             # reset the file name format entry to the default value
             def reset_fileformat(w):
                 self.filefrmtEntry.set_text("Latest_configuration")
+                
+            # set sensitivity of the encryptSwitch
+            def set_encryptswitch_sensitivity(GParamBoolean, encryptSwitch):
+                if self.encryptSwitch.get_active():
+                    self.archSwitch.set_sensitive(False)
+                else:
+                    self.archSwitch.set_sensitive(True)
+                    
+            # set sensitivity of the archSwitch
+            def set_archswitch_sensitivity(GParamBoolean, archSwitch):
+                if self.archSwitch.get_active():
+                    self.encryptSwitch.set_sensitive(False)
+                else:
+                    self.encryptSwitch.set_sensitive(True)
             
-            # Dialog for showing more options itself
+            # Dialog itself
             self.msDialog = Adw.AlertDialog.new()
             self.msDialog.set_heading(_["more_options"])
             self.msDialog.choose(self, None, None, None)
@@ -195,7 +219,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.msBox = Gtk.ListBox.new()
             self.msBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
             self.msBox.add_css_class('boxed-list')
-            self.msBox.set_size_request(-1, 500) if self.open_setdialog_tf else self.msBox.set_size_request(-1, 300)
+            self.msBox.set_size_request(-1, 520) if self.open_setdialog_tf else self.msBox.set_size_request(-1, 320)
             self.msDialog.set_extra_child(self.msBox)
             
             # Periodic saving section
@@ -252,18 +276,34 @@ class MainWindow(Adw.ApplicationWindow):
             self.dirRow.set_title(_["pb_folder"])
             self.dirRow.add_suffix(self.folderButton)
             self.dirRow.set_use_markup(True)
-            if settings["periodic-saving-folder"] == '':
-                self.dirRow.set_subtitle(f"{download_dir}/SaveDesktop/archives")
-            else:
-                self.dirRow.set_subtitle(settings["periodic-saving-folder"])
+            self.dirRow.set_subtitle(settings["periodic-saving-folder"].format(download_dir))
             self.saving_eRow.add_row(self.dirRow)
+            
+            # Adw.ActionRow for entering a password for the archive encryption
+            self.get_password_from_file()
+            
+            self.cpwdRow = Adw.PasswordEntryRow.new()
+            self.cpwdRow.set_title(_["pwd_for_encryption"])
+            try:
+                self.cpwdRow.set_text(self.password)
+            except:
+                self.cpwdRow.set_text("")
+            self.saving_eRow.add_row(self.cpwdRow)
                 
-            # Archive Encryption section
+            # Manual saving section
+            self.manRow = Adw.ExpanderRow.new()
+            self.manRow.set_title(_["manual_saving"])
+            self.manRow.set_expanded(True)
+            self.msBox.append(self.manRow)
+            
             # action row and switch for showing options of the archive encryption
             self.encryptSwitch = Gtk.Switch.new()
+            self.archSwitch = Gtk.Switch.new()
             self.encryptSwitch.set_valign(Gtk.Align.CENTER)
+            self.encryptSwitch.connect('notify::active', set_encryptswitch_sensitivity)
             if settings["enable-encryption"] == True:
                 self.encryptSwitch.set_active(True)
+                self.archSwitch.set_sensitive(False)
             
             self.encryptRow = Adw.ActionRow.new()
             self.encryptRow.set_title(_["archive_encryption"])
@@ -271,7 +311,20 @@ class MainWindow(Adw.ApplicationWindow):
             self.encryptRow.set_subtitle_lines(15)
             self.encryptRow.add_suffix(self.encryptSwitch)
             self.encryptRow.set_activatable_widget(self.encryptSwitch)
-            self.msBox.append(self.encryptRow)
+            self.manRow.add_row(self.encryptRow)
+            
+            # action row and switch for showing the "Save a configuration without creating the archive" option
+            self.archSwitch.set_valign(Gtk.Align.CENTER)
+            self.archSwitch.connect('notify::active', set_archswitch_sensitivity)
+            if settings["save-without-archive"] == True:
+                self.archSwitch.set_active(True)
+                self.encryptSwitch.set_sensitive(False)
+            
+            self.archRow = Adw.ActionRow.new()
+            self.archRow.set_title(_["save_without_archive"])
+            self.archRow.add_suffix(self.archSwitch)
+            self.archRow.set_activatable_widget(self.archSwitch)
+            self.manRow.add_row(self.archRow)
 
             # add response of this dialog
             self.msDialog.add_response('cancel', _["cancel"])
@@ -281,6 +334,7 @@ class MainWindow(Adw.ApplicationWindow):
             
             self.msDialog.present()
             
+        # open a dialog for selecting the items to include in the configuration archive
         def open_itemsDialog(w):
             self.itemsd = itemsDialog()
             self.itemsd.choose(self, None, None, None)
@@ -293,10 +347,10 @@ class MainWindow(Adw.ApplicationWindow):
         self.more_options_dialog = more_options_dialog
         self.items_dialog = open_itemsDialog
             
-        # Set valign for save desktop layout
+        # Set valign for the save desktop layout
         self.saveBox.set_valign(Gtk.Align.CENTER)
         
-        # Title image for save page
+        # Title image for the save page
         self.titleImage = Gtk.Image.new_from_icon_name("desktop-symbolic")
         self.titleImage.set_pixel_size(64)
         self.saveBox.append(self.titleImage)
@@ -307,7 +361,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.label_title.set_justify(Gtk.Justification.CENTER)
         self.saveBox.append(self.label_title)
         
-        # Box for show this options: set the filename, set items that will be included to the config archive and periodic saving
+        # Box for show these options: set the filename, set items that will be included to the config archive and periodic saving
         self.lbox_e = Gtk.ListBox.new()
         self.lbox_e.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.lbox_e.add_css_class(css_class='boxed-list-separate')
@@ -350,7 +404,7 @@ class MainWindow(Adw.ApplicationWindow):
         # action row
         self.moreSettings = Adw.ActionRow.new()
         self.moreSettings.set_title(_["more_options"])
-        self.moreSettings.set_subtitle(f"{_['periodic_saving']}, {_['archive_encryption']}")
+        self.moreSettings.set_subtitle(f"{_['periodic_saving']}, {_['manual_saving']}")
         self.moreSettings.set_subtitle_lines(3)
         self.moreSettings.add_suffix(self.msButton)
         self.moreSettings.set_activatable_widget(self.msButton)
@@ -370,21 +424,33 @@ class MainWindow(Adw.ApplicationWindow):
         self.importBox.set_valign(Gtk.Align.CENTER)
         self.importBox.set_halign(Gtk.Align.CENTER)
         
+        # Box for the below buttons
+        self.btnBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        
         # Import configuration button
         self.fileButton = Gtk.Button.new_with_label(_["import_from_file"])
         self.fileButton.add_css_class("pill")
         self.fileButton.add_css_class("suggested-action")
         self.fileButton.set_halign(Gtk.Align.CENTER)
         self.fileButton.set_valign(Gtk.Align.CENTER)
-        self.fileButton.connect("clicked", self.select_folder_to_import)
+        self.fileButton.connect("clicked", self.select_file_to_import)
+        self.btnBox.append(self.fileButton)
+        
+        # Import configuration from folder button
+        self.folderButton = Gtk.Button.new_with_label(_["import_from_folder"])
+        self.folderButton.add_css_class("pill")
+        self.folderButton.set_halign(Gtk.Align.CENTER)
+        self.folderButton.set_valign(Gtk.Align.CENTER)
+        self.folderButton.connect("clicked", self.select_folder_to_import)
+        self.btnBox.append(self.folderButton)
         
         # Image and title for the Import page
         self.importPage = Adw.StatusPage.new()
         self.importPage.set_icon_name("document-open-symbolic")
-        self.importPage.set_title(_['import_config'])
-        self.importPage.set_description(_["import_config_desc2"])
+        self.importPage.set_title(_["import_title"])
+        self.importPage.set_description(_["import_config"])
         self.importPage.set_size_request(360, -1)
-        self.importPage.set_child(self.fileButton)
+        self.importPage.set_child(self.btnBox)
         self.importBox.append(self.importPage)
             
     # Syncing desktop page
@@ -396,7 +462,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.sync_btn_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.syncPage = Adw.StatusPage.new()
         self.syncPage.set_icon_name("emblem-synchronizing-symbolic")
-        self.syncPage.set_title(_["sync_title"])
+        self.syncPage.set_title(_["sync"])
         self.syncPage.set_description(f'{_["sync_desc"]} <a href="{self.app_wiki}/synchronization/{r_lang}">{_["learn_more"]}</a>')
         self.syncPage.set_child(self.sync_btn_box)
         self.syncingBox.append(self.syncPage)
@@ -431,6 +497,7 @@ class MainWindow(Adw.ApplicationWindow):
         # show the message about finished setup the synchronization
         def almost_done():
             self.initsetupDialog.remove_response('ok-rclone')
+            self.initsetupDialog.remove_response('ok-syncthing')
             self.initsetupDialog.remove_response('next')
             self.initsetupDialog.set_extra_child(None)
             self.initsetupDialog.set_heading(_["almost_done_title"])
@@ -464,7 +531,7 @@ class MainWindow(Adw.ApplicationWindow):
             
         # Responses of this dialog
         def initsetupDialog_closed(w, response):
-            if response == 'next': # open the Gtk.FileDialog in the GNOME Online accounts case
+            if response == 'next' or response == 'ok-syncthing': # open the Gtk.FileDialog in the GNOME Online accounts case
                 self.select_pb_folder(w) if self.get_button_type == 'set-button' else self.select_folder_to_sync(w)
                 almost_done()
             elif response == 'ok-rclone': # set the periodic saving folder in the Rclone case
@@ -492,6 +559,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.initsetupDialog.set_body_use_markup(True)
         self.initsetupDialog.set_can_close(False)
         self.initsetupDialog.add_response('cancel', _["cancel"])
+        self.initsetupDialog.set_response_appearance('cancel', Adw.ResponseAppearance.DESTRUCTIVE)
+        self.initsetupDialog.add_response('ok-syncthing', _["syncthing_folder"])
         self.initsetupDialog.connect('response', initsetupDialog_closed)
         self.initsetupDialog.present()
         
@@ -571,7 +640,7 @@ class MainWindow(Adw.ApplicationWindow):
             finally:
                 if not e_o:
                     self.file_row.remove(self.setupButton)
-                    self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.tar.gz')
+                    self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.zip')
                     os.system(f"notify-send 'SaveDesktop' '{_['config_saved']}'")
                     self.setDialog.set_response_enabled('ok', True)
                     self.auto_save_start = False
@@ -620,15 +689,15 @@ class MainWindow(Adw.ApplicationWindow):
         # Check the file system of the periodic saving folder and their existation
         def check_filesystem_fnc():
             global folder, path, check_filesystem
-            check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"] if not snap else subprocess.getoutput('stat -f "%s"' % settings["periodic-saving-folder"]))
+            check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"])
             
-            path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.tar.gz'
+            path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.zip'
             
             # Check if periodic saving is set to "Never"
             if settings["periodic-saving"] == "Never":
                 folder = f'<span color="red">{_["pb_interval"]}: {_["never"]}</span>'
             # Check if the filesystem is not FUSE
-            elif (not snap and not("gvfsd" in check_filesystem or "rclone" in check_filesystem)) or (snap and not "fuse" in check_filesystem):
+            elif ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder"):
                 folder = f'<span color="red">{_["cloud_folder_err"]}</span>'
             # Check if the periodic saving file exists
             elif not os.path.exists(path):
@@ -727,11 +796,14 @@ class MainWindow(Adw.ApplicationWindow):
                 # save the status of the Bidirectional Synchronization switch
                 settings["bidirectional-sync"] = self.bsSwitch.get_active()
 
-                check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % self.cfileRow.get_subtitle()) if not snap else subprocess.getoutput('stat -f "%s"' % self.cfileRow.get_subtitle())
+                check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % self.cfileRow.get_subtitle())
 
                 if self.cfileRow.get_subtitle():
                     # Check if the selected cloud drive folder is correct
-                    if (not snap and ("gvfs" in check_filesystem or "rclone" in check_filesystem)) or (snap and "fuse" in check_filesystem):
+                    if ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder"):
+                        os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
+                        settings["file-for-syncing"] = ""
+                    else:
                         settings["file-for-syncing"] = self.cfileRow.get_subtitle()
                         
                         # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
@@ -753,9 +825,6 @@ class MainWindow(Adw.ApplicationWindow):
                         
                         self.mount_type = "cloud-receiver"
                         self.set_up_auto_mount()
-                    else:
-                        os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
-                        settings["file-for-syncing"] = ""
                 else:
                     pass
 
@@ -774,7 +843,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.cloudBox = Gtk.ListBox.new()
         self.cloudBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.cloudBox.get_style_context().add_class(class_name='boxed-list')
-        self.cloudBox.set_size_request(-1, 500)
+        self.cloudBox.set_size_request(-1, 400)
         self.cloudDialog.set_extra_child(self.cloudBox)
         
         # Row and buttons for selecting the cloud drive folder
@@ -794,10 +863,6 @@ class MainWindow(Adw.ApplicationWindow):
         
         ## the row itself
         self.cfileRow = Adw.ActionRow.new()
-        
-        settings["file-for-syncing"] = "" if "sd.tar.gz" in settings["file-for-syncing"] else settings["file-for-syncing"]
-        
-        ### add the reset button if the subtitle is not empty
         self.cfileRow.add_suffix(self.resetButton) if not settings["file-for-syncing"] == "" else None
         self.cfileRow.set_title(_["select_cloud_folder_btn"])
         self.cfileRow.set_subtitle(settings["file-for-syncing"])
@@ -865,7 +930,7 @@ class MainWindow(Adw.ApplicationWindow):
         
         if not cfile_subtitle == "none":
             if "gvfs" in cfile_subtitle:
-                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^/]*).*' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
+                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]+):host=([^,]+),user=([^/]+)' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
                 
                 match = re.search(pattern, cfile_subtitle)
                 
@@ -880,10 +945,10 @@ class MainWindow(Adw.ApplicationWindow):
                     elif "onedrive" in cfile_subtitle: # OneDrive
                         cloud_service = match.group(1)  # cloud_service for OneDrive
                         host = match.group(2)  # host for OneDrive
-                        user = None # user is not relevant for OneDrive
+                        user = match.group(3) # user is not relevant for OneDrive
                         ssl = None  # ssl is not relevant for OneDrive
                         prefix = None  # prefix is not relevant for OneDrive
-                        cmd = f"gio mount {cloud_service}://{host}" # command for OneDrive
+                        cmd = f"gio mount {cloud_service}://{user}@{host}" # command for OneDrive
                     elif "dav" in cfile_subtitle: # DAV
                         cloud_service = match.group(1)  # cloud_service for DAV
                         host = match.group(2)  # host for DAV
@@ -909,6 +974,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                         "prefix": prefix,
                         "cmd": cmd
                     }
+            elif os.path.exists(f"{cfile_subtitle}/.stfolder"):
+                cmd = ""
             else:
                 cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle}" if not os.path.exists(f"{download_dir}/SaveDesktop/rclone_drive") else f"rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive"
             synchronization_content = f'#!/usr/bin/bash\n{cmd}\nsleep 60s\n{sync_cmd}\n{periodic_saving_cmd}'
@@ -920,7 +987,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
         else:
-            raise AttributeError("It aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")
+            raise AttributeError("There aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")
             
         self.syncingBox.remove(self.syncPage)
         self.sync_desktop()
@@ -934,7 +1001,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 return
             self.folder_pb = folder.get_path()
             settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] else settings["periodic-saving-folder"]
-            self.dirRow.set_subtitle(self.folder_pb) if hasattr(self, 'dirRow') else None
+            self.dirRow.set_subtitle(f"{self.folder_pb}") if hasattr(self, 'dirRow') else None
         
         self.pb_chooser = Gtk.FileDialog.new()
         self.pb_chooser.set_modal(True)
@@ -970,24 +1037,42 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.folderchooser.set_title(_["save_config"])
         self.folderchooser.select_folder(self, None, save_selected, None)
             
-    # Load file chooser
-    def select_folder_to_import(self, w):
+    # Select a ZIP or TAR.GZ file to import
+    def select_file_to_import(self, w):
+        # Show a "Please wait" pop-up window while checking the archive type
+        def show_please_wait_toast():
+            wait_toast = Adw.Toast.new(title=_["please_wait"])
+            wait_toast.set_timeout(10)
+            self.toast_overlay.add_toast(wait_toast)
+        
+        # Check, if the archive is encrypted or not
+        def get_status_of_encryption():
+            self.is_folder = False
+            try:
+                status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.import_file).infolist() if not z.filename.endswith("/"))
+            except:
+                status = False
+            if status == True:
+                GLib.idle_add(self.check_password_dialog)
+            else:
+                self.import_config()
+        
+        # Get path from the dialog
         def open_selected(source, res, data):
             try:
                 file = source.open_finish(res)
             except:
                 return
             self.import_file = file.get_path()
-            if ".sd.zip" in self.import_file:
-                self.check_password_dialog()
-            else:
-                self.import_config()
+            show_please_wait_toast()
+            check_thread = Thread(target=get_status_of_encryption)
+            check_thread.start()
                 
         self.cancel_process = False # set this value to False before importing the configuration, as it may already be set to True due to the recent cancellation of the configuration import
         
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
-        self.file_chooser.set_title(_["import_fileshooser"].format(self.environment))
+        self.file_chooser.set_title(_["import_config"])
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_["savedesktop_f"])
         self.file_filter.add_pattern('*.sd.tar.gz')
@@ -996,6 +1081,24 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
         self.file_chooser.open(self, None, open_selected, None)
+        
+    # Select folder to import configuration    
+    def select_folder_to_import(self, w):
+        def import_selected(source, res, data):
+            try:
+                folder = source.select_folder_finish(res)
+            except:
+                return
+            self.import_folder = folder.get_path()
+            self.is_folder = True if os.path.exists(f"{self.import_folder}/.folder.sd") else False
+            self.import_config()
+            
+        self.cancel_process = False # set this value to False before importing the configuration, as it may already be set to True due to the recent cancellation of the configuration import
+        
+        self.file_chooser = Gtk.FileDialog.new()
+        self.file_chooser.set_modal(True)
+        self.file_chooser.set_title(_["import_config"])
+        self.file_chooser.select_folder(self, None, import_selected, None)
         
     # Select folder for syncing the configuration with other computers in the network
     def select_folder_to_sync(self, w):
@@ -1015,6 +1118,14 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.sync_folder_chooser.set_title(_["select_cloud_folder_btn"])
         self.sync_folder_chooser.select_folder(self, None, set_selected, None)
         
+    # Get a password from the {DATA}/password file
+    def get_password_from_file(self):
+        if os.path.exists(f"{DATA}/password"):
+            p = PasswordStore()
+            self.password = p.password
+        else:
+            self.password = ""
+    
     # Dialog for creating password for the config archive
     def create_password_dialog(self):
         # Action after closing pswdDialog
@@ -1061,7 +1172,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.pswdDialog.present()
 
         # Button for generating strong password
-        self.pswdgenButton = Gtk.Button.new_from_icon_name("emblem-synchronizing-symbolic")
+        self.pswdgenButton = Gtk.Button.new_from_icon_name("dialog-password-symbolic")
         self.pswdgenButton.set_tooltip_text(_["gen_password"])
         self.pswdgenButton.add_css_class("flat")
         self.pswdgenButton.set_valign(Gtk.Align.CENTER)
@@ -1088,18 +1199,17 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             e_o = False
             os.system(f"python3 {system_dir}/config.py --save")
             print("creating and moving the configuration archive to the user-defined directory")
-            if settings["enable-encryption"] == True:
-                os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
+            if settings["save-without-archive"] == True:
+                os.system(f"echo > {CACHE}/save_config/.folder.sd && mv {CACHE}/save_config '{self.folder}/{self.filename_text}'")
+            else:
+                if settings["enable-encryption"] == True:
+                    os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
+                else:
+                    os.system(f"zip -9 cfg.sd.zip . -r")
                 if self.cancel_process:
                     return
                 else:
                     shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
-            else:
-                os.system(f"tar --exclude='cfg.sd.tar.gz' --gzip -cf cfg.sd.tar.gz ./")
-                if self.cancel_process:
-                    return
-                else:
-                    shutil.copyfile('cfg.sd.tar.gz', f"{self.folder}/{self.filename_text}.sd.tar.gz")
             print("Configuration saved successfully.")
         except Exception as e:
             e_o = True
@@ -1149,7 +1259,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.savewaitBox.append(self.sdoneImage)
 
         # Use "sd.zip" if Archive Encryption is enabled
-        status = _["saving_config_status"].replace("sd.tar.gz", "sd.zip") if settings["enable-encryption"] else _["saving_config_status"]
+        status_old = _["saving_config_status"]
+        status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
                 
         # Create label about selected directory for saving the configuration
         self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
@@ -1253,21 +1364,29 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         try:
             e_o = False
             os.system("echo > import_status")
-            if ".sd.zip" in self.import_file:
-                with zipfile.ZipFile(self.import_file, "r") as zip_ar:
-                    for member in zip_ar.namelist():
-                        if self.cancel_process:
-                            return
-                        zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=self.checkEntry.get_text().encode("utf-8"))
+            if self.is_folder == True:
+                shutil.copytree(self.import_folder, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
             else:
-                with tarfile.open(self.import_file, 'r:gz') as tar:
-                    for member in tar.getmembers():
-                        try:
+                if ".sd.zip" in self.import_file:
+                    with zipfile.ZipFile(self.import_file, "r") as zip_ar:
+                        for member in zip_ar.namelist():
                             if self.cancel_process:
                                 return
-                            tar.extract(member, path=f"{CACHE}/import_config")
-                        except PermissionError as e:
-                            print(f"Permission denied for {member.name}: {e}")
+                            try:
+                                p = self.checkEntry.get_text()
+                                password = p.encode("utf-8") if p else None  # None instead of b""
+                            except Exception as e:
+                                password = None
+                            zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=password)
+                elif ".sd.tar.gz" in self.import_file:
+                    with tarfile.open(self.import_file, 'r:gz') as tar:
+                        for member in tar.getmembers():
+                            try:
+                                if self.cancel_process:
+                                    return
+                                tar.extract(member, path=f"{CACHE}/import_config")
+                            except PermissionError as e:
+                                print(f"Permission denied for {member.name}: {e}")
             os.system(f"python3 {system_dir}/config.py --import_")
             os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in [f"{CACHE}/import_config/app", f"{CACHE}/import_config/installed_flatpaks.sh", f"{CACHE}/import_config/installed_user_flatpaks.sh"]) else None
             print("Configuration imported successfully.")
@@ -1319,7 +1438,10 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.importwaitBox.append(self.idoneImage)
 
         # Create label about configuration archive name
-        self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(self.import_file))
+        try:
+            self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(self.import_file))
+        except:
+            self.importwaitLabel = Gtk.Label.new(str=_["importing_config_status"].format(self.import_folder))
         self.importwaitLabel.set_use_markup(True)
         self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
         self.importwaitLabel.set_wrap(True)
@@ -1450,7 +1572,7 @@ class MyApp(Adw.Application):
     
     # Start importing the configuration using Ctrl+I keyboard shortcut
     def call_importing_config(self, action, param):
-        self.win.select_folder_to_import(w="")
+        self.win.select_file_to_import(w="")
     
     # Open the More options dialog using Ctrl+Shift+M keyboard shortcut
     def call_ms_dialog(self, action, param):
@@ -1500,9 +1622,14 @@ class MyApp(Adw.Application):
             else:
                 os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
     
-    # open directory with created configuration archive after clicking on the "Open the folder" button
+    # open a directory with created configuration archive after clicking on the "Open the folder" button
     def open_dir(self, action, param):
-        Gtk.FileLauncher.new(Gio.File.new_for_path(f"{self.win.folder}/{self.win.filename_text}.sd.tar.gz" if not settings["enable-encryption"] else f"{self.win.folder}/{self.win.filename_text}.sd.zip")).open_containing_folder()
+        if settings["save-without-archive"]:
+            path = f"{self.win.folder}/{self.win.filename_text}"
+        else:
+            path = f"{self.win.folder}/{self.win.filename_text}.sd.zip"
+
+        Gtk.FileLauncher.new(Gio.File.new_for_path(path)).open_containing_folder()
     
     # "About app" dialog
     def on_about_action(self, action, param):

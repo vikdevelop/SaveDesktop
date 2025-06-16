@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 from pathlib import Path
 from datetime import datetime, date, timedelta
-import subprocess, os, locale, json, gi, socket, shutil, tarfile, re
+import subprocess, os, locale, json, gi, socket, shutil, zipfile, tarfile, re
 from gi.repository import Gio, GLib
 from localization import *
+from password_store import *
 
 dt = datetime.now()
 
@@ -67,22 +68,13 @@ class Syncing:
         if not os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
             subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
         self.get_pb_info()
+        self.file = "test_Sync"
         os.makedirs(f"{CACHE}/syncing", exist_ok=True) # create the subfolder in the cache directory
         os.chdir(f"{CACHE}/syncing")
         os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
         print("extracting the archive")
-        try:
-            with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
-                for member in tar.getmembers():
-                    try:
-                        tar.extract(member)
-                    except PermissionError as e:
-                        print(f"Permission denied for {member.name}: {e}")
-        except Exception as e:
-            os.system(f"notify-send '{_['err_occured']}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
-            exit()
-        self.import_config()
-    
+        self.get_zip_file_status()
+        
     # Get data from the SaveDesktop.json file such as filename format, periodic saving interval and folder (for bidirectional synchronization)
     def get_pb_info(self):
         with open(os.path.join(settings['file-for-syncing'], "SaveDesktop.json")) as data:
@@ -92,6 +84,78 @@ class Syncing:
             settings["filename-format"] = info["filename"]
             settings["periodic-saving"] = info["periodic-saving-interval"]
             settings["periodic-saving-folder"] = settings["file-for-syncing"]
+        
+    # Check, if the ZIP archive is encrypted or not
+    def get_zip_file_status(self):
+        try:
+            status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(f"{settings['file-for-syncing']}/{self.file}.sd.zip").infolist() if not z.filename.endswith("/"))
+        except:
+            status = False
+            
+        if status == True:
+            self.get_pwd_from_file()
+        else:
+            self.password = None
+            self.extract_archive()
+    
+    # Get a password from the {DATA}/password file
+    def get_pwd_from_file(self):
+        def try_passwordstore():
+            try:
+                p = PasswordStore()
+                return p.password
+            except Exception as e:
+                print(f"[PasswordStore failed] {e}")
+                return None
+
+        # #1 First attempt
+        self.password = try_passwordstore()
+
+        # #2 If it fails, run GUI
+        if not self.password:
+            os.system("python3 /app/password_check_gui.py")
+            self.password = try_passwordstore()
+
+        # #3 If password is still unavailable, get it from the {DATA}/entered-password.txt file
+        if not self.password and os.path.exists(f"{DATA}/entered-password.txt"):
+            with open(f"{DATA}/entered-password.txt") as ep:
+                self.password = ep.read().strip()
+
+        # #4 Final check
+        if not self.password:
+            msg = _["password_store_err"]
+            err_occured = _['err_occured']
+            print(msg)
+            os.system(f'notify-send "{err_occured}" "{msg}"')
+            exit()
+
+        # #5 Continue in extraction
+        self.extract_archive()
+                
+    # Extract the configuration archive
+    def extract_archive(self):
+        print("No errors with getting a password detected.")
+        try:
+            if os.path.exists(f"{settings['file-for-syncing']}/{self.file}.sd.zip"):
+                with zipfile.ZipFile(f"{settings['file-for-syncing']}/{self.file}.sd.zip", "r") as zip_ar:
+                    for member in zip_ar.namelist():
+                        if self.password != None:
+                            zip_ar.extract(member, path=f"{CACHE}/syncing", pwd=self.password.encode("utf-8"))
+                        else:
+                            zip_ar.extract(member, path=f"{CACHE}/syncing")
+            else:
+                with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
+                    for member in tar.getmembers():
+                        try:
+                            tar.extract(member)
+                        except PermissionError as e:
+                            print(f"Permission denied for {member.name}: {e}")
+            self.password = None
+            os.system(f"rm {DATA}/entered-password.txt")
+        except Exception as e:
+            os.system(f"notify-send '{_['err_occured']}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
+            exit()
+        self.import_config()
     
     # Start importing a configuration from the configuration archive
     def import_config(self):

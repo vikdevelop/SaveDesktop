@@ -18,25 +18,16 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.5.4"
+v = "3.6_6"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>Added Tamil translations (thanks to @TamilNeram) and fixed minor bugs.</p>\
-<p>3.5.3</p>\
-<p>Improved an interval logic for periodic saving and synchronization (#373), added support for saving the configuration without an archive (terminal only yet) (#368), added Estonian translations thanks to Priit Jõerüüt (Weblate), and fixed minor bugs.</p>\
-<p>3.5.2</p>\
-<p>Fixed a bug with loading the password requirement in the Cinnamon DE for unlocking the Nextcloud folder, and added a notification about starting synchronization.</p>\
-<p>3.5.1</p>\
-<ul><li>Fixed the UnboundLocalError when the user selects the Nextcloud drive as a periodic saving folder or cloud drive folder</li>\
-<li>Added support for saving the ~/.local/share/gvfs-metadata folder if the Desktop option is enabled</li>\
-<li>Added Swedish translations, thanks to @bittin</li></ul>\
-<p>3.5</p><ul>\
-<li>Added dialog for the initial setting up synchronization; if you have set up synchronization before, it doesn't show</li>\
-<li>Temporarily disabled support for synchronization in the Snap environment due to unreliability</li>\
-<li>Added more keyboard shortcuts</li>\
-<li>Added support for the Hyprland window manager, thanks to @pyclicker</li>\
-<li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>\
-<li>The UI is now more adaptive on the smaller screens</li>\
-</ul>"
+rel_notes = "<p>Added a dialog window to entering a password for the encrypted archive used in the synchronization mode and fixed related bugs.</p>\
+<p>3.6_5-beta</p><p>Improved security of the password saved in the app's data directory and importing a configuration from the folder.</p>\
+<p>3.6_4-HOTFIX-beta</p><p>Fixed bugs with file chooser dialog and showing a text in the Saving configuration page</p>\
+<p>3.6_4-beta</p><p>Added support for using the syncthing folders in the synchronization (#392) and fixed a bug with saving or importing configuration in the CLI and related bugs.</p>\
+<p>3.6_3-beta</p><p>From now on, it will be used only ZIP format in all operations, including manual saving configuration and periodic saving, but it will be retained backward compatibility for the *.sd.tar.gz archive format.</p>\
+<p>3.6_2-beta</p><p>Added support for saving a configuration without creating the archive and changed the archive format from *.tgz to *.tzst</p>\
+<p>3.6_1-beta</p><ul><li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization</li>\<li>Changed the archive format from *.tar.gz to *.tgz (only for manual saving yet)</li>\<li>Minor UI improvements</li></ul>\
+"
 
 flatpak = os.path.exists("/.flatpak-info")
 snap = os.environ.get('SNAP_NAME', '') == 'savedesktop'
