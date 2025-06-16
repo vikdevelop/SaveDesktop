@@ -90,5 +90,14 @@
     "check_pwd_desc": "உங்கள் உள்ளமைவுடன் காப்பகத்தைத் திறக்கக் கீழே உள்ள கடவுச்சொல்லை உள்ளிடவும். நீங்கள் அதை மறந்துவிட்டால், நீங்கள் காப்பகத்தை அவிழ்த்து உங்கள் உள்ளமைவை இறக்குமதி செய்யத் தொடங்க முடியாது.",
     "summary": "உங்கள் பணிமேடை உள்ளமைவைச் சேமி",
     "description": "உங்கள் தற்போதைய உள்ளமைவை (கருப்பொருள்கள், சின்னங்கள், பின்ணணிகள், அனைத்து பணிமேடை சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே சொடுக்கில் சேமிக்க சேமிபணிமேடை உங்களை அனுமதிக்கிறது.",
-    "translator_credits": "தமிழ்நேரம் <https://TamilNeram.github.io>"
+    "translator_credits": "தமிழ்நேரம் <https://TamilNeram.github.io>",
+    "pwd_for_encryption": "Password for encryption",
+    "manual_saving": "Manual saving",
+    "remember_password": "Remember Password",
+    "import_from_folder": "Import from folder",
+    "syncthing_folder": "Use syncthing folder instead",
+    "save_without_archive": "Save the configuration without creating an archive",
+    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
+    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
 }
