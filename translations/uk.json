@@ -90,5 +90,14 @@
     "select": "Вибрати",
     "gnome_oa_section_desc": "У цьому розділі виберіть хмарний сервіс, який вам потрібен, наприклад, Google, Microsoft 365 або Nextcloud.",
     "gnome_oa_settings": "1. Відкрийте налаштування системи",
-    "gnome_oa_chooser": "3. Натисніть кнопку \"Далі\" та виберіть створену папку хмарного диска"
+    "gnome_oa_chooser": "3. Натисніть кнопку \"Далі\" та виберіть створену папку хмарного диска",
+    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
+    "remember_password": "Remember Password",
+    "syncthing_folder": "Use syncthing folder instead",
+    "save_without_archive": "Save the configuration without creating an archive",
+    "import_from_folder": "Import from folder",
+    "pwd_for_encryption": "Password for encryption",
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization.",
+    "manual_saving": "Manual saving",
+    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration"
 }
