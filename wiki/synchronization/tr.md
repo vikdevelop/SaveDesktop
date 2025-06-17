@@ -1,6 +1,6 @@
-# Sincronización entre ordenadores de la red
+# Ağdaki bilgisayarlar arasında senkronizasyon
 
-In addition to saving the configuration and importing it, SaveDesktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
+SaveDesktop, yapılandırmayı kaydetmenin ve içe aktarmanın yanı sıra, bunu ağınızdaki bilgisayarlar arasında senkronize etmenize de olanak tanır. Bu senkronizasyon, paylaşılan bir bulut klasörü veya Syncthing gibi paylaşılan bir klasör aracılığıyla yapılabilir.
 
 ## Setting Up on the First Computer
 1. Open the **Sync** page in the SaveDesktop app.

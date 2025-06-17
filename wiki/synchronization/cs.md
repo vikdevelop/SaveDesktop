@@ -1,5 +1,7 @@
 # Synchronizace mezi počítači v síti
 
+Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.
+
 ## Nastavení prvního počítače
 1. V aplikaci SaveDesktop otevřete stránku **Sync**.
 2. Klepněte na tlačítko **„Nastavit synchronizační soubor “**.

@@ -1,5 +1,7 @@
 # नेटवर्क में कंप्यूटरों के बीच समन्वयन
 
+In addition to saving the configuration and importing it, SaveDesktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
+
 ## Setting Up on the First Computer
 1. Open the **Sync** page in the SaveDesktop app.
 2. Click **“Set up the sync file.”**
