@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="synchronization_between_computers_title"></str>
+  <str key="synchronization_intro"></str>
+  <str key="set_up_first_pc"></str>
+  <str key="set_up_second_pc"></str>
+  <str key="bidirectional_sync"></str>
+  <str key="synchronization_files"></str>
+  <str key="saving_cfg_title"></str>
+  <str key="version_warning"></str>
+  <str key="saving_cfg_intro"></str>
+  <str key="save_cfg_outro"></str>
+  <str key="import_cfg_in_cli_title"></str>
+  <str key="imp_cfg_cli_intro"></str>
+  <str key="imp_cfg_cli_steps"></str>
+  <str key="imp_cfg_cli_note"></str>
+</root>
