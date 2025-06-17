@@ -1,19 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title">Sincronització entre ordinadors de la xarxa</str>
-  <str key="periodic_sync">## Sincronització periòdica
-Podeu triar entre les opcions següents:
-- Diàriament
-- Setmanalment
-- Mensualment
-- Manualment (és possible realitzar la sincronització en qualsevol moment des del menú principal en fer clic als tres punts)
-- Mai (no es duu a terme cap canvi)</str>
-  <str key="save_installed_flatpaks_title">Desa el programari Flatpak per ser instal·lat des d'una llista</str>
-  <str key="save_flatpak_intro">Des de la versió 2.5, el SaveDesktop us permet desar el programari Flatpak existent i instal·lar-ho des d'una llista. Com funciona això?</str>
-  <str key="saving_flatpaks">### Desat del programari Flatpak instal·lat
-És possible crear una llista del programari Flatpak existent a la carpeta `/var/lib/flatpak/app` del sistema, però no a el que es trobi a `~/.local/share/flatpak/app`. Al fitxer de configuració desat, la llista del programari Flatpak està etiquetat com a `installed_flatpaks.sh`.</str>
-  <str key="installing_flatpaks">### Instal·lació de programari Flatpak des d'una llista
-Després d'importar el fitxer de configuració, en tornar a iniciar la sessió, **el programari Flatpak s'instal·larà en rerefons.**</str>
   <str key="version_warning">**Aquesta característica és disponible des de la versió: `3.2.2`**</str>
   <str key="import_cfg_in_cli_title">Important la configuració</str>
   <str key="imp_cfg_cli_intro">A més de la importació mitjançant la interfície gràfica (GUI), el SaveDesktop també us permet importar la configuració mitjançant la línia d'ordres (CLI), que podeu utilitzar en cas que el vostre entorn d'escriptori es trenqui.</str>
@@ -35,68 +22,7 @@ Inseriu l'ordre següent a la consola d'ordres:
      ```</str>
   <str key="imp_cfg_cli_note">**Nota**:
 - En comptes de `/ruta/del/fitxer.sd.tar.gz`, indiqueu la ruta real on es troba el fitxer de configuració que voleu importar, com ara: `/home/benet/Documents/config.sd.tar.gz`</str>
-  <str key="archive_encryption_">Xifrat del fitxer</str>
-  <str key="archive_encryption_desc">Si, per raons de seguretat o qualsevol altre motiu, voleu xifrar el fitxer de configuració, podeu utilitzar la característica inclosa al SaveDesktop. Com es fa, llavors?</str>
-  <str key="ac_intro">## Com funciona?
-En habilitar aquesta característica, el SaveDesktop us demanarà sempre crear-ne una contrasenya per als fitxers de configuració nous que es generin. Perquè la contrasenya sigui forta, ha de tenir almenys 12 caràcters, contenir una majúscula i una minúscula, a més d'un caràcter especial. Si la contrasenya no compleix aquests requisits, no serà possible continuar desant la configuració. </str>
-  <str key="ac_warn">&amp;gt; [!ATENCIÓ]  
-&amp;gt; El desament periòdic crea sempre fitxers sense contrasenya. Els fitxers xifrats no es poden emprar en tasques de sincronització.</str>
-  <str key="ac_setup">## Com es configura?
-A partir de la versió 3.3, la interfície ha canviat significativament, en concret la secció del desament periòdic que ara es troba al botó «Més opcions». Al mateix lloc, es troba la secció de xifratge. Feu clic al botó esmenat i habiliteu l'opció Xifrat del fitxer.</str>
   <str key="saving_cfg_title">Desant la configuració</str>
   <str key="saving_cfg_intro">Tant si preferiu la línia d'ordres (CLI) com ara un entorn gràfic (GUI), el SaveDesktop us permet dur a terme la tasca de totes dues formes.</str>
   <str key="save_cfg_outro">En utilitzar aquest mètode, s'empraran els paràmetres de la interfície gràfica (GUI). Específicament els paràmetres del desament periòdic, com ara el format de nom de fitxer i la carpeta de destinació on desar els fitxers. Podeu desar la configuració amb aquest mètode sempre que vulgueu, independentment de l'interval de desament automàtic triat.</str>
-  <str key="enc">El fitxer es desarà com a format ZIP (perquè un Tar no suporta protecció per contrasenya) i, en intentar extreure el seu contingut, si us demanarà la contrasenya que vau utilitzar durant el procés de creació. També si us demanarà quan vulgueu importar-ne la configuració.
-
-Si oblideu la contrasenya, no serà possible de cap manera extreure el contingut o importar cap configuració continguda al fitxer.</str>
-  <str key="requirements">#### Requisits
-- Heu de crear prèviament una carpeta que sincronitzi amb el vostre emmagatzematge al núvol i que sigui disponible a cada ordinador que voleu aplicar la sincronització. Es pot dur a terme utilitzant:</str>
-  <str key="set_up_first_computer">## Configuració de la sincronització a l'aplicació SaveDesktop
-Al primer ordinador:
-1. Obriu l'aplicació SaveDesktop
-2. A la pàgina de sincronització, feu clic al botó «Configura el fitxer de sincronització» i després al botó «Canvia»
-3. Feu clic a «Desat periòdic» i seleccioneu la carpeta que sincronitza amb l'emmagatzematge al núvol com a carpeta de desat periòdic
-4. Si el fitxer de configuració no existeix, feu clic al botó «Crea»</str>
-  <str key="rclone">&lt;details&gt;
-    &lt;summary&gt;&lt;b&gt;Rclone&lt;/b&gt;&lt;p&gt;(per a altres entorns d'escriptori)&lt;/p&gt;&lt;/summary&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Instal·leu el Rclone&lt;/li&gt;
-      &lt;pre&gt;&lt;code&gt;sudo -v ; curl https://rclone.org/install.sh | sudo bash&lt;/code&gt;&lt;/pre&gt;
-      &lt;li&gt;Utilitzeu aquesta ordre que crearà la carpeta al núvol, configura el Rclone i munta la carpeta
-      &lt;pre&gt;&lt;code&gt;mkdir -p ~/drive &amp;amp;&amp;amp; rclone config create drive el-vostre-servei-al-núvol &amp;amp;&amp;amp; nohup rclone mount drive: ~/drive --vfs-cache-mode writes &amp;amp; echo "S'ha muntat la unitat correctament"&lt;/code&gt;&lt;/pre&gt;
-      &lt;p&gt;* En comptes d' `el-vostre-servei-al-núvol ` indiqueu el nom del proveïdor de serveis, com ara `drive` (per al Google Drive), `onedrive`, `dropbox`, etc.&lt;/p&gt;&lt;/li&gt;
-      &lt;li&gt;Permeteu l'accés a la carpeta creada mitjançant l'aplicació [Flatseal app](https://flathub.org/apps/com.github.tchx84.Flatseal).&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/details&gt;
-  
-  </str>
-  <str key="set_up_second_computer">Al segon ordinador:
-1. Inicieu el SaveDesktop
-2. Aneu a la pàgina de sincronització i feu clic al botó «Connecta amb l'emmagatzematge al núvol».
-3. Feu clic al botó «Selecciona la carpeta al núvol» i trieu la carpeta del mateix emmagatzematge al núvol que té el primer ordinador.
-4. Seleccioneu la periodicitat de la sincronització perquè, si ho deixeu en blanc, la sincronització no funcionarà.
-
-Per a configurar una sincronització bidireccional, assegureu-vos que teniu configurada la mateixa carpeta de l'apartat «Connectat amb l'emmagatzematge al núvol» del primer ordinador, que existeix un interval de sincronització periòdica seleccionat i que està habilitada l'opció «Sincronització bidireccional».
-</str>
-  <str key="gnome_online_accounts">&lt;details&gt;
-    &lt;summary&gt;&lt;b&gt;Comptes en línia del GNOME&lt;/b&gt;&lt;p&gt;(per a entorns d'escriptori GNOME, Cinnamon, COSMIC (obsolet) i Budgie)&lt;/p&gt;&lt;/summary&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Obriu la configuració del GNOME&lt;/li&gt;
-      &lt;li&gt;Aneu a la secció dels comptes en línia i trieu el servei al núvol de la vostra preferència&lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png"&gt;
-    
-  &lt;/details&gt;
-      
-        Comptes en línia del GNOME
-        (per a entorns d'escriptori GNOME, Cinnamon, COSMIC (obsolet) i Budgie)
-      
-
-    - Obriu la configuració del GNOME
-    - Aneu a la secció dels comptes en línia i trieu el servei al núvol de la vostra preferència
-
-      ![OnlineAccounts.png](https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png) 
-    
-  
-  </str>
 </root>

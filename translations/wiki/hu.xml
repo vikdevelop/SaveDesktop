@@ -1,16 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title">Azonos hálózaton lévő számítógépek szinkronizálása</str>
-  <str key="periodic_sync">## Időszakos szinkronizálás
-Az alábbi tételek közül választhatsz:
-- Naponta
-- Hetente
-- Havonta
-- Never (nothing's happening)</str>
-  <str key="save_installed_flatpaks_title">Telepített Flatpak alkalmazások mentése és listából telepítése</str>
-  <str key="save_flatpak_intro">A 2.5-ös verzió óta a SaveDesktop lehetővé teszi a telepített Flatpak alkalmazások mentését és a listából történő telepítését. Hogyan is működik?</str>
-  <str key="saving_flatpaks">### A telepített Flatpak alkalmazások mentése
-A telepített Flatpak alkalmazások listája csak a `/var/lib/flatpak/app` rendszerkönyvtárba menthető, a `~/.local/share/flatpak/app` főkönyvtárba nem. A mentett konfigurációs archívumban a telepített Flatpak alkalmazások listája `installed_flatpaks.sh` címkével van ellátva.</str>
-  <str key="installing_flatpaks">### Flatpak alkalmazások telepítése a listából
-A mentett konfigurációs fájl importálása és újbóli bejelentkezés után **a Flatpak alkalmazások telepítése megkezdődik a háttérben.**</str>
 </root>

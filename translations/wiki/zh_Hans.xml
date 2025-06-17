@@ -1,19 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title">通过网络在不同计算机中同步</str>
-  <str key="periodic_sync">## 定期同步
-您可从以下方案中选择:
-- 每日
-- 每周
-- 每月
-- 手动（可手动点击标题栏的三点按钮进行手动同步）
-- 从不（无事发生）</str>
-  <str key="save_installed_flatpaks_title">保存已安装的Flatpak应用并通过列表进行安装</str>
-  <str key="save_flatpak_intro">自2.5版本以后，SaveDesktop允许您保存已安装的Flatpak应用，并支持通过列表安装Flatpak应用。那么它是如何工作的呢？</str>
-  <str key="saving_flatpaks">### 保存已安装的Flatpak应用
-为已安装的Flatpak应用建立列表是可行的。列表将读取系统安装路径/var/lib/flatpak/app和用户安装路径~/.local/share/flatpak/app中的应用，而保存好的列表将位于存档文件中的installed_flatpaks.sh和installed_user_flatpaks.sh，它们同样分别对应系统安装和用户安装。</str>
-  <str key="installing_flatpaks">### 从列表安装Flatpak应用
-当完成导入并重新登录后，**Flatpak应用将在后台自动安装。**</str>
   <str key="version_warning">**自`3.2.2`版本起，该功能已实现。**</str>
   <str key="import_cfg_in_cli_title">导入配置</str>
   <str key="imp_cfg_cli_intro">除了通过图形界面导入配置，SaveDesktop也允许您通过命令行界面（CLI）导入配置，当您的桌面环境受损时，这也许会很有用。</str>
