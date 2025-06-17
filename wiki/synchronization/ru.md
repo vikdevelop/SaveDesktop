@@ -1,55 +1,35 @@
-
 # Синхронизация между компьютерами в сети
-#### Требования
-- На каждом компьютере, который вы хотите синхронизировать, должна быть создана папка, которая будет синхронизироваться с облачным хранилищем. Это можно сделать с помощью:
 
-  <details>
-      <summary>
-        <b>GNOME Online Accounts</b>
-        <p>(для окружений рабочего стола GNOME, Cinnamon, COSMIC (Old) и Budgie)</p>
-      </summary>
-      <ul>
-        <li>Откройте настройки GNOME</li>
-        <li>Перейдите в раздел «Сетевые учетные записи» и выберите свой облачный сервис</li>
-      </ul>
+## Setting Up on the First Computer
+1. Open the **Sync** page in the SaveDesktop app.
+2. Click **“Set up the sync file.”**
+3. A quick setup wizard will appear:
+   * If you're using GNOME, Cinnamon, Budgie, or older COSMIC, the **GNOME Online Accounts** method is used.
+   * For KDE Plasma or other desktops, it switches to **Rclone** (you’ll just need to copy a command and paste it into the terminal).
+   * Alternatively, you can use **Syncthing** by clicking **“Use Syncthing’s folder instead”** and selecting a synced folder.
+4. After finishing the wizard, the **“Set up the sync file”** dialog will open:
+   * A **periodic saving file** (your desktop config archive) will start generating inside the selected folder.
+   * You can optionally change the interval or filename using the **“Change”** button.
+5. Click **“Apply”**:
+   * A second file, `SaveDesktop.json`, is created in the same folder. It contains the sync file name and saving interval.
+   * You will be prompted to **log out** of your session so synchronization can fully activate.
 
-      <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
-      
-  </details> 
+## Connecting on Another Computer
+1. On the other computer, go to the **Sync** page again.
+2. Click **“Connect to the cloud storage.”**
+3. The same wizard will appear – choose your synced folder via GNOME OA, Rclone, or Syncthing.
+4. After the wizard:
+   * The **“Connect to the cloud storage”** dialog opens.
+   * Select the **sync interval** and enable or disable **Bidirectional synchronization**.
+5. Click **“Apply”**:
+   * You will be prompted to **log out**, or (if using manual sync) informed that you can sync from the app’s header menu.
+   * After logging back in, SaveDesktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
 
-  <details>
-    <summary><b>Rclone</b><p>(для других окружений рабочего стола)</p></summary>
-    <ul>
-      <li>Установка Rclone</li>
-      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
-      <li>Настройте Rclone с помощью этой команды, которая создаст папку облачного диска, настроит Rclone и смонтирует папку
-      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "Диск успешно смонтирован"</code></pre>
-      <p>* Вместо <code>your-cloud-drive-service</code> используйте название вашего облачного сервиса, например <code>drive</code> (для Google Drive), <code>onedrive</code>, <code>dropbox</code> и т. д.</p></li>
-    </ul>
-  </details>
-  
-## Настройка синхронизации в приложении SaveDesktop
-На первом компьютере:
-1. Откройте приложение SaveDesktop
-2. На странице «Синхронизация» нажмите на кнопку «Настроить файл синхронизации», а затем на кнопку «Изменить».
-3. Нажмите на «Периодическое сохранение» и выберите папку, которая синхронизируется с облачным хранилищем, в качестве папки периодического сохранения
-4. Если файл периодического сохранения не существует, нажмите на кнопку «Создать»
+### Bidirectional Synchronization
+If **Bidirectional synchronization** is enabled on both computers:
+* SaveDesktop copies sync settings (such as interval and filename) from one machine to the other,
+* This keeps your systems in sync without needing to configure each one manually.
 
-На втором компьютере:
-1. Откройте приложение SaveDesktop
-2. Перейдите на страницу «Синхронизация» и нажмите кнопку «Подключиться к облачному хранилищу».
-3. Нажмите кнопку «Выбрать папку облачного диска» и выберите папку, синхронизированную с тем же облачным хранилищем, что и на первом компьютере.
-4. Выберите периодический интервал синхронизации, так как если оставить значение «Никогда», синхронизация не будет работать.
-
-Чтобы настроить двунаправленную синхронизацию, убедитесь, что в диалоговом окне «Подключение к облачному хранилищу» на первом компьютере выбрана та же облачная папка, выбран периодический интервал синхронизации и включен переключатель «Двунаправленная синхронизация».
-
-### Периодическая синхронизация
-Вы можете выбрать один из следующих вариантов:
-- Ежедневно
-- Еженедельно
-- Ежемесячно
-- Вручную (можно синхронизировать конфигурацию из меню в строке заголовка, нажав на три точки)
-- Никогда (ничего не происходит)
-
-{% include footer.html %}
-
+## Files Used in Synchronization
+* **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
+* **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.
