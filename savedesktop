@@ -16,10 +16,10 @@ sys.path.append(init_dir)
 # Command-line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("--background", action="store_true", help="Start periodic saving")
-parser.add_argument("--sync", action="store_true", help="Sync a desktop configuration")
-parser.add_argument("--save-now", action="store_true", help="Save a configuration using UI parameters (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/saving-importing-configuration-in-cli/en#saving-configuration)")
-parser.add_argument("--save-without-archive", type=str, help="Save a configuration without an archive", dest="FOLDER_PATH")
-parser.add_argument("--import-config", help="Import a configuration from a file (learn more: https://vikdevelop.github.io/SaveDesktop/wiki/saving-importing-configuration-in-cli/en#importing-configuration)", type=str, dest="CFG_ARCHIVE_PATH")
+parser.add_argument("--sync", action="store_true", help="Start synchronization")
+parser.add_argument("--save-now", action="store_true", help="Save a configuration using UI parameters such as periodic saving folder, file name format and password for encryption.")
+parser.add_argument("--save-without-archive", type=str, help="Save the configuration without an archive", dest="FOLDER_PATH")
+parser.add_argument("--import-config", help="Import a configuration from a file (*.sd.zip or *.sd.tar.gz) or folder", type=str, dest="CFG_ARCHIVE_PATH")
 cmd = parser.parse_args()
 
 # Run Python scripts from the listed command-line arguments
@@ -60,7 +60,7 @@ elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
     elif os.path.exists(f"{file_path}/.folder.sd"):
         shutil.copytree(file_path, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
     else:
-        print("Unsupported file type. Use *.sd.tar.gz, *.sd.zip or folder which contains the \".folder.sd\" file.")
+        print("Unsupported file type. Use *.sd.zip, *.sd.tar.gz or folder which contains the \".folder.sd\" file.")
         exit(1)
     
     os.system(f"python3 {init_dir}/config.py --import_")
