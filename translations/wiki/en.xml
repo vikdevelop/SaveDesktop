@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="synchronization_between_computers_title">Synchronization between computers in the network</str>
+  <str key="synchronization_between_computers_title"># Synchronization between computers in the network</str>
   <str key="synchronization_intro">In addition to saving the configuration and importing it, SaveDesktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.</str>
   <str key="set_up_first_pc">## Setting Up on the First Computer
 1. Open the **Sync** page in the SaveDesktop app.

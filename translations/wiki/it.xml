@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="synchronization_between_computers_title">Sincronizzazione tra computer in rete</str>
+  <str key="synchronization_between_computers_title"># Sincronizzazione tra computer in rete</str>
   <str key="synchronization_intro">Oltre a salvare la configurazione e importarla, SaveDesktop consente anche di sincronizzarla tra i computer della rete utilizzando una cartella cloud condivisa o una cartella Syncthing condivisa.</str>
   <str key="set_up_second_pc">## Connessione su un altro computer
 1. Sull'altro computer, accedi nuovamente alla pagina **Sincronizzazione**.

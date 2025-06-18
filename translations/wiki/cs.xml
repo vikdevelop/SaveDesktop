@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="synchronization_between_computers_title">Synchronizace mezi počítači v síti</str>
+  <str key="synchronization_between_computers_title"># Synchronizace mezi počítači v síti</str>
   <str key="synchronization_intro">Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.</str>
   <str key="set_up_second_pc">## Připojení k jinému počítači
 1. Na druhém počítači znovu přejděte na stránku **Synchronizace**.

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="synchronization_between_computers_title">Ağdaki bilgisayarlar arasında senkronizasyon</str>
+  <str key="synchronization_between_computers_title"># Ağdaki bilgisayarlar arasında senkronizasyon</str>
   <str key="synchronization_intro">SaveDesktop, yapılandırmayı kaydetmenin ve içe aktarmanın yanı sıra, bunu ağınızdaki bilgisayarlar arasında senkronize etmenize de olanak tanır. Bu senkronizasyon, paylaşılan bir bulut klasörü veya Syncthing gibi paylaşılan bir klasör aracılığıyla yapılabilir.</str>
   <str key="set_up_first_pc"/>
   <str key="set_up_second_pc"/>
