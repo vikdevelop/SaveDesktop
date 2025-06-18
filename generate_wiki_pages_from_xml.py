@@ -62,6 +62,7 @@ def main():
         try:
             with open(md_path, "w", encoding="utf-8") as f:
                 f.write(markdown_content)
+                f.write("\n{% include footer.html %}")
             print(f"Generated: {md_path}")
         except Exception as e:
             print(f"Failed to write {md_path}: {e}")

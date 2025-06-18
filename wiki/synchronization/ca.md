@@ -35,3 +35,5 @@ If **Bidirectional synchronization** is enabled on both computers:
 ## Files Used in Synchronization
 * **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
 * **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.
+
+{% include footer.html %}

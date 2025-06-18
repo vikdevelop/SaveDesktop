@@ -35,3 +35,5 @@ Pokud je **obousměrná synchronizace** povolena na obou počítačích:
 ## Soubory použité při synchronizaci
 * **Periodický ukládací soubor** - archiv `.sd.zip` konfigurace pracovní plochy, který je pravidelně aktualizován.
 * **SaveDesktop.json** - malý pomocný soubor, který ukládá název archivu a interval ukládání, používaný při nastavení synchronizace.
+
+{% include footer.html %}

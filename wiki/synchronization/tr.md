@@ -32,6 +32,8 @@ If **Bidirectional synchronization** is enabled on both computers:
 * SaveDesktop copies sync settings (such as interval and filename) from one machine to the other,
 * This keeps your systems in sync without needing to configure each one manually.
 
-## Files Used in Synchronization
-* **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
-* **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.
+## Senkronizasyonda Kullanılan Dosyalar 
+* **Periyodik kaydetme dosyası** – masaüstü yapılandırmanızın `.sd.zip` arşivi, düzenli olarak güncellenir.
+* **SaveDesktop.json** – arşivin dosya adını ve kaydetme aralığını depolayan, senkronizasyon kurulumu sırasında kullanılan küçük bir yardımcı dosya.
+
+{% include footer.html %}
