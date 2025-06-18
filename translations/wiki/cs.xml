@@ -1,30 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title">Synchronizace mezi počítači v síti</str>
-  <str key="version_warning">**Tato funkce je k dispozici od verze: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Import konfigurace</str>
-  <str key="imp_cfg_cli_intro">Kromě importu konfigurace v grafickém uživatelském rozhraní umožňuje SaveDesktop také importovat konfiguraci v rozhraní příkazového řádku (CLI), které můžete použít v případě, že se vaše desktopové prostředí rozbije.</str>
-  <str key="imp_cfg_cli_steps">### Jak tedy postupovat?
-**1. Otevřete terminál**
-
-Můžete jej otevřít z nabídky aplikací nebo pomocí klávesové zkratky Ctrl+Alt+T.
-
-**2. Zadejte příkaz**
-
-Do terminálu zadejte následující příkaz:
-- pokud máte SaveDesktop nainstalovaný jako balíček Flatpak, zadejte následující:
-     ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
-     ```
-- pokud máte SaveDesktop nainstalovaný jako Snap nebo nativní balíček, použijte:
-     ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
-     ```</str>
-  <str key="imp_cfg_cli_note">**Poznámka**:
-- místo `/path/to/filename.sd.tar.gz` zadejte cestu ke konfiguračnímu archivu, který chcete importovat, například: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
-  <str key="saving_cfg_title">Ukládání konfigurace</str>
-  <str key="saving_cfg_intro">Pokud dáváte přednost rozhraní příkazového řádku (CLI) před grafickým uživatelským rozhraním (GUI), SaveDesktop kromě ukládání konfigurace v grafickém uživatelském rozhraní umožňuje ukládat konfiguraci i v CLI.</str>
-  <str key="save_cfg_outro">Při použití této metody se používají parametry z grafického uživatelského rozhraní, konkrétně parametry z režimu pravidelného ukládání, jako je formát názvu souboru a vybraná složka pro pravidelné ukládání souborů. Pomocí této metody můžete konfiguraci uložit kdykoli chcete, bez ohledu na zvolený interval periodického ukládání.</str>
   <str key="synchronization_intro">Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.</str>
   <str key="set_up_second_pc">## Připojení k jinému počítači
 1. Na druhém počítači znovu přejděte na stránku **Synchronizace**.

@@ -1,30 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title">Sincronizzazione tra computer in rete</str>
-  <str key="version_warning">**Questa funzionalità è disponibile dalla versione: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Importazione della configurazione</str>
-  <str key="imp_cfg_cli_intro">Oltre a importare la configurazione nella GUI, SaveDesktop ti consente anche di importare la configurazione nell'interfaccia a riga di comando (CLI), che puoi utilizzare nel caso in cui il tuo ambiente desktop si guasti.</str>
-  <str key="imp_cfg_cli_steps">### Quindi, come procedere?
-**1. Apri un terminale**
-
-Puoi aprirlo dal menu delle applicazioni o usando la scorciatoia da tastiera Ctrl+Alt+T.
-
-**2. Inserisci il comando**
-
-Inserisci il seguente comando nel terminale:
-- se hai installato SaveDesktop come pacchetto Flatpak, usa quanto segue:
-     ```
-flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
-     ```
-- se hai installato SaveDesktop come pacchetto Snap o nativo, usa:
-     ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
-     ```</str>
-  <str key="imp_cfg_cli_note">**Nota**:
-- invece di `/path/to/filename.sd.tar.gz`, inserisci il percorso dell'archivio di configurazione che desideri importare, ad esempio: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
-  <str key="saving_cfg_title">Salvataggio della configurazione</str>
-  <str key="saving_cfg_intro">Se preferisci l'interfaccia della riga di comando (CLI) all'interfaccia utente grafica (GUI), SaveDesktop oltre a salvare la configurazione nella GUI, ti consente di salvare la configurazione nella CLI.</str>
-  <str key="save_cfg_outro">Quando si utilizza questo metodo, vengono utilizzati i parametri della GUI, in particolare i parametri della modalità di salvataggio periodico, come il formato del nome file e la cartella selezionata per il salvataggio periodico dei file. Puoi salvare la configurazione con questo metodo ogni volta che vuoi, indipendentemente dall'intervallo di salvataggio periodico selezionato.</str>
   <str key="synchronization_intro">Oltre a salvare la configurazione e importarla, SaveDesktop consente anche di sincronizzarla tra i computer della rete utilizzando una cartella cloud condivisa o una cartella Syncthing condivisa.</str>
   <str key="set_up_second_pc">## Connessione su un altro computer
 1. Sull'altro computer, accedi nuovamente alla pagina **Sincronizzazione**.

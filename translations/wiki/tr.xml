@@ -8,28 +8,4 @@
   <str key="synchronization_files">## Senkronizasyonda Kullanılan Dosyalar 
 * **Periyodik kaydetme dosyası** – masaüstü yapılandırmanızın `.sd.zip` arşivi, düzenli olarak güncellenir.
 * **SaveDesktop.json** – arşivin dosya adını ve kaydetme aralığını depolayan, senkronizasyon kurulumu sırasında kullanılan küçük bir yardımcı dosya.</str>
-  <str key="saving_cfg_title">Kaydediliyor</str>
-  <str key="version_warning">**Bu özellik `3.2.2` sürümüyle kullanılabilir**</str>
-  <str key="saving_cfg_intro">Grafiksel kullanıcı arayüzünden (GUI) önce komut satırı arayüzünü (CLI) tercih ediyorsanız, SaveDesktop GUI'de yapılandırmayı kaydetmenin yanı sıra CLI'de de yapılandırmayı kaydetmenize olanak tanır.</str>
-  <str key="save_cfg_outro">Bu yöntemi kullanırken, GUI'den parametreler, özellikle periyodik kaydetme modundan parametreler, örneğin dosya adı biçimi ve periyodik kaydetme dosyaları için seçili klasör kullanılır. Seçili periyodik kaydetme aralığından bağımsız olarak, yapılandırmayı istediğiniz zaman bu yöntemle kaydedebilirsiniz.</str>
-  <str key="import_cfg_in_cli_title">İçe aktarılıyor</str>
-  <str key="imp_cfg_cli_intro">SaveDesktop, yapılandırmayı GUI'ye aktarmanın yanı sıra, masaüstü ortamınız bozulursa kullanabileceğiniz komut satırı arayüzüne (CLI) de yapılandırma aktarmanıza olanak tanır.</str>
-  <str key="imp_cfg_cli_steps">### Nasıl yapılır?
-**1. Konsolu aç**
-
-Uygulamalar menüsünden ya da Ctrl+Alt+T klavye kısayolunu kullanın.
-
-**2. Kodu girin**
-
-Konsola bu kodu girin:
-- SaveDesktop'u Flatpak paketi olarak yüklediyseniz, aşağıdakileri kullanın:
-     ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
-     ```
-- SaveDesktop'u Snap veya yerel paket olarak yüklediyseniz, şunu kullanın:: 
-     ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
-     ```</str>
-  <str key="imp_cfg_cli_note">**Not**:
-- `/path/to/filename.sd.tar.gz`yerine içe aktarmak istediğiniz yapılandırma arşivinin yolunu girin. Örneğin: `/home/user/Downloads/myconfig.sd.tar.gz`</str>
 </root>

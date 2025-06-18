@@ -1,27 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title">通过网络在不同计算机中同步</str>
-  <str key="version_warning">**自`3.2.2`版本起，该功能已实现。**</str>
-  <str key="import_cfg_in_cli_title">导入配置</str>
-  <str key="imp_cfg_cli_intro">除了通过图形界面导入配置，SaveDesktop也允许您通过命令行界面（CLI）导入配置，当您的桌面环境受损时，这也许会很有用。</str>
-  <str key="imp_cfg_cli_steps">### 那么该如何实现呢?
-**1. 打开一个终端**
-
-您可通过应用菜单，或者通过快捷键比如Ctrl+Alt+T来打开。
-
-**2. 输入命令以导入配置**
-
-在终端里输入以下命令:
-- 如果您通过Flatpak安装了SaveDesktop，则输入：
-
-     ```
-     flatpak run io.github.vikdevelop.SaveDesktop --import-config /path/to/filename.sd.tar.gz
-     ```
-
-- 如果您通过Snap或本地包安装，则输入：
-     ```
-     savedesktop --import-config /path/to/filename.sd.tar.gz
-     ```</str>
-  <str key="imp_cfg_cli_note">**请注意**:
-- 应当输入您想导入的配置文件的实际路径以取代`/path/to/filename.sd.tar.gz`，比如：`/home/user/Downloads/myconfig.sd.tar.gz`</str>
 </root>
