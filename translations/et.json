@@ -91,13 +91,13 @@
     "summary": "Salvesta oma töölaua seadistused",
     "description": "SaveDesktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne).",
     "translator_credits": "Priit Jõerüüt 2025",
-    "remember_password": "Remember Password",
-    "syncthing_folder": "Use Syncthing folder instead",
-    "save_without_archive": "Save the configuration without creating an archive",
-    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
-    "import_from_folder": "Import from folder",
-    "pwd_for_encryption": "Password for encryption",
-    "manual_saving": "Manual saving",
-    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "remember_password": "Jäta salasõna meelde",
+    "syncthing_folder": "Selle asemel kasuta Syncthingi kausta",
+    "save_without_archive": "Salvesta seadistused ilma arhiivi loomata",
+    "password_store_err": "Salasõna on kas sisestamata või vale. Jätkamine pole võimalik.",
+    "import_from_folder": "Impordi kaustast",
+    "pwd_for_encryption": "Krüptimise salasõna",
+    "manual_saving": "Käsitsi salvestamine",
+    "enter_password_title": "Seadistuste sünkroniseerimiseks palun sisesta salasõna",
+    "enter_password_desc": "Oled SaveDesktopi abil sünkroniseerimiseks valinud krüptitud arhiivifaili. Lukustuse eemaldamiseks palun sisesta salasõna ja sünkroniseerimine saab alata."
 }
