@@ -1,28 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title">Sincronização entre computadores na rede</str>
-  <str key="saving_cfg_title">Salvar configuração</str>
-  <str key="saving_cfg_intro">Se você preferir a interface de linha de comando (CLI) à interface gráfica de usuário (GUI), o SaveDesktop, além de salvar sua configuração pela GUI, também te permite salvar sua configuração pela CLI.</str>
-  <str key="save_cfg_outro">Ao usar este método, ele usa parâmetros da GUI, especificamente parâmetros do modo de salvamento periódico, como o formato de nome de arquivo e a pasta selecionada para os arquivos de salvamento periódico. Você pode salvar a configuração com esse método quando quiser, independente do intervalo de salvamento periódico escolhido.</str>
-  <str key="version_warning">**Essa funcionalidade está disponível a partir da versão: `3.2.2`**</str>
-  <str key="import_cfg_in_cli_title">Importar configuração</str>
-  <str key="imp_cfg_cli_intro">Além de importar configurações pela GUI, o SaveDesktop também permite que você importe configurações pela interface de linha de comando (CLI), a qual você pode usar caso o seu ambiente de área de trabalho quebre.</str>
-  <str key="imp_cfg_cli_steps">### Então, como proceder?
- ** 1. Abra um terminal **
-
- Você pode abri -lo no menu Aplicativos ou usando o atalho do teclado CTRL+ALT+T.
-
- ** 2. Digite o comando **
-
- Digite o seguinte comando no terminal:
- - Se você já salvou o pacote FlatPak, use o seguinte:
- `` `
- Flatpak Run io.github.vikdevelo.savedesktop --import-config /path/to/fileneame.sd.tar.gz
- `` `
- - Se você já salvou o SAVEDESKTOP instalado como um pacote snap ou nativo, use:
- `` `
- savedesktop --import-config /path/to/filename.sd.tar.gz
- `` `</str>
-  <str key="imp_cfg_cli_note">**Nota**:
-- em vez de `/caminho/para/nomedoarquivo.sd.tar.gz`, insira o caminho para o arquivo de configuração que você deseja importar, por exemplo: `/home/usuário/Downloads/minhaconfiguração.sd.tar.gz`</str>
 </root>
