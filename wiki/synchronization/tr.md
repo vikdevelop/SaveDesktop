@@ -2,35 +2,34 @@
 
 SaveDesktop, yapılandırmayı kaydetmenin ve içe aktarmanın yanı sıra, bunu ağınızdaki bilgisayarlar arasında senkronize etmenize de olanak tanır. Bu senkronizasyon, paylaşılan bir bulut klasörü veya Syncthing gibi paylaşılan bir klasör aracılığıyla yapılabilir.
 
-## Setting Up on the First Computer
-1. Open the **Sync** page in the SaveDesktop app.
-2. Click **“Set up the sync file.”**
-3. A quick setup wizard will appear:
-   * If you're using GNOME, Cinnamon, Budgie, or older COSMIC, the **GNOME Online Accounts** method is used.
-   * For KDE Plasma or other desktops, it switches to **Rclone** (you’ll just need to copy a command and paste it into the terminal).
-   * Alternatively, you can use **Syncthing** by clicking **“Use Syncthing’s folder instead”** and selecting a synced folder.
-4. After finishing the wizard, the **“Set up the sync file”** dialog will open:
-   * A **periodic saving file** (your desktop config archive) will start generating inside the selected folder.
-   * You can optionally change the interval or filename using the **“Change”** button.
-5. Click **“Apply”**:
-   * A second file, `SaveDesktop.json`, is created in the same folder. It contains the sync file name and saving interval.
-   * You will be prompted to **log out** of your session so synchronization can fully activate.
+## İlk Bilgisayarda Kurulum
+1. SaveDesktop uygulamasında **Senkronizasyon** sayfasını açın.
+2. **“Senkronizasyon dosyasını ayarla”** seçeneğine tıklayın.
+3. Hızlı kurulum sihirbazı görünecektir:
+   * GNOME, Cinnamon, Budgie veya daha eski COSMIC kullanıyorsanız, **GNOME Çevrimiçi Hesapları** yöntemi kullanılır.
+   * KDE Plasma veya diğer masaüstleri için **Rclone**'a geçer (sadece bir komutu kopyalayıp terminale yapıştırmanız gerekir).
+   * Alternatif olarak, **“Bunun yerine Syncthing’in klasörünü kullan”** seçeneğine tıklayıp senkronize edilmiş bir klasör seçerek **Syncthing**’i kullanabilirsiniz.
+4. Sihirbaz tamamlandıktan sonra, **“Senkronizasyon dosyasını ayarla”** arama kutusu açılacaktır:
+   * Seçili klasörün içinde **periyodik kayıt dosyası** (masaüstü yapılandırma arşiviniz) oluşturulmaya başlayacaktır.
+   * İsteğe bağlı olarak **“Değiştir”** düğmesini kullanarak aralığı veya dosya adını değiştirebilirsiniz. 5. **“Uygula”** düğmesine tıklayın:
+   * Aynı klasörde ikinci bir dosya, `SaveDesktop.json`, oluşturulur. Bu dosya senkronizasyon dosya adını ve kaydetme aralığını içerir.
+   * Senkronizasyonun tam olarak etkinleşebilmesi için oturumunuzdan **çıkış yapmanız** istenecektir.
 
-## Connecting on Another Computer
-1. On the other computer, go to the **Sync** page again.
-2. Click **“Connect to the cloud storage.”**
-3. The same wizard will appear – choose your synced folder via GNOME OA, Rclone, or Syncthing.
-4. After the wizard:
-   * The **“Connect to the cloud storage”** dialog opens.
-   * Select the **sync interval** and enable or disable **Bidirectional synchronization**.
-5. Click **“Apply”**:
-   * You will be prompted to **log out**, or (if using manual sync) informed that you can sync from the app’s header menu.
-   * After logging back in, SaveDesktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
+## Başka Bir Bilgisayara Bağlanma
+1. Diğer bilgisayarda tekrar **Senkronizasyon** sayfasına gidin.
+2. **“Bulut depolamaya bağlanın”** seçeneğine tıklayın
+3. Aynı sihirbaz karşınıza çıkacak – GNOME OA, Rclone veya Syncthing aracılığıyla senkronize ettiğiniz klasörü seçin.
+4. Sihirbazın ardından:
+   * **“Bulut depolamaya bağlanın”** iletişim kutusu açılır.
+   * **Senkronizasyon aralığını** seçin ve **Çift yönlü senkronizasyonu** etkinleştirin veya devre dışı bırakın.
+5. **“Uygula”**'ya tıklayın:
+   * **Oturumu kapatmanız** istenecek veya (manuel senkronizasyon kullanıyorsanız) uygulamanın başlık menüsünden senkronizasyon yapabileceğiniz bildirilecektir.
+   * Tekrar oturum açtığınızda SaveDesktop paylaşılan klasöre bağlanır ve yapılandırmanızı otomatik olarak eşitler; başlangıçta ve bitişte bir bildirim görüntüler.
 
-### Bidirectional Synchronization
-If **Bidirectional synchronization** is enabled on both computers:
-* SaveDesktop copies sync settings (such as interval and filename) from one machine to the other,
-* This keeps your systems in sync without needing to configure each one manually.
+### Çift Yönlü Senkronizasyon
+Her iki bilgisayarda da **Çift yönlü senkronizasyon** etkinleştirilmişse:
+* SaveDesktop, senkronizasyon ayarlarını (aralık ve dosya adı gibi) bir makineden diğerine kopyalar.
+* Bu, her birini manuel olarak yapılandırmanıza gerek kalmadan sistemlerinizin senkronize kalmasını sağlar.
 
 ## Senkronizasyonda Kullanılan Dosyalar 
 * **Periyodik kaydetme dosyası** – masaüstü yapılandırmanızın `.sd.zip` arşivi, düzenli olarak güncellenir.
