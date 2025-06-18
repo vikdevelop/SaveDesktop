@@ -1,6 +1,7 @@
 name: Generate Wiki Pages from XML
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'translations/wiki/*.xml'
