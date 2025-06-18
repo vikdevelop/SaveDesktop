@@ -91,13 +91,13 @@
     "gnome_oa_section_desc": "Bu bölümde Google, Microsoft 365 veya Nextcloud gibi istediğiniz bulut hizmetini seçin.",
     "gnome_oa_settings": "1. Sistem ayarlarını açın.",
     "gnome_oa_chooser": "3. İleri düğmesine tıklayın ve oluşturulan bulut sürücü klasörünü seçin",
-    "pwd_for_encryption": "Password for encryption",
-    "save_without_archive": "Save the configuration without creating an archive",
-    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "syncthing_folder": "Use Syncthing folder instead",
-    "remember_password": "Remember Password",
-    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
-    "import_from_folder": "Import from folder",
-    "manual_saving": "Manual saving",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "pwd_for_encryption": "Şifreleme için parola",
+    "save_without_archive": "Arşiv oluşturmadan yapılandırmayı kaydedin",
+    "enter_password_title": "Yapılandırmayı senkronize etmek için arşivin kilidini açmak üzere lütfen bir parola girin",
+    "syncthing_folder": "Bunun yerine Syncthing klasörünü kullanın",
+    "remember_password": "Parolayı hatırla",
+    "password_store_err": "Şifre girilmedi veya yanlış. Devam edilemiyor.",
+    "import_from_folder": "Klasörden aktar",
+    "manual_saving": "Manuel kaydet",
+    "enter_password_desc": "SaveDesktop uygulaması kullanılarak senkronizasyon için şifrelenmiş bir arşiv seçildi. Lütfen kilidini açmak ve senkronizasyonu başlatmak için aşağıdaki şifreyi girin."
 }
