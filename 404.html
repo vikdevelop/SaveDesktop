@@ -49,7 +49,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var currentUrl = window.location.href;
-            if (currentUrl.includes("/wiki/")) {
+            if (currentUrl.includes("/wiki/synchronization")) {
                 fetch(currentUrl, { method: 'HEAD' })
                     .then(response => {
                         if (response.status === 404) {
