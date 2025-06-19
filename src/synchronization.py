@@ -115,7 +115,7 @@ class Syncing:
 
         # #2 If it fails, run GUI
         if not self.password:
-            os.system("python3 /app/password_check_gui.py")
+            os.system(f"python3 {system_dir}/password_check_gui.py")
             self.password = try_passwordstore()
 
         # #3 If password is still unavailable, get it from the {DATA}/entered-password.txt file
