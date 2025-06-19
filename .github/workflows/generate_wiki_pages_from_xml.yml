@@ -26,8 +26,8 @@ jobs:
       - name: Checkout 'webpage' branch
         uses: actions/checkout@v4
         with:
-          ref: webpage_3.6
-          path: webpage_3.6
+          ref: webpage
+          path: webpage
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -40,13 +40,13 @@ jobs:
             --xml-dir=../tmp-xml \
             --output-dir=wiki/synchronization \
             --strings=synchronization_between_computers_title,synchronization_intro,set_up_first_pc,set_up_second_pc,bidirectional_sync,synchronization_files
-        working-directory: ./webpage_3.6
+        working-directory: ./webpage
 
       - name: Commit and push changes to 'webpage' branch
         run: |
-          cd webpage_3.6
+          cd webpage
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add wiki/synchronization/*.md
           git commit -m "Update wiki markdown from XML translations" || echo "No changes to commit"
-          git push origin webpage_3.6
+          git push origin webpage
