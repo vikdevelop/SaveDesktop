@@ -1361,11 +1361,15 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
        
     # start process of importing configuration
     def start_importing(self):
+        def import_folder():
+            shutil.copytree(self.import_folder, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
+        
         try:
             e_o = False
             os.system("echo > import_status")
             if self.is_folder == True:
-                shutil.copytree(self.import_folder, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
+                imp_folder_thread = Thread(target=import_folder)
+                imp_folder_thread.start()
             else:
                 if ".sd.zip" in self.import_file:
                     with zipfile.ZipFile(self.import_file, "r") as zip_ar:
