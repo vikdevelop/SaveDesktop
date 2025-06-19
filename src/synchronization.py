@@ -68,7 +68,7 @@ class Syncing:
         if not os.path.exists(f"{settings['file-for-syncing']}/SaveDesktop.json"):
             err_str = _["err_occured"]
             err = "SaveDesktop.json doesn't exist in the cloud drive folder!"
-            os.system(f'notify-send "{err_str}" "{err}')
+            os.system(f'notify-send "{err_str}" "{err}"')
             exit()
         self.get_pb_info()
         os.makedirs(f"{CACHE}/syncing", exist_ok=True) # create the subfolder in the cache directory
