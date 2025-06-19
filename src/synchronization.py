@@ -65,10 +65,12 @@ class Syncing:
     def download_config(self):
         subtitle = (lambda s: re.sub(r'<.*?>', '', s).split('…')[-1].strip())(_["importing_config_status"].format(settings["file-for-syncing"]))
         os.system(f'notify-send "SaveDesktop Synchronization" "{subtitle}"')
-        if not os.path.exists(f'{settings["file-for-syncing"]}/SaveDesktop.json'):
-            subprocess.run(['python3', f'{system_dir}/periodic_saving.py', '--now'], check=True)
+        if not os.path.exists(f"{settings['file-for-syncing']}/SaveDesktop.json"):
+            err_str = _["err_occured"]
+            err = "SaveDesktop.json doesn't exist in the cloud drive folder!"
+            os.system(f'notify-send "{err_str}" "{err}')
+            exit()
         self.get_pb_info()
-        self.file = "test_Sync"
         os.makedirs(f"{CACHE}/syncing", exist_ok=True) # create the subfolder in the cache directory
         os.chdir(f"{CACHE}/syncing")
         os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
