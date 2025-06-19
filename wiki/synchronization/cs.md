@@ -3,11 +3,11 @@
 Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.
 
 ## Nastavení prvního počítače
-1. V aplikaci SaveDesktop otevřete stránku **Sync**.
+1. V aplikaci SaveDesktop otevřete stránku **Synchronizovat**.
 2. Klepněte na tlačítko **„Nastavit synchronizační soubor “**.
 3. Zobrazí se průvodce rychlým nastavením:
-   * Pokud používáte prostředí GNOME, Cinnamon, Budgie nebo starší COSMIC, použije se metoda **GNOME Online Accounts**.
-   * V případě prostředí KDE Plasma nebo jiných desktopů se přepne na **Rclone** (stačí zkopírovat příkaz a vložit jej do terminálu).
+   * Pokud používáte prostředí GNOME, Cinnamon, Budgie nebo starší COSMIC, použije se metoda **Online účty GNOME**.
+   * V případě prostředí KDE Plasma nebo jiných prostředí se přepne na **Rclone** (stačí zkopírovat příkaz a vložit jej do terminálu).
    * Alternativně můžete použít **Syncthing** kliknutím na **„Použít místo toho složku Syncthing “** a výběrem synchronizované složky.
 4. Po dokončení průvodce se otevře dialogové okno **„Nastavit synchronizační soubor “**:
    * Ve vybrané složce se začne generovat **soubor pro periodické ukládání** (váš archív konfigurace pracovní plochy).
@@ -17,8 +17,8 @@ Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také jej�
    * Budete vyzváni k **odhlášení** z relace, aby se synchronizace mohla plně aktivovat.
 
 ## Připojení k jinému počítači
-1. Na druhém počítači znovu přejděte na stránku **Synchronizace**.
-2. Klepněte na tlačítko **„Připojit ke cloudovému úložišti “**.
+1. Na druhém počítači znovu přejděte na stránku **Synchronizovat**.
+2. Klepněte na tlačítko **„Připojit se ke cloudovému úložišti “**.
 3. Zobrazí se stejný průvodce - vyberte složku synchronizovanou prostřednictvím GNOME OA, Rclone nebo Syncthing.
 4. Po zobrazení průvodce:
    * Otevře se dialogové okno **„Připojit ke cloudovému úložišti “**.
