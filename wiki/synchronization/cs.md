@@ -1,50 +1,39 @@
-
 # Synchronizace mezi počítači v síti
-#### Požadavky
-- Na každém počítači, který chcete synchronizovat, musíte mít vytvořenou složku, která se bude synchronizovat s cloudovým úložištěm. To lze provést pomocí:
-  
-  <details>
-    <summary><b>Online účty GNOME</b><p>(pro prostředí GNOME, Cinnamon, COSMIC (Old) a Budgie)</p></summary>
-    <ul>
-      <li>Otevřete Nastavení prostředí GNOME</li>
-      <li>Přejděte do části Online účty a vyberte službu cloudového disku</li>
-    </ul>
-    <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
-    
-  </details>
 
-  <details>
-    <summary><b>Rclone</b><p>(pro jiná desktopová prostředí)</p></summary>
-    <ul>
-      <li>Nainstalujte Rclone</li>
-      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
-      <li>Nastavte Rclone pomocí tohoto příkazu, který vytvoří složku cloudové jednotky, nastaví Rclone a připojí složku
-      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
-      <p>* Namísto <code>your-cloud-drive-service</code> použijte název služby cloudového disku, například <code>drive</code> (pro Google Drive), <code>onedrive</code>, <code>dropbox</code> atd.</p></li>
-    </ul>
-  </details>
-  
-## Nastavení synchronizace v aplikaci SaveDesktop
-V prvním počítači:
-1. Otevřete aplikaci SaveDesktop
-2. Na stránce Synchronizace klikněte na tlačítko „Nastavit synchronizační soubor“ a poté na tlačítko „Změnit“. 3. Klikněte na tlačítko „Nastavit synchronizační soubor“.
-3. Klikněte na možnost „Periodické ukládání“ a vyberte složku, která je synchronizována s cloudovým úložištěm, jako složku pro pravidelné ukládání.
-4. Pokud soubor pro pravidelné ukládání neexistuje, klikněte na tlačítko Vytvořit
+Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.
 
-V druhém počítači:
-1. Otevřete aplikaci SaveDesktop
-2. Přejděte na stránku Synchronizace a klikněte na tlačítko „Připojit ke cloudovému úložišti“.
-3. Klikněte na tlačítko „Select cloud drive folder“ (Vybrat složku cloudové jednotky) a vyberte složku, která je synchronizována se stejným cloudovým úložištěm jako první počítač.
-4. Vyberte interval pravidelné synchronizace, protože pokud ponecháte hodnotu Nikdy, synchronizace nebude fungovat.
+## Nastavení prvního počítače
+1. V aplikaci SaveDesktop otevřete stránku **Synchronizovat**.
+2. Klepněte na tlačítko **„Nastavit synchronizační soubor “**.
+3. Zobrazí se průvodce rychlým nastavením:
+   * Pokud používáte prostředí GNOME, Cinnamon, Budgie nebo starší COSMIC, použije se metoda **Online účty GNOME**.
+   * V případě prostředí KDE Plasma nebo jiných prostředí se přepne na **Rclone** (stačí zkopírovat příkaz a vložit jej do terminálu).
+   * Alternativně můžete použít **Syncthing** kliknutím na **„Použít místo toho složku Syncthing “** a výběrem synchronizované složky.
+4. Po dokončení průvodce se otevře dialogové okno **„Nastavit synchronizační soubor “**:
+   * Ve vybrané složce se začne generovat **soubor pro periodické ukládání** (váš archív konfigurace pracovní plochy).
+   * Interval nebo název souboru můžete volitelně změnit pomocí tlačítka **„Změnit “**.
+5. Klepněte na tlačítko **„Použít “**:
+   * Ve stejné složce se vytvoří druhý soubor, `SaveDesktop.json`. Obsahuje název synchronizačního souboru a interval ukládání.
+   * Budete vyzváni k **odhlášení** z relace, aby se synchronizace mohla plně aktivovat.
 
-Chcete-li nastavit obousměrnou synchronizaci, ujistěte se, že máte v dialogovém okně „Připojit ke cloudovému úložišti“ na prvním počítači vybranou stejnou složku cloudového úložiště, zvolený interval periodické synchronizace a povolený přepínač „Obousměrná synchronizace“.
+## Připojení k jinému počítači
+1. Na druhém počítači znovu přejděte na stránku **Synchronizovat**.
+2. Klepněte na tlačítko **„Připojit se ke cloudovému úložišti “**.
+3. Zobrazí se stejný průvodce - vyberte složku synchronizovanou prostřednictvím GNOME OA, Rclone nebo Syncthing.
+4. Po zobrazení průvodce:
+   * Otevře se dialogové okno **„Připojit ke cloudovému úložišti “**.
+   * Vyberte **interval synchronizace** a povolte nebo zakažte **obousměrnou synchronizaci**.
+5. Klikněte na tlačítko **„Použít “**:
+   * Budete vyzváni k **odhlášení** nebo (pokud používáte ruční synchronizaci) informováni, že můžete synchronizovat z nabídky v záhlaví aplikace.
+   * Po opětovném přihlášení se aplikace SaveDesktop připojí ke sdílené složce a automaticky synchronizuje vaši konfiguraci s upozorněním na začátku a na konci.
 
-### Pravidelná synchronizace
-Můžete si vybrat mezi následujícími možnostmi:
-- Denně
-- Týdně 
-- Měsíčně 
-- Ručně (je možné synchronizovat konfiguraci z menu v záhlaví kliknutím na tři tečky)
-- Nikdy (nic se neděje)
+### Obousměrná synchronizace
+Pokud je **obousměrná synchronizace** povolena na obou počítačích:
+* SaveDesktop kopíruje nastavení synchronizace (například interval a název souboru) z jednoho počítače na druhý,
+* Díky tomu jsou vaše systémy synchronizovány, aniž byste museli každý z nich nastavovat ručně.
+
+## Soubory použité při synchronizaci
+* **Periodický ukládací soubor** - archiv `.sd.zip` konfigurace pracovní plochy, který je pravidelně aktualizován.
+* **SaveDesktop.json** - malý pomocný soubor, který ukládá název archivu a interval ukládání, používaný při nastavení synchronizace.
 
 {% include footer.html %}

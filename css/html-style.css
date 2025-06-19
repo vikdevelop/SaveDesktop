@@ -3972,6 +3972,10 @@ textarea.form-control-lg {
   cursor: default;
 }
 
+.nav-link-bold {
+  font-weight: bold;
+}
+
 .nav-tabs {
   border-bottom: 0.125rem solid #dee2e6;
 }
@@ -11520,3 +11524,4 @@ html {
 .copyright {
   background-color: #1a252f;
 }
+

@@ -1,49 +1,39 @@
 # Sincronització entre ordinadors de la xarxa
-#### Requisits
-- Heu de crear prèviament una carpeta que sincronitzi amb el vostre emmagatzematge al núvol i que sigui disponible a cada ordinador que voleu aplicar la sincronització. Es pot dur a terme utilitzant:
 
-  <details>
-    <summary><b>Comptes en línia del GNOME</b><p>(per a entorns d'escriptori GNOME, Cinnamon, COSMIC (obsolet) i Budgie)</p></summary>
-    <ul>
-      <li>Obriu la configuració del GNOME</li>
-      <li>Aneu a la secció dels comptes en línia i trieu el servei al núvol de la vostra preferència</li>
-    </ul>
-    <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
-    
-  </details>
+In addition to saving the configuration and importing it, SaveDesktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
 
-  <details>
-    <summary><b>Rclone</b><p>(per a altres entorns d'escriptori)</p></summary>
-    <ul>
-      <li>Instal·leu el Rclone</li>
-      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
-      <li>Utilitzeu aquesta ordre que crearà la carpeta al núvol, configura el Rclone i munta la carpeta
-      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "S'ha muntat la unitat correctament"</code></pre>
-      <p>* En comptes d'  <code>el-vostre-servei-al-núvol</code> indiqueu el nom del proveïdor de serveis, com ara <code>drive</code> (per al Google Drive), <code>onedrive</code>, <code>dropbox</code>, etc.</p></li>
-    </ul>
-  </details>
-  
-## Configuració de la sincronització a l'aplicació SaveDesktop
-Al primer ordinador:
-1. Obriu l'aplicació SaveDesktop
-2. A la pàgina de sincronització, feu clic al botó «Configura el fitxer de sincronització» i després al botó «Canvia»
-3. Feu clic a «Desat periòdic» i seleccioneu la carpeta que sincronitza amb l'emmagatzematge al núvol com a carpeta de desat periòdic
-4. Si el fitxer de configuració no existeix, feu clic al botó «Crea»
+## Setting Up on the First Computer
+1. Open the **Sync** page in the SaveDesktop app.
+2. Click **“Set up the sync file.”**
+3. A quick setup wizard will appear:
+   * If you're using GNOME, Cinnamon, Budgie, or older COSMIC, the **GNOME Online Accounts** method is used.
+   * For KDE Plasma or other desktops, it switches to **Rclone** (you’ll just need to copy a command and paste it into the terminal).
+   * Alternatively, you can use **Syncthing** by clicking **“Use Syncthing’s folder instead”** and selecting a synced folder.
+4. After finishing the wizard, the **“Set up the sync file”** dialog will open:
+   * A **periodic saving file** (your desktop config archive) will start generating inside the selected folder.
+   * You can optionally change the interval or filename using the **“Change”** button.
+5. Click **“Apply”**:
+   * A second file, `SaveDesktop.json`, is created in the same folder. It contains the sync file name and saving interval.
+   * You will be prompted to **log out** of your session so synchronization can fully activate.
 
-Al segon ordinador:
-1. Inicieu el SaveDesktop
-2. Aneu a la pàgina de sincronització i feu clic al botó «Connecta amb l'emmagatzematge al núvol».
-3. Feu clic al botó «Selecciona la carpeta al núvol» i trieu la carpeta del mateix emmagatzematge al núvol que té el primer ordinador.
-4. Seleccioneu la periodicitat de la sincronització perquè, si ho deixeu en blanc, la sincronització no funcionarà.
+## Connecting on Another Computer
+1. On the other computer, go to the **Sync** page again.
+2. Click **“Connect to the cloud storage.”**
+3. The same wizard will appear – choose your synced folder via GNOME OA, Rclone, or Syncthing.
+4. After the wizard:
+   * The **“Connect to the cloud storage”** dialog opens.
+   * Select the **sync interval** and enable or disable **Bidirectional synchronization**.
+5. Click **“Apply”**:
+   * You will be prompted to **log out**, or (if using manual sync) informed that you can sync from the app’s header menu.
+   * After logging back in, SaveDesktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
 
-Per a configurar una sincronització bidireccional, assegureu-vos que teniu configurada la mateixa carpeta de l'apartat «Connectat amb l'emmagatzematge al núvol» del primer ordinador, que existeix un interval de sincronització periòdica seleccionat i que està habilitada l'opció «Sincronització bidireccional».
+### Bidirectional Synchronization
+If **Bidirectional synchronization** is enabled on both computers:
+* SaveDesktop copies sync settings (such as interval and filename) from one machine to the other,
+* This keeps your systems in sync without needing to configure each one manually.
 
-## Sincronització periòdica
-Podeu triar entre les opcions següents:
-- Diàriament
-- Setmanalment
-- Mensualment
-- Manualment (és possible realitzar la sincronització en qualsevol moment des del menú principal en fer clic als tres punts)
-- Mai (no es duu a terme cap canvi)
+## Files Used in Synchronization
+* **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
+* **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.
 
 {% include footer.html %}

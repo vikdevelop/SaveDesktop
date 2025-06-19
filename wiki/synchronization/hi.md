@@ -1,50 +1,39 @@
-
 # नेटवर्क में कंप्यूटरों के बीच समन्वयन
-## Requirements
-- You must have a folder created that will sync with your cloud storage on each computer you want to sync. This can be done using:
 
-  <details>
-    <summary><b>GNOME Online Accounts</b><p>(for GNOME, Cinnamon, COSMIC (Old) and Budgie desktop environments)</p></summary>
-    <ul>
-      <li>Open the GNOME Settings</li>
-      <li>Go to the Online Accounts section and select your cloud drive service</li>
-    </ul>
-    <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
-    
-  </details>
+In addition to saving the configuration and importing it, SaveDesktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
 
-  <details>
-    <summary><b>Rclone</b><p>(for other desktop environments)</p></summary>
-    <ul>
-      <li>Install Rclone</li>
-      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash</code></pre>
-      <li>Setup Rclone by using this command, which creates the cloud drive folder, sets up Rclone and mounts the folder
-      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive &amp;&amp; rclone config create savedesktop your-cloud-drive-service &amp;&amp; nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes &amp; echo "The drive has been mounted successfully"</code></pre>
-      <p>* Instead of <code>your-cloud-drive-service</code> use the name of your cloud drive service, such as <code>drive</code> (for Google Drive), <code>onedrive</code>, <code>dropbox</code>, etc.</p></li>
-    </ul>
-  </details>
-  
-## Setting up synchronization in the SaveDesktop app
-On the first computer:
-1. Open the SaveDesktop app
-2. On the Sync page, click on the "Set up the sync file" button and then on the "Change" button
-3. Click on "Periodic saving" and select the folder that is synchronized with your cloud storage as a periodic saving folder
-4. If the periodic saving file does not exist, click on the Create button
+## Setting Up on the First Computer
+1. Open the **Sync** page in the SaveDesktop app.
+2. Click **“Set up the sync file.”**
+3. A quick setup wizard will appear:
+   * If you're using GNOME, Cinnamon, Budgie, or older COSMIC, the **GNOME Online Accounts** method is used.
+   * For KDE Plasma or other desktops, it switches to **Rclone** (you’ll just need to copy a command and paste it into the terminal).
+   * Alternatively, you can use **Syncthing** by clicking **“Use Syncthing’s folder instead”** and selecting a synced folder.
+4. After finishing the wizard, the **“Set up the sync file”** dialog will open:
+   * A **periodic saving file** (your desktop config archive) will start generating inside the selected folder.
+   * You can optionally change the interval or filename using the **“Change”** button.
+5. Click **“Apply”**:
+   * A second file, `SaveDesktop.json`, is created in the same folder. It contains the sync file name and saving interval.
+   * You will be prompted to **log out** of your session so synchronization can fully activate.
 
-On the second computer:
-1. Open the SaveDesktop app
-2. Go to the Sync page and click the "Connect to the cloud storage" button.
-3. Click on the "Select cloud drive folder" button and select the folder that is synced with the same cloud storage as the first computer.
-4. Select the periodic synchronization interval, because if you leave that to Never, the synchronization doesn't work.
+## Connecting on Another Computer
+1. On the other computer, go to the **Sync** page again.
+2. Click **“Connect to the cloud storage.”**
+3. The same wizard will appear – choose your synced folder via GNOME OA, Rclone, or Syncthing.
+4. After the wizard:
+   * The **“Connect to the cloud storage”** dialog opens.
+   * Select the **sync interval** and enable or disable **Bidirectional synchronization**.
+5. Click **“Apply”**:
+   * You will be prompted to **log out**, or (if using manual sync) informed that you can sync from the app’s header menu.
+   * After logging back in, SaveDesktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
 
-To set up bidirectional synchronization, make sure you have the same cloud folder selected in the "Connect to cloud storage" dialog on the first computer, the periodic synchronization interval selected, and the "Bidirectional synchronization" switch enabled.
+### Bidirectional Synchronization
+If **Bidirectional synchronization** is enabled on both computers:
+* SaveDesktop copies sync settings (such as interval and filename) from one machine to the other,
+* This keeps your systems in sync without needing to configure each one manually.
 
-### Periodic synchronization
-You can choose between the following options:
-- Daily
-- Weekly 
-- Monthly 
-- Manually (it is possible to sync configuration from the menu in the header bar by clicking on the three dots)
-- Never (nothing's happening)
+## Files Used in Synchronization
+* **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
+* **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.
 
 {% include footer.html %}

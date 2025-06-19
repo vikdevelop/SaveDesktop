@@ -1,48 +1,39 @@
 # பிணையத்திர் கணினிகளுக்கு இடையே ஒத்திசைவு
-#### தேவைகள்
-- நீங்கள் ஒத்திசைக்க விரும்பும் ஒவ்வொரு கணினியிலும் உங்கள் முகில் சேமிப்பகத்துடன் ஒத்திசைக்கும் ஒரு கோப்புறை உருவாக்கப்பட வேண்டும். இதைப் பயன்படுத்தி செய்ய முடியும்:
 
-  <details>
-  <summary><b>GNOME இணைய கணக்குகள்</b><p>(GNOME, Cinnamon, COSMIC (பழைய) மற்றும் Budgie desktop சூழல்களுக்கு)</p></summary>
-    <ul>
-      <li>GNOME அமைப்புகளைத் திற</li>
-      <li>இணைய கணக்குகள் பிரிவுக்குச் சென்று உங்கள் முகில் இயக்கி சேவையைத் தேர்ந்தெடு</li>
-    </ul>
-    <img src="https://raw.githubusercontent.com/vikdevelop/SaveDesktop/webpage/wiki/synchronization/screenshots/OnlineAccounts_en.png">
-   </details>
-    
-    <details>
-       <summary><b>Rclone</b><p>(பிற டெஸ்க்டாப் சூழல்களுக்கு)</p> </summary>
-    <ul>
-      <li>Rclone-ஐ நிறுவு</li>
-      <pre><code>sudo -v ; curl https://rclone.org/install.sh | sudo bash </code></pre>
-      <li>இந்த கட்டளையைப் பயன்படுத்தி Rclone ஐ அமைக்கவும், இது கிளவுட் டிரைவ் கோப்புறையை உருவாக்குகிறது, Rclone ஐ அமைத்து கோப்புறையை ஏற்றுகிறது.
-      <pre><code>mkdir -p ~/Downloads/SaveDesktop/rclone_drive && rclone config create savedesktop your-cloud-drive-service && nohup rclone mount savedesktop: ~/Downloads/SaveDesktop/rclone_drive --vfs-cache-mode writes & echo "இயக்கி வெற்றிகரமாக ஏற்றப்பட்டுள்ளது"</code></pre>
-      <p>* <code>your-cloud-drive-service</code> என்பதற்குப் பதிலாக, <code>drive</code> (Google Drive-க்கு), <code>onedrive</code>, <code>dropbox</code> போன்ற உங்கள் கிளவுட் டிரைவ் சேவையின் பெயரைப் பயன்படுத்தவும்.</p></li>
-      </ul>
-    </details>
+In addition to saving the configuration and importing it, SaveDesktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
 
-## சேமிபணிமேடை பயன்பாட்டில் ஒத்திசைவை அமைத்தல்
-முதல் கணினியில்:
-1. சேமிபணிமேடை பயன்பாட்டைத் திற
-2. ஒத்திசைவு பக்கத்தில், "ஒத்திசைவு கோப்பை அமை" பொத்தானைக் சொடுக்கு, பின்னர் "மாற்று" பொத்தானைக் சொடுக்கு
-3. "அவ்வப்போது சேமி" என்பதைக் சொடுக்கி, உங்கள் முகில் சேமிப்பகத்துடன் ஒத்திசைக்கப்பட்ட கோப்புறையை அவ்வப்போது சேமிக்கும் கோப்புறையாகத் தேர்ந்தெடு
-4. அவ்வப்போது சேமிக்கும் கோப்பு இல்லை என்றால், உருவாக்கு பொத்தானைக் சொடுக்கு
+## Setting Up on the First Computer
+1. Open the **Sync** page in the SaveDesktop app.
+2. Click **“Set up the sync file.”**
+3. A quick setup wizard will appear:
+   * If you're using GNOME, Cinnamon, Budgie, or older COSMIC, the **GNOME Online Accounts** method is used.
+   * For KDE Plasma or other desktops, it switches to **Rclone** (you’ll just need to copy a command and paste it into the terminal).
+   * Alternatively, you can use **Syncthing** by clicking **“Use Syncthing’s folder instead”** and selecting a synced folder.
+4. After finishing the wizard, the **“Set up the sync file”** dialog will open:
+   * A **periodic saving file** (your desktop config archive) will start generating inside the selected folder.
+   * You can optionally change the interval or filename using the **“Change”** button.
+5. Click **“Apply”**:
+   * A second file, `SaveDesktop.json`, is created in the same folder. It contains the sync file name and saving interval.
+   * You will be prompted to **log out** of your session so synchronization can fully activate.
 
-இரண்டாவது கணினியில்:
-1. சேமிபணிமேடை பயன்பாட்டைத் திற
-2. ஒத்திசைவு பக்கத்திற்குச் சென்று "முகில் ச்டோரேச் உடன் இணைக்கவும்" பொத்தானைக் சொடுக்கு செய்க.
-3. "முகில் இயக்கிக் கோப்புறையைத் தேர்ந்தெடு" பொத்தானைக் சொடுக்கு செய்து, முதல் கணினியின் அதே முகில் சேமிப்பகத்துடன் ஒத்திசைக்கப்பட்ட கோப்புறையைத் தேர்ந்தெடு.
-4. அவ்வப்போது ஒத்திசைவு இடைவெளியைத் தேர்ந்தெடுக்கவும், ஏனென்றால் நீங்கள் அதை ஒருபோதும் விட்டுவிட்டால், ஒத்திசைவு வேலை செய்யாது.
+## Connecting on Another Computer
+1. On the other computer, go to the **Sync** page again.
+2. Click **“Connect to the cloud storage.”**
+3. The same wizard will appear – choose your synced folder via GNOME OA, Rclone, or Syncthing.
+4. After the wizard:
+   * The **“Connect to the cloud storage”** dialog opens.
+   * Select the **sync interval** and enable or disable **Bidirectional synchronization**.
+5. Click **“Apply”**:
+   * You will be prompted to **log out**, or (if using manual sync) informed that you can sync from the app’s header menu.
+   * After logging back in, SaveDesktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
 
-இருதரப்பு ஒத்திசைவை அமைக்க, முதல் கணினியில் "முகில் சேமிப்பகத்துடன் இணைக்கவும்" உரையாடலில் அதே முகில் கோப்புறை, தேர்ந்தெடுக்கப்பட்ட கால ஒத்திசைவு இடைவெளி மற்றும் "இருதரப்பு ஒத்திசைவு" சுவிட்ச் இயக்கப்பட்டதா என்பதை உறுதிப்படுத்திக் கொள்ளுங்கள்.
+### Bidirectional Synchronization
+If **Bidirectional synchronization** is enabled on both computers:
+* SaveDesktop copies sync settings (such as interval and filename) from one machine to the other,
+* This keeps your systems in sync without needing to configure each one manually.
 
-### அவ்வப்போது ஒத்திசைவு
-பின்வரும் விருப்பங்களுக்கு இடையே நீங்கள் தேர்வு செய்யலாம்:
-- நாள்தோறும்
-- வாராந்திர
-- மாதாந்திர
-- கைமுறையாக (தலைப்பு பட்டியில் உள்ள மெனுவிலிருந்து உள்ளமைவை மூன்று புள்ளிகளைக் சொடுக்கு செய்வதன் மூலம் ஒத்திசைக்க முடியும்)
-- ஒருபோதும் (எதுவும் நடக்கவில்லை)
+## Files Used in Synchronization
+* **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
+* **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.
 
 {% include footer.html %}
