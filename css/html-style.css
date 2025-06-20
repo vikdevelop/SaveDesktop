@@ -11448,9 +11448,21 @@ html {
 }
 
 .masthead {
-  padding-top: calc(6rem + 74px);
-  padding-bottom: 6rem;
+  padding: 30px 0;
+  text-align: center;
+  color: black;
 }
+
+.masthead a {
+  color: black;
+  margin: 0 10px;
+}
+
+.masthead small {
+  display: block;
+  margin-top: 10px;
+}
+
 .masthead .masthead-heading {
   font-size: 2.75rem;
   line-height: 2.75rem;
