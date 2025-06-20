@@ -90,6 +90,44 @@
       display: block;
       margin-top: 10px;
     }
+    .banner-top {
+      background-color: #87CEEB;
+      padding: 20px;
+      margin: 120px auto -80px auto; 
+      max-width: 900px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .banner-top h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .banner-bottom {
+      background-color: #AFEEEE;
+      padding: 20px;
+      margin: 20px auto 60px auto;
+      max-width: 900px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .banner-bottom a {
+      color: #003c00;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: inline-block;
+    }
+
+    .banner-bottom a:hover {
+      text-decoration: underline;
+    }
     </style>
   </head>
   <body id="top">
@@ -102,23 +140,36 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link px-lg-3" href="/SaveDesktop/open-issue">Report an Issue</a></li>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link px-lg-3" href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/">App translations</a></li>
-            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link px-lg-3">Wiki</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/SaveDesktop/open-issue">Report an Issue</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/">Translate the App</a></li>
+            <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded">Wiki</a></li>
           </ul>
         </div>
       </div>
     </nav>
     <div class="content">
+      <!-- Blue Header Box -->
+      <div class="banner-top">
+        <h1>SaveDesktop Wiki</h1>
+      </div>
+
+      <!-- Main White Language Container -->
       <div class="language-container">
-        <h1>SaveDesktop Wiki</h1><hr>
         <h3>Synchronization between computers in the network</h3>
         <p>This article is available in these languages:</p>
         <div id="language-grid" class="language-grid">
           <p>Loading...</p>
         </div>
-        <hr><a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/">Translate Wiki using Weblate</a>
+        <hr>
       </div>
+
+      <!-- Green Translation Box -->
+      <div class="banner-bottom">
+        <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/" target="_blank">
+          🌍 Help translate the Wiki via Weblate
+        </a>
+      </div>
+
     </div>
     
     <!-- Footer --->
