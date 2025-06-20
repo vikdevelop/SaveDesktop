@@ -11527,10 +11527,21 @@ html {
 }
 
 .footer {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  background-color: #ffffff;
-  color: #fff;
+  background-color: #f0f0f0;
+  padding: 30px 0;
+  text-align: center;
+  color: black;
+}
+
+.footer a {
+  color: black;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.footer small {
+  display: block;
+  margin-top: 10px;
 }
 
 .copyright {
