@@ -189,9 +189,9 @@
         container.innerHTML = "";
 
         const links = data
-          .filter(item => item.name.match(/^[a-z]{2,3}\.md$/))
+          .filter(item => item.name.endsWith(".md"))
           .map(item => {
-            const langCode = item.name.replace(".md", "");
+            const langCode = item.name.replace(".md", "").replace("_", "-");
             let name;
             try {
               const localDisplay = new Intl.DisplayNames([langCode], { type: 'language' });
@@ -199,13 +199,13 @@
             } catch {
               name = langCode;
             }
-
+          
             const a = document.createElement("a");
-            a.href = `synchronization/${langCode}`;
+            a.href = `synchronization/${item.name.replace(".md", "")}`;
             a.textContent = name;
             return a;
           });
-
+        
         links.forEach(link => container.appendChild(link));
       })
       .catch(err => {
