@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, subprocess
+import os, socket, glob, sys, shutil, re, zipfile, random, string, gi, warnings, tarfile, subprocess, shlex
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk
@@ -1155,7 +1155,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
 
         # Generate Password
         def pswd_generator(w):
-            characters = string.ascii_letters + string.digits + string.punctuation
+            safe_punctuation = "!@#%+=_-"
+            characters = string.ascii_letters + string.digits + safe_punctuation
             password = ''.join(random.choice(characters) for _ in range(24))
             self.pswdEntry.set_text(password)
 
@@ -1203,9 +1204,9 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 os.system(f"echo > {CACHE}/save_config/.folder.sd && mv {CACHE}/save_config '{self.folder}/{self.filename_text}'")
             else:
                 if settings["enable-encryption"] == True:
-                    os.system(f"zip -9 -P \'{self.password}\' cfg.sd.zip . -r")
+                    os.system(f'7z a -tzip -mx=6 -p"{self.password}" cfg.sd.zip {CACHE}/save_config')
                 else:
-                    os.system(f"zip -9 cfg.sd.zip . -r")
+                    os.system(f"7z a -tzip -mx=6 cfg.sd.zip {CACHE}/save_config")
                 if self.cancel_process:
                     return
                 else:

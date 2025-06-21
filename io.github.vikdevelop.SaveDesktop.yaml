@@ -53,6 +53,21 @@ finish-args:
     - --filesystem=xdg-run/dconf
     - --talk-name=ca.desrt.dconf
 modules:
+  - name: 7zip
+    buildsystem: simple
+    subdir: CPP/7zip/Bundles/Alone2
+    build-commands:
+      - make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc
+      - install -D ./_o/7zz -t /app/bin
+      - ln -s /app/bin/7zz /app/bin/7z
+    sources:
+      - type: git
+        url: https://github.com/ip7z/7zip.git
+        tag: '24.09'
+        commit: e5431fa6f5505e385c6f9367260717e9c47dc2ee
+    x-checker-data:
+      type: git
+      tag-pattern: ^([\d.]+)$
   - name: dconf-amd64
     only-arches: ['x86_64']
     buildsystem: simple
