@@ -18,9 +18,10 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, and icon
-v = "3.6"
+v = "3.6-hotfix"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<ul>\
+rel_notes = "<p>Fixed a \"buffer overflow\" error when creating configuration archives by replacing the ZIP utility with 7-Zip.</p>\
+<p>3.6</p><ul>\
 <li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization mode</li>\
 <li>Migrated from the *.sd.tar.gz to the *.sd.zip archive format, but for backward compatibility reasons, it will still be possible to select the first named archive format</li>\
 <li>Added support for using the syncthing folders in the synchronization mode (#392)</li>\
