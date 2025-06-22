@@ -76,7 +76,7 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    source-tag: '3.6'
+    source-tag: '3.6-hotfix-1'
     source-depth: 1
     plugin: nil
     override-build: |
@@ -102,8 +102,10 @@ parts:
       - wget
       - libnotify-bin
       - zip
+      - p7zip-full
       - coreutils
     stage:
       - usr/bin/notify-send
       - usr/bin/wget
       - usr/bin/zip
+      - usr/bin/7z
