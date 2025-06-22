@@ -1204,9 +1204,9 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 os.system(f"echo > {CACHE}/save_config/.folder.sd && mv {CACHE}/save_config '{self.folder}/{self.filename_text}'")
             else:
                 if settings["enable-encryption"] == True:
-                    os.system(f'7z a -tzip -mx=6 -p"{self.password}" cfg.sd.zip {CACHE}/save_config')
+                    os.system(f'7z a -tzip -mx=6 -p"{self.password}" cfg.sd.zip .')
                 else:
-                    os.system(f"7z a -tzip -mx=6 cfg.sd.zip {CACHE}/save_config")
+                    os.system(f"7z a -tzip -mx=6 cfg.sd.zip .")
                 if self.cancel_process:
                     return
                 else:
@@ -1373,16 +1373,21 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 imp_folder_thread.start()
             else:
                 if ".sd.zip" in self.import_file:
-                    with zipfile.ZipFile(self.import_file, "r") as zip_ar:
-                        for member in zip_ar.namelist():
-                            if self.cancel_process:
-                                return
-                            try:
-                                p = self.checkEntry.get_text()
-                                password = p.encode("utf-8") if p else None  # None instead of b""
-                            except Exception as e:
-                                password = None
-                            zip_ar.extract(member, path=f"{CACHE}/import_config", pwd=password)
+                    if self.cancel_process:
+                        return
+                    try:
+                        password = self.checkEntry.get_text()
+                    except Exception:
+                        password = None
+                    try:
+                        result = subprocess.run(
+                            ['7z', 'x', f'-p{password}', self.import_file, f'-o{CACHE}/import_config', '-y'],
+                            capture_output=True, text=True, check=True
+                        )
+                        print("Output:", result.stdout)
+                    except subprocess.CalledProcessError as e:
+                        print("Return code:", e.returncode)
+                        raise OSError(e.stderr)
                 elif ".sd.tar.gz" in self.import_file:
                     with tarfile.open(self.import_file, 'r:gz') as tar:
                         for member in tar.getmembers():
