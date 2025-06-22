@@ -145,7 +145,7 @@ class Syncing:
                         capture_output=True, text=True, check=True
                     )
                     print("Output:", result.stdout)
-                except subprocess.CalledProcessError as e:
+               except subprocess.CalledProcessError as e:
                     print("Return code:", e.returncode)
                     raise OSError(e.stderr)
             else:
