@@ -139,12 +139,15 @@ class Syncing:
         print("No errors with getting a password detected.")
         try:
             if os.path.exists(f"{settings['file-for-syncing']}/{self.file}.sd.zip"):
-                with zipfile.ZipFile(f"{settings['file-for-syncing']}/{self.file}.sd.zip", "r") as zip_ar:
-                    for member in zip_ar.namelist():
-                        if self.password != None:
-                            zip_ar.extract(member, path=f"{CACHE}/syncing", pwd=self.password.encode("utf-8"))
-                        else:
-                            zip_ar.extract(member, path=f"{CACHE}/syncing")
+               try:
+                    result = subprocess.run(
+                        ['7z', 'x', f'-p{self.password}', f"{settings['file-for-syncing']}/{self.file}.sd.zip", f'-o{CACHE}/syncing', '-y'],
+                        capture_output=True, text=True, check=True
+                    )
+                    print("Output:", result.stdout)
+                except subprocess.CalledProcessError as e:
+                    print("Return code:", e.returncode)
+                    raise OSError(e.stderr)
             else:
                 with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
                     for member in tar.getmembers():
