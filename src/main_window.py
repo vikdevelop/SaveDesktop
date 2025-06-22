@@ -776,12 +776,45 @@ class MainWindow(Adw.ApplicationWindow):
         # enable or disable the response of this dialog in depending on the selected periodic synchronization interval
         def on_psync_changed(psyncRow, GParamObject):
             self.cloudDialog.set_response_enabled('ok', not (self.psyncRow.get_selected_item().get_string() == _["never"] or not self.cfileRow.get_subtitle()))
+            
+        def finish_setup():
+            if self.cfileRow.get_subtitle():
+                # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
+                if self.check_psync == "Never2":
+                    if not settings["periodic-import"] == "Never2":
+                        self.show_warn_toast()
+                
+                # if it is selected to manually sync, it creates an option in the app menu in the header bar
+                if settings["manually-sync"]:
+                    self.sync_menu = Gio.Menu()
+                    self.sync_menu.append(_["sync"], 'app.m-sync-with-key')
+                    self.main_menu.prepend_section(None, self.sync_menu)
+                    self.show_special_toast()
+                else:
+                    try:
+                        self.sync_menu.remove_all()
+                    except:
+                        pass
+        
+        def check_fs():
+            try:
+                check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % self.cfileRow.get_subtitle())
+                if ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder"):
+                    os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
+                    settings["file-for-syncing"] = ""
+                else:
+                    settings["file-for-syncing"] = self.cfileRow.get_subtitle()
+            except Exception as e:
+                print(e)
+            finally:
+                self.mount_type = "cloud-receiver"
+                self.set_up_auto_mount()
+                GLib.idle_add(finish_setup)
         
         # Action after closing URL dialog
         def cloudDialog_closed(w, response):
             if response == 'ok':
-                check_psync = settings["periodic-import"]
-                
+                self.check_psync = settings["periodic-import"]
                 # translate the periodic sync options to English
                 selected_item = self.psyncRow.get_selected_item()
                 sync = {_["never"]: "Never2", _["manually"]: "Manually2", _["daily"]: "Daily2", _["weekly"]: "Weekly2", _["monthly"]: "Monthly2"}
@@ -796,37 +829,8 @@ class MainWindow(Adw.ApplicationWindow):
                 # save the status of the Bidirectional Synchronization switch
                 settings["bidirectional-sync"] = self.bsSwitch.get_active()
 
-                check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % self.cfileRow.get_subtitle())
-
-                if self.cfileRow.get_subtitle():
-                    # Check if the selected cloud drive folder is correct
-                    if ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder"):
-                        os.system(f"notify-send \"{_['err_occured']}\" \"{_['cloud_folder_err']}\"")
-                        settings["file-for-syncing"] = ""
-                    else:
-                        settings["file-for-syncing"] = self.cfileRow.get_subtitle()
-                        
-                        # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
-                        if check_psync == "Never2":
-                            if not settings["periodic-import"] == "Never2":
-                                self.show_warn_toast()
-                        
-                        # if it is selected to manually sync, it creates an option in the app menu in the header bar
-                        if settings["manually-sync"]:
-                            self.sync_menu = Gio.Menu()
-                            self.sync_menu.append(_["sync"], 'app.m-sync-with-key')
-                            self.main_menu.prepend_section(None, self.sync_menu)
-                            self.show_special_toast()
-                        else:
-                            try:
-                                self.sync_menu.remove_all()
-                            except:
-                                pass
-                        
-                        self.mount_type = "cloud-receiver"
-                        self.set_up_auto_mount()
-                else:
-                    pass
+                check_thread = Thread(target=check_fs)
+                check_thread.start()
 
         # Dialog itself
         self.cloudDialog = Adw.AlertDialog.new()
