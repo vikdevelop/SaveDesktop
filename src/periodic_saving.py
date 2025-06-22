@@ -87,9 +87,9 @@ class PeriodicBackups:
         except:
             self.password = None
         if self.password != None:
-            os.system(f'7z a -tzip -mx=6 -p"{self.password}" cfg.sd.zip {CACHE}/periodic_saving')
+            os.system(f'7z a -tzip -mx=6 -p"{self.password}" cfg.sd.zip .')
         else:
-            os.system(f"7z a -tzip -mx=6 cfg.sd.zip {CACHE}/periodic_saving")
+            os.system(f"7z a -tzip -mx=6 cfg.sd.zip .")
         shutil.copyfile('cfg.sd.zip', f'{self.pbfolder}/{self.filename}.sd.zip')
 
     def save_last_backup_date(self):
