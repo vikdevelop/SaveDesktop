@@ -26,4 +26,12 @@ Python Scripts (e.g., generate_wiki_pages_from_xml.py)
 
 Licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
+Translations Source
+
+The translated Markdown files in this branch are generated from XML files stored in the main branch, specifically in the /translations/wiki/. These XML translations files are licensed under the GNU General Public License v3.0 (GPLv3):
+
+https://www.gnu.org/licenses/gpl-3.0.html
+
+Only the generated content is licensed under CC BY-SA 4.0; the translation sources remain under GPLv3
+
 © 2023-2025 vikdevelop
