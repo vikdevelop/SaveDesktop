@@ -1,9 +1,9 @@
 {
     "about_app": "Uygulama Hakkında",
     "unsuppurted_env_desc": "<big><b>Daha önceden yüklenmiş , desteklenmeyen ortama sahipsiniz.</b></big> \nLütfen bu ortamlardan herhangi birini kullanın.: {}.",
-    "save_config": "Suanki ayarları kayıt et",
+    "save_config": "Şuanki ayarları kaydet",
     "import_config": "Kaydedilmiş ayarları yükle",
-    "set_filename": "Dosya adını ayarla",
+    "set_filename": "Dosya adı",
     "config_saved": "Ayarlar kayıt edildi!",
     "open_folder": "Klasörü aç",
     "cancel": "İptal et",
