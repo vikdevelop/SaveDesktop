@@ -8,7 +8,7 @@ Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také jej�
 3. Zobrazí se průvodce rychlým nastavením:
    * Pokud používáte prostředí GNOME, Cinnamon, Budgie nebo starší COSMIC, použije se metoda **Online účty GNOME**.
    * V případě prostředí KDE Plasma nebo jiných prostředí se přepne na **Rclone** (stačí zkopírovat příkaz a vložit jej do terminálu).
-   * Alternativně můžete použít **Syncthing** kliknutím na **„Použít místo toho složku Syncthing “** a výběrem synchronizované složky.
+   * Alternativně můžete použít **Syncthing** kliknutím na **„Použít místo toho složku Syncthing“** a výběrem synchronizované složky.
 4. Po dokončení průvodce se otevře dialogové okno **„Nastavit synchronizační soubor “**:
    * Ve vybrané složce se začne generovat **soubor pro periodické ukládání** (váš archív konfigurace pracovní plochy).
    * Interval nebo název souboru můžete volitelně změnit pomocí tlačítka **„Změnit “**.
@@ -21,7 +21,7 @@ Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také jej�
 2. Klepněte na tlačítko **„Připojit se ke cloudovému úložišti “**.
 3. Zobrazí se stejný průvodce - vyberte složku synchronizovanou prostřednictvím GNOME OA, Rclone nebo Syncthing.
 4. Po zobrazení průvodce:
-   * Otevře se dialogové okno **„Připojit ke cloudovému úložišti “**.
+   * Otevře se dialogové okno **„Připojit se ke cloudovému úložišti “**.
    * Vyberte **interval synchronizace** a povolte nebo zakažte **obousměrnou synchronizaci**.
 5. Klikněte na tlačítko **„Použít “**:
    * Budete vyzváni k **odhlášení** nebo (pokud používáte ruční synchronizaci) informováni, že můžete synchronizovat z nabídky v záhlaví aplikace.
@@ -33,7 +33,7 @@ Pokud je **obousměrná synchronizace** povolena na obou počítačích:
 * Díky tomu jsou vaše systémy synchronizovány, aniž byste museli každý z nich nastavovat ručně.
 
 ## Soubory použité při synchronizaci
-* **Periodický ukládací soubor** - archiv `.sd.zip` konfigurace pracovní plochy, který je pravidelně aktualizován.
+* **Soubor pravidelného ukládání** - archiv `.sd.zip` konfigurace pracovní plochy, který je pravidelně aktualizován.
 * **SaveDesktop.json** - malý pomocný soubor, který ukládá název archivu a interval ukládání, používaný při nastavení synchronizace.
 
 {% include footer.html %}
