@@ -1,3 +1,4 @@
+import gc
 import os, json, gi, argparse, shutil
 from abc import ABC, abstractmethod
 from functools import wraps, partial
@@ -458,23 +459,24 @@ class Save(Config):
         """
         blacklist = settings["disabled-flatpak-apps-data"] + ["cache"]
 
-        Path(f"{CACHE}/save_config/app").mkdir(exist_ok=True)
         dest_dir = Path(f"{CACHE}/save_config/app")
 
         if Path(f"{CACHE}/periodic_saving/saving_status").exists():
-            Path(f"{CACHE}/periodic_saving/app").mkdir(exist_ok=True)
             dest_dir = Path(f"{CACHE}/periodic_saving/app")
+
+        dest_dir.mkdir(exist_ok=True, parents=True)
 
         # Generate paths to be copied
         var_app_path = Path(f"{home}/.var/app")
-        for item in var_app_path.iterdir():
-            if item not in blacklist:
-                source_path = var_app_path / item
-                dest_path = dest_dir / item
-                if source_path.is_dir():
-                    yield source_path, dest_path, shutil.ignore_patterns('cache')
-                else:
-                    yield source_path, dest_path, None
+        with os.scandir(var_app_path) as scanner:
+            for entry in scanner:
+                if entry.name not in blacklist:
+                    source_path = var_app_path / entry.name
+                    dest_path = dest_dir / entry.name
+                    if entry.is_dir():
+                        yield source_path, dest_path, shutil.ignore_patterns('cache')
+                    else:
+                        yield source_path, dest_path, None
 
     def setup(self):
         """
@@ -530,18 +532,17 @@ class Save(Config):
                 with ThreadPoolExecutor(max_workers=max_workers or MAX_WORKERS) as executor:
                     futures = []
                     for source, dest, ignore_pattern in Save.__flatpak_data_dirs():
-                        if source.is_dir():
-                            future = executor.submit(shutil.copytree, source, dest,
-                                                     dirs_exist_ok=True, ignore=ignore_pattern)
-                        else:
-                            future = executor.submit(shutil.copy2, source, dest)
-                        futures.append(future)
+                        copy_fn = shutil.copytree if source.is_dir() else shutil.copy2
+                        arguments = (source, dest,
+                                {'dirs_exist_ok': True, 'ignore': ignore_pattern}) if source.is_dir() else (source,
+                                                                                                            dest)
+                        futures.append(executor.submit(copy_fn, *arguments))
 
-                    for future in futures:
+                for future in futures:
                         future.result()
 
     def teardown(self):
-        pass
+        gc.collect()
 
 
 class Import(Config):
