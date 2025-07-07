@@ -1,39 +1,39 @@
 # பிணையத்திர் கணினிகளுக்கு இடையே ஒத்திசைவு
 
-In addition to saving the configuration and importing it, SaveDesktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
+உள்ளமைவைச் சேமிப்பதோடு, அதை இறக்குமதி செய்வதோடு கூடுதலாக, பகிரப்பட்ட கிளவுட் கோப்புறை அல்லது பகிரப்பட்ட ஒத்திசைவு கோப்புறையைப் பயன்படுத்தி உங்கள் பிணையத்தில் உள்ள கணினிகளுக்கு இடையில் அதை ஒத்திசைக்க பணிமேடைசேமி உங்களை அனுமதிக்கிறது.
 
-## Setting Up on the First Computer
-1. Open the **Sync** page in the SaveDesktop app.
-2. Click **“Set up the sync file.”**
-3. A quick setup wizard will appear:
-   * If you're using GNOME, Cinnamon, Budgie, or older COSMIC, the **GNOME Online Accounts** method is used.
-   * For KDE Plasma or other desktops, it switches to **Rclone** (you’ll just need to copy a command and paste it into the terminal).
-   * Alternatively, you can use **Syncthing** by clicking **“Use Syncthing’s folder instead”** and selecting a synced folder.
-4. After finishing the wizard, the **“Set up the sync file”** dialog will open:
-   * A **periodic saving file** (your desktop config archive) will start generating inside the selected folder.
-   * You can optionally change the interval or filename using the **“Change”** button.
-5. Click **“Apply”**:
-   * A second file, `SaveDesktop.json`, is created in the same folder. It contains the sync file name and saving interval.
-   * You will be prompted to **log out** of your session so synchronization can fully activate.
+## முதல் கணினியில் அமைத்தல்
+1. பணிமேடைசேமி பயன்பாட்டில் **ஒத்திசைவு** பக்கத்தைத் திறக்கவும்.
+2. கிளிக் **“ஒத்திசைவு கோப்பை அமைக்கவும்.”**
+3. விரைவான அமைவு வழிகாட்டித் தோன்றும்:
+   *நீங்கள் க்னோம், இலவங்கப்பட்டை, பட்கி அல்லது பழைய காஸ்மிக் பயன்படுத்துகிறீர்கள் என்றால், **ஜினோம் ஆன்லைன் கணக்குகள்** முறை பயன்படுத்தப்படுகிறது.
+   *கே.டி.இ பிளாஸ்மா அல்லது பிற டெஸ்க்டாப்புகளுக்கு, இது ** rclone** க்கு மாறுகிறது (நீங்கள் ஒரு கட்டளையை நகலெடுத்து முனையத்தில் ஒட்ட வேண்டும்).
+   *மாற்றாக, **“அதற்குப் பதிலாக ஒத்திசைவின் கோப்புறையைப் பயன்படுத்துங்கள்”** மற்றும் ஒத்திசைக்கப்பட்ட கோப்புறையைத் தேர்ந்தெடுப்பதன் மூலம் **ஒத்திசைவு** ஐப் பயன்படுத்தலாம்.
+4. வழிகாட்டியை முடித்தபிறகு, **“ஒத்திசைவு கோப்பை அமைக்கவும்”** உரையாடல் திறக்கப்படும்:
+   *ஒரு ** அவ்வப்போது சேமிக்கும் கோப்பு ** (உங்கள் டெஸ்க்டாப் கட்டமைப்புக் காப்பகம்) தேர்ந்தெடுக்கப்பட்ட கோப்புறையில் உருவாக்கத் தொடங்கும்.
+***“மாற்றம்”** பொத்தானைப் பயன்படுத்தி இடைவெளி அல்லது கோப்புப் பெயரை நீங்கள் விருப்பமாக மாற்றலாம்.
+5. கிளிக் **“இடு”**:
+   * இரண்டாவது கோப்பு, `savedesktop.json`, அதே கோப்புறையில் உருவாக்கப்பட்டுள்ளது. இதில் ஒத்திசைவு கோப்புப் பெயர் மற்றும் சேமிப்பு இடைவெளி உள்ளது.
+   *உங்கள் அமர்வின் **வெளியேற** நீங்கள் கேட்கப்படுவீர்கள், எனவே ஒத்திசைவு முழுமையாகச் செயல்படுத்த முடியும்.
 
-## Connecting on Another Computer
-1. On the other computer, go to the **Sync** page again.
-2. Click **“Connect to the cloud storage.”**
-3. The same wizard will appear – choose your synced folder via GNOME OA, Rclone, or Syncthing.
-4. After the wizard:
-   * The **“Connect to the cloud storage”** dialog opens.
-   * Select the **sync interval** and enable or disable **Bidirectional synchronization**.
-5. Click **“Apply”**:
-   * You will be prompted to **log out**, or (if using manual sync) informed that you can sync from the app’s header menu.
-   * After logging back in, SaveDesktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
+## மற்றொரு கணினியில் இணைத்தல்
+1. மற்ற கணினியில், ** ஒத்திசைவு ** பக்கத்திற்கு மீண்டும் செல்லவும்.
+2. கிளிக் ** “கிளவுட் ஸ்டோரேஜுடன் இணைக்கவும்.” **
+3. அதே வழிகாட்டித் தோன்றும் - உங்கள் ஒத்திசைக்கப்பட்ட கோப்புறையை க்னோம் ஓ, ரிலோன் அல்லது ஒத்திசைவு வழியாகத் தேர்வு செய்யவும்.
+4. வழிகாட்டிப் பிறகு:
+   *** “மேகக்கணி சேமிப்பகத்துடன் இணைக்கவும்” ** உரையாடல் திறக்கிறது.
+   *** ஒத்திசைவு இடைவெளி ** ஐத் தேர்ந்தெடுத்து இயக்கவும் அல்லது முடக்கவும் ** இருதரப்பு ஒத்திசைவு **.
+5. கிளிக் **“இடு”**:
+   *நீங்கள் ** வெளியேறும்படி கேட்கப்படுவீர்கள் **, அல்லது (கையேடு ஒத்திசைவைப் பயன்படுத்தினால்) பயன்பாட்டின் தலைப்பு மெனுவிலிருந்து ஒத்திசைக்க முடியும் என்று தெரிவிக்கப்படுகிறது.
+   * மீண்டும் உள்நுழைந்த பிறகு, பணிமேடைசேமி பகிரப்பட்ட கோப்புறையுடன் இணைகிறது மற்றும் உங்கள் உள்ளமைவை தானாக ஒத்திசைக்கிறது, தொடக்க மற்றும் முடிவில் அறிவிப்புடன்.
 
-### Bidirectional Synchronization
-If **Bidirectional synchronization** is enabled on both computers:
-* SaveDesktop copies sync settings (such as interval and filename) from one machine to the other,
-* This keeps your systems in sync without needing to configure each one manually.
+### இருதரப்பு ஒத்திசைவு
+இரண்டு கணினிகளிலும் ** இருதரப்பு ஒத்திசைவு ** இயக்கப்பட்டிருந்தால்:
+* Savedesktop பிரதிகள் ஒத்திசைவு அமைப்புகளை (இடைவெளி மற்றும் கோப்புப் பெயர் போன்றவை) ஒரு இயந்திரத்திலிருந்து மற்றொன்றுக்கு,
+* இது ஒவ்வொன்றையும் கைமுறையாக உள்ளமைக்கத் தேவை இல்லாமல் உங்கள் கணினிகளை ஒத்திசைவாக வைத்திருக்கிறது.
 
-## Files Used in Synchronization
-* **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
-* **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.
+ஒத்திசைவில் பயன்படுத்தப்படும் கோப்புகள்
+*** அவ்வப்போது சேமிக்கும் கோப்பு ** - உங்கள் டெஸ்க்டாப் உள்ளமைவின் `.sd.zip` காப்பகம், தவறாமல் புதுப்பிக்கப்படுகிறது.
+*** savedesktop.json ** - காப்பகத்தின் கோப்புப் பெயர் மற்றும் சேமிப்பு இடைவெளியைச் சேமிக்கும் ஒரு சிறிய உதவி கோப்பு, ஒத்திசைவு அமைப்பின்போது பயன்படுத்தப்படுகிறது.
 
 {% include footer.html %}
