@@ -181,7 +181,7 @@ class SandwichMeta(type(ABC)):
         return super().__new__(mcs, name, bases, namespace)
 
 
-MAX_WORKERS = 5
+MAX_WORKERS = 3
 
 class Config(ABC, metaclass=SandwichMeta):
     """
@@ -418,7 +418,7 @@ class Config(ABC, metaclass=SandwichMeta):
         except Exception as e:
             print(f"Error copying {source} to {dest}: {e}")
 
-    def __parallel_copy(self, max_workers: Optional[int] = None) -> None:
+    def _parallel_copy(self, max_workers: Optional[int] = None) -> None:
         """
         Executes parallel copying tasks for a list of configuration files using a thread pool
         executor. Each configuration contains sources, destinations, and whether the copy
@@ -513,7 +513,7 @@ class Save(Config):
         print("Settings from the Dconf database")
         os.system("dconf dump / > ./dconf-settings.ini")
 
-        self.__parallel_copy(max_workers=max_workers)
+        self._parallel_copy(max_workers=max_workers)
 
         if flatpak:
             if settings["save-installed-flatpaks"]:
@@ -529,7 +529,7 @@ class Save(Config):
                 print("User data of installed Flatpak apps")
                 with ThreadPoolExecutor(max_workers=max_workers or MAX_WORKERS) as executor:
                     futures = []
-                    for source, dest, ignore_pattern in self.__flatpak_data_dirs():
+                    for source, dest, ignore_pattern in Save.__flatpak_data_dirs():
                         if source.is_dir():
                             future = executor.submit(shutil.copytree, source, dest,
                                                      dirs_exist_ok=True, ignore=ignore_pattern)
@@ -675,7 +675,7 @@ class Import(Config):
 
         :return: None
         """
-        self.__parallel_copy(max_workers=max_workers)
+        self._parallel_copy(max_workers=max_workers)
         if flatpak:
             if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
                 self.create_flatpak_desktop()
