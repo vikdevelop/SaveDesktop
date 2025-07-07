@@ -91,13 +91,13 @@
     "summary": "உங்கள் பணிமேடை உள்ளமைவைச் சேமி",
     "description": "உங்கள் தற்போதைய உள்ளமைவை (கருப்பொருள்கள், சின்னங்கள், பின்ணணிகள், அனைத்து பணிமேடை சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே சொடுக்கில் சேமிக்க சேமிபணிமேடை உங்களை அனுமதிக்கிறது.",
     "translator_credits": "தமிழ்நேரம் <https://TamilNeram.github.io>",
-    "pwd_for_encryption": "Password for encryption",
-    "manual_saving": "Manual saving",
-    "remember_password": "Remember Password",
-    "import_from_folder": "Import from folder",
-    "syncthing_folder": "Use Syncthing folder instead",
-    "save_without_archive": "Save the configuration without creating an archive",
-    "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
-    "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "pwd_for_encryption": "குறியாக்கத்திற்கான கடவுச்சொல்",
+    "manual_saving": "கையேடு சேமிப்பு",
+    "remember_password": "கடவுச்சொல்லை நினைவில் கொள்",
+    "import_from_folder": "கோப்புறையிலிருந்து இறக்குமதி",
+    "syncthing_folder": "அதற்குப் பதிலாக ஒத்திசைவு கோப்புறையைப் பயன்படுத்தவும்",
+    "save_without_archive": "காப்பகத்தை உருவாக்காமல் உள்ளமைவைச் சேமி",
+    "password_store_err": "கடவுச்சொல் உள்ளிடப்படவில்லை, அல்லது அது தவறானது. தொடர முடியவில்லை.",
+    "enter_password_title": "உள்ளமைவை ஒத்திசைக்க காப்பகத்தைத் திறக்கக் கடவுச்சொல்லை உள்ளிடவும்",
+    "enter_password_desc": "Savedesktop பயன்பாட்டைப் பயன்படுத்தி ஒத்திசைவுக்கு மறைகுறியாக்கப்பட்ட காப்பகம் தேர்ந்தெடுக்கப்பட்டுள்ளது. அதைத் திறக்கக் கீழே உள்ள கடவுச்சொல்லை உள்ளிடவும் மற்றும் ஒத்திசைவைத் தொடங்கவும்."
 }

@@ -48,6 +48,8 @@ platforms:
 layout:
   /usr/share/gvfs:
     bind: $SNAP/usr/share/gvfs
+  /usr/lib/7zip:
+    bind: $SNAP/usr/lib/7zip
 
 apps:
   savedesktop:
@@ -109,3 +111,5 @@ parts:
       - usr/bin/wget
       - usr/bin/zip
       - usr/bin/7z
+      - usr/lib/7zip/7z
+      - usr/lib/7zip/7z.so
