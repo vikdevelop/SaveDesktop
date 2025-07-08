@@ -145,7 +145,7 @@ class ConfigFiles:
         :rtype: ConfigFiles
         """
         return ConfigFiles(self.label, [
-            (dest / source.name, source.parent, recursive) for source, dest, recursive in self.sources
+            (dest, source, recursive) for source, dest, recursive in self.sources
         ])
 
 
@@ -209,107 +209,107 @@ class Config(ABC, metaclass=SandwichMeta):
                 (Path(f"{desktop}"), Path("./Desktop/"), True),
             ]),
             ConfigFiles("Gtk settings", [
-                (Path(f"{home}/.config/gtk-4.0"), Path("./"), True),
-                (Path(f"{home}/.config/gtk-3.0"), Path("./"), True),
+                (Path(f"{home}/.config/gtk-4.0"), Path("./gtk-4.0"), True),
+                (Path(f"{home}/.config/gtk-3.0"), Path("./gtk-3.0"), True),
             ])
         ]
 
         if settings["save-backgrounds"]:
             self.config_files.append(
                 ConfigFiles("Backgrounds", [
-                    (Path(f"{home}/.local/share/backgrounds"), Path("./"), True),
+                    (Path(f"{home}/.local/share/backgrounds"), Path("./backgrounds"), True),
                 ])
             )
 
         if settings["save-icons"]:
             self.config_files.append(
                 ConfigFiles("Icons", [
-                    (Path(f"{home}/.local/share/icons"), Path("./"), True),
-                    (Path(f"{home}/.icons"), Path("./"), True),
+                    (Path(f"{home}/.local/share/icons"), Path("./icons"), True),
+                    (Path(f"{home}/.icons"), Path("./.icons"), True),
                 ])
             )
 
         if settings["save-themes"]:
             self.config_files.append(
                 ConfigFiles("Themes", [
-                    (Path(f"{home}/.local/share/themes"), Path("./"), True),
-                    (Path(f"{home}/.themes"), Path("./"), True),
+                    (Path(f"{home}/.local/share/themes"), Path("./themes"), True),
+                    (Path(f"{home}/.themes"), Path("./.themes"), True),
                 ])
             )
 
         if settings["save-fonts"]:
             self.config_files.append(
                 ConfigFiles("Fonts", [
-                    (Path(f"{home}/.local/share/fonts"), Path("./"), True),
-                    (Path(f"{home}/.themes"), Path("./"), True),
+                    (Path(f"{home}/.local/share/fonts"), Path("./fonts"), True),
+                    (Path(f"{home}/.fonts"), Path("./.fonts"), True),
                 ])
             )
 
         if settings["save-desktop-folder"]:
             self.config_files.extend([
                 ConfigFiles("GVFS metadata files", [
-                    (Path(f"{home}/.local/share/gvfs-metadata"), Path("./"), True),
+                    (Path(f"{home}/.local/share/gvfs-metadata"), Path("./gvfs-metadata"), True),
                 ]),
             ])
 
         files_to_copy = {
             DesktopEnvironment.GNOME: [
-                (Path(f"{home}/.config/gnome-background-properties"), Path("./"), True),
-                (Path(f"{home}/.local/share/nautilus-python"), Path("./"), True),
-                (Path(f"{home}/.config/gnome-control-center"), Path("./"), True),
-                (Path(f"{home}/.local/share/nautilus"), Path("./"), True),
-                (Path(f"{home}/.config/gnome-shell"), Path("./"), True),
+                (Path(f"{home}/.config/gnome-background-properties"), Path("./gnome-background-properties"), True),
+                (Path(f"{home}/.local/share/nautilus-python"), Path("./nautilus-python"), True),
+                (Path(f"{home}/.config/gnome-control-center"), Path("./gnome-control-center"), True),
+                (Path(f"{home}/.local/share/nautilus"), Path("./nautilus"), True),
+                (Path(f"{home}/.config/gnome-shell"), Path("./gnome-shell"), True),
             ],
             DesktopEnvironment.PANTHEON: [
-                (Path(f"{home}/.config/marlin"), Path("./"), True),
-                (Path(f"{home}/.config/plank"), Path("./"), True),
+                (Path(f"{home}/.config/marlin"), Path("./marlin"), True),
+                (Path(f"{home}/.config/plank"), Path("./plank"), True),
             ],
             DesktopEnvironment.CINNAMON: [
-                (Path(f"{home}/.config/nemo"), Path("./"), True),
-                (Path(f"{home}/.cinnamon"), Path("./"), True)
+                (Path(f"{home}/.config/nemo"), Path("./nemo"), True),
+                (Path(f"{home}/.cinnamon"), Path("./.cinnamon"), True)
             ],
             DesktopEnvironment.BUDGIE: [
-                (Path(f"{home}/.config/budgie-desktop"), Path("./"), True),
-                (Path(f"{home}/.config/budgie-extras"), Path("./"), True),
-                (Path(f"{home}/.config/nemo"), Path("./"), True),
+                (Path(f"{home}/.config/budgie-desktop"), Path("./budgie-desktop"), True),
+                (Path(f"{home}/.config/budgie-extras"), Path("./budgie-extras"), True),
+                (Path(f"{home}/.config/nemo"), Path("./nemo"), True),
             ],
             DesktopEnvironment.COSMIC_OLD: [
-                (Path(f"{home}/.local/share/gnome-shell"), Path("./"), True),
-                (Path(f"{home}/.config/pop-shell"), Path("./"), True),
+                (Path(f"{home}/.local/share/gnome-shell"), Path("./gnome-shell"), True),
+                (Path(f"{home}/.config/pop-shell"), Path("./pop-shell"), True),
             ],
             DesktopEnvironment.COSMIC_NEW: [
                 (Path(f"{home}/.local/state/cosmic"), Path("./cosmic-state"), True),
-                (Path(f"{home}/.config/cosmic"), Path("./"), True),
+                (Path(f"{home}/.config/cosmic"), Path("./cosmic"), True),
             ],
             DesktopEnvironment.XFCE: [
-                (Path(f"{home}/.config/Thunar"), Path("./"), True),
-                (Path(f"{home}/.config/xfce4"), Path("./"), True),
-                (Path(f"{home}/.xfce4"), Path("./"), True),
+                (Path(f"{home}/.config/Thunar"), Path("./Thunar"), True),
+                (Path(f"{home}/.config/xfce4"), Path("./xfce4"), True),
+                (Path(f"{home}/.xfce4"), Path("./.xfce4"), True),
             ],
             DesktopEnvironment.MATE: [
-                (Path(f"{home}/.config/caja"), Path("./"), True)
+                (Path(f"{home}/.config/caja"), Path("./caja"), True)
             ],
             DesktopEnvironment.KDE_PLASMA: [
-                (Path(f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc"), Path("./xdg-config/"), False),
-                (Path(f"{home}/.local/share/plasma-systemmonitor"), Path("./xdg-data/"), True),
-                (Path(f"{home}/.local/share/color-schemes"), Path("./xdg-data/"), True),
-                (Path(f"{home}/.config/plasmashellrc"), Path("./xdg-config/"), False),
-                (Path(f"{home}/.config/spectaclerc"), Path("./xdg-config/"), False),
-                (Path(f"{home}/.config/gwenviewrc"), Path("./xdg-config/"), False),
-                (Path(f"{home}/.config/dolphinrc"), Path("./xdg-config/"), False),
-                (Path(f"{home}/.local/share/dolphin"), Path("./xdg-data/"), True),
-                (Path(f"{home}/.local/share/aurorae"), Path("./xdg-data/"), True),
-                (Path(f"{home}/.config/plasmarc"), Path("./xdg-config/"), False),
-                (Path(f"{home}/.config/Kvantum"), Path("./xdg-config/"), True),
-                (Path(f"{home}/.local/share/sddm"), Path("./xdg-data/"), True),
-                (Path(f"{home}/.local/share/[k]*"), Path("./xdg-data/"), True),
-                (Path(f"{home}/.config/gtkrc"), Path("./xdg-config/"), False),
-                (Path(f"{home}/.config/latte"), Path("./xdg-config/"), True),
-                (Path(f"{home}/.config/[k]*"), Path("./xdg-config/"), True),
+                (Path(f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc"), Path("./xdg-config/plasma-org.kde.plasma.desktop-appletsrc"), False),
+                (Path(f"{home}/.local/share/plasma-systemmonitor"), Path("./xdg-config/plasma-systemmonitor"), True),
+                (Path(f"{home}/.local/share/color-schemes"), Path("./xdg-config/color-schemes"), True),
+                (Path(f"{home}/.config/plasmashellrc"), Path("./xdg-config/plasmashellrc"), False),
+                (Path(f"{home}/.config/spectaclerc"), Path("./xdg-config/spectaclerc"), False),
+                (Path(f"{home}/.config/gwenviewrc"), Path("./xdg-config/gwenviewrc"), False),
+                (Path(f"{home}/.config/dolphinrc"), Path("./xdg-config/dolphinrc"), False),
+                (Path(f"{home}/.local/share/dolphin"), Path("./xdg-data/dolphin"), True),
+                (Path(f"{home}/.local/share/aurorae"), Path("./xdg-data/aurorae"), True),
+                (Path(f"{home}/.config/plasmarc"), Path("./xdg-data/plasmarc"), False),
+                (Path(f"{home}/.config/Kvantum"), Path("./xdg-data/Kvantum"), True),
+                (Path(f"{home}/.local/share/sddm"), Path("./xdg-data/sddm"), True),
+                (Path(f"{home}/.local/share/[k]*"), Path("./xdg-data/[k]*"), True),
+                (Path(f"{home}/.config/gtkrc"), Path("./xdg-data/gtkrc"), False),
+                (Path(f"{home}/.config/latte"), Path("./xdg-data/latte"), True),
+                (Path(f"{home}/.config/[k]*"), Path("./xdg-config/[k]*"), True),
             ],
             DesktopEnvironment.DEEPIN: [
-                (Path(f"{home}/.local/share/deepin"), Path("./deepin-data"), True),
-                (Path(f"{home}/.config/deepin"), Path("./"), True),
+                (Path(f"{home}/.local/share/deepin"), Path("./deepin"), True),
+                (Path(f"{home}/.config/deepin"), Path("./deepin"), True),
             ],
             DesktopEnvironment.HYPRLAND: [
                 (Path(f"{home}/.config/hypr"), Path("./hypr"), True),
@@ -324,28 +324,28 @@ class Config(ABC, metaclass=SandwichMeta):
 
         if environment == DesktopEnvironment.GNOME and settings["save-extensions"]:
             desktop_env_config.extend([
-                (Path(f"{home}/.local/share/gnome-shell"), Path("./"), True),
+                (Path(f"{home}/.local/share/gnome-shell"), Path("./gnome-shell"), True),
             ])
 
         if environment == DesktopEnvironment.CINNAMON and settings["save-extensions"]:
             desktop_env_config.extend([
-                (Path(f"{home}/.local/share/cinnamon"), Path("./"), True),
+                (Path(f"{home}/.local/share/cinnamon"), Path("./cinnamon"), True),
             ])
 
         if environment == DesktopEnvironment.COSMIC_OLD:
             desktop_env_config.extend([
-                (Path(f"{home}/.local/share/nautilus"), Path("./"), True),
+                (Path(f"{home}/.local/share/nautilus"), Path("./nautilus"), True),
             ])
 
         if environment == DesktopEnvironment.KDE_PLASMA:
             if settings["save-backgrounds"]:
                 desktop_env_config.extend([
-                    (Path(f"{home}/.local/share/wallpapers"), Path("./xdg-data/"), True)
+                    (Path(f"{home}/.local/share/wallpapers"), Path("./xdg-data/wallpapers"), True)
                 ])
 
             if settings["save-extensions"]:
                 desktop_env_config.extend([
-                    (Path(f"{home}/.local/share/plasma"), Path("./xdg-data/"), True),
+                    (Path(f"{home}/.local/share/plasma"), Path("./xdg-data/plasma"), True),
                 ])
 
     @abstractmethod
@@ -428,6 +428,7 @@ class Config(ABC, metaclass=SandwichMeta):
 
         :return: None
         """
+        
         with ThreadPoolExecutor(max_workers=max_workers or MAX_WORKERS) as executor:
             for config in self.config_files:
                 print(f"Processing: {config.label}")
@@ -440,7 +441,6 @@ class Config(ABC, metaclass=SandwichMeta):
                 for future in futures:
                     future.result()
 
-
 class Save(Config):
 
     def __init__(self):
@@ -448,25 +448,16 @@ class Save(Config):
 
     @staticmethod
     def __flatpak_data_dirs() -> Generator[Tuple[Path, Path, Optional[Callable]], None, None]:
-        """
-        Generates and yields source and destination paths for flatpak app data to be copied,
-        excluding specific blacklisted items. This is useful for handling saving configurations
-        and periodic backups within the application.
-
-        :return: A generator yielding tuples of source path, destination path,
-                 and an optional ignore pattern to be used during the copying process.
-        :rtype: Generator[Tuple[Path, Path, Optional[Callable]], None, None]
-        """
         blacklist = settings["disabled-flatpak-apps-data"] + ["cache"]
 
         dest_dir = Path(f"{CACHE}/save_config/app")
-
         if Path(f"{CACHE}/periodic_saving/saving_status").exists():
             dest_dir = Path(f"{CACHE}/periodic_saving/app")
-
         dest_dir.mkdir(exist_ok=True, parents=True)
 
-        # Generate paths to be copied
+        def ignore_cache_recursive(dir, entries):
+            return [e for e in entries if e == "cache"]
+
         var_app_path = Path(f"{home}/.var/app")
         with os.scandir(var_app_path) as scanner:
             for entry in scanner:
@@ -474,9 +465,10 @@ class Save(Config):
                     source_path = var_app_path / entry.name
                     dest_path = dest_dir / entry.name
                     if entry.is_dir():
-                        yield source_path, dest_path, shutil.ignore_patterns('cache')
+                        yield source_path, dest_path, ignore_cache_recursive
                     else:
                         yield source_path, dest_path, None
+
 
     def setup(self):
         """
@@ -532,14 +524,15 @@ class Save(Config):
                 with ThreadPoolExecutor(max_workers=max_workers or MAX_WORKERS) as executor:
                     futures = []
                     for source, dest, ignore_pattern in Save.__flatpak_data_dirs():
-                        copy_fn = shutil.copytree if source.is_dir() else shutil.copy2
-                        arguments = (source, dest,
-                                {'dirs_exist_ok': True, 'ignore': ignore_pattern}) if source.is_dir() else (source,
-                                                                                                            dest)
-                        futures.append(executor.submit(copy_fn, *arguments))
+                        if source.is_dir():
+                            futures.append(executor.submit(
+                                shutil.copytree, source, dest, dirs_exist_ok=True, ignore=ignore_pattern
+                            ))
+                        else:
+                            futures.append(executor.submit(shutil.copy2, source, dest))
 
                 for future in futures:
-                        future.result()
+                    future.result()
 
     def teardown(self):
         gc.collect()
@@ -561,7 +554,7 @@ class Import(Config):
 
         :return: None
         """
-        self.config_files = map(lambda x: x.reverse(), self.config_files)
+        self.config_files = self.config_files = [x.reverse() for x in self.config_files]
 
     @staticmethod
     def __change_grandparent_dir(paths: List[Path], grandparent: Path):
@@ -683,7 +676,6 @@ class Import(Config):
 
     def teardown(self) -> None:
         pass
-
 
 if args.save:
     Save().run()

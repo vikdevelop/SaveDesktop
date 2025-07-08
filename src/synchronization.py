@@ -167,13 +167,18 @@ class Syncing:
         os.system(f"python3 {system_dir}/config.py --import_")
         self.done()
     
-    # Send a notification about finished synchronization and write the last date of synchronization
     def done(self):
         if not settings["manually-sync"]:
             with open(f"{DATA}/sync-info.json", "w") as s:
                 json.dump({"last-synced": date.today().isoformat()}, s)
-        os.system("rm sync_status") if all(not os.path.exists(app_path) for app_path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]) else None
-        print("Configuration has been synced successfully.")
+                
+        # Remove the cache dir's content
+        os.chdir(CACHE)
+        if all(not os.path.exists(p) for p in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
+            if os.path.exists("syncing"):
+                shutil.rmtree("syncing")
+        
+        # Send a notification about finished synchronization
         os.system(f"notify-send 'SaveDesktop ({self.file})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
 Syncing()
