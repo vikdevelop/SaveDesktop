@@ -308,7 +308,7 @@ class Config(ABC, metaclass=SandwichMeta):
                 (Path(f"{home}/.config/[k]*"), Path("./xdg-config/[k]*"), True),
             ],
             DesktopEnvironment.DEEPIN: [
-                (Path(f"{home}/.local/share/deepin"), Path("./deepin"), True),
+                (Path(f"{home}/.local/share/deepin"), Path("./deepin-data"), True),
                 (Path(f"{home}/.config/deepin"), Path("./deepin"), True),
             ],
             DesktopEnvironment.HYPRLAND: [
@@ -347,6 +347,8 @@ class Config(ABC, metaclass=SandwichMeta):
                 desktop_env_config.extend([
                     (Path(f"{home}/.local/share/plasma"), Path("./xdg-data/plasma"), True),
                 ])
+                
+        self.config_files.append(desktop_env_config)
 
     @abstractmethod
     def setup(self) -> None:
@@ -676,6 +678,7 @@ class Import(Config):
 
     def teardown(self) -> None:
         pass
+
 
 if args.save:
     Save().run()

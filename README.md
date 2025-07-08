@@ -63,6 +63,7 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.config/gtk-4.0 
   - ~/.config/gtk-3.0
   - ~/.var/app
+  - ~/.local/share/flatpak/app
   - /var/lib/flatpak/app
   ```
   - **GNOME**
@@ -120,6 +121,7 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
   - ~/.config/spectaclerc
   - ~/.config/plasmarc
   - ~/.config/plasma-org.kde.plasma.desktop-appletsrc
+  - ~/.local/share/[k]* (all directories and files beginning with k)
   - ~/.local/share/konsole
   - ~/.local/share/dolphin
   - ~/.local/share/sddm
@@ -149,7 +151,7 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
 If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
 | <h4>SaveDesktop application</h4> (click on widget below) | <h4>SaveDesktop Github wiki</h4> (click on widget below) |
 | --- | --- |
-| <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Stav překladu" /></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Stav překladu" title="For the language to be added to the Github Wiki, it should have translated at least seven of the 12 strings." /></a> |
+| <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Stav překladu" /></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Stav překladu" /></a> |
 
 ### Reporting issues
 You can report an issue on GitHub, or if you are not registered on GitHub, you can use this [web page](https://vikdevelop.github.io/SaveDesktop/open-issue/). You can also use [Github Discussions](https://github.com/vikdevelop/SaveDesktop/discussions).
@@ -194,7 +196,7 @@ To install the SaveDesktop Beta, run the following command:
 snap install savedesktop --beta
 ```
 #### 3. Flatpak Builder
-Before building this app using Flatpak Builder, ensure if you have installed org.gnome.Sdk runtime. If not, use this command: `flatpak install org.gnome.Sdk//47`
+Before building this app using Flatpak Builder, ensure if you have installed org.gnome.Sdk runtime. If not, use this command: `flatpak install org.gnome.Sdk//48`
 
 Then, you can continue in building this app using Flatpak Builder by entering this command:
 

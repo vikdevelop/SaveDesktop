@@ -99,5 +99,5 @@
     "unsuppurted_env_desc": "<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}.",
     "summary": "Save your desktop configuration",
     "description": "SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.",
-    "translator_credits": "Translator github-link"
+    "translator_credits": ""
 }
