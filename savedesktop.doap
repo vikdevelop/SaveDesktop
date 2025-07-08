@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:doap="http://usefulinc.com/ns/doap#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+
+  <doap:Project>
+    <doap:name>SaveDesktop</doap:name>
+    <doap:shortdesc xml:lang="en">Save your desktop configuration</doap:shortdesc>
+    <doap:description xml:lang="en">
+      SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click. 
+    </doap:description>
+
+    <doap:homepage rdf:resource="https://github.com/vikdevelop/SaveDesktop" />
+    <doap:bug-database rdf:resource="https://github.com/vikdevelop/SaveDesktop/issues" />
+    <doap:download-page rdf:resource="https://vikdevelop.github.io/SaveDesktop" />
+
+    <doap:programming-language>Python</doap:programming-language>
+    <platform>GTK 4</platform>
+    <platform>Libadwaita</platform>
+
+    <doap:license rdf:resource="https://spdx.org/licenses/GPL-3.0-or-later.html" />
+    <doap:category>Utility</doap:category>
+    <doap:created>2023-02-19</doap:created>
+
+    <doap:maintainer>
+      <foaf:Person>
+        <foaf:name>vikdevelop</foaf:name>
+        <foaf:mbox rdf:resource="mailto:vikdevelop@proton.me" />
+      </foaf:Person>
+    </doap:maintainer>
+  </doap:Project>
+
+</rdf:RDF>
