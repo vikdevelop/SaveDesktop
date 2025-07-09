@@ -1,9 +1,9 @@
 # Synchronizace mezi počítači v síti
 
-Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.
+Kromě uložení konfigurace a jejího importu umožňuje Save Desktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.
 
 ## Nastavení prvního počítače
-1. V aplikaci SaveDesktop otevřete stránku **Synchronizovat**.
+1. V aplikaci Save Desktop otevřete stránku **Synchronizovat**.
 2. Klepněte na tlačítko **„Nastavit synchronizační soubor “**.
 3. Zobrazí se průvodce rychlým nastavením:
    * Pokud používáte prostředí GNOME, Cinnamon, Budgie nebo starší COSMIC, použije se metoda **Online účty GNOME**.
@@ -25,11 +25,11 @@ Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také jej�
    * Vyberte **interval synchronizace** a povolte nebo zakažte **obousměrnou synchronizaci**.
 5. Klikněte na tlačítko **„Použít “**:
    * Budete vyzváni k **odhlášení** nebo (pokud používáte ruční synchronizaci) informováni, že můžete synchronizovat z nabídky v záhlaví aplikace.
-   * Po opětovném přihlášení se aplikace SaveDesktop připojí ke sdílené složce a automaticky synchronizuje vaši konfiguraci s upozorněním na začátku a na konci.
+   * Po opětovném přihlášení se aplikace Save Desktop připojí ke sdílené složce a automaticky synchronizuje vaši konfiguraci s upozorněním na začátku a na konci.
 
 ### Obousměrná synchronizace
 Pokud je **obousměrná synchronizace** povolena na obou počítačích:
-* SaveDesktop kopíruje nastavení synchronizace (například interval a název souboru) z jednoho počítače na druhý,
+* Save Desktop kopíruje nastavení synchronizace (například interval a název souboru) z jednoho počítače na druhý,
 * Díky tomu jsou vaše systémy synchronizovány, aniž byste museli každý z nich nastavovat ručně.
 
 ## Soubory použité při synchronizaci

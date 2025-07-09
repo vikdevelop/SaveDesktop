@@ -1,9 +1,9 @@
 # Sincronizzazione tra computer in rete
 
-Oltre a salvare la configurazione e importarla, SaveDesktop consente anche di sincronizzarla tra i computer della rete utilizzando una cartella cloud condivisa o una cartella Syncthing condivisa.
+Oltre a salvare la configurazione e importarla, Save Desktop consente anche di sincronizzarla tra i computer della rete utilizzando una cartella cloud condivisa o una cartella Syncthing condivisa.
 
 ## Configurazione sul primo computer
-1. Apri la pagina **Sync** nell'app SaveDesktop.
+1. Apri la pagina **Sync** nell'app Save Desktop.
 2. Fai clic su **"Configura il file di sincronizzazione".**
 3. Apparirà una procedura guidata di configurazione rapida:
 * Se utilizzi GNOME, Cinnamon, Budgie o una versione precedente di COSMIC, viene utilizzato il metodo **Account GNOME Online**.
@@ -25,11 +25,11 @@ Oltre a salvare la configurazione e importarla, SaveDesktop consente anche di si
 * Seleziona l'**intervallo di sincronizzazione** e abilita o disabilita la **Sincronizzazione bidirezionale**.
 5. Fai clic su **"Applica":
 * Ti verrà richiesto di **disconnetterti** o (se utilizzi la sincronizzazione manuale) verrai informato che puoi sincronizzare dal menu principale dell'app.
-* Dopo aver effettuato nuovamente l'accesso, SaveDesktop si connette alla cartella condivisa e sincronizza automaticamente la configurazione, con una notifica all'inizio e alla fine.
+* Dopo aver effettuato nuovamente l'accesso, Save Desktop si connette alla cartella condivisa e sincronizza automaticamente la configurazione, con una notifica all'inizio e alla fine.
 
 ### Sincronizzazione bidirezionale
 Se la **Sincronizzazione bidirezionale** è abilitata su entrambi i computer:
-* SaveDesktop copia le impostazioni di sincronizzazione (come intervallo e nome file) da una macchina all'altra,
+* Save Desktop copia le impostazioni di sincronizzazione (come intervallo e nome file) da una macchina all'altra,
 * Questo mantiene i sistemi sincronizzati senza dover configurare manualmente ciascuno di essi.
 
 ## File utilizzati nella sincronizzazione

@@ -1,9 +1,9 @@
 # Ağdaki bilgisayarlar arasında senkronizasyon
 
-SaveDesktop, yapılandırmayı kaydetmenin ve içe aktarmanın yanı sıra, bunu ağınızdaki bilgisayarlar arasında senkronize etmenize de olanak tanır. Bu senkronizasyon, paylaşılan bir bulut klasörü veya Syncthing gibi paylaşılan bir klasör aracılığıyla yapılabilir.
+Save Desktop, yapılandırmayı kaydetmenin ve içe aktarmanın yanı sıra, bunu ağınızdaki bilgisayarlar arasında senkronize etmenize de olanak tanır. Bu senkronizasyon, paylaşılan bir bulut klasörü veya Syncthing gibi paylaşılan bir klasör aracılığıyla yapılabilir.
 
 ## İlk Bilgisayarda Kurulum
-1. SaveDesktop uygulamasında **Senkronizasyon** sayfasını açın.
+1. Save Desktop uygulamasında **Senkronizasyon** sayfasını açın.
 2. **“Senkronizasyon dosyasını ayarla”** seçeneğine tıklayın.
 3. Hızlı kurulum sihirbazı görünecektir:
    * GNOME, Cinnamon, Budgie veya daha eski COSMIC kullanıyorsanız, **GNOME Çevrimiçi Hesapları** yöntemi kullanılır.
@@ -24,11 +24,11 @@ SaveDesktop, yapılandırmayı kaydetmenin ve içe aktarmanın yanı sıra, bunu
    * **Senkronizasyon aralığını** seçin ve **Çift yönlü senkronizasyonu** etkinleştirin veya devre dışı bırakın.
 5. **“Uygula”**'ya tıklayın:
    * **Oturumu kapatmanız** istenecek veya (manuel senkronizasyon kullanıyorsanız) uygulamanın başlık menüsünden senkronizasyon yapabileceğiniz bildirilecektir.
-   * Tekrar oturum açtığınızda SaveDesktop paylaşılan klasöre bağlanır ve yapılandırmanızı otomatik olarak eşitler; başlangıçta ve bitişte bir bildirim görüntüler.
+   * Tekrar oturum açtığınızda Save Desktop paylaşılan klasöre bağlanır ve yapılandırmanızı otomatik olarak eşitler; başlangıçta ve bitişte bir bildirim görüntüler.
 
 ### Çift Yönlü Senkronizasyon
 Her iki bilgisayarda da **Çift yönlü senkronizasyon** etkinleştirilmişse:
-* SaveDesktop, senkronizasyon ayarlarını (aralık ve dosya adı gibi) bir makineden diğerine kopyalar.
+* Save Desktop, senkronizasyon ayarlarını (aralık ve dosya adı gibi) bir makineden diğerine kopyalar.
 * Bu, her birini manuel olarak yapılandırmanıza gerek kalmadan sistemlerinizin senkronize kalmasını sağlar.
 
 ## Senkronizasyonda Kullanılan Dosyalar 

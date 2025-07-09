@@ -1,9 +1,9 @@
 # 通过网络在不同计算机中同步
 
-In addition to saving the configuration and importing it, SaveDesktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
+In addition to saving the configuration and importing it, Save Desktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
 
 ## Setting Up on the First Computer
-1. Open the **Sync** page in the SaveDesktop app.
+1. Open the **Sync** page in the Save Desktop app.
 2. Click **“Set up the sync file.”**
 3. A quick setup wizard will appear:
    * If you're using GNOME, Cinnamon, Budgie, or older COSMIC, the **GNOME Online Accounts** method is used.
@@ -25,11 +25,11 @@ In addition to saving the configuration and importing it, SaveDesktop also allow
    * Select the **sync interval** and enable or disable **Bidirectional synchronization**.
 5. Click **“Apply”**:
    * You will be prompted to **log out**, or (if using manual sync) informed that you can sync from the app’s header menu.
-   * After logging back in, SaveDesktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
+   * After logging back in, Save Desktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
 
 ### Bidirectional Synchronization
 If **Bidirectional synchronization** is enabled on both computers:
-* SaveDesktop copies sync settings (such as interval and filename) from one machine to the other,
+* Save Desktop copies sync settings (such as interval and filename) from one machine to the other,
 * This keeps your systems in sync without needing to configure each one manually.
 
 ## Files Used in Synchronization
