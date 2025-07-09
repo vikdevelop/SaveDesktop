@@ -16,16 +16,13 @@
 
 <br>
 
-# Content
-- [About](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#about)
-    - [Supported environments](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#supported-environments)
-    - [SaveDesktop features](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#savedesktop-can-save)
-- [Contributing](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#contributing)
-  - [Translations](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#translations)
-  - [Reporting issues](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#reporting-issues)
-- [Installation](https://github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#installation)
+# About
 
-## About
+
+<details>
+    <summary><h2>Features</h2><p>Supported desktop environments, range of items to be stored and used configuration directories</p></summary>
+    
+    
 ### Supported environments:
 - GNOME
 - Xfce
@@ -49,114 +46,107 @@
 NOTE: It can happen that a backup file will not be created, in that case, just allow access to the folder in the [Flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal) app.
 
 <details>
-  <summary><b>Configuration directories that will be included in the archive</b></summary>
-  
-  - **General directories**
-  ```
-  - ~/.config/dconf
-  - ~/.local/share/backgrounds 
-  - ~/.themes
-  - ~/.icons
-  - ~/.local/share/icons
-  - ~/.local/share/fonts
-  - ~/.fonts
-  - ~/.config/gtk-4.0 
-  - ~/.config/gtk-3.0
-  - ~/.var/app
-  - ~/.local/share/flatpak/app
-  - /var/lib/flatpak/app
-  ```
-  - **GNOME**
-  ```
-   - ~/.local/share/gnome-background-properties
-   - ~/.local/share/gnome-shell
-   - ~/.local/share/nautilus-python
-   - ~/.local/share/nautilus
-   - ~/.local/share/gnome-control-center
-  ```
-  - **Pantheon**
-  ```
-  - ~/.config/plank 
-  - ~/.config/marlin 
-  ```
-  - **Cinnamon**
-  ```
-  - ~/.config/nemo
-  - ~/.local/share/cinnamon
-  - ~/.cinnamon
-  ```
-  - **Budgie**
-  ```
-  - ~/.config/budgie-desktop
-  - ~/.config/bugie-extras
-  - ~/.config/nemo
-  ```
-  - **Cosmic (Old)**
-  ```
-  - ~/.config/pop-shell
-  - ~/.local/share/gnome-shell
-  ```
-  - **Cosmic (New)**
-  ```
-  - ~/.config/cosmic
-  - ~/.local/state/cosmic
-  ```
-  - **Xfce**
-  ```
-  - ~/.config/xfce4
-  - ~/.config/Thunar
-  - ~/.xfce4
-  ```
-  - **MATE**
-  ```
-  - ~/.config/caja
-  ```
-  - **KDE Plasma**
-  ```
-  - ~/.config/[k]* (all directories and files beginning with k)
-  - ~/.config/gtkrc
-  - ~/.config/dolphinrc
-  - ~/.config/gwenviewrc
-  - ~/.config/plasmashellrc
-  - ~/.config/spectaclerc
-  - ~/.config/plasmarc
-  - ~/.config/plasma-org.kde.plasma.desktop-appletsrc
-  - ~/.local/share/[k]* (all directories and files beginning with k)
-  - ~/.local/share/konsole
-  - ~/.local/share/dolphin
-  - ~/.local/share/sddm
-  - ~/.local/share/wallpapers
-  - ~/.local/share/plasma-systemmonitor
-  - ~/.local/share/plasma
-  - ~/.local/share/aurorae
-  - ~/.local/share/kscreen
-  - ~/.local/share/color-schemes
-  ```
-  - **Deepin**
-  ```
-  - ~/.config/deepin
-  - ~/.local/share/deepin
-  ```
-  - **Hyprland**
-  ```
-  - ~/.config/hypr
-  ```
-  
+      <summary><b>Configuration directories that will be included in the archive</b></summary>
+      
+      - **General directories**
+      ```
+      - ~/.config/dconf
+      - ~/.local/share/backgrounds 
+      - ~/.themes
+      - ~/.icons
+      - ~/.local/share/icons
+      - ~/.local/share/fonts
+      - ~/.fonts
+      - ~/.config/gtk-4.0 
+      - ~/.config/gtk-3.0
+      - ~/.var/app
+      - ~/.local/share/flatpak/app
+      - /var/lib/flatpak/app
+      ```
+      - **GNOME**
+      ```
+       - ~/.local/share/gnome-background-properties
+       - ~/.local/share/gnome-shell
+       - ~/.local/share/nautilus-python
+       - ~/.local/share/nautilus
+       - ~/.local/share/gnome-control-center
+      ```
+      - **Pantheon**
+      ```
+      - ~/.config/plank 
+      - ~/.config/marlin 
+      ```
+      - **Cinnamon**
+      ```
+      - ~/.config/nemo
+      - ~/.local/share/cinnamon
+      - ~/.cinnamon
+      ```
+      - **Budgie**
+      ```
+      - ~/.config/budgie-desktop
+      - ~/.config/bugie-extras
+      - ~/.config/nemo
+      ```
+      - **Cosmic (Old)**
+      ```
+      - ~/.config/pop-shell
+      - ~/.local/share/gnome-shell
+      ```
+      - **Cosmic (New)**
+      ```
+      - ~/.config/cosmic
+      - ~/.local/state/cosmic
+      ```
+      - **Xfce**
+      ```
+      - ~/.config/xfce4
+      - ~/.config/Thunar
+      - ~/.xfce4
+      ```
+      - **MATE**
+      ```
+      - ~/.config/caja
+      ```
+      - **KDE Plasma**
+      ```
+      - ~/.config/[k]* (all directories and files beginning with k)
+      - ~/.config/gtkrc
+      - ~/.config/dolphinrc
+      - ~/.config/gwenviewrc
+      - ~/.config/plasmashellrc
+      - ~/.config/spectaclerc
+      - ~/.config/plasmarc
+      - ~/.config/plasma-org.kde.plasma.desktop-appletsrc
+      - ~/.local/share/[k]* (all directories and files beginning with k)
+      - ~/.local/share/konsole
+      - ~/.local/share/dolphin
+      - ~/.local/share/sddm
+      - ~/.local/share/wallpapers
+      - ~/.local/share/plasma-systemmonitor
+      - ~/.local/share/plasma
+      - ~/.local/share/aurorae
+      - ~/.local/share/kscreen
+      - ~/.local/share/color-schemes
+      ```
+      - **Deepin**
+      ```
+      - ~/.config/deepin
+      - ~/.local/share/deepin
+      ```
+      - **Hyprland**
+      ```
+      - ~/.config/hypr
+      ```
+      
+</details>
+    
 </details>
 
-## Contributing
-*See to the [CONTRIBUTING.md](https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md) for more information.*
+<details>
+    <summary><h2>Installation</h2><p>Installation of stable or beta releases</p></summary>
+    
 
-### Translations
-If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
-| <h4>SaveDesktop application</h4> (click on widget below) | <h4>SaveDesktop Github wiki</h4> (click on widget below) |
-| --- | --- |
-| <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Stav překladu" /></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Stav překladu" /></a> |
-
-### Reporting issues
-You can report an issue on GitHub, or if you are not registered on GitHub, you can use this [web page](https://vikdevelop.github.io/SaveDesktop/open-issue/). You can also use [Github Discussions](https://github.com/vikdevelop/SaveDesktop/discussions).
-
-## Installation
 ### Stable releases
 - Flathub
   
@@ -203,3 +193,31 @@ Then, you can continue in building this app using Flatpak Builder by entering th
 ```
 git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
 ```
+
+</details>
+
+ 
+<details>
+    <summary><h2>Contribution</h2><p>Translations, reporting issues, contributing and code of conduct</p></summary>
+    
+    
+### Code of Conduct
+
+This project follows the GNOME Code of Conduct available at:
+https://conduct.gnome.org
+
+By participating, you are expected to uphold this code.
+
+### Contributing
+*See to the [CONTRIBUTING.md](https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md) for more information.*
+
+#### Translations
+If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
+| <h4>SaveDesktop application</h4> (click on widget below) | <h4>SaveDesktop Github wiki</h4> (click on widget below) |
+| --- | --- |
+| <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Stav překladu" /></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Stav překladu" /></a> |
+
+#### Reporting issues
+You can report an issue on GitHub, or if you are not registered on GitHub, you can use this [web page](https://vikdevelop.github.io/SaveDesktop/open-issue/). You can also use [Github Discussions](https://github.com/vikdevelop/SaveDesktop/discussions).
+
+</details>

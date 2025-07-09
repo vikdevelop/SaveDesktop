@@ -1,33 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:doap="http://usefulinc.com/ns/doap#"
-         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
 
-  <doap:Project>
-    <doap:name>SaveDesktop</doap:name>
-    <doap:shortdesc xml:lang="en">Save your desktop configuration</doap:shortdesc>
-    <doap:description xml:lang="en">
-      SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click. 
-    </doap:description>
+  <name xml:lang="en">SaveDesktop</name>
+  <shortdesc xml:lang="en">Save your desktop configuration</shortdesc>
+  <description xml:lang="en">SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</description>
+  <homepage rdf:resource="https://github.com/vikdevelop/savedesktop" />
+  <bug-database rdf:resource="https://github.com/vikdevelop/savedesktop/issues"/>
+  <download-page rdf:resource="https://flathub.org/apps/details/io.github.vikdevelop.SaveDesktop" />
+  <category rdf:resource="http://api.gnome.org/doap-extensions#apps" />
+  <programming-language>Python</programming-language>
+  <platform>GTK 4</platform>
+  <platform>Libadwaita</platform>
 
-    <doap:homepage rdf:resource="https://github.com/vikdevelop/SaveDesktop" />
-    <doap:bug-database rdf:resource="https://github.com/vikdevelop/SaveDesktop/issues" />
-    <doap:download-page rdf:resource="https://vikdevelop.github.io/SaveDesktop" />
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>vikdevelop</foaf:name>
+      <foaf:mbox rdf:resource="mailto:vikdevelop@proton.me" />
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://gitlab.gnome.org"/>
+          <foaf:accountName>vikdevelop</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
+      <foaf:account>
+        <foaf:OnlineAccount>
+          <foaf:accountServiceHomepage rdf:resource="https://github.com"/>
+          <foaf:accountName>vikdevelop</foaf:accountName>
+        </foaf:OnlineAccount>
+      </foaf:account>
 
-    <doap:programming-language>Python</doap:programming-language>
-    <platform>GTK 4</platform>
-    <platform>Libadwaita</platform>
-
-    <doap:license rdf:resource="https://spdx.org/licenses/GPL-3.0-or-later.html" />
-    <doap:category>Utility</doap:category>
-    <doap:created>2023-02-19</doap:created>
-
-    <doap:maintainer>
-      <foaf:Person>
-        <foaf:name>vikdevelop</foaf:name>
-        <foaf:mbox rdf:resource="mailto:vikdevelop@proton.me" />
-      </foaf:Person>
-    </doap:maintainer>
-  </doap:Project>
-
-</rdf:RDF>
+    </foaf:Person>
+  </maintainer>
+</Project>

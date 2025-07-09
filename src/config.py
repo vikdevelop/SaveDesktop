@@ -559,6 +559,8 @@ class Save(Config):
 
 class Import(Config):
     def __init__(self):
+        self.get_original_variables_state()
+        self.set_all_variables_to_true()
         super().__init__()
         self.__revert_copies()
 
@@ -568,6 +570,53 @@ class Import(Config):
         Reverts the changes made to the configuration files and restores them to
         """
         self.config_files = [x.reverse() for x in self.config_files]
+        
+    def get_original_variables_state(self):
+        """
+        Get original state of variables for items to include in the configuration archive
+        """
+        print("getting original switchers state")
+        
+        self.icons_sw_state = settings["save-icons"]
+        self.themes_sw_state = settings["save-themes"]
+        self.backgrounds_sw_state = settings["save-backgrounds"]
+        self.fonts_sw_state = settings["save-fonts"]
+        self.desktop_sw_state = settings["save-desktop-folder"]
+        self.extensions_sw_state = settings["save-extensions"]
+        self.flatpak_list_sw_state = settings["save-installed-flatpaks"]
+        self.flatpak_data_sw_state = settings["save-flatpak-data"]
+        
+    def set_all_variables_to_true(self):
+        """
+        Set all variables to true so that all items in the archive can be imported from the archive
+        """
+        
+        print("setting all of them to TRUE")
+        
+        settings["save-icons"] = True
+        settings["save-themes"] = True
+        settings["save-backgrounds"] = True
+        settings["save-fonts"] = True
+        settings["save-desktop-folder"] = True
+        settings["save-extensions"] = True
+        settings["save-installed-flatpaks"] = True
+        settings["save-flatpak-data"] = True
+        
+    def set_all_variables_to_original_state(self):
+        """
+        Set all listed variables to the user-defined state in the application
+        """
+        
+        print("setting all of them to original state")
+        
+        settings["save-icons"] = self.icons_sw_state
+        settings["save-themes"] = self.themes_sw_state
+        settings["save-backgrounds"] = self.backgrounds_sw_state
+        settings["save-fonts"] = self.fonts_sw_state
+        settings["save-desktop-folder"] = self.desktop_sw_state
+        settings["save-extensions"] = self.extensions_sw_state
+        settings["save-installed-flatpaks"] = self.flatpak_list_sw_state
+        settings["save-flatpak-data"] = self.flatpak_data_sw_state
 
     def import_kde_plasma_shell(self):
         # Copy all of xdg-config to ~/.config/
@@ -590,6 +639,7 @@ class Import(Config):
         This method imports the user settings using the dconf command. For the backward compatibility reasons,
         it's also possible copy the 'user' file to the ~/.config/dconf directory, if presents in the archive
         """
+        
         print("importing settings from the dconf-settings.ini file")
         if Path("user").exists():
             shutil.copytree("user", f"{home}/.config/dconf/") # backward compatibility with versions 2.9.4 and older
@@ -608,7 +658,7 @@ class Import(Config):
         create_flatpak_desktop() method to set up the import of Flatpak applications
         and their data after logging back into the system.
         """
-
+        
         self.setup()
         # For KDE Plasma, use the shell copy logic and skip the parallel Python copy
         if DesktopEnvironment.get_current_de() == DesktopEnvironment.KDE_PLASMA:
@@ -617,6 +667,7 @@ class Import(Config):
         if flatpak:
             if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
                 self.create_flatpak_desktop()
+        self.set_all_variables_to_original_state()
 
     def teardown(self) -> None:
         pass
