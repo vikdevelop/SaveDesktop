@@ -17,6 +17,42 @@ parser.add_argument("-i", "--import_", help="Import saved configuration", action
 
 args = parser.parse_args()
 
+def get_kde_files(home):
+    """
+    This method saves the KDE Plasma's configuration files from ~/.config
+    and ~/.local/share directories to ./xdg-config and ./xdg-data directories
+    in resulting archive
+    """
+    
+    config_dir = Path(f"{home}/.config")
+    localshare_dir = Path(f"{home}/.local/share")
+
+    kde_files = [
+        (Path(f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc"), Path("./xdg-config/plasma-org.kde.plasma.desktop-appletsrc"), False),
+        (Path(f"{home}/.local/share/plasma-systemmonitor"), Path("./xdg-config/plasma-systemmonitor"), True),
+        (Path(f"{home}/.local/share/color-schemes"), Path("./xdg-config/color-schemes"), True),
+        (Path(f"{home}/.config/plasmashellrc"), Path("./xdg-config/plasmashellrc"), False),
+        (Path(f"{home}/.config/spectaclerc"), Path("./xdg-config/spectaclerc"), False),
+        (Path(f"{home}/.config/gwenviewrc"), Path("./xdg-config/gwenviewrc"), False),
+        (Path(f"{home}/.config/dolphinrc"), Path("./xdg-config/dolphinrc"), False),
+        (Path(f"{home}/.local/share/dolphin"), Path("./xdg-data/dolphin"), True),
+        (Path(f"{home}/.local/share/aurorae"), Path("./xdg-data/aurorae"), True),
+        (Path(f"{home}/.config/plasmarc"), Path("./xdg-data/plasmarc"), False),
+        (Path(f"{home}/.config/Kvantum"), Path("./xdg-data/Kvantum"), True),
+        (Path(f"{home}/.local/share/sddm"), Path("./xdg-data/sddm"), True),
+        (Path(f"{home}/.config/gtkrc"), Path("./xdg-data/gtkrc"), False),
+        (Path(f"{home}/.config/latte"), Path("./xdg-data/latte"), True),
+    ]
+
+    # Add all files/dirs starting with "k" from ~/.config
+    for item in config_dir.glob("k*"):
+        kde_files.append((item, Path("./xdg-config") / item.name, item.is_dir()))
+
+    # Add all files/dirs starting with "k" from ~/.local/share
+    for item in localshare_dir.glob("k*"):
+        kde_files.append((item, Path("./xdg-data") / item.name, item.is_dir()))
+
+    return kde_files
 
 class DesktopEnvironment(Enum):
     """
@@ -205,9 +241,6 @@ class Config(ABC, metaclass=SandwichMeta):
         desktop = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP).replace(" ", "*")
 
         self.config_files = [
-            ConfigFiles("Desktop folder", [
-                (Path(f"{desktop}"), Path("./Desktop/"), True),
-            ]),
             ConfigFiles("Gtk settings", [
                 (Path(f"{home}/.config/gtk-4.0"), Path("./gtk-4.0"), True),
                 (Path(f"{home}/.config/gtk-3.0"), Path("./gtk-3.0"), True),
@@ -247,7 +280,8 @@ class Config(ABC, metaclass=SandwichMeta):
 
         if settings["save-desktop-folder"]:
             self.config_files.extend([
-                ConfigFiles("GVFS metadata files", [
+                ConfigFiles("Desktop directory and GVFS metadata files", [
+                    (Path(f"{desktop}"), Path("./Desktop"), True),
                     (Path(f"{home}/.local/share/gvfs-metadata"), Path("./gvfs-metadata"), True),
                 ]),
             ])
@@ -289,24 +323,7 @@ class Config(ABC, metaclass=SandwichMeta):
             DesktopEnvironment.MATE: [
                 (Path(f"{home}/.config/caja"), Path("./caja"), True)
             ],
-            DesktopEnvironment.KDE_PLASMA: [
-                (Path(f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc"), Path("./xdg-config/plasma-org.kde.plasma.desktop-appletsrc"), False),
-                (Path(f"{home}/.local/share/plasma-systemmonitor"), Path("./xdg-config/plasma-systemmonitor"), True),
-                (Path(f"{home}/.local/share/color-schemes"), Path("./xdg-config/color-schemes"), True),
-                (Path(f"{home}/.config/plasmashellrc"), Path("./xdg-config/plasmashellrc"), False),
-                (Path(f"{home}/.config/spectaclerc"), Path("./xdg-config/spectaclerc"), False),
-                (Path(f"{home}/.config/gwenviewrc"), Path("./xdg-config/gwenviewrc"), False),
-                (Path(f"{home}/.config/dolphinrc"), Path("./xdg-config/dolphinrc"), False),
-                (Path(f"{home}/.local/share/dolphin"), Path("./xdg-data/dolphin"), True),
-                (Path(f"{home}/.local/share/aurorae"), Path("./xdg-data/aurorae"), True),
-                (Path(f"{home}/.config/plasmarc"), Path("./xdg-data/plasmarc"), False),
-                (Path(f"{home}/.config/Kvantum"), Path("./xdg-data/Kvantum"), True),
-                (Path(f"{home}/.local/share/sddm"), Path("./xdg-data/sddm"), True),
-                (Path(f"{home}/.local/share/[k]*"), Path("./xdg-data/[k]*"), True),
-                (Path(f"{home}/.config/gtkrc"), Path("./xdg-data/gtkrc"), False),
-                (Path(f"{home}/.config/latte"), Path("./xdg-data/latte"), True),
-                (Path(f"{home}/.config/[k]*"), Path("./xdg-config/[k]*"), True),
-            ],
+            DesktopEnvironment.KDE_PLASMA: get_kde_files(home),
             DesktopEnvironment.DEEPIN: [
                 (Path(f"{home}/.local/share/deepin"), Path("./deepin-data"), True),
                 (Path(f"{home}/.config/deepin"), Path("./deepin"), True),
@@ -347,7 +364,7 @@ class Config(ABC, metaclass=SandwichMeta):
                 desktop_env_config.extend([
                     (Path(f"{home}/.local/share/plasma"), Path("./xdg-data/plasma"), True),
                 ])
-                
+
         self.config_files.append(desktop_env_config)
 
     @abstractmethod
@@ -430,7 +447,7 @@ class Config(ABC, metaclass=SandwichMeta):
 
         :return: None
         """
-        
+
         with ThreadPoolExecutor(max_workers=max_workers or MAX_WORKERS) as executor:
             for config in self.config_files:
                 print(f"Processing: {config.label}")
@@ -547,87 +564,20 @@ class Import(Config):
 
     def __revert_copies(self):
         """
+        self.config_files = [x.reverse() for x in self.config_files]
         Reverts the changes made to the configuration files and restores them to
-        their original location. This method applies the `reverse()` operation to each
-        configuration file in the `config_files` collection.
-
-        :return: None
         """
-        self.config_files = self.config_files = [x.reverse() for x in self.config_files]
+        self.config_files = [x.reverse() for x in self.config_files]
 
-    @staticmethod
-    def __change_grandparent_dir(paths: List[Path], grandparent: Path):
-        """
-        Modifies paths to replace their parent directory with a specified grandparent
-        directory if their parent directory name matches specific values.
-
-        :param paths: List containing Path objects to be modified.
-        :param grandparent: The grandparent directory used for replacement.
-        :return: A list of Path objects with updated parent directories where applicable.
-        """
-        return list(map(
-            lambda p: grandparent / p.parent.name / p.name
-            if p.parent.name in ['xdg-config', 'xdg-data']
-            else p,
-            paths
-        ))
-
-    @staticmethod
-    def __is_xdg_path(path: Path) -> bool:
-        """
-        Determines if the given path is an XDG path based on the naming convention.
-
-        This static method checks whether the provided path belongs to the XDG
-        configuration or data directory by examining the name of the parent
-        directory.
-
-        :param path: The path to be checked.
-        :type path: Path
-        :return: Returns True if the path belongs to an XDG directory, otherwise False.
-        :rtype: bool
-        """
-        return path.parent.name in ['xdg-config', 'xdg-data']
-
-    @staticmethod
-    def __create_xdg_path(grandparent: Path, path: Path) -> Path:
-        """
-        Generate a new XDG-compliant path.
-
-        This method constructs a new path by combining the given `grandparent` path with the
-        parent directory name and the name of the `path`. The resulting path follows the structure:
-        `grandparent / parent_name_of_path / name_of_path`.
-
-        :param grandparent: The top-level directory where the new path should be rooted.
-        :type grandparent: Path
-        :param path: The source path whose parent directory name and file name will be used
-            to form the new path.
-        :type path: Path
-        :return: A new path combining `grandparent`, and the name of `path`.
-        :rtype: Path
-        """
-        return grandparent / path.name
-
-    def __kde_import_or_sync(self) -> None:
-        """
-        Processes and updates the list of configuration file paths by ensuring they comply
-        with the XDG (X Desktop Group) specification. Determines the current directory
-        to use based on whether syncing or import configuration paths exist before transforming
-        configurable file paths accordingly.
-
-        :param self: Instance of the class calling the function.
-        """
-        syncing_path = Path(f"{CACHE}/syncing")
-        import_config_path = Path(f"{CACHE}/import_config")
-        current_dir = syncing_path if syncing_path.exists() else import_config_path
-
-        modify = partial(self.__create_xdg_path, current_dir)
-        transform = lambda p: modify(p) if self.__is_xdg_path(p) else p
-        self.config_files = list(map(transform, self.config_files))
+    def import_kde_plasma_shell(self):
+        # Copy all of xdg-config to ~/.config/
+        os.system(f'cp -au xdg-config/. {home}/.config/')
+        # Copy all of xdg-data to ~/.local/share/
+        os.system(f'cp -au xdg-data/. {home}/.local/share/')
 
     def create_flatpak_desktop(self):
         os.system(f"cp {system_dir}/install_flatpak_from_script.py {CACHE}/")
-        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") or not os.path.exists(
-                f"{CACHE}/syncing/sync_status"):
+        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") or not os.path.exists(f"{CACHE}/syncing/sync_status"):
             if not os.path.exists(f"{home}/.config/autostart"):
                 os.mkdir(f"{home}/.config/autostart")
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
@@ -637,19 +587,10 @@ class Import(Config):
 
     def setup(self):
         """
-        Sets up the application configuration by importing settings from the Dconf
-        database. Handles both backwards compatibility and Flatpak configurations.
-
-        Behavior changes based on whether a "user" directory exists, and whether
-        running under Flatpak is detected. Copies configuration directory for older
-        versions or executes system commands to load Dconf settings dynamically.
-
-        :param self: Instance of the class containing this method.
-
-        :raises FileNotFoundError: If the required configuration file or directory
-            is missing.
+        This method imports the user settings using the dconf command. For the backward compatibility reasons,
+        it's also possible copy the 'user' file to the ~/.config/dconf directory, if presents in the archive
         """
-        print("importing settings from the Dconf database")
+        print("importing settings from the dconf-settings.ini file")
         if Path("user").exists():
             shutil.copytree("user", f"{home}/.config/dconf/") # backward compatibility with versions 2.9.4 and older
         else:
@@ -661,16 +602,18 @@ class Import(Config):
 
     def run(self, max_workers: Optional[int] = None):
         """
-        Executes the process to handle parallel copy and create the Flatpak desktop integration
-        if applicable. This method is designed to check for specific files and handle Flatpak
-        desktop creation when these files are detected.
-
-        :return: None
+        This method first opens the setup() method to import Dconf settings,
+        then imports KDE Plasma settings from the xdg-config and xdg-data folders.
+        This is followed by running a parallel copy, and finally running the
+        create_flatpak_desktop() method to set up the import of Flatpak applications
+        and their data after logging back into the system.
         """
+
         self.setup()
-        self._parallel_copy(max_workers=max_workers)
+        # For KDE Plasma, use the shell copy logic and skip the parallel Python copy
         if DesktopEnvironment.get_current_de() == DesktopEnvironment.KDE_PLASMA:
-            self.__kde_import_or_sync()
+            self.import_kde_plasma_shell()
+        self._parallel_copy(max_workers=max_workers)
         if flatpak:
             if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
                 self.create_flatpak_desktop()
@@ -682,3 +625,4 @@ if args.save:
     Save().run()
 elif args.import_:
     Import().run()
+
