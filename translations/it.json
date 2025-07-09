@@ -12,7 +12,7 @@
     "logout": "Disconnettersi",
     "please_wait": "Attendere prego …",
     "summary": "Salva la configurazione del tuo desktop",
-    "description": "Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? SaveDesktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata.",
+    "description": "Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? Save Desktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata.",
     "translator_credits": "Albano Battistella https://github.com/albanobattistella",
     "periodic_saving": "Salvataggio periodico",
     "periodic_saving_desc": "Le modifiche avranno effetto solo dopo il prossimo login",
@@ -69,7 +69,7 @@
     "select_cloud_folder_btn": "Seleziona la cartella dell'unità cloud",
     "err_occured": "Si è verificato un errore",
     "create": "Crea",
-    "connect_cloud_storage_desc": "Su un altro computer, apri l'app SaveDesktop e, in questa pagina, clicca sul pulsante \"Imposta il file di sincronizzazione\" e fai le impostazioni necessarie. Su questo computer, seleziona la cartella che hai sincronizzato con il tuo archivio cloud ed hai anche salvato lo stesso file di salvataggio periodico.",
+    "connect_cloud_storage_desc": "Su un altro computer, apri l'app Save Desktop e, in questa pagina, clicca sul pulsante \"Imposta il file di sincronizzazione\" e fai le impostazioni necessarie. Su questo computer, seleziona la cartella che hai sincronizzato con il tuo archivio cloud ed hai anche salvato lo stesso file di salvataggio periodico.",
     "bidirectional_sync": "Sincronizzazione bidirezionale",
     "connect_cloud_storage": "Connettiti allo storage cloud",
     "change": "Modifica",
@@ -99,5 +99,5 @@
     "import_from_folder": "Importa dalla cartella",
     "manual_saving": "Salvataggio manuale",
     "enter_password_title": "Inserisci una password per sbloccare l'archivio e sincronizzare la configurazione",
-    "enter_password_desc": "È stato selezionato un archivio crittografato per la sincronizzazione tramite l'app SaveDesktop. Inserisci la password qui sotto per sbloccarlo e avviare la sincronizzazione."
+    "enter_password_desc": "È stato selezionato un archivio crittografato per la sincronizzazione tramite l'app Save Desktop. Inserisci la password qui sotto per sbloccarlo e avviare la sincronizzazione."
 }

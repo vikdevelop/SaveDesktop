@@ -7,7 +7,7 @@
     "config_saved": "S'ha desat la configuració!",
     "open_folder": "Obre la carpeta",
     "cancel": "Cancel·la",
-    "savedesktop_f": "Fitxers del SaveDesktop",
+    "savedesktop_f": "Fitxers del Save Desktop",
     "config_imported": "S'ha aplicat la configuració!",
     "logout": "Tanca la sessió",
     "please_wait": "Un moment…",
@@ -41,7 +41,7 @@
     "periodic_sync": "Sincronització periòdica",
     "m_sync_desc": "Ja podeu sincronitzar la configuració des del menú de la barra superior",
     "summary": "Desa la configuració actual del vostre entorn d'escriptori",
-    "description": "El SaveDesktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic.",
+    "description": "El Save Desktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic.",
     "translator_credits": "BennyBeat https://github.com/BennyBeat",
     "periodic_saving_file": "Fitxer de desat periòdic",
     "user_data_flatpak": "Dades d'usuari del programari Flatpak instal·lat",
@@ -75,7 +75,7 @@
     "change": "Canvia",
     "periodic_saving_file_err": "No existeix el fitxer de desat periòdic.",
     "bidirectional_sync_desc": "En habilitar-ho i seleccionar l'interval de la sincronització i la carpeta de la unitat al núvol, tota la informació del desament automàtic (interval, carpeta i nom de fitxer) de l'altre ordinador es copia en aquest mitjançant la sincronització indicada.",
-    "connect_cloud_storage_desc": "Obriu aquesta pàgina del SaveDesktop a l'altre ordinador i feu clic al botó «Configura el fitxer de sincronització» per a realitzar els canvis necessaris. En aquest ordinador, seleccioneu la carpeta que heu sincronitzat amb l'emmagatzematge al núvol i on heu desat el fitxer de desament automàtic.",
+    "connect_cloud_storage_desc": "Obriu aquesta pàgina del Save Desktop a l'altre ordinador i feu clic al botó «Configura el fitxer de sincronització» per a realitzar els canvis necessaris. En aquest ordinador, seleccioneu la carpeta que heu sincronitzat amb l'emmagatzematge al núvol i on heu desat el fitxer de desament automàtic.",
     "connect_cloud_storage": "Connecta a l'emmagatzematge al núvol",
     "next": "Next",
     "open_wiki": "Open the application wiki",
@@ -99,5 +99,5 @@
     "password_store_err": "Password not entered, or it's incorrect. Unable to continue.",
     "manual_saving": "Manual saving",
     "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 }

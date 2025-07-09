@@ -7,12 +7,12 @@
     "config_saved": "Konfigurace byla uložena!",
     "open_folder": "Otevřít složku",
     "cancel": "Zrušit",
-    "savedesktop_f": "Soubory SaveDesktop",
+    "savedesktop_f": "Soubory Save Desktop",
     "config_imported": "Konfigurace byla provedena!",
     "logout": "Odhlásit se",
     "please_wait": "Počkejte prosím …",
     "summary": "Uložte konfiguraci plochy",
-    "description": "SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.",
+    "description": "Save Desktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.",
     "translator_credits": "vikdevelop https://github.com/vikdevelop",
     "periodic_saving": "Pravidelné ukládání",
     "periodic_saving_desc": "Změny se projeví až po dalším přihlášení",
@@ -76,7 +76,7 @@
     "bidirectional_sync_desc": "Pokud je tato funkce povolena a je vybrán interval synchronizace a složka cloudové jednotky, informace o pravidelném ukládání (interval, složka a název souboru) z druhého počítače s nastavenou synchronizací se zkopírují do tohoto počítače.",
     "bidirectional_sync": "Obousměrná synchronizace",
     "connect_cloud_storage": "Připojit se ke cloudovému úložišti",
-    "connect_cloud_storage_desc": "Na jiném počítači otevřete aplikaci SaveDesktop a na této stránce klikněte na tlačítko „Nastavit synchronizační soubor“ a proveďte potřebná nastavení. Na tomto počítači vyberte složku, kterou jste synchronizovali s cloudovým úložištěm a do které jste také uložili stejný soubor pro pravidelné ukládání.",
+    "connect_cloud_storage_desc": "Na jiném počítači otevřete aplikaci Save Desktop a na této stránce klikněte na tlačítko „Nastavit synchronizační soubor“ a proveďte potřebná nastavení. Na tomto počítači vyberte složku, kterou jste synchronizovali s cloudovým úložištěm a do které jste také uložili stejný soubor pro pravidelné ukládání.",
     "almost_done_title": "Téměř hotovo!",
     "gnome_oa_section": "2. Přejděte do sekce Online účty",
     "rclone_copy_cmd": "Nyní zkopírujte příkaz pro nastavení Rclone pomocí postranního tlačítka a otevřete aplikaci Terminál pomocí klávesové zkratky Ctrl+Alt+T nebo ji najděte v nabídce aplikací.",
@@ -99,5 +99,5 @@
     "import_from_folder": "Importovat ze složky",
     "manual_saving": "Ruční ukládání",
     "enter_password_title": "Zadejte prosím heslo k odemknutí archivu pro synchronizaci konfigurace",
-    "enter_password_desc": "Pro synchronizaci pomocí aplikace SaveDesktop byl vybrán šifrovaný archiv. Pro jeho odemčení a spuštění synchronizace zadejte níže uvedené heslo."
+    "enter_password_desc": "Pro synchronizaci pomocí aplikace Save Desktop byl vybrán šifrovaný archiv. Pro jeho odemčení a spuštění synchronizace zadejte níže uvedené heslo."
 }

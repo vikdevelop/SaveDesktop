@@ -7,7 +7,7 @@
     "config_saved": "Konfiguracja została zapisana!",
     "open_folder": "Otwórz katalog",
     "cancel": "Anuluj",
-    "savedesktop_f": "Pliki SaveDesktop",
+    "savedesktop_f": "Pliki Save Desktop",
     "config_imported": "The configuration has been applied!",
     "logout": "Wyloguj się",
     "please_wait": "Proszę czekać…",
@@ -49,7 +49,7 @@
     "quit": "Wyjdź",
     "keyboard_shortcuts": "Skróty klawiszowe",
     "summary": "Zapisz konfigurację swojego pulpitu",
-    "description": "SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.",
+    "description": "Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.",
     "translator_credits": "Eryk Michalak gnu.ewm@protonmail.com",
     "importing_config_status": "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n",
     "saving_config_status": "<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n",
@@ -74,7 +74,7 @@
     "cloud_folder_err": "You didn't select the cloud drive folder!",
     "gen_password": "Generuj hasło",
     "bidirectional_sync_desc": "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer.",
-    "connect_cloud_storage_desc": "On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.",
+    "connect_cloud_storage_desc": "On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.",
     "bidirectional_sync": "Bidirectional synchronization",
     "connect_cloud_storage": "Connect to the cloud storage",
     "almost_done_title": "Almost done!",
@@ -99,5 +99,5 @@
     "pwd_for_encryption": "Hasło szyfrowania",
     "manual_saving": "Ręczne zapisywanie",
     "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 }

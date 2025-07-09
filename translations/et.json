@@ -9,7 +9,7 @@
     "config_saved_desc": "<big><b>{}</b></big>\nSa võid nüüd vaadata oma töölauakeskkonna seadistuste archive või minna tagasi eelmise vaate juurde.\n",
     "open_folder": "Ava kaust",
     "cancel": "Katkesta",
-    "savedesktop_f": "SaveDesktopi failid",
+    "savedesktop_f": "Save Desktopi failid",
     "importing_config_status": "<big><b>Impordime seadistusi…</b></big>\nImpordime seadistusi failist:\n<i>{}</i>\n",
     "config_imported": "Seadistused on nüüd kasutusel!",
     "config_imported_desc": "<big><b>{}</b></big>\nMuudatuste kasutuselevõtmiseks võid sa kohe välja logida või minna tagasi ja logida välja hiljem.\n",
@@ -68,7 +68,7 @@
     "please_wait": "Palun oota…",
     "change": "Muuda",
     "connect_cloud_storage": "Ühenda pilvesalvestusteenusega",
-    "connect_cloud_storage_desc": "Ava teises arvutis SaveDesktop rakendus ja sellel lehel klõpsi nuppu „Seadista sünkroniseerimisfail“ ja seadista vastavalt. Selles arvutis vali kaust, mille oled sünkroniseerinud oma pilveteenusega ja kuhu oled lisanud faili regulaarseks salvestamiseks.",
+    "connect_cloud_storage_desc": "Ava teises arvutis Save Desktop rakendus ja sellel lehel klõpsi nuppu „Seadista sünkroniseerimisfail“ ja seadista vastavalt. Selles arvutis vali kaust, mille oled sünkroniseerinud oma pilveteenusega ja kuhu oled lisanud faili regulaarseks salvestamiseks.",
     "select_cloud_folder_btn": "Vali pilveteenuse kaust",
     "cloud_folder_err": "Sa pole pilveteenuse kausta valinud!",
     "periodic_sync": "Regulaarne sünkroniseerimine",
@@ -89,7 +89,7 @@
     "check_pwd_title": "Kasutades salasõna eemalda arhiivifaili krüptimine",
     "check_pwd_desc": "Alljärgnevalt sisesta arhiivifaili krüptimise eemaldamiseks vajalik salasõna. Kui oled salasõna unustanud, siis arhiivifaili lahtipakkimine ja järgnev importimine pole võimalik.",
     "summary": "Salvesta oma töölaua seadistused",
-    "description": "SaveDesktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne).",
+    "description": "Save Desktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne).",
     "translator_credits": "Priit Jõerüüt 2025",
     "remember_password": "Jäta salasõna meelde",
     "syncthing_folder": "Selle asemel kasuta Syncthingi kausta",
@@ -99,5 +99,5 @@
     "pwd_for_encryption": "Krüptimise salasõna",
     "manual_saving": "Käsitsi salvestamine",
     "enter_password_title": "Seadistuste sünkroniseerimiseks palun sisesta salasõna",
-    "enter_password_desc": "Oled SaveDesktopi abil sünkroniseerimiseks valinud krüptitud arhiivifaili. Lukustuse eemaldamiseks palun sisesta salasõna ja sünkroniseerimine saab alata."
+    "enter_password_desc": "Oled Save Desktopi abil sünkroniseerimiseks valinud krüptitud arhiivifaili. Lukustuse eemaldamiseks palun sisesta salasõna ja sünkroniseerimine saab alata."
 }

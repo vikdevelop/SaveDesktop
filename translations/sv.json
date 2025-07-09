@@ -9,7 +9,7 @@
     "config_saved_desc": "<big><b>{}</b></big>\nDu kan nu se arkivet med konfigurationen av din skrivbordsmiljö, eller gå tillbaka till föregående sida.\n",
     "open_folder": "Öppna mappen",
     "cancel": "Avbryt",
-    "savedesktop_f": "SaveDesktop filer",
+    "savedesktop_f": "Save Desktop filer",
     "importing_config_status": "<big><b>Importerar konfiguration …</b></big>\nImporterar konfiguration från:\n<i>{}</i>\n",
     "config_imported": "Konfigurationen har tillämpats!",
     "config_imported_desc": "<big><b>{}</b></big>\nDu kan logga ut från systemet för att ändringarna ska träda i kraft, eller gå tillbaka till föregående sida och logga ut senare.\n",
@@ -68,7 +68,7 @@
     "please_wait": "Vänligen vänta …",
     "change": "Ändra",
     "connect_cloud_storage": "Anslut till molnlagring",
-    "connect_cloud_storage_desc": "På den andra datorn öppnar du SaveDesktop programmet och på den här sidan klickar du på knappen \"Konfigurera synkroniseringsfil\" och gör nödvändiga inställningar. På den här datorn väljer du mappen som du har synkroniserat med din molnlagring och som även har sparat samma periodiska sparfil.",
+    "connect_cloud_storage_desc": "På den andra datorn öppnar du Save Desktop programmet och på den här sidan klickar du på knappen \"Konfigurera synkroniseringsfil\" och gör nödvändiga inställningar. På den här datorn väljer du mappen som du har synkroniserat med din molnlagring och som även har sparat samma periodiska sparfil.",
     "select_cloud_folder_btn": "Välj mappen i molnlagring",
     "cloud_folder_err": "Du valde inte mappen för molnlagring!",
     "periodic_sync": "Periodisk synkronisering",
@@ -89,7 +89,7 @@
     "check_pwd_title": "Lås upp arkivet med ett lösenord",
     "check_pwd_desc": "Ange lösenordet nedan för att låsa upp arkivet med din konfiguration. Om du har glömt det kommer du inte att kunna packa upp arkivet och börja importera din konfiguration.",
     "summary": "Spara din skrivbordskonfiguration",
-    "description": "SaveDesktop låter dig spara din nuvarande konfiguration (teman, ikoner, bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett klick.",
+    "description": "Save Desktop låter dig spara din nuvarande konfiguration (teman, ikoner, bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett klick.",
     "translator_credits": "Luna Jernberg https://github.com/bittin/",
     "save_without_archive": "Spara konfigurationen utan att skapa ett arkiv",
     "syncthing_folder": "Använd Syncthing mapp istället",
@@ -99,5 +99,5 @@
     "pwd_for_encryption": "Lösenord för kryptering",
     "manual_saving": "Manuell sparning",
     "enter_password_title": "Ange ett lösenord för att låsa upp arkivet för att synkronisera konfigurationen.",
-    "enter_password_desc": "Ett krypterat arkiv har valts ut för synkronisering med SaveDesktop programmet. Ange lösenordet nedan för att låsa upp det och starta synkroniseringen."
+    "enter_password_desc": "Ett krypterat arkiv har valts ut för synkronisering med Save Desktop programmet. Ange lösenordet nedan för att låsa upp det och starta synkroniseringen."
 }

@@ -7,12 +7,12 @@
     "config_saved": "A configuração foi salva!",
     "open_folder": "Abrir a pasta",
     "cancel": "Cancelar",
-    "savedesktop_f": "Arquivos SaveDesktop",
+    "savedesktop_f": "Arquivos Save Desktop",
     "config_imported": "A configuração foi aplicada!",
     "logout": "Sair",
     "please_wait": "Por favor, aguarde…",
     "summary": "Salvar a configuração da sua área de trabalho",
-    "description": "SaveDesktop permite que você salve sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um único clique.",
+    "description": "Save Desktop permite que você salve sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um único clique.",
     "translator_credits": "Felipe Nogueira https://github.com/fnogcps\nIsaac Dias https://hosted.weblate.org/user/IsaacDias/\nFilipe Motta <luizfilipemotta@gmail.com>\nEzilei Correia <ezilei@yahoo.com.br>",
     "periodic_saving": "Salvamento periódico",
     "periodic_saving_desc": "As alterações só terão efeito após o próximo login",
@@ -76,7 +76,7 @@
     "create": "Criar",
     "change": "Alterar",
     "periodic_saving_file_err": "O arquivo de salvamento periódico não existe.",
-    "connect_cloud_storage_desc": "Em outro computador, abra o aplicativo SaveDesktop e, nesta página, clique no botão “Configurar o arquivo de sincronização” e faça as configurações necessárias. Neste computador, selecione a pasta que você sincronizou com seu armazenamento em nuvem e também salvou o mesmo arquivo de salvamento periódico.",
+    "connect_cloud_storage_desc": "Em outro computador, abra o aplicativo Save Desktop e, nesta página, clique no botão “Configurar o arquivo de sincronização” e faça as configurações necessárias. Neste computador, selecione a pasta que você sincronizou com seu armazenamento em nuvem e também salvou o mesmo arquivo de salvamento periódico.",
     "open_wiki": "Abrir o wiki do aplicativo",
     "gnome_oa_section": "2. Vá para a seção Contas Online",
     "almost_done_title": "Quase pronto!",
@@ -99,5 +99,5 @@
     "pwd_for_encryption": "Password for encryption",
     "manual_saving": "Manual saving",
     "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 }

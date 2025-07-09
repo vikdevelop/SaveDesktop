@@ -9,7 +9,7 @@
     "config_saved_desc": "<big><b>{}</b></big>\nVoit nyt katselmoida arkiston, jossa työpöytäympäristösi määritys on, tai palata edelliselle sivulle.\n",
     "open_folder": "Avaa kansio",
     "cancel": "Peru",
-    "savedesktop_f": "SaveDesktop-tiedostot",
+    "savedesktop_f": "Save Desktop-tiedostot",
     "importing_config_status": "<big><b>Tuodaan määritystä…</b></big>\nMääritys tuodaan seuraavasta lähteestä:\n<i>{}</i>\n",
     "config_imported": "Määritys on toteutettu!",
     "config_imported_desc": "<big><b>{}</b></big>\nVoit kirjautua ulos järjestelmästä, jotta muutokset tulevat voimaan, tai palata edelliselle sivulle ja kirjautua ulos myöhemmin.\n",
@@ -64,7 +64,7 @@
     "check_pwd_title": "Avaa arkiston lukitus salasanalla",
     "check_pwd_desc": "Kirjoita määritysarkiston salasana alapuolelle. Jos olet unohtanut salasanan, et pysty avata arkistoa ja tuoda määritystä.",
     "summary": "Tallenna työpöytäsi määritys",
-    "description": "SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.",
+    "description": "Save Desktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.",
     "translator_credits": "Name jiri.gronroos+l10n@iki.fi",
     "select_cloud_folder_btn": "Valitse pilviaseman kansio",
     "err_occured": "Tapahtui virhe",
@@ -74,7 +74,7 @@
     "cloud_folder_err": "Et valinnut pilviaseman kansiota!",
     "gen_password": "Luo salasana",
     "bidirectional_sync_desc": "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer.",
-    "connect_cloud_storage_desc": "On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.",
+    "connect_cloud_storage_desc": "On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.",
     "bidirectional_sync": "Kaksisuuntainen synkronointi",
     "connect_cloud_storage": "Yhdistä pilvitallennustilaan",
     "gnome_oa_section": "2. Siirry verkkotileihin",
@@ -99,5 +99,5 @@
     "remember_password": "Muista salasana",
     "password_store_err": "Salasanaa ei kirjoitettu, tai se oli väärin. Jatkaminen ei ole mahdollista.",
     "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 }

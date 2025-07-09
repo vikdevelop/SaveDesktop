@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title"># Synchronizace mezi počítači v síti</str>
-  <str key="synchronization_intro">Kromě uložení konfigurace a jejího importu umožňuje SaveDesktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.</str>
+  <str key="synchronization_intro">Kromě uložení konfigurace a jejího importu umožňuje Save Desktop také její synchronizaci mezi počítači v síti pomocí sdílené cloudové složky nebo sdílené složky Syncthing.</str>
   <str key="set_up_second_pc">## Připojení k jinému počítači
 1. Na druhém počítači znovu přejděte na stránku **Synchronizovat**.
 2. Klepněte na tlačítko **„Připojit se ke cloudovému úložišti “**.
@@ -11,17 +11,17 @@
    * Vyberte **interval synchronizace** a povolte nebo zakažte **obousměrnou synchronizaci**.
 5. Klikněte na tlačítko **„Použít “**:
    * Budete vyzváni k **odhlášení** nebo (pokud používáte ruční synchronizaci) informováni, že můžete synchronizovat z nabídky v záhlaví aplikace.
-   * Po opětovném přihlášení se aplikace SaveDesktop připojí ke sdílené složce a automaticky synchronizuje vaši konfiguraci s upozorněním na začátku a na konci.
+   * Po opětovném přihlášení se aplikace Save Desktop připojí ke sdílené složce a automaticky synchronizuje vaši konfiguraci s upozorněním na začátku a na konci.
 </str>
   <str key="bidirectional_sync">### Obousměrná synchronizace
 Pokud je **obousměrná synchronizace** povolena na obou počítačích:
-* SaveDesktop kopíruje nastavení synchronizace (například interval a název souboru) z jednoho počítače na druhý,
+* Save Desktop kopíruje nastavení synchronizace (například interval a název souboru) z jednoho počítače na druhý,
 * Díky tomu jsou vaše systémy synchronizovány, aniž byste museli každý z nich nastavovat ručně.</str>
   <str key="synchronization_files">## Soubory použité při synchronizaci
 * **Soubor pravidelného ukládání** - archiv `.sd.zip` konfigurace pracovní plochy, který je pravidelně aktualizován.
 * **SaveDesktop.json** - malý pomocný soubor, který ukládá název archivu a interval ukládání, používaný při nastavení synchronizace.</str>
   <str key="set_up_first_pc">## Nastavení prvního počítače
-1. V aplikaci SaveDesktop otevřete stránku **Synchronizovat**.
+1. V aplikaci Save Desktop otevřete stránku **Synchronizovat**.
 2. Klepněte na tlačítko **„Nastavit synchronizační soubor “**.
 3. Zobrazí se průvodce rychlým nastavením:
    * Pokud používáte prostředí GNOME, Cinnamon, Budgie nebo starší COSMIC, použije se metoda **Online účty GNOME**.

@@ -7,12 +7,12 @@
     "config_saved": "Oppsettet har blitt lagret.",
     "open_folder": "Åpne mappen",
     "cancel": "Avbryt",
-    "savedesktop_f": "SaveDesktop-filer",
+    "savedesktop_f": "Save Desktop-filer",
     "config_imported": "Oppsettet har blitt anvendt.",
     "logout": "Logg ut",
     "please_wait": "Vent …",
     "summary": "Lagre nåværende oppsett av skrivebordsmiljøet ditt",
-    "description": "SaveDesktop lar deg lagre ditt nåværende oppsett (drakter, ikoner, bakgrunnsbilder, alle skrivebordsmiljøinnstillinger, utvidelser, osv.) med ett klikk.",
+    "description": "Save Desktop lar deg lagre ditt nåværende oppsett (drakter, ikoner, bakgrunnsbilder, alle skrivebordsmiljøinnstillinger, utvidelser, osv.) med ett klikk.",
     "translator_credits": "Allan Nordhøy https://github.com/comradekingu",
     "periodic_saving": "Periodic saving",
     "periodic_saving_desc": "Changes will only take effect after the next login",
@@ -74,7 +74,7 @@
     "periodic_saving_file_err": "Periodic saving file does not exist.",
     "cloud_folder_err": "You didn't select the cloud drive folder!",
     "bidirectional_sync_desc": "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer.",
-    "connect_cloud_storage_desc": "On another computer, open the SaveDesktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.",
+    "connect_cloud_storage_desc": "On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file.",
     "bidirectional_sync": "Bidirectional synchronization",
     "connect_cloud_storage": "Connect to the cloud storage",
     "gnome_oa_settings": "1. Open the system settings",
@@ -99,5 +99,5 @@
     "save_without_archive": "Save the configuration without creating an archive",
     "manual_saving": "Manual saving",
     "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 }

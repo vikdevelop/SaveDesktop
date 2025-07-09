@@ -7,12 +7,12 @@
     "config_saved": "¡Se ha guardado la configuración!",
     "open_folder": "Abrir la carpeta",
     "cancel": "Cancelar",
-    "savedesktop_f": "Archivos de SaveDesktop",
+    "savedesktop_f": "Archivos de Save Desktop",
     "config_imported": "¡La configuración se ha aplicado!",
     "logout": "Cerrar sesión",
     "please_wait": "Espera, por favor…",
     "summary": "Guardar la configuración del escritorio",
-    "description": "SaveDesktop le permite guardar su configuración actual (temas, iconos, fondos de pantalla, todos los ajustes del entorno del escritorio, extensiones, etc.) con un solo clic.",
+    "description": "Save Desktop le permite guardar su configuración actual (temas, iconos, fondos de pantalla, todos los ajustes del entorno del escritorio, extensiones, etc.) con un solo clic.",
     "translator_credits": "gallegonovato fran-carro@hotmail.es",
     "periodic_saving": "Copia de seguridad periódica",
     "periodic_saving_desc": "Los cambios sólo surtirán efecto tras el siguiente inicio de sesión",
@@ -74,7 +74,7 @@
     "cloud_folder_err": "¡No has seleccionado la carpeta de la unidad en la nube!",
     "gen_password": "Generar contraseña",
     "bidirectional_sync_desc": "Si está activada y se seleccionan el intervalo de sincronización y la carpeta de la unidad en la nube, la información de guardado periódico (intervalo, carpeta y nombre de archivo) del otro ordenador con la sincronización establecida se copia en este ordenador.",
-    "connect_cloud_storage_desc": "En otro ordenador, abra la aplicación SaveDesktop y, en esta página, haga clic en el botón \"Configurar el archivo de sincronización\" y realice los ajustes necesarios. En este ordenador, seleccione la carpeta que ha sincronizado con su almacenamiento en la nube y también ha guardado el mismo archivo de guardado periódico.",
+    "connect_cloud_storage_desc": "En otro ordenador, abra la aplicación Save Desktop y, en esta página, haga clic en el botón \"Configurar el archivo de sincronización\" y realice los ajustes necesarios. En este ordenador, seleccione la carpeta que ha sincronizado con su almacenamiento en la nube y también ha guardado el mismo archivo de guardado periódico.",
     "bidirectional_sync": "Sincronización bidireccional",
     "connect_cloud_storage": "Conectarse al almacenamiento en la nube",
     "almost_done_title": "¡Casi terminamos!",
@@ -99,5 +99,5 @@
     "pwd_for_encryption": "Password for encryption",
     "manual_saving": "Manual saving",
     "enter_password_title": "Please enter a password to unlock the archive for sync the configuration",
-    "enter_password_desc": "An encrypted archive has been selected for synchronization using the SaveDesktop app. Please enter the password below to unlock it and start synchronization."
+    "enter_password_desc": "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 }

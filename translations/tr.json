@@ -7,12 +7,12 @@
     "config_saved": "Ayarlar kayıt edildi!",
     "open_folder": "Klasörü aç",
     "cancel": "İptal et",
-    "savedesktop_f": "SaveDesktop dosyaları",
+    "savedesktop_f": "Save Desktop dosyaları",
     "config_imported": "Ayarlar uygulandı !",
     "logout": "Çıkış Yap",
     "please_wait": "Lütfen bekleyin …",
     "summary": "Masaüstü yapılandırmanızı kaydedin",
-    "description": "SaveDesktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.",
+    "description": "Save Desktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.",
     "translator_credits": "Batmanly https://github.com/batmanly\nSabri Ünal https://github.com/yakushabb",
     "periodic_saving": "Düzenli kaydetme",
     "periodic_saving_desc": "Değişiklikler yalnızca sonraki oturum açma işleminden sonra geçerli olacak",
@@ -74,7 +74,7 @@
     "gen_password": "Parola Oluştur",
     "cloud_folder_err": "Bulut sürücü klasörünü seçmediniz!",
     "bidirectional_sync_desc": "Etkinse ve eşzamanlama aralığı ve bulut sürücü klasörü seçilirse, eşzamanlama ayarlı diğer bilgisayardaki düzenli kayıt bilgileri (aralık, klasör ve dosya adı) bu bilgisayara kopyalanır.",
-    "connect_cloud_storage_desc": "Başka bilgisayarda SaveDesktop uygulamasını açıp bu sayfadaki “Eşzamanlama dosyasını ayarla” düğmesine tıklayın ve gerekli ayarları yapın. Bu bilgisayarda, bulut depolama alanınızla eşzamanlamak istediğiniz ve aynı düzenli kayıt dosyasına kaydettiğiniz klasörü seçin.",
+    "connect_cloud_storage_desc": "Başka bilgisayarda Save Desktop uygulamasını açıp bu sayfadaki “Eşzamanlama dosyasını ayarla” düğmesine tıklayın ve gerekli ayarları yapın. Bu bilgisayarda, bulut depolama alanınızla eşzamanlamak istediğiniz ve aynı düzenli kayıt dosyasına kaydettiğiniz klasörü seçin.",
     "bidirectional_sync": "Çift yönlü eşzamanlama",
     "connect_cloud_storage": "Bulut depolamaya bağlan",
     "open_wiki": "Uygulama wiki'sini açın",
@@ -99,5 +99,5 @@
     "password_store_err": "Şifre girilmedi veya yanlış. Devam edilemiyor.",
     "import_from_folder": "Klasörden aktar",
     "manual_saving": "Manuel kaydet",
-    "enter_password_desc": "SaveDesktop uygulaması kullanılarak senkronizasyon için şifrelenmiş bir arşiv seçildi. Lütfen kilidini açmak ve senkronizasyonu başlatmak için aşağıdaki şifreyi girin."
+    "enter_password_desc": "Save Desktop uygulaması kullanılarak senkronizasyon için şifrelenmiş bir arşiv seçildi. Lütfen kilidini açmak ve senkronizasyonu başlatmak için aşağıdaki şifreyi girin."
 }
