@@ -1208,9 +1208,9 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 os.system(f"echo > {CACHE}/save_config/.folder.sd && mv {CACHE}/save_config '{self.folder}/{self.filename_text}'")
             else:
                 if settings["enable-encryption"] == True:
-                    os.system(f'7z a -tzip -mx=6 -p"{self.password}" -x!*.zip -x!saving_status cfg.sd.zip .')
+                    os.system(f'7z a -tzip -mx=3 -p"{self.password}" -x!*.zip -x!saving_status cfg.sd.zip .')
                 else:
-                    os.system(f"7z a -tzip -mx=6 -x!*.zip -x!saving_status cfg.sd.zip .")
+                    os.system(f"7z a -tzip -mx=3 -x!*.zip -x!saving_status cfg.sd.zip .")
                 if self.cancel_process:
                     return
                 else:
