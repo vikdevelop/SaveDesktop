@@ -8,7 +8,7 @@ from password_store import *
 class PasswordWindow(Gtk.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.set_title(f"{_['sync']} | SaveDesktop")
+        self.set_title(f"{_['sync']} | Save Desktop")
         
         # Header bar
         self.headerbar = Gtk.HeaderBar.new()

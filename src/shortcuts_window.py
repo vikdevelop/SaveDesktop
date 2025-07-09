@@ -61,28 +61,28 @@ SHORTCUTS_WINDOW = '<?xml version="1.0" encoding="UTF-8"?>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.ms-dialog</property>\
-                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;m</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;alt&gt;&amp;m</property>\
               </object>\
             </child>\
             <child>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.items-dialog</property>\
-                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;i</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;alt&gt;&amp;i</property>\
               </object>\
             </child>\
             <child>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.set-dialog</property>\
-                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;s</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;alt&gt;&amp;s</property>\
               </object>\
             </child>\
             <child>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.cloud-dialog</property>\
-                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;c</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;alt&gt;&amp;c</property>\
               </object>\
             </child>\
           </object>\

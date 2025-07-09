@@ -15,7 +15,7 @@ from password_store import PasswordStore
 class MainWindow(Adw.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.set_title("SaveDesktop")
+        self.set_title("Save Desktop")
         self.app_wiki = "https://vikdevelop.github.io/SaveDesktop/wiki"
         
         # header bar and toolbarview
@@ -79,7 +79,7 @@ class MainWindow(Adw.ApplicationWindow):
         # menu switcher
         self.switcher_title = Adw.ViewSwitcherTitle.new()
         self.switcher_title.set_stack(self.stack)
-        self.switcher_title.set_title("SaveDesktop")
+        self.switcher_title.set_title("Save Desktop")
         self.headerbar.set_title_widget(self.switcher_title)
         self.switcher_title.connect("notify::title-visible", self.change_bar)
         
@@ -1237,7 +1237,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
             self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
-            self.set_title("SaveDesktop")
+            self.set_title("Save Desktop")
             for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
                 self.savewaitBox.remove(widget)
         
@@ -1290,7 +1290,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
             self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
-            self.set_title("SaveDesktop")
+            self.set_title("Save Desktop")
             for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
                 self.savewaitBox.remove(widget)
         
@@ -1425,7 +1425,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
             self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
-            self.set_title("SaveDesktop")
+            self.set_title("Save Desktop")
             for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]:
                 self.importwaitBox.remove(widget)
 
@@ -1478,13 +1478,13 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
             self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
-            self.set_title("SaveDesktop")
+            self.set_title("Save Desktop")
             [self.importwaitBox.remove(widget) for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]]
             if hasattr(self, 'flistBox'):
                 self.pBox.remove(self.flistBox)
         
         # send notification about imported configuration if application window is inactive only
-        self.notification_import = Gio.Notification.new("SaveDesktop")
+        self.notification_import = Gio.Notification.new("Save Desktop")
         self.notification_import.set_body(_["config_imported"])
         active_window = app.get_active_window()
         if active_window is None or not active_window.is_active():
@@ -1563,10 +1563,10 @@ class MyApp(Adw.Application):
         self.create_action('m-sync-with-key', self.sync_pc, ["<primary>m"] if settings["manually-sync"] else None)
         self.create_action('save-config', self.call_saving_config, ["<primary>s"])
         self.create_action('import-config', self.call_importing_config, ["<primary>i"])
-        self.create_action('ms-dialog', self.call_ms_dialog, ["<primary><shift>m"])
-        self.create_action('items-dialog', self.call_items_dialog, ["<primary><shift>i"])
-        self.create_action('set-dialog', self.call_setDialog, ["<primary><shift>s"])
-        self.create_action('cloud-dialog', self.call_cloudDialog, ["<primary><shift>c"])
+        self.create_action('ms-dialog', self.call_ms_dialog, ["<primary><alt>m"])
+        self.create_action('items-dialog', self.call_items_dialog, ["<primary><alt>i"])
+        self.create_action('set-dialog', self.call_setDialog, ["<primary><alt>s"])
+        self.create_action('cloud-dialog', self.call_cloudDialog, ["<primary><alt>c"])
         self.create_action('open-wiki', self.open_wiki, ["F1"])
         self.create_action('quit', self.app_quit, ["<primary>q"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
@@ -1649,11 +1649,11 @@ class MyApp(Adw.Application):
     # "About app" dialog
     def on_about_action(self, action, param):
         dialog = Adw.AboutDialog()
-        dialog.set_application_name("SaveDesktop")
+        dialog.set_application_name("Save Desktop")
         dialog.set_developer_name("vikdevelop")
         dialog.set_comments(_["summary"])
         r_lang != "en" and dialog.set_translator_credits(_["translator_credits"]) # add the translator credits section if the system language is not English
-        dialog.add_link("SaveDesktop Github Wiki (Weblate)", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/") # add a link to translate the SaveDesktop Github wiki on Weblate
+        dialog.add_link("Save Desktop Github Wiki (Weblate)", "https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/") # add a link to translate the SaveDesktop Github wiki on Weblate
         dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
         dialog.set_website("https://vikdevelop.github.io/SaveDesktop")
         dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")

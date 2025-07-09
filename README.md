@@ -1,7 +1,7 @@
 
 <p align="center">
   <img src="/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg">
-  <h1 align="center">SaveDesktop</h1>
+  <h1 align="center">Save Desktop</h1>
   <p align="center">Save your desktop configuration</p>
 </p>
 
@@ -35,7 +35,7 @@
 - Deepin
 - Hyprland (logging out of the system doesn't work yet)
 
-### SaveDesktop can save:
+### Save Desktop can save:
 - your icons, fonts, and themes
 - your settings
 - your backgrounds (including dynamic wallpapers, provided that the same username is retained)
@@ -175,13 +175,13 @@ Add the Flathub Beta repository to your system:
 ```
 flatpak remote-add --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 ```
-Install the SaveDesktop Beta from this repository:
+Install the Save Desktop Beta from this repository:
 
 ```
 flatpak install flathub-beta io.github.vikdevelop.SaveDesktop
 ```
 #### 2. Snap
-To install the SaveDesktop Beta, run the following command:
+To install the Save Desktop Beta, run the following command:
 ```
 snap install savedesktop --beta
 ```
@@ -212,8 +212,8 @@ By participating, you are expected to uphold this code.
 *See to the [CONTRIBUTING.md](https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md) for more information.*
 
 #### Translations
-If you want to help localize SaveDesktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
-| <h4>SaveDesktop application</h4> (click on widget below) | <h4>SaveDesktop Github wiki</h4> (click on widget below) |
+If you want to help localize Save Desktop, you can use the Weblate tool (it is possible to register with, e.g., GitHub or Google).
+| <h4>Save Desktop application</h4> (click on widget below) | <h4>Save Desktop Github wiki</h4> (click on widget below) |
 | --- | --- |
 | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Stav překladu" /></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Stav překladu" /></a> |
 

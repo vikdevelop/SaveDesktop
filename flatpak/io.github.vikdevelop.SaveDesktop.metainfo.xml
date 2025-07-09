@@ -3,7 +3,7 @@
     
     <id>io.github.vikdevelop.SaveDesktop</id>
     <launchable type="desktop-id">io.github.vikdevelop.SaveDesktop.desktop</launchable>
-    <name>SaveDesktop</name>
+    <name>Save Desktop</name>
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0-or-later</project_license>
     <developer id="io.github.vikdevelop">

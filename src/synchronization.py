@@ -57,14 +57,14 @@ class Syncing:
     # Check, if "Manually" is the sync interval
     def check_manually_sync_status(self):
         if settings["periodic-import"] == "Manually2" and not os.path.exists(f"{CACHE}/.from_app"):
-            print("Please sync from the SaveDesktop app")
+            print("Please sync from the Save Desktop app")
         else:
             self.download_config()
     
     # Download the configuration archive from the cloud drive folder
     def download_config(self):
         subtitle = (lambda s: re.sub(r'<.*?>', '', s).split('…')[-1].strip())(_["importing_config_status"].format(settings["file-for-syncing"]))
-        os.system(f'notify-send "SaveDesktop Synchronization" "{subtitle}"')
+        os.system(f'notify-send "Save Desktop Synchronization" "{subtitle}"')
         if not os.path.exists(f"{settings['file-for-syncing']}/SaveDesktop.json"):
             err_str = _["err_occured"]
             err = "SaveDesktop.json doesn't exist in the cloud drive folder!"
@@ -179,6 +179,6 @@ class Syncing:
                 shutil.rmtree("syncing")
         
         # Send a notification about finished synchronization
-        os.system(f"notify-send 'SaveDesktop ({self.file})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
+        os.system(f"notify-send 'Save Desktop ({self.file})' '{_['config_imported']} {_['periodic_saving_desc']}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
 Syncing()

@@ -4,7 +4,7 @@
          xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
-  <name xml:lang="en">SaveDesktop</name>
+  <name xml:lang="en">Save Desktop</name>
   <shortdesc xml:lang="en">Save your desktop configuration</shortdesc>
   <description xml:lang="en">SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</description>
   <homepage rdf:resource="https://github.com/vikdevelop/savedesktop" />
