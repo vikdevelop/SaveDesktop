@@ -61,28 +61,28 @@
     <summary xml:lang="ta">உங்கள் டெச்க்டாப் உள்ளமைவைச் சேமிக்கவும்</summary>
     
     <description>
-      <p>SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
-      <p xml:lang="cs">SaveDesktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.</p>
-      <p xml:lang="fr">SaveDesktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.</p>
-      <p xml:lang="pt_BR">SaveDesktop permite que você salve sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um único clique.</p>
-      <p xml:lang="it">Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? SaveDesktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata.</p>
+      <p>Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
+      <p xml:lang="cs">Save Desktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím.</p>
+      <p xml:lang="fr">Save Desktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic.</p>
+      <p xml:lang="pt_BR">Save Desktop permite que você salve sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um único clique.</p>
+      <p xml:lang="it">Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? Save Desktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata.</p>
       <p xml:lang="nl">Wilt u uw huidige voorkeuren (thema's, pictogrammen, bureaubladachtergronden, systeemvoorkeuren, uitbreidingen, etc.) opslaan? SaveDesktop kan u hierbij helpen. Met slechts één muisklik wordt alles opgeslagen.</p>
-      <p xml:lang="ar">هل ترغب في حفظ التخصيصات الحالي الخاص بك بما في ذلك السمات والرموز والخلفيات وجميع إعدادات بيئة سطح المكتب والإضافات وما إلى ذلك؟ يمكن أن يساعدك SaveDesktop في ذلك. بنقرة واحدة فقط ويتم حفظ التخصيصات الخاص بك.</p>
-      <p xml:lang="ru">Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все настройки окружения рабочего стола, расширения и т.д.? SaveDesktop поможет вам в этом. Всего один клик - и ваша конфигурация сохранена.</p>
-      <p xml:lang="id">SaveDesktop memungkinkan Anda menyimpan konfigurasi saat ini (tema, ikon, wallpaper, semua pengaturan lingkungan desktop, ekstensi, dll.) dengan satu klik.</p>
-      <p xml:lang="nb_NO">SaveDesktop lar deg lagre ditt nåværende oppsett (drakter, ikoner, bakgrunnsbilder, alle skrivebordsmiljøinnstillinger, utvidelser, osv.) med ett klikk.</p>
-      <p xml:lang="uk">SaveDesktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, всі налаштування середовища робочого столу, розширення тощо) одним клацанням миші.</p>
-      <p xml:lang="hu">SaveDesktop lehetővé teszi, hogy egy gombnyomással elmentsd a jelenlegi konfigurációdat (témákat, ikonokat, háttereket, az összes asztali környezeti beállítást, kiegészítéseket, stb.).</p>
-      <p xml:lang="es">SaveDesktop te permite guardar tu configuración actual (temas, iconos, fondos de pantalla, todos los ajustes del entorno del escritorio, extensiones, etc.) con un solo clic.</p>
-      <p xml:lang="tr">SaveDesktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.</p>
-      <p xml:lang="de">Mit SaveDesktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.</p>
-      <p xml:lang="zh_Hans">SaveDesktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。</p>
-      <p xml:lang="ca">El SaveDesktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic.</p>
-      <p xml:lang="hi">SaveDesktop आपको एक क्लिक से अपने वर्तमान विन्यास (थीम, आइकन, वॉलपेपर, सभी डेस्कटॉप वातावरण सेटिंग्स, एक्सटेंशन इत्यादि) को सहेजने देता है।</p>
-      <p xml:lang="pt">SaveDesktop permite gravar a sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um clique.</p>
-      <p xml:lang="fi">SaveDesktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.</p>
-      <p xml:lang="sv">SaveDesktop låter dig spara din nuvarande konfiguration (teman, ikoner, bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett klick.</p>
-      <p xml:lang="et">SaveDesktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne).</p>
+      <p xml:lang="ar">هل ترغب في حفظ التخصيصات الحالي الخاص بك بما في ذلك السمات والرموز والخلفيات وجميع إعدادات بيئة سطح المكتب والإضافات وما إلى ذلك؟ يمكن أن يساعدك Save Desktop في ذلك. بنقرة واحدة فقط ويتم حفظ التخصيصات الخاص بك.</p>
+      <p xml:lang="ru">Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все настройки окружения рабочего стола, расширения и т.д.? Save Desktop поможет вам в этом. Всего один клик - и ваша конфигурация сохранена.</p>
+      <p xml:lang="id">Save Desktop memungkinkan Anda menyimpan konfigurasi saat ini (tema, ikon, wallpaper, semua pengaturan lingkungan desktop, ekstensi, dll.) dengan satu klik.</p>
+      <p xml:lang="nb_NO">Save Desktop lar deg lagre ditt nåværende oppsett (drakter, ikoner, bakgrunnsbilder, alle skrivebordsmiljøinnstillinger, utvidelser, osv.) med ett klikk.</p>
+      <p xml:lang="uk">Save Desktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, всі налаштування середовища робочого столу, розширення тощо) одним клацанням миші.</p>
+      <p xml:lang="hu">Save Desktop lehetővé teszi, hogy egy gombnyomással elmentsd a jelenlegi konfigurációdat (témákat, ikonokat, háttereket, az összes asztali környezeti beállítást, kiegészítéseket, stb.).</p>
+      <p xml:lang="es">Save Desktop te permite guardar tu configuración actual (temas, iconos, fondos de pantalla, todos los ajustes del entorno del escritorio, extensiones, etc.) con un solo clic.</p>
+      <p xml:lang="tr">Save Desktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir.</p>
+      <p xml:lang="de">Mit Save Desktop können Sie Ihre aktuelle Konfiguration (Designs, Symbole, Hintergrundbilder, alle Einstellungen der Desktop-Umgebung, Erweiterungen usw.) mit einem Klick speichern.</p>
+      <p xml:lang="zh_Hans">Save Desktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。</p>
+      <p xml:lang="ca">El Save Desktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic.</p>
+      <p xml:lang="hi">Save Desktop आपको एक क्लिक से अपने वर्तमान विन्यास (थीम, आइकन, वॉलपेपर, सभी डेस्कटॉप वातावरण सेटिंग्स, एक्सटेंशन इत्यादि) को सहेजने देता है।</p>
+      <p xml:lang="pt">Save Desktop permite gravar a sua configuração atual (temas, ícones, papéis de parede, todas as configurações da área de trabalho, extensões, etc.) com um clique.</p>
+      <p xml:lang="fi">Save Desktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella.</p>
+      <p xml:lang="sv">Save Desktop låter dig spara din nuvarande konfiguration (teman, ikoner, bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett klick.</p>
+      <p xml:lang="et">Save Desktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne).</p>
       <p xml:lang="ta">உங்கள் தற்போதைய உள்ளமைவை (கருப்பொருள்கள், சின்னங்கள், வால்பேப்பர்கள், அனைத்து டெச்க்டாப் சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே கிளிக்கில் சேமிக்க சேமிப்பக்டாப் உங்களை அனுமதிக்கிறது.</p>
     </description>
     
