@@ -1233,7 +1233,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         def cancel_save(w):
             self.cancel_process = True
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
-            os.system(f"pkill tar") if not settings["enable-encryption"] else os.system("pkill zip")
+            os.system(f"pkill 7z")
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
             self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
@@ -1420,6 +1420,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         # Stop importing configuration
         def cancel_import(w):
             self.cancel_process = True
+            os.system("pkill 7z")
             os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)

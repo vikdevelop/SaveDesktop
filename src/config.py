@@ -545,9 +545,6 @@ class Import(Config):
         super().__init__()
         self.__revert_copies()
 
-        if DesktopEnvironment.get_current_de() == DesktopEnvironment.KDE_PLASMA:
-            self.__kde_import_or_sync()  # I don't know if this should be here, in setup or run function
-
     def __revert_copies(self):
         """
         Reverts the changes made to the configuration files and restores them to
@@ -605,11 +602,10 @@ class Import(Config):
         :param path: The source path whose parent directory name and file name will be used
             to form the new path.
         :type path: Path
-        :return: A new path combining `grandparent`, the parent directory name of `path`,
-            and the name of `path`.
+        :return: A new path combining `grandparent`, and the name of `path`.
         :rtype: Path
         """
-        return grandparent / path.parent.name / path.name
+        return grandparent / path.name
 
     def __kde_import_or_sync(self) -> None:
         """
@@ -671,14 +667,16 @@ class Import(Config):
 
         :return: None
         """
+        self.setup()
         self._parallel_copy(max_workers=max_workers)
+        if DesktopEnvironment.get_current_de() == DesktopEnvironment.KDE_PLASMA:
+            self.__kde_import_or_sync()
         if flatpak:
             if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
                 self.create_flatpak_desktop()
 
     def teardown(self) -> None:
         pass
-
 
 if args.save:
     Save().run()
