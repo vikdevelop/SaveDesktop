@@ -1,0 +1,33 @@
+name: Flatpak CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y flatpak flatpak-builder appstream
+
+      - name: Install GNOME Platform and SDK
+        run: |
+          flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+          flatpak install -y flathub org.gnome.Platform//48
+          flatpak install -y flathub org.gnome.Sdk//48
+
+      - name: Validate AppStream metainfo
+        run: |
+          appstreamcli validate flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
+
+      - name: Build Flatpak
+        run: |
+          flatpak-builder --force-clean build io.github.vikdevelop.SaveDesktop.yaml
