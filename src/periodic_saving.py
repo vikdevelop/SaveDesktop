@@ -87,7 +87,7 @@ class PeriodicBackups:
         except:
             self.password = None
         if self.password != None:
-            os.system(f'7z a -tzip -mx=3 -p"{self.password}" -x!*.zip -x!saving_status cfg.sd.zip .')
+            os.system(f'7z a -tzip -mem=AES256 -mx=3 -p"{self.password}" -x!*.zip -x!saving_status cfg.sd.zip .')
         else:
             os.system(f"7z a -tzip -mx=3 -x!*.zip -x!saving_status cfg.sd.zip .")
         shutil.copyfile('cfg.sd.zip', f'{self.pbfolder}/{self.filename}.sd.zip')
