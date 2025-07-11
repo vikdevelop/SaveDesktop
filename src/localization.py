@@ -20,7 +20,7 @@ else:
 # Set application version, and icon
 v = "3.6.1"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>This version brings significant speedup of saving and importing configurations thanks to parallel copying (thanks to @ArthurValadares), change of application name from \"SaveDesktop\" to \"Save Desktop\" and minor user interface improvements along with minor bug fixes.</p>\
+rel_notes = "<p>This version brings significant speedup of saving and importing configurations thanks to parallel copying (thanks to @ArthurValadares), change of application name from \"SaveDesktop\" to \"Save Desktop\" and minor user interface improvements along with minor bug fixes. Also the import of dynamic wallpapers in GNOME has been improved.</p>\
 <p>3.6-hotfix</p><p>Fixed a \"buffer overflow\" error when creating configuration archives by replacing the ZIP utility with 7-Zip.</p>\
 <p>3.6</p><ul>\
 <li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization mode</li>\

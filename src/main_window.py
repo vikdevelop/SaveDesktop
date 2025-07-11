@@ -1371,7 +1371,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         
         try:
             e_o = False
-            os.system("echo > import_status")
+            os.system("echo > import_status") # Create a txt file to prevent removing the cache's content after the next login by closing the app window
             if self.is_folder == True:
                 imp_folder_thread = Thread(target=import_folder)
                 imp_folder_thread.start()
@@ -1401,8 +1401,10 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                                 tar.extract(member, path=f"{CACHE}/import_config")
                             except PermissionError as e:
                                 print(f"Permission denied for {member.name}: {e}")
+            os.system("find . -type f -name '*.xml' -exec python3 -c 'import re, sys; p=sys.argv[1]; t=open(p).read(); open(p,\"w\").write(re.sub(\"/home/[^/]+/\", \"%s/\", t))' {} \;" % home) # Replace the old home folder path with the current home folder path in all dynamic wallapers' XML files
+            os.system("find . -type f -name '*.ini' -exec python3 -c 'import re, sys; p=sys.argv[1]; t=open(p).read(); open(p,\"w\").write(re.sub(\"/home/[^/]+/\", \"%s/\", t))' {} \;" % home) # Replace the old home folder path with the current home folder path in all INI files (specifically dconf-settings.ini)
             os.system(f"python3 {system_dir}/config.py --import_")
-            os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in [f"{CACHE}/import_config/app", f"{CACHE}/import_config/installed_flatpaks.sh", f"{CACHE}/import_config/installed_user_flatpaks.sh"]) else None
+            os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in [f"{CACHE}/import_config/app", f"{CACHE}/import_config/installed_flatpaks.sh", f"{CACHE}/import_config/installed_user_flatpaks.sh"]) else None # Remove the import_status file only if the specified files don't exist
             print("Configuration imported successfully.")
         except Exception as e:
             e_o = True
