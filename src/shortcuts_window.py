@@ -33,14 +33,7 @@ SHORTCUTS_WINDOW = '<?xml version="1.0" encoding="UTF-8"?>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.import-config</property>\
-                <property name="accelerator">&lt;primary&gt;&amp;i</property>\
-              </object>\
-            </child>\
-            <child>\
-              <object class="GtkShortcutsShortcut">\
-                <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
-                <property name="action-name">app.m_sync_with_key</property>\
-                <property name="accelerator">&lt;primary&gt;&amp;m</property>\
+                <property name="accelerator">&lt;primary&gt;&amp;o</property>\
               </object>\
             </child>\
             <child>\
@@ -60,29 +53,36 @@ SHORTCUTS_WINDOW = '<?xml version="1.0" encoding="UTF-8"?>\
             <child>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
+                <property name="action-name">app.m_sync_with_key</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;s</property>\
+              </object>\
+            </child>\
+            <child>\
+              <object class="GtkShortcutsShortcut">\
+                <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.ms-dialog</property>\
-                <property name="accelerator">&lt;primary&gt;&lt;alt&gt;&amp;m</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;m</property>\
               </object>\
             </child>\
             <child>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.items-dialog</property>\
-                <property name="accelerator">&lt;primary&gt;&lt;alt&gt;&amp;i</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;i</property>\
               </object>\
             </child>\
             <child>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.set-dialog</property>\
-                <property name="accelerator">&lt;primary&gt;&lt;alt&gt;&amp;s</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;f</property>\
               </object>\
             </child>\
             <child>\
               <object class="GtkShortcutsShortcut">\
                 <property name="title" translatable="true" context="ShortcutsWindow">%s</property>\
                 <property name="action-name">app.cloud-dialog</property>\
-                <property name="accelerator">&lt;primary&gt;&lt;alt&gt;&amp;c</property>\
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;&amp;c</property>\
               </object>\
             </child>\
           </object>\
@@ -90,7 +90,7 @@ SHORTCUTS_WINDOW = '<?xml version="1.0" encoding="UTF-8"?>\
       </object>\
     </child>\
   </template>\
-</interface>' % (_["open_wiki"], _["save_config"], _["import_from_file"], _["sync_manually"], _["keyboard_shortcuts"], _["quit"], _["more_options"], _["items_for_archive"], _["set_up_sync_file"], _["connect_cloud_storage"])
+</interface>' % (_["open_wiki"], _["save_config"], _["import_from_file"], _["keyboard_shortcuts"], _["quit"], _["sync_manually"], _["more_options"], _["items_for_archive"], _["set_up_sync_file"], _["connect_cloud_storage"])
 
 # Load the shortcuts window
 @Gtk.Template(string=SHORTCUTS_WINDOW)
