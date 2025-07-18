@@ -6,7 +6,7 @@
 
   <name xml:lang="en">Save Desktop</name>
   <shortdesc xml:lang="en">Save your desktop configuration</shortdesc>
-  <description xml:lang="en">SaveDesktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</description>
+  <description xml:lang="en">Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</description>
   <homepage rdf:resource="https://github.com/vikdevelop/savedesktop" />
   <bug-database rdf:resource="https://github.com/vikdevelop/savedesktop/issues"/>
   <download-page rdf:resource="https://flathub.org/apps/details/io.github.vikdevelop.SaveDesktop" />
