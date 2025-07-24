@@ -85,7 +85,7 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
       - **Budgie**
       ```
       - ~/.config/budgie-desktop
-      - ~/.config/bugie-extras
+      - ~/.config/budgie-extras
       - ~/.config/nemo
       ```
       - **Cosmic (Old)**
