@@ -1,50 +1,31 @@
 name: Generate Wiki Pages from XML
-
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'translations/wiki/*.xml'
+      - 'translations/*.xml'
     branches:
-      - main
-
+      - webpage
 jobs:
   generate-wiki:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout current branch (main)
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Save XML files for later use
-        run: |
-          mkdir -p tmp-xml
-          cp -r translations/wiki/*.xml tmp-xml/
-
       - name: Checkout 'webpage' branch
         uses: actions/checkout@v4
         with:
           ref: webpage
-          path: webpage
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: 3.x
-
       - name: Run Python script to generate markdown
         run: |
           python3 generate_wiki_pages_from_xml.py \
-            --xml-dir=../tmp-xml \
+            --xml-dir=translations \
             --output-dir=wiki/synchronization \
             --strings=synchronization_between_computers_title,synchronization_intro,set_up_first_pc,set_up_second_pc,bidirectional_sync,synchronization_files
-        working-directory: ./webpage
-
       - name: Commit and push changes to 'webpage' branch
         run: |
-          cd webpage
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add wiki/synchronization/*.md
