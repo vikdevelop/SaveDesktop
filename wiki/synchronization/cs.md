@@ -10,7 +10,7 @@ Kromě uložení konfigurace a jejího importu umožňuje Save Desktop také jej
    * V případě prostředí KDE Plasma nebo jiných prostředí se přepne na **Rclone** (stačí zkopírovat příkaz a vložit jej do terminálu).
    * Alternativně můžete použít **Syncthing** kliknutím na **„Použít místo toho složku Syncthing“** a výběrem synchronizované složky.
 4. Po dokončení průvodce se otevře dialogové okno **„Nastavit synchronizační soubor “**:
-   * Ve vybrané složce se začne generovat **soubor pro periodické ukládání** (váš archív konfigurace pracovní plochy).
+   * Ve vybrané složce se začne generovat **soubor pro periodické ukládání** (váš archiv konfigurace pracovní plochy).
    * Interval nebo název souboru můžete volitelně změnit pomocí tlačítka **„Změnit “**.
 5. Klepněte na tlačítko **„Použít “**:
    * Ve stejné složce se vytvoří druhý soubor, `SaveDesktop.json`. Obsahuje název synchronizačního souboru a interval ukládání.
