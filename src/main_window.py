@@ -1582,6 +1582,7 @@ class MyApp(Adw.Application):
         self.create_action('cloud-dialog', self.call_cloudDialog, ["<primary><shift>c"])
         self.create_action('open-wiki', self.open_wiki, ["F1"])
         self.create_action('quit', self.app_quit, ["<primary>q"])
+        self.create_action('quit', self.app_quit, ["<primary>w"])
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.create_action('logout', self.logout)
         self.create_action('open_dir', self.open_dir)
