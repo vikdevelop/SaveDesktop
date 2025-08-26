@@ -1225,7 +1225,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             self.toolbarview.set_content(self.headapp)
         finally:
             if not e_o:
-                self.exporting_done()
+                GLib.idle_add(self.exporting_done)
             
     # "Please wait" information page on the "Save" page
     def please_wait_save(self):
@@ -1366,15 +1366,11 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
        
     # start process of importing configuration
     def start_importing(self):
-        def import_folder():
-            shutil.copytree(self.import_folder, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
-        
         try:
             e_o = False
             os.system("echo > import_status") # Create a txt file to prevent removing the cache's content after the next login by closing the app window
             if self.is_folder == True:
-                imp_folder_thread = Thread(target=import_folder)
-                imp_folder_thread.start()
+                shutil.copytree(self.import_folder, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
             else:
                 if ".sd.zip" in self.import_file:
                     if self.cancel_process:
@@ -1401,8 +1397,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                                 tar.extract(member, path=f"{CACHE}/import_config")
                             except PermissionError as e:
                                 print(f"Permission denied for {member.name}: {e}")
-            os.system("find . -type f -name '*.xml' -exec python3 -c 'import re, sys; p=sys.argv[1]; t=open(p).read(); open(p,\"w\").write(re.sub(\"/home/[^/]+/\", \"%s/\", t))' {} \;" % home) # Replace the old home folder path with the current home folder path in all dynamic wallapers' XML files
-            os.system("find . -type f -name '*.ini' -exec python3 -c 'import re, sys; p=sys.argv[1]; t=open(p).read(); open(p,\"w\").write(re.sub(\"/home/[^/]+/\", \"%s/\", t))' {} \;" % home) # Replace the old home folder path with the current home folder path in all INI files (specifically dconf-settings.ini)
+            self.replace_home_in_files(".", home)
             os.system(f"python3 {system_dir}/config.py --import_")
             os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in [f"{CACHE}/import_config/app", f"{CACHE}/import_config/installed_flatpaks.sh", f"{CACHE}/import_config/installed_user_flatpaks.sh"]) else None # Remove the import_status file only if the specified files don't exist
             print("Configuration imported successfully.")
@@ -1415,7 +1410,23 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
         finally:
             if not e_o:
-                self.applying_done()
+                GLib.idle_add(self.applying_done)
+                
+    # Replace original /home/$USER path with actual path in the dconf-settings.ini file and other XML files
+    def replace_home_in_files(self, root, home, patterns=(".xml", ".ini")):
+        regex = re.compile(r"/home/[^/]+/")
+        for dirpath, _, filenames in os.walk(root):
+            for filename in filenames:
+                if filename.endswith(patterns):
+                    path = os.path.join(dirpath, filename)
+                    with open(path, "r", encoding="utf-8") as f:
+                        text = f.read()
+                    new_text = regex.sub(f"{home}/", text)
+                    if new_text != text:
+                        with open(path, "w", encoding="utf-8") as f:
+                            f.write(new_text)
+                        print(f"Updated /home/$USER path in: {path}")
+
     
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
