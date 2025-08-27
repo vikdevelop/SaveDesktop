@@ -17,10 +17,15 @@ elif 'zh' in p_lang:
 else:
     r_lang = p_lang[:-3]
 
-# Set application version, and icon
-v = "3.6.1"
+# Set application version, icon, and release notes
+v = "3.6.2"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<p>This version brings significant speedup of saving and importing configurations thanks to parallel copying (thanks to @ArthurValadares), change of application name from \"SaveDesktop\" to \"Save Desktop\" and minor user interface improvements along with minor bug fixes. Also improved the import of dynamic wallpapers in GNOME and improved archive encryption.</p>\
+rel_notes = "<ul>\
+<li>Fixed a bug with properly including extensions in the archive (#428)</li>\
+<li>Fixed a bug with importing a configuration from the folder</li>\
+<li>Fixed a bug with cancelling saving or importing configuration</li>\
+<li>Added the Ctrl+W keyboard shortcut for closing the app window</li></ul>\
+<p>3.6.1</p><p>This version brings significant speedup of saving and importing configurations thanks to parallel copying (thanks to @ArthurValadares), change of application name from \"SaveDesktop\" to \"Save Desktop\" and minor user interface improvements along with minor bug fixes. Also improved the import of dynamic wallpapers in GNOME and improved archive encryption.</p>\
 <p>3.6-hotfix</p><p>Fixed a \"buffer overflow\" error when creating configuration archives by replacing the ZIP utility with 7-Zip.</p>\
 <p>3.6</p><ul>\
 <li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization mode</li>\
@@ -43,7 +48,7 @@ home = snap_real_home if 'SNAP' in os.environ else snap_home
 # Load GSettings database
 settings = Gio.Settings.new_with_path("io.github.vikdevelop.SaveDesktop", "/io/github/vikdevelop/SaveDesktop/")
 
-# Get user download dir
+# Get the user download dir
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
 
 # Check, if the app is running in the sandbox (Flatpak or Snap)

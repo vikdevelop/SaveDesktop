@@ -24,7 +24,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.toolbarview.add_top_bar(self.headerbar)
         
         # Values that are set if state of the switch "Extensions" in the Items, state of the switch "User data of installed Flatpak apps" will be saved or not, if whether to reopen the self.setDialog, if restarts the app window. Whether the Apply button in self.setDialog will be enabled or not.
-        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.cancel_process = self.set_button_sensitive = self.restart_app_win = self.auto_save_start = False
+        self.save_ext_switch_state = self.flatpak_data_sw_state = self.open_setdialog_tf = self.set_button_sensitive = self.restart_app_win = self.auto_save_start = False
         
         # set the window size and maximization from the GSettings database
         (width, height) = settings["window-size"]
@@ -1033,8 +1033,6 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 self.filename_text = self.with_spaces_text.replace(" ", "_")
             else:
                 self.filename_text = f'{self.saveEntry.get_text()}'
-                
-        self.cancel_process = False # set this value to False before saving the configuration, as it may already be set to True due to the recent cancellation of the configuration save
         
         self.folderchooser = Gtk.FileDialog.new()
         self.folderchooser.set_modal(True)
@@ -1071,8 +1069,6 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             show_please_wait_toast()
             check_thread = Thread(target=get_status_of_encryption)
             check_thread.start()
-                
-        self.cancel_process = False # set this value to False before importing the configuration, as it may already be set to True due to the recent cancellation of the configuration import
         
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
@@ -1096,8 +1092,6 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             self.import_folder = folder.get_path()
             self.is_folder = True if os.path.exists(f"{self.import_folder}/.folder.sd") else False
             self.import_config()
-            
-        self.cancel_process = False # set this value to False before importing the configuration, as it may already be set to True due to the recent cancellation of the configuration import
         
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
@@ -1145,7 +1139,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 (len(password) < 12, "The password is too short. It should has at least 12 characters"),
                 (not re.search(r'[A-Z]', password), "The password should has at least one capital letter"),
                 (not re.search(r'[a-z]', password), "The password should has at least one lowercase letter"),
-                (not re.search(r'[@#$%^&*()":{}|<>_-]', password), "The password should has at least one special character"),
+                (not re.search(r'[!@#%+=$&ĐłŁ_-§|]', password), "The password should has at least one special character"),
                 (" " in password, "The password must not contain spaces")
             ]
             
@@ -1159,9 +1153,12 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
 
         # Generate Password
         def pswd_generator(w):
-            safe_punctuation = "!@#%+=_-"
-            characters = string.ascii_letters + string.digits + safe_punctuation
-            password = ''.join(random.choice(characters) for _ in range(24))
+            safe = "!@#%+=$&ĐłŁ_-§|"
+            allc = safe + string.ascii_letters + string.digits
+            password = [random.choice(safe), random.choice(string.ascii_letters), random.choice(string.digits)] + \
+                       [random.choice(allc) for _ in range(21)]
+            random.shuffle(password)
+            password = ''.join(password)
             self.pswdEntry.set_text(password)
 
         # Dialog itself
@@ -1202,26 +1199,39 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
     def start_saving(self):
         try:
             e_o = False
-            os.system(f"python3 {system_dir}/config.py --save")
-            print("creating and moving the configuration archive to the user-defined directory")
-            if settings["save-without-archive"] == True:
-                os.system(f"echo > {CACHE}/save_config/.folder.sd && mv {CACHE}/save_config '{self.folder}/{self.filename_text}'")
+            # Cleanup the cache dir before importing
+            print("Cleaning up the cache directory")
+            save_cache_dir = f"{CACHE}/save_config"
+            try:
+                shutil.rmtree(save_cache_dir)
+            except:
+                os.makedirs(save_cache_dir)
+            os.chdir(save_cache_dir)
+            subprocess.run(["python3", f"{system_dir}/config.py", "--save"], check=True)
+
+            print("Creating and moving the configuration archive or folder to the user-defined directory")
+
+            if settings["save-without-archive"]:
+                open(f"{CACHE}/save_config/.folder.sd", "w").close()
+                shutil.move(f"{CACHE}/save_config", f"{self.folder}/{self.filename_text}")
             else:
-                if settings["enable-encryption"] == True:
-                    os.system(f'7z a -tzip -mem=AES256 -mx=3 -p"{self.password}" -x!*.zip -x!saving_status cfg.sd.zip .')
-                else:
-                    os.system(f"7z a -tzip -mx=3 -x!*.zip -x!saving_status cfg.sd.zip .")
-                if self.cancel_process:
-                    return
-                else:
-                    shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
+                # příprava příkazu 7z
+                cmd = ['7z', 'a', '-tzip', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.']
+                if settings["enable-encryption"]:
+                    cmd.insert(4, "-mem=AES256")
+                    cmd.insert(5, f"-p{self.password}")
+                
+                subprocess.run(cmd, check=True)
+                
+                shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
+
             print("Configuration saved successfully.")
+
         except Exception as e:
             e_o = True
-            error = e
-            GLib.idle_add(self.show_err_msg, error) if not self.cancel_process else None
+            GLib.idle_add(self.show_err_msg, e)
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
+            self.switcher_bar.set_reveal(self.switcher_title.get_title_visible())
             self.toolbarview.set_content(self.headapp)
         finally:
             if not e_o:
@@ -1231,9 +1241,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
     def please_wait_save(self):
         # Stop saving configuration
         def cancel_save(w):
-            self.cancel_process = True
-            os.system(f"pkill -xf 'python3 {system_dir}/config.py --save'")
-            os.system(f"pkill 7z")
+            os.popen(f"pkill -xf 'python3 {system_dir}/config.py --save'")
+            os.popen(f"pkill -9 7z")
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
             self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
@@ -1329,9 +1338,6 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         self.backtomButton.set_valign(Gtk.Align.CENTER)
         self.backtomButton.set_halign(Gtk.Align.CENTER)
         self.savewaitBox.append(self.backtomButton)
-        
-        # remove content in the cache directory
-        os.popen(f"rm -rf {CACHE}/save_config/")
      
     # dialog for entering password of the archive
     def check_password_dialog(self):     
@@ -1359,55 +1365,74 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
     # Import configuration
     def import_config(self):
         self.please_wait_import()
-        os.makedirs(f"{CACHE}/import_config", exist_ok=True)
-        os.chdir(f"{CACHE}/import_config")
         import_thread = Thread(target=self.start_importing)
         import_thread.start()
        
-    # start process of importing configuration
     def start_importing(self):
         try:
             e_o = False
-            os.system("echo > import_status") # Create a txt file to prevent removing the cache's content after the next login by closing the app window
-            if self.is_folder == True:
-                shutil.copytree(self.import_folder, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
+            
+            # Cleanup the cache dir before importing
+            print("Cleaning up the cache directory")
+            imp_cache_dir = f"{CACHE}/import_config"
+            try:
+                shutil.rmtree(imp_cache_dir)
+            except:
+                os.makedirs(imp_cache_dir)
+            os.chdir(imp_cache_dir)
+            
+            # Create a txt file to prevent removing the cache's content after closing the app window
+            open("import_status", "w").close()
+            
+            # Check, if the input is folder or not
+            if self.is_folder:
+                shutil.copytree(self.import_folder, f"{CACHE}/import_config",
+                                dirs_exist_ok=True, ignore_dangling_symlinks=True)
             else:
                 if ".sd.zip" in self.import_file:
-                    if self.cancel_process:
-                        return
                     try:
-                        password = self.checkEntry.get_text()
-                    except Exception:
+                        password = getattr(self.checkEntry, "get_text", lambda: None)()
+                    except AttributeError:
                         password = None
-                    try:
-                        result = subprocess.run(
-                            ['7z', 'x', f'-p{password}', self.import_file, f'-o{CACHE}/import_config', '-y'],
-                            capture_output=True, text=True, check=True
-                        )
-                        print("Output:", result.stdout)
-                    except subprocess.CalledProcessError as e:
-                        print("Return code:", e.returncode)
-                        raise OSError(e.stderr)
+                    
+                    if password != None:
+                        try:
+                            subprocess.run(
+                                ['7z', 'e', '-so', f'-p{password}' if password else '', self.import_file, 'dconf-settings.ini'],
+                                capture_output=True, text=True, check=True
+                            )
+                        except subprocess.CalledProcessError as e:
+                            first_error = next((l for l in e.stderr.splitlines() if "Wrong password" in l), None)
+                            raise ValueError(first_error or "Wrong password")
+                        print("Checking password is completed.")
+                    
+                    subprocess.run(
+                        ['7z', 'x', '-y', f'-p{password}', self.import_file, f'-o{CACHE}/import_config'],
+                        capture_output=False, text=True, check=True
+                    )
+
                 elif ".sd.tar.gz" in self.import_file:
-                    with tarfile.open(self.import_file, 'r:gz') as tar:
-                        for member in tar.getmembers():
-                            try:
-                                if self.cancel_process:
-                                    return
-                                tar.extract(member, path=f"{CACHE}/import_config")
-                            except PermissionError as e:
-                                print(f"Permission denied for {member.name}: {e}")
+                    subprocess.run(["tar", "-xzf", self.import_file, "-C", f"{CACHE}/import_config"],
+                                   capture_output=True, text=True, check=True)
+
             self.replace_home_in_files(".", home)
-            os.system(f"python3 {system_dir}/config.py --import_")
-            os.system("rm import_status") if all(not os.path.exists(app_path) for app_path in [f"{CACHE}/import_config/app", f"{CACHE}/import_config/installed_flatpaks.sh", f"{CACHE}/import_config/installed_user_flatpaks.sh"]) else None # Remove the import_status file only if the specified files don't exist
+            subprocess.run(["python3", f"{system_dir}/config.py", "--import_"], check=True)
+
+            if all(not os.path.exists(p) for p in [
+                f"{CACHE}/import_config/app",
+                f"{CACHE}/import_config/installed_flatpaks.sh",
+                f"{CACHE}/import_config/installed_user_flatpaks.sh"
+            ]):
+                os.remove("import_status")
+
             print("Configuration imported successfully.")
+
         except Exception as e:
             e_o = True
-            error = e
-            GLib.idle_add(self.show_err_msg, error) if not self.cancel_process else None
+            GLib.idle_add(self.show_err_msg, e)
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
+            self.switcher_bar.set_reveal(self.switcher_title.get_title_visible())
         finally:
             if not e_o:
                 GLib.idle_add(self.applying_done)
@@ -1426,15 +1451,14 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                         with open(path, "w", encoding="utf-8") as f:
                             f.write(new_text)
                         print(f"Updated /home/$USER path in: {path}")
-
     
     # "Please wait" information on the "Import" page
     def please_wait_import(self):
         # Stop importing configuration
         def cancel_import(w):
-            self.cancel_process = True
-            os.system("pkill 7z")
-            os.system(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
+            os.popen("pkill -9 7z")
+            os.popen("pkill -9 tar")
+            os.popen(f"pkill -xf 'python3 {system_dir}/config.py --import_'")
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
             self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
@@ -1536,10 +1560,14 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
         
     # show message dialog in the error case
     def show_err_msg(self, error):
+        error_str = str(error)
+        if "died" in error_str:
+            return        
+        
         self.errDialog = Adw.AlertDialog.new()
         self.errDialog.choose(self, None, None, None)
         self.errDialog.set_heading(heading=_["err_occured"])
-        self.errDialog.set_body(body=f"{error}")
+        self.errDialog.set_body(body=f"{error_str}")
         self.errDialog.add_response('cancel', _["cancel"])
         self.errDialog.present()
        
