@@ -34,7 +34,7 @@ jobs:
           flatpak build-bundle sdrepo io.github.vikdevelop.SaveDesktop.flatpak io.github.vikdevelop.SaveDesktop
 
       - name: Upload Flatpak artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SaveDesktop-flatpak
           path: io.github.vikdevelop.SaveDesktop.flatpak
