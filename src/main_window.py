@@ -1190,8 +1190,6 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
     # Save configuration
     def save_config(self):
         self.please_wait_save()
-        os.makedirs(f"{CACHE}/save_config", exist_ok=True)
-        os.chdir(f"{CACHE}/save_config")
         save_thread = Thread(target=self.start_saving)
         save_thread.start()
         
