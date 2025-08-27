@@ -1203,7 +1203,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             try:
                 shutil.rmtree(save_cache_dir)
             except:
-                os.makedirs(save_cache_dir)
+                pass
+            os.makedirs(save_cache_dir, exist_ok=True)
             os.chdir(save_cache_dir)
             subprocess.run(["python3", f"{system_dir}/config.py", "--save"], check=True)
 
@@ -1213,13 +1214,18 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 open(f"{CACHE}/save_config/.folder.sd", "w").close()
                 shutil.move(f"{CACHE}/save_config", f"{self.folder}/{self.filename_text}")
             else:
-                # příprava příkazu 7z
                 cmd = ['7z', 'a', '-tzip', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.']
                 if settings["enable-encryption"]:
                     cmd.insert(4, "-mem=AES256")
                     cmd.insert(5, f"-p{self.password}")
+
+                proc = subprocess.run(cmd, capture_output=True, text=True)
                 
-                subprocess.run(cmd, check=True)
+                if proc.returncode not in (0, 1):
+                    # 0 = everything is OK, 1 = warning (e.g. file not found)
+                    raise OSError(f"7z failed: {proc.stderr}")
+                else:
+                    print("7z finished with warnings:", proc.stderr)
                 
                 shutil.copyfile('cfg.sd.zip', f"{self.folder}/{self.filename_text}.sd.zip")
 
@@ -1376,7 +1382,8 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
             try:
                 shutil.rmtree(imp_cache_dir)
             except:
-                os.makedirs(imp_cache_dir)
+                pass
+            os.makedirs(imp_cache_dir, exist_ok=True)
             os.chdir(imp_cache_dir)
             
             # Create a txt file to prevent removing the cache's content after closing the app window
