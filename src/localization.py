@@ -24,6 +24,7 @@ rel_notes = "<ul>\
 <li>Fixed a bug with properly including extensions in the archive (#428)</li>\
 <li>Fixed a bug with importing a configuration from the folder</li>\
 <li>Fixed a bug with cancelling saving or importing configuration</li>\
+<li>Fixed a bug with crashing the app after setting up the synchronization</li>\
 <li>Added the Ctrl+W keyboard shortcut for closing the app window</li></ul>\
 <p>3.6.1</p><p>This version brings significant speedup of saving and importing configurations thanks to parallel copying (thanks to @ArthurValadares), change of application name from \"SaveDesktop\" to \"Save Desktop\" and minor user interface improvements along with minor bug fixes. Also improved the import of dynamic wallpapers in GNOME and improved archive encryption.</p>\
 <p>3.6-hotfix</p><p>Fixed a \"buffer overflow\" error when creating configuration archives by replacing the ZIP utility with 7-Zip.</p>\
