@@ -47,6 +47,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.menu_button = Gtk.MenuButton.new()
         self.menu_button.set_icon_name(icon_name='open-menu-symbolic')
         self.menu_button.set_menu_model(menu_model=self.main_menu)
+        self.menu_button.set_primary(True)
         self.headerbar.pack_end(child=self.menu_button)
         
         # add Manually sync section
