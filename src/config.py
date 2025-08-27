@@ -48,18 +48,18 @@ ENVIRONMENTS = {
 }
 
 KDE_DIRS_SAVE = [
-    (f"{home}/.config/plasmarc", "plasmarc"),
-    (f"{home}/.config/plasmashellrc", "plasmashellrc"),
-    (f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc", "plasma-org.kde.plasma.desktop-appletsrc"),
-    (f"{home}/.config/dolphinrc", "dolphinrc"),
-    (f"{home}/.config/gtkrc", "gtkrc"),
-    (f"{home}/.config/Kvantum", "Kvantum"),
-    (f"{home}/.config/latte", "latte"),
-    (f"{home}/.local/share/dolphin", "dolphin"),
-    (f"{home}/.local/share/sddm", "sddm"),
-    (f"{home}/.local/share/aurorae", "aurorae"),
-    (f"{home}/.local/share/plasma-systemmonitor", "plasma-systemmonitor"),
-    (f"{home}/.local/share/color-schemes", "color-schemes"),
+    (f"{home}/.config/plasmarc", "xdg-config/plasmarc"),
+    (f"{home}/.config/plasmashellrc", "xdg-config/plasmashellrc"),
+    (f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc", "xdg-config/plasma-org.kde.plasma.desktop-appletsrc"),
+    (f"{home}/.config/dolphinrc", "xdg-config/dolphinrc"),
+    (f"{home}/.config/gtkrc", "xdg-config/gtkrc"),
+    (f"{home}/.config/Kvantum", "xdg-config/Kvantum"),
+    (f"{home}/.config/latte", "xdg-config/latte"),
+    (f"{home}/.local/share/dolphin", "xdg-data/dolphin"),
+    (f"{home}/.local/share/sddm", "xdg-data/sddm"),
+    (f"{home}/.local/share/aurorae", "xdg-data/aurorae"),
+    (f"{home}/.local/share/plasma-systemmonitor", "xdg-data/plasma-systemmonitor"),
+    (f"{home}/.local/share/color-schemes", "xdg-data/color-schemes"),
 ]
 
 KDE_DIRS_IMPORT = [
@@ -98,10 +98,10 @@ class Save:
         if settings["save-extensions"]:
             safe_copytree(f"{home}/.local/share/gnome-shell", "gnome-shell")
             safe_copytree(f"{home}/.local/share/cinnamon", "cinnamon")
-            safe_copytree(f"{home}/.local/share/plasma", "plasma")
+            safe_copytree(f"{home}/.local/share/plasma", "xdg-data/plasma")
         if settings["save-backgrounds"]:
             safe_copytree(f"{home}/.local/share/backgrounds", "backgrounds")
-            safe_copytree(f"{home}/.local/share/wallpapers", "wallpapers")
+            safe_copytree(f"{home}/.local/share/wallpapers", "xdg-data/wallpapers")
         if settings["save-icons"]:
             safe_copytree(f"{home}/.icons", ".icons")
             safe_copytree(f"{home}/.local/share/icons", "icons")
@@ -126,14 +126,19 @@ class Save:
         # Environment specific
         if environment_key == "KDE":
             print("Saving KDE Plasma configuration...")
-            for src, dst in KDE_DIRS_SAVE:
-                safe_copytree(os.path.join(home, src), dst)
+            os.makedirs("xdg-config", exist_ok=True)
+            os.makedirs("xdg-data", exist_ok=True)
             os.system(f"cp -R {home}/.config/[k]* ./xdg-config/")
             os.system(f"cp -R {home}/.local/share/[k]* ./xdg-data/")
+            for src, dst in KDE_DIRS_SAVE:
+                if os.path.isfile(src):
+                    safe_copy(src, dst)
+                else:
+                    safe_copytree(src, dst)
         elif environment:
             print(f"Saving environment-specific config for: {environment['de_name']}")
             for src, dst in environment["dirs"]:
-                safe_copytree(os.path.join(home, src), dst)
+                safe_copytree(src, dst)
         else:
             print(f"[WARN] Unknown DE: {environment_key}")
     
@@ -198,7 +203,7 @@ class Import:
         if environment_key == "KDE":
             print("Importing KDE Plasma configuration...")
             for src, dst in KDE_DIRS_IMPORT:
-                safe_copytree(src, os.path.join(home, dst))
+                safe_copytree(src, dst)
         elif environment:
             print(f"Importing environment-specific config for: {environment['de_name']}")
             for src, dst in environment["dirs"]:
