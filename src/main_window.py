@@ -1145,7 +1145,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 (len(password) < 12, "The password is too short. It should has at least 12 characters"),
                 (not re.search(r'[A-Z]', password), "The password should has at least one capital letter"),
                 (not re.search(r'[a-z]', password), "The password should has at least one lowercase letter"),
-                (not re.search(r'[!@#%+=$&ĐłŁ_-§|]', password), "The password should has at least one special character"),
+                (not re.search(r'[-_@.:,+=]', password), "The password should has at least one special character"),
                 (" " in password, "The password must not contain spaces")
             ]
             
@@ -1159,7 +1159,7 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
 
         # Generate Password
         def pswd_generator(w):
-            safe = "!@#%+=$&ĐłŁ_-§|"
+            safe = "-_@.:,+="
             allc = safe + string.ascii_letters + string.digits
             password = [random.choice(safe), random.choice(string.ascii_letters), random.choice(string.digits)] + \
                        [random.choice(allc) for _ in range(21)]
