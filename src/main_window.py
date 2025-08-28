@@ -1403,10 +1403,10 @@ fi""" % (user, host, prefix, fm, user, host, prefix)
                 if ".sd.zip" in self.import_file:
                     try:
                         password = getattr(self.checkEntry, "get_text", lambda: None)()
-                    except AttributeError:
+                    except:
                         password = None
                     
-                    if password != None:
+                    if password:
                         try:
                             subprocess.run(
                                 ['7z', 'e', '-so', f'-p{password}' if password else '', self.import_file, 'dconf-settings.ini'],

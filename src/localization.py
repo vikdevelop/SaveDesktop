@@ -18,9 +18,10 @@ else:
     r_lang = p_lang[:-3]
 
 # Set application version, icon, and release notes
-v = "3.6.2"
+v = "3.6.2-hotfix"
 icon = "io.github.vikdevelop.SaveDesktop"
-rel_notes = "<ul>\
+rel_notes = "<p>Fixed a bug with importing configuration from the archive</p>\
+<p>3.6.2</p><ul>\
 <li>Fixed a bug with properly including extensions in the archive (#428)</li>\
 <li>Fixed a bug with importing a configuration from the folder</li>\
 <li>Fixed a bug with cancelling saving or importing configuration</li>\
