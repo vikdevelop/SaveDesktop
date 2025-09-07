@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface domain="savedesktop">
+  <requires lib="gtk" version="4.0"/>
+  <template class="SaveDesktopShortcutsWindow" parent="GtkShortcutsWindow">
+    <property name="modal">true</property>
+    <child>
+      <object class="GtkShortcutsSection">
+        <property name="section-name">shortcuts</property>
+        <property name="max-height">4</property>
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title" translatable="no"></property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Open the application wiki</property>
+                <property name="action-name">app.open-wiki</property>
+                <property name="accelerator">F1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Save the current configuration</property>
+                <property name="action-name">app.save-config</property>
+                <property name="accelerator">&lt;primary&gt;s</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Import from file</property>
+                <property name="action-name">app.import-config</property>
+                <property name="accelerator">&lt;primary&gt;o</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Keyboard shortcuts</property>
+                <property name="action-name">app.shortcuts</property>
+                <property name="accelerator">&lt;primary&gt;question</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Quit</property>
+                <property name="action-name">app.quit</property>
+                <property name="accelerator">&lt;primary&gt;q</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Synchronise manually</property>
+                <property name="action-name">app.m_sync_with_key</property>
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;s</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">More options</property>
+                <property name="action-name">app.ms-dialog</property>
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;m</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Items to include in the configuration archive</property>
+                <property name="action-name">app.items-dialog</property>
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;i</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Set up the sync file</property>
+                <property name="action-name">app.set-dialog</property>
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;f</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes">Connect to the cloud storage</property>
+                <property name="action-name">app.cloud-dialog</property>
+                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;c</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

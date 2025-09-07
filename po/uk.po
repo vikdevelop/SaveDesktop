@@ -1,0 +1,472 @@
+# Translation file for uk
+# Generated from uk.json
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: savedesktop\n"
+"POT-Creation-Date: 2025-09-03 19:10\n"
+"PO-Revision-Date: 2025-09-03 19:10\n"
+"Last-Translator: Auto-generated\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Translation key: save
+msgid "Save"
+msgstr "Зберегти"
+
+#: src/gui/shortcuts_window.ui:22
+# Translation key: save_config
+msgid "Save the current configuration"
+msgstr "Зберегти поточну конфігурацію"
+
+# Translation key: set_filename
+msgid "Set the file name"
+msgstr "Задайте ім'я файлу"
+
+#: src/gui/shortcuts_window.ui:64
+# Translation key: items_for_archive
+msgid "Items to include in the configuration archive"
+msgstr "Елементи для включення в архів конфігурації"
+
+# Translation key: items_desc
+msgid "These settings also apply to periodic saving"
+msgstr "Ці налаштування також застосовуються до періодичного збереження"
+
+# Translation key: icons
+msgid "Icons"
+msgstr "Піктограми"
+
+# Translation key: themes
+msgid "Themes"
+msgstr "Теми"
+
+# Translation key: fonts
+msgid "Fonts"
+msgstr "Шрифти"
+
+# Translation key: backgrounds
+msgid "Backgrounds"
+msgstr "Шпалери"
+
+# Translation key: extensions
+msgid "Extensions"
+msgstr "Розширення"
+
+# Translation key: desktop_folder
+msgid "Desktop"
+msgstr "Робочий стіл"
+
+# Translation key: save_installed_flatpaks
+msgid "Flatpak apps"
+msgstr "Додатки Flatpak"
+
+# Translation key: list
+msgid "List of installed Flatpak apps"
+msgstr "Список встановлених додатків Flatpak"
+
+# Translation key: user_data_flatpak
+msgid "User data of installed Flatpak apps"
+msgstr "Дані користувача встановлених додатків Flatpak"
+
+# Translation key: flatpaks_data_tittle
+msgid "Flatpak apps data selection"
+msgstr "Обирання даних Flatpak додатків"
+
+#: src/gui/shortcuts_window.ui
+# Translation key: more_options
+msgid "More options"
+msgstr "Додаткові опції"
+
+# Translation key: periodic_saving
+msgid "Periodic saving"
+msgstr "Періодичне збереження"
+
+# Translation key: periodic_saving_desc
+msgid "Changes will only take effect after the next login"
+msgstr "Зміни набудуть чинності тільки після наступного входу в систему"
+
+# Translation key: pb_interval
+msgid "Interval"
+msgstr "Інтервал"
+
+# Translation key: never
+msgid "Never"
+msgstr "Ніколи"
+
+# Translation key: daily
+msgid "Daily"
+msgstr "Щодня"
+
+# Translation key: weekly
+msgid "Weekly"
+msgstr "Щотижня"
+
+# Translation key: monthly
+msgid "Monthly"
+msgstr "Щомісяця"
+
+# Translation key: manually
+msgid "Manually"
+msgstr "Вручну"
+
+# Translation key: learn_more
+msgid "Learn more"
+msgstr "Дізнатися більше"
+
+# Translation key: pb_folder
+msgid "Folder for periodic saving"
+msgstr "Тека для періодичного збереження"
+
+# Translation key: set_pb_folder_tooltip
+msgid "Choose custom folder for periodic saving"
+msgstr "Виберіть власну теку для періодичного збереження"
+
+# Translation key: set_another
+msgid "Choose another folder"
+msgstr "Виберіть іншу теку"
+
+# Translation key: filename_format
+msgid "File name format"
+msgstr "Формат назви файлу"
+
+# Translation key: reset_button
+msgid "Reset to default"
+msgstr "Скинути до замовчування"
+
+# Translation key: pwd_for_encryption
+msgid "Password for encryption"
+msgstr "Пароль для шифрування"
+
+# Translation key: manual_saving
+msgid "Manual saving"
+msgstr "Ручне збереження"
+
+# Translation key: archive_encryption
+msgid "Archive encryption"
+msgstr "Шифрування архіву"
+
+# Translation key: archive_encryption_desc
+msgid ""
+"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+msgstr ""
+"При ручному збереженні конфігурації вам буде запропоновано створити пароль. Це корисно, коли ви зберігаєте конфігурацію на портативних носіях для кращого захисту ваших даних."
+
+# Translation key: save_without_archive
+msgid "Save the configuration without creating an archive"
+msgstr "Зберегти конфігурацію без створення архіву"
+
+# Translation key: create_pwd_title
+msgid "Create new password"
+msgstr "Створити новий пароль"
+
+# Translation key: create_pwd_desc
+msgid ""
+"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+msgstr ""
+"Будь ласка, створіть новий пароль для вашого архіву. Критерії включають довжину не менше 12 символів, одну велику літеру, одну маленьку літеру та один спеціальний символ."
+
+# Translation key: gen_password
+msgid "Generate Password"
+msgstr "Згенерувати пароль"
+
+# Translation key: password_entry
+msgid "Password"
+msgstr "Пароль"
+
+# Translation key: check_pwd_title
+msgid "Unlock the archive with a password"
+msgstr "Розблокувати архів за допомогою пароля"
+
+# Translation key: check_pwd_desc
+msgid ""
+"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+msgstr ""
+"Введіть пароль нижче, щоб розблокувати архів з вашою конфігурацією. Якщо ви його забули, ви не зможете розпакувати архів і почати імпорт конфігурації."
+
+# Translation key: enter_password_title
+msgid ""
+"Please enter a password to unlock the archive for sync the configuration"
+msgstr ""
+"Будь ласка, введіть пароль, щоб розблокувати архів для синхронізації конфігурації"
+
+# Translation key: enter_password_desc
+msgid ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+msgstr ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+
+# Translation key: remember_password
+msgid "Remember Password"
+msgstr "Запам'ятати пароль"
+
+# Translation key: password_store_err
+msgid "Password not entered, or it's incorrect. Unable to continue."
+msgstr "Введено не правильний пароль або нічого. Неможливо продовжити."
+
+# Translation key: saving_config_status
+msgid ""
+"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+msgstr ""
+"<big><b>Збереження конфігурації...</b></big>\nКонфігурація вашої стільниці буде збережена в:\n <i>{}/{}.sd.tar.gz</i>\n"
+
+# Translation key: config_saved
+msgid "Configuration has been saved!"
+msgstr "Конфігурацію збережено!"
+
+# Translation key: config_saved_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+msgstr ""
+"<big><b>{}</b></big>\nТепер ви можете переглянути архів з конфігурацією вашої стільниці або повернутися до попередньої сторінки.\n"
+
+# Translation key: open_folder
+msgid "Open the folder"
+msgstr "Відкрити теку"
+
+# Translation key: import_title
+msgid "Import"
+msgstr "Імпорт"
+
+# Translation key: import_config
+msgid "Import saved configuration"
+msgstr "Імпорт збереженої конфігурації"
+
+#: src/gui/shortcuts_window.ui:29
+# Translation key: import_from_file
+msgid "Import from file"
+msgstr "Імпорт з файлу"
+
+# Translation key: import_from_folder
+msgid "Import from folder"
+msgstr "Імпортувати з теки"
+
+# Translation key: cancel
+msgid "Cancel"
+msgstr "Скасувати"
+
+# Translation key: savedesktop_f
+msgid "Save Desktop files"
+msgstr "Файли Save Desktop"
+
+# Translation key: importing_config_status
+msgid ""
+"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+msgstr ""
+"<big><b>Імпортування конфігурації...</b></big>\nІмпортування конфігурації з:\n<i>{}</i>\n"
+
+# Translation key: config_imported
+msgid "The configuration has been applied!"
+msgstr "Конфігурацію застосовано!"
+
+# Translation key: config_imported_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+msgstr ""
+"<big><b>{}</b></big>\nВи можете вийти із системи що зміни набули чинності, або повернутися до попередньої сторінки і вийти із системи пізніше.\n"
+
+# Translation key: back_to_page
+msgid "Back to previous page"
+msgstr "Повернутися до попередньої сторінки"
+
+# Translation key: logout
+msgid "Log Out"
+msgstr "Вийти"
+
+# Translation key: err_occured
+msgid "An error occurred"
+msgstr "Виникла помилка"
+
+# Translation key: apply
+msgid "Apply"
+msgstr "Застосувати"
+
+# Translation key: sync
+msgid "Sync"
+msgstr "Синхронізувати"
+
+# Translation key: sync_desc
+msgid ""
+"Sync your desktop environment configuration with other computers in the network."
+msgstr ""
+"Синхронізуйте конфігурацію середовище стільниці з іншими комп'ютерами в мережі."
+
+# Translation key: initial_setup
+msgid "Initial synchronization setup"
+msgstr "Налаштування початкової синхронізації"
+
+# Translation key: gnome_oa_settings
+msgid "1. Open the system settings"
+msgstr "1. Відкрийте налаштування системи"
+
+# Translation key: gnome_oa_section
+msgid "2. Go to the Online Accounts section"
+msgstr "2. Перейдіть до розділу \"Онлайн-акаунти\""
+
+# Translation key: gnome_oa_section_desc
+msgid ""
+"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+msgstr ""
+"У цьому розділі виберіть хмарний сервіс, який вам потрібен, наприклад, Google, Microsoft 365 або Nextcloud."
+
+# Translation key: gnome_oa_chooser
+msgid "3. Click on the Next button and select the created cloud drive folder"
+msgstr "3. Натисніть кнопку \"Далі\" та виберіть створену папку хмарного диска"
+
+# Translation key: gnome_oa_chooser_desc
+msgid ""
+"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+msgstr ""
+"Створену папку хмарного диска можна знайти в бічній панелі діалогу вибору файлів у вигляді: username@service.com."
+
+# Translation key: rclone_intro_desc
+msgid ""
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+msgstr ""
+"Для правильного функціонування синхронізації, вам потрібно мати папку, яка синхронізується з вашим хмарним сервісом за допомогою Rclone.\n<b>Почніть з вибору хмарного сервісу, який ви використовуєте.</b>"
+
+# Translation key: rclone_copy_cmd
+msgid ""
+"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+msgstr ""
+"Тепер скопіюйте команду для налаштування Rclone за допомогою бічної кнопки та відкрийте додаток термінала, використовуючи комбінацію клавіш Ctrl+Alt+T або знайшовши його в меню програм."
+
+# Translation key: rclone_cmd_copied_msg
+msgid ""
+"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+msgstr ""
+"Після того, як ви завершите налаштування Rclone за допомогою наданої команди, натисніть кнопку \"Застосувати\""
+
+# Translation key: syncthing_folder
+msgid "Use Syncthing folder instead"
+msgstr "Використовувати замість теку Syncthing"
+
+# Translation key: almost_done_title
+msgid "Almost done!"
+msgstr "Майже готово!"
+
+# Translation key: almost_done_desc
+msgid ""
+"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+msgstr ""
+"Ви щойно створили папку хмарного диска! Натисніть кнопку \"Далі\", щоб завершити налаштування."
+
+# Translation key: select
+msgid "Select"
+msgstr "Вибрати"
+
+# Translation key: next
+msgid "Next"
+msgstr "Далі"
+
+#: src/gui/shortcuts_window.ui:71
+# Translation key: set_up_sync_file
+msgid "Set up the sync file"
+msgstr "Налаштування файлу синхронізації"
+
+# Translation key: periodic_saving_file
+msgid "Periodic saving file"
+msgstr "Періодичне збереження файлу"
+
+# Translation key: periodic_saving_file_err
+msgid "Periodic saving file does not exist."
+msgstr "Файл періодичного збереження не існує."
+
+# Translation key: create
+msgid "Create"
+msgstr "Створити"
+
+# Translation key: please_wait
+msgid "Please wait …"
+msgstr "Будь ласка, зачекайте…"
+
+# Translation key: change
+msgid "Change"
+msgstr "Змінити"
+
+#: src/gui/shortcuts_window.ui:78
+# Translation key: connect_cloud_storage
+msgid "Connect to the cloud storage"
+msgstr "Підключитися до хмарного сховища"
+
+# Translation key: connect_cloud_storage_desc
+msgid ""
+"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+msgstr ""
+"На іншому комп'ютері відкрийте додаток Save Desktop, а на цій сторінці натисніть кнопку \"Налаштувати файл синхронізації\" і зробіть необхідні налаштування. На цьому комп'ютері виберіть папку, яку ви синхронізували з вашим хмарним сховищем, і де також збережено той же файл періодичного збереження."
+
+# Translation key: select_cloud_folder_btn
+msgid "Select the cloud drive folder"
+msgstr "Виберіть папку хмарного диска"
+
+# Translation key: cloud_folder_err
+msgid "You didn't select the cloud drive folder!"
+msgstr "Ви не вибрали папку хмарного диска!"
+
+# Translation key: periodic_sync
+msgid "Periodic synchronization"
+msgstr "Періодична синхронізація"
+
+# Translation key: bidirectional_sync
+msgid "Bidirectional synchronization"
+msgstr "Двостороння синхронізація"
+
+# Translation key: bidirectional_sync_desc
+msgid ""
+"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+msgstr ""
+"Якщо увімкнено, і вибрані інтервал синхронізації та папка хмарного диска, інформація про періодичне збереження (інтервал, папка та ім'я файлу) з іншого комп'ютера, для якого налаштовано синхронізацію, буде скопійована на цей комп'ютер."
+
+# Translation key: m_sync_desc
+msgid "From now on, you can sync the config from the menu in the header bar"
+msgstr ""
+"Відтепер ви можете синхронізувати налаштування з меню на панелі заголовка"
+
+#: src/gui/shortcuts_window.ui:50
+# Translation key: sync_manually
+msgid "Synchronise manually"
+msgstr "Синхронізувати вручну"
+
+#: src/gui/shortcuts_window.ui:36
+# Translation key: keyboard_shortcuts
+msgid "Keyboard shortcuts"
+msgstr "Клавіатурні скорочення"
+
+#: src/gui/shortcuts_window.ui:15
+# Translation key: open_wiki
+msgid "Open the application wiki"
+msgstr "Відкрити вікі-документацію додатку"
+
+#: src/gui/shortcuts_window.ui:43
+# Translation key: quit
+msgid "Quit"
+msgstr "Вийти"
+
+# Translation key: about_app
+msgid "About app"
+msgstr "Про додаток"
+
+# Translation key: unsuppurted_env_desc
+msgid ""
+"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+msgstr ""
+"<big><b>Ви використовуєте не підтримуване середовище.</b></big> \nБудь ласка, використовуйте одне з підтримуваних: {}."
+
+#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
+# Translation key: summary
+msgid "Save your desktop configuration"
+msgstr "Збережіть конфігурацію вашої стільниці"
+
+# Translation key: description
+msgid ""
+"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+msgstr ""
+"Save Desktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, всі налаштування середовища робочого столу, розширення тощо) в один клац."
+
+# Translation key: translator_credits
+msgid "Translator credits"
+msgstr ""
+"Kefir2105 https://github.com/Kefir2105\nvolkov <volkovissocool@gmail.com>"
+

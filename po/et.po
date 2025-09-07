@@ -1,0 +1,469 @@
+# Translation file for et
+# Generated from et.json
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: savedesktop\n"
+"POT-Creation-Date: 2025-09-03 19:10\n"
+"PO-Revision-Date: 2025-09-03 19:10\n"
+"Last-Translator: Auto-generated\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Translation key: save
+msgid "Save"
+msgstr "Salvesta"
+
+#: src/gui/shortcuts_window.ui:22
+# Translation key: save_config
+msgid "Save the current configuration"
+msgstr "Salvesta praegused seadistused"
+
+# Translation key: set_filename
+msgid "Set the file name"
+msgstr "Sisesta faili nimi"
+
+#: src/gui/shortcuts_window.ui:64
+# Translation key: items_for_archive
+msgid "Items to include in the configuration archive"
+msgstr "Vali seadistuste arhiivifaili kaasatavad objektid"
+
+# Translation key: items_desc
+msgid "These settings also apply to periodic saving"
+msgstr "Need seadistused kehtivad ka regulaarsel varundamisel"
+
+# Translation key: icons
+msgid "Icons"
+msgstr "Ikoonid"
+
+# Translation key: themes
+msgid "Themes"
+msgstr "Kujundused"
+
+# Translation key: fonts
+msgid "Fonts"
+msgstr "Kirjatüübid"
+
+# Translation key: backgrounds
+msgid "Backgrounds"
+msgstr "Taustapildid"
+
+# Translation key: extensions
+msgid "Extensions"
+msgstr "Lisamoodulid"
+
+# Translation key: desktop_folder
+msgid "Desktop"
+msgstr "Töölaud"
+
+# Translation key: save_installed_flatpaks
+msgid "Flatpak apps"
+msgstr "Flatpaki rakendused"
+
+# Translation key: list
+msgid "List of installed Flatpak apps"
+msgstr "Paigaldatud Flatpaki rakenduste loend"
+
+# Translation key: user_data_flatpak
+msgid "User data of installed Flatpak apps"
+msgstr "Paigaldatud Flatpaki rakenduste kasutajaandmed"
+
+# Translation key: flatpaks_data_tittle
+msgid "Flatpak apps data selection"
+msgstr "Vali Flatpaki rakendused, mille andmed tahad kaasata"
+
+#: src/gui/shortcuts_window.ui
+# Translation key: more_options
+msgid "More options"
+msgstr "Lisavalikud"
+
+# Translation key: periodic_saving
+msgid "Periodic saving"
+msgstr "Regulaarne salvestamine"
+
+# Translation key: periodic_saving_desc
+msgid "Changes will only take effect after the next login"
+msgstr "Muudatused jõustuvad järgmisel sisselogimisel"
+
+# Translation key: pb_interval
+msgid "Interval"
+msgstr "Sagedus"
+
+# Translation key: never
+msgid "Never"
+msgstr "Mitte kunagi"
+
+# Translation key: daily
+msgid "Daily"
+msgstr "Kord päevas"
+
+# Translation key: weekly
+msgid "Weekly"
+msgstr "Iga nädal"
+
+# Translation key: monthly
+msgid "Monthly"
+msgstr "Iga kuu"
+
+# Translation key: manually
+msgid "Manually"
+msgstr "Valides aja käsitsi"
+
+# Translation key: learn_more
+msgid "Learn more"
+msgstr "Lisateave"
+
+# Translation key: pb_folder
+msgid "Folder for periodic saving"
+msgstr "Kaust regulaarseks salvestamiseks"
+
+# Translation key: set_pb_folder_tooltip
+msgid "Choose custom folder for periodic saving"
+msgstr "Vali kaust regulaarseks salvestamiseks sobilik kaust"
+
+# Translation key: set_another
+msgid "Choose another folder"
+msgstr "Vali muu kaust"
+
+# Translation key: filename_format
+msgid "File name format"
+msgstr "Failinime vorming"
+
+# Translation key: reset_button
+msgid "Reset to default"
+msgstr "Taasta algväärtused"
+
+# Translation key: pwd_for_encryption
+msgid "Password for encryption"
+msgstr "Krüptimise salasõna"
+
+# Translation key: manual_saving
+msgid "Manual saving"
+msgstr "Käsitsi salvestamine"
+
+# Translation key: archive_encryption
+msgid "Archive encryption"
+msgstr "Arhiivifaili krüptimine"
+
+# Translation key: archive_encryption_desc
+msgid ""
+"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+msgstr ""
+"Seadistuste käsitsi salvestamisel palume, et lisaksid salasõna. See võimalus parandab turvalisust, kui kavatsed kasutada salvestamist teisaldatavale andmekandjale."
+
+# Translation key: save_without_archive
+msgid "Save the configuration without creating an archive"
+msgstr "Salvesta seadistused ilma arhiivi loomata"
+
+# Translation key: create_pwd_title
+msgid "Create new password"
+msgstr "Loo uus salasõna"
+
+# Translation key: create_pwd_desc
+msgid ""
+"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+msgstr ""
+"Palun lisa oma arhiivifailile salasõna. Eeldame, et ta oleks vähemalt 12 tähemärki pikk, sisaldaks vähemalt ühte suurtähte, väiketähte ja erimärki."
+
+# Translation key: gen_password
+msgid "Generate Password"
+msgstr "Loo salasõna"
+
+# Translation key: password_entry
+msgid "Password"
+msgstr "Salasõna"
+
+# Translation key: check_pwd_title
+msgid "Unlock the archive with a password"
+msgstr "Kasutades salasõna eemalda arhiivifaili krüptimine"
+
+# Translation key: check_pwd_desc
+msgid ""
+"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+msgstr ""
+"Alljärgnevalt sisesta arhiivifaili krüptimise eemaldamiseks vajalik salasõna. Kui oled salasõna unustanud, siis arhiivifaili lahtipakkimine ja järgnev importimine pole võimalik."
+
+# Translation key: enter_password_title
+msgid ""
+"Please enter a password to unlock the archive for sync the configuration"
+msgstr "Seadistuste sünkroniseerimiseks palun sisesta salasõna"
+
+# Translation key: enter_password_desc
+msgid ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+msgstr ""
+"Oled Save Desktopi abil sünkroniseerimiseks valinud krüptitud arhiivifaili. Lukustuse eemaldamiseks palun sisesta salasõna ja sünkroniseerimine saab alata."
+
+# Translation key: remember_password
+msgid "Remember Password"
+msgstr "Jäta salasõna meelde"
+
+# Translation key: password_store_err
+msgid "Password not entered, or it's incorrect. Unable to continue."
+msgstr "Salasõna on kas sisestamata või vale. Jätkamine pole võimalik."
+
+# Translation key: saving_config_status
+msgid ""
+"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+msgstr ""
+"<big><b>Salvestame seadistusi …</b></big>\nSinu töölauakeskkonna seadistused salvestuvad faili:\n <i>{}/{}.sd.tar.gz</i>\n"
+
+# Translation key: config_saved
+msgid "Configuration has been saved!"
+msgstr "Seadistused on salvestatud!"
+
+# Translation key: config_saved_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+msgstr ""
+"<big><b>{}</b></big>\nSa võid nüüd vaadata oma töölauakeskkonna seadistuste archive või minna tagasi eelmise vaate juurde.\n"
+
+# Translation key: open_folder
+msgid "Open the folder"
+msgstr "Ava kaust"
+
+# Translation key: import_title
+msgid "Import"
+msgstr "Impordi"
+
+# Translation key: import_config
+msgid "Import saved configuration"
+msgstr "Impordi salvestatud seadistused"
+
+#: src/gui/shortcuts_window.ui:29
+# Translation key: import_from_file
+msgid "Import from file"
+msgstr "Impordi failist"
+
+# Translation key: import_from_folder
+msgid "Import from folder"
+msgstr "Impordi kaustast"
+
+# Translation key: cancel
+msgid "Cancel"
+msgstr "Katkesta"
+
+# Translation key: savedesktop_f
+msgid "Save Desktop files"
+msgstr "Save Desktopi failid"
+
+# Translation key: importing_config_status
+msgid ""
+"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+msgstr ""
+"<big><b>Impordime seadistusi…</b></big>\nImpordime seadistusi failist:\n<i>{}</i>\n"
+
+# Translation key: config_imported
+msgid "The configuration has been applied!"
+msgstr "Seadistused on nüüd kasutusel!"
+
+# Translation key: config_imported_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+msgstr ""
+"<big><b>{}</b></big>\nMuudatuste kasutuselevõtmiseks võid sa kohe välja logida või minna tagasi ja logida välja hiljem.\n"
+
+# Translation key: back_to_page
+msgid "Back to previous page"
+msgstr "Tagasi eelmisesse vaatesse"
+
+# Translation key: logout
+msgid "Log Out"
+msgstr "Logi välja"
+
+# Translation key: err_occured
+msgid "An error occurred"
+msgstr "Tekkis viga"
+
+# Translation key: apply
+msgid "Apply"
+msgstr "Rakenda"
+
+# Translation key: sync
+msgid "Sync"
+msgstr "Sünkroniseerimine"
+
+# Translation key: sync_desc
+msgid ""
+"Sync your desktop environment configuration with other computers in the network."
+msgstr ""
+"Sünkroniseeri oma töölauakeskkonna seadistusi teiste arvutitega võrgus."
+
+# Translation key: initial_setup
+msgid "Initial synchronization setup"
+msgstr "Sünkroniseerimise algne seadistus"
+
+# Translation key: gnome_oa_settings
+msgid "1. Open the system settings"
+msgstr "1. Ava süsteemi seadistused"
+
+# Translation key: gnome_oa_section
+msgid "2. Go to the Online Accounts section"
+msgstr "2. Ava võrguteenuste valik"
+
+# Translation key: gnome_oa_section_desc
+msgid ""
+"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+msgstr ""
+"Siin vali soovitud pilveteenus, nagu Google, Microsoft 365 või Nextcloud."
+
+# Translation key: gnome_oa_chooser
+msgid "3. Click on the Next button and select the created cloud drive folder"
+msgstr "3. Klõpsi nuppu Edasi ja vali loodud pilveteenuse kaust"
+
+# Translation key: gnome_oa_chooser_desc
+msgid ""
+"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+msgstr ""
+"Loodud pilvekaust leidub külgpaanis failivalija vaates ja tavaliselt näeb välja umbes nii: kasutajanimi@teenus.com."
+
+# Translation key: rclone_intro_desc
+msgid ""
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+msgstr ""
+"Et sünkroniseerimine toimiks korralikult vajad sa kausta, mis on rclone'i abil sünkroniseeritud sinu pilveteenusega.\n<b>Alustamiseks vali soovitud pilveteenuse kaust.</b>"
+
+# Translation key: rclone_copy_cmd
+msgid ""
+"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+msgstr ""
+"Seejärel kasutades küljel asuvat nuppu kopeeri rclone'i ülesseadmiseks vajalik käsk, ava terminalirakendus kas Ctrl+Alt+T kiirklahviga või valides ta rakenduste käivitajast."
+
+# Translation key: rclone_cmd_copied_msg
+msgid ""
+"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+msgstr ""
+"Kui oled selle käsu abil rclone'i seadistanud, siis klõpsi „Rakenda“ nuppu"
+
+# Translation key: syncthing_folder
+msgid "Use Syncthing folder instead"
+msgstr "Selle asemel kasuta Syncthingi kausta"
+
+# Translation key: almost_done_title
+msgid "Almost done!"
+msgstr "Peaaegu valmis!"
+
+# Translation key: almost_done_desc
+msgid ""
+"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+msgstr ""
+"Pilveteenuse kausta oled sa nüüd loonud! Seadistamise lõpetamiseks vajuta nuppu „Edasi“."
+
+# Translation key: select
+msgid "Select"
+msgstr "Vali"
+
+# Translation key: next
+msgid "Next"
+msgstr "Edasi"
+
+#: src/gui/shortcuts_window.ui:71
+# Translation key: set_up_sync_file
+msgid "Set up the sync file"
+msgstr "Seadista sünkroniseerimisfail"
+
+# Translation key: periodic_saving_file
+msgid "Periodic saving file"
+msgstr "Fail regulaarseks salvestamiseks"
+
+# Translation key: periodic_saving_file_err
+msgid "Periodic saving file does not exist."
+msgstr "Regulaarseks salvestamiseks mõeldud faili pole olemas."
+
+# Translation key: create
+msgid "Create"
+msgstr "Loo"
+
+# Translation key: please_wait
+msgid "Please wait …"
+msgstr "Palun oota…"
+
+# Translation key: change
+msgid "Change"
+msgstr "Muuda"
+
+#: src/gui/shortcuts_window.ui:78
+# Translation key: connect_cloud_storage
+msgid "Connect to the cloud storage"
+msgstr "Ühenda pilvesalvestusteenusega"
+
+# Translation key: connect_cloud_storage_desc
+msgid ""
+"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+msgstr ""
+"Ava teises arvutis Save Desktop rakendus ja sellel lehel klõpsi nuppu „Seadista sünkroniseerimisfail“ ja seadista vastavalt. Selles arvutis vali kaust, mille oled sünkroniseerinud oma pilveteenusega ja kuhu oled lisanud faili regulaarseks salvestamiseks."
+
+# Translation key: select_cloud_folder_btn
+msgid "Select the cloud drive folder"
+msgstr "Vali pilveteenuse kaust"
+
+# Translation key: cloud_folder_err
+msgid "You didn't select the cloud drive folder!"
+msgstr "Sa pole pilveteenuse kausta valinud!"
+
+# Translation key: periodic_sync
+msgid "Periodic synchronization"
+msgstr "Regulaarne sünkroniseerimine"
+
+# Translation key: bidirectional_sync
+msgid "Bidirectional synchronization"
+msgstr "Mõlemasuunaline sünkroniseerimine"
+
+# Translation key: bidirectional_sync_desc
+msgid ""
+"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+msgstr ""
+"Kui eelistus on kasutusel, sünkroniseerimisvälp ja pilveteenuse kaust valitud, siis regulaarse salvestamise teave (välp, kaust ja failinimi) teisest arvutist kopeeritakse siia arvutisse."
+
+# Translation key: m_sync_desc
+msgid "From now on, you can sync the config from the menu in the header bar"
+msgstr "Alates nüüdsest saad sa andmed sünkroniseerida menüüst päiseriba kohal"
+
+#: src/gui/shortcuts_window.ui:50
+# Translation key: sync_manually
+msgid "Synchronise manually"
+msgstr "Sünkroniseeri käsitsi"
+
+#: src/gui/shortcuts_window.ui:36
+# Translation key: keyboard_shortcuts
+msgid "Keyboard shortcuts"
+msgstr "Klaviatuuri kiirklahvid"
+
+#: src/gui/shortcuts_window.ui:15
+# Translation key: open_wiki
+msgid "Open the application wiki"
+msgstr "Ava rakenduse viki"
+
+#: src/gui/shortcuts_window.ui:43
+# Translation key: quit
+msgid "Quit"
+msgstr "Välju"
+
+# Translation key: about_app
+msgid "About app"
+msgstr "Rakenduse teave"
+
+# Translation key: unsuppurted_env_desc
+msgid ""
+"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+msgstr ""
+"<big><b>Sa kasutad mittetoetatud töölauakeskkonda.</b></big> \nHetkel on toetatud: {}."
+
+#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
+# Translation key: summary
+msgid "Save your desktop configuration"
+msgstr "Salvesta oma töölaua seadistused"
+
+# Translation key: description
+msgid ""
+"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+msgstr ""
+"Save Desktop võimaldab sul ühe klõpsuga salvestada (ja seega ka varundada) oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik töölauakeskkonna seadistused, lisamoodulid, jne)."
+
+# Translation key: translator_credits
+msgid "Translator credits"
+msgstr "Priit Jõerüüt 2025"
+

@@ -30,7 +30,7 @@ jobs:
 
       - name: Build Flatpak
         run: |
-          flatpak-builder --force-clean --repo=sdrepo build io.github.vikdevelop.SaveDesktop.yaml
+          flatpak-builder --force-clean --repo=sdrepo build io.github.vikdevelop.SaveDesktop.json
           flatpak build-bundle sdrepo io.github.vikdevelop.SaveDesktop.flatpak io.github.vikdevelop.SaveDesktop
 
       - name: Upload Flatpak artifact

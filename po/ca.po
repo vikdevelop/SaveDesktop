@@ -1,0 +1,471 @@
+# Translation file for ca
+# Generated from ca.json
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: savedesktop\n"
+"POT-Creation-Date: 2025-09-03 19:10\n"
+"PO-Revision-Date: 2025-09-03 19:10\n"
+"Last-Translator: Auto-generated\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Translation key: save
+msgid "Save"
+msgstr "Desa"
+
+#: src/gui/shortcuts_window.ui:22
+# Translation key: save_config
+msgid "Save the current configuration"
+msgstr "Desa la configuració actual"
+
+# Translation key: set_filename
+msgid "Set the file name"
+msgstr "Nom del fitxer"
+
+#: src/gui/shortcuts_window.ui:64
+# Translation key: items_for_archive
+msgid "Items to include in the configuration archive"
+msgstr "Elements que voleu incloure al fitxer de configuració"
+
+# Translation key: items_desc
+msgid "These settings also apply to periodic saving"
+msgstr "Aquestes opcions afecten també a la còpia automàtica"
+
+# Translation key: icons
+msgid "Icons"
+msgstr "Icones"
+
+# Translation key: themes
+msgid "Themes"
+msgstr "Temes"
+
+# Translation key: fonts
+msgid "Fonts"
+msgstr "Fonts"
+
+# Translation key: backgrounds
+msgid "Backgrounds"
+msgstr "Fons d'escriptori"
+
+# Translation key: extensions
+msgid "Extensions"
+msgstr "Extensions"
+
+# Translation key: desktop_folder
+msgid "Desktop"
+msgstr "Escriptori"
+
+# Translation key: save_installed_flatpaks
+msgid "Flatpak apps"
+msgstr "Programari Flatpak"
+
+# Translation key: list
+msgid "List of installed Flatpak apps"
+msgstr "Llistat del programari Flatpak instal·lat"
+
+# Translation key: user_data_flatpak
+msgid "User data of installed Flatpak apps"
+msgstr "Dades d'usuari del programari Flatpak instal·lat"
+
+# Translation key: flatpaks_data_tittle
+msgid "Flatpak apps data selection"
+msgstr "Selecció de dades d'aplicacions Flatpak"
+
+#: src/gui/shortcuts_window.ui
+# Translation key: more_options
+msgid "More options"
+msgstr "Més opcions"
+
+# Translation key: periodic_saving
+msgid "Periodic saving"
+msgstr "Còpia automàtica"
+
+# Translation key: periodic_saving_desc
+msgid "Changes will only take effect after the next login"
+msgstr "Els canvis seran efectius al proper inici de sessió"
+
+# Translation key: pb_interval
+msgid "Interval"
+msgstr "Interval"
+
+# Translation key: never
+msgid "Never"
+msgstr "Mai"
+
+# Translation key: daily
+msgid "Daily"
+msgstr "Diàriament"
+
+# Translation key: weekly
+msgid "Weekly"
+msgstr "Setmanalment"
+
+# Translation key: monthly
+msgid "Monthly"
+msgstr "Mensualment"
+
+# Translation key: manually
+msgid "Manually"
+msgstr "Manual"
+
+# Translation key: learn_more
+msgid "Learn more"
+msgstr "Més informació"
+
+# Translation key: pb_folder
+msgid "Folder for periodic saving"
+msgstr "Carpeta de destinació"
+
+# Translation key: set_pb_folder_tooltip
+msgid "Choose custom folder for periodic saving"
+msgstr "Trieu una carpeta on desar la còpia automàtica"
+
+# Translation key: set_another
+msgid "Choose another folder"
+msgstr "Trieu altra carpeta"
+
+# Translation key: filename_format
+msgid "File name format"
+msgstr "Format del nom de fitxer"
+
+# Translation key: reset_button
+msgid "Reset to default"
+msgstr "Restaura als valors per defecte"
+
+# Translation key: pwd_for_encryption
+msgid "Password for encryption"
+msgstr "Password for encryption"
+
+# Translation key: manual_saving
+msgid "Manual saving"
+msgstr "Manual saving"
+
+# Translation key: archive_encryption
+msgid "Archive encryption"
+msgstr "Xifrat de ftxer"
+
+# Translation key: archive_encryption_desc
+msgid ""
+"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+msgstr ""
+"En desar la configuració de forma manual, si us demanarà crear una contrasenya. Això és útil quan deseu la configuració en mitjans extraïbles per mantenir segures les vostres dades."
+
+# Translation key: save_without_archive
+msgid "Save the configuration without creating an archive"
+msgstr "Save the configuration without creating an archive"
+
+# Translation key: create_pwd_title
+msgid "Create new password"
+msgstr "Crea una contrasenya nova"
+
+# Translation key: create_pwd_desc
+msgid ""
+"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+msgstr ""
+"Creeu una contrasenya nova per al vostre fitxer. Es recomana emprar almenys 12 caràcters, incloent-hi majúscules, minúscules i caràcters especials."
+
+# Translation key: gen_password
+msgid "Generate Password"
+msgstr "Crea una contrasenya"
+
+# Translation key: password_entry
+msgid "Password"
+msgstr "Contrasenya"
+
+# Translation key: check_pwd_title
+msgid "Unlock the archive with a password"
+msgstr "Desbloca el fitxer amb una contrasenya"
+
+# Translation key: check_pwd_desc
+msgid ""
+"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+msgstr ""
+"Inseriu més avall una contrasenya per a desblocar el fitxer de configuració. Si l'oblideu, no podreu descomprimir el fitxer i aplicar la importació de la configuració."
+
+# Translation key: enter_password_title
+msgid ""
+"Please enter a password to unlock the archive for sync the configuration"
+msgstr ""
+"Please enter a password to unlock the archive for sync the configuration"
+
+# Translation key: enter_password_desc
+msgid ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+msgstr ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+
+# Translation key: remember_password
+msgid "Remember Password"
+msgstr "Remember Password"
+
+# Translation key: password_store_err
+msgid "Password not entered, or it's incorrect. Unable to continue."
+msgstr "Password not entered, or it's incorrect. Unable to continue."
+
+# Translation key: saving_config_status
+msgid ""
+"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+msgstr ""
+"<big><b>Desant la configuració ...</b></big>\nLa configuració del vostre escriptori es desarà a:\n <i>{}/{}.sd.tar.gz</i>\n"
+
+# Translation key: config_saved
+msgid "Configuration has been saved!"
+msgstr "S'ha desat la configuració!"
+
+# Translation key: config_saved_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+msgstr ""
+"<big><b>{}</b></big>\nAra podeu revisar el fitxer amb la configuració del vostre escriptori, o tornar a la pàgina anterior.\n"
+
+# Translation key: open_folder
+msgid "Open the folder"
+msgstr "Obre la carpeta"
+
+# Translation key: import_title
+msgid "Import"
+msgstr "Importa"
+
+# Translation key: import_config
+msgid "Import saved configuration"
+msgstr "Importa una configuració"
+
+#: src/gui/shortcuts_window.ui:29
+# Translation key: import_from_file
+msgid "Import from file"
+msgstr "Des d'un fitxer"
+
+# Translation key: import_from_folder
+msgid "Import from folder"
+msgstr "Import from folder"
+
+# Translation key: cancel
+msgid "Cancel"
+msgstr "Cancel·la"
+
+# Translation key: savedesktop_f
+msgid "Save Desktop files"
+msgstr "Fitxers del Save Desktop"
+
+# Translation key: importing_config_status
+msgid ""
+"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+msgstr ""
+"<big><b>Important la configuració ...</b></big>\nS'està important la configuració des de:\n<i>{}</i>\n"
+
+# Translation key: config_imported
+msgid "The configuration has been applied!"
+msgstr "S'ha aplicat la configuració!"
+
+# Translation key: config_imported_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+msgstr ""
+"<big><b>{}</b></big>\nPodeu tancar la sessió ara perquè els canvis siguin aplicats, o podeu tornar a la pàgina anterior i tancar la sessió més tard.\n"
+
+# Translation key: back_to_page
+msgid "Back to previous page"
+msgstr "Torna a la pàgina anterior"
+
+# Translation key: logout
+msgid "Log Out"
+msgstr "Tanca la sessió"
+
+# Translation key: err_occured
+msgid "An error occurred"
+msgstr "S'ha produït un error"
+
+# Translation key: apply
+msgid "Apply"
+msgstr "Aplica"
+
+# Translation key: sync
+msgid "Sync"
+msgstr "Sincronitza"
+
+# Translation key: sync_desc
+msgid ""
+"Sync your desktop environment configuration with other computers in the network."
+msgstr ""
+"Sincronitzeu el vostre entorn d'escriptori amb altres equips de la xarxa."
+
+# Translation key: initial_setup
+msgid "Initial synchronization setup"
+msgstr "Initial synchronization setup"
+
+# Translation key: gnome_oa_settings
+msgid "1. Open the system settings"
+msgstr "1. Open the system settings"
+
+# Translation key: gnome_oa_section
+msgid "2. Go to the Online Accounts section"
+msgstr "2. Go to the Online Accounts section"
+
+# Translation key: gnome_oa_section_desc
+msgid ""
+"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+msgstr ""
+"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+
+# Translation key: gnome_oa_chooser
+msgid "3. Click on the Next button and select the created cloud drive folder"
+msgstr "3. Click on the Next button and select the created cloud drive folder"
+
+# Translation key: gnome_oa_chooser_desc
+msgid ""
+"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+msgstr ""
+"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+
+# Translation key: rclone_intro_desc
+msgid ""
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+msgstr ""
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+
+# Translation key: rclone_copy_cmd
+msgid ""
+"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+msgstr ""
+"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+
+# Translation key: rclone_cmd_copied_msg
+msgid ""
+"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+msgstr ""
+"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+
+# Translation key: syncthing_folder
+msgid "Use Syncthing folder instead"
+msgstr "Use Syncthing folder instead"
+
+# Translation key: almost_done_title
+msgid "Almost done!"
+msgstr "Almost done!"
+
+# Translation key: almost_done_desc
+msgid ""
+"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+msgstr ""
+"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+
+# Translation key: select
+msgid "Select"
+msgstr "Select"
+
+# Translation key: next
+msgid "Next"
+msgstr "Next"
+
+#: src/gui/shortcuts_window.ui:71
+# Translation key: set_up_sync_file
+msgid "Set up the sync file"
+msgstr "Configura el fitxer de sincronització"
+
+# Translation key: periodic_saving_file
+msgid "Periodic saving file"
+msgstr "Fitxer de desat periòdic"
+
+# Translation key: periodic_saving_file_err
+msgid "Periodic saving file does not exist."
+msgstr "No existeix el fitxer de desat periòdic."
+
+# Translation key: create
+msgid "Create"
+msgstr "Crea"
+
+# Translation key: please_wait
+msgid "Please wait …"
+msgstr "Un moment…"
+
+# Translation key: change
+msgid "Change"
+msgstr "Canvia"
+
+#: src/gui/shortcuts_window.ui:78
+# Translation key: connect_cloud_storage
+msgid "Connect to the cloud storage"
+msgstr "Connecta a l'emmagatzematge al núvol"
+
+# Translation key: connect_cloud_storage_desc
+msgid ""
+"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+msgstr ""
+"Obriu aquesta pàgina del Save Desktop a l'altre ordinador i feu clic al botó «Configura el fitxer de sincronització» per a realitzar els canvis necessaris. En aquest ordinador, seleccioneu la carpeta que heu sincronitzat amb l'emmagatzematge al núvol i on heu desat el fitxer de desament automàtic."
+
+# Translation key: select_cloud_folder_btn
+msgid "Select the cloud drive folder"
+msgstr "Selecciona la carpeta del núvol"
+
+# Translation key: cloud_folder_err
+msgid "You didn't select the cloud drive folder!"
+msgstr "No heu seleccionat cap carpeta del núvol!"
+
+# Translation key: periodic_sync
+msgid "Periodic synchronization"
+msgstr "Sincronització periòdica"
+
+# Translation key: bidirectional_sync
+msgid "Bidirectional synchronization"
+msgstr "Sincronització bidireccional"
+
+# Translation key: bidirectional_sync_desc
+msgid ""
+"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+msgstr ""
+"En habilitar-ho i seleccionar l'interval de la sincronització i la carpeta de la unitat al núvol, tota la informació del desament automàtic (interval, carpeta i nom de fitxer) de l'altre ordinador es copia en aquest mitjançant la sincronització indicada."
+
+# Translation key: m_sync_desc
+msgid "From now on, you can sync the config from the menu in the header bar"
+msgstr ""
+"Ja podeu sincronitzar la configuració des del menú de la barra superior"
+
+#: src/gui/shortcuts_window.ui:50
+# Translation key: sync_manually
+msgid "Synchronise manually"
+msgstr "Sincronitza manualment"
+
+#: src/gui/shortcuts_window.ui:36
+# Translation key: keyboard_shortcuts
+msgid "Keyboard shortcuts"
+msgstr "Dreceres de teclat"
+
+#: src/gui/shortcuts_window.ui:15
+# Translation key: open_wiki
+msgid "Open the application wiki"
+msgstr "Open the application wiki"
+
+#: src/gui/shortcuts_window.ui:43
+# Translation key: quit
+msgid "Quit"
+msgstr "Surt"
+
+# Translation key: about_app
+msgid "About app"
+msgstr "Quant a..."
+
+# Translation key: unsuppurted_env_desc
+msgid ""
+"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+msgstr ""
+"<big><b>Teniu un entorn d'escriptori no suportat.</b></big> \nEl programa funciona amb: {}."
+
+#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
+# Translation key: summary
+msgid "Save your desktop configuration"
+msgstr "Desa la configuració actual del vostre entorn d'escriptori"
+
+# Translation key: description
+msgid ""
+"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+msgstr ""
+"El Save Desktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic."
+
+# Translation key: translator_credits
+msgid "Translator credits"
+msgstr "BennyBeat https://github.com/BennyBeat"
+

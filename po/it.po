@@ -1,0 +1,472 @@
+# Translation file for it
+# Generated from it.json
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: savedesktop\n"
+"POT-Creation-Date: 2025-09-03 19:10\n"
+"PO-Revision-Date: 2025-09-03 19:10\n"
+"Last-Translator: Auto-generated\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Translation key: save
+msgid "Save"
+msgstr "Salva"
+
+#: src/gui/shortcuts_window.ui:22
+# Translation key: save_config
+msgid "Save the current configuration"
+msgstr "Salva la configurazione corrente"
+
+# Translation key: set_filename
+msgid "Set the file name"
+msgstr "Impostare il nome file"
+
+#: src/gui/shortcuts_window.ui:64
+# Translation key: items_for_archive
+msgid "Items to include in the configuration archive"
+msgstr "Elementi da includere nell'archivio di configurazione"
+
+# Translation key: items_desc
+msgid "These settings also apply to periodic saving"
+msgstr "Queste impostazioni si applicano anche al salvataggio periodico"
+
+# Translation key: icons
+msgid "Icons"
+msgstr "Icone"
+
+# Translation key: themes
+msgid "Themes"
+msgstr "Temi"
+
+# Translation key: fonts
+msgid "Fonts"
+msgstr "Font"
+
+# Translation key: backgrounds
+msgid "Backgrounds"
+msgstr "Sfondi"
+
+# Translation key: extensions
+msgid "Extensions"
+msgstr "Estensioni"
+
+# Translation key: desktop_folder
+msgid "Desktop"
+msgstr "Desktop"
+
+# Translation key: save_installed_flatpaks
+msgid "Flatpak apps"
+msgstr "App flatpak"
+
+# Translation key: list
+msgid "List of installed Flatpak apps"
+msgstr "Elenco delle app Flatpak installate"
+
+# Translation key: user_data_flatpak
+msgid "User data of installed Flatpak apps"
+msgstr "Dati utente delle app Flatpak installate"
+
+# Translation key: flatpaks_data_tittle
+msgid "Flatpak apps data selection"
+msgstr "Selezione dei dati delle app Flatpak"
+
+#: src/gui/shortcuts_window.ui
+# Translation key: more_options
+msgid "More options"
+msgstr "Ulteriori opzioni"
+
+# Translation key: periodic_saving
+msgid "Periodic saving"
+msgstr "Salvataggio periodico"
+
+# Translation key: periodic_saving_desc
+msgid "Changes will only take effect after the next login"
+msgstr "Le modifiche avranno effetto solo dopo il prossimo login"
+
+# Translation key: pb_interval
+msgid "Interval"
+msgstr "Intervallo"
+
+# Translation key: never
+msgid "Never"
+msgstr "Mai"
+
+# Translation key: daily
+msgid "Daily"
+msgstr "Giornaliero"
+
+# Translation key: weekly
+msgid "Weekly"
+msgstr "Settimanale"
+
+# Translation key: monthly
+msgid "Monthly"
+msgstr "Mensile"
+
+# Translation key: manually
+msgid "Manually"
+msgstr "Manualmente"
+
+# Translation key: learn_more
+msgid "Learn more"
+msgstr "Ulteriori informazioni"
+
+# Translation key: pb_folder
+msgid "Folder for periodic saving"
+msgstr "Cartella per il salvataggio periodico"
+
+# Translation key: set_pb_folder_tooltip
+msgid "Choose custom folder for periodic saving"
+msgstr "Scegli la cartella personalizzata per il salvataggio periodico"
+
+# Translation key: set_another
+msgid "Choose another folder"
+msgstr "Scegli un'altra cartella"
+
+# Translation key: filename_format
+msgid "File name format"
+msgstr "Formato del nome del file"
+
+# Translation key: reset_button
+msgid "Reset to default"
+msgstr "Ripristina le impostazioni predefinite"
+
+# Translation key: pwd_for_encryption
+msgid "Password for encryption"
+msgstr "Password per la crittografia"
+
+# Translation key: manual_saving
+msgid "Manual saving"
+msgstr "Salvataggio manuale"
+
+# Translation key: archive_encryption
+msgid "Archive encryption"
+msgstr "Cifratura dell'archivio"
+
+# Translation key: archive_encryption_desc
+msgid ""
+"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+msgstr ""
+"Quando salvi manualmente la configurazione, ti verrà richiesto di creare una password. Ciò è utile quando si salva la configurazione su un supporto portatile per una migliore sicurezza dei dati."
+
+# Translation key: save_without_archive
+msgid "Save the configuration without creating an archive"
+msgstr "Salvare la configurazione senza creare un archivio"
+
+# Translation key: create_pwd_title
+msgid "Create new password"
+msgstr "Crea una nuova password"
+
+# Translation key: create_pwd_desc
+msgid ""
+"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+msgstr ""
+"Crea una nuova password per il tuo archivio. I criteri includono una lunghezza di almeno 12 caratteri, una lettera maiuscola, una lettera minuscola e un carattere speciale."
+
+# Translation key: gen_password
+msgid "Generate Password"
+msgstr "Genera Password"
+
+# Translation key: password_entry
+msgid "Password"
+msgstr "Password"
+
+# Translation key: check_pwd_title
+msgid "Unlock the archive with a password"
+msgstr "Sblocca l'archivio con una password"
+
+# Translation key: check_pwd_desc
+msgid ""
+"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+msgstr ""
+"Inserisci la password qui sotto per sbloccare l'archivio con la tua configurazione. Se l'hai dimenticata, non potrai decomprimere l'archivio e iniziare a importare la tua configurazione."
+
+# Translation key: enter_password_title
+msgid ""
+"Please enter a password to unlock the archive for sync the configuration"
+msgstr ""
+"Inserisci una password per sbloccare l'archivio e sincronizzare la configurazione"
+
+# Translation key: enter_password_desc
+msgid ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+msgstr ""
+"È stato selezionato un archivio crittografato per la sincronizzazione tramite l'app Save Desktop. Inserisci la password qui sotto per sbloccarlo e avviare la sincronizzazione."
+
+# Translation key: remember_password
+msgid "Remember Password"
+msgstr "Ricorda password"
+
+# Translation key: password_store_err
+msgid "Password not entered, or it's incorrect. Unable to continue."
+msgstr "Password non inserita o errata. Impossibile continuare."
+
+# Translation key: saving_config_status
+msgid ""
+"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+msgstr ""
+"<big><b>Salvataggio della configurazione…</b></big>\nLa configurazione del tuo ambiente desktop verrà salvata in:\n  <i>{}/{}.sd.tar.gz</i>\n"
+
+# Translation key: config_saved
+msgid "Configuration has been saved!"
+msgstr "La configurazione è stata salvata!"
+
+# Translation key: config_saved_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+msgstr ""
+"<big><b>{}</b></big>\nOra puoi visualizzare l'archivio con la configurazione del tuo ambiente desktop oppure tornare alla pagina precedente.\n"
+
+# Translation key: open_folder
+msgid "Open the folder"
+msgstr "Apri la cartella"
+
+# Translation key: import_title
+msgid "Import"
+msgstr "Importa"
+
+# Translation key: import_config
+msgid "Import saved configuration"
+msgstr "Importa la configurazione salvata"
+
+#: src/gui/shortcuts_window.ui:29
+# Translation key: import_from_file
+msgid "Import from file"
+msgstr "Importa da file"
+
+# Translation key: import_from_folder
+msgid "Import from folder"
+msgstr "Importa dalla cartella"
+
+# Translation key: cancel
+msgid "Cancel"
+msgstr "Cancella"
+
+# Translation key: savedesktop_f
+msgid "Save Desktop files"
+msgstr "Salva i file del desktop"
+
+# Translation key: importing_config_status
+msgid ""
+"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+msgstr ""
+"<big><b>Importazione della configurazione…</b></big>\nImportazione configurazione da:\n<i>{}</i>\n"
+
+# Translation key: config_imported
+msgid "The configuration has been applied!"
+msgstr "La configurazione è stata applicata!"
+
+# Translation key: config_imported_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+msgstr ""
+"<big><b>{}</b></big>\nÈ possibile disconnettersi dal sistema per rendere effettive le modifiche oppure tornare alla pagina precedente e disconnettersi in seguito.\n"
+
+# Translation key: back_to_page
+msgid "Back to previous page"
+msgstr "Ritorno alla pagina precedente"
+
+# Translation key: logout
+msgid "Log Out"
+msgstr "Disconnettersi"
+
+# Translation key: err_occured
+msgid "An error occurred"
+msgstr "Si è verificato un errore"
+
+# Translation key: apply
+msgid "Apply"
+msgstr "Applica"
+
+# Translation key: sync
+msgid "Sync"
+msgstr "Sincronizzazione"
+
+# Translation key: sync_desc
+msgid ""
+"Sync your desktop environment configuration with other computers in the network."
+msgstr ""
+"Sincronizza la configurazione del tuo ambiente desktop con altri computer nella rete."
+
+# Translation key: initial_setup
+msgid "Initial synchronization setup"
+msgstr "Configurazione iniziale della sincronizzazione"
+
+# Translation key: gnome_oa_settings
+msgid "1. Open the system settings"
+msgstr "1. Aprire le impostazioni di sistema"
+
+# Translation key: gnome_oa_section
+msgid "2. Go to the Online Accounts section"
+msgstr "2. Vai alla sezione Account online"
+
+# Translation key: gnome_oa_section_desc
+msgid ""
+"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+msgstr ""
+"In questa sezione seleziona il servizio cloud desiderato, ad esempio Google, Microsoft 365 o Nextcloud."
+
+# Translation key: gnome_oa_chooser
+msgid "3. Click on the Next button and select the created cloud drive folder"
+msgstr ""
+"3. Fare clic sul pulsante Avanti e selezionare la cartella dell'unità cloud creata"
+
+# Translation key: gnome_oa_chooser_desc
+msgid ""
+"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+msgstr ""
+"La cartella dell'unità cloud creata può essere trovata nel pannello laterale della finestra di dialogo di selezione file, nel seguente formato: nomeutente@servizio.com."
+
+# Translation key: rclone_intro_desc
+msgid ""
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+msgstr ""
+"Per far funzionare correttamente la sincronizzazione, devi avere la cartella sincronizzata con il tuo servizio cloud tramite Rclone.\n<b>Inizia selezionando il servizio di unità cloud che utilizzi.</b>"
+
+# Translation key: rclone_copy_cmd
+msgid ""
+"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+msgstr ""
+"Ora copia il comando per configurare Rclone utilizzando il pulsante laterale e apri l'app terminale utilizzando la scorciatoia da tastiera Ctrl+Alt+T o trovandola nel menu delle app."
+
+# Translation key: rclone_cmd_copied_msg
+msgid ""
+"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+msgstr ""
+"Una volta terminata la configurazione di Rclone utilizzando il comando fornito, fare clic sul pulsante \"Applica\""
+
+# Translation key: syncthing_folder
+msgid "Use Syncthing folder instead"
+msgstr "Utilizzare invece la cartella Syncthing"
+
+# Translation key: almost_done_title
+msgid "Almost done!"
+msgstr "Quasi finito!"
+
+# Translation key: almost_done_desc
+msgid ""
+"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+msgstr ""
+"Ora hai creato la cartella dell'unità cloud! Fai clic sul pulsante Avanti per completare la configurazione."
+
+# Translation key: select
+msgid "Select"
+msgstr "Seleziona"
+
+# Translation key: next
+msgid "Next"
+msgstr "Prossimo"
+
+#: src/gui/shortcuts_window.ui:71
+# Translation key: set_up_sync_file
+msgid "Set up the sync file"
+msgstr "Imposta il file di sincronizzazione"
+
+# Translation key: periodic_saving_file
+msgid "Periodic saving file"
+msgstr "File di salvataggio periodico"
+
+# Translation key: periodic_saving_file_err
+msgid "Periodic saving file does not exist."
+msgstr "Il file di salvataggio periodico non esiste."
+
+# Translation key: create
+msgid "Create"
+msgstr "Crea"
+
+# Translation key: please_wait
+msgid "Please wait …"
+msgstr "Attendere prego …"
+
+# Translation key: change
+msgid "Change"
+msgstr "Modifica"
+
+#: src/gui/shortcuts_window.ui:78
+# Translation key: connect_cloud_storage
+msgid "Connect to the cloud storage"
+msgstr "Connettiti allo storage cloud"
+
+# Translation key: connect_cloud_storage_desc
+msgid ""
+"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+msgstr ""
+"Su un altro computer, apri l'app Save Desktop e, in questa pagina, clicca sul pulsante \"Imposta il file di sincronizzazione\" e fai le impostazioni necessarie. Su questo computer, seleziona la cartella che hai sincronizzato con il tuo archivio cloud ed hai anche salvato lo stesso file di salvataggio periodico."
+
+# Translation key: select_cloud_folder_btn
+msgid "Select the cloud drive folder"
+msgstr "Seleziona la cartella dell'unità cloud"
+
+# Translation key: cloud_folder_err
+msgid "You didn't select the cloud drive folder!"
+msgstr "Non hai selezionato la cartella dell'unità cloud!"
+
+# Translation key: periodic_sync
+msgid "Periodic synchronization"
+msgstr "Sincronizzazione periodica"
+
+# Translation key: bidirectional_sync
+msgid "Bidirectional synchronization"
+msgstr "Sincronizzazione bidirezionale"
+
+# Translation key: bidirectional_sync_desc
+msgid ""
+"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+msgstr ""
+"Se abilitata e se sono selezionati l'intervallo di sincronizzazione e la cartella dell'unità cloud, le informazioni di salvataggio periodico (intervallo, cartella e nome file) dall'altro computer con sincronizzazione impostata su sincronizza, vengono copiate su questo computer."
+
+# Translation key: m_sync_desc
+msgid "From now on, you can sync the config from the menu in the header bar"
+msgstr ""
+"D'ora in poi, puoi sincronizzare la configurazione dal menu nella barra dell'intestazione"
+
+#: src/gui/shortcuts_window.ui:50
+# Translation key: sync_manually
+msgid "Synchronise manually"
+msgstr "Sincronizza manualmente"
+
+#: src/gui/shortcuts_window.ui:36
+# Translation key: keyboard_shortcuts
+msgid "Keyboard shortcuts"
+msgstr "Scorciatoie da tastiera"
+
+#: src/gui/shortcuts_window.ui:15
+# Translation key: open_wiki
+msgid "Open the application wiki"
+msgstr "Apri il wiki dell'applicazione"
+
+#: src/gui/shortcuts_window.ui:43
+# Translation key: quit
+msgid "Quit"
+msgstr "Esci"
+
+# Translation key: about_app
+msgid "About app"
+msgstr "Informazioni sull'app"
+
+# Translation key: unsuppurted_env_desc
+msgid ""
+"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+msgstr ""
+"<big><b>Hai installato un ambiente non supportato.</b></big>\nSi prega di utilizzare uno di questi ambienti: {}."
+
+#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
+# Translation key: summary
+msgid "Save your desktop configuration"
+msgstr "Salva la configurazione del tuo desktop"
+
+# Translation key: description
+msgid ""
+"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+msgstr ""
+"Desideri salvare la tua configurazione corrente inclusi temi, icone, sfondi, tutte le impostazioni dell'ambiente desktop, estensioni e così via? Save Desktop può aiutarti in questo. Basta un clic e hai la tua configurazione salvata."
+
+# Translation key: translator_credits
+msgid "Translator credits"
+msgstr "Albano Battistella https://github.com/albanobattistella"
+

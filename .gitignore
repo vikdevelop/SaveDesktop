@@ -1,0 +1,32 @@
+# Build artifacts
+build/
+build-dir/
+.flatpak-builder/
+.buildconfig
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
+*.log
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Meson specific
+builddir/
+subprojects/*/

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Save Desktop
+Categories=Utility
+Comment=Save your desktop configuration
+Exec=savedesktop
+Type=Application
+Icon=io.github.vikdevelop.SaveDesktop

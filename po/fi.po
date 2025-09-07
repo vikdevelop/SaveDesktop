@@ -1,0 +1,471 @@
+# Translation file for fi
+# Generated from fi.json
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: savedesktop\n"
+"POT-Creation-Date: 2025-09-03 19:10\n"
+"PO-Revision-Date: 2025-09-03 19:10\n"
+"Last-Translator: Auto-generated\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Translation key: save
+msgid "Save"
+msgstr "Tallenna"
+
+#: src/gui/shortcuts_window.ui:22
+# Translation key: save_config
+msgid "Save the current configuration"
+msgstr "Tallenna nykyiset määritykset"
+
+# Translation key: set_filename
+msgid "Set the file name"
+msgstr "Aseta tiedostonimi"
+
+#: src/gui/shortcuts_window.ui:64
+# Translation key: items_for_archive
+msgid "Items to include in the configuration archive"
+msgstr "Määritysarkistoon sisällytettävät kohteet"
+
+# Translation key: items_desc
+msgid "These settings also apply to periodic saving"
+msgstr "Nämä asetukset pätevät myös jaksottaiseen tallennukseen"
+
+# Translation key: icons
+msgid "Icons"
+msgstr "Kuvakkeet"
+
+# Translation key: themes
+msgid "Themes"
+msgstr "Teemat"
+
+# Translation key: fonts
+msgid "Fonts"
+msgstr "Fontit"
+
+# Translation key: backgrounds
+msgid "Backgrounds"
+msgstr "Taustakuvat"
+
+# Translation key: extensions
+msgid "Extensions"
+msgstr "Laajennukset"
+
+# Translation key: desktop_folder
+msgid "Desktop"
+msgstr "Työpöytä"
+
+# Translation key: save_installed_flatpaks
+msgid "Flatpak apps"
+msgstr "Flatpak-sovellukset"
+
+# Translation key: list
+msgid "List of installed Flatpak apps"
+msgstr "Luettelo asennetuista Flatpak-sovelluksista"
+
+# Translation key: user_data_flatpak
+msgid "User data of installed Flatpak apps"
+msgstr "Asennettujen Flatpak-sovellusten käyttäjädata"
+
+# Translation key: flatpaks_data_tittle
+msgid "Flatpak apps data selection"
+msgstr "Flatpak-sovellusten datavalinta"
+
+#: src/gui/shortcuts_window.ui
+# Translation key: more_options
+msgid "More options"
+msgstr "Lisää valintoja"
+
+# Translation key: periodic_saving
+msgid "Periodic saving"
+msgstr "Jaksottainen tallennus"
+
+# Translation key: periodic_saving_desc
+msgid "Changes will only take effect after the next login"
+msgstr "Muutokset tulevat voimaan vasta seuraavalla kirjautumiskerralla"
+
+# Translation key: pb_interval
+msgid "Interval"
+msgstr "Aikaväli"
+
+# Translation key: never
+msgid "Never"
+msgstr "Ei koskaan"
+
+# Translation key: daily
+msgid "Daily"
+msgstr "Päivittäin"
+
+# Translation key: weekly
+msgid "Weekly"
+msgstr "Viikottain"
+
+# Translation key: monthly
+msgid "Monthly"
+msgstr "Kuukausittain"
+
+# Translation key: manually
+msgid "Manually"
+msgstr "Manuaalisesti"
+
+# Translation key: learn_more
+msgid "Learn more"
+msgstr "Lue lisää"
+
+# Translation key: pb_folder
+msgid "Folder for periodic saving"
+msgstr "Kansio jaksottaista tallennusta varten"
+
+# Translation key: set_pb_folder_tooltip
+msgid "Choose custom folder for periodic saving"
+msgstr "Valitse mukautettu kansio jaksottaista tallennusta varten"
+
+# Translation key: set_another
+msgid "Choose another folder"
+msgstr "Valitse toinen kansio"
+
+# Translation key: filename_format
+msgid "File name format"
+msgstr "Tiedostonimen muoto"
+
+# Translation key: reset_button
+msgid "Reset to default"
+msgstr "Palauta oletusasetus"
+
+# Translation key: pwd_for_encryption
+msgid "Password for encryption"
+msgstr "Salasana salausta varten"
+
+# Translation key: manual_saving
+msgid "Manual saving"
+msgstr "Manuaalinen tallennus"
+
+# Translation key: archive_encryption
+msgid "Archive encryption"
+msgstr "Arkiston salaus"
+
+# Translation key: archive_encryption_desc
+msgid ""
+"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+msgstr ""
+"Kun tallennat määrityksen manuaalisesti, sinua pyydetään luomaan salasana. Tämä on hyödyllinen ominaisuus datan turvaamiseksi, kun määritys on tarkoitus tallentaa esimerkiksi erilliselle muistitikulle."
+
+# Translation key: save_without_archive
+msgid "Save the configuration without creating an archive"
+msgstr "Tallenna kokoonpano luomatta arkistoa"
+
+# Translation key: create_pwd_title
+msgid "Create new password"
+msgstr "Luo uusi salasana"
+
+# Translation key: create_pwd_desc
+msgid ""
+"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+msgstr ""
+"Luo uusi salasana arkistoon. Salasanan on sisällettävä vähintään 12 merkkiä, yksi iso kirjain, yksi pieni kirjain ja yksi erikoismerkki."
+
+# Translation key: gen_password
+msgid "Generate Password"
+msgstr "Luo salasana"
+
+# Translation key: password_entry
+msgid "Password"
+msgstr "Salasana"
+
+# Translation key: check_pwd_title
+msgid "Unlock the archive with a password"
+msgstr "Avaa arkiston lukitus salasanalla"
+
+# Translation key: check_pwd_desc
+msgid ""
+"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+msgstr ""
+"Kirjoita määritysarkiston salasana alapuolelle. Jos olet unohtanut salasanan, et pysty avata arkistoa ja tuoda määritystä."
+
+# Translation key: enter_password_title
+msgid ""
+"Please enter a password to unlock the archive for sync the configuration"
+msgstr ""
+"Please enter a password to unlock the archive for sync the configuration"
+
+# Translation key: enter_password_desc
+msgid ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+msgstr ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+
+# Translation key: remember_password
+msgid "Remember Password"
+msgstr "Muista salasana"
+
+# Translation key: password_store_err
+msgid "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
+"Salasanaa ei kirjoitettu, tai se oli väärin. Jatkaminen ei ole mahdollista."
+
+# Translation key: saving_config_status
+msgid ""
+"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+msgstr ""
+"<big><b>Tallennetaan määritystä …</b></big>\nTyöpöytäympäristösi määritys tallennetaan seuraavaan tiedostoon:\n <i>{}/{}.sd.tar.gz</i>\n"
+
+# Translation key: config_saved
+msgid "Configuration has been saved!"
+msgstr "Määritys on tallennettu!"
+
+# Translation key: config_saved_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+msgstr ""
+"<big><b>{}</b></big>\nVoit nyt katselmoida arkiston, jossa työpöytäympäristösi määritys on, tai palata edelliselle sivulle.\n"
+
+# Translation key: open_folder
+msgid "Open the folder"
+msgstr "Avaa kansio"
+
+# Translation key: import_title
+msgid "Import"
+msgstr "Tuo"
+
+# Translation key: import_config
+msgid "Import saved configuration"
+msgstr "Tuo tallennettu määritys"
+
+#: src/gui/shortcuts_window.ui:29
+# Translation key: import_from_file
+msgid "Import from file"
+msgstr "Tuo tiedostosta"
+
+# Translation key: import_from_folder
+msgid "Import from folder"
+msgstr "Tuo kansiosta"
+
+# Translation key: cancel
+msgid "Cancel"
+msgstr "Peru"
+
+# Translation key: savedesktop_f
+msgid "Save Desktop files"
+msgstr "Save Desktop-tiedostot"
+
+# Translation key: importing_config_status
+msgid ""
+"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+msgstr ""
+"<big><b>Tuodaan määritystä…</b></big>\nMääritys tuodaan seuraavasta lähteestä:\n<i>{}</i>\n"
+
+# Translation key: config_imported
+msgid "The configuration has been applied!"
+msgstr "Määritys on toteutettu!"
+
+# Translation key: config_imported_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+msgstr ""
+"<big><b>{}</b></big>\nVoit kirjautua ulos järjestelmästä, jotta muutokset tulevat voimaan, tai palata edelliselle sivulle ja kirjautua ulos myöhemmin.\n"
+
+# Translation key: back_to_page
+msgid "Back to previous page"
+msgstr "Takaisin edelliselle sivulle"
+
+# Translation key: logout
+msgid "Log Out"
+msgstr "Kirjaudu ulos"
+
+# Translation key: err_occured
+msgid "An error occurred"
+msgstr "Tapahtui virhe"
+
+# Translation key: apply
+msgid "Apply"
+msgstr "Toteuta"
+
+# Translation key: sync
+msgid "Sync"
+msgstr "Synkronoi"
+
+# Translation key: sync_desc
+msgid ""
+"Sync your desktop environment configuration with other computers in the network."
+msgstr ""
+"Synkronoi työpöytämäärityksesi muiden verkossa olevien tietokoneiden kanssa."
+
+# Translation key: initial_setup
+msgid "Initial synchronization setup"
+msgstr "Ensimmäisen synkronoinnin määritys"
+
+# Translation key: gnome_oa_settings
+msgid "1. Open the system settings"
+msgstr "1. Avaa järjestelmän asetukset"
+
+# Translation key: gnome_oa_section
+msgid "2. Go to the Online Accounts section"
+msgstr "2. Siirry verkkotileihin"
+
+# Translation key: gnome_oa_section_desc
+msgid ""
+"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+msgstr ""
+"Valitse haluamasi pilvipalvelu kuten Google, Microsoft 365 tai Nextcloud."
+
+# Translation key: gnome_oa_chooser
+msgid "3. Click on the Next button and select the created cloud drive folder"
+msgstr "3. Napsauta Seuraava-painiketta ja valitse luotu kansio pilvestä"
+
+# Translation key: gnome_oa_chooser_desc
+msgid ""
+"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+msgstr ""
+"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+
+# Translation key: rclone_intro_desc
+msgid ""
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+msgstr ""
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+
+# Translation key: rclone_copy_cmd
+msgid ""
+"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+msgstr ""
+"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+
+# Translation key: rclone_cmd_copied_msg
+msgid ""
+"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+msgstr ""
+"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+
+# Translation key: syncthing_folder
+msgid "Use Syncthing folder instead"
+msgstr "Käytä Syncthing-kansiota sen sijaan"
+
+# Translation key: almost_done_title
+msgid "Almost done!"
+msgstr "Melkein valmista!"
+
+# Translation key: almost_done_desc
+msgid ""
+"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+msgstr ""
+"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+
+# Translation key: select
+msgid "Select"
+msgstr "Valitse"
+
+# Translation key: next
+msgid "Next"
+msgstr "Seuraava"
+
+#: src/gui/shortcuts_window.ui:71
+# Translation key: set_up_sync_file
+msgid "Set up the sync file"
+msgstr "Aseta synkronointitiedosto"
+
+# Translation key: periodic_saving_file
+msgid "Periodic saving file"
+msgstr "Jaksottaisen tallennuksen tiedosto"
+
+# Translation key: periodic_saving_file_err
+msgid "Periodic saving file does not exist."
+msgstr "Jaksottaisen tallennuksen tiedostoa ei ole olemassa."
+
+# Translation key: create
+msgid "Create"
+msgstr "Luo"
+
+# Translation key: please_wait
+msgid "Please wait …"
+msgstr "Odota hetki…"
+
+# Translation key: change
+msgid "Change"
+msgstr "Vaihda"
+
+#: src/gui/shortcuts_window.ui:78
+# Translation key: connect_cloud_storage
+msgid "Connect to the cloud storage"
+msgstr "Yhdistä pilvitallennustilaan"
+
+# Translation key: connect_cloud_storage_desc
+msgid ""
+"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+msgstr ""
+"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+
+# Translation key: select_cloud_folder_btn
+msgid "Select the cloud drive folder"
+msgstr "Valitse pilviaseman kansio"
+
+# Translation key: cloud_folder_err
+msgid "You didn't select the cloud drive folder!"
+msgstr "Et valinnut pilviaseman kansiota!"
+
+# Translation key: periodic_sync
+msgid "Periodic synchronization"
+msgstr "Jaksottainen synkronointi"
+
+# Translation key: bidirectional_sync
+msgid "Bidirectional synchronization"
+msgstr "Kaksisuuntainen synkronointi"
+
+# Translation key: bidirectional_sync_desc
+msgid ""
+"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+msgstr ""
+"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+
+# Translation key: m_sync_desc
+msgid "From now on, you can sync the config from the menu in the header bar"
+msgstr "Vastedes voit synkronoida määrityksen otsakepalkin valikosta"
+
+#: src/gui/shortcuts_window.ui:50
+# Translation key: sync_manually
+msgid "Synchronise manually"
+msgstr "Synkronoi manuaalisesti"
+
+#: src/gui/shortcuts_window.ui:36
+# Translation key: keyboard_shortcuts
+msgid "Keyboard shortcuts"
+msgstr "Pikanäppäimet"
+
+#: src/gui/shortcuts_window.ui:15
+# Translation key: open_wiki
+msgid "Open the application wiki"
+msgstr "Avaa sovelluksen wiki"
+
+#: src/gui/shortcuts_window.ui:43
+# Translation key: quit
+msgid "Quit"
+msgstr "Lopeta"
+
+# Translation key: about_app
+msgid "About app"
+msgstr "Tietoja sovelluksesta"
+
+# Translation key: unsuppurted_env_desc
+msgid ""
+"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+msgstr ""
+"<big><b>Havaittu tuen ulkopuolella olevan ympäristön asennus.</b></big> \nKäytä jotain näistä ympäristöistä: {}."
+
+#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
+# Translation key: summary
+msgid "Save your desktop configuration"
+msgstr "Tallenna työpöytäsi määritys"
+
+# Translation key: description
+msgid ""
+"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+msgstr ""
+"Save Desktopin avulla voit tallentaa työpöytäympäristösi määrityksen (teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, laajennukset jne.) yhdellä napsautuksella."
+
+# Translation key: translator_credits
+msgid "Translator credits"
+msgstr "Name jiri.gronroos+l10n@iki.fi"
+
