@@ -49,8 +49,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.menu_button.set_primary(True)
         self.headerbar.pack_end(child=self.menu_button)
 
-        self.menu_button.set_tooltip_text(tooltip_text)
-
         # add Manually sync section
         if settings["manually-sync"] == True:
             self.sync_menu = Gio.Menu()
@@ -320,10 +318,16 @@ class MainWindow(Adw.ApplicationWindow):
         self.sync_btn_box.append(self.getButton)
 
     def _open_InitSetupDialog(self, w):
-        self.get_btn_type = w.get_name()
+        self.__get_button_type(w)
         self.init_setup_dialog = InitSetupDialog(self)
         self.init_setup_dialog.choose(self, None, None, None)
         self.init_setup_dialog.present(self)
+
+    def __get_button_type(self, w):
+        try:
+            self.get_btn_type = w.get_name()
+        except:
+            self.get_btn_type = w
 
     def _open_SetDialog(self, w):
         self.set_dialog = SetDialog(self)

@@ -62,22 +62,21 @@ class SaveDesktopApp(Adw.Application):
 
     # Open the More options dialog using Ctrl+Shift+M keyboard shortcut
     def call_ms_dialog(self, action, param):
-        self.win.more_options_dialog(w="")
-        self.win.msDialog.present()
+        self.win._open_more_options_dialog(w="")
 
     # Open the "Items to include in the configuration archive" dialog using Ctrl+Shift+I keyboard shortcut
     def call_items_dialog(self, action, param):
-        self.win.items_dialog(w="")
+        self.win._open_itemsDialog(w="")
 
     # Open the "Set up the sync file" dialog using Ctrl+Shift+S keyboard shortcut
     def call_setDialog(self, action, param):
         if not snap:
-            self.win.open_setDialog(w="set-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w="set-button")
+            self.win._open_SetDialog(w="set-button") if not settings["first-synchronization-setup"] else self.win._open_InitSetupDialog(w="set-button")
 
     # Open the "Connect to the cloud drive" dialog using Ctrl+Shift+C keyboard shortcut
     def call_cloudDialog(self, action, param):
         if not snap:
-            self.win.open_cloudDialog(w="get-button") if not settings["first-synchronization-setup"] else self.win.open_initsetupDialog(w="get-button")
+            self.win._open_CloudDialog(w="get-button") if not settings["first-synchronization-setup"] else self.win._open_InitSetupDialog(w="get-button")
 
     # Open the application wiki using F1 keyboard shortcut
     def open_wiki(self, action, param):
