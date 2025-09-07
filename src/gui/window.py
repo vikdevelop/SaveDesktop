@@ -515,7 +515,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _call_archive_command(self):
         try:
-            subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+            subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         except subprocess.CalledProcessError as e:
             GLib.idle_add(self.show_err_msg, e)
             self.toolbarview.set_content(self.headapp)

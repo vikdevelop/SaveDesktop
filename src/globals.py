@@ -11,7 +11,6 @@ def get_app_environment():
         return {
             'type': 'flatpak',
             'home': Path(os.getenv('HOME', Path.home())),
-            'version_suffix': '',
             'run_cmd': 'flatpak run io.github.vikdevelop.SaveDesktop'
         }
     
@@ -19,7 +18,6 @@ def get_app_environment():
         return {
             'type': 'snap',
             'home': Path(os.getenv('SNAP_REAL_HOME', os.getenv('HOME', Path.home()))),
-            'version_suffix': '-snap',
             'run_cmd': 'savedesktop'
         }
     
@@ -27,14 +25,12 @@ def get_app_environment():
         return {
             'type': 'native',
             'home': Path.home(),
-            'version_suffix': '-native', 
             'run_cmd': 'savedesktop'
         }
 
 env = get_app_environment()
 
 home = env['home']
-version = f"1.0.0{env['version_suffix']}"
 
 # System paths
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
@@ -54,10 +50,11 @@ sync_cmd = f'{env["run_cmd"]} --sync'
 flatpak = (env['type'] == 'flatpak')
 snap = (env['type'] == 'snap')
 
+app_prefix = os.environ.get('SAVEDESKTOP_DIR')
+
 # Export
 __all__ = [
     'home', 'download_dir', 'snap', 'flatpak', 'settings',
-    'DATA', 'CACHE', 'version',
-    'periodic_saving_cmd', 'sync_cmd'
+    'DATA', 'CACHE', 'app_prefix', 'periodic_saving_cmd', 'sync_cmd'
 ]
 

@@ -71,7 +71,7 @@ class PeriodicBackups:
         os.makedirs(f"{CACHE}/periodic_saving", exist_ok=True)
         os.chdir(f"{CACHE}/periodic_saving")
         os.system("echo > saving_status")
-        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
         print("creating the configuration archive")
         print("moving the configuration archive to the user-defined directory")

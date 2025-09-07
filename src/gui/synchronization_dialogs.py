@@ -191,7 +191,7 @@ class SetDialog(Adw.AlertDialog):
             self.file_row.set_subtitle(_("Please wait …"))
             self.file_row.set_use_markup(False)
             subprocess.run(['notify-send', 'SaveDesktop', _("Please wait …")])
-            subprocess.run([sys.executable, "savedesktop.core.periodic_saving", "--save-now"], check=True, env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+            subprocess.run([sys.executable, "savedesktop.core.periodic_saving", "--save-now"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         except Exception as e:
             e_o = True
             subprocess.run(['notify-send', _("An error occurred"), f'{e}'])
@@ -266,7 +266,7 @@ class SetDialog(Adw.AlertDialog):
         try:
             self.mount_type = "periodic-saving"
             open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
-            subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization_setup", "--automount-setup", self.mount_type], check=True, env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+            subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization_setup", "--automount-setup", self.mount_type], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         except Exception as e:
             os.system(f"notify-send \'{_('An error occurred')}\' '{e}'")
         finally:
@@ -410,7 +410,7 @@ class CloudDialog(Adw.AlertDialog):
                 settings["file-for-syncing"] = self.cfileRow.get_subtitle()
                 result = subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization_setup", "--checkfs"],
                            capture_output=True, text=True,
-                           env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+                           env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
                 if result.returncode == 0:
                     output = result.stdout.strip()
@@ -422,7 +422,7 @@ class CloudDialog(Adw.AlertDialog):
                     else:
                         subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization_setup",
                                        "--automount-setup", self.mount_type],
-                                       env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+                                       env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
             else:
                 raise AttributeError(_("You have not selected the cloud drive folder"))
         except Exception as e:

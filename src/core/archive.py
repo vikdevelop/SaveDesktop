@@ -26,7 +26,7 @@ class Create:
 
     def start_saving(self):
         self._cleanup_cache_dir()
-        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
         print("Creating and moving the configuration archive or folder to the user-defined directory")
 
@@ -91,7 +91,7 @@ class Unpack:
                 self._unpack_tar_archive()
 
         self._replace_home_in_files(".", home)
-        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--import_"], check=True, env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--import_"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
         self._remove_status_file()
 

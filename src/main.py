@@ -43,7 +43,7 @@ class SaveDesktopApp(Adw.Application):
         try:
             os.system(f'notify-send "{_("Please wait …")}"')
             os.system(f"echo > {CACHE}/.from_app")
-            subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization"], check=True, env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+            subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         except subprocess.CalledProcessError as e:
             GLib.idle_add(self.win.show_err_msg, e)
             self.toolbarview.set_content(self.headapp)

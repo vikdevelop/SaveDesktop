@@ -167,7 +167,7 @@ class Syncing:
     
     # Start importing a configuration from the configuration archive
     def import_config(self):
-        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": "/app/share/savedesktop"})
+        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         self.done()
     
     def done(self):
