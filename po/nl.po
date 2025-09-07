@@ -460,6 +460,7 @@ msgid "Save your desktop configuration"
 msgstr "Sla de huidige voorkeuren van uw werkomgeving op"
 
 # Translation key: description
+#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
 "Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
 msgstr ""
