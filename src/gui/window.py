@@ -87,7 +87,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.switcher_bar.set_stack(self.stack)
         self.toolbarview.add_bottom_bar(self.switcher_bar)
 
-        self.setup_switcher_responsive()
+        self.setup_switcher_responsive(status_box=False)
 
         # Toast Overlay for showing the popup window
         self.toast_overlay = Adw.ToastOverlay.new()
@@ -145,10 +145,15 @@ class MainWindow(Adw.ApplicationWindow):
             self.unsupp_label = Gtk.Label.new(str=f'<big>{_("<big><b>You have an unsupported environment installed.</b></big>\nPlease use one of these environments: {}.")}</big>'.format(', '.join(set(desktop_map.values())))); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
 
     # Switch between ViewSwitcherTitle and ViewSwitcherBar based on the title visible
-    def setup_switcher_responsive(self):
-        narrow_breakpoint = Adw.Breakpoint.new(
-            Adw.BreakpointCondition.parse("max-width: 400sp")
-        )
+    def setup_switcher_responsive(self, status_box):
+        if not status_box:
+            narrow_breakpoint = Adw.Breakpoint.new(
+                Adw.BreakpointCondition.parse("max-width: 400sp")
+            )
+        else:
+            narrow_breakpoint = Adw.Breakpoint.new(
+                Adw.BreakpointCondition.parse("min-width: 400sp")
+            )
 
         # When activating a narrow breakpoint, display the switcher_bar
         narrow_breakpoint.connect("apply",
@@ -285,16 +290,14 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Syncing desktop page
     def sync_desktop(self):
-        # Set showing the Initial synchronization setup dialog only if the periodic saving folder or cloud drive folder does not use GVFS or Rclone filesystem
-        settings["first-synchronization-setup"] = True if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") else False
-        language = locale.getlocale()[0].split("_")[0]
+        self._basic_setup()
 
         # Box, image and title for this page
         self.sync_btn_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.syncPage = Adw.StatusPage.new()
         self.syncPage.set_icon_name("view-refresh-symbolic")
         self.syncPage.set_title(_("Sync"))
-        self.syncPage.set_description(f'{_("Sync your desktop environment configuration with other computers in the network.")} <a href="{self.app_wiki}/synchronization/{language}">{_("Learn more")}</a>')
+        self.syncPage.set_description(f'{_("Sync your desktop environment configuration with other computers in the network.")} <a href="{self.app_wiki}/synchronization/{self.language}">{_("Learn more")}</a>')
         self.syncPage.set_child(self.sync_btn_box)
         self.syncingBox.append(self.syncPage)
 
@@ -316,6 +319,12 @@ class MainWindow(Adw.ApplicationWindow):
         self.getButton.set_valign(Gtk.Align.CENTER)
         self.getButton.set_halign(Gtk.Align.CENTER)
         self.sync_btn_box.append(self.getButton)
+
+    def _basic_setup(self):
+        # Set showing the Initial synchronization setup dialog only if the periodic saving folder or cloud drive folder does not use GVFS or Rclone filesystem
+        settings["first-synchronization-setup"] = True if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") else False
+        # Get language to show the wiki page in the correct ones
+        self.language = locale.getlocale()[0].split("_")[0]
 
     def _open_InitSetupDialog(self, w):
         self.__get_button_type(w)
@@ -339,7 +348,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.set_dialog.choose(self, None, None, None)
         self.set_dialog.present(self)
 
-    # Select folder for periodic backups (Gtk.FileDialog)
+    # Select folder for periodic saving
     def select_pb_folder(self, w):
         def save_selected(source, res, data):
             try:
@@ -505,134 +514,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.pswdEntry.add_suffix(self.pswdgenButton)
         self.pswdDialog.set_extra_child(self.pswdEntry)
 
-    # Save configuration
-    def save_config(self):
-        self.archive_mode = "--create"
-        self.archive_name = f"{self.folder}/{self.filename_text}"
-        self.please_wait_save()
-        save_thread = Thread(target=self._call_archive_command)
-        save_thread.start()
-
-    def _call_archive_command(self):
-        try:
-            subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
-        except subprocess.CalledProcessError as e:
-            GLib.idle_add(self.show_err_msg, e)
-            self.toolbarview.set_content(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(self.switcher_title.get_title_visible())
-        finally:
-            if self.archive_mode == "--create":
-                GLib.idle_add(self.exporting_done)
-            elif self.archive_mode == "--unpack":
-                GLib.idle_add(self.applying_done)
-            else:
-                pass
-
-    # "Please wait" information page on the "Save" page
-    def please_wait_save(self):
-        # Stop saving configuration
-        def cancel_save(w):
-            os.popen('pkill -f "savedesktop.core.config"')
-            os.popen(f"pkill -9 7z")
-            self.toolbarview.set_content(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
-            self.set_title("Save Desktop")
-            for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
-                self.savewaitBox.remove(widget)
-
-        self.headerbar.set_title_widget(None)
-        self.switcher_bar.set_reveal(False)
-
-        # Create box widget for this page
-        self.savewaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.savewaitBox.set_halign(Gtk.Align.CENTER)
-        self.savewaitBox.set_valign(Gtk.Align.CENTER)
-        self.toolbarview.set_content(self.savewaitBox)
-
-        # Set bold title
-        self.set_title(_("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n<i>{}/{}.sd.tar.gz</i>").split('</b>')[0].split('<b>')[-1])
-
-        # Create spinner for this page
-        self.savewaitSpinner = Gtk.Spinner.new()
-        self.savewaitSpinner.set_size_request(100, 100)
-        self.savewaitSpinner.start()
-        self.savewaitBox.append(self.savewaitSpinner)
-
-        # Prepare Gtk.Image widget for the next page
-        self.sdoneImage = Gtk.Image.new()
-        self.savewaitBox.append(self.sdoneImage)
-
-        # Use "sd.zip" if Archive Encryption is enabled
-        status_old = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n<i>{}/{}.sd.tar.gz</i>")
-        status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
-
-        # Create label about selected directory for saving the configuration
-        self.savewaitLabel = Gtk.Label.new(str=status.format(self.folder, self.filename_text))
-        self.savewaitLabel.set_use_markup(True)
-        self.savewaitLabel.set_justify(Gtk.Justification.CENTER)
-        self.savewaitLabel.set_wrap(True)
-        self.savewaitBox.append(self.savewaitLabel)
-
-        # Create button for cancel saving configuration
-        self.savewaitButton = Gtk.Button.new_with_label(_("Cancel"))
-        self.savewaitButton.add_css_class("pill")
-        self.savewaitButton.add_css_class("destructive-action")
-        self.savewaitButton.connect("clicked", cancel_save)
-        self.savewaitButton.set_valign(Gtk.Align.CENTER)
-        self.savewaitButton.set_halign(Gtk.Align.CENTER)
-        self.savewaitBox.append(self.savewaitButton)
-
-    # config has been saved action
-    def exporting_done(self):
-        # back to the previous page from this page
-        def back_to_main(w):
-            self.toolbarview.set_content(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
-            self.set_title("Save Desktop")
-            for widget in [self.savewaitSpinner, self.savewaitLabel, self.savewaitButton, self.sdoneImage, self.opensaveButton, self.backtomButton]:
-                self.savewaitBox.remove(widget)
-
-        # send notification about saved configuration if application window is inactive only
-        self.notification_save = Gio.Notification.new("SaveDesktop")
-        self.notification_save.set_body(_("Configuration has been saved!"))
-        app = self.get_application()
-        active_window = app.get_active_window()
-        if active_window is None or not active_window.is_active():
-            app.send_notification(None, self.notification_save)
-
-        # stop spinner animation
-        self.savewaitSpinner.stop()
-        self.savewaitBox.remove(self.savewaitButton)
-        self.savewaitBox.remove(self.savewaitSpinner)
-
-        # set title to "Configuration has been saved!"
-        self.set_title(_("Configuration has been saved!"))
-
-        # use widget for showing done.svg icon
-        self.sdoneImage.set_from_icon_name("done")
-        self.sdoneImage.set_pixel_size(128)
-
-        # edit label for the purposes of this page
-        self.savewaitLabel.set_label(_("<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.").format(_("Configuration has been saved!")))
-        self.opensaveButton = Gtk.Button.new_with_label(_("Open the folder"))
-        self.opensaveButton.add_css_class('pill')
-        self.opensaveButton.add_css_class('suggested-action')
-        self.opensaveButton.set_action_name("app.open_dir")
-        self.opensaveButton.set_valign(Gtk.Align.CENTER)
-        self.opensaveButton.set_halign(Gtk.Align.CENTER)
-        self.savewaitBox.append(self.opensaveButton)
-
-        # create button for backing to the previous page
-        self.backtomButton = Gtk.Button.new_with_label(_("Back to previous page"))
-        self.backtomButton.connect("clicked", back_to_main)
-        self.backtomButton.add_css_class("pill")
-        self.backtomButton.set_valign(Gtk.Align.CENTER)
-        self.backtomButton.set_halign(Gtk.Align.CENTER)
-        self.savewaitBox.append(self.backtomButton)
-
     # dialog for entering password of the archive
     def check_password_dialog(self):
         # action after closing dialog for checking password
@@ -659,11 +540,36 @@ class MainWindow(Adw.ApplicationWindow):
         self.checkEntry.set_title(_("Password"))
         self.checkDialog.set_extra_child(self.checkEntry)
 
+    # Save configuration
+    def save_config(self):
+        self.archive_mode = "--create"
+        self.archive_name = f"{self.folder}/{self.filename_text}"
+        self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n<i>{}/{}.sd.tar.gz</i>").split('</b>')[0].split('<b>')[-1]
+        self.status_desc = self._set_status_desc_save()
+        self.done_title = _("Configuration has been saved!")
+        self.done_desc = _("<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.").format(_("Configuration has been saved!"))
+
+        self.please_wait()
+        save_thread = Thread(target=self._call_archive_command)
+        save_thread.start()
+
+    def _set_status_desc_save(self):
+        # Use "sd.zip" if Archive Encryption is enabled
+        status_old = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n<i>{}/{}.sd.tar.gz</i>")
+        status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
+        return status.format(self.folder, self.filename_text)
+
     # Import configuration
     def import_config(self):
-        self.archive_mode = "--unpack"
         self._identify_file_type()
-        self.please_wait_import()
+
+        self.archive_mode = "--unpack"
+        self.status_title = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>").split('</b>')[0].split('<b>')[-1]
+        self.status_desc = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>").format(self.archive_name)
+        self.done_title = _("The configuration has been applied!")
+        self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.").format(_("The configuration has been applied!"))
+
+        self.please_wait()
         import_thread = Thread(target=self._call_archive_command)
         import_thread.start()
 
@@ -673,113 +579,132 @@ class MainWindow(Adw.ApplicationWindow):
         except:
             self.archive_name = self.import_file
 
-    # "Please wait" information on the "Import" page
-    def please_wait_import(self):
-        # Stop importing configuration
-        def cancel_import(w):
-            os.popen("pkill -9 7z")
-            os.popen("pkill -9 tar")
-            os.popen('pkill -f "savedesktop.core.config"')
+    def _call_archive_command(self):
+        try:
+            subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        except subprocess.CalledProcessError as e:
+            GLib.idle_add(self.show_err_msg, e)
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
-            self.set_title("Save Desktop")
-            for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]:
-                self.importwaitBox.remove(widget)
+            self.switcher_bar.set_reveal(self.switcher_title.get_title_visible())
+        finally:
+            GLib.idle_add(self.done)
 
-        # Add new headerbar for this page
+    # "Please wait" information page on the "Save" page
+    def please_wait(self):
+        # Stop saving configuration
+        def cancel(w):
+            os.popen('pkill -f "savedesktop.core.config"')
+            os.popen('pkill -9 7z')
+            os.popen('pkill -9 tar')
+            self.toolbarview.set_content(self.headapp)
+            self.headerbar.set_title_widget(self.switcher_title)
+            self.set_title("Save Desktop")
+            self.setup_switcher_responsive(status_box=False)
+            for widget in [self.spinner, self.cancel_button, self.status_page]:
+                self.status_box.remove(widget)
+
         self.headerbar.set_title_widget(None)
         self.switcher_bar.set_reveal(False)
 
+        self.setup_switcher_responsive(status_box=True)
+
         # Create box widget for this page
-        self.importwaitBox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.importwaitBox.set_halign(Gtk.Align.CENTER)
-        self.importwaitBox.set_valign(Gtk.Align.CENTER)
-        self.toolbarview.set_content(self.importwaitBox)
+        self.status_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+        self.status_box.set_halign(Gtk.Align.CENTER)
+        self.status_box.set_valign(Gtk.Align.CENTER)
+        self.status_box.set_size_request(350, 100)
+        self.toolbarview.set_content(self.status_box)
 
         # Set bold title
-        self.set_title(_("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>").split('</b>')[0].split('<b>')[-1])
+        self.set_title(self.status_title)
 
         # Create spinner for this page
-        self.importwaitSpinner = Gtk.Spinner.new()
-        self.importwaitSpinner.set_size_request(100, 100)
-        self.importwaitSpinner.start()
-        self.importwaitBox.append(self.importwaitSpinner)
+        self.spinner = Gtk.Spinner.new()
+        self.spinner.set_size_request(100, 100)
+        self.spinner.start()
+        self.status_box.append(self.spinner)
 
-        # Prepare Gtk.Image widget for this page
-        self.idoneImage = Gtk.Image.new()
-        self.importwaitBox.append(self.idoneImage)
+        # Adw.StatusPage()
+        self.status_page = Adw.StatusPage.new()
+        self.status_page.set_description(self.status_desc)
+        self.status_box.append(self.status_page)
 
-        # Create label about configuration archive name
-        try:
-            self.importwaitLabel = Gtk.Label.new(str=_("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>").format(self.import_file))
-        except:
-            self.importwaitLabel = Gtk.Label.new(str=_("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>").format(self.import_folder))
-        self.importwaitLabel.set_use_markup(True)
-        self.importwaitLabel.set_justify(Gtk.Justification.CENTER)
-        self.importwaitLabel.set_wrap(True)
-        self.importwaitBox.append(self.importwaitLabel)
+        # Create button for cancel saving configuration
+        self.cancel_button = Gtk.Button.new_with_label(_("Cancel"))
+        self.cancel_button.add_css_class("pill")
+        self.cancel_button.add_css_class("destructive-action")
+        self.cancel_button.connect("clicked", cancel)
+        self.cancel_button.set_valign(Gtk.Align.CENTER)
+        self.cancel_button.set_halign(Gtk.Align.CENTER)
+        self.status_box.append(self.cancel_button)
 
-        # Create button for canceling importing configuration
-        self.importwaitButton = Gtk.Button.new_with_label(_("Cancel"))
-        self.importwaitButton.add_css_class("pill")
-        self.importwaitButton.add_css_class("destructive-action")
-        self.importwaitButton.connect("clicked", cancel_import)
-        self.importwaitButton.set_halign(Gtk.Align.CENTER)
-        self.importwaitButton.set_valign(Gtk.Align.CENTER)
-        self.importwaitBox.append(self.importwaitButton)
-
-    # Config has been imported action
-    def applying_done(self):
+    # config has been saved action
+    def done(self):
         # back to the previous page from this page
         def back_to_main(w):
             self.toolbarview.set_content(self.headapp)
+            self.setup_switcher_responsive(status_box=False)
             self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(True if self.switcher_title.get_title_visible() else False)
             self.set_title("Save Desktop")
-            [self.importwaitBox.remove(widget) for widget in [self.importwaitSpinner, self.importwaitLabel, self.importwaitButton, self.idoneImage, self.logoutButton, self.backtomButton]]
-            if hasattr(self, 'flistBox'):
-                self.pBox.remove(self.flistBox)
+            for widget in [self.status_page, self.open_folder_button, self.logout_button, self.back_button]:
+                self.status_box.remove(widget)
 
-        # send notification about imported configuration if application window is inactive only
-        self.notification_import = Gio.Notification.new("Save Desktop")
-        self.notification_import.set_body(_("The configuration has been applied!"))
+        self._send_notification()
+
+        # stop spinner animation
+        self.spinner.stop()
+        self.status_box.remove(self.cancel_button)
+        self.status_box.remove(self.spinner)
+
+        # set title to "Configuration has been saved!"
+        self.set_title(self.done_title)
+
+        # Adw.StatusPage()
+        self.status_page.set_icon_name("done")
+        self.status_page.set_description(self.done_desc)
+
+        # Box layout for the buttons below
+        self.buttons_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        self.status_page.set_child(self.buttons_box)
+
+        self._add_specific_button()
+
+        # create button for backing to the previous page
+        self.back_button = Gtk.Button.new_with_label(_("Back to previous page"))
+        self.back_button.connect("clicked", back_to_main)
+        self.back_button.add_css_class("pill")
+        self.back_button.set_valign(Gtk.Align.CENTER)
+        self.back_button.set_halign(Gtk.Align.CENTER)
+        self.buttons_box.append(self.back_button)
+
+    # send notification about saved configuration if application window is inactive only
+    def _send_notification(self):
+        self.notification_save = Gio.Notification.new("SaveDesktop")
+        self.notification_save.set_body(self.done_title)
         app = self.get_application()
         active_window = app.get_active_window()
         if active_window is None or not active_window.is_active():
-            app.send_notification(None, self.notification_import)
+            app.send_notification(None, self.notification_save)
 
-        # stop spinner animation
-        self.importwaitSpinner.stop()
-        self.importwaitBox.remove(self.importwaitButton)
-        self.importwaitBox.remove(self.importwaitSpinner)
-
-        # set title to "Configuration has been applied!"
-        self.set_title(_("The configuration has been applied!"))
-
-        # widget for showing done.svg icon
-        self.idoneImage.set_from_icon_name("done")
-        self.idoneImage.set_pixel_size(128)
-
-        # edit label for the purposes of this page
-        self.importwaitLabel.set_label(_("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.").format(_("The configuration has been applied!")))
-
-        # create button for loging out of the system
-        self.logoutButton = Gtk.Button.new_with_label(_("Log Out"))
-        self.logoutButton.add_css_class('pill')
-        self.logoutButton.add_css_class('suggested-action')
-        self.logoutButton.set_halign(Gtk.Align.CENTER)
-        self.logoutButton.set_valign(Gtk.Align.CENTER)
-        self.logoutButton.set_action_name("app.logout")
-        self.importwaitBox.append(self.logoutButton) if not (flatpak and self.environment == "Hyprland") else None
-
-        # create button for backing to the previous page
-        self.backtomButton = Gtk.Button.new_with_label(_("Back to previous page"))
-        self.backtomButton.connect("clicked", back_to_main)
-        self.backtomButton.add_css_class("pill")
-        self.backtomButton.set_halign(Gtk.Align.CENTER)
-        self.backtomButton.set_valign(Gtk.Align.CENTER)
-        self.importwaitBox.append(self.backtomButton)
+    def _add_specific_button(self):
+        if self.archive_mode == "--create":
+            self.open_folder_button = Gtk.Button.new_with_label(_("Open the folder"))
+            self.open_folder_button.add_css_class('pill')
+            self.open_folder_button.add_css_class('suggested-action')
+            self.open_folder_button.set_action_name("app.open_dir")
+            self.open_folder_button.set_valign(Gtk.Align.CENTER)
+            self.open_folder_button.set_halign(Gtk.Align.CENTER)
+            self.buttons_box.append(self.open_folder_button)
+        elif self.archive_mode == "--unpack":
+            self.logout_button = Gtk.Button.new_with_label(_("Log Out"))
+            self.logout_button.add_css_class('pill')
+            self.logout_button.add_css_class('suggested-action')
+            self.logout_button.set_halign(Gtk.Align.CENTER)
+            self.logout_button.set_valign(Gtk.Align.CENTER)
+            self.logout_button.set_action_name("app.logout")
+            if not (flatpak and self.environment == "Hyprland"):
+                self.buttons_box.append(self.logout_button)
 
     # show message dialog in the error case
     def show_err_msg(self, error):

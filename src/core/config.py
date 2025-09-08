@@ -207,7 +207,7 @@ class Import:
         elif environment:
             print(f"Importing environment-specific config for: {environment['de_name']}")
             for src, dst in environment["dirs"]:
-                safe_copytree(dst, os.path.join(home, src))
+                safe_copytree(dst, src)
         else:
             print(f"[WARN] Unknown DE: {environment_key}")
         
