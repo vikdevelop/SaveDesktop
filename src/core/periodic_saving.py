@@ -1,4 +1,4 @@
-import argparse, json, os, gi, shutil, subprocess
+import argparse, json, os, gi, shutil, subprocess, sys
 from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio

@@ -89,7 +89,7 @@ msgstr "更改仅在下次登录后生效"
 
 # Translation key: pb_interval
 msgid "Interval"
-msgstr "Interval"
+msgstr ""
 
 # Translation key: never
 msgid "Never"
@@ -336,7 +336,7 @@ msgstr ""
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 # Translation key: almost_done_title
 msgid "Almost done!"
@@ -366,7 +366,7 @@ msgstr "定期保存文件"
 
 # Translation key: periodic_saving_file_err
 msgid "Periodic saving file does not exist."
-msgstr "Periodic saving file does not exist."
+msgstr ""
 
 # Translation key: create
 msgid "Create"
@@ -405,7 +405,7 @@ msgstr "周期性同步"
 
 # Translation key: bidirectional_sync
 msgid "Bidirectional synchronization"
-msgstr "Bidirectional synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync_desc
 msgid ""

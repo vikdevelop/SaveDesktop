@@ -52,11 +52,11 @@ msgstr "Achtergronden"
 
 # Translation key: extensions
 msgid "Extensions"
-msgstr "Extensions"
+msgstr ""
 
 # Translation key: desktop_folder
 msgid "Desktop"
-msgstr "Desktop"
+msgstr ""
 
 # Translation key: save_installed_flatpaks
 msgid "Flatpak apps"
@@ -64,7 +64,7 @@ msgstr "Flatpaktoepassingen"
 
 # Translation key: list
 msgid "List of installed Flatpak apps"
-msgstr "List of installed Flatpak apps"
+msgstr ""
 
 # Translation key: user_data_flatpak
 msgid "User data of installed Flatpak apps"
@@ -72,12 +72,12 @@ msgstr "Gebruikersgegevens van geïnstalleerde Flatpaktoepassingen"
 
 # Translation key: flatpaks_data_tittle
 msgid "Flatpak apps data selection"
-msgstr "Flatpak apps data selection"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui
 # Translation key: more_options
 msgid "More options"
-msgstr "More options"
+msgstr ""
 
 # Translation key: periodic_saving
 msgid "Periodic saving"
@@ -89,7 +89,7 @@ msgstr "Meld u opnieuw aan om de wĳzigingen toe te passen"
 
 # Translation key: pb_interval
 msgid "Interval"
-msgstr "Interval"
+msgstr ""
 
 # Translation key: never
 msgid "Never"
@@ -137,15 +137,15 @@ msgstr "Standaardwaarden"
 
 # Translation key: pwd_for_encryption
 msgid "Password for encryption"
-msgstr "Password for encryption"
+msgstr ""
 
 # Translation key: manual_saving
 msgid "Manual saving"
-msgstr "Manual saving"
+msgstr ""
 
 # Translation key: archive_encryption
 msgid "Archive encryption"
-msgstr "Archive encryption"
+msgstr ""
 
 # Translation key: archive_encryption_desc
 msgid ""
@@ -155,11 +155,11 @@ msgstr ""
 
 # Translation key: save_without_archive
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 # Translation key: create_pwd_title
 msgid "Create new password"
-msgstr "Create new password"
+msgstr ""
 
 # Translation key: create_pwd_desc
 msgid ""
@@ -169,15 +169,15 @@ msgstr ""
 
 # Translation key: gen_password
 msgid "Generate Password"
-msgstr "Generate Password"
+msgstr ""
 
 # Translation key: password_entry
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 # Translation key: check_pwd_title
 msgid "Unlock the archive with a password"
-msgstr "Unlock the archive with a password"
+msgstr ""
 
 # Translation key: check_pwd_desc
 msgid ""
@@ -199,11 +199,11 @@ msgstr ""
 
 # Translation key: remember_password
 msgid "Remember Password"
-msgstr "Remember Password"
+msgstr ""
 
 # Translation key: password_store_err
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
 
 # Translation key: saving_config_status
 msgid ""
@@ -240,7 +240,7 @@ msgstr "Importeren uit bestand"
 
 # Translation key: import_from_folder
 msgid "Import from folder"
-msgstr "Import from folder"
+msgstr ""
 
 # Translation key: cancel
 msgid "Cancel"
@@ -268,7 +268,7 @@ msgstr ""
 
 # Translation key: back_to_page
 msgid "Back to previous page"
-msgstr "Back to previous page"
+msgstr ""
 
 # Translation key: logout
 msgid "Log Out"
@@ -276,7 +276,7 @@ msgstr "Afmelden"
 
 # Translation key: err_occured
 msgid "An error occurred"
-msgstr "An error occurred"
+msgstr ""
 
 # Translation key: apply
 msgid "Apply"
@@ -294,15 +294,15 @@ msgstr ""
 
 # Translation key: initial_setup
 msgid "Initial synchronization setup"
-msgstr "Initial synchronization setup"
+msgstr ""
 
 # Translation key: gnome_oa_settings
 msgid "1. Open the system settings"
-msgstr "1. Open the system settings"
+msgstr ""
 
 # Translation key: gnome_oa_section
 msgid "2. Go to the Online Accounts section"
-msgstr "2. Go to the Online Accounts section"
+msgstr ""
 
 # Translation key: gnome_oa_section_desc
 msgid ""
@@ -312,7 +312,7 @@ msgstr ""
 
 # Translation key: gnome_oa_chooser
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr "3. Click on the Next button and select the created cloud drive folder"
+msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
 msgid ""
@@ -340,11 +340,11 @@ msgstr ""
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 # Translation key: almost_done_title
 msgid "Almost done!"
-msgstr "Almost done!"
+msgstr ""
 
 # Translation key: almost_done_desc
 msgid ""
@@ -354,11 +354,11 @@ msgstr ""
 
 # Translation key: select
 msgid "Select"
-msgstr "Select"
+msgstr ""
 
 # Translation key: next
 msgid "Next"
-msgstr "Next"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:71
 # Translation key: set_up_sync_file
@@ -371,11 +371,11 @@ msgstr "Periodiek opgeslagen bestand"
 
 # Translation key: periodic_saving_file_err
 msgid "Periodic saving file does not exist."
-msgstr "Periodic saving file does not exist."
+msgstr ""
 
 # Translation key: create
 msgid "Create"
-msgstr "Create"
+msgstr ""
 
 # Translation key: please_wait
 msgid "Please wait …"
@@ -383,12 +383,12 @@ msgstr "Even geduld…"
 
 # Translation key: change
 msgid "Change"
-msgstr "Change"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:78
 # Translation key: connect_cloud_storage
 msgid "Connect to the cloud storage"
-msgstr "Connect to the cloud storage"
+msgstr ""
 
 # Translation key: connect_cloud_storage_desc
 msgid ""
@@ -398,11 +398,11 @@ msgstr ""
 
 # Translation key: select_cloud_folder_btn
 msgid "Select the cloud drive folder"
-msgstr "Select the cloud drive folder"
+msgstr ""
 
 # Translation key: cloud_folder_err
 msgid "You didn't select the cloud drive folder!"
-msgstr "You didn't select the cloud drive folder!"
+msgstr ""
 
 # Translation key: periodic_sync
 msgid "Periodic synchronization"
@@ -410,7 +410,7 @@ msgstr "Periodieke synchronisatie"
 
 # Translation key: bidirectional_sync
 msgid "Bidirectional synchronization"
-msgstr "Bidirectional synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync_desc
 msgid ""
@@ -426,22 +426,22 @@ msgstr ""
 #: src/gui/shortcuts_window.ui:50
 # Translation key: sync_manually
 msgid "Synchronise manually"
-msgstr "Synchronise manually"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:36
 # Translation key: keyboard_shortcuts
 msgid "Keyboard shortcuts"
-msgstr "Keyboard shortcuts"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:15
 # Translation key: open_wiki
 msgid "Open the application wiki"
-msgstr "Open the application wiki"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:43
 # Translation key: quit
 msgid "Quit"
-msgstr "Quit"
+msgstr ""
 
 # Translation key: about_app
 msgid "About app"

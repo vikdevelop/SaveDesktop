@@ -52,7 +52,7 @@ msgstr "Fonds d'écran"
 
 # Translation key: extensions
 msgid "Extensions"
-msgstr "Extensions"
+msgstr ""
 
 # Translation key: desktop_folder
 msgid "Desktop"
@@ -137,11 +137,11 @@ msgstr "Réinitialisation aux valeurs par défaut"
 
 # Translation key: pwd_for_encryption
 msgid "Password for encryption"
-msgstr "Password for encryption"
+msgstr ""
 
 # Translation key: manual_saving
 msgid "Manual saving"
-msgstr "Manual saving"
+msgstr ""
 
 # Translation key: archive_encryption
 msgid "Archive encryption"
@@ -155,7 +155,7 @@ msgstr ""
 
 # Translation key: save_without_archive
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 # Translation key: create_pwd_title
 msgid "Create new password"
@@ -169,7 +169,7 @@ msgstr ""
 
 # Translation key: gen_password
 msgid "Generate Password"
-msgstr "Generate Password"
+msgstr ""
 
 # Translation key: password_entry
 msgid "Password"
@@ -199,11 +199,11 @@ msgstr ""
 
 # Translation key: remember_password
 msgid "Remember Password"
-msgstr "Remember Password"
+msgstr ""
 
 # Translation key: password_store_err
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
 
 # Translation key: saving_config_status
 msgid ""
@@ -240,7 +240,7 @@ msgstr "Importer à partir d'un fichier"
 
 # Translation key: import_from_folder
 msgid "Import from folder"
-msgstr "Import from folder"
+msgstr ""
 
 # Translation key: cancel
 msgid "Cancel"
@@ -294,15 +294,15 @@ msgstr ""
 
 # Translation key: initial_setup
 msgid "Initial synchronization setup"
-msgstr "Initial synchronization setup"
+msgstr ""
 
 # Translation key: gnome_oa_settings
 msgid "1. Open the system settings"
-msgstr "1. Open the system settings"
+msgstr ""
 
 # Translation key: gnome_oa_section
 msgid "2. Go to the Online Accounts section"
-msgstr "2. Go to the Online Accounts section"
+msgstr ""
 
 # Translation key: gnome_oa_section_desc
 msgid ""
@@ -312,7 +312,7 @@ msgstr ""
 
 # Translation key: gnome_oa_chooser
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr "3. Click on the Next button and select the created cloud drive folder"
+msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
 msgid ""
@@ -340,11 +340,11 @@ msgstr ""
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 # Translation key: almost_done_title
 msgid "Almost done!"
-msgstr "Almost done!"
+msgstr ""
 
 # Translation key: almost_done_desc
 msgid ""
@@ -354,11 +354,11 @@ msgstr ""
 
 # Translation key: select
 msgid "Select"
-msgstr "Select"
+msgstr ""
 
 # Translation key: next
 msgid "Next"
-msgstr "Next"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:71
 # Translation key: set_up_sync_file
@@ -371,11 +371,11 @@ msgstr "Fichier pour l'enregistrement périodique"
 
 # Translation key: periodic_saving_file_err
 msgid "Periodic saving file does not exist."
-msgstr "Periodic saving file does not exist."
+msgstr ""
 
 # Translation key: create
 msgid "Create"
-msgstr "Create"
+msgstr ""
 
 # Translation key: please_wait
 msgid "Please wait …"
@@ -383,12 +383,12 @@ msgstr "Veuillez patienter …"
 
 # Translation key: change
 msgid "Change"
-msgstr "Change"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:78
 # Translation key: connect_cloud_storage
 msgid "Connect to the cloud storage"
-msgstr "Connect to the cloud storage"
+msgstr ""
 
 # Translation key: connect_cloud_storage_desc
 msgid ""
@@ -398,11 +398,11 @@ msgstr ""
 
 # Translation key: select_cloud_folder_btn
 msgid "Select the cloud drive folder"
-msgstr "Select the cloud drive folder"
+msgstr ""
 
 # Translation key: cloud_folder_err
 msgid "You didn't select the cloud drive folder!"
-msgstr "You didn't select the cloud drive folder!"
+msgstr ""
 
 # Translation key: periodic_sync
 msgid "Periodic synchronization"
@@ -410,7 +410,7 @@ msgstr "Synchronisation périodique"
 
 # Translation key: bidirectional_sync
 msgid "Bidirectional synchronization"
-msgstr "Bidirectional synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync_desc
 msgid ""
@@ -436,7 +436,7 @@ msgstr "Raccourcis clavier"
 #: src/gui/shortcuts_window.ui:15
 # Translation key: open_wiki
 msgid "Open the application wiki"
-msgstr "Open the application wiki"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:43
 # Translation key: quit

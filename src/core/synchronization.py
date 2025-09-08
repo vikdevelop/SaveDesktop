@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from pathlib import Path
 from datetime import datetime, date, timedelta
-import subprocess, os, locale, json, gi, socket, shutil, zipfile, tarfile, re
+import subprocess, os, locale, json, sys, gi, socket, shutil, zipfile, tarfile, re
 from gi.repository import Gio, GLib
 from savedesktop.globals import *
 from savedesktop.core.password_store import *

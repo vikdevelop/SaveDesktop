@@ -56,7 +56,7 @@ msgstr "Estensioni"
 
 # Translation key: desktop_folder
 msgid "Desktop"
-msgstr "Desktop"
+msgstr ""
 
 # Translation key: save_installed_flatpaks
 msgid "Flatpak apps"
@@ -173,7 +173,7 @@ msgstr "Genera Password"
 
 # Translation key: password_entry
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 # Translation key: check_pwd_title
 msgid "Unlock the archive with a password"

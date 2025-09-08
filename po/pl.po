@@ -28,11 +28,11 @@ msgstr "Ustaw nazwę pliku"
 #: src/gui/shortcuts_window.ui:64
 # Translation key: items_for_archive
 msgid "Items to include in the configuration archive"
-msgstr "Items to include in the configuration archive"
+msgstr ""
 
 # Translation key: items_desc
 msgid "These settings also apply to periodic saving"
-msgstr "These settings also apply to periodic saving"
+msgstr ""
 
 # Translation key: icons
 msgid "Icons"
@@ -64,15 +64,15 @@ msgstr "Aplikacje Flatpak"
 
 # Translation key: list
 msgid "List of installed Flatpak apps"
-msgstr "List of installed Flatpak apps"
+msgstr ""
 
 # Translation key: user_data_flatpak
 msgid "User data of installed Flatpak apps"
-msgstr "User data of installed Flatpak apps"
+msgstr ""
 
 # Translation key: flatpaks_data_tittle
 msgid "Flatpak apps data selection"
-msgstr "Flatpak apps data selection"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui
 # Translation key: more_options
@@ -81,15 +81,15 @@ msgstr "Więcej opcji"
 
 # Translation key: periodic_saving
 msgid "Periodic saving"
-msgstr "Periodic saving"
+msgstr ""
 
 # Translation key: periodic_saving_desc
 msgid "Changes will only take effect after the next login"
-msgstr "Changes will only take effect after the next login"
+msgstr ""
 
 # Translation key: pb_interval
 msgid "Interval"
-msgstr "Interval"
+msgstr ""
 
 # Translation key: never
 msgid "Never"
@@ -117,11 +117,11 @@ msgstr "Dowiedz się więcej"
 
 # Translation key: pb_folder
 msgid "Folder for periodic saving"
-msgstr "Folder for periodic saving"
+msgstr ""
 
 # Translation key: set_pb_folder_tooltip
 msgid "Choose custom folder for periodic saving"
-msgstr "Choose custom folder for periodic saving"
+msgstr ""
 
 # Translation key: set_another
 msgid "Choose another folder"
@@ -145,7 +145,7 @@ msgstr "Ręczne zapisywanie"
 
 # Translation key: archive_encryption
 msgid "Archive encryption"
-msgstr "Archive encryption"
+msgstr ""
 
 # Translation key: archive_encryption_desc
 msgid ""
@@ -155,7 +155,7 @@ msgstr ""
 
 # Translation key: save_without_archive
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 # Translation key: create_pwd_title
 msgid "Create new password"
@@ -177,7 +177,7 @@ msgstr "Hasło"
 
 # Translation key: check_pwd_title
 msgid "Unlock the archive with a password"
-msgstr "Unlock the archive with a password"
+msgstr ""
 
 # Translation key: check_pwd_desc
 msgid ""
@@ -203,7 +203,7 @@ msgstr "Zapamiętaj hasło"
 
 # Translation key: password_store_err
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
 
 # Translation key: saving_config_status
 msgid ""
@@ -258,7 +258,7 @@ msgstr ""
 
 # Translation key: config_imported
 msgid "The configuration has been applied!"
-msgstr "The configuration has been applied!"
+msgstr ""
 
 # Translation key: config_imported_desc
 msgid ""
@@ -294,15 +294,15 @@ msgstr ""
 
 # Translation key: initial_setup
 msgid "Initial synchronization setup"
-msgstr "Initial synchronization setup"
+msgstr ""
 
 # Translation key: gnome_oa_settings
 msgid "1. Open the system settings"
-msgstr "1. Open the system settings"
+msgstr ""
 
 # Translation key: gnome_oa_section
 msgid "2. Go to the Online Accounts section"
-msgstr "2. Go to the Online Accounts section"
+msgstr ""
 
 # Translation key: gnome_oa_section_desc
 msgid ""
@@ -312,7 +312,7 @@ msgstr ""
 
 # Translation key: gnome_oa_chooser
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr "3. Click on the Next button and select the created cloud drive folder"
+msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
 msgid ""
@@ -340,11 +340,11 @@ msgstr ""
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 # Translation key: almost_done_title
 msgid "Almost done!"
-msgstr "Almost done!"
+msgstr ""
 
 # Translation key: almost_done_desc
 msgid ""
@@ -363,15 +363,15 @@ msgstr "Dalej"
 #: src/gui/shortcuts_window.ui:71
 # Translation key: set_up_sync_file
 msgid "Set up the sync file"
-msgstr "Set up the sync file"
+msgstr ""
 
 # Translation key: periodic_saving_file
 msgid "Periodic saving file"
-msgstr "Periodic saving file"
+msgstr ""
 
 # Translation key: periodic_saving_file_err
 msgid "Periodic saving file does not exist."
-msgstr "Periodic saving file does not exist."
+msgstr ""
 
 # Translation key: create
 msgid "Create"
@@ -388,7 +388,7 @@ msgstr "Zmień"
 #: src/gui/shortcuts_window.ui:78
 # Translation key: connect_cloud_storage
 msgid "Connect to the cloud storage"
-msgstr "Connect to the cloud storage"
+msgstr ""
 
 # Translation key: connect_cloud_storage_desc
 msgid ""
@@ -398,19 +398,19 @@ msgstr ""
 
 # Translation key: select_cloud_folder_btn
 msgid "Select the cloud drive folder"
-msgstr "Select the cloud drive folder"
+msgstr ""
 
 # Translation key: cloud_folder_err
 msgid "You didn't select the cloud drive folder!"
-msgstr "You didn't select the cloud drive folder!"
+msgstr ""
 
 # Translation key: periodic_sync
 msgid "Periodic synchronization"
-msgstr "Periodic synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync
 msgid "Bidirectional synchronization"
-msgstr "Bidirectional synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync_desc
 msgid ""
@@ -420,7 +420,7 @@ msgstr ""
 
 # Translation key: m_sync_desc
 msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr "From now on, you can sync the config from the menu in the header bar"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:50
 # Translation key: sync_manually
@@ -435,7 +435,7 @@ msgstr "Skróty klawiszowe"
 #: src/gui/shortcuts_window.ui:15
 # Translation key: open_wiki
 msgid "Open the application wiki"
-msgstr "Open the application wiki"
+msgstr ""
 
 #: src/gui/shortcuts_window.ui:43
 # Translation key: quit

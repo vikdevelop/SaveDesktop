@@ -89,7 +89,7 @@ msgstr "Změny se projeví až po dalším přihlášení"
 
 # Translation key: pb_interval
 msgid "Interval"
-msgstr "Interval"
+msgstr ""
 
 # Translation key: never
 msgid "Never"
@@ -226,7 +226,7 @@ msgstr "Otevřít složku"
 
 # Translation key: import_title
 msgid "Import"
-msgstr "Import"
+msgstr ""
 
 # Translation key: import_config
 msgid "Import saved configuration"

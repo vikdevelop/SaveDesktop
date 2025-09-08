@@ -137,11 +137,11 @@ msgstr "Restablecer los valores por defecto"
 
 # Translation key: pwd_for_encryption
 msgid "Password for encryption"
-msgstr "Password for encryption"
+msgstr ""
 
 # Translation key: manual_saving
 msgid "Manual saving"
-msgstr "Manual saving"
+msgstr ""
 
 # Translation key: archive_encryption
 msgid "Archive encryption"
@@ -155,7 +155,7 @@ msgstr ""
 
 # Translation key: save_without_archive
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 # Translation key: create_pwd_title
 msgid "Create new password"
@@ -199,11 +199,11 @@ msgstr ""
 
 # Translation key: remember_password
 msgid "Remember Password"
-msgstr "Remember Password"
+msgstr ""
 
 # Translation key: password_store_err
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
 
 # Translation key: saving_config_status
 msgid ""
@@ -240,7 +240,7 @@ msgstr "Importar desde archivo"
 
 # Translation key: import_from_folder
 msgid "Import from folder"
-msgstr "Import from folder"
+msgstr ""
 
 # Translation key: cancel
 msgid "Cancel"
@@ -341,7 +341,7 @@ msgstr ""
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 # Translation key: almost_done_title
 msgid "Almost done!"
