@@ -87,7 +87,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.switcher_bar.set_stack(self.stack)
         self.toolbarview.add_bottom_bar(self.switcher_bar)
 
-        self.setup_switcher_responsive(status_box=False)
+        self.setup_switcher_responsive()
 
         # Toast Overlay for showing the popup window
         self.toast_overlay = Adw.ToastOverlay.new()
@@ -145,28 +145,27 @@ class MainWindow(Adw.ApplicationWindow):
             self.unsupp_label = Gtk.Label.new(str=f'<big>{_("<big><b>You have an unsupported environment installed.</b></big>\nPlease use one of these environments: {}.")}</big>'.format(', '.join(set(desktop_map.values())))); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
 
     # Switch between ViewSwitcherTitle and ViewSwitcherBar based on the title visible
-    def setup_switcher_responsive(self, status_box):
-        if not status_box:
-            narrow_breakpoint = Adw.Breakpoint.new(
-                Adw.BreakpointCondition.parse("max-width: 400sp")
-            )
-        else:
-            narrow_breakpoint = Adw.Breakpoint.new(
-                Adw.BreakpointCondition.parse("min-width: 400sp")
-            )
+    def setup_switcher_responsive(self):
+        self.break_point = Adw.Breakpoint.new(
+            Adw.BreakpointCondition.parse("max-width: 400sp")
+        )
 
         # When activating a narrow breakpoint, display the switcher_bar
-        narrow_breakpoint.connect("apply",
-            lambda bp: self.switcher_bar.set_reveal(True))
+        self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
 
         # Hide switcher_bar when narrow breakpoint is deactivated
-        narrow_breakpoint.connect("unapply",
-            lambda bp: self.switcher_bar.set_reveal(False))
+        self.unapply_handler = self.break_point.connect("unapply", self.__on_break_point_unapply)
 
         # Add a breakpoint to the window
-        self.add_breakpoint(narrow_breakpoint)
+        self.add_breakpoint(self.break_point)
 
         # Default state - hidden (only displayed when the breakpoint is met)
+        self.switcher_bar.set_reveal(False)
+
+    def __on_break_point_apply(self, break_point):
+        self.switcher_bar.set_reveal(True)
+
+    def __on_break_point_unapply(self, break_point):
         self.switcher_bar.set_reveal(False)
 
     # Show main page
@@ -600,14 +599,13 @@ class MainWindow(Adw.ApplicationWindow):
             self.toolbarview.set_content(self.headapp)
             self.headerbar.set_title_widget(self.switcher_title)
             self.set_title("Save Desktop")
-            self.setup_switcher_responsive(status_box=False)
+            self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
             for widget in [self.spinner, self.cancel_button, self.status_page]:
                 self.status_box.remove(widget)
 
         self.headerbar.set_title_widget(None)
+        self.break_point.disconnect(self.apply_handler)
         self.switcher_bar.set_reveal(False)
-
-        self.setup_switcher_responsive(status_box=True)
 
         # Create box widget for this page
         self.status_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -644,9 +642,10 @@ class MainWindow(Adw.ApplicationWindow):
         # back to the previous page from this page
         def back_to_main(w):
             self.toolbarview.set_content(self.headapp)
-            self.setup_switcher_responsive(status_box=False)
             self.headerbar.set_title_widget(self.switcher_title)
             self.set_title("Save Desktop")
+            self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
+            print("connected")
             for widget in [self.status_page, self.open_folder_button, self.logout_button, self.back_button]:
                 self.status_box.remove(widget)
 
