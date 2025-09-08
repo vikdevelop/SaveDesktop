@@ -189,7 +189,6 @@ msgstr ""
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 msgid ""
@@ -324,7 +323,6 @@ msgstr ""
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
@@ -336,7 +334,6 @@ msgstr ""
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"

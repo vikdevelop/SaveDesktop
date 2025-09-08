@@ -189,13 +189,11 @@ msgstr ""
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 
 # Translation key: remember_password
 msgid "Remember Password"
@@ -308,7 +306,6 @@ msgstr ""
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
 msgstr ""
-"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
 
 # Translation key: gnome_oa_chooser
 msgid "3. Click on the Next button and select the created cloud drive folder"
@@ -318,25 +315,21 @@ msgstr ""
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
 msgstr ""
-"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
 
 # Translation key: rclone_intro_desc
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
 msgstr ""
-"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"
@@ -350,7 +343,6 @@ msgstr ""
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to complete the setup."
 msgstr ""
-"You've now created the cloud drive folder! Click on the Next button to complete the setup."
 
 # Translation key: select
 msgid "Select"

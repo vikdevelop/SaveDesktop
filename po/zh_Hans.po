@@ -164,7 +164,6 @@ msgstr "创建新密码"
 msgid ""
 "Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
 msgstr ""
-"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
 
 # Translation key: gen_password
 msgid "Generate Password"
@@ -182,7 +181,6 @@ msgstr "解锁存档时不需要密码"
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
 msgstr ""
-"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
 
 # Translation key: enter_password_title
 msgid ""
@@ -193,7 +191,6 @@ msgstr "请输入密码解锁存档以同步配置"
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 
 # Translation key: remember_password
 msgid "Remember Password"
@@ -314,25 +311,21 @@ msgstr "3. 点击下一步，选择已创建的云同步文件夹"
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
 msgstr ""
-"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
 
 # Translation key: rclone_intro_desc
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
 msgstr ""
-"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"
@@ -389,7 +382,6 @@ msgstr "连接到云存储"
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
 msgstr ""
-"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
 
 # Translation key: select_cloud_folder_btn
 msgid "Select the cloud drive folder"
@@ -411,7 +403,6 @@ msgstr ""
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
-"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
 
 # Translation key: m_sync_desc
 msgid "From now on, you can sync the config from the menu in the header bar"

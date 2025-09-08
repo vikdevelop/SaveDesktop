@@ -151,7 +151,6 @@ msgstr ""
 msgid ""
 "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
 msgstr ""
-"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
 
 # Translation key: save_without_archive
 msgid "Save the configuration without creating an archive"
@@ -165,7 +164,6 @@ msgstr ""
 msgid ""
 "Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
 msgstr ""
-"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
 
 # Translation key: gen_password
 msgid "Generate Password"
@@ -183,19 +181,16 @@ msgstr ""
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
 msgstr ""
-"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
 
 # Translation key: enter_password_title
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 
 # Translation key: remember_password
 msgid "Remember Password"
@@ -219,7 +214,6 @@ msgstr "Oppsettet har blitt lagret."
 msgid ""
 "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 msgstr ""
-"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 
 # Translation key: open_folder
 msgid "Open the folder"
@@ -264,7 +258,6 @@ msgstr "Oppsettet har blitt anvendt."
 msgid ""
 "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
 msgstr ""
-"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
 
 # Translation key: back_to_page
 msgid "Back to previous page"
@@ -290,7 +283,6 @@ msgstr ""
 msgid ""
 "Sync your desktop environment configuration with other computers in the network."
 msgstr ""
-"Sync your desktop environment configuration with other computers in the network."
 
 # Translation key: initial_setup
 msgid "Initial synchronization setup"
@@ -308,7 +300,6 @@ msgstr ""
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
 msgstr ""
-"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
 
 # Translation key: gnome_oa_chooser
 msgid "3. Click on the Next button and select the created cloud drive folder"
@@ -318,25 +309,21 @@ msgstr ""
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
 msgstr ""
-"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
 
 # Translation key: rclone_intro_desc
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
 msgstr ""
-"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 
 # Translation key: syncthing_folder
 msgid "Use Syncthing folder instead"
@@ -350,7 +337,6 @@ msgstr ""
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to complete the setup."
 msgstr ""
-"You've now created the cloud drive folder! Click on the Next button to complete the setup."
 
 # Translation key: select
 msgid "Select"
@@ -394,7 +380,6 @@ msgstr ""
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
 msgstr ""
-"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
 
 # Translation key: select_cloud_folder_btn
 msgid "Select the cloud drive folder"
@@ -416,7 +401,6 @@ msgstr ""
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
-"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
 
 # Translation key: m_sync_desc
 msgid "From now on, you can sync the config from the menu in the header bar"
