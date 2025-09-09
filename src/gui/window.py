@@ -542,10 +542,11 @@ class MainWindow(Adw.ApplicationWindow):
     def save_config(self):
         self.archive_mode = "--create"
         self.archive_name = f"{self.folder}/{self.filename_text}"
-        self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n<i>{}/{}.sd.tar.gz</i>").split('</b>')[0].split('<b>')[-1]
+        self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = self._set_status_desc_save()
+        print(self._set_status_desc_save())
         self.done_title = _("Configuration has been saved!")
-        self.done_desc = _("<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.").format(_("Configuration has been saved!"))
+        self.done_desc = _("<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n").format(_("Configuration has been saved!"))
 
         self.please_wait()
         save_thread = Thread(target=self._call_archive_command)
@@ -553,7 +554,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _set_status_desc_save(self):
         # Use "sd.zip" if Archive Encryption is enabled
-        status_old = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n<i>{}/{}.sd.tar.gz</i>")
+        status_old = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n")
         status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
         return status.format(self.folder, self.filename_text)
 
@@ -562,10 +563,10 @@ class MainWindow(Adw.ApplicationWindow):
         self._identify_file_type()
 
         self.archive_mode = "--unpack"
-        self.status_title = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>").split('</b>')[0].split('<b>')[-1]
-        self.status_desc = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>").format(self.archive_name)
+        self.status_title = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").split('</b>')[0].split('<b>')[-1]
+        self.status_desc = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").format(self.archive_name)
         self.done_title = _("The configuration has been applied!")
-        self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.").format(_("The configuration has been applied!"))
+        self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n").format(_("The configuration has been applied!"))
 
         self.please_wait()
         import_thread = Thread(target=self._call_archive_command)
@@ -655,7 +656,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.status_page.set_description(self.done_desc)
 
         # Box layout for the buttons below
-        self.buttons_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        self.buttons_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.status_page.set_child(self.buttons_box)
 
         self._add_specific_button()
