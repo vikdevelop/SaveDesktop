@@ -116,6 +116,7 @@ class InitSetupDialog(Adw.AlertDialog):
         self.remove_response('ok-syncthing')
 
         self.set_extra_child(None)
+        self.set_heading(_("Almost done!"))
         self.set_body(_("You've now created the cloud drive folder! Click on the Next button to complete the setup."))
         self.set_can_close(True)
 
