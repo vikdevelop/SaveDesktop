@@ -70,3 +70,4 @@ class PasswordStore:
         except Exception as e:
             print("[ERROR]", e)
             return None
+

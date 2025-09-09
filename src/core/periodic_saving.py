@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio
 from savedesktop.globals import *
-from savedesktop.core.password_store import *
+from savedesktop.core.password_store import PasswordStore
 
 # Get the current date
 dt = datetime.now()
@@ -108,3 +108,4 @@ if __name__ == "__main__":
 
     pb = PeriodicBackups()
     pb.run(args.now)
+

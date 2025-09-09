@@ -10,7 +10,6 @@ from savedesktop.globals import *
 from savedesktop.gui.items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
 from savedesktop.gui.more_options_dialog import MoreOptionsDialog
 from savedesktop.gui.synchronization_dialogs import InitSetupDialog, SetDialog, CloudDialog
-from savedesktop.core.password_store import PasswordStore
 
 # Application window
 class MainWindow(Adw.ApplicationWindow):

@@ -6,7 +6,7 @@ from threading import Thread
 from savedesktop.gui.window import MainWindow
 from savedesktop.globals import *
 
-@Gtk.Template(resource_path="/io/github/vikdevelop/SaveDesktop/gui/gtk/shortcuts_window.ui")
+@Gtk.Template(resource_path="/io/github/vikdevelop/SaveDesktop/gui/templates/shortcuts_window.ui")
 class ShortcutsWindow(Gtk.ShortcutsWindow):
     __gtype_name__ = 'SaveDesktopShortcutsWindow'
 

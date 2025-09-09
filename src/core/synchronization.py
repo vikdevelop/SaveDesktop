@@ -4,7 +4,7 @@ from datetime import datetime, date, timedelta
 import subprocess, os, locale, json, sys, gi, socket, shutil, zipfile, tarfile, re
 from gi.repository import Gio, GLib
 from savedesktop.globals import *
-from savedesktop.core.password_store import *
+from savedesktop.core.password_store import PasswordStore
 
 dt = datetime.now()
 
@@ -185,4 +185,5 @@ class Syncing:
         os.system(f"notify-send 'Save Desktop ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
 Syncing()
+
 
