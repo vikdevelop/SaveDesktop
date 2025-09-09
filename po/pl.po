@@ -12,37 +12,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# Translation key: save
+#: src/gui/window.py
 msgid "Save"
 msgstr "Zapisz"
 
-#: src/gui/shortcuts_window.ui:22
-# Translation key: save_config
+#: src/gui/templates/shortcuts_window.ui:22
+#: src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Zapisz obecną konfigurację"
 
-# Translation key: set_filename
+#: src/gui/window.py
 msgid "Set the file name"
 msgstr "Ustaw nazwę pliku"
 
-#: src/gui/shortcuts_window.ui:64
-# Translation key: items_for_archive
+#: src/gui/templates/shortcuts_window.ui:64
+#: src/gui/window.py
+#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr ""
 
-# Translation key: items_desc
+#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr ""
 
-# Translation key: icons
+#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "Ikony"
 
-# Translation key: themes
+#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "Motywy"
 
-# Translation key: fonts
+#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr "Czcionki"
 
@@ -50,100 +51,100 @@ msgstr "Czcionki"
 msgid "Backgrounds"
 msgstr "Tapety"
 
-# Translation key: extensions
+#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr "Rozszerzenia"
 
-# Translation key: desktop_folder
+#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "Pulpit"
 
-# Translation key: save_installed_flatpaks
+#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "Aplikacje Flatpak"
 
-# Translation key: list
+#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr ""
 
-# Translation key: user_data_flatpak
+#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr ""
 
-# Translation key: flatpaks_data_tittle
+#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr ""
 
-#: src/gui/shortcuts_window.ui
-# Translation key: more_options
+#: src/gui/templates/shortcuts_window.ui:57
+#: src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Więcej opcji"
 
-# Translation key: periodic_saving
+#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr ""
 
-# Translation key: periodic_saving_desc
+#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr ""
 
-# Translation key: pb_interval
+#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr ""
 
-# Translation key: never
+#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "Nigdy"
 
-# Translation key: daily
+#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "Codziennie"
 
-# Translation key: weekly
+#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "Co tydzień"
 
-# Translation key: monthly
+#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "Co miesiąc"
 
-# Translation key: manually
+#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "Ręcznie"
 
-# Translation key: learn_more
+#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "Dowiedz się więcej"
 
-# Translation key: pb_folder
+#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr ""
 
-# Translation key: set_pb_folder_tooltip
+#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr ""
 
-# Translation key: set_another
+#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "Wybierz inny katalog"
 
-# Translation key: filename_format
+#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "Format nazwy pliku"
 
-# Translation key: reset_button
+#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "Przywróć ustawienia domyślne"
 
-# Translation key: pwd_for_encryption
+#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr "Hasło szyfrowania"
 
-# Translation key: manual_saving
+#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr "Ręczne zapisywanie"
 
-# Translation key: archive_encryption
+#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr ""
 
@@ -152,11 +153,11 @@ msgid ""
 "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
 msgstr ""
 
-# Translation key: save_without_archive
+#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr ""
 
-# Translation key: create_pwd_title
+#: src/gui/window.py
 msgid "Create new password"
 msgstr "Utwórz nowe hasło"
 
@@ -165,15 +166,15 @@ msgid ""
 "Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
 msgstr ""
 
-# Translation key: gen_password
+#: src/gui/window.py
 msgid "Generate Password"
 msgstr "Generuj hasło"
 
-# Translation key: password_entry
+#: src/gui/window.py
 msgid "Password"
 msgstr "Hasło"
 
-# Translation key: check_pwd_title
+#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr ""
 
@@ -192,11 +193,11 @@ msgid ""
 "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 msgstr ""
 
-# Translation key: remember_password
+#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr "Zapamiętaj hasło"
 
-# Translation key: password_store_err
+#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
 
@@ -206,7 +207,7 @@ msgid ""
 msgstr ""
 "<big><b>Saving configuration ...</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
 
-# Translation key: config_saved
+#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Konfiguracja została zapisana!"
 
@@ -215,32 +216,32 @@ msgid ""
 "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 msgstr ""
 
-# Translation key: open_folder
+#: src/gui/window.py
 msgid "Open the folder"
 msgstr "Otwórz katalog"
 
-# Translation key: import_title
+#: src/gui/window.py
 msgid "Import"
 msgstr "Importuj"
 
-# Translation key: import_config
+#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "Importuj zapisaną konfigurację"
 
-#: src/gui/shortcuts_window.ui:29
-# Translation key: import_from_file
+#: src/gui/templates/shortcuts_window.ui:29
+#: src/gui/window.py
 msgid "Import from file"
 msgstr "Importuj z pliku"
 
-# Translation key: import_from_folder
+#: src/gui/window.py
 msgid "Import from folder"
 msgstr "Importuj z katalogu"
 
-# Translation key: cancel
+#: src/gui/window.py
 msgid "Cancel"
 msgstr "Anuluj"
 
-# Translation key: savedesktop_f
+#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "Pliki Save Desktop"
 
@@ -250,7 +251,7 @@ msgid ""
 msgstr ""
 "<big><b>Importing configuration ...</b></big>\nImporting configuration from: {}\n"
 
-# Translation key: config_imported
+#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr ""
 
@@ -259,23 +260,23 @@ msgid ""
 "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
 msgstr ""
 
-# Translation key: back_to_page
+#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "Wróć do poprzedniej strony"
 
-# Translation key: logout
+#: src/gui/window.py
 msgid "Log Out"
 msgstr "Wyloguj się"
 
-# Translation key: err_occured
+#: src/gui/window.py
 msgid "An error occurred"
 msgstr "Wystąpił błąd"
 
-# Translation key: apply
+#: src/gui/window.py
 msgid "Apply"
 msgstr "Zastosuj"
 
-# Translation key: sync
+#: src/gui/window.py
 msgid "Sync"
 msgstr "Synchronizacja"
 
@@ -284,15 +285,15 @@ msgid ""
 "Sync your desktop environment configuration with other computers in the network."
 msgstr ""
 
-# Translation key: initial_setup
+#: src/gui/window.py
 msgid "Initial synchronization setup"
 msgstr ""
 
-# Translation key: gnome_oa_settings
+#: src/gui/window.py
 msgid "1. Open the system settings"
 msgstr ""
 
-# Translation key: gnome_oa_section
+#: src/gui/window.py
 msgid "2. Go to the Online Accounts section"
 msgstr ""
 
@@ -301,7 +302,7 @@ msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
 msgstr ""
 
-# Translation key: gnome_oa_chooser
+#: src/gui/window.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 
@@ -325,11 +326,11 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
 
-# Translation key: syncthing_folder
+#: src/gui/window.py
 msgid "Use Syncthing folder instead"
 msgstr ""
 
-# Translation key: almost_done_title
+#: src/gui/window.py
 msgid "Almost done!"
 msgstr ""
 
@@ -338,41 +339,41 @@ msgid ""
 "You've now created the cloud drive folder! Click on the Next button to complete the setup."
 msgstr ""
 
-# Translation key: select
+#: src/gui/window.py
 msgid "Select"
 msgstr "Wybierz"
 
-# Translation key: next
+#: src/gui/window.py
 msgid "Next"
 msgstr "Dalej"
 
-#: src/gui/shortcuts_window.ui:71
-# Translation key: set_up_sync_file
+#: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr ""
 
-# Translation key: periodic_saving_file
+#: src/gui/window.py
 msgid "Periodic saving file"
 msgstr ""
 
-# Translation key: periodic_saving_file_err
+#: src/gui/window.py
 msgid "Periodic saving file does not exist."
 msgstr ""
 
-# Translation key: create
+#: src/gui/window.py
 msgid "Create"
 msgstr "Utwórz"
 
-# Translation key: please_wait
+#: src/gui/window.py
 msgid "Please wait …"
 msgstr "Proszę czekać…"
 
-# Translation key: change
+#: src/gui/window.py
 msgid "Change"
 msgstr "Zmień"
 
-#: src/gui/shortcuts_window.ui:78
-# Translation key: connect_cloud_storage
+#: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr ""
 
@@ -381,19 +382,19 @@ msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
 msgstr ""
 
-# Translation key: select_cloud_folder_btn
+#: src/gui/window.py
 msgid "Select the cloud drive folder"
 msgstr ""
 
-# Translation key: cloud_folder_err
+#: src/gui/window.py
 msgid "You didn't select the cloud drive folder!"
 msgstr ""
 
-# Translation key: periodic_sync
+#: src/gui/window.py
 msgid "Periodic synchronization"
 msgstr ""
 
-# Translation key: bidirectional_sync
+#: src/gui/window.py
 msgid "Bidirectional synchronization"
 msgstr ""
 
@@ -402,31 +403,29 @@ msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
 
-# Translation key: m_sync_desc
+#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 
-#: src/gui/shortcuts_window.ui:50
-# Translation key: sync_manually
+#: src/gui/templates/shortcuts_window.ui:50
+#: src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Synchronizuj ręcznie"
 
-#: src/gui/shortcuts_window.ui:36
-# Translation key: keyboard_shortcuts
+#: src/gui/templates/shortcuts_window.ui:36
+#: src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Skróty klawiszowe"
 
-#: src/gui/shortcuts_window.ui:15
-# Translation key: open_wiki
+#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr ""
 
-#: src/gui/shortcuts_window.ui:43
-# Translation key: quit
+#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "Wyjdź"
 
-# Translation key: about_app
+#: src/gui/window.py
 msgid "About app"
 msgstr "O aplikacji"
 
@@ -437,7 +436,7 @@ msgstr ""
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
-# Translation key: summary
+#: src/main.py
 msgid "Save your desktop configuration"
 msgstr "Zapisz konfigurację swojego pulpitu"
 
@@ -447,7 +446,7 @@ msgid ""
 "Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
 msgstr ""
 
-# Translation key: translator_credits
+#: src/main.py
 msgid "Translator credits"
 msgstr "Eryk Michalak gnu.ewm@protonmail.com"
 

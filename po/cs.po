@@ -12,37 +12,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# Translation key: save
+#: src/gui/window.py
 msgid "Save"
 msgstr "Uložit"
 
-#: src/gui/shortcuts_window.ui:22
-# Translation key: save_config
+#: src/gui/templates/shortcuts_window.ui:22
+#: src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Uložit aktuální konfiguraci"
 
-# Translation key: set_filename
+#: src/gui/window.py
 msgid "Set the file name"
 msgstr "Nastavit název souboru"
 
-#: src/gui/shortcuts_window.ui:64
-# Translation key: items_for_archive
+#: src/gui/templates/shortcuts_window.ui:64
+#: src/gui/window.py
+#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "Položky, které mají být zahrnuty do archivu konfigurace"
 
-# Translation key: items_desc
+#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr "Tato nastavení platí i pro pravidelné ukládání"
 
-# Translation key: icons
+#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "Ikony"
 
-# Translation key: themes
+#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "Motivy"
 
-# Translation key: fonts
+#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr "Fonty"
 
@@ -50,100 +51,100 @@ msgstr "Fonty"
 msgid "Backgrounds"
 msgstr "Pozadí"
 
-# Translation key: extensions
+#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr "Rozšíření"
 
-# Translation key: desktop_folder
+#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "Plocha"
 
-# Translation key: save_installed_flatpaks
+#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "Aplikace Flatpak"
 
-# Translation key: list
+#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr "Seznam nainstalovaných aplikací Flatpak"
 
-# Translation key: user_data_flatpak
+#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr "Uživatelská data nainstalovaných aplikací Flatpak"
 
-# Translation key: flatpaks_data_tittle
+#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr "Výběr dat aplikací Flatpak"
 
-#: src/gui/shortcuts_window.ui
-# Translation key: more_options
+#: src/gui/templates/shortcuts_window.ui:57
+#: src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Více možností"
 
-# Translation key: periodic_saving
+#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr "Pravidelné ukládání"
 
-# Translation key: periodic_saving_desc
+#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr "Změny se projeví až po dalším přihlášení"
 
-# Translation key: pb_interval
+#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr ""
 
-# Translation key: never
+#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "Nikdy"
 
-# Translation key: daily
+#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "Denně"
 
-# Translation key: weekly
+#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "Týdně"
 
-# Translation key: monthly
+#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "Měsíčně"
 
-# Translation key: manually
+#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "Ručně"
 
-# Translation key: learn_more
+#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "Zjistit více"
 
-# Translation key: pb_folder
+#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr "Složka pro pravidelné ukládání"
 
-# Translation key: set_pb_folder_tooltip
+#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr "Vybrat vlastní složku pro pravidelné ukládání"
 
-# Translation key: set_another
+#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "Vybrat jinou složku"
 
-# Translation key: filename_format
+#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "Formát názvu souboru"
 
-# Translation key: reset_button
+#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "Resetovat na výchozí"
 
-# Translation key: pwd_for_encryption
+#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr "Heslo pro šifrování"
 
-# Translation key: manual_saving
+#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr "Ruční ukládání"
 
-# Translation key: archive_encryption
+#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr "Šifrování archivu"
 
@@ -153,11 +154,11 @@ msgid ""
 msgstr ""
 "Při ručním ukládání konfigurace budete vyzváni k vytvoření hesla. To je užitečné při ukládání konfigurace na přenosné médium pro lepší zabezpečení dat."
 
-# Translation key: save_without_archive
+#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "Uložit konfiguraci bez vytváření archivu"
 
-# Translation key: create_pwd_title
+#: src/gui/window.py
 msgid "Create new password"
 msgstr "Vytvořit nové heslo"
 
@@ -167,15 +168,15 @@ msgid ""
 msgstr ""
 "Vytvořte si prosím nové heslo pro svůj archiv. Kritéria zahrnují délku alespoň 12 znaků, jedno velké písmeno, jedno malé písmeno a jeden speciální znak."
 
-# Translation key: gen_password
+#: src/gui/window.py
 msgid "Generate Password"
 msgstr "Vygenerovat heslo"
 
-# Translation key: password_entry
+#: src/gui/window.py
 msgid "Password"
 msgstr "Heslo"
 
-# Translation key: check_pwd_title
+#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr "Odemknout archiv pomocí hesla"
 
@@ -196,11 +197,11 @@ msgid ""
 msgstr ""
 "Pro synchronizaci pomocí aplikace Save Desktop byl vybrán šifrovaný archiv. Pro jeho odemčení a spuštění synchronizace zadejte níže uvedené heslo."
 
-# Translation key: remember_password
+#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr "Zapamatovat heslo"
 
-# Translation key: password_store_err
+#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "Heslo nebylo zadáno, nebo je nesprávné. Nelze pokračovat."
 
@@ -210,7 +211,7 @@ msgid ""
 msgstr ""
 "<big><b>Ukládání konfigurace … </b></big>\nKonfigurace vašeho desktopového prostředí bude uložena v:\n <i>{}/{}.sd.tar.gz</i>\n"
 
-# Translation key: config_saved
+#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Konfigurace byla uložena!"
 
@@ -220,32 +221,32 @@ msgid ""
 msgstr ""
 "<big><b>{}</b></big>\nNyní si můžete prohlédnout archiv s konfigurací svého desktopového prostředí nebo se vrátit na předchozí stránku.\n"
 
-# Translation key: open_folder
+#: src/gui/window.py
 msgid "Open the folder"
 msgstr "Otevřít složku"
 
-# Translation key: import_title
+#: src/gui/window.py
 msgid "Import"
 msgstr ""
 
-# Translation key: import_config
+#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "Importovat již uloženou konfiguraci"
 
-#: src/gui/shortcuts_window.ui:29
-# Translation key: import_from_file
+#: src/gui/templates/shortcuts_window.ui:29
+#: src/gui/window.py
 msgid "Import from file"
 msgstr "Importovat ze souboru"
 
-# Translation key: import_from_folder
+#: src/gui/window.py
 msgid "Import from folder"
 msgstr "Importovat ze složky"
 
-# Translation key: cancel
+#: src/gui/window.py
 msgid "Cancel"
 msgstr "Zrušit"
 
-# Translation key: savedesktop_f
+#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "Soubory Save Desktop"
 
@@ -255,7 +256,7 @@ msgid ""
 msgstr ""
 "<big><b>Importování konfigurace …</b></big>\nImportování konfigurace z: \n<i>{}</i>\n"
 
-# Translation key: config_imported
+#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Konfigurace byla provedena!"
 
@@ -265,23 +266,23 @@ msgid ""
 msgstr ""
 "<big><b>{}</b></big>\nAby se změny projevily, můžete se ze systému odhlásit, nebo se vrátit na předchozí stránku a odhlásit se později.\n"
 
-# Translation key: back_to_page
+#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "Vrátit se na předchozí stránku"
 
-# Translation key: logout
+#: src/gui/window.py
 msgid "Log Out"
 msgstr "Odhlásit se"
 
-# Translation key: err_occured
+#: src/gui/window.py
 msgid "An error occurred"
 msgstr "Došlo k chybě"
 
-# Translation key: apply
+#: src/gui/window.py
 msgid "Apply"
 msgstr "Použít"
 
-# Translation key: sync
+#: src/gui/window.py
 msgid "Sync"
 msgstr "Synchronizovat"
 
@@ -291,15 +292,15 @@ msgid ""
 msgstr ""
 "Synchronizujte konfiguraci vašeho desktopového prostředí s ostatními počítači v síti."
 
-# Translation key: initial_setup
+#: src/gui/window.py
 msgid "Initial synchronization setup"
 msgstr "Počáteční nastavení synchronizace"
 
-# Translation key: gnome_oa_settings
+#: src/gui/window.py
 msgid "1. Open the system settings"
 msgstr "1. Otevřete nastavení systému"
 
-# Translation key: gnome_oa_section
+#: src/gui/window.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Přejděte do sekce Online účty"
 
@@ -309,7 +310,7 @@ msgid ""
 msgstr ""
 "V této sekci vyberte požadovanou cloudovou službu, jako je Google, Microsoft 365 nebo Nextcloud."
 
-# Translation key: gnome_oa_chooser
+#: src/gui/window.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 "3. Klikněte na tlačítko Další a vyberte vytvořenou složku cloudové jednotky"
@@ -338,11 +339,11 @@ msgid ""
 msgstr ""
 "Po dokončení nastavení Rclone pomocí uvedeného příkazu klikněte na tlačítko \"Apply\""
 
-# Translation key: syncthing_folder
+#: src/gui/window.py
 msgid "Use Syncthing folder instead"
 msgstr "Použít místo toho složku Syncthing"
 
-# Translation key: almost_done_title
+#: src/gui/window.py
 msgid "Almost done!"
 msgstr "Téměř hotovo!"
 
@@ -352,41 +353,41 @@ msgid ""
 msgstr ""
 "Nyní máte vytvořenou složku cloudové jednotky! Klikněte na tlačítko Další pro dokončení nastavení."
 
-# Translation key: select
+#: src/gui/window.py
 msgid "Select"
 msgstr "Vybrat"
 
-# Translation key: next
+#: src/gui/window.py
 msgid "Next"
 msgstr "Další"
 
-#: src/gui/shortcuts_window.ui:71
-# Translation key: set_up_sync_file
+#: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Nastavit synchronizační soubor"
 
-# Translation key: periodic_saving_file
+#: src/gui/window.py
 msgid "Periodic saving file"
 msgstr "Soubor pravidelného ukládání"
 
-# Translation key: periodic_saving_file_err
+#: src/gui/window.py
 msgid "Periodic saving file does not exist."
 msgstr "Soubor pravidelného ukládání neexistuje."
 
-# Translation key: create
+#: src/gui/window.py
 msgid "Create"
 msgstr "Vytvořit"
 
-# Translation key: please_wait
+#: src/gui/window.py
 msgid "Please wait …"
 msgstr "Počkejte prosím …"
 
-# Translation key: change
+#: src/gui/window.py
 msgid "Change"
 msgstr "Změnit"
 
-#: src/gui/shortcuts_window.ui:78
-# Translation key: connect_cloud_storage
+#: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Připojit se ke cloudovému úložišti"
 
@@ -396,19 +397,19 @@ msgid ""
 msgstr ""
 "Na jiném počítači otevřete aplikaci Save Desktop a na této stránce klikněte na tlačítko „Nastavit synchronizační soubor“ a proveďte potřebná nastavení. Na tomto počítači vyberte složku, kterou jste synchronizovali s cloudovým úložištěm a do které jste také uložili stejný soubor pro pravidelné ukládání."
 
-# Translation key: select_cloud_folder_btn
+#: src/gui/window.py
 msgid "Select the cloud drive folder"
 msgstr "Vybrat cloudovou složku"
 
-# Translation key: cloud_folder_err
+#: src/gui/window.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Nevybrali jste složku cloudové jednotky!"
 
-# Translation key: periodic_sync
+#: src/gui/window.py
 msgid "Periodic synchronization"
 msgstr "Pravidelná synchronizace"
 
-# Translation key: bidirectional_sync
+#: src/gui/window.py
 msgid "Bidirectional synchronization"
 msgstr "Obousměrná synchronizace"
 
@@ -418,31 +419,29 @@ msgid ""
 msgstr ""
 "Pokud je tato funkce povolena a je vybrán interval synchronizace a složka cloudové jednotky, informace o pravidelném ukládání (interval, složka a název souboru) z druhého počítače s nastavenou synchronizací se zkopírují do tohoto počítače."
 
-# Translation key: m_sync_desc
+#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Od teď můžete synchronizovat konfiguraci z nabídky v záhlaví"
 
-#: src/gui/shortcuts_window.ui:50
-# Translation key: sync_manually
+#: src/gui/templates/shortcuts_window.ui:50
+#: src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Synchronizovat ručně"
 
-#: src/gui/shortcuts_window.ui:36
-# Translation key: keyboard_shortcuts
+#: src/gui/templates/shortcuts_window.ui:36
+#: src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Klávesové zkratky"
 
-#: src/gui/shortcuts_window.ui:15
-# Translation key: open_wiki
+#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr "Otevřít wiki aplikace"
 
-#: src/gui/shortcuts_window.ui:43
-# Translation key: quit
+#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "Ukončit"
 
-# Translation key: about_app
+#: src/gui/window.py
 msgid "About app"
 msgstr "O aplikaci"
 
@@ -454,7 +453,7 @@ msgstr ""
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
-# Translation key: summary
+#: src/main.py
 msgid "Save your desktop configuration"
 msgstr "Uložte konfiguraci plochy"
 
@@ -465,7 +464,7 @@ msgid ""
 msgstr ""
 "Save Desktop umožňuje uložit aktuální konfiguraci (motivy, ikony, tapety, všechna nastavení prostředí, rozšíření atd.) jedním kliknutím."
 
-# Translation key: translator_credits
+#: src/main.py
 msgid "Translator credits"
 msgstr "vikdevelop https://github.com/vikdevelop"
 

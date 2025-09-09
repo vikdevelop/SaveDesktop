@@ -12,37 +12,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# Translation key: save
+#: src/gui/window.py
 msgid "Save"
 msgstr "保存"
 
-#: src/gui/shortcuts_window.ui:22
-# Translation key: save_config
+#: src/gui/templates/shortcuts_window.ui:22
+#: src/gui/window.py
 msgid "Save the current configuration"
 msgstr "保存当前配置"
 
-# Translation key: set_filename
+#: src/gui/window.py
 msgid "Set the file name"
 msgstr "设置文件名"
 
-#: src/gui/shortcuts_window.ui:64
-# Translation key: items_for_archive
+#: src/gui/templates/shortcuts_window.ui:64
+#: src/gui/window.py
+#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "要包含在配置存档中的项目"
 
-# Translation key: items_desc
+#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr "这些设置也适用于定期保存"
 
-# Translation key: icons
+#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "图标"
 
-# Translation key: themes
+#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "主题"
 
-# Translation key: fonts
+#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr "字体"
 
@@ -50,100 +51,100 @@ msgstr "字体"
 msgid "Backgrounds"
 msgstr "背景"
 
-# Translation key: extensions
+#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr "扩展"
 
-# Translation key: desktop_folder
+#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "桌面"
 
-# Translation key: save_installed_flatpaks
+#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "Flatpak 包"
 
-# Translation key: list
+#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr "已安装的Flatpak应用列表"
 
-# Translation key: user_data_flatpak
+#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr "使用已安装 Flatpak 程序的用户数据"
 
-# Translation key: flatpaks_data_tittle
+#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr "Flatpak应用数据选项"
 
-#: src/gui/shortcuts_window.ui
-# Translation key: more_options
+#: src/gui/templates/shortcuts_window.ui:57
+#: src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "更多选项"
 
-# Translation key: periodic_saving
+#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr "定期保存"
 
-# Translation key: periodic_saving_desc
+#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr "更改仅在下次登录后生效"
 
-# Translation key: pb_interval
+#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr ""
 
-# Translation key: never
+#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "从不"
 
-# Translation key: daily
+#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "每日"
 
-# Translation key: weekly
+#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "每周"
 
-# Translation key: monthly
+#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "每月"
 
-# Translation key: manually
+#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "手动"
 
-# Translation key: learn_more
+#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "学习更多"
 
-# Translation key: pb_folder
+#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr "定期保存目录"
 
-# Translation key: set_pb_folder_tooltip
+#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr "手动选择定期保存目录"
 
-# Translation key: set_another
+#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "选择其他目录"
 
-# Translation key: filename_format
+#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "文件名称格式"
 
-# Translation key: reset_button
+#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "恢复默认"
 
-# Translation key: pwd_for_encryption
+#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr "加密所需的密码"
 
-# Translation key: manual_saving
+#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr "手动保存"
 
-# Translation key: archive_encryption
+#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr "存档加密"
 
@@ -152,11 +153,11 @@ msgid ""
 "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
 msgstr "在手动保存配置的时候，会有创建密码的提示信息。这在使用移动便携存储设备保存配置时能更好的保护您的数据。"
 
-# Translation key: save_without_archive
+#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "保存配置时不创建存档"
 
-# Translation key: create_pwd_title
+#: src/gui/window.py
 msgid "Create new password"
 msgstr "创建新密码"
 
@@ -165,15 +166,15 @@ msgid ""
 "Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
 msgstr ""
 
-# Translation key: gen_password
+#: src/gui/window.py
 msgid "Generate Password"
 msgstr "生成密码"
 
-# Translation key: password_entry
+#: src/gui/window.py
 msgid "Password"
 msgstr "密码"
 
-# Translation key: check_pwd_title
+#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr "解锁存档时不需要密码"
 
@@ -192,11 +193,11 @@ msgid ""
 "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 msgstr ""
 
-# Translation key: remember_password
+#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr "记住密码"
 
-# Translation key: password_store_err
+#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "密码为空或密码错误，无法进行下一步。"
 
@@ -206,7 +207,7 @@ msgid ""
 msgstr ""
 "<big><b>保存配置……</b></big>\n您的桌面环境配置将被保存至：\n <i>{}/{}.sd.tar.gz</i>\n"
 
-# Translation key: config_saved
+#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "配置已保存！"
 
@@ -216,32 +217,32 @@ msgid ""
 msgstr ""
 "<big><b>{}</b></big>\n现在您可以查看桌面环境配置存档，或者返回上一页。\n"
 
-# Translation key: open_folder
+#: src/gui/window.py
 msgid "Open the folder"
 msgstr "打开文件夹"
 
-# Translation key: import_title
+#: src/gui/window.py
 msgid "Import"
 msgstr "导入"
 
-# Translation key: import_config
+#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "导入保存的配置"
 
-#: src/gui/shortcuts_window.ui:29
-# Translation key: import_from_file
+#: src/gui/templates/shortcuts_window.ui:29
+#: src/gui/window.py
 msgid "Import from file"
 msgstr "从文件导入"
 
-# Translation key: import_from_folder
+#: src/gui/window.py
 msgid "Import from folder"
 msgstr "从文件夹导入"
 
-# Translation key: cancel
+#: src/gui/window.py
 msgid "Cancel"
 msgstr "取消"
 
-# Translation key: savedesktop_f
+#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "Save Desktop文件"
 
@@ -251,7 +252,7 @@ msgid ""
 msgstr ""
 "<big><b>导入配置……</b></big>\n从：<i>{}</i>导入配置\n"
 
-# Translation key: config_imported
+#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "配置已应用！"
 
@@ -261,23 +262,23 @@ msgid ""
 msgstr ""
 "<big><b>{}</b></big>\n您可以注销以使更改生效，或返回上一页稍后再注销。\n"
 
-# Translation key: back_to_page
+#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "返回上一页"
 
-# Translation key: logout
+#: src/gui/window.py
 msgid "Log Out"
 msgstr "注销"
 
-# Translation key: err_occured
+#: src/gui/window.py
 msgid "An error occurred"
 msgstr "出现一个错误"
 
-# Translation key: apply
+#: src/gui/window.py
 msgid "Apply"
 msgstr "应用"
 
-# Translation key: sync
+#: src/gui/window.py
 msgid "Sync"
 msgstr "同步"
 
@@ -286,15 +287,15 @@ msgid ""
 "Sync your desktop environment configuration with other computers in the network."
 msgstr "将您的桌面环境配置与网络中的其他计算机同步。"
 
-# Translation key: initial_setup
+#: src/gui/window.py
 msgid "Initial synchronization setup"
 msgstr "初始化同步设置"
 
-# Translation key: gnome_oa_settings
+#: src/gui/window.py
 msgid "1. Open the system settings"
 msgstr "1. 打开系统设置"
 
-# Translation key: gnome_oa_section
+#: src/gui/window.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. 定位到在线账号（Online Accounts）部分"
 
@@ -303,7 +304,7 @@ msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
 msgstr "选择你想使用的任一云服务，比如 Google，Microsoft 365 或 Nextcloud."
 
-# Translation key: gnome_oa_chooser
+#: src/gui/window.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. 点击下一步，选择已创建的云同步文件夹"
 
@@ -327,11 +328,11 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
 
-# Translation key: syncthing_folder
+#: src/gui/window.py
 msgid "Use Syncthing folder instead"
 msgstr ""
 
-# Translation key: almost_done_title
+#: src/gui/window.py
 msgid "Almost done!"
 msgstr "马上就好！"
 
@@ -340,41 +341,41 @@ msgid ""
 "You've now created the cloud drive folder! Click on the Next button to complete the setup."
 msgstr "您已经创建好云驱动文件夹了！点击下一步以完成设置。"
 
-# Translation key: select
+#: src/gui/window.py
 msgid "Select"
 msgstr "选择"
 
-# Translation key: next
+#: src/gui/window.py
 msgid "Next"
 msgstr "下一步"
 
-#: src/gui/shortcuts_window.ui:71
-# Translation key: set_up_sync_file
+#: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "设置同步文件"
 
-# Translation key: periodic_saving_file
+#: src/gui/window.py
 msgid "Periodic saving file"
 msgstr "定期保存文件"
 
-# Translation key: periodic_saving_file_err
+#: src/gui/window.py
 msgid "Periodic saving file does not exist."
 msgstr ""
 
-# Translation key: create
+#: src/gui/window.py
 msgid "Create"
 msgstr "新建"
 
-# Translation key: please_wait
+#: src/gui/window.py
 msgid "Please wait …"
 msgstr "请稍等 …"
 
-# Translation key: change
+#: src/gui/window.py
 msgid "Change"
 msgstr "更改"
 
-#: src/gui/shortcuts_window.ui:78
-# Translation key: connect_cloud_storage
+#: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "连接到云存储"
 
@@ -383,19 +384,19 @@ msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
 msgstr ""
 
-# Translation key: select_cloud_folder_btn
+#: src/gui/window.py
 msgid "Select the cloud drive folder"
 msgstr "选择云驱动文件夹"
 
-# Translation key: cloud_folder_err
+#: src/gui/window.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "您没有选择云驱动文件夹！"
 
-# Translation key: periodic_sync
+#: src/gui/window.py
 msgid "Periodic synchronization"
 msgstr "周期性同步"
 
-# Translation key: bidirectional_sync
+#: src/gui/window.py
 msgid "Bidirectional synchronization"
 msgstr ""
 
@@ -404,31 +405,29 @@ msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
 
-# Translation key: m_sync_desc
+#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯"
 
-#: src/gui/shortcuts_window.ui:50
-# Translation key: sync_manually
+#: src/gui/templates/shortcuts_window.ui:50
+#: src/gui/window.py
 msgid "Synchronise manually"
 msgstr "手动同步"
 
-#: src/gui/shortcuts_window.ui:36
-# Translation key: keyboard_shortcuts
+#: src/gui/templates/shortcuts_window.ui:36
+#: src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "快捷键"
 
-#: src/gui/shortcuts_window.ui:15
-# Translation key: open_wiki
+#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr "打开本应用使用说明（WIKI）"
 
-#: src/gui/shortcuts_window.ui:43
-# Translation key: quit
+#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "退出"
 
-# Translation key: about_app
+#: src/gui/window.py
 msgid "About app"
 msgstr "关于应用"
 
@@ -440,7 +439,7 @@ msgstr ""
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
-# Translation key: summary
+#: src/main.py
 msgid "Save your desktop configuration"
 msgstr "保存您的桌面环境配置"
 
@@ -450,7 +449,7 @@ msgid ""
 "Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
 msgstr "Save Desktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。"
 
-# Translation key: translator_credits
+#: src/main.py
 msgid "Translator credits"
 msgstr "译者github链接"
 

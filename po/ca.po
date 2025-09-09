@@ -12,37 +12,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# Translation key: save
+#: src/gui/window.py
 msgid "Save"
 msgstr "Desa"
 
-#: src/gui/shortcuts_window.ui:22
-# Translation key: save_config
+#: src/gui/templates/shortcuts_window.ui:22
+#: src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Desa la configuració actual"
 
-# Translation key: set_filename
+#: src/gui/window.py
 msgid "Set the file name"
 msgstr "Nom del fitxer"
 
-#: src/gui/shortcuts_window.ui:64
-# Translation key: items_for_archive
+#: src/gui/templates/shortcuts_window.ui:64
+#: src/gui/window.py
+#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "Elements que voleu incloure al fitxer de configuració"
 
-# Translation key: items_desc
+#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr "Aquestes opcions afecten també a la còpia automàtica"
 
-# Translation key: icons
+#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "Icones"
 
-# Translation key: themes
+#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "Temes"
 
-# Translation key: fonts
+#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr ""
 
@@ -50,100 +51,100 @@ msgstr ""
 msgid "Backgrounds"
 msgstr "Fons d'escriptori"
 
-# Translation key: extensions
+#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr ""
 
-# Translation key: desktop_folder
+#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "Escriptori"
 
-# Translation key: save_installed_flatpaks
+#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "Programari Flatpak"
 
-# Translation key: list
+#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr "Llistat del programari Flatpak instal·lat"
 
-# Translation key: user_data_flatpak
+#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr "Dades d'usuari del programari Flatpak instal·lat"
 
-# Translation key: flatpaks_data_tittle
+#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr "Selecció de dades d'aplicacions Flatpak"
 
-#: src/gui/shortcuts_window.ui
-# Translation key: more_options
+#: src/gui/templates/shortcuts_window.ui:57
+#: src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Més opcions"
 
-# Translation key: periodic_saving
+#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr "Còpia automàtica"
 
-# Translation key: periodic_saving_desc
+#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr "Els canvis seran efectius al proper inici de sessió"
 
-# Translation key: pb_interval
+#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr ""
 
-# Translation key: never
+#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "Mai"
 
-# Translation key: daily
+#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "Diàriament"
 
-# Translation key: weekly
+#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "Setmanalment"
 
-# Translation key: monthly
+#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "Mensualment"
 
-# Translation key: manually
+#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "Manual"
 
-# Translation key: learn_more
+#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "Més informació"
 
-# Translation key: pb_folder
+#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr "Carpeta de destinació"
 
-# Translation key: set_pb_folder_tooltip
+#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr "Trieu una carpeta on desar la còpia automàtica"
 
-# Translation key: set_another
+#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "Trieu altra carpeta"
 
-# Translation key: filename_format
+#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "Format del nom de fitxer"
 
-# Translation key: reset_button
+#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "Restaura als valors per defecte"
 
-# Translation key: pwd_for_encryption
+#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr ""
 
-# Translation key: manual_saving
+#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr ""
 
-# Translation key: archive_encryption
+#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr "Xifrat de ftxer"
 
@@ -153,11 +154,11 @@ msgid ""
 msgstr ""
 "En desar la configuració de forma manual, si us demanarà crear una contrasenya. Això és útil quan deseu la configuració en mitjans extraïbles per mantenir segures les vostres dades."
 
-# Translation key: save_without_archive
+#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr ""
 
-# Translation key: create_pwd_title
+#: src/gui/window.py
 msgid "Create new password"
 msgstr "Crea una contrasenya nova"
 
@@ -167,15 +168,15 @@ msgid ""
 msgstr ""
 "Creeu una contrasenya nova per al vostre fitxer. Es recomana emprar almenys 12 caràcters, incloent-hi majúscules, minúscules i caràcters especials."
 
-# Translation key: gen_password
+#: src/gui/window.py
 msgid "Generate Password"
 msgstr "Crea una contrasenya"
 
-# Translation key: password_entry
+#: src/gui/window.py
 msgid "Password"
 msgstr "Contrasenya"
 
-# Translation key: check_pwd_title
+#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr "Desbloca el fitxer amb una contrasenya"
 
@@ -195,11 +196,11 @@ msgid ""
 "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 msgstr ""
 
-# Translation key: remember_password
+#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr ""
 
-# Translation key: password_store_err
+#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
 
@@ -209,7 +210,7 @@ msgid ""
 msgstr ""
 "<big><b>Desant la configuració ...</b></big>\nLa configuració del vostre escriptori es desarà a:\n <i>{}/{}.sd.tar.gz</i>\n"
 
-# Translation key: config_saved
+#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "S'ha desat la configuració!"
 
@@ -219,32 +220,32 @@ msgid ""
 msgstr ""
 "<big><b>{}</b></big>\nAra podeu revisar el fitxer amb la configuració del vostre escriptori, o tornar a la pàgina anterior.\n"
 
-# Translation key: open_folder
+#: src/gui/window.py
 msgid "Open the folder"
 msgstr "Obre la carpeta"
 
-# Translation key: import_title
+#: src/gui/window.py
 msgid "Import"
 msgstr "Importa"
 
-# Translation key: import_config
+#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "Importa una configuració"
 
-#: src/gui/shortcuts_window.ui:29
-# Translation key: import_from_file
+#: src/gui/templates/shortcuts_window.ui:29
+#: src/gui/window.py
 msgid "Import from file"
 msgstr "Des d'un fitxer"
 
-# Translation key: import_from_folder
+#: src/gui/window.py
 msgid "Import from folder"
 msgstr ""
 
-# Translation key: cancel
+#: src/gui/window.py
 msgid "Cancel"
 msgstr "Cancel·la"
 
-# Translation key: savedesktop_f
+#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "Fitxers del Save Desktop"
 
@@ -254,7 +255,7 @@ msgid ""
 msgstr ""
 "<big><b>Important la configuració ...</b></big>\nS'està important la configuració des de:\n<i>{}</i>\n"
 
-# Translation key: config_imported
+#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "S'ha aplicat la configuració!"
 
@@ -264,23 +265,23 @@ msgid ""
 msgstr ""
 "<big><b>{}</b></big>\nPodeu tancar la sessió ara perquè els canvis siguin aplicats, o podeu tornar a la pàgina anterior i tancar la sessió més tard.\n"
 
-# Translation key: back_to_page
+#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "Torna a la pàgina anterior"
 
-# Translation key: logout
+#: src/gui/window.py
 msgid "Log Out"
 msgstr "Tanca la sessió"
 
-# Translation key: err_occured
+#: src/gui/window.py
 msgid "An error occurred"
 msgstr "S'ha produït un error"
 
-# Translation key: apply
+#: src/gui/window.py
 msgid "Apply"
 msgstr "Aplica"
 
-# Translation key: sync
+#: src/gui/window.py
 msgid "Sync"
 msgstr "Sincronitza"
 
@@ -290,15 +291,15 @@ msgid ""
 msgstr ""
 "Sincronitzeu el vostre entorn d'escriptori amb altres equips de la xarxa."
 
-# Translation key: initial_setup
+#: src/gui/window.py
 msgid "Initial synchronization setup"
 msgstr ""
 
-# Translation key: gnome_oa_settings
+#: src/gui/window.py
 msgid "1. Open the system settings"
 msgstr ""
 
-# Translation key: gnome_oa_section
+#: src/gui/window.py
 msgid "2. Go to the Online Accounts section"
 msgstr ""
 
@@ -307,7 +308,7 @@ msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
 msgstr ""
 
-# Translation key: gnome_oa_chooser
+#: src/gui/window.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 
@@ -331,11 +332,11 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
 
-# Translation key: syncthing_folder
+#: src/gui/window.py
 msgid "Use Syncthing folder instead"
 msgstr ""
 
-# Translation key: almost_done_title
+#: src/gui/window.py
 msgid "Almost done!"
 msgstr ""
 
@@ -344,41 +345,41 @@ msgid ""
 "You've now created the cloud drive folder! Click on the Next button to complete the setup."
 msgstr ""
 
-# Translation key: select
+#: src/gui/window.py
 msgid "Select"
 msgstr ""
 
-# Translation key: next
+#: src/gui/window.py
 msgid "Next"
 msgstr ""
 
-#: src/gui/shortcuts_window.ui:71
-# Translation key: set_up_sync_file
+#: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Configura el fitxer de sincronització"
 
-# Translation key: periodic_saving_file
+#: src/gui/window.py
 msgid "Periodic saving file"
 msgstr "Fitxer de desat periòdic"
 
-# Translation key: periodic_saving_file_err
+#: src/gui/window.py
 msgid "Periodic saving file does not exist."
 msgstr "No existeix el fitxer de desat periòdic."
 
-# Translation key: create
+#: src/gui/window.py
 msgid "Create"
 msgstr "Crea"
 
-# Translation key: please_wait
+#: src/gui/window.py
 msgid "Please wait …"
 msgstr "Un moment…"
 
-# Translation key: change
+#: src/gui/window.py
 msgid "Change"
 msgstr "Canvia"
 
-#: src/gui/shortcuts_window.ui:78
-# Translation key: connect_cloud_storage
+#: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Connecta a l'emmagatzematge al núvol"
 
@@ -388,19 +389,19 @@ msgid ""
 msgstr ""
 "Obriu aquesta pàgina del Save Desktop a l'altre ordinador i feu clic al botó «Configura el fitxer de sincronització» per a realitzar els canvis necessaris. En aquest ordinador, seleccioneu la carpeta que heu sincronitzat amb l'emmagatzematge al núvol i on heu desat el fitxer de desament automàtic."
 
-# Translation key: select_cloud_folder_btn
+#: src/gui/window.py
 msgid "Select the cloud drive folder"
 msgstr "Selecciona la carpeta del núvol"
 
-# Translation key: cloud_folder_err
+#: src/gui/window.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "No heu seleccionat cap carpeta del núvol!"
 
-# Translation key: periodic_sync
+#: src/gui/window.py
 msgid "Periodic synchronization"
 msgstr "Sincronització periòdica"
 
-# Translation key: bidirectional_sync
+#: src/gui/window.py
 msgid "Bidirectional synchronization"
 msgstr "Sincronització bidireccional"
 
@@ -410,32 +411,30 @@ msgid ""
 msgstr ""
 "En habilitar-ho i seleccionar l'interval de la sincronització i la carpeta de la unitat al núvol, tota la informació del desament automàtic (interval, carpeta i nom de fitxer) de l'altre ordinador es copia en aquest mitjançant la sincronització indicada."
 
-# Translation key: m_sync_desc
+#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 "Ja podeu sincronitzar la configuració des del menú de la barra superior"
 
-#: src/gui/shortcuts_window.ui:50
-# Translation key: sync_manually
+#: src/gui/templates/shortcuts_window.ui:50
+#: src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Sincronitza manualment"
 
-#: src/gui/shortcuts_window.ui:36
-# Translation key: keyboard_shortcuts
+#: src/gui/templates/shortcuts_window.ui:36
+#: src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Dreceres de teclat"
 
-#: src/gui/shortcuts_window.ui:15
-# Translation key: open_wiki
+#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr ""
 
-#: src/gui/shortcuts_window.ui:43
-# Translation key: quit
+#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "Surt"
 
-# Translation key: about_app
+#: src/gui/window.py
 msgid "About app"
 msgstr "Quant a..."
 
@@ -447,7 +446,7 @@ msgstr ""
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
-# Translation key: summary
+#: src/main.py
 msgid "Save your desktop configuration"
 msgstr "Desa la configuració actual del vostre entorn d'escriptori"
 
@@ -458,7 +457,7 @@ msgid ""
 msgstr ""
 "El Save Desktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic."
 
-# Translation key: translator_credits
+#: src/main.py
 msgid "Translator credits"
 msgstr "BennyBeat https://github.com/BennyBeat"
 

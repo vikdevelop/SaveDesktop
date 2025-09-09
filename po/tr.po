@@ -12,37 +12,38 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# Translation key: save
+#: src/gui/window.py
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/gui/shortcuts_window.ui:22
-# Translation key: save_config
+#: src/gui/templates/shortcuts_window.ui:22
+#: src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Şuanki ayarları kaydet"
 
-# Translation key: set_filename
+#: src/gui/window.py
 msgid "Set the file name"
 msgstr "Dosya adı"
 
-#: src/gui/shortcuts_window.ui:64
-# Translation key: items_for_archive
+#: src/gui/templates/shortcuts_window.ui:64
+#: src/gui/window.py
+#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "Yapılandırma arşivine eklenecek ögeler"
 
-# Translation key: items_desc
+#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr "Bu ayarlar aynı zamanda düzenli kayıt için de uygulanır"
 
-# Translation key: icons
+#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "Simgeler"
 
-# Translation key: themes
+#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "Temalar"
 
-# Translation key: fonts
+#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr "Yazı Tipleri"
 
@@ -50,101 +51,101 @@ msgstr "Yazı Tipleri"
 msgid "Backgrounds"
 msgstr "Arka Planlar"
 
-# Translation key: extensions
+#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr "Uzantılar"
 
-# Translation key: desktop_folder
+#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "Masaüstü"
 
-# Translation key: save_installed_flatpaks
+#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "Flatpak uygulamaları"
 
-# Translation key: list
+#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr "Kurulu Flatpak uygulamalarının listesi"
 
-# Translation key: user_data_flatpak
+#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr "Kurulu Flatpak uygulamalarının kullanıcı verileri"
 
-# Translation key: flatpaks_data_tittle
+#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr "Flatpak uygulamaları veri seçimi"
 
-#: src/gui/shortcuts_window.ui
-# Translation key: more_options
+#: src/gui/templates/shortcuts_window.ui:57
+#: src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Daha çok seçenek"
 
-# Translation key: periodic_saving
+#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr "Düzenli kaydetme"
 
-# Translation key: periodic_saving_desc
+#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr ""
 "Değişiklikler yalnızca sonraki oturum açma işleminden sonra geçerli olacak"
 
-# Translation key: pb_interval
+#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr "Aralık"
 
-# Translation key: never
+#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "Asla"
 
-# Translation key: daily
+#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "Günlük"
 
-# Translation key: weekly
+#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "Haftalık"
 
-# Translation key: monthly
+#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "Aylık"
 
-# Translation key: manually
+#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "Elle"
 
-# Translation key: learn_more
+#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "Daha çoğunu öğren"
 
-# Translation key: pb_folder
+#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr "Düzenli kayıt klasörü"
 
-# Translation key: set_pb_folder_tooltip
+#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr "Düzenli kayıt için özel klasör seçin"
 
-# Translation key: set_another
+#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "Başka bir klasör seçin"
 
-# Translation key: filename_format
+#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "Dosya adı biçimi"
 
-# Translation key: reset_button
+#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "Öntanımlılara sıfırla"
 
-# Translation key: pwd_for_encryption
+#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr "Şifreleme için parola"
 
-# Translation key: manual_saving
+#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr "Manuel kaydet"
 
-# Translation key: archive_encryption
+#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr "Arşiv şifreleme"
 
@@ -154,11 +155,11 @@ msgid ""
 msgstr ""
 "Yapılandırmayı elle kaydederken parola oluşturmanız istenir. Bu, verilerinizin daha iyi güvenliği için yapılandırmayı taşınabilir ortama kaydederken kullanışlıdır."
 
-# Translation key: save_without_archive
+#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "Arşiv oluşturmadan yapılandırmayı kaydedin"
 
-# Translation key: create_pwd_title
+#: src/gui/window.py
 msgid "Create new password"
 msgstr "Yeni parola oluştur"
 
@@ -168,15 +169,15 @@ msgid ""
 msgstr ""
 "Lütfen arşiviniz için yeni parola oluşturun. Parolanız en az 12 karakter uzunluğunda olmalı, bir büyük harf, bir küçük harf ve bir özel karakter içermelidir."
 
-# Translation key: gen_password
+#: src/gui/window.py
 msgid "Generate Password"
 msgstr "Parola Oluştur"
 
-# Translation key: password_entry
+#: src/gui/window.py
 msgid "Password"
 msgstr "Parola"
 
-# Translation key: check_pwd_title
+#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr "Arşiv kilidini parolayla aç"
 
@@ -198,11 +199,11 @@ msgid ""
 msgstr ""
 "Save Desktop uygulaması kullanılarak senkronizasyon için şifrelenmiş bir arşiv seçildi. Lütfen kilidini açmak ve senkronizasyonu başlatmak için aşağıdaki şifreyi girin."
 
-# Translation key: remember_password
+#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr "Parolayı hatırla"
 
-# Translation key: password_store_err
+#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "Şifre girilmedi veya yanlış. Devam edilemiyor."
 
@@ -212,7 +213,7 @@ msgid ""
 msgstr ""
 "<big><b>Yapılandırma kaydediliyor…</b></big>\nMasaüstü ortamınızın yapılandırması şuraya kaydedilecek:\n<i>{}/{}.sd.tar.gz</i>\n"
 
-# Translation key: config_saved
+#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Ayarlar kayıt edildi!"
 
@@ -222,32 +223,32 @@ msgid ""
 msgstr ""
 "<big><b>{}</b></big>\nArtık arşivi masaüstü ortamınızın yapılandırmasıyla görüntüleyebilir ya da önceki sayfaya dönebilirsiniz.\n"
 
-# Translation key: open_folder
+#: src/gui/window.py
 msgid "Open the folder"
 msgstr "Klasörü aç"
 
-# Translation key: import_title
+#: src/gui/window.py
 msgid "Import"
 msgstr "İçe Aktar"
 
-# Translation key: import_config
+#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "Kaydedilmiş ayarları yükle"
 
-#: src/gui/shortcuts_window.ui:29
-# Translation key: import_from_file
+#: src/gui/templates/shortcuts_window.ui:29
+#: src/gui/window.py
 msgid "Import from file"
 msgstr "Dosyadan içe aktar"
 
-# Translation key: import_from_folder
+#: src/gui/window.py
 msgid "Import from folder"
 msgstr "Klasörden aktar"
 
-# Translation key: cancel
+#: src/gui/window.py
 msgid "Cancel"
 msgstr "İptal et"
 
-# Translation key: savedesktop_f
+#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "Save Desktop dosyaları"
 
@@ -257,7 +258,7 @@ msgid ""
 msgstr ""
 "<big><b>Yapılandırma içe aktarılıyor...</b></big>\nYapılandırma şuradan içe aktarılıyor:\n<i>{}</i>\n"
 
-# Translation key: config_imported
+#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Ayarlar uygulandı !"
 
@@ -267,23 +268,23 @@ msgid ""
 msgstr ""
 "<big><b>{}</b></big>\nDeğişikliklerin geçerli olması için oturumu şimdi kapatabilir ya da önceki sayfaya geri dönüp daha sonra oturumu kapatabilirsiniz.\n"
 
-# Translation key: back_to_page
+#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "Önceki sayfaya dön"
 
-# Translation key: logout
+#: src/gui/window.py
 msgid "Log Out"
 msgstr "Çıkış Yap"
 
-# Translation key: err_occured
+#: src/gui/window.py
 msgid "An error occurred"
 msgstr "Hata oluştu"
 
-# Translation key: apply
+#: src/gui/window.py
 msgid "Apply"
 msgstr "Uygula"
 
-# Translation key: sync
+#: src/gui/window.py
 msgid "Sync"
 msgstr "Eşzamanla"
 
@@ -293,15 +294,15 @@ msgid ""
 msgstr ""
 "Masaüstü ortamı yapılandırmanızı ağdaki diğer bilgisayarlarla eşzamanlayın."
 
-# Translation key: initial_setup
+#: src/gui/window.py
 msgid "Initial synchronization setup"
 msgstr "İlk senkronizasyon kurulumu"
 
-# Translation key: gnome_oa_settings
+#: src/gui/window.py
 msgid "1. Open the system settings"
 msgstr "1. Sistem ayarlarını açın."
 
-# Translation key: gnome_oa_section
+#: src/gui/window.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Çevrimiçi Hesaplar bölümüne gidin"
 
@@ -311,7 +312,7 @@ msgid ""
 msgstr ""
 "Bu bölümde Google, Microsoft 365 veya Nextcloud gibi istediğiniz bulut hizmetini seçin."
 
-# Translation key: gnome_oa_chooser
+#: src/gui/window.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 "3. İleri düğmesine tıklayın ve oluşturulan bulut sürücü klasörünü seçin"
@@ -340,11 +341,11 @@ msgid ""
 msgstr ""
 "Verilen komutu kullanarak Rclone kurulumunu tamamladıktan sonra \"Uygula\" düğmesine tıklayın"
 
-# Translation key: syncthing_folder
+#: src/gui/window.py
 msgid "Use Syncthing folder instead"
 msgstr "Bunun yerine Syncthing klasörünü kullanın"
 
-# Translation key: almost_done_title
+#: src/gui/window.py
 msgid "Almost done!"
 msgstr "Az kaldı!"
 
@@ -354,41 +355,41 @@ msgid ""
 msgstr ""
 "Bulut sürücü klasörünü oluşturdunuz! Kurulumu tamamlamak için İleri düğmesine tıklayın."
 
-# Translation key: select
+#: src/gui/window.py
 msgid "Select"
 msgstr "Seç"
 
-# Translation key: next
+#: src/gui/window.py
 msgid "Next"
 msgstr "Sürdür"
 
-#: src/gui/shortcuts_window.ui:71
-# Translation key: set_up_sync_file
+#: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Eşzamanlama dosyası ayarla"
 
-# Translation key: periodic_saving_file
+#: src/gui/window.py
 msgid "Periodic saving file"
 msgstr "Düzenli kayıt dosyası"
 
-# Translation key: periodic_saving_file_err
+#: src/gui/window.py
 msgid "Periodic saving file does not exist."
 msgstr "Düzenli kayıt dosyası yok."
 
-# Translation key: create
+#: src/gui/window.py
 msgid "Create"
 msgstr "Oluştur"
 
-# Translation key: please_wait
+#: src/gui/window.py
 msgid "Please wait …"
 msgstr "Lütfen bekleyin …"
 
-# Translation key: change
+#: src/gui/window.py
 msgid "Change"
 msgstr "Değiştir"
 
-#: src/gui/shortcuts_window.ui:78
-# Translation key: connect_cloud_storage
+#: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Bulut depolamaya bağlan"
 
@@ -398,19 +399,19 @@ msgid ""
 msgstr ""
 "Başka bilgisayarda Save Desktop uygulamasını açıp bu sayfadaki “Eşzamanlama dosyasını ayarla” düğmesine tıklayın ve gerekli ayarları yapın. Bu bilgisayarda, bulut depolama alanınızla eşzamanlamak istediğiniz ve aynı düzenli kayıt dosyasına kaydettiğiniz klasörü seçin."
 
-# Translation key: select_cloud_folder_btn
+#: src/gui/window.py
 msgid "Select the cloud drive folder"
 msgstr "Bulut sunucu klasörünü seç"
 
-# Translation key: cloud_folder_err
+#: src/gui/window.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Bulut sürücü klasörünü seçmediniz!"
 
-# Translation key: periodic_sync
+#: src/gui/window.py
 msgid "Periodic synchronization"
 msgstr "Düzenli eşzamanlama"
 
-# Translation key: bidirectional_sync
+#: src/gui/window.py
 msgid "Bidirectional synchronization"
 msgstr "Çift yönlü eşzamanlama"
 
@@ -420,31 +421,29 @@ msgid ""
 msgstr ""
 "Etkinse ve eşzamanlama aralığı ve bulut sürücü klasörü seçilirse, eşzamanlama ayarlı diğer bilgisayardaki düzenli kayıt bilgileri (aralık, klasör ve dosya adı) bu bilgisayara kopyalanır."
 
-# Translation key: m_sync_desc
+#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Artık yapılandırmayı başlık çubuğundaki menüden eşzamanlayabilirsiniz"
 
-#: src/gui/shortcuts_window.ui:50
-# Translation key: sync_manually
+#: src/gui/templates/shortcuts_window.ui:50
+#: src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Elle eşzamanla"
 
-#: src/gui/shortcuts_window.ui:36
-# Translation key: keyboard_shortcuts
+#: src/gui/templates/shortcuts_window.ui:36
+#: src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
-#: src/gui/shortcuts_window.ui:15
-# Translation key: open_wiki
+#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr "Uygulama wiki'sini açın"
 
-#: src/gui/shortcuts_window.ui:43
-# Translation key: quit
+#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "Çık"
 
-# Translation key: about_app
+#: src/gui/window.py
 msgid "About app"
 msgstr "Uygulama Hakkında"
 
@@ -456,7 +455,7 @@ msgstr ""
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
-# Translation key: summary
+#: src/main.py
 msgid "Save your desktop configuration"
 msgstr "Masaüstü yapılandırmanızı kaydedin"
 
@@ -467,7 +466,7 @@ msgid ""
 msgstr ""
 "Save Desktop senin suanki ayarlarını(temalar,iconlar,duvar kağıtları, tüm masaüstü ortam ayları , eklentiler , vb.) tek tıkla kaydetmene izin verir."
 
-# Translation key: translator_credits
+#: src/main.py
 msgid "Translator credits"
 msgstr ""
 "Batmanly https://github.com/batmanly\nSabri Ünal https://github.com/yakushabb"
