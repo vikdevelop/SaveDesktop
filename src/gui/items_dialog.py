@@ -42,7 +42,7 @@ class FolderSwitchRow(Adw.ActionRow):
 
 # dialog for showing installed Flatpak apps
 class FlatpakAppsDialog(Adw.AlertDialog):
-    def __init__(self):
+    def __init__(self, parent):
         super().__init__()
         self.set_heading(_("Flatpak apps data selection"))
         
@@ -109,8 +109,10 @@ class FlatpakAppsDialog(Adw.AlertDialog):
             settings["disabled-flatpak-apps-data"] = self.old_disabled_flatpaks
             
 class itemsDialog(Adw.AlertDialog):
-    def __init__(self):
+    def __init__(self, parent):
         super().__init__()
+        self.parent = parent
+
         self.set_heading(_("Items to include in the configuration archive"))
         self.set_body(_("These settings also apply to periodic saving"))
         
@@ -275,9 +277,9 @@ class itemsDialog(Adw.AlertDialog):
     # show dialog for managing Flatpak applications data
     def manage_data_list(self, w):
         self.close()
-        self.appd = FlatpakAppsDialog()
-        self.appd.choose(self, None, None, None)
-        self.appd.present()
+        self.appd = FlatpakAppsDialog(self.parent)
+        self.appd.choose(self.parent, None, None, None)
+        self.appd.present(self.parent)
 
     # show button after clicking on the switch "User data of Flatpak apps"
     def show_appsbtn(self, w, GParamBoolean):

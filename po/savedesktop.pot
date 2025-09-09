@@ -320,6 +320,10 @@ msgid ""
 msgstr ""
 
 #: src/gui/window.py
+msgid "Copy"
+msgstr ""
+
+#: src/gui/window.py
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""

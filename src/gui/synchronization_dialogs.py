@@ -19,7 +19,7 @@ class InitSetupDialog(Adw.AlertDialog):
         self.set_body_use_markup(True)
         self.set_can_close(False)
         self.add_response('cancel', _("Cancel"))
-        self.add_response('ok-syncthing', _("Use Syncthing folder instead"))
+        #self.add_response('ok-syncthing', _("Use Syncthing folder instead"))
         self.set_response_appearance('cancel', Adw.ResponseAppearance.DESTRUCTIVE)
         self.connect('response', self.initsetupDialog_closed)
 
@@ -69,49 +69,58 @@ class InitSetupDialog(Adw.AlertDialog):
 
             # row for showing the command for setting up the Rclone
             self.cmdRow = Adw.ActionRow.new()
-            self.cmdRow.set_title_selectable(True)
+            self.cmdRow.set_subtitle_selectable(True)
             self.cmdRow.set_use_markup(True)
             self.cmdRow.add_suffix(self.copyButton)
             self.initBox.append(self.cmdRow)
 
             # add the Apply and Syncthing buttons to the dialog
+            self.add_response('ok-syncthing', _("Use Syncthing folder instead"))
             self.add_response('ok-rclone', _("Apply"))
             self.set_response_appearance('ok-rclone', Adw.ResponseAppearance.SUGGESTED)
             self.set_response_enabled('ok-rclone', False)
-
-    # show the message about finished setup the synchronization
-    def almost_done(self):
-        self.remove_response('ok-rclone')
-        self.remove_response('ok-syncthing')
-        self.remove_response('next')
-        self.set_extra_child(None)
-        self.set_body(_("You've now created the cloud drive folder! Click on the Next button to complete the setup."))
-        self.set_can_close(True)
-        self.add_response('open-setdialog', _("Next")) if self.get_button_type == 'set-button' else self.add_response('open-clouddialog', _("Next"))
-        self.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED) if self.get_button_type == 'set-button' else self.set_response_appearance('open-clouddialog', Adw.ResponseAppearance.SUGGESTED)
-
-    # copy the command for setting up the Rclone using Gdk.Clipboard()
-    def copy_rclone_command(self, w):
-        os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True) # create the requested folder before copying the command for setting up Rclone to the clipboard
-        clipboard = Gdk.Display.get_default().get_clipboard()
-        Gdk.Clipboard.set(clipboard, f"command -v rclone &> /dev/null && (rclone config create savedesktop {self.cloud_service} && rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'") # copy the command for setting up Rclone to the clipboard
-        self.copyButton.set_icon_name("done")
-        self.cmdRow.set_title(_("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"))
-        self.cmdRow.set_subtitle("")
-        self.set_response_enabled('ok-rclone', True)
 
     # Set the Rclone setup command
     def get_service(self, comborow, GParamObject):
         self.set_body("")
         get_servrow = self.servRow.get_selected_item().get_string()
         self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox" if get_servrow == "DropBox" else "pcloud"
+
         self.cmdRow.set_title(_("Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."))
         self.cmdRow.set_subtitle(f"command -v rclone &amp;> /dev/null &amp;&amp; (rclone config create savedesktop {self.cloud_service} &amp;&amp; rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
+
         # set the copyButton properties
         self.copyButton.set_sensitive(True)
         self.copyButton.set_icon_name("edit-copy-symbolic")
-        self.copyButton.set_tooltip_text("Copy")
-        self.copyButton.connect("clicked", copy_rclone_command)
+        self.copyButton.set_tooltip_text(_("Copy"))
+        self.copyButton.connect("clicked", self.copy_rclone_command)
+
+    # copy the command for setting up the Rclone using Gdk.Clipboard()
+    def copy_rclone_command(self, w):
+        os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True) # create the requested folder before copying the command for setting up Rclone to the clipboard
+
+        clipboard = Gdk.Display.get_default().get_clipboard()
+        Gdk.Clipboard.set(clipboard, f"command -v rclone &> /dev/null && (rclone config create savedesktop {self.cloud_service} && rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'") # copy the command for setting up Rclone to the clipboard
+
+        self.copyButton.set_icon_name("done")
+        self.cmdRow.set_title(_("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"))
+        self.cmdRow.set_subtitle("")
+
+        self.set_response_enabled('ok-rclone', True)
+        self.remove_response('ok-syncthing')
+
+    # show the message about finished setup the synchronization
+    def almost_done(self):
+        self.remove_response('ok-rclone')
+        self.remove_response('next')
+        self.remove_response('ok-syncthing')
+
+        self.set_extra_child(None)
+        self.set_body(_("You've now created the cloud drive folder! Click on the Next button to complete the setup."))
+        self.set_can_close(True)
+
+        self.add_response('open-setdialog', _("Next")) if self.get_button_type == 'set-button' else self.add_response('open-clouddialog', _("Next"))
+        self.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED) if self.get_button_type == 'set-button' else self.set_response_appearance('open-clouddialog', Adw.ResponseAppearance.SUGGESTED)
 
     # Responses of this dialog
     def initsetupDialog_closed(self, w, response):
@@ -252,7 +261,8 @@ class SetDialog(Adw.AlertDialog):
             folder = f'<span color="red">{_("Interval")}: {_("Never")}</span>'
         # Check if the filesystem is not FUSE
         elif ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder"):
-            folder = f'<span color="red">{_("You didn't select the cloud drive folder!")}</span>'
+            err = _("You didn't select the cloud drive folder!")
+            folder = f'<span color="red">{err}</span>'
         # Check if the periodic saving file exists
         elif not os.path.exists(path):
             folder = f'<span color="red">{_("Periodic saving file does not exist.")}</span>'
@@ -414,17 +424,17 @@ class CloudDialog(Adw.AlertDialog):
 
                 if result.returncode == 0:
                     output = result.stdout.strip()
-                    if "You have not selected the cloud drive folder!" in output:
+                    if "You didn't selected the cloud drive folder!" in output:
                         settings["file-for-syncing"] = ""
                         if os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
                             os.remove(f"{DATA}/savedesktop-synchronization.sh")
-                        raise AttributeError(_("You have not selected the cloud drive folder"))
+                        raise AttributeError(_("You didn't select the cloud drive folder!"))
                     else:
                         subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization_setup",
                                        "--automount-setup", self.mount_type],
                                        env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
             else:
-                raise AttributeError(_("You have not selected the cloud drive folder"))
+                raise AttributeError(_("You didn't select the cloud drive folder!"))
         except Exception as e:
             os.system(f'notify-send \'{_("An error occurred")}\' \'{e}\'')
             return

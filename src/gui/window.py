@@ -86,7 +86,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.switcher_bar.set_stack(self.stack)
         self.toolbarview.add_bottom_bar(self.switcher_bar)
 
-        self.setup_switcher_responsive()
+        self._setup_switcher_responsive()
 
         # Toast Overlay for showing the popup window
         self.toast_overlay = Adw.ToastOverlay.new()
@@ -143,8 +143,8 @@ class MainWindow(Adw.ApplicationWindow):
             self.toolbarview.set_content(self.pBox)
             self.unsupp_label = Gtk.Label.new(str=f'<big>{_("<big><b>You have an unsupported environment installed.</b></big>\nPlease use one of these environments: {}.")}</big>'.format(', '.join(set(desktop_map.values())))); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
 
-    # Switch between ViewSwitcherTitle and ViewSwitcherBar based on the title visible
-    def setup_switcher_responsive(self):
+    # Switch between ViewSwitcherTitle and ViewSwitcherBar based on the Adw.Breakpoint status
+    def _setup_switcher_responsive(self):
         self.break_point = Adw.Breakpoint.new(
             Adw.BreakpointCondition.parse("max-width: 400sp")
         )
@@ -203,7 +203,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.itemsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.itemsButton.set_valign(Gtk.Align.CENTER)
         self.itemsButton.add_css_class("flat")
-        self.itemsButton.connect("clicked", self._open_itemsDialog)
+        self.itemsButton.connect("clicked", self._open_items_dialog)
 
         # Action row for opening dialog for selecting items that will be included to the config archive
         self.items_row = Adw.ActionRow.new()
@@ -247,10 +247,10 @@ class MainWindow(Adw.ApplicationWindow):
         self.more_options_dialog.present(self)
 
     # open a dialog for selecting the items to include in the configuration archive
-    def _open_itemsDialog(self, w):
-        self.itemsd = itemsDialog()
-        self.itemsd.choose(self, None, None, None)
-        self.itemsd.present()
+    def _open_items_dialog(self, w):
+        self.items_dialog = itemsDialog(self)
+        self.items_dialog.choose(self, None, None, None)
+        self.items_dialog.present(self)
 
     # Import configuration page
     def import_desktop(self):
@@ -582,26 +582,12 @@ class MainWindow(Adw.ApplicationWindow):
             subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         except subprocess.CalledProcessError as e:
             GLib.idle_add(self.show_err_msg, e)
-            self.toolbarview.set_content(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(self.switcher_title.get_title_visible())
+            self._set_default_widgets_state()
         finally:
             GLib.idle_add(self.done)
 
-    # "Please wait" information page on the "Save" page
+    # "Please wait" information page
     def please_wait(self):
-        # Stop saving configuration
-        def cancel(w):
-            os.popen('pkill -f "savedesktop.core.config"')
-            os.popen('pkill -9 7z')
-            os.popen('pkill -9 tar')
-            self.toolbarview.set_content(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
-            self.set_title("Save Desktop")
-            self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
-            for widget in [self.spinner, self.cancel_button, self.status_page]:
-                self.status_box.remove(widget)
-
         self.headerbar.set_title_widget(None)
         self.break_point.disconnect(self.apply_handler)
         self.switcher_bar.set_reveal(False)
@@ -631,23 +617,29 @@ class MainWindow(Adw.ApplicationWindow):
         self.cancel_button = Gtk.Button.new_with_label(_("Cancel"))
         self.cancel_button.add_css_class("pill")
         self.cancel_button.add_css_class("destructive-action")
-        self.cancel_button.connect("clicked", cancel)
+        self.cancel_button.connect("clicked", self._cancel)
         self.cancel_button.set_valign(Gtk.Align.CENTER)
         self.cancel_button.set_halign(Gtk.Align.CENTER)
         self.status_box.append(self.cancel_button)
 
+    # Stop Saving/Importing Configuration
+    def _cancel(self, w):
+        os.popen('pkill -f "savedesktop.core.config"')
+        os.popen('pkill -9 7z')
+        os.popen('pkill -9 tar')
+        self._set_default_widgets_state()
+        for widget in [self.spinner, self.cancel_button, self.status_page]:
+            self.status_box.remove(widget)
+
+    def _set_default_widgets_state(self):
+        self.toolbarview.set_content(self.headapp)
+        self.headerbar.set_title_widget(self.switcher_title)
+        self.set_title("Save Desktop")
+        self.switcher_bar.set_reveal(True)
+        self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
+
     # config has been saved action
     def done(self):
-        # back to the previous page from this page
-        def back_to_main(w):
-            self.toolbarview.set_content(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
-            self.set_title("Save Desktop")
-            self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
-            print("connected")
-            for widget in [self.status_page, self.open_folder_button, self.logout_button, self.back_button]:
-                self.status_box.remove(widget)
-
         self._send_notification()
 
         # stop spinner animation
@@ -670,7 +662,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # create button for backing to the previous page
         self.back_button = Gtk.Button.new_with_label(_("Back to previous page"))
-        self.back_button.connect("clicked", back_to_main)
+        self.back_button.connect("clicked", self._back_to_main)
         self.back_button.add_css_class("pill")
         self.back_button.set_valign(Gtk.Align.CENTER)
         self.back_button.set_halign(Gtk.Align.CENTER)
@@ -678,7 +670,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     # send notification about saved configuration if application window is inactive only
     def _send_notification(self):
-        self.notification_save = Gio.Notification.new("SaveDesktop")
+        self.notification_save = Gio.Notification.new("Save Desktop")
         self.notification_save.set_body(self.done_title)
         app = self.get_application()
         active_window = app.get_active_window()
@@ -703,6 +695,11 @@ class MainWindow(Adw.ApplicationWindow):
             self.logout_button.set_action_name("app.logout")
             if not (flatpak and self.environment == "Hyprland"):
                 self.buttons_box.append(self.logout_button)
+
+    def _back_to_main(self, w):
+        self._set_default_widgets_state()
+        for widget in [self.status_page, self.open_folder_button, self.logout_button, self.back_button]:
+            self.status_box.remove(widget)
 
     # show message dialog in the error case
     def show_err_msg(self, error):

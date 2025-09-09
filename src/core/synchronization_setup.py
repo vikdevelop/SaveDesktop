@@ -11,7 +11,7 @@ def check_fs():
     if not "gvfsd" in check_filesystem:
         if not "rclone" in check_filesystem:
             if not os.path.exists(f"{settings['file-for-syncing']}/.stfolder"):
-                print("You have not selected the cloud drive folder!")
+                print("You didn't select the cloud drive folder!")
 
 # set up auto-mounting of the cloud drives after logging in to the system
 def set_up_auto_mount():
