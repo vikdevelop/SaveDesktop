@@ -118,20 +118,25 @@ class SaveDesktopApp(Adw.Application):
 
     # "About app" dialog
     def on_about_action(self, action, param):
-        dialog = Adw.AboutDialog()
-        dialog.set_application_name("Save Desktop")
-        dialog.set_developer_name("vikdevelop")
-        dialog.set_comments(_("Save your desktop configuration"))
-        dialog.set_translator_credits(_("Translator credits")) if not _("Translator credits") == "Translator credits" else None
-        dialog.set_license_type(Gtk.License(Gtk.License.GPL_3_0))
-        dialog.set_website("https://vikdevelop.github.io/SaveDesktop")
-        dialog.set_issue_url("https://github.com/vikdevelop/SaveDesktop/issues")
-        dialog.set_copyright("© 2023-2025 vikdevelop")
-        dialog.set_developers(["vikdevelop https://github.com/vikdevelop"])
-        dialog.set_artists(["Brage Fuglseth"])
-        dialog.set_version(os.environ.get("SAVEDESKTOP_VERSION"))
-        dialog.set_application_icon("io.github.vikdevelop.SaveDesktop")
-        dialog.set_release_notes("")
+        app_version = os.environ.get("SAVEDESKTOP_VERSION")
+        dialog = Adw.AboutDialog(
+            application_name="Save Desktop",
+            developer_name="vikdevelop",
+            comments=_("Save your desktop configuration"),
+            license_type=Gtk.License.GPL_3_0,
+            website="https://vikdevelop.github.io/SaveDesktop",
+            issue_url="https://github.com/vikdevelop/SaveDesktop/issues",
+            copyright="© 2023-2025 vikdevelop",
+            developers=["vikdevelop https://github.com/vikdevelop"],
+            artists=["Brage Fuglseth"],
+            version=app_version,
+            application_icon="io.github.vikdevelop.SaveDesktop",
+            release_notes=f"<p>https://github.com/vikdevelop/SaveDesktop/releases/tag/{app_version}</p>",
+        )
+
+        if _("Translator credits") != "Translator credits":
+            dialog.set_translator_credits(_("Translator credits"))
+
         dialog.present(app.get_active_window())
 
     # create Gio actions for opening the folder, logging out of the system, etc.
