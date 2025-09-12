@@ -544,7 +544,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.archive_name = f"{self.folder}/{self.filename_text}"
         self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = self._set_status_desc_save()
-        print(self._set_status_desc_save())
         self.done_title = _("Configuration has been saved!")
         self.done_desc = _("<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n").format(_("Configuration has been saved!"))
 
@@ -636,8 +635,9 @@ class MainWindow(Adw.ApplicationWindow):
         self.toolbarview.set_content(self.headapp)
         self.headerbar.set_title_widget(self.switcher_title)
         self.set_title("Save Desktop")
-        self.switcher_bar.set_reveal(True)
         self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
+        if self.get_default_size()[0] < 400:
+            self.switcher_bar.set_reveal(True)
 
     # config has been saved action
     def done(self):
@@ -699,7 +699,11 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _back_to_main(self, w):
         self._set_default_widgets_state()
-        for widget in [self.status_page, self.open_folder_button, self.logout_button, self.back_button]:
+        if self.archive_mode == "--create":
+            widgets = [self.status_page, self.open_folder_button, self.back_button]
+        else:
+            widgets = [self.status_page, self.logout_button, self.back_button]
+        for widget in widgets:
             self.status_box.remove(widget)
 
     # show message dialog in the error case
