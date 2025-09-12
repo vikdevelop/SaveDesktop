@@ -292,15 +292,15 @@ msgid ""
 msgstr ""
 "Synkronoi työpöytämäärityksesi muiden verkossa olevien tietokoneiden kanssa."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Ensimmäisen synkronoinnin määritys"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Avaa järjestelmän asetukset"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Siirry verkkotileihin"
 
@@ -310,7 +310,7 @@ msgid ""
 msgstr ""
 "Valitse haluamasi pilvipalvelu kuten Google, Microsoft 365 tai Nextcloud."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Napsauta Seuraava-painiketta ja valitse luotu kansio pilvestä"
 
@@ -334,11 +334,11 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Käytä Syncthing-kansiota sen sijaan"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Melkein valmista!"
 
@@ -347,28 +347,29 @@ msgid ""
 "You've now created the cloud drive folder! Click on the Next button to complete the setup."
 msgstr ""
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Valitse"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Seuraava"
 
 #: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Aseta synkronointitiedosto"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Jaksottaisen tallennuksen tiedosto"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Jaksottaisen tallennuksen tiedostoa ei ole olemassa."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Luo"
 
@@ -376,11 +377,12 @@ msgstr "Luo"
 msgid "Please wait …"
 msgstr "Odota hetki…"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Vaihda"
 
 #: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Yhdistä pilvitallennustilaan"
@@ -390,19 +392,19 @@ msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
 msgstr ""
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Valitse pilviaseman kansio"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Et valinnut pilviaseman kansiota!"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Jaksottainen synkronointi"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Kaksisuuntainen synkronointi"
 

@@ -61,6 +61,17 @@
     </screenshots>
           
     <releases>
+       <release version="3.7-beta" type="development" date="2025-09-12">
+           <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.7-beta</url>
+           <description>
+                <ul>
+                    <li>Transition to the Meson build system</li>
+                    <li>Refactored code base</li>
+                    <li>Removed the "Use Syncthing folder instead" from the Initial Synchronization setup dialog for GNOME-based environments</li>
+                    <li>Other minor UI improvements</li>
+                </ul>
+           </description>
+       </release>
        <release version="3.6" date="2025-06-19">
            <description>
                <ul>

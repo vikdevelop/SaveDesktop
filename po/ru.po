@@ -293,15 +293,15 @@ msgid ""
 msgstr ""
 "Синхронизируйте конфигурацию среды рабочего стола с другими компьютерами в сети."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Первоначальная настройка синхронизации"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Откройте системные настройки"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Перейдите в раздел «Сетевые учётные записи»"
 
@@ -311,7 +311,7 @@ msgid ""
 msgstr ""
 "В этом разделе выберите нужный облачный сервис, например Google, Microsoft 365 или Nextcloud."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Нажмите кнопку «Далее» и выберите имеющуюся папку облачного диска"
 
@@ -339,11 +339,11 @@ msgid ""
 msgstr ""
 "Завершив настройку Rclone с помощью данной команды, нажмите кнопку «Применить»"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Вместо этого использовать папку Syncthing"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Почти готово!"
 
@@ -353,28 +353,29 @@ msgid ""
 msgstr ""
 "Теперь вы создали папку на облачном диске! Чтобы завершить настройку, нажмите кнопку «Далее»."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Выбрать"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Далее"
 
 #: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Настройка файла синхронизации"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Файл периодического сохранения"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Файл периодического сохранения не существует."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Создать"
 
@@ -382,11 +383,12 @@ msgstr "Создать"
 msgid "Please wait …"
 msgstr "Пожалуйста, подождите…"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Изменить"
 
 #: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Подключить облачное хранилище"
@@ -397,19 +399,19 @@ msgid ""
 msgstr ""
 "На другом компьютере откройте приложение Save Desktop и на этой странице нажмите кнопку «Настроить файл синхронизации» и выполните необходимые настройки. На этом компьютере выберите папку, которую вы синхронизировали с вашим облачным хранилищем, а также сохранили тот же файл периодического сохранения."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Выбрать папку облачного диска"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Вы не выбрали папку облачного диска!"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Периодическая синхронизация"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Двунаправленная синхронизация"
 

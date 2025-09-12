@@ -292,15 +292,15 @@ msgid ""
 msgstr ""
 "Sünkroniseeri oma töölauakeskkonna seadistusi teiste arvutitega võrgus."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Sünkroniseerimise algne seadistus"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Ava süsteemi seadistused"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Ava võrguteenuste valik"
 
@@ -310,7 +310,7 @@ msgid ""
 msgstr ""
 "Siin vali soovitud pilveteenus, nagu Google, Microsoft 365 või Nextcloud."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Klõpsi nuppu Edasi ja vali loodud pilveteenuse kaust"
 
@@ -338,11 +338,11 @@ msgid ""
 msgstr ""
 "Kui oled selle käsu abil rclone'i seadistanud, siis klõpsi „Rakenda“ nuppu"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Selle asemel kasuta Syncthingi kausta"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Peaaegu valmis!"
 
@@ -352,28 +352,29 @@ msgid ""
 msgstr ""
 "Pilveteenuse kausta oled sa nüüd loonud! Seadistamise lõpetamiseks vajuta nuppu „Edasi“."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Vali"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Edasi"
 
 #: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Seadista sünkroniseerimisfail"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Fail regulaarseks salvestamiseks"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Regulaarseks salvestamiseks mõeldud faili pole olemas."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Loo"
 
@@ -381,11 +382,12 @@ msgstr "Loo"
 msgid "Please wait …"
 msgstr "Palun oota…"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Muuda"
 
 #: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Ühenda pilvesalvestusteenusega"
@@ -396,19 +398,19 @@ msgid ""
 msgstr ""
 "Ava teises arvutis Save Desktop rakendus ja sellel lehel klõpsi nuppu „Seadista sünkroniseerimisfail“ ja seadista vastavalt. Selles arvutis vali kaust, mille oled sünkroniseerinud oma pilveteenusega ja kuhu oled lisanud faili regulaarseks salvestamiseks."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Vali pilveteenuse kaust"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Sa pole pilveteenuse kausta valinud!"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Regulaarne sünkroniseerimine"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Mõlemasuunaline sünkroniseerimine"
 

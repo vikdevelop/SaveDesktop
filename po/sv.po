@@ -294,15 +294,15 @@ msgid ""
 msgstr ""
 "Synkronisera konfigurationen av din skrivbordsmiljö med andra datorer i nätverket."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Inledande synkroniseringsinställningar"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Öppna systeminställningarna"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Gå till avsnittet Onlinekonton"
 
@@ -312,7 +312,7 @@ msgid ""
 msgstr ""
 "I det här avsnittet väljer du den molntjänst du vill ha, till exempel Google, Microsoft 365 eller Nextcloud."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Klicka på knappen Nästa och välj den skapade molnlagringsmappen"
 
@@ -340,11 +340,11 @@ msgid ""
 msgstr ""
 "När du har slutfört konfigureringen av Rclone med det angivna kommandot klickar du på \"Verkställ\" knappen"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Använd Syncthing mapp istället"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Nästan klart!"
 
@@ -354,28 +354,29 @@ msgid ""
 msgstr ""
 "Du har nu skapatmolnenhet mappen! Klicka på nästa för att slutföra installationen."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Välj"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Nästa"
 
 #: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Ställ in synkfil"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Periodisk sparfil"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Periodisk sparfil existerar inte."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Skapa"
 
@@ -383,11 +384,12 @@ msgstr "Skapa"
 msgid "Please wait …"
 msgstr "Vänligen vänta …"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Ändra"
 
 #: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Anslut till molnlagring"
@@ -398,19 +400,19 @@ msgid ""
 msgstr ""
 "På den andra datorn öppnar du Save Desktop programmet och på den här sidan klickar du på knappen \"Konfigurera synkroniseringsfil\" och gör nödvändiga inställningar. På den här datorn väljer du mappen som du har synkroniserat med din molnlagring och som även har sparat samma periodiska sparfil."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Välj mappen i molnlagring"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Du valde inte mappen för molnlagring!"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Periodisk synkronisering"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Dubbelriktad synkronisering"
 

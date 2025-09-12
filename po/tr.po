@@ -294,15 +294,15 @@ msgid ""
 msgstr ""
 "Masaüstü ortamı yapılandırmanızı ağdaki diğer bilgisayarlarla eşzamanlayın."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "İlk senkronizasyon kurulumu"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Sistem ayarlarını açın."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Çevrimiçi Hesaplar bölümüne gidin"
 
@@ -312,7 +312,7 @@ msgid ""
 msgstr ""
 "Bu bölümde Google, Microsoft 365 veya Nextcloud gibi istediğiniz bulut hizmetini seçin."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 "3. İleri düğmesine tıklayın ve oluşturulan bulut sürücü klasörünü seçin"
@@ -341,11 +341,11 @@ msgid ""
 msgstr ""
 "Verilen komutu kullanarak Rclone kurulumunu tamamladıktan sonra \"Uygula\" düğmesine tıklayın"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Bunun yerine Syncthing klasörünü kullanın"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Az kaldı!"
 
@@ -355,28 +355,29 @@ msgid ""
 msgstr ""
 "Bulut sürücü klasörünü oluşturdunuz! Kurulumu tamamlamak için İleri düğmesine tıklayın."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Seç"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Sürdür"
 
 #: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Eşzamanlama dosyası ayarla"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Düzenli kayıt dosyası"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Düzenli kayıt dosyası yok."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Oluştur"
 
@@ -384,11 +385,12 @@ msgstr "Oluştur"
 msgid "Please wait …"
 msgstr "Lütfen bekleyin …"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Değiştir"
 
 #: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Bulut depolamaya bağlan"
@@ -399,19 +401,19 @@ msgid ""
 msgstr ""
 "Başka bilgisayarda Save Desktop uygulamasını açıp bu sayfadaki “Eşzamanlama dosyasını ayarla” düğmesine tıklayın ve gerekli ayarları yapın. Bu bilgisayarda, bulut depolama alanınızla eşzamanlamak istediğiniz ve aynı düzenli kayıt dosyasına kaydettiğiniz klasörü seçin."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Bulut sunucu klasörünü seç"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Bulut sürücü klasörünü seçmediniz!"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Düzenli eşzamanlama"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Çift yönlü eşzamanlama"
 

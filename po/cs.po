@@ -292,15 +292,15 @@ msgid ""
 msgstr ""
 "Synchronizujte konfiguraci vašeho desktopového prostředí s ostatními počítači v síti."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Počáteční nastavení synchronizace"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Otevřete nastavení systému"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Přejděte do sekce Online účty"
 
@@ -310,7 +310,7 @@ msgid ""
 msgstr ""
 "V této sekci vyberte požadovanou cloudovou službu, jako je Google, Microsoft 365 nebo Nextcloud."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 "3. Klikněte na tlačítko Další a vyberte vytvořenou složku cloudové jednotky"
@@ -339,11 +339,11 @@ msgid ""
 msgstr ""
 "Po dokončení nastavení Rclone pomocí uvedeného příkazu klikněte na tlačítko \"Apply\""
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Použít místo toho složku Syncthing"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Téměř hotovo!"
 
@@ -353,28 +353,29 @@ msgid ""
 msgstr ""
 "Nyní máte vytvořenou složku cloudové jednotky! Klikněte na tlačítko Další pro dokončení nastavení."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Vybrat"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Další"
 
 #: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Nastavit synchronizační soubor"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Soubor pravidelného ukládání"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Soubor pravidelného ukládání neexistuje."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Vytvořit"
 
@@ -382,11 +383,12 @@ msgstr "Vytvořit"
 msgid "Please wait …"
 msgstr "Počkejte prosím …"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Změnit"
 
 #: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Připojit se ke cloudovému úložišti"
@@ -397,19 +399,19 @@ msgid ""
 msgstr ""
 "Na jiném počítači otevřete aplikaci Save Desktop a na této stránce klikněte na tlačítko „Nastavit synchronizační soubor“ a proveďte potřebná nastavení. Na tomto počítači vyberte složku, kterou jste synchronizovali s cloudovým úložištěm a do které jste také uložili stejný soubor pro pravidelné ukládání."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Vybrat cloudovou složku"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Nevybrali jste složku cloudové jednotky!"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Pravidelná synchronizace"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Obousměrná synchronizace"
 

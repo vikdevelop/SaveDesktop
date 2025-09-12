@@ -293,15 +293,15 @@ msgid ""
 msgstr ""
 "Sincronizza la configurazione del tuo ambiente desktop con altri computer nella rete."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Configurazione iniziale della sincronizzazione"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Aprire le impostazioni di sistema"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Vai alla sezione Account online"
 
@@ -311,7 +311,7 @@ msgid ""
 msgstr ""
 "In questa sezione seleziona il servizio cloud desiderato, ad esempio Google, Microsoft 365 o Nextcloud."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 "3. Fare clic sul pulsante Avanti e selezionare la cartella dell'unità cloud creata"
@@ -340,11 +340,11 @@ msgid ""
 msgstr ""
 "Una volta terminata la configurazione di Rclone utilizzando il comando fornito, fare clic sul pulsante \"Applica\""
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Utilizzare invece la cartella Syncthing"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Quasi finito!"
 
@@ -354,28 +354,29 @@ msgid ""
 msgstr ""
 "Ora hai creato la cartella dell'unità cloud! Fai clic sul pulsante Avanti per completare la configurazione."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Seleziona"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Prossimo"
 
 #: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Imposta il file di sincronizzazione"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "File di salvataggio periodico"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Il file di salvataggio periodico non esiste."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Crea"
 
@@ -383,11 +384,12 @@ msgstr "Crea"
 msgid "Please wait …"
 msgstr "Attendere prego …"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Modifica"
 
 #: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Connettiti allo storage cloud"
@@ -398,19 +400,19 @@ msgid ""
 msgstr ""
 "Su un altro computer, apri l'app Save Desktop e, in questa pagina, clicca sul pulsante \"Imposta il file di sincronizzazione\" e fai le impostazioni necessarie. Su questo computer, seleziona la cartella che hai sincronizzato con il tuo archivio cloud ed hai anche salvato lo stesso file di salvataggio periodico."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Seleziona la cartella dell'unità cloud"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Non hai selezionato la cartella dell'unità cloud!"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Sincronizzazione periodica"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Sincronizzazione bidirezionale"
 

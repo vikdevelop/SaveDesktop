@@ -291,15 +291,15 @@ msgid ""
 "Sync your desktop environment configuration with other computers in the network."
 msgstr "இணைப்பில் உள்ள பிற கணினிகளுடன் உங்கள் பணிமேடை சூழல் உள்ளமைவை ஒத்திசை."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "ஆரம்ப ஒத்திசைவு அமைப்பு"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. கணினி அமைப்புகளைத் திற"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. நிகழ்நிலை கணக்குகள் பகுதிக்குச் செல்"
 
@@ -309,7 +309,7 @@ msgid ""
 msgstr ""
 "இந்தப் பிரிவில் கூகிள், நுண்மென் 365 அல்லது அடுத்தமுகில் போன்ற நீங்கள் விரும்பும் முகில் சேவையைத் தேர்ந்தெடு."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 "3. அடுத்த பொத்தானைக் சொடுக்கு செய்து உருவாக்கிய முகில் இயக்கிக் கோப்புறையைத் தேர்ந்தெடு"
@@ -338,11 +338,11 @@ msgid ""
 msgstr ""
 "வழங்கப்பட்ட கட்டளையைப் பயன்படுத்தி ஆர்நகலியை அமைத்ததும், \"இடு\" பொத்தானைக் சொடுக்கு"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "அதற்குப் பதிலாக ஒத்திசைவு கோப்புறையைப் பயன்படுத்தவும்"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "கிட்டத்தட்ட முடிந்தது!"
 
@@ -352,28 +352,29 @@ msgid ""
 msgstr ""
 "நீங்கள் இப்போது முகில் இயக்கிக் கோப்புறையை உருவாக்கியுள்ளீர்கள்! அமைப்பை முடிக்க அடுத்த பொத்தானைக் சொடுக்கு."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "தேர்ந்தெடு"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "அடுத்தது"
 
 #: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "ஒத்திசைவு கோப்பை அமை"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "அவ்வப்போது சேமிக்கும் கோப்பு"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "அவ்வப்போது சேமிக்கும் கோப்பு இல்லை."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "உருவாக்கு"
 
@@ -381,11 +382,12 @@ msgstr "உருவாக்கு"
 msgid "Please wait …"
 msgstr "தயவுசெய்து காத்திரு…"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "மாற்றம்"
 
 #: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "முகில் சேமிப்பகத்துடன் இணை"
@@ -396,19 +398,19 @@ msgid ""
 msgstr ""
 "மற்றொரு கணினியில், சேமிபணிமேடை பயன்பாட்டைத் திறந்து, இந்தப் பக்கத்தில், \"ஒத்திசைவு கோப்பை அமைக்கவும்\" பொத்தானைக் சொடுக்கு செய்து தேவையான அமைப்புகளை உருவாக்கவும். இந்தக் கணினியில், உங்கள் மேகக்கணி சேமிப்பகத்துடன் நீங்கள் ஒத்திசைத்த கோப்புறையைத் தேர்ந்தெடுக்கவும், அதே கால சேமிப்பு கோப்பையும் சேமித்துள்ளீர்கள்."
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "முகில் இயக்கிக் கோப்புறையைத் தேர்ந்தெடு"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "நீங்கள் முகில் இயக்கிக் கோப்புறையைத் தேர்ந்தெடுக்கவில்லை!"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "அவ்வப்போது ஒத்திசைவு"
 
-#: src/gui/window.py
+#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "இருதரப்பு ஒத்திசைவு"
 
