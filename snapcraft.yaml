@@ -79,16 +79,13 @@ parts:
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
     plugin: meson
-    source-tag: '3.7-beta'
+    source-tag: '3.7-beta.01'
     source-depth: 1
     meson-parameters:
       - --prefix=/snap/savedesktop/current/usr
     organize:
       snap/savedesktop/current/usr: usr
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
-    override-build: |
-      craftctl default
-      sed -i '1s|#!/snap/gnome-46-2404-sdk/current/usr/bin/python3|#!/usr/bin/env python3|' $CRAFT_PART_INSTALL/usr/bin/savedesktop
 
   deps:
     after: [ dconf, savedesktop ]
