@@ -39,7 +39,7 @@ class Syncing:
         if interval is None:
             settings["manually-sync"] = settings["periodic-import"] == "Manually2"
             if settings["manually-sync"]:
-                self.check_sync_date()
+                self.check_manually_sync_status()
             else:
                 print("Synchronization is not set up.")
         else:
@@ -69,13 +69,13 @@ class Syncing:
             err_str = _("An error occurred")
             err = "SaveDesktop.json doesn't exist in the cloud drive folder!"
             os.system(f'notify-send "{err_str}" "{err}"')
-            exit()
-        self.get_pb_info()
-        os.makedirs(f"{CACHE}/syncing", exist_ok=True) # create the subfolder in the cache directory
-        os.chdir(f"{CACHE}/syncing")
-        os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
-        print("extracting the archive")
-        self.get_zip_file_status()
+        else:
+            self.get_pb_info()
+            os.makedirs(f"{CACHE}/syncing", exist_ok=True) # create the subfolder in the cache directory
+            os.chdir(f"{CACHE}/syncing")
+            os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
+            print("extracting the archive")
+            self.get_zip_file_status()
         
     # Get data from the SaveDesktop.json file such as filename format, periodic saving interval and folder (for bidirectional synchronization)
     def get_pb_info(self):
@@ -115,7 +115,7 @@ class Syncing:
 
         # #2 If it fails, run GUI
         if not self.password:
-            os.system(f"python3 -m savedesktop.gui.password_checker")
+            subprocess.run([sys.executable, "-m", "savedesktop.gui.password_checker"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
             self.password = try_passwordstore()
 
         # #3 If password is still unavailable, get it from the {DATA}/entered-password.txt file
@@ -127,8 +127,7 @@ class Syncing:
         if not self.password:
             msg = _("Password not entered, or it's incorrect. Unable to continue.")
             err_occurred = _("An error occurred")
-            print(msg)
-            os.system(f'notify-send "{err_occurred}" "{msg}"')
+            os.system(f'notify-send "{msg}" "{err_occurred}"')
             exit()
 
         # #5 Continue in extraction
@@ -162,8 +161,8 @@ class Syncing:
             os.system(f"notify-send '{err_str}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
             if os.path.exists(f"{DATA}/password"):
                 os.remove(f"{DATA}/password")
-            exit()
-        self.import_config()
+        else:
+            self.import_config()
     
     # Start importing a configuration from the configuration archive
     def import_config(self):
@@ -182,8 +181,6 @@ class Syncing:
                 shutil.rmtree("syncing")
         
         # Send a notification about finished synchronization
-        os.system(f"notify-send 'Save Desktop ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")
+        os.system(f"notify-send 'Save Desktop Synchronization ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
 Syncing()
-
-
