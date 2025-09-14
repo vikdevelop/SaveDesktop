@@ -11488,6 +11488,8 @@ html {
   }
 }
 .portfolio .portfolio-item {
+  width: 150px;
+  height: 150px;
   cursor: pointer;
   position: relative;
   display: block;
@@ -11508,6 +11510,15 @@ html {
 }
 .portfolio .portfolio-item .portfolio-item-caption .portfolio-item-caption-content {
   font-size: 1.5rem;
+}
+
+.portfolio-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  margin-top: 10px;
 }
 
 .portfolio-modal .btn-close {
@@ -11547,4 +11558,3 @@ html {
 .copyright {
   background-color: #1a252f;
 }
-
