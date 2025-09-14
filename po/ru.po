@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
 "PO-Revision-Date: 2025-09-15 04:56+0000\n"
-"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
+"Last-Translator: Vin <k3kelm4vw@mozmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/ru/>\n"
 "Language: ru\n"
@@ -68,7 +68,7 @@ msgstr "Приложения Flatpak"
 
 #: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
-msgstr "Список установленных Flatpak приложений"
+msgstr "Список установленных приложений Flatpak"
 
 #: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
@@ -549,9 +549,9 @@ msgid ""
 "wallpapers, all desktop environment settings, extensions, etc.) with one "
 "click."
 msgstr ""
-"Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все "
-"настройки окружения рабочего стола, расширения и т.д.? Save Desktop поможет "
-"вам в этом. Всего один клик - и ваша конфигурация сохранена."
+"Вы хотите сохранить текущую конфигурацию (темы, значки, обои, все настройки "
+"окружения рабочего стола, расширения и т.д.)? Save Desktop поможет вам в "
+"этом всего в один клик."
 
 #: src/main.py
 msgid "Translator credits"
