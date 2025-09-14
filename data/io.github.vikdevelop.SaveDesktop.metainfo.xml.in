@@ -45,18 +45,15 @@
     <screenshots>
         <screenshot type="default">
             <caption translatable="yes">Save</caption>
-            <!--image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/save_page.png</image-->
-            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/save_page.png</image>
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/save_page.png</image>
         </screenshot>
         <screenshot>
             <caption translatable="yes">Import</caption>
-            <!--image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/import_page.png</image-->
-            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png</image>
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/import_page.png</image>
         </screenshot>
         <screenshot>
             <caption translatable="yes">Sync</caption>
-            <!--image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/sync_page.png</image-->
-            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png</image>
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/sync_page.png</image>
         </screenshot>
     </screenshots>
           
