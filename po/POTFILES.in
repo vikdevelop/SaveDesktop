@@ -1,0 +1,13 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/io.github.vikdevelop.SaveDesktop.desktop.in
+data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in
+data/io.github.vikdevelop.SaveDesktop.gschema.xml
+src/core/synchronization.py
+src/gui/more_options_dialog.py
+src/gui/items_dialog.py
+src/gui/password_checker.py
+src/gui/shortcuts_window.ui
+src/gui/synchronization_dialogs.py
+src/gui/window.py
+src/globals.py

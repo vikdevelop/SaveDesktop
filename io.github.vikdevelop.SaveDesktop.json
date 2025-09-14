@@ -1,0 +1,124 @@
+{
+    "app-id" : "io.github.vikdevelop.SaveDesktop",
+    "desktop-file-name-suffix" : " (Master)",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "48",
+    "sdk" : "org.gnome.Sdk",
+    "command" : "savedesktop",
+    "finish-args" : [
+        "--share=ipc",
+        "--socket=wayland",
+        "--socket=fallback-x11",
+        "--device=dri",
+        "--filesystem=xdg-run/gvfs",
+        "--filesystem=xdg-run/gvfsd",
+        "--filesystem=~/.config",
+        "--filesystem=~/.local/share",
+        "--filesystem=xdg-download",
+        "--filesystem=xdg-music",
+        "--filesystem=xdg-videos",
+        "--filesystem=xdg-documents",
+        "--filesystem=xdg-public-share",
+        "--filesystem=xdg-pictures",
+        "--filesystem=xdg-desktop",
+        "--filesystem=~/.themes:create",
+        "--filesystem=~/.icons:create",
+        "--filesystem=~/.cinnamon:create",
+        "--filesystem=~/.xfce4:create",
+        "--filesystem=~/.fonts:create",
+        "--filesystem=/var/lib/flatpak:ro",
+        "--filesystem=~/.local/share/flatpak/app:ro",
+        "--filesystem=~/.var/app:ro",
+        "--talk-name=org.gnome.SessionManager",
+        "--talk-name=org.xfce.SessionManager",
+        "--talk-name=org.kde.LogoutPrompt",
+        "--talk-name=com.system76.CosmicSession",
+        "--talk-name=org.freedesktop.FileManager1",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--filesystem=xdg-run/dconf",
+        "--talk-name=ca.desrt.dconf"
+    ],
+    "modules" : [
+        {
+            "name" : "7zip",
+            "buildsystem" : "simple",
+            "subdir" : "CPP/7zip/Bundles/Alone2",
+            "build-commands" : [
+                "make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc",
+                "install -D ./_o/7zz -t /app/bin",
+                "ln -s /app/bin/7zz /app/bin/7z"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/ip7z/7zip.git",
+                    "tag" : "25.01",
+                    "commit" : "5e96a8279489832924056b1fa82f29d5837c9469"
+                }
+            ],
+            "x-checker-data" : {
+                "type" : "git",
+                "tag-pattern" : "^([\\d.]+)$"
+            }
+        },
+        {
+            "name" : "dconf-amd64",
+            "only-arches" : [
+                "x86_64"
+            ],
+            "buildsystem" : "simple",
+            "build-commands" : [
+                "cp -R * /app"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz",
+                    "sha256" : "164fc714f96ef4b348665fc3617f54cfa5acf12df5c039d7a9d21ba1d86a2f2d"
+                }
+            ]
+        },
+        {
+            "name" : "dconf-aarch64",
+            "only-arches" : [
+                "aarch64"
+            ],
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dsystemduserunitdir=/app/lib/systemd/user/",
+                "-Dbash_completion=false",
+                "-Dman=false"
+            ],
+            "cleanup" : [
+                "/include",
+                "/lib/pkgconfig",
+                "/libexec",
+                "/share/dbus-1"
+            ],
+            "sources" : [
+                {
+                    "type" : "archive",
+                    "url" : "https://download.gnome.org/sources/dconf/0.40/dconf-0.40.0.tar.xz",
+                    "sha256" : "cf7f22a4c9200421d8d3325c5c1b8b93a36843650c9f95d6451e20f0bcb24533"
+                }
+            ]
+        },
+        {
+            "name" : "savedesktop",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "dir",
+                    "path" : "."
+                }
+            ],
+            "config-opts" : [
+                "--libdir=lib"
+            ]
+        }
+    ],
+    "build-options" : {
+        "env" : {        }
+    }
+}

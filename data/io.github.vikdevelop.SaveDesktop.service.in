@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=io.github.vikdevelop.SaveDesktop
+Exec=@bindir@/savedesktop --gapplication-service

@@ -25,16 +25,14 @@ If your changes include visual modifications, please include screenshots to demo
 
 Select the installation methods on which you tested your changes:
 
-- [ ] Flatpak
+- [ ] Flatpak or GNOME Builder
 - [ ] Snap
-- [ ] Native version from this repository
 
 ## Checklist
 
 - [ ] I have read the [contributing guidelines](https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md).
 - [ ] I have performed a self-review of my code.
 - [ ] I have commented my code where necessary.
-- [ ] I have updated the documentation accordingly.
 - [ ] My changes do not introduce any new warnings.
 
 ## Additional Notes

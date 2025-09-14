@@ -13,6 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Validate AppStream metainfo
+        run: |
+          appstreamcli validate data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in
+
       - name: Install dependencies
         run: |
           sudo apt update
@@ -24,13 +28,9 @@ jobs:
           flatpak install --user -y flathub org.gnome.Platform//48
           flatpak install --user -y flathub org.gnome.Sdk//48
 
-      - name: Validate AppStream metainfo
-        run: |
-          appstreamcli validate flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
-
       - name: Build Flatpak
         run: |
-          flatpak-builder --force-clean --repo=sdrepo build io.github.vikdevelop.SaveDesktop.yaml
+          flatpak-builder --force-clean --sandbox --repo=sdrepo build io.github.vikdevelop.SaveDesktop.json
           flatpak build-bundle sdrepo io.github.vikdevelop.SaveDesktop.flatpak io.github.vikdevelop.SaveDesktop
 
       - name: Upload Flatpak artifact

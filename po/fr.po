@@ -1,0 +1,463 @@
+# Translation file for fr
+# Generated from fr.json
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: savedesktop\n"
+"POT-Creation-Date: 2025-09-03 19:10\n"
+"PO-Revision-Date: 2025-09-03 19:10\n"
+"Last-Translator: Auto-generated\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/gui/window.py
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: src/gui/templates/shortcuts_window.ui:22
+#: src/gui/window.py
+msgid "Save the current configuration"
+msgstr "Sauvegarder la configuration actuelle"
+
+#: src/gui/window.py
+msgid "Set the file name"
+msgstr "Définir le nom du fichier"
+
+#: src/gui/templates/shortcuts_window.ui:64
+#: src/gui/window.py
+#: src/gui/items_dialog.py
+msgid "Items to include in the configuration archive"
+msgstr "Éléments à inclure dans l'archive de configuration"
+
+#: src/gui/items_dialog.py
+msgid "These settings also apply to periodic saving"
+msgstr "Ces paramètres s'appliquent également à l'enregistrement périodique"
+
+#: src/gui/items_dialog.py
+msgid "Icons"
+msgstr "Icônes"
+
+#: src/gui/items_dialog.py
+msgid "Themes"
+msgstr "Thèmes"
+
+#: src/gui/items_dialog.py
+msgid "Fonts"
+msgstr "Polices de caractères"
+
+# Translation key: backgrounds
+msgid "Backgrounds"
+msgstr "Fonds d'écran"
+
+#: src/gui/items_dialog.py
+msgid "Extensions"
+msgstr ""
+
+#: src/gui/items_dialog.py
+msgid "Desktop"
+msgstr "Bureau"
+
+#: src/gui/items_dialog.py
+msgid "Flatpak apps"
+msgstr "Applications Flatpak"
+
+#: src/gui/items_dialog.py
+msgid "List of installed Flatpak apps"
+msgstr "Liste des applications Flatpak installées"
+
+#: src/gui/items_dialog.py
+msgid "User data of installed Flatpak apps"
+msgstr "Données utilisateur des applications Flatpak installées"
+
+#: src/gui/items_dialog.py
+msgid "Flatpak apps data selection"
+msgstr "Sélection des données des applications Flatpak"
+
+#: src/gui/templates/shortcuts_window.ui:57
+#: src/gui/more_options_dialog.py
+msgid "More options"
+msgstr "Plus d'options"
+
+#: src/gui/more_options_dialog.py
+msgid "Periodic saving"
+msgstr "Sauvegarde périodique"
+
+#: src/gui/more_options_dialog.py
+msgid "Changes will only take effect after the next login"
+msgstr "Les modifications ne prendront effet qu'après la prochaine connexion"
+
+#: src/gui/more_options_dialog.py
+msgid "Interval"
+msgstr "Intervalle"
+
+#: src/gui/more_options_dialog.py
+msgid "Never"
+msgstr "Jamais"
+
+#: src/gui/more_options_dialog.py
+msgid "Daily"
+msgstr "Journalier"
+
+#: src/gui/more_options_dialog.py
+msgid "Weekly"
+msgstr "Hebdomadaire"
+
+#: src/gui/more_options_dialog.py
+msgid "Monthly"
+msgstr "Mensuel"
+
+#: src/gui/more_options_dialog.py
+msgid "Manually"
+msgstr "Manuellement"
+
+#: src/gui/more_options_dialog.py
+msgid "Learn more"
+msgstr "En savoir plus"
+
+#: src/gui/more_options_dialog.py
+msgid "Folder for periodic saving"
+msgstr "Répertoire de sauvegarde périodique"
+
+#: src/gui/more_options_dialog.py
+msgid "Choose custom folder for periodic saving"
+msgstr "Sélectionner un répertoire personnalisé pour la sauvegarde périodique"
+
+#: src/gui/more_options_dialog.py
+msgid "Choose another folder"
+msgstr "Sélectionner un autre dossier"
+
+#: src/gui/more_options_dialog.py
+msgid "File name format"
+msgstr "Format du nom de fichier"
+
+#: src/gui/more_options_dialog.py
+msgid "Reset to default"
+msgstr "Réinitialisation aux valeurs par défaut"
+
+#: src/gui/more_options_dialog.py
+msgid "Password for encryption"
+msgstr ""
+
+#: src/gui/more_options_dialog.py
+msgid "Manual saving"
+msgstr ""
+
+#: src/gui/more_options_dialog.py
+msgid "Archive encryption"
+msgstr "Chiffrement de l'archive"
+
+# Translation key: archive_encryption_desc
+msgid ""
+"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+msgstr ""
+"Lors de la sauvegarde manuelle de la configuration, il vous sera demandé de créer un mot de passe. Cette option permet d'améliorer la sécurité de vos données lorsque la configuration est enregistrée sur un support de stockage amovible."
+
+#: src/gui/more_options_dialog.py
+msgid "Save the configuration without creating an archive"
+msgstr ""
+
+#: src/gui/window.py
+msgid "Create new password"
+msgstr "Créer un nouveau mot de passe"
+
+# Translation key: create_pwd_desc
+msgid ""
+"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+msgstr ""
+"Veuillez créer un nouveau mot de passe. Le nouveau mot de passe doit contenir au moins 12 caractères avec au moins une majuscule, au moins une minuscule et au moins un caractère spécial."
+
+#: src/gui/window.py
+msgid "Generate Password"
+msgstr ""
+
+#: src/gui/window.py
+msgid "Password"
+msgstr "Mot de passe"
+
+#: src/gui/window.py
+msgid "Unlock the archive with a password"
+msgstr "Déverrouiller l'archive avec un mot de passe"
+
+# Translation key: check_pwd_desc
+msgid ""
+"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+msgstr ""
+"Veuillez saisir ci-dessous le mot de passe permettant de déverrouiller l'archive qui contient votre configuration. En cas d'oubli du mot de passe, vous ne serez pas en mesure d'ouvrir l'archive contenant votre configuration et votre configuration ne pourra donc pas être importée."
+
+# Translation key: enter_password_title
+msgid ""
+"Please enter a password to unlock the archive for sync the configuration"
+msgstr ""
+
+# Translation key: enter_password_desc
+msgid ""
+"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+msgstr ""
+
+#: src/gui/password_checker.py
+msgid "Remember Password"
+msgstr ""
+
+#: src/core/synchronization.py
+msgid "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
+
+# Translation key: saving_config_status
+msgid ""
+"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+msgstr ""
+"<big><b>Enregistrement de la configuration ...</b></big>\nLa configuration de votre environnement de bureau sera enregistrée dans :\n <i>{}/{}.sd.tar.gz</i>\n"
+
+#: src/gui/window.py
+msgid "Configuration has been saved!"
+msgstr "La configuration a été enregistrée !"
+
+# Translation key: config_saved_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+msgstr ""
+"<big><b>{}</b></big>\nVous pouvez maintenant consulter l'archive contenant la configuration de votre environnement de bureau, ou revenir à la page précédente.\n"
+
+#: src/gui/window.py
+msgid "Open the folder"
+msgstr "Ouvrir le dossier"
+
+#: src/gui/window.py
+msgid "Import"
+msgstr "Importation"
+
+#: src/gui/window.py
+msgid "Import saved configuration"
+msgstr "Importer la configuration sauvegardée"
+
+#: src/gui/templates/shortcuts_window.ui:29
+#: src/gui/window.py
+msgid "Import from file"
+msgstr "Importer à partir d'un fichier"
+
+#: src/gui/window.py
+msgid "Import from folder"
+msgstr ""
+
+#: src/gui/window.py
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/gui/window.py
+msgid "Save Desktop files"
+msgstr "Fichiers Save Desktop"
+
+# Translation key: importing_config_status
+msgid ""
+"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+msgstr ""
+"<big><b>Import de la configuration ...</b></big>\nImport de la configuration à partir de : {}\n"
+
+#: src/gui/window.py
+msgid "The configuration has been applied!"
+msgstr "La configuration a été appliquée !"
+
+# Translation key: config_imported_desc
+msgid ""
+"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+msgstr ""
+"<big><b>{}</b></big>\nVous pouvez vous déconnecter du système pour que les changements prennent effet, ou revenir à la page précédente et vous déconnecter plus tard.\n"
+
+#: src/gui/window.py
+msgid "Back to previous page"
+msgstr "Revenir à la page précédente"
+
+#: src/gui/window.py
+msgid "Log Out"
+msgstr "Fermer la session"
+
+#: src/gui/window.py
+msgid "An error occurred"
+msgstr "Une erreur est survenue"
+
+#: src/gui/window.py
+msgid "Apply"
+msgstr "Appliquer"
+
+#: src/gui/window.py
+msgid "Sync"
+msgstr "Synchroniser"
+
+# Translation key: sync_desc
+msgid ""
+"Sync your desktop environment configuration with other computers in the network."
+msgstr ""
+"Synchroniser la configuration de votre environnement de bureau avec les autres ordinateurs du réseau."
+
+#: src/gui/synchronization_dialogs.py
+msgid "Initial synchronization setup"
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "1. Open the system settings"
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "2. Go to the Online Accounts section"
+msgstr ""
+
+# Translation key: gnome_oa_section_desc
+msgid ""
+"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "3. Click on the Next button and select the created cloud drive folder"
+msgstr ""
+
+# Translation key: gnome_oa_chooser_desc
+msgid ""
+"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+msgstr ""
+
+# Translation key: rclone_intro_desc
+msgid ""
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+msgstr ""
+
+# Translation key: rclone_copy_cmd
+msgid ""
+"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+msgstr ""
+
+# Translation key: rclone_cmd_copied_msg
+msgid ""
+"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "Use Syncthing folder instead"
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "Almost done!"
+msgstr ""
+
+# Translation key: almost_done_desc
+msgid ""
+"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "Select"
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "Next"
+msgstr ""
+
+#: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/synchronization_dialogs.py
+#: src/gui/window.py
+msgid "Set up the sync file"
+msgstr "Configurer le fichier de synchronisation"
+
+#: src/gui/synchronization_dialogs.py
+msgid "Periodic saving file"
+msgstr "Fichier pour l'enregistrement périodique"
+
+#: src/gui/synchronization_dialogs.py
+msgid "Periodic saving file does not exist."
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "Create"
+msgstr ""
+
+#: src/gui/window.py
+msgid "Please wait …"
+msgstr "Veuillez patienter …"
+
+#: src/gui/synchronization_dialogs.py
+msgid "Change"
+msgstr ""
+
+#: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/synchronization_dialogs.py
+#: src/gui/window.py
+msgid "Connect to the cloud storage"
+msgstr ""
+
+# Translation key: connect_cloud_storage_desc
+msgid ""
+"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "Select the cloud drive folder"
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "You didn't select the cloud drive folder!"
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "Periodic synchronization"
+msgstr "Synchronisation périodique"
+
+#: src/gui/synchronization_dialogs.py
+msgid "Bidirectional synchronization"
+msgstr ""
+
+# Translation key: bidirectional_sync_desc
+msgid ""
+"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+msgstr ""
+
+#: src/gui/window.py
+msgid "From now on, you can sync the config from the menu in the header bar"
+msgstr ""
+"Désormais, vous pouvez synchroniser la configuration à partir du menu de la barre d'en-tête"
+
+#: src/gui/templates/shortcuts_window.ui:50
+#: src/gui/window.py
+msgid "Synchronise manually"
+msgstr "Synchroniser manuellement"
+
+#: src/gui/templates/shortcuts_window.ui:36
+#: src/gui/window.py
+msgid "Keyboard shortcuts"
+msgstr "Raccourcis clavier"
+
+#: src/gui/templates/shortcuts_window.ui:15
+msgid "Open the application wiki"
+msgstr ""
+
+#: src/gui/templates/shortcuts_window.ui:43
+msgid "Quit"
+msgstr "Quitter"
+
+#: src/gui/window.py
+msgid "About app"
+msgstr "À propos"
+
+# Translation key: unsuppurted_env_desc
+msgid ""
+"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+msgstr ""
+"<big><b>Votre environnements de bureau n'est pas compatible </b></big> \nVeuillez utiliser l'un de ces environnements : {}."
+
+#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
+#: src/main.py
+msgid "Save your desktop configuration"
+msgstr "Sauvegarder la configuration de votre bureau"
+
+# Translation key: description
+#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
+msgid ""
+"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+msgstr ""
+"Save Desktop vous permet de sauvegarder votre configuration actuelle (thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de bureau, les extensions, en un seul clic."
+
+#: src/main.py
+msgid "Translator credits"
+msgstr "Lien github des traducteurs"
+

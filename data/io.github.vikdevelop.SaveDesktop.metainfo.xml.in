@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+    
+    <id>io.github.vikdevelop.SaveDesktop</id>
+    <launchable type="desktop-id">io.github.vikdevelop.SaveDesktop.desktop</launchable>
+    <name>Save Desktop</name>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-3.0-or-later</project_license>
+    <developer id="io.github.vikdevelop">
+      <name>vikdevelop</name>
+    </developer>
+
+    <categories>
+        <category>Utility</category>
+    </categories>
+    
+    <content_rating type="oars-1.1"/>
+
+    <requires>
+        <display_length compare="ge">360</display_length>
+    </requires>
+
+    <supports>
+        <control>keyboard</control>
+        <control>pointing</control>
+        <control>touch</control>
+    </supports>
+
+    <branding>
+        <color type="primary" scheme_preference="light">#b6d1eb</color>
+        <color type="primary" scheme_preference="dark">#061530</color>
+    </branding>
+    
+    <url type="homepage">https://vikdevelop.github.io/SaveDesktop</url>
+    <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
+    <url type="translate">https://hosted.weblate.org/projects/vikdevelop/savedesktop/</url>
+    <url type="contribute">https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md</url>
+
+    <summary translatable="yes">Save your desktop configuration</summary>
+    
+    <description>
+      <p translatable="yes">Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
+    </description>
+    
+    <screenshots>
+        <screenshot type="default">
+            <caption translatable="yes">Save</caption>
+            <!--image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/save_page.png</image-->
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/save_page.png</image>
+        </screenshot>
+        <screenshot>
+            <caption translatable="yes">Import</caption>
+            <!--image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/import_page.png</image-->
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/import_page.png</image>
+        </screenshot>
+        <screenshot>
+            <caption translatable="yes">Sync</caption>
+            <!--image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/data/screenshots/sync_page.png</image-->
+            <image>https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/flatpak/screenshots/sync_page.png</image>
+        </screenshot>
+    </screenshots>
+          
+    <releases>
+       <release version="3.7-beta" type="development" date="2025-09-12">
+           <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.7-beta</url>
+           <description>
+                <ul>
+                    <li>Transition to the Meson build system</li>
+                    <li>Refactored code base</li>
+                    <li>Removed the "Use Syncthing folder instead" from the Initial Synchronization setup dialog for GNOME-based environments</li>
+                    <li>Other minor UI improvements</li>
+                </ul>
+           </description>
+       </release>
+       <release version="3.6" date="2025-06-19">
+           <description>
+               <ul>
+                    <li>Added an option to encrypt the periodic saving files and added support for its usage in the synchronization mode</li>
+                    <li>Migrated from the *.sd.tar.gz to the *.sd.zip archive format, but for backward compatibility reasons, it will still be possible to select the first named archive format</li>
+                    <li>Added support for using the syncthing folders in the synchronization mode (#392)</li>
+                    <li>Fixed other minor bugs</li>
+               </ul>
+           </description>
+       </release>
+       <release version="3.5" date="2024-11-17">
+            <description>
+                <ul>
+                    <li>Added dialog for the initial setting up synchronization; if you have set up synchronization before, it doesn't show</li>
+                    <li>Temporarily disabled support for synchronization in the Snap environment due to unreliability</li>
+                    <li>Added more keyboard shortcuts</li>
+                    <li>Added support for the Hyprland window manager, thanks to @pyclicker</li>
+                    <li>Fixed bugs with installation Flatpak apps in the synchronization mode and also with setting the bidirectional sync</li>
+                    <li>The UI is now more adaptive on the smaller screens</li>
+                </ul>
+            </description>
+       </release>
+       <release version="3.4" date="2024-09-04">
+           <description>
+               <ul>
+                    <li>Synchronisation has been redesigned from the ground up - instead of using URLs to synchronise between computers on the local network, a folder synchronised with cloud storage (using GNOME Online Accounts or Rclone) is used - find out more here: vikdevelop.github.io/SaveDesktop/wiki/synchronization/en</li>
+                    <li>Added support for comparing installed Flatpak apps, which means that only apps that have not yet been installed on the system will be installed</li>
+                    <li>Added option to generate password for configuration archive</li>
+                    <li>Added SaveDesktop to the Flathub/Snap Beta channel, so if you want, you can participate in beta testing to prevent bugs in a future stable releases. More informations are here: github.com/vikdevelop/SaveDesktop?tab=readme-ov-file#beta-releases</li>
+                    <li>Improved support for displaying possible error messages in the GUI</li>
+                    <li>Other minor UI improvements</li>
+                </ul>
+           </description>
+       </release>
+        <release version="3.3" date="2024-06-27">
+           <description>
+               <ul>
+                  <li>Added option to set archive protection with password (more information is available on the Github wiki)</li>
+                  <li>Added option to save configuration from command-line interface (more information is also available on the Github wiki)</li>
+                  <li>Added support for Deepin DE</li>
+                  <li>Added support for saving Kvantum Manager and Latte dock configurations</li>
+                  <li>Updated translations</li>
+                </ul>
+           </description>
+       </release>
+       <release version="3.2" date="2024-03-24">
+           <description>
+               <ul>
+                  <li>Added option for selecting what Flatpak applications data will be included in the configuration archive; just click on the button next to the User data of installed Flatpak apps switch</li>
+                  <li>Improved displaying status about saving and importing configuration</li>
+                  <li>From now on, periodic saving will take place only after the first login on a given day, not after further logins on the same day</li>
+                </ul>
+           </description>
+       </release>
+       <release version="3.1" date="2024-02-02">
+           <description>
+               <ul>
+                  <li>Added an option for selecting whether extensions of GNOME, KDE and Cinnamon DE should be saved or not</li>
+                  <li>Added an option for selecting whether /home/user/Desktop should be saved or not</li>
+                  <li>Added Ctrl+Q shortcut for closing the application</li>
+                  <li>Added Ctrl+S shortcut for manually synchronization</li>
+                  <li>Added Keyboard shortcuts window</li>
+                  <li>The application menu in the header bar is divided into two sections (if manually synchronization is enabled)</li>
+                  <li>Improved switch for including Flatpak apps in the configuration archive</li>
+                  <li>Added notification about saved and imported configuration</li>
+                  <li>Improved saving and importing configuration</li>
+               </ul>
+           </description>
+       </release>
+       <release version="3.0" date="2024-01-02">
+           <description>
+               <ul>
+                   <li>Added support for saving user data from installed Flatpak apps. You can select if you want to save a list of installed Flatpak apps only or also save the data of your installed Flatpak apps.</li>
+                   <li>Added support for saving flatpaks installed in the home folder (~/.local/share/flatpak/app)</li>
+                   <li>Improved saving and importing configuration</li>
+                   <li>Improved selecting the sync file; you don't need to allow permission in the Flatseal app and check if the folder for the sync file is the same as the periodic saving folder</li>
+                   <li>Now, there is no needing to log out of the system after selecting a different periodic saving file. A message of the necessity to log out of the system shows if you enable periodic synchronization (selecting another option instead of the "Never" option)</li>
+               </ul>
+           </description>
+       </release>
+       <release version="2.9" date="2023-08-20">
+           <description>
+               <ul>
+                   <li>Added support for synchronization between computers in the network. Information about how it works is on the GitHub wiki</li>
+               </ul>
+           </description>
+       </release>
+       <release version="2.8" date="2023-08-04">
+           <description>
+               <ul>
+                   <li>Added option for choosing file name format for periodic saving (information about how it works is available under the help button of the filename format entry)</li>
+                   <li>Now, it is possible to choose items that will be included in the configuration archive. These items include icons, fonts, themes, and backgrounds.</li>
+                   <li>Improved menu switcher in the header bar</li>
+               </ul>
+           </description>
+       </release>
+       <release version="2.7" date="2023-07-07">
+          <description>
+            <ul>
+              <li>Now, after saving the configuration and opening the folder, the configuration file will be selected automatically, so you don't need to have difficulty searching for the configuration file in the folder.</li>
+              <li>Added support for setting the filename with spaces</li>
+            </ul>
+          </description>
+       </release>
+       <release version="2.6" date="2023-06-04">
+          <description>
+            <ul>
+              <li>Added option to choosing custom folder for periodic saving</li>
+              <li>Importing a configuration from the list is now dependent on selecting a folder for periodic saving</li>
+            </ul>
+          </description>
+       </release>
+       <release version="2.5" date="2023-05-28">
+          <description>
+            <ul>
+              <li>Added option for saving installed Flatpak apps (#84) (is possible backup only flatpaks that has been installed on system)</li>
+              <li>For storing SaveDesktop app settings (such as filename, window size, etc.) is now using GSettings instead of JSON file</li>
+            </ul>
+          </description>
+       </release>
+       <release version="2.4" date="2023-05-08">
+          <description>
+            <ul>
+              <li>Added option for saving configuration to custom directory</li>
+            </ul>
+            <p>NOTE:</p>
+            <p>You can save configuration to more or less to anything regular directory in home folder such as ~/Downloads, ~/Pictures, ~/Documents, ~/Music, etc., but if you want to save configuration e.g. on another hard drive, will be neccessary allow access in Flatseal to work correctly.</p>
+          </description>
+       </release>
+       <release version="2.3.1" date="2023-04-22">
+          <description>
+            <ul>
+              <li>Added new application icon, thanks to @bragefuglseth</li>
+              <li>Updated translations</li>
+            </ul>
+          </description>
+       </release>
+       <release version="2.3" date="2023-04-19">
+          <description>
+            <ul>
+              <li>Added Chinese (simplified) translations, thanks to @carrothu-cn</li>
+              <li>Fixed minor bugs</li>
+            </ul>
+          </description>
+       </release>
+       <release version="2.2.2" date="2023-04-13">
+          <description>
+            <ul>
+              <li>Improved saving and importing configuration</li>
+              <li>Added link to About Dialog about how periodic saving works (is possible to find it under option "Details")</li>
+              <li>Updated translations</li>
+            </ul>
+          </description>
+        </release>
+        <release version="2.2" date="2023-04-07">
+          <description>
+            <p>New application design</p>
+            <ul>
+              <li>Divided into two pages: Save current configuration and Import saved configuration</li>
+              <li>Added option for import from list</li>
+              <li>Replaced normal File Chooser Dialog with File Chooser Native: is now possible load configuration from anything directory</li>
+              <li>Added option for save Flatpak apps custom permissions</li>
+            </ul>
+        </description>
+      </release>
+      <release version="2.1" date="2023-04-01">
+          <description>
+            <ul>
+              <li>Added periodic saving (Never, Daily, Weekly and Monthly)</li>
+            </ul>
+        </description>
+      </release>
+      <release version="2.0" date="2023-03-28">
+          <description>
+            <ul>
+              <li>Added Deutsch translations, thanks to @gimplyworxs</li>
+            </ul>
+        </description>
+      </release>
+      <release version="1.9" date="2023-03-24">
+          <description>
+            <ul>
+              <li>Added support for KDE Plasma DE</li>
+              <li>Added Turkish translations, thanks to @Batmanly</li>
+            </ul>
+        </description>
+      </release>
+      <release version="1.8" date="2023-03-20">
+          <description>
+            <ul>
+              <li>Added support for drag and drop for import saved configuration (drag is working only from Downloads directory in default)</li>
+            </ul>
+        </description>
+      </release>
+      <release version="1.7" date="2023-03-16">
+        <description>
+          <ul>
+            <li>Added Spanish translations, thanks to @gallegonovato</li>
+            <li>Fixed minor bugs</li>
+          </ul>
+        </description>
+      </release>
+      <release version="1.6" date="2023-03-13">
+        <description>
+          <ul>
+            <li>Added Hungarian translations, thanks to @danieluhrinyi</li>
+            <li>Updated translations</li>
+          </ul>
+        </description>
+      </release>
+      <release version="1.5" date="2023-03-12">
+        <description>
+          <ul>
+            <li>Added Ukrainian translations, thanks to @Kefir2105</li>
+            <li>Added Norwegian (Bokmål) translations, thanks to @comradekingu</li>
+            <li>Updated translations</li>
+          </ul>
+        </description>
+      </release>
+      <release version="1.4" date="2023-03-11">
+        <description>
+          <ul>
+            <li>Added Indonesian translations, thanks to @sekalengrengginang </li>
+            <li>Bug fixes</li>
+          </ul>
+        </description>
+      </release>
+      <release version="1.3" date="2023-03-10">
+        <description>
+          <ul>
+            <li>Added Arabic translations, thanks to @fawaz006</li>
+            <li>Added Russian translations, thanks to @vorons</li>
+            <li>Updated translations</li>
+            <li>Added support for MATE DE and using GNOME in Ubuntu distribution</li>
+            <li>Added alert message about using spaces in the file name entry</li>
+          </ul>
+        </description>
+      </release>
+      <release version="1.2" date="2023-03-09">
+        <description>
+          <ul>
+            <li>Added Italian translations, thanks to @albanobattistella</li>
+            <li>Added Dutch translations, thanks to @Vistaus</li>
+            <li>Added support for Pantheon desktop environment</li>
+            <li>Added support for using GNOME on Zorin OS distribution</li>
+          </ul>
+        </description>
+      </release>
+      <release version="1.1" date="2023-03-08">
+        <description>
+          <ul>
+            <li>Added Portugalese (Brazil) translations, thanks to @fnogcps</li>
+            <li>Added French translations, thanks to tachyglossues</li>
+          </ul>
+        </description>
+      </release>
+      <release version="1.0" date="2023-03-06">
+      </release>
+    </releases>
+    
+</component>
+

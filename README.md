@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg">
+  <img src="/data/icons/hicolor/scalable/apps/io.github.vikdevelop.SaveDesktop.svg">
   <h1 align="center">Save Desktop</h1>
   <p align="center">Save your desktop configuration</p>
 </p>
@@ -148,24 +148,11 @@ NOTE: It can happen that a backup file will not be created, in that case, just a
     
 
 ### Stable releases
-- Flathub
   
   <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?locale=en'/></a>
 
-- Snap
-
   <a href="https://snapcraft.io/savedesktop"><img alt="Get it from the Snap Store" src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" width='240' />
   </a>
-
-- Install on the system (native version)
-  
-  ```bash
-  # Install
-  wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --install
-
-  # Remove
-  wget -qO /tmp/savedesktop-native-installer.py https://raw.githubusercontent.com/vikdevelop/SaveDesktop/main/native/native_installer.py && python3 /tmp/savedesktop-native-installer.py --remove
-  ```
 
 ### Beta releases
 If you want to help with the testing of the future releases of this app, you can use one of these options:
@@ -185,20 +172,16 @@ To install the Save Desktop Beta, run the following command:
 ```
 snap install savedesktop --beta
 ```
-#### 3. Flatpak Builder
-Before building this app using Flatpak Builder, ensure if you have installed org.gnome.Sdk runtime. If not, use this command: `flatpak install org.gnome.Sdk//48`
-
-Then, you can continue in building this app using Flatpak Builder by entering this command:
-
-```
-git clone https://github.com/vikdevelop/SaveDesktop && cd SaveDesktop && flatpak-builder build *.yaml --install --user
-```
+#### 3. GNOME Builder
+1. Install GNOME Builder from [Flathub](https://flathub.org/apps/org.gnome.Builder)
+2. Click on the "Clone repository" button and enter URL of this repository
+3. Click on the Run button (Ctrl+Shift+Space)
 
 </details>
 
  
 <details>
-    <summary><h2>Contribution</h2><p>Translations, reporting issues, contributing and code of conduct</p></summary>
+    <summary><h2>Contribution</h2><p>Code of Conduct, translations and reporting issues</p></summary>
     
     
 ### Code of Conduct
