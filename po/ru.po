@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
 "PO-Revision-Date: 2025-09-15 04:56+0000\n"
-"Last-Translator: Сергей Ворон <voron.s.a@gmail.com>\n"
+"Last-Translator: Сергей <asvmail.as@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/ru/>\n"
 "Language: ru\n"
@@ -40,7 +40,7 @@ msgstr "Эти настройки также применяются для пе�
 
 #: src/gui/items_dialog.py
 msgid "Icons"
-msgstr "Иконки"
+msgstr "Значки"
 
 #: src/gui/items_dialog.py
 msgid "Themes"
@@ -223,11 +223,11 @@ msgstr ""
 
 #: src/gui/password_checker.py
 msgid "Remember Password"
-msgstr "Запомнить Пароль"
+msgstr "Запомнить пароль"
 
 #: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Пароль не введен или указан неверно. Невозможно продолжить"
+msgstr "Пароль не введен или указан неверно. Невозможно продолжить."
 
 # Translation key: saving_config_status
 #: src/gui/window.py
