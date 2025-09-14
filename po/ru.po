@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2025-09-15 04:56+0000\n"
+"Last-Translator: Сергей Ворон <voron.s.a@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/ru/>\n"
 "Language: ru\n"
@@ -395,9 +395,8 @@ msgstr ""
 "найдя его в меню приложений."
 
 #: src/gui/synchronization_dialogs.py
-#, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr "Копировать"
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
