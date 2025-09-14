@@ -5,12 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-03 19:10\n"
-"Last-Translator: Auto-generated\n"
+"PO-Revision-Date: 2025-09-14 10:44+0000\n"
+"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"Language-Team: Hindi <https://hosted.weblate.org/projects/vikdevelop/"
+"savedesktop/hi/>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: src/gui/window.py
 msgid "Save"
@@ -134,12 +138,14 @@ msgid "Reset to default"
 msgstr "तयशुदा पर रीसेट"
 
 #: src/gui/more_options_dialog.py
+#, fuzzy
 msgid "Password for encryption"
-msgstr ""
+msgstr "Password for encryption"
 
 #: src/gui/more_options_dialog.py
+#, fuzzy
 msgid "Manual saving"
-msgstr ""
+msgstr "Manual saving"
 
 #: src/gui/more_options_dialog.py
 msgid "Archive encryption"
@@ -156,8 +162,9 @@ msgstr ""
 "डेटा की बेहतर सुरक्षा के लिए पोर्टेबल मीडिया में विन्यास को सहेजते समय उपयोगी है।"
 
 #: src/gui/more_options_dialog.py
+#, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Save the configuration without creating an archive"
 
 #: src/gui/window.py
 msgid "Create new password"
@@ -174,8 +181,9 @@ msgstr ""
 "एक छोटा अक्षर और एक विशेष वर्ण शामिल है।"
 
 #: src/gui/window.py
+#, fuzzy
 msgid "Generate Password"
-msgstr ""
+msgstr "Generate Password"
 
 #: src/gui/window.py
 msgid "Password"
@@ -198,9 +206,11 @@ msgstr ""
 
 # Translation key: enter_password_title
 #: src/gui/password_checker.py
+#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 #: src/gui/password_checker.py
@@ -214,8 +224,9 @@ msgstr ""
 "synchronization।"
 
 #: src/gui/password_checker.py
+#, fuzzy
 msgid "Remember Password"
-msgstr ""
+msgstr "Remember Password"
 
 #: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
@@ -264,8 +275,9 @@ msgid "Import from file"
 msgstr "फाइल से आयात"
 
 #: src/gui/window.py
+#, fuzzy
 msgid "Import from folder"
-msgstr ""
+msgstr "Import from folder"
 
 #: src/gui/window.py
 msgid "Cancel"
@@ -310,8 +322,9 @@ msgid "Log Out"
 msgstr "लॉग आउट"
 
 #: src/gui/window.py
+#, fuzzy
 msgid "An error occurred"
-msgstr ""
+msgstr "An error occurred"
 
 #: src/gui/window.py
 msgid "Apply"
@@ -329,16 +342,19 @@ msgid ""
 msgstr "नेटवर्क में अन्य कंप्यूटरों के साथ अपने डेस्कटॉप वातावरण विन्यास को समन्वयित करें।"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Initial synchronization setup"
-msgstr ""
+msgstr "Initial synchronization setup"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "1. Open the system settings"
-msgstr ""
+msgstr "1. Open the system settings"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "2. Go to the Online Accounts section"
-msgstr ""
+msgstr "2. Go to the Online Accounts section"
 
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
@@ -350,8 +366,9 @@ msgstr ""
 "365 or Nextcloud।"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr ""
+msgstr "3. Click on the Next button and select the created cloud drive folder"
 
 # Translation key: gnome_oa_chooser_desc
 #: src/gui/synchronization_dialogs.py
@@ -364,11 +381,15 @@ msgstr ""
 
 # Translation key: rclone_intro_desc
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
+"For synchronization to works properly, you need to have the folder, that is "
+"synced with your cloud service using Rclone.\n"
+"<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 #: src/gui/synchronization_dialogs.py
@@ -382,23 +403,29 @@ msgstr ""
 "apps' menu।"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
+"Once you have finished setting up Rclone using the command provided, click "
+"the \"Apply\" button"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Use Syncthing folder instead"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Almost done!"
-msgstr ""
+msgstr "Almost done!"
 
 # Translation key: almost_done_desc
 #: src/gui/synchronization_dialogs.py
@@ -410,12 +437,14 @@ msgstr ""
 "complete the setup।"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Select"
-msgstr ""
+msgstr "Select"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 #: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
@@ -431,21 +460,24 @@ msgid "Periodic saving file does not exist."
 msgstr "Periodic saving file does not exist।"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Create"
-msgstr ""
+msgstr "Create"
 
 #: src/gui/window.py
 msgid "Please wait …"
 msgstr "कृपया प्रतीक्षा करें …"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Change"
-msgstr ""
+msgstr "Change"
 
 #: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
+#, fuzzy
 msgid "Connect to the cloud storage"
-msgstr ""
+msgstr "Connect to the cloud storage"
 
 # Translation key: connect_cloud_storage_desc
 #: src/gui/synchronization_dialogs.py
@@ -461,20 +493,23 @@ msgstr ""
 "also have saved the same periodic saving file।"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Select the cloud drive folder"
-msgstr ""
+msgstr "Select the cloud drive folder"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "You didn't select the cloud drive folder!"
-msgstr ""
+msgstr "You didn't select the cloud drive folder!"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "आवधिक समन्वयन"
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Bidirectional synchronization"
-msgstr ""
+msgstr "Bidirectional synchronization"
 
 # Translation key: bidirectional_sync_desc
 #: src/gui/synchronization_dialogs.py
@@ -500,8 +535,9 @@ msgid "Keyboard shortcuts"
 msgstr "कीबोर्ड शॉर्टकट"
 
 #: src/gui/templates/shortcuts_window.ui:15
+#, fuzzy
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Open the application wiki"
 
 #: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
