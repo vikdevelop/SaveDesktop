@@ -52,6 +52,10 @@ class Create:
 
     def _copy_config_to_folder(self):
         open(f"{CACHE}/save_config/.folder.sd", "w").close()
+
+        if os.path.exists(args.create):
+            shutil.rmtree(args.create)
+
         shutil.move(f"{CACHE}/save_config", f"{args.create}")
 
     def _create_archive(self):

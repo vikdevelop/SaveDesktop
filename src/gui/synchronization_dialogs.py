@@ -173,7 +173,7 @@ class SetDialog(Adw.AlertDialog):
         check_thread.start()
 
         # Button for opening More options dialog
-        self.open_setdialog_tf = True # set this value to TRUE for expanding the Periodic saving row
+        self._create_file_to_expand_row()
         self.ps_button = Gtk.Button.new_with_label(_("Change"))
         self.ps_button.connect('clicked', self.parent._open_more_options_dialog)
         self.ps_button.set_valign(Gtk.Align.CENTER)
@@ -189,6 +189,10 @@ class SetDialog(Adw.AlertDialog):
                                  else f'<span color="green">{pb}</span>')
         self.ps_button.add_css_class('suggested-action') if settings["periodic-saving"] == "Never" else None
 
+    # Create this file to set expanding the "Periodic saving" row in the More options dialog
+    def _create_file_to_expand_row(self):
+        open(f"{CACHE}/expand_pb_row", "w").close()
+
     # make the periodic saving file if it does not exist
     def make_pb_file(self, w):
         self.setupButton.set_sensitive(False)
@@ -200,19 +204,18 @@ class SetDialog(Adw.AlertDialog):
             e_o = False
             self.file_row.set_subtitle(_("Please wait …"))
             self.file_row.set_use_markup(False)
-            subprocess.run(['notify-send', 'SaveDesktop', _("Please wait …")])
-            subprocess.run([sys.executable, "savedesktop.core.periodic_saving", "--save-now"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+            subprocess.run(['notify-send', 'Save Desktop', _("Please wait …")])
+            subprocess.run([sys.executable, "-m", "savedesktop.core.periodic_saving", "--now"], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         except Exception as e:
             e_o = True
-            subprocess.run(['notify-send', _("An error occurred"), f'{e}'])
-            self.file_row.set_subtitle(f'{e}')
+            subprocess.run(['notify-send', _("An error occurred"), f'{e.stderr}'])
+            self.file_row.set_subtitle(f'{e.stderr}')
         finally:
             if not e_o:
                 self.file_row.remove(self.setupButton)
                 self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.zip')
                 os.system(f"notify-send 'SaveDesktop' '{_('Configuration has been saved!')}'")
                 self.set_response_enabled('ok', True)
-                self.auto_save_start = False
 
     # Refer to the article about synchronization
     def open_sync_link(self, w):
@@ -241,7 +244,7 @@ class SetDialog(Adw.AlertDialog):
             self.setupButton.add_css_class("suggested-action")
             self.setupButton.connect("clicked", self.make_pb_file)
             self.file_row.add_suffix(self.setupButton)
-            make_pb_file(w) if self.auto_save_start else None # start creating the periodic saving file if the self.start_saving value is TRUE
+
         if _("You didn't select the cloud drive folder!") in folder:
             self.lmButton = Gtk.Button.new_with_label(_("Learn more"))
             self.lmButton.set_valign(Gtk.Align.CENTER)
@@ -286,12 +289,10 @@ class SetDialog(Adw.AlertDialog):
     # Action after closing dialog for setting synchronization file
     def setDialog_closed(self, w, response):
         if response == 'ok':
-            self.open_setdialog_tf = False
-
             thread = Thread(target=self.save_file)
             thread.start()
         else:
-            self.open_setdialog_tf = False
+            pass
 
 class CloudDialog(Adw.AlertDialog):
     def __init__(self, parent):
@@ -412,7 +413,8 @@ class CloudDialog(Adw.AlertDialog):
 
     # enable or disable the response of this dialog in depending on the selected periodic synchronization interval
     def on_psync_changed(self, psyncRow, GParamObject):
-        self.set_response_enabled('ok', not (self.psyncRow.get_selected_item().get_string() == _("Never") or not self.cfileRow.get_subtitle()))
+        if not self.psyncRow.get_selected_item().get_string() == _("Never") and not self.cfileRow.get_subtitle():
+            self.set_response_enabled('ok', True)
 
     def call_automount(self):
         try:

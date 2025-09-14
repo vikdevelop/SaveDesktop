@@ -76,13 +76,16 @@ def set_up_auto_mount():
             cmd = ""
         else:
             cmd = f"rclone mount {cfile_subtitle.split('/')[-1]}: {cfile_subtitle}" if not os.path.exists(f"{download_dir}/SaveDesktop/rclone_drive") else f"rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive"
+
         synchronization_content = f'#!/usr/bin/bash\n{cmd}\nsleep 60s\n{sync_cmd}\n{periodic_saving_cmd}'
         if flatpak:
-            synchronization_content += f'\npython3 {CACHE}/install_flatpak_from_script.py'
+            synchronization_content += f'\npython3 {CACHE}/flatpaks_installer.py'
         with open(f"{DATA}/savedesktop-synchronization.sh", "w") as f:
             f.write(synchronization_content)
+
         os.makedirs(f'{home}/.config/autostart', exist_ok=True)
         open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
+
         [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
     else:
         raise AttributeError("There aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")

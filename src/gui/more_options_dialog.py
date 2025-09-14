@@ -19,10 +19,10 @@ class MoreOptionsDialog(Adw.AlertDialog):
 
         # Periodic saving section
         # Expander row for showing options of the periodic saving
-        self.saving_eRow = Adw.ExpanderRow.new()
-        self.saving_eRow.set_title(_("Periodic saving"))
-        #self.saving_eRow.set_expanded(True) if self.parent.parent.open_setdialog_tf else None
-        self.msBox.append(child=self.saving_eRow)
+        self.periodic_row = Adw.ExpanderRow.new()
+        self.periodic_row.set_title(_("Periodic saving"))
+        self.msBox.append(child=self.periodic_row)
+        self._expand_periodic_row()
 
         options = Gtk.StringList.new(strings=[
             _("Never"), _("Daily"), _("Weekly"), _("Monthly")
@@ -34,7 +34,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.pbRow.set_subtitle(_("Changes will only take effect after the next login"))
         self.pbRow.set_subtitle_lines(4)
         self.pbRow.set_model(model=options)
-        self.saving_eRow.add_row(self.pbRow)
+        self.periodic_row.add_row(self.pbRow)
 
         # Load options from GSettings database
         if settings["periodic-saving"] == 'Never':
@@ -58,7 +58,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.filefrmtEntry.set_title(_("File name format"))
         self.filefrmtEntry.add_suffix(self.filefrmtButton)
         self.filefrmtEntry.set_text(settings["filename-format"])
-        self.saving_eRow.add_row(self.filefrmtEntry)
+        self.periodic_row.add_row(self.filefrmtEntry)
 
         # Button for choosing folder for periodic saving
         self.folderButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
@@ -72,7 +72,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.dirRow.add_suffix(self.folderButton)
         self.dirRow.set_use_markup(True)
         self.dirRow.set_subtitle(settings["periodic-saving-folder"].format(download_dir))
-        self.saving_eRow.add_row(self.dirRow)
+        self.periodic_row.add_row(self.dirRow)
 
         # Adw.ActionRow for entering a password for the archive encryption
         self.get_password_from_file()
@@ -83,7 +83,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
             self.cpwdRow.set_text(self.password)
         except:
             self.cpwdRow.set_text("")
-        self.saving_eRow.add_row(self.cpwdRow)
+        self.periodic_row.add_row(self.cpwdRow)
 
         # Manual saving section
         self.manRow = Adw.ExpanderRow.new()
@@ -127,6 +127,10 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.connect('response', self.msDialog_closed)
 
+    def _expand_periodic_row(self):
+        if os.path.exists(f"{CACHE}/expand_pb_row"):
+            self.periodic_row.set_expanded(True)
+
     def get_password_from_file(self):
         if os.path.exists(f"{DATA}/password"):
             p = PasswordStore()
@@ -136,36 +140,6 @@ class MoreOptionsDialog(Adw.AlertDialog):
 
     def open_file_dialog(self, w):
         self.parent.select_pb_folder(w="")
-
-    # create desktop file for enabling periodic saving at startup
-    def create_pb_desktop(self):
-        os.makedirs(f'{home}/.config/autostart', exist_ok=True)
-        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
-            with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
-                cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
-
-    # Action after closing dialog for showing more options
-    def msDialog_closed(self, w, response):
-        if response == 'ok':
-            settings["filename-format"] = self.filefrmtEntry.get_text() # save the file name format entry
-            settings["periodic-saving-folder"] = self.dirRow.get_subtitle() # save the selected periodic saving folder
-            # save the periodic saving interval
-            selected_item = self.pbRow.get_selected_item()
-            backup_mapping = {_("Never"): "Never", _("Daily"): "Daily", _("Weekly"): "Weekly", _("Monthly"): "Monthly"}
-            backup_item = backup_mapping.get(selected_item.get_string(), "Never")
-            self.create_pb_desktop() if not backup_item == "Never" else None
-            settings["periodic-saving"] = backup_item
-            settings["enable-encryption"] = self.encryptSwitch.get_active() # save the archive encryption's switch state
-            settings["save-without-archive"] = self.archSwitch.get_active() # save the switch state of the "Save a configuration without creating the configuration archive" option
-            # save the entered password to the file
-            if self.cpwdRow.get_text():
-                password = self.cpwdRow.get_text()
-                PasswordStore(password)
-            else:
-                try:
-                    os.remove(f"{DATA}/password")
-                except:
-                    pass
 
     # reset the file name format entry to the default value
     def reset_fileformat(self, w):
@@ -184,3 +158,40 @@ class MoreOptionsDialog(Adw.AlertDialog):
             self.encryptSwitch.set_sensitive(False)
         else:
             self.encryptSwitch.set_sensitive(True)
+
+    # Action after closing dialog for showing more options
+    def msDialog_closed(self, w, response):
+        if response == 'ok':
+            settings["filename-format"] = self.filefrmtEntry.get_text() # save the file name format entry
+            settings["periodic-saving-folder"] = self.dirRow.get_subtitle() # save the selected periodic saving folder
+            settings["enable-encryption"] = self.encryptSwitch.get_active() # save the archive encryption's switch state
+            settings["save-without-archive"] = self.archSwitch.get_active() # save the switch state of the "Save a configuration without creating the configuration archive" option
+            self._save_periodic_saving_values()
+            self._save_password()
+
+    def _save_periodic_saving_values(self):
+        # save the periodic saving interval
+        self.selected_item = self.pbRow.get_selected_item()
+        self.backup_mapping = {_("Never"): "Never", _("Daily"): "Daily", _("Weekly"): "Weekly", _("Monthly"): "Monthly"}
+        self.backup_item = self.backup_mapping.get(self.selected_item.get_string(), "Never")
+        settings["periodic-saving"] = self.backup_item
+        if not self.backup_item == "Never":
+            self.__create_pb_desktop()
+
+    # create desktop file for enabling periodic saving at startup
+    def __create_pb_desktop(self):
+        os.makedirs(f'{home}/.config/autostart', exist_ok=True)
+        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
+            with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
+                cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
+
+    # save the entered password to the file
+    def _save_password(self):
+        if self.cpwdRow.get_text():
+            password = self.cpwdRow.get_text()
+            PasswordStore(password)
+        else:
+            try:
+                os.remove(f"{DATA}/password")
+            except:
+                pass

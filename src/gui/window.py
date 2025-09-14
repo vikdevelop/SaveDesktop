@@ -26,12 +26,13 @@ class MainWindow(Adw.ApplicationWindow):
         # set the window size and maximization from the GSettings database
         (width, height) = settings["window-size"]
         self.set_default_size(width, height)
+        self.set_size_request(360, 500)
 
         # if the value is TRUE, it enables window maximalization
         if settings["maximized"]:
             self.maximize()
 
-        # App menu - primary menu
+        # primary menu
         self.main_menu = Gio.Menu()
 
         # primary menu section
@@ -44,7 +45,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.menu_button = Gtk.MenuButton.new()
         self.menu_button.set_icon_name(icon_name='open-menu-symbolic')
         self.menu_button.set_menu_model(menu_model=self.main_menu)
-        #self.menu_button.set_tooltip_text(_("Main Menu"))
         self.menu_button.set_primary(True)
         self.headerbar.pack_end(child=self.menu_button)
 
@@ -90,10 +90,6 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Toast Overlay for showing the popup window
         self.toast_overlay = Adw.ToastOverlay.new()
-        self.toast_overlay.set_margin_top(margin=1)
-        self.toast_overlay.set_margin_end(margin=1)
-        self.toast_overlay.set_margin_bottom(margin=1)
-        self.toast_overlay.set_margin_start(margin=1)
         self.toast_overlay.set_child(self.toolbarview)
         self.set_content(self.toast_overlay)
 
@@ -579,8 +575,9 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _call_archive_command(self):
         try:
-            subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
-        except subprocess.CalledProcessError as e:
+            subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        except subprocess.CalledProcessError as err:
+            e = err.stderr
             GLib.idle_add(self.show_err_msg, e)
             self._set_default_widgets_state()
         finally:
