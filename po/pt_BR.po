@@ -5,12 +5,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-03 19:10\n"
-"Last-Translator: Auto-generated\n"
+"PO-Revision-Date: 2025-09-14 10:44+0000\n"
+"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"vikdevelop/savedesktop/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 #: src/gui/window.py
 msgid "Save"
@@ -134,12 +138,14 @@ msgid "Reset to default"
 msgstr "Restaurar para o padrão"
 
 #: src/gui/more_options_dialog.py
+#, fuzzy
 msgid "Password for encryption"
-msgstr ""
+msgstr "Password for encryption"
 
 #: src/gui/more_options_dialog.py
+#, fuzzy
 msgid "Manual saving"
-msgstr ""
+msgstr "Manual saving"
 
 #: src/gui/more_options_dialog.py
 msgid "Archive encryption"
@@ -157,8 +163,9 @@ msgstr ""
 "aumentar a segurança de seus dados."
 
 #: src/gui/more_options_dialog.py
+#, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Save the configuration without creating an archive"
 
 #: src/gui/window.py
 msgid "Create new password"
@@ -200,25 +207,33 @@ msgstr ""
 
 # Translation key: enter_password_title
 #: src/gui/password_checker.py
+#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 #: src/gui/password_checker.py
+#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
+"An encrypted archive has been selected for synchronization using the Save "
+"Desktop app. Please enter the password below to unlock it and start "
+"synchronization."
 
 #: src/gui/password_checker.py
+#, fuzzy
 msgid "Remember Password"
-msgstr ""
+msgstr "Remember Password"
 
 #: src/core/synchronization.py
+#, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr ""
+msgstr "Password not entered, or it's incorrect. Unable to continue."
 
 # Translation key: saving_config_status
 #: src/gui/window.py
@@ -263,8 +278,9 @@ msgid "Import from file"
 msgstr "Importar do arquivo"
 
 #: src/gui/window.py
+#, fuzzy
 msgid "Import from folder"
-msgstr ""
+msgstr "Import from folder"
 
 #: src/gui/window.py
 msgid "Cancel"
@@ -388,8 +404,9 @@ msgstr ""
 "encontrando-o no menu de aplicativos."
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -401,8 +418,9 @@ msgstr ""
 "no botão \"Aplicar\""
 
 #: src/gui/synchronization_dialogs.py
+#, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Use Syncthing folder instead"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
