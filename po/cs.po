@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2025-09-14 11:14+0000\n"
+"Last-Translator: vikdevelop <vikdevelop@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/cs/>\n"
 "Language: cs\n"
@@ -90,7 +90,6 @@ msgid "Changes will only take effect after the next login"
 msgstr "Změny se projeví až po dalším přihlášení"
 
 #: src/gui/more_options_dialog.py
-#, fuzzy
 msgid "Interval"
 msgstr "Interval"
 
@@ -257,7 +256,6 @@ msgid "Open the folder"
 msgstr "Otevřít složku"
 
 #: src/gui/window.py
-#, fuzzy
 msgid "Import"
 msgstr "Import"
 
@@ -394,9 +392,8 @@ msgstr ""
 "najděte v nabídce aplikací."
 
 #: src/gui/synchronization_dialogs.py
-#, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr "Kopírovat"
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
