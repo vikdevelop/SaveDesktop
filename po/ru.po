@@ -16,8 +16,7 @@ msgstr ""
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/gui/templates/shortcuts_window.ui:22
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:22 src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Сохранить текущую конфигурацию"
 
@@ -25,8 +24,7 @@ msgstr "Сохранить текущую конфигурацию"
 msgid "Set the file name"
 msgstr "Задайте имя файла"
 
-#: src/gui/templates/shortcuts_window.ui:64
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:64 src/gui/window.py
 #: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "Элементы для включения в архив конфигурации"
@@ -75,8 +73,7 @@ msgstr "Пользовательские данные установленных
 msgid "Flatpak apps data selection"
 msgstr "Выбор данных приложений Flatpak"
 
-#: src/gui/templates/shortcuts_window.ui:57
-#: src/gui/more_options_dialog.py
+#: src/gui/templates/shortcuts_window.ui:57 src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Больше опций"
 
@@ -149,10 +146,15 @@ msgid "Archive encryption"
 msgstr "Шифрование архива"
 
 # Translation key: archive_encryption_desc
+#: src/gui/more_options_dialog.py
 msgid ""
-"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+"When manually saving the configuration, you will be prompted to create a "
+"password. This is useful when saving the configuration to portable media for "
+"better security of your data."
 msgstr ""
-"При ручном сохранении конфигурации вам будет предложено создать пароль. Это полезно при сохранении конфигурации на переносном носителе для большей безопасности ваших данных."
+"При ручном сохранении конфигурации вам будет предложено создать пароль. Это "
+"полезно при сохранении конфигурации на переносном носителе для большей "
+"безопасности ваших данных."
 
 #: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
@@ -163,10 +165,15 @@ msgid "Create new password"
 msgstr "Создать новый пароль"
 
 # Translation key: create_pwd_desc
+#: src/gui/window.py
 msgid ""
-"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+"Please create new password for your archive. Criteria include a length of at "
+"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"special character."
 msgstr ""
-"Пожалуйста, создайте новый пароль для вашего архива. Критерии включают длину не менее 12 символов, одну заглавную букву, одну строчную букву и один специальный символ."
+"Пожалуйста, создайте новый пароль для вашего архива. Критерии включают длину "
+"не менее 12 символов, одну заглавную букву, одну строчную букву и один "
+"специальный символ."
 
 #: src/gui/window.py
 msgid "Generate Password"
@@ -181,22 +188,33 @@ msgid "Unlock the archive with a password"
 msgstr "Разблокировать архив паролем"
 
 # Translation key: check_pwd_desc
+#: src/gui/window.py
 msgid ""
-"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+"Enter the password below to unlock the archive with your configuration. If "
+"you have forgotten it, you will not be able to unzip the archive and start "
+"importing your configuration."
 msgstr ""
-"Введите пароль ниже, чтобы разблокировать архив с вашей конфигурацией. Если вы его забыли, то не сможете распаковать архив и начать импорт вашей конфигурации."
+"Введите пароль ниже, чтобы разблокировать архив с вашей конфигурацией. Если "
+"вы его забыли, то не сможете распаковать архив и начать импорт вашей "
+"конфигурации."
 
 # Translation key: enter_password_title
+#: src/gui/password_checker.py
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Пожалуйста, введите пароль, чтобы разблокировать архив для синхронизации конфигурации"
+"Пожалуйста, введите пароль, чтобы разблокировать архив для синхронизации "
+"конфигурации"
 
 # Translation key: enter_password_desc
+#: src/gui/password_checker.py
 msgid ""
-"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+"An encrypted archive has been selected for synchronization using the Save "
+"Desktop app. Please enter the password below to unlock it and start "
+"synchronization."
 msgstr ""
-"Для синхронизации с помощью приложения Save Desktop выбран зашифрованный архив. Введите пароль ниже, чтобы разблокировать его и начать синхронизацию."
+"Для синхронизации с помощью приложения Save Desktop выбран зашифрованный "
+"архив. Введите пароль ниже, чтобы разблокировать его и начать синхронизацию."
 
 #: src/gui/password_checker.py
 msgid "Remember Password"
@@ -207,20 +225,30 @@ msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "Пароль не введен или указан неверно. Невозможно продолжить"
 
 # Translation key: saving_config_status
+#: src/gui/window.py
 msgid ""
-"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+"<big><b>Saving configuration …</b></big>\n"
+"The configuration of your desktop environment will be saved in:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
 msgstr ""
-"<big><b>Сохранение конфигурации ...</b></big>\nКонфигурация среды рабочего стола будет сохранена в:\n <i>{}/{}.sd.tar.gz</i>\n"
+"<big><b>Сохранение конфигурации ...</b></big>\n"
+"Конфигурация среды рабочего стола будет сохранена в:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
 
 #: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Конфигурация сохранена!"
 
 # Translation key: config_saved_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+"<big><b>{}</b></big>\n"
+"You can now view the archive with the configuration of your desktop "
+"environment, or return to the previous page.\n"
 msgstr ""
-"<big><b>{}</b></big>\nТеперь вы можете просмотреть архив с конфигурацией вашей среды рабочего стола или вернуться на предыдущую страницу.\n"
+"<big><b>{}</b></big>\n"
+"Теперь вы можете просмотреть архив с конфигурацией вашей среды рабочего "
+"стола или вернуться на предыдущую страницу.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -234,8 +262,7 @@ msgstr "Импорт"
 msgid "Import saved configuration"
 msgstr "Импорт сохраненной конфигурации"
 
-#: src/gui/templates/shortcuts_window.ui:29
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:29 src/gui/window.py
 msgid "Import from file"
 msgstr "Импорт из файла"
 
@@ -252,20 +279,30 @@ msgid "Save Desktop files"
 msgstr "Файлы Save Desktop"
 
 # Translation key: importing_config_status
+#: src/gui/window.py
 msgid ""
-"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+"<big><b>Importing configuration …</b></big>\n"
+"Importing configuration from:\n"
+"<i>{}</i>\n"
 msgstr ""
-"<big><b>Импорт конфигурации ...</b></big>\nИмпорт конфигурации из: \n<i>{}</i>\n"
+"<big><b>Импорт конфигурации ...</b></big>\n"
+"Импорт конфигурации из: \n"
+"<i>{}</i>\n"
 
 #: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Конфигурация применена!"
 
 # Translation key: config_imported_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+"<big><b>{}</b></big>\n"
+"You can log out of the system for the changes to take effect, or go back to "
+"the previous page and log out later.\n"
 msgstr ""
-"<big><b>{}</b></big>\nВы можете выйти из системы, чтобы изменения вступили в силу, или вернуться на предыдущую страницу и выйти из системы позже.\n"
+"<big><b>{}</b></big>\n"
+"Вы можете выйти из системы, чтобы изменения вступили в силу, или вернуться "
+"на предыдущую страницу и выйти из системы позже.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -288,10 +325,13 @@ msgid "Sync"
 msgstr "Синхронизация"
 
 # Translation key: sync_desc
+#: src/gui/window.py
 msgid ""
-"Sync your desktop environment configuration with other computers in the network."
+"Sync your desktop environment configuration with other computers in the "
+"network."
 msgstr ""
-"Синхронизируйте конфигурацию среды рабочего стола с другими компьютерами в сети."
+"Синхронизируйте конфигурацию среды рабочего стола с другими компьютерами в "
+"сети."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
@@ -306,38 +346,61 @@ msgid "2. Go to the Online Accounts section"
 msgstr "2. Перейдите в раздел «Сетевые учётные записи»"
 
 # Translation key: gnome_oa_section_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft "
+"365 or Nextcloud."
 msgstr ""
-"В этом разделе выберите нужный облачный сервис, например Google, Microsoft 365 или Nextcloud."
+"В этом разделе выберите нужный облачный сервис, например Google, Microsoft "
+"365 или Nextcloud."
 
 #: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Нажмите кнопку «Далее» и выберите имеющуюся папку облачного диска"
 
 # Translation key: gnome_oa_chooser_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+"The created cloud drive folder can be found in the side panel of the file "
+"chooser dialog, in this form: username@service.com."
 msgstr ""
-"Создаваемую папку облачного диска можно найти в боковой панели диалога выбора файлов в виде username@service.com."
+"Создаваемую папку облачного диска можно найти в боковой панели диалога "
+"выбора файлов в виде username@service.com."
 
 # Translation key: rclone_intro_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+"For synchronization to works properly, you need to have the folder, that is "
+"synced with your cloud service using Rclone.\n"
+"<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"Для правильного функционирования синхронизации необходимо иметь папку, которая синхронизируется с облачным сервисом с помощью Rclone.\n<b>Начните с выбора облачного сервиса, который вы используете.</b>"
+"Для правильного функционирования синхронизации необходимо иметь папку, "
+"которая синхронизируется с облачным сервисом с помощью Rclone.\n"
+"<b>Начните с выбора облачного сервиса, который вы используете.</b>"
 
 # Translation key: rclone_copy_cmd
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+"Now, copy the command to set up Rclone using the side button and open the "
+"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
+"apps' menu."
 msgstr ""
-"Теперь скопируйте команду для настройки Rclone с помощью боковой кнопки и откройте приложение терминала, используя комбинацию клавиш Ctrl+Alt+T или найдя его в меню приложений."
+"Теперь скопируйте команду для настройки Rclone с помощью боковой кнопки и "
+"откройте приложение терминала, используя комбинацию клавиш Ctrl+Alt+T или "
+"найдя его в меню приложений."
+
+#: src/gui/synchronization_dialogs.py
+msgid "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+"Once you have finished setting up Rclone using the command provided, click "
+"the \"Apply\" button"
 msgstr ""
-"Завершив настройку Rclone с помощью данной команды, нажмите кнопку «Применить»"
+"Завершив настройку Rclone с помощью данной команды, нажмите кнопку "
+"«Применить»"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
@@ -348,10 +411,13 @@ msgid "Almost done!"
 msgstr "Почти готово!"
 
 # Translation key: almost_done_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+"You've now created the cloud drive folder! Click on the Next button to "
+"complete the setup."
 msgstr ""
-"Теперь вы создали папку на облачном диске! Чтобы завершить настройку, нажмите кнопку «Далее»."
+"Теперь вы создали папку на облачном диске! Чтобы завершить настройку, "
+"нажмите кнопку «Далее»."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select"
@@ -361,8 +427,7 @@ msgstr "Выбрать"
 msgid "Next"
 msgstr "Далее"
 
-#: src/gui/templates/shortcuts_window.ui:71
-#: src/gui/synchronization_dialogs.py
+#: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Настройка файла синхронизации"
@@ -387,17 +452,24 @@ msgstr "Пожалуйста, подождите…"
 msgid "Change"
 msgstr "Изменить"
 
-#: src/gui/templates/shortcuts_window.ui:78
-#: src/gui/synchronization_dialogs.py
+#: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Подключить облачное хранилище"
 
 # Translation key: connect_cloud_storage_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+"On another computer, open the Save Desktop app, and on this page, click on "
+"the \"Set up the sync file\" button and make the necessary settings. On this "
+"computer, select the folder that you have synced with your cloud storage and "
+"also have saved the same periodic saving file."
 msgstr ""
-"На другом компьютере откройте приложение Save Desktop и на этой странице нажмите кнопку «Настроить файл синхронизации» и выполните необходимые настройки. На этом компьютере выберите папку, которую вы синхронизировали с вашим облачным хранилищем, а также сохранили тот же файл периодического сохранения."
+"На другом компьютере откройте приложение Save Desktop и на этой странице "
+"нажмите кнопку «Настроить файл синхронизации» и выполните необходимые "
+"настройки. На этом компьютере выберите папку, которую вы синхронизировали с "
+"вашим облачным хранилищем, а также сохранили тот же файл периодического "
+"сохранения."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
@@ -416,22 +488,26 @@ msgid "Bidirectional synchronization"
 msgstr "Двунаправленная синхронизация"
 
 # Translation key: bidirectional_sync_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+"If enabled, and the sync interval and cloud drive folder are selected, the "
+"periodic saving information (interval, folder, and file name) from the other "
+"computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
-"Если этот параметр включен, а интервал синхронизации и папка облачного диска выбраны, информация о периодическом сохранении (интервал, папка и имя файла) с другого компьютера, на котором настроена синхронизация, копируется на этот компьютер."
+"Если этот параметр включен, а интервал синхронизации и папка облачного диска "
+"выбраны, информация о периодическом сохранении (интервал, папка и имя файла) "
+"с другого компьютера, на котором настроена синхронизация, копируется на этот "
+"компьютер."
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Теперь вы можете синхронизировать конфиг из меню в панели заголовка"
 
-#: src/gui/templates/shortcuts_window.ui:50
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Синхронизовать вручную"
 
-#: src/gui/templates/shortcuts_window.ui:36
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:36 src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Комбинации клавиш"
 
@@ -448,26 +524,32 @@ msgid "About app"
 msgstr "О приложении"
 
 # Translation key: unsuppurted_env_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+"<big><b>You have an unsupported environment installed.</b></big> \n"
+"Please use one of these environments: {}."
 msgstr ""
-"<big><b>У вас установлено неподдерживаемое окружение.</b></big> \nПожалуйста, используйте одно из этих окружений: {}."
+"<big><b>У вас установлено неподдерживаемое окружение.</b></big> \n"
+"Пожалуйста, используйте одно из этих окружений: {}."
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
-#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
-#: src/main.py
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 msgid "Save your desktop configuration"
 msgstr "Сохраните конфигурацию вашего окружения рабочего стола"
 
 # Translation key: description
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+"Save Desktop lets you save your current configuration (themes, icons, "
+"wallpapers, all desktop environment settings, extensions, etc.) with one "
+"click."
 msgstr ""
-"Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все настройки окружения рабочего стола, расширения и т.д.? Save Desktop поможет вам в этом. Всего один клик - и ваша конфигурация сохранена."
+"Вы хотите сохранить текущую конфигурацию, включая темы, значки, обои, все "
+"настройки окружения рабочего стола, расширения и т.д.? Save Desktop поможет "
+"вам в этом. Всего один клик - и ваша конфигурация сохранена."
 
 #: src/main.py
 msgid "Translator credits"
 msgstr ""
-"voron <voron@duck.com>\nvolkov <volkovissocool@gmail.com>"
-
+"voron <voron@duck.com>\n"
+"volkov <volkovissocool@gmail.com>"

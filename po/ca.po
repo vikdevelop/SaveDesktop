@@ -16,8 +16,7 @@ msgstr ""
 msgid "Save"
 msgstr "Desa"
 
-#: src/gui/templates/shortcuts_window.ui:22
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:22 src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Desa la configuració actual"
 
@@ -25,8 +24,7 @@ msgstr "Desa la configuració actual"
 msgid "Set the file name"
 msgstr "Nom del fitxer"
 
-#: src/gui/templates/shortcuts_window.ui:64
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:64 src/gui/window.py
 #: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "Elements que voleu incloure al fitxer de configuració"
@@ -75,8 +73,7 @@ msgstr "Dades d'usuari del programari Flatpak instal·lat"
 msgid "Flatpak apps data selection"
 msgstr "Selecció de dades d'aplicacions Flatpak"
 
-#: src/gui/templates/shortcuts_window.ui:57
-#: src/gui/more_options_dialog.py
+#: src/gui/templates/shortcuts_window.ui:57 src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Més opcions"
 
@@ -149,10 +146,15 @@ msgid "Archive encryption"
 msgstr "Xifrat de ftxer"
 
 # Translation key: archive_encryption_desc
+#: src/gui/more_options_dialog.py
 msgid ""
-"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+"When manually saving the configuration, you will be prompted to create a "
+"password. This is useful when saving the configuration to portable media for "
+"better security of your data."
 msgstr ""
-"En desar la configuració de forma manual, si us demanarà crear una contrasenya. Això és útil quan deseu la configuració en mitjans extraïbles per mantenir segures les vostres dades."
+"En desar la configuració de forma manual, si us demanarà crear una "
+"contrasenya. Això és útil quan deseu la configuració en mitjans extraïbles "
+"per mantenir segures les vostres dades."
 
 #: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
@@ -163,10 +165,14 @@ msgid "Create new password"
 msgstr "Crea una contrasenya nova"
 
 # Translation key: create_pwd_desc
+#: src/gui/window.py
 msgid ""
-"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+"Please create new password for your archive. Criteria include a length of at "
+"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"special character."
 msgstr ""
-"Creeu una contrasenya nova per al vostre fitxer. Es recomana emprar almenys 12 caràcters, incloent-hi majúscules, minúscules i caràcters especials."
+"Creeu una contrasenya nova per al vostre fitxer. Es recomana emprar almenys "
+"12 caràcters, incloent-hi majúscules, minúscules i caràcters especials."
 
 #: src/gui/window.py
 msgid "Generate Password"
@@ -181,19 +187,28 @@ msgid "Unlock the archive with a password"
 msgstr "Desbloca el fitxer amb una contrasenya"
 
 # Translation key: check_pwd_desc
+#: src/gui/window.py
 msgid ""
-"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+"Enter the password below to unlock the archive with your configuration. If "
+"you have forgotten it, you will not be able to unzip the archive and start "
+"importing your configuration."
 msgstr ""
-"Inseriu més avall una contrasenya per a desblocar el fitxer de configuració. Si l'oblideu, no podreu descomprimir el fitxer i aplicar la importació de la configuració."
+"Inseriu més avall una contrasenya per a desblocar el fitxer de configuració. "
+"Si l'oblideu, no podreu descomprimir el fitxer i aplicar la importació de la "
+"configuració."
 
 # Translation key: enter_password_title
+#: src/gui/password_checker.py
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
 
 # Translation key: enter_password_desc
+#: src/gui/password_checker.py
 msgid ""
-"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+"An encrypted archive has been selected for synchronization using the Save "
+"Desktop app. Please enter the password below to unlock it and start "
+"synchronization."
 msgstr ""
 
 #: src/gui/password_checker.py
@@ -205,20 +220,30 @@ msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
 
 # Translation key: saving_config_status
+#: src/gui/window.py
 msgid ""
-"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+"<big><b>Saving configuration …</b></big>\n"
+"The configuration of your desktop environment will be saved in:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
 msgstr ""
-"<big><b>Desant la configuració ...</b></big>\nLa configuració del vostre escriptori es desarà a:\n <i>{}/{}.sd.tar.gz</i>\n"
+"<big><b>Desant la configuració ...</b></big>\n"
+"La configuració del vostre escriptori es desarà a:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
 
 #: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "S'ha desat la configuració!"
 
 # Translation key: config_saved_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+"<big><b>{}</b></big>\n"
+"You can now view the archive with the configuration of your desktop "
+"environment, or return to the previous page.\n"
 msgstr ""
-"<big><b>{}</b></big>\nAra podeu revisar el fitxer amb la configuració del vostre escriptori, o tornar a la pàgina anterior.\n"
+"<big><b>{}</b></big>\n"
+"Ara podeu revisar el fitxer amb la configuració del vostre escriptori, o "
+"tornar a la pàgina anterior.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -232,8 +257,7 @@ msgstr "Importa"
 msgid "Import saved configuration"
 msgstr "Importa una configuració"
 
-#: src/gui/templates/shortcuts_window.ui:29
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:29 src/gui/window.py
 msgid "Import from file"
 msgstr "Des d'un fitxer"
 
@@ -250,20 +274,30 @@ msgid "Save Desktop files"
 msgstr "Fitxers del Save Desktop"
 
 # Translation key: importing_config_status
+#: src/gui/window.py
 msgid ""
-"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+"<big><b>Importing configuration …</b></big>\n"
+"Importing configuration from:\n"
+"<i>{}</i>\n"
 msgstr ""
-"<big><b>Important la configuració ...</b></big>\nS'està important la configuració des de:\n<i>{}</i>\n"
+"<big><b>Important la configuració ...</b></big>\n"
+"S'està important la configuració des de:\n"
+"<i>{}</i>\n"
 
 #: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "S'ha aplicat la configuració!"
 
 # Translation key: config_imported_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+"<big><b>{}</b></big>\n"
+"You can log out of the system for the changes to take effect, or go back to "
+"the previous page and log out later.\n"
 msgstr ""
-"<big><b>{}</b></big>\nPodeu tancar la sessió ara perquè els canvis siguin aplicats, o podeu tornar a la pàgina anterior i tancar la sessió més tard.\n"
+"<big><b>{}</b></big>\n"
+"Podeu tancar la sessió ara perquè els canvis siguin aplicats, o podeu tornar "
+"a la pàgina anterior i tancar la sessió més tard.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -286,8 +320,10 @@ msgid "Sync"
 msgstr "Sincronitza"
 
 # Translation key: sync_desc
+#: src/gui/window.py
 msgid ""
-"Sync your desktop environment configuration with other computers in the network."
+"Sync your desktop environment configuration with other computers in the "
+"network."
 msgstr ""
 "Sincronitzeu el vostre entorn d'escriptori amb altres equips de la xarxa."
 
@@ -304,8 +340,10 @@ msgid "2. Go to the Online Accounts section"
 msgstr ""
 
 # Translation key: gnome_oa_section_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft "
+"365 or Nextcloud."
 msgstr ""
 
 #: src/gui/synchronization_dialogs.py
@@ -313,23 +351,37 @@ msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+"The created cloud drive folder can be found in the side panel of the file "
+"chooser dialog, in this form: username@service.com."
 msgstr ""
 
 # Translation key: rclone_intro_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+"For synchronization to works properly, you need to have the folder, that is "
+"synced with your cloud service using Rclone.\n"
+"<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
 
 # Translation key: rclone_copy_cmd
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+"Now, copy the command to set up Rclone using the side button and open the "
+"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
+"apps' menu."
+msgstr ""
+
+#: src/gui/synchronization_dialogs.py
+msgid "Copy"
 msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+"Once you have finished setting up Rclone using the command provided, click "
+"the \"Apply\" button"
 msgstr ""
 
 #: src/gui/synchronization_dialogs.py
@@ -341,8 +393,10 @@ msgid "Almost done!"
 msgstr ""
 
 # Translation key: almost_done_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+"You've now created the cloud drive folder! Click on the Next button to "
+"complete the setup."
 msgstr ""
 
 #: src/gui/synchronization_dialogs.py
@@ -353,8 +407,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:71
-#: src/gui/synchronization_dialogs.py
+#: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Configura el fitxer de sincronització"
@@ -379,17 +432,23 @@ msgstr "Un moment…"
 msgid "Change"
 msgstr "Canvia"
 
-#: src/gui/templates/shortcuts_window.ui:78
-#: src/gui/synchronization_dialogs.py
+#: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Connecta a l'emmagatzematge al núvol"
 
 # Translation key: connect_cloud_storage_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+"On another computer, open the Save Desktop app, and on this page, click on "
+"the \"Set up the sync file\" button and make the necessary settings. On this "
+"computer, select the folder that you have synced with your cloud storage and "
+"also have saved the same periodic saving file."
 msgstr ""
-"Obriu aquesta pàgina del Save Desktop a l'altre ordinador i feu clic al botó «Configura el fitxer de sincronització» per a realitzar els canvis necessaris. En aquest ordinador, seleccioneu la carpeta que heu sincronitzat amb l'emmagatzematge al núvol i on heu desat el fitxer de desament automàtic."
+"Obriu aquesta pàgina del Save Desktop a l'altre ordinador i feu clic al botó "
+"«Configura el fitxer de sincronització» per a realitzar els canvis "
+"necessaris. En aquest ordinador, seleccioneu la carpeta que heu sincronitzat "
+"amb l'emmagatzematge al núvol i on heu desat el fitxer de desament automàtic."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
@@ -408,23 +467,27 @@ msgid "Bidirectional synchronization"
 msgstr "Sincronització bidireccional"
 
 # Translation key: bidirectional_sync_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+"If enabled, and the sync interval and cloud drive folder are selected, the "
+"periodic saving information (interval, folder, and file name) from the other "
+"computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
-"En habilitar-ho i seleccionar l'interval de la sincronització i la carpeta de la unitat al núvol, tota la informació del desament automàtic (interval, carpeta i nom de fitxer) de l'altre ordinador es copia en aquest mitjançant la sincronització indicada."
+"En habilitar-ho i seleccionar l'interval de la sincronització i la carpeta "
+"de la unitat al núvol, tota la informació del desament automàtic (interval, "
+"carpeta i nom de fitxer) de l'altre ordinador es copia en aquest mitjançant "
+"la sincronització indicada."
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 "Ja podeu sincronitzar la configuració des del menú de la barra superior"
 
-#: src/gui/templates/shortcuts_window.ui:50
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Sincronitza manualment"
 
-#: src/gui/templates/shortcuts_window.ui:36
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:36 src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Dreceres de teclat"
 
@@ -441,25 +504,30 @@ msgid "About app"
 msgstr "Quant a..."
 
 # Translation key: unsuppurted_env_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+"<big><b>You have an unsupported environment installed.</b></big> \n"
+"Please use one of these environments: {}."
 msgstr ""
-"<big><b>Teniu un entorn d'escriptori no suportat.</b></big> \nEl programa funciona amb: {}."
+"<big><b>Teniu un entorn d'escriptori no suportat.</b></big> \n"
+"El programa funciona amb: {}."
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
-#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
-#: src/main.py
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 msgid "Save your desktop configuration"
 msgstr "Desa la configuració actual del vostre entorn d'escriptori"
 
 # Translation key: description
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+"Save Desktop lets you save your current configuration (themes, icons, "
+"wallpapers, all desktop environment settings, extensions, etc.) with one "
+"click."
 msgstr ""
-"El Save Desktop us permet desar la configuració actual (temes, icones, fons de pantalla, totes les opcions de configuració de l'entorn d'escriptori, complements, etc.) amb un sol clic."
+"El Save Desktop us permet desar la configuració actual (temes, icones, fons "
+"de pantalla, totes les opcions de configuració de l'entorn d'escriptori, "
+"complements, etc.) amb un sol clic."
 
 #: src/main.py
 msgid "Translator credits"
 msgstr "BennyBeat https://github.com/BennyBeat"
-

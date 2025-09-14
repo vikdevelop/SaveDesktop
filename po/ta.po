@@ -16,8 +16,7 @@ msgstr ""
 msgid "Save"
 msgstr "சேமி"
 
-#: src/gui/templates/shortcuts_window.ui:22
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:22 src/gui/window.py
 msgid "Save the current configuration"
 msgstr "தற்போதைய உள்ளமைவைச் சேமி"
 
@@ -25,8 +24,7 @@ msgstr "தற்போதைய உள்ளமைவைச் சேமி"
 msgid "Set the file name"
 msgstr "கோப்புப் பெயரை அமை"
 
-#: src/gui/templates/shortcuts_window.ui:64
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:64 src/gui/window.py
 #: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "உள்ளமைவு காப்பகத்தில் சேர்க்க வேண்டிய உருப்படிகள்"
@@ -75,8 +73,7 @@ msgstr "நிறுவப்பட்ட தட்டைகட்டு பய�
 msgid "Flatpak apps data selection"
 msgstr "தட்டைகட்டு பயன்பாடுகள் தரவுத் தேர்வு"
 
-#: src/gui/templates/shortcuts_window.ui:57
-#: src/gui/more_options_dialog.py
+#: src/gui/templates/shortcuts_window.ui:57 src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "மேலும் விருப்பங்கள்"
 
@@ -149,10 +146,15 @@ msgid "Archive encryption"
 msgstr "காப்பக குறியாக்கம்"
 
 # Translation key: archive_encryption_desc
+#: src/gui/more_options_dialog.py
 msgid ""
-"When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
+"When manually saving the configuration, you will be prompted to create a "
+"password. This is useful when saving the configuration to portable media for "
+"better security of your data."
 msgstr ""
-"உள்ளமைவை கைமுறையாகச் சேமிக்கும்போது, கடவுச்சொல்லை உருவாக்கும்படி கேட்கப்படுவீர்கள். உங்கள் தரவின் சிறந்த பாதுகாப்பிற்காக உள்ளமைவை எடுத்துசெல்லதக்க ஊடகத்தில் சேமிக்கும்போது இது பயனுள்ளதாக இருக்கும்."
+"உள்ளமைவை கைமுறையாகச் சேமிக்கும்போது, கடவுச்சொல்லை உருவாக்கும்படி கேட்கப்படுவீர்கள். உங்கள் "
+"தரவின் சிறந்த பாதுகாப்பிற்காக உள்ளமைவை எடுத்துசெல்லதக்க ஊடகத்தில் சேமிக்கும்போது இது "
+"பயனுள்ளதாக இருக்கும்."
 
 #: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
@@ -163,10 +165,15 @@ msgid "Create new password"
 msgstr "புதிய கடவுச்சொல்லை உருவாக்கு"
 
 # Translation key: create_pwd_desc
+#: src/gui/window.py
 msgid ""
-"Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
+"Please create new password for your archive. Criteria include a length of at "
+"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"special character."
 msgstr ""
-"உங்கள் காப்பகத்திற்கு புதிய கடவுச்சொல்லை உருவாக்கு. அளவுகோல்கள் குறைந்தது 12 எழுத்து நீளம், ஒரு பெரிய எழுத்து, ஒரு சிறிய எழுத்து மற்றும் ஒரு சிறப்பு எழுத்து ஆகியவை அடங்கும்."
+"உங்கள் காப்பகத்திற்கு புதிய கடவுச்சொல்லை உருவாக்கு. அளவுகோல்கள் குறைந்தது 12 எழுத்து "
+"நீளம், ஒரு பெரிய எழுத்து, ஒரு சிறிய எழுத்து மற்றும் ஒரு சிறப்பு எழுத்து ஆகியவை "
+"அடங்கும்."
 
 #: src/gui/window.py
 msgid "Generate Password"
@@ -181,21 +188,32 @@ msgid "Unlock the archive with a password"
 msgstr "கடவுச்சொல் மூலம் காப்பகத்தைத் திற"
 
 # Translation key: check_pwd_desc
+#: src/gui/window.py
 msgid ""
-"Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
+"Enter the password below to unlock the archive with your configuration. If "
+"you have forgotten it, you will not be able to unzip the archive and start "
+"importing your configuration."
 msgstr ""
-"உங்கள் உள்ளமைவுடன் காப்பகத்தைத் திறக்கக் கீழே உள்ள கடவுச்சொல்லை உள்ளிடவும். நீங்கள் அதை மறந்துவிட்டால், நீங்கள் காப்பகத்தை அவிழ்த்து உங்கள் உள்ளமைவை இறக்குமதி செய்யத் தொடங்க முடியாது."
+"உங்கள் உள்ளமைவுடன் காப்பகத்தைத் திறக்கக் கீழே உள்ள கடவுச்சொல்லை உள்ளிடவும். நீங்கள் அதை "
+"மறந்துவிட்டால், நீங்கள் காப்பகத்தை அவிழ்த்து உங்கள் உள்ளமைவை இறக்குமதி செய்யத் தொடங்க "
+"முடியாது."
 
 # Translation key: enter_password_title
+#: src/gui/password_checker.py
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr "உள்ளமைவை ஒத்திசைக்க காப்பகத்தைத் திறக்கக் கடவுச்சொல்லை உள்ளிடவும்"
 
 # Translation key: enter_password_desc
+#: src/gui/password_checker.py
 msgid ""
-"An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
+"An encrypted archive has been selected for synchronization using the Save "
+"Desktop app. Please enter the password below to unlock it and start "
+"synchronization."
 msgstr ""
-"Savedesktop பயன்பாட்டைப் பயன்படுத்தி ஒத்திசைவுக்கு மறைகுறியாக்கப்பட்ட காப்பகம் தேர்ந்தெடுக்கப்பட்டுள்ளது. அதைத் திறக்கக் கீழே உள்ள கடவுச்சொல்லை உள்ளிடவும் மற்றும் ஒத்திசைவைத் தொடங்கவும்."
+"Savedesktop பயன்பாட்டைப் பயன்படுத்தி ஒத்திசைவுக்கு மறைகுறியாக்கப்பட்ட காப்பகம் "
+"தேர்ந்தெடுக்கப்பட்டுள்ளது. அதைத் திறக்கக் கீழே உள்ள கடவுச்சொல்லை உள்ளிடவும் மற்றும் ஒத்திசைவைத் "
+"தொடங்கவும்."
 
 #: src/gui/password_checker.py
 msgid "Remember Password"
@@ -206,20 +224,30 @@ msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "கடவுச்சொல் உள்ளிடப்படவில்லை, அல்லது அது தவறானது. தொடர முடியவில்லை."
 
 # Translation key: saving_config_status
+#: src/gui/window.py
 msgid ""
-"<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
+"<big><b>Saving configuration …</b></big>\n"
+"The configuration of your desktop environment will be saved in:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
 msgstr ""
-"<big> <b> உள்ளமைவைச் சேமித்தல்… </b> </big>\n உங்கள் பணிமேடை சூழலின் உள்ளமைவு சேமிக்கப்படும்:\n <i> {}/{}. Sd.tar.gz </i>\n"
+"<big> <b> உள்ளமைவைச் சேமித்தல்… </b> </big>\n"
+" உங்கள் பணிமேடை சூழலின் உள்ளமைவு சேமிக்கப்படும்:\n"
+" <i> {}/{}. Sd.tar.gz </i>\n"
 
 #: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "உள்ளமைவு சேமிக்கப்பட்டது!"
 
 # Translation key: config_saved_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
+"<big><b>{}</b></big>\n"
+"You can now view the archive with the configuration of your desktop "
+"environment, or return to the previous page.\n"
 msgstr ""
-"<big> <b> {} </b> </big>\n உங்கள் பணிமேடை சூழலின் உள்ளமைவுடன் காப்பகத்தை இப்போது காணலாம் அல்லது முந்தைய பக்கத்திற்குத் திரும்பலாம்.\n"
+"<big> <b> {} </b> </big>\n"
+" உங்கள் பணிமேடை சூழலின் உள்ளமைவுடன் காப்பகத்தை இப்போது காணலாம் அல்லது முந்தைய "
+"பக்கத்திற்குத் திரும்பலாம்.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -233,8 +261,7 @@ msgstr "இறக்குமதி"
 msgid "Import saved configuration"
 msgstr "இறக்குமதி சேமிக்கப்பட்ட உள்ளமைவு"
 
-#: src/gui/templates/shortcuts_window.ui:29
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:29 src/gui/window.py
 msgid "Import from file"
 msgstr "கோப்பிலிருந்து இறக்குமதி"
 
@@ -251,20 +278,30 @@ msgid "Save Desktop files"
 msgstr "சேமிபணிமேடை கோப்புகள்"
 
 # Translation key: importing_config_status
+#: src/gui/window.py
 msgid ""
-"<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
+"<big><b>Importing configuration …</b></big>\n"
+"Importing configuration from:\n"
+"<i>{}</i>\n"
 msgstr ""
-"<big> <b> உள்ளமைவை இறக்குமதி செய்தல்… </b></big>\n இதிலிருந்து உள்ளமைவை இறக்குமதி செய்தல்:\n <i> {} </i>\n"
+"<big> <b> உள்ளமைவை இறக்குமதி செய்தல்… </b></big>\n"
+" இதிலிருந்து உள்ளமைவை இறக்குமதி செய்தல்:\n"
+" <i> {} </i>\n"
 
 #: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "உள்ளமைவு பயன்படுத்தப்பட்டது!"
 
 # Translation key: config_imported_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
+"<big><b>{}</b></big>\n"
+"You can log out of the system for the changes to take effect, or go back to "
+"the previous page and log out later.\n"
 msgstr ""
-"<big> <b> {} </b> </big>\n மாற்றங்கள் நடைமுறைக்கு வர நீங்கள் கணினியிலிருந்து வெளியேறலாம், அல்லது முந்தைய பக்கத்திற்குச் சென்று பின்னர் வெளியேறலாம்.\n"
+"<big> <b> {} </b> </big>\n"
+" மாற்றங்கள் நடைமுறைக்கு வர நீங்கள் கணினியிலிருந்து வெளியேறலாம், அல்லது முந்தைய "
+"பக்கத்திற்குச் சென்று பின்னர் வெளியேறலாம்.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -287,8 +324,10 @@ msgid "Sync"
 msgstr "ஒத்திசைவு"
 
 # Translation key: sync_desc
+#: src/gui/window.py
 msgid ""
-"Sync your desktop environment configuration with other computers in the network."
+"Sync your desktop environment configuration with other computers in the "
+"network."
 msgstr "இணைப்பில் உள்ள பிற கணினிகளுடன் உங்கள் பணிமேடை சூழல் உள்ளமைவை ஒத்திசை."
 
 #: src/gui/synchronization_dialogs.py
@@ -304,10 +343,13 @@ msgid "2. Go to the Online Accounts section"
 msgstr "2. நிகழ்நிலை கணக்குகள் பகுதிக்குச் செல்"
 
 # Translation key: gnome_oa_section_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft "
+"365 or Nextcloud."
 msgstr ""
-"இந்தப் பிரிவில் கூகிள், நுண்மென் 365 அல்லது அடுத்தமுகில் போன்ற நீங்கள் விரும்பும் முகில் சேவையைத் தேர்ந்தெடு."
+"இந்தப் பிரிவில் கூகிள், நுண்மென் 365 அல்லது அடுத்தமுகில் போன்ற நீங்கள் விரும்பும் முகில் "
+"சேவையைத் தேர்ந்தெடு."
 
 #: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
@@ -315,26 +357,45 @@ msgstr ""
 "3. அடுத்த பொத்தானைக் சொடுக்கு செய்து உருவாக்கிய முகில் இயக்கிக் கோப்புறையைத் தேர்ந்தெடு"
 
 # Translation key: gnome_oa_chooser_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
+"The created cloud drive folder can be found in the side panel of the file "
+"chooser dialog, in this form: username@service.com."
 msgstr ""
-"உருவாக்கப்பட்ட முகில் இயக்கிக் கோப்புறையை கோப்புத் தேர்வு உரையாடலின் பக்க பலைகையில் இந்தப் படிவத்தில் காணலாம்: USERNAME@SERVICE.com."
+"உருவாக்கப்பட்ட முகில் இயக்கிக் கோப்புறையை கோப்புத் தேர்வு உரையாடலின் பக்க பலைகையில் இந்தப் "
+"படிவத்தில் காணலாம்: USERNAME@SERVICE.com."
 
 # Translation key: rclone_intro_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
+"For synchronization to works properly, you need to have the folder, that is "
+"synced with your cloud service using Rclone.\n"
+"<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"சரியாக வேலை செய்ய ஒத்திசைவு, நீங்கள் கோப்புறையை வைத்திருக்க வேண்டும், அது ஆர்நகலியைப் பயன்படுத்தி உங்கள் முகில் சேவையுடன் ஒத்திசைக்கப்படுகிறது.\n <b> நீங்கள் பயன்படுத்தும் முகில் இயக்கிச் சேவையைத் தேர்ந்தெடுப்பதன் மூலம் தொடங்கு. </b>"
+"சரியாக வேலை செய்ய ஒத்திசைவு, நீங்கள் கோப்புறையை வைத்திருக்க வேண்டும், அது ஆர்நகலியைப் "
+"பயன்படுத்தி உங்கள் முகில் சேவையுடன் ஒத்திசைக்கப்படுகிறது.\n"
+" <b> நீங்கள் பயன்படுத்தும் முகில் இயக்கிச் சேவையைத் தேர்ந்தெடுப்பதன் மூலம் தொடங்கு. </b>"
 
 # Translation key: rclone_copy_cmd
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
+"Now, copy the command to set up Rclone using the side button and open the "
+"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
+"apps' menu."
 msgstr ""
-"இப்போது, பக்க பொத்தானைப் பயன்படுத்தி ஆர்நகலியை அமைக்கக் கட்டளையை நகலெடுத்து, கட்டு+மாற்று+ஏ விசைப்பலகை குறுக்குவழியைப் பயன்படுத்தி முனையப் பயன்பாட்டைத் திற அல்லது பயன்பாடுகளின் பட்டியலில் கண்டுபிடி."
+"இப்போது, பக்க பொத்தானைப் பயன்படுத்தி ஆர்நகலியை அமைக்கக் கட்டளையை நகலெடுத்து, "
+"கட்டு+மாற்று+ஏ விசைப்பலகை குறுக்குவழியைப் பயன்படுத்தி முனையப் பயன்பாட்டைத் திற அல்லது "
+"பயன்பாடுகளின் பட்டியலில் கண்டுபிடி."
+
+#: src/gui/synchronization_dialogs.py
+msgid "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
+"Once you have finished setting up Rclone using the command provided, click "
+"the \"Apply\" button"
 msgstr ""
 "வழங்கப்பட்ட கட்டளையைப் பயன்படுத்தி ஆர்நகலியை அமைத்ததும், \"இடு\" பொத்தானைக் சொடுக்கு"
 
@@ -347,10 +408,13 @@ msgid "Almost done!"
 msgstr "கிட்டத்தட்ட முடிந்தது!"
 
 # Translation key: almost_done_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"You've now created the cloud drive folder! Click on the Next button to complete the setup."
+"You've now created the cloud drive folder! Click on the Next button to "
+"complete the setup."
 msgstr ""
-"நீங்கள் இப்போது முகில் இயக்கிக் கோப்புறையை உருவாக்கியுள்ளீர்கள்! அமைப்பை முடிக்க அடுத்த பொத்தானைக் சொடுக்கு."
+"நீங்கள் இப்போது முகில் இயக்கிக் கோப்புறையை உருவாக்கியுள்ளீர்கள்! அமைப்பை முடிக்க அடுத்த "
+"பொத்தானைக் சொடுக்கு."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select"
@@ -360,8 +424,7 @@ msgstr "தேர்ந்தெடு"
 msgid "Next"
 msgstr "அடுத்தது"
 
-#: src/gui/templates/shortcuts_window.ui:71
-#: src/gui/synchronization_dialogs.py
+#: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "ஒத்திசைவு கோப்பை அமை"
@@ -386,17 +449,23 @@ msgstr "தயவுசெய்து காத்திரு…"
 msgid "Change"
 msgstr "மாற்றம்"
 
-#: src/gui/templates/shortcuts_window.ui:78
-#: src/gui/synchronization_dialogs.py
+#: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "முகில் சேமிப்பகத்துடன் இணை"
 
 # Translation key: connect_cloud_storage_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"On another computer, open the Save Desktop app, and on this page, click on the \"Set up the sync file\" button and make the necessary settings. On this computer, select the folder that you have synced with your cloud storage and also have saved the same periodic saving file."
+"On another computer, open the Save Desktop app, and on this page, click on "
+"the \"Set up the sync file\" button and make the necessary settings. On this "
+"computer, select the folder that you have synced with your cloud storage and "
+"also have saved the same periodic saving file."
 msgstr ""
-"மற்றொரு கணினியில், சேமிபணிமேடை பயன்பாட்டைத் திறந்து, இந்தப் பக்கத்தில், \"ஒத்திசைவு கோப்பை அமைக்கவும்\" பொத்தானைக் சொடுக்கு செய்து தேவையான அமைப்புகளை உருவாக்கவும். இந்தக் கணினியில், உங்கள் மேகக்கணி சேமிப்பகத்துடன் நீங்கள் ஒத்திசைத்த கோப்புறையைத் தேர்ந்தெடுக்கவும், அதே கால சேமிப்பு கோப்பையும் சேமித்துள்ளீர்கள்."
+"மற்றொரு கணினியில், சேமிபணிமேடை பயன்பாட்டைத் திறந்து, இந்தப் பக்கத்தில், \"ஒத்திசைவு "
+"கோப்பை அமைக்கவும்\" பொத்தானைக் சொடுக்கு செய்து தேவையான அமைப்புகளை உருவாக்கவும். இந்தக் "
+"கணினியில், உங்கள் மேகக்கணி சேமிப்பகத்துடன் நீங்கள் ஒத்திசைத்த கோப்புறையைத் தேர்ந்தெடுக்கவும், "
+"அதே கால சேமிப்பு கோப்பையும் சேமித்துள்ளீர்கள்."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
@@ -415,22 +484,25 @@ msgid "Bidirectional synchronization"
 msgstr "இருதரப்பு ஒத்திசைவு"
 
 # Translation key: bidirectional_sync_desc
+#: src/gui/synchronization_dialogs.py
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+"If enabled, and the sync interval and cloud drive folder are selected, the "
+"periodic saving information (interval, folder, and file name) from the other "
+"computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
-"இயக்கப்பட்டிருந்தால், மற்றும் ஒத்திசைவு இடைவெளி மற்றும் முகில் இயக்கிக் கோப்புறை தேர்ந்தெடுக்கப்பட்டால், ஒத்திசைவதற்கு அமைக்கப்பட்ட பிற கணினியிலிருந்து அவ்வப்போது சேமிக்கும் செய்தி (இடைவெளி, கோப்புறை மற்றும் கோப்புப் பெயர்) இந்தக் கணினியில் நகலெடுக்கப்படுகிறது."
+"இயக்கப்பட்டிருந்தால், மற்றும் ஒத்திசைவு இடைவெளி மற்றும் முகில் இயக்கிக் கோப்புறை "
+"தேர்ந்தெடுக்கப்பட்டால், ஒத்திசைவதற்கு அமைக்கப்பட்ட பிற கணினியிலிருந்து அவ்வப்போது சேமிக்கும் "
+"செய்தி (இடைவெளி, கோப்புறை மற்றும் கோப்புப் பெயர்) இந்தக் கணினியில் நகலெடுக்கப்படுகிறது."
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "இனிமேல், தலைப்பு பட்டியில் உள்ள பட்டியலிருந்து உள்ளமைவை ஒத்திசைக்கலாம்"
 
-#: src/gui/templates/shortcuts_window.ui:50
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 msgid "Synchronise manually"
 msgstr "கைமுறையாக ஒத்திசை"
 
-#: src/gui/templates/shortcuts_window.ui:36
-#: src/gui/window.py
+#: src/gui/templates/shortcuts_window.ui:36 src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
@@ -447,25 +519,30 @@ msgid "About app"
 msgstr "பயன்பாடுபற்றி"
 
 # Translation key: unsuppurted_env_desc
+#: src/gui/window.py
 msgid ""
-"<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
+"<big><b>You have an unsupported environment installed.</b></big> \n"
+"Please use one of these environments: {}."
 msgstr ""
-"<big> <b> உங்களிடம் ஆதரிக்கப்படாத சூழல் நிறுவப்பட்டுள்ளது. </b></big>\nஇந்தச் சூழல்களில் ஒன்றைப் பயன்படுத்தவும்: {}."
+"<big> <b> உங்களிடம் ஆதரிக்கப்படாத சூழல் நிறுவப்பட்டுள்ளது. </b></big>\n"
+"இந்தச் சூழல்களில் ஒன்றைப் பயன்படுத்தவும்: {}."
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
-#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
-#: src/main.py
+#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 msgid "Save your desktop configuration"
 msgstr "உங்கள் பணிமேடை உள்ளமைவைச் சேமி"
 
 # Translation key: description
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+"Save Desktop lets you save your current configuration (themes, icons, "
+"wallpapers, all desktop environment settings, extensions, etc.) with one "
+"click."
 msgstr ""
-"உங்கள் தற்போதைய உள்ளமைவை (கருப்பொருள்கள், சின்னங்கள், பின்ணணிகள், அனைத்து பணிமேடை சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே சொடுக்கில் சேமிக்க சேமிபணிமேடை உங்களை அனுமதிக்கிறது."
+"உங்கள் தற்போதைய உள்ளமைவை (கருப்பொருள்கள், சின்னங்கள், பின்ணணிகள், அனைத்து பணிமேடை "
+"சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே சொடுக்கில் சேமிக்க சேமிபணிமேடை உங்களை "
+"அனுமதிக்கிறது."
 
 #: src/main.py
 msgid "Translator credits"
 msgstr "தமிழ்நேரம் <https://TamilNeram.github.io>"
-
