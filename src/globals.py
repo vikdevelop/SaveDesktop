@@ -11,21 +11,27 @@ def get_app_environment():
         return {
             'type': 'flatpak',
             'home': Path(os.getenv('HOME', Path.home())),
-            'run_cmd': 'flatpak run io.github.vikdevelop.SaveDesktop'
+            'run_cmd': 'flatpak run io.github.vikdevelop.SaveDesktop',
+            'cache': f'{GLib.get_user_cache_dir()}/tmp',
+            'data': f'{GLib.get_user_data_dir()}'
         }
     
     elif os.environ.get('SNAP_NAME') == 'savedesktop':
         return {
             'type': 'snap',
             'home': Path(os.getenv('SNAP_REAL_HOME', os.getenv('HOME', Path.home()))),
-            'run_cmd': 'savedesktop'
+            'run_cmd': 'savedesktop',
+            'cache': f'{GLib.get_user_cache_dir()}',
+            'data': f'{GLib.get_user_data_dir()}'
         }
     
     else:
         return {
             'type': 'native',
             'home': Path.home(),
-            'run_cmd': 'savedesktop'
+            'run_cmd': 'savedesktop',
+            'cache': os.path.join(f'{GLib.get_user_cache_dir()}', 'io.github.vikdevelop.SaveDesktop'),
+            'data': os.path.join(f'{GLib.get_user_data_dir()}', 'io.github.vikdevelop.SaveDesktop')
         }
 
 env = get_app_environment()
@@ -39,8 +45,9 @@ settings = Gio.Settings.new_with_path(
     "/io/github/vikdevelop/SaveDesktop/"
 )
 
-DATA = f'{GLib.get_user_data_dir()}'
-CACHE = f'{GLib.get_user_cache_dir()}'
+# Cache and data directories
+CACHE = env['cache']
+DATA = env['data']
 
 # Commands
 periodic_saving_cmd = f'{env["run_cmd"]} --background'
@@ -50,6 +57,7 @@ sync_cmd = f'{env["run_cmd"]} --sync'
 flatpak = (env['type'] == 'flatpak')
 snap = (env['type'] == 'snap')
 
+# Application path
 app_prefix = os.environ.get('SAVEDESKTOP_DIR')
 
 # Export
