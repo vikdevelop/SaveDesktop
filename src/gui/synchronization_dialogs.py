@@ -2,7 +2,7 @@ import gi, sys, subprocess, os, locale
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from threading import Thread
-from gi.repository import Gtk, Gdk, Adw, GLib
+from gi.repository import Gtk, Gdk, Adw, GLib, Gio
 from savedesktop.globals import *
 
 class InitSetupDialog(Adw.AlertDialog):
@@ -58,7 +58,7 @@ class InitSetupDialog(Adw.AlertDialog):
             # row for selecting the cloud service
             self.servRow = Adw.ComboRow.new()
             self.servRow.set_model(services)
-            self.servRow.connect("notify::selected-item", self.get_service)
+            self.servRow.connect("notify::selected-item", self._get_service)
             self.initBox.append(self.servRow)
 
             # button for copying the Rclone command to clipboard
@@ -79,49 +79,6 @@ class InitSetupDialog(Adw.AlertDialog):
             self.add_response('ok-rclone', _("Apply"))
             self.set_response_appearance('ok-rclone', Adw.ResponseAppearance.SUGGESTED)
             self.set_response_enabled('ok-rclone', False)
-
-    # Set the Rclone setup command
-    def get_service(self, comborow, GParamObject):
-        self.set_body("")
-        get_servrow = self.servRow.get_selected_item().get_string()
-        self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox" if get_servrow == "DropBox" else "pcloud"
-
-        self.cmdRow.set_title(_("Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."))
-        self.cmdRow.set_subtitle(f"command -v rclone &amp;> /dev/null &amp;&amp; (rclone config create savedesktop {self.cloud_service} &amp;&amp; rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'")
-
-        # set the copyButton properties
-        self.copyButton.set_sensitive(True)
-        self.copyButton.set_icon_name("edit-copy-symbolic")
-        self.copyButton.set_tooltip_text(_("Copy"))
-        self.copyButton.connect("clicked", self.copy_rclone_command)
-
-    # copy the command for setting up the Rclone using Gdk.Clipboard()
-    def copy_rclone_command(self, w):
-        os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True) # create the requested folder before copying the command for setting up Rclone to the clipboard
-
-        clipboard = Gdk.Display.get_default().get_clipboard()
-        Gdk.Clipboard.set(clipboard, f"command -v rclone &> /dev/null && (rclone config create savedesktop {self.cloud_service} && rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'") # copy the command for setting up Rclone to the clipboard
-
-        self.copyButton.set_icon_name("done")
-        self.cmdRow.set_title(_("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"))
-        self.cmdRow.set_subtitle("")
-
-        self.set_response_enabled('ok-rclone', True)
-        self.remove_response('ok-syncthing')
-
-    # show the message about finished setup the synchronization
-    def almost_done(self):
-        self.remove_response('ok-rclone')
-        self.remove_response('next')
-        self.remove_response('ok-syncthing')
-
-        self.set_extra_child(None)
-        self.set_heading(_("Almost done!"))
-        self.set_body(_("You've now created the cloud drive folder! Click on the Next button to complete the setup."))
-        self.set_can_close(True)
-
-        self.add_response('open-setdialog', _("Next")) if self.get_button_type == 'set-button' else self.add_response('open-clouddialog', _("Next"))
-        self.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED) if self.get_button_type == 'set-button' else self.set_response_appearance('open-clouddialog', Adw.ResponseAppearance.SUGGESTED)
 
     # Responses of this dialog
     def initsetupDialog_closed(self, w, response):
@@ -145,6 +102,49 @@ class InitSetupDialog(Adw.AlertDialog):
             settings["first-synchronization-setup"] = False
             self.restart_app_win = True
             self.parent._open_CloudDialog(w)
+
+    # Set the Rclone setup command
+    def _get_service(self, comborow, GParamObject):
+        self.set_body("")
+        get_servrow = self.servRow.get_selected_item().get_string()
+        self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox" if get_servrow == "DropBox" else "pcloud"
+        self.rclone_command = f"command -v rclone &amp;> /dev/null &amp;&amp; (rclone config create savedesktop {self.cloud_service} &amp;&amp; rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'"
+
+        self.cmdRow.set_title(_("Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."))
+        self.cmdRow.set_subtitle(self.rclone_command)
+
+        # set the copyButton properties
+        self.copyButton.set_sensitive(True)
+        self.copyButton.set_icon_name("edit-copy-symbolic")
+        self.copyButton.set_tooltip_text(_("Copy"))
+        self.copyButton.connect("clicked", self.__copy_rclone_command)
+
+    # copy the command for setting up the Rclone using Gdk.Clipboard()
+    def __copy_rclone_command(self, w):
+        os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True) # create the requested folder before copying the command for setting up Rclone to the clipboard
+
+        clipboard = Gdk.Display.get_default().get_clipboard()
+        Gdk.Clipboard.set(clipboard, self.rclone_command) # copy the command for setting up Rclone to the clipboard
+
+        self.set_extra_child(None)
+        self.set_body(_("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"))
+
+        self.set_response_enabled('ok-rclone', True)
+        self.remove_response('ok-syncthing')
+
+    # show the message about finished setup the synchronization
+    def almost_done(self):
+        self.remove_response('ok-rclone')
+        self.remove_response('next')
+        self.remove_response('ok-syncthing')
+
+        self.set_extra_child(None)
+        self.set_heading(_("Almost done!"))
+        self.set_body(_("You've now created the cloud drive folder! Click on the Next button to complete the setup."))
+        self.set_can_close(True)
+
+        self.add_response('open-setdialog', _("Next")) if self.get_button_type == 'set-button' else self.add_response('open-clouddialog', _("Next"))
+        self.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED) if self.get_button_type == 'set-button' else self.set_response_appearance('open-clouddialog', Adw.ResponseAppearance.SUGGESTED)
 
 class SetDialog(Adw.AlertDialog):
     def __init__(self, parent):
@@ -194,7 +194,7 @@ class SetDialog(Adw.AlertDialog):
         open(f"{CACHE}/expand_pb_row", "w").close()
 
     # Refer to the article about synchronization
-    def open_sync_link(self, w):
+    def _open_sync_link(self, w):
         language = locale.getlocale()[0].split("_")[0]
         os.system(f"xdg-open {self.app_wiki}/synchronization/{language}")
 
@@ -240,24 +240,24 @@ class SetDialog(Adw.AlertDialog):
             self.setupButton = Gtk.Button.new_with_label(_("Create"))
             self.setupButton.set_valign(Gtk.Align.CENTER)
             self.setupButton.add_css_class("suggested-action")
-            self.setupButton.connect("clicked", self.make_pb_file)
+            self.setupButton.connect("clicked", self._make_pb_file)
             self.file_row.add_suffix(self.setupButton)
 
         if _("You didn't select the cloud drive folder!") in folder:
             self.lmButton = Gtk.Button.new_with_label(_("Learn more"))
             self.lmButton.set_valign(Gtk.Align.CENTER)
             self.lmButton.add_css_class("suggested-action")
-            self.lmButton.connect("clicked", self.open_sync_link)
+            self.lmButton.connect("clicked", self._open_sync_link)
             self.file_row.add_suffix(self.lmButton)
         self.set_body("") # set the body as empty after loading the periodic saving information
 
     # make the periodic saving file if it does not exist
-    def make_pb_file(self, w):
+    def _make_pb_file(self, w):
         self.setupButton.set_sensitive(False)
-        pb_thread = Thread(target=self.save_now)
+        pb_thread = Thread(target=self.__save_now)
         pb_thread.start()
 
-    def save_now(self):
+    def __save_now(self):
         try:
             e_o = False
             self.file_row.set_subtitle(_("Please wait …"))
@@ -275,8 +275,17 @@ class SetDialog(Adw.AlertDialog):
                 os.system(f"notify-send 'SaveDesktop' '{_('Configuration has been saved!')}'")
                 self.set_response_enabled('ok', True)
 
+    # Action after closing dialog for setting synchronization file
+    def setDialog_closed(self, w, response):
+        if response == 'ok':
+            thread = Thread(target=self._save_file)
+            thread.start()
+        else:
+            if os.path.exists(f"{CACHE}/expand_pb_row"):
+                os.remove(f"{CACHE}/expand_pb_row")
+
     # save the SaveDesktop.json file to the periodic saving folder and set up the auto-mounting the cloud drive
-    def save_file(self):
+    def _save_file(self):
         try:
             self.mount_type = "periodic-saving"
             open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
@@ -285,15 +294,6 @@ class SetDialog(Adw.AlertDialog):
             os.system(f"notify-send \'{_('An error occurred')}\' '{e}'")
         finally:
             pass
-
-    # Action after closing dialog for setting synchronization file
-    def setDialog_closed(self, w, response):
-        if response == 'ok':
-            thread = Thread(target=self.save_file)
-            thread.start()
-        else:
-            if os.path.exists(f"{CACHE}/expand_pb_row"):
-                os.remove(f"{CACHE}/expand_pb_row")
 
 class CloudDialog(Adw.AlertDialog):
     def __init__(self, parent):
@@ -311,7 +311,7 @@ class CloudDialog(Adw.AlertDialog):
         self.cloudBox = Gtk.ListBox.new()
         self.cloudBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.cloudBox.get_style_context().add_class(class_name='boxed-list')
-        self.cloudBox.set_size_request(-1, 400)
+        self.cloudBox.set_size_request(-1, 300)
         self.set_extra_child(self.cloudBox)
 
         # Row and buttons for selecting the cloud drive folder
@@ -417,7 +417,28 @@ class CloudDialog(Adw.AlertDialog):
         if not self.psyncRow.get_selected_item().get_string() == _("Never") and not self.cfileRow.get_subtitle():
             self.set_response_enabled('ok', True)
 
-    def call_automount(self):
+    # Action after closing URL dialog
+    def cloudDialog_closed(self, w, response):
+        if response == 'ok':
+            self.check_psync = settings["periodic-import"]
+            # translate the periodic sync options to English
+            selected_item = self.psyncRow.get_selected_item()
+            sync = {_("Never"): "Never2", _("Manually"): "Manually2", _("Daily"): "Daily2", _("Weekly"): "Weekly2", _("Monthly"): "Monthly2"}
+
+            sync_item = sync.get(selected_item.get_string(), "Never2")
+
+            settings["periodic-import"] = sync_item
+
+            # if the selected periodic saving interval is "Manually2", it enables the manually-sync value
+            settings["manually-sync"] = True and settings["periodic-import"] == "Manually2"
+
+            # save the status of the Bidirectional Synchronization switch
+            settings["bidirectional-sync"] = self.bsSwitch.get_active()
+
+            check_thread = Thread(target=self._call_automount)
+            check_thread.start()
+
+    def _call_automount(self):
         try:
             if self.cfileRow.get_subtitle():
                 self.mount_type = "cloud-receiver"
@@ -454,33 +475,12 @@ class CloudDialog(Adw.AlertDialog):
         # if it is selected to manually sync, it creates an option in the app menu in the header bar
         if settings["manually-sync"]:
             self.sync_menu = Gio.Menu()
-            self.sync_menu.append(_("Sync"), 'app.m-sync-with-key')
-            self.main_menu.prepend_section(None, self.sync_menu)
+            self.sync_menu.append(_("Synchronise manually"), 'app.m-sync-with-key')
+            self.parent.main_menu.prepend_section(None, self.sync_menu)
             self.parent.show_special_toast()
         else:
             try:
                 self.sync_menu.remove_all()
             except:
                 pass
-
-    # Action after closing URL dialog
-    def cloudDialog_closed(self, w, response):
-        if response == 'ok':
-            self.check_psync = settings["periodic-import"]
-            # translate the periodic sync options to English
-            selected_item = self.psyncRow.get_selected_item()
-            sync = {_("Never"): "Never2", _("Manually"): "Manually2", _("Daily"): "Daily2", _("Weekly"): "Weekly2", _("Monthly"): "Monthly2"}
-
-            sync_item = sync.get(selected_item.get_string(), "Never2")
-
-            settings["periodic-import"] = sync_item
-
-            # if the selected periodic saving interval is "Manually2", it enables the manually-sync value
-            settings["manually-sync"] = True and settings["periodic-import"] == "Manually2"
-
-            # save the status of the Bidirectional Synchronization switch
-            settings["bidirectional-sync"] = self.bsSwitch.get_active()
-
-            check_thread = Thread(target=self.call_automount)
-            check_thread.start()
 
