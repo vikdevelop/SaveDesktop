@@ -5,9 +5,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
+"PO-Revision-Date: 2025-09-16 14:05+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/vikdevelop/savedesktop/ca/>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/vikdevelop/"
+"savedesktop/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +48,7 @@ msgstr "Temes"
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Fonts"
-msgstr ""
+msgstr "Fonts"
 
 # Translation key: backgrounds
 msgid "Backgrounds"
@@ -56,7 +57,7 @@ msgstr "Fons d'escriptori"
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Extensions"
-msgstr ""
+msgstr "Extensions"
 
 #: src/gui/items_dialog.py
 msgid "Desktop"
@@ -93,7 +94,7 @@ msgstr "Els canvis seran efectius al proper inici de sessió"
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 #: src/gui/more_options_dialog.py
 msgid "Never"
@@ -142,12 +143,12 @@ msgstr "Restaura als valors per defecte"
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Password for encryption"
-msgstr ""
+msgstr "Password for encryption"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Manual saving"
-msgstr ""
+msgstr "Manual saving"
 
 #: src/gui/more_options_dialog.py
 msgid "Archive encryption"
@@ -156,7 +157,7 @@ msgstr "Xifrat de ftxer"
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Save the configuration without creating an archive"
 
 #: src/gui/window.py
 msgid "Create new password"
@@ -180,6 +181,7 @@ msgstr "Desbloca el fitxer amb una contrasenya"
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Please enter a password to unlock the archive for sync the configuration"
 
 #: src/gui/window.py
 msgid "Configuration has been saved!"
@@ -204,7 +206,7 @@ msgstr "Des d'un fitxer"
 #: src/gui/window.py
 #, fuzzy
 msgid "Import from folder"
-msgstr ""
+msgstr "Import from folder"
 
 #: src/gui/window.py
 msgid "Cancel"
@@ -249,7 +251,7 @@ msgstr ""
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Initial synchronization setup"
-msgstr ""
+msgstr "Initial synchronization setup"
 
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
@@ -258,6 +260,8 @@ msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft"
 " 365 or Nextcloud."
 msgstr ""
+"In this section select the cloud service you want, such as Google, Microsoft "
+"365 or Nextcloud."
 
 # Translation key: gnome_oa_chooser_desc
 #: src/gui/synchronization_dialogs.py
@@ -266,11 +270,13 @@ msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
+"The created cloud drive folder can be found in the side panel of the file "
+"chooser dialog, in this form: username@service.com."
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -279,11 +285,13 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
+"Once you have finished setting up Rclone using the command provided, click "
+"the \"Apply\" button"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Use Syncthing folder instead"
 
 #: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
@@ -347,7 +355,7 @@ msgstr "Dreceres de teclat"
 #: src/gui/templates/shortcuts_window.ui:15
 #, fuzzy
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Open the application wiki"
 
 #: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
