@@ -48,7 +48,7 @@ msgstr ""
 msgid "Fonts"
 msgstr ""
 
-# Translation key: backgrounds
+#: src/gui/items_dialog.py
 msgid "Backgrounds"
 msgstr ""
 

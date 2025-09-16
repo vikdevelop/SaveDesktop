@@ -7,14 +7,12 @@ msgstr ""
 "POT-Creation-Date: 2025-09-03 19:10\n"
 "PO-Revision-Date: 2025-09-14 10:44+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/vikdevelop/"
-"savedesktop/uk/>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/vikdevelop/savedesktop/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.14-dev\n"
 
 #: src/gui/window.py
@@ -154,8 +152,8 @@ msgstr "Шифрування архіву"
 #: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
-"password. This is useful when saving the configuration to portable media for "
-"better security of your data."
+"password. This is useful when saving the configuration to portable media for"
+" better security of your data."
 msgstr ""
 "При ручному збереженні конфігурації вам буде запропоновано створити пароль. "
 "Це корисно, коли ви зберігаєте конфігурацію на портативних носіях для "
@@ -172,8 +170,8 @@ msgstr "Створити новий пароль"
 # Translation key: create_pwd_desc
 #: src/gui/window.py
 msgid ""
-"Please create new password for your archive. Criteria include a length of at "
-"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"Please create new password for your archive. Criteria include a length of at"
+" least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
 "Будь ласка, створіть новий пароль для вашого архіву. Критерії включають "
@@ -212,15 +210,11 @@ msgstr ""
 
 # Translation key: enter_password_desc
 #: src/gui/password_checker.py
-#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
 
 #: src/gui/password_checker.py
 msgid "Remember Password"
@@ -249,12 +243,10 @@ msgstr "Конфігурацію збережено!"
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
-"You can now view the archive with the configuration of your desktop "
-"environment, or return to the previous page.\n"
+"You can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 msgstr ""
 "<big><b>{}</b></big>\n"
-"Тепер ви можете переглянути архів з конфігурацією вашої стільниці або "
-"повернутися до попередньої сторінки.\n"
+"Тепер ви можете переглянути архів з конфігурацією вашої стільниці або повернутися до попередньої сторінки.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -303,12 +295,10 @@ msgstr "Конфігурацію застосовано!"
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
-"You can log out of the system for the changes to take effect, or go back to "
-"the previous page and log out later.\n"
+"You can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
 msgstr ""
 "<big><b>{}</b></big>\n"
-"Ви можете вийти із системи що зміни набули чинності, або повернутися до "
-"попередньої сторінки і вийти із системи пізніше.\n"
+"Ви можете вийти із системи що зміни набули чинності, або повернутися до попередньої сторінки і вийти із системи пізніше.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -354,8 +344,8 @@ msgstr "2. Перейдіть до розділу \"Онлайн-акаунти\
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft "
-"365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft"
+" 365 or Nextcloud."
 msgstr ""
 "У цьому розділі виберіть хмарний сервіс, який вам потрібен, наприклад, "
 "Google, Microsoft 365 або Nextcloud."
@@ -376,12 +366,10 @@ msgstr ""
 # Translation key: rclone_intro_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"Для правильного функціонування синхронізації, вам потрібно мати папку, яка "
-"синхронізується з вашим хмарним сервісом за допомогою Rclone.\n"
+"Для правильного функціонування синхронізації, вам потрібно мати папку, яка синхронізується з вашим хмарним сервісом за допомогою Rclone.\n"
 "<b>Почніть з вибору хмарного сервісу, який ви використовуєте.</b>"
 
 # Translation key: rclone_copy_cmd
@@ -396,9 +384,8 @@ msgstr ""
 "або знайшовши його в меню програм."
 
 #: src/gui/synchronization_dialogs.py
-#, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -468,9 +455,9 @@ msgstr "Підключитися до хмарного сховища"
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this "
-"computer, select the folder that you have synced with your cloud storage and "
-"also have saved the same periodic saving file."
+"the \"Set up the sync file\" button and make the necessary settings. On this"
+" computer, select the folder that you have synced with your cloud storage "
+"and also have saved the same periodic saving file."
 msgstr ""
 "На іншому комп'ютері відкрийте додаток Save Desktop, а на цій сторінці "
 "натисніть кнопку \"Налаштувати файл синхронізації\" і зробіть необхідні "
@@ -498,8 +485,9 @@ msgstr "Двостороння синхронізація"
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"periodic saving information (interval, folder, and file name) from the other"
+" computer with synchronization set to synchronize is copied to this "
+"computer."
 msgstr ""
 "Якщо увімкнено, і вибрані інтервал синхронізації та папка хмарного диска, "
 "інформація про періодичне збереження (інтервал, папка та ім'я файлу) з "
