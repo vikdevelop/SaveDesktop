@@ -7,8 +7,7 @@ msgstr ""
 "POT-Creation-Date: 2025-09-03 19:10\n"
 "PO-Revision-Date: 2025-09-14 10:44+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: Estonian <https://hosted.weblate.org/projects/vikdevelop/"
-"savedesktop/et/>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/vikdevelop/savedesktop/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -153,11 +152,11 @@ msgstr "Arhiivifaili krüptimine"
 #: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
-"password. This is useful when saving the configuration to portable media for "
-"better security of your data."
+"password. This is useful when saving the configuration to portable media for"
+" better security of your data."
 msgstr ""
-"Seadistuste käsitsi salvestamisel palume, et lisaksid salasõna. See võimalus "
-"parandab turvalisust, kui kavatsed kasutada salvestamist teisaldatavale "
+"Seadistuste käsitsi salvestamisel palume, et lisaksid salasõna. See võimalus"
+" parandab turvalisust, kui kavatsed kasutada salvestamist teisaldatavale "
 "andmekandjale."
 
 #: src/gui/more_options_dialog.py
@@ -171,8 +170,8 @@ msgstr "Loo uus salasõna"
 # Translation key: create_pwd_desc
 #: src/gui/window.py
 msgid ""
-"Please create new password for your archive. Criteria include a length of at "
-"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"Please create new password for your archive. Criteria include a length of at"
+" least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
 "Palun lisa oma arhiivifailile salasõna. Eeldame, et ta oleks vähemalt 12 "
@@ -245,12 +244,10 @@ msgstr "Seadistused on salvestatud!"
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
-"You can now view the archive with the configuration of your desktop "
-"environment, or return to the previous page.\n"
+"You can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 msgstr ""
 "<big><b>{}</b></big>\n"
-"Sa võid nüüd vaadata oma töölauakeskkonna seadistuste archive või minna "
-"tagasi eelmise vaate juurde.\n"
+"Sa võid nüüd vaadata oma töölauakeskkonna seadistuste archive või minna tagasi eelmise vaate juurde.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -299,12 +296,10 @@ msgstr "Seadistused on nüüd kasutusel!"
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
-"You can log out of the system for the changes to take effect, or go back to "
-"the previous page and log out later.\n"
+"You can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
 msgstr ""
 "<big><b>{}</b></big>\n"
-"Muudatuste kasutuselevõtmiseks võid sa kohe välja logida või minna tagasi ja "
-"logida välja hiljem.\n"
+"Muudatuste kasutuselevõtmiseks võid sa kohe välja logida või minna tagasi ja logida välja hiljem.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -349,8 +344,8 @@ msgstr "2. Ava võrguteenuste valik"
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft "
-"365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft"
+" 365 or Nextcloud."
 msgstr ""
 "Siin vali soovitud pilveteenus, nagu Google, Microsoft 365 või Nextcloud."
 
@@ -370,12 +365,10 @@ msgstr ""
 # Translation key: rclone_intro_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"Et sünkroniseerimine toimiks korralikult vajad sa kausta, mis on rclone'i "
-"abil sünkroniseeritud sinu pilveteenusega.\n"
+"Et sünkroniseerimine toimiks korralikult vajad sa kausta, mis on rclone'i abil sünkroniseeritud sinu pilveteenusega.\n"
 "<b>Alustamiseks vali soovitud pilveteenuse kaust.</b>"
 
 # Translation key: rclone_copy_cmd
@@ -392,7 +385,7 @@ msgstr ""
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -461,9 +454,9 @@ msgstr "Ühenda pilvesalvestusteenusega"
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this "
-"computer, select the folder that you have synced with your cloud storage and "
-"also have saved the same periodic saving file."
+"the \"Set up the sync file\" button and make the necessary settings. On this"
+" computer, select the folder that you have synced with your cloud storage "
+"and also have saved the same periodic saving file."
 msgstr ""
 "Ava teises arvutis Save Desktop rakendus ja sellel lehel klõpsi nuppu "
 "„Seadista sünkroniseerimisfail“ ja seadista vastavalt. Selles arvutis vali "
@@ -490,8 +483,9 @@ msgstr "Mõlemasuunaline sünkroniseerimine"
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"periodic saving information (interval, folder, and file name) from the other"
+" computer with synchronization set to synchronize is copied to this "
+"computer."
 msgstr ""
 "Kui eelistus on kasutusel, sünkroniseerimisvälp ja pilveteenuse kaust "
 "valitud, siis regulaarse salvestamise teave (välp, kaust ja failinimi) "
@@ -499,7 +493,8 @@ msgstr ""
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr "Alates nüüdsest saad sa andmed sünkroniseerida menüüst päiseriba kohal"
+msgstr ""
+"Alates nüüdsest saad sa andmed sünkroniseerida menüüst päiseriba kohal"
 
 #: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 msgid "Synchronise manually"

@@ -7,8 +7,7 @@ msgstr ""
 "POT-Creation-Date: 2025-09-03 19:10\n"
 "PO-Revision-Date: 2025-09-14 10:44+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
-"projects/vikdevelop/savedesktop/zh_Hans/>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/projects/vikdevelop/savedesktop/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,7 +91,7 @@ msgstr "更改仅在下次登录后生效"
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Interval"
-msgstr "Interval"
+msgstr ""
 
 #: src/gui/more_options_dialog.py
 msgid "Never"
@@ -154,11 +153,9 @@ msgstr "存档加密"
 #: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
-"password. This is useful when saving the configuration to portable media for "
-"better security of your data."
-msgstr ""
-"在手动保存配置的时候，会有创建密码的提示信息。这在使用移动便携存储设备保存配"
-"置时能更好的保护您的数据。"
+"password. This is useful when saving the configuration to portable media for"
+" better security of your data."
+msgstr "在手动保存配置的时候，会有创建密码的提示信息。这在使用移动便携存储设备保存配置时能更好的保护您的数据。"
 
 #: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
@@ -172,13 +169,10 @@ msgstr "创建新密码"
 #: src/gui/window.py
 #, fuzzy
 msgid ""
-"Please create new password for your archive. Criteria include a length of at "
-"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"Please create new password for your archive. Criteria include a length of at"
+" least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
-"Please create new password for your archive. Criteria include a length of at "
-"least 12 characters, one uppercase letter, one lowercase letter, and one "
-"special character."
 
 #: src/gui/window.py
 msgid "Generate Password"
@@ -200,9 +194,6 @@ msgid ""
 "you have forgotten it, you will not be able to unzip the archive and start "
 "importing your configuration."
 msgstr ""
-"Enter the password below to unlock the archive with your configuration. If "
-"you have forgotten it, you will not be able to unzip the archive and start "
-"importing your configuration."
 
 # Translation key: enter_password_title
 #: src/gui/password_checker.py
@@ -218,9 +209,6 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
 
 #: src/gui/password_checker.py
 msgid "Remember Password"
@@ -249,8 +237,7 @@ msgstr "配置已保存！"
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
-"You can now view the archive with the configuration of your desktop "
-"environment, or return to the previous page.\n"
+"You can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 msgstr ""
 "<big><b>{}</b></big>\n"
 "现在您可以查看桌面环境配置存档，或者返回上一页。\n"
@@ -301,8 +288,7 @@ msgstr "配置已应用！"
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
-"You can log out of the system for the changes to take effect, or go back to "
-"the previous page and log out later.\n"
+"You can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
 msgstr ""
 "<big><b>{}</b></big>\n"
 "您可以注销以使更改生效，或返回上一页稍后再注销。\n"
@@ -349,8 +335,8 @@ msgstr "2. 定位到在线账号（Online Accounts）部分"
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft "
-"365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft"
+" 365 or Nextcloud."
 msgstr "选择你想使用的任一云服务，比如 Google，Microsoft 365 或 Nextcloud."
 
 #: src/gui/synchronization_dialogs.py
@@ -364,20 +350,14 @@ msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
-"The created cloud drive folder can be found in the side panel of the file "
-"chooser dialog, in this form: username@service.com."
 
 # Translation key: rclone_intro_desc
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
-"<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 #: src/gui/synchronization_dialogs.py
@@ -387,14 +367,11 @@ msgid ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
-"Now, copy the command to set up Rclone using the side button and open the "
-"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
-"apps' menu."
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -403,13 +380,11 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click "
-"the \"Apply\" button"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 #: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
@@ -442,7 +417,7 @@ msgstr "定期保存文件"
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Periodic saving file does not exist."
-msgstr "Periodic saving file does not exist."
+msgstr ""
 
 #: src/gui/synchronization_dialogs.py
 msgid "Create"
@@ -466,14 +441,10 @@ msgstr "连接到云存储"
 #, fuzzy
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this "
-"computer, select the folder that you have synced with your cloud storage and "
-"also have saved the same periodic saving file."
+"the \"Set up the sync file\" button and make the necessary settings. On this"
+" computer, select the folder that you have synced with your cloud storage "
+"and also have saved the same periodic saving file."
 msgstr ""
-"On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this "
-"computer, select the folder that you have synced with your cloud storage and "
-"also have saved the same periodic saving file."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
@@ -490,19 +461,17 @@ msgstr "周期性同步"
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Bidirectional synchronization"
-msgstr "Bidirectional synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync_desc
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"periodic saving information (interval, folder, and file name) from the other"
+" computer with synchronization set to synchronize is copied to this "
+"computer."
 msgstr ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
@@ -548,9 +517,7 @@ msgid ""
 "Save Desktop lets you save your current configuration (themes, icons, "
 "wallpapers, all desktop environment settings, extensions, etc.) with one "
 "click."
-msgstr ""
-"Save Desktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展"
-"等）。"
+msgstr "Save Desktop 可让您一键保存当前配置（主题、图标、壁纸、所有桌面环境设置、扩展等）。"
 
 #: src/main.py
 msgid "Translator credits"

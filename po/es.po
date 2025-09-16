@@ -7,8 +7,7 @@ msgstr ""
 "POT-Creation-Date: 2025-09-03 19:10\n"
 "PO-Revision-Date: 2025-09-14 10:44+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/vikdevelop/"
-"savedesktop/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/vikdevelop/savedesktop/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -140,12 +139,12 @@ msgstr "Restablecer los valores por defecto"
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Password for encryption"
-msgstr "Password for encryption"
+msgstr ""
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Manual saving"
-msgstr "Manual saving"
+msgstr ""
 
 #: src/gui/more_options_dialog.py
 msgid "Archive encryption"
@@ -155,8 +154,8 @@ msgstr "Cifrado de archivos"
 #: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
-"password. This is useful when saving the configuration to portable media for "
-"better security of your data."
+"password. This is useful when saving the configuration to portable media for"
+" better security of your data."
 msgstr ""
 "Al guardar manualmente la configuración, se le pedirá que cree una "
 "contraseña. Esto es útil cuando se guarda la configuración en medios "
@@ -165,7 +164,7 @@ msgstr ""
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 #: src/gui/window.py
 msgid "Create new password"
@@ -174,12 +173,12 @@ msgstr "Crear una nueva contraseña"
 # Translation key: create_pwd_desc
 #: src/gui/window.py
 msgid ""
-"Please create new password for your archive. Criteria include a length of at "
-"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"Please create new password for your archive. Criteria include a length of at"
+" least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
-"Por favor, cree una nueva contraseña para su archivo. Los criterios incluyen "
-"al menos 12 caracteres, una letra mayúscula, una letra minúscula y un "
+"Por favor, cree una nueva contraseña para su archivo. Los criterios incluyen"
+" al menos 12 caracteres, una letra mayúscula, una letra minúscula y un "
 "carácter especial."
 
 #: src/gui/window.py
@@ -211,7 +210,6 @@ msgstr ""
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 #: src/gui/password_checker.py
@@ -221,19 +219,16 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
 
 #: src/gui/password_checker.py
 #, fuzzy
 msgid "Remember Password"
-msgstr "Remember Password"
+msgstr ""
 
 #: src/core/synchronization.py
 #, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
 
 # Translation key: saving_config_status
 #: src/gui/window.py
@@ -254,12 +249,10 @@ msgstr "¡Se ha guardado la configuración!"
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
-"You can now view the archive with the configuration of your desktop "
-"environment, or return to the previous page.\n"
+"You can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 msgstr ""
 "<big><b>{}</b></big>\n"
-"Ahora puede ver el archivo con la configuración de su entorno de escritorio "
-"o volver a la página anterior.\n"
+"Ahora puede ver el archivo con la configuración de su entorno de escritorio o volver a la página anterior.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -280,7 +273,7 @@ msgstr "Importar desde archivo"
 #: src/gui/window.py
 #, fuzzy
 msgid "Import from folder"
-msgstr "Import from folder"
+msgstr ""
 
 #: src/gui/window.py
 msgid "Cancel"
@@ -309,12 +302,10 @@ msgstr "¡La configuración se ha aplicado!"
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
-"You can log out of the system for the changes to take effect, or go back to "
-"the previous page and log out later.\n"
+"You can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
 msgstr ""
 "<big><b>{}</b></big>\n"
-"Puede salir del sistema para que los cambios surtan efecto, o volver a la "
-"página anterior y salir más tarde.\n"
+"Puede salir del sistema para que los cambios surtan efecto, o volver a la página anterior y salir más tarde.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -360,8 +351,8 @@ msgstr "2. Ir a la sección Cuentas en línea"
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft "
-"365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft"
+" 365 or Nextcloud."
 msgstr ""
 "En esta sección selecciona el servicio de nube que deseas, como Google, "
 "Microsoft 365 o Nextcloud."
@@ -385,14 +376,11 @@ msgstr ""
 # Translation key: rclone_intro_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
+"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"Para que la sincronización funcione correctamente, debe tener la carpeta "
-"sincronizada con su servicio en la nube mediante Rclone.\n"
-"<b>Comience seleccionando el servicio de almacenamiento en la nube que "
-"utiliza.</b>"
+"Para que la sincronización funcione correctamente, debe tener la carpeta sincronizada con su servicio en la nube mediante Rclone.\n"
+"<b>Comience seleccionando el servicio de almacenamiento en la nube que utiliza.</b>"
 
 # Translation key: rclone_copy_cmd
 #: src/gui/synchronization_dialogs.py
@@ -408,7 +396,7 @@ msgstr ""
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -422,7 +410,7 @@ msgstr ""
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 #: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
@@ -479,15 +467,15 @@ msgstr "Conectarse al almacenamiento en la nube"
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this "
-"computer, select the folder that you have synced with your cloud storage and "
-"also have saved the same periodic saving file."
+"the \"Set up the sync file\" button and make the necessary settings. On this"
+" computer, select the folder that you have synced with your cloud storage "
+"and also have saved the same periodic saving file."
 msgstr ""
 "En otro ordenador, abra la aplicación Save Desktop y, en esta página, haga "
 "clic en el botón \"Configurar el archivo de sincronización\" y realice los "
 "ajustes necesarios. En este ordenador, seleccione la carpeta que ha "
-"sincronizado con su almacenamiento en la nube y también ha guardado el mismo "
-"archivo de guardado periódico."
+"sincronizado con su almacenamiento en la nube y también ha guardado el mismo"
+" archivo de guardado periódico."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
@@ -509,8 +497,9 @@ msgstr "Sincronización bidireccional"
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"periodic saving information (interval, folder, and file name) from the other"
+" computer with synchronization set to synchronize is copied to this "
+"computer."
 msgstr ""
 "Si está activada y se seleccionan el intervalo de sincronización y la "
 "carpeta de la unidad en la nube, la información de guardado periódico "
