@@ -17,36 +17,27 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.14-dev\n"
 
-#: src/gui/window.py
 msgid "Save"
 msgstr "Зберегти"
 
-#: src/gui/templates/shortcuts_window.ui:22 src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Зберегти поточну конфігурацію"
 
-#: src/gui/window.py
 msgid "Set the file name"
 msgstr "Задайте ім'я файлу"
 
-#: src/gui/templates/shortcuts_window.ui:64 src/gui/window.py
-#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "Елементи для включення в архів конфігурації"
 
-#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr "Ці налаштування також застосовуються до періодичного збереження"
 
-#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "Піктограми"
 
-#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "Теми"
 
-#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr "Шрифти"
 
@@ -54,104 +45,79 @@ msgstr "Шрифти"
 msgid "Backgrounds"
 msgstr "Шпалери"
 
-#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr "Розширення"
 
-#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "Робочий стіл"
 
-#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "Додатки Flatpak"
 
-#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr "Список встановлених додатків Flatpak"
 
-#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr "Дані користувача встановлених додатків Flatpak"
 
-#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr "Обирання даних Flatpak додатків"
 
-#: src/gui/templates/shortcuts_window.ui:57 src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Додаткові опції"
 
-#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr "Періодичне збереження"
 
-#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr "Зміни набудуть чинності тільки після наступного входу в систему"
 
-#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr "Інтервал"
 
-#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "Ніколи"
 
-#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "Щодня"
 
-#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "Щотижня"
 
-#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "Щомісяця"
 
-#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "Вручну"
 
-#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "Дізнатися більше"
 
-#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr "Тека для періодичного збереження"
 
-#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr "Виберіть власну теку для періодичного збереження"
 
-#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "Виберіть іншу теку"
 
-#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "Формат назви файлу"
 
-#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "Скинути до замовчування"
 
-#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr "Пароль для шифрування"
 
-#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr "Ручне збереження"
 
-#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr "Шифрування архіву"
 
 # Translation key: archive_encryption_desc
-#: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
 "password. This is useful when saving the configuration to portable media for "
@@ -161,16 +127,13 @@ msgstr ""
 "Це корисно, коли ви зберігаєте конфігурацію на портативних носіях для "
 "кращого захисту ваших даних."
 
-#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "Зберегти конфігурацію без створення архіву"
 
-#: src/gui/window.py
 msgid "Create new password"
 msgstr "Створити новий пароль"
 
 # Translation key: create_pwd_desc
-#: src/gui/window.py
 msgid ""
 "Please create new password for your archive. Criteria include a length of at "
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
@@ -180,20 +143,16 @@ msgstr ""
 "довжину не менше 12 символів, одну велику літеру, одну маленьку літеру та "
 "один спеціальний символ."
 
-#: src/gui/window.py
 msgid "Generate Password"
 msgstr "Згенерувати пароль"
 
-#: src/gui/window.py
 msgid "Password"
 msgstr "Пароль"
 
-#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr "Розблокувати архів за допомогою пароля"
 
 # Translation key: check_pwd_desc
-#: src/gui/window.py
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If "
 "you have forgotten it, you will not be able to unzip the archive and start "
@@ -203,7 +162,6 @@ msgstr ""
 "його забули, ви не зможете розпакувати архів і почати імпорт конфігурації."
 
 # Translation key: enter_password_title
-#: src/gui/password_checker.py
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
@@ -211,7 +169,6 @@ msgstr ""
 "конфігурації"
 
 # Translation key: enter_password_desc
-#: src/gui/password_checker.py
 #, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
@@ -222,16 +179,13 @@ msgstr ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 
-#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr "Запам'ятати пароль"
 
-#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "Введено не правильний пароль або нічого. Неможливо продовжити."
 
 # Translation key: saving_config_status
-#: src/gui/window.py
 msgid ""
 "<big><b>Saving configuration …</b></big>\n"
 "The configuration of your desktop environment will be saved in:\n"
@@ -241,12 +195,10 @@ msgstr ""
 "Конфігурація вашої стільниці буде збережена в:\n"
 " <i>{}/{}.sd.tar.gz</i>\n"
 
-#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Конфігурацію збережено!"
 
 # Translation key: config_saved_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can now view the archive with the configuration of your desktop "
@@ -256,36 +208,28 @@ msgstr ""
 "Тепер ви можете переглянути архів з конфігурацією вашої стільниці або "
 "повернутися до попередньої сторінки.\n"
 
-#: src/gui/window.py
 msgid "Open the folder"
 msgstr "Відкрити теку"
 
-#: src/gui/window.py
 msgid "Import"
 msgstr "Імпорт"
 
-#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "Імпорт збереженої конфігурації"
 
-#: src/gui/templates/shortcuts_window.ui:29 src/gui/window.py
 msgid "Import from file"
 msgstr "Імпорт з файлу"
 
-#: src/gui/window.py
 msgid "Import from folder"
 msgstr "Імпортувати з теки"
 
-#: src/gui/window.py
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "Файли Save Desktop"
 
 # Translation key: importing_config_status
-#: src/gui/window.py
 msgid ""
 "<big><b>Importing configuration …</b></big>\n"
 "Importing configuration from:\n"
@@ -295,12 +239,10 @@ msgstr ""
 "Імпортування конфігурації з:\n"
 "<i>{}</i>\n"
 
-#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Конфігурацію застосовано!"
 
 # Translation key: config_imported_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
@@ -310,28 +252,22 @@ msgstr ""
 "Ви можете вийти із системи що зміни набули чинності, або повернутися до "
 "попередньої сторінки і вийти із системи пізніше.\n"
 
-#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "Повернутися до попередньої сторінки"
 
-#: src/gui/window.py
 msgid "Log Out"
 msgstr "Вийти"
 
-#: src/gui/window.py
 msgid "An error occurred"
 msgstr "Виникла помилка"
 
-#: src/gui/window.py
 msgid "Apply"
 msgstr "Застосувати"
 
-#: src/gui/window.py
 msgid "Sync"
 msgstr "Синхронізувати"
 
 # Translation key: sync_desc
-#: src/gui/window.py
 msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
@@ -339,20 +275,16 @@ msgstr ""
 "Синхронізуйте конфігурацію середовище стільниці з іншими комп'ютерами в "
 "мережі."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Налаштування початкової синхронізації"
 
-#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Відкрийте налаштування системи"
 
-#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Перейдіть до розділу \"Онлайн-акаунти\""
 
 # Translation key: gnome_oa_section_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
@@ -360,12 +292,10 @@ msgstr ""
 "У цьому розділі виберіть хмарний сервіс, який вам потрібен, наприклад, "
 "Google, Microsoft 365 або Nextcloud."
 
-#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Натисніть кнопку \"Далі\" та виберіть створену папку хмарного диска"
 
 # Translation key: gnome_oa_chooser_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
@@ -374,7 +304,6 @@ msgstr ""
 "файлів у вигляді: username@service.com."
 
 # Translation key: rclone_intro_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -385,7 +314,6 @@ msgstr ""
 "<b>Почніть з вибору хмарного сервісу, який ви використовуєте.</b>"
 
 # Translation key: rclone_copy_cmd
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
@@ -395,13 +323,11 @@ msgstr ""
 "та відкрийте додаток термінала, використовуючи комбінацію клавіш Ctrl+Alt+T "
 "або знайшовши його в меню програм."
 
-#: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
 msgstr "Copy"
 
 # Translation key: rclone_cmd_copied_msg
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
@@ -409,16 +335,13 @@ msgstr ""
 "Після того, як ви завершите налаштування Rclone за допомогою наданої "
 "команди, натисніть кнопку \"Застосувати\""
 
-#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Використовувати замість теку Syncthing"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Майже готово!"
 
 # Translation key: almost_done_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
@@ -426,46 +349,34 @@ msgstr ""
 "Ви щойно створили папку хмарного диска! Натисніть кнопку \"Далі\", щоб "
 "завершити налаштування."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Вибрати"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Далі"
 
-#: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
-#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Налаштування файлу синхронізації"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Періодичне збереження файлу"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Файл періодичного збереження не існує."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Створити"
 
-#: src/gui/window.py
 msgid "Please wait …"
 msgstr "Будь ласка, зачекайте…"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Змінити"
 
-#: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
-#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Підключитися до хмарного сховища"
 
 # Translation key: connect_cloud_storage_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -478,24 +389,19 @@ msgstr ""
 "вашим хмарним сховищем, і де також збережено той же файл періодичного "
 "збереження."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Виберіть папку хмарного диска"
 
-#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Ви не вибрали папку хмарного диска!"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Періодична синхронізація"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Двостороння синхронізація"
 
 # Translation key: bidirectional_sync_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
@@ -506,33 +412,26 @@ msgstr ""
 "іншого комп'ютера, для якого налаштовано синхронізацію, буде скопійована на "
 "цей комп'ютер."
 
-#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 "Відтепер ви можете синхронізувати налаштування з меню на панелі заголовка"
 
-#: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Синхронізувати вручну"
 
-#: src/gui/templates/shortcuts_window.ui:36 src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Клавіатурні скорочення"
 
-#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr "Відкрити вікі-документацію додатку"
 
-#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "Вийти"
 
-#: src/gui/window.py
 msgid "About app"
 msgstr "Про додаток"
 
 # Translation key: unsuppurted_env_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>You have an unsupported environment installed.</b></big> \n"
 "Please use one of these environments: {}."
@@ -540,13 +439,10 @@ msgstr ""
 "<big><b>Ви використовуєте не підтримуване середовище.</b></big> \n"
 "Будь ласка, використовуйте одне з підтримуваних: {}."
 
-#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
-#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 msgid "Save your desktop configuration"
 msgstr "Збережіть конфігурацію вашої стільниці"
 
 # Translation key: description
-#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
 "Save Desktop lets you save your current configuration (themes, icons, "
 "wallpapers, all desktop environment settings, extensions, etc.) with one "
@@ -555,7 +451,6 @@ msgstr ""
 "Save Desktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, "
 "всі налаштування середовища робочого столу, розширення тощо) в один клац."
 
-#: src/main.py
 msgid "Translator credits"
 msgstr ""
 "Kefir2105 https://github.com/Kefir2105\n"
