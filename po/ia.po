@@ -5,9 +5,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
+"PO-Revision-Date: 2025-09-16 14:05+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: Interlingua <https://hosted.weblate.org/projects/vikdevelop/savedesktop/ia/>\n"
+"Language-Team: Interlingua <https://hosted.weblate.org/projects/vikdevelop/"
+"savedesktop/ia/>\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,193 +19,193 @@ msgstr ""
 #: src/gui/window.py
 #, fuzzy
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 #: src/gui/templates/shortcuts_window.ui:22 src/gui/window.py
 #, fuzzy
 msgid "Save the current configuration"
-msgstr ""
+msgstr "Save the current configuration"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Set the file name"
-msgstr ""
+msgstr "Set the file name"
 
 #: src/gui/templates/shortcuts_window.ui:64 src/gui/window.py
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Items to include in the configuration archive"
-msgstr ""
+msgstr "Items to include in the configuration archive"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "These settings also apply to periodic saving"
-msgstr ""
+msgstr "These settings also apply to periodic saving"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Icons"
-msgstr ""
+msgstr "Icons"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Themes"
-msgstr ""
+msgstr "Themes"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Fonts"
-msgstr ""
+msgstr "Fonts"
 
 # Translation key: backgrounds
 #, fuzzy
 msgid "Backgrounds"
-msgstr ""
+msgstr "Backgrounds"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Extensions"
-msgstr ""
+msgstr "Extensions"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Desktop"
-msgstr ""
+msgstr "Desktop"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Flatpak apps"
-msgstr ""
+msgstr "Flatpak apps"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "List of installed Flatpak apps"
-msgstr ""
+msgstr "List of installed Flatpak apps"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "User data of installed Flatpak apps"
-msgstr ""
+msgstr "User data of installed Flatpak apps"
 
 #: src/gui/items_dialog.py
 #, fuzzy
 msgid "Flatpak apps data selection"
-msgstr ""
+msgstr "Flatpak apps data selection"
 
 #: src/gui/templates/shortcuts_window.ui:57 src/gui/more_options_dialog.py
 #, fuzzy
 msgid "More options"
-msgstr ""
+msgstr "More options"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Periodic saving"
-msgstr ""
+msgstr "Periodic saving"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Changes will only take effect after the next login"
-msgstr ""
+msgstr "Changes will only take effect after the next login"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Never"
-msgstr ""
+msgstr "Never"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Daily"
-msgstr ""
+msgstr "Daily"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Weekly"
-msgstr ""
+msgstr "Weekly"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Monthly"
-msgstr ""
+msgstr "Monthly"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Manually"
-msgstr ""
+msgstr "Manually"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Learn more"
-msgstr ""
+msgstr "Learn more"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Folder for periodic saving"
-msgstr ""
+msgstr "Folder for periodic saving"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Choose custom folder for periodic saving"
-msgstr ""
+msgstr "Choose custom folder for periodic saving"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Choose another folder"
-msgstr ""
+msgstr "Choose another folder"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "File name format"
-msgstr ""
+msgstr "File name format"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Reset to default"
-msgstr ""
+msgstr "Reset to default"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Password for encryption"
-msgstr ""
+msgstr "Password for encryption"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Manual saving"
-msgstr ""
+msgstr "Manual saving"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Archive encryption"
-msgstr ""
+msgstr "Archive encryption"
 
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Save the configuration without creating an archive"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Create new password"
-msgstr ""
+msgstr "Create new password"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Generate Password"
-msgstr ""
+msgstr "Generate Password"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Unlock the archive with a password"
-msgstr ""
+msgstr "Unlock the archive with a password"
 
 # Translation key: enter_password_title
 #: src/gui/password_checker.py
@@ -212,76 +213,77 @@ msgstr ""
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Please enter a password to unlock the archive for sync the configuration"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Configuration has been saved!"
-msgstr ""
+msgstr "Configuration has been saved!"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Open the folder"
-msgstr ""
+msgstr "Open the folder"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Import"
-msgstr ""
+msgstr "Import"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Import saved configuration"
-msgstr ""
+msgstr "Import saved configuration"
 
 #: src/gui/templates/shortcuts_window.ui:29 src/gui/window.py
 #, fuzzy
 msgid "Import from file"
-msgstr ""
+msgstr "Import from file"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Import from folder"
-msgstr ""
+msgstr "Import from folder"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Save Desktop files"
-msgstr ""
+msgstr "Save Desktop files"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "The configuration has been applied!"
-msgstr ""
+msgstr "The configuration has been applied!"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Back to previous page"
-msgstr ""
+msgstr "Back to previous page"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Log Out"
-msgstr ""
+msgstr "Log Out"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "An error occurred"
-msgstr ""
+msgstr "An error occurred"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Apply"
-msgstr ""
+msgstr "Apply"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Sync"
-msgstr ""
+msgstr "Sync"
 
 # Translation key: sync_desc
 #: src/gui/window.py
@@ -290,11 +292,13 @@ msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
 msgstr ""
+"Sync your desktop environment configuration with other computers in the "
+"network."
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Initial synchronization setup"
-msgstr ""
+msgstr "Initial synchronization setup"
 
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
@@ -303,6 +307,8 @@ msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft"
 " 365 or Nextcloud."
 msgstr ""
+"In this section select the cloud service you want, such as Google, Microsoft "
+"365 or Nextcloud."
 
 # Translation key: gnome_oa_chooser_desc
 #: src/gui/synchronization_dialogs.py
@@ -311,11 +317,13 @@ msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
+"The created cloud drive folder can be found in the side panel of the file "
+"chooser dialog, in this form: username@service.com."
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -324,104 +332,106 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
+"Once you have finished setting up Rclone using the command provided, click "
+"the \"Apply\" button"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Use Syncthing folder instead"
 
 #: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 #, fuzzy
 msgid "Set up the sync file"
-msgstr ""
+msgstr "Set up the sync file"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Periodic saving file"
-msgstr ""
+msgstr "Periodic saving file"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Periodic saving file does not exist."
-msgstr ""
+msgstr "Periodic saving file does not exist."
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Create"
-msgstr ""
+msgstr "Create"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "Please wait …"
-msgstr ""
+msgstr "Please wait …"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Change"
-msgstr ""
+msgstr "Change"
 
 #: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 #, fuzzy
 msgid "Connect to the cloud storage"
-msgstr ""
+msgstr "Connect to the cloud storage"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Select the cloud drive folder"
-msgstr ""
+msgstr "Select the cloud drive folder"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "You didn't select the cloud drive folder!"
-msgstr ""
+msgstr "You didn't select the cloud drive folder!"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Periodic synchronization"
-msgstr ""
+msgstr "Periodic synchronization"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Bidirectional synchronization"
-msgstr ""
+msgstr "Bidirectional synchronization"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
+msgstr "From now on, you can sync the config from the menu in the header bar"
 
 #: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 #, fuzzy
 msgid "Synchronise manually"
-msgstr ""
+msgstr "Synchronise manually"
 
 #: src/gui/templates/shortcuts_window.ui:36 src/gui/window.py
 #, fuzzy
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Keyboard shortcuts"
 
 #: src/gui/templates/shortcuts_window.ui:15
 #, fuzzy
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Open the application wiki"
 
 #: src/gui/templates/shortcuts_window.ui:43
 #, fuzzy
 msgid "Quit"
-msgstr ""
+msgstr "Quit"
 
 #: src/gui/window.py
 #, fuzzy
 msgid "About app"
-msgstr ""
+msgstr "About app"
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 #, fuzzy
 msgid "Save your desktop configuration"
-msgstr ""
+msgstr "Save your desktop configuration"
 
 # Translation key: description
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
@@ -431,6 +441,9 @@ msgid ""
 "wallpapers, all desktop environment settings, extensions, etc.) with one "
 "click."
 msgstr ""
+"Save Desktop lets you save your current configuration (themes, icons, "
+"wallpapers, all desktop environment settings, extensions, etc.) with one "
+"click."
 
 #: src/main.py
 msgid "Translator credits"
