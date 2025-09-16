@@ -16,36 +16,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.14-dev\n"
 
-#: src/gui/window.py
 msgid "Save"
 msgstr "Spara"
 
-#: src/gui/templates/shortcuts_window.ui:22 src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Spara nuvarande konfiguration"
 
-#: src/gui/window.py
 msgid "Set the file name"
 msgstr "Ange filnamn"
 
-#: src/gui/templates/shortcuts_window.ui:64 src/gui/window.py
-#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "Objekt som ska inkluderas i konfigurationsarkivet"
 
-#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr "Dessa inställningar gäller även för periodiskt sparande"
 
-#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "Ikoner"
 
-#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "Teman"
 
-#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr "Teckensnitt"
 
@@ -53,104 +44,79 @@ msgstr "Teckensnitt"
 msgid "Backgrounds"
 msgstr "Bakgrunder"
 
-#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr "Tillägg"
 
-#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "Skrivbord"
 
-#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "Flatpak program"
 
-#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr "Lista av installerade Flatpak program"
 
-#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr "Användardata av installerade Flatpak program"
 
-#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr "Dataval för Flatpak program"
 
-#: src/gui/templates/shortcuts_window.ui:57 src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Mer alternativ"
 
-#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr "Periodiskt sparande"
 
-#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr "Ändringar träder i kraft först efter nästa inloggning"
 
-#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr "Intervall"
 
-#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "Aldrig"
 
-#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "Dagligen"
 
-#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "Veckovis"
 
-#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "Månadsvis"
 
-#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "Manuellt"
 
-#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "Läs mer"
 
-#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr "Mapp för periodiskt sparande"
 
-#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr "Välj anpassad mapp för periodiskt sparande"
 
-#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "Välj en annan mapp"
 
-#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "Filnamnsformat"
 
-#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "Återställ till standard"
 
-#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr "Lösenord för kryptering"
 
-#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr "Manuell sparning"
 
-#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr "Arkivkryptering"
 
 # Translation key: archive_encryption_desc
-#: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
 "password. This is useful when saving the configuration to portable media for "
@@ -160,16 +126,13 @@ msgstr ""
 "lösenord. Detta är användbart när du sparar konfigurationen på flyttbart "
 "media för bättre säkerhet för din data."
 
-#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "Spara konfigurationen utan att skapa ett arkiv"
 
-#: src/gui/window.py
 msgid "Create new password"
 msgstr "Skapa nytt lösenord"
 
 # Translation key: create_pwd_desc
-#: src/gui/window.py
 msgid ""
 "Please create new password for your archive. Criteria include a length of at "
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
@@ -178,20 +141,16 @@ msgstr ""
 "Skapa ett nytt lösenord för ditt arkiv. Kriterier inkluderar en längd på "
 "minst 12 tecken, en stor bokstav, en liten bokstav och ett specialtecken."
 
-#: src/gui/window.py
 msgid "Generate Password"
 msgstr "Generera lösenord"
 
-#: src/gui/window.py
 msgid "Password"
 msgstr "Lösenord"
 
-#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr "Lås upp arkivet med ett lösenord"
 
 # Translation key: check_pwd_desc
-#: src/gui/window.py
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If "
 "you have forgotten it, you will not be able to unzip the archive and start "
@@ -202,7 +161,6 @@ msgstr ""
 "din konfiguration."
 
 # Translation key: enter_password_title
-#: src/gui/password_checker.py
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
@@ -210,7 +168,6 @@ msgstr ""
 "konfigurationen."
 
 # Translation key: enter_password_desc
-#: src/gui/password_checker.py
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
@@ -220,18 +177,15 @@ msgstr ""
 "programmet. Ange lösenordet nedan för att låsa upp det och starta "
 "synkroniseringen."
 
-#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr "Kom ihåg lösenord"
 
-#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
 "Lösenordet är inte inmatat, eller så är det felaktigt. Det går inte att "
 "fortsätta."
 
 # Translation key: saving_config_status
-#: src/gui/window.py
 msgid ""
 "<big><b>Saving configuration …</b></big>\n"
 "The configuration of your desktop environment will be saved in:\n"
@@ -241,12 +195,10 @@ msgstr ""
 "Konfigurationen av din skrivbordsmiljö kommer att sparas i:\n"
 " <i>{}/{}.sd.tar.gz</i>\n"
 
-#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Konfigurationen har sparats!"
 
 # Translation key: config_saved_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can now view the archive with the configuration of your desktop "
@@ -256,36 +208,28 @@ msgstr ""
 "Du kan nu se arkivet med konfigurationen av din skrivbordsmiljö, eller gå "
 "tillbaka till föregående sida.\n"
 
-#: src/gui/window.py
 msgid "Open the folder"
 msgstr "Öppna mappen"
 
-#: src/gui/window.py
 msgid "Import"
 msgstr "Importera"
 
-#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "Importera sparad konfiguration"
 
-#: src/gui/templates/shortcuts_window.ui:29 src/gui/window.py
 msgid "Import from file"
 msgstr "Importera från fil"
 
-#: src/gui/window.py
 msgid "Import from folder"
 msgstr "Importera från mapp"
 
-#: src/gui/window.py
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "Save Desktop filer"
 
 # Translation key: importing_config_status
-#: src/gui/window.py
 msgid ""
 "<big><b>Importing configuration …</b></big>\n"
 "Importing configuration from:\n"
@@ -295,12 +239,10 @@ msgstr ""
 "Importerar konfiguration från:\n"
 "<i>{}</i>\n"
 
-#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Konfigurationen har tillämpats!"
 
 # Translation key: config_imported_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
@@ -310,28 +252,22 @@ msgstr ""
 "Du kan logga ut från systemet för att ändringarna ska träda i kraft, eller "
 "gå tillbaka till föregående sida och logga ut senare.\n"
 
-#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "Tillbaka till föregående sida"
 
-#: src/gui/window.py
 msgid "Log Out"
 msgstr "Logga ut"
 
-#: src/gui/window.py
 msgid "An error occurred"
 msgstr "Ett fel har uppstått"
 
-#: src/gui/window.py
 msgid "Apply"
 msgstr "Tillämpa"
 
-#: src/gui/window.py
 msgid "Sync"
 msgstr "Synkronisera"
 
 # Translation key: sync_desc
-#: src/gui/window.py
 msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
@@ -339,20 +275,16 @@ msgstr ""
 "Synkronisera konfigurationen av din skrivbordsmiljö med andra datorer i "
 "nätverket."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Inledande synkroniseringsinställningar"
 
-#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Öppna systeminställningarna"
 
-#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Gå till avsnittet Onlinekonton"
 
 # Translation key: gnome_oa_section_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
@@ -360,12 +292,10 @@ msgstr ""
 "I det här avsnittet väljer du den molntjänst du vill ha, till exempel "
 "Google, Microsoft 365 eller Nextcloud."
 
-#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Klicka på knappen Nästa och välj den skapade molnlagringsmappen"
 
 # Translation key: gnome_oa_chooser_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
@@ -374,7 +304,6 @@ msgstr ""
 "denna form: användarnamn@service.com."
 
 # Translation key: rclone_intro_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -385,7 +314,6 @@ msgstr ""
 "<b>Börja med att välja den molnlagringstjänst du använder.</b>"
 
 # Translation key: rclone_copy_cmd
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
@@ -395,12 +323,10 @@ msgstr ""
 "öppna terminalappen med kortkommandot Ctrl+Alt+T eller leta reda på det i "
 "programmenyn."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Copy"
 msgstr "Kopiera"
 
 # Translation key: rclone_cmd_copied_msg
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
@@ -408,16 +334,13 @@ msgstr ""
 "När du har slutfört konfigureringen av Rclone med det angivna kommandot "
 "klickar du på \"Verkställ\" knappen"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Använd Syncthing mapp istället"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Nästan klart!"
 
 # Translation key: almost_done_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
@@ -425,46 +348,34 @@ msgstr ""
 "Du har nu skapatmolnenhet mappen! Klicka på nästa för att slutföra "
 "installationen."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Välj"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Nästa"
 
-#: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
-#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Ställ in synkfil"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Periodisk sparfil"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Periodisk sparfil existerar inte."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Skapa"
 
-#: src/gui/window.py
 msgid "Please wait …"
 msgstr "Vänligen vänta …"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Ändra"
 
-#: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
-#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Anslut till molnlagring"
 
 # Translation key: connect_cloud_storage_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -476,24 +387,19 @@ msgstr ""
 "inställningar. På den här datorn väljer du mappen som du har synkroniserat "
 "med din molnlagring och som även har sparat samma periodiska sparfil."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Välj mappen i molnlagring"
 
-#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Du valde inte mappen för molnlagring!"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Periodisk synkronisering"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Dubbelriktad synkronisering"
 
 # Translation key: bidirectional_sync_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
@@ -504,33 +410,26 @@ msgstr ""
 "mapp och filnamn) från den andra datorn med synkronisering inställd på att "
 "synkronisera till den här datorn."
 
-#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 "Från och med nu kan du synkronisera konfigurationen från menyn i huvudfältet"
 
-#: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Synkronisera manuellt"
 
-#: src/gui/templates/shortcuts_window.ui:36 src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Tangentbordsgenvägar"
 
-#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr "Öppna programmets wiki"
 
-#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/gui/window.py
 msgid "About app"
 msgstr "Om programmet"
 
 # Translation key: unsuppurted_env_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>You have an unsupported environment installed.</b></big> \n"
 "Please use one of these environments: {}."
@@ -538,13 +437,10 @@ msgstr ""
 "<big><b>Du har en miljö som inte stöds installerad.</b></big> \n"
 "Vänligen använd någon av dessa miljöer: {}."
 
-#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
-#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 msgid "Save your desktop configuration"
 msgstr "Spara din skrivbordskonfiguration"
 
 # Translation key: description
-#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
 "Save Desktop lets you save your current configuration (themes, icons, "
 "wallpapers, all desktop environment settings, extensions, etc.) with one "
@@ -554,6 +450,5 @@ msgstr ""
 "bakgrundsbilder, alla skrivbordsmiljöinställningar, tillägg, etc.) med ett "
 "klick."
 
-#: src/main.py
 msgid "Translator credits"
 msgstr "Luna Jernberg https://github.com/bittin/"

@@ -16,36 +16,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.14-dev\n"
 
-#: src/gui/window.py
 msgid "Save"
 msgstr "சேமி"
 
-#: src/gui/templates/shortcuts_window.ui:22 src/gui/window.py
 msgid "Save the current configuration"
 msgstr "தற்போதைய உள்ளமைவைச் சேமி"
 
-#: src/gui/window.py
 msgid "Set the file name"
 msgstr "கோப்புப் பெயரை அமை"
 
-#: src/gui/templates/shortcuts_window.ui:64 src/gui/window.py
-#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "உள்ளமைவு காப்பகத்தில் சேர்க்க வேண்டிய உருப்படிகள்"
 
-#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr "இந்த அமைப்புகள் அவ்வப்போது சேமிப்பதற்கும் பொருந்தும்"
 
-#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "சின்னங்கள்"
 
-#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "கருப்பொருள்கள்"
 
-#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr "எழுத்துருக்கள்"
 
@@ -53,104 +44,79 @@ msgstr "எழுத்துருக்கள்"
 msgid "Backgrounds"
 msgstr "பின்னணிகள்"
 
-#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr "நீட்டிப்புகள்"
 
-#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "பணிமேடை"
 
-#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "தட்டைகட்டு பயன்பாடுகள்"
 
-#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr "நிறுவப்பட்ட தட்டைகட்டு பயன்பாடுகளின் பட்டியல்"
 
-#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr "நிறுவப்பட்ட தட்டைகட்டு பயன்பாடுகளின் பயனர் தரவு"
 
-#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr "தட்டைகட்டு பயன்பாடுகள் தரவுத் தேர்வு"
 
-#: src/gui/templates/shortcuts_window.ui:57 src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "மேலும் விருப்பங்கள்"
 
-#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr "அவ்வப்போது சேமி"
 
-#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr "அடுத்த உள்நுழைவுக்குப் பிறகுதான் மாற்றங்கள் நடைமுறைக்கு வரும்"
 
-#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr "இடைவேளை"
 
-#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "ஒருபோதும்"
 
-#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "நாள்தோறும்"
 
-#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "வாராந்தோறும்"
 
-#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "திங்கள்தோறும்"
 
-#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "கைமுறையாக"
 
-#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "மேலும் அறிக"
 
-#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr "அவ்வப்போது சேமிப்பதற்கான கோப்புறை"
 
-#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr "அவ்வப்போது சேமிக்க தனிப்பயன் கோப்புறையைத் தேர்வுசெய்க"
 
-#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "மற்றொரு கோப்புறையைத் தேர்வுசெய்க"
 
-#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "கோப்புப் பெயர் வடிவம்"
 
-#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "இயல்புநிலைக்கு மீட்டமை"
 
-#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr "குறியாக்கத்திற்கான கடவுச்சொல்"
 
-#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr "கையேடு சேமிப்பு"
 
-#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr "காப்பக குறியாக்கம்"
 
 # Translation key: archive_encryption_desc
-#: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
 "password. This is useful when saving the configuration to portable media for "
@@ -160,16 +126,13 @@ msgstr ""
 "தரவின் சிறந்த பாதுகாப்பிற்காக உள்ளமைவை எடுத்துசெல்லதக்க ஊடகத்தில் சேமிக்கும்போது இது "
 "பயனுள்ளதாக இருக்கும்."
 
-#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "காப்பகத்தை உருவாக்காமல் உள்ளமைவைச் சேமி"
 
-#: src/gui/window.py
 msgid "Create new password"
 msgstr "புதிய கடவுச்சொல்லை உருவாக்கு"
 
 # Translation key: create_pwd_desc
-#: src/gui/window.py
 msgid ""
 "Please create new password for your archive. Criteria include a length of at "
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
@@ -179,20 +142,16 @@ msgstr ""
 "நீளம், ஒரு பெரிய எழுத்து, ஒரு சிறிய எழுத்து மற்றும் ஒரு சிறப்பு எழுத்து ஆகியவை "
 "அடங்கும்."
 
-#: src/gui/window.py
 msgid "Generate Password"
 msgstr "கடவுச்சொல்லை உருவாக்கு"
 
-#: src/gui/window.py
 msgid "Password"
 msgstr "கடவுச்சொல்"
 
-#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr "கடவுச்சொல் மூலம் காப்பகத்தைத் திற"
 
 # Translation key: check_pwd_desc
-#: src/gui/window.py
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If "
 "you have forgotten it, you will not be able to unzip the archive and start "
@@ -203,13 +162,11 @@ msgstr ""
 "முடியாது."
 
 # Translation key: enter_password_title
-#: src/gui/password_checker.py
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr "உள்ளமைவை ஒத்திசைக்க காப்பகத்தைத் திறக்கக் கடவுச்சொல்லை உள்ளிடவும்"
 
 # Translation key: enter_password_desc
-#: src/gui/password_checker.py
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
@@ -219,16 +176,13 @@ msgstr ""
 "தேர்ந்தெடுக்கப்பட்டுள்ளது. அதைத் திறக்கக் கீழே உள்ள கடவுச்சொல்லை உள்ளிடவும் மற்றும் ஒத்திசைவைத் "
 "தொடங்கவும்."
 
-#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr "கடவுச்சொல்லை நினைவில் கொள்"
 
-#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "கடவுச்சொல் உள்ளிடப்படவில்லை, அல்லது அது தவறானது. தொடர முடியவில்லை."
 
 # Translation key: saving_config_status
-#: src/gui/window.py
 msgid ""
 "<big><b>Saving configuration …</b></big>\n"
 "The configuration of your desktop environment will be saved in:\n"
@@ -238,12 +192,10 @@ msgstr ""
 " உங்கள் பணிமேடை சூழலின் உள்ளமைவு சேமிக்கப்படும்:\n"
 " <i> {}/{}. Sd.tar.gz </i>\n"
 
-#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "உள்ளமைவு சேமிக்கப்பட்டது!"
 
 # Translation key: config_saved_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can now view the archive with the configuration of your desktop "
@@ -253,36 +205,28 @@ msgstr ""
 " உங்கள் பணிமேடை சூழலின் உள்ளமைவுடன் காப்பகத்தை இப்போது காணலாம் அல்லது முந்தைய "
 "பக்கத்திற்குத் திரும்பலாம்.\n"
 
-#: src/gui/window.py
 msgid "Open the folder"
 msgstr "கோப்புறையைத் திற"
 
-#: src/gui/window.py
 msgid "Import"
 msgstr "இறக்குமதி"
 
-#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "இறக்குமதி சேமிக்கப்பட்ட உள்ளமைவு"
 
-#: src/gui/templates/shortcuts_window.ui:29 src/gui/window.py
 msgid "Import from file"
 msgstr "கோப்பிலிருந்து இறக்குமதி"
 
-#: src/gui/window.py
 msgid "Import from folder"
 msgstr "கோப்புறையிலிருந்து இறக்குமதி"
 
-#: src/gui/window.py
 msgid "Cancel"
 msgstr "கைவிடு"
 
-#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "சேமிபணிமேடை கோப்புகள்"
 
 # Translation key: importing_config_status
-#: src/gui/window.py
 msgid ""
 "<big><b>Importing configuration …</b></big>\n"
 "Importing configuration from:\n"
@@ -292,12 +236,10 @@ msgstr ""
 " இதிலிருந்து உள்ளமைவை இறக்குமதி செய்தல்:\n"
 " <i> {} </i>\n"
 
-#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "உள்ளமைவு பயன்படுத்தப்பட்டது!"
 
 # Translation key: config_imported_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
@@ -307,47 +249,37 @@ msgstr ""
 " மாற்றங்கள் நடைமுறைக்கு வர நீங்கள் கணினியிலிருந்து வெளியேறலாம், அல்லது முந்தைய "
 "பக்கத்திற்குச் சென்று பின்னர் வெளியேறலாம்.\n"
 
-#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "முந்தைய பக்கத்திற்குத் திரும்பு"
 
-#: src/gui/window.py
 msgid "Log Out"
 msgstr "விடுபதிகை"
 
-#: src/gui/window.py
 msgid "An error occurred"
 msgstr "பிழை ஏற்பட்டது"
 
-#: src/gui/window.py
 msgid "Apply"
 msgstr "இடு"
 
-#: src/gui/window.py
 msgid "Sync"
 msgstr "ஒத்திசைவு"
 
 # Translation key: sync_desc
-#: src/gui/window.py
 msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
 msgstr "இணைப்பில் உள்ள பிற கணினிகளுடன் உங்கள் பணிமேடை சூழல் உள்ளமைவை ஒத்திசை."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "ஆரம்ப ஒத்திசைவு அமைப்பு"
 
-#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. கணினி அமைப்புகளைத் திற"
 
-#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. நிகழ்நிலை கணக்குகள் பகுதிக்குச் செல்"
 
 # Translation key: gnome_oa_section_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
@@ -355,13 +287,11 @@ msgstr ""
 "இந்தப் பிரிவில் கூகிள், நுண்மென் 365 அல்லது அடுத்தமுகில் போன்ற நீங்கள் விரும்பும் முகில் "
 "சேவையைத் தேர்ந்தெடு."
 
-#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 "3. அடுத்த பொத்தானைக் சொடுக்கு செய்து உருவாக்கிய முகில் இயக்கிக் கோப்புறையைத் தேர்ந்தெடு"
 
 # Translation key: gnome_oa_chooser_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
@@ -370,7 +300,6 @@ msgstr ""
 "படிவத்தில் காணலாம்: USERNAME@SERVICE.com."
 
 # Translation key: rclone_intro_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -381,7 +310,6 @@ msgstr ""
 " <b> நீங்கள் பயன்படுத்தும் முகில் இயக்கிச் சேவையைத் தேர்ந்தெடுப்பதன் மூலம் தொடங்கு. </b>"
 
 # Translation key: rclone_copy_cmd
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
@@ -391,29 +319,24 @@ msgstr ""
 "கட்டு+மாற்று+ஏ விசைப்பலகை குறுக்குவழியைப் பயன்படுத்தி முனையப் பயன்பாட்டைத் திற அல்லது "
 "பயன்பாடுகளின் பட்டியலில் கண்டுபிடி."
 
-#: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
 msgstr "Copy"
 
 # Translation key: rclone_cmd_copied_msg
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
 "வழங்கப்பட்ட கட்டளையைப் பயன்படுத்தி ஆர்நகலியை அமைத்ததும், \"இடு\" பொத்தானைக் சொடுக்கு"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "அதற்குப் பதிலாக ஒத்திசைவு கோப்புறையைப் பயன்படுத்தவும்"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "கிட்டத்தட்ட முடிந்தது!"
 
 # Translation key: almost_done_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
@@ -421,46 +344,34 @@ msgstr ""
 "நீங்கள் இப்போது முகில் இயக்கிக் கோப்புறையை உருவாக்கியுள்ளீர்கள்! அமைப்பை முடிக்க அடுத்த "
 "பொத்தானைக் சொடுக்கு."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "தேர்ந்தெடு"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "அடுத்தது"
 
-#: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
-#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "ஒத்திசைவு கோப்பை அமை"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "அவ்வப்போது சேமிக்கும் கோப்பு"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "அவ்வப்போது சேமிக்கும் கோப்பு இல்லை."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "உருவாக்கு"
 
-#: src/gui/window.py
 msgid "Please wait …"
 msgstr "தயவுசெய்து காத்திரு…"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "மாற்றம்"
 
-#: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
-#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "முகில் சேமிப்பகத்துடன் இணை"
 
 # Translation key: connect_cloud_storage_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -472,24 +383,19 @@ msgstr ""
 "கணினியில், உங்கள் மேகக்கணி சேமிப்பகத்துடன் நீங்கள் ஒத்திசைத்த கோப்புறையைத் தேர்ந்தெடுக்கவும், "
 "அதே கால சேமிப்பு கோப்பையும் சேமித்துள்ளீர்கள்."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "முகில் இயக்கிக் கோப்புறையைத் தேர்ந்தெடு"
 
-#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "நீங்கள் முகில் இயக்கிக் கோப்புறையைத் தேர்ந்தெடுக்கவில்லை!"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "அவ்வப்போது ஒத்திசைவு"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "இருதரப்பு ஒத்திசைவு"
 
 # Translation key: bidirectional_sync_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
@@ -499,32 +405,25 @@ msgstr ""
 "தேர்ந்தெடுக்கப்பட்டால், ஒத்திசைவதற்கு அமைக்கப்பட்ட பிற கணினியிலிருந்து அவ்வப்போது சேமிக்கும் "
 "செய்தி (இடைவெளி, கோப்புறை மற்றும் கோப்புப் பெயர்) இந்தக் கணினியில் நகலெடுக்கப்படுகிறது."
 
-#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "இனிமேல், தலைப்பு பட்டியில் உள்ள பட்டியலிருந்து உள்ளமைவை ஒத்திசைக்கலாம்"
 
-#: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 msgid "Synchronise manually"
 msgstr "கைமுறையாக ஒத்திசை"
 
-#: src/gui/templates/shortcuts_window.ui:36 src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
-#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr "பயன்பாட்டு விக்கியைத் திற"
 
-#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "வெளியேறு"
 
-#: src/gui/window.py
 msgid "About app"
 msgstr "பயன்பாடுபற்றி"
 
 # Translation key: unsuppurted_env_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>You have an unsupported environment installed.</b></big> \n"
 "Please use one of these environments: {}."
@@ -532,13 +431,10 @@ msgstr ""
 "<big> <b> உங்களிடம் ஆதரிக்கப்படாத சூழல் நிறுவப்பட்டுள்ளது. </b></big>\n"
 "இந்தச் சூழல்களில் ஒன்றைப் பயன்படுத்தவும்: {}."
 
-#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
-#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 msgid "Save your desktop configuration"
 msgstr "உங்கள் பணிமேடை உள்ளமைவைச் சேமி"
 
 # Translation key: description
-#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
 "Save Desktop lets you save your current configuration (themes, icons, "
 "wallpapers, all desktop environment settings, extensions, etc.) with one "
@@ -548,6 +444,5 @@ msgstr ""
 "சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே சொடுக்கில் சேமிக்க சேமிபணிமேடை உங்களை "
 "அனுமதிக்கிறது."
 
-#: src/main.py
 msgid "Translator credits"
 msgstr "தமிழ்நேரம் <https://TamilNeram.github.io>"
