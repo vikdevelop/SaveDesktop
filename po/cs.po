@@ -148,17 +148,6 @@ msgstr "Ruční ukládání"
 msgid "Archive encryption"
 msgstr "Šifrování archivu"
 
-# Translation key: archive_encryption_desc
-#: src/gui/more_options_dialog.py
-msgid ""
-"When manually saving the configuration, you will be prompted to create a "
-"password. This is useful when saving the configuration to portable media for"
-" better security of your data."
-msgstr ""
-"Při ručním ukládání konfigurace budete vyzváni k vytvoření hesla. To je "
-"užitečné při ukládání konfigurace na přenosné médium pro lepší zabezpečení "
-"dat."
-
 #: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "Uložit konfiguraci bez vytváření archivu"
@@ -166,17 +155,6 @@ msgstr "Uložit konfiguraci bez vytváření archivu"
 #: src/gui/window.py
 msgid "Create new password"
 msgstr "Vytvořit nové heslo"
-
-# Translation key: create_pwd_desc
-#: src/gui/window.py
-msgid ""
-"Please create new password for your archive. Criteria include a length of at"
-" least 12 characters, one uppercase letter, one lowercase letter, and one "
-"special character."
-msgstr ""
-"Vytvořte si prosím nové heslo pro svůj archiv. Kritéria zahrnují délku "
-"alespoň 12 znaků, jedno velké písmeno, jedno malé písmeno a jeden speciální "
-"znak."
 
 #: src/gui/window.py
 msgid "Generate Password"
@@ -190,16 +168,6 @@ msgstr "Heslo"
 msgid "Unlock the archive with a password"
 msgstr "Odemknout archiv pomocí hesla"
 
-# Translation key: check_pwd_desc
-#: src/gui/window.py
-msgid ""
-"Enter the password below to unlock the archive with your configuration. If "
-"you have forgotten it, you will not be able to unzip the archive and start "
-"importing your configuration."
-msgstr ""
-"Zadáním níže uvedeného hesla odemknete archiv s vaší konfigurací. Pokud jste"
-" ho zapomněli, nebudete moci archiv rozbalit a začít importovat konfiguraci."
-
 # Translation key: enter_password_title
 #: src/gui/password_checker.py
 msgid ""
@@ -207,47 +175,9 @@ msgid ""
 msgstr ""
 "Zadejte prosím heslo k odemknutí archivu pro synchronizaci konfigurace"
 
-# Translation key: enter_password_desc
-#: src/gui/password_checker.py
-msgid ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
-msgstr ""
-"Pro synchronizaci pomocí aplikace Save Desktop byl vybrán šifrovaný archiv. "
-"Pro jeho odemčení a spuštění synchronizace zadejte níže uvedené heslo."
-
-#: src/gui/password_checker.py
-msgid "Remember Password"
-msgstr "Zapamatovat heslo"
-
-#: src/core/synchronization.py
-msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Heslo nebylo zadáno, nebo je nesprávné. Nelze pokračovat."
-
-# Translation key: saving_config_status
-#: src/gui/window.py
-msgid ""
-"<big><b>Saving configuration …</b></big>\n"
-"The configuration of your desktop environment will be saved in:\n"
-" <i>{}/{}.sd.tar.gz</i>\n"
-msgstr ""
-"<big><b>Ukládání konfigurace … </b></big>\n"
-"Konfigurace vašeho desktopového prostředí bude uložena v:\n"
-" <i>{}/{}.sd.tar.gz</i>\n"
-
 #: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Konfigurace byla uložena!"
-
-# Translation key: config_saved_desc
-#: src/gui/window.py
-msgid ""
-"<big><b>{}</b></big>\n"
-"You can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
-msgstr ""
-"<big><b>{}</b></big>\n"
-"Nyní si můžete prohlédnout archiv s konfigurací svého desktopového prostředí nebo se vrátit na předchozí stránku.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -277,29 +207,9 @@ msgstr "Zrušit"
 msgid "Save Desktop files"
 msgstr "Soubory Save Desktop"
 
-# Translation key: importing_config_status
-#: src/gui/window.py
-msgid ""
-"<big><b>Importing configuration …</b></big>\n"
-"Importing configuration from:\n"
-"<i>{}</i>\n"
-msgstr ""
-"<big><b>Importování konfigurace …</b></big>\n"
-"Importování konfigurace z: \n"
-"<i>{}</i>\n"
-
 #: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Konfigurace byla provedena!"
-
-# Translation key: config_imported_desc
-#: src/gui/window.py
-msgid ""
-"<big><b>{}</b></big>\n"
-"You can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
-msgstr ""
-"<big><b>{}</b></big>\n"
-"Aby se změny projevily, můžete se ze systému odhlásit, nebo se vrátit na předchozí stránku a odhlásit se později.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -334,14 +244,6 @@ msgstr ""
 msgid "Initial synchronization setup"
 msgstr "Počáteční nastavení synchronizace"
 
-#: src/gui/synchronization_dialogs.py
-msgid "1. Open the system settings"
-msgstr "1. Otevřete nastavení systému"
-
-#: src/gui/synchronization_dialogs.py
-msgid "2. Go to the Online Accounts section"
-msgstr "2. Přejděte do sekce Online účty"
-
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
@@ -351,11 +253,6 @@ msgstr ""
 "V této sekci vyberte požadovanou cloudovou službu, jako je Google, Microsoft"
 " 365 nebo Nextcloud."
 
-#: src/gui/synchronization_dialogs.py
-msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr ""
-"3. Klikněte na tlačítko Další a vyberte vytvořenou složku cloudové jednotky"
-
 # Translation key: gnome_oa_chooser_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
@@ -364,26 +261,6 @@ msgid ""
 msgstr ""
 "Vytvořenou složku cloudové jednotky je možné nalézt na postranním panelu "
 "dialogu pro výběr souborů v tomto tvaru: uzivatelskejmeno@sluzba.com."
-
-# Translation key: rclone_intro_desc
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n"
-"<b>Start by selecting the cloud drive service you use.</b>"
-msgstr ""
-"Aby synchronizace fungovala správně, potřebujete mít složku, která je synchronizována s vaší cloudovou službou pomocí Rclone.\n"
-"<b>Začněte výběrem používané cloudové služby.</b>"
-
-# Translation key: rclone_copy_cmd
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"Now, copy the command to set up Rclone using the side button and open the "
-"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
-"apps' menu."
-msgstr ""
-"Nyní zkopírujte příkaz pro nastavení Rclone pomocí postranního tlačítka a "
-"otevřete aplikaci Terminál pomocí klávesové zkratky Ctrl+Alt+T nebo ji "
-"najděte v nabídce aplikací."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Copy"
@@ -401,27 +278,6 @@ msgstr ""
 #: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Použít místo toho složku Syncthing"
-
-#: src/gui/synchronization_dialogs.py
-msgid "Almost done!"
-msgstr "Téměř hotovo!"
-
-# Translation key: almost_done_desc
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"You've now created the cloud drive folder! Click on the Next button to "
-"complete the setup."
-msgstr ""
-"Nyní máte vytvořenou složku cloudové jednotky! Klikněte na tlačítko Další "
-"pro dokončení nastavení."
-
-#: src/gui/synchronization_dialogs.py
-msgid "Select"
-msgstr "Vybrat"
-
-#: src/gui/synchronization_dialogs.py
-msgid "Next"
-msgstr "Další"
 
 #: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
@@ -453,20 +309,6 @@ msgstr "Změnit"
 msgid "Connect to the cloud storage"
 msgstr "Připojit se ke cloudovému úložišti"
 
-# Translation key: connect_cloud_storage_desc
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this"
-" computer, select the folder that you have synced with your cloud storage "
-"and also have saved the same periodic saving file."
-msgstr ""
-"Na jiném počítači otevřete aplikaci Save Desktop a na této stránce klikněte "
-"na tlačítko „Nastavit synchronizační soubor“ a proveďte potřebná nastavení. "
-"Na tomto počítači vyberte složku, kterou jste synchronizovali s cloudovým "
-"úložištěm a do které jste také uložili stejný soubor pro pravidelné "
-"ukládání."
-
 #: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Vybrat cloudovou složku"
@@ -482,19 +324,6 @@ msgstr "Pravidelná synchronizace"
 #: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Obousměrná synchronizace"
-
-# Translation key: bidirectional_sync_desc
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other"
-" computer with synchronization set to synchronize is copied to this "
-"computer."
-msgstr ""
-"Pokud je tato funkce povolena a je vybrán interval synchronizace a složka "
-"cloudové jednotky, informace o pravidelném ukládání (interval, složka a "
-"název souboru) z druhého počítače s nastavenou synchronizací se zkopírují do"
-" tohoto počítače."
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
@@ -519,15 +348,6 @@ msgstr "Ukončit"
 #: src/gui/window.py
 msgid "About app"
 msgstr "O aplikaci"
-
-# Translation key: unsuppurted_env_desc
-#: src/gui/window.py
-msgid ""
-"<big><b>You have an unsupported environment installed.</b></big> \n"
-"Please use one of these environments: {}."
-msgstr ""
-"<big><b>Máte nainstalované nepodporované prostředí.</b></big> \n"
-"Použijte jedno z těchto prostředí: {}."
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
