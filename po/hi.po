@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-16 14:05+0000\n"
+"PO-Revision-Date: 2025-09-14 10:44+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/hi/>\n"
@@ -151,6 +151,16 @@ msgstr "Manual saving"
 msgid "Archive encryption"
 msgstr "पुरालेख कूटलेखन"
 
+# Translation key: archive_encryption_desc
+#: src/gui/more_options_dialog.py
+msgid ""
+"When manually saving the configuration, you will be prompted to create a "
+"password. This is useful when saving the configuration to portable media for "
+"better security of your data."
+msgstr ""
+"विन्यास को हस्तचालित रूप से सहेजते समय, आपको पासवर्ड बनाने के लिए कहा जाएगा। यह आपके "
+"डेटा की बेहतर सुरक्षा के लिए पोर्टेबल मीडिया में विन्यास को सहेजते समय उपयोगी है।"
+
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Save the configuration without creating an archive"
@@ -159,6 +169,16 @@ msgstr "Save the configuration without creating an archive"
 #: src/gui/window.py
 msgid "Create new password"
 msgstr "नया पासवर्ड बनाएं"
+
+# Translation key: create_pwd_desc
+#: src/gui/window.py
+msgid ""
+"Please create new password for your archive. Criteria include a length of at "
+"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"special character."
+msgstr ""
+"कृपया अपने पुरालेख के लिए नया पासवर्ड बनाएं। मानदंड में कम से कम 12 अक्षर, एक बड़ा अक्षर, "
+"एक छोटा अक्षर और एक विशेष वर्ण शामिल है।"
 
 #: src/gui/window.py
 #, fuzzy
@@ -173,6 +193,17 @@ msgstr "पासवर्ड"
 msgid "Unlock the archive with a password"
 msgstr "पासवर्ड से पुरालेख को खोलें"
 
+# Translation key: check_pwd_desc
+#: src/gui/window.py
+msgid ""
+"Enter the password below to unlock the archive with your configuration. If "
+"you have forgotten it, you will not be able to unzip the archive and start "
+"importing your configuration."
+msgstr ""
+"अपने विन्यास के साथ पुरालेख को खोलने के लिए नीचे दिया गया पासवर्ड दर्ज करें। यदि आप इसे "
+"भूल गए हैं, तो आप पुरालेख को अनज़िप नहीं कर पाएंगे और अपना विन्यास आयात करना शुरू नहीं कर "
+"पाएंगे।"
+
 # Translation key: enter_password_title
 #: src/gui/password_checker.py
 #, fuzzy
@@ -181,9 +212,51 @@ msgid ""
 msgstr ""
 "Please enter a password to unlock the archive for sync the configuration"
 
+# Translation key: enter_password_desc
+#: src/gui/password_checker.py
+msgid ""
+"An encrypted archive has been selected for synchronization using the Save "
+"Desktop app. Please enter the password below to unlock it and start "
+"synchronization."
+msgstr ""
+"An encrypted archive has been selected for synchronization using the Save "
+"Desktop app. Please enter the password below to unlock it and start "
+"synchronization।"
+
+#: src/gui/password_checker.py
+#, fuzzy
+msgid "Remember Password"
+msgstr "Remember Password"
+
+#: src/core/synchronization.py
+msgid "Password not entered, or it's incorrect. Unable to continue."
+msgstr "Password not entered, or it's incorrect. Unable to continue।"
+
+# Translation key: saving_config_status
+#: src/gui/window.py
+msgid ""
+"<big><b>Saving configuration …</b></big>\n"
+"The configuration of your desktop environment will be saved in:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
+msgstr ""
+"<big><b>विन्यास सहेजा जा रहा है …</b></big>\n"
+"आपके डेस्कटॉप वातावरण का विन्यास इसमें सहेजा जाएगा:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
+
 #: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "विन्यास सहेजा गया है!"
+
+# Translation key: config_saved_desc
+#: src/gui/window.py
+msgid ""
+"<big><b>{}</b></big>\n"
+"You can now view the archive with the configuration of your desktop "
+"environment, or return to the previous page.\n"
+msgstr ""
+"<big><b>{}</b></big>\n"
+"अब आप अपने डेस्कटॉप वातावरण के विन्यास के साथ संग्रह देख सकते हैं, या पिछले पृष्ठ पर लौट "
+"सकते हैं।\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -214,9 +287,31 @@ msgstr "रद्द करें"
 msgid "Save Desktop files"
 msgstr "Save Desktop फाइलें"
 
+# Translation key: importing_config_status
+#: src/gui/window.py
+msgid ""
+"<big><b>Importing configuration …</b></big>\n"
+"Importing configuration from:\n"
+"<i>{}</i>\n"
+msgstr ""
+"<big><b>विन्यास आयात किया जा रहा है...</b></big>\n"
+"यहाँ से विन्यास आयात किया जा रहा है:\n"
+"<i>{}</i>\n"
+
 #: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "विन्यास लागू कर दिया गया है!"
+
+# Translation key: config_imported_desc
+#: src/gui/window.py
+msgid ""
+"<big><b>{}</b></big>\n"
+"You can log out of the system for the changes to take effect, or go back to "
+"the previous page and log out later.\n"
+msgstr ""
+"<big><b>{}</b></big>\n"
+"परिवर्तनों को प्रभावी करने के लिए आप सिस्टम से लॉग आउट कर सकते हैं, या पिछले पृष्ठ पर "
+"वापस जा सकते हैं और बाद में लॉग आउट कर सकते हैं।\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -244,23 +339,36 @@ msgstr "समन्वयन"
 msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
-msgstr ""
-"नेटवर्क में अन्य कंप्यूटरों के साथ अपने डेस्कटॉप वातावरण विन्यास को समन्वयित"
-" करें।"
+msgstr "नेटवर्क में अन्य कंप्यूटरों के साथ अपने डेस्कटॉप वातावरण विन्यास को समन्वयित करें।"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Initial synchronization setup"
 msgstr "Initial synchronization setup"
 
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "1. Open the system settings"
+msgstr "1. Open the system settings"
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "2. Go to the Online Accounts section"
+msgstr "2. Go to the Online Accounts section"
+
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft"
-" 365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft "
+"365 or Nextcloud."
 msgstr ""
-"In this section select the cloud service you want, such as Google, Microsoft"
-" 365 or Nextcloud।"
+"In this section select the cloud service you want, such as Google, Microsoft "
+"365 or Nextcloud।"
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "3. Click on the Next button and select the created cloud drive folder"
+msgstr "3. Click on the Next button and select the created cloud drive folder"
 
 # Translation key: gnome_oa_chooser_desc
 #: src/gui/synchronization_dialogs.py
@@ -270,6 +378,29 @@ msgid ""
 msgstr ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com।"
+
+# Translation key: rclone_intro_desc
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid ""
+"For synchronization to works properly, you need to have the folder, that is "
+"synced with your cloud service using Rclone.\n"
+"<b>Start by selecting the cloud drive service you use.</b>"
+msgstr ""
+"For synchronization to works properly, you need to have the folder, that is "
+"synced with your cloud service using Rclone.\n"
+"<b>Start by selecting the cloud drive service you use.</b>"
+
+# Translation key: rclone_copy_cmd
+#: src/gui/synchronization_dialogs.py
+msgid ""
+"Now, copy the command to set up Rclone using the side button and open the "
+"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
+"apps' menu."
+msgstr ""
+"Now, copy the command to set up Rclone using the side button and open the "
+"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
+"apps' menu।"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
@@ -290,6 +421,30 @@ msgstr ""
 #, fuzzy
 msgid "Use Syncthing folder instead"
 msgstr "Use Syncthing folder instead"
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "Almost done!"
+msgstr "Almost done!"
+
+# Translation key: almost_done_desc
+#: src/gui/synchronization_dialogs.py
+msgid ""
+"You've now created the cloud drive folder! Click on the Next button to "
+"complete the setup."
+msgstr ""
+"You've now created the cloud drive folder! Click on the Next button to "
+"complete the setup।"
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "Select"
+msgstr "Select"
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "Next"
+msgstr "Next"
 
 #: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
@@ -324,6 +479,19 @@ msgstr "Change"
 msgid "Connect to the cloud storage"
 msgstr "Connect to the cloud storage"
 
+# Translation key: connect_cloud_storage_desc
+#: src/gui/synchronization_dialogs.py
+msgid ""
+"On another computer, open the Save Desktop app, and on this page, click on "
+"the \"Set up the sync file\" button and make the necessary settings. On this "
+"computer, select the folder that you have synced with your cloud storage and "
+"also have saved the same periodic saving file."
+msgstr ""
+"On another computer, open the Save Desktop app, and on this page, click on "
+"the \"Set up the sync file\" button and make the necessary settings. On this "
+"computer, select the folder that you have synced with your cloud storage and "
+"also have saved the same periodic saving file।"
+
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Select the cloud drive folder"
@@ -342,6 +510,17 @@ msgstr "आवधिक समन्वयन"
 #, fuzzy
 msgid "Bidirectional synchronization"
 msgstr "Bidirectional synchronization"
+
+# Translation key: bidirectional_sync_desc
+#: src/gui/synchronization_dialogs.py
+msgid ""
+"If enabled, and the sync interval and cloud drive folder are selected, the "
+"periodic saving information (interval, folder, and file name) from the other "
+"computer with synchronization set to synchronize is copied to this computer."
+msgstr ""
+"If enabled, and the sync interval and cloud drive folder are selected, the "
+"periodic saving information (interval, folder, and file name) from the other "
+"computer with synchronization set to synchronize is copied to this computer।"
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
@@ -368,6 +547,15 @@ msgstr "छोड़ें"
 msgid "About app"
 msgstr "ऐप के बारे में"
 
+# Translation key: unsuppurted_env_desc
+#: src/gui/window.py
+msgid ""
+"<big><b>You have an unsupported environment installed.</b></big> \n"
+"Please use one of these environments: {}."
+msgstr ""
+"<big><b>आपके पास एक असमर्थित परिवेश स्थापित है।</b></big> \n"
+"कृपया इनमें से किसी एक परिवेश का उपयोग करें: {}।"
+
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 msgid "Save your desktop configuration"
@@ -380,8 +568,8 @@ msgid ""
 "wallpapers, all desktop environment settings, extensions, etc.) with one "
 "click."
 msgstr ""
-"Save Desktop आपको एक क्लिक से अपने वर्तमान विन्यास (थीम, आइकन, वॉलपेपर, सभी "
-"डेस्कटॉप वातावरण सेटिंग्स, एक्सटेंशन इत्यादि) को सहेजने देता है।"
+"Save Desktop आपको एक क्लिक से अपने वर्तमान विन्यास (थीम, आइकन, वॉलपेपर, सभी डेस्कटॉप "
+"वातावरण सेटिंग्स, एक्सटेंशन इत्यादि) को सहेजने देता है।"
 
 #: src/main.py
 msgid "Translator credits"

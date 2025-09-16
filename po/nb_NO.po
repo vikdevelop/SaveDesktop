@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-16 14:05+0000\n"
+"PO-Revision-Date: 2025-09-14 10:44+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "vikdevelop/savedesktop/nb_NO/>\n"
@@ -179,6 +179,18 @@ msgstr "Manual saving"
 msgid "Archive encryption"
 msgstr "Archive encryption"
 
+# Translation key: archive_encryption_desc
+#: src/gui/more_options_dialog.py
+#, fuzzy
+msgid ""
+"When manually saving the configuration, you will be prompted to create a "
+"password. This is useful when saving the configuration to portable media for "
+"better security of your data."
+msgstr ""
+"When manually saving the configuration, you will be prompted to create a "
+"password. This is useful when saving the configuration to portable media for "
+"better security of your data."
+
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Save the configuration without creating an archive"
@@ -188,6 +200,18 @@ msgstr "Save the configuration without creating an archive"
 #, fuzzy
 msgid "Create new password"
 msgstr "Create new password"
+
+# Translation key: create_pwd_desc
+#: src/gui/window.py
+#, fuzzy
+msgid ""
+"Please create new password for your archive. Criteria include a length of at "
+"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"special character."
+msgstr ""
+"Please create new password for your archive. Criteria include a length of at "
+"least 12 characters, one uppercase letter, one lowercase letter, and one "
+"special character."
 
 #: src/gui/window.py
 #, fuzzy
@@ -204,6 +228,18 @@ msgstr "Password"
 msgid "Unlock the archive with a password"
 msgstr "Unlock the archive with a password"
 
+# Translation key: check_pwd_desc
+#: src/gui/window.py
+#, fuzzy
+msgid ""
+"Enter the password below to unlock the archive with your configuration. If "
+"you have forgotten it, you will not be able to unzip the archive and start "
+"importing your configuration."
+msgstr ""
+"Enter the password below to unlock the archive with your configuration. If "
+"you have forgotten it, you will not be able to unzip the archive and start "
+"importing your configuration."
+
 # Translation key: enter_password_title
 #: src/gui/password_checker.py
 #, fuzzy
@@ -212,9 +248,54 @@ msgid ""
 msgstr ""
 "Please enter a password to unlock the archive for sync the configuration"
 
+# Translation key: enter_password_desc
+#: src/gui/password_checker.py
+#, fuzzy
+msgid ""
+"An encrypted archive has been selected for synchronization using the Save "
+"Desktop app. Please enter the password below to unlock it and start "
+"synchronization."
+msgstr ""
+"An encrypted archive has been selected for synchronization using the Save "
+"Desktop app. Please enter the password below to unlock it and start "
+"synchronization."
+
+#: src/gui/password_checker.py
+#, fuzzy
+msgid "Remember Password"
+msgstr "Remember Password"
+
+#: src/core/synchronization.py
+#, fuzzy
+msgid "Password not entered, or it's incorrect. Unable to continue."
+msgstr "Password not entered, or it's incorrect. Unable to continue."
+
+# Translation key: saving_config_status
+#: src/gui/window.py
+msgid ""
+"<big><b>Saving configuration …</b></big>\n"
+"The configuration of your desktop environment will be saved in:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
+msgstr ""
+"<big><b>Saving configuration ...</b></big>\n"
+"The configuration of your desktop environment will be saved in:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
+
 #: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Oppsettet har blitt lagret."
+
+# Translation key: config_saved_desc
+#: src/gui/window.py
+#, fuzzy
+msgid ""
+"<big><b>{}</b></big>\n"
+"You can now view the archive with the configuration of your desktop "
+"environment, or return to the previous page.\n"
+msgstr ""
+"<big><b>{}</b></big>\n"
+"You can now view the archive with the configuration of your desktop "
+"environment, or return to the previous page.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -247,9 +328,31 @@ msgstr "Avbryt"
 msgid "Save Desktop files"
 msgstr "Save Desktop-filer"
 
+# Translation key: importing_config_status
+#: src/gui/window.py
+msgid ""
+"<big><b>Importing configuration …</b></big>\n"
+"Importing configuration from:\n"
+"<i>{}</i>\n"
+msgstr ""
+"<big><b>Importing configuration ...</b></big>\n"
+"Importing configuration from: {}\n"
+
 #: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Oppsettet har blitt anvendt."
+
+# Translation key: config_imported_desc
+#: src/gui/window.py
+#, fuzzy
+msgid ""
+"<big><b>{}</b></big>\n"
+"You can log out of the system for the changes to take effect, or go back to "
+"the previous page and log out later.\n"
+msgstr ""
+"<big><b>{}</b></big>\n"
+"You can log out of the system for the changes to take effect, or go back to "
+"the previous page and log out later.\n"
 
 #: src/gui/window.py
 #, fuzzy
@@ -290,15 +393,30 @@ msgstr ""
 msgid "Initial synchronization setup"
 msgstr "Initial synchronization setup"
 
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "1. Open the system settings"
+msgstr "1. Open the system settings"
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "2. Go to the Online Accounts section"
+msgstr "2. Go to the Online Accounts section"
+
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid ""
-"In this section select the cloud service you want, such as Google, Microsoft"
-" 365 or Nextcloud."
+"In this section select the cloud service you want, such as Google, Microsoft "
+"365 or Nextcloud."
 msgstr ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "3. Click on the Next button and select the created cloud drive folder"
+msgstr "3. Click on the Next button and select the created cloud drive folder"
 
 # Translation key: gnome_oa_chooser_desc
 #: src/gui/synchronization_dialogs.py
@@ -309,6 +427,30 @@ msgid ""
 msgstr ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
+
+# Translation key: rclone_intro_desc
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid ""
+"For synchronization to works properly, you need to have the folder, that is "
+"synced with your cloud service using Rclone.\n"
+"<b>Start by selecting the cloud drive service you use.</b>"
+msgstr ""
+"For synchronization to works properly, you need to have the folder, that is "
+"synced with your cloud service using Rclone.\n"
+"<b>Start by selecting the cloud drive service you use.</b>"
+
+# Translation key: rclone_copy_cmd
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid ""
+"Now, copy the command to set up Rclone using the side button and open the "
+"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
+"apps' menu."
+msgstr ""
+"Now, copy the command to set up Rclone using the side button and open the "
+"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
+"apps' menu."
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
@@ -329,6 +471,31 @@ msgstr ""
 #, fuzzy
 msgid "Use Syncthing folder instead"
 msgstr "Use Syncthing folder instead"
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "Almost done!"
+msgstr "Almost done!"
+
+# Translation key: almost_done_desc
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid ""
+"You've now created the cloud drive folder! Click on the Next button to "
+"complete the setup."
+msgstr ""
+"You've now created the cloud drive folder! Click on the Next button to "
+"complete the setup."
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "Select"
+msgstr "Select"
+
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid "Next"
+msgstr "Next"
 
 #: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
@@ -366,6 +533,20 @@ msgstr "Change"
 msgid "Connect to the cloud storage"
 msgstr "Connect to the cloud storage"
 
+# Translation key: connect_cloud_storage_desc
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid ""
+"On another computer, open the Save Desktop app, and on this page, click on "
+"the \"Set up the sync file\" button and make the necessary settings. On this "
+"computer, select the folder that you have synced with your cloud storage and "
+"also have saved the same periodic saving file."
+msgstr ""
+"On another computer, open the Save Desktop app, and on this page, click on "
+"the \"Set up the sync file\" button and make the necessary settings. On this "
+"computer, select the folder that you have synced with your cloud storage and "
+"also have saved the same periodic saving file."
+
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Select the cloud drive folder"
@@ -385,6 +566,18 @@ msgstr "Periodic synchronization"
 #, fuzzy
 msgid "Bidirectional synchronization"
 msgstr "Bidirectional synchronization"
+
+# Translation key: bidirectional_sync_desc
+#: src/gui/synchronization_dialogs.py
+#, fuzzy
+msgid ""
+"If enabled, and the sync interval and cloud drive folder are selected, the "
+"periodic saving information (interval, folder, and file name) from the other "
+"computer with synchronization set to synchronize is copied to this computer."
+msgstr ""
+"If enabled, and the sync interval and cloud drive folder are selected, the "
+"periodic saving information (interval, folder, and file name) from the other "
+"computer with synchronization set to synchronize is copied to this computer."
 
 #: src/gui/window.py
 #, fuzzy
@@ -414,6 +607,15 @@ msgstr "Quit"
 #: src/gui/window.py
 msgid "About app"
 msgstr "Om programmet"
+
+# Translation key: unsuppurted_env_desc
+#: src/gui/window.py
+msgid ""
+"<big><b>You have an unsupported environment installed.</b></big> \n"
+"Please use one of these environments: {}."
+msgstr ""
+"<big><b>Du har et ustøttet miljø installert.</b></big> \n"
+"Bruk ett av disse miljøene: {}."
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
