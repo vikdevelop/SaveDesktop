@@ -5,9 +5,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
+"PO-Revision-Date: 2025-09-16 14:05+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/projects/vikdevelop/savedesktop/zh_Hans/>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/vikdevelop/savedesktop/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +92,7 @@ msgstr "更改仅在下次登录后生效"
 #: src/gui/more_options_dialog.py
 #, fuzzy
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 #: src/gui/more_options_dialog.py
 msgid "Never"
@@ -256,11 +257,13 @@ msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
+"The created cloud drive folder can be found in the side panel of the file "
+"chooser dialog, in this form: username@service.com."
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -269,11 +272,13 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
+"Once you have finished setting up Rclone using the command provided, click "
+"the \"Apply\" button"
 
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Use Syncthing folder instead"
 
 #: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
@@ -287,7 +292,7 @@ msgstr "定期保存文件"
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Periodic saving file does not exist."
-msgstr ""
+msgstr "Periodic saving file does not exist."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Create"
@@ -321,7 +326,7 @@ msgstr "周期性同步"
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Bidirectional synchronization"
-msgstr ""
+msgstr "Bidirectional synchronization"
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
