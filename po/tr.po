@@ -5,9 +5,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
+"PO-Revision-Date: 2025-09-16 14:05+0000\n"
 "Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/vikdevelop/savedesktop/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/vikdevelop/"
+"savedesktop/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,17 +150,6 @@ msgstr "Manuel kaydet"
 msgid "Archive encryption"
 msgstr "Arşiv şifreleme"
 
-# Translation key: archive_encryption_desc
-#: src/gui/more_options_dialog.py
-msgid ""
-"When manually saving the configuration, you will be prompted to create a "
-"password. This is useful when saving the configuration to portable media for"
-" better security of your data."
-msgstr ""
-"Yapılandırmayı elle kaydederken parola oluşturmanız istenir. Bu, "
-"verilerinizin daha iyi güvenliği için yapılandırmayı taşınabilir ortama "
-"kaydederken kullanışlıdır."
-
 #: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "Arşiv oluşturmadan yapılandırmayı kaydedin"
@@ -167,17 +157,6 @@ msgstr "Arşiv oluşturmadan yapılandırmayı kaydedin"
 #: src/gui/window.py
 msgid "Create new password"
 msgstr "Yeni parola oluştur"
-
-# Translation key: create_pwd_desc
-#: src/gui/window.py
-msgid ""
-"Please create new password for your archive. Criteria include a length of at"
-" least 12 characters, one uppercase letter, one lowercase letter, and one "
-"special character."
-msgstr ""
-"Lütfen arşiviniz için yeni parola oluşturun. Parolanız en az 12 karakter "
-"uzunluğunda olmalı, bir büyük harf, bir küçük harf ve bir özel karakter "
-"içermelidir."
 
 #: src/gui/window.py
 msgid "Generate Password"
@@ -191,17 +170,6 @@ msgstr "Parola"
 msgid "Unlock the archive with a password"
 msgstr "Arşiv kilidini parolayla aç"
 
-# Translation key: check_pwd_desc
-#: src/gui/window.py
-msgid ""
-"Enter the password below to unlock the archive with your configuration. If "
-"you have forgotten it, you will not be able to unzip the archive and start "
-"importing your configuration."
-msgstr ""
-"Yapılandırmanızın bulunduğu arşivin kilidini açmak için aşağıya parolayı "
-"girin. Parolayı unuttuysanız, arşivi açamaz ve yapılandırmanızı içe "
-"aktarmaya başlayamazsınız."
-
 # Translation key: enter_password_title
 #: src/gui/password_checker.py
 msgid ""
@@ -210,48 +178,9 @@ msgstr ""
 "Yapılandırmayı senkronize etmek için arşivin kilidini açmak üzere lütfen bir"
 " parola girin"
 
-# Translation key: enter_password_desc
-#: src/gui/password_checker.py
-msgid ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
-msgstr ""
-"Save Desktop uygulaması kullanılarak senkronizasyon için şifrelenmiş bir "
-"arşiv seçildi. Lütfen kilidini açmak ve senkronizasyonu başlatmak için "
-"aşağıdaki şifreyi girin."
-
-#: src/gui/password_checker.py
-msgid "Remember Password"
-msgstr "Parolayı hatırla"
-
-#: src/core/synchronization.py
-msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Şifre girilmedi veya yanlış. Devam edilemiyor."
-
-# Translation key: saving_config_status
-#: src/gui/window.py
-msgid ""
-"<big><b>Saving configuration …</b></big>\n"
-"The configuration of your desktop environment will be saved in:\n"
-" <i>{}/{}.sd.tar.gz</i>\n"
-msgstr ""
-"<big><b>Yapılandırma kaydediliyor…</b></big>\n"
-"Masaüstü ortamınızın yapılandırması şuraya kaydedilecek:\n"
-"<i>{}/{}.sd.tar.gz</i>\n"
-
 #: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Ayarlar kayıt edildi!"
-
-# Translation key: config_saved_desc
-#: src/gui/window.py
-msgid ""
-"<big><b>{}</b></big>\n"
-"You can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
-msgstr ""
-"<big><b>{}</b></big>\n"
-"Artık arşivi masaüstü ortamınızın yapılandırmasıyla görüntüleyebilir ya da önceki sayfaya dönebilirsiniz.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
@@ -281,29 +210,9 @@ msgstr "İptal et"
 msgid "Save Desktop files"
 msgstr "Save Desktop dosyaları"
 
-# Translation key: importing_config_status
-#: src/gui/window.py
-msgid ""
-"<big><b>Importing configuration …</b></big>\n"
-"Importing configuration from:\n"
-"<i>{}</i>\n"
-msgstr ""
-"<big><b>Yapılandırma içe aktarılıyor...</b></big>\n"
-"Yapılandırma şuradan içe aktarılıyor:\n"
-"<i>{}</i>\n"
-
 #: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Ayarlar uygulandı !"
-
-# Translation key: config_imported_desc
-#: src/gui/window.py
-msgid ""
-"<big><b>{}</b></big>\n"
-"You can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
-msgstr ""
-"<big><b>{}</b></big>\n"
-"Değişikliklerin geçerli olması için oturumu şimdi kapatabilir ya da önceki sayfaya geri dönüp daha sonra oturumu kapatabilirsiniz.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
@@ -337,14 +246,6 @@ msgstr ""
 msgid "Initial synchronization setup"
 msgstr "İlk senkronizasyon kurulumu"
 
-#: src/gui/synchronization_dialogs.py
-msgid "1. Open the system settings"
-msgstr "1. Sistem ayarlarını açın."
-
-#: src/gui/synchronization_dialogs.py
-msgid "2. Go to the Online Accounts section"
-msgstr "2. Çevrimiçi Hesaplar bölümüne gidin"
-
 # Translation key: gnome_oa_section_desc
 #: src/gui/synchronization_dialogs.py
 msgid ""
@@ -353,11 +254,6 @@ msgid ""
 msgstr ""
 "Bu bölümde Google, Microsoft 365 veya Nextcloud gibi istediğiniz bulut "
 "hizmetini seçin."
-
-#: src/gui/synchronization_dialogs.py
-msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr ""
-"3. İleri düğmesine tıklayın ve oluşturulan bulut sürücü klasörünü seçin"
 
 # Translation key: gnome_oa_chooser_desc
 #: src/gui/synchronization_dialogs.py
@@ -368,30 +264,10 @@ msgstr ""
 "Oluşturulan bulut sürücü klasörü, dosya seçici iletişim kutusunun yan "
 "panelinde, şu biçimde bulunabilir: kullanıcıadı@sunucu.com."
 
-# Translation key: rclone_intro_desc
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n"
-"<b>Start by selecting the cloud drive service you use.</b>"
-msgstr ""
-"Senkronizasyonun düzgün çalışması için, Rclone kullanarak bulut servisinizle senkronize edilmiş klasöre sahip olmanız gerekir.\n"
-"<b>Kullandığınız bulut sürücü servisini seçerek başlayın.</b>"
-
-# Translation key: rclone_copy_cmd
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"Now, copy the command to set up Rclone using the side button and open the "
-"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
-"apps' menu."
-msgstr ""
-"Şimdi, yan düğmeyi kullanarak Rclone'ı kurmak için komutu kopyalayın ve "
-"Ctrl+Alt+T klavye kısayolunu kullanarak veya uygulamalar menüsünden terminal"
-" uygulamasını açın."
-
 #: src/gui/synchronization_dialogs.py
 #, fuzzy
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 # Translation key: rclone_cmd_copied_msg
 #: src/gui/synchronization_dialogs.py
@@ -405,27 +281,6 @@ msgstr ""
 #: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Bunun yerine Syncthing klasörünü kullanın"
-
-#: src/gui/synchronization_dialogs.py
-msgid "Almost done!"
-msgstr "Az kaldı!"
-
-# Translation key: almost_done_desc
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"You've now created the cloud drive folder! Click on the Next button to "
-"complete the setup."
-msgstr ""
-"Bulut sürücü klasörünü oluşturdunuz! Kurulumu tamamlamak için İleri "
-"düğmesine tıklayın."
-
-#: src/gui/synchronization_dialogs.py
-msgid "Select"
-msgstr "Seç"
-
-#: src/gui/synchronization_dialogs.py
-msgid "Next"
-msgstr "Sürdür"
 
 #: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
 #: src/gui/window.py
@@ -457,19 +312,6 @@ msgstr "Değiştir"
 msgid "Connect to the cloud storage"
 msgstr "Bulut depolamaya bağlan"
 
-# Translation key: connect_cloud_storage_desc
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this"
-" computer, select the folder that you have synced with your cloud storage "
-"and also have saved the same periodic saving file."
-msgstr ""
-"Başka bilgisayarda Save Desktop uygulamasını açıp bu sayfadaki “Eşzamanlama "
-"dosyasını ayarla” düğmesine tıklayın ve gerekli ayarları yapın. Bu "
-"bilgisayarda, bulut depolama alanınızla eşzamanlamak istediğiniz ve aynı "
-"düzenli kayıt dosyasına kaydettiğiniz klasörü seçin."
-
 #: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Bulut sunucu klasörünü seç"
@@ -485,18 +327,6 @@ msgstr "Düzenli eşzamanlama"
 #: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Çift yönlü eşzamanlama"
-
-# Translation key: bidirectional_sync_desc
-#: src/gui/synchronization_dialogs.py
-msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other"
-" computer with synchronization set to synchronize is copied to this "
-"computer."
-msgstr ""
-"Etkinse ve eşzamanlama aralığı ve bulut sürücü klasörü seçilirse, "
-"eşzamanlama ayarlı diğer bilgisayardaki düzenli kayıt bilgileri (aralık, "
-"klasör ve dosya adı) bu bilgisayara kopyalanır."
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
@@ -521,15 +351,6 @@ msgstr "Çık"
 #: src/gui/window.py
 msgid "About app"
 msgstr "Uygulama Hakkında"
-
-# Translation key: unsuppurted_env_desc
-#: src/gui/window.py
-msgid ""
-"<big><b>You have an unsupported environment installed.</b></big> \n"
-"Please use one of these environments: {}."
-msgstr ""
-"<big><b>Daha önceden yüklenmiş , desteklenmeyen ortama sahipsiniz.</b></big> \n"
-"Lütfen bu ortamlardan herhangi birini kullanın.: {}."
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
