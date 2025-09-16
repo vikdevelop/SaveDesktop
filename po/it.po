@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-16 14:05+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2025-09-16 14:21+0000\n"
+"Last-Translator: vikdevelop <vikdevelop@proton.me>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/it/>\n"
 "Language: it\n"
@@ -58,7 +58,6 @@ msgid "Extensions"
 msgstr "Estensioni"
 
 #: src/gui/items_dialog.py
-#, fuzzy
 msgid "Desktop"
 msgstr "Desktop"
 
@@ -163,7 +162,6 @@ msgid "Generate Password"
 msgstr "Genera Password"
 
 #: src/gui/window.py
-#, fuzzy
 msgid "Password"
 msgstr "Password"
 
