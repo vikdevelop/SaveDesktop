@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2025-09-18 07:58+0000\n"
+"Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/et/>\n"
 "Language: et\n"
@@ -16,36 +16,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.14-dev\n"
 
-#: src/gui/window.py
 msgid "Save"
 msgstr "Salvesta"
 
-#: src/gui/templates/shortcuts_window.ui:22 src/gui/window.py
 msgid "Save the current configuration"
 msgstr "Salvesta praegused seadistused"
 
-#: src/gui/window.py
 msgid "Set the file name"
 msgstr "Sisesta faili nimi"
 
-#: src/gui/templates/shortcuts_window.ui:64 src/gui/window.py
-#: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
 msgstr "Vali seadistuste arhiivifaili kaasatavad objektid"
 
-#: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
 msgstr "Need seadistused kehtivad ka regulaarsel varundamisel"
 
-#: src/gui/items_dialog.py
 msgid "Icons"
 msgstr "Ikoonid"
 
-#: src/gui/items_dialog.py
 msgid "Themes"
 msgstr "Kujundused"
 
-#: src/gui/items_dialog.py
 msgid "Fonts"
 msgstr "Kirjatüübid"
 
@@ -53,104 +44,79 @@ msgstr "Kirjatüübid"
 msgid "Backgrounds"
 msgstr "Taustapildid"
 
-#: src/gui/items_dialog.py
 msgid "Extensions"
 msgstr "Lisamoodulid"
 
-#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr "Töölaud"
 
-#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr "Flatpaki rakendused"
 
-#: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
 msgstr "Paigaldatud Flatpaki rakenduste loend"
 
-#: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
 msgstr "Paigaldatud Flatpaki rakenduste kasutajaandmed"
 
-#: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
 msgstr "Vali Flatpaki rakendused, mille andmed tahad kaasata"
 
-#: src/gui/templates/shortcuts_window.ui:57 src/gui/more_options_dialog.py
 msgid "More options"
 msgstr "Lisavalikud"
 
-#: src/gui/more_options_dialog.py
 msgid "Periodic saving"
 msgstr "Regulaarne salvestamine"
 
-#: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
 msgstr "Muudatused jõustuvad järgmisel sisselogimisel"
 
-#: src/gui/more_options_dialog.py
 msgid "Interval"
 msgstr "Sagedus"
 
-#: src/gui/more_options_dialog.py
 msgid "Never"
 msgstr "Mitte kunagi"
 
-#: src/gui/more_options_dialog.py
 msgid "Daily"
 msgstr "Kord päevas"
 
-#: src/gui/more_options_dialog.py
 msgid "Weekly"
 msgstr "Iga nädal"
 
-#: src/gui/more_options_dialog.py
 msgid "Monthly"
 msgstr "Iga kuu"
 
-#: src/gui/more_options_dialog.py
 msgid "Manually"
 msgstr "Valides aja käsitsi"
 
-#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr "Lisateave"
 
-#: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
 msgstr "Kaust regulaarseks salvestamiseks"
 
-#: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
 msgstr "Vali kaust regulaarseks salvestamiseks sobilik kaust"
 
-#: src/gui/more_options_dialog.py
 msgid "Choose another folder"
 msgstr "Vali muu kaust"
 
-#: src/gui/more_options_dialog.py
 msgid "File name format"
 msgstr "Failinime vorming"
 
-#: src/gui/more_options_dialog.py
 msgid "Reset to default"
 msgstr "Taasta algväärtused"
 
-#: src/gui/more_options_dialog.py
 msgid "Password for encryption"
 msgstr "Krüptimise salasõna"
 
-#: src/gui/more_options_dialog.py
 msgid "Manual saving"
 msgstr "Käsitsi salvestamine"
 
-#: src/gui/more_options_dialog.py
 msgid "Archive encryption"
 msgstr "Arhiivifaili krüptimine"
 
 # Translation key: archive_encryption_desc
-#: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
 "password. This is useful when saving the configuration to portable media for "
@@ -160,16 +126,13 @@ msgstr ""
 "parandab turvalisust, kui kavatsed kasutada salvestamist teisaldatavale "
 "andmekandjale."
 
-#: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
 msgstr "Salvesta seadistused ilma arhiivi loomata"
 
-#: src/gui/window.py
 msgid "Create new password"
 msgstr "Loo uus salasõna"
 
 # Translation key: create_pwd_desc
-#: src/gui/window.py
 msgid ""
 "Please create new password for your archive. Criteria include a length of at "
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
@@ -178,20 +141,16 @@ msgstr ""
 "Palun lisa oma arhiivifailile salasõna. Eeldame, et ta oleks vähemalt 12 "
 "tähemärki pikk, sisaldaks vähemalt ühte suurtähte, väiketähte ja erimärki."
 
-#: src/gui/window.py
 msgid "Generate Password"
 msgstr "Loo salasõna"
 
-#: src/gui/window.py
 msgid "Password"
 msgstr "Salasõna"
 
-#: src/gui/window.py
 msgid "Unlock the archive with a password"
 msgstr "Kasutades salasõna eemalda arhiivifaili krüptimine"
 
 # Translation key: check_pwd_desc
-#: src/gui/window.py
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If "
 "you have forgotten it, you will not be able to unzip the archive and start "
@@ -202,13 +161,11 @@ msgstr ""
 "järgnev importimine pole võimalik."
 
 # Translation key: enter_password_title
-#: src/gui/password_checker.py
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr "Seadistuste sünkroniseerimiseks palun sisesta salasõna"
 
 # Translation key: enter_password_desc
-#: src/gui/password_checker.py
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
@@ -218,16 +175,13 @@ msgstr ""
 "Lukustuse eemaldamiseks palun sisesta salasõna ja sünkroniseerimine saab "
 "alata."
 
-#: src/gui/password_checker.py
 msgid "Remember Password"
 msgstr "Jäta salasõna meelde"
 
-#: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "Salasõna on kas sisestamata või vale. Jätkamine pole võimalik."
 
 # Translation key: saving_config_status
-#: src/gui/window.py
 msgid ""
 "<big><b>Saving configuration …</b></big>\n"
 "The configuration of your desktop environment will be saved in:\n"
@@ -237,12 +191,10 @@ msgstr ""
 "Sinu töölauakeskkonna seadistused salvestuvad faili:\n"
 " <i>{}/{}.sd.tar.gz</i>\n"
 
-#: src/gui/window.py
 msgid "Configuration has been saved!"
 msgstr "Seadistused on salvestatud!"
 
 # Translation key: config_saved_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can now view the archive with the configuration of your desktop "
@@ -252,36 +204,28 @@ msgstr ""
 "Sa võid nüüd vaadata oma töölauakeskkonna seadistuste archive või minna "
 "tagasi eelmise vaate juurde.\n"
 
-#: src/gui/window.py
 msgid "Open the folder"
 msgstr "Ava kaust"
 
-#: src/gui/window.py
 msgid "Import"
 msgstr "Impordi"
 
-#: src/gui/window.py
 msgid "Import saved configuration"
 msgstr "Impordi salvestatud seadistused"
 
-#: src/gui/templates/shortcuts_window.ui:29 src/gui/window.py
 msgid "Import from file"
 msgstr "Impordi failist"
 
-#: src/gui/window.py
 msgid "Import from folder"
 msgstr "Impordi kaustast"
 
-#: src/gui/window.py
 msgid "Cancel"
 msgstr "Katkesta"
 
-#: src/gui/window.py
 msgid "Save Desktop files"
 msgstr "Save Desktopi failid"
 
 # Translation key: importing_config_status
-#: src/gui/window.py
 msgid ""
 "<big><b>Importing configuration …</b></big>\n"
 "Importing configuration from:\n"
@@ -291,12 +235,10 @@ msgstr ""
 "Impordime seadistusi failist:\n"
 "<i>{}</i>\n"
 
-#: src/gui/window.py
 msgid "The configuration has been applied!"
 msgstr "Seadistused on nüüd kasutusel!"
 
 # Translation key: config_imported_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
@@ -306,60 +248,48 @@ msgstr ""
 "Muudatuste kasutuselevõtmiseks võid sa kohe välja logida või minna tagasi ja "
 "logida välja hiljem.\n"
 
-#: src/gui/window.py
 msgid "Back to previous page"
 msgstr "Tagasi eelmisesse vaatesse"
 
-#: src/gui/window.py
 msgid "Log Out"
 msgstr "Logi välja"
 
-#: src/gui/window.py
 msgid "An error occurred"
 msgstr "Tekkis viga"
 
-#: src/gui/window.py
 msgid "Apply"
 msgstr "Rakenda"
 
-#: src/gui/window.py
 msgid "Sync"
 msgstr "Sünkroniseerimine"
 
 # Translation key: sync_desc
-#: src/gui/window.py
 msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
 msgstr ""
 "Sünkroniseeri oma töölauakeskkonna seadistusi teiste arvutitega võrgus."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
 msgstr "Sünkroniseerimise algne seadistus"
 
-#: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
 msgstr "1. Ava süsteemi seadistused"
 
-#: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
 msgstr "2. Ava võrguteenuste valik"
 
 # Translation key: gnome_oa_section_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
 "Siin vali soovitud pilveteenus, nagu Google, Microsoft 365 või Nextcloud."
 
-#: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Klõpsi nuppu Edasi ja vali loodud pilveteenuse kaust"
 
 # Translation key: gnome_oa_chooser_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
@@ -368,7 +298,6 @@ msgstr ""
 "välja umbes nii: kasutajanimi@teenus.com."
 
 # Translation key: rclone_intro_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -379,7 +308,6 @@ msgstr ""
 "<b>Alustamiseks vali soovitud pilveteenuse kaust.</b>"
 
 # Translation key: rclone_copy_cmd
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
@@ -389,29 +317,23 @@ msgstr ""
 "vajalik käsk, ava terminalirakendus kas Ctrl+Alt+T kiirklahviga või valides "
 "ta rakenduste käivitajast."
 
-#: src/gui/synchronization_dialogs.py
-#, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr "Kopeeri"
 
 # Translation key: rclone_cmd_copied_msg
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
 "Kui oled selle käsu abil rclone'i seadistanud, siis klõpsi „Rakenda“ nuppu"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
 msgstr "Selle asemel kasuta Syncthingi kausta"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
 msgstr "Peaaegu valmis!"
 
 # Translation key: almost_done_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
@@ -419,46 +341,34 @@ msgstr ""
 "Pilveteenuse kausta oled sa nüüd loonud! Seadistamise lõpetamiseks vajuta "
 "nuppu „Edasi“."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Select"
 msgstr "Vali"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Next"
 msgstr "Edasi"
 
-#: src/gui/templates/shortcuts_window.ui:71 src/gui/synchronization_dialogs.py
-#: src/gui/window.py
 msgid "Set up the sync file"
 msgstr "Seadista sünkroniseerimisfail"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
 msgstr "Fail regulaarseks salvestamiseks"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
 msgstr "Regulaarseks salvestamiseks mõeldud faili pole olemas."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Create"
 msgstr "Loo"
 
-#: src/gui/window.py
 msgid "Please wait …"
 msgstr "Palun oota…"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Change"
 msgstr "Muuda"
 
-#: src/gui/templates/shortcuts_window.ui:78 src/gui/synchronization_dialogs.py
-#: src/gui/window.py
 msgid "Connect to the cloud storage"
 msgstr "Ühenda pilvesalvestusteenusega"
 
 # Translation key: connect_cloud_storage_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -470,24 +380,19 @@ msgstr ""
 "kaust, mille oled sünkroniseerinud oma pilveteenusega ja kuhu oled lisanud "
 "faili regulaarseks salvestamiseks."
 
-#: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
 msgstr "Vali pilveteenuse kaust"
 
-#: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
 msgstr "Sa pole pilveteenuse kausta valinud!"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
 msgstr "Regulaarne sünkroniseerimine"
 
-#: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
 msgstr "Mõlemasuunaline sünkroniseerimine"
 
 # Translation key: bidirectional_sync_desc
-#: src/gui/synchronization_dialogs.py
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
@@ -497,32 +402,25 @@ msgstr ""
 "valitud, siis regulaarse salvestamise teave (välp, kaust ja failinimi) "
 "teisest arvutist kopeeritakse siia arvutisse."
 
-#: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Alates nüüdsest saad sa andmed sünkroniseerida menüüst päiseriba kohal"
 
-#: src/gui/templates/shortcuts_window.ui:50 src/gui/window.py
 msgid "Synchronise manually"
 msgstr "Sünkroniseeri käsitsi"
 
-#: src/gui/templates/shortcuts_window.ui:36 src/gui/window.py
 msgid "Keyboard shortcuts"
 msgstr "Klaviatuuri kiirklahvid"
 
-#: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
 msgstr "Ava rakenduse viki"
 
-#: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
 msgstr "Välju"
 
-#: src/gui/window.py
 msgid "About app"
 msgstr "Rakenduse teave"
 
 # Translation key: unsuppurted_env_desc
-#: src/gui/window.py
 msgid ""
 "<big><b>You have an unsupported environment installed.</b></big> \n"
 "Please use one of these environments: {}."
@@ -530,13 +428,10 @@ msgstr ""
 "<big><b>Sa kasutad mittetoetatud töölauakeskkonda.</b></big> \n"
 "Hetkel on toetatud: {}."
 
-#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
-#: data/io.github.vikdevelop.SaveDesktop.desktop.in:4 src/main.py
 msgid "Save your desktop configuration"
 msgstr "Salvesta oma töölaua seadistused"
 
 # Translation key: description
-#: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
 "Save Desktop lets you save your current configuration (themes, icons, "
 "wallpapers, all desktop environment settings, extensions, etc.) with one "
@@ -546,6 +441,5 @@ msgstr ""
 "oma töölaua seadistused (kujundus, ikoonid, taustapildid, kõik "
 "töölauakeskkonna seadistused, lisamoodulid, jne)."
 
-#: src/main.py
 msgid "Translator credits"
 msgstr "Priit Jõerüüt 2025"
