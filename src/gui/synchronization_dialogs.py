@@ -469,7 +469,7 @@ class CloudDialog(Adw.AlertDialog):
     # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
     def __post_setup(self):
         if self.check_psync == "Never2":
-            if not settings["periodic-import"] == "Never2":
+            if not settings["periodic-import"] == "Never2" and not settings["periodic-import"] == "Manually2":
                 self.parent.show_warn_toast()
 
         # if it is selected to manually sync, it creates an option in the app menu in the header bar
@@ -480,7 +480,6 @@ class CloudDialog(Adw.AlertDialog):
             self.parent.show_special_toast()
         else:
             try:
-                self.sync_menu.remove_all()
+                self.parent.sync_menu.remove_all()
             except:
                 pass
-
