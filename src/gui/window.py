@@ -99,6 +99,30 @@ class MainWindow(Adw.ApplicationWindow):
 
         self._env_detection()
 
+    # Switch between ViewSwitcherTitle and ViewSwitcherBar based on the Adw.Breakpoint status
+    def _setup_switcher_responsive(self):
+        self.break_point = Adw.Breakpoint.new(
+            Adw.BreakpointCondition.parse("max-width: 400sp")
+        )
+
+        # When activating a narrow breakpoint, display the switcher_bar
+        self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
+
+        # Hide switcher_bar when narrow breakpoint is deactivated
+        self.unapply_handler = self.break_point.connect("unapply", self.__on_break_point_unapply)
+
+        # Add a breakpoint to the window
+        self.add_breakpoint(self.break_point)
+
+        # Default state - hidden (only displayed when the breakpoint is met)
+        self.switcher_bar.set_reveal(False)
+
+    def __on_break_point_apply(self, break_point):
+        self.switcher_bar.set_reveal(True)
+
+    def __on_break_point_unapply(self, break_point):
+        self.switcher_bar.set_reveal(False)
+
     # If the user has a supported environment, it shows the app window, otherwise, it shows the window with information about an unsupported environment
     def _env_detection(self):
         def setup_environment(env_name):
@@ -138,30 +162,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.pBox.set_margin_end(50)
             self.toolbarview.set_content(self.pBox)
             self.unsupp_label = Gtk.Label.new(str=f'<big>{_("<big><b>You have an unsupported environment installed.</b></big>\nPlease use one of these environments: {}.")}</big>'.format(', '.join(set(desktop_map.values())))); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
-
-    # Switch between ViewSwitcherTitle and ViewSwitcherBar based on the Adw.Breakpoint status
-    def _setup_switcher_responsive(self):
-        self.break_point = Adw.Breakpoint.new(
-            Adw.BreakpointCondition.parse("max-width: 400sp")
-        )
-
-        # When activating a narrow breakpoint, display the switcher_bar
-        self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
-
-        # Hide switcher_bar when narrow breakpoint is deactivated
-        self.unapply_handler = self.break_point.connect("unapply", self.__on_break_point_unapply)
-
-        # Add a breakpoint to the window
-        self.add_breakpoint(self.break_point)
-
-        # Default state - hidden (only displayed when the breakpoint is met)
-        self.switcher_bar.set_reveal(False)
-
-    def __on_break_point_apply(self, break_point):
-        self.switcher_bar.set_reveal(True)
-
-    def __on_break_point_unapply(self, break_point):
-        self.switcher_bar.set_reveal(False)
 
     # Show main page
     def save_desktop(self):
