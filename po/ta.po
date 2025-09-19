@@ -321,7 +321,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""

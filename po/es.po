@@ -109,11 +109,11 @@ msgstr "Restablecer los valores por defecto"
 
 #, fuzzy
 msgid "Password for encryption"
-msgstr "Password for encryption"
+msgstr ""
 
 #, fuzzy
 msgid "Manual saving"
-msgstr "Manual saving"
+msgstr ""
 
 msgid "Archive encryption"
 msgstr "Cifrado de archivos"
@@ -130,7 +130,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 msgid "Create new password"
 msgstr "Crear una nueva contraseña"
@@ -169,7 +169,6 @@ msgstr ""
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 #, fuzzy
@@ -178,17 +177,14 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
 
 #, fuzzy
 msgid "Remember Password"
-msgstr "Remember Password"
+msgstr ""
 
 #, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
 
 # Translation key: saving_config_status
 msgid ""
@@ -227,7 +223,7 @@ msgstr "Importar desde archivo"
 
 #, fuzzy
 msgid "Import from folder"
-msgstr "Import from folder"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -335,7 +331,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
@@ -347,7 +343,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 msgid "Almost done!"
 msgstr "¡Casi terminamos!"

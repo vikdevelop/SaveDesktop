@@ -64,7 +64,7 @@ msgstr "Seleção de dados de apps Flatpak"
 
 #, fuzzy
 msgid "More options"
-msgstr "More options"
+msgstr ""
 
 msgid "Periodic saving"
 msgstr "Gravação periódica"
@@ -74,7 +74,7 @@ msgstr "As alterações só terão efeito após o próximo login"
 
 #, fuzzy
 msgid "Interval"
-msgstr "Interval"
+msgstr ""
 
 msgid "Never"
 msgstr "Nunca"
@@ -111,15 +111,15 @@ msgstr "Restaurar para o padrão"
 
 #, fuzzy
 msgid "Password for encryption"
-msgstr "Password for encryption"
+msgstr ""
 
 #, fuzzy
 msgid "Manual saving"
-msgstr "Manual saving"
+msgstr ""
 
 #, fuzzy
 msgid "Archive encryption"
-msgstr "Archive encryption"
+msgstr ""
 
 # Translation key: archive_encryption_desc
 #, fuzzy
@@ -128,17 +128,14 @@ msgid ""
 "password. This is useful when saving the configuration to portable media for "
 "better security of your data."
 msgstr ""
-"When manually saving the configuration, you will be prompted to create a "
-"password. This is useful when saving the configuration to portable media for "
-"better security of your data."
 
 #, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 #, fuzzy
 msgid "Create new password"
-msgstr "Create new password"
+msgstr ""
 
 # Translation key: create_pwd_desc
 #, fuzzy
@@ -147,21 +144,18 @@ msgid ""
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
-"Please create new password for your archive. Criteria include a length of at "
-"least 12 characters, one uppercase letter, one lowercase letter, and one "
-"special character."
 
 #, fuzzy
 msgid "Generate Password"
-msgstr "Generate Password"
+msgstr ""
 
 #, fuzzy
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 #, fuzzy
 msgid "Unlock the archive with a password"
-msgstr "Unlock the archive with a password"
+msgstr ""
 
 # Translation key: check_pwd_desc
 #, fuzzy
@@ -170,16 +164,12 @@ msgid ""
 "you have forgotten it, you will not be able to unzip the archive and start "
 "importing your configuration."
 msgstr ""
-"Enter the password below to unlock the archive with your configuration. If "
-"you have forgotten it, you will not be able to unzip the archive and start "
-"importing your configuration."
 
 # Translation key: enter_password_title
 #, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 #, fuzzy
@@ -188,17 +178,14 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
 
 #, fuzzy
 msgid "Remember Password"
-msgstr "Remember Password"
+msgstr ""
 
 #, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
 
 # Translation key: saving_config_status
 msgid ""
@@ -237,7 +224,7 @@ msgstr "Importar do ficheiro"
 
 #, fuzzy
 msgid "Import from folder"
-msgstr "Import from folder"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -276,7 +263,7 @@ msgstr "Sair"
 
 #, fuzzy
 msgid "An error occurred"
-msgstr "An error occurred"
+msgstr ""
 
 msgid "Apply"
 msgstr "Aplicar"
@@ -294,15 +281,15 @@ msgstr ""
 
 #, fuzzy
 msgid "Initial synchronization setup"
-msgstr "Initial synchronization setup"
+msgstr ""
 
 #, fuzzy
 msgid "1. Open the system settings"
-msgstr "1. Open the system settings"
+msgstr ""
 
 #, fuzzy
 msgid "2. Go to the Online Accounts section"
-msgstr "2. Go to the Online Accounts section"
+msgstr ""
 
 # Translation key: gnome_oa_section_desc
 #, fuzzy
@@ -310,12 +297,10 @@ msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
-"In this section select the cloud service you want, such as Google, Microsoft "
-"365 or Nextcloud."
 
 #, fuzzy
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr "3. Click on the Next button and select the created cloud drive folder"
+msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
 #, fuzzy
@@ -323,8 +308,6 @@ msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
-"The created cloud drive folder can be found in the side panel of the file "
-"chooser dialog, in this form: username@service.com."
 
 # Translation key: rclone_intro_desc
 #, fuzzy
@@ -333,9 +316,6 @@ msgid ""
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
-"<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 #, fuzzy
@@ -344,13 +324,10 @@ msgid ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
-"Now, copy the command to set up Rclone using the side button and open the "
-"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
-"apps' menu."
 
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 #, fuzzy
@@ -358,16 +335,14 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click "
-"the \"Apply\" button"
 
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 #, fuzzy
 msgid "Almost done!"
-msgstr "Almost done!"
+msgstr ""
 
 # Translation key: almost_done_desc
 #, fuzzy
@@ -375,16 +350,14 @@ msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
-"You've now created the cloud drive folder! Click on the Next button to "
-"complete the setup."
 
 #, fuzzy
 msgid "Select"
-msgstr "Select"
+msgstr ""
 
 #, fuzzy
 msgid "Next"
-msgstr "Next"
+msgstr ""
 
 msgid "Set up the sync file"
 msgstr "Configure o ficheiro de sincronização"
@@ -394,22 +367,22 @@ msgstr "Ficheiro de gravação periódica"
 
 #, fuzzy
 msgid "Periodic saving file does not exist."
-msgstr "Periodic saving file does not exist."
+msgstr ""
 
 #, fuzzy
 msgid "Create"
-msgstr "Create"
+msgstr ""
 
 msgid "Please wait …"
 msgstr "Por favor, aguarde…"
 
 #, fuzzy
 msgid "Change"
-msgstr "Change"
+msgstr ""
 
 #, fuzzy
 msgid "Connect to the cloud storage"
-msgstr "Connect to the cloud storage"
+msgstr ""
 
 # Translation key: connect_cloud_storage_desc
 #, fuzzy
@@ -419,25 +392,21 @@ msgid ""
 "computer, select the folder that you have synced with your cloud storage and "
 "also have saved the same periodic saving file."
 msgstr ""
-"On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this "
-"computer, select the folder that you have synced with your cloud storage and "
-"also have saved the same periodic saving file."
 
 #, fuzzy
 msgid "Select the cloud drive folder"
-msgstr "Select the cloud drive folder"
+msgstr ""
 
 #, fuzzy
 msgid "You didn't select the cloud drive folder!"
-msgstr "You didn't select the cloud drive folder!"
+msgstr ""
 
 msgid "Periodic synchronization"
 msgstr "Sincronização periódica"
 
 #, fuzzy
 msgid "Bidirectional synchronization"
-msgstr "Bidirectional synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync_desc
 #, fuzzy
@@ -446,9 +415,6 @@ msgid ""
 "periodic saving information (interval, folder, and file name) from the other "
 "computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
 
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
@@ -463,7 +429,7 @@ msgstr "Atalhos do teclado"
 
 #, fuzzy
 msgid "Open the application wiki"
-msgstr "Open the application wiki"
+msgstr ""
 
 msgid "Quit"
 msgstr "Encerrar"

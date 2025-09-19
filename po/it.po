@@ -146,7 +146,7 @@ msgid "Generate Password"
 msgstr "Genera Password"
 
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 msgid "Unlock the archive with a password"
 msgstr "Sblocca l'archivio con una password"

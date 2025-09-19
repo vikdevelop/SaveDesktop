@@ -73,7 +73,7 @@ msgstr "更改仅在下次登录后生效"
 
 #, fuzzy
 msgid "Interval"
-msgstr "Interval"
+msgstr ""
 
 msgid "Never"
 msgstr "从不"
@@ -139,9 +139,6 @@ msgid ""
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
-"Please create new password for your archive. Criteria include a length of at "
-"least 12 characters, one uppercase letter, one lowercase letter, and one "
-"special character."
 
 msgid "Generate Password"
 msgstr "生成密码"
@@ -159,9 +156,6 @@ msgid ""
 "you have forgotten it, you will not be able to unzip the archive and start "
 "importing your configuration."
 msgstr ""
-"Enter the password below to unlock the archive with your configuration. If "
-"you have forgotten it, you will not be able to unzip the archive and start "
-"importing your configuration."
 
 # Translation key: enter_password_title
 msgid ""
@@ -175,9 +169,6 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
 
 msgid "Remember Password"
 msgstr "记住密码"
@@ -294,8 +285,6 @@ msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
-"The created cloud drive folder can be found in the side panel of the file "
-"chooser dialog, in this form: username@service.com."
 
 # Translation key: rclone_intro_desc
 #, fuzzy
@@ -304,9 +293,6 @@ msgid ""
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
-"<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 #, fuzzy
@@ -315,13 +301,10 @@ msgid ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
-"Now, copy the command to set up Rclone using the side button and open the "
-"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
-"apps' menu."
 
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 #, fuzzy
@@ -329,12 +312,10 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click "
-"the \"Apply\" button"
 
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 msgid "Almost done!"
 msgstr "马上就好！"
@@ -359,7 +340,7 @@ msgstr "定期保存文件"
 
 #, fuzzy
 msgid "Periodic saving file does not exist."
-msgstr "Periodic saving file does not exist."
+msgstr ""
 
 msgid "Create"
 msgstr "新建"
@@ -381,10 +362,6 @@ msgid ""
 "computer, select the folder that you have synced with your cloud storage and "
 "also have saved the same periodic saving file."
 msgstr ""
-"On another computer, open the Save Desktop app, and on this page, click on "
-"the \"Set up the sync file\" button and make the necessary settings. On this "
-"computer, select the folder that you have synced with your cloud storage and "
-"also have saved the same periodic saving file."
 
 msgid "Select the cloud drive folder"
 msgstr "选择云驱动文件夹"
@@ -397,7 +374,7 @@ msgstr "周期性同步"
 
 #, fuzzy
 msgid "Bidirectional synchronization"
-msgstr "Bidirectional synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync_desc
 #, fuzzy
@@ -406,9 +383,6 @@ msgid ""
 "periodic saving information (interval, folder, and file name) from the other "
 "computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
 
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯"

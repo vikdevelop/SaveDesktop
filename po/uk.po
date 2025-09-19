@@ -175,9 +175,6 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
 
 msgid "Remember Password"
 msgstr "Запам'ятати пароль"
@@ -325,7 +322,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""

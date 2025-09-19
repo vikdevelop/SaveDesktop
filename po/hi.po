@@ -109,11 +109,11 @@ msgstr "तयशुदा पर रीसेट"
 
 #, fuzzy
 msgid "Password for encryption"
-msgstr "Password for encryption"
+msgstr ""
 
 #, fuzzy
 msgid "Manual saving"
-msgstr "Manual saving"
+msgstr ""
 
 msgid "Archive encryption"
 msgstr "पुरालेख कूटलेखन"
@@ -129,7 +129,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 msgid "Create new password"
 msgstr "नया पासवर्ड बनाएं"
@@ -145,7 +145,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Generate Password"
-msgstr "Generate Password"
+msgstr ""
 
 msgid "Password"
 msgstr "पासवर्ड"
@@ -168,7 +168,6 @@ msgstr ""
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 msgid ""
@@ -182,7 +181,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Remember Password"
-msgstr "Remember Password"
+msgstr ""
 
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "Password not entered, or it's incorrect. Unable to continue।"
@@ -224,7 +223,7 @@ msgstr "फाइल से आयात"
 
 #, fuzzy
 msgid "Import from folder"
-msgstr "Import from folder"
+msgstr ""
 
 msgid "Cancel"
 msgstr "रद्द करें"
@@ -263,7 +262,7 @@ msgstr "लॉग आउट"
 
 #, fuzzy
 msgid "An error occurred"
-msgstr "An error occurred"
+msgstr ""
 
 msgid "Apply"
 msgstr "लागू करें"
@@ -279,15 +278,15 @@ msgstr "नेटवर्क में अन्य कंप्यूटरो
 
 #, fuzzy
 msgid "Initial synchronization setup"
-msgstr "Initial synchronization setup"
+msgstr ""
 
 #, fuzzy
 msgid "1. Open the system settings"
-msgstr "1. Open the system settings"
+msgstr ""
 
 #, fuzzy
 msgid "2. Go to the Online Accounts section"
-msgstr "2. Go to the Online Accounts section"
+msgstr ""
 
 # Translation key: gnome_oa_section_desc
 msgid ""
@@ -299,7 +298,7 @@ msgstr ""
 
 #, fuzzy
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr "3. Click on the Next button and select the created cloud drive folder"
+msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
 msgid ""
@@ -316,9 +315,6 @@ msgid ""
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
-"<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
@@ -332,7 +328,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 #, fuzzy
@@ -340,16 +336,14 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click "
-"the \"Apply\" button"
 
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 #, fuzzy
 msgid "Almost done!"
-msgstr "Almost done!"
+msgstr ""
 
 # Translation key: almost_done_desc
 msgid ""
@@ -361,11 +355,11 @@ msgstr ""
 
 #, fuzzy
 msgid "Select"
-msgstr "Select"
+msgstr ""
 
 #, fuzzy
 msgid "Next"
-msgstr "Next"
+msgstr ""
 
 msgid "Set up the sync file"
 msgstr "समन्वयन फाइल निर्धारित करें"
@@ -378,18 +372,18 @@ msgstr "Periodic saving file does not exist।"
 
 #, fuzzy
 msgid "Create"
-msgstr "Create"
+msgstr ""
 
 msgid "Please wait …"
 msgstr "कृपया प्रतीक्षा करें …"
 
 #, fuzzy
 msgid "Change"
-msgstr "Change"
+msgstr ""
 
 #, fuzzy
 msgid "Connect to the cloud storage"
-msgstr "Connect to the cloud storage"
+msgstr ""
 
 # Translation key: connect_cloud_storage_desc
 msgid ""
@@ -405,18 +399,18 @@ msgstr ""
 
 #, fuzzy
 msgid "Select the cloud drive folder"
-msgstr "Select the cloud drive folder"
+msgstr ""
 
 #, fuzzy
 msgid "You didn't select the cloud drive folder!"
-msgstr "You didn't select the cloud drive folder!"
+msgstr ""
 
 msgid "Periodic synchronization"
 msgstr "आवधिक समन्वयन"
 
 #, fuzzy
 msgid "Bidirectional synchronization"
-msgstr "Bidirectional synchronization"
+msgstr ""
 
 # Translation key: bidirectional_sync_desc
 msgid ""
@@ -439,7 +433,7 @@ msgstr "कीबोर्ड शॉर्टकट"
 
 #, fuzzy
 msgid "Open the application wiki"
-msgstr "Open the application wiki"
+msgstr ""
 
 msgid "Quit"
 msgstr "छोड़ें"

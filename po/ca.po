@@ -39,7 +39,7 @@ msgstr "Temes"
 
 #, fuzzy
 msgid "Fonts"
-msgstr "Fonts"
+msgstr ""
 
 # Translation key: backgrounds
 msgid "Backgrounds"
@@ -47,7 +47,7 @@ msgstr "Fons d'escriptori"
 
 #, fuzzy
 msgid "Extensions"
-msgstr "Extensions"
+msgstr ""
 
 msgid "Desktop"
 msgstr "Escriptori"
@@ -75,7 +75,7 @@ msgstr "Els canvis seran efectius al proper inici de sessió"
 
 #, fuzzy
 msgid "Interval"
-msgstr "Interval"
+msgstr ""
 
 msgid "Never"
 msgstr "Mai"
@@ -112,11 +112,11 @@ msgstr "Restaura als valors per defecte"
 
 #, fuzzy
 msgid "Password for encryption"
-msgstr "Password for encryption"
+msgstr ""
 
 #, fuzzy
 msgid "Manual saving"
-msgstr "Manual saving"
+msgstr ""
 
 msgid "Archive encryption"
 msgstr "Xifrat de ftxer"
@@ -133,7 +133,7 @@ msgstr ""
 
 #, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr "Save the configuration without creating an archive"
+msgstr ""
 
 msgid "Create new password"
 msgstr "Crea una contrasenya nova"
@@ -171,7 +171,6 @@ msgstr ""
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
-"Please enter a password to unlock the archive for sync the configuration"
 
 # Translation key: enter_password_desc
 #, fuzzy
@@ -180,17 +179,14 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
-"An encrypted archive has been selected for synchronization using the Save "
-"Desktop app. Please enter the password below to unlock it and start "
-"synchronization."
 
 #, fuzzy
 msgid "Remember Password"
-msgstr "Remember Password"
+msgstr ""
 
 #, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr "Password not entered, or it's incorrect. Unable to continue."
+msgstr ""
 
 # Translation key: saving_config_status
 msgid ""
@@ -229,7 +225,7 @@ msgstr "Des d'un fitxer"
 
 #, fuzzy
 msgid "Import from folder"
-msgstr "Import from folder"
+msgstr ""
 
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -284,15 +280,15 @@ msgstr ""
 
 #, fuzzy
 msgid "Initial synchronization setup"
-msgstr "Initial synchronization setup"
+msgstr ""
 
 #, fuzzy
 msgid "1. Open the system settings"
-msgstr "1. Open the system settings"
+msgstr ""
 
 #, fuzzy
 msgid "2. Go to the Online Accounts section"
-msgstr "2. Go to the Online Accounts section"
+msgstr ""
 
 # Translation key: gnome_oa_section_desc
 #, fuzzy
@@ -300,12 +296,10 @@ msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
-"In this section select the cloud service you want, such as Google, Microsoft "
-"365 or Nextcloud."
 
 #, fuzzy
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr "3. Click on the Next button and select the created cloud drive folder"
+msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
 #, fuzzy
@@ -313,8 +307,6 @@ msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
-"The created cloud drive folder can be found in the side panel of the file "
-"chooser dialog, in this form: username@service.com."
 
 # Translation key: rclone_intro_desc
 #, fuzzy
@@ -323,9 +315,6 @@ msgid ""
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
-"For synchronization to works properly, you need to have the folder, that is "
-"synced with your cloud service using Rclone.\n"
-"<b>Start by selecting the cloud drive service you use.</b>"
 
 # Translation key: rclone_copy_cmd
 #, fuzzy
@@ -334,13 +323,10 @@ msgid ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
-"Now, copy the command to set up Rclone using the side button and open the "
-"terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
-"apps' menu."
 
 #, fuzzy
 msgid "Copy"
-msgstr "Copy"
+msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
 #, fuzzy
@@ -348,16 +334,14 @@ msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
-"Once you have finished setting up Rclone using the command provided, click "
-"the \"Apply\" button"
 
 #, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr "Use Syncthing folder instead"
+msgstr ""
 
 #, fuzzy
 msgid "Almost done!"
-msgstr "Almost done!"
+msgstr ""
 
 # Translation key: almost_done_desc
 #, fuzzy
@@ -365,16 +349,14 @@ msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
-"You've now created the cloud drive folder! Click on the Next button to "
-"complete the setup."
 
 #, fuzzy
 msgid "Select"
-msgstr "Select"
+msgstr ""
 
 #, fuzzy
 msgid "Next"
-msgstr "Next"
+msgstr ""
 
 msgid "Set up the sync file"
 msgstr "Configura el fitxer de sincronització"
@@ -444,7 +426,7 @@ msgstr "Dreceres de teclat"
 
 #, fuzzy
 msgid "Open the application wiki"
-msgstr "Open the application wiki"
+msgstr ""
 
 msgid "Quit"
 msgstr "Surt"
