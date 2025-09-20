@@ -59,8 +59,6 @@ snap = (env['type'] == 'snap')
 
 # Application path
 app_prefix = os.environ.get('SAVEDESKTOP_DIR')
-if snap:
-    app_prefix = os.path.join(os.environ["SNAP"], app_prefix.lstrip("/"))
 
 # Export
 __all__ = [
