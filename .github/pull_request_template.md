@@ -14,7 +14,6 @@ If this pull request addresses an issue, please link to it here. For example:
 
 - [ ] Added new feature: Describe the feature.
 - [ ] Fixed bug: Describe the bug and how it was fixed.
-- [ ] Updated documentation: Describe what was updated.
 - [ ] Other: Describe any other changes made.
 
 ## Screenshots (if applicable)
@@ -22,11 +21,7 @@ If this pull request addresses an issue, please link to it here. For example:
 If your changes include visual modifications, please include screenshots to demonstrate the changes.
 
 ## Testing
-
-Select the installation methods on which you tested your changes:
-
-- [ ] Flatpak or GNOME Builder
-- [ ] Snap
+- [ ] I have tested my changes via GNOME Builder
 
 ## Checklist
 

@@ -28,6 +28,7 @@ body:
         - Budgie
         - COSMIC
         - Deepin
+        - Hyprland
     validations:
       required: true
   - type: input
@@ -45,9 +46,7 @@ body:
         How did you install SaveDesktop?
       options:
         - Flatpak from Flathub
-        - Flatpak, which was built with Flatpak Builder
-        - Native from this repository
-        - Snap from Snap Store
+        - GNOME Builder
         - Other
     validations:
       required: true

@@ -64,6 +64,7 @@
                 <ul>
                     <li>Transition to the Meson build system</li>
                     <li>Refactored code base</li>
+                    <li>Snap support has been discontinued due to technical compatibility issues. Snap users can continue using v3.6.2-hotfix, but updates will only be provided for Flatpak or other methods.</li>
                     <li>Removed the "Use Syncthing folder instead" from the Initial Synchronization setup dialog for GNOME-based environments</li>
                     <li>Other minor UI improvements</li>
                 </ul>
