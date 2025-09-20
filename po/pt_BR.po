@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2025-09-21 11:07+0000\n"
+"Last-Translator: Ezilei Correia <ezilei@yahoo.com.br>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "vikdevelop/savedesktop/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -107,13 +107,11 @@ msgstr "Formato do nome do arquivo"
 msgid "Reset to default"
 msgstr "Restaurar para o padrão"
 
-#, fuzzy
 msgid "Password for encryption"
-msgstr ""
+msgstr "Senha para criptografia"
 
-#, fuzzy
 msgid "Manual saving"
-msgstr ""
+msgstr "Salvamento manual"
 
 msgid "Archive encryption"
 msgstr "Encriptação de arquivo"
@@ -128,9 +126,8 @@ msgstr ""
 "uma senha. Isso é útil ao salvar a configuração em uma mídia portátil para "
 "aumentar a segurança de seus dados."
 
-#, fuzzy
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Salvar a configuração sem criar um arquivo"
 
 msgid "Create new password"
 msgstr "Criar nova senha"
@@ -152,7 +149,7 @@ msgid "Password"
 msgstr "Senha"
 
 msgid "Unlock the archive with a password"
-msgstr "Desbloqueie o arquivo com uma senha"
+msgstr "Desbloquear o arquivo com uma senha"
 
 # Translation key: check_pwd_desc
 msgid ""
@@ -165,26 +162,27 @@ msgstr ""
 "importar sua configuração."
 
 # Translation key: enter_password_title
-#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Por favor, digite uma senha para desbloquear o arquivo e sincronizar a "
+"configuração"
 
 # Translation key: enter_password_desc
-#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
+"Um arquivo criptografado foi selecionado para sincronização usando o "
+"aplicativo Save Desktop. Digite a senha abaixo para desbloqueá-lo e iniciar "
+"a sincronização."
 
-#, fuzzy
 msgid "Remember Password"
-msgstr ""
+msgstr "Lembrar Senha"
 
-#, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr ""
+msgstr "Senha não inserida ou incorreta. Não é possível continuar."
 
 # Translation key: saving_config_status
 msgid ""
@@ -221,9 +219,8 @@ msgstr "Importar configuração salva"
 msgid "Import from file"
 msgstr "Importar do arquivo"
 
-#, fuzzy
 msgid "Import from folder"
-msgstr ""
+msgstr "Importar da pasta"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -327,9 +324,8 @@ msgstr ""
 "abra o aplicativo do terminal usando o atalho de teclado Ctrl+Alt+T ou "
 "encontrando-o no menu de aplicativos."
 
-#, fuzzy
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
@@ -339,9 +335,8 @@ msgstr ""
 "Depois de terminar de configurar o Rclone usando o comando fornecido, clique "
 "no botão \"Aplicar\""
 
-#, fuzzy
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Use a pasta Syncthing em vez disto"
 
 msgid "Almost done!"
 msgstr "Quase pronto!"
