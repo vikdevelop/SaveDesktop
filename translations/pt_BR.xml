@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title"># Sincronização entre computadores na rede</str>
+  <str key="synchronization_intro">Além de salvar a configuração e importá-la, o Save Desktop também permite sincronizá-la entre computadores na sua rede usando uma pasta de nuvem compartilhada ou uma pasta Syncthing compartilhada.</str>
 </root>
