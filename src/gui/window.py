@@ -446,42 +446,6 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Dialog for creating password for the config archive
     def create_password_dialog(self):
-        # Action after closing pswdDialog
-        def pswdDialog_closed(w, response):
-            if response == 'ok':
-                with open(f"{CACHE}/temp_file", "w") as tmp:
-                    tmp.write(self.pswdEntry.get_text())
-                self.save_config()
-
-        # Check the password to see if it meets the criteria
-        def check_password(pswdEntry):
-            password = self.pswdEntry.get_text()
-            criteria = [
-                (len(password) < 12, "The password is too short. It should has at least 12 characters"),
-                (not re.search(r'[A-Z]', password), "The password should has at least one capital letter"),
-                (not re.search(r'[a-z]', password), "The password should has at least one lowercase letter"),
-                (not re.search(r'[-_@.:,+=]', password), "The password should has at least one special character"),
-                (" " in password, "The password must not contain spaces")
-            ]
-
-            for condition, message in criteria:
-                if condition:
-                    self.pswdDialog.set_response_enabled("ok", False)
-                    print(message)
-                    return
-
-            self.pswdDialog.set_response_enabled("ok", True)
-
-        # Generate Password
-        def pswd_generator(w):
-            safe = "-_@.:,+="
-            allc = safe + string.ascii_letters + string.digits
-            password = [random.choice(safe), random.choice(string.ascii_letters), random.choice(string.digits)] + \
-                       [random.choice(allc) for _ in range(21)]
-            random.shuffle(password)
-            password = ''.join(password)
-            self.pswdEntry.set_text(password)
-
         # Dialog itself
         self.pswdDialog = Adw.AlertDialog.new()
         self.pswdDialog.set_heading(_("Create new password"))
@@ -491,7 +455,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.pswdDialog.add_response("ok", _("Apply"))
         self.pswdDialog.set_response_enabled("ok", False)
         self.pswdDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.pswdDialog.connect('response', pswdDialog_closed)
+        self.pswdDialog.connect('response', self._pswdDialog_closed)
         self.pswdDialog.present()
 
         # Button for generating strong password
@@ -499,26 +463,56 @@ class MainWindow(Adw.ApplicationWindow):
         self.pswdgenButton.set_tooltip_text(_("Generate Password"))
         self.pswdgenButton.add_css_class("flat")
         self.pswdgenButton.set_valign(Gtk.Align.CENTER)
-        self.pswdgenButton.connect("clicked", pswd_generator)
+        self.pswdgenButton.connect("clicked", self._get_generated_password)
 
         # entry for entering password
         self.pswdEntry = Adw.PasswordEntryRow.new()
         self.pswdEntry.set_title(_("Password"))
-        self.pswdEntry.connect('changed', check_password)
+        self.pswdEntry.connect('changed', self._check_password)
         self.pswdEntry.add_suffix(self.pswdgenButton)
         self.pswdDialog.set_extra_child(self.pswdEntry)
 
+    # Action after closing pswdDialog
+    def _pswdDialog_closed(self, w, response):
+        if response == 'ok':
+            with open(f"{CACHE}/temp_file", "w") as tmp:
+                tmp.write(self.pswdEntry.get_text())
+            self.save_config()
+
+    # Check the password to see if it meets the criteria
+    def _check_password(self, pswdEntry):
+        password = self.pswdEntry.get_text()
+        criteria = [
+            (len(password) < 12, "The password is too short. It should has at least 12 characters"),
+            (not re.search(r'[A-Z]', password), "The password should has at least one capital letter"),
+            (not re.search(r'[a-z]', password), "The password should has at least one lowercase letter"),
+            (not re.search(r'[-_@.:,+=]', password), "The password should has at least one special character"),
+            (" " in password, "The password must not contain spaces")
+        ]
+
+        for condition, message in criteria:
+            if condition:
+                self.pswdDialog.set_response_enabled("ok", False)
+                print(message)
+                return
+
+        self.pswdDialog.set_response_enabled("ok", True)
+
+    # Generate Password
+    def _get_generated_password(self, w):
+        self.password = self._password_generator()
+        self.pswdEntry.set_text(self.password)
+
+    def _password_generator(self):
+        safe = "-_@.:,+="
+        allc = safe + string.ascii_letters + string.digits
+        password = [random.choice(safe), random.choice(string.ascii_letters), random.choice(string.digits)] + \
+                   [random.choice(allc) for _ in range(21)]
+        random.shuffle(password)
+        return ''.join(password)
+
     # dialog for entering password of the archive
     def check_password_dialog(self):
-        # action after closing dialog for checking password
-        def checkDialog_closed(w, response):
-            if response == 'ok':
-                self.checkDialog.set_response_enabled("ok", False)
-                with open(f"{CACHE}/temp_file", "w") as tmp:
-                    tmp.write(self.checkEntry.get_text())
-
-                self.import_config()
-
         # Dialog itself
         self.checkDialog = Adw.AlertDialog.new()
         self.checkDialog.set_heading(_("Unlock the archive with a password"))
@@ -527,12 +521,21 @@ class MainWindow(Adw.ApplicationWindow):
         self.checkDialog.add_response("cancel", _("Cancel"))
         self.checkDialog.add_response("ok", _("Apply"))
         self.checkDialog.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.checkDialog.connect('response', checkDialog_closed)
+        self.checkDialog.connect('response', self._checkDialog_closed)
         self.checkDialog.present()
 
         self.checkEntry = Adw.PasswordEntryRow.new()
         self.checkEntry.set_title(_("Password"))
         self.checkDialog.set_extra_child(self.checkEntry)
+
+    # action after closing dialog for checking password
+    def _checkDialog_closed(self, w, response):
+        if response == 'ok':
+            self.checkDialog.set_response_enabled("ok", False)
+            with open(f"{CACHE}/temp_file", "w") as tmp:
+                tmp.write(self.checkEntry.get_text())
+
+            self.import_config()
 
     # Save configuration
     def save_config(self):

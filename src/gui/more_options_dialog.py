@@ -75,15 +75,18 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.periodic_row.add_row(self.dirRow)
 
         # Adw.ActionRow for entering a password for the archive encryption
-        self.get_password_from_file()
-
         self.cpwdRow = Adw.PasswordEntryRow.new()
         self.cpwdRow.set_title(_("Password for encryption"))
-        try:
-            self.cpwdRow.set_text(self.password)
-        except:
-            self.cpwdRow.set_text("")
         self.periodic_row.add_row(self.cpwdRow)
+        self._get_password_from_file()
+
+        # Button for generating strong password
+        self.pswdgenButton = Gtk.Button.new_from_icon_name("dialog-password-symbolic")
+        self.pswdgenButton.set_tooltip_text(_("Generate Password"))
+        self.pswdgenButton.add_css_class("flat")
+        self.pswdgenButton.set_valign(Gtk.Align.CENTER)
+        self.pswdgenButton.connect("clicked", self._get_generated_password)
+        self.cpwdRow.add_suffix(self.pswdgenButton)
 
         # Manual saving section
         self.manRow = Adw.ExpanderRow.new()
@@ -131,12 +134,16 @@ class MoreOptionsDialog(Adw.AlertDialog):
         if os.path.exists(f"{CACHE}/expand_pb_row"):
             self.periodic_row.set_expanded(True)
 
-    def get_password_from_file(self):
+    def _get_password_from_file(self):
         if os.path.exists(f"{DATA}/password"):
             p = PasswordStore()
-            self.password = p.password
+            self.cpwdRow.set_text(p.password)
         else:
-            self.password = ""
+            self.cpwdRow.set_text("")
+
+    def _get_generated_password(self, w):
+        self.password = self.parent._password_generator()
+        self.cpwdRow.set_text(self.password)
 
     def open_file_dialog(self, w):
         self.parent.select_pb_folder(w="")
