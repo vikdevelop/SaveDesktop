@@ -79,7 +79,7 @@ parts:
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
     plugin: meson
-    source-tag: '3.7-beta.02-snap'
+    source-tag: '3.7-beta.02snap'
     source-depth: 1
     meson-parameters:
       - --prefix=/usr
