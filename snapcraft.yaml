@@ -78,24 +78,35 @@ parts:
 
   savedesktop:
     source: https://github.com/vikdevelop/SaveDesktop.git
-    plugin: meson
-    source-tag: '3.7-beta.02snap'
+    source-tag: '3.6.2-hotfix' # the last release for Snap
     source-depth: 1
-    meson-parameters:
-      - --prefix=/snap/savedesktop/current/usr
-    organize:
-      snap/savedesktop/current/usr: usr
+    plugin: nil
+    override-build: |
+      set -eux
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr $CRAFT_PART_SRC/src/*
+      install -D -t $CRAFT_PART_INSTALL/usr/share/applications $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.desktop
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps $CRAFT_PART_SRC/flatpak/icons/io.github.vikdevelop.SaveDesktop.svg
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/exclamation_mark.png
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/desktop-symbolic.svg
+      install -D -t $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps $CRAFT_PART_SRC/flatpak/symbolic-icons/done.svg
+      install -D -t $CRAFT_PART_INSTALL/usr/share/metainfo $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.metainfo.xml
+      install -D -t $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas $CRAFT_PART_SRC/flatpak/io.github.vikdevelop.SaveDesktop.gschema.xml
+      glib-compile-schemas $CRAFT_PART_INSTALL/usr/share/glib-2.0/schemas
+      cp -R $CRAFT_PART_SRC/translations $CRAFT_PART_INSTALL/usr/
+      install -Dm755 -t $CRAFT_PART_INSTALL/usr/bin $CRAFT_PART_SRC/savedesktop
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
 
   deps:
     after: [ dconf, savedesktop ]
     plugin: nil
     stage-packages:
+      - wget
       - libnotify-bin
+      - zip
       - p7zip-full
       - coreutils
     stage:
       - usr/bin/notify-send
+      - usr/bin/wget
+      - usr/bin/zip
       - usr/bin/7z
-      - usr/lib/7zip/7z
-      - usr/lib/7zip/7z.so

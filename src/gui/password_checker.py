@@ -75,7 +75,7 @@ class PasswordWindow(Gtk.ApplicationWindow):
 class App(Adw.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE,
-                         application_id="io.github.vikdevelop.SaveDesktop" if not snap else None)
+                         application_id="io.github.vikdevelop.SaveDesktop")
         self.connect('activate', self.on_activate)
     
     # Show the main window of the application

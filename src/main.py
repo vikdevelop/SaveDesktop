@@ -93,19 +93,16 @@ class SaveDesktopApp(Adw.Application):
 
     # log out of the system after clicking on the "Log Out" button
     def logout(self, action, param):
-        if snap:
-            os.system("dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.TerminateSession string:$(dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager.ListSessions | awk -F 'string \"' '/string \"/ {print $2; exit}' | awk -F '\"' '{print $1}')")
+        if self.win.environment == 'Xfce':
+            os.system("dbus-send --print-reply --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
+        elif self.win.environment == 'KDE Plasma':
+            os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
+        elif self.win.environment == 'COSMIC (New)':
+            os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
+        elif self.win.environment == 'Hyprland':
+            os.system("hyprctl dispatch exit")
         else:
-            if self.win.environment == 'Xfce':
-                os.system("dbus-send --print-reply --session --dest=org.xfce.SessionManager /org/xfce/SessionManager org.xfce.Session.Manager.Logout boolean:true boolean:false")
-            elif self.win.environment == 'KDE Plasma':
-                os.system("dbus-send --print-reply --session --dest=org.kde.LogoutPrompt /LogoutPrompt org.kde.LogoutPrompt.promptLogout")
-            elif self.win.environment == 'COSMIC (New)':
-                os.system("dbus-send --print-reply --session --dest=com.system76.CosmicSession --type=method_call /com/system76/CosmicSession com.system76.CosmicSession.Exit")
-            elif self.win.environment == 'Hyprland':
-                os.system("hyprctl dispatch exit")
-            else:
-                os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
+            os.system("gdbus call --session --dest org.gnome.SessionManager --object-path /org/gnome/SessionManager --method org.gnome.SessionManager.Logout 1")
 
     # open a directory with created configuration archive after clicking on the "Open the folder" button
     def open_dir(self, action, param):

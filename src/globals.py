@@ -16,15 +16,6 @@ def get_app_environment():
             'data': f'{GLib.get_user_data_dir()}'
         }
     
-    elif os.environ.get('SNAP_NAME') == 'savedesktop':
-        return {
-            'type': 'snap',
-            'home': Path(os.getenv('SNAP_REAL_HOME', os.getenv('HOME', Path.home()))),
-            'run_cmd': 'savedesktop',
-            'cache': f'{GLib.get_user_cache_dir()}',
-            'data': f'{GLib.get_user_data_dir()}'
-        }
-    
     else:
         return {
             'type': 'native',
@@ -55,14 +46,13 @@ sync_cmd = f'{env["run_cmd"]} --sync'
 
 # Detect flags
 flatpak = (env['type'] == 'flatpak')
-snap = (env['type'] == 'snap')
 
 # Application path
 app_prefix = os.environ.get('SAVEDESKTOP_DIR')
 
 # Export
 __all__ = [
-    'home', 'download_dir', 'snap', 'flatpak', 'settings',
+    'home', 'download_dir', 'flatpak', 'settings',
     'DATA', 'CACHE', 'app_prefix', 'periodic_saving_cmd', 'sync_cmd'
 ]
 

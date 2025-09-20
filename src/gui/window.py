@@ -73,7 +73,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Add pages to the menu switcher
         self.stack.add_titled_with_icon(self.saveBox,"savepage",_("Save"),"document-save-symbolic")
         self.stack.add_titled_with_icon(self.importBox,"importpage",_("Import"),"document-open-symbolic")
-        self.stack.add_titled_with_icon(self.syncingBox,"syncpage",_("Sync"),"view-refresh-symbolic") if not snap else None
+        self.stack.add_titled_with_icon(self.syncingBox,"syncpage",_("Sync"),"view-refresh-symbolic")
 
         # menu switcher
         self.switcher_title = Adw.ViewSwitcherTitle.new()
@@ -129,7 +129,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.environment = env_name
             self.save_desktop()
             self.import_desktop()
-            self.sync_desktop() if not snap else print("Synchronization in the Snap environment is temporarily disabled.")
+            self.sync_desktop()
             self.connect("close-request", self.on_close)
 
         # Check the user's current desktop
