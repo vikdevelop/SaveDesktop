@@ -418,7 +418,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
-        self.file_chooser.set_title(_("Import saved configuration"))
+        self.file_chooser.set_title(_("Import from file"))
         self.file_filter = Gtk.FileFilter.new()
         self.file_filter.set_name(_("Save Desktop files"))
         self.file_filter.add_pattern('*.sd.tar.gz')
@@ -441,7 +441,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
-        self.file_chooser.set_title(_("Import saved configuration"))
+        self.file_chooser.set_title(_("Import from folder"))
         self.file_chooser.select_folder(self, None, import_selected, None)
 
     # Dialog for creating password for the config archive
@@ -631,14 +631,6 @@ class MainWindow(Adw.ApplicationWindow):
         for widget in [self.spinner, self.cancel_button, self.status_page]:
             self.status_box.remove(widget)
 
-    def _set_default_widgets_state(self):
-        self.toolbarview.set_content(self.headapp)
-        self.headerbar.set_title_widget(self.switcher_title)
-        self.set_title("Save Desktop")
-        self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
-        if self.get_default_size()[0] < 400:
-            self.switcher_bar.set_reveal(True)
-
     # config has been saved action
     def done(self):
         self._send_notification()
@@ -705,6 +697,14 @@ class MainWindow(Adw.ApplicationWindow):
             widgets = [self.status_page, self.logout_button, self.back_button]
         for widget in widgets:
             self.status_box.remove(widget)
+
+    def _set_default_widgets_state(self):
+        self.toolbarview.set_content(self.headapp)
+        self.headerbar.set_title_widget(self.switcher_title)
+        self.set_title("Save Desktop")
+        self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
+        if self.get_default_size()[0] < 400:
+            self.switcher_bar.set_reveal(True)
 
     # show message dialog in the error case
     def show_err_msg(self, error):

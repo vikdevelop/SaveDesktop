@@ -183,6 +183,7 @@ msgstr ""
 msgid "Remember Password"
 msgstr ""
 
+#, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr "Password not entered, or it's incorrect. Unable to continue।"
 
@@ -301,6 +302,7 @@ msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
+#, fuzzy
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
@@ -317,6 +319,7 @@ msgid ""
 msgstr ""
 
 # Translation key: rclone_copy_cmd
+#, fuzzy
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
@@ -346,6 +349,7 @@ msgid "Almost done!"
 msgstr ""
 
 # Translation key: almost_done_desc
+#, fuzzy
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
@@ -367,6 +371,7 @@ msgstr "समन्वयन फाइल निर्धारित करे
 msgid "Periodic saving file"
 msgstr "आवधिक फाइल सहेजना"
 
+#, fuzzy
 msgid "Periodic saving file does not exist."
 msgstr "Periodic saving file does not exist।"
 
@@ -386,6 +391,7 @@ msgid "Connect to the cloud storage"
 msgstr ""
 
 # Translation key: connect_cloud_storage_desc
+#, fuzzy
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -413,6 +419,7 @@ msgid "Bidirectional synchronization"
 msgstr ""
 
 # Translation key: bidirectional_sync_desc
+#, fuzzy
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
