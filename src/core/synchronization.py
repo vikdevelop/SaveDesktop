@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 from pathlib import Path
 from datetime import datetime, date, timedelta
 import subprocess, os, locale, json, sys, gi, socket, shutil, zipfile, tarfile, re

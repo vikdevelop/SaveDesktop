@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import os, sys, re, zipfile, random, string, gi, subprocess, locale
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
