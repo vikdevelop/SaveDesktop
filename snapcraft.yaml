@@ -82,7 +82,9 @@ parts:
     source-tag: '3.7-beta.02snap'
     source-depth: 1
     meson-parameters:
-      - --prefix=/usr
+      - --prefix=/snap/savedesktop/current/usr
+    organize:
+      snap/savedesktop/current/usr: usr
     parse-info: [ usr/share/metainfo/io.github.vikdevelop.SaveDesktop.metainfo.xml ]
 
   deps:
