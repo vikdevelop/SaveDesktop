@@ -100,13 +100,11 @@ parts:
     after: [ dconf, savedesktop ]
     plugin: nil
     stage-packages:
-      - wget
       - libnotify-bin
-      - zip
       - p7zip-full
       - coreutils
     stage:
       - usr/bin/notify-send
-      - usr/bin/wget
-      - usr/bin/zip
       - usr/bin/7z
+      - usr/lib/7zip/7z
+      - usr/lib/7zip/7z.so
