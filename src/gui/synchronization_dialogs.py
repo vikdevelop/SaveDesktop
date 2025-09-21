@@ -191,7 +191,7 @@ class SetDialog(Adw.AlertDialog):
 
         # Button for opening More options dialog
         self.ps_button = Gtk.Button.new_with_label(_("Change"))
-        self.ps_button.connect('clicked', self.parent._open_more_options_dialog)
+        self.ps_button.connect('clicked', self._show_more_options)
         self.ps_button.set_valign(Gtk.Align.CENTER)
 
         # Row for showing the selected periodic saving interval
@@ -213,6 +213,10 @@ class SetDialog(Adw.AlertDialog):
     def _open_sync_link(self, w):
         language = locale.getlocale()[0].split("_")[0]
         os.system(f"xdg-open {self.app_wiki}/synchronization/{language}")
+
+    def _show_more_options(self, w):
+        self.close()
+        self.parent._open_more_options_dialog(w)
 
     # Check the file system of the periodic saving folder and their existation
     def check_filesystem_fnc(self):
@@ -269,29 +273,24 @@ class SetDialog(Adw.AlertDialog):
 
     def __save_now(self):
         try:
-            e_o = False
-            self.file_row.set_subtitle(_("Please wait …"))
+            self.status_desc = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
+            self.file_row.set_subtitle(self.status_desc)
             self.file_row.set_use_markup(False)
-            subprocess.run(['notify-send', 'Save Desktop', _("Please wait …")])
+            subprocess.run(['notify-send', 'Save Desktop', self.status_desc])
             subprocess.run([sys.executable, "-m", "savedesktop.core.periodic_saving", "--now"], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         except Exception as e:
-            e_o = True
             subprocess.run(['notify-send', _("An error occurred"), f'{e.stderr}'])
             self.file_row.set_subtitle(f'{e.stderr}')
-        finally:
-            if not e_o:
-                self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.zip')
-                os.system(f"notify-send 'SaveDesktop' '{_('Configuration has been saved!')}'")
-                self.set_response_enabled('ok', True)
+        else:
+            self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.zip')
+            os.system(f"notify-send 'SaveDesktop' '{_('Configuration has been saved!')}'")
+            self.set_response_enabled('ok', True)
 
     # Action after closing dialog for setting synchronization file
     def setDialog_closed(self, w, response):
         if response == 'ok':
             thread = Thread(target=self._save_file)
             thread.start()
-        else:
-            if os.path.exists(f"{CACHE}/expand_pb_row"):
-                os.remove(f"{CACHE}/expand_pb_row")
 
     # save the SaveDesktop.json file to the periodic saving folder and set up the auto-mounting the cloud drive
     def _save_file(self):

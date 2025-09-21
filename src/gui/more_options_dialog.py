@@ -22,7 +22,6 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.periodic_row = Adw.ExpanderRow.new()
         self.periodic_row.set_title(_("Periodic saving"))
         self.msBox.append(child=self.periodic_row)
-        self._expand_periodic_row()
 
         options = Gtk.StringList.new(strings=[
             _("Never"), _("Daily"), _("Weekly"), _("Monthly")
@@ -124,15 +123,13 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.archRow.set_activatable_widget(self.archSwitch)
         self.manRow.add_row(self.archRow)
 
+        self._expand_periodic_row()
+
         # add response of this dialog
         self.add_response('cancel', _("Cancel"))
         self.add_response('ok', _("Apply"))
         self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.connect('response', self.msDialog_closed)
-
-    def _expand_periodic_row(self):
-        if os.path.exists(f"{CACHE}/expand_pb_row"):
-            self.periodic_row.set_expanded(True)
 
     def _get_password_from_file(self):
         if os.path.exists(f"{DATA}/password"):
@@ -166,6 +163,11 @@ class MoreOptionsDialog(Adw.AlertDialog):
         else:
             self.encryptSwitch.set_sensitive(True)
 
+    def _expand_periodic_row(self):
+        if os.path.exists(f"{CACHE}/expand_pb_row"):
+            self.periodic_row.set_expanded(True)
+            self.manRow.set_expanded(False)
+
     # Action after closing dialog for showing more options
     def msDialog_closed(self, w, response):
         if response == 'ok':
@@ -175,6 +177,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
             settings["save-without-archive"] = self.archSwitch.get_active() # save the switch state of the "Save a configuration without creating the configuration archive" option
             self._save_periodic_saving_values()
             self._save_password()
+            self._call_set_dialog()
 
     def _save_periodic_saving_values(self):
         # save the periodic saving interval
@@ -202,3 +205,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
                 os.remove(f"{DATA}/password")
             except:
                 pass
+
+    def _call_set_dialog(self):
+        if os.path.exists(f"{CACHE}/expand_pb_row"):
+            self.parent._open_SetDialog()

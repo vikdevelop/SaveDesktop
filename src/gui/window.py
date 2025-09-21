@@ -759,3 +759,7 @@ class MainWindow(Adw.ApplicationWindow):
             print("saving/importing/syncing configuration in progress...")
         else:
             pass
+
+        # Remove this file to disable expanding the "Periodic saving" row in the "More options" dialog
+        if os.path.exists(f"{CACHE}/expand_pb_row"):
+            os.remove(f"{CACHE}/expand_pb_row")
