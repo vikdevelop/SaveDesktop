@@ -300,7 +300,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.setButton.set_name("set-button")
         self.setButton.add_css_class("pill")
         self.setButton.add_css_class("suggested-action")
-        self.setButton.connect("clicked", self._open_SetDialog if not settings["first-synchronization-setup"] else self._open_InitSetupDialog)
+        self.setButton.connect("clicked", self._open_InitSetupDialog)
         self.setButton.set_valign(Gtk.Align.CENTER)
         self.setButton.set_halign(Gtk.Align.CENTER)
         self.sync_btn_box.append(self.setButton)
@@ -309,7 +309,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.getButton = Gtk.Button.new_with_label(_("Connect to the cloud storage"))
         self.getButton.set_name("get-button")
         self.getButton.add_css_class("pill")
-        self.getButton.connect("clicked", self._open_CloudDialog if not settings["first-synchronization-setup"] else self._open_InitSetupDialog)
+        self.getButton.connect("clicked", self._open_InitSetupDialog)
         self.getButton.set_valign(Gtk.Align.CENTER)
         self.getButton.set_halign(Gtk.Align.CENTER)
         self.sync_btn_box.append(self.getButton)
@@ -321,10 +321,17 @@ class MainWindow(Adw.ApplicationWindow):
         self.language = locale.getlocale()[0].split("_")[0]
 
     def _open_InitSetupDialog(self, w):
+        self._basic_setup()
         self.__get_button_type(w)
-        self.init_setup_dialog = InitSetupDialog(self)
-        self.init_setup_dialog.choose(self, None, None, None)
-        self.init_setup_dialog.present(self)
+        if settings["first-synchronization-setup"] == True:
+            self.init_setup_dialog = InitSetupDialog(self)
+            self.init_setup_dialog.choose(self, None, None, None)
+            self.init_setup_dialog.present(self)
+        else:
+            if self.get_btn_type == "set-button":
+                self._open_SetDialog()
+            else:
+                self._open_CloudDialog()
 
     def __get_button_type(self, w):
         try:
@@ -332,12 +339,12 @@ class MainWindow(Adw.ApplicationWindow):
         except:
             self.get_btn_type = w
 
-    def _open_SetDialog(self, w):
+    def _open_SetDialog(self):
         self.set_dialog = SetDialog(self)
         self.set_dialog.choose(self, None, None, None)
         self.set_dialog.present(self)
 
-    def _open_CloudDialog(self, w):
+    def _open_CloudDialog(self):
         self.set_dialog = CloudDialog(self)
         self.set_dialog.choose(self, None, None, None)
         self.set_dialog.present(self)

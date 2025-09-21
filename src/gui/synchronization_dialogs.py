@@ -18,9 +18,7 @@ class InitSetupDialog(Adw.AlertDialog):
         # Dialog itself
         self.set_heading(_("Initial synchronization setup"))
         self.set_body_use_markup(True)
-        self.set_can_close(False)
         self.add_response('cancel', _("Cancel"))
-        #self.add_response('ok-syncthing', _("Use Syncthing folder instead"))
         self.set_response_appearance('cancel', Adw.ResponseAppearance.DESTRUCTIVE)
         self.connect('response', self.initsetupDialog_closed)
 
@@ -89,20 +87,20 @@ class InitSetupDialog(Adw.AlertDialog):
             else:
                 self.cloud_dialog.select_folder_to_sync(w)
             self.almost_done()
+            self.present(self.parent)
         elif response == 'ok-rclone': # set the periodic saving folder in the Rclone case
             if self.get_button_type == 'set-button':
                 settings["periodic-saving-folder"] = f"{download_dir}/SaveDesktop/rclone_drive"
             else:
                 settings["file-for-syncing"] = f"{download_dir}/SaveDesktop/rclone_drive"
             self.almost_done()
-        elif response == 'cancel': # if the user clicks on the Cancel button
-            self.set_can_close(True)
+            self.present(self.parent)
         elif response == 'open-setdialog': # open the "Set up the sync file" dialog after clicking on the Next button in "Almost done!" page
             settings["periodic-saving"] = "Daily"
-            self.parent._open_SetDialog(w)
+            self.parent._open_SetDialog()
         elif response == 'open-clouddialog': # open the "Connect to the cloud folder" dialog after clicking on the Next button in "Almost done!" page
             settings["periodic-import"] = "Daily2"
-            self.parent._open_CloudDialog(w)
+            self.parent._open_CloudDialog()
 
     # Set the Rclone setup command
     def _get_service(self, comborow, GParamObject):
@@ -120,7 +118,7 @@ class InitSetupDialog(Adw.AlertDialog):
         self.copyButton.set_tooltip_text(_("Copy"))
         self.copyButton.connect("clicked", self.__copy_rclone_command)
 
-    def __get_selected_cloud_service():
+    def __get_selected_cloud_service(self):
         self.get_choice = self.servRow.get_selected_item().get_string()
         if self.get_choice == "Google Drive":
             self.cloud_service = "drive"
@@ -218,7 +216,7 @@ class SetDialog(Adw.AlertDialog):
 
     # Check the file system of the periodic saving folder and their existation
     def check_filesystem_fnc(self):
-        global folder, path, check_filesystem
+        global folder, path
         check_fs_result = check_fs(folder=settings["periodic-saving-folder"])
 
         path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.zip'
@@ -239,7 +237,7 @@ class SetDialog(Adw.AlertDialog):
         self.update_gui()
 
     def update_gui(self):
-        global folder, path, check_filesystem
+        global folder, path
         self.file_row = Adw.ActionRow()
         self.file_row.set_title(_("Periodic saving file"))
         self.file_row.set_subtitle(folder)
@@ -441,7 +439,8 @@ class CloudDialog(Adw.AlertDialog):
             settings["periodic-import"] = sync_item
 
             # if the selected periodic saving interval is "Manually2", it enables the manually-sync value
-            settings["manually-sync"] = True and settings["periodic-import"] == "Manually2"
+            if settings["periodic-import"] == "Manually2":
+                settings["manually-sync"] = True
 
             # save the status of the Bidirectional Synchronization switch
             settings["bidirectional-sync"] = self.bsSwitch.get_active()

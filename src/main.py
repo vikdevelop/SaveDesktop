@@ -50,7 +50,7 @@ class SaveDesktopApp(Adw.Application):
             self.headerbar.set_title_widget(self.switcher_title)
             self.switcher_bar.set_reveal(self.switcher_title.get_title_visible())
         finally:
-            self.win.applying_done()
+            GLib.idle_add(self.win.applying_done())
 
     # Start saving the configuration using Ctrl+S keyboard shortcut
     def call_saving_config(self, action, param):
@@ -66,15 +66,15 @@ class SaveDesktopApp(Adw.Application):
 
     # Open the "Items to include in the configuration archive" dialog using Ctrl+Shift+I keyboard shortcut
     def call_items_dialog(self, action, param):
-        self.win._open_itemsDialog(w="")
+        self.win._open_items_dialog(w="")
 
     # Open the "Set up the sync file" dialog using Ctrl+Shift+S keyboard shortcut
     def call_setDialog(self, action, param):
-        self.win._open_SetDialog(w="set-button") if not settings["first-synchronization-setup"] else self.win._open_InitSetupDialog(w="set-button")
+        self.win._open_InitSetupDialog(w="set-button")
 
     # Open the "Connect to the cloud drive" dialog using Ctrl+Shift+C keyboard shortcut
     def call_cloudDialog(self, action, param):
-        self.win._open_CloudDialog(w="get-button") if not settings["first-synchronization-setup"] else self.win._open_InitSetupDialog(w="get-button")
+        self.win._open_InitSetupDialog(w="get-button")
 
     # Open the application wiki using F1 keyboard shortcut
     def open_wiki(self, action, param):
