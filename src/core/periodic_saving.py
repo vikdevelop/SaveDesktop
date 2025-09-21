@@ -38,7 +38,6 @@ class PeriodicBackups:
     def get_interval(self):
         if settings["periodic-saving"] == 'Never':
             print("Periodic saving is not set up.")
-            exit()
         elif settings["periodic-saving"] == 'Daily':
             self.check_and_backup(1)
         elif settings["periodic-saving"] == 'Weekly':
@@ -97,9 +96,9 @@ class PeriodicBackups:
             json.dump({"last-saved": date.today().isoformat()}, pb)
 
     def config_saved(self):
-        os.remove("saving_status")
+        os.chdir(CACHE)
+        shutil.rmtree("periodic_saving")
         print("Configuration saved.")
-        exit()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

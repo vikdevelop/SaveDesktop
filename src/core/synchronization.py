@@ -5,6 +5,7 @@ import subprocess, os, locale, json, sys, gi, socket, shutil, zipfile, tarfile, 
 from gi.repository import Gio, GLib
 from savedesktop.globals import *
 from savedesktop.core.password_store import PasswordStore
+from savedesktop.gui.password_checker import PasswordCheckerApp
 
 dt = datetime.now()
 
@@ -63,8 +64,7 @@ class Syncing:
     
     # Download the configuration archive from the cloud drive folder
     def download_config(self):
-        subtitle = (lambda s: re.sub(r'<.*?>', '', s).split('…')[-1].strip())(_("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>").format(settings["file-for-syncing"]))
-        os.system(f'notify-send "Save Desktop Synchronization" "{subtitle}"')
+        self._send_notification_at_startup()
         if not os.path.exists(f"{settings['file-for-syncing']}/SaveDesktop.json"):
             err_str = _("An error occurred")
             err = "SaveDesktop.json doesn't exist in the cloud drive folder!"
@@ -76,6 +76,21 @@ class Syncing:
             os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
             print("extracting the archive")
             self.get_zip_file_status()
+
+    def _send_notification_at_startup(self):
+        orig_str = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n")
+        status_str = orig_str
+        subtitle = (
+            status_str
+            .replace("<big>", "")
+            .replace("</big>", "")
+            .replace("<b>", "")
+            .replace("</b>", "")
+            .replace("<i>", "")
+            .replace("</i>", "")
+            .split("…", 1)[-1].strip()
+        ).format(f'{settings["file-for-syncing"]}/{settings["filename-format"]}.sd.zip')
+        os.system(f'notify-send "Save Desktop Synchronization" "{subtitle}"')
         
     # Get data from the SaveDesktop.json file such as filename format, periodic saving interval and folder (for bidirectional synchronization)
     def get_pb_info(self):
@@ -115,7 +130,8 @@ class Syncing:
 
         # #2 If it fails, run GUI
         if not self.password:
-            subprocess.run([sys.executable, "-m", "savedesktop.gui.password_checker"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+            app = PasswordCheckerApp()
+            app.run([])
             self.password = try_passwordstore()
 
         # #3 If password is still unavailable, get it from the {DATA}/entered-password.txt file
@@ -127,15 +143,13 @@ class Syncing:
         if not self.password:
             msg = _("Password not entered, or it's incorrect. Unable to continue.")
             err_occurred = _("An error occurred")
-            os.system(f'notify-send "{msg}" "{err_occurred}"')
-            exit()
-
-        # #5 Continue in extraction
-        self.extract_archive()
+            os.system(f'notify-send "{err_occurred}" "{msg}"')
+        else:
+            # #5 Continue in extraction
+            self.extract_archive()
                 
     # Extract the configuration archive
     def extract_archive(self):
-        print("No errors with getting a password detected.")
         try:
             if os.path.exists(f"{settings['file-for-syncing']}/{self.file}.sd.zip"):
                try:
@@ -155,12 +169,15 @@ class Syncing:
                         except PermissionError as e:
                             print(f"Permission denied for {member.name}: {e}")
             self.password = None
-            os.system(f"rm {DATA}/entered-password.txt")
+            if os.path.exists(f"{DATA}/entered-password.txt"):
+                os.remove(f"{DATA}/entered-password.txt")
         except Exception as e:
             err_occurred = _("An error occurred")
-            os.system(f"notify-send '{err_str}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
+            os.system(f"notify-send '{err_occurred}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
             if os.path.exists(f"{DATA}/password"):
                 os.remove(f"{DATA}/password")
+            if os.path.exists("sync_status"):
+                os.remove("sync_status")
         else:
             self.import_config()
     

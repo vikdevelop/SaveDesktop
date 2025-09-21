@@ -1,4 +1,4 @@
-import sys, gi
+import sys, gi, gettext, locale
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio
@@ -43,6 +43,7 @@ class PasswordWindow(Gtk.ApplicationWindow):
         # Password Entry
         self.passEntry = Adw.PasswordEntryRow.new()
         self.passEntry.set_title(_("Password"))
+        self.passEntry.connect("changed", self._empty_check)
         self.winBox.append(self.passEntry)
         
         # Switch and row for showing the "Remember a password" option
@@ -61,8 +62,15 @@ class PasswordWindow(Gtk.ApplicationWindow):
         self.applyButton.add_css_class('pill')
         self.applyButton.set_halign(Gtk.Align.CENTER)
         self.applyButton.connect("clicked", self.save_password)
+        self.applyButton.set_sensitive(False)
         self.winBox.append(self.applyButton)
         
+    def _empty_check(self, passEntry):
+        if self.passEntry.get_text() == "":
+            self.applyButton.set_sensitive(False)
+        else:
+            self.applyButton.set_sensitive(True)
+
     # Save the entered password to the file
     def save_password(self, w):
         if self.remSwitch.get_active():
@@ -70,9 +78,9 @@ class PasswordWindow(Gtk.ApplicationWindow):
         else:
             with open(f"{DATA}/entered-password.txt", "w") as ep:
                 ep.write(self.passEntry.get_text())
-        app.quit()
+        self.close()
         
-class App(Adw.Application):
+class PasswordCheckerApp(Adw.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE,
                          application_id="io.github.vikdevelop.SaveDesktop")
@@ -82,6 +90,3 @@ class App(Adw.Application):
     def on_activate(self, app):
         self.win = PasswordWindow(application=app)
         self.win.present()
-
-app = App()
-app.run(sys.argv)
