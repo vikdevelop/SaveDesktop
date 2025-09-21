@@ -715,16 +715,24 @@ class MainWindow(Adw.ApplicationWindow):
 
     # show message dialog in the error case
     def show_err_msg(self, error):
-        error_str = str(error)
-        if "died" in error_str:
+        self.error_str = str(error)
+        if "died" in self.error_str:
             return
 
         self.errDialog = Adw.AlertDialog.new()
         self.errDialog.choose(self, None, None, None)
         self.errDialog.set_heading(heading=_("An error occurred"))
-        self.errDialog.set_body(body=f"{error_str}")
+        self.errDialog.set_body(body=f"{self.error_str}")
         self.errDialog.add_response('cancel', _("Cancel"))
+        self.errDialog.add_response('copy', _("Copy"))
+        self.errDialog.set_response_appearance('copy', Adw.ResponseAppearance.SUGGESTED)
+        self.errDialog.connect('response', self._errDialog_closed)
         self.errDialog.present()
+
+    def _errDialog_closed(self, w, response):
+        if response == "copy":
+            self.clipboard = Gdk.Display.get_default().get_clipboard()
+            self.clipboard_copy = Gdk.Clipboard.set(self.clipboard, self.error_str)
 
     # a warning indicating that the user must log out
     def show_warn_toast(self):
