@@ -46,26 +46,23 @@ class FlatpakAppsDialog(Adw.AlertDialog):
         super().__init__()
         self.set_heading(_("Flatpak apps data selection"))
         
-        # primary Gtk.Box for this dialog
-        self.dialogBox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
-        self.set_extra_child(self.dialogBox)
-        
         self.old_disabled_flatpaks = settings["disabled-flatpak-apps-data"]
         
         # widget for scrolling items list
-        scrolled_window = Gtk.ScrolledWindow()
-        scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
-        scrolled_window.set_min_content_width(300)
-        scrolled_window.set_min_content_height(380)
-        self.dialogBox.append(scrolled_window)
+        self.scrolled_window = Gtk.ScrolledWindow()
+        self.scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        self.scrolled_window.set_min_content_width(300)
+        self.scrolled_window.set_min_content_height(380)
+        self.set_extra_child(self.scrolled_window)
         
         # listbox for showing items
-        self.flowbox = Gtk.ListBox.new()
-        self.flowbox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.flowbox.add_css_class(css_class='boxed-list')
+        self.flow_box = Gtk.ListBox.new()
+        self.flow_box.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.flow_box.add_css_class(css_class='boxed-list')
+        self.set_extra_child(self.flow_box)
         
         # set self.flowbox as child for Gtk.ScrolledWindow widget
-        scrolled_window.set_child(self.flowbox)
+        self.scrolled_window.set_child(self.flow_box)
         
         # add buttons to the dialog
         self.add_response('cancel', _("Cancel"))
@@ -92,14 +89,14 @@ class FlatpakAppsDialog(Adw.AlertDialog):
                     break
                 folder_name = file_info.get_name()
                 folder_row = FolderSwitchRow(folder_name)
-                self.flowbox.append(folder_row)
+                self.flow_box.append(folder_row)
         except Exception as e:
             print(f"Error loading folders: {e}")
        
     # set default switch state
     def set_initial_switch_state(self):
         disabled_flatpaks = settings.get_strv("disabled-flatpak-apps-data")
-        for child in self.flowbox.get_row_at_index(0):
+        for child in self.flow_box.get_row_at_index(0):
             if isinstance(child, FolderSwitchRow):
                 child.switch.set_active(child.folder_name not in disabled_flatpaks)
     

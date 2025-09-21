@@ -4,6 +4,7 @@ gi.require_version('Adw', '1')
 from threading import Thread
 from gi.repository import Gtk, Gdk, Adw, GLib, Gio
 from savedesktop.globals import *
+from savedesktop.core.synchronization_setup import check_fs, set_up_auto_mount
 
 class InitSetupDialog(Adw.AlertDialog):
     def __init__(self, parent):
@@ -83,7 +84,10 @@ class InitSetupDialog(Adw.AlertDialog):
     # Responses of this dialog
     def initsetupDialog_closed(self, w, response):
         if response == 'next' or response == 'ok-syncthing': # open the Gtk.FileDialog in the GNOME Online accounts case
-            self.parent.select_pb_folder(w) if self.get_button_type == 'set-button' else self.cloud_dialog.select_folder_to_sync(w)
+            if self.get_button_type == 'set-button':
+                self.parent.select_pb_folder(w)
+            else:
+                self.cloud_dialog.select_folder_to_sync(w)
             self.almost_done()
         elif response == 'ok-rclone': # set the periodic saving folder in the Rclone case
             if self.get_button_type == 'set-button':
@@ -94,20 +98,17 @@ class InitSetupDialog(Adw.AlertDialog):
         elif response == 'cancel': # if the user clicks on the Cancel button
             self.set_can_close(True)
         elif response == 'open-setdialog': # open the "Set up the sync file" dialog after clicking on the Next button in "Almost done!" page
-            self.auto_save_start = True
             settings["periodic-saving"] = "Daily"
-            self.restart_app_win = True
             self.parent._open_SetDialog(w)
         elif response == 'open-clouddialog': # open the "Connect to the cloud folder" dialog after clicking on the Next button in "Almost done!" page
-            settings["first-synchronization-setup"] = False
-            self.restart_app_win = True
+            settings["periodic-import"] = "Daily2"
             self.parent._open_CloudDialog(w)
 
     # Set the Rclone setup command
     def _get_service(self, comborow, GParamObject):
         self.set_body("")
-        get_servrow = self.servRow.get_selected_item().get_string()
-        self.cloud_service = "drive" if get_servrow == "Google Drive" else "onedrive" if get_servrow == "Microsoft OneDrive" else "dropbox" if get_servrow == "DropBox" else "pcloud"
+        self.__get_selected_cloud_service()
+
         self.rclone_command = f"command -v rclone &amp;> /dev/null &amp;&amp; (rclone config create savedesktop {self.cloud_service} &amp;&amp; rclone mount savedesktop: {download_dir}/SaveDesktop/rclone_drive) || echo 'Rclone is not installed. Please install it from this website first: https://rclone.org/install/.'"
 
         self.cmdRow.set_title(_("Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."))
@@ -118,6 +119,19 @@ class InitSetupDialog(Adw.AlertDialog):
         self.copyButton.set_icon_name("edit-copy-symbolic")
         self.copyButton.set_tooltip_text(_("Copy"))
         self.copyButton.connect("clicked", self.__copy_rclone_command)
+
+    def __get_selected_cloud_service():
+        self.get_choice = self.servRow.get_selected_item().get_string()
+        if self.get_choice == "Google Drive":
+            self.cloud_service = "drive"
+        elif self.get_choice == "Microsoft OneDrive":
+            self.cloud_service = "onedrive"
+        elif self.get_choice == "DropBox":
+            self.cloud_service = "dropbox"
+        elif self.get_choice == "pCloud":
+            self.cloud_service = "pcloud"
+        else:
+            self.cloud_service = None
 
     # copy the command for setting up the Rclone using Gdk.Clipboard()
     def __copy_rclone_command(self, w):
@@ -143,8 +157,12 @@ class InitSetupDialog(Adw.AlertDialog):
         self.set_body(_("You've now created the cloud drive folder! Click on the Next button to complete the setup."))
         self.set_can_close(True)
 
-        self.add_response('open-setdialog', _("Next")) if self.get_button_type == 'set-button' else self.add_response('open-clouddialog', _("Next"))
-        self.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED) if self.get_button_type == 'set-button' else self.set_response_appearance('open-clouddialog', Adw.ResponseAppearance.SUGGESTED)
+        if self.get_button_type == "set-button":
+            self.add_response('open-setdialog', _("Next"))
+            self.set_response_appearance('open-setdialog', Adw.ResponseAppearance.SUGGESTED)
+        else:
+            self.add_response('open-clouddialog', _("Next"))
+            self.set_response_appearance('open-clouddialog', Adw.ResponseAppearance.SUGGESTED)
 
 class SetDialog(Adw.AlertDialog):
     def __init__(self, parent):
@@ -201,15 +219,15 @@ class SetDialog(Adw.AlertDialog):
     # Check the file system of the periodic saving folder and their existation
     def check_filesystem_fnc(self):
         global folder, path, check_filesystem
-        check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings["periodic-saving-folder"])
+        check_fs_result = check_fs(folder=settings["periodic-saving-folder"])
 
         path = f'{settings["periodic-saving-folder"]}/{settings["filename-format"].replace(" ", "_")}.sd.zip'
 
         # Check if periodic saving is set to "Never"
         if settings["periodic-saving"] == "Never":
-            folder = f'<span color="red">{_("Interval")}: {_("Never")}</span>'
+            folder = f'{_("Interval")}: {_("Never")}'
         # Check if the filesystem is not FUSE
-        elif ("gvfsd" not in check_filesystem and "rclone" not in check_filesystem) and not os.path.exists(f"{settings['periodic-saving-folder']}/.stfolder"):
+        elif check_fs_result == "You didn't select the cloud drive folder!":
             err = _("You didn't select the cloud drive folder!")
             folder = f'<span color="red">{err}</span>'
         # Check if the periodic saving file exists
@@ -237,12 +255,7 @@ class SetDialog(Adw.AlertDialog):
             self.set_response_enabled('ok', False)
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)] # remove these files if the periodic saving folder is not a cloud drive folder
         if _("Periodic saving file does not exist.") in folder:
-            self.setupButton = Gtk.Button.new_with_label(_("Create"))
-            self.setupButton.set_valign(Gtk.Align.CENTER)
-            self.setupButton.add_css_class("suggested-action")
-            self.setupButton.connect("clicked", self._make_pb_file)
-            self.file_row.add_suffix(self.setupButton)
-
+            self._make_pb_file()
         if _("You didn't select the cloud drive folder!") in folder:
             self.lmButton = Gtk.Button.new_with_label(_("Learn more"))
             self.lmButton.set_valign(Gtk.Align.CENTER)
@@ -252,8 +265,7 @@ class SetDialog(Adw.AlertDialog):
         self.set_body("") # set the body as empty after loading the periodic saving information
 
     # make the periodic saving file if it does not exist
-    def _make_pb_file(self, w):
-        self.setupButton.set_sensitive(False)
+    def _make_pb_file(self):
         pb_thread = Thread(target=self.__save_now)
         pb_thread.start()
 
@@ -270,7 +282,6 @@ class SetDialog(Adw.AlertDialog):
             self.file_row.set_subtitle(f'{e.stderr}')
         finally:
             if not e_o:
-                self.file_row.remove(self.setupButton)
                 self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.zip')
                 os.system(f"notify-send 'SaveDesktop' '{_('Configuration has been saved!')}'")
                 self.set_response_enabled('ok', True)
@@ -287,9 +298,9 @@ class SetDialog(Adw.AlertDialog):
     # save the SaveDesktop.json file to the periodic saving folder and set up the auto-mounting the cloud drive
     def _save_file(self):
         try:
-            self.mount_type = "periodic-saving"
             open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
-            subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization_setup", "--automount-setup", self.mount_type], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+            set_up_auto_mount(mount_type="periodic-saving")
+            print("Auto mount has been set up.")
         except Exception as e:
             os.system(f"notify-send \'{_('An error occurred')}\' '{e}'")
         finally:
@@ -441,23 +452,17 @@ class CloudDialog(Adw.AlertDialog):
     def _call_automount(self):
         try:
             if self.cfileRow.get_subtitle():
-                self.mount_type = "cloud-receiver"
                 settings["file-for-syncing"] = self.cfileRow.get_subtitle()
-                result = subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization_setup", "--checkfs"],
-                           capture_output=True, text=True,
-                           env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+                check_fs_result = check_fs(folder=settings["file-for-syncing"])
 
-                if result.returncode == 0:
-                    output = result.stdout.strip()
-                    if "You didn't selected the cloud drive folder!" in output:
-                        settings["file-for-syncing"] = ""
-                        if os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
-                            os.remove(f"{DATA}/savedesktop-synchronization.sh")
-                        raise AttributeError(_("You didn't select the cloud drive folder!"))
-                    else:
-                        subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization_setup",
-                                       "--automount-setup", self.mount_type],
-                                       env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+                if check_fs_result == "You didn't select the cloud drive folder!":
+                    settings["file-for-syncing"] = ""
+                    if os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
+                        os.remove(f"{DATA}/savedesktop-synchronization.sh")
+                    raise AttributeError(_("You didn't select the cloud drive folder!"))
+                else:
+                    set_up_auto_mount(mount_type="cloud-receiver")
+                    print("Auto mount has been set up")
             else:
                 raise AttributeError(_("You didn't select the cloud drive folder!"))
         except Exception as e:

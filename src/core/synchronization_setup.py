@@ -1,23 +1,18 @@
-import subprocess, argparse, re, os, gettext
+import subprocess, re, os
 from savedesktop.globals import *
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-c", "--checkfs", help="Check file system", action="store_true")
-parser.add_argument("-s", "--automount-setup", help="Set up auto mount", type=str)
-args = parser.parse_args()
-
-def check_fs():
-    check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % settings['file-for-syncing'])
+def check_fs(folder):
+    check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % folder)
     if not "gvfsd" in check_filesystem:
         if not "rclone" in check_filesystem:
-            if not os.path.exists(f"{settings['file-for-syncing']}/.stfolder"):
-                print("You didn't select the cloud drive folder!")
+            if not os.path.exists(f"{folder}/.stfolder"):
+                return "You didn't select the cloud drive folder!"
 
 # set up auto-mounting of the cloud drives after logging in to the system
-def set_up_auto_mount():
-    if args.automount_setup == "periodic-saving":
+def set_up_auto_mount(mount_type):
+    if mount_type == "periodic-saving":
         cfile_subtitle = settings["periodic-saving-folder"]
-    elif args.automount_setup == "cloud-receiver":
+    elif mount_type == "cloud-receiver":
         cfile_subtitle = settings["file-for-syncing"]
     else:
         cfile_subtitle = "none"
@@ -89,10 +84,3 @@ def set_up_auto_mount():
         [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
     else:
         raise AttributeError("There aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")
-
-if args.checkfs:
-    print("checkfs - executed")
-    check_fs()
-elif args.automount_setup:
-    print("automount-setup - executed")
-    set_up_auto_mount()
