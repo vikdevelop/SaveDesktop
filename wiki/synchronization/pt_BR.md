@@ -1,6 +1,6 @@
 # Sincronização entre computadores na rede
 
-In addition to saving the configuration and importing it, Save Desktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
+Além de salvar a configuração e importá-la, o Save Desktop também permite sincronizá-la entre computadores na sua rede usando uma pasta de nuvem compartilhada ou uma pasta Syncthing compartilhada.
 
 ## Setting Up on the First Computer
 1. Open the **Sync** page in the Save Desktop app.
