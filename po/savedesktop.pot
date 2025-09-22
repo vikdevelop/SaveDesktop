@@ -450,7 +450,11 @@ msgstr ""
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:42
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop environment with ease. "
+"It saves and imports your themes, icons, fonts, wallpapers, extensions, desktop folder, Flatpak apps and their data, "
+"as well as other desktop settings — all in one archive. "
+"Choose what to include and keep your setup consistent across devices with automatic periodic saves "
+"and synchronization."
 msgstr ""
 
 #: src/main.py

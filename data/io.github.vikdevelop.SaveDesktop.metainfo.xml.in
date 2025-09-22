@@ -39,7 +39,7 @@
     <summary translatable="yes">Save your desktop configuration</summary>
     
     <description>
-      <p translatable="yes">Save Desktop lets you save your current configuration (themes, icons, wallpapers, all desktop environment settings, extensions, etc.) with one click.</p>
+        <p translatable="yes">Save Desktop helps you back up, restore, and synchronize your entire desktop environment with ease. It saves and imports your themes, icons, fonts, wallpapers, extensions, desktop folder, Flatpak apps and their data, as well as other desktop settings — all in one archive. Choose what to include and keep your setup consistent across devices with automatic periodic saves and synchronization.</p>
     </description>
     
     <screenshots>
@@ -58,8 +58,8 @@
     </screenshots>
           
     <releases>
-       <release version="3.7-beta" type="development" date="2025-09-12">
-           <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.7-beta</url>
+       <release version="3.7" date="2025-09-28">
+           <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.7</url>
            <description>
                 <ul>
                     <li>Transition to the Meson build system</li>
