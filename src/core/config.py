@@ -37,7 +37,7 @@ ENVIRONMENTS = {
     "ubuntu:GNOME": {"de_name": "GNOME", "dirs": GNOME_DIRS},
     "zorin:GNOME": {"de_name": "GNOME", "dirs": GNOME_DIRS},
     "Pantheon": {"de_name": "Pantheon", "dirs": [(f"{home}/.config/plank", "plank"), (f"{home}/.config/marlin", "marlin")]},
-    "Cinnamon": {"de_name": "Cinnamon", "dirs": [(f"{home}/.config/nemo", "nemo"), (f"{home}/.local/share/cinnamon", "cinnamon"), (f"{home}/.cinnamon", ".cinnamon")]},
+    "X-Cinnamon": {"de_name": "Cinnamon", "dirs": [(f"{home}/.config/nemo", "nemo"), (f"{home}/.local/share/cinnamon", "cinnamon"), (f"{home}/.cinnamon", ".cinnamon")]},
     "Budgie:GNOME": {"de_name": "Budgie", "dirs": [(f"{home}/.config/budgie-desktop", "budgie-desktop"), (f"{home}/.config/budgie-extras", "budgie-extras"), (f"{home}/.config/nemo", "nemo")]},
     "pop:GNOME": {"de_name": "COSMIC (Old)", "dirs": [(f"{home}/.config/pop-shell", "pop-shell"), (f"{home}/.local/share/nautilus", "nautilus")]},
     "COSMIC": {"de_name": "COSMIC (New)", "dirs": [(f"{home}/.config/cosmic", "cosmic"), (f"{home}/.local/state/cosmic", "cosmic-state")]},
