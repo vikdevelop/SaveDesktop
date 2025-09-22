@@ -44,30 +44,24 @@ msgstr "Font"
 msgid "Backgrounds"
 msgstr "Latar Belakang"
 
-#, fuzzy
 msgid "Extensions"
 msgstr ""
 
-#, fuzzy
 msgid "Desktop"
 msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Aplikasi flatpak"
 
-#, fuzzy
 msgid "List of installed Flatpak apps"
 msgstr ""
 
-#, fuzzy
 msgid "User data of installed Flatpak apps"
 msgstr ""
 
-#, fuzzy
 msgid "Flatpak apps data selection"
 msgstr ""
 
-#, fuzzy
 msgid "More options"
 msgstr ""
 
@@ -77,7 +71,6 @@ msgstr "Simpan berkala"
 msgid "Changes will only take effect after the next login"
 msgstr "Perubahan hanya akan berlaku setelah login berikutnya"
 
-#, fuzzy
 msgid "Interval"
 msgstr ""
 
@@ -114,56 +107,45 @@ msgstr "Format nama file"
 msgid "Reset to default"
 msgstr "Setel ulang ke default"
 
-#, fuzzy
 msgid "Password for encryption"
 msgstr ""
 
-#, fuzzy
 msgid "Manual saving"
 msgstr ""
 
-#, fuzzy
 msgid "Archive encryption"
 msgstr ""
 
 # Translation key: archive_encryption_desc
-#, fuzzy
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
 "password. This is useful when saving the configuration to portable media for "
 "better security of your data."
 msgstr ""
 
-#, fuzzy
 msgid "Save the configuration without creating an archive"
 msgstr ""
 
-#, fuzzy
 msgid "Create new password"
 msgstr ""
 
 # Translation key: create_pwd_desc
-#, fuzzy
 msgid ""
 "Please create new password for your archive. Criteria include a length of at "
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
 
-#, fuzzy
 msgid "Generate Password"
 msgstr ""
 
-#, fuzzy
 msgid "Password"
 msgstr ""
 
-#, fuzzy
 msgid "Unlock the archive with a password"
 msgstr ""
 
 # Translation key: check_pwd_desc
-#, fuzzy
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If "
 "you have forgotten it, you will not be able to unzip the archive and start "
@@ -171,24 +153,20 @@ msgid ""
 msgstr ""
 
 # Translation key: enter_password_title
-#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
 
 # Translation key: enter_password_desc
-#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
 
-#, fuzzy
 msgid "Remember Password"
 msgstr ""
 
-#, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
 
@@ -206,7 +184,6 @@ msgid "Configuration has been saved!"
 msgstr "Konfigurasi telah tersimpan!"
 
 # Translation key: config_saved_desc
-#, fuzzy
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can now view the archive with the configuration of your desktop "
@@ -225,7 +202,6 @@ msgstr "Mengimpor konfigurasi yang tersimpan"
 msgid "Import from file"
 msgstr "Impor dari file"
 
-#, fuzzy
 msgid "Import from folder"
 msgstr ""
 
@@ -248,21 +224,18 @@ msgid "The configuration has been applied!"
 msgstr "Konfigurasi ini telah diterapkan!"
 
 # Translation key: config_imported_desc
-#, fuzzy
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
 "the previous page and log out later.\n"
 msgstr ""
 
-#, fuzzy
 msgid "Back to previous page"
 msgstr ""
 
 msgid "Log Out"
 msgstr "Keluar Sesi"
 
-#, fuzzy
 msgid "An error occurred"
 msgstr ""
 
@@ -280,38 +253,31 @@ msgstr ""
 "Menyinkronkan konfigurasi lingkungan desktop Anda dengan komputer lain dalam "
 "jaringan."
 
-#, fuzzy
 msgid "Initial synchronization setup"
 msgstr ""
 
-#, fuzzy
 msgid "1. Open the system settings"
 msgstr ""
 
-#, fuzzy
 msgid "2. Go to the Online Accounts section"
 msgstr ""
 
 # Translation key: gnome_oa_section_desc
-#, fuzzy
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
 
-#, fuzzy
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
-#, fuzzy
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
 
 # Translation key: rclone_intro_desc
-#, fuzzy
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -319,75 +285,61 @@ msgid ""
 msgstr ""
 
 # Translation key: rclone_copy_cmd
-#, fuzzy
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
 
-#, fuzzy
 msgid "Copy"
 msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
-#, fuzzy
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
 
-#, fuzzy
 msgid "Use Syncthing folder instead"
 msgstr ""
 
-#, fuzzy
 msgid "Almost done!"
 msgstr ""
 
 # Translation key: almost_done_desc
-#, fuzzy
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
 
-#, fuzzy
 msgid "Select"
 msgstr ""
 
-#, fuzzy
 msgid "Next"
 msgstr ""
 
 msgid "Set up the sync file"
 msgstr "Atur file sinkronisasi"
 
-#, fuzzy
 msgid "Periodic saving file"
 msgstr ""
 
-#, fuzzy
 msgid "Periodic saving file does not exist."
 msgstr ""
 
-#, fuzzy
 msgid "Create"
 msgstr ""
 
 msgid "Please wait …"
 msgstr "Harap tunggu…"
 
-#, fuzzy
 msgid "Change"
 msgstr ""
 
-#, fuzzy
 msgid "Connect to the cloud storage"
 msgstr ""
 
 # Translation key: connect_cloud_storage_desc
-#, fuzzy
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -395,23 +347,19 @@ msgid ""
 "also have saved the same periodic saving file."
 msgstr ""
 
-#, fuzzy
 msgid "Select the cloud drive folder"
 msgstr ""
 
-#, fuzzy
 msgid "You didn't select the cloud drive folder!"
 msgstr ""
 
 msgid "Periodic synchronization"
 msgstr "Sinkronisasi berkala"
 
-#, fuzzy
 msgid "Bidirectional synchronization"
 msgstr ""
 
 # Translation key: bidirectional_sync_desc
-#, fuzzy
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
@@ -423,19 +371,15 @@ msgstr ""
 "Mulai sekarang, Anda dapat menyinkronkan konfigurasi dari menu di bilah "
 "header"
 
-#, fuzzy
 msgid "Synchronise manually"
 msgstr ""
 
-#, fuzzy
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#, fuzzy
 msgid "Open the application wiki"
 msgstr ""
 
-#, fuzzy
 msgid "Quit"
 msgstr ""
 
@@ -453,15 +397,24 @@ msgstr ""
 msgid "Save your desktop configuration"
 msgstr "Simpan konfigurasi lingkungan desktop Anda saat ini"
 
-# Translation key: description
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, "
-"wallpapers, all desktop environment settings, extensions, etc.) with one "
-"click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop "
+"environment with ease. It saves and imports your themes, icons, fonts, "
+"wallpapers, extensions, desktop folder, Flatpak apps and their data, as well "
+"as other desktop settings — all in one archive. Choose what to include and "
+"keep your setup consistent across devices with automatic periodic saves and "
+"synchronization."
 msgstr ""
-"Save Desktop memungkinkan Anda menyimpan konfigurasi saat ini (tema, ikon, "
-"wallpaper, semua pengaturan lingkungan desktop, ekstensi, dll.) dengan satu "
-"klik."
 
 msgid "Translator credits"
 msgstr "Penerjemah github-tautan"
+
+# Translation key: description
+#~ msgid ""
+#~ "Save Desktop lets you save your current configuration (themes, icons, "
+#~ "wallpapers, all desktop environment settings, extensions, etc.) with one "
+#~ "click."
+#~ msgstr ""
+#~ "Save Desktop memungkinkan Anda menyimpan konfigurasi saat ini (tema, "
+#~ "ikon, wallpaper, semua pengaturan lingkungan desktop, ekstensi, dll.) "
+#~ "dengan satu klik."

@@ -160,13 +160,11 @@ msgstr ""
 "salasanan, et pysty avata arkistoa ja tuoda määritystä."
 
 # Translation key: enter_password_title
-#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
 
 # Translation key: enter_password_desc
-#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
@@ -289,14 +287,12 @@ msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr "3. Napsauta Seuraava-painiketta ja valitse luotu kansio pilvestä"
 
 # Translation key: gnome_oa_chooser_desc
-#, fuzzy
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
 
 # Translation key: rclone_intro_desc
-#, fuzzy
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -304,19 +300,16 @@ msgid ""
 msgstr ""
 
 # Translation key: rclone_copy_cmd
-#, fuzzy
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
 
-#, fuzzy
 msgid "Copy"
 msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
-#, fuzzy
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
@@ -329,7 +322,6 @@ msgid "Almost done!"
 msgstr "Melkein valmista!"
 
 # Translation key: almost_done_desc
-#, fuzzy
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
@@ -363,7 +355,6 @@ msgid "Connect to the cloud storage"
 msgstr "Yhdistä pilvitallennustilaan"
 
 # Translation key: connect_cloud_storage_desc
-#, fuzzy
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -384,7 +375,6 @@ msgid "Bidirectional synchronization"
 msgstr "Kaksisuuntainen synkronointi"
 
 # Translation key: bidirectional_sync_desc
-#, fuzzy
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
@@ -420,15 +410,24 @@ msgstr ""
 msgid "Save your desktop configuration"
 msgstr "Tallenna työpöytäsi määritys"
 
-# Translation key: description
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, "
-"wallpapers, all desktop environment settings, extensions, etc.) with one "
-"click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop "
+"environment with ease. It saves and imports your themes, icons, fonts, "
+"wallpapers, extensions, desktop folder, Flatpak apps and their data, as well "
+"as other desktop settings — all in one archive. Choose what to include and "
+"keep your setup consistent across devices with automatic periodic saves and "
+"synchronization."
 msgstr ""
-"Save Desktopin avulla voit tallentaa työpöytäympäristösi määrityksen "
-"(teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, "
-"laajennukset jne.) yhdellä napsautuksella."
 
 msgid "Translator credits"
 msgstr "Name jiri.gronroos+l10n@iki.fi"
+
+# Translation key: description
+#~ msgid ""
+#~ "Save Desktop lets you save your current configuration (themes, icons, "
+#~ "wallpapers, all desktop environment settings, extensions, etc.) with one "
+#~ "click."
+#~ msgstr ""
+#~ "Save Desktopin avulla voit tallentaa työpöytäympäristösi määrityksen "
+#~ "(teemat, kuvakkeet, taustakuvat, kaikki työpöytäympäristön asetukset, "
+#~ "laajennukset jne.) yhdellä napsautuksella."

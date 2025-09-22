@@ -44,7 +44,6 @@ msgstr "Polices de caractères"
 msgid "Backgrounds"
 msgstr "Fonds d'écran"
 
-#, fuzzy
 msgid "Extensions"
 msgstr ""
 
@@ -108,11 +107,9 @@ msgstr "Format du nom de fichier"
 msgid "Reset to default"
 msgstr "Réinitialisation aux valeurs par défaut"
 
-#, fuzzy
 msgid "Password for encryption"
 msgstr ""
 
-#, fuzzy
 msgid "Manual saving"
 msgstr ""
 
@@ -130,7 +127,6 @@ msgstr ""
 "données lorsque la configuration est enregistrée sur un support de stockage "
 "amovible."
 
-#, fuzzy
 msgid "Save the configuration without creating an archive"
 msgstr ""
 
@@ -147,7 +143,6 @@ msgstr ""
 "contenir au moins 12 caractères avec au moins une majuscule, au moins une "
 "minuscule et au moins un caractère spécial."
 
-#, fuzzy
 msgid "Generate Password"
 msgstr ""
 
@@ -169,24 +164,20 @@ msgstr ""
 "et votre configuration ne pourra donc pas être importée."
 
 # Translation key: enter_password_title
-#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
 
 # Translation key: enter_password_desc
-#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
 
-#, fuzzy
 msgid "Remember Password"
 msgstr ""
 
-#, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
 
@@ -225,7 +216,6 @@ msgstr "Importer la configuration sauvegardée"
 msgid "Import from file"
 msgstr "Importer à partir d'un fichier"
 
-#, fuzzy
 msgid "Import from folder"
 msgstr ""
 
@@ -280,38 +270,31 @@ msgstr ""
 "Synchroniser la configuration de votre environnement de bureau avec les "
 "autres ordinateurs du réseau."
 
-#, fuzzy
 msgid "Initial synchronization setup"
 msgstr ""
 
-#, fuzzy
 msgid "1. Open the system settings"
 msgstr ""
 
-#, fuzzy
 msgid "2. Go to the Online Accounts section"
 msgstr ""
 
 # Translation key: gnome_oa_section_desc
-#, fuzzy
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
 
-#, fuzzy
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
-#, fuzzy
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
 
 # Translation key: rclone_intro_desc
-#, fuzzy
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -319,44 +302,36 @@ msgid ""
 msgstr ""
 
 # Translation key: rclone_copy_cmd
-#, fuzzy
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
 
-#, fuzzy
 msgid "Copy"
 msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
-#, fuzzy
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
 
-#, fuzzy
 msgid "Use Syncthing folder instead"
 msgstr ""
 
-#, fuzzy
 msgid "Almost done!"
 msgstr ""
 
 # Translation key: almost_done_desc
-#, fuzzy
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
 
-#, fuzzy
 msgid "Select"
 msgstr ""
 
-#, fuzzy
 msgid "Next"
 msgstr ""
 
@@ -366,27 +341,22 @@ msgstr "Configurer le fichier de synchronisation"
 msgid "Periodic saving file"
 msgstr "Fichier pour l'enregistrement périodique"
 
-#, fuzzy
 msgid "Periodic saving file does not exist."
 msgstr ""
 
-#, fuzzy
 msgid "Create"
 msgstr ""
 
 msgid "Please wait …"
 msgstr "Veuillez patienter …"
 
-#, fuzzy
 msgid "Change"
 msgstr ""
 
-#, fuzzy
 msgid "Connect to the cloud storage"
 msgstr ""
 
 # Translation key: connect_cloud_storage_desc
-#, fuzzy
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -394,23 +364,19 @@ msgid ""
 "also have saved the same periodic saving file."
 msgstr ""
 
-#, fuzzy
 msgid "Select the cloud drive folder"
 msgstr ""
 
-#, fuzzy
 msgid "You didn't select the cloud drive folder!"
 msgstr ""
 
 msgid "Periodic synchronization"
 msgstr "Synchronisation périodique"
 
-#, fuzzy
 msgid "Bidirectional synchronization"
 msgstr ""
 
 # Translation key: bidirectional_sync_desc
-#, fuzzy
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
@@ -428,7 +394,6 @@ msgstr "Synchroniser manuellement"
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
-#, fuzzy
 msgid "Open the application wiki"
 msgstr ""
 
@@ -449,15 +414,24 @@ msgstr ""
 msgid "Save your desktop configuration"
 msgstr "Sauvegarder la configuration de votre bureau"
 
-# Translation key: description
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, "
-"wallpapers, all desktop environment settings, extensions, etc.) with one "
-"click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop "
+"environment with ease. It saves and imports your themes, icons, fonts, "
+"wallpapers, extensions, desktop folder, Flatpak apps and their data, as well "
+"as other desktop settings — all in one archive. Choose what to include and "
+"keep your setup consistent across devices with automatic periodic saves and "
+"synchronization."
 msgstr ""
-"Save Desktop vous permet de sauvegarder votre configuration actuelle "
-"(thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de "
-"bureau, les extensions, en un seul clic."
 
 msgid "Translator credits"
 msgstr "Lien github des traducteurs"
+
+# Translation key: description
+#~ msgid ""
+#~ "Save Desktop lets you save your current configuration (themes, icons, "
+#~ "wallpapers, all desktop environment settings, extensions, etc.) with one "
+#~ "click."
+#~ msgstr ""
+#~ "Save Desktop vous permet de sauvegarder votre configuration actuelle "
+#~ "(thèmes, icônes, fonds d'écran, tous les paramètres de l'environnement de "
+#~ "bureau, les extensions, en un seul clic."

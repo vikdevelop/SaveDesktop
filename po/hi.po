@@ -107,11 +107,9 @@ msgstr "फाइल नाम प्रारूप"
 msgid "Reset to default"
 msgstr "तयशुदा पर रीसेट"
 
-#, fuzzy
 msgid "Password for encryption"
 msgstr ""
 
-#, fuzzy
 msgid "Manual saving"
 msgstr ""
 
@@ -127,7 +125,6 @@ msgstr ""
 "विन्यास को हस्तचालित रूप से सहेजते समय, आपको पासवर्ड बनाने के लिए कहा जाएगा। यह आपके "
 "डेटा की बेहतर सुरक्षा के लिए पोर्टेबल मीडिया में विन्यास को सहेजते समय उपयोगी है।"
 
-#, fuzzy
 msgid "Save the configuration without creating an archive"
 msgstr ""
 
@@ -143,7 +140,6 @@ msgstr ""
 "कृपया अपने पुरालेख के लिए नया पासवर्ड बनाएं। मानदंड में कम से कम 12 अक्षर, एक बड़ा अक्षर, "
 "एक छोटा अक्षर और एक विशेष वर्ण शामिल है।"
 
-#, fuzzy
 msgid "Generate Password"
 msgstr ""
 
@@ -164,7 +160,6 @@ msgstr ""
 "पाएंगे।"
 
 # Translation key: enter_password_title
-#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
@@ -179,7 +174,6 @@ msgstr ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization।"
 
-#, fuzzy
 msgid "Remember Password"
 msgstr ""
 
@@ -222,7 +216,6 @@ msgstr "सहेजा गया विन्यास आयात करे�
 msgid "Import from file"
 msgstr "फाइल से आयात"
 
-#, fuzzy
 msgid "Import from folder"
 msgstr ""
 
@@ -261,7 +254,6 @@ msgstr "पिछले पृष्ठ पर जाएं"
 msgid "Log Out"
 msgstr "लॉग आउट"
 
-#, fuzzy
 msgid "An error occurred"
 msgstr ""
 
@@ -277,15 +269,12 @@ msgid ""
 "network."
 msgstr "नेटवर्क में अन्य कंप्यूटरों के साथ अपने डेस्कटॉप वातावरण विन्यास को समन्वयित करें।"
 
-#, fuzzy
 msgid "Initial synchronization setup"
 msgstr ""
 
-#, fuzzy
 msgid "1. Open the system settings"
 msgstr ""
 
-#, fuzzy
 msgid "2. Go to the Online Accounts section"
 msgstr ""
 
@@ -297,7 +286,6 @@ msgstr ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud।"
 
-#, fuzzy
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 
@@ -311,7 +299,6 @@ msgstr ""
 "chooser dialog, in this form: username@service.com।"
 
 # Translation key: rclone_intro_desc
-#, fuzzy
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -329,22 +316,18 @@ msgstr ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu।"
 
-#, fuzzy
 msgid "Copy"
 msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
-#, fuzzy
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
 
-#, fuzzy
 msgid "Use Syncthing folder instead"
 msgstr ""
 
-#, fuzzy
 msgid "Almost done!"
 msgstr ""
 
@@ -357,11 +340,9 @@ msgstr ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup।"
 
-#, fuzzy
 msgid "Select"
 msgstr ""
 
-#, fuzzy
 msgid "Next"
 msgstr ""
 
@@ -375,18 +356,15 @@ msgstr "आवधिक फाइल सहेजना"
 msgid "Periodic saving file does not exist."
 msgstr "Periodic saving file does not exist।"
 
-#, fuzzy
 msgid "Create"
 msgstr ""
 
 msgid "Please wait …"
 msgstr "कृपया प्रतीक्षा करें …"
 
-#, fuzzy
 msgid "Change"
 msgstr ""
 
-#, fuzzy
 msgid "Connect to the cloud storage"
 msgstr ""
 
@@ -403,18 +381,15 @@ msgstr ""
 "computer, select the folder that you have synced with your cloud storage and "
 "also have saved the same periodic saving file।"
 
-#, fuzzy
 msgid "Select the cloud drive folder"
 msgstr ""
 
-#, fuzzy
 msgid "You didn't select the cloud drive folder!"
 msgstr ""
 
 msgid "Periodic synchronization"
 msgstr "आवधिक समन्वयन"
 
-#, fuzzy
 msgid "Bidirectional synchronization"
 msgstr ""
 
@@ -438,7 +413,6 @@ msgstr "हस्तचालित रूप से समन्वयित �
 msgid "Keyboard shortcuts"
 msgstr "कीबोर्ड शॉर्टकट"
 
-#, fuzzy
 msgid "Open the application wiki"
 msgstr ""
 
@@ -459,14 +433,23 @@ msgstr ""
 msgid "Save your desktop configuration"
 msgstr "अपना डेस्कटॉप विन्यास सहेजें"
 
-# Translation key: description
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, "
-"wallpapers, all desktop environment settings, extensions, etc.) with one "
-"click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop "
+"environment with ease. It saves and imports your themes, icons, fonts, "
+"wallpapers, extensions, desktop folder, Flatpak apps and their data, as well "
+"as other desktop settings — all in one archive. Choose what to include and "
+"keep your setup consistent across devices with automatic periodic saves and "
+"synchronization."
 msgstr ""
-"Save Desktop आपको एक क्लिक से अपने वर्तमान विन्यास (थीम, आइकन, वॉलपेपर, सभी डेस्कटॉप "
-"वातावरण सेटिंग्स, एक्सटेंशन इत्यादि) को सहेजने देता है।"
 
 msgid "Translator credits"
 msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
+
+# Translation key: description
+#~ msgid ""
+#~ "Save Desktop lets you save your current configuration (themes, icons, "
+#~ "wallpapers, all desktop environment settings, extensions, etc.) with one "
+#~ "click."
+#~ msgstr ""
+#~ "Save Desktop आपको एक क्लिक से अपने वर्तमान विन्यास (थीम, आइकन, वॉलपेपर, सभी "
+#~ "डेस्कटॉप वातावरण सेटिंग्स, एक्सटेंशन इत्यादि) को सहेजने देता है।"
