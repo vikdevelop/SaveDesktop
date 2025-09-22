@@ -107,11 +107,9 @@ msgstr "Formato del nombre del archivo"
 msgid "Reset to default"
 msgstr "Restablecer los valores por defecto"
 
-#, fuzzy
 msgid "Password for encryption"
 msgstr ""
 
-#, fuzzy
 msgid "Manual saving"
 msgstr ""
 
@@ -128,7 +126,6 @@ msgstr ""
 "contraseña. Esto es útil cuando se guarda la configuración en medios "
 "portátiles para una mayor seguridad de sus datos."
 
-#, fuzzy
 msgid "Save the configuration without creating an archive"
 msgstr ""
 
@@ -165,24 +162,20 @@ msgstr ""
 "empezar a importar tu configuración."
 
 # Translation key: enter_password_title
-#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
 
 # Translation key: enter_password_desc
-#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
 
-#, fuzzy
 msgid "Remember Password"
 msgstr ""
 
-#, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
 
@@ -221,7 +214,6 @@ msgstr "Importar la configuración guardada"
 msgid "Import from file"
 msgstr "Importar desde archivo"
 
-#, fuzzy
 msgid "Import from folder"
 msgstr ""
 
@@ -329,7 +321,6 @@ msgstr ""
 "abra la aplicación de terminal usando el atajo de teclado Ctrl+Alt+T o "
 "buscándolo en el menú de aplicaciones."
 
-#, fuzzy
 msgid "Copy"
 msgstr ""
 
@@ -341,7 +332,6 @@ msgstr ""
 "Una vez que haya terminado de configurar Rclone usando el comando "
 "proporcionado, haga clic en el botón \"Aplicar\""
 
-#, fuzzy
 msgid "Use Syncthing folder instead"
 msgstr ""
 
@@ -450,15 +440,24 @@ msgstr ""
 msgid "Save your desktop configuration"
 msgstr "Guardar la configuración del escritorio"
 
-# Translation key: description
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, "
-"wallpapers, all desktop environment settings, extensions, etc.) with one "
-"click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop "
+"environment with ease. It saves and imports your themes, icons, fonts, "
+"wallpapers, extensions, desktop folder, Flatpak apps and their data, as well "
+"as other desktop settings — all in one archive. Choose what to include and "
+"keep your setup consistent across devices with automatic periodic saves and "
+"synchronization."
 msgstr ""
-"Save Desktop le permite guardar su configuración actual (temas, iconos, "
-"fondos de pantalla, todos los ajustes del entorno del escritorio, "
-"extensiones, etc.) con un solo clic."
 
 msgid "Translator credits"
 msgstr "gallegonovato fran-carro@hotmail.es"
+
+# Translation key: description
+#~ msgid ""
+#~ "Save Desktop lets you save your current configuration (themes, icons, "
+#~ "wallpapers, all desktop environment settings, extensions, etc.) with one "
+#~ "click."
+#~ msgstr ""
+#~ "Save Desktop le permite guardar su configuración actual (temas, iconos, "
+#~ "fondos de pantalla, todos los ajustes del entorno del escritorio, "
+#~ "extensiones, etc.) con un solo clic."

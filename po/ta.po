@@ -319,7 +319,6 @@ msgstr ""
 "கட்டு+மாற்று+ஏ விசைப்பலகை குறுக்குவழியைப் பயன்படுத்தி முனையப் பயன்பாட்டைத் திற அல்லது "
 "பயன்பாடுகளின் பட்டியலில் கண்டுபிடி."
 
-#, fuzzy
 msgid "Copy"
 msgstr ""
 
@@ -434,15 +433,24 @@ msgstr ""
 msgid "Save your desktop configuration"
 msgstr "உங்கள் பணிமேடை உள்ளமைவைச் சேமி"
 
-# Translation key: description
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, "
-"wallpapers, all desktop environment settings, extensions, etc.) with one "
-"click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop "
+"environment with ease. It saves and imports your themes, icons, fonts, "
+"wallpapers, extensions, desktop folder, Flatpak apps and their data, as well "
+"as other desktop settings — all in one archive. Choose what to include and "
+"keep your setup consistent across devices with automatic periodic saves and "
+"synchronization."
 msgstr ""
-"உங்கள் தற்போதைய உள்ளமைவை (கருப்பொருள்கள், சின்னங்கள், பின்ணணிகள், அனைத்து பணிமேடை "
-"சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே சொடுக்கில் சேமிக்க சேமிபணிமேடை உங்களை "
-"அனுமதிக்கிறது."
 
 msgid "Translator credits"
 msgstr "தமிழ்நேரம் <https://TamilNeram.github.io>"
+
+# Translation key: description
+#~ msgid ""
+#~ "Save Desktop lets you save your current configuration (themes, icons, "
+#~ "wallpapers, all desktop environment settings, extensions, etc.) with one "
+#~ "click."
+#~ msgstr ""
+#~ "உங்கள் தற்போதைய உள்ளமைவை (கருப்பொருள்கள், சின்னங்கள், பின்ணணிகள், அனைத்து பணிமேடை "
+#~ "சுற்றுச்சூழல் அமைப்புகள், நீட்டிப்புகள் போன்றவை) ஒரே சொடுக்கில் சேமிக்க சேமிபணிமேடை "
+#~ "உங்களை அனுமதிக்கிறது."

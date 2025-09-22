@@ -16,177 +16,136 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.14-dev\n"
 
-#, fuzzy
 msgid "Save"
 msgstr ""
 
-#, fuzzy
 msgid "Save the current configuration"
 msgstr ""
 
-#, fuzzy
 msgid "Set the file name"
 msgstr ""
 
-#, fuzzy
 msgid "Items to include in the configuration archive"
 msgstr ""
 
-#, fuzzy
 msgid "These settings also apply to periodic saving"
 msgstr ""
 
-#, fuzzy
 msgid "Icons"
 msgstr ""
 
-#, fuzzy
 msgid "Themes"
 msgstr ""
 
-#, fuzzy
 msgid "Fonts"
 msgstr ""
 
 # Translation key: backgrounds
-#, fuzzy
 msgid "Backgrounds"
 msgstr ""
 
-#, fuzzy
 msgid "Extensions"
 msgstr ""
 
-#, fuzzy
 msgid "Desktop"
 msgstr ""
 
-#, fuzzy
 msgid "Flatpak apps"
 msgstr ""
 
-#, fuzzy
 msgid "List of installed Flatpak apps"
 msgstr ""
 
-#, fuzzy
 msgid "User data of installed Flatpak apps"
 msgstr ""
 
-#, fuzzy
 msgid "Flatpak apps data selection"
 msgstr ""
 
-#, fuzzy
 msgid "More options"
 msgstr ""
 
-#, fuzzy
 msgid "Periodic saving"
 msgstr ""
 
-#, fuzzy
 msgid "Changes will only take effect after the next login"
 msgstr ""
 
-#, fuzzy
 msgid "Interval"
 msgstr ""
 
-#, fuzzy
 msgid "Never"
 msgstr ""
 
-#, fuzzy
 msgid "Daily"
 msgstr ""
 
-#, fuzzy
 msgid "Weekly"
 msgstr ""
 
-#, fuzzy
 msgid "Monthly"
 msgstr ""
 
-#, fuzzy
 msgid "Manually"
 msgstr ""
 
-#, fuzzy
 msgid "Learn more"
 msgstr ""
 
-#, fuzzy
 msgid "Folder for periodic saving"
 msgstr ""
 
-#, fuzzy
 msgid "Choose custom folder for periodic saving"
 msgstr ""
 
-#, fuzzy
 msgid "Choose another folder"
 msgstr ""
 
-#, fuzzy
 msgid "File name format"
 msgstr ""
 
-#, fuzzy
 msgid "Reset to default"
 msgstr ""
 
-#, fuzzy
 msgid "Password for encryption"
 msgstr ""
 
-#, fuzzy
 msgid "Manual saving"
 msgstr ""
 
-#, fuzzy
 msgid "Archive encryption"
 msgstr ""
 
 # Translation key: archive_encryption_desc
-#, fuzzy
 msgid ""
 "When manually saving the configuration, you will be prompted to create a "
 "password. This is useful when saving the configuration to portable media for "
 "better security of your data."
 msgstr ""
 
-#, fuzzy
 msgid "Save the configuration without creating an archive"
 msgstr ""
 
-#, fuzzy
 msgid "Create new password"
 msgstr ""
 
 # Translation key: create_pwd_desc
-#, fuzzy
 msgid ""
 "Please create new password for your archive. Criteria include a length of at "
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
 
-#, fuzzy
 msgid "Generate Password"
 msgstr ""
 
-#, fuzzy
 msgid "Password"
 msgstr ""
 
-#, fuzzy
 msgid "Unlock the archive with a password"
 msgstr ""
 
 # Translation key: check_pwd_desc
-#, fuzzy
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If "
 "you have forgotten it, you will not be able to unzip the archive and start "
@@ -194,154 +153,124 @@ msgid ""
 msgstr ""
 
 # Translation key: enter_password_title
-#, fuzzy
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
 
 # Translation key: enter_password_desc
-#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
 
-#, fuzzy
 msgid "Remember Password"
 msgstr ""
 
-#, fuzzy
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
 
 # Translation key: saving_config_status
-#, fuzzy
 msgid ""
 "<big><b>Saving configuration …</b></big>\n"
 "The configuration of your desktop environment will be saved in:\n"
 " <i>{}/{}.sd.tar.gz</i>\n"
 msgstr ""
 
-#, fuzzy
 msgid "Configuration has been saved!"
 msgstr ""
 
 # Translation key: config_saved_desc
-#, fuzzy
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can now view the archive with the configuration of your desktop "
 "environment, or return to the previous page.\n"
 msgstr ""
 
-#, fuzzy
 msgid "Open the folder"
 msgstr ""
 
-#, fuzzy
 msgid "Import"
 msgstr ""
 
-#, fuzzy
 msgid "Import saved configuration"
 msgstr ""
 
-#, fuzzy
 msgid "Import from file"
 msgstr ""
 
-#, fuzzy
 msgid "Import from folder"
 msgstr ""
 
-#, fuzzy
 msgid "Cancel"
 msgstr ""
 
-#, fuzzy
 msgid "Save Desktop files"
 msgstr ""
 
 # Translation key: importing_config_status
-#, fuzzy
 msgid ""
 "<big><b>Importing configuration …</b></big>\n"
 "Importing configuration from:\n"
 "<i>{}</i>\n"
 msgstr ""
 
-#, fuzzy
 msgid "The configuration has been applied!"
 msgstr ""
 
 # Translation key: config_imported_desc
-#, fuzzy
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
 "the previous page and log out later.\n"
 msgstr ""
 
-#, fuzzy
 msgid "Back to previous page"
 msgstr ""
 
-#, fuzzy
 msgid "Log Out"
 msgstr ""
 
-#, fuzzy
 msgid "An error occurred"
 msgstr ""
 
-#, fuzzy
 msgid "Apply"
 msgstr ""
 
-#, fuzzy
 msgid "Sync"
 msgstr ""
 
 # Translation key: sync_desc
-#, fuzzy
 msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
 msgstr ""
 
-#, fuzzy
 msgid "Initial synchronization setup"
 msgstr ""
 
-#, fuzzy
 msgid "1. Open the system settings"
 msgstr ""
 
-#, fuzzy
 msgid "2. Go to the Online Accounts section"
 msgstr ""
 
 # Translation key: gnome_oa_section_desc
-#, fuzzy
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
 
-#, fuzzy
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
 
 # Translation key: gnome_oa_chooser_desc
-#, fuzzy
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
 
 # Translation key: rclone_intro_desc
-#, fuzzy
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is "
 "synced with your cloud service using Rclone.\n"
@@ -349,77 +278,61 @@ msgid ""
 msgstr ""
 
 # Translation key: rclone_copy_cmd
-#, fuzzy
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the "
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
 
-#, fuzzy
 msgid "Copy"
 msgstr ""
 
 # Translation key: rclone_cmd_copied_msg
-#, fuzzy
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
 
-#, fuzzy
 msgid "Use Syncthing folder instead"
 msgstr ""
 
-#, fuzzy
 msgid "Almost done!"
 msgstr ""
 
 # Translation key: almost_done_desc
-#, fuzzy
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
 
-#, fuzzy
 msgid "Select"
 msgstr ""
 
-#, fuzzy
 msgid "Next"
 msgstr ""
 
-#, fuzzy
 msgid "Set up the sync file"
 msgstr ""
 
-#, fuzzy
 msgid "Periodic saving file"
 msgstr ""
 
-#, fuzzy
 msgid "Periodic saving file does not exist."
 msgstr ""
 
-#, fuzzy
 msgid "Create"
 msgstr ""
 
-#, fuzzy
 msgid "Please wait …"
 msgstr ""
 
-#, fuzzy
 msgid "Change"
 msgstr ""
 
-#, fuzzy
 msgid "Connect to the cloud storage"
 msgstr ""
 
 # Translation key: connect_cloud_storage_desc
-#, fuzzy
 msgid ""
 "On another computer, open the Save Desktop app, and on this page, click on "
 "the \"Set up the sync file\" button and make the necessary settings. On this "
@@ -427,71 +340,59 @@ msgid ""
 "also have saved the same periodic saving file."
 msgstr ""
 
-#, fuzzy
 msgid "Select the cloud drive folder"
 msgstr ""
 
-#, fuzzy
 msgid "You didn't select the cloud drive folder!"
 msgstr ""
 
-#, fuzzy
 msgid "Periodic synchronization"
 msgstr ""
 
-#, fuzzy
 msgid "Bidirectional synchronization"
 msgstr ""
 
 # Translation key: bidirectional_sync_desc
-#, fuzzy
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the "
 "periodic saving information (interval, folder, and file name) from the other "
 "computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
 
-#, fuzzy
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 
-#, fuzzy
 msgid "Synchronise manually"
 msgstr ""
 
-#, fuzzy
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#, fuzzy
 msgid "Open the application wiki"
 msgstr ""
 
-#, fuzzy
 msgid "Quit"
 msgstr ""
 
-#, fuzzy
 msgid "About app"
 msgstr ""
 
 # Translation key: unsuppurted_env_desc
-#, fuzzy
 msgid ""
 "<big><b>You have an unsupported environment installed.</b></big> \n"
 "Please use one of these environments: {}."
 msgstr ""
 
-#, fuzzy
 msgid "Save your desktop configuration"
 msgstr ""
 
-# Translation key: description
-#, fuzzy
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, "
-"wallpapers, all desktop environment settings, extensions, etc.) with one "
-"click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop "
+"environment with ease. It saves and imports your themes, icons, fonts, "
+"wallpapers, extensions, desktop folder, Flatpak apps and their data, as well "
+"as other desktop settings — all in one archive. Choose what to include and "
+"keep your setup consistent across devices with automatic periodic saves and "
+"synchronization."
 msgstr ""
 
 msgid "Translator credits"

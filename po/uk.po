@@ -169,7 +169,6 @@ msgstr ""
 "конфігурації"
 
 # Translation key: enter_password_desc
-#, fuzzy
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save "
 "Desktop app. Please enter the password below to unlock it and start "
@@ -320,7 +319,6 @@ msgstr ""
 "та відкрийте додаток термінала, використовуючи комбінацію клавіш Ctrl+Alt+T "
 "або знайшовши його в меню програм."
 
-#, fuzzy
 msgid "Copy"
 msgstr ""
 
@@ -439,16 +437,26 @@ msgstr ""
 msgid "Save your desktop configuration"
 msgstr "Збережіть конфігурацію вашої стільниці"
 
-# Translation key: description
 msgid ""
-"Save Desktop lets you save your current configuration (themes, icons, "
-"wallpapers, all desktop environment settings, extensions, etc.) with one "
-"click."
+"Save Desktop helps you back up, restore, and synchronize your entire desktop "
+"environment with ease. It saves and imports your themes, icons, fonts, "
+"wallpapers, extensions, desktop folder, Flatpak apps and their data, as well "
+"as other desktop settings — all in one archive. Choose what to include and "
+"keep your setup consistent across devices with automatic periodic saves and "
+"synchronization."
 msgstr ""
-"Save Desktop дозволяє зберегти поточну конфігурацію (теми, значки, шпалери, "
-"всі налаштування середовища робочого столу, розширення тощо) в один клац."
 
 msgid "Translator credits"
 msgstr ""
 "Kefir2105 https://github.com/Kefir2105\n"
 "volkov <volkovissocool@gmail.com>"
+
+# Translation key: description
+#~ msgid ""
+#~ "Save Desktop lets you save your current configuration (themes, icons, "
+#~ "wallpapers, all desktop environment settings, extensions, etc.) with one "
+#~ "click."
+#~ msgstr ""
+#~ "Save Desktop дозволяє зберегти поточну конфігурацію (теми, значки, "
+#~ "шпалери, всі налаштування середовища робочого столу, розширення тощо) в "
+#~ "один клац."
