@@ -48,7 +48,11 @@ def set_up_auto_mount(mount_type):
                         prefix = re.sub(r'gio mount |%2F', '/', prefix_old).replace('//', '').strip() # Replace 2%F with /
                     else:
                         prefix = ""
-                    fm = "nautilus" if not self.environment == "Cinnamon" else "nemo"
+                    
+                    if os.getenv("XDG_CURRENT_DESKTOP") in ["X-Cinnamon", "Budgie:GNOME"]:
+                        fm = "nemo"
+                    else:
+                        fm = "nautilus"
                     cmd = (
                         f"output=$(secret-tool lookup object Nextcloud) && "
                         f"output=\"Positive signal\" || "
