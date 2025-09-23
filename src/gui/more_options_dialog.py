@@ -209,3 +209,4 @@ class MoreOptionsDialog(Adw.AlertDialog):
     def _call_set_dialog(self):
         if os.path.exists(f"{CACHE}/expand_pb_row"):
             self.parent._open_SetDialog()
+            os.remove(f"{CACHE}/expand_pb_row")
