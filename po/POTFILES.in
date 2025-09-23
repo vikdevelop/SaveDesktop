@@ -7,7 +7,7 @@ src/core/synchronization.py
 src/gui/more_options_dialog.py
 src/gui/items_dialog.py
 src/gui/password_checker.py
-src/gui/shortcuts_window.ui
 src/gui/synchronization_dialogs.py
+src/gui/templates/shortcuts_window.ui
 src/gui/window.py
-src/globals.py
+src/main.py
