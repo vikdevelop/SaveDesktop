@@ -6,6 +6,7 @@ parser.add_argument("-c", "--create", help="Create archive", type=str)
 parser.add_argument("-u", "--unpack", help="Unpack archive", type=str)
 args = parser.parse_args()
 
+# Get password entered in the "Create a new password" dialog from the temporary file
 def get_password():
     temp_file = f"{CACHE}/temp_file"
     if os.path.exists(temp_file):
@@ -14,6 +15,7 @@ def get_password():
     else:
         return None
 
+# Remove above temporary file
 def remove_temp_file():
     try:
         os.remove(f"{CACHE}/temp_file")
@@ -39,8 +41,8 @@ class Create:
         print("Configuration saved successfully.")
         remove_temp_file()
 
+    # Cleanup the cache dir before saving
     def _cleanup_cache_dir(self):
-        # Cleanup the cache dir before importing
         print("Cleaning up the cache directory")
         save_cache_dir = f"{CACHE}/save_config"
         try:
@@ -50,6 +52,7 @@ class Create:
         os.makedirs(save_cache_dir, exist_ok=True)
         os.chdir(save_cache_dir)
 
+    # Copy the configuration folder to the user-defined directory
     def _copy_config_to_folder(self):
         open(f"{CACHE}/save_config/.folder.sd", "w").close()
 
@@ -58,6 +61,7 @@ class Create:
 
         shutil.move(f"{CACHE}/save_config", f"{args.create}")
 
+    # Create a new ZIP archive with 7-Zip
     def _create_archive(self):
         password = get_password()
         cmd = ['7z', 'a', '-tzip', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.']
@@ -84,16 +88,6 @@ class Unpack:
         self._cleanup_cache_dir()
         self._check_config_type()
 
-        # Check, if the input is folder or not
-        if self.is_folder:
-            self._copy_folder_to_cache()
-        else:
-            if self.import_file.endswith(".sd.zip"):
-                self._unpack_zip_archive()
-
-            elif ".sd.tar.gz" in self.import_file:
-                self._unpack_tar_archive()
-
         self._replace_home_in_files(".", home)
         subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--import_"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
@@ -116,15 +110,29 @@ class Unpack:
         # Create a txt file to prevent removing the cache's content after closing the app window
         open("import_status", "w").close()
 
+    # Check, if the input is archive or folder
     def _check_config_type(self):
         if self.import_file.endswith(".sd.zip") or self.import_file.endswith(".sd.tar.gz"):
             self.is_folder = False
         else:
             self.is_folder = True
 
+        # Check, if the input is folder or not
+        if self.is_folder:
+            self._copy_folder_to_cache()
+        else:
+            if self.import_file.endswith(".sd.zip"):
+                self._unpack_zip_archive()
+            elif self.import_file.endswith(".sd.tar.gz"):
+                self._unpack_tar_archive()
+            else:
+                pass
+
+    # Copy the user-defined folder to the cache directory
     def _copy_folder_to_cache(self):
         shutil.copytree(self.import_folder, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
 
+    # Unpack the ZIP archive with 7-Zip
     def _unpack_zip_archive(self):
         password = get_password()
 
@@ -144,6 +152,7 @@ class Unpack:
             capture_output=False, text=True, check=True
         )
 
+    # Unpack a legacy archive with Tarball (for backward compatibility)
     def _unpack_tar_archive(self):
         subprocess.run(["tar", "-xzf", self.import_file, "-C", f"{CACHE}/import_config"],capture_output=True, text=True, check=True)
 
@@ -162,6 +171,7 @@ class Unpack:
                             f.write(new_text)
                         print(f"Updated /home/$USER path in: {path}")
 
+    # Remove the "import_status" file if the condition is met
     def _remove_status_file(self):
         if all(not os.path.exists(p) for p in [
             f"{CACHE}/import_config/app",

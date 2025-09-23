@@ -18,6 +18,7 @@ class PeriodicBackups:
     def __init__(self):
         self.last_backup_date = self.load_last_backup_date()
 
+    # Load last backup date from the {DATA}/periodic-saving.json file
     def load_last_backup_date(self):
         backup_file = f"{DATA}/periodic-saving.json"
         if os.path.exists(backup_file):
@@ -26,6 +27,8 @@ class PeriodicBackups:
             return date.fromisoformat(jp.get("last-saved", "2000-01-01"))
         return date(2000, 1, 1)
 
+    # Start periodic saving without checking last backup date (with --now parameter)
+    # or with checking it
     def run(self, now: bool) -> None:
         self.pbfolder = f'{settings["periodic-saving-folder"].format(download_dir)}'
 
@@ -35,6 +38,7 @@ class PeriodicBackups:
         else:
             self.get_interval()
 
+    # Get the periodic saving interval from GSettings
     def get_interval(self):
         if settings["periodic-saving"] == 'Never':
             print("Periodic saving is not set up.")
@@ -45,6 +49,7 @@ class PeriodicBackups:
         elif settings["periodic-saving"] == 'Monthly':
             self.check_and_backup(30)
 
+    # Check the number of days since the last backup
     def check_and_backup(self, interval):
         today = date.today()
         if (today - self.last_backup_date).days >= interval:
@@ -79,6 +84,7 @@ class PeriodicBackups:
         self.save_last_backup_date()
         self.config_saved()
         
+    # Get an encrypted password from the {DATA}/password file
     def get_password_from_file(self):
         try:
             ps = PasswordStore()
@@ -91,6 +97,7 @@ class PeriodicBackups:
            subprocess.run(['7z', 'a', '-tzip', '-mx=6', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.'], check=True)
         shutil.copyfile('cfg.sd.zip', f'{self.pbfolder}/{self.filename}.sd.zip')
 
+    # Save today's date to the {DATA}/periodic-saving.json file
     def save_last_backup_date(self):
         with open(f"{DATA}/periodic-saving.json", "w") as pb:
             json.dump({"last-saved": date.today().isoformat()}, pb)

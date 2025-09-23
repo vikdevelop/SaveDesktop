@@ -8,7 +8,8 @@ from savedesktop.core.password_store import PasswordStore
 class MoreOptionsDialog(Adw.AlertDialog):
     def __init__(self, parent):
         super().__init__()
-        self.parent = parent
+        self.parent = parent # Connect this dialog with MainWindow class
+
         self.set_heading(_("More options"))
 
         # Box for this dialog
@@ -18,6 +19,21 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.set_extra_child(self.msBox)
 
         # Periodic saving section
+        self.load_periodic_saving_section()
+
+        # Manual saving section
+        self.load_manual_saving_section()
+
+        # Call _expand_periodic_row() method to expand "Periodic saving" section
+        self._expand_periodic_row()
+
+        # add response of this dialog
+        self.add_response('cancel', _("Cancel"))
+        self.add_response('ok', _("Apply"))
+        self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
+        self.connect('response', self.msDialog_closed)
+
+    def load_periodic_saving_section(self):
         # Expander row for showing options of the periodic saving
         self.periodic_row = Adw.ExpanderRow.new()
         self.periodic_row.set_title(_("Periodic saving"))
@@ -50,7 +66,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.filefrmtButton.add_css_class('destructive-action')
         self.filefrmtButton.set_valign(Gtk.Align.CENTER)
         self.filefrmtButton.set_tooltip_text(_("Reset to default"))
-        self.filefrmtButton.connect("clicked", self.reset_fileformat)
+        self.filefrmtButton.connect("clicked", self._reset_fileformat)
 
         # Entry for selecting file name format
         self.filefrmtEntry = Adw.EntryRow.new()
@@ -63,7 +79,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.folderButton = Gtk.Button.new_from_icon_name("document-open-symbolic")
         self.folderButton.set_valign(Gtk.Align.CENTER)
         self.folderButton.set_tooltip_text(_("Choose another folder"))
-        self.folderButton.connect("clicked", self.open_file_dialog)
+        self.folderButton.connect("clicked", self._open_file_dialog)
 
         # Adw.ActionRow for showing folder for periodic saving
         self.dirRow = Adw.ActionRow.new()
@@ -87,7 +103,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.pswdgenButton.connect("clicked", self._get_generated_password)
         self.cpwdRow.add_suffix(self.pswdgenButton)
 
-        # Manual saving section
+    def load_manual_saving_section(self):
         self.manRow = Adw.ExpanderRow.new()
         self.manRow.set_title(_("Manual saving"))
         self.manRow.set_expanded(True)
@@ -97,7 +113,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.encryptSwitch = Gtk.Switch.new()
         self.archSwitch = Gtk.Switch.new()
         self.encryptSwitch.set_valign(Gtk.Align.CENTER)
-        self.encryptSwitch.connect('notify::active', self.set_encryptswitch_sensitivity)
+        self.encryptSwitch.connect('notify::active', self._set_encryptswitch_sensitivity)
         if settings["enable-encryption"] == True:
             self.encryptSwitch.set_active(True)
             self.archSwitch.set_sensitive(False)
@@ -112,7 +128,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
 
         # action row and switch for showing the "Save a configuration without creating the archive" option
         self.archSwitch.set_valign(Gtk.Align.CENTER)
-        self.archSwitch.connect('notify::active', self.set_archswitch_sensitivity)
+        self.archSwitch.connect('notify::active', self._set_archswitch_sensitivity)
         if settings["save-without-archive"] == True:
             self.archSwitch.set_active(True)
             self.encryptSwitch.set_sensitive(False)
@@ -123,14 +139,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.archRow.set_activatable_widget(self.archSwitch)
         self.manRow.add_row(self.archRow)
 
-        self._expand_periodic_row()
-
-        # add response of this dialog
-        self.add_response('cancel', _("Cancel"))
-        self.add_response('ok', _("Apply"))
-        self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.connect('response', self.msDialog_closed)
-
+    # Get an encrypted password from the {DATA}/password file
     def _get_password_from_file(self):
         if os.path.exists(f"{DATA}/password"):
             p = PasswordStore()
@@ -138,31 +147,35 @@ class MoreOptionsDialog(Adw.AlertDialog):
         else:
             self.cpwdRow.set_text("")
 
+    # Call MainWindow's method (self.parent) to get auto-generated password
     def _get_generated_password(self, w):
         self.password = self.parent._password_generator()
         self.cpwdRow.set_text(self.password)
 
-    def open_file_dialog(self, w):
+    # Open the file chooser dialog for selecting  the periodic saving folder
+    # by calling the MainWindow's method (self.parent)
+    def _open_file_dialog(self, w):
         self.parent.select_pb_folder(w="")
 
-    # reset the file name format entry to the default value
-    def reset_fileformat(self, w):
+    # Reset the file name format entry to the default value
+    def _reset_fileformat(self, w):
         self.filefrmtEntry.set_text("Latest_configuration")
 
-    # set sensitivity of the encryptSwitch
-    def set_encryptswitch_sensitivity(self, GParamBoolean, encryptSwitch):
+    # Set sensitivity of the encryptSwitch
+    def _set_encryptswitch_sensitivity(self, GParamBoolean, encryptSwitch):
         if self.encryptSwitch.get_active():
             self.archSwitch.set_sensitive(False)
         else:
             self.archSwitch.set_sensitive(True)
 
-    # set sensitivity of the archSwitch
-    def set_archswitch_sensitivity(self, GParamBoolean, archSwitch):
+    # Set sensitivity of the archSwitch
+    def _set_archswitch_sensitivity(self, GParamBoolean, archSwitch):
         if self.archSwitch.get_active():
             self.encryptSwitch.set_sensitive(False)
         else:
             self.encryptSwitch.set_sensitive(True)
 
+    # Expand "Periodic saving" row if the below file exists
     def _expand_periodic_row(self):
         if os.path.exists(f"{CACHE}/expand_pb_row"):
             self.periodic_row.set_expanded(True)
@@ -206,6 +219,8 @@ class MoreOptionsDialog(Adw.AlertDialog):
             except:
                 pass
 
+    # Open the "Set up the sync file" dialog after clicking on the Apply button
+    # in this dialog, if the below file exists
     def _call_set_dialog(self):
         if os.path.exists(f"{CACHE}/expand_pb_row"):
             self.parent._open_SetDialog()

@@ -135,12 +135,11 @@ class InitSetupDialog(Adw.AlertDialog):
     def __copy_rclone_command(self, w):
         os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True) # create the requested folder before copying the command for setting up Rclone to the clipboard
 
-        clipboard = Gdk.Display.get_default().get_clipboard()
-        Gdk.Clipboard.set(clipboard, self.rclone_command) # copy the command for setting up Rclone to the clipboard
+        self.clipboard = Gdk.Display.get_default().get_clipboard()
+        self.clipboard_setup = Gdk.Clipboard.set(self.clipboard, self.rclone_command) # copy the command for setting up Rclone to the clipboard
 
         self.set_extra_child(None)
         self.set_body(_("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"))
-
         self.set_response_enabled('ok-rclone', True)
         self.remove_response('ok-syncthing')
 
@@ -214,6 +213,7 @@ class SetDialog(Adw.AlertDialog):
         language = locale.getlocale()[0].split("_")[0]
         os.system(f"xdg-open {self.app_wiki}/synchronization/{language}")
 
+    # Call the More options dialog from the MainWindow class
     def _show_more_options(self, w):
         self.close()
         self.parent._open_more_options_dialog(w)
@@ -240,6 +240,7 @@ class SetDialog(Adw.AlertDialog):
 
         self.update_gui()
 
+    # Update GUI after FS check
     def update_gui(self):
         global folder, path
         self.file_row = Adw.ActionRow()

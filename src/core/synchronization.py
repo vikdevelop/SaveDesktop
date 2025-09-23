@@ -77,6 +77,7 @@ class Syncing:
             print("extracting the archive")
             self.get_zip_file_status()
 
+    # Send a notification about the started synchronization
     def _send_notification_at_startup(self):
         orig_str = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n")
         status_str = orig_str

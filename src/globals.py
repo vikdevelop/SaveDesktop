@@ -10,7 +10,6 @@ def get_app_environment():
     if os.path.exists("/.flatpak-info"):
         return {
             'type': 'flatpak',
-            'home': Path(os.getenv('HOME', Path.home())),
             'run_cmd': 'flatpak run io.github.vikdevelop.SaveDesktop',
             'cache': f'{GLib.get_user_cache_dir()}/tmp',
             'data': f'{GLib.get_user_data_dir()}'
@@ -19,7 +18,6 @@ def get_app_environment():
     else:
         return {
             'type': 'native',
-            'home': Path.home(),
             'run_cmd': 'savedesktop',
             'cache': os.path.join(f'{GLib.get_user_cache_dir()}', 'io.github.vikdevelop.SaveDesktop'),
             'data': os.path.join(f'{GLib.get_user_data_dir()}', 'io.github.vikdevelop.SaveDesktop')
@@ -27,7 +25,7 @@ def get_app_environment():
 
 env = get_app_environment()
 
-home = env['home']
+home = Path.home()
 
 # System paths
 download_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
@@ -39,6 +37,9 @@ settings = Gio.Settings.new_with_path(
 # Cache and data directories
 CACHE = env['cache']
 DATA = env['data']
+
+os.makedirs(CACHE, exist_ok=True)
+os.makedirs(DATA, exist_ok=True)
 
 # Commands
 periodic_saving_cmd = f'{env["run_cmd"]} --background'

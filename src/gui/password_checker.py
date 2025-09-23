@@ -65,6 +65,7 @@ class PasswordWindow(Gtk.ApplicationWindow):
         self.applyButton.set_sensitive(False)
         self.winBox.append(self.applyButton)
         
+    # Set sensitivity of the Apply button based on the Password entry status
     def _empty_check(self, passEntry):
         if self.passEntry.get_text() == "":
             self.applyButton.set_sensitive(False)
@@ -86,7 +87,7 @@ class PasswordCheckerApp(Adw.Application):
                          application_id="io.github.vikdevelop.SaveDesktop")
         self.connect('activate', self.on_activate)
     
-    # Show the main window of the application
+    # Show the app window
     def on_activate(self, app):
         self.win = PasswordWindow(application=app)
         self.win.present()

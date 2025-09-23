@@ -19,7 +19,12 @@ def set_up_auto_mount(mount_type):
 
     if not cfile_subtitle == "none":
         if "gvfs" in cfile_subtitle:
-            pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*' if "google-drive" in cfile_subtitle else r'.*/gvfs/([^:]+):host=([^,]+),user=([^/]+)' if "onedrive" in cfile_subtitle else r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
+            if "google-drive" in cfile_subtitle:
+                pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*'
+            elif "onedrive" in cfile_subtitle:
+                pattern = r'.*/gvfs/([^:]+):host=([^,]+),user=([^/]+)'
+            else:
+                pattern = r'.*/gvfs/([^:]*):host=([^,]*),ssl=([^,]*),user=([^,]*),prefix=([^/]*).*'
 
             match = re.search(pattern, cfile_subtitle)
 

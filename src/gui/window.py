@@ -753,13 +753,3 @@ class MainWindow(Adw.ApplicationWindow):
         settings["window-size"] = self.get_default_size()
         settings["maximized"] = self.is_maximized()
         settings["filename"] = self.saveEntry.get_text()
-
-        # Check for ongoing operations before clearing cache
-        if any(os.path.exists(f"{CACHE}/{path}") for path in ["import_config/import_status", "syncing/sync_status", "periodic_saving/saving_status"]):
-            print("saving/importing/syncing configuration in progress...")
-        else:
-            pass
-
-        # Remove this file to disable expanding the "Periodic saving" row in the "More options" dialog
-        if os.path.exists(f"{CACHE}/expand_pb_row"):
-            os.remove(f"{CACHE}/expand_pb_row")
