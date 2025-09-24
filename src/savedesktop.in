@@ -69,22 +69,12 @@ elif cmd.FOLDER_PATH: # save a configuration without an archive
     os.makedirs(archive_name, exist_ok=True)
     subprocess.run([sys.executable, "-m", "savedesktop.core.archive", archive_mode, archive_name], env={**os.environ, "PYTHONPATH": f"{pkgdatadir}"})
 elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
-    if not os.path.exists(file_path):
-        print(f"File not found: {file_path}")
-        exit(1)
-
-    if file_path.endswith('.sd.zip'):
-        os.system(f"unzip {file_path}")
-    elif file_path.endswith('.sd.tar.gz'):
-        os.system(f"tar -xf {file_path}")
-    elif os.path.exists(f"{file_path}/.folder.sd"):
-        shutil.copytree(file_path, f"{CACHE}/import_config", dirs_exist_ok=True, ignore_dangling_symlinks=True)
-    else:
-        print("Unsupported file type. Use *.sd.zip, *.sd.tar.gz or folder which contains the \".folder.sd\" file.")
-        exit(1)
-
     archive_mode = "--unpack"
     archive_name = f"{cmd.CFG_ARCHIVE_PATH}"
+    if not os.path.exists(archive_name):
+        print(f"File not found: {archive_name}")
+        exit(1)
+
     subprocess.run([sys.executable, "-m", "savedesktop.core.archive", archive_mode, archive_name], env={**os.environ, "PYTHONPATH": f"{pkgdatadir}"})
 else: # show the app window
     import gi

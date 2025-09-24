@@ -3,7 +3,7 @@
   <h1>Save Desktop</h1>
   <p><i>Save your desktop configuration</i></p>
 
-  <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='180' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en&light'/></a>
+  <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='180' alt="Download on Flathub" src='https://flathub.org/api/badge?svg&locale=en&light'/></a>
   
   ![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)
   ![Translations](https://hosted.weblate.org/widget/vikdevelop/savedesktop/svg-badge.svg)
@@ -11,7 +11,7 @@
 
 ## 🚀 About
 
-**Save Desktop** is a cross-desktop tool to **back up, restore and sync your entire Linux desktop setup**.  
+**Save Desktop** is a cross-desktop tool to **back up, restore and sync your entire Linux desktop setup**.
 It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones), Flatpak apps and user data – and bring them back in just a few clicks.
 
 ## 📸 Screenshots
@@ -75,7 +75,7 @@ It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones),
   - **Cosmic (Old)**
   ```
   - ~/.config/pop-shell
-  - ~/.local/share/gnome-shell
+  - ~/.local/share/nautilus
   ```
   - **Cosmic (New)**
   ```
@@ -128,19 +128,18 @@ It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones),
 
 ### Stable releases
 
-> [!NOTE]
-> **Flathub**: The latest stable releases (recommended)
-> 
-> <a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='180' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en&light'/></a>
+**Flathub** _(recommended)_: The latest stable releases
 
-> [!IMPORTANT]
-> **Snap Store**: Frozen at version `3.6.2-hotfix`, no updates will be provided. Active development continues on Flathub (see above).
+<a href='https://flathub.org/apps/io.github.vikdevelop.SaveDesktop'><img width='180' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en&light'/></a>
+
+> [!WARNING]
+> **Snap Store**: Frozen at version `3.6.2-hotfix`, no updates will be provided. Active development continues on **Flathub** (see above).
 >
 > <a href="https://snapcraft.io/savedesktop"><img alt="Get it from the Snap Store" src="https://snapcraft.io/en/light/install.svg" /></a>
 
 ### Beta releases
 - Flathub Beta:
-  - [**Install from Flathub Beta**](https://dl.flathub.org/beta-repo/appstream/io.github.vikdevelop.SaveDesktop.flatpakref)
+  - [**Install from file**](https://dl.flathub.org/beta-repo/appstream/io.github.vikdevelop.SaveDesktop.flatpakref)
 
 * GNOME Builder (for development):
 
