@@ -83,7 +83,7 @@ def set_up_auto_mount(mount_type):
 
         synchronization_content = f'#!/usr/bin/bash\n{cmd}\nsleep 60s\n{sync_cmd}\n{periodic_saving_cmd}'
         if flatpak:
-            synchronization_content += f'\npython3 {CACHE}/flatpaks_installer.py'
+            synchronization_content += f'\npython3 {CACHE}/workspace/flatpaks_installer.py'
         with open(f"{DATA}/savedesktop-synchronization.sh", "w") as f:
             f.write(synchronization_content)
 

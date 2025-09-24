@@ -91,9 +91,10 @@ class Unpack:
 
         cleanup_cache_dir()
         self._check_config_type()
-
         self._replace_home_in_files(".", home)
-        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--import_"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+
+        cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--import_"], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        print(cmd.stdout)
 
         print("Configuration imported successfully.")
         remove_temp_file()
