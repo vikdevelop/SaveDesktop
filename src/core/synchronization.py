@@ -132,9 +132,9 @@ class Syncing:
             app.run([])
             self.password = try_passwordstore()
 
-        # #3 If password is still unavailable, get it from the {DATA}/entered-password.txt file
-        if not self.password and os.path.exists(f"{DATA}/entered-password.txt"):
-            with open(f"{DATA}/entered-password.txt") as ep:
+        # #3 If password is still unavailable, get it from the {CACHE}/entered-password.txt file
+        if not self.password and os.path.exists(f"{CACHE}/temp_file"):
+            with open(f"{CACHE}/temp_file") as ep:
                 self.password = ep.read().strip()
 
         # #4 Final check
@@ -159,8 +159,8 @@ class Syncing:
             with open(f"{DATA}/sync-info.json", "w") as s:
                 json.dump({"last-synced": date.today().isoformat()}, s)
                 
-        if os.path.exists(f"{DATA}/entered-password.txt"):
-            os.remove(f"{DATA}/entered-password.txt")
+        if os.path.exists(f"{CACHE}/temp_file"):
+            os.remove(f"{CACHE}/temp_file")
         
         # Send a notification about finished synchronization
         os.system(f"notify-send 'Save Desktop Synchronization ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")

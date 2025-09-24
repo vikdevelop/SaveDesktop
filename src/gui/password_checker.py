@@ -77,7 +77,7 @@ class PasswordWindow(Gtk.ApplicationWindow):
         if self.remSwitch.get_active():
             PasswordStore(self.passEntry.get_text())
         else:
-            with open(f"{DATA}/entered-password.txt", "w") as ep:
+            with open(f"{CACHE}/temp_file", "w") as ep:
                 ep.write(self.passEntry.get_text())
         self.close()
         

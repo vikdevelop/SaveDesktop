@@ -3,7 +3,6 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio
 from savedesktop.globals import *
-from savedesktop.core.password_store import PasswordStore
 
 # Get the current date
 dt = datetime.now()
@@ -33,9 +32,10 @@ class PeriodicBackups:
         self.pbfolder = f'{settings["periodic-saving-folder"].format(download_dir)}'
 
         if now:
-            print("Saving immediately")
+            print("MODE: Save now")
             self.backup()
         else:
+            print("MODE: Periodic saving")
             self.get_interval()
 
     # Get the periodic saving interval from GSettings
@@ -58,7 +58,7 @@ class PeriodicBackups:
             print(f"Backup not needed today. Last backup was on {self.last_backup_date}.")
 
     def backup(self):
-        if self.pbfolder == f'{download_dir}/SaveDesktop/archives':
+        if self.pbfolder == '{}/SaveDesktop/archives'.format(download_dir) or self.pbfolder == f'{download_dir}/SaveDesktop/archives':
             try:
                 if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
                     os.makedirs(f"{download_dir}/SaveDesktop/archives")
@@ -72,7 +72,6 @@ class PeriodicBackups:
         else:
             self.filename = settings["filename-format"]
 
-        print("MODE: Periodic saving")
         self.call_archive_command()
 
         self.save_last_backup_date()
