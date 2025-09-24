@@ -60,9 +60,5 @@ if not dest_dir == None:
                 subprocess.run(['flatpak', 'install', '--user', 'flathub', app, '-y'])
         else:
             print('All Flatpak apps are installed.')
-
-    # Remove these directories in the cache folder after finishing operations
-    os.system(f"rm -rf {CACHE_FLATPAK}/import_config")
-    os.system(f"rm -rf {CACHE_FLATPAK}/syncing")
 else:
     print("Nothing to do.")
