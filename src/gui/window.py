@@ -585,7 +585,8 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _call_archive_command(self):
         try:
-            subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+            cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+            print(cmd.stdout)
         except subprocess.CalledProcessError as err:
             e = err.stderr
             GLib.idle_add(self.show_err_msg, e)
@@ -753,3 +754,6 @@ class MainWindow(Adw.ApplicationWindow):
         settings["window-size"] = self.get_default_size()
         settings["maximized"] = self.is_maximized()
         settings["filename"] = self.saveEntry.get_text()
+
+        if os.path.exists(f"{CACHE}/expand_pb_row"):
+            os.remove(f"{CACHE}/expand_pb_row")

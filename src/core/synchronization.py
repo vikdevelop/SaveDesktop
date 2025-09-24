@@ -158,9 +158,6 @@ class Syncing:
         if not settings["manually-sync"]:
             with open(f"{DATA}/sync-info.json", "w") as s:
                 json.dump({"last-synced": date.today().isoformat()}, s)
-                
-        if os.path.exists(f"{CACHE}/temp_file"):
-            os.remove(f"{CACHE}/temp_file")
         
         # Send a notification about finished synchronization
         os.system(f"notify-send 'Save Desktop Synchronization ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")

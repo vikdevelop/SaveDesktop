@@ -213,7 +213,7 @@ class Import:
     # Create an autostart file to install Flatpaks from a list after the next login 
     def create_flatpak_autostart(self):
         os.system(f"cp /app/share/savedesktop/savedesktop/core/flatpaks_installer.py {CACHE}/")
-        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") or not os.path.exists(f"{CACHE}/syncing/sync_status"):
+        if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
             if not os.path.exists(f"{home}/.config/autostart"): 
                 os.mkdir(f"{home}/.config/autostart")
             if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):

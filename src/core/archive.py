@@ -73,6 +73,7 @@ class Create:
             cmd.insert(5, f"-p{password}")
 
         proc = subprocess.run(cmd, capture_output=True, text=True)
+        print(proc.stdout)
 
         if proc.returncode not in (0, 1):
             # 0 = everything is OK, 1 = warning (e.g. file not found)
@@ -134,18 +135,20 @@ class Unpack:
                 raise ValueError(first_error or "Wrong password")
             print("Checking password is completed.")
 
-        subprocess.run(
+        cmd = subprocess.run(
             ['7z', 'x', '-y', f'-p{password}', self.import_file, f'-o{TEMP_CACHE}'],
-            capture_output=False, text=True, check=True
+            capture_output=True, text=True, check=True
         )
+        print(cmd.stdout)
 
     # Unpack a legacy archive with Tarball (for backward compatibility)
     def _unpack_tar_archive(self):
-        subprocess.run(["tar", "-xzf", self.import_file, "-C", f"{TEMP_CACHE}"],capture_output=True, text=True, check=True)
+        cmd = subprocess.run(["tar", "-xzf", self.import_file, "-C", f"{TEMP_CACHE}"],capture_output=True, text=True, check=True)
+        print(cmd.stdout)
 
     # Replace original /home/$USER path with actual path in the dconf-settings.ini file and other XML files
     def _replace_home_in_files(self, root, home, patterns=(".xml", ".ini")):
-        regex = re.compile(r"/home/[^/]+/")
+        regex = re.compile(r"(?:/var)?/home/[^/]+/")
         for dirpath, _, filenames in os.walk(root):
             for filename in filenames:
                 if filename.endswith(patterns):
