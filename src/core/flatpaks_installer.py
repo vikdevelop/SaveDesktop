@@ -18,10 +18,8 @@ if environment:
         os.system("gsettings set org.gnome.shell disable-user-extensions false")
     
 # Check if the required directories exist in the cache directory
-if os.path.exists(f"{CACHE_FLATPAK}/import_config"):
-    dest_dir = f"{CACHE_FLATPAK}/import_config"
-elif os.path.exists(f"{CACHE_FLATPAK}/syncing"):
-    dest_dir = f"{CACHE_FLATPAK}/syncing"
+if os.path.exists(f"{CACHE_FLATPAK}/workspace"):
+    dest_dir = f"{CACHE_FLATPAK}/workspace"
 else:
     dest_dir = None
    

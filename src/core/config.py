@@ -147,13 +147,8 @@ class Save:
         gsettings = settings["disabled-flatpak-apps-data"]
         black_list = gsettings # convert GSettings property to a list
         
-        # set destination dir
-        if os.path.exists(f"{CACHE}/periodic_saving/saving_status"):
-            os.makedirs(f"{CACHE}/periodic_saving/app", exist_ok=True)
-            destdir = f"{CACHE}/periodic_saving/app"
-        else:
-            os.makedirs(f"{CACHE}/save_config/app", exist_ok=True)
-            destdir = f"{CACHE}/save_config/app"
+        os.makedirs(f"{CACHE}/workspace/app", exist_ok=True)
+        destdir = f"{CACHE}/workspace/app"
         
         # copy Flatpak apps data
         for item in os.listdir(f"{home}/.var/app"):

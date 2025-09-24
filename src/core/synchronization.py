@@ -64,17 +64,14 @@ class Syncing:
     
     # Download the configuration archive from the cloud drive folder
     def download_config(self):
+        print("MODE: Synchronization")
         self._send_notification_at_startup()
         if not os.path.exists(f"{settings['file-for-syncing']}/SaveDesktop.json"):
             err_str = _("An error occurred")
-            err = "SaveDesktop.json doesn't exist in the cloud drive folder!"
+            err = "SaveDesktop.json: directory or file does not exist."
             os.system(f'notify-send "{err_str}" "{err}"')
         else:
             self.get_pb_info()
-            os.makedirs(f"{CACHE}/syncing", exist_ok=True) # create the subfolder in the cache directory
-            os.chdir(f"{CACHE}/syncing")
-            os.system("echo > sync_status") # create a txt file to prevent removing the sync's folder content after closing the app window
-            print("extracting the archive")
             self.get_zip_file_status()
 
     # Send a notification about the started synchronization
@@ -114,7 +111,7 @@ class Syncing:
             self.get_pwd_from_file()
         else:
             self.password = None
-            self.extract_archive()
+            self.call_archive_command()
     
     # Get a password from the {DATA}/password file
     def get_pwd_from_file(self):
@@ -147,44 +144,14 @@ class Syncing:
             os.system(f'notify-send "{err_occurred}" "{msg}"')
         else:
             # #5 Continue in extraction
-            self.extract_archive()
+            self.call_archive_command()
                 
     # Extract the configuration archive
-    def extract_archive(self):
-        try:
-            if os.path.exists(f"{settings['file-for-syncing']}/{self.file}.sd.zip"):
-               try:
-                    result = subprocess.run(
-                        ['7z', 'x', f'-p{self.password}', f"{settings['file-for-syncing']}/{self.file}.sd.zip", f'-o{CACHE}/syncing', '-y'],
-                        capture_output=True, text=True, check=True
-                    )
-                    print("Output:", result.stdout)
-               except subprocess.CalledProcessError as e:
-                    print("Return code:", e.returncode)
-                    raise OSError(e.stderr)
-            else:
-                with tarfile.open(f"{settings['file-for-syncing']}/{self.file}.sd.tar.gz", 'r:gz') as tar:
-                    for member in tar.getmembers():
-                        try:
-                            tar.extract(member)
-                        except PermissionError as e:
-                            print(f"Permission denied for {member.name}: {e}")
-            self.password = None
-            if os.path.exists(f"{DATA}/entered-password.txt"):
-                os.remove(f"{DATA}/entered-password.txt")
-        except Exception as e:
-            err_occurred = _("An error occurred")
-            os.system(f"notify-send '{err_occurred}' '{e}' -i io.github.vikdevelop.SaveDesktop-symbolic")
-            if os.path.exists(f"{DATA}/password"):
-                os.remove(f"{DATA}/password")
-            if os.path.exists("sync_status"):
-                os.remove("sync_status")
-        else:
-            self.import_config()
-    
-    # Start importing a configuration from the configuration archive
-    def import_config(self):
-        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+    def call_archive_command(self):
+        self.archive_mode = "--unpack"
+        self.archive_name = f"{settings['file-for-syncing']}/{self.file}.sd.zip"
+
+        subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         self.done()
     
     def done(self):
@@ -192,11 +159,8 @@ class Syncing:
             with open(f"{DATA}/sync-info.json", "w") as s:
                 json.dump({"last-synced": date.today().isoformat()}, s)
                 
-        # Remove the cache dir's content
-        os.chdir(CACHE)
-        if all(not os.path.exists(p) for p in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
-            if os.path.exists("syncing"):
-                shutil.rmtree("syncing")
+        if os.path.exists(f"{DATA}/entered-password.txt"):
+            os.remove(f"{DATA}/entered-password.txt")
         
         # Send a notification about finished synchronization
         os.system(f"notify-send 'Save Desktop Synchronization ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")

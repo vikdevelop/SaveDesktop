@@ -72,30 +72,18 @@ class PeriodicBackups:
         else:
             self.filename = settings["filename-format"]
 
-        os.makedirs(f"{CACHE}/periodic_saving", exist_ok=True)
-        os.chdir(f"{CACHE}/periodic_saving")
-        os.system("echo > saving_status")
-        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
-
-        print("creating the configuration archive")
-        print("moving the configuration archive to the user-defined directory")
-        self.get_password_from_file()
+        print("MODE: Periodic saving")
+        self.call_archive_command()
 
         self.save_last_backup_date()
         self.config_saved()
         
-    # Get an encrypted password from the {DATA}/password file
-    def get_password_from_file(self):
-        try:
-            ps = PasswordStore()
-            self.password = ps.password
-        except:
-            self.password = None
-        if self.password != None:
-           subprocess.run(['7z', 'a', '-tzip', '-mx=6', f'-p{self.password}', '-mem=AES256', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.'], check=True)
-        else:
-           subprocess.run(['7z', 'a', '-tzip', '-mx=6', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.'], check=True)
-        shutil.copyfile('cfg.sd.zip', f'{self.pbfolder}/{self.filename}.sd.zip')
+    # Call the command for making the archive
+    def call_archive_command(self):
+        self.archive_mode = "--create"
+        self.archive_name = f"{self.pbfolder}/{self.filename}"
+
+        subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
     # Save today's date to the {DATA}/periodic-saving.json file
     def save_last_backup_date(self):
@@ -103,8 +91,6 @@ class PeriodicBackups:
             json.dump({"last-saved": date.today().isoformat()}, pb)
 
     def config_saved(self):
-        os.chdir(CACHE)
-        shutil.rmtree("periodic_saving")
         print("Configuration saved.")
 
 if __name__ == "__main__":
