@@ -62,3 +62,8 @@ if not dest_dir == None:
             print('All Flatpak apps are installed.')
 else:
     print("Nothing to do.")
+
+# Remove the autostart file after finishing the operations
+autostart_file = f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"
+if os.path.exists(autostart_file):
+    os.remove(autostart_file)
