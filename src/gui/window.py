@@ -739,5 +739,13 @@ class MainWindow(Adw.ApplicationWindow):
         settings["maximized"] = self.is_maximized()
         settings["filename"] = self.saveEntry.get_text()
 
+        # Remove this file to disable expanding the "Periodic saving" row in the
+        # More Options Dialog
         if os.path.exists(f"{CACHE}/expand_pb_row"):
             os.remove(f"{CACHE}/expand_pb_row")
+
+        # Remove this folder to cleanup unnecessary content created during saving,
+        # importing, or syncing the configuration only if the autostart file for
+        # installing Flatpaks is not present
+        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
+            subprocess.Popen(["rm", "-rf", f"{CACHE}/workspace"])
