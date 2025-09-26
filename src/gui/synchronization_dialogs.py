@@ -83,7 +83,7 @@ class InitSetupDialog(Adw.AlertDialog):
     def initsetupDialog_closed(self, w, response):
         if response == 'next' or response == 'ok-syncthing': # open the Gtk.FileDialog in the GNOME Online accounts case
             if self.get_button_type == 'set-button':
-                self.parent.select_pb_folder(w)
+                self._select_pb_folder()
             else:
                 self.cloud_dialog.select_folder_to_sync(w)
             self.almost_done()
@@ -101,6 +101,21 @@ class InitSetupDialog(Adw.AlertDialog):
         elif response == 'open-clouddialog': # open the "Connect to the cloud folder" dialog after clicking on the Next button in "Almost done!" page
             settings["periodic-import"] = "Daily2"
             self.parent._open_CloudDialog()
+
+    # Select folder for periodic saving
+    def _select_pb_folder(self):
+        def save_selected(source, res, data):
+            try:
+                folder = source.select_folder_finish(res)
+            except:
+                return
+            self.folder_pb = folder.get_path()
+            settings["periodic-saving-folder"] = self.folder_pb
+
+        self.pb_chooser = Gtk.FileDialog.new()
+        self.pb_chooser.set_modal(True)
+        self.pb_chooser.set_title(_("Choose custom folder for periodic saving"))
+        self.pb_chooser.select_folder(self.parent, None, save_selected, None)
 
     # Set the Rclone setup command
     def _get_service(self, comborow, GParamObject):
@@ -197,11 +212,11 @@ class SetDialog(Adw.AlertDialog):
         ## translate the periodic-saving key to the user language
         pb = next((key for key, value in {_("Never"): "Never", _("Daily"): "Daily", _("Weekly"): "Weekly", _("Monthly"): "Monthly"}.items() if settings["periodic-saving"] == value), None)
         self.ps_row = Adw.ActionRow.new()
-        self.ps_row.set_title(f'{_("Periodic saving")} ({_("Interval")})')
+        self.ps_row.set_title(f'{_("Periodic saving")}')
         self.ps_row.set_use_markup(True)
         self.ps_row.add_suffix(self.ps_button)
-        self.ps_row.set_subtitle(f'<span color="red">{_("Never")}</span>' if settings["periodic-saving"] == "Never"
-                                 else f'<span color="green">{pb}</span>')
+        self.ps_row.set_subtitle(f'❌ {_("Never")}' if settings["periodic-saving"] == "Never"
+                                 else f'✅ {pb}')
         self.ps_button.add_css_class('suggested-action') if settings["periodic-saving"] == "Never" else None
 
     # Create this file to set expanding the "Periodic saving" row in the More options dialog
@@ -227,7 +242,7 @@ class SetDialog(Adw.AlertDialog):
 
         # Check if periodic saving is set to "Never"
         if settings["periodic-saving"] == "Never":
-            folder = f'{_("Interval")}: {_("Never")}'
+            folder = ""
         # Check if the filesystem is not FUSE
         elif check_fs_result == "You didn't select the cloud drive folder!":
             err = _("You didn't select the cloud drive folder!")
@@ -246,7 +261,6 @@ class SetDialog(Adw.AlertDialog):
         self.file_row = Adw.ActionRow()
         self.file_row.set_title(_("Periodic saving file"))
         self.file_row.set_subtitle(folder)
-        self.file_row.add_suffix(Gtk.Image.new_from_icon_name("network-wired-symbolic")) if "red" not in folder else None
         self.file_row.set_subtitle_lines(8)
         self.file_row.set_use_markup(True)
         self.file_row.set_subtitle_selectable(True)

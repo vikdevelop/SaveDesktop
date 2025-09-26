@@ -349,22 +349,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.set_dialog.choose(self, None, None, None)
         self.set_dialog.present(self)
 
-    # Select folder for periodic saving
-    def select_pb_folder(self, w):
-        def save_selected(source, res, data):
-            try:
-                folder = source.select_folder_finish(res)
-            except:
-                return
-            self.folder_pb = folder.get_path()
-            settings["periodic-saving-folder"] = self.folder_pb if settings["first-synchronization-setup"] else settings["periodic-saving-folder"]
-            self.dirRow.set_subtitle(f"{self.folder_pb}") if hasattr(self, 'dirRow') else None
-
-        self.pb_chooser = Gtk.FileDialog.new()
-        self.pb_chooser.set_modal(True)
-        self.pb_chooser.set_title(_("Choose custom folder for periodic saving"))
-        self.pb_chooser.select_folder(self, None, save_selected, None)
-
     # Select folder for saving configuration
     def select_folder(self, w):
         def save_selected(source, res, data):

@@ -155,7 +155,22 @@ class MoreOptionsDialog(Adw.AlertDialog):
     # Open the file chooser dialog for selecting  the periodic saving folder
     # by calling the MainWindow's method (self.parent)
     def _open_file_dialog(self, w):
-        self.parent.select_pb_folder(w="")
+        self.__select_pb_folder()
+
+    # Select folder for periodic saving
+    def __select_pb_folder(self):
+        def save_selected(source, res, data):
+            try:
+                folder = source.select_folder_finish(res)
+            except:
+                return
+            self.folder_pb = folder.get_path()
+            self.dirRow.set_subtitle(f"{self.folder_pb}")
+
+        self.pb_chooser = Gtk.FileDialog.new()
+        self.pb_chooser.set_modal(True)
+        self.pb_chooser.set_title(_("Choose custom folder for periodic saving"))
+        self.pb_chooser.select_folder(self.parent, None, save_selected, None)
 
     # Reset the file name format entry to the default value
     def _reset_fileformat(self, w):
@@ -185,9 +200,9 @@ class MoreOptionsDialog(Adw.AlertDialog):
     def msDialog_closed(self, w, response):
         if response == 'ok':
             settings["filename-format"] = self.filefrmtEntry.get_text() # save the file name format entry
-            settings["periodic-saving-folder"] = self.dirRow.get_subtitle() # save the selected periodic saving folder
             settings["enable-encryption"] = self.encryptSwitch.get_active() # save the archive encryption's switch state
             settings["save-without-archive"] = self.archSwitch.get_active() # save the switch state of the "Save a configuration without creating the configuration archive" option
+            settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
             self._save_periodic_saving_values()
             self._save_password()
             self._call_set_dialog()
