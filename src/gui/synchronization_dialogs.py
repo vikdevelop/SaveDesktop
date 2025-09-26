@@ -268,9 +268,6 @@ class SetDialog(Adw.AlertDialog):
         self.l_setdBox.append(self.ps_row)
 
         set_button_sensitive = settings["periodic-saving"] != "Never" and not os.path.exists(path)
-        if "red" in folder:
-            self.set_response_enabled('ok', False)
-            [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)] # remove these files if the periodic saving folder is not a cloud drive folder
         if _("Periodic saving file does not exist.") in folder:
             self._make_pb_file()
         if _("You didn't select the cloud drive folder!") in folder:
@@ -279,6 +276,8 @@ class SetDialog(Adw.AlertDialog):
             self.lmButton.add_css_class("suggested-action")
             self.lmButton.connect("clicked", self._open_sync_link)
             self.file_row.add_suffix(self.lmButton)
+            self.set_response_enabled('ok', False)
+            [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)] # remove these files if the periodic saving folder is not a cloud drive folder
         self.set_body("") # set the body as empty after loading the periodic saving information
 
     # make the periodic saving file if it does not exist
@@ -433,7 +432,8 @@ class CloudDialog(Adw.AlertDialog):
         self.cfileRow.remove(self.resetButton)
         self.set_response_enabled('ok', True)
         settings["file-for-syncing"] = self.cfileRow.get_subtitle()
-        [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)]
+        if not settings["periodic-saving-folder"]:
+            [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)]
 
     # enable or disable the response of this dialog in depending on the selected periodic synchronization interval
     def on_psync_changed(self, psyncRow, GParamObject):
