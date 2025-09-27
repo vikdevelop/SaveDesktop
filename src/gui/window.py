@@ -568,15 +568,23 @@ class MainWindow(Adw.ApplicationWindow):
             self.archive_name = self.import_file
 
     def _call_archive_command(self):
-        try:
-            cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
-            print(cmd.stdout)
-        except subprocess.CalledProcessError as err:
-            e = err.stderr
-            GLib.idle_add(self.show_err_msg, e)
-            self._set_default_widgets_state()
-        finally:
+        self.archive_proc = subprocess.Popen(
+            [sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            env={**os.environ, "PYTHONPATH": f"{app_prefix}"}
+        )
+        out, err = self.archive_proc.communicate()
+        print(out)
+
+        if self.archive_proc.returncode == 0:
             GLib.idle_add(self.done)
+        elif self.archive_proc.returncode < 0:
+            print("Cancelled by user.")
+        else:
+            GLib.idle_add(self.show_err_msg, err)
+            self._set_default_widgets_state()
 
     # "Please wait" information page
     def please_wait(self):
@@ -616,12 +624,15 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Stop Saving/Importing Configuration
     def _cancel(self, w):
-        os.popen('pkill -f "savedesktop.core.config"')
-        os.popen('pkill -9 7z')
-        os.popen('pkill -9 tar')
+        self._kill_processes()
         self._set_default_widgets_state()
         for widget in [self.spinner, self.cancel_button, self.status_page]:
             self.status_box.remove(widget)
+
+    # Kill 7z, tar and savedesktop.core.config after clicking on the Cancel button
+    def _kill_processes(self):
+        if hasattr(self, "archive_proc") and self.archive_proc.poll() is None:
+            self.archive_proc.kill()
 
     # config has been saved action
     def done(self):
@@ -734,6 +745,8 @@ class MainWindow(Adw.ApplicationWindow):
     # action after closing the main window
     def on_close(self, w):
         self.close()
+        self._kill_processes()
+
         # Save window size, state, and filename
         settings["window-size"] = self.get_default_size()
         settings["maximized"] = self.is_maximized()
