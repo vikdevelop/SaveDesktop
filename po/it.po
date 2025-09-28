@@ -86,9 +86,6 @@ msgstr "Settimanale"
 msgid "Monthly"
 msgstr "Mensile"
 
-msgid "Manually"
-msgstr "Manualmente"
-
 msgid "Learn more"
 msgstr "Ulteriori informazioni"
 
@@ -418,9 +415,6 @@ msgstr ""
 "D'ora in poi, puoi sincronizzare la configurazione dal menu nella barra "
 "dell'intestazione"
 
-msgid "Synchronise manually"
-msgstr "Sincronizza manualmente"
-
 msgid "Keyboard shortcuts"
 msgstr "Scorciatoie da tastiera"
 
@@ -461,6 +455,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Albano Battistella https://github.com/albanobattistella"
+
+#~ msgid "Manually"
+#~ msgstr "Manualmente"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Sincronizza manualmente"
 
 # Translation key: description
 #~ msgid ""

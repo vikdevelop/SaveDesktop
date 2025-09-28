@@ -86,9 +86,6 @@ msgstr "每周"
 msgid "Monthly"
 msgstr "每月"
 
-msgid "Manually"
-msgstr "手动"
-
 msgid "Learn more"
 msgstr "学习更多"
 
@@ -373,9 +370,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯"
 
-msgid "Synchronise manually"
-msgstr "手动同步"
-
 msgid "Keyboard shortcuts"
 msgstr "快捷键"
 
@@ -410,6 +404,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "译者github链接"
+
+#~ msgid "Manually"
+#~ msgstr "手动"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "手动同步"
 
 # Translation key: description
 #~ msgid ""

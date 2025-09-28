@@ -86,9 +86,6 @@ msgstr "Mingguan"
 msgid "Monthly"
 msgstr "Bulanan"
 
-msgid "Manually"
-msgstr "Manual"
-
 msgid "Learn more"
 msgstr "Pelajari lebih lanjut"
 
@@ -371,9 +368,6 @@ msgstr ""
 "Mulai sekarang, Anda dapat menyinkronkan konfigurasi dari menu di bilah "
 "header"
 
-msgid "Synchronise manually"
-msgstr ""
-
 msgid "Keyboard shortcuts"
 msgstr ""
 
@@ -408,6 +402,9 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Penerjemah github-tautan"
+
+#~ msgid "Manually"
+#~ msgstr "Manual"
 
 # Translation key: description
 #~ msgid ""

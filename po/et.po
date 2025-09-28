@@ -86,9 +86,6 @@ msgstr "Iga nädal"
 msgid "Monthly"
 msgstr "Iga kuu"
 
-msgid "Manually"
-msgstr "Valides aja käsitsi"
-
 msgid "Learn more"
 msgstr "Lisateave"
 
@@ -405,9 +402,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Alates nüüdsest saad sa andmed sünkroniseerida menüüst päiseriba kohal"
 
-msgid "Synchronise manually"
-msgstr "Sünkroniseeri käsitsi"
-
 msgid "Keyboard shortcuts"
 msgstr "Klaviatuuri kiirklahvid"
 
@@ -449,6 +443,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Priit Jõerüüt 2025"
+
+#~ msgid "Manually"
+#~ msgstr "Valides aja käsitsi"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Sünkroniseeri käsitsi"
 
 # Translation key: description
 #~ msgid ""

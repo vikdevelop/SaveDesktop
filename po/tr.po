@@ -87,9 +87,6 @@ msgstr "Haftalık"
 msgid "Monthly"
 msgstr "Aylık"
 
-msgid "Manually"
-msgstr "Elle"
-
 msgid "Learn more"
 msgstr "Daha çoğunu öğren"
 
@@ -412,9 +409,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Artık yapılandırmayı başlık çubuğundaki menüden eşzamanlayabilirsiniz"
 
-msgid "Synchronise manually"
-msgstr "Elle eşzamanla"
-
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
 
@@ -452,6 +446,12 @@ msgid "Translator credits"
 msgstr ""
 "Batmanly https://github.com/batmanly\n"
 "Sabri Ünal https://github.com/yakushabb"
+
+#~ msgid "Manually"
+#~ msgstr "Elle"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Elle eşzamanla"
 
 # Translation key: description
 #~ msgid ""

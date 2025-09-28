@@ -86,9 +86,6 @@ msgstr "Hebdomadaire"
 msgid "Monthly"
 msgstr "Mensuel"
 
-msgid "Manually"
-msgstr "Manuellement"
-
 msgid "Learn more"
 msgstr "En savoir plus"
 
@@ -390,9 +387,6 @@ msgstr ""
 "Désormais, vous pouvez synchroniser la configuration à partir du menu de la "
 "barre d'en-tête"
 
-msgid "Synchronise manually"
-msgstr "Synchroniser manuellement"
-
 msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
@@ -427,6 +421,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Lien github des traducteurs"
+
+#~ msgid "Manually"
+#~ msgstr "Manuellement"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Synchroniser manuellement"
 
 # Translation key: description
 #~ msgid ""

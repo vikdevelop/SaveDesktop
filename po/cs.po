@@ -86,9 +86,6 @@ msgstr "Týdně"
 msgid "Monthly"
 msgstr "Měsíčně"
 
-msgid "Manually"
-msgstr "Ručně"
-
 msgid "Learn more"
 msgstr "Zjistit více"
 
@@ -409,9 +406,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Od teď můžete synchronizovat konfiguraci z nabídky v záhlaví"
 
-msgid "Synchronise manually"
-msgstr "Synchronizovat ručně"
-
 msgid "Keyboard shortcuts"
 msgstr "Klávesové zkratky"
 
@@ -452,6 +446,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "vikdevelop https://github.com/vikdevelop"
+
+#~ msgid "Manually"
+#~ msgstr "Ručně"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Synchronizovat ručně"
 
 # Translation key: description
 #~ msgid ""

@@ -86,9 +86,6 @@ msgstr "Viikottain"
 msgid "Monthly"
 msgstr "Kuukausittain"
 
-msgid "Manually"
-msgstr "Manuaalisesti"
-
 msgid "Learn more"
 msgstr "Lue lisää"
 
@@ -384,9 +381,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Vastedes voit synkronoida määrityksen otsakepalkin valikosta"
 
-msgid "Synchronise manually"
-msgstr "Synkronoi manuaalisesti"
-
 msgid "Keyboard shortcuts"
 msgstr "Pikanäppäimet"
 
@@ -421,6 +415,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Name jiri.gronroos+l10n@iki.fi"
+
+#~ msgid "Manually"
+#~ msgstr "Manuaalisesti"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Synkronoi manuaalisesti"
 
 # Translation key: description
 #~ msgid ""

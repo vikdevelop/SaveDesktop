@@ -86,9 +86,6 @@ msgstr "Semanalmente"
 msgid "Monthly"
 msgstr "Mensualmente"
 
-msgid "Manually"
-msgstr "Manualmente"
-
 msgid "Learn more"
 msgstr "Más información"
 
@@ -414,9 +411,6 @@ msgstr ""
 "A partir de ahora, puedes sincronizar la configuración desde el menú de la "
 "barra de cabecera"
 
-msgid "Synchronise manually"
-msgstr "Sincronizar manualmente"
-
 msgid "Keyboard shortcuts"
 msgstr "Atajos de teclado"
 
@@ -451,6 +445,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "gallegonovato fran-carro@hotmail.es"
+
+#~ msgid "Manually"
+#~ msgstr "Manualmente"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Sincronizar manualmente"
 
 # Translation key: description
 #~ msgid ""

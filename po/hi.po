@@ -86,9 +86,6 @@ msgstr "साप्ताहिक"
 msgid "Monthly"
 msgstr "मासिक"
 
-msgid "Manually"
-msgstr "हाथ से"
-
 msgid "Learn more"
 msgstr "और अधिक जानें"
 
@@ -407,9 +404,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "अब से, आप शीर्षलेख पट्टी में मेनू से विन्यास को समन्वयित कर सकते हैं"
 
-msgid "Synchronise manually"
-msgstr "हस्तचालित रूप से समन्वयित करें"
-
 msgid "Keyboard shortcuts"
 msgstr "कीबोर्ड शॉर्टकट"
 
@@ -444,6 +438,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
+
+#~ msgid "Manually"
+#~ msgstr "हाथ से"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "हस्तचालित रूप से समन्वयित करें"
 
 # Translation key: description
 #~ msgid ""

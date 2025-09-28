@@ -86,9 +86,6 @@ msgstr "Hetente"
 msgid "Monthly"
 msgstr "Havonta"
 
-msgid "Manually"
-msgstr "Manuálisan"
-
 msgid "Learn more"
 msgstr "Tudj meg többet"
 
@@ -369,9 +366,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Ezentúl szinkronizálhatod a konfigurációt a fejlécsáv menüjéből"
 
-msgid "Synchronise manually"
-msgstr ""
-
 msgid "Keyboard shortcuts"
 msgstr ""
 
@@ -406,6 +400,9 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Daniel Uhrinyi https://github.com/danieluhrinyi"
+
+#~ msgid "Manually"
+#~ msgstr "Manuálisan"
 
 # Translation key: description
 #~ msgid ""

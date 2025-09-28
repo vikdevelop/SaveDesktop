@@ -86,9 +86,6 @@ msgstr "Semanalmente"
 msgid "Monthly"
 msgstr "Mensalmente"
 
-msgid "Manually"
-msgstr "Manualmente"
-
 msgid "Learn more"
 msgstr "Saiba mais"
 
@@ -417,9 +414,6 @@ msgstr ""
 "De agora em diante, você pode sincronizar a configuração no menu da barra de "
 "cabeçalho"
 
-msgid "Synchronise manually"
-msgstr "Sincronizar manualmente"
-
 msgid "Keyboard shortcuts"
 msgstr "Atalhos de teclado"
 
@@ -458,6 +452,12 @@ msgstr ""
 "Isaac Dias https://hosted.weblate.org/user/IsaacDias/\n"
 "Filipe Motta <luizfilipemotta@gmail.com>\n"
 "Ezilei Correia <ezilei@yahoo.com.br>"
+
+#~ msgid "Manually"
+#~ msgstr "Manualmente"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Sincronizar manualmente"
 
 # Translation key: description
 #~ msgid ""

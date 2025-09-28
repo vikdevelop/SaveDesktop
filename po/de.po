@@ -86,9 +86,6 @@ msgstr "Wöchentlich"
 msgid "Monthly"
 msgstr "Monatlich"
 
-msgid "Manually"
-msgstr ""
-
 msgid "Learn more"
 msgstr "Mehr erfahren"
 
@@ -365,9 +362,6 @@ msgid ""
 msgstr ""
 
 msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
-
-msgid "Synchronise manually"
 msgstr ""
 
 msgid "Keyboard shortcuts"

@@ -86,9 +86,6 @@ msgstr "Setmanalment"
 msgid "Monthly"
 msgstr "Mensualment"
 
-msgid "Manually"
-msgstr "Manual"
-
 msgid "Learn more"
 msgstr "Més informació"
 
@@ -392,9 +389,6 @@ msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 "Ja podeu sincronitzar la configuració des del menú de la barra superior"
 
-msgid "Synchronise manually"
-msgstr "Sincronitza manualment"
-
 msgid "Keyboard shortcuts"
 msgstr "Dreceres de teclat"
 
@@ -429,6 +423,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "BennyBeat https://github.com/BennyBeat"
+
+#~ msgid "Manually"
+#~ msgstr "Manual"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Sincronitza manualment"
 
 # Translation key: description
 #~ msgid ""
