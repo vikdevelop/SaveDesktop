@@ -11,35 +11,35 @@
 		</key>
 		<key name="save-icons" type="b">
 			<default>true</default>
-			<summary>Save icons (option)</summary>
+			<summary>Save icons</summary>
 		</key>
 		<key name="save-themes" type="b">
 			<default>true</default>
-			<summary>Save themes (option)</summary>
+			<summary>Save themes</summary>
 		</key>
 		<key name="save-fonts" type="b">
 			<default>true</default>
-			<summary>Save fonts (option)</summary>
+			<summary>Save fonts</summary>
 		</key>
 		<key name="save-backgrounds" type="b">
 			<default>true</default>
-			<summary>Save backgrounds (option)</summary>
+			<summary>Save backgrounds</summary>
 		</key>
 		<key name="save-extensions" type="b">
 			<default>true</default>
-			<summary>Save GNOME extensions (option)</summary>
+			<summary>Save GNOME, Cinnamon, or Plasma extensions</summary>
 		</key>
 		<key name="save-desktop-folder" type="b">
 			<default>false</default>
-			<summary>Save the user desktop folder (option)</summary>
+			<summary>Save the user desktop folder</summary>
 		</key>
 		<key name="save-installed-flatpaks" type="b">
 			<default>true</default>
-			<summary>Save installed Flatpak apps (option)</summary>
+			<summary>Save installed Flatpak apps</summary>
 		</key>
 		<key name="save-flatpak-data" type="b">
 		  <default>false</default>
-		  <summary>Save data of installed Flatpak apps (row)</summary>
+		  <summary>Save data of installed Flatpak apps</summary>
 		</key>
 		<key name="disabled-flatpak-apps-data" type="as">
 		  <default>[]</default>
@@ -69,7 +69,7 @@
 		</key>
 		<key name="enable-encryption" type="b">
 		  <default>false</default>
-		  <summary>Enable/Disable encryption of the configuration archives in the manually mode</summary>
+		  <summary>Enable or disable encryption of the configuration archives in the manually mode</summary>
 		</key>
 	  <key name="save-without-archive" type="b">
 		    <default>false</default>
@@ -77,7 +77,7 @@
 		</key>
 		<key name="file-for-syncing" type="s">
 		  <default>''</default>
-		  <summary>File for synchronization with other computers in the network</summary>
+		  <summary>Folder (originally file) for synchronization with other computers in the network</summary>
 		</key>
 		<key name="periodic-import" type="s">
 		  <choices>
@@ -85,14 +85,9 @@
 				<choice value="Daily2"/>
 				<choice value="Weekly2"/>
 				<choice value="Monthly2"/>
-				<choice value="Manually2"/>
 			</choices>
 			<default>"Never2"</default>
 			<summary>Periodic import</summary>
-		</key>
-		<key name="manually-sync" type="b">
-		  <default>false</default>
-		  <summary>Manually sync</summary>
 		</key>
 		<key name="bidirectional-sync" type="b">
 		    <default>true</default>

@@ -46,7 +46,7 @@ class Create:
 
         # In the periodic saving mode, it's not allowed to save the
         # configuration without creating the archive
-        if settings["save-without-archive"] and not args.create == settings["periodic-saving-folder"]:
+        if settings["save-without-archive"] and f'{settings["periodic-saving-folder"]}' not in args.create:
             self._copy_config_to_folder()
         else:
             self._create_archive()
