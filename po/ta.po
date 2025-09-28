@@ -86,9 +86,6 @@ msgstr "வாராந்தோறும்"
 msgid "Monthly"
 msgstr "திங்கள்தோறும்"
 
-msgid "Manually"
-msgstr "கைமுறையாக"
-
 msgid "Learn more"
 msgstr "மேலும் அறிக"
 
@@ -407,9 +404,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "இனிமேல், தலைப்பு பட்டியில் உள்ள பட்டியலிருந்து உள்ளமைவை ஒத்திசைக்கலாம்"
 
-msgid "Synchronise manually"
-msgstr "கைமுறையாக ஒத்திசை"
-
 msgid "Keyboard shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
 
@@ -444,6 +438,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "தமிழ்நேரம் <https://TamilNeram.github.io>"
+
+#~ msgid "Manually"
+#~ msgstr "கைமுறையாக"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "கைமுறையாக ஒத்திசை"
 
 # Translation key: description
 #~ msgid ""

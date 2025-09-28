@@ -86,9 +86,6 @@ msgstr "Iedere week"
 msgid "Monthly"
 msgstr "Iedere maand"
 
-msgid "Manually"
-msgstr "Handmatig"
-
 msgid "Learn more"
 msgstr "Meer informatie"
 
@@ -369,9 +366,6 @@ msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 "Voortaan kunt u de voorkeuren synchroniseren middels het menu op de kopbalk"
 
-msgid "Synchronise manually"
-msgstr ""
-
 msgid "Keyboard shortcuts"
 msgstr ""
 
@@ -406,6 +400,9 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "https://github.com/Vistaus"
+
+#~ msgid "Manually"
+#~ msgstr "Handmatig"
 
 # Translation key: description
 #~ msgid ""

@@ -87,9 +87,6 @@ msgstr "Щотижня"
 msgid "Monthly"
 msgstr "Щомісяця"
 
-msgid "Manually"
-msgstr "Вручну"
-
 msgid "Learn more"
 msgstr "Дізнатися більше"
 
@@ -411,9 +408,6 @@ msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 "Відтепер ви можете синхронізувати налаштування з меню на панелі заголовка"
 
-msgid "Synchronise manually"
-msgstr "Синхронізувати вручну"
-
 msgid "Keyboard shortcuts"
 msgstr "Клавіатурні скорочення"
 
@@ -450,6 +444,12 @@ msgid "Translator credits"
 msgstr ""
 "Kefir2105 https://github.com/Kefir2105\n"
 "volkov <volkovissocool@gmail.com>"
+
+#~ msgid "Manually"
+#~ msgstr "Вручну"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Синхронізувати вручну"
 
 # Translation key: description
 #~ msgid ""

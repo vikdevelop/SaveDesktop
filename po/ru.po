@@ -87,9 +87,6 @@ msgstr "Еженедельно"
 msgid "Monthly"
 msgstr "Ежемесячно"
 
-msgid "Manually"
-msgstr "Вручную"
-
 msgid "Learn more"
 msgstr "Подробнее"
 
@@ -413,9 +410,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr "Теперь вы можете синхронизировать конфиг из меню в панели заголовка"
 
-msgid "Synchronise manually"
-msgstr "Синхронизовать вручную"
-
 msgid "Keyboard shortcuts"
 msgstr "Комбинации клавиш"
 
@@ -459,6 +453,12 @@ msgid "Translator credits"
 msgstr ""
 "voron <voron@duck.com>\n"
 "volkov <volkovissocool@gmail.com>"
+
+#~ msgid "Manually"
+#~ msgstr "Вручную"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Синхронизовать вручную"
 
 # Translation key: description
 #~ msgid ""

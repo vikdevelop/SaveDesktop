@@ -86,9 +86,6 @@ msgstr "Veckovis"
 msgid "Monthly"
 msgstr "Månadsvis"
 
-msgid "Manually"
-msgstr "Manuellt"
-
 msgid "Learn more"
 msgstr "Läs mer"
 
@@ -414,9 +411,6 @@ msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 "Från och med nu kan du synkronisera konfigurationen från menyn i huvudfältet"
 
-msgid "Synchronise manually"
-msgstr "Synkronisera manuellt"
-
 msgid "Keyboard shortcuts"
 msgstr "Tangentbordsgenvägar"
 
@@ -451,6 +445,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Luna Jernberg https://github.com/bittin/"
+
+#~ msgid "Manually"
+#~ msgstr "Manuellt"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Synkronisera manuellt"
 
 # Translation key: description
 #~ msgid ""

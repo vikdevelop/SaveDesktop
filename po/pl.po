@@ -87,9 +87,6 @@ msgstr "Co tydzień"
 msgid "Monthly"
 msgstr "Co miesiąc"
 
-msgid "Manually"
-msgstr "Ręcznie"
-
 msgid "Learn more"
 msgstr "Dowiedz się więcej"
 
@@ -368,9 +365,6 @@ msgstr ""
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
 
-msgid "Synchronise manually"
-msgstr "Synchronizuj ręcznie"
-
 msgid "Keyboard shortcuts"
 msgstr "Skróty klawiszowe"
 
@@ -403,3 +397,9 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Eryk Michalak gnu.ewm@protonmail.com"
+
+#~ msgid "Manually"
+#~ msgstr "Ręcznie"
+
+#~ msgid "Synchronise manually"
+#~ msgstr "Synchronizuj ręcznie"
