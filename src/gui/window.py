@@ -48,12 +48,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.menu_button.set_primary(True)
         self.headerbar.pack_end(child=self.menu_button)
 
-        # add Manually sync section
-        if settings["manually-sync"] == True:
-            self.sync_menu = Gio.Menu()
-            self.sync_menu.append(_("Synchronise manually"), 'app.m-sync-with-key')
-            self.main_menu.prepend_section(None, self.sync_menu)
-
         # primary layout
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.headapp.set_valign(Gtk.Align.CENTER)
@@ -466,7 +460,7 @@ class MainWindow(Adw.ApplicationWindow):
     # Action after closing pswdDialog
     def _pswdDialog_closed(self, w, response):
         if response == 'ok':
-            with open(f"{CACHE}/temp_file", "w") as tmp:
+            with open(f"{CACHE}/workspace/temp_file", "w") as tmp:
                 tmp.write(self.pswdEntry.get_text())
             self.save_config()
 
@@ -523,13 +517,14 @@ class MainWindow(Adw.ApplicationWindow):
     def _checkDialog_closed(self, w, response):
         if response == 'ok':
             self.checkDialog.set_response_enabled("ok", False)
-            with open(f"{CACHE}/temp_file", "w") as tmp:
+            with open(f"{CACHE}/workspace/temp_file", "w") as tmp:
                 tmp.write(self.checkEntry.get_text())
 
             self.import_config()
 
     # Save configuration
     def save_config(self):
+        print("Saving the configuration is in progress…\nFull output will be available after finishing this operation.")
         self.archive_mode = "--create"
         self.archive_name = f"{self.folder}/{self.filename_text}"
         self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
@@ -549,6 +544,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Import configuration
     def import_config(self):
+        print("Importing the configuration is in progress…\nFull output will be available after finishing this operation.")
         self._identify_file_type()
 
         self.archive_mode = "--unpack"
@@ -758,7 +754,7 @@ class MainWindow(Adw.ApplicationWindow):
             os.remove(f"{CACHE}/expand_pb_row")
 
         # Remove this folder to cleanup unnecessary content created during saving,
-        # importing, or syncing the configuration only if the autostart file for
+        # importing, or syncing the configuration only if the Python script for
         # installing Flatpaks is not present
-        if not os.path.exists(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"):
+        if not os.path.exists(f"{CACHE}/workspace/flatpaks_installer.py"):
             subprocess.Popen(["rm", "-rf", f"{CACHE}/workspace"])

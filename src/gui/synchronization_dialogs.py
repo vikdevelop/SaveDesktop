@@ -368,7 +368,7 @@ class CloudDialog(Adw.AlertDialog):
 
         # Periodic sync section
         options = Gtk.StringList.new(strings=[
-           _("Never"), _("Manually"), _("Daily"), _("Weekly"), _("Monthly")
+           _("Never"), _("Daily"), _("Weekly"), _("Monthly")
         ])
 
         self.psyncRow = Adw.ComboRow.new()
@@ -377,15 +377,13 @@ class CloudDialog(Adw.AlertDialog):
         self.psyncRow.set_title(_("Periodic synchronization"))
         self.psyncRow.set_title_lines(2)
         self.psyncRow.set_model(model=options)
-        self.psyncRow.connect('notify::selected-item', self.on_psync_changed)
+        self.psyncRow.connect('notify::selected-item', self._on_psync_changed)
         self.cloudBox.append(self.psyncRow)
 
         # Load periodic sync values form GSettings database
         old_psync = settings["periodic-import"]
         if settings["periodic-import"] == "Never2":
             self.psyncRow.set_selected(0)
-        elif settings["periodic-import"] == "Manually2":
-            self.psyncRow.set_selected(1)
         elif settings["periodic-import"] == "Daily2":
             self.psyncRow.set_selected(2)
         elif settings["periodic-import"] == "Weekly2":
@@ -436,9 +434,12 @@ class CloudDialog(Adw.AlertDialog):
             [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", f"{DATA}/savedesktop-synchronization.sh"] if os.path.exists(path)]
 
     # enable or disable the response of this dialog in depending on the selected periodic synchronization interval
-    def on_psync_changed(self, psyncRow, GParamObject):
-        if not self.psyncRow.get_selected_item().get_string() == _("Never") and not self.cfileRow.get_subtitle():
-            self.set_response_enabled('ok', True)
+    def _on_psync_changed(self, psyncRow, GParamObject):
+        if not self.psyncRow.get_selected_item().get_string() == _("Never"):
+            if not self.cfileRow.get_subtitle() == "":
+                self.set_response_enabled('ok', True)
+        else:
+            self.set_response_enabled('ok', False)
 
     # Action after closing URL dialog
     def cloudDialog_closed(self, w, response):
@@ -446,15 +447,11 @@ class CloudDialog(Adw.AlertDialog):
             self.check_psync = settings["periodic-import"]
             # translate the periodic sync options to English
             selected_item = self.psyncRow.get_selected_item()
-            sync = {_("Never"): "Never2", _("Manually"): "Manually2", _("Daily"): "Daily2", _("Weekly"): "Weekly2", _("Monthly"): "Monthly2"}
+            sync = {_("Never"): "Never2", _("Daily"): "Daily2", _("Weekly"): "Weekly2", _("Monthly"): "Monthly2"}
 
             sync_item = sync.get(selected_item.get_string(), "Never2")
 
             settings["periodic-import"] = sync_item
-
-            # if the selected periodic saving interval is "Manually2", it enables the manually-sync value
-            if settings["periodic-import"] == "Manually2":
-                settings["manually-sync"] = True
 
             # save the status of the Bidirectional Synchronization switch
             settings["bidirectional-sync"] = self.bsSwitch.get_active()
@@ -479,7 +476,9 @@ class CloudDialog(Adw.AlertDialog):
             else:
                 raise AttributeError(_("You didn't select the cloud drive folder!"))
         except Exception as e:
-            os.system(f'notify-send \'{_("An error occurred")}\' \'{e}\'')
+            err_title = _("An error occurred")
+            err_desc = str(e)
+            subprocess.run(['notify-send', err_title, err_desc])
             return
         else:
             GLib.idle_add(self.__post_setup)
@@ -487,17 +486,5 @@ class CloudDialog(Adw.AlertDialog):
     # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
     def __post_setup(self):
         if self.check_psync == "Never2":
-            if not settings["periodic-import"] == "Never2" and not settings["periodic-import"] == "Manually2":
+            if not settings["periodic-import"] == "Never2":
                 self.parent.show_warn_toast()
-
-        # if it is selected to manually sync, it creates an option in the app menu in the header bar
-        if settings["manually-sync"]:
-            self.sync_menu = Gio.Menu()
-            self.sync_menu.append(_("Synchronise manually"), 'app.m-sync-with-key')
-            self.parent.main_menu.prepend_section(None, self.sync_menu)
-            self.parent.show_special_toast()
-        else:
-            try:
-                self.parent.sync_menu.remove_all()
-            except:
-                pass

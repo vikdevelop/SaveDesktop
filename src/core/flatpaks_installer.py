@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-import os
+import os, subprocess, sys
 from pathlib import Path
-import subprocess
 
 CACHE_FLATPAK = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
 
@@ -67,3 +66,6 @@ else:
 autostart_file = f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"
 if os.path.exists(autostart_file):
     os.remove(autostart_file)
+
+# Remove this script after finishing the operations
+os.remove(sys.argv[0])

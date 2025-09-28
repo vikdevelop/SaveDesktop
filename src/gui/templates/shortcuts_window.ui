@@ -47,13 +47,6 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes">Synchronise manually</property>
-                <property name="action-name">app.m_sync_with_key</property>
-                <property name="accelerator">&lt;primary&gt;&lt;shift&gt;s</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes">More options</property>
                 <property name="action-name">app.ms-dialog</property>
                 <property name="accelerator">&lt;primary&gt;&lt;shift&gt;m</property>

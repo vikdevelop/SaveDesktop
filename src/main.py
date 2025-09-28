@@ -17,7 +17,6 @@ class SaveDesktopApp(Adw.Application):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE,
                          application_id="io.github.vikdevelop.SaveDesktop")
-        self.create_action('m-sync-with-key', self.sync_pc, ["<primary><shift>s"] if settings["manually-sync"] else None)
         self.create_action('save-config', self.call_saving_config, ["<primary>s"])
         self.create_action('import-config', self.call_importing_config, ["<primary>o"])
         self.create_action('ms-dialog', self.call_ms_dialog, ["<primary><shift>m"])
@@ -31,26 +30,6 @@ class SaveDesktopApp(Adw.Application):
         self.create_action('open_dir', self.open_dir)
         self.create_action('about', self.on_about_action)
         self.connect('activate', self.on_activate)
-
-    # Synchronize configuation manually after clicking on the "Synchronise manually" button in the header bar menu
-    def sync_pc(self, action, param):
-        self.win.import_file = settings["file-for-syncing"]
-        self.win.please_wait_import()
-        sync_thread = Thread(target=self._sync_process)
-        sync_thread.start()
-
-    def _sync_process(self):
-        try:
-            os.system(f'notify-send "{_("Please wait …")}"')
-            os.system(f"echo > {CACHE}/.from_app")
-            subprocess.run([sys.executable, "-m", "savedesktop.core.synchronization"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
-        except subprocess.CalledProcessError as e:
-            GLib.idle_add(self.win.show_err_msg, e)
-            self.toolbarview.set_content(self.headapp)
-            self.headerbar.set_title_widget(self.switcher_title)
-            self.switcher_bar.set_reveal(self.switcher_title.get_title_visible())
-        finally:
-            GLib.idle_add(self.win.applying_done())
 
     # Start saving the configuration using Ctrl+S keyboard shortcut
     def call_saving_config(self, action, param):

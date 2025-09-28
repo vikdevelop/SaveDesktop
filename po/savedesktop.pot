@@ -113,10 +113,6 @@ msgid "Monthly"
 msgstr ""
 
 #: src/gui/more_options_dialog.py
-msgid "Manually"
-msgstr ""
-
-#: src/gui/more_options_dialog.py
 msgid "Learn more"
 msgstr ""
 
@@ -413,11 +409,6 @@ msgstr ""
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
-
-#: src/gui/templates/shortcuts_window.ui:50
-#: src/gui/window.py
-msgid "Synchronise manually"
 msgstr ""
 
 #: src/gui/templates/shortcuts_window.ui:36

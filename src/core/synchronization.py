@@ -13,7 +13,6 @@ class Syncing:
     def __init__(self):
         self.last_sync_date = self.load_last_sync_date()
         if not settings["file-for-syncing"]:
-            settings["manually-sync"] = False
             print("Synchronization is not set up.")
         else:
             self.get_sync_interval()
@@ -34,33 +33,20 @@ class Syncing:
             "Daily2": 1,
             "Weekly2": 7,
             "Monthly2": 30,
-            "Manually2": None
         }
         interval = intervals.get(settings["periodic-import"], None)
         if interval is None:
-            settings["manually-sync"] = settings["periodic-import"] == "Manually2"
-            if settings["manually-sync"]:
-                self.check_manually_sync_status()
-            else:
-                print("Synchronization is not set up.")
+            print("Synchronization is not set up. Maybe you have selected the Never interval?")
         else:
-            settings["manually-sync"] = False
             self.check_and_sync(interval)
     
     # Check, if the synchronization is necessary for that day
     def check_and_sync(self, interval):
         today = date.today()
         if (today - self.last_sync_date).days >= interval:
-            self.check_manually_sync_status()
+            self.download_config()
         else:
             print(f"Sync not needed today. Last sync was on {self.last_sync_date}.")
-    
-    # Check, if "Manually" is the sync interval
-    def check_manually_sync_status(self):
-        if settings["periodic-import"] == "Manually2" and not os.path.exists(f"{CACHE}/.from_app"):
-            print("Please sync from the Save Desktop app")
-        else:
-            self.download_config()
     
     # Download the configuration archive from the cloud drive folder
     def download_config(self):
@@ -133,8 +119,8 @@ class Syncing:
             self.password = try_passwordstore()
 
         # #3 If password is still unavailable, get it from the {CACHE}/entered-password.txt file
-        if not self.password and os.path.exists(f"{CACHE}/temp_file"):
-            with open(f"{CACHE}/temp_file") as ep:
+        if not self.password and os.path.exists(f"{CACHE}/workspace/temp_file"):
+            with open(f"{CACHE}/workspace/temp_file") as ep:
                 self.password = ep.read().strip()
 
         # #4 Final check
@@ -151,13 +137,12 @@ class Syncing:
         self.archive_mode = "--unpack"
         self.archive_name = f"{settings['file-for-syncing']}/{self.file}.sd.zip"
 
-        subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"}, check=True)
         self.done()
     
     def done(self):
-        if not settings["manually-sync"]:
-            with open(f"{DATA}/sync-info.json", "w") as s:
-                json.dump({"last-synced": date.today().isoformat()}, s)
+        with open(f"{DATA}/sync-info.json", "w") as s:
+            json.dump({"last-synced": date.today().isoformat()}, s)
         
         # Send a notification about finished synchronization
         os.system(f"notify-send 'Save Desktop Synchronization ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")

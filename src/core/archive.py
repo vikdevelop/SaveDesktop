@@ -21,7 +21,7 @@ def cleanup_cache_dir():
 
 # Get password entered in the "Create a new password" dialog from the temporary file
 def get_password():
-    temp_file = f"{CACHE}/temp_file"
+    temp_file = f"{TEMP_CACHE}/temp_file"
     if os.path.exists(temp_file):
         with open(temp_file) as tmp:
             return tmp.read().strip()
@@ -31,8 +31,8 @@ def get_password():
 
 # Remove above temporary file
 def remove_temp_file():
-    if os.path.exists(f"{CACHE}/temp_file"):
-        os.remove(f"{CACHE}/temp_file")
+    if os.path.exists(f"{TEMP_CACHE}/temp_file"):
+        os.remove(f"{TEMP_CACHE}/temp_file")
 
 class Create:
     def __init__(self):
