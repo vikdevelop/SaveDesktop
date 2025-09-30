@@ -40,7 +40,7 @@ class Create:
 
     def start_saving(self):
         cleanup_cache_dir()
-        cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
         # In the periodic saving mode, it's not allowed to save the
         # configuration without creating the archive
@@ -69,7 +69,7 @@ class Create:
     def _create_archive(self):
         password = get_password()
         cmd = ['7z', 'a', '-tzip', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.']
-        if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb"):
+        if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb") and os.path.exists(f"{DATA}/password"):
             cmd.insert(4, "-mem=AES256")
             cmd.insert(5, f"-p{password}")
 
