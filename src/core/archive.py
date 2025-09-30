@@ -8,6 +8,7 @@ parser.add_argument("-u", "--unpack", help="Unpack archive", type=str)
 args = parser.parse_args()
 
 TEMP_CACHE = f"{CACHE}/workspace"
+temp_file = f"{CACHE}/temp_file"
 
 # Cleanup the cache dir before saving
 def cleanup_cache_dir():
@@ -21,7 +22,6 @@ def cleanup_cache_dir():
 
 # Get password entered in the "Create a new password" dialog from the temporary file
 def get_password():
-    temp_file = f"{CACHE}/temp_file"
     if os.path.exists(temp_file):
         with open(temp_file) as tmp:
             return tmp.read().strip()
@@ -31,8 +31,8 @@ def get_password():
 
 # Remove above temporary file
 def remove_temp_file():
-    if os.path.exists(f"{CACHE}/temp_file"):
-        os.remove(f"{CACHE}/temp_file")
+    if os.path.exists(temp_file):
+        os.remove(temp_file)
 
 class Create:
     def __init__(self):
@@ -159,7 +159,7 @@ class Unpack:
 
     # Unpack a legacy archive with Tarball (for backward compatibility)
     def _unpack_tar_archive(self):
-        cmd = subprocess.run(["tar", "-xzf", self.import_file, "-C", f"{TEMP_CACHE}"],capture_output=True, text=True, check=True)
+        cmd = subprocess.run(["tar", "-xzf", self.import_file, "-C", f"{TEMP_CACHE}"], capture_output=True, text=True, check=True)
         print(cmd.stdout)
 
     # Replace original /home/$USER path with actual path in the dconf-settings.ini file and other XML files
