@@ -374,9 +374,9 @@ class MainWindow(Adw.ApplicationWindow):
     def select_file_to_import(self, w):
         # Show a "Please wait" pop-up window while checking the archive type
         def show_please_wait_toast():
-            wait_toast = Adw.Toast.new(title=_("Please wait …"))
-            wait_toast.set_timeout(5)
-            self.toast_overlay.add_toast(wait_toast)
+            self.toast.set_title(title=_("Please wait …"))
+            self.toast.set_timeout(5)
+            self.toast_overlay.add_toast(self.toast)
 
         # Check, if the archive is encrypted or not
         def get_status_of_encryption():
@@ -546,6 +546,7 @@ class MainWindow(Adw.ApplicationWindow):
     def import_config(self):
         print("Importing the configuration is in progress…\nFull output will be available after finishing this operation.")
         self._identify_file_type()
+        self.toast_overlay.dismiss_all()
 
         self.archive_mode = "--unpack"
         self.status_title = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").split('</b>')[0].split('<b>')[-1]
@@ -732,11 +733,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.warn_toast.set_button_label(_("Log Out"))
         self.warn_toast.set_action_name("app.logout")
         self.toast_overlay.add_toast(self.warn_toast)
-
-    # message that says where will be run a synchronization
-    def show_special_toast(self):
-        self.special_toast = Adw.Toast.new(title=_("From now on, you can sync the config from the menu in the header bar"))
-        self.toast_overlay.add_toast(self.special_toast)
 
     # action after closing the main window
     def on_close(self, w):
