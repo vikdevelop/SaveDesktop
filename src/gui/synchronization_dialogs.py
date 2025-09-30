@@ -385,11 +385,11 @@ class CloudDialog(Adw.AlertDialog):
         if settings["periodic-import"] == "Never2":
             self.psyncRow.set_selected(0)
         elif settings["periodic-import"] == "Daily2":
-            self.psyncRow.set_selected(2)
+            self.psyncRow.set_selected(1)
         elif settings["periodic-import"] == "Weekly2":
-            self.psyncRow.set_selected(3)
+            self.psyncRow.set_selected(2)
         elif settings["periodic-import"] == "Monthly2":
-            self.psyncRow.set_selected(4)
+            self.psyncRow.set_selected(3)
 
         # Bidirectional Synchronization section
         ## Switch

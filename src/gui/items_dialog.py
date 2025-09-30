@@ -268,8 +268,9 @@ class itemsDialog(Adw.AlertDialog):
                 settings["save-extensions"] = self.switch_ext.get_active()
                 self.save_ext_switch_state = False
         elif response == 'cancel':
-            switch_status = self.flatpak_data_sw_state
-            settings["save-flatpak-data"] = switch_status
+            if flatpak:
+                switch_status = self.flatpak_data_sw_state
+                settings["save-flatpak-data"] = switch_status
 
     # show dialog for managing Flatpak applications data
     def manage_data_list(self, w):

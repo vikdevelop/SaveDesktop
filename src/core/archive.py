@@ -153,9 +153,9 @@ class Unpack:
             os.remove(f"{CACHE}/sync")
             if os.path.exists(f"{DATA}/password"):
                 os.remove(f"{DATA}/password")
+            subprocess.run(["notify-send", "An error occured", "Password is not enterred, or it's incorrect. Unable to continue."])
 
         remove_temp_file()
-        subprocess.run(["notify-send", "An error occured", "Password is not enterred, or it's incorrect. Unable to continue."])
 
     # Unpack a legacy archive with Tarball (for backward compatibility)
     def _unpack_tar_archive(self):
