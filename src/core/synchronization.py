@@ -155,7 +155,7 @@ class Syncing:
         os.system(f"notify-send 'Save Desktop Synchronization ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
         # Remove this status file after finished operations
-        if os.path.exists(f"{CACHE}/pb"):
-            os.remove(f"{CACHE}/pb")
+        if os.path.exists(f"{CACHE}/sync"):
+            os.remove(f"{CACHE}/sync")
 
 Syncing()
