@@ -72,11 +72,15 @@ class PeriodicBackups:
         else:
             self.filename = settings["filename-format"]
 
+        self.create_status_file()
         self.call_archive_command()
 
         self.save_last_backup_date()
-        self.config_saved()
         
+    # Create this file to enable some periodic saving features in archive.py
+    def create_status_file(self):
+        open(f"{CACHE}/pb", "w").close()
+
     # Call the command for making the archive
     def call_archive_command(self):
         self.archive_mode = "--create"
@@ -84,13 +88,14 @@ class PeriodicBackups:
 
         subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
+        # Remove this file after finishing operations
+        if os.path.exists(f"{CACHE}/pb"):
+            os.remove(f"{CACHE}/pb")
+
     # Save today's date to the {DATA}/periodic-saving.json file
     def save_last_backup_date(self):
         with open(f"{DATA}/periodic-saving.json", "w") as pb:
             json.dump({"last-saved": date.today().isoformat()}, pb)
-
-    def config_saved(self):
-        print("Configuration saved.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

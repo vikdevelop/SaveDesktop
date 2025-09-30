@@ -375,7 +375,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Show a "Please wait" pop-up window while checking the archive type
         def show_please_wait_toast():
             wait_toast = Adw.Toast.new(title=_("Please wait …"))
-            wait_toast.set_timeout(10)
+            wait_toast.set_timeout(5)
             self.toast_overlay.add_toast(wait_toast)
 
         # Check, if the archive is encrypted or not
@@ -460,7 +460,7 @@ class MainWindow(Adw.ApplicationWindow):
     # Action after closing pswdDialog
     def _pswdDialog_closed(self, w, response):
         if response == 'ok':
-            with open(f"{CACHE}/workspace/temp_file", "w") as tmp:
+            with open(f"{CACHE}/temp_file", "w") as tmp:
                 tmp.write(self.pswdEntry.get_text())
             self.save_config()
 
@@ -517,7 +517,7 @@ class MainWindow(Adw.ApplicationWindow):
     def _checkDialog_closed(self, w, response):
         if response == 'ok':
             self.checkDialog.set_response_enabled("ok", False)
-            with open(f"{CACHE}/workspace/temp_file", "w") as tmp:
+            with open(f"{CACHE}/temp_file", "w") as tmp:
                 tmp.write(self.checkEntry.get_text())
 
             self.import_config()
@@ -620,13 +620,13 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Stop Saving/Importing Configuration
     def _cancel(self, w):
-        self._kill_processes()
+        self._kill_process()
         self._set_default_widgets_state()
         for widget in [self.spinner, self.cancel_button, self.status_page]:
             self.status_box.remove(widget)
 
-    # Kill 7z, tar and savedesktop.core.config after clicking on the Cancel button
-    def _kill_processes(self):
+    # Kill a process for saving/importing configuration
+    def _kill_process(self):
         if hasattr(self, "archive_proc") and self.archive_proc.poll() is None:
             self.archive_proc.kill()
 
@@ -741,7 +741,7 @@ class MainWindow(Adw.ApplicationWindow):
     # action after closing the main window
     def on_close(self, w):
         self.close()
-        self._kill_processes()
+        self._kill_process()
 
         # Save window size, state, and filename
         settings["window-size"] = self.get_default_size()
@@ -754,7 +754,8 @@ class MainWindow(Adw.ApplicationWindow):
             os.remove(f"{CACHE}/expand_pb_row")
 
         # Remove this folder to cleanup unnecessary content created during saving,
-        # importing, or syncing the configuration only if the Python script for
-        # installing Flatpaks is not present
-        if not os.path.exists(f"{CACHE}/workspace/flatpaks_installer.py"):
-            subprocess.Popen(["rm", "-rf", f"{CACHE}/workspace"])
+        # importing, or syncing the configuration only if these files are not present
+        files_to_check = [f"{CACHE}/pb", f"{CACHE}/sync", f"{CACHE}/workspace/flatpaks_installer.py"]
+        for path in files_to_check:
+            if not os.path.exists(path):
+                subprocess.Popen(["rm", "-rf", f"{CACHE}/workspace"])

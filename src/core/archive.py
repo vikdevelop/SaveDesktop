@@ -21,18 +21,18 @@ def cleanup_cache_dir():
 
 # Get password entered in the "Create a new password" dialog from the temporary file
 def get_password():
-    temp_file = f"{TEMP_CACHE}/temp_file"
+    temp_file = f"{CACHE}/temp_file"
     if os.path.exists(temp_file):
         with open(temp_file) as tmp:
             return tmp.read().strip()
-    else:
+    elif os.path.exists(f"{DATA}/password"):
         p = PasswordStore()
         return p.password
 
 # Remove above temporary file
 def remove_temp_file():
-    if os.path.exists(f"{TEMP_CACHE}/temp_file"):
-        os.remove(f"{TEMP_CACHE}/temp_file")
+    if os.path.exists(f"{CACHE}/temp_file"):
+        os.remove(f"{CACHE}/temp_file")
 
 class Create:
     def __init__(self):
@@ -40,16 +40,18 @@ class Create:
 
     def start_saving(self):
         cleanup_cache_dir()
-        subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
-
-        print("Creating and moving the configuration archive or folder to the user-defined directory")
+        cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        print(cmd.stdout)
 
         # In the periodic saving mode, it's not allowed to save the
         # configuration without creating the archive
-        if settings["save-without-archive"] and f'{settings["periodic-saving-folder"]}' not in args.create:
+        if settings["save-without-archive"] and not os.path.exists(f"{CACHE}/pb"):
+            print("Moving the configuration to the user-defined directory")
             self._copy_config_to_folder()
         else:
             self._create_archive()
+
+            print("Moving the configuration archive to the user-defined directory")
             shutil.copyfile('cfg.sd.zip', f"{args.create}.sd.zip")
 
         print("Configuration saved successfully.")
@@ -68,7 +70,7 @@ class Create:
     def _create_archive(self):
         password = get_password()
         cmd = ['7z', 'a', '-tzip', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.']
-        if settings["enable-encryption"]:
+        if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb"):
             cmd.insert(4, "-mem=AES256")
             cmd.insert(5, f"-p{password}")
 
@@ -93,7 +95,7 @@ class Unpack:
         self._check_config_type()
         self._replace_home_in_files(".", home)
 
-        cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.config", "--import_"], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--import_"], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
         print(cmd.stdout)
 
         print("Configuration imported successfully.")
@@ -126,12 +128,14 @@ class Unpack:
         password = get_password()
 
         if password:
+            # Check if the password for archive is correct or not
             try:
                 subprocess.run(
                     ['7z', 'e', '-so', f'-p{password}' if password else '', self.import_file, 'dconf-settings.ini'],
                     capture_output=True, text=True, check=True
                 )
             except subprocess.CalledProcessError as e:
+                self.__handle_sync_error()
                 first_error = next((l for l in e.stderr.splitlines() if "Wrong password" in l), None)
                 raise ValueError(first_error or "Wrong password")
             print("Checking password is completed.")
@@ -141,6 +145,18 @@ class Unpack:
             capture_output=True, text=True, check=True
         )
         print(cmd.stdout)
+
+    def __handle_sync_error(self):
+        # If 7-Zip returns an error regarding an incorrect password and the {CACHE}/sync file
+        # is available, the {DATA}/password and {CACHE}/temp_file files will be deleted
+        # because them contain the incorrect password for the archive.
+        if os.path.exists(f"{CACHE}/sync"):
+            os.remove(f"{CACHE}/sync")
+            if os.path.exists(f"{DATA}/password"):
+                os.remove(f"{DATA}/password")
+
+        remove_temp_file()
+        subprocess.run(["notify-send", "An error occured", "Password is not enterred, or it's incorrect. Unable to continue."])
 
     # Unpack a legacy archive with Tarball (for backward compatibility)
     def _unpack_tar_archive(self):

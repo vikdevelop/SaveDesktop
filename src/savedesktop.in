@@ -26,6 +26,7 @@ import argparse
 import signal
 import locale
 import gettext
+import zipfile
 from datetime import date
 
 VERSION = '@VERSION@'
@@ -71,9 +72,16 @@ elif cmd.FOLDER_PATH: # save a configuration without an archive
 elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
     archive_mode = "--unpack"
     archive_name = f"{cmd.CFG_ARCHIVE_PATH}"
+
+    # Check, if the archive exists
     if not os.path.exists(archive_name):
         print(f"File not found: {archive_name}")
         exit(1)
+
+    # Check, if the archive is encrypted or not
+    if archive_name.endswith(".sd.zip"):
+        if any(z.flag_bits & 0x1 for z in zipfile.ZipFile(f"{archive_name}").infolist() if not z.filename.endswith("/")):
+            raise ValueError(f"Encrypted archives are not supported in this mode")
 
     subprocess.run([sys.executable, "-m", "savedesktop.core.archive", archive_mode, archive_name], env={**os.environ, "PYTHONPATH": f"{pkgdatadir}"})
 else: # show the app window

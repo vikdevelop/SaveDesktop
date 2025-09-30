@@ -1,6 +1,6 @@
 core_sources = [ '__init__.py',
 		'archive.py',
-                'config.py',
+                'de_config.py',
                 'flatpaks_installer.py',
                 'password_store.py',
                 'periodic_saving.py',

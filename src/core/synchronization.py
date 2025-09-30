@@ -58,6 +58,7 @@ class Syncing:
             os.system(f'notify-send "{err_str}" "{err}"')
         else:
             self.get_pb_info()
+            self.create_status_file()
             self.get_zip_file_status()
 
     # Send a notification about the started synchronization
@@ -92,7 +93,7 @@ class Syncing:
             status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(f"{settings['file-for-syncing']}/{self.file}.sd.zip").infolist() if not z.filename.endswith("/"))
         except:
             status = False
-            
+
         if status == True:
             self.get_pwd_from_file()
         else:
@@ -118,9 +119,9 @@ class Syncing:
             app.run([])
             self.password = try_passwordstore()
 
-        # #3 If password is still unavailable, get it from the {CACHE}/entered-password.txt file
-        if not self.password and os.path.exists(f"{CACHE}/workspace/temp_file"):
-            with open(f"{CACHE}/workspace/temp_file") as ep:
+        # #3 If password is still unavailable, get it from the {CACHE}/temp_file
+        if not self.password and os.path.exists(f"{CACHE}/temp_file"):
+            with open(f"{CACHE}/temp_file") as ep:
                 self.password = ep.read().strip()
 
         # #4 Final check
@@ -130,15 +131,21 @@ class Syncing:
             os.system(f'notify-send "{err_occurred}" "{msg}"')
         else:
             # #5 Continue in extraction
+            print("Password retrieved from file successfully")
             self.call_archive_command()
+
+    # Create this file to enable some synchronization features in terms of encryption in archive.py
+    def create_status_file(self):
+        open(f"{CACHE}/sync", "w").close()
                 
     # Extract the configuration archive
     def call_archive_command(self):
         self.archive_mode = "--unpack"
         self.archive_name = f"{settings['file-for-syncing']}/{self.file}.sd.zip"
 
-        subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"}, check=True)
-        self.done()
+        subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        if os.path.exists(f"{CACHE}/sync"):
+            self.done()
     
     def done(self):
         with open(f"{DATA}/sync-info.json", "w") as s:
@@ -146,5 +153,9 @@ class Syncing:
         
         # Send a notification about finished synchronization
         os.system(f"notify-send 'Save Desktop Synchronization ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")
+
+        # Remove this status file after finished operations
+        if os.path.exists(f"{CACHE}/pb"):
+            os.remove(f"{CACHE}/pb")
 
 Syncing()
