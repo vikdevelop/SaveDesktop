@@ -752,6 +752,5 @@ class MainWindow(Adw.ApplicationWindow):
         # Remove this folder to cleanup unnecessary content created during saving,
         # importing, or syncing the configuration only if these files are not present
         files_to_check = [f"{CACHE}/pb", f"{CACHE}/sync", f"{CACHE}/workspace/flatpaks_installer.py"]
-        for path in files_to_check:
-            if not os.path.exists(path):
-                subprocess.Popen(["rm", "-rf", f"{CACHE}/workspace"])
+        if not any(os.path.exists(path) for path in files_to_check):
+            subprocess.Popen(["rm", "-rf", f"{CACHE}/workspace"])
