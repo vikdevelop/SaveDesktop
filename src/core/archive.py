@@ -41,11 +41,10 @@ class Create:
     def start_saving(self):
         cleanup_cache_dir()
         cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
-        print(cmd.stdout)
 
         # In the periodic saving mode, it's not allowed to save the
         # configuration without creating the archive
-        if settings["save-without-archive"] and not os.path.exists(f"{CACHE}/pb"):
+        if settings["save-without-archive"] and not os.path.exists(f"{CACHE}/pb") or "Configuration-" in args.create:
             print("Moving the configuration to the user-defined directory")
             self._copy_config_to_folder()
         else:
