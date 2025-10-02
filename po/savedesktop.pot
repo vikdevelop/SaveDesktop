@@ -6,7 +6,7 @@ msgstr ""
 
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-18 11:40\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: \n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Set the file name"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:64
+#: src/gui/templates/shortcuts_window.ui:57
 #: src/gui/window.py
 #: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
@@ -79,7 +79,7 @@ msgstr ""
 msgid "Flatpak apps data selection"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:57
+#: src/gui/templates/shortcuts_window.ui:50
 #: src/gui/more_options_dialog.py
 msgid "More options"
 msgstr ""
@@ -349,7 +349,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/templates/shortcuts_window.ui:64
 #: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
@@ -375,7 +375,7 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:78
+#: src/gui/templates/shortcuts_window.ui:71
 #: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
