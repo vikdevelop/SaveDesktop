@@ -39,19 +39,21 @@ class Create:
         self.start_saving()
 
     def start_saving(self):
+        self.path_with_filename = args.create
+
         cleanup_cache_dir()
         subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
         # In the periodic saving mode, it's not allowed to save the
         # configuration without creating the archive
-        if settings["save-without-archive"] and not os.path.exists(f"{CACHE}/pb") or "Configuration-" in args.create:
+        if not self.path_with_filename.endswith(".sd.zip"):
             print("Moving the configuration to the user-defined directory")
             self._copy_config_to_folder()
         else:
             self._create_archive()
 
             print("Moving the configuration archive to the user-defined directory")
-            shutil.copyfile('cfg.sd.zip', f"{args.create}.sd.zip")
+            shutil.copyfile('cfg.sd.zip', self.path_with_filename)
 
         print("Configuration saved successfully.")
         remove_temp_file()
@@ -60,18 +62,19 @@ class Create:
     def _copy_config_to_folder(self):
         open(f".folder.sd", "w").close()
 
-        if os.path.exists(args.create):
-            shutil.rmtree(args.create)
+        if os.path.exists(self.path_with_filename):
+            shutil.rmtree(self.path_with_filename)
 
-        shutil.move(TEMP_CACHE, f"{args.create}")
+        shutil.move(TEMP_CACHE, self.path_with_filename)
 
     # Create a new ZIP archive with 7-Zip
     def _create_archive(self):
         password = get_password()
         cmd = ['7z', 'a', '-tzip', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.']
-        if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb") and os.path.exists(f"{DATA}/password"):
-            cmd.insert(4, "-mem=AES256")
-            cmd.insert(5, f"-p{password}")
+        if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb"):
+            if password:
+                cmd.insert(4, "-mem=AES256")
+                cmd.insert(5, f"-p{password}")
 
         proc = subprocess.run(cmd, capture_output=True, text=True)
         print(proc.stdout)

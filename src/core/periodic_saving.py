@@ -30,6 +30,10 @@ class PeriodicBackups:
     # or with checking it
     def run(self, now: bool) -> None:
         self.pbfolder = f'{settings["periodic-saving-folder"].format(download_dir)}'
+        self.status_desc = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
+
+        # Send a notification about started periodic saving
+        subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', self.status_desc])
 
         if now:
             print("MODE: Save now")
@@ -75,7 +79,7 @@ class PeriodicBackups:
         self.create_status_file()
         self.call_archive_command()
 
-        self.save_last_backup_date()
+        self.done()
         
     # Create this file to enable some periodic saving features in archive.py
     def create_status_file(self):
@@ -84,7 +88,11 @@ class PeriodicBackups:
     # Call the command for making the archive
     def call_archive_command(self):
         self.archive_mode = "--create"
-        self.archive_name = f"{self.pbfolder}/{self.filename}"
+        self.archive_name = f"{self.pbfolder}/{self.filename}.sd.zip"
+
+        print("Summary:")
+        print(f"Path: {self.archive_name}")
+        print(f"Encryption: {os.path.exists(f'{DATA}/password')}")
 
         subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
@@ -92,10 +100,17 @@ class PeriodicBackups:
         if os.path.exists(f"{CACHE}/pb"):
             os.remove(f"{CACHE}/pb")
 
-    # Save today's date to the {DATA}/periodic-saving.json file
-    def save_last_backup_date(self):
+    def done(self):
+        # Save today's date to the {DATA}/periodic-saving.json file
         with open(f"{DATA}/periodic-saving.json", "w") as pb:
             json.dump({"last-saved": date.today().isoformat()}, pb)
+
+        # Save the current periodic saving settings to the SaveDesktop.json file
+        if os.path.exists(f"{self.pbfolder}/SaveDesktop.json"):
+            open(f"{self.pbfolder}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
+
+        # Send a notification about finished periodic saving
+        subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', _("Configuration has been saved!")])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

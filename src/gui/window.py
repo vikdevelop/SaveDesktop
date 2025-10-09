@@ -527,6 +527,10 @@ class MainWindow(Adw.ApplicationWindow):
         print("Saving the configuration is in progress…\nFull output will be available after finishing this operation.")
         self.archive_mode = "--create"
         self.archive_name = f"{self.folder}/{self.filename_text}"
+
+        if not settings["save-without-archive"]:
+            self.archive_name += ".sd.zip"
+
         self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = self._set_status_desc_save()
         self.done_title = _("Configuration has been saved!")
@@ -537,7 +541,6 @@ class MainWindow(Adw.ApplicationWindow):
         save_thread.start()
 
     def _set_status_desc_save(self):
-        # Use "sd.zip" if Archive Encryption is enabled
         status_old = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n")
         status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
         return status.format(self.folder, self.filename_text)

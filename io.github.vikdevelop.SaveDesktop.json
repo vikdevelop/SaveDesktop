@@ -68,13 +68,13 @@
             ],
             "buildsystem" : "simple",
             "build-commands" : [
-                "cp -R * /app"
+                "cp -R dconf/* /app"
             ],
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/2.9.5n/dconf_build.tar.xz",
-                    "sha256" : "164fc714f96ef4b348665fc3617f54cfa5acf12df5c039d7a9d21ba1d86a2f2d"
+                    "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/3.7.1/dconf-build-override-049-amd64.tar.xz",
+                    "sha256" : "a1e644bbf755cccf531260a78bcc631d18c29518f86004256cd4b32d9e8a85f3"
                 }
             ]
         },
@@ -83,23 +83,15 @@
             "only-arches" : [
                 "aarch64"
             ],
-            "buildsystem" : "meson",
-            "config-opts" : [
-                "-Dsystemduserunitdir=/app/lib/systemd/user/",
-                "-Dbash_completion=false",
-                "-Dman=false"
-            ],
-            "cleanup" : [
-                "/include",
-                "/lib/pkgconfig",
-                "/libexec",
-                "/share/dbus-1"
+            "buildsystem" : "simple",
+            "build-commands" : [
+                "cp -R * /app"
             ],
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://download.gnome.org/sources/dconf/0.40/dconf-0.40.0.tar.xz",
-                    "sha256" : "cf7f22a4c9200421d8d3325c5c1b8b93a36843650c9f95d6451e20f0bcb24533"
+                    "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/3.7.1/dconf-build-override-049-amd64.tar.xz",
+                    "sha256" : "a60390607bda144a17b56e0557ec9bb3d1b7a5c6465270652769cfe7642dd528"
                 }
             ]
         },
