@@ -34,12 +34,15 @@ def remove_temp_file():
     if os.path.exists(temp_file):
         os.remove(temp_file)
 
+password = get_password()
+
 class Create:
     def __init__(self):
         self.start_saving()
 
     def start_saving(self):
         self.path_with_filename = args.create
+        print(f"Output path: {self.path_with_filename}")
 
         cleanup_cache_dir()
         subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
@@ -60,8 +63,6 @@ class Create:
 
     # Copy the configuration folder to the user-defined directory
     def _copy_config_to_folder(self):
-        open(f".folder.sd", "w").close()
-
         if os.path.exists(self.path_with_filename):
             shutil.rmtree(self.path_with_filename)
 
@@ -69,7 +70,6 @@ class Create:
 
     # Create a new ZIP archive with 7-Zip
     def _create_archive(self):
-        password = get_password()
         cmd = ['7z', 'a', '-tzip', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.']
         if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb"):
             if password:
@@ -90,8 +90,8 @@ class Unpack:
         self.start_importing()
 
     def start_importing(self):
-        self.import_file = args.unpack
-        self.import_folder = args.unpack
+        self.path_with_filename = args.unpack
+        print(f"Input path: {self.path_with_filename}")
 
         cleanup_cache_dir()
         self._check_config_type()
@@ -105,7 +105,7 @@ class Unpack:
 
     # Check, if the input is archive or folder
     def _check_config_type(self):
-        if self.import_file.endswith(".sd.zip") or self.import_file.endswith(".sd.tar.gz"):
+        if self.path_with_filename.endswith(".sd.zip") or self.path_with_filename.endswith(".sd.tar.gz"):
             self.is_folder = False
         else:
             self.is_folder = True
@@ -114,26 +114,25 @@ class Unpack:
         if self.is_folder:
             self._copy_folder_to_cache()
         else:
-            if self.import_file.endswith(".sd.zip"):
+            if self.path_with_filename.endswith(".sd.zip"):
                 self._unpack_zip_archive()
-            elif self.import_file.endswith(".sd.tar.gz"):
+            elif self.path_with_filename.endswith(".sd.tar.gz"):
                 self._unpack_tar_archive()
             else:
                 pass
 
     # Copy the user-defined folder to the cache directory
     def _copy_folder_to_cache(self):
-        shutil.copytree(self.import_folder, TEMP_CACHE, dirs_exist_ok=True, ignore_dangling_symlinks=True)
+        print("Copying a folder with the configuration to the cache directory")
+        shutil.copytree(self.path_with_filename, TEMP_CACHE, dirs_exist_ok=True, ignore_dangling_symlinks=True)
 
     # Unpack the ZIP archive with 7-Zip
     def _unpack_zip_archive(self):
-        password = get_password()
-
         if password:
-            # Check if the password for archive is correct or not
+            # Check, if the password for archive is correct or not
             try:
                 subprocess.run(
-                    ['7z', 'e', '-so', f'-p{password}' if password else '', self.import_file, 'dconf-settings.ini'],
+                    ['7z', 'e', '-so', f'-p{password}' if password else '', self.path_with_filename, 'dconf-settings.ini'],
                     capture_output=True, text=True, check=True
                 )
             except subprocess.CalledProcessError as e:
@@ -143,7 +142,7 @@ class Unpack:
             print("Checking password is completed.")
 
         cmd = subprocess.run(
-            ['7z', 'x', '-y', f'-p{password}', self.import_file, f'-o{TEMP_CACHE}'],
+            ['7z', 'x', '-y', f'-p{password}', self.path_with_filename, f'-o{TEMP_CACHE}'],
             capture_output=True, text=True, check=True
         )
         print(cmd.stdout)
@@ -162,7 +161,7 @@ class Unpack:
 
     # Unpack a legacy archive with Tarball (for backward compatibility)
     def _unpack_tar_archive(self):
-        cmd = subprocess.run(["tar", "-xzf", self.import_file, "-C", f"{TEMP_CACHE}"], capture_output=True, text=True, check=True)
+        cmd = subprocess.run(["tar", "-xzf", self.path_with_filename, "-C", f"{TEMP_CACHE}"], capture_output=True, text=True, check=True)
         print(cmd.stdout)
 
     # Replace original /home/$USER path with actual path in the dconf-settings.ini file and other XML files

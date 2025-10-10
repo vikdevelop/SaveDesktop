@@ -381,15 +381,19 @@ class CloudDialog(Adw.AlertDialog):
         self.cloudBox.append(self.psyncRow)
 
         # Load periodic sync values form GSettings database
-        old_psync = settings["periodic-import"]
+        self.old_periodic_sync = settings["periodic-import"]
         if settings["periodic-import"] == "Never2":
             self.psyncRow.set_selected(0)
+            self.set_response_enabled('ok', False)
         elif settings["periodic-import"] == "Daily2":
             self.psyncRow.set_selected(1)
+            self.set_response_enabled('ok', True)
         elif settings["periodic-import"] == "Weekly2":
             self.psyncRow.set_selected(2)
+            self.set_response_enabled('ok', True)
         elif settings["periodic-import"] == "Monthly2":
             self.psyncRow.set_selected(3)
+            self.set_response_enabled('ok', True)
 
         # Bidirectional Synchronization section
         ## Switch
@@ -439,7 +443,8 @@ class CloudDialog(Adw.AlertDialog):
             if not self.cfileRow.get_subtitle() == "":
                 self.set_response_enabled('ok', True)
         else:
-            self.set_response_enabled('ok', False)
+            if self.old_periodic_sync == "Never2":
+                self.set_response_enabled('ok', False)
 
     # Action after closing URL dialog
     def cloudDialog_closed(self, w, response):

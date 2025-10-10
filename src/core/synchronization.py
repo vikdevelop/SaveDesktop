@@ -13,7 +13,7 @@ class Syncing:
     def __init__(self):
         self.last_sync_date = self.load_last_sync_date()
         if not settings["file-for-syncing"]:
-            print("Synchronization is not set up.")
+            print("Synchronization is not set up. Maybe you have not selected the cloud drive folder in the \"Connect to the cloud storage\" dialog?")
         else:
             self.get_sync_interval()
     
@@ -36,7 +36,7 @@ class Syncing:
         }
         interval = intervals.get(settings["periodic-import"], None)
         if interval is None:
-            print("Synchronization is not set up. Maybe you have selected the Never interval?")
+            print("Synchronization is not set up. Maybe you have selected the Never interval in the \"Connect to the cloud storage\" dialog?")
         else:
             self.check_and_sync(interval)
     
@@ -54,8 +54,8 @@ class Syncing:
         self._send_notification_at_startup()
         if not os.path.exists(f"{settings['file-for-syncing']}/SaveDesktop.json"):
             err_str = _("An error occurred")
-            err = "SaveDesktop.json: directory or file does not exist."
-            os.system(f'notify-send "{err_str}" "{err}"')
+            err = "SaveDesktop.json is missing in the cloud drive folder!"
+            subprocess.run(["notify-send", err_str, err])
         else:
             self.get_pb_info()
             self.create_status_file()
@@ -75,7 +75,7 @@ class Syncing:
             .replace("</i>", "")
             .split("…", 1)[-1].strip()
         ).format(f'{settings["file-for-syncing"]}/{settings["filename-format"]}.sd.zip')
-        os.system(f'notify-send "Save Desktop Synchronization" "{subtitle}"')
+        subprocess.run(["notify-send", "Save Desktop Synchronization", subtitle])
         
     # Get data from the SaveDesktop.json file such as filename format, periodic saving interval and folder (for bidirectional synchronization)
     def get_pb_info(self):
@@ -128,7 +128,7 @@ class Syncing:
         if not self.password:
             msg = _("Password not entered, or it's incorrect. Unable to continue.")
             err_occurred = _("An error occurred")
-            os.system(f'notify-send "{err_occurred}" "{msg}"')
+            subprocess.run(["notify-send", err_occurred, msg])
         else:
             # #5 Continue in extraction
             print("Password retrieved from file successfully")
@@ -148,14 +148,15 @@ class Syncing:
             self.done()
     
     def done(self):
+        # Save today's date to the {DATA}/sync-info.json file
         with open(f"{DATA}/sync-info.json", "w") as s:
             json.dump({"last-synced": date.today().isoformat()}, s)
-        
-        # Send a notification about finished synchronization
-        os.system(f"notify-send 'Save Desktop Synchronization ({self.file})' '{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}' -i io.github.vikdevelop.SaveDesktop-symbolic")
 
         # Remove this status file after finished operations
         if os.path.exists(f"{CACHE}/sync"):
             os.remove(f"{CACHE}/sync")
+
+        # Send a notification about finished synchronization
+        subprocess.run(["notify-send", f"Save Desktop Synchronization ({self.file})", f"{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}.", "-i", "io.github.vikdevelop.SaveDesktop-symbolic"])
 
 Syncing()

@@ -380,9 +380,8 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Check, if the archive is encrypted or not
         def get_status_of_encryption():
-            self.is_folder = False
             try:
-                status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.import_file).infolist() if not z.filename.endswith("/"))
+                status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.path_to_import).infolist() if not z.filename.endswith("/"))
             except:
                 status = False
             if status == True:
@@ -396,7 +395,7 @@ class MainWindow(Adw.ApplicationWindow):
                 file = source.open_finish(res)
             except:
                 return
-            self.import_file = file.get_path()
+            self.path_to_import = file.get_path()
             show_please_wait_toast()
             check_thread = Thread(target=get_status_of_encryption)
             check_thread.start()
@@ -420,8 +419,7 @@ class MainWindow(Adw.ApplicationWindow):
                 folder = source.select_folder_finish(res)
             except:
                 return
-            self.import_folder = folder.get_path()
-            self.is_folder = True if os.path.exists(f"{self.import_folder}/.folder.sd") else False
+            self.path_to_import = folder.get_path()
             self.import_config()
 
         self.file_chooser = Gtk.FileDialog.new()
@@ -548,9 +546,9 @@ class MainWindow(Adw.ApplicationWindow):
     # Import configuration
     def import_config(self):
         print("Importing the configuration is in progress…\nFull output will be available after finishing this operation.")
-        self._identify_file_type()
         self.toast_overlay.dismiss_all()
 
+        self.archive_name = self.path_to_import
         self.archive_mode = "--unpack"
         self.status_title = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").format(self.archive_name)
@@ -560,12 +558,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.please_wait()
         import_thread = Thread(target=self._call_archive_command)
         import_thread.start()
-
-    def _identify_file_type(self):
-        try:
-            self.archive_name = self.import_folder
-        except:
-            self.archive_name = self.import_file
 
     def _call_archive_command(self):
         self.archive_proc = subprocess.Popen(

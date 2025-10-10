@@ -30,10 +30,8 @@ class PeriodicBackups:
     # or with checking it
     def run(self, now: bool) -> None:
         self.pbfolder = f'{settings["periodic-saving-folder"].format(download_dir)}'
-        self.status_desc = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
 
-        # Send a notification about started periodic saving
-        subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', self.status_desc])
+        self.send_notification_at_startup()
 
         if now:
             print("MODE: Save now")
@@ -42,10 +40,18 @@ class PeriodicBackups:
             print("MODE: Periodic saving")
             self.get_interval()
 
+    # Send a notification about started periodic saving
+    def send_notification_at_startup(self):
+        try:
+            self.status_desc = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
+            subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', self.status_desc])
+        except NameError: # handle an error: '_' is not defined
+            pass
+
     # Get the periodic saving interval from GSettings
     def get_interval(self):
         if settings["periodic-saving"] == 'Never':
-            print("Periodic saving is not set up.")
+            print("Periodic saving is not set up. Maybe you have selected Never interval in the More options dialog?")
         elif settings["periodic-saving"] == 'Daily':
             self.check_and_backup(1)
         elif settings["periodic-saving"] == 'Weekly':
@@ -66,9 +72,9 @@ class PeriodicBackups:
             try:
                 if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
                     os.makedirs(f"{download_dir}/SaveDesktop/archives")
-            except:
-                os.system(f"mkdir {home}/Downloads")
-                os.system(f"xdg-user-dirs-update --set DOWNLOAD {home}/Downloads")
+            except FileNotFoundError:
+                subprocess.run(["mkdir", f"{home}/Downloads"])
+                subprocess.run([f"xdg-user-dirs-update", "--set", "DOWNLOAD", f"{home}/Downloads"])
                 os.makedirs(f"{download_dir}/SaveDesktop/archives")
 
         if " " in settings["filename-format"]:
@@ -78,8 +84,6 @@ class PeriodicBackups:
 
         self.create_status_file()
         self.call_archive_command()
-
-        self.done()
         
     # Create this file to enable some periodic saving features in archive.py
     def create_status_file(self):
@@ -90,27 +94,29 @@ class PeriodicBackups:
         self.archive_mode = "--create"
         self.archive_name = f"{self.pbfolder}/{self.filename}.sd.zip"
 
-        print("Summary:")
-        print(f"Path: {self.archive_name}")
-        print(f"Encryption: {os.path.exists(f'{DATA}/password')}")
-
         subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
 
-        # Remove this file after finishing operations
-        if os.path.exists(f"{CACHE}/pb"):
-            os.remove(f"{CACHE}/pb")
+        self.done()
 
     def done(self):
         # Save today's date to the {DATA}/periodic-saving.json file
         with open(f"{DATA}/periodic-saving.json", "w") as pb:
             json.dump({"last-saved": date.today().isoformat()}, pb)
 
+        # Remove this file after finishing operations
+        if os.path.exists(f"{CACHE}/pb"):
+            os.remove(f"{CACHE}/pb")
+
         # Save the current periodic saving settings to the SaveDesktop.json file
+        # (only for cloud drive folders)
         if os.path.exists(f"{self.pbfolder}/SaveDesktop.json"):
             open(f"{self.pbfolder}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
 
         # Send a notification about finished periodic saving
-        subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', _("Configuration has been saved!")])
+        try:
+            subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', _("Configuration has been saved!")])
+        except NameError: # handle an error: '_' is not defined
+            pass
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
