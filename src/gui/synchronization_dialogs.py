@@ -148,10 +148,15 @@ class InitSetupDialog(Adw.AlertDialog):
 
     # copy the command for setting up the Rclone using Gdk.Clipboard()
     def __copy_rclone_command(self, w):
-        os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True) # create the requested folder before copying the command for setting up Rclone to the clipboard
+        # Create the requested folder before copying the command for setting up Rclone to the clipboard
+        os.makedirs(f"{download_dir}/SaveDesktop/rclone_drive", exist_ok=True)
 
+        # Replace "&amp;" characters with "&" due to syntax errors in Bash/Zsh
+        self.rclone_command = self.rclone_command.replace("&amp;", "&")
+
+        # Copy the command for setting up Rclone to the clipboard
         self.clipboard = Gdk.Display.get_default().get_clipboard()
-        self.clipboard_setup = Gdk.Clipboard.set(self.clipboard, self.rclone_command) # copy the command for setting up Rclone to the clipboard
+        self.clipboard_setup = Gdk.Clipboard.set(self.clipboard, self.rclone_command)
 
         self.set_extra_child(None)
         self.set_body(_("Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"))
