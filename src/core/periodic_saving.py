@@ -3,6 +3,7 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio
 from savedesktop.globals import *
+from savedesktop.core.synchronization_setup import set_up_auto_mount
 
 # Get the current date
 dt = datetime.now()
@@ -111,6 +112,11 @@ class PeriodicBackups:
         # (only for cloud drive folders)
         if os.path.exists(f"{self.pbfolder}/SaveDesktop.json"):
             open(f"{self.pbfolder}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
+
+        # If the {DATA}/savedesktop-synchronization.sh file exists, create it again,
+        # because it is possible that the cloud drive folder path has been changed
+        if os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
+            set_up_auto_mount(mount_type="periodic-saving")
 
         # Send a notification about finished periodic saving
         try:
