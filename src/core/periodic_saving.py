@@ -31,10 +31,9 @@ class PeriodicBackups:
     def run(self, now: bool) -> None:
         self.pbfolder = f'{settings["periodic-saving-folder"].format(download_dir)}'
 
-        self.send_notification_at_startup()
-
         if now:
             print("MODE: Save now")
+            self.send_notification_at_startup()
             self.backup()
         else:
             print("MODE: Periodic saving")
@@ -63,6 +62,7 @@ class PeriodicBackups:
     def check_and_backup(self, interval):
         today = date.today()
         if (today - self.last_backup_date).days >= interval:
+            self.send_notification_at_startup()
             self.backup()
         else:
             print(f"Backup not needed today. Last backup was on {self.last_backup_date}.")
