@@ -2,8 +2,10 @@ import gi, os
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw
+from threading import Thread
 from savedesktop.globals import *
 from savedesktop.core.password_store import PasswordStore
+from savedesktop.core.synchronization_setup import set_up_auto_mount, create_savedesktop_json
 
 class MoreOptionsDialog(Adw.AlertDialog):
     def __init__(self, parent):
@@ -215,6 +217,7 @@ class MoreOptionsDialog(Adw.AlertDialog):
         settings["periodic-saving"] = self.backup_item
         if not self.backup_item == "Never":
             self.__create_pb_desktop()
+            self.__update_synchronization_scripts()
 
     # create desktop file for enabling periodic saving at startup
     def __create_pb_desktop(self):
@@ -222,6 +225,14 @@ class MoreOptionsDialog(Adw.AlertDialog):
         if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
             with open(f'{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop', 'w') as cb:
                 cb.write(f'[Desktop Entry]\nName=SaveDesktop (Periodic backups)\nType=Application\nExec={periodic_saving_cmd}')
+
+    # write the periodic saving info (folder or filename) to these files if they exist
+    def __update_synchronization_scripts(self):
+        if os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
+            set_up_auto_mount(mount_type="periodic-saving")
+        if os.path.exists(f'{settings["periodic-saving-folder"]}/SaveDesktop.json'):
+            savedesktop_json = Thread(target=create_savedesktop_json)
+            savedesktop_json.start()
 
     # save the entered password to the file
     def _save_password(self):

@@ -1,6 +1,7 @@
 import subprocess, re, os
 from savedesktop.globals import *
 
+# Check if the cloud drive folder uses GVFS or Rclone FS or if it is a Syncthing folder
 def check_fs(folder):
     check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % folder)
     if not "gvfsd" in check_filesystem:
@@ -8,7 +9,13 @@ def check_fs(folder):
             if not os.path.exists(f"{folder}/.stfolder"):
                 return "You didn't select the cloud drive folder!"
 
-# set up auto-mounting of the cloud drives after logging in to the system
+# Create the SaveDesktop.json file in the cloud drive folder, which contains periodic saving filename and interval
+def create_savedesktop_json():
+    with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as json:
+        json.write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
+    print("The SaveDesktop.json file has been created or modified (if it already exists).")
+
+# Set up auto-mounting of the cloud drives after logging in to the system
 def set_up_auto_mount(mount_type):
     if mount_type == "periodic-saving":
         cfile_subtitle = settings["periodic-saving-folder"]
@@ -39,7 +46,7 @@ def set_up_auto_mount(mount_type):
                 elif "onedrive" in cfile_subtitle: # OneDrive
                     cloud_service = match.group(1)  # cloud_service for OneDrive
                     host = match.group(2)  # host for OneDrive
-                    user = match.group(3) # user is not relevant for OneDrive
+                    user = match.group(3) # user for OneDrive
                     ssl = None  # ssl is not relevant for OneDrive
                     prefix = None  # prefix is not relevant for OneDrive
                     cmd = f"gio mount {cloud_service}://{user}@{host}" # command for OneDrive
@@ -48,6 +55,7 @@ def set_up_auto_mount(mount_type):
                     host = match.group(2)  # host for DAV
                     ssl = match.group(3)  # ssl for DAV
                     user = match.group(4)  # user for DAV
+
                     if match.group(5): # prefix for DAV
                         prefix_old = match.group(5)
                         prefix = re.sub(r'gio mount |%2F', '/', prefix_old).replace('//', '').strip() # Replace 2%F with /
@@ -90,6 +98,8 @@ def set_up_auto_mount(mount_type):
         os.makedirs(f'{home}/.config/autostart', exist_ok=True)
         open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.sync.desktop", "w").write(f"[Desktop Entry]\nName=SaveDesktop (Synchronization)\nType=Application\nExec=sh {DATA}/savedesktop-synchronization.sh")
 
-        [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.MountDrive.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.server.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
+        [os.remove(path) for path in [f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Backup.desktop", f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"] if os.path.exists(path)]
+
+        print("Automatic connection to the cloud folder has been set up.")
     else:
-        raise AttributeError("There aren't possible to get values from the periodic-saving-folder or file-for-syncing strings")
+        raise AttributeError("It isn't possible to get values from the periodic-saving-folder or file-for-syncing strings")

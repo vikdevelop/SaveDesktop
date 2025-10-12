@@ -3,7 +3,6 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio
 from savedesktop.globals import *
-from savedesktop.core.synchronization_setup import set_up_auto_mount
 
 # Get the current date
 dt = datetime.now()
@@ -34,14 +33,14 @@ class PeriodicBackups:
 
         if now:
             print("MODE: Save now")
-            self.send_notification_at_startup()
+            self.send_notification_at_start_up()
             self.backup()
         else:
             print("MODE: Periodic saving")
             self.get_interval()
 
     # Send a notification about started periodic saving
-    def send_notification_at_startup(self):
+    def send_notification_at_start_up(self):
         try:
             self.status_desc = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
             subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', self.status_desc])
@@ -63,7 +62,7 @@ class PeriodicBackups:
     def check_and_backup(self, interval):
         today = date.today()
         if (today - self.last_backup_date).days >= interval:
-            self.send_notification_at_startup()
+            self.send_notification_at_start_up()
             self.backup()
         else:
             print(f"Backup not needed today. Last backup was on {self.last_backup_date}.")
@@ -107,16 +106,6 @@ class PeriodicBackups:
         # Remove this file after finishing operations
         if os.path.exists(f"{CACHE}/pb"):
             os.remove(f"{CACHE}/pb")
-
-        # Save the current periodic saving settings to the SaveDesktop.json file
-        # (only for cloud drive folders)
-        if os.path.exists(f"{self.pbfolder}/SaveDesktop.json"):
-            open(f"{self.pbfolder}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
-
-        # If the {DATA}/savedesktop-synchronization.sh file exists, create it again,
-        # because it is possible that the cloud drive folder path has been changed
-        if os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
-            set_up_auto_mount(mount_type="periodic-saving")
 
         # Send a notification about finished periodic saving
         try:

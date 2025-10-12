@@ -4,7 +4,7 @@ gi.require_version('Adw', '1')
 from threading import Thread
 from gi.repository import Gtk, Gdk, Adw, GLib, Gio
 from savedesktop.globals import *
-from savedesktop.core.synchronization_setup import check_fs, set_up_auto_mount
+from savedesktop.core.synchronization_setup import check_fs, create_savedesktop_json, set_up_auto_mount
 
 class InitSetupDialog(Adw.AlertDialog):
     def __init__(self, parent):
@@ -220,9 +220,13 @@ class SetDialog(Adw.AlertDialog):
         self.ps_row.set_title(f'{_("Periodic saving")}')
         self.ps_row.set_use_markup(True)
         self.ps_row.add_suffix(self.ps_button)
-        self.ps_row.set_subtitle(f'❌ {_("Never")}' if settings["periodic-saving"] == "Never"
-                                 else f'✅ {pb}')
-        self.ps_button.add_css_class('suggested-action') if settings["periodic-saving"] == "Never" else None
+        if settings["periodic-saving"] == "Never":
+            self.ps_row.set_subtitle(f'❌ {_("Never")}')
+            self.ps_button.add_css_class('suggested-action')
+            self.set_response_enabled('ok', False)
+        else:
+            self.ps_row.set_subtitle(f'✅ {pb}')
+            self.set_response_enabled('ok', True)
 
     # Create this file to set expanding the "Periodic saving" row in the More options dialog
     def _create_file_to_expand_row(self):
@@ -314,11 +318,16 @@ class SetDialog(Adw.AlertDialog):
     # save the SaveDesktop.json file to the periodic saving folder and set up the auto-mounting the cloud drive
     def _save_file(self):
         try:
-            open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w").write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
+            create_savedesktop_json()
+
+            # Setup mounting the cloud drive folder at start up
             set_up_auto_mount(mount_type="periodic-saving")
-            print("Auto mount has been set up.")
+
+            # Show the message about the necessity to log out of the system the first time
+            if settings["first-synchronization-setup"] and settings["periodic-saving"] != "Never":
+                self.parent.show_warn_toast()
         except Exception as e:
-            os.system(f"notify-send \'{_('An error occurred')}\' '{e}'")
+            subprocess.run(["notify-send", _("An error occured"), e])
         finally:
             pass
 
@@ -482,7 +491,6 @@ class CloudDialog(Adw.AlertDialog):
                     raise AttributeError(_("You didn't select the cloud drive folder!"))
                 else:
                     set_up_auto_mount(mount_type="cloud-receiver")
-                    print("Auto mount has been set up")
             else:
                 raise AttributeError(_("You didn't select the cloud drive folder!"))
         except Exception as e:
@@ -493,8 +501,7 @@ class CloudDialog(Adw.AlertDialog):
         else:
             GLib.idle_add(self.__post_setup)
 
-    # check if the selected periodic sync interval was Never: if yes, shows the message about the necessity to log out of the system
+    # Show the message about the necessity to log out of the system the first time
     def __post_setup(self):
-        if self.check_psync == "Never2":
-            if not settings["periodic-import"] == "Never2":
-                self.parent.show_warn_toast()
+        if settings["first-synchronization-setup"] and settings["periodic-import"] != "Never2":
+            self.parent.show_warn_toast()
