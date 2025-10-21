@@ -14,21 +14,8 @@ current_day = datetime.today()
 first_day = current_day.replace(day=1)
 
 class PeriodicBackups:
-    def __init__(self):
+    def __init__(self, now):
         self.last_backup_date = self.load_last_backup_date()
-
-    # Load last backup date from the {DATA}/periodic-saving.json file
-    def load_last_backup_date(self):
-        backup_file = f"{DATA}/periodic-saving.json"
-        if os.path.exists(backup_file):
-            with open(backup_file) as pb:
-                jp = json.load(pb)
-            return date.fromisoformat(jp.get("last-saved", "2000-01-01"))
-        return date(2000, 1, 1)
-
-    # Start periodic saving without checking last backup date (with --now parameter)
-    # or with checking it
-    def run(self, now: bool) -> None:
         self.pbfolder = f'{settings["periodic-saving-folder"].format(download_dir)}'
 
         if now:
@@ -38,6 +25,15 @@ class PeriodicBackups:
         else:
             print("MODE: Periodic saving")
             self.get_interval()
+
+    # Load last backup date from the {DATA}/periodic-saving.json file
+    def load_last_backup_date(self):
+        backup_file = f"{DATA}/periodic-saving.json"
+        if os.path.exists(backup_file):
+            with open(backup_file) as pb:
+                jp = json.load(pb)
+            return date.fromisoformat(jp.get("last-saved", "2000-01-01"))
+        return date(2000, 1, 1)
 
     # Send a notification about started periodic saving
     def send_notification_at_start_up(self):
@@ -112,12 +108,3 @@ class PeriodicBackups:
             subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', _("Configuration has been saved!")])
         except NameError: # handle an error: '_' is not defined
             pass
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--now", help="Save now", action="store_true")
-    args = parser.parse_args()
-
-    pb = PeriodicBackups()
-    pb.run(args.now)
-

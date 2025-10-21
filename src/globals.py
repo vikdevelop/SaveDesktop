@@ -42,8 +42,8 @@ os.makedirs(CACHE, exist_ok=True)
 os.makedirs(DATA, exist_ok=True)
 
 # Commands
-periodic_saving_cmd = f'{env["run_cmd"]} --background'
-sync_cmd = f'{env["run_cmd"]} --sync'
+periodic_saving_cmd = f'{env["run_cmd"]} --periodic-save'
+sync_cmd = f'{env["run_cmd"]} --periodic-sync'
 
 # Detect flags
 flatpak = (env['type'] == 'flatpak')

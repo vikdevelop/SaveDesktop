@@ -10,12 +10,17 @@ from savedesktop.gui.password_checker import PasswordCheckerApp
 dt = datetime.now()
 
 class Syncing:
-    def __init__(self):
+    def __init__(self, now):
         self.last_sync_date = self.load_last_sync_date()
-        if not settings["file-for-syncing"]:
-            print("Synchronization is not set up. Maybe you have not selected the cloud drive folder in the \"Connect to the cloud storage\" dialog?")
+        if now:
+            print("MODE: Sync now")
+            self.download_config()
         else:
-            self.get_sync_interval()
+            if not settings["file-for-syncing"]:
+                print("Synchronization is not set up. Maybe you have not selected the cloud drive folder in the \"Connect to the cloud storage\" dialog?")
+            else:
+                print("MODE: Synchronization")
+                self.get_sync_interval()
     
     # Load the last date from the {DATA}/sync-info.json file
     def load_last_sync_date(self):
@@ -50,16 +55,17 @@ class Syncing:
     
     # Download the configuration archive from the cloud drive folder
     def download_config(self):
-        print("MODE: Synchronization")
         self._send_notification_at_startup()
-        if not os.path.exists(f"{settings['file-for-syncing']}/SaveDesktop.json"):
-            err_str = _("An error occurred")
-            err = "SaveDesktop.json is missing in the cloud drive folder!"
-            subprocess.run(["notify-send", err_str, err])
-        else:
-            self.get_pb_info()
-            self.create_status_file()
-            self.get_zip_file_status()
+
+        # Check, if the SaveDesktop.json file exists, or not
+        try:
+            open(f"{settings['file-for-syncing']}/SaveDesktop.json").close()
+        except Exception as e:
+            subprocess.run(["notify-send", _("An error occured"), str(e)])
+
+        self.get_pb_info()
+        self.create_status_file()
+        self.get_zip_file_status()
 
     # Send a notification about the started synchronization
     def _send_notification_at_startup(self):
@@ -158,5 +164,3 @@ class Syncing:
 
         # Send a notification about finished synchronization
         subprocess.run(["notify-send", f"Save Desktop Synchronization ({self.file})", f"{_('The configuration has been applied!')} {_('Changes will only take effect after the next login')}.", "-i", "io.github.vikdevelop.SaveDesktop-symbolic"])
-
-Syncing()

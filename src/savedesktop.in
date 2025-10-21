@@ -45,30 +45,33 @@ gettext.install('savedesktop', localedir)
 
 # Command-line arguments
 parser = argparse.ArgumentParser()
-parser.add_argument("--background", action="store_true", help="Start periodic saving")
-parser.add_argument("--sync", action="store_true", help="Start synchronization")
+parser.add_argument("--background", "--periodic-save", action="store_true", help="Start periodic saving")
 parser.add_argument("--save-now", action="store_true", help="Save a configuration using UI parameters such as periodic saving folder, file name format and password for encryption.")
 parser.add_argument("--save-without-archive", type=str, help="Save the configuration without creating an archive", dest="FOLDER_PATH")
+parser.add_argument("--sync", "--periodic-sync", action="store_true", help="Start periodic synchronization")
+parser.add_argument("--sync-now", action="store_true", help="Sync the configuration immediately")
 parser.add_argument("--import-config", help="Import a configuration from a file (*.sd.zip or *.sd.tar.gz) or folder", type=str, dest="CFG_ARCHIVE_PATH")
 cmd = parser.parse_args()
 
 # Run Python scripts from the listed command-line arguments
 if cmd.background: # start periodic saving
     from savedesktop.core.periodic_saving import PeriodicBackups
-    pb = PeriodicBackups()
-    pb.run(None)
-elif cmd.sync: # sync a desktop configuration
-    from savedesktop.core.synchronization import Syncing
+    PeriodicBackups(now=False)
 elif cmd.save_now: # save a configuration using UI parameters
     from savedesktop.core.periodic_saving import PeriodicBackups
-    pb = PeriodicBackups()
-    pb.run(now=True)
+    pb = PeriodicBackups(now=True)
 elif cmd.FOLDER_PATH: # save a configuration without an archive
     archive_mode = "--create"
     archive_name = f"{cmd.FOLDER_PATH}/Configuration-{date.today()}"
 
     os.makedirs(archive_name, exist_ok=True)
     subprocess.run([sys.executable, "-m", "savedesktop.core.archive", archive_mode, archive_name], env={**os.environ, "PYTHONPATH": f"{pkgdatadir}"})
+elif cmd.sync: # sync a desktop configuration
+    from savedesktop.core.synchronization import Syncing
+    Syncing(now=False)
+elif cmd.sync_now: # sync a desktop configuration immediately
+    from savedesktop.core.synchronization import Syncing
+    Syncing(now=True)
 elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
     archive_mode = "--unpack"
     archive_name = f"{cmd.CFG_ARCHIVE_PATH}"
