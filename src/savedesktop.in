@@ -27,7 +27,9 @@ import signal
 import locale
 import gettext
 import zipfile
+import gi
 from datetime import date
+from gi.repository import Gio
 
 VERSION = '@VERSION@'
 pkgdatadir = '@pkgdatadir@'
@@ -53,13 +55,15 @@ parser.add_argument("--sync-now", action="store_true", help="Sync the configurat
 parser.add_argument("--import-config", help="Import a configuration from a file (*.sd.zip or *.sd.tar.gz) or folder", type=str, dest="CFG_ARCHIVE_PATH")
 cmd = parser.parse_args()
 
+# Import these modules before starting periodic saving or synchronization
+from savedesktop.core.periodic_saving import PeriodicBackups
+from savedesktop.core.synchronization import Syncing
+
 # Run Python scripts from the listed command-line arguments
 if cmd.background: # start periodic saving
-    from savedesktop.core.periodic_saving import PeriodicBackups
     PeriodicBackups(now=False)
 elif cmd.save_now: # save a configuration using UI parameters
-    from savedesktop.core.periodic_saving import PeriodicBackups
-    pb = PeriodicBackups(now=True)
+    PeriodicBackups(now=True)
 elif cmd.FOLDER_PATH: # save a configuration without an archive
     archive_mode = "--create"
     archive_name = f"{cmd.FOLDER_PATH}/Configuration-{date.today()}"
@@ -67,10 +71,8 @@ elif cmd.FOLDER_PATH: # save a configuration without an archive
     os.makedirs(archive_name, exist_ok=True)
     subprocess.run([sys.executable, "-m", "savedesktop.core.archive", archive_mode, archive_name], env={**os.environ, "PYTHONPATH": f"{pkgdatadir}"})
 elif cmd.sync: # sync a desktop configuration
-    from savedesktop.core.synchronization import Syncing
     Syncing(now=False)
 elif cmd.sync_now: # sync a desktop configuration immediately
-    from savedesktop.core.synchronization import Syncing
     Syncing(now=True)
 elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
     archive_mode = "--unpack"
@@ -78,8 +80,7 @@ elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
 
     # Check, if the archive exists
     if not os.path.exists(archive_name):
-        print(f"File not found: {archive_name}")
-        exit(1)
+        raise FileNotFoundError(f"{archive_name} does not exist.")
 
     # Check, if the archive is encrypted or not
     if archive_name.endswith(".sd.zip"):
@@ -88,9 +89,6 @@ elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
 
     subprocess.run([sys.executable, "-m", "savedesktop.core.archive", archive_mode, archive_name], env={**os.environ, "PYTHONPATH": f"{pkgdatadir}"})
 else: # show the app window
-    import gi
-
-    from gi.repository import Gio
     resource = Gio.Resource.load(os.path.join(pkgdatadir, 'savedesktop.gresource'))
     resource._register()
 
