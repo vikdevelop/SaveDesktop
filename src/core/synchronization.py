@@ -12,14 +12,14 @@ dt = datetime.now()
 class Syncing:
     def __init__(self, now):
         self.last_sync_date = self.load_last_sync_date()
-        if now:
-            print("MODE: Sync now")
-            self.download_config()
+        if not settings["file-for-syncing"]:
+            print("Synchronization is not set up. Maybe you have not selected the cloud drive folder in the \"Connect to the cloud storage\" dialog?")
         else:
-            if not settings["file-for-syncing"]:
-                print("Synchronization is not set up. Maybe you have not selected the cloud drive folder in the \"Connect to the cloud storage\" dialog?")
+            if now:
+                print("MODE: Sync now")
+                self.download_config()
             else:
-                print("MODE: Synchronization")
+                print("MODE: Periodic synchronization")
                 self.get_sync_interval()
     
     # Load the last date from the {DATA}/sync-info.json file
