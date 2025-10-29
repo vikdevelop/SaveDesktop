@@ -20,7 +20,6 @@ class PeriodicBackups:
 
         if now:
             print("MODE: Save now")
-            self.send_notification_at_start_up()
             self.backup()
         else:
             print("MODE: Periodic saving")
@@ -34,14 +33,6 @@ class PeriodicBackups:
                 jp = json.load(pb)
             return date.fromisoformat(jp.get("last-saved", "2000-01-01"))
         return date(2000, 1, 1)
-
-    # Send a notification about started periodic saving
-    def send_notification_at_start_up(self):
-        try:
-            self.status_desc = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
-            subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', self.status_desc])
-        except NameError: # handle an error: '_' is not defined
-            pass
 
     # Get the periodic saving interval from GSettings
     def get_interval(self):
@@ -58,12 +49,12 @@ class PeriodicBackups:
     def check_and_backup(self, interval):
         today = date.today()
         if (today - self.last_backup_date).days >= interval:
-            self.send_notification_at_start_up()
             self.backup()
         else:
             print(f"Backup not needed today. Last backup was on {self.last_backup_date}.")
 
     def backup(self):
+        self._send_notification_at_start_up()
         if self.pbfolder == '{}/SaveDesktop/archives'.format(download_dir) or self.pbfolder == f'{download_dir}/SaveDesktop/archives':
             try:
                 if not os.path.exists(f"{download_dir}/SaveDesktop/archives"):
@@ -81,6 +72,14 @@ class PeriodicBackups:
         self.create_status_file()
         self.call_archive_command()
         
+    # Send a notification about started periodic saving
+    def _send_notification_at_start_up(self):
+        try:
+            self.status_desc = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
+            subprocess.run(["notify-send", f'Save Desktop ({_("Periodic saving")})', self.status_desc])
+        except NameError: # handle an error: '_' is not defined
+            pass
+
     # Create this file to enable some periodic saving features in archive.py
     def create_status_file(self):
         open(f"{CACHE}/pb", "w").close()

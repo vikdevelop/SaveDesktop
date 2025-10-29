@@ -39,11 +39,19 @@ if not dest_dir == None:
         system_flatpak_dir = '/var/lib/flatpak/app'
         user_flatpak_dir = os.path.expanduser('~/.local/share/flatpak/app')
         # Load Flatpaks from bash scripts
-        installed_flatpaks = set()
+        installed_flatpaks = {}
         for file in installed_flatpaks_files:
             if os.path.exists(file):
                 with open(file, 'r') as f:
-                    installed_flatpaks.update(line.split()[3] for line in f if line.startswith('flatpak install'))
+                    for line in f:
+                        if line.startswith('flatpak install'):
+                            parts = line.split()
+                            if '--user' in parts:
+                                app = parts[3]
+                                installed_flatpaks[app] = '--user'
+                            elif '--system' in parts:
+                                app = parts[3]
+                                installed_flatpaks[app] = '--system'
 
         # Get installed Flatpaks in the specified directories
         installed_apps = set()
@@ -52,11 +60,11 @@ if not dest_dir == None:
                 installed_apps.update(app for app in os.listdir(directory) if os.path.isdir(os.path.join(directory, app)))
 
         # Compare Flatpaks listed in the Bash scripts with the installed ones
-        flatpaks_to_install = installed_flatpaks - installed_apps
+        flatpaks_to_install = {app: method for app, method in installed_flatpaks.items() if app not in installed_apps}
 
         if flatpaks_to_install:
-            for app in flatpaks_to_install:
-                subprocess.run(['flatpak', 'install', '--user', 'flathub', app, '-y'])
+            for app, method in flatpaks_to_install.items():
+                subprocess.run(['flatpak', 'install', method, 'flathub', app, '-y'])
         else:
             print('All Flatpak apps are installed.')
 else:
