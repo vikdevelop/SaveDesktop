@@ -126,26 +126,8 @@ class MainWindow(Adw.ApplicationWindow):
             self.sync_desktop()
             self.connect("close-request", self.on_close)
 
-        # Check the user's current desktop
-        desktop_env = os.getenv('XDG_CURRENT_DESKTOP')
-        desktop_map = {
-            'GNOME': 'GNOME',
-            'zorin:GNOME': 'GNOME',
-            'ubuntu:GNOME': 'GNOME',
-            'pop:GNOME': 'COSMIC (Old)',
-            'COSMIC': 'COSMIC (New)',
-            'Pantheon': 'Pantheon',
-            'X-Cinnamon': 'Cinnamon',
-            'Budgie': 'Budgie',
-            'Budgie:GNOME': 'Budgie',
-            'XFCE': 'Xfce',
-            'MATE': 'MATE',
-            'KDE': 'KDE Plasma',
-            'Deepin': 'Deepin',
-            'Hyprland': 'Hyprland'}
-
-        if desktop_env in desktop_map:
-            setup_environment(desktop_map[desktop_env])
+        if environment:
+            setup_environment(environment["de_name"])
         else:
             # Handle unsupported desktop environments
             self.headerbar.set_title_widget(None)
@@ -156,7 +138,14 @@ class MainWindow(Adw.ApplicationWindow):
             self.pBox.set_margin_start(50)
             self.pBox.set_margin_end(50)
             self.toolbarview.set_content(self.pBox)
-            self.unsupp_label = Gtk.Label.new(str=f'<big>{_("<big><b>You have an unsupported environment installed.</b></big>\nPlease use one of these environments: {}.")}</big>'.format(', '.join(set(desktop_map.values())))); self.unsupp_label.set_use_markup(True); self.unsupp_label.set_justify(Gtk.Justification.CENTER); self.unsupp_label.set_wrap(True); self.pBox.append(self.unsupp_label)
+
+            self.env_list = [env["de_name"] for env in ENVIRONMENTS.values()]
+            self.unsupp_label = Gtk.Label.new()
+            self.unsupp_label.set_label(str=f'<big>{_("<big><b>You have an unsupported environment installed.</b></big>\nPlease use one of these environments: {}.")}</big>'.format(self.env_list))
+            self.unsupp_label.set_use_markup(True)
+            self.unsupp_label.set_justify(Gtk.Justification.CENTER)
+            self.unsupp_label.set_wrap(True)
+            self.pBox.append(self.unsupp_label)
 
     # Show main page
     def save_desktop(self):

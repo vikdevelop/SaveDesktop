@@ -24,36 +24,7 @@ def safe_copytree(src: str, dst: str, ignore=None):
     else:
         print(f"[SKIP] Directory not found: {src}")
 
-# Desktop environments list and their directories
-GNOME_DIRS = [
-    (f"{home}/.local/share/gnome-background-properties", "gnome-background-properties"),
-    (f"{home}/.local/share/nautilus-python", "nautilus-python"),
-    (f"{home}/.local/share/nautilus", "nautilus"),
-    (f"{home}/.config/gnome-control-center", "gnome-control-center"),
-]
-
-BUDGIE_DIRS = [
-    (f"{home}/.config/budgie-desktop", "budgie-desktop"),
-    (f"{home}/.config/budgie-extras", "budgie-extras"),
-    (f"{home}/.config/nemo", "nemo")
-]
-
-ENVIRONMENTS = {
-    "GNOME": {"de_name": "GNOME", "dirs": GNOME_DIRS},
-    "ubuntu:GNOME": {"de_name": "GNOME", "dirs": GNOME_DIRS},
-    "zorin:GNOME": {"de_name": "GNOME", "dirs": GNOME_DIRS},
-    "Pantheon": {"de_name": "Pantheon", "dirs": [(f"{home}/.config/plank", "plank"), (f"{home}/.config/marlin", "marlin")]},
-    "X-Cinnamon": {"de_name": "Cinnamon", "dirs": [(f"{home}/.config/nemo", "nemo"), (f"{home}/.local/share/cinnamon", "cinnamon"), (f"{home}/.cinnamon", ".cinnamon")]},
-    "Budgie": {"de_name": "Budgie", "dirs": BUDGIE_DIRS},
-    "Budgie:GNOME": {"de_name": "Budgie", "dirs": BUDGIE_DIRS},
-    "pop:GNOME": {"de_name": "COSMIC (Old)", "dirs": [(f"{home}/.config/pop-shell", "pop-shell"), (f"{home}/.local/share/nautilus", "nautilus")]},
-    "COSMIC": {"de_name": "COSMIC (New)", "dirs": [(f"{home}/.config/cosmic", "cosmic"), (f"{home}/.local/state/cosmic", "cosmic-state")]},
-    "XFCE": {"de_name": "Xfce", "dirs": [(f"{home}/.config/xfce4", "xfce4"), (f"{home}/.config/Thunar", "Thunar"), (f"{home}/.xfce4", ".xfce4")]},
-    "MATE": {"de_name": "MATE", "dirs": [(f"{home}/.config/caja", "caja")]},
-    "Deepin": {"de_name": "Deepin", "dirs": [(f"{home}/.config/deepin", "deepin"), (f"{home}/.local/share/deepin", "deepin-data")]},
-    "Hyprland": {"de_name": "Hyprland", "dirs": [(f"{home}/.config/hypr", "hypr")]},
-}
-
+# Directories for KDE Plasma DE
 KDE_DIRS_SAVE = [
     (f"{home}/.config/plasmarc", "xdg-config/plasmarc"),
     (f"{home}/.config/plasmashellrc", "xdg-config/plasmashellrc"),
@@ -73,9 +44,6 @@ KDE_DIRS_IMPORT = [
     ("xdg-config", f"{home}/.config"),
     ("xdg-data", f"{home}/.local/share"),
 ]
-
-environment_key = os.getenv("XDG_CURRENT_DESKTOP", "")
-environment = ENVIRONMENTS.get(environment_key, None)
 
 class Save:
     def __init__(self):
@@ -124,21 +92,22 @@ class Save:
                 self.save_flatpak_data()
 
         # Environment specific
-        if environment_key == "KDE":
-            print("Saving KDE Plasma configuration...")
-            os.makedirs("xdg-config", exist_ok=True)
-            os.makedirs("xdg-data", exist_ok=True)
-            os.system(f"cp -R {home}/.config/[k]* ./xdg-config/")
-            os.system(f"cp -R {home}/.local/share/[k]* ./xdg-data/")
-            for src, dst in KDE_DIRS_SAVE:
-                if os.path.isfile(src):
-                    safe_copy(src, dst)
-                else:
+        if environment:
+            if environment["de_name"] == "KDE Plasma":
+                print("Saving KDE Plasma configuration...")
+                os.makedirs("xdg-config", exist_ok=True)
+                os.makedirs("xdg-data", exist_ok=True)
+                os.system(f"cp -R {home}/.config/[k]* ./xdg-config/")
+                os.system(f"cp -R {home}/.local/share/[k]* ./xdg-data/")
+                for src, dst in KDE_DIRS_SAVE:
+                    if os.path.isfile(src):
+                        safe_copy(src, dst)
+                    else:
+                        safe_copytree(src, dst)
+            else:
+                print(f"Saving environment-specific config for: {environment['de_name']}")
+                for src, dst in environment["dirs"]:
                     safe_copytree(src, dst)
-        elif environment:
-            print(f"Saving environment-specific config for: {environment['de_name']}")
-            for src, dst in environment["dirs"]:
-                safe_copytree(src, dst)
         else:
             print(f"[WARN] Unknown DE: {environment_key}")
     
@@ -195,14 +164,15 @@ class Import:
         safe_copytree(".icons", f"{home}/.icons")
 
         # Environment specific
-        if environment_key == "KDE":
-            print("Importing KDE Plasma configuration...")
-            for src, dst in KDE_DIRS_IMPORT:
-                safe_copytree(src, dst)
-        elif environment:
-            print(f"Importing environment-specific config for: {environment['de_name']}")
-            for src, dst in environment["dirs"]:
-                safe_copytree(dst, src)
+        if environment:
+            if environment["de_name"] == "KDE Plasma":
+                print("Importing KDE Plasma configuration...")
+                for src, dst in KDE_DIRS_IMPORT:
+                    safe_copytree(src, dst)
+            else:
+                print(f"Importing environment-specific config for: {environment['de_name']}")
+                for src, dst in environment["dirs"]:
+                    safe_copytree(dst, src)
         else:
             print(f"[WARN] Unknown DE: {environment_key}")
         

@@ -51,7 +51,7 @@ flatpak = (env['type'] == 'flatpak')
 # Application path
 app_prefix = os.environ.get('SAVEDESKTOP_DIR')
 
-# Desktop Environment Detection
+# DE detection
 # Desktop environments list and their directories
 GNOME_DIRS = [
     (f"{home}/.local/share/gnome-background-properties", "gnome-background-properties"),
@@ -80,34 +80,14 @@ ENVIRONMENTS = {
     "MATE": {"de_name": "MATE", "dirs": [(f"{home}/.config/caja", "caja")]},
     "Deepin": {"de_name": "Deepin", "dirs": [(f"{home}/.config/deepin", "deepin"), (f"{home}/.local/share/deepin", "deepin-data")]},
     "Hyprland": {"de_name": "Hyprland", "dirs": [(f"{home}/.config/hypr", "hypr")]},
+    "KDE": {"de_name": "KDE Plasma"},
 }
 
-KDE_DIRS_SAVE = [
-    (f"{home}/.config/plasmarc", "xdg-config/plasmarc"),
-    (f"{home}/.config/plasmashellrc", "xdg-config/plasmashellrc"),
-    (f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc", "xdg-config/plasma-org.kde.plasma.desktop-appletsrc"),
-    (f"{home}/.config/dolphinrc", "xdg-config/dolphinrc"),
-    (f"{home}/.config/gtkrc", "xdg-config/gtkrc"),
-    (f"{home}/.config/Kvantum", "xdg-config/Kvantum"),
-    (f"{home}/.config/latte", "xdg-config/latte"),
-    (f"{home}/.local/share/dolphin", "xdg-data/dolphin"),
-    (f"{home}/.local/share/sddm", "xdg-data/sddm"),
-    (f"{home}/.local/share/aurorae", "xdg-data/aurorae"),
-    (f"{home}/.local/share/plasma-systemmonitor", "xdg-data/plasma-systemmonitor"),
-    (f"{home}/.local/share/color-schemes", "xdg-data/color-schemes"),
-]
-
-KDE_DIRS_IMPORT = [
-    ("xdg-config", f"{home}/.config"),
-    ("xdg-data", f"{home}/.local/share"),
-]
-
-XDG = os.getenv("XDG_CURRENT_DESKTOP", "")
-environment = ENVIRONMENTS.get(XDG, None)
+environment_key = os.getenv("XDG_CURRENT_DESKTOP", "")
+environment = ENVIRONMENTS.get(environment_key, None)
 
 # Export
 __all__ = [
-    'home', 'download_dir', 'flatpak', 'settings', 'DATA', 'CACHE',
-    'app_prefix', 'periodic_saving_cmd', 'sync_cmd', 'XDG', 'environment'
+    'home', 'download_dir', 'flatpak', 'settings', 'environment_key', 'environment',
+    'ENVIRONMENTS', 'DATA', 'CACHE', 'app_prefix', 'periodic_saving_cmd', 'sync_cmd'
 ]
-
