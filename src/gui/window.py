@@ -136,6 +136,7 @@ class MainWindow(Adw.ApplicationWindow):
             'COSMIC': 'COSMIC (New)',
             'Pantheon': 'Pantheon',
             'X-Cinnamon': 'Cinnamon',
+            'Budgie': 'Budgie',
             'Budgie:GNOME': 'Budgie',
             'XFCE': 'Xfce',
             'MATE': 'MATE',

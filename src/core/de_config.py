@@ -32,13 +32,20 @@ GNOME_DIRS = [
     (f"{home}/.config/gnome-control-center", "gnome-control-center"),
 ]
 
+BUDGIE_DIRS = [
+    (f"{home}/.config/budgie-desktop", "budgie-desktop"),
+    (f"{home}/.config/budgie-extras", "budgie-extras"),
+    (f"{home}/.config/nemo", "nemo")
+]
+
 ENVIRONMENTS = {
     "GNOME": {"de_name": "GNOME", "dirs": GNOME_DIRS},
     "ubuntu:GNOME": {"de_name": "GNOME", "dirs": GNOME_DIRS},
     "zorin:GNOME": {"de_name": "GNOME", "dirs": GNOME_DIRS},
     "Pantheon": {"de_name": "Pantheon", "dirs": [(f"{home}/.config/plank", "plank"), (f"{home}/.config/marlin", "marlin")]},
     "X-Cinnamon": {"de_name": "Cinnamon", "dirs": [(f"{home}/.config/nemo", "nemo"), (f"{home}/.local/share/cinnamon", "cinnamon"), (f"{home}/.cinnamon", ".cinnamon")]},
-    "Budgie:GNOME": {"de_name": "Budgie", "dirs": [(f"{home}/.config/budgie-desktop", "budgie-desktop"), (f"{home}/.config/budgie-extras", "budgie-extras"), (f"{home}/.config/nemo", "nemo")]},
+    "Budgie": {"de_name": "Budgie", "dirs": BUDGIE_DIRS},
+    "Budgie:GNOME": {"de_name": "Budgie", "dirs": BUDGIE_DIRS},
     "pop:GNOME": {"de_name": "COSMIC (Old)", "dirs": [(f"{home}/.config/pop-shell", "pop-shell"), (f"{home}/.local/share/nautilus", "nautilus")]},
     "COSMIC": {"de_name": "COSMIC (New)", "dirs": [(f"{home}/.config/cosmic", "cosmic"), (f"{home}/.local/state/cosmic", "cosmic-state")]},
     "XFCE": {"de_name": "Xfce", "dirs": [(f"{home}/.config/xfce4", "xfce4"), (f"{home}/.config/Thunar", "Thunar"), (f"{home}/.xfce4", ".xfce4")]},
@@ -67,8 +74,7 @@ KDE_DIRS_IMPORT = [
     ("xdg-data", f"{home}/.local/share"),
 ]
 
-XDG = os.getenv("XDG_CURRENT_DESKTOP", "")
-environment_key = XDG
+environment_key = os.getenv("XDG_CURRENT_DESKTOP", "")
 environment = ENVIRONMENTS.get(environment_key, None)
 
 class Save:
