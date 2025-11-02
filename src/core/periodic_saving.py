@@ -3,6 +3,7 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 from gi.repository import GLib, Gio
 from savedesktop.globals import *
+from savedesktop.core.archive import Create
 
 # Get the current date
 dt = datetime.now()
@@ -86,10 +87,9 @@ class PeriodicBackups:
 
     # Call the command for making the archive
     def call_archive_command(self):
-        self.archive_mode = "--create"
-        self.archive_name = f"{self.pbfolder}/{self.filename}.sd.zip"
+        dir_path = f"{self.pbfolder}/{self.filename}.sd.zip"
 
-        subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        Create(dir_path) # archive.py
 
         self.done()
 

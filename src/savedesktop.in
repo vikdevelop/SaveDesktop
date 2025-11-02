@@ -58,6 +58,7 @@ cmd = parser.parse_args()
 # Import these modules before starting periodic saving or synchronization
 from savedesktop.core.periodic_saving import PeriodicBackups
 from savedesktop.core.synchronization import Syncing
+from savedesktop.core.archive import Create, Unpack
 
 # Run Python scripts from the listed command-line arguments
 if cmd.background: # start periodic saving
@@ -65,29 +66,25 @@ if cmd.background: # start periodic saving
 elif cmd.save_now: # save a configuration using UI parameters
     PeriodicBackups(now=True)
 elif cmd.FOLDER_PATH: # save a configuration without an archive
-    archive_mode = "--create"
-    archive_name = f"{cmd.FOLDER_PATH}/Configuration-{date.today()}"
-
-    os.makedirs(archive_name, exist_ok=True)
-    subprocess.run([sys.executable, "-m", "savedesktop.core.archive", archive_mode, archive_name], env={**os.environ, "PYTHONPATH": f"{pkgdatadir}"})
+    dir_path = f"{cmd.FOLDER_PATH}/Configuration-{date.today()}"
+    Create(dir_path) # archive.py
 elif cmd.sync: # sync a desktop configuration
     Syncing(now=False)
 elif cmd.sync_now: # sync a desktop configuration immediately
     Syncing(now=True)
 elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
-    archive_mode = "--unpack"
-    archive_name = f"{cmd.CFG_ARCHIVE_PATH}"
+    dir_path = f"{cmd.CFG_ARCHIVE_PATH}"
 
     # Check, if the archive exists
-    if not os.path.exists(archive_name):
-        raise FileNotFoundError(f"{archive_name} does not exist.")
+    if not os.path.exists(dir_path):
+        raise FileNotFoundError(f"{dir_path} does not exist.")
 
     # Check, if the archive is encrypted or not
-    if archive_name.endswith(".sd.zip"):
-        if any(z.flag_bits & 0x1 for z in zipfile.ZipFile(f"{archive_name}").infolist() if not z.filename.endswith("/")):
+    if dir_path.endswith(".sd.zip"):
+        if any(z.flag_bits & 0x1 for z in zipfile.ZipFile(f"{dir_path}").infolist() if not z.filename.endswith("/")):
             raise ValueError(f"Encrypted archives are not supported in this mode")
 
-    subprocess.run([sys.executable, "-m", "savedesktop.core.archive", archive_mode, archive_name], env={**os.environ, "PYTHONPATH": f"{pkgdatadir}"})
+    Unpack(dir_path) # archive.py
 else: # show the app window
     resource = Gio.Resource.load(os.path.join(pkgdatadir, 'savedesktop.gresource'))
     resource._register()

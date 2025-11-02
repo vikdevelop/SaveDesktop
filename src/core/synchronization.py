@@ -6,6 +6,7 @@ from gi.repository import Gio, GLib
 from savedesktop.globals import *
 from savedesktop.core.password_store import PasswordStore
 from savedesktop.gui.password_checker import PasswordCheckerApp
+from savedesktop.core.archive import Unpack
 
 dt = datetime.now()
 
@@ -95,12 +96,7 @@ class Syncing:
         
     # Check, if the ZIP archive is encrypted or not
     def get_zip_file_status(self):
-        try:
-            status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(f"{settings['file-for-syncing']}/{self.file}.sd.zip").infolist() if not z.filename.endswith("/"))
-        except:
-            status = False
-
-        if status == True:
+        if any(z.flag_bits & 0x1 for z in zipfile.ZipFile(f'{settings["file-for-syncing"]}/{self.file}.sd.zip').infolist() if not z.filename.endswith("/")):
             self.get_pwd_from_file()
         else:
             self.password = None
@@ -146,10 +142,10 @@ class Syncing:
                 
     # Extract the configuration archive
     def call_archive_command(self):
-        self.archive_mode = "--unpack"
-        self.archive_name = f"{settings['file-for-syncing']}/{self.file}.sd.zip"
+        dir_path = f"{settings['file-for-syncing']}/{self.file}.sd.zip"
 
-        subprocess.run([sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name], env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        Unpack(dir_path) # archive.py
+
         if os.path.exists(f"{CACHE}/sync"):
             self.done()
     

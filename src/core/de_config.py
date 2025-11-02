@@ -67,15 +67,9 @@ KDE_DIRS_IMPORT = [
     ("xdg-data", f"{home}/.local/share"),
 ]
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-s", "--save", help="Save the current configuration", action="store_true")
-parser.add_argument("-i", "--import_", help="Import saved configuration", action="store_true")
-args = parser.parse_args()
-
 XDG = os.getenv("XDG_CURRENT_DESKTOP", "")
 environment_key = XDG
 environment = ENVIRONMENTS.get(environment_key, None)
-
 
 class Save:
     def __init__(self):
@@ -217,8 +211,3 @@ class Import:
             os.makedirs(f"{home}/.config/autostart", exist_ok=True)
             with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as fa:
                 fa.write(f"[Desktop Entry]\nName=SaveDesktop (Flatpak Apps installer)\nType=Application\nExec=python3 {CACHE}/workspace/flatpaks_installer.py")
-
-if args.save:
-    Save()
-elif args.import_:
-    Import()

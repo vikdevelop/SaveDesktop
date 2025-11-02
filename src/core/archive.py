@@ -1,11 +1,7 @@
 import os, sys, shutil, subprocess, argparse, re
 from savedesktop.globals import *
 from savedesktop.core.password_store import PasswordStore
-
-parser = argparse.ArgumentParser()
-parser.add_argument("-c", "--create", help="Create archive", type=str)
-parser.add_argument("-u", "--unpack", help="Unpack archive", type=str)
-args = parser.parse_args()
+from savedesktop.core.de_config import Save, Import
 
 TEMP_CACHE = f"{CACHE}/workspace"
 temp_file = f"{CACHE}/temp_file"
@@ -15,7 +11,7 @@ def cleanup_cache_dir():
     print("Cleaning up the cache directory")
     try:
         shutil.rmtree(TEMP_CACHE)
-    except:
+    except FileNotFoundError:
         pass
     os.makedirs(TEMP_CACHE, exist_ok=True)
     os.chdir(TEMP_CACHE)
@@ -37,15 +33,14 @@ def remove_temp_file():
 password = get_password()
 
 class Create:
-    def __init__(self):
+    def __init__(self, dir_path):
+        self.path_with_filename = dir_path
+        print(f"Output path: {self.path_with_filename}")
         self.start_saving()
 
     def start_saving(self):
-        self.path_with_filename = args.create
-        print(f"Output path: {self.path_with_filename}")
-
         cleanup_cache_dir()
-        subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--save"], check=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+        Save() # de_config.py
 
         # In the periodic saving mode, it's not allowed to save the
         # configuration without creating the archive
@@ -86,40 +81,45 @@ class Create:
             print("7z finished with warnings:", proc.stderr)
 
 class Unpack:
-    def __init__(self):
+    def __init__(self, dir_path):
+        self.path_with_filename = dir_path
+        print(f"Input path: {self.path_with_filename}")
         self.start_importing()
 
     def start_importing(self):
-        self.path_with_filename = args.unpack
-        print(f"Input path: {self.path_with_filename}")
-
         cleanup_cache_dir()
         self._check_config_type()
         self._replace_home_in_files(".", home)
 
-        cmd = subprocess.run([sys.executable, "-m", "savedesktop.core.de_config", "--import_"], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
-        print(cmd.stdout)
+        Import() # de_config.py
 
         print("Configuration imported successfully.")
         remove_temp_file()
 
     # Check, if the input is archive or folder
     def _check_config_type(self):
-        if self.path_with_filename.endswith(".sd.zip") or self.path_with_filename.endswith(".sd.tar.gz"):
-            self.is_folder = False
-        else:
-            self.is_folder = True
-
         # Check, if the input is folder or not
-        if self.is_folder:
-            self._copy_folder_to_cache()
+        if self.path_with_filename.endswith(".sd.zip"):
+            self._unpack_zip_archive()
+        elif self.path_with_filename.endswith(".sd.tar.gz"):
+            self._unpack_tar_archive()
         else:
-            if self.path_with_filename.endswith(".sd.zip"):
-                self._unpack_zip_archive()
-            elif self.path_with_filename.endswith(".sd.tar.gz"):
-                self._unpack_tar_archive()
-            else:
-                pass
+            self._copy_folder_to_cache()
+
+    # Replace original /home/$USER path with actual path in the dconf-settings.ini file and other XML files
+    def _replace_home_in_files(self, root, home, patterns=(".xml", ".ini")):
+        regex = re.compile(r"(?:/var)?/home/[^/]+/")
+        for dirpath, _, filenames in os.walk(root):
+            for filename in filenames:
+                if filename.endswith(patterns):
+                    path = os.path.join(dirpath, filename)
+                    with open(path, "r", encoding="utf-8") as f:
+                        text = f.read()
+                    new_text = regex.sub(f"{home}/", text)
+                    if new_text != text:
+                        with open(path, "w", encoding="utf-8") as f:
+                            f.write(new_text)
+                        print(f"Updated /home/$USER path in: {path}")
 
     # Copy the user-defined folder to the cache directory
     def _copy_folder_to_cache(self):
@@ -164,24 +164,17 @@ class Unpack:
         cmd = subprocess.run(["tar", "-xzf", self.path_with_filename, "-C", f"{TEMP_CACHE}"], capture_output=True, text=True, check=True)
         print(cmd.stdout)
 
-    # Replace original /home/$USER path with actual path in the dconf-settings.ini file and other XML files
-    def _replace_home_in_files(self, root, home, patterns=(".xml", ".ini")):
-        regex = re.compile(r"(?:/var)?/home/[^/]+/")
-        for dirpath, _, filenames in os.walk(root):
-            for filename in filenames:
-                if filename.endswith(patterns):
-                    path = os.path.join(dirpath, filename)
-                    with open(path, "r", encoding="utf-8") as f:
-                        text = f.read()
-                    new_text = regex.sub(f"{home}/", text)
-                    if new_text != text:
-                        with open(path, "w", encoding="utf-8") as f:
-                            f.write(new_text)
-                        print(f"Updated /home/$USER path in: {path}")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--create", help="Create archive", type=str)
+    parser.add_argument("-u", "--unpack", help="Unpack archive", type=str)
+    args = parser.parse_args()
 
-if args.create:
-    Create()
-elif args.unpack:
-    Unpack()
-else:
-    pass
+    if args.create:
+        dir_path = args.create
+        Create(dir_path)
+    elif args.unpack:
+        dir_path = args.unpack
+        Unpack(dir_path)
+    else:
+        pass
