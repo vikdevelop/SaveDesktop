@@ -58,6 +58,18 @@
     </screenshots>
           
     <releases>
+       <release version="3.8" date="2025-11-05">
+          <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.8</url>
+          <description>
+            <ul>
+              <li>Improved synchronization logic and added new CLI argument --sync-now.</li>
+              <li>Fixed detection of newer versions of Budgie (#462)</li>
+              <li>Fixed saving configuration without creating an archive in CLI (#463)</li>
+              <li>Added support for system installations of Flatpak applications (#464)</li>
+              <li>Translation updates</li>
+            </ul>
+          </description>
+       </release>
        <release version="3.7" date="2025-09-28">
            <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.7</url>
            <description>
