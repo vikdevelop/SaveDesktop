@@ -714,10 +714,10 @@ class MainWindow(Adw.ApplicationWindow):
 
     # a warning indicating that the user must log out
     def show_warn_toast(self):
-        self.warn_toast = Adw.Toast.new(title=_("Changes will only take effect after the next login"))
-        self.warn_toast.set_button_label(_("Log Out"))
-        self.warn_toast.set_action_name("app.logout")
-        self.toast_overlay.add_toast(self.warn_toast)
+        self.toast.set_title(title=_("Changes will only take effect after the next login"))
+        self.toast.set_button_label(_("Log Out"))
+        self.toast.set_action_name("app.logout")
+        self.toast_overlay.add_toast(self.toast)
 
     # action after closing the main window
     def on_close(self, w):

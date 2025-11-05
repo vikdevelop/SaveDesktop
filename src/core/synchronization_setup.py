@@ -4,8 +4,8 @@ from savedesktop.globals import *
 # Check if the cloud drive folder uses GVFS or Rclone FS or if it is a Syncthing folder
 def check_fs(folder):
     check_filesystem = subprocess.getoutput('df -T "%s" | awk \'NR==2 {print $2}\'' % folder)
-    if not "gvfsd" in check_filesystem:
-        if not "rclone" in check_filesystem:
+    if "gvfsd" not in check_filesystem:
+        if "rclone" not in check_filesystem:
             if not os.path.exists(f"{folder}/.stfolder"):
                 return "You didn't select the cloud drive folder!"
 
@@ -22,9 +22,9 @@ def set_up_auto_mount(mount_type):
     elif mount_type == "cloud-receiver":
         cfile_subtitle = settings["file-for-syncing"]
     else:
-        cfile_subtitle = "none"
+        cfile_subtitle = None
 
-    if not cfile_subtitle == "none":
+    if cfile_subtitle:
         if "gvfs" in cfile_subtitle:
             if "google-drive" in cfile_subtitle:
                 pattern = r'.*/gvfs/([^:]*):host=([^,]*),user=([^/]*).*'
