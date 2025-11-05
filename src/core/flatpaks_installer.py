@@ -34,7 +34,7 @@ if not dest_dir == None:
         print("installing the Flatpak apps on the system")
 
         # If the Flathub repository in user installation doesn't exist, add it
-        if os.path.getsize(f"{dest_dir}/installed_user_flatpaks.sh") < 5:
+        if os.path.getsize(f"{dest_dir}/installed_user_flatpaks.sh") > 5:
             os.system("flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo")
         # Install Flatpak apps from list
         installed_flatpaks_files = [f'{dest_dir}/installed_flatpaks.sh', f'{dest_dir}/installed_user_flatpaks.sh']
