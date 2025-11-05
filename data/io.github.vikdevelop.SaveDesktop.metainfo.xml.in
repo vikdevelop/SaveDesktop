@@ -65,7 +65,7 @@
               <li>Improved synchronization logic and added new CLI argument --sync-now.</li>
               <li>Fixed detection of newer versions of Budgie (#462)</li>
               <li>Fixed saving configuration without creating an archive in CLI (#463)</li>
-              <li>Added support for system installations of Flatpak applications (#464)</li>
+              <li>Added support for system installations of Flatpak apps (#459)</li>
               <li>Translation updates</li>
             </ul>
           </description>
