@@ -1,12 +1,12 @@
 name: Bug report
-description: Report a bug of SaveDesktop app to developer
-title: "bug:"
+description: Report a bug with the app
+title: "bug: "
 labels: [bug]
 body:
   - type: input
     id: distro
     attributes:
-      label: Linux distribution
+      label: "Linux distribution"
       description: "What Linux distribution (name and version) are you using?"
       placeholder: "e.g. Fedora 40, Ubuntu 24.04"
     validations:
@@ -14,9 +14,8 @@ body:
   - type: dropdown
     id: environment
     attributes:
-      label: Desktop Environment
-      description: |
-        What desktop environment are you using?
+      label: "Desktop Environment"
+      description: "What desktop environment are you using?"
       options:
         - Select
         - GNOME
@@ -34,16 +33,15 @@ body:
   - type: input
     id: version
     attributes:
-      label: Version of the SaveDesktop app
+      label: "Version of the SaveDesktop app"
       description: "You can find it by clicking on the three dots in the header bar and then the 'About app' button."
     validations:
       required: true
   - type: dropdown
     id: package
     attributes:
-      label: Package type
-      description: |
-        How did you install SaveDesktop?
+      label: "Package type"
+      description: "How did you install SaveDesktop?"
       options:
         - Flatpak from Flathub
         - GNOME Builder
@@ -51,9 +49,23 @@ body:
     validations:
       required: true
   - type: textarea
-    id: bugdesc
+    id: desc
     attributes:
-      label: Bug description
-      description: Describe the problem, steps to reproduce, alternatively insert output from the terminal
+      label: "Bug description"
+      description: "Briefly describe the problem"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to reproduce"
+      description: "Describe how you came across the problem"
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: "Output from the Terminal"
+      description: "Open the Terminal app (Ctrl+Alt+T or find it in the apps' menu) and run the flatpak run io.github.vikdevelop.SaveDesktop command (alternatively, add another argument if you run in CLI). Then insert the output below."
     validations:
       required: true
