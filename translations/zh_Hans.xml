@@ -1,4 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
   <str key="synchronization_between_computers_title"># 通过网络在不同计算机中同步</str>
+  <str key="synchronization_intro">除了保存和导入配置外，Save Desktop还允许您使用共享云文件夹或共享Syncthing文件夹在网络上的计算机之间同步配置。</str>
 </root>
