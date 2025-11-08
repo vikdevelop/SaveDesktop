@@ -1,6 +1,6 @@
 # 通过网络在不同计算机中同步
 
-In addition to saving the configuration and importing it, Save Desktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
+除了保存和导入配置外，Save Desktop还允许您使用共享云文件夹或共享Syncthing文件夹在网络上的计算机之间同步配置。
 
 ## Setting Up on the First Computer
 1. Open the **Sync** page in the Save Desktop app.
