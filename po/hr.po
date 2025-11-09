@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-11-09 07:46+0000\n"
+"PO-Revision-Date: 2025-11-10 07:16+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/hr/>\n"
@@ -20,227 +20,244 @@ msgstr ""
 
 #: src/gui/window.py
 msgid "Save"
-msgstr ""
+msgstr "Spremi"
 
 #: src/gui/templates/shortcuts_window.ui:22
 #: src/gui/window.py
 msgid "Save the current configuration"
-msgstr ""
+msgstr "Spremi trenutačnu konfiguraciju"
 
 #: src/gui/window.py
 msgid "Set the file name"
-msgstr ""
+msgstr "Postavi ime datoteke"
 
 #: src/gui/templates/shortcuts_window.ui:57
 #: src/gui/window.py
 #: src/gui/items_dialog.py
 msgid "Items to include in the configuration archive"
-msgstr ""
+msgstr "Stavke koje treba uključiti u konfiguracijsku arhivu"
 
 #: src/gui/items_dialog.py
 msgid "These settings also apply to periodic saving"
-msgstr ""
+msgstr "Ove se postavke primjenjuju i na periodično spremanje"
 
 #: src/gui/items_dialog.py
 msgid "Icons"
-msgstr ""
+msgstr "Ikone"
 
 #: src/gui/items_dialog.py
 msgid "Themes"
-msgstr ""
+msgstr "Teme"
 
 #: src/gui/items_dialog.py
 msgid "Fonts"
-msgstr ""
+msgstr "Fontovi"
 
 #: src/gui/items_dialog.py
 msgid "Backgrounds"
-msgstr ""
+msgstr "Pozadine"
 
 #: src/gui/items_dialog.py
 msgid "Extensions"
-msgstr ""
+msgstr "Proširenja"
 
 #: src/gui/items_dialog.py
 msgid "Desktop"
-msgstr ""
+msgstr "Radna površina"
 
 #: src/gui/items_dialog.py
 msgid "Flatpak apps"
-msgstr ""
+msgstr "Flatpak aplikacije"
 
 #: src/gui/items_dialog.py
 msgid "List of installed Flatpak apps"
-msgstr ""
+msgstr "Popis instaliranih Flatpak aplikacija"
 
 #: src/gui/items_dialog.py
 msgid "User data of installed Flatpak apps"
-msgstr ""
+msgstr "Korisnički podaci instaliranih Flatpak aplikacija"
 
 #: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
-msgstr ""
+msgstr "Odabir podataka Flatpak aplikacija"
 
 #: src/gui/templates/shortcuts_window.ui:50
 #: src/gui/more_options_dialog.py
 msgid "More options"
-msgstr ""
+msgstr "Više opcija"
 
 #: src/gui/more_options_dialog.py
 msgid "Periodic saving"
-msgstr ""
+msgstr "Periodično spremanje"
 
 #: src/gui/more_options_dialog.py
 msgid "Changes will only take effect after the next login"
-msgstr ""
+msgstr "Promjene će stupiti na snagu tek nakon sljedeće prijave"
 
 #: src/gui/more_options_dialog.py
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 #: src/gui/more_options_dialog.py
 msgid "Never"
-msgstr ""
+msgstr "Nikada"
 
 #: src/gui/more_options_dialog.py
 msgid "Daily"
-msgstr ""
+msgstr "Dnevno"
 
 #: src/gui/more_options_dialog.py
 msgid "Weekly"
-msgstr ""
+msgstr "Tjedno"
 
 #: src/gui/more_options_dialog.py
 msgid "Monthly"
-msgstr ""
+msgstr "Mjesečno"
 
 #: src/gui/more_options_dialog.py
 msgid "Learn more"
-msgstr ""
+msgstr "Saznaj više"
 
 #: src/gui/more_options_dialog.py
 msgid "Folder for periodic saving"
-msgstr ""
+msgstr "Mapa za periodično spremanje"
 
 #: src/gui/more_options_dialog.py
 msgid "Choose custom folder for periodic saving"
-msgstr ""
+msgstr "Odaberi prilagođenu mapu za periodično spremanje"
 
 #: src/gui/more_options_dialog.py
 msgid "Choose another folder"
-msgstr ""
+msgstr "Odaberi jednu drugu mapu"
 
 #: src/gui/more_options_dialog.py
 msgid "File name format"
-msgstr ""
+msgstr "Format imena datoteka"
 
 #: src/gui/more_options_dialog.py
 msgid "Reset to default"
-msgstr ""
+msgstr "Resetiraj na standardne vrijednosti"
 
 #: src/gui/more_options_dialog.py
 msgid "Password for encryption"
-msgstr ""
+msgstr "Lozinka za šifriranje"
 
 #: src/gui/more_options_dialog.py
 msgid "Manual saving"
-msgstr ""
+msgstr "Ručno spremanje"
 
 #: src/gui/more_options_dialog.py
 msgid "Archive encryption"
-msgstr ""
+msgstr "Šifriranje arhive"
 
 #: src/gui/more_options_dialog.py
 msgid ""
 "When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data."
 msgstr ""
+"Prilikom ručnog spremanja konfiguracije, dobit ćeš upit da stvoriš lozinku. "
+"Ovo je korisno kada spremaš konfiguraciju na prijenosni medij za bolju "
+"sigurnost podataka."
 
 #: src/gui/more_options_dialog.py
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Spremi konfiguraciju bez stvaranja arhive"
 
 #: src/gui/window.py
 msgid "Create new password"
-msgstr ""
+msgstr "Stvori novu lozinku"
 
 #: src/gui/window.py
 msgid ""
 "Please create new password for your archive. Criteria include a length of at least 12 characters, one uppercase letter, one lowercase letter, and one special character."
 msgstr ""
+"Stvori novu lozinku za svoju arhivu. Kriteriji uključuju duljinu od barem 12 "
+"znakova, jedno veliko slovo, jedno malo slovo i jedan poseban znak."
 
 #: src/gui/window.py
 msgid "Generate Password"
-msgstr ""
+msgstr "Generiraj lozinku"
 
 #: src/gui/window.py
 msgid "Password"
-msgstr ""
+msgstr "Lozinka"
 
 #: src/gui/window.py
 msgid "Unlock the archive with a password"
-msgstr ""
+msgstr "Otključaj arhivu lozinkom"
 
 #: src/gui/window.py
 msgid ""
 "Enter the password below to unlock the archive with your configuration. If you have forgotten it, you will not be able to unzip the archive and start importing your configuration."
 msgstr ""
+"Unese lozinku u nastavku za otključavanje arhive sa svojom konfiguracijom. "
+"Ako lozniku zaboraviš, nećeš moći raspakirati arhivu i započeti uvoz svoje "
+"konfiguracije."
 
 #: src/gui/password_checker.py
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
-msgstr ""
+msgstr "Unesi lozinku za otključavanje arhive za sinkronizaciju konfiguracije"
 
 #: src/gui/password_checker.py
 msgid ""
 "An encrypted archive has been selected for synchronization using the Save Desktop app. Please enter the password below to unlock it and start synchronization."
 msgstr ""
+"Odabrana je jedna šifrirana arhiva za sinkronizaciju pomoću aplikacije Save "
+"Desktop. Unesi lozinku u nastavku za otključavanje i pokretanje "
+"sinkronizacije."
 
 #: src/gui/password_checker.py
 msgid "Remember Password"
-msgstr ""
+msgstr "Zapamti lozinku"
 
 #: src/core/synchronization.py
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr ""
+msgstr "Lozinka nije unesena ili je netočna. Nije moguće nastaviti."
 
 #: src/gui/window.py
 msgid ""
 "<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n"
 msgstr ""
+"<big><b>Spremanje konfiguracije ...</b></big>\n"
+"Konfiguracija tvog radnog okruženja će se spremljena u:\n"
+" <i>{}/{}.sd.tar.gz</i>\n"
 
 #: src/gui/window.py
 msgid "Configuration has been saved!"
-msgstr ""
+msgstr "Konfiguracija je spremljena!"
 
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\nYou can now view the archive with the configuration of your desktop environment, or return to the previous page.\n"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"Sada možeš pregledati arhivu s konfiguracijom tog radnog okruženja ili se "
+"vratiti na prethodnu stranicu.\n"
 
 #: src/gui/window.py
 msgid "Open the folder"
-msgstr ""
+msgstr "Otvori mapu"
 
 #: src/gui/window.py
 msgid "Import"
-msgstr ""
+msgstr "Uvezi"
 
 #: src/gui/window.py
 msgid "Import saved configuration"
-msgstr ""
+msgstr "Uvezi spremljene konfiguracije"
 
 #: src/gui/templates/shortcuts_window.ui:29
 #: src/gui/window.py
 msgid "Import from file"
-msgstr ""
+msgstr "Uvezi iz datoteke"
 
 #: src/gui/window.py
 msgid "Import from folder"
-msgstr ""
+msgstr "Uvezi iz mape"
 
 #: src/gui/window.py
 msgid "Cancel"
-msgstr ""
+msgstr "Odustani"
 
 #: src/gui/window.py
 msgid "Save Desktop files"
@@ -250,106 +267,127 @@ msgstr "Save Desktop datoteke"
 msgid ""
 "<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"
 msgstr ""
+"<big><b>Uvoz konfiguracije ...</b></big>\n"
+"Konfiguracija se uvozi iz:\n"
+"<i>{}</i>\n"
 
 #: src/gui/window.py
 msgid "The configuration has been applied!"
-msgstr ""
+msgstr "Konfiguracija je primijenjena!"
 
 #: src/gui/window.py
 msgid ""
 "<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"Da bi promjene stupile na snagu odjaviti iz sustava ili se vratiti na "
+"prethodnu stranicu i odjaviti se kasnije.\n"
 
 #: src/gui/window.py
 msgid "Back to previous page"
-msgstr ""
+msgstr "Natrag na prethodnu stranicu"
 
 #: src/gui/window.py
 msgid "Log Out"
-msgstr ""
+msgstr "Odjavi se"
 
 #: src/gui/window.py
 msgid "An error occurred"
-msgstr ""
+msgstr "Dogodila se greška"
 
 #: src/gui/window.py
 msgid "Apply"
-msgstr ""
+msgstr "Primijeni"
 
 #: src/gui/window.py
 msgid "Sync"
-msgstr ""
+msgstr "Sinkronizraj"
 
 #: src/gui/window.py
 msgid ""
 "Sync your desktop environment configuration with other computers in the network."
 msgstr ""
+"Sinkroniziraj konfiguraciju tvog radnog okruženja s drugim računalima u "
+"mreži."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Initial synchronization setup"
-msgstr ""
+msgstr "Početno postavljanje sinkronizacije"
 
 #: src/gui/synchronization_dialogs.py
 msgid "1. Open the system settings"
-msgstr ""
+msgstr "1. Otvori postavke sustava"
 
 #: src/gui/synchronization_dialogs.py
 msgid "2. Go to the Online Accounts section"
-msgstr ""
+msgstr "2. Idite na odjeljak „Online računi“"
 
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft 365 or Nextcloud."
 msgstr ""
+"U ovom odjeljku odaberi željenu uslugu u oblaku, kao što su Google, "
+"Microsoft 365 ili Nextcloud."
 
 #: src/gui/synchronization_dialogs.py
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr ""
+msgstr "3. Klikni na gumb „Dalje“ i odaberi stvorenu mapu u oblaku"
 
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file chooser dialog, in this form: username@service.com."
 msgstr ""
+"Stvorena mapa u oblaku se može pronaći na bočnoj ploči dijaloga za biranje "
+"datoteka, u ovom obliku: username@service.com."
 
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "For synchronization to works properly, you need to have the folder, that is synced with your cloud service using Rclone.\n<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
+"Da bi sinkronizacija ispravno funkcionirala, moraš imati mapu koja je "
+"sinkronizirana s tvojom uslugom u oblaku pomoću Rclone.\n"
+"<b>Započni biranjem usluge spremanja u oblaku koju koristiš.</b>"
 
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "Now, copy the command to set up Rclone using the side button and open the terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the apps' menu."
 msgstr ""
+"Sada kopiraj naredbu za postavljanje Rclonea pomoću bočnog gumba i otvori "
+"aplikaciju terminala pomoću tipkovnog prečaca Ctrl+Alt+T ili je pronađi u "
+"izborniku aplikacija."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Copy"
-msgstr ""
+msgstr "Kopiraj"
 
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click the \"Apply\" button"
 msgstr ""
+"Nakon što završiš s postavljanjem Rclonea pomoću navedene naredbe, klikni "
+"gumb „Primijeni“"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Umjesto toga koristi Syncthing mapu"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Almost done!"
-msgstr ""
+msgstr "Skoro gotovo!"
 
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to complete the setup."
 msgstr ""
+"Mapa u oblaku je sada stvorena! Klikni gumb „Dalje“ dovršavanje postavljanja."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select"
-msgstr ""
+msgstr "Odaberi"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Next"
-msgstr ""
+msgstr "Dalje"
 
 #: src/gui/templates/shortcuts_window.ui:64
 #: src/gui/synchronization_dialogs.py
@@ -359,29 +397,29 @@ msgstr "Postavi datoteku za sinkronizaciju"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file"
-msgstr ""
+msgstr "Datoteka za periodično spremanje"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Periodic saving file does not exist."
-msgstr ""
+msgstr "Datoteka za periodično spremanje ne postoji."
 
 #: src/gui/synchronization_dialogs.py
 msgid "Create"
-msgstr ""
+msgstr "Stvori"
 
 #: src/gui/window.py
 msgid "Please wait …"
-msgstr ""
+msgstr "Pričekaj …"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Change"
-msgstr ""
+msgstr "Promijeni"
 
 #: src/gui/templates/shortcuts_window.ui:71
 #: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
-msgstr ""
+msgstr "Poveži se sa spremištem u oblaku"
 
 #: src/gui/synchronization_dialogs.py
 msgid ""
@@ -394,50 +432,57 @@ msgstr ""
 
 #: src/gui/synchronization_dialogs.py
 msgid "Select the cloud drive folder"
-msgstr ""
+msgstr "Odaberi mapu u oblaku"
 
 #: src/gui/synchronization_dialogs.py
 msgid "You didn't select the cloud drive folder!"
-msgstr ""
+msgstr "Nisi odabrao/la mapu u oblaku!"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Periodic synchronization"
-msgstr ""
+msgstr "Periodična sinkronizacija"
 
 #: src/gui/synchronization_dialogs.py
 msgid "Bidirectional synchronization"
-msgstr ""
+msgstr "Dvosmjerna sinkronizacija"
 
 #: src/gui/synchronization_dialogs.py
 msgid ""
 "If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
+"Ako je uključeno i ako su interval sinkronizacije i mapa oblaku odabrani, "
+"podaci o periodičnom spremanju (interval, mapa i ime datoteke) će se "
+"kopirati se na ovo računalo s drugog računala na kojem je sinkronizacija "
+"uključena."
 
 #: src/gui/window.py
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
+"Od sada može’ sinkronizirati konfiguraciju iz izbornika u traci zaglavlja"
 
 #: src/gui/templates/shortcuts_window.ui:36
 #: src/gui/window.py
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Tipkovni prečaci"
 
 #: src/gui/templates/shortcuts_window.ui:15
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Otvori wiki aplikacije"
 
 #: src/gui/templates/shortcuts_window.ui:43
 msgid "Quit"
-msgstr ""
+msgstr "Zatvori aplikaciju"
 
 #: src/gui/window.py
 msgid "About app"
-msgstr ""
+msgstr "O aplikaciji"
 
 #: src/gui/window.py
 msgid ""
 "<big><b>You have an unsupported environment installed.</b></big> \nPlease use one of these environments: {}."
 msgstr ""
+"<big><b>Imaš instalirano jedno nepodržano okruženje.</b></big> \n"
+"Koristi jedno od ovih okruženja: {}."
 
 #: data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in:39
 #: data/io.github.vikdevelop.SaveDesktop.desktop.in:4
@@ -462,4 +507,4 @@ msgstr ""
 
 #: src/main.py
 msgid "Translator credits"
-msgstr ""
+msgstr "Zasluge prevoditelja"
