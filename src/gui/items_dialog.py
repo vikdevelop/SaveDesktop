@@ -201,6 +201,22 @@ class itemsDialog(Adw.AlertDialog):
         self.desktop_row.set_activatable_widget(self.switch_de)
         self.itemsBox.append(child=self.desktop_row)
         
+        # Switch and row of option 'Save Display Settings' (~/.config/monitors.xml)
+        self.switch_ds = Gtk.Switch.new()
+        if settings["save-display-settings"]:
+            self.switch_ds.set_active(True)
+        self.switch_ds.set_valign(align=Gtk.Align.CENTER)
+
+        self.ds_row = Adw.ActionRow.new()
+        self.ds_row.set_title(title=_("Display Settings"))
+        self.ds_row.set_subtitle_selectable(True)
+        self.ds_row.set_use_markup(True)
+        self.ds_row.set_title_lines(2)
+        self.ds_row.set_subtitle_lines(3)
+        self.ds_row.add_suffix(self.switch_ds)
+        self.ds_row.set_activatable_widget(self.switch_ds)
+        self.itemsBox.append(child=self.ds_row)
+
         if flatpak:
             self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_("Flatpak apps"))
@@ -261,6 +277,7 @@ class itemsDialog(Adw.AlertDialog):
             settings["save-fonts"] = self.switch_03.get_active()
             settings["save-backgrounds"] = self.switch_04.get_active()
             settings["save-desktop-folder"] = self.switch_de.get_active()
+            settings["save-display-settings"] = self.switch_ds.get_active()
             if flatpak:
                 settings["save-installed-flatpaks"] = self.switch_05.get_active()
                 settings["save-flatpak-data"] = self.switch_06.get_active()

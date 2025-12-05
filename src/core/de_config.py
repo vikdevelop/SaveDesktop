@@ -5,7 +5,10 @@ from savedesktop.globals import *
 # Helping functions
 def safe_copy(src: str, dst: str):
     if os.path.isfile(src):
-        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        try:
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+        except FileNotFoundError:
+            pass
         try:
             shutil.copy2(src, dst)
             print(f"[OK] Copied file: {src} → {dst}")
@@ -56,7 +59,7 @@ class Save:
         safe_copytree(f"{home}/.config/gtk-4.0", "gtk-4.0")
         safe_copytree(f"{home}/.config/gtk-3.0", "gtk-3.0")
 
-        # Fonts, themes, extensions, backgrounds, icons
+        # Fonts, themes, extensions, backgrounds, icons, display settings
         if settings["save-fonts"]:
             safe_copytree(f"{home}/.fonts", ".fonts")
             safe_copytree(f"{home}/.local/share/fonts", "fonts")
@@ -73,6 +76,12 @@ class Save:
         if settings["save-icons"]:
             safe_copytree(f"{home}/.icons", ".icons")
             safe_copytree(f"{home}/.local/share/icons", "icons")
+        if settings["save-display-settings"]:
+            safe_copy(f"{home}/.config/monitors.xml", "monitors.xml")
+            if environment["de_name"] == "KDE Plasma":
+                safe_copy(f"{home}/.config/kwinoutputconfig.json", "xdg-config/kwinoutputconfig.json")
+            if environment["de_name"] == "Xfce":
+                safe_copy(f"{home}/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml", "xfce-displays.xml")
 
         # Desktop folder
         if settings["save-desktop-folder"]:
@@ -146,7 +155,7 @@ class Import:
             os.system("echo user-db:user > temporary-profile")
             os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < dconf-settings.ini')
 
-        # Fonts, Themes, GTK, Extensions, Desktop folder, Backgrounds, Icons
+        # Fonts, Themes, GTK, Extensions, Desktop folder, Backgrounds, Icons, Display settings
         safe_copytree("fonts", f"{home}/.local/share/fonts")
         safe_copytree(".fonts", f"{home}/.fonts")
         safe_copytree("themes", f"{home}/.local/share/themes")
@@ -162,6 +171,8 @@ class Import:
         safe_copytree("wallpapers", f"{home}/.local/share/wallpapers")
         safe_copytree("icons", f"{home}/.local/share/icons")
         safe_copytree(".icons", f"{home}/.icons")
+        safe_copy("monitors.xml", f"{home}/.config/monitors.xml")
+        safe_copy("xfce-displays.xml", f"{home}/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml")
 
         # Environment specific
         if environment:
