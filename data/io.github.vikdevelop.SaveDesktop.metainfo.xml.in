@@ -41,6 +41,13 @@
     <description>
         <p translatable="yes">Save Desktop helps you back up, restore, and synchronize your entire desktop environment with ease. It saves and imports your themes, icons, fonts, wallpapers, extensions, desktop folder, Flatpak apps and their data, as well as other desktop settings — all in one archive. Choose what to include and keep your setup consistent across devices with automatic periodic saves and synchronization.</p>
     </description>
+
+    <keywords>
+        <keyword>desktop backup</keyword>
+        <keyword>settings restore</keyword>
+        <keyword>backup</keyword>
+        <keyword>device synchronization</keyword>
+    </keywords>
     
     <screenshots>
         <screenshot type="default">
