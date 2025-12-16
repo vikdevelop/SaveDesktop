@@ -17,7 +17,7 @@ def safe_copy(src: str, dst: str):
 def safe_copytree(src: str, dst: str, ignore=None):
     if os.path.isdir(src):
         try:
-            shutil.copytree(src, dst, dirs_exist_ok=True, ignore=ignore)
+            shutil.copytree(src, dst, dirs_exist_ok=True, symlinks=True, ignore=ignore)
             print(f"[OK] Copied dir: {src} → {dst}")
         except Exception as e:
             print(f"[ERR] Dir copy failed {src} → {dst}: {e}")

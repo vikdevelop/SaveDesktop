@@ -397,6 +397,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_filter.set_name(_("Save Desktop files"))
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_filter.add_pattern('*.sd.zip')
+        self.file_filter.add_pattern('*.sd.7z')
         self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
@@ -517,7 +518,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.archive_name = f"{self.folder}/{self.filename_text}"
 
         if not settings["save-without-archive"]:
-            self.archive_name += ".sd.zip"
+            self.archive_name += ".sd.7z"
 
         self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = self._set_status_desc_save()
@@ -530,7 +531,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _set_status_desc_save(self):
         status_old = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n")
-        status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
+        status = status_old.replace("sd.tar.gz", "sd.7z") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
         return status.format(self.folder, self.filename_text)
 
     # Import configuration
@@ -741,6 +742,7 @@ class MainWindow(Adw.ApplicationWindow):
     # Remove this folder to cleanup unnecessary content created during saving,
     # importing, or syncing the configuration only if these files are not present
     def remove_cache(self):
-        files_to_check = [f"{CACHE}/pb", f"{CACHE}/sync", f"{CACHE}/workspace/flatpaks_installer.py"]
-        if not any(os.path.exists(path) for path in files_to_check):
-            shutil.rmtree(f"{CACHE}/workspace")
+        if os.path.exists(f"{CACHE}/workspace"):
+            files_to_check = [f"{CACHE}/pb", f"{CACHE}/sync", f"{CACHE}/workspace/flatpaks_installer.py"]
+            if not any(os.path.exists(path) for path in files_to_check):
+                shutil.rmtree(f"{CACHE}/workspace")
