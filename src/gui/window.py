@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, sys, re, zipfile, random, string, gi, subprocess, locale
+import os, sys, re, zipfile, random, string, gi, subprocess, locale, shutil
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk
@@ -734,8 +734,13 @@ class MainWindow(Adw.ApplicationWindow):
         if os.path.exists(f"{CACHE}/expand_pb_row"):
             os.remove(f"{CACHE}/expand_pb_row")
 
-        # Remove this folder to cleanup unnecessary content created during saving,
-        # importing, or syncing the configuration only if these files are not present
+        # Call remove_cache function using Thread
+        rem_cache = Thread(target=self.remove_cache)
+        rem_cache.start()
+
+    # Remove this folder to cleanup unnecessary content created during saving,
+    # importing, or syncing the configuration only if these files are not present
+    def remove_cache(self):
         files_to_check = [f"{CACHE}/pb", f"{CACHE}/sync", f"{CACHE}/workspace/flatpaks_installer.py"]
         if not any(os.path.exists(path) for path in files_to_check):
-            subprocess.Popen(["rm", "-rf", f"{CACHE}/workspace"])
+            shutil.rmtree(f"{CACHE}/workspace")

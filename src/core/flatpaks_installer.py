@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, subprocess, sys
+import os, subprocess, sys, shutil
 from pathlib import Path
 
 CACHE_FLATPAK = f"{Path.home()}/.var/app/io.github.vikdevelop.SaveDesktop/cache/tmp"
@@ -77,5 +77,5 @@ autostart_file = f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesk
 if os.path.exists(autostart_file):
     os.remove(autostart_file)
 
-# Remove this script after finishing the operations
-os.remove(sys.argv[0])
+# Remove the cache dir after finishing the operations
+shutil.rmtree(f"{CACHE}/workspace")
