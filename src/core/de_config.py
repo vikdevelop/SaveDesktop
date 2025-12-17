@@ -1,4 +1,4 @@
-import os, shutil, argparse
+import os, shutil, argparse, subprocess
 from gi.repository import GLib
 from savedesktop.globals import *
 
@@ -71,8 +71,12 @@ class Save:
             safe_copytree(f"{home}/.local/share/backgrounds", "backgrounds")
             safe_copytree(f"{home}/.local/share/wallpapers", "xdg-data/wallpapers")
         if settings["save-icons"]:
-            safe_copytree(f"{home}/.icons", ".icons")
-            safe_copytree(f"{home}/.local/share/icons", "icons")
+            xdg_path = f"{home}/.local/share"
+            legacy_path = f"{home}"
+            if os.path.isdir(f"{xdg_path}/icons") and os.listdir(f"{xdg_path}/icons"):
+                subprocess.run(["tar", "-czvf", "icon-themes.tgz", "-C", xdg_path, "icons"])
+            if os.path.isdir(f"{legacy_path}/.icons") and os.listdir(f"{legacy_path}/.icons"):
+                subprocess.run(["tar", "-czvf", "icon-themes-legacy.tgz", "-C", legacy_path, ".icons"])
 
         # Desktop folder
         if settings["save-desktop-folder"]:
@@ -160,8 +164,7 @@ class Import:
         safe_copytree("gvfs-metadata", f"{home}/.local/share/gvfs-metadata")
         safe_copytree("backgrounds", f"{home}/.local/share/backgrounds")
         safe_copytree("wallpapers", f"{home}/.local/share/wallpapers")
-        safe_copytree("icons", f"{home}/.local/share/icons")
-        safe_copytree(".icons", f"{home}/.icons")
+        self.import_icons()
 
         # Environment specific
         if environment:
@@ -180,6 +183,17 @@ class Import:
             if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]): 
                 self.create_flatpak_autostart()
     
+    # Extract an archive with icon themes
+    def import_icons(self):
+        if os.path.exists(f"icon-themes.tgz"):
+            subprocess.run(["tar", "-xzvf", "icon-themes.tgz"])
+        if os.path.exists(f"icon-themes-legacy.tgz"):
+            subprocess.run(["tar", "-xzvf", "icon-themes-legacy.tgz"])
+        print("[OK] Extracting an icons' archive")
+
+        safe_copytree("icons", f"{home}/.local/share/icons")
+        safe_copytree(".icons", f"{home}/.icons")
+
     # Create an autostart file to install Flatpaks from a list after the next login 
     def create_flatpak_autostart(self):
         os.system(f"cp /app/share/savedesktop/savedesktop/core/flatpaks_installer.py {CACHE}/workspace")

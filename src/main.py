@@ -85,7 +85,7 @@ class SaveDesktopApp(Adw.Application):
         if settings["save-without-archive"]:
             path = f"{self.win.folder}/{self.win.filename_text}"
         else:
-            path = f"{self.win.folder}/{self.win.filename_text}.sd.7z"
+            path = f"{self.win.folder}/{self.win.filename_text}.sd.zip"
 
         Gtk.FileLauncher.new(Gio.File.new_for_path(path)).open_containing_folder()
 

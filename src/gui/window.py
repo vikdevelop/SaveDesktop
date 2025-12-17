@@ -397,7 +397,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_filter.set_name(_("Save Desktop files"))
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_filter.add_pattern('*.sd.zip')
-        self.file_filter.add_pattern('*.sd.7z')
         self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
@@ -518,7 +517,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.archive_name = f"{self.folder}/{self.filename_text}"
 
         if not settings["save-without-archive"]:
-            self.archive_name += ".sd.7z"
+            self.archive_name += ".sd.zip"
 
         self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = self._set_status_desc_save()
