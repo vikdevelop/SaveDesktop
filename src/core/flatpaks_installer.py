@@ -23,12 +23,16 @@ else:
     dest_dir = None
    
 # If the destination directory variable is not 'None', continue in installing Flatpak apps
-if not dest_dir == None:
+if dest_dir:
     # If the destination directory has a directory with installed Flatpak apps user data, install them
     if os.path.exists(f"{dest_dir}/app"):
         print("copying the Flatpak apps' user data to the ~/.var/app directory")
         os.system(f"cp -au {dest_dir}/app/ ~/.var/")
     
+    # If the flatpak-apps-data.tgz archive exists, unpack it to the ~/.var/app directory
+    if os.path.exists(f"{dest_dir}/flatpak-apps-data.tgz"):
+        subprocess.run(["tar", "--keep-newer-files", "--no-overwrite-dir", "-xzvf", "flatpak-apps-data.tgz", "-C", f"{home}/.var"])
+
     # If the Bash scripts for installing Flatpak apps to the system exist, install them
     if os.path.exists(f"{dest_dir}/installed_flatpaks.sh") or os.path.exists(f"{dest_dir}/installed_user_flatpaks.sh"):
         print("installing the Flatpak apps on the system")

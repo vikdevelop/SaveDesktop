@@ -1,6 +1,7 @@
 import os, shutil, argparse, subprocess
 from gi.repository import GLib
 from savedesktop.globals import *
+from pathlib import Path
 
 # Helping functions
 def safe_copy(src: str, dst: str):
@@ -45,6 +46,9 @@ KDE_DIRS_IMPORT = [
     ("xdg-data", f"{home}/.local/share"),
 ]
 
+# The ~/Desktop folder definition
+desktop_dir = Path(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
+
 class Save:
     def __init__(self):
         
@@ -74,15 +78,13 @@ class Save:
             xdg_path = f"{home}/.local/share"
             legacy_path = f"{home}"
             if os.path.isdir(f"{xdg_path}/icons") and os.listdir(f"{xdg_path}/icons"):
-                subprocess.run(["tar", "-czvf", "icon-themes.tgz", "-C", xdg_path, "icons"])
+                subprocess.run(["tar", "-czf", "icon-themes.tgz", "-C", xdg_path, "icons"])
             if os.path.isdir(f"{legacy_path}/.icons") and os.listdir(f"{legacy_path}/.icons"):
-                subprocess.run(["tar", "-czvf", "icon-themes-legacy.tgz", "-C", legacy_path, ".icons"])
+                subprocess.run(["tar", "-czf", "icon-themes-legacy.tgz", "-C", legacy_path, ".icons"])
 
         # Desktop folder
         if settings["save-desktop-folder"]:
-            desktop_dir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP)
-            if desktop_dir:
-                safe_copytree(desktop_dir, "Desktop")
+            subprocess.run(["tar", "-czf", "desktop-folder.tgz", "-C", str(desktop_dir.parent), str(desktop_dir.name)])
             safe_copytree(f"{home}/.local/share/gvfs-metadata", "gvfs-metadata")
         
         # Flatpak apps and their data
@@ -120,24 +122,14 @@ class Save:
         gsettings = settings["disabled-flatpak-apps-data"]
         black_list = gsettings # convert GSettings property to a list
         
-        os.makedirs(f"{CACHE}/workspace/app", exist_ok=True)
-        destdir = f"{CACHE}/workspace/app"
-        
-        # copy Flatpak apps data
-        for item in os.listdir(f"{home}/.var/app"):
-            if item not in black_list and item != "cache":
-                source_path = os.path.join(f"{home}/.var/app", item)
-                destination_path = os.path.join(destdir, item)
-                if os.path.isdir(source_path):
-                    try:
-                        shutil.copytree(source_path, destination_path, ignore=shutil.ignore_patterns('cache'))
-                    except Exception as e:
-                        print(f"Error copying directory {source_path}: {e}")
-                else:
-                    try:
-                        shutil.copy2(source_path, destination_path)
-                    except Exception as e:
-                        print(f"Error copying file {source_path}: {e}")
+        cmd = ["tar", "-czf", "flatpak-apps-data.tgz", "--exclude=*/cache"]
+
+        for apps in black_list:
+            cmd.append(f"--exclude={apps}")
+
+        cmd.extend(["-C", f"{home}/.var", "app"])
+
+        subprocess.run(cmd)
 
 class Import:
     def __init__(self):
@@ -160,10 +152,10 @@ class Import:
         safe_copytree("gnome-shell", f"{home}/.local/share/gnome-shell")
         safe_copytree("cinnamon", f"{home}/.local/share/cinnamon")
         safe_copytree("plasma", f"{home}/.local/share/plasma")
-        safe_copytree("Desktop", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
         safe_copytree("gvfs-metadata", f"{home}/.local/share/gvfs-metadata")
         safe_copytree("backgrounds", f"{home}/.local/share/backgrounds")
         safe_copytree("wallpapers", f"{home}/.local/share/wallpapers")
+        self.import_desktop_folder()
         self.import_icons()
 
         # Environment specific
@@ -183,16 +175,25 @@ class Import:
             if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]): 
                 self.create_flatpak_autostart()
     
+    # Extract an archive with the Desktop folder
+    def import_desktop_folder(self):
+        if os.path.exists("desktop-folder.tgz"):
+            subprocess.run(["tar", "--keep-newer-files", "--no-overwrite-dir", "-xzvf", "desktop-folder.tgz", "-C", str(desktop_dir.parent)])
+            print("[OK] Extracting a Desktop archive")
+        else:
+            safe_copytree("Desktop", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
+
     # Extract an archive with icon themes
     def import_icons(self):
         if os.path.exists(f"icon-themes.tgz"):
-            subprocess.run(["tar", "-xzvf", "icon-themes.tgz"])
+            subprocess.run(["tar", "--keep-newer-files", "--no-overwrite-dir", "-xzvf", "icon-themes.tgz", "-C", f"{home}/.local/share/icons"])
+            print("[OK] Extracting a XDG icons archive")
         if os.path.exists(f"icon-themes-legacy.tgz"):
-            subprocess.run(["tar", "-xzvf", "icon-themes-legacy.tgz"])
-        print("[OK] Extracting an icons' archive")
-
-        safe_copytree("icons", f"{home}/.local/share/icons")
-        safe_copytree(".icons", f"{home}/.icons")
+            print(f"[OK] Extracting a legacy icons archive")
+            subprocess.run(["tar", "--keep-newer-files", "--no-overwrite-dir", "-xzf", "icon-themes-legacy.tgz", "--keep-new-files", "-C", f"{home}/.icons", "--keep-new-files"])
+        else:
+            safe_copytree("icons", f"{home}/.local/share/icons")
+            safe_copytree(".icons", f"{home}/.icons")
 
     # Create an autostart file to install Flatpaks from a list after the next login 
     def create_flatpak_autostart(self):

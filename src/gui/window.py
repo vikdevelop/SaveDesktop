@@ -530,7 +530,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _set_status_desc_save(self):
         status_old = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n")
-        status = status_old.replace("sd.tar.gz", "sd.7z") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
+        status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
         return status.format(self.folder, self.filename_text)
 
     # Import configuration
