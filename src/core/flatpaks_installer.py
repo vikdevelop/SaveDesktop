@@ -31,7 +31,7 @@ if dest_dir:
     
     # If the flatpak-apps-data.tgz archive exists, unpack it to the ~/.var/app directory
     if os.path.exists(f"{dest_dir}/flatpak-apps-data.tgz"):
-        subprocess.run(["tar", "--keep-newer-files", "--no-overwrite-dir", "-xzvf", "flatpak-apps-data.tgz", "-C", f"{home}/.var"])
+        subprocess.run(["tar", "-xzvf", "flatpak-apps-data.tgz", "-C", f"{Path.home()}/.var"])
 
     # If the Bash scripts for installing Flatpak apps to the system exist, install them
     if os.path.exists(f"{dest_dir}/installed_flatpaks.sh") or os.path.exists(f"{dest_dir}/installed_user_flatpaks.sh"):
@@ -82,4 +82,4 @@ if os.path.exists(autostart_file):
     os.remove(autostart_file)
 
 # Remove the cache dir after finishing the operations
-shutil.rmtree(f"{CACHE}/workspace")
+shutil.rmtree(f"{CACHE_FLATPAK}/workspace")

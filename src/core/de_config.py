@@ -172,13 +172,13 @@ class Import:
             print(f"[WARN] Unknown DE: {environment_key}")
         
         if flatpak: 
-            if any(os.path.exists(path) for path in ["app", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]): 
+            if any(os.path.exists(path) for path in ["app", "flatpak-apps-data.tgz", "installed_flatpaks.sh", "installed_user_flatpaks.sh"]):
                 self.create_flatpak_autostart()
     
     # Extract an archive with the Desktop folder
     def import_desktop_folder(self):
         if os.path.exists("desktop-folder.tgz"):
-            subprocess.run(["tar", "--keep-newer-files", "--no-overwrite-dir", "-xzvf", "desktop-folder.tgz", "-C", str(desktop_dir.parent)])
+            subprocess.run(["tar", "-xzvf", "desktop-folder.tgz", "-C", str(desktop_dir.parent)])
             print("[OK] Extracting a Desktop archive")
         else:
             safe_copytree("Desktop", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
@@ -186,11 +186,11 @@ class Import:
     # Extract an archive with icon themes
     def import_icons(self):
         if os.path.exists(f"icon-themes.tgz"):
-            subprocess.run(["tar", "--keep-newer-files", "--no-overwrite-dir", "-xzvf", "icon-themes.tgz", "-C", f"{home}/.local/share/icons"])
+            subprocess.run(["tar", "-xzvf", "icon-themes.tgz", "-C", f"{home}/.local/share/icons"])
             print("[OK] Extracting a XDG icons archive")
         if os.path.exists(f"icon-themes-legacy.tgz"):
             print(f"[OK] Extracting a legacy icons archive")
-            subprocess.run(["tar", "--keep-newer-files", "--no-overwrite-dir", "-xzf", "icon-themes-legacy.tgz", "--keep-new-files", "-C", f"{home}/.icons", "--keep-new-files"])
+            subprocess.run(["tar", "-xzvf", "icon-themes-legacy.tgz", "-C", f"{home}/.icons"])
         else:
             safe_copytree("icons", f"{home}/.local/share/icons")
             safe_copytree(".icons", f"{home}/.icons")
