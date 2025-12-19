@@ -81,20 +81,21 @@ class Save:
                 subprocess.run(["tar", "-czf", "icon-themes.tgz", "-C", xdg_path, "icons"])
             if os.path.isdir(f"{legacy_path}/.icons") and os.listdir(f"{legacy_path}/.icons"):
                 subprocess.run(["tar", "-czf", "icon-themes-legacy.tgz", "-C", legacy_path, ".icons"])
+            print("[OK] Saving icons")
 
         # Desktop folder
         if settings["save-desktop-folder"]:
             subprocess.run(["tar", "-czf", "desktop-folder.tgz", "-C", str(desktop_dir.parent), str(desktop_dir.name)])
             safe_copytree(f"{home}/.local/share/gvfs-metadata", "gvfs-metadata")
+            print("[OK] Saving ~/Desktop folder")
         
         # Flatpak apps and their data
         if flatpak:
             if settings["save-installed-flatpaks"]:
-                print("saving list of installed Flatpak apps")
                 os.system("ls /var/lib/flatpak/app/ | awk '{print \"flatpak install --system \" $1 \" -y\"}' > ./installed_flatpaks.sh")
                 os.system("ls ~/.local/share/flatpak/app | awk '{print \"flatpak install --user \" $1 \" -y\"}' > ./installed_user_flatpaks.sh")
+                print("[OK] Saving list of installed Flatpak apps")
             if settings["save-flatpak-data"]:
-                print("saving user data of installed Flatpak apps")
                 self.save_flatpak_data()
 
         # Environment specific
@@ -130,6 +131,7 @@ class Save:
         cmd.extend(["-C", f"{home}/.var", "app"])
 
         subprocess.run(cmd)
+        print("[OK] Saving Flatpak apps' data")
 
 class Import:
     def __init__(self):
@@ -186,11 +188,11 @@ class Import:
     # Extract an archive with icon themes
     def import_icons(self):
         if os.path.exists(f"icon-themes.tgz"):
-            subprocess.run(["tar", "-xzvf", "icon-themes.tgz", "-C", f"{home}/.local/share/icons"])
+            subprocess.run(["tar", "-xzvf", "icon-themes.tgz", "-C", f"{home}/.local/share/"])
             print("[OK] Extracting a XDG icons archive")
         if os.path.exists(f"icon-themes-legacy.tgz"):
             print(f"[OK] Extracting a legacy icons archive")
-            subprocess.run(["tar", "-xzvf", "icon-themes-legacy.tgz", "-C", f"{home}/.icons"])
+            subprocess.run(["tar", "-xzvf", "icon-themes-legacy.tgz", "-C", f"{home}/"])
         else:
             safe_copytree("icons", f"{home}/.local/share/icons")
             safe_copytree(".icons", f"{home}/.icons")

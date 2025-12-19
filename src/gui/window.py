@@ -512,7 +512,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Save configuration
     def save_config(self):
-        print("Saving the configuration is in progress…\nFull output will be available after finishing this operation.")
+        print("Saving the configuration is in progress…")
         self.archive_mode = "--create"
         self.archive_name = f"{self.folder}/{self.filename_text}"
 
@@ -535,7 +535,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Import configuration
     def import_config(self):
-        print("Importing the configuration is in progress…\nFull output will be available after finishing this operation.")
+        print("Importing the configuration is in progress…")
         self.toast_overlay.dismiss_all()
 
         self.archive_name = self.path_to_import
@@ -552,7 +552,7 @@ class MainWindow(Adw.ApplicationWindow):
     def _call_archive_command(self):
         self.archive_proc = subprocess.Popen(
             [sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name],
-            stdout=subprocess.PIPE,
+            stdout=None,
             stderr=subprocess.PIPE,
             text=True,
             env={**os.environ, "PYTHONPATH": f"{app_prefix}"}
@@ -745,3 +745,4 @@ class MainWindow(Adw.ApplicationWindow):
             files_to_check = [f"{CACHE}/pb", f"{CACHE}/sync", f"{CACHE}/workspace/flatpaks_installer.py"]
             if not any(os.path.exists(path) for path in files_to_check):
                 shutil.rmtree(f"{CACHE}/workspace")
+
