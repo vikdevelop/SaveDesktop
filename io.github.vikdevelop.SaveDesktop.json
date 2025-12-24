@@ -67,13 +67,17 @@
                     "type" : "archive",
                     "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/3.7.1/dconf-build-override-049-amd64.tar.xz",
                     "sha256" : "a1e644bbf755cccf531260a78bcc631d18c29518f86004256cd4b32d9e8a85f3",
-                    "only-arches" : ["x86_64"]
+                    "only-arches" : [
+                        "x86_64"
+                    ]
                 },
                 {
                     "type" : "archive",
                     "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/3.7.1/dconf-build-override-049-aarch64.tar.xz",
                     "sha256" : "a60390607bda144a17b56e0557ec9bb3d1b7a5c6465270652769cfe7642dd528",
-                    "only-arches" : ["aarch64"]
+                    "only-arches" : [
+                        "aarch64"
+                    ]
                 }
             ]
         },

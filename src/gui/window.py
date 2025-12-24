@@ -161,7 +161,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.saveBox.set_valign(Gtk.Align.CENTER)
 
         # Title image for the save page
-        self.titleImage = Gtk.Image.new_from_icon_name("preferences-desktop-display-symbolic")
+        self.titleImage = Gtk.Image.new_from_icon_name("computer")
         self.titleImage.set_pixel_size(64)
         self.saveBox.append(self.titleImage)
 
@@ -267,7 +267,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Image and title for the Import page
         self.importPage = Adw.StatusPage.new()
-        self.importPage.set_icon_name("document-open-symbolic")
+        self.importPage.set_icon_name("package-x-generic")
         self.importPage.set_title(_("Import"))
         self.importPage.set_description(_("Import saved configuration"))
         self.importPage.set_size_request(360, -1)
@@ -281,7 +281,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Box, image and title for this page
         self.sync_btn_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.syncPage = Adw.StatusPage.new()
-        self.syncPage.set_icon_name("view-refresh-symbolic")
+        self.syncPage.set_icon_name("folder-remote")
         self.syncPage.set_title(_("Sync"))
         self.syncPage.set_description(f'{_("Sync your desktop environment configuration with other computers in the network.")} <a href="{self.app_wiki}/synchronization/{self.language}">{_("Learn more")}</a>')
         self.syncPage.set_child(self.sync_btn_box)
