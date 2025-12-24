@@ -278,6 +278,9 @@ class MainWindow(Adw.ApplicationWindow):
     def sync_desktop(self):
         self._basic_setup()
 
+        self.syncingBox.set_valign(Gtk.Align.CENTER)
+        self.syncingBox.set_valign(Gtk.Align.CENTER)
+
         # Box, image and title for this page
         self.sync_btn_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         self.syncPage = Adw.StatusPage.new()
@@ -587,6 +590,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.status_box.set_vexpand(True)
         self.status_box.set_hexpand(True)
         self.status_box.set_size_request(350, 100)
+        self.status_box.set_valign(Gtk.Align.CENTER)
         self.scrolled.set_child(self.status_box)
 
         # Set bold title
