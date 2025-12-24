@@ -236,15 +236,14 @@ msgstr ""
 msgid "The configuration has been applied!"
 msgstr "உள்ளமைவு பயன்படுத்தப்பட்டது!"
 
-# Translation key: config_imported_desc
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
 "the previous page and log out later.\n"
+"\n"
+"<i>If your archive contains Flatpak apps, they will start installing after "
+"the next login.</i>"
 msgstr ""
-"<big> <b> {} </b> </big>\n"
-" மாற்றங்கள் நடைமுறைக்கு வர நீங்கள் கணினியிலிருந்து வெளியேறலாம், அல்லது முந்தைய "
-"பக்கத்திற்குச் சென்று பின்னர் வெளியேறலாம்.\n"
 
 msgid "Back to previous page"
 msgstr "முந்தைய பக்கத்திற்குத் திரும்பு"
@@ -438,6 +437,16 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "தமிழ்நேரம் <https://TamilNeram.github.io>"
+
+# Translation key: config_imported_desc
+#~ msgid ""
+#~ "<big><b>{}</b></big>\n"
+#~ "You can log out of the system for the changes to take effect, or go back "
+#~ "to the previous page and log out later.\n"
+#~ msgstr ""
+#~ "<big> <b> {} </b> </big>\n"
+#~ " மாற்றங்கள் நடைமுறைக்கு வர நீங்கள் கணினியிலிருந்து வெளியேறலாம், அல்லது முந்தைய "
+#~ "பக்கத்திற்குச் சென்று பின்னர் வெளியேறலாம்.\n"
 
 #~ msgid "Manually"
 #~ msgstr "கைமுறையாக"
