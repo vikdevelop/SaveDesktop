@@ -50,9 +50,6 @@ class Create:
         else:
             self._create_archive()
 
-            print("Moving the configuration archive to the user-defined directory")
-            shutil.copyfile('cfg.sd.zip', self.path_with_filename)
-
         print("Configuration saved successfully.")
         remove_temp_file()
 
@@ -65,7 +62,7 @@ class Create:
 
     # Create a new ZIP archive with 7-Zip
     def _create_archive(self):
-        cmd = ['7z', 'a', '-tzip', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip', '.']
+        cmd = ['7z', 'a', '-snL', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip',  "."]
         if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb"):
             if password:
                 cmd.insert(4, "-mem=AES256")
@@ -79,6 +76,9 @@ class Create:
             raise OSError(f"7z failed: {proc.stderr}")
         else:
             print("7z finished with warnings:", proc.stderr)
+
+        print("Moving the configuration archive to the user-defined directory")
+        shutil.copyfile('cfg.sd.zip', self.path_with_filename)
 
 class Unpack:
     def __init__(self, dir_path):
@@ -141,11 +141,24 @@ class Unpack:
                 raise ValueError(first_error or "Wrong password")
             print("Checking password is completed.")
 
-        cmd = subprocess.run(
-            ['7z', 'x', '-y', f'-p{password}', self.path_with_filename, f'-o{TEMP_CACHE}'],
-            capture_output=True, text=True, check=True
+        cmd = ['7z', 'x', '-y', '-snL']
+
+        if password:
+            cmd.append(f'-p{password}')
+
+        cmd.extend([
+            self.path_with_filename,
+            f'-o{TEMP_CACHE}'
+        ])
+
+        proc = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True
         )
-        print(cmd.stdout)
+
+        if proc.returncode >= 7:
+            raise OSError(proc.stderr)
 
     def __handle_sync_error(self):
         # If 7-Zip returns an error regarding an incorrect password and the {CACHE}/sync file

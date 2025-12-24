@@ -49,10 +49,18 @@ class MainWindow(Adw.ApplicationWindow):
         self.headerbar.pack_end(child=self.menu_button)
 
         # primary layout
+        self.scrolled = Gtk.ScrolledWindow()
+        self.scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self.scrolled.set_vexpand(True)
+        self.scrolled.set_hexpand(True)
+        self.toolbarview.set_content(self.scrolled)
+
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.headapp.set_valign(Gtk.Align.CENTER)
-        self.headapp.set_halign(Gtk.Align.CENTER)
-        self.toolbarview.set_content(self.headapp)
+        self.headapp.set_valign(Gtk.Align.FILL)
+        self.headapp.set_halign(Gtk.Align.FILL)
+        self.headapp.set_vexpand(True)
+        self.headapp.set_hexpand(True)
+        self.scrolled.set_child(self.headapp)
 
         # A view container for the menu switcher
         self.stack = Adw.ViewStack(vexpand=True)
@@ -512,7 +520,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Save configuration
     def save_config(self):
-        print("Saving the configuration is in progress…\nFull output will be available after finishing this operation.")
+        print("Saving the configuration is in progress…")
         self.archive_mode = "--create"
         self.archive_name = f"{self.folder}/{self.filename_text}"
 
@@ -535,7 +543,7 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Import configuration
     def import_config(self):
-        print("Importing the configuration is in progress…\nFull output will be available after finishing this operation.")
+        print("Importing the configuration is in progress…")
         self.toast_overlay.dismiss_all()
 
         self.archive_name = self.path_to_import
@@ -543,7 +551,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.status_title = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").format(self.archive_name)
         self.done_title = _("The configuration has been applied!")
-        self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n").format(_("The configuration has been applied!"))
+        self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n\n<i>If your archive contains Flatpak apps, they will start installing after the next login.</i>").format(_("The configuration has been applied!"))
 
         self.please_wait()
         import_thread = Thread(target=self._call_archive_command)
@@ -552,7 +560,7 @@ class MainWindow(Adw.ApplicationWindow):
     def _call_archive_command(self):
         self.archive_proc = subprocess.Popen(
             [sys.executable, "-m", "savedesktop.core.archive", self.archive_mode, self.archive_name],
-            stdout=subprocess.PIPE,
+            stdout=None,
             stderr=subprocess.PIPE,
             text=True,
             env={**os.environ, "PYTHONPATH": f"{app_prefix}"}
@@ -576,10 +584,10 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Create box widget for this page
         self.status_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.status_box.set_halign(Gtk.Align.CENTER)
-        self.status_box.set_valign(Gtk.Align.CENTER)
+        self.status_box.set_vexpand(True)
+        self.status_box.set_hexpand(True)
         self.status_box.set_size_request(350, 100)
-        self.toolbarview.set_content(self.status_box)
+        self.scrolled.set_child(self.status_box)
 
         # Set bold title
         self.set_title(self.status_title)
@@ -684,7 +692,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.status_box.remove(widget)
 
     def _set_default_widgets_state(self):
-        self.toolbarview.set_content(self.headapp)
+        self.scrolled.set_child(self.headapp)
         self.headerbar.set_title_widget(self.switcher_title)
         self.set_title("Save Desktop")
         self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
@@ -741,6 +749,8 @@ class MainWindow(Adw.ApplicationWindow):
     # Remove this folder to cleanup unnecessary content created during saving,
     # importing, or syncing the configuration only if these files are not present
     def remove_cache(self):
-        files_to_check = [f"{CACHE}/pb", f"{CACHE}/sync", f"{CACHE}/workspace/flatpaks_installer.py"]
-        if not any(os.path.exists(path) for path in files_to_check):
-            shutil.rmtree(f"{CACHE}/workspace")
+        if os.path.exists(f"{CACHE}/workspace"):
+            files_to_check = [f"{CACHE}/pb", f"{CACHE}/sync", f"{CACHE}/workspace/flatpaks_installer.py"]
+            if not any(os.path.exists(path) for path in files_to_check):
+                shutil.rmtree(f"{CACHE}/workspace")
+
