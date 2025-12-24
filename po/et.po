@@ -235,15 +235,14 @@ msgstr ""
 msgid "The configuration has been applied!"
 msgstr "Seadistused on nüüd kasutusel!"
 
-# Translation key: config_imported_desc
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
 "the previous page and log out later.\n"
+"\n"
+"<i>If your archive contains Flatpak apps, they will start installing after "
+"the next login.</i>"
 msgstr ""
-"<big><b>{}</b></big>\n"
-"Muudatuste kasutuselevõtmiseks võid sa kohe välja logida või minna tagasi ja "
-"logida välja hiljem.\n"
 
 msgid "Back to previous page"
 msgstr "Tagasi eelmisesse vaatesse"
@@ -443,6 +442,16 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Priit Jõerüüt 2025"
+
+# Translation key: config_imported_desc
+#~ msgid ""
+#~ "<big><b>{}</b></big>\n"
+#~ "You can log out of the system for the changes to take effect, or go back "
+#~ "to the previous page and log out later.\n"
+#~ msgstr ""
+#~ "<big><b>{}</b></big>\n"
+#~ "Muudatuste kasutuselevõtmiseks võid sa kohe välja logida või minna tagasi "
+#~ "ja logida välja hiljem.\n"
 
 #~ msgid "Manually"
 #~ msgstr "Valides aja käsitsi"

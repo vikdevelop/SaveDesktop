@@ -235,15 +235,14 @@ msgstr ""
 msgid "The configuration has been applied!"
 msgstr "विन्यास लागू कर दिया गया है!"
 
-# Translation key: config_imported_desc
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
 "the previous page and log out later.\n"
+"\n"
+"<i>If your archive contains Flatpak apps, they will start installing after "
+"the next login.</i>"
 msgstr ""
-"<big><b>{}</b></big>\n"
-"परिवर्तनों को प्रभावी करने के लिए आप सिस्टम से लॉग आउट कर सकते हैं, या पिछले पृष्ठ पर "
-"वापस जा सकते हैं और बाद में लॉग आउट कर सकते हैं।\n"
 
 msgid "Back to previous page"
 msgstr "पिछले पृष्ठ पर जाएं"
@@ -438,6 +437,16 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
+
+# Translation key: config_imported_desc
+#~ msgid ""
+#~ "<big><b>{}</b></big>\n"
+#~ "You can log out of the system for the changes to take effect, or go back "
+#~ "to the previous page and log out later.\n"
+#~ msgstr ""
+#~ "<big><b>{}</b></big>\n"
+#~ "परिवर्तनों को प्रभावी करने के लिए आप सिस्टम से लॉग आउट कर सकते हैं, या पिछले पृष्ठ पर "
+#~ "वापस जा सकते हैं और बाद में लॉग आउट कर सकते हैं।\n"
 
 #~ msgid "Manually"
 #~ msgstr "हाथ से"

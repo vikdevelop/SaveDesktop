@@ -215,11 +215,13 @@ msgstr ""
 msgid "The configuration has been applied!"
 msgstr ""
 
-# Translation key: config_imported_desc
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
 "the previous page and log out later.\n"
+"\n"
+"<i>If your archive contains Flatpak apps, they will start installing after "
+"the next login.</i>"
 msgstr ""
 
 msgid "Back to previous page"

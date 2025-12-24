@@ -239,15 +239,14 @@ msgstr ""
 msgid "The configuration has been applied!"
 msgstr "Konfigurationen har tillämpats!"
 
-# Translation key: config_imported_desc
 msgid ""
 "<big><b>{}</b></big>\n"
 "You can log out of the system for the changes to take effect, or go back to "
 "the previous page and log out later.\n"
+"\n"
+"<i>If your archive contains Flatpak apps, they will start installing after "
+"the next login.</i>"
 msgstr ""
-"<big><b>{}</b></big>\n"
-"Du kan logga ut från systemet för att ändringarna ska träda i kraft, eller "
-"gå tillbaka till föregående sida och logga ut senare.\n"
 
 msgid "Back to previous page"
 msgstr "Tillbaka till föregående sida"
@@ -445,6 +444,16 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Luna Jernberg https://github.com/bittin/"
+
+# Translation key: config_imported_desc
+#~ msgid ""
+#~ "<big><b>{}</b></big>\n"
+#~ "You can log out of the system for the changes to take effect, or go back "
+#~ "to the previous page and log out later.\n"
+#~ msgstr ""
+#~ "<big><b>{}</b></big>\n"
+#~ "Du kan logga ut från systemet för att ändringarna ska träda i kraft, "
+#~ "eller gå tillbaka till föregående sida och logga ut senare.\n"
 
 #~ msgid "Manually"
 #~ msgstr "Manuellt"
