@@ -49,10 +49,18 @@ class MainWindow(Adw.ApplicationWindow):
         self.headerbar.pack_end(child=self.menu_button)
 
         # primary layout
+        self.scrolled = Gtk.ScrolledWindow()
+        self.scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self.scrolled.set_vexpand(True)
+        self.scrolled.set_hexpand(True)
+        self.toolbarview.set_content(self.scrolled)
+
         self.headapp = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.headapp.set_valign(Gtk.Align.CENTER)
-        self.headapp.set_halign(Gtk.Align.CENTER)
-        self.toolbarview.set_content(self.headapp)
+        self.headapp.set_valign(Gtk.Align.FILL)
+        self.headapp.set_halign(Gtk.Align.FILL)
+        self.headapp.set_vexpand(True)
+        self.headapp.set_hexpand(True)
+        self.scrolled.set_child(self.headapp)
 
         # A view container for the menu switcher
         self.stack = Adw.ViewStack(vexpand=True)
@@ -543,7 +551,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.status_title = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").format(self.archive_name)
         self.done_title = _("The configuration has been applied!")
-        self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n").format(_("The configuration has been applied!"))
+        self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n\n<i>If your archive contains Flatpak apps, they will start installing after the next login.</i>").format(_("The configuration has been applied!"))
 
         self.please_wait()
         import_thread = Thread(target=self._call_archive_command)
@@ -576,10 +584,10 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Create box widget for this page
         self.status_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.status_box.set_halign(Gtk.Align.CENTER)
-        self.status_box.set_valign(Gtk.Align.CENTER)
+        self.status_box.set_vexpand(True)
+        self.status_box.set_hexpand(True)
         self.status_box.set_size_request(350, 100)
-        self.toolbarview.set_content(self.status_box)
+        self.scrolled.set_child(self.status_box)
 
         # Set bold title
         self.set_title(self.status_title)
@@ -684,7 +692,7 @@ class MainWindow(Adw.ApplicationWindow):
             self.status_box.remove(widget)
 
     def _set_default_widgets_state(self):
-        self.toolbarview.set_content(self.headapp)
+        self.scrolled.set_child(self.headapp)
         self.headerbar.set_title_widget(self.switcher_title)
         self.set_title("Save Desktop")
         self.apply_handler = self.break_point.connect("apply", self.__on_break_point_apply)
