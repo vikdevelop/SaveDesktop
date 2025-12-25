@@ -37,5 +37,5 @@ body:
     attributes:
       label: Scope check
       options:
-        - label: This request is related to desktop configuration backup/restore
+        - label: This request is related to desktop configuration backup/restore/sync
           required: true
