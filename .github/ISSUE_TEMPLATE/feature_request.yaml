@@ -1,19 +1,41 @@
 name: Feature request
-description: Suggestion to improve SaveDesktop
+description: Suggest an improvement to Save Desktop
 title: "feature_request: "
 labels: [enhancement]
 body:
   - type: textarea
     id: problem
     attributes:
-      label: The current problem or need
-      description: 
+      label: What problem does this solve?
+      description: |
+        Describe the limitation, pain point, or missing capability.
+        Please avoid describing the solution here.
     validations:
       required: true
+
   - type: textarea
-    id: idea
+    id: benefit
     attributes:
-      label: Describe the solution you'd like
-      description: 
+      label: Who benefits and how?
+      description: |
+        Explain who would use this feature and why it matters.
     validations:
       required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution (optional)
+      description: |
+        If you have an idea how this could work, describe it here.
+        Implementation details may be changed or rejected.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This request is related to desktop configuration backup/restore
+          required: true

@@ -33,7 +33,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: "Version of the SaveDesktop app"
+      label: "Version of the Save Desktop app"
       description: "You can find it by clicking on the three dots in the header bar and then the 'About app' button."
     validations:
       required: true

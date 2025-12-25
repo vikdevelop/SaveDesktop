@@ -1,5 +1,5 @@
 name: Question
-description: Do you have any questions related to the SaveDesktop app, the Github wiki, or something similar?
+description: Ask a question about how Save Desktop works
 title: "question: "
 labels: [question]
 body:
@@ -7,6 +7,17 @@ body:
     id: question
     attributes:
       label: Your question
-      description: 
+      description: |
+        Ask about how Save Desktop works or how to use a specific feature.
+        Please check the README and existing issues first.
     validations:
       required: true
+
+  - type: input
+    id: context
+    attributes:
+      label: Context (optional)
+      description: |
+        Linux distribution, desktop environment, or usage scenario.
+    validations:
+      required: false
