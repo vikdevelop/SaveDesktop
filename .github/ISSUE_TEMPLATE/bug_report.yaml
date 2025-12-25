@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a bug with the app
+description: Report a bug with Save Desktop
 title: "bug: "
 labels: [bug]
 body:
@@ -17,7 +17,7 @@ body:
       label: "Desktop Environment"
       description: "What desktop environment are you using?"
       options:
-        - Select
+        - (please select)
         - GNOME
         - KDE Plasma
         - Xfce
@@ -41,11 +41,12 @@ body:
     id: package
     attributes:
       label: "Package type"
-      description: "How did you install SaveDesktop?"
+      description: "How did you install Save Desktop?"
       options:
+        - (please select)
         - Flatpak from Flathub
         - GNOME Builder
-        - Other
+        - Other (please specify in the bug description)
     validations:
       required: true
   - type: textarea
@@ -66,6 +67,6 @@ body:
     id: output
     attributes:
       label: "Output from the Terminal"
-      description: "Open the Terminal app (Ctrl+Alt+T or find it in the apps' menu) and run the flatpak run io.github.vikdevelop.SaveDesktop command (alternatively, add another argument if you run in CLI). Then insert the output below."
+      description: "Open the Terminal app (Ctrl+Alt+T or find it in the apps' menu) and run the flatpak run io.github.vikdevelop.SaveDesktop command (alternatively, add another argument if you run in CLI). Then insert the output below. Please insert full output as text, not a screenshot!"
     validations:
       required: true
