@@ -1,9 +1,49 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="synchronization_between_computers_title"></str>
-  <str key="synchronization_intro"></str>
-  <str key="set_up_first_pc"></str>
-  <str key="set_up_second_pc"></str>
-  <str key="bidirectional_sync"></str>
-  <str key="synchronization_files"></str>
+  <str key="synchronization_between_computers_title"># Synkronisering mellan datorer i nätverket</str>
+  <str key="synchronization_intro">Förutom att spara konfigurationen och importera dem låter Spara skrivbord även dig att synkronisera det mellan datorer i ditt nätverk med hjälp av en delad molnmapp eller en delad Syncthing-mapp.</str>
+  <str key="set_up_first_pc">## Konfigurera på den första datorn
+1. Öppna sidan **Synkronisera** i programmet Spara skrivbord.
+2. Klicka på **”Konfigurera synkroniseringsfil.”**
+3. En snabb installationsguide visas:
+* Om du använder GNOME, Cinnamon, Budgie eller äldre COSMIC används metoden **GNOME Online konton**.
+* För KDE Plasma eller andra skrivbordsmiljöer växlar det till **Rclone** (du behöver bara kopiera ett kommando och klistra in det i terminalen).
+* Alternativt kan du använda **Syncthing** genom att klicka på **”Använd Syncthings mapp istället”** och välja en synkroniserad mapp.
+4. Efter att guiden är klar öppnas dialogrutan **”Konfigurera synkroniseringsfil”**:
+* En **periodisk sparfil** (din skrivbordskonfigurationsarkiv) börjar genereras i den valda mappen.
+* Du kan valfritt ändra intervallet eller filnamnet med knappen **”Ändra”**. 5. Klicka på **”Verkställ”**:
+* En andra fil, `SaveDesktop.json`, skapas i samma mapp. Den innehåller synkroniseringsfilens namn och sparintervall.
+* Du kommer att bli ombedd att **logga ut** från din session så att synkroniseringen kan aktiveras helt.</str>
+  <str key="set_up_second_pc">## Anslut på en annan dator
+
+1. Gå till sidan **Synkronisera** igen på den andra datorn.
+
+2. Klicka på **”Anslut till molnlagringen.”**
+
+3. Samma guide visas – välj din synkroniserade mapp via GNOME OA, Rclone eller Syncthing.
+
+4. Efter guiden:
+
+* Dialogrutan **”Anslut till molnlagringen”** öppnas.
+
+* Välj **synkroniseringsintervall** och aktivera eller inaktivera **Dubbelriktad synkronisering**.
+
+5. Klicka på **”Verkställ”**:
+
+* Du kommer att bli ombedd att **logga ut**, eller (om du använder manuell synkronisering) informeras du om att du kan synkronisera från appens huvudmeny.
+
+* Efter inloggning ansluter Spara skrivbordet till den delade mappen och synkroniserar din konfiguration automatiskt, med en avisering i början och slutet.
+</str>
+  <str key="bidirectional_sync">### Dubbelriktad synkronisering
+
+Om **Dubbelriktad synkronisering** är aktiverad på båda datorerna:
+
+* Spara Skrivbordet kopierar synkroniseringsinställningar (som intervall och filnamn) från en maskin till den andra.
+
+* Detta håller dina system synkroniserade utan att behöva konfigurera vart och en manuellt.</str>
+  <str key="synchronization_files">## Filer som används vid synkronisering
+
+* **Periodisk sparfil** – ett `.sd.zip`-arkiv med din skrivbordskonfiguration, uppdateras regelbundet.
+
+* **SaveDesktop.json** – en liten hjälpfil som lagrar arkivets filnamn och sparintervall, som används under synkroniseringsinstallationen.</str>
 </root>
