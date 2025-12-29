@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="synchronization_between_computers_title"></str>
+  <str key="synchronization_intro"></str>
+  <str key="set_up_first_pc"></str>
+  <str key="set_up_second_pc"></str>
+  <str key="bidirectional_sync"></str>
+  <str key="synchronization_files"></str>
+</root>
