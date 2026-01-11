@@ -89,7 +89,12 @@ class Unpack:
     def start_importing(self):
         cleanup_cache_dir()
         self._check_config_type()
-        self._replace_home_in_files(".", home)
+        
+        if os.path.exists("dconf-settings.ini"):
+            self._sanitize_dconf_dump(path="dconf-settings.ini")
+            self._replace_home_in_files(".", home)
+        else:
+            self._replace_home_in_files(".", home)
 
         Import() # de_config.py
 
@@ -106,6 +111,33 @@ class Unpack:
         else:
             self._copy_folder_to_cache()
 
+    # Remove the org/gnome/portal/filechooser string from the dconf-settings.ini file
+    def _sanitize_dconf_dump(self, path):
+        with open(path, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+
+        sanitized = []
+        skip_block = False
+
+        for line in lines:
+            # Start of problematic schema
+            if line.startswith("[org/gnome/portal/filechooser"):
+                skip_block = True
+                continue
+
+            # End of schema block
+            if skip_block and line.startswith("["):
+                skip_block = False
+
+            if not skip_block:
+                sanitized.append(line)
+
+        if sanitized != lines:
+            with open(path, "w", encoding="utf-8") as f:
+                f.writelines(sanitized)
+
+            print("Removed org/gnome/portal/filechooser from dconf-settings.ini")
+            
     # Replace original /home/$USER path with actual path in the dconf-settings.ini file and other XML files
     def _replace_home_in_files(self, root, home, patterns=(".xml", ".ini")):
         regex = re.compile(r"(?:/var)?/home/[^/]+/")
