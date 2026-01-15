@@ -56,10 +56,6 @@ class Save:
         print("Saving settings from the Dconf database...")
         os.system("dconf dump / > ./dconf-settings.ini")
 
-        # GTK configs
-        safe_copytree(f"{home}/.config/gtk-4.0", "gtk-4.0")
-        safe_copytree(f"{home}/.config/gtk-3.0", "gtk-3.0")
-
         # Fonts, themes, extensions, backgrounds, icons
         if settings["save-fonts"]:
             safe_copytree(f"{home}/.fonts", ".fonts")
@@ -88,6 +84,11 @@ class Save:
             subprocess.run(["tar", "-czf", "desktop-folder.tgz", "-C", str(desktop_dir.parent), str(desktop_dir.name)])
             safe_copytree(f"{home}/.local/share/gvfs-metadata", "gvfs-metadata")
             print("[OK] Saving ~/Desktop folder")
+
+        # GTK Settings
+        if settings["save-gtk-settings"]:
+            safe_copytree(f"{home}/.config/gtk-4.0", "gtk-4.0")
+            safe_copytree(f"{home}/.config/gtk-3.0", "gtk-3.0")
         
         # Flatpak apps and their data
         if flatpak:

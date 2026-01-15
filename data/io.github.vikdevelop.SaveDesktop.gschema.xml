@@ -33,6 +33,10 @@
 			<default>false</default>
 			<summary>Save the user desktop folder</summary>
 		</key>
+	  <key name="save-gtk-settings" type="b">
+	    <default>true</default>
+	    <summary>Save the GTK application settings (appearance, tabs, styles)</summary>
+	  </key>
 		<key name="save-installed-flatpaks" type="b">
 			<default>true</default>
 			<summary>Save installed Flatpak apps</summary>
