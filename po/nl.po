@@ -25,11 +25,13 @@ msgstr "Huidige voorkeuren opslaan"
 msgid "Set the file name"
 msgstr "Geef het bestand een naam"
 
-msgid "Items to include in the configuration archive"
-msgstr "Items om op te nemen in het voorkeurenarchief"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Deze voorkeuren zĳn ook van toepassing op periodiek opslaan"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Pictogrammen"
@@ -48,6 +50,12 @@ msgid "Extensions"
 msgstr ""
 
 msgid "Desktop"
+msgstr ""
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
 msgstr ""
 
 msgid "Flatpak apps"
@@ -402,6 +410,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "https://github.com/Vistaus"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Items om op te nemen in het voorkeurenarchief"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Deze voorkeuren zĳn ook van toepassing op periodiek opslaan"
 
 #~ msgid "Manually"
 #~ msgstr "Handmatig"

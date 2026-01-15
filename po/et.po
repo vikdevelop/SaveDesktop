@@ -25,11 +25,13 @@ msgstr "Salvesta praegused seadistused"
 msgid "Set the file name"
 msgstr "Sisesta faili nimi"
 
-msgid "Items to include in the configuration archive"
-msgstr "Vali seadistuste arhiivifaili kaasatavad objektid"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Need seadistused kehtivad ka regulaarsel varundamisel"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Ikoonid"
@@ -49,6 +51,12 @@ msgstr "Lisamoodulid"
 
 msgid "Desktop"
 msgstr "Töölaud"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Flatpaki rakendused"
@@ -448,6 +456,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Priit Jõerüüt 2025"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Vali seadistuste arhiivifaili kaasatavad objektid"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Need seadistused kehtivad ka regulaarsel varundamisel"
 
 # Translation key: config_imported_desc
 #~ msgid ""

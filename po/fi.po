@@ -25,11 +25,13 @@ msgstr "Tallenna nykyiset määritykset"
 msgid "Set the file name"
 msgstr "Aseta tiedostonimi"
 
-msgid "Items to include in the configuration archive"
-msgstr "Määritysarkistoon sisällytettävät kohteet"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Nämä asetukset pätevät myös jaksottaiseen tallennukseen"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Kuvakkeet"
@@ -49,6 +51,12 @@ msgstr "Laajennukset"
 
 msgid "Desktop"
 msgstr "Työpöytä"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Flatpak-sovellukset"
@@ -414,6 +422,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Name jiri.gronroos+l10n@iki.fi"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Määritysarkistoon sisällytettävät kohteet"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Nämä asetukset pätevät myös jaksottaiseen tallennukseen"
 
 # Translation key: config_imported_desc
 #~ msgid ""

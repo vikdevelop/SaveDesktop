@@ -25,11 +25,13 @@ msgstr "वर्तमान विन्यास सहेजें"
 msgid "Set the file name"
 msgstr "फाइल नाम निर्धारित करें"
 
-msgid "Items to include in the configuration archive"
-msgstr "विन्यास पुरालेख में शामिल करने योग्य आइटम"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "ये सेटिंग्स आवधिक सहेजने पर भी लागू होती हैं"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "आइकन"
@@ -49,6 +51,12 @@ msgstr "विस्तार"
 
 msgid "Desktop"
 msgstr "डेस्कटॉप"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "फ्लैटपैक ऐप्स"
@@ -437,6 +445,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "विन्यास पुरालेख में शामिल करने योग्य आइटम"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "ये सेटिंग्स आवधिक सहेजने पर भी लागू होती हैं"
 
 # Translation key: config_imported_desc
 #~ msgid ""

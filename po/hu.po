@@ -25,11 +25,13 @@ msgstr "Jelenlegi konfiguráció mentése"
 msgid "Set the file name"
 msgstr "Fájlnév megadása"
 
-msgid "Items to include in the configuration archive"
-msgstr "A konfigurációs archívumba felveendő elemek"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Ezek a beállítások érvényesek az időszakos mentésekre is"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Ikonok"
@@ -48,6 +50,12 @@ msgid "Extensions"
 msgstr ""
 
 msgid "Desktop"
+msgstr ""
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
 msgstr ""
 
 msgid "Flatpak apps"
@@ -402,6 +410,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Daniel Uhrinyi https://github.com/danieluhrinyi"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "A konfigurációs archívumba felveendő elemek"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Ezek a beállítások érvényesek az időszakos mentésekre is"
 
 #~ msgid "Manually"
 #~ msgstr "Manuálisan"

@@ -25,11 +25,13 @@ msgstr "Desa la configuració actual"
 msgid "Set the file name"
 msgstr "Nom del fitxer"
 
-msgid "Items to include in the configuration archive"
-msgstr "Elements que voleu incloure al fitxer de configuració"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Aquestes opcions afecten també a la còpia automàtica"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Icones"
@@ -49,6 +51,12 @@ msgstr ""
 
 msgid "Desktop"
 msgstr "Escriptori"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Programari Flatpak"
@@ -422,6 +430,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "BennyBeat https://github.com/BennyBeat"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Elements que voleu incloure al fitxer de configuració"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Aquestes opcions afecten també a la còpia automàtica"
 
 # Translation key: config_imported_desc
 #~ msgid ""

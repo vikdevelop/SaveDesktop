@@ -26,11 +26,13 @@ msgstr "Spremi trenutačnu konfiguraciju"
 msgid "Set the file name"
 msgstr "Postavi ime datoteke"
 
-msgid "Items to include in the configuration archive"
-msgstr "Stavke koje treba uključiti u konfiguracijsku arhivu"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Ove se postavke primjenjuju i na periodično spremanje"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Ikone"
@@ -49,6 +51,12 @@ msgstr "Proširenja"
 
 msgid "Desktop"
 msgstr "Radna površina"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Flatpak aplikacije"
@@ -427,6 +435,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Zasluge prevoditelja"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Stavke koje treba uključiti u konfiguracijsku arhivu"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Ove se postavke primjenjuju i na periodično spremanje"
 
 #~ msgid ""
 #~ "<big><b>{}</b></big>\n"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-12-24 13:44+0000\n"
+"PO-Revision-Date: 2026-01-15 20:02+0000\n"
 "Last-Translator: vikdevelop <vikdevelop@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/cs/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 msgid "Save"
 msgstr "Uložit"
@@ -25,11 +25,15 @@ msgstr "Uložit aktuální konfiguraci"
 msgid "Set the file name"
 msgstr "Nastavit název souboru"
 
-msgid "Items to include in the configuration archive"
-msgstr "Položky, které mají být zahrnuty do archivu konfigurace"
+msgid "Select configuration items"
+msgstr "Vybrat položky konfigurace"
 
-msgid "These settings also apply to periodic saving"
-msgstr "Tato nastavení platí i pro pravidelné ukládání"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
+"Tato nastavení se používají pro ruční a pravidelné ukládání, import a "
+"synchronizaci."
 
 msgid "Icons"
 msgstr "Ikony"
@@ -49,6 +53,12 @@ msgstr "Rozšíření"
 
 msgid "Desktop"
 msgstr "Plocha"
+
+msgid "GTK application settings"
+msgstr "Nastavení aplikací GTK"
+
+msgid "Bookmarks, styles, etc."
+msgstr "Záložky, styly, atd."
 
 msgid "Flatpak apps"
 msgstr "Aplikace Flatpak"
@@ -451,6 +461,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "vikdevelop https://github.com/vikdevelop"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Položky, které mají být zahrnuty do archivu konfigurace"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Tato nastavení platí i pro pravidelné ukládání"
 
 # Translation key: config_imported_desc
 #~ msgid ""
