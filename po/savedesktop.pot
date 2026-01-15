@@ -32,11 +32,11 @@ msgstr ""
 #: src/gui/templates/shortcuts_window.ui:57
 #: src/gui/window.py
 #: src/gui/items_dialog.py
-msgid "Items to include in the configuration archive"
+msgid "Select configuration items"
 msgstr ""
 
 #: src/gui/items_dialog.py
-msgid "These settings also apply to periodic saving"
+msgid "These settings are used for manual and periodic saves, imports, and synchronization."
 msgstr ""
 
 #: src/gui/items_dialog.py
@@ -61,6 +61,14 @@ msgstr ""
 
 #: src/gui/items_dialog.py
 msgid "Desktop"
+msgstr ""
+
+#: src/gui/items_dialog.py
+msgid "GTK application settings"
+msgstr ""
+
+#: src/gui/items_dialog.py
+msgid "Bookmarks, styles, etc."
 msgstr ""
 
 #: src/gui/items_dialog.py

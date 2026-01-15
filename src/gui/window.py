@@ -7,7 +7,6 @@ from datetime import date
 from pathlib import Path
 from threading import Thread
 from savedesktop.globals import *
-from savedesktop.gui.items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
 from savedesktop.gui.more_options_dialog import MoreOptionsDialog
 from savedesktop.gui.synchronization_dialogs import InitSetupDialog, SetDialog, CloudDialog
 
@@ -38,6 +37,7 @@ class MainWindow(Adw.ApplicationWindow):
         # primary menu section
         self.general_menu = Gio.Menu()
         self.general_menu.append(_("Keyboard shortcuts"), 'app.shortcuts')
+        self.general_menu.append(_("Select configuration items"), 'app.items-dialog')
         self.general_menu.append(_("About app"), 'app.about')
         self.main_menu.append_section(None, self.general_menu)
 
@@ -187,21 +187,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.saveEntry.set_text(settings["filename"])
         self.lbox_e.append(self.saveEntry)
 
-        # Button for opening dialog for selecting items that will be included to the config archive
-        self.itemsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
-        self.itemsButton.set_valign(Gtk.Align.CENTER)
-        self.itemsButton.add_css_class("flat")
-        self.itemsButton.connect("clicked", self._open_items_dialog)
-
-        # Action row for opening dialog for selecting items that will be included to the config archive
-        self.items_row = Adw.ActionRow.new()
-        self.items_row.set_title(title=_("Items to include in the configuration archive"))
-        self.items_row.set_use_markup(True)
-        self.items_row.set_title_lines(5)
-        self.items_row.add_suffix(self.itemsButton)
-        self.items_row.set_activatable_widget(self.itemsButton)
-        self.lbox_e.append(child=self.items_row)
-
         self.lbox_e.set_show_separators(True)
 
         # section for showing dialog with more options
@@ -233,12 +218,6 @@ class MainWindow(Adw.ApplicationWindow):
         self.more_options_dialog = MoreOptionsDialog(self)
         self.more_options_dialog.choose(self, None, None, None)
         self.more_options_dialog.present(self)
-
-    # open a dialog for selecting the items to include in the configuration archive
-    def _open_items_dialog(self, w):
-        self.items_dialog = itemsDialog(self)
-        self.items_dialog.choose(self, None, None, None)
-        self.items_dialog.present(self)
 
     # Import configuration page
     def import_desktop(self):

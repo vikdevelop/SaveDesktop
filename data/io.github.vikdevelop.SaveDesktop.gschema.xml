@@ -35,7 +35,7 @@
 		</key>
 	  <key name="save-gtk-settings" type="b">
 	    <default>true</default>
-	    <summary>Save the GTK application settings (appearance, tabs, styles)</summary>
+	    <summary>Save the GTK application settings</summary>
 	  </key>
 		<key name="save-installed-flatpaks" type="b">
 			<default>true</default>

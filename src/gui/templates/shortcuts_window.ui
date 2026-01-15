@@ -54,7 +54,7 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property name="title" translatable="yes">Items to include in the configuration archive</property>
+                <property name="title" translatable="yes">Select configuration items</property>
                 <property name="action-name">app.items-dialog</property>
                 <property name="accelerator">&lt;primary&gt;&lt;shift&gt;i</property>
               </object>

@@ -3,6 +3,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib
 from savedesktop.gui.window import MainWindow
+from savedesktop.gui.items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
 from savedesktop.globals import *
 
 @Gtk.Template(resource_path="/io/github/vikdevelop/SaveDesktop/gui/templates/shortcuts_window.ui")
@@ -44,7 +45,9 @@ class SaveDesktopApp(Adw.Application):
 
     # Open the "Items to include in the configuration archive" dialog using Ctrl+Shift+I keyboard shortcut
     def call_items_dialog(self, action, param):
-        self.win._open_items_dialog(w="")
+        self.items_dialog = itemsDialog(self.win)
+        self.items_dialog.choose(self.win, None, None, None)
+        self.items_dialog.present(self.win)
 
     # Open the "Set up the sync file" dialog using Ctrl+Shift+S keyboard shortcut
     def call_setDialog(self, action, param):

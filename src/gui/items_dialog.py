@@ -110,8 +110,8 @@ class itemsDialog(Adw.AlertDialog):
         super().__init__()
         self.parent = parent
 
-        self.set_heading(_("Items to include in the configuration archive"))
-        self.set_body(_("These settings also apply to periodic saving"))
+        self.set_heading(_("Select configuration items"))
+        self.set_body(_("These settings are used for manual and periodic saves, imports, and synchronization."))
         
         # Box for loading widgets in this dialog
         self.itemsBox = Gtk.ListBox.new()
@@ -192,6 +192,7 @@ class itemsDialog(Adw.AlertDialog):
         
         self.desktop_row = Adw.ActionRow.new()
         self.desktop_row.set_title(title=_("Desktop"))
+        self.desktop_row.set_subtitle(subtitle=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
         self.desktop_row.set_subtitle_selectable(True)
         self.desktop_row.set_use_markup(True)
         self.desktop_row.set_title_lines(2)
@@ -200,14 +201,15 @@ class itemsDialog(Adw.AlertDialog):
         self.desktop_row.set_activatable_widget(self.switch_de)
         self.itemsBox.append(child=self.desktop_row)
         
-        # Swithc and row of option 'GTK application settings (appearance, tabs, styles)'
+        # Switch and row of the option: GTK Settings
         self.switch_gtk = Gtk.Switch.new()
         if settings["save-gtk-settings"]:
             self.switch_gtk.set_active(True)
         self.switch_gtk.set_valign(align=Gtk.Align.CENTER)
 
         self.gtk_row = Adw.ActionRow.new()
-        self.gtk_row.set_title(title=_("GTK application settings (appearance, tabs, styles)"))
+        self.gtk_row.set_title(title=_("GTK application settings"))
+        self.gtk_row.set_subtitle(subtitle=_("Bookmarks, styles, etc."))
         self.gtk_row.set_subtitle_selectable(True)
         self.gtk_row.set_use_markup(True)
         self.gtk_row.set_title_lines(2)
