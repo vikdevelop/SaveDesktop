@@ -25,11 +25,13 @@ msgstr "Spara nuvarande konfiguration"
 msgid "Set the file name"
 msgstr "Ange filnamn"
 
-msgid "Items to include in the configuration archive"
-msgstr "Objekt som ska inkluderas i konfigurationsarkivet"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Dessa inställningar gäller även för periodiskt sparande"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Ikoner"
@@ -49,6 +51,12 @@ msgstr "Tillägg"
 
 msgid "Desktop"
 msgstr "Skrivbord"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Flatpak program"
@@ -456,6 +464,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Luna Jernberg https://github.com/bittin/"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Objekt som ska inkluderas i konfigurationsarkivet"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Dessa inställningar gäller även för periodiskt sparande"
 
 # Translation key: config_imported_desc
 #~ msgid ""

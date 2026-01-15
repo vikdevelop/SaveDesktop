@@ -25,11 +25,13 @@ msgstr "Salva la configurazione corrente"
 msgid "Set the file name"
 msgstr "Impostare il nome file"
 
-msgid "Items to include in the configuration archive"
-msgstr "Elementi da includere nell'archivio di configurazione"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Queste impostazioni si applicano anche al salvataggio periodico"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Icone"
@@ -49,6 +51,12 @@ msgstr "Estensioni"
 
 msgid "Desktop"
 msgstr "Desktop"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "App flatpak"
@@ -460,6 +468,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Albano Battistella https://github.com/albanobattistella"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Elementi da includere nell'archivio di configurazione"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Queste impostazioni si applicano anche al salvataggio periodico"
 
 # Translation key: config_imported_desc
 #~ msgid ""

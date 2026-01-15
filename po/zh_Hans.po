@@ -25,11 +25,13 @@ msgstr "保存当前配置"
 msgid "Set the file name"
 msgstr "设置文件名"
 
-msgid "Items to include in the configuration archive"
-msgstr "要包含在配置存档中的项目"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "这些设置也适用于定期保存"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "图标"
@@ -49,6 +51,12 @@ msgstr "扩展"
 
 msgid "Desktop"
 msgstr "桌面"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Flatpak 包"
@@ -426,6 +434,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "译者github链接"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "要包含在配置存档中的项目"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "这些设置也适用于定期保存"
 
 # Translation key: config_imported_desc
 #~ msgid ""

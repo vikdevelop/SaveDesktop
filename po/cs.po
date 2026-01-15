@@ -25,11 +25,13 @@ msgstr "Uložit aktuální konfiguraci"
 msgid "Set the file name"
 msgstr "Nastavit název souboru"
 
-msgid "Items to include in the configuration archive"
-msgstr "Položky, které mají být zahrnuty do archivu konfigurace"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Tato nastavení platí i pro pravidelné ukládání"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Ikony"
@@ -49,6 +51,12 @@ msgstr "Rozšíření"
 
 msgid "Desktop"
 msgstr "Plocha"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Aplikace Flatpak"
@@ -451,6 +459,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "vikdevelop https://github.com/vikdevelop"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Položky, které mají být zahrnuty do archivu konfigurace"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Tato nastavení platí i pro pravidelné ukládání"
 
 # Translation key: config_imported_desc
 #~ msgid ""

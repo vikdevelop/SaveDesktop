@@ -25,11 +25,13 @@ msgstr "Guardar la configuración actual"
 msgid "Set the file name"
 msgstr "Establecer el nombre del archivo"
 
-msgid "Items to include in the configuration archive"
-msgstr "Elementos que deben incluirse en el archivo de la configuración"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Estos ajustes también se aplican al guardado periódico"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Iconos"
@@ -49,6 +51,12 @@ msgstr "Extensiones"
 
 msgid "Desktop"
 msgstr "Escritorio"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Aplicaciones de Flatpak"
@@ -444,6 +452,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "gallegonovato fran-carro@hotmail.es"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Elementos que deben incluirse en el archivo de la configuración"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Estos ajustes también se aplican al guardado periódico"
 
 # Translation key: config_imported_desc
 #~ msgid ""

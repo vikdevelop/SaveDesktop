@@ -26,10 +26,12 @@ msgstr "Zapisz obecną konfigurację"
 msgid "Set the file name"
 msgstr "Ustaw nazwę pliku"
 
-msgid "Items to include in the configuration archive"
+msgid "Select configuration items"
 msgstr ""
 
-msgid "These settings also apply to periodic saving"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
 msgstr ""
 
 msgid "Icons"
@@ -50,6 +52,12 @@ msgstr "Rozszerzenia"
 
 msgid "Desktop"
 msgstr "Pulpit"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Aplikacje Flatpak"

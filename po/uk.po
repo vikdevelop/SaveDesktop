@@ -26,11 +26,13 @@ msgstr "Зберегти поточну конфігурацію"
 msgid "Set the file name"
 msgstr "Задайте ім'я файлу"
 
-msgid "Items to include in the configuration archive"
-msgstr "Елементи для включення в архів конфігурації"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Ці налаштування також застосовуються до періодичного збереження"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Піктограми"
@@ -50,6 +52,12 @@ msgstr "Розширення"
 
 msgid "Desktop"
 msgstr "Робочий стіл"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Додатки Flatpak"
@@ -443,6 +451,12 @@ msgid "Translator credits"
 msgstr ""
 "Kefir2105 https://github.com/Kefir2105\n"
 "volkov <volkovissocool@gmail.com>"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Елементи для включення в архів конфігурації"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Ці налаштування також застосовуються до періодичного збереження"
 
 # Translation key: config_imported_desc
 #~ msgid ""

@@ -25,10 +25,12 @@ msgstr "Lagre nåværende oppsett"
 msgid "Set the file name"
 msgstr "Sett filnavn (uten mellomrom)"
 
-msgid "Items to include in the configuration archive"
+msgid "Select configuration items"
 msgstr ""
 
-msgid "These settings also apply to periodic saving"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
 msgstr ""
 
 msgid "Icons"
@@ -48,6 +50,12 @@ msgid "Extensions"
 msgstr ""
 
 msgid "Desktop"
+msgstr ""
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
 msgstr ""
 
 msgid "Flatpak apps"

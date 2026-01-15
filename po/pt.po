@@ -25,11 +25,13 @@ msgstr "Gravar configuração atual"
 msgid "Set the file name"
 msgstr "Definir o nome do ficheiro"
 
-msgid "Items to include in the configuration archive"
-msgstr "Itens à serem incluídos no arquivo de configuração"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Estas configurações também aplicam-se à gravação periódica"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Ícones"
@@ -49,6 +51,12 @@ msgstr "Extensões"
 
 msgid "Desktop"
 msgstr "Área de Trabalho"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Apps Flatpak"
@@ -408,6 +416,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Trandutor github-link"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Itens à serem incluídos no arquivo de configuração"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Estas configurações também aplicam-se à gravação periódica"
 
 # Translation key: config_imported_desc
 #~ msgid ""

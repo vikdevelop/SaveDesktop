@@ -25,11 +25,13 @@ msgstr "Şuanki ayarları kaydet"
 msgid "Set the file name"
 msgstr "Dosya adı"
 
-msgid "Items to include in the configuration archive"
-msgstr "Yapılandırma arşivine eklenecek ögeler"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Bu ayarlar aynı zamanda düzenli kayıt için de uygulanır"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Simgeler"
@@ -49,6 +51,12 @@ msgstr "Uzantılar"
 
 msgid "Desktop"
 msgstr "Masaüstü"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Flatpak uygulamaları"
@@ -452,6 +460,12 @@ msgid "Translator credits"
 msgstr ""
 "Batmanly https://github.com/batmanly\n"
 "Sabri Ünal https://github.com/yakushabb"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Yapılandırma arşivine eklenecek ögeler"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Bu ayarlar aynı zamanda düzenli kayıt için de uygulanır"
 
 # Translation key: config_imported_desc
 #~ msgid ""

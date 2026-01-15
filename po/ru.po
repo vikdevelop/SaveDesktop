@@ -26,11 +26,13 @@ msgstr "Сохранить текущую конфигурацию"
 msgid "Set the file name"
 msgstr "Задайте имя файла"
 
-msgid "Items to include in the configuration archive"
-msgstr "Элементы для включения в архив конфигурации"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "Эти настройки также применяются для периодического сохранения"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "Значки"
@@ -50,6 +52,12 @@ msgstr "Расширения"
 
 msgid "Desktop"
 msgstr "Рабочий стол"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Приложения Flatpak"
@@ -458,6 +466,12 @@ msgid "Translator credits"
 msgstr ""
 "voron <voron@duck.com>\n"
 "volkov <volkovissocool@gmail.com>"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "Элементы для включения в архив конфигурации"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "Эти настройки также применяются для периодического сохранения"
 
 # Translation key: config_imported_desc
 #~ msgid ""

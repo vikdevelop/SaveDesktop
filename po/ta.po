@@ -25,11 +25,13 @@ msgstr "தற்போதைய உள்ளமைவைச் சேமி"
 msgid "Set the file name"
 msgstr "கோப்புப் பெயரை அமை"
 
-msgid "Items to include in the configuration archive"
-msgstr "உள்ளமைவு காப்பகத்தில் சேர்க்க வேண்டிய உருப்படிகள்"
+msgid "Select configuration items"
+msgstr ""
 
-msgid "These settings also apply to periodic saving"
-msgstr "இந்த அமைப்புகள் அவ்வப்போது சேமிப்பதற்கும் பொருந்தும்"
+msgid ""
+"These settings are used for manual and periodic saves, imports, and "
+"synchronization."
+msgstr ""
 
 msgid "Icons"
 msgstr "சின்னங்கள்"
@@ -49,6 +51,12 @@ msgstr "நீட்டிப்புகள்"
 
 msgid "Desktop"
 msgstr "பணிமேடை"
+
+msgid "GTK application settings"
+msgstr ""
+
+msgid "Bookmarks, styles, etc."
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "தட்டைகட்டு பயன்பாடுகள்"
@@ -445,10 +453,17 @@ msgstr ""
 "எழுத்துருக்கள், சுவரொட்டிகள், நீட்டிப்புகள், பணிமேடை கோப்புறை, தட்டைகட்டு செயலிகள் மற்றும் "
 "அவற்றின் தரவு மற்றும் பிற பணிமேடை அமைப்புகள் - அனைத்தையும் ஒரே காப்பகத்தில் சேமித்து "
 "இறக்குமதி செய்கிறது. எதைச் சேர்க்க வேண்டும் என்பதைத் தேர்வுசெய்து, தானியங்கு காலச் "
-"சேமிப்புகள் மற்றும் ஒத்திசைவு மூலம் சாதனங்கள் முழுவதும் உங்கள் அமைப்பைச் சீராக வைத்திருக்கவும்."
+"சேமிப்புகள் மற்றும் ஒத்திசைவு மூலம் சாதனங்கள் முழுவதும் உங்கள் அமைப்பைச் சீராக "
+"வைத்திருக்கவும்."
 
 msgid "Translator credits"
 msgstr "தமிழ்நேரம் <https://TamilNeram.github.io>"
+
+#~ msgid "Items to include in the configuration archive"
+#~ msgstr "உள்ளமைவு காப்பகத்தில் சேர்க்க வேண்டிய உருப்படிகள்"
+
+#~ msgid "These settings also apply to periodic saving"
+#~ msgstr "இந்த அமைப்புகள் அவ்வப்போது சேமிப்பதற்கும் பொருந்தும்"
 
 # Translation key: config_imported_desc
 #~ msgid ""
