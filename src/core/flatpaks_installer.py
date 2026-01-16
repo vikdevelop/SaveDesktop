@@ -70,6 +70,14 @@ if dest_dir:
                 os.system("flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo")
             subprocess.run(['flatpak', 'install', method, 'flathub', app, '-y'])
 
+    # Remove orphaned ~/.var/app directories
+    user_var_app = Path.home() / ".var/app"
+    if user_var_app.exists():
+        for app_dir in user_var_app.iterdir():
+            if app_dir.is_dir() and app_dir.name not in desired_flatpaks:
+                print(f"[REMOVE] Orphaned Flatpak user data: {app_dir.name}")
+                shutil.rmtree(app_dir)
+
 else:
     print("Nothing to do.")
 

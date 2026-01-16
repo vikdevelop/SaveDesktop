@@ -228,6 +228,7 @@ class itemsDialog(Adw.AlertDialog):
             
             # Switch and row of option 'Save installed flatpaks'
             self.switch_05 = Gtk.Switch.new()
+            self.switch_05.connect('notify::active', self._set_sw05_sensitivity)
             if settings["save-installed-flatpaks"]:
                 self.switch_05.set_active(True)
             self.switch_05.set_valign(align=Gtk.Align.CENTER)
@@ -269,6 +270,11 @@ class itemsDialog(Adw.AlertDialog):
         self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.connect('response', self.itemsdialog_closed)
         
+    def _set_sw05_sensitivity(self, GParamBoolean, switch_05):
+        if not self.switch_05.get_active():
+            self.switch_06.set_sensitive(False)
+            self.switch_06.set_active(False)
+
     # Action after closing itemsDialog
     def itemsdialog_closed(self, w, response):
         if response == 'ok':
