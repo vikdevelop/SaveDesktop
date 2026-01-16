@@ -228,7 +228,6 @@ class itemsDialog(Adw.AlertDialog):
             
             # Switch and row of option 'Save installed flatpaks'
             self.switch_05 = Gtk.Switch.new()
-            self.switch_05.connect('notify::active', self._set_sw05_sensitivity)
             if settings["save-installed-flatpaks"]:
                 self.switch_05.set_active(True)
             self.switch_05.set_valign(align=Gtk.Align.CENTER)
@@ -264,6 +263,11 @@ class itemsDialog(Adw.AlertDialog):
             self.appsButton.set_valign(Gtk.Align.CENTER)
             self.appsButton.set_tooltip_text(_("Flatpak apps data selection"))
             self.appsButton.connect("clicked", self.manage_data_list)
+
+            if not self.switch_05.get_active():
+                self.switch_06.set_sensitive(False)
+                self.switch_06.set_active(False)
+            self.switch_05.connect('notify::active', self._set_sw05_sensitivity)
         
         self.add_response('cancel', _("Cancel"))
         self.add_response('ok', _("Apply"))
@@ -274,6 +278,8 @@ class itemsDialog(Adw.AlertDialog):
         if not self.switch_05.get_active():
             self.switch_06.set_sensitive(False)
             self.switch_06.set_active(False)
+        else:
+            self.switch_06.set_sensitive(True)
 
     # Action after closing itemsDialog
     def itemsdialog_closed(self, w, response):
