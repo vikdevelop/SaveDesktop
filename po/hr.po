@@ -52,10 +52,7 @@ msgstr "Proširenja"
 msgid "Desktop"
 msgstr "Radna površina"
 
-msgid "GTK application settings"
-msgstr ""
-
-msgid "Bookmarks, styles, etc."
+msgid "File manager bookmarks"
 msgstr ""
 
 msgid "Flatpak apps"
@@ -69,6 +66,9 @@ msgstr "Korisnički podaci instaliranih Flatpak aplikacija"
 
 msgid "Flatpak apps data selection"
 msgstr "Odabir podataka Flatpak aplikacija"
+
+msgid "Keep existing Flatpak apps and data"
+msgstr ""
 
 msgid "More options"
 msgstr "Više opcija"

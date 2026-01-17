@@ -52,10 +52,7 @@ msgstr "扩展"
 msgid "Desktop"
 msgstr "桌面"
 
-msgid "GTK application settings"
-msgstr ""
-
-msgid "Bookmarks, styles, etc."
+msgid "File manager bookmarks"
 msgstr ""
 
 msgid "Flatpak apps"
@@ -69,6 +66,9 @@ msgstr "使用已安装 Flatpak 程序的用户数据"
 
 msgid "Flatpak apps data selection"
 msgstr "Flatpak应用数据选项"
+
+msgid "Keep existing Flatpak apps and data"
+msgstr ""
 
 msgid "More options"
 msgstr "更多选项"

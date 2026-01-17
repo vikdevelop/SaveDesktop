@@ -52,10 +52,7 @@ msgstr "Extensions"
 msgid "Desktop"
 msgstr "Bureau"
 
-msgid "GTK application settings"
-msgstr ""
-
-msgid "Bookmarks, styles, etc."
+msgid "File manager bookmarks"
 msgstr ""
 
 msgid "Flatpak apps"
@@ -69,6 +66,9 @@ msgstr "Données utilisateur des applications Flatpak installées"
 
 msgid "Flatpak apps data selection"
 msgstr "Sélection des données des applications Flatpak"
+
+msgid "Keep existing Flatpak apps and data"
+msgstr ""
 
 msgid "More options"
 msgstr "Plus d'options"
