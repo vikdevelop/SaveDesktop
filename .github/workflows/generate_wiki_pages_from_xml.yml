@@ -24,6 +24,10 @@ jobs:
             --xml-dir=translations \
             --output-dir=wiki/synchronization \
             --strings=synchronization_between_computers_title,synchronization_intro,set_up_first_pc,set_up_second_pc,bidirectional_sync,synchronization_files
+          python3 generate_wiki_pages_from_xml.py \
+            --xml-dir=translations \
+            --output-dir=wiki/flatpak_apps \
+            --strings=flatpak_wiki_title,flatpak_wiki_intro,flatpak_wiki_dest,flatpak_wiki_options,flatpak_wiki_import_process,flatpak_wiki_sync_mode,flatpak_wiki_note
       - name: Commit and push changes to 'webpage' branch
         run: |
           git config --global user.name "github-actions[bot]"
