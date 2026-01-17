@@ -33,5 +33,4 @@ If **Bidirectional synchronization** is enabled on both computers:
   <str key="synchronization_files">## Files Used in Synchronization
 * **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
 * **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.</str>
-  <str key="flatpak_wiki_intro">## Saving, importing, and syncing Flatpak applications</str>
 </root>
