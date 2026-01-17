@@ -192,11 +192,10 @@ class itemsDialog(Adw.AlertDialog):
         
         self.desktop_row = Adw.ActionRow.new()
         self.desktop_row.set_title(title=_("Desktop"))
-        self.desktop_row.set_subtitle(subtitle=GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
+        self.desktop_row.set_tooltip_text(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
         self.desktop_row.set_subtitle_selectable(True)
         self.desktop_row.set_use_markup(True)
         self.desktop_row.set_title_lines(2)
-        self.desktop_row.set_subtitle_lines(3)
         self.desktop_row.add_suffix(self.switch_de)
         self.desktop_row.set_activatable_widget(self.switch_de)
         self.itemsBox.append(child=self.desktop_row)
@@ -221,6 +220,7 @@ class itemsDialog(Adw.AlertDialog):
         if flatpak:
             self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_("Flatpak apps"))
+            self.flatpak_row.set_subtitle(f"<a href='https://vikdevelop.github.io/SaveDesktop/wiki/flatpak_apps/{language}'>{_('Learn more')}</a>")
             self.flatpak_row.set_use_markup(True)
             self.flatpak_row.set_title_lines(2)
             self.flatpak_row.set_subtitle_lines(3)

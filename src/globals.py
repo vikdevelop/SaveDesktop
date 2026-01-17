@@ -51,6 +51,9 @@ flatpak = (env['type'] == 'flatpak')
 # Application path
 app_prefix = os.environ.get('SAVEDESKTOP_DIR')
 
+# Get system language
+language = locale.getlocale()[0].split("_")[0]
+
 # DE detection
 # Desktop environments list and their directories
 GNOME_DIRS = [
@@ -88,6 +91,6 @@ environment = ENVIRONMENTS.get(environment_key, None)
 
 # Export
 __all__ = [
-    'home', 'download_dir', 'flatpak', 'settings', 'environment_key', 'environment',
+    'home', 'download_dir', 'flatpak', 'language', 'settings', 'environment_key', 'environment',
     'ENVIRONMENTS', 'DATA', 'CACHE', 'app_prefix', 'periodic_saving_cmd', 'sync_cmd'
 ]

@@ -293,7 +293,7 @@ class MainWindow(Adw.ApplicationWindow):
         # Set showing the Initial synchronization setup dialog only if the periodic saving folder or cloud drive folder does not use GVFS or Rclone filesystem
         settings["first-synchronization-setup"] = True if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh") else False
         # Get language to show the wiki page in the correct ones
-        self.language = locale.getlocale()[0].split("_")[0]
+        self.language = language
 
     def _open_InitSetupDialog(self, w):
         self._basic_setup()
