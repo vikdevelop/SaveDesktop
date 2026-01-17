@@ -275,7 +275,7 @@ class itemsDialog(Adw.AlertDialog):
                 self.switch_07.set_active(True)
 
             self.remove_row = Adw.ActionRow.new()
-            self.remove_row.set_title("Keep existing Flatpak apps and data")
+            self.remove_row.set_title(_("Keep existing Flatpak apps and data"))
             self.remove_row.set_title_lines(3)
             self.remove_row.add_suffix(self.switch_07)
             self.remove_row.set_activatable_widget(self.switch_07)

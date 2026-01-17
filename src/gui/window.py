@@ -163,7 +163,7 @@ class MainWindow(Adw.ApplicationWindow):
 
         # Title image for the save page
         self.titleImage = Gtk.Image.new_from_icon_name("computer")
-        self.titleImage.set_pixel_size(64)
+        self.titleImage.set_pixel_size(128)
         self.saveBox.append(self.titleImage)
 
         # Title "Save Current configuration" for save page and subtitle "{user_desktop}"
