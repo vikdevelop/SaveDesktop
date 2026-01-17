@@ -8,6 +8,7 @@ from pathlib import Path
 from threading import Thread
 from savedesktop.globals import *
 from savedesktop.gui.more_options_dialog import MoreOptionsDialog
+from savedesktop.gui.items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
 from savedesktop.gui.synchronization_dialogs import InitSetupDialog, SetDialog, CloudDialog
 
 # Application window
@@ -525,7 +526,6 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Import configuration
     def import_config(self):
-        print("Importing the configuration is in progress…")
         self.toast_overlay.dismiss_all()
 
         self.archive_name = self.path_to_import
@@ -535,9 +535,22 @@ class MainWindow(Adw.ApplicationWindow):
         self.done_title = _("The configuration has been applied!")
         self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n\n<i>If your archive contains Flatpak apps, they will start installing after the next login.</i>").format(_("The configuration has been applied!"))
 
-        self.please_wait()
-        import_thread = Thread(target=self._call_archive_command)
-        import_thread.start()
+        self._show_items_dialog()
+
+    def _show_items_dialog(self):
+        self.items_dialog = itemsDialog(self)
+        self.items_dialog.choose(self, None, None, None)
+        self.items_dialog.connect("response", self._on_items_dialog_response)
+        self.items_dialog.present(self)
+
+    def _on_items_dialog_response(self, dialog, response, *args):
+        if response == "cancel":
+            pass
+        else:
+            print("Importing the configuration is in progress…")
+            self.please_wait()
+            import_thread = Thread(target=self._call_archive_command)
+            import_thread.start()
 
     def _call_archive_command(self):
         self.archive_proc = subprocess.Popen(

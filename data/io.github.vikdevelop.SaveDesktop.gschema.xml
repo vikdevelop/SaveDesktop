@@ -33,9 +33,9 @@
 			<default>false</default>
 			<summary>Save the user desktop folder</summary>
 		</key>
-	  <key name="save-gtk-settings" type="b">
+	  <key name="save-bookmarks" type="b">
 	    <default>true</default>
-	    <summary>Save the GTK application settings</summary>
+	    <summary>Save the file manager bookmarks</summary>
 	  </key>
 		<key name="save-installed-flatpaks" type="b">
 			<default>true</default>
@@ -45,6 +45,10 @@
 		  <default>false</default>
 		  <summary>Save data of installed Flatpak apps</summary>
 		</key>
+	  <key name="keep-flatpaks" type="b">
+	    <default>true</default>
+	    <summary>Keep existing Flatpak apps and data</summary>
+	  </key>
 		<key name="disabled-flatpak-apps-data" type="as">
 		  <default>[]</default>
 		  <summary>Select, what Flatpak applications data will be saved</summary>

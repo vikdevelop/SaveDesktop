@@ -1,4 +1,4 @@
-import os, shutil, subprocess
+import os, shutil, subprocess, json
 from gi.repository import GLib
 from savedesktop.globals import *
 from pathlib import Path
@@ -73,6 +73,12 @@ def create_flatpak_list():
 
 def create_flatpak_autostart():
     os.system(f"cp /app/share/savedesktop/savedesktop/core/flatpaks_installer.py {CACHE}/workspace")
+
+    # Create a JSON file with the user's preferences for Flatpak apps
+    with open(f"{CACHE}/workspace/flatpak-prefs.json", "w") as fl:
+        json.dump({"keep-flatpaks": settings["keep-flatpaks"], "install-flatpaks": settings["save-installed-flatpaks"], "copy-data": settings["save-flatpak-data"]}, fl)
+
+    # Create an autostart file for post-login Flatpak installation
     os.makedirs(f"{home}/.config/autostart", exist_ok=True)
     if not os.path.exists(f"{DATA}/savedesktop-synchronization.sh"):
         with open(f"{home}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop", "w") as f:
@@ -84,6 +90,16 @@ def create_flatpak_autostart():
             )
 
     print("[OK] Created Flatpak autostart")
+
+def save_bookmarks():
+    safe_copytree(f"{home}/.config/gtk-4.0", "gtk-4.0")
+    if settings["save-bookmarks"]:
+        safe_copy(f"{home}/.config/gtk-3.0/bookmarks", "gtk-3.0/bookmarks")
+
+def import_bookmarks():
+    safe_copytree("gtk-4.0", f"{home}/.config/gtk-4.0", )
+    if settings["save-bookmarks"]:
+        safe_copy("gtk-3.0/bookmarks", f"{home}/.config/gtk-3.0/bookmarks")
 
 # ------------------------
 # Desktop folder
@@ -131,14 +147,6 @@ GENERAL_ITEMS = {
         ],
     },
 
-    "gtk": {
-        "key": "save-gtk-settings",
-        "dirs": [
-            (f"{home}/.config/gtk-4.0", "gtk-4.0"),
-            (f"{home}/.config/gtk-3.0", "gtk-3.0"),
-        ],
-    },
-
     "backgrounds": {
         "key": "save-backgrounds",
         "dirs": [
@@ -168,6 +176,12 @@ SPECIAL_ITEMS = {
         "key": "save-icons",
         "save": save_icons,
         "import": import_icons,
+    },
+
+    "bookmarks": {
+        "key": "save-bookmarks",
+        "save": save_bookmarks,
+        "import": import_bookmarks,
     },
 
     "flatpaks": {

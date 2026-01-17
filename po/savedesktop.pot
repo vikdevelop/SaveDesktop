@@ -64,11 +64,7 @@ msgid "Desktop"
 msgstr ""
 
 #: src/gui/items_dialog.py
-msgid "GTK application settings"
-msgstr ""
-
-#: src/gui/items_dialog.py
-msgid "Bookmarks, styles, etc."
+msgid "File manager bookmarks"
 msgstr ""
 
 #: src/gui/items_dialog.py
@@ -85,6 +81,10 @@ msgstr ""
 
 #: src/gui/items_dialog.py
 msgid "Flatpak apps data selection"
+msgstr ""
+
+#: src/gui/items_dialog.py
+msgid "Keep existing Flatpak apps and data"
 msgstr ""
 
 #: src/gui/templates/shortcuts_window.ui:50
