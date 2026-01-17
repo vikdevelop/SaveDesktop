@@ -54,11 +54,8 @@ msgstr "Lisamoodulid"
 msgid "Desktop"
 msgstr "Töölaud"
 
-msgid "GTK application settings"
-msgstr "GTK rakenduse seadistused"
-
-msgid "Bookmarks, styles, etc."
-msgstr "Järjehoidjad, stiilid, jne."
+msgid "File manager bookmarks"
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Flatpaki rakendused"
@@ -71,6 +68,9 @@ msgstr "Paigaldatud Flatpaki rakenduste kasutajaandmed"
 
 msgid "Flatpak apps data selection"
 msgstr "Vali Flatpaki rakendused, mille andmed tahad kaasata"
+
+msgid "Keep existing Flatpak apps and data"
+msgstr ""
 
 msgid "More options"
 msgstr "Lisavalikud"
@@ -458,6 +458,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Priit Jõerüüt 2025"
+
+#~ msgid "GTK application settings"
+#~ msgstr "GTK rakenduse seadistused"
+
+#~ msgid "Bookmarks, styles, etc."
+#~ msgstr "Järjehoidjad, stiilid, jne."
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Vali seadistuste arhiivifaili kaasatavad objektid"

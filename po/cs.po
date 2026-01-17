@@ -54,11 +54,8 @@ msgstr "Rozšíření"
 msgid "Desktop"
 msgstr "Plocha"
 
-msgid "GTK application settings"
-msgstr "Nastavení aplikací GTK"
-
-msgid "Bookmarks, styles, etc."
-msgstr "Záložky, styly, atd."
+msgid "File manager bookmarks"
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "Aplikace Flatpak"
@@ -71,6 +68,9 @@ msgstr "Uživatelská data nainstalovaných aplikací Flatpak"
 
 msgid "Flatpak apps data selection"
 msgstr "Výběr dat aplikací Flatpak"
+
+msgid "Keep existing Flatpak apps and data"
+msgstr ""
 
 msgid "More options"
 msgstr "Více možností"
@@ -461,6 +461,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "vikdevelop https://github.com/vikdevelop"
+
+#~ msgid "GTK application settings"
+#~ msgstr "Nastavení aplikací GTK"
+
+#~ msgid "Bookmarks, styles, etc."
+#~ msgstr "Záložky, styly, atd."
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Položky, které mají být zahrnuty do archivu konfigurace"

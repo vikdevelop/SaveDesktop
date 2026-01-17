@@ -52,10 +52,7 @@ msgstr "நீட்டிப்புகள்"
 msgid "Desktop"
 msgstr "பணிமேடை"
 
-msgid "GTK application settings"
-msgstr ""
-
-msgid "Bookmarks, styles, etc."
+msgid "File manager bookmarks"
 msgstr ""
 
 msgid "Flatpak apps"
@@ -69,6 +66,9 @@ msgstr "நிறுவப்பட்ட தட்டைகட்டு பய�
 
 msgid "Flatpak apps data selection"
 msgstr "தட்டைகட்டு பயன்பாடுகள் தரவுத் தேர்வு"
+
+msgid "Keep existing Flatpak apps and data"
+msgstr ""
 
 msgid "More options"
 msgstr "மேலும் விருப்பங்கள்"

@@ -54,11 +54,8 @@ msgstr "Estensioni"
 msgid "Desktop"
 msgstr "Desktop"
 
-msgid "GTK application settings"
-msgstr "Impostazioni GTK applicazione"
-
-msgid "Bookmarks, styles, etc."
-msgstr "Segnalibri, stili, ecc."
+msgid "File manager bookmarks"
+msgstr ""
 
 msgid "Flatpak apps"
 msgstr "App flatpak"
@@ -71,6 +68,9 @@ msgstr "Dati utente delle app Flatpak installate"
 
 msgid "Flatpak apps data selection"
 msgstr "Selezione dei dati delle app Flatpak"
+
+msgid "Keep existing Flatpak apps and data"
+msgstr ""
 
 msgid "More options"
 msgstr "Ulteriori opzioni"
@@ -470,6 +470,12 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Albano Battistella https://github.com/albanobattistella"
+
+#~ msgid "GTK application settings"
+#~ msgstr "Impostazioni GTK applicazione"
+
+#~ msgid "Bookmarks, styles, etc."
+#~ msgstr "Segnalibri, stili, ecc."
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Elementi da includere nell'archivio di configurazione"

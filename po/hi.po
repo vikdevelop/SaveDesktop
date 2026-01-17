@@ -52,10 +52,7 @@ msgstr "विस्तार"
 msgid "Desktop"
 msgstr "डेस्कटॉप"
 
-msgid "GTK application settings"
-msgstr ""
-
-msgid "Bookmarks, styles, etc."
+msgid "File manager bookmarks"
 msgstr ""
 
 msgid "Flatpak apps"
@@ -69,6 +66,9 @@ msgstr "स्थापित फ्लैटपैक ऐप्स का उ�
 
 msgid "Flatpak apps data selection"
 msgstr "फ्लैटपैक ऐप्स डेटा चयन"
+
+msgid "Keep existing Flatpak apps and data"
+msgstr ""
 
 msgid "More options"
 msgstr "अधिक विकल्प"
