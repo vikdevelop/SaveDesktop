@@ -23,8 +23,9 @@ else:
     dest_dir = None
    
 if dest_dir:
+    os.chdir(dest_dir)
     # Check Flatpak user preferences
-    with open(f"{dest_dir}/flatpak-prefs.json") as fl:
+    with open(f"flatpak-prefs.json") as fl:
         j = json.load(fl)
 
     copy_data = j["copy-data"]
@@ -33,16 +34,16 @@ if dest_dir:
 
     # Restore Flatpak user data archive
     if copy_data:
-        if os.path.exists(f"{dest_dir}/app"):
+        if os.path.exists(f"app"):
             print("copying the Flatpak apps' user data to the ~/.var/app directory")
-            os.system(f"cp -au {dest_dir}/app/ ~/.var/")
+            os.system(f"cp -au ./app/ ~/.var/")
 
-        if os.path.exists(f"{dest_dir}/flatpak-apps-data.tgz"):
+        if os.path.exists(f"flatpak-apps-data.tgz"):
             subprocess.run(["tar", "-xzvf", "flatpak-apps-data.tgz", "-C", f"{Path.home()}/.var"])
 
     # Load Flatpaks from bash scripts
     if install_flatpaks:
-        installed_flatpaks_files = [f'{dest_dir}/installed_flatpaks.sh', f'{dest_dir}/installed_user_flatpaks.sh']
+        installed_flatpaks_files = ['installed_flatpaks.sh', 'installed_user_flatpaks.sh']
         desired_flatpaks = {}
         for file in installed_flatpaks_files:
             if os.path.exists(file):
@@ -100,6 +101,5 @@ if os.path.exists(autostart_file):
     os.remove(autostart_file)
 
 # Remove the cache dir after finishing the operations
-#if os.path.exists(CACHE_FLATPAK):
-    #shutil.rmtree(CACHE_FLATPAK)
-
+if os.path.exists(CACHE_FLATPAK):
+    shutil.rmtree(CACHE_FLATPAK)
