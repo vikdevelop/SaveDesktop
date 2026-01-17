@@ -159,7 +159,15 @@
       <div class="language-container">
         <h3>Synchronization between computers in the network</h3>
         <p>This article is available in these languages:</p>
-        <div id="language-grid" class="language-grid">
+        <div id="language-grid-sync" class="language-grid">
+          <p>Loading...</p>
+        </div>
+      </div>
+
+      <div class="language-container">
+        <h3>Saving, importing, and syncing Flatpak apps</h3>
+        <p>This article is available in these languages:</p>
+        <div id="language-grid-flatpak" class="language-grid">
           <p>Loading...</p>
         </div>
       </div>
@@ -182,36 +190,49 @@
     
     <!-- JS for loading markdown files in the /wiki/synchronization directory -->
     <script>
-    fetch("https://api.github.com/repos/vikdevelop/SaveDesktop/contents/wiki/synchronization?ref=webpage")
-      .then(res => res.json())
-      .then(data => {
-        const container = document.getElementById("language-grid");
-        container.innerHTML = "";
-
-        const links = data
-          .filter(item => item.name.endsWith(".md"))
-          .map(item => {
-            const langCode = item.name.replace(".md", "").replace("_", "-");
-            let name;
-            try {
-              const localDisplay = new Intl.DisplayNames([langCode], { type: 'language' });
-              name = localDisplay.of(langCode);
-            } catch {
-              name = langCode;
-            }
-          
-            const a = document.createElement("a");
-            a.href = `synchronization/${item.name.replace(".md", "")}`;
-            a.textContent = name;
-            return a;
-          });
-        
-        links.forEach(link => container.appendChild(link));
-      })
-      .catch(err => {
-        document.getElementById("language-grid").textContent = "Failed to load languages.";
-        console.error(err);
-      });
+    function loadWikiLanguages(folder, containerId) {
+      fetch(`https://api.github.com/repos/vikdevelop/SaveDesktop/contents/wiki/${folder}?ref=webpage`)
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById(containerId);
+          container.innerHTML = "";
+    
+          const links = data
+            .filter(item => item.name.endsWith(".md"))
+            .map(item => {
+              const langCode = item.name.replace(".md", "").replace("_", "-");
+    
+              let name;
+              try {
+                const localDisplay = new Intl.DisplayNames([langCode], { type: 'language' });
+                name = localDisplay.of(langCode);
+              } catch {
+                name = langCode;
+              }
+    
+              const a = document.createElement("a");
+              a.href = `${folder}/${item.name.replace(".md", "")}`;
+              a.textContent = name;
+    
+              return a;
+            });
+    
+          if (links.length === 0) {
+            container.textContent = "No translations available.";
+            return;
+          }
+    
+          links.forEach(link => container.appendChild(link));
+        })
+        .catch(err => {
+          document.getElementById(containerId).textContent = "Failed to load languages.";
+          console.error(err);
+        });
+    }
+    
+    // Load both wiki sections
+    loadWikiLanguages("synchronization", "language-grid-sync");
+    loadWikiLanguages("flatpak_apps", "language-grid-flatpak");
     </script>
   </body>
 </html>
