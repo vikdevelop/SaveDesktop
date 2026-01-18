@@ -311,10 +311,10 @@ class itemsDialog(Adw.AlertDialog):
             settings["save-backgrounds"] = self.switch_04.get_active()
             settings["save-desktop-folder"] = self.switch_de.get_active()
             settings["save-bookmarks"] = self.switch_gtk.get_active()
-            settings["keep-flatpaks"] = self.switch_07.get_active()
             if flatpak:
                 settings["save-installed-flatpaks"] = self.switch_05.get_active()
                 settings["save-flatpak-data"] = self.switch_06.get_active()
+                settings["keep-flatpaks"] = self.switch_07.get_active()
             if self.save_ext_switch_state == True:
                 settings["save-extensions"] = self.switch_ext.get_active()
                 self.save_ext_switch_state = False
