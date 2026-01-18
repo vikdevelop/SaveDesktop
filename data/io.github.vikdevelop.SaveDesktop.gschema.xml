@@ -2,7 +2,7 @@
 <schemalist>
 	<schema id="io.github.vikdevelop.SaveDesktop" path="/io/github/vikdevelop/SaveDesktop/">
 		<key name="window-size" type="(ii)">
-			<default>(630, 517)</default>
+			<default>(500, 500)</default>
 			<summary>Window size</summary>
 		</key>
 		<key name="maximized" type="b">

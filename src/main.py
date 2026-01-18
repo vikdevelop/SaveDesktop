@@ -102,7 +102,7 @@ class SaveDesktopApp(Adw.Application):
             license_type=Gtk.License.GPL_3_0,
             website="https://vikdevelop.github.io/SaveDesktop",
             issue_url="https://github.com/vikdevelop/SaveDesktop/issues",
-            copyright="© 2023-2025 vikdevelop",
+            copyright="© 2023-2026 vikdevelop",
             developers=["vikdevelop https://github.com/vikdevelop"],
             artists=["Brage Fuglseth"],
             version=app_version,

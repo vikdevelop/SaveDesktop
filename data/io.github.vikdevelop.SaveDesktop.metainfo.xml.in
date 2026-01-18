@@ -65,6 +65,17 @@
     </screenshots>
           
     <releases>
+       <release version="3.9" date="2026-01-18">
+         <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.9</url>
+         <description>
+           <ul>
+             <li>Fixed a bug with applying the settings from dConf (#487)</li>
+             <li>The dialog for selecting the configuration items is now located in the app's menu in the header bar, and their settings are now applied for saving, importing, and syncing mode.</li>
+             <li>Added an option to exclude the file manager bookmarks (#480)</li>
+             <li>Added an option to set removing the Flatpak apps that aren't available in the configuration archive (#482)</li>
+           </ul>
+         </description>
+       </release>
        <release version="3.8" date="2025-11-05">
           <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.8</url>
           <description>
