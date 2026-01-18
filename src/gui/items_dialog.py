@@ -269,18 +269,20 @@ class itemsDialog(Adw.AlertDialog):
             if settings["keep-flatpaks"]:
                 self.switch_07.set_active(True)
 
-            if not self.switch_05.get_active():
-                self.switch_06.set_sensitive(False)
-                self.switch_06.set_active(False)
-                self.switch_07.set_sensitive(False)
-                self.switch_07.set_active(True)
-
             self.remove_row = Adw.ActionRow.new()
             self.remove_row.set_title(_("Keep existing Flatpak apps and data"))
             self.remove_row.set_title_lines(3)
             self.remove_row.add_suffix(self.switch_07)
             self.remove_row.set_activatable_widget(self.switch_07)
             self.flatpak_row.add_row(child=self.remove_row)
+
+            if not self.switch_05.get_active():
+                self.switch_06.set_sensitive(False)
+                self.switch_06.set_active(False)
+                self.switch_07.set_sensitive(False)
+                self.switch_07.set_active(True)
+                settings["save-flatpak-data"] = False
+                settings["keep-flatpaks"] = True
 
             self.switch_05.connect('notify::active', self._set_sw05_sensitivity)
         
