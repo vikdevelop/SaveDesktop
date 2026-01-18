@@ -1,50 +1,50 @@
-# Saving, importing, and syncing Flatpak apps
+# Spara, importera och synkronisera Flatpak-appar
 
-Save Desktop allows you to save, import, and sync Flatpak applications together with their user data, in addition to icons, themes, settings, and extensions.
+Med Spara skrivbord kan du spara, importera och synkronisera Flatpak-applikationer tillsammans med deras användardata, utöver ikoner, teman, inställningar och tillägg.
 
-## Where can I find this?
+## Var kan jag hitta detta?
 
-Flatpak-related options are located in the **Select configuration items** dialog.
-You can open it from the header menu (three dots in the window title bar).
+Flatpak-relaterade alternativ finns i dialogrutan **Välj konfigurationsobjekt**.
+Du kan öppna den från huvudmenyn (tre punkter i fönstrets titelfält).
 
-## Available options
+## Tillgängliga alternativ
 
-### List of installed Flatpak apps
+### Lista över installerade Flatpak-appar
 
-Saves and restores the list of installed Flatpak applications.
+Sparar och återställer listan över installerade Flatpak-applikationer.
 
-### User data of installed Flatpak apps
+### Användardata för installerade Flatpak-appar
 
-Allows you to include user data of selected Flatpak applications.
-Click the **">"** button to choose which apps should have their data saved.
+Tillåter dig inkludera användardata för utvalda Flatpak-applikationer.
+Klicka på knappen **">"** för att välja vilka appar som ska få sina data sparade.
 
-### Keep installed Flatpak apps and data (enabled by default)
+### Behåll installerade Flatpak-appar och data (aktiverat som standard)
 
-When enabled, Save Desktop **will NOT remove Flatpak applications or their data that are not present in the archive**.
+När det är aktiverat kommer Spara skrivbord **INTE att ta bort Flatpak-applikationer eller deras data som inte finns i arkivet**.
 
-When disabled, Save Desktop will **remove any installed Flatpak apps that are not listed in the imported archive — including their user data**.
+När det är inaktiverat kommer Spara skrivbord **att ta bort alla installerade Flatpak-appar som inte listas i det importerade arkivet – inklusive deras användardata**.
 
-⚠️ **Warning:**
-Disable this option only if you intentionally want your system to exactly match the imported archive. Removed applications and their data **cannot be recovered**.
+⚠️ **Varning:**
+Inaktivera endast det här alternativet om du avsiktligt vill att ditt system ska matcha det importerade arkivet exakt. Borttagna program och deras data **kan inte återställas**.
 
-## How does importing work?
+## Hur fungerar import?
 
-After selecting an archive or folder, you will be asked which configuration items should be imported.
-Click **Apply** to start the import process.
+Efter att du har valt ett arkiv eller en mapp blir du tillfrågad vilka konfigurationsobjekt som ska importeras.
+Klicka på **Verkställ** för att starta importprocessen.
 
-Import order:
+Importordning:
 
-1. Desktop configuration (icons, themes, fonts, extensions, settings, etc.)
-2. Flatpak applications and their user data (after next login)
+1. Skrivbordskonfiguration (ikoner, teman, teckensnitt, tillägg, inställningar etc.)
+2. Flatpak-applikationer och deras användardata (efter nästa inloggning)
 
-Flatpak installation and removal start **after you log back into the system**.
+Installation och borttagning av Flatpak börjar **efter att du har loggat in i systemet igen**.
 
-### Synchronization mode
+### Synkroniseringsläge
 
-In synchronization mode, Flatpak applications are processed **immediately after synchronization finishes** (no relog required).
+I synkroniseringsläge bearbetas Flatpak-applikationer **omedelbart efter att synkroniseringen är klar** (ingen omloggning krävs).
 
-## Important note
+## Viktig anmärkning
 
-If **Keep installed Flatpak apps and data** is disabled and you have Flatpak applications installed that are not included in the imported archive, they will be **permanently removed together with their user data**.
+Om **Behåll installerade Flatpak-appar och data** är inaktiverat och du har Flatpak-applikationer installerade som inte ingår i det importerade arkivet, kommer de att **tas bort permanent tillsammans med deras användardata**.
 
 {% include footer.html %}
