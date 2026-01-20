@@ -1,50 +1,50 @@
-# Saving, importing, and syncing Flatpak apps
+# Salvataggio, importazione e sincronizzazione delle app Flatpak
 
-Save Desktop allows you to save, import, and sync Flatpak applications together with their user data, in addition to icons, themes, settings, and extensions.
+Save Desktop consente di salvare, importare e sincronizzare le applicazioni Flatpak insieme ai relativi dati utente, oltre a icone, temi, impostazioni ed estensioni.
 
-## Where can I find this?
+## Dove posso trovarlo?
 
-Flatpak-related options are located in the **Select configuration items** dialog.
-You can open it from the header menu (three dots in the window title bar).
+Le opzioni relative a Flatpak si trovano nella finestra di dialogo **Seleziona elementi di configurazione**.
+Puoi aprirla dal menu dell'intestazione (tre puntini nella barra del titolo della finestra).
 
-## Available options
+## Opzioni disponibili
 
-### List of installed Flatpak apps
+### Elenco delle app Flatpak installate
 
-Saves and restores the list of installed Flatpak applications.
+Salva e ripristina l'elenco delle applicazioni Flatpak installate.
 
-### User data of installed Flatpak apps
+### Dati utente delle app Flatpak installate
 
-Allows you to include user data of selected Flatpak applications.
-Click the **">"** button to choose which apps should have their data saved.
+Consente di includere i dati utente delle applicazioni Flatpak selezionate.
+Clicca sul pulsante **">"** per scegliere le app di cui salvare i dati.
 
-### Keep installed Flatpak apps and data (enabled by default)
+### Mantieni app e dati Flatpak installati (abilitato per impostazione predefinita)
 
-When enabled, Save Desktop **will NOT remove Flatpak applications or their data that are not present in the archive**.
+Se abilitata, Save Desktop **NON rimuoverà le applicazioni Flatpak o i relativi dati che non sono presenti nell'archivio**.
 
-When disabled, Save Desktop will **remove any installed Flatpak apps that are not listed in the imported archive — including their user data**.
+Se disabilitata, Save Desktop **rimuoverà tutte le app Flatpak installate che non sono elencate nell'archivio importato, inclusi i relativi dati utente**.
 
-⚠️ **Warning:**
-Disable this option only if you intentionally want your system to exactly match the imported archive. Removed applications and their data **cannot be recovered**.
+⚠️ **Attenzione:**
+Disattiva questa opzione solo se desideri che il tuo sistema corrisponda esattamente all'archivio importato. Le applicazioni rimosse e i relativi dati **non possono essere recuperati**.
 
-## How does importing work?
+## Come funziona l'importazione?
 
-After selecting an archive or folder, you will be asked which configuration items should be imported.
-Click **Apply** to start the import process.
+Dopo aver selezionato un archivio o una cartella, ti verrà chiesto quali elementi di configurazione importare.
+Fai clic su **Applica** per avviare il processo di importazione.
 
-Import order:
+Ordine di importazione:
 
-1. Desktop configuration (icons, themes, fonts, extensions, settings, etc.)
-2. Flatpak applications and their user data (after next login)
+1. Configurazione desktop (icone, temi, font, estensioni, impostazioni, ecc.)
+2. Applicazioni Flatpak e relativi dati utente (dopo il successivo accesso)
 
-Flatpak installation and removal start **after you log back into the system**.
+L'installazione e la rimozione di Flatpak iniziano **dopo aver effettuato nuovamente l'accesso al sistema**.
 
-### Synchronization mode
+### Modalità di sincronizzazione
 
-In synchronization mode, Flatpak applications are processed **immediately after synchronization finishes** (no relog required).
+In modalità di sincronizzazione, le applicazioni Flatpak vengono elaborate **immediatamente dopo il termine della sincronizzazione** (non è necessario alcun nuovo accesso).
 
-## Important note
+## Nota importante
 
-If **Keep installed Flatpak apps and data** is disabled and you have Flatpak applications installed that are not included in the imported archive, they will be **permanently removed together with their user data**.
+Se l'opzione **Mantieni app e dati Flatpak installati** è disattivata e hai installato applicazioni Flatpak non incluse nell'archivio importato, queste verranno **rimosse definitivamente insieme ai relativi dati utente**.
 
 {% include footer.html %}
