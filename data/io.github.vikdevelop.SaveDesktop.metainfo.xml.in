@@ -32,6 +32,7 @@
     </branding>
     
     <url type="homepage">https://vikdevelop.github.io/SaveDesktop</url>
+    <url type="vcs-browser">https://github.com/vikdevelop/SaveDesktop</url>
     <url type="bugtracker">https://github.com/vikdevelop/SaveDesktop/issues</url>
     <url type="translate">https://hosted.weblate.org/projects/vikdevelop/savedesktop/</url>
     <url type="contribute">https://github.com/vikdevelop/SaveDesktop/blob/main/CONTRIBUTING.md</url>
