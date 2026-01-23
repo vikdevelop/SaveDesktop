@@ -20,7 +20,7 @@ msgid "Save"
 msgstr "Kaydet"
 
 msgid "Save the current configuration"
-msgstr "Şuanki ayarları kaydet"
+msgstr "Şu anki ayarları kaydet"
 
 msgid "Set the file name"
 msgstr "Dosya adı"
@@ -68,7 +68,7 @@ msgid "Flatpak apps data selection"
 msgstr "Flatpak uygulamaları veri seçimi"
 
 msgid "Keep existing Flatpak apps and data"
-msgstr ""
+msgstr "Var olan Flatpak uygulamalarını ve verilerini tut"
 
 msgid "More options"
 msgstr "Daha çok seçenek"
@@ -77,8 +77,7 @@ msgid "Periodic saving"
 msgstr "Düzenli kaydetme"
 
 msgid "Changes will only take effect after the next login"
-msgstr ""
-"Değişiklikler yalnızca sonraki oturum açma işleminden sonra geçerli olacak"
+msgstr "Değişiklikler yalnızca sonraki oturum açma işleminden sonra geçerli olacak"
 
 msgid "Interval"
 msgstr "Aralık"
@@ -111,7 +110,7 @@ msgid "File name format"
 msgstr "Dosya adı biçimi"
 
 msgid "Reset to default"
-msgstr "Öntanımlılara sıfırla"
+msgstr "Varsayılanlara sıfırla"
 
 msgid "Password for encryption"
 msgstr "Şifreleme için parola"
