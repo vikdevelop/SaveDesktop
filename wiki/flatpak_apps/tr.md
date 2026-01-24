@@ -1,6 +1,7 @@
-# Saving, importing, and syncing Flatpak apps
+# Kaydetme, içe aktarma, ve Flatpak uygulamarını senkronize et
 
-Save Desktop allows you to save, import, and sync Flatpak applications together with their user data, in addition to icons, themes, settings, and extensions.
+Save Desktop; Flatpak uygulamalarını kullanıcı verileriyle birlikte, ayrıca simgeler, temalar, ayarlar ve eklentilerle beraber
+kaydetmenize, içe aktarmanıza ve senkronize etmenize olanak tanır.
 
 ## Where can I find this?
 
@@ -43,8 +44,10 @@ Flatpak installation and removal start **after you log back into the system**.
 
 In synchronization mode, Flatpak applications are processed **immediately after synchronization finishes** (no relog required).
 
-## Important note
+## Önemli not
 
-If **Keep installed Flatpak apps and data** is disabled and you have Flatpak applications installed that are not included in the imported archive, they will be **permanently removed together with their user data**.
+Eğer **Flatpak uygulamalarını ve verilerini koru** seçeneği devre dışıysa
+ve içe aktarılan arşivde yer almayan Flatpak uygulamaları yüklüyse,
+**bu uygulamalar kullanıcı verileriyle birlikte kalıcı olarak silinir.**
 
 {% include footer.html %}
