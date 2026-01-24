@@ -32,4 +32,12 @@ Her iki bilgisayarda da **Çift yönlü senkronizasyon** etkinleştirilmişse:
   <str key="synchronization_files">## Senkronizasyonda Kullanılan Dosyalar 
 * **Periyodik kaydetme dosyası** – masaüstü yapılandırmanızın `.sd.zip` arşivi, düzenli olarak güncellenir.
 * **SaveDesktop.json** – arşivin dosya adını ve kaydetme aralığını depolayan, senkronizasyon kurulumu sırasında kullanılan küçük bir yardımcı dosya.</str>
+  <str key="flatpak_wiki_title"># Kaydetme, içe aktarma, ve Flatpak uygulamarını senkronize et</str>
+  <str key="flatpak_wiki_note">## Önemli not
+
+Eğer **Flatpak uygulamalarını ve verilerini koru** seçeneği devre dışıysa
+ve içe aktarılan arşivde yer almayan Flatpak uygulamaları yüklüyse,
+**bu uygulamalar kullanıcı verileriyle birlikte kalıcı olarak silinir.**</str>
+  <str key="flatpak_wiki_intro">Save Desktop; Flatpak uygulamalarını kullanıcı verileriyle birlikte, ayrıca simgeler, temalar, ayarlar ve eklentilerle beraber
+kaydetmenize, içe aktarmanıza ve senkronize etmenize olanak tanır.</str>
 </root>
