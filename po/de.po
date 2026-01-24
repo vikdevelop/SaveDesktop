@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2026-01-25 08:58+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/de/>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 msgid "Save"
 msgstr "Speichern"
@@ -26,12 +26,14 @@ msgid "Set the file name"
 msgstr "Den Dateinamen festlegen"
 
 msgid "Select configuration items"
-msgstr ""
+msgstr "Konfigurationselemente auswählen"
 
 msgid ""
 "These settings are used for manual and periodic saves, imports, and "
 "synchronization."
 msgstr ""
+"Diese Einstellungen werden für manuelle und regelmäßige Speichervorgänge, "
+"Importe und Synchronisierungen verwendet."
 
 msgid "Icons"
 msgstr "Symbole"
@@ -47,40 +49,40 @@ msgid "Backgrounds"
 msgstr "Hintergründe"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Erweiterungen"
 
 msgid "Desktop"
-msgstr ""
+msgstr "Desktop"
 
 msgid "File manager bookmarks"
-msgstr ""
+msgstr "Dateimanager-Lesezeichen"
 
 msgid "Flatpak apps"
 msgstr "Flatpak-Apps"
 
 msgid "List of installed Flatpak apps"
-msgstr ""
+msgstr "Liste der installierten Flatpak-Apps"
 
 msgid "User data of installed Flatpak apps"
-msgstr ""
+msgstr "Benutzerdaten von installierten Flatpak-Apps"
 
 msgid "Flatpak apps data selection"
-msgstr ""
+msgstr "Datenauswahl für Flatpak-Apps"
 
 msgid "Keep existing Flatpak apps and data"
-msgstr ""
+msgstr "Bestehende Flatpak-Apps und Daten behalten"
 
 msgid "More options"
-msgstr ""
+msgstr "Weitere Optionen"
 
 msgid "Periodic saving"
 msgstr "Regelmäßiges Speichern"
 
 msgid "Changes will only take effect after the next login"
-msgstr "Die Änderungen werden erst nach der nächsten Anmeldung wirksam."
+msgstr "Änderungen werden erst nach der nächsten Anmeldung wirksam"
 
 msgid "Interval"
-msgstr ""
+msgstr "Intervall"
 
 msgid "Never"
 msgstr "Nie"
@@ -113,13 +115,13 @@ msgid "Reset to default"
 msgstr "Auf Standardeinstellungen zurücksetzen"
 
 msgid "Password for encryption"
-msgstr ""
+msgstr "Passwort für die Verschlüsselung"
 
 msgid "Manual saving"
-msgstr ""
+msgstr "Manuelles Speichern"
 
 msgid "Archive encryption"
-msgstr ""
+msgstr "Archivverschlüsselung"
 
 # Translation key: archive_encryption_desc
 msgid ""
@@ -127,12 +129,15 @@ msgid ""
 "password. This is useful when saving the configuration to portable media for "
 "better security of your data."
 msgstr ""
+"Wenn Sie die Konfiguration manuell speichern, werden Sie aufgefordert, ein "
+"Passwort zu erstellen. Dies ist nützlich, wenn Sie die Konfiguration auf "
+"einem tragbaren Medium speichern, um die Sicherheit Ihrer Daten zu erhöhen."
 
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Konfiguration speichern, ohne ein Archiv zu erstellen"
 
 msgid "Create new password"
-msgstr ""
+msgstr "Neues Passwort erstellen"
 
 # Translation key: create_pwd_desc
 msgid ""
@@ -140,15 +145,18 @@ msgid ""
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
+"Bitte erstellen Sie ein neues Passwort für Ihr Archiv. Die Kriterien "
+"umfassen eine Länge von mindestens 12 Zeichen, einen Großbuchstaben, einen "
+"Kleinbuchstaben und ein Sonderzeichen."
 
 msgid "Generate Password"
-msgstr ""
+msgstr "Passwort generieren"
 
 msgid "Password"
-msgstr ""
+msgstr "Passwort"
 
 msgid "Unlock the archive with a password"
-msgstr ""
+msgstr "Das Archiv mit einem Passwort entsperren"
 
 # Translation key: check_pwd_desc
 msgid ""
@@ -156,11 +164,16 @@ msgid ""
 "you have forgotten it, you will not be able to unzip the archive and start "
 "importing your configuration."
 msgstr ""
+"Geben Sie das Passwort unten ein, um das Archiv mit Ihrer Konfiguration zu "
+"entsperren. Wenn Sie es vergessen haben, können Sie weder das Archiv "
+"entpacken noch mit dem Import Ihrer Konfiguration beginnen."
 
 # Translation key: enter_password_title
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Bitte geben Sie ein Passwort ein, um das Archiv für die Synchronisierung der "
+"Konfiguration zu entsperren"
 
 # Translation key: enter_password_desc
 msgid ""
@@ -168,12 +181,15 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
+"Ein verschlüsseltes Archiv wurde für die Synchronisierung mit der App Save "
+"Desktop ausgewählt. Bitte geben Sie das Passwort unten ein, um es zu "
+"entsperren und die Synchronisierung zu starten."
 
 msgid "Remember Password"
-msgstr ""
+msgstr "Passwort merken"
 
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr ""
+msgstr "Passwort nicht eingegeben oder falsch. Fortfahren nicht möglich."
 
 # Translation key: saving_config_status
 msgid ""
@@ -194,6 +210,9 @@ msgid ""
 "You can now view the archive with the configuration of your desktop "
 "environment, or return to the previous page.\n"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"Sie können nun das Archiv mit der Konfiguration Ihrer Desktop-Umgebung "
+"ansehen oder zur vorherigen Seite zurückkehren.\n"
 
 msgid "Open the folder"
 msgstr "Den Ordner öffnen"
@@ -208,7 +227,7 @@ msgid "Import from file"
 msgstr "Aus Datei importieren"
 
 msgid "Import from folder"
-msgstr ""
+msgstr "Aus Ordner importieren"
 
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -222,8 +241,9 @@ msgid ""
 "Importing configuration from:\n"
 "<i>{}</i>\n"
 msgstr ""
-"<big><b>Importing configuration ...</b></big>\n"
-"Importing configuration from: {}\n"
+"<big><b>Konfiguration wird importiert …</b></big>\n"
+"Konfiguration wird importiert aus:\n"
+"<i>{}</i>\n"
 
 msgid "The configuration has been applied!"
 msgstr "Die Konfiguration wurde angewendet!"
@@ -236,6 +256,12 @@ msgid ""
 "<i>If your archive contains Flatpak apps, they will start installing after "
 "the next login.</i>"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"Sie können sich aus dem System abmelden, damit die Änderungen wirksam "
+"werden, oder zur vorherigen Seite zurückkehren und sich später abmelden.\n"
+"\n"
+"<i>Wenn Ihr Archiv Flatpak-Apps enthält, wird deren Installation nach der "
+"nächsten Anmeldung gestartet.</i>"
 
 msgid "Back to previous page"
 msgstr "Zurück zur vorherigen Seite"
@@ -250,37 +276,45 @@ msgid "Apply"
 msgstr "Anwenden"
 
 msgid "Sync"
-msgstr ""
+msgstr "Synchronisieren"
 
 # Translation key: sync_desc
 msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
 msgstr ""
+"Synchronisieren Sie die Konfiguration Ihrer Desktop-Umgebung mit anderen "
+"Computern im Netzwerk."
 
 msgid "Initial synchronization setup"
-msgstr ""
+msgstr "Ersteinrichtung der Synchronisierung"
 
 msgid "1. Open the system settings"
-msgstr ""
+msgstr "1. Öffnen Sie die Systemeinstellungen"
 
 msgid "2. Go to the Online Accounts section"
-msgstr ""
+msgstr "2. Gehen Sie zum Abschnitt Online-Konten"
 
 # Translation key: gnome_oa_section_desc
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
+"Wählen Sie in diesem Abschnitt den gewünschten Cloud-Dienst aus, z. B. "
+"Google, Microsoft 365 oder Nextcloud."
 
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
+"3. Klicken Sie auf die Schaltfläche Weiter und wählen Sie den erstellten "
+"Cloud-Laufwerksordner aus"
 
 # Translation key: gnome_oa_chooser_desc
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
+"Der erstellte Cloud-Laufwerksordner befindet sich im Seitenbereich des "
+"Dateiauswahldialogs in folgender Form: benutzername@dienst.com."
 
 # Translation key: rclone_intro_desc
 msgid ""
@@ -288,6 +322,10 @@ msgid ""
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
+"Damit die Synchronisierung ordnungsgemäß funktioniert, benötigen Sie den "
+"Ordner, der mit Ihrem Cloud-Dienst über Rclone synchronisiert wird.\n"
+"<b>Wählen Sie zunächst den von Ihnen verwendeten Cloud-Laufwerksdienst aus.</"
+"b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
@@ -295,54 +333,61 @@ msgid ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
+"Kopieren Sie nun den Befehl zum Einrichten von Rclone mit der Seitentaste "
+"und öffnen Sie die Terminal-App mit der Tastenkombination Strg+Alt+T oder "
+"suchen Sie sie im App-Menü."
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopieren"
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
+"Nachdem Sie die Einrichtung von Rclone mit dem angegebenen Befehl "
+"abgeschlossen haben, klicken Sie auf die Schaltfläche „Anwenden“"
 
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Stattdessen Syncthing-Ordner verwenden"
 
 msgid "Almost done!"
-msgstr ""
+msgstr "Fast fertig!"
 
 # Translation key: almost_done_desc
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
+"Sie haben nun den Cloud-Laufwerksordner erstellt! Klicken Sie auf die "
+"Schaltfläche Weiter, um die Einrichtung abzuschließen."
 
 msgid "Select"
-msgstr ""
+msgstr "Auswählen"
 
 msgid "Next"
-msgstr ""
+msgstr "Weiter"
 
 msgid "Set up the sync file"
-msgstr ""
+msgstr "Synchronisierungsdatei einrichten"
 
 msgid "Periodic saving file"
-msgstr ""
+msgstr "Datei für regelmäßige Speicherung"
 
 msgid "Periodic saving file does not exist."
-msgstr ""
+msgstr "Die Datei für die regelmäßige Speicherung existiert nicht."
 
 msgid "Create"
-msgstr ""
+msgstr "Erstellen"
 
 msgid "Please wait …"
 msgstr "Bitte warten …"
 
 msgid "Change"
-msgstr ""
+msgstr "Ändern"
 
 msgid "Connect to the cloud storage"
-msgstr ""
+msgstr "Mit dem Cloud-Speicher verbinden"
 
 # Translation key: connect_cloud_storage_desc
 msgid ""
@@ -351,18 +396,24 @@ msgid ""
 "computer, select the folder that you have synced with your cloud storage and "
 "also have saved the same periodic saving file."
 msgstr ""
+"Öffnen Sie auf einem anderen Computer die App Save Desktop, klicken Sie auf "
+"dieser Seite auf die Schaltfläche Einrichten der Datei für die "
+"Synchronisierung und nehmen Sie die erforderlichen Einstellungen vor. Wählen "
+"Sie auf diesem Computer den Ordner aus, den Sie mit Ihrem Cloud-Speicher "
+"synchronisiert und in dem Sie dieselbe Datei für die regelmäßige Speicherung "
+"gespeichert haben."
 
 msgid "Select the cloud drive folder"
-msgstr ""
+msgstr "Wählen Sie den Cloud-Laufwerksordner aus"
 
 msgid "You didn't select the cloud drive folder!"
-msgstr ""
+msgstr "Sie haben den Cloud-Laufwerksordner nicht ausgewählt!"
 
 msgid "Periodic synchronization"
-msgstr ""
+msgstr "Regelmäßige Synchronisierung"
 
 msgid "Bidirectional synchronization"
-msgstr ""
+msgstr "Bidirektionale Synchronisierung"
 
 # Translation key: bidirectional_sync_desc
 msgid ""
@@ -370,32 +421,39 @@ msgid ""
 "periodic saving information (interval, folder, and file name) from the other "
 "computer with synchronization set to synchronize is copied to this computer."
 msgstr ""
+"Wenn aktiviert und das Synchronisierungsintervall und der Cloud-"
+"Laufwerksordner ausgewählt sind, werden die regelmäßigen "
+"Speicherinformationen (Intervall, Ordner und Dateiname) vom anderen "
+"Computer, dessen Synchronisierung auf Synchronisieren eingestellt ist, auf "
+"diesen Computer kopiert."
 
 msgid "From now on, you can sync the config from the menu in the header bar"
 msgstr ""
+"Ab sofort können Sie die Konfiguration über das Menü in der Kopfzeile "
+"synchronisieren"
 
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Tastaturkürzel"
 
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Öffnen Sie das Anwendungs-Wiki"
 
 msgid "Quit"
-msgstr ""
+msgstr "Beenden"
 
 msgid "About app"
-msgstr "Über"
+msgstr "Über die App"
 
 # Translation key: unsuppurted_env_desc
 msgid ""
 "<big><b>You have an unsupported environment installed.</b></big> \n"
 "Please use one of these environments: {}."
 msgstr ""
-"<big><b>Sie haben eine nicht unterstützte Umgebung installiert.</b></big>\n"
+"<big><b>Sie haben eine nicht unterstützte Umgebung installiert.</b></big> \n"
 "Bitte verwenden Sie eine der folgenden Umgebungen: {}."
 
 msgid "Save your desktop configuration"
-msgstr "Speichern Sie die aktuelle Konfiguration Ihrer Desktop-Umgebung"
+msgstr "Speichern Sie Ihre Desktop-Konfiguration"
 
 msgid ""
 "Save Desktop helps you back up, restore, and synchronize your entire desktop "
@@ -405,9 +463,17 @@ msgid ""
 "keep your setup consistent across devices with automatic periodic saves and "
 "synchronization."
 msgstr ""
+"Save Desktop hilft Ihnen dabei, Ihre gesamte Desktop-Umgebung mühelos zu "
+"sichern, wiederherzustellen und zu synchronisieren. Es speichert und "
+"importiert Ihre Designs, Symbole, Schriftarten, Hintergrundbilder, "
+"Erweiterungen, Desktop-Ordner, Flatpak-Apps und deren Daten sowie andere "
+"Desktop-Einstellungen – alles in einem Archiv. Wählen Sie aus, was Sie "
+"einbeziehen möchten, und sorgen Sie mit automatischen regelmäßigen "
+"Sicherungen und Synchronisierungen für eine einheitliche Konfiguration auf "
+"allen Geräten."
 
 msgid "Translator credits"
-msgstr "Github Link des Übersetzers"
+msgstr "Danksagungen an Übersetzer"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Elemente, die in das Konfigurationsarchiv aufzunehmen sind"
