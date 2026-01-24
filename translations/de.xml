@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="synchronization_between_computers_title"></str>
-  <str key="synchronization_intro"></str>
-  <str key="set_up_first_pc"></str>
-  <str key="set_up_second_pc"></str>
-  <str key="bidirectional_sync"></str>
-  <str key="synchronization_files"></str>
-  <str key="flatpak_wiki_title"></str>
-  <str key="flatpak_wiki_intro"></str>
-  <str key="flatpak_wiki_dest"></str>
-  <str key="flatpak_wiki_options"></str>
-  <str key="flatpak_wiki_import_process"></str>
-  <str key="flatpak_wiki_sync_mode"></str>
-  <str key="flatpak_wiki_note"></str>
+  <str key="synchronization_between_computers_title"># Synchronisierung zwischen Computern im Netzwerk</str>
+  <str key="synchronization_intro">Neben dem Speichern und Importieren der Konfiguration können Sie mit Save Desktop diese auch zwischen Computern in Ihrem Netzwerk über einen freigegebenen Cloud-Ordner oder einen freigegebenen Syncthing-Ordner synchronisieren.</str>
+  <str key="set_up_first_pc"/>
+  <str key="set_up_second_pc"/>
+  <str key="bidirectional_sync"/>
+  <str key="synchronization_files"/>
+  <str key="flatpak_wiki_title"># Flatpak-Apps speichern, importieren und synchronisieren</str>
+  <str key="flatpak_wiki_intro">Save Desktop ermöglicht es Ihnen, Flatpak-Anwendungen zusammen mit ihren Benutzerdaten sowie Symbolen, Designs, Einstellungen und Erweiterungen zu speichern, zu importieren und zu synchronisieren.</str>
+  <str key="flatpak_wiki_dest"/>
+  <str key="flatpak_wiki_options"/>
+  <str key="flatpak_wiki_import_process"/>
+  <str key="flatpak_wiki_sync_mode"/>
+  <str key="flatpak_wiki_note"/>
 </root>
