@@ -27,7 +27,7 @@ It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones),
 - Include **Flatpak apps and user data**
 - Restore everything in one click
 - Sync with cloud folders
-- Works with **GNOME, KDE Plasma, Xfce, Cinnamon, Budgie, COSMIC, Pantheon, MATE, Deepin** and **Hyprland**
+- Works with **GNOME, KDE Plasma, Xfce, Cinnamon, Budgie, COSMIC (GNOME and Rust version), Pantheon, MATE, Deepin** and **Hyprland**
 
 <details>
   <summary><b>Full list of supported desktops & directories</b></summary>
@@ -35,25 +35,28 @@ It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones),
   - **General directories**
   ```
   - ~/.config/dconf
-  - ~/.local/share/backgrounds 
-  - ~/.themes
-  - ~/.icons
-  - ~/.local/share/icons
-  - ~/.local/share/fonts
-  - ~/.fonts
   - ~/.config/gtk-4.0 
   - ~/.config/gtk-3.0
-  - ~/.var/app
+  - ~/.themes
+  - ~/.icons
+  - ~/.fonts
+  - ~/.local/share/themes
+  - ~/.local/share/icons
+  - ~/.local/share/fonts
+  - ~/.local/share/backgrounds 
+  - ~/.local/share/gnome-shell
+  - ~/.local/share/plasma
+  - ~/.local/share/cinnamon
   - ~/.local/share/flatpak/app
+  - ~/.var/app
   - /var/lib/flatpak/app
   ```
   - **GNOME**
   ```
    - ~/.local/share/gnome-background-properties
-   - ~/.local/share/gnome-shell
    - ~/.local/share/nautilus-python
    - ~/.local/share/nautilus
-   - ~/.local/share/gnome-control-center
+   - ~/.config/gnome-control-center
   ```
   - **Pantheon**
   ```
@@ -63,7 +66,6 @@ It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones),
   - **Cinnamon**
   ```
   - ~/.config/nemo
-  - ~/.local/share/cinnamon
   - ~/.cinnamon
   ```
   - **Budgie**
@@ -108,7 +110,6 @@ It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones),
   - ~/.local/share/sddm
   - ~/.local/share/wallpapers
   - ~/.local/share/plasma-systemmonitor
-  - ~/.local/share/plasma
   - ~/.local/share/aurorae
   - ~/.local/share/kscreen
   - ~/.local/share/color-schemes
@@ -156,7 +157,7 @@ I welcome contributions of all kinds!
   | App                                                                                                                                                                                      | Wiki                                                                                                                                                                                                             |
   | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
   | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop/287x66-grey.png" alt="Translation status"/></a> | <a href="https://hosted.weblate.org/projects/vikdevelop/savedesktop-github-wiki/"><img src="https://hosted.weblate.org/widget/vikdevelop/savedesktop-github-wiki/287x66-grey.png" alt="Translation status"/></a> |
-* **Issues & bugs** → [GitHub Issues](https://github.com/vikdevelop/SaveDesktop/issues) or [Open issue without GitHub](https://vikdevelop.github.io/SaveDesktop/open-issue/)
+* **Issues & bugs** → [GitHub Issues](https://github.com/vikdevelop/SaveDesktop/issues) or [Open issue without GitHub](https://vikdevelop.github.io/SaveDesktop/issue-report/)
 * **Discussions** → [GitHub Discussions](https://github.com/vikdevelop/SaveDesktop/discussions)
 
 This project follows the [GNOME Code of Conduct](https://conduct.gnome.org).
