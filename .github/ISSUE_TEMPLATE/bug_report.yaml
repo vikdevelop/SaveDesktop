@@ -2,6 +2,7 @@ name: Bug report
 description: Report a bug with Save Desktop
 title: "bug: "
 labels: [bug]
+
 body:
   - type: input
     id: distro
@@ -11,6 +12,8 @@ body:
       placeholder: "e.g. Fedora 40, Ubuntu 24.04"
     validations:
       required: true
+      minLength: 3
+
   - type: dropdown
     id: environment
     attributes:
@@ -30,6 +33,7 @@ body:
         - Hyprland
     validations:
       required: true
+
   - type: input
     id: version
     attributes:
@@ -37,6 +41,8 @@ body:
       description: "You can find it by clicking on the three dots in the header bar and then the 'About app' button."
     validations:
       required: true
+      minLength: 3
+
   - type: dropdown
     id: package
     attributes:
@@ -49,24 +55,30 @@ body:
         - Other (please specify in the bug description)
     validations:
       required: true
+
   - type: textarea
-    id: desc
+    id: bug_description
     attributes:
-      label: "Bug description"
-      description: "Briefly describe the problem"
+      label: Bug description
+      description: Clearly describe what is not working.
     validations:
       required: true
+      minLength: 80
+
   - type: textarea
     id: steps
     attributes:
-      label: "Steps to reproduce"
-      description: "Describe how you came across the problem"
+      label: Steps to reproduce
+      description: Provide step-by-step instructions to reproduce the issue.
     validations:
       required: true
+      minLength: 50
+
   - type: textarea
-    id: output
+    id: terminal_output
     attributes:
-      label: "Output from the Terminal"
-      description: "Open the Terminal app (Ctrl+Alt+T or find it in the apps' menu) and run the flatpak run io.github.vikdevelop.SaveDesktop command (alternatively, add another argument if you run in CLI). Then insert the output below. Please insert full output as text, not a screenshot!"
+      label: Output from the Terminal
+      description: Open the Terminal app (Ctrl+Alt+T or find it in the apps' menu) and run the flatpak run io.github.vikdevelop.SaveDesktop command (alternatively, add another argument if you run in CLI). Then insert the output below. Please insert full output as text, not a screenshot!
+      render: shell
     validations:
       required: true
