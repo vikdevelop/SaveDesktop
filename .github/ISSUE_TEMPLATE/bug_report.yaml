@@ -2,18 +2,15 @@ name: Bug report
 description: Report a bug with Save Desktop
 title: "bug: "
 labels: [bug]
-
 body:
   - type: input
     id: distro
     attributes:
       label: "Linux distribution"
       description: "What Linux distribution (name and version) are you using?"
-      placeholder: "e.g. Fedora 40, Ubuntu 24.04"
+      placeholder: "e.g. Fedora 43, Ubuntu 25.04"
     validations:
       required: true
-      minLength: 3
-
   - type: dropdown
     id: environment
     attributes:
@@ -28,12 +25,12 @@ body:
         - MATE
         - Pantheon (elementaryOS)
         - Budgie
-        - COSMIC
+        - COSMIC (Old)
+        - COSMIC (New)
         - Deepin
         - Hyprland
     validations:
       required: true
-
   - type: input
     id: version
     attributes:
@@ -41,8 +38,6 @@ body:
       description: "You can find it by clicking on the three dots in the header bar and then the 'About app' button."
     validations:
       required: true
-      minLength: 3
-
   - type: dropdown
     id: package
     attributes:
@@ -55,30 +50,24 @@ body:
         - Other (please specify in the bug description)
     validations:
       required: true
-
   - type: textarea
-    id: bug_description
+    id: desc
     attributes:
-      label: Bug description
-      description: Clearly describe what is not working.
+      label: "Bug description"
+      description: "Briefly describe the problem"
     validations:
       required: true
-      minLength: 80
-
   - type: textarea
     id: steps
     attributes:
-      label: Steps to reproduce
-      description: Provide step-by-step instructions to reproduce the issue.
+      label: "Steps to reproduce"
+      description: "Describe how you came across the problem"
     validations:
       required: true
-      minLength: 50
-
   - type: textarea
-    id: terminal_output
+    id: output
     attributes:
-      label: Output from the Terminal
-      description: Open the Terminal app (Ctrl+Alt+T or find it in the apps' menu) and run the flatpak run io.github.vikdevelop.SaveDesktop command (alternatively, add another argument if you run in CLI). Then insert the output below. Please insert full output as text, not a screenshot!
-      render: shell
+      label: "Output from the Terminal"
+      description: "Open the Terminal app (Ctrl+Alt+T or find it in the apps' menu) and run the flatpak run io.github.vikdevelop.SaveDesktop command (alternatively, add another argument if you run in CLI). Then insert the output below. Please insert full output as text, not a screenshot!"
     validations:
       required: true
