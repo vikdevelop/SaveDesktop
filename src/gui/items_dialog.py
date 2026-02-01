@@ -2,6 +2,7 @@ import gi, sys, os
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib
+from savedesktop.gui.custom_dirs_dialog import CustomDirsDialog
 from savedesktop.globals import *
 
 # Row for showing available apps
@@ -59,7 +60,6 @@ class FlatpakAppsDialog(Adw.AlertDialog):
         self.flow_box = Gtk.ListBox.new()
         self.flow_box.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.flow_box.add_css_class(css_class='boxed-list')
-        self.set_extra_child(self.flow_box)
         
         # set self.flowbox as child for Gtk.ScrolledWindow widget
         self.scrolled_window.set_child(self.flow_box)
@@ -184,22 +184,6 @@ class itemsDialog(Adw.AlertDialog):
             self.save_ext_switch_state = True
             self.show_extensions_row()
         
-        # Switch and row of option 'Save Desktop' (~/Desktop)
-        self.switch_de = Gtk.Switch.new()
-        if settings["save-desktop-folder"]:
-            self.switch_de.set_active(True)
-        self.switch_de.set_valign(align=Gtk.Align.CENTER)
-        
-        self.desktop_row = Adw.ActionRow.new()
-        self.desktop_row.set_title(title=_("Desktop"))
-        self.desktop_row.set_tooltip_text(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
-        self.desktop_row.set_subtitle_selectable(True)
-        self.desktop_row.set_use_markup(True)
-        self.desktop_row.set_title_lines(2)
-        self.desktop_row.add_suffix(self.switch_de)
-        self.desktop_row.set_activatable_widget(self.switch_de)
-        self.itemsBox.append(child=self.desktop_row)
-        
         # Switch and row of the option: GTK Settings
         if environment["de_name"] in ["GNOME", "Cinnamon", "Xfce", "Budgie", "Pantheon", "MATE", "COSMIC (Old)"]:
             self.switch_gtk = Gtk.Switch.new()
@@ -216,6 +200,34 @@ class itemsDialog(Adw.AlertDialog):
             self.gtk_row.add_suffix(self.switch_gtk)
             self.gtk_row.set_activatable_widget(self.switch_gtk)
             self.itemsBox.append(child=self.gtk_row)
+
+        # Switch and row of option 'Save Desktop' (~/Desktop)
+        self.switch_de = Gtk.Switch.new()
+        if settings["save-desktop-folder"]:
+            self.switch_de.set_active(True)
+        self.switch_de.set_valign(align=Gtk.Align.CENTER)
+
+        self.desktop_row = Adw.ActionRow.new()
+        self.desktop_row.set_title(title=_("Desktop"))
+        self.desktop_row.set_tooltip_text(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
+        self.desktop_row.set_subtitle_selectable(True)
+        self.desktop_row.set_use_markup(True)
+        self.desktop_row.set_title_lines(2)
+        self.desktop_row.add_suffix(self.switch_de)
+        self.desktop_row.set_activatable_widget(self.switch_de)
+        self.itemsBox.append(child=self.desktop_row)
+
+        # Custom directories section
+        self.custom_button = Gtk.Button.new_from_icon_name("go-next-symbolic")
+        self.custom_button.add_css_class("flat")
+        self.custom_button.set_valign(Gtk.Align.CENTER)
+        self.custom_button.connect("clicked", self._show_custom_dirs_dialog)
+
+        self.custom_row = Adw.ActionRow.new()
+        self.custom_row.set_title("Custom folders")
+        self.custom_row.add_suffix(self.custom_button)
+        self.custom_row.set_activatable_widget(self.custom_button)
+        self.itemsBox.append(child=self.custom_row)
 
         if flatpak:
             self.flatpak_row = Adw.ExpanderRow.new()
@@ -300,6 +312,12 @@ class itemsDialog(Adw.AlertDialog):
         else:
             self.switch_06.set_sensitive(True)
             self.switch_07.set_sensitive(True)
+
+    def _show_custom_dirs_dialog(self, w):
+        self.close()
+        self.CDDialog = CustomDirsDialog(self.parent)
+        self.CDDialog.choose(self.parent, None, None, None)
+        self.CDDialog.present(self.parent)
 
     # Action after closing itemsDialog
     def itemsdialog_closed(self, w, response):

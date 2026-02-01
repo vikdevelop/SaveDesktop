@@ -53,6 +53,10 @@
 		  <default>[]</default>
 		  <summary>Select, what Flatpak applications data will be saved</summary>
 		</key>
+	  <key name="custom-dirs" type="as">
+		  <default>[]</default>
+		  <summary>Selected custom directories</summary>
+		</key>
 		<key name="periodic-saving" type="s">
 		  <choices>
 				<choice value="Never"/>
