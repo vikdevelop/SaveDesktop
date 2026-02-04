@@ -13,7 +13,7 @@ class CustomDirsDialog(Adw.AlertDialog):
 
         self.subtitle = f'{_("Select custom folders that you want to include in the configuration archive.")}'
         if flatpak:
-            self.subtitle += f'\n{_("<i>Since you are using Flatpak, pay attention to the path format. <b>If the selected path is in the /run/user/ format</b>, it would be necessary to grant access to the folder you want to select.</i>")} <a href="https://linuxconfig.org/how-to-manage-flatpaks-privileges-with-flatseal">{_("Learn more")}</a>'
+            self.subtitle += f'\n{_("<i>Since you are using Flatpak, pay attention to the path format. <b>If the selected path begins at /run/user/</b>, it would be necessary to grant access to the folder you want to select.</i>")} <a href="https://linuxconfig.org/how-to-manage-flatpaks-privileges-with-flatseal">{_("Learn more")}</a>'
 
         self.set_heading(_("Custom folders"))
         self.set_body(self.subtitle)
@@ -73,7 +73,7 @@ class CustomDirsDialog(Adw.AlertDialog):
 
             del_button = Gtk.Button.new_from_icon_name("user-trash-symbolic")
             del_button.add_css_class("destructive-action")
-            del_button.set_tooltip_text(_("Remove folder"))
+            del_button.set_tooltip_text(_("Remove"))
             del_button.set_valign(Gtk.Align.CENTER)
             del_button.connect("clicked", self._remove_folder)
 
@@ -102,7 +102,7 @@ class CustomDirsDialog(Adw.AlertDialog):
         for folder in folders:
             del_button = Gtk.Button.new_from_icon_name("user-trash-symbolic")
             del_button.add_css_class("destructive-action")
-            del_button.set_tooltip_text(_("Remove folder"))
+            del_button.set_tooltip_text(_("Remove"))
             del_button.set_valign(Gtk.Align.CENTER)
 
             del_button.connect("clicked", self._remove_folder)
