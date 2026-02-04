@@ -11,18 +11,37 @@ class CustomDirsDialog(Adw.AlertDialog):
         self.parent = parent
         self.old_settings = settings["custom-dirs"]
 
+        self.subtitle = f'{_("Select custom folders that you want to include in the configuration archive.")}'
+        if flatpak:
+            self.subtitle += f'\n{_("<i>Since you are using Flatpak, pay attention to the path format. <b>If the selected path is in the /run/user/ format</b>, it would be necessary to grant access to the folder you want to select.</i>")} <a href="https://linuxconfig.org/how-to-manage-flatpaks-privileges-with-flatseal">{_("Learn more")}</a>'
+
         self.set_heading(_("Custom folders"))
-        self.set_body(_("Select custom folders that you want to include in the configuration archive."))
+        self.set_body(self.subtitle)
         self.set_body_use_markup(True)
 
+        # add the Cancel button
+        self.add_response('cancel', _("Cancel"))
+        self.connect('response', self.apply_settings)
+
+        self.box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=15)
+        self.set_extra_child(self.box)
+
+        if not settings["custom-dirs"] == []:
+            self._activate_folders_list()
+
+        # if there are problems loading a folder, an error message is displayed
+        try:
+            self.load_folders()
+            self.set_initial_switch_state()
+        except Exception as e:
+            self._show_add_button()
+
+    def _activate_folders_list(self):
         # widget for scrolling items list
         self.scrolled_window = Gtk.ScrolledWindow()
         self.scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         self.scrolled_window.set_min_content_width(300)
         self.scrolled_window.set_min_content_height(200)
-        self.set_extra_child(self.scrolled_window)
-
-        self.box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
         self.scrolled_window.set_child(self.box)
 
         # listbox for showing items
@@ -31,21 +50,8 @@ class CustomDirsDialog(Adw.AlertDialog):
         self.flow_box.add_css_class(css_class='boxed-list')
         self.box.append(self.flow_box)
 
-        # set self.flowbox as child for Gtk.ScrolledWindow widget
-        self.scrolled_window.set_child(self.flow_box)
-
-        # add buttons to the dialog
-        self.add_response('cancel', _("Cancel"))
         self.add_response('ok', _("Apply"))
         self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
-        self.connect('response', self.apply_settings)
-
-        # if there are problems loading a folder, an error message is displayed
-        try:
-            self.load_folders()
-            self.set_initial_switch_state()
-        except Exception as e:
-            self._show_add_button()
 
     def _show_add_button(self):
         self.button = Gtk.Button.new_with_label(_("Add folder"))
@@ -74,7 +80,14 @@ class CustomDirsDialog(Adw.AlertDialog):
             row = Adw.ActionRow.new()
             row.set_title(folder_path)
             row.add_suffix(del_button)
-            self.flow_box.append(row)
+
+            try:
+                self.flow_box.append(row)
+            except AttributeError:
+                self._activate_folders_list()
+                self.flow_box.append(row)
+                self.box.remove(self.button)
+                self.box.append(self.button)
 
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
@@ -96,7 +109,7 @@ class CustomDirsDialog(Adw.AlertDialog):
 
             row = Adw.ActionRow.new()
             row.set_title(folder)
-            row.set_title_lines(1)
+            row.set_title_lines(4)
             row.add_suffix(del_button)
 
             self.flow_box.append(row)

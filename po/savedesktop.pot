@@ -81,7 +81,11 @@ msgid "Add folder"
 msgstr ""
 
 #: src/gui/custom_dirs_dialog.py
-msgid "Remove folder"
+msgid "Remove"
+msgstr ""
+
+#: src/gui/custom_dirs_dialog.py
+msgid "<i>Since you are using Flatpak, pay attention to the path format. <b>If the selected path is in the /run/user/ format</b>, it would be necessary to grant access to the folder you want to select.</i>"
 msgstr ""
 
 #: src/gui/items_dialog.py

@@ -38,12 +38,17 @@ if dest_dir:
             print("copying the Flatpak apps' user data to the ~/.var/app directory")
             os.system(f"cp -au ./app/ ~/.var/")
 
-        if os.path.exists(f"flatpak-apps-data.tgz"):
+        if os.path.exists(f"Flatpak_Apps/flatpak-apps-data.tgz"):
+            subprocess.run(["tar", "-xzvf", "Flatpak_Apps/flatpak-apps-data.tgz", "-C", f"{Path.home()}/.var"])
+        else:
             subprocess.run(["tar", "-xzvf", "flatpak-apps-data.tgz", "-C", f"{Path.home()}/.var"])
 
     # Load Flatpaks from bash scripts
     if install_flatpaks:
-        installed_flatpaks_files = ['installed_flatpaks.sh', 'installed_user_flatpaks.sh']
+        if os.path.exists("Flatpak_Apps"):
+            installed_flatpaks_files = ['Flatpak_Apps/installed_flatpaks.sh', 'Flatpak_Apps/installed_user_flatpaks.sh']
+        else:
+            installed_flatpaks_files = ['installed_flatpaks.sh', 'installed_user_flatpaks.sh']
         desired_flatpaks = {}
         for file in installed_flatpaks_files:
             if os.path.exists(file):
