@@ -8,7 +8,7 @@ from pathlib import Path
 from threading import Thread
 from savedesktop.globals import *
 from savedesktop.gui.more_options_dialog import MoreOptionsDialog
-from savedesktop.gui.items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
+from savedesktop.gui.items_dialog import itemsDialog
 from savedesktop.gui.synchronization_dialogs import InitSetupDialog, SetDialog, CloudDialog
 
 # Application window
@@ -546,7 +546,7 @@ class MainWindow(Adw.ApplicationWindow):
     def _on_items_dialog_response(self, dialog, response, *args):
         if response == "cancel":
             pass
-        else:
+        elif response == "ok":
             print("Importing the configuration is in progress…")
             self.please_wait()
             import_thread = Thread(target=self._call_archive_command)

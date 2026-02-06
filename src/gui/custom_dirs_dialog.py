@@ -37,13 +37,6 @@ class CustomDirsDialog(Adw.AlertDialog):
             self._show_add_button()
 
     def _activate_folders_list(self):
-        # widget for scrolling items list
-        self.scrolled_window = Gtk.ScrolledWindow()
-        self.scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
-        self.scrolled_window.set_min_content_width(300)
-        self.scrolled_window.set_min_content_height(200)
-        self.scrolled_window.set_child(self.box)
-
         # listbox for showing items
         self.flow_box = Gtk.ListBox.new()
         self.flow_box.set_selection_mode(mode=Gtk.SelectionMode.NONE)
@@ -77,8 +70,12 @@ class CustomDirsDialog(Adw.AlertDialog):
             del_button.set_valign(Gtk.Align.CENTER)
             del_button.connect("clicked", self._remove_folder)
 
+            if "/run/user" in folder_path:
+                folder_path = f"<span color='orange'>{folder_path}</span>"
+
             row = Adw.ActionRow.new()
             row.set_title(folder_path)
+            row.set_use_markup(True)
             row.add_suffix(del_button)
 
             try:
@@ -107,8 +104,12 @@ class CustomDirsDialog(Adw.AlertDialog):
 
             del_button.connect("clicked", self._remove_folder)
 
+            if "/run/user" in folder:
+                folder = f"<span color='orange'>{folder}</span>"
+
             row = Adw.ActionRow.new()
             row.set_title(folder)
+            row.set_use_markup(True)
             row.set_title_lines(4)
             row.add_suffix(del_button)
 

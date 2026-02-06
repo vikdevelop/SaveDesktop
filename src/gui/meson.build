@@ -3,6 +3,7 @@ gui_sources = [ '__init__.py',
                 'password_checker.py',
                 'items_dialog.py',
                 'custom_dirs_dialog.py',
+                'flatpak_apps_dialog.py',
                 'more_options_dialog.py',
                 'synchronization_dialogs.py', 
               ]
