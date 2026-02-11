@@ -432,7 +432,7 @@ msgid "Bidirectional synchronization"
 msgstr ""
 
 #: src/gui/synchronization_dialogs.py
-msgid "The periodic saving information (interval, file name, folder and archive's password) and selected configuration items from the other computer with synchronization setup will be used on this computer."
+msgid "Replace local periodic saving settings and selected configuration items with those from the other computer."
 msgstr ""
 
 #: src/gui/window.py

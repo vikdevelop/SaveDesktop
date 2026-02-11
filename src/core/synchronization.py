@@ -104,8 +104,15 @@ class Syncing:
                 settings["save-installed-flatpaks"] = info["include"]["flatpaks"]
                 settings["disabled-flatpak-apps-data"] = info["include"]["disabled-flatpaks"]
                 settings["keep-flatpaks"] = info["include"]["keep-flatpaks"]
+                self._sanitize_custom_dirs(cd_list=info["include"]["custom-dirs"])
             except KeyError: # Backward compatibility for file formats created by older versions of Save Desktop
                 pass
+
+    # Replace the old home path with the current home path in the custom-dirs list
+    def _sanitize_custom_dirs(self, cd_list):
+        pattern = r'^(/var)?/home/[^/]+'
+        custom_dirs = [re.sub(pattern, home, s) for s in cd_list]
+        settings["custom-dirs"] = custom_dirs
         
     # Check, if the ZIP archive is encrypted or not
     def get_zip_file_status(self):
