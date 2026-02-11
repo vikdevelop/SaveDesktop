@@ -5,6 +5,7 @@ from threading import Thread
 from gi.repository import Gtk, Gdk, Adw, GLib, Gio
 from savedesktop.globals import *
 from savedesktop.core.synchronization_setup import check_fs, create_savedesktop_json, set_up_auto_mount
+from savedesktop.core.periodic_saving import PeriodicBackups
 
 class InitSetupDialog(Adw.AlertDialog):
     def __init__(self, parent):
@@ -300,10 +301,10 @@ class SetDialog(Adw.AlertDialog):
             self.file_row.set_subtitle(self.status_desc)
             self.file_row.set_use_markup(False)
             subprocess.run(['notify-send', 'Save Desktop', self.status_desc])
-            subprocess.run([sys.executable, "-m", "savedesktop.core.periodic_saving", "--now"], check=True, capture_output=True, text=True, env={**os.environ, "PYTHONPATH": f"{app_prefix}"})
+            PeriodicBackups(now=True)
         except Exception as e:
-            subprocess.run(['notify-send', _("An error occurred"), f'{e.stderr}'])
-            self.file_row.set_subtitle(f'{e.stderr}')
+            subprocess.run(['notify-send', _("An error occurred"), f'{e}'])
+            self.file_row.set_subtitle(f'{e}')
         else:
             self.file_row.set_subtitle(f'{settings["periodic-saving-folder"]}/{settings["filename-format"]}.sd.zip')
             os.system(f"notify-send 'SaveDesktop' '{_('Configuration has been saved!')}'")
@@ -347,7 +348,6 @@ class CloudDialog(Adw.AlertDialog):
         self.cloudBox = Gtk.ListBox.new()
         self.cloudBox.set_selection_mode(mode=Gtk.SelectionMode.NONE)
         self.cloudBox.get_style_context().add_class(class_name='boxed-list')
-        self.cloudBox.set_size_request(-1, 300)
         self.set_extra_child(self.cloudBox)
 
         # Row and buttons for selecting the cloud drive folder
@@ -419,8 +419,8 @@ class CloudDialog(Adw.AlertDialog):
         ## Action Row
         self.bsyncRow = Adw.ActionRow.new()
         self.bsyncRow.set_title(_("Bidirectional synchronization"))
-        self.bsyncRow.set_subtitle(_("Replace local periodic saving settings and selected configuration items with those from the other computer."))
-        self.bsyncRow.set_title_lines(2)
+        self.bsyncRow.set_subtitle(_("Enables full two-way synchronization, allowing this computer to use the same backup schedule, archive name, and selected configuration items as the other computer with synchronization set up."))
+        self.bsyncRow.set_subtitle_lines(10)
         self.bsyncRow.add_suffix(self.bsSwitch)
         self.bsyncRow.set_activatable_widget(self.bsSwitch)
         self.cloudBox.append(self.bsyncRow)

@@ -432,11 +432,7 @@ msgid "Bidirectional synchronization"
 msgstr ""
 
 #: src/gui/synchronization_dialogs.py
-msgid "Replace local periodic saving settings and selected configuration items with those from the other computer."
-msgstr ""
-
-#: src/gui/window.py
-msgid "From now on, you can sync the config from the menu in the header bar"
+msgid "Enables full two-way synchronization, allowing this computer to use the same backup schedule, archive name, and selected configuration items as the other computer with synchronization set up."
 msgstr ""
 
 #: src/gui/templates/shortcuts_window.ui:36
