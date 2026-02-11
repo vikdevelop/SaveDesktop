@@ -93,6 +93,19 @@ class Syncing:
             settings["filename-format"] = info["filename"]
             settings["periodic-saving"] = info["periodic-saving-interval"]
             settings["periodic-saving-folder"] = settings["file-for-syncing"]
+            try:
+                settings["save-icons"] = info["include"]["icons"]
+                settings["save-themes"] = info["include"]["themes"]
+                settings["save-backgrounds"] = info["include"]["backgrounds"]
+                settings["save-fonts"] = info["include"]["fonts"]
+                settings["save-extensions"] = info["include"]["extensions"]
+                settings["save-bookmarks"] = info["include"]["bookmarks"]
+                settings["save-desktop-folder"] = info["include"]["desktop"]
+                settings["save-installed-flatpaks"] = info["include"]["flatpaks"]
+                settings["disabled-flatpak-apps-data"] = info["include"]["disabled-flatpaks"]
+                settings["keep-flatpaks"] = info["include"]["keep-flatpaks"]
+            except KeyError: # Backward compatibility for file formats created by older versions of Save Desktop
+                pass
         
     # Check, if the ZIP archive is encrypted or not
     def get_zip_file_status(self):

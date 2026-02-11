@@ -432,8 +432,7 @@ msgid "Bidirectional synchronization"
 msgstr ""
 
 #: src/gui/synchronization_dialogs.py
-msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
+msgid "The periodic saving information (interval, file name, folder and archive's password) and selected configuration items from the other computer with synchronization setup will be used on this computer."
 msgstr ""
 
 #: src/gui/window.py

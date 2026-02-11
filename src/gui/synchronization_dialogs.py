@@ -419,7 +419,7 @@ class CloudDialog(Adw.AlertDialog):
         ## Action Row
         self.bsyncRow = Adw.ActionRow.new()
         self.bsyncRow.set_title(_("Bidirectional synchronization"))
-        self.bsyncRow.set_subtitle(_("If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."))
+        self.bsyncRow.set_subtitle(_("The periodic saving information (interval, file name, folder and archive's password) and selected configuration items from the other computer with synchronization setup will be used on this computer."))
         self.bsyncRow.set_title_lines(2)
         self.bsyncRow.add_suffix(self.bsSwitch)
         self.bsyncRow.set_activatable_widget(self.bsSwitch)

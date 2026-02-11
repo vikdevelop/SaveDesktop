@@ -102,7 +102,7 @@
 			<summary>Periodic import</summary>
 		</key>
 		<key name="bidirectional-sync" type="b">
-		    <default>true</default>
+		    <default>false</default>
 		    <summary>Enable/Disable bidirectional synchronization</summary>
 		</key>
 		<key name="first-synchronization-setup" type="b">
