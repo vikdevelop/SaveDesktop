@@ -139,6 +139,17 @@ class itemsDialog(Adw.AlertDialog):
             self.flatpak_row.set_subtitle_lines(3)
             self.itemsBox.append(child=self.flatpak_row)
             
+            self.appsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
+            self.appsButton.add_css_class("flat")
+            self.appsButton.set_valign(Gtk.Align.CENTER)
+            self.appsButton.set_tooltip_text(_("Flatpak apps selection"))
+            self.appsButton.connect("clicked", self.manage_data_list)
+
+            self.mngmt_row = Adw.ActionRow.new()
+            self.mngmt_row.set_title(_("Flatpak apps selection"))
+            self.mngmt_row.add_suffix(self.appsButton)
+            self.flatpak_row.add_row(self.mngmt_row)
+
             # Switch and row of option 'Save installed flatpaks'
             self.switch_05 = Gtk.Switch.new()
             if settings["save-installed-flatpaks"]:
@@ -155,7 +166,6 @@ class itemsDialog(Adw.AlertDialog):
             
             # Switch, button and row of option 'Save SaveDesktop app settings'
             self.switch_06 = Gtk.Switch.new()
-            self.appsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
             
             self.data_row = Adw.ActionRow.new()
             self.data_row.set_title(title=_("User data of installed Flatpak apps"))
@@ -170,12 +180,6 @@ class itemsDialog(Adw.AlertDialog):
                 self.data_row.add_suffix(self.appsButton)
             self.flatpak_data_sw_state = settings["save-flatpak-data"]
             self.switch_06.set_valign(align=Gtk.Align.CENTER)
-            self.switch_06.connect('notify::active', self.show_appsbtn)
-            
-            self.appsButton.add_css_class("flat")
-            self.appsButton.set_valign(Gtk.Align.CENTER)
-            self.appsButton.set_tooltip_text(_("Flatpak apps data selection"))
-            self.appsButton.connect("clicked", self.manage_data_list)
 
             self.switch_07 = Gtk.Switch.new()
             self.switch_07.set_valign(Gtk.Align.CENTER)
@@ -224,15 +228,6 @@ class itemsDialog(Adw.AlertDialog):
         self.appd = FlatpakAppsDialog(self.parent)
         self.appd.choose(self.parent, None, None, None)
         self.appd.present(self.parent)
-
-    # show button after clicking on the switch "User data of Flatpak apps"
-    def show_appsbtn(self, w, GParamBoolean):
-        self.flatpak_data_sw_state = settings["save-flatpak-data"]
-        if self.switch_06.get_active() == True:
-            self.data_row.add_suffix(self.appsButton)
-        else:
-            self.data_row.remove(self.appsButton)
-        settings["save-flatpak-data"] = self.switch_06.get_active()
 
     # show extensions row, if user has installed GNOME, Cinnamon or KDE Plasma DE
     def show_extensions_row(self):

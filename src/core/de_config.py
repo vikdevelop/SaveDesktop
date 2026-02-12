@@ -75,9 +75,17 @@ def save_flatpak_data():
     subprocess.run(cmd)
     print("[OK] Saving Flatpak app data")
 
+def export_flatpaks(path, output_file, install_type):
+    if os.path.exists(path):
+        apps = [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
+        with open(output_file, 'w') as f:
+            for app in apps:
+                if not app in settings["disabled-flatpak-apps-data"]:
+                    f.write(f"flatpak install --{install_type} {app} -y\n")
+
 def create_flatpak_list():
-    os.system("ls /var/lib/flatpak/app/ | awk '{print \"flatpak install --system \" $1 \" -y\"}' > 'Flatpak_Apps/installed_flatpaks.sh'")
-    os.system("ls ~/.local/share/flatpak/app | awk '{print \"flatpak install --user \" $1 \" -y\"}' > 'Flatpak_Apps/installed_user_flatpaks.sh'")
+    export_flatpaks('/var/lib/flatpak/app/', 'Flatpak_Apps/installed_flatpaks.sh', 'system')
+    export_flatpaks(f'{home}.local/share/flatpak/app', 'Flatpak_Apps/installed_user_flatpaks.sh', 'user')
     print("[OK] Saving Flatpak app list")
 
 def create_flatpak_autostart():
