@@ -368,7 +368,7 @@ class MainWindow(Adw.ApplicationWindow):
             if status == True:
                 GLib.idle_add(self.check_password_dialog)
             else:
-                self.import_config()
+                GLib.idle_add(self.import_config)
 
         # Get path from the dialog
         def open_selected(source, res, data):
@@ -569,7 +569,7 @@ class MainWindow(Adw.ApplicationWindow):
             print("Cancelled by user.")
         else:
             GLib.idle_add(self.show_err_msg, err)
-            self._set_default_widgets_state()
+            GLib.idle_add(self._set_default_widgets_state)
 
     # "Please wait" information page
     def please_wait(self):

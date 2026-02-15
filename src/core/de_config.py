@@ -93,7 +93,7 @@ def create_flatpak_autostart():
 
     # Create a JSON file with the user's preferences for Flatpak apps
     with open(f"{CACHE}/workspace/flatpak-prefs.json", "w") as fl:
-        json.dump({"keep-flatpaks": settings["keep-flatpaks"], "install-flatpaks": settings["save-installed-flatpaks"], "copy-data": settings["save-flatpak-data"]}, fl)
+        json.dump({"keep-flatpaks": settings["keep-flatpaks"], "disabled-flatpaks": settings["disabled-flatpak-apps-data"], "install-flatpaks": settings["save-installed-flatpaks"], "copy-data": settings["save-flatpak-data"]}, fl)
 
     # Create an autostart file for post-login Flatpak installation
     os.makedirs(f"{home}/.config/autostart", exist_ok=True)
@@ -349,9 +349,9 @@ class Import:
                 print(f"Importing environment-specific config for: {environment['de_name']}")
                 for src, dst in environment["dirs"]:
                     if os.path.exists("DE"):
-                        safe_copytree(os.path.join("DE", src), dst)
+                        safe_copytree(os.path.join("DE", dst), src)
                     else:
-                        safe_copytree(src, dst)
+                        safe_copytree(dst, src)
         else:
             print(f"[WARN] Unknown DE: {environment_key}")
 
