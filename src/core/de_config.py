@@ -85,7 +85,7 @@ def export_flatpaks(path, output_file, install_type):
 
 def create_flatpak_list():
     export_flatpaks('/var/lib/flatpak/app/', 'Flatpak_Apps/installed_flatpaks.sh', 'system')
-    export_flatpaks(f'{home}.local/share/flatpak/app', 'Flatpak_Apps/installed_user_flatpaks.sh', 'user')
+    export_flatpaks(f'{home}/.local/share/flatpak/app', 'Flatpak_Apps/installed_user_flatpaks.sh', 'user')
     print("[OK] Saving Flatpak app list")
 
 def create_flatpak_autostart():
