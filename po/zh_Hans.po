@@ -55,6 +55,24 @@ msgstr "桌面"
 msgid "File manager bookmarks"
 msgstr ""
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Flatpak 包"
 
@@ -64,8 +82,8 @@ msgstr "已安装的Flatpak应用列表"
 msgid "User data of installed Flatpak apps"
 msgstr "使用已安装 Flatpak 程序的用户数据"
 
-msgid "Flatpak apps data selection"
-msgstr "Flatpak应用数据选项"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr ""
@@ -384,17 +402,11 @@ msgstr "周期性同步"
 msgid "Bidirectional synchronization"
 msgstr "双向同步"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"如果启用，并且选择了同步间隔和云驱动器文件夹，则将同步设置为同步的其他计算机"
-"中的定期保存信息（间隔、文件夹和文件名）复制到此计算机。"
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯"
 
 msgid "Keyboard shortcuts"
 msgstr "快捷键"
@@ -434,6 +446,22 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "译者github链接"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Flatpak应用数据选项"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "如果启用，并且选择了同步间隔和云驱动器文件夹，则将同步设置为同步的其他计算"
+#~ "机中的定期保存信息（间隔、文件夹和文件名）复制到此计算机。"
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr "从现在开始，您可以从标题栏中的菜单中同步配置╰(*°▽°*)╯"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "要包含在配置存档中的项目"

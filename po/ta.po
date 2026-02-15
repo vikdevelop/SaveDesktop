@@ -55,6 +55,24 @@ msgstr "பணிமேடை"
 msgid "File manager bookmarks"
 msgstr ""
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "தட்டைகட்டு பயன்பாடுகள்"
 
@@ -64,8 +82,8 @@ msgstr "நிறுவப்பட்ட தட்டைகட்டு பய�
 msgid "User data of installed Flatpak apps"
 msgstr "நிறுவப்பட்ட தட்டைகட்டு பயன்பாடுகளின் பயனர் தரவு"
 
-msgid "Flatpak apps data selection"
-msgstr "தட்டைகட்டு பயன்பாடுகள் தரவுத் தேர்வு"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr ""
@@ -404,18 +422,11 @@ msgstr "அவ்வப்போது ஒத்திசைவு"
 msgid "Bidirectional synchronization"
 msgstr "இருதரப்பு ஒத்திசைவு"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"இயக்கப்பட்டிருந்தால், மற்றும் ஒத்திசைவு இடைவெளி மற்றும் முகில் இயக்கிக் கோப்புறை "
-"தேர்ந்தெடுக்கப்பட்டால், ஒத்திசைவதற்கு அமைக்கப்பட்ட பிற கணினியிலிருந்து அவ்வப்போது சேமிக்கும் "
-"செய்தி (இடைவெளி, கோப்புறை மற்றும் கோப்புப் பெயர்) இந்தக் கணினியில் நகலெடுக்கப்படுகிறது."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr "இனிமேல், தலைப்பு பட்டியில் உள்ள பட்டியலிருந்து உள்ளமைவை ஒத்திசைக்கலாம்"
 
 msgid "Keyboard shortcuts"
 msgstr "விசைப்பலகை குறுக்குவழிகள்"
@@ -458,6 +469,24 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "தமிழ்நேரம் <https://TamilNeram.github.io>"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "தட்டைகட்டு பயன்பாடுகள் தரவுத் தேர்வு"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "இயக்கப்பட்டிருந்தால், மற்றும் ஒத்திசைவு இடைவெளி மற்றும் முகில் இயக்கிக் கோப்புறை "
+#~ "தேர்ந்தெடுக்கப்பட்டால், ஒத்திசைவதற்கு அமைக்கப்பட்ட பிற கணினியிலிருந்து அவ்வப்போது "
+#~ "சேமிக்கும் செய்தி (இடைவெளி, கோப்புறை மற்றும் கோப்புப் பெயர்) இந்தக் கணினியில் "
+#~ "நகலெடுக்கப்படுகிறது."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr "இனிமேல், தலைப்பு பட்டியில் உள்ள பட்டியலிருந்து உள்ளமைவை ஒத்திசைக்கலாம்"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "உள்ளமைவு காப்பகத்தில் சேர்க்க வேண்டிய உருப்படிகள்"

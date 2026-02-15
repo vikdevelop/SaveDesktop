@@ -55,6 +55,24 @@ msgstr "Escriptori"
 msgid "File manager bookmarks"
 msgstr ""
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Programari Flatpak"
 
@@ -64,8 +82,8 @@ msgstr "Llistat del programari Flatpak instal·lat"
 msgid "User data of installed Flatpak apps"
 msgstr "Dades d'usuari del programari Flatpak instal·lat"
 
-msgid "Flatpak apps data selection"
-msgstr "Selecció de dades d'aplicacions Flatpak"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr ""
@@ -381,20 +399,11 @@ msgstr "Sincronització periòdica"
 msgid "Bidirectional synchronization"
 msgstr "Sincronització bidireccional"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"En habilitar-ho i seleccionar l'interval de la sincronització i la carpeta "
-"de la unitat al núvol, tota la informació del desament automàtic (interval, "
-"carpeta i nom de fitxer) de l'altre ordinador es copia en aquest mitjançant "
-"la sincronització indicada."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
-"Ja podeu sincronitzar la configuració des del menú de la barra superior"
 
 msgid "Keyboard shortcuts"
 msgstr "Dreceres de teclat"
@@ -430,6 +439,25 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "BennyBeat https://github.com/BennyBeat"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Selecció de dades d'aplicacions Flatpak"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "En habilitar-ho i seleccionar l'interval de la sincronització i la "
+#~ "carpeta de la unitat al núvol, tota la informació del desament automàtic "
+#~ "(interval, carpeta i nom de fitxer) de l'altre ordinador es copia en "
+#~ "aquest mitjançant la sincronització indicada."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr ""
+#~ "Ja podeu sincronitzar la configuració des del menú de la barra superior"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Elements que voleu incloure al fitxer de configuració"

@@ -55,6 +55,24 @@ msgstr ""
 msgid "File manager bookmarks"
 msgstr ""
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Flatpaktoepassingen"
 
@@ -64,7 +82,7 @@ msgstr ""
 msgid "User data of installed Flatpak apps"
 msgstr "Gebruikersgegevens van geïnstalleerde Flatpaktoepassingen"
 
-msgid "Flatpak apps data selection"
+msgid "Select Flatpak apps"
 msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
@@ -365,16 +383,11 @@ msgstr "Periodieke synchronisatie"
 msgid "Bidirectional synchronization"
 msgstr ""
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
-"Voortaan kunt u de voorkeuren synchroniseren middels het menu op de kopbalk"
 
 msgid "Keyboard shortcuts"
 msgstr ""
@@ -410,6 +423,11 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "https://github.com/Vistaus"
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr ""
+#~ "Voortaan kunt u de voorkeuren synchroniseren middels het menu op de "
+#~ "kopbalk"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Items om op te nemen in het voorkeurenarchief"

@@ -55,6 +55,24 @@ msgstr "Radna površina"
 msgid "File manager bookmarks"
 msgstr ""
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Flatpak aplikacije"
 
@@ -64,8 +82,8 @@ msgstr "Popis instaliranih Flatpak aplikacija"
 msgid "User data of installed Flatpak apps"
 msgstr "Korisnički podaci instaliranih Flatpak aplikacija"
 
-msgid "Flatpak apps data selection"
-msgstr "Odabir podataka Flatpak aplikacija"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr ""
@@ -383,18 +401,10 @@ msgid "Bidirectional synchronization"
 msgstr "Dvosmjerna sinkronizacija"
 
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"Ako je uključeno i ako su interval sinkronizacije i mapa oblaku odabrani, "
-"podaci o periodičnom spremanju (interval, mapa i ime datoteke) će se "
-"kopirati se na ovo računalo s drugog računala na kojem je sinkronizacija "
-"uključena."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
-"Od sada može’ sinkronizirati konfiguraciju iz izbornika u traci zaglavlja"
 
 msgid "Keyboard shortcuts"
 msgstr "Tipkovni prečaci"
@@ -435,6 +445,24 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Zasluge prevoditelja"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Odabir podataka Flatpak aplikacija"
+
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "Ako je uključeno i ako su interval sinkronizacije i mapa oblaku odabrani, "
+#~ "podaci o periodičnom spremanju (interval, mapa i ime datoteke) će se "
+#~ "kopirati se na ovo računalo s drugog računala na kojem je sinkronizacija "
+#~ "uključena."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr ""
+#~ "Od sada može’ sinkronizirati konfiguraciju iz izbornika u traci zaglavlja"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Stavke koje treba uključiti u konfiguracijsku arhivu"

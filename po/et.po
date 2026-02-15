@@ -57,6 +57,24 @@ msgstr "Töölaud"
 msgid "File manager bookmarks"
 msgstr "Failihalduri järjehoidjad"
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Flatpaki rakendused"
 
@@ -66,8 +84,8 @@ msgstr "Paigaldatud Flatpaki rakenduste loend"
 msgid "User data of installed Flatpak apps"
 msgstr "Paigaldatud Flatpaki rakenduste kasutajaandmed"
 
-msgid "Flatpak apps data selection"
-msgstr "Vali Flatpaki rakendused, mille andmed tahad kaasata"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr "Säilita olemasolevad Flatpaki rakendused ja andmed"
@@ -404,18 +422,11 @@ msgstr "Regulaarne sünkroniseerimine"
 msgid "Bidirectional synchronization"
 msgstr "Mõlemasuunaline sünkroniseerimine"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"Kui eelistus on kasutusel, sünkroniseerimisvälp ja pilveteenuse kaust "
-"valitud, siis regulaarse salvestamise teave (välp, kaust ja failinimi) "
-"teisest arvutist kopeeritakse siia arvutisse."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr "Alates nüüdsest saad sa andmed sünkroniseerida menüüst päiseriba kohal"
 
 msgid "Keyboard shortcuts"
 msgstr "Klaviatuuri kiirklahvid"
@@ -458,6 +469,24 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Priit Jõerüüt 2025"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Vali Flatpaki rakendused, mille andmed tahad kaasata"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "Kui eelistus on kasutusel, sünkroniseerimisvälp ja pilveteenuse kaust "
+#~ "valitud, siis regulaarse salvestamise teave (välp, kaust ja failinimi) "
+#~ "teisest arvutist kopeeritakse siia arvutisse."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr ""
+#~ "Alates nüüdsest saad sa andmed sünkroniseerida menüüst päiseriba kohal"
 
 #~ msgid "GTK application settings"
 #~ msgstr "GTK rakenduse seadistused"
