@@ -22,9 +22,10 @@ def create_savedesktop_json():
             "extensions": settings["save-extensions"],
             "bookmarks": settings["save-bookmarks"],
             "desktop": settings["save-desktop-folder"],
-            "custom-dirs": settings["custom-dirs"],
+            "custom-dirs": settings["custom-dirs"] if settings["custom-dirs"] else [],
             "flatpaks": settings["save-installed-flatpaks"],
             "disabled-flatpaks": settings["disabled-flatpak-apps-data"] if settings["save-installed-flatpaks"] else [],
+            "flatpak-data": settings["save-flatpak-data"],
             "keep-flatpaks": settings["keep-flatpaks"]
         }
     }

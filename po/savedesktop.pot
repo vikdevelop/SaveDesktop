@@ -73,7 +73,7 @@ msgid "Custom folders"
 msgstr ""
 
 #: src/gui/custom_dirs_dialog.py
-msgid "Select custom folders that you want to include in the configuration archive."
+msgid "Select custom folders to include in the configuration archive."
 msgstr ""
 
 #: src/gui/custom_dirs_dialog.py

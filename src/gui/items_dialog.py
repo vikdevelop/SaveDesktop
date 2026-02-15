@@ -4,6 +4,7 @@ gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib
 from savedesktop.gui.custom_dirs_dialog import CustomDirsDialog
 from savedesktop.gui.flatpak_apps_dialog import FolderSwitchRow, FlatpakAppsDialog
+from savedesktop.core.synchronization_setup import create_savedesktop_json
 from savedesktop.globals import *
             
 class itemsDialog(Adw.AlertDialog):
@@ -256,6 +257,8 @@ class itemsDialog(Adw.AlertDialog):
             settings["save-backgrounds"] = self.switch_04.get_active()
             settings["save-desktop-folder"] = self.switch_de.get_active()
             settings["save-bookmarks"] = self.switch_gtk.get_active()
+            if settings["periodic-saving"] != "Never" and os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop.json"):
+                create_savedesktop_json()
             if flatpak:
                 settings["save-installed-flatpaks"] = self.switch_05.get_active()
                 settings["save-flatpak-data"] = self.switch_06.get_active()

@@ -312,6 +312,7 @@ class SetDialog(Adw.AlertDialog):
 
     # Action after closing dialog for setting synchronization file
     def setDialog_closed(self, w, response):
+        os.remove(f"{CACHE}/expand_pb_row")
         if response == 'ok':
             thread = Thread(target=self._save_file)
             thread.start()

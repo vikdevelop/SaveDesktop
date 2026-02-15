@@ -11,7 +11,7 @@ class CustomDirsDialog(Adw.AlertDialog):
         self.parent = parent
         self.old_settings = settings["custom-dirs"]
 
-        self.subtitle = f'{_("Select custom folders that you want to include in the configuration archive.")}'
+        self.subtitle = f'{_("Select custom folders to include in the configuration archive.")}'
         if flatpak:
             self.subtitle += f'\n{_("<i>Since you are using Flatpak, pay attention to the path format. <b>If the selected path begins at /run/user/</b>, it would be necessary to grant access to the folder you want to select.</i>")} <a href="https://linuxconfig.org/how-to-manage-flatpaks-privileges-with-flatseal">{_("Learn more")}</a>'
 

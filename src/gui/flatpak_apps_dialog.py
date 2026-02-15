@@ -53,7 +53,7 @@ class FlatpakAppsDialog(Adw.AlertDialog):
         # listbox for showing items
         self.flow_box = Gtk.ListBox.new()
         self.flow_box.set_selection_mode(mode=Gtk.SelectionMode.NONE)
-        self.flow_box.set_size_request(320, -1)
+        self.flow_box.set_size_request(325, -1)
         self.flow_box.add_css_class(css_class='boxed-list')
 
         # set self.flowbox as child for Gtk.ScrolledWindow widget
@@ -96,7 +96,11 @@ class FlatpakAppsDialog(Adw.AlertDialog):
                         with open(flatpak_path, 'r', encoding='utf-8') as f:
                             config.read_file(f)
 
-                        app_name = config.get('Desktop Entry', 'Name')
+                        if _("Translator credits") == "Translator credits":
+                            app_name = config.get('Desktop Entry', 'Name')
+                        else:
+                            app_name = config.get('Desktop Entry', f'Name[{language}]')
+
                         self.folder_row = FolderSwitchRow(app_name)
                         self.folder_row.set_subtitle(name)
                         if name in black_list:
