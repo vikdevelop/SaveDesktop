@@ -57,6 +57,24 @@ msgstr "Skrivbord"
 msgid "File manager bookmarks"
 msgstr "Filhanterare bokmärken"
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Flatpak program"
 
@@ -66,8 +84,8 @@ msgstr "Lista av installerade Flatpak program"
 msgid "User data of installed Flatpak apps"
 msgstr "Användardata av installerade Flatpak program"
 
-msgid "Flatpak apps data selection"
-msgstr "Dataval för Flatpak program"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr "Behåll befintliga Flatpak-appar och data"
@@ -411,20 +429,11 @@ msgstr "Periodisk synkronisering"
 msgid "Bidirectional synchronization"
 msgstr "Dubbelriktad synkronisering"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"Om det är aktiverat och synkroniseringsintervallet och mappen för "
-"molnlagring är vald, kopieras den periodiska sparinformationen (intervall, "
-"mapp och filnamn) från den andra datorn med synkronisering inställd på att "
-"synkronisera till den här datorn."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
-"Från och med nu kan du synkronisera konfigurationen från menyn i huvudfältet"
 
 msgid "Keyboard shortcuts"
 msgstr "Tangentbordsgenvägar"
@@ -466,6 +475,26 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "Luna Jernberg https://github.com/bittin/"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Dataval för Flatpak program"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "Om det är aktiverat och synkroniseringsintervallet och mappen för "
+#~ "molnlagring är vald, kopieras den periodiska sparinformationen "
+#~ "(intervall, mapp och filnamn) från den andra datorn med synkronisering "
+#~ "inställd på att synkronisera till den här datorn."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr ""
+#~ "Från och med nu kan du synkronisera konfigurationen från menyn i "
+#~ "huvudfältet"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Objekt som ska inkluderas i konfigurationsarkivet"

@@ -56,6 +56,24 @@ msgstr "Робочий стіл"
 msgid "File manager bookmarks"
 msgstr ""
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Додатки Flatpak"
 
@@ -65,8 +83,8 @@ msgstr "Список встановлених додатків Flatpak"
 msgid "User data of installed Flatpak apps"
 msgstr "Дані користувача встановлених додатків Flatpak"
 
-msgid "Flatpak apps data selection"
-msgstr "Обирання даних Flatpak додатків"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr ""
@@ -400,20 +418,11 @@ msgstr "Періодична синхронізація"
 msgid "Bidirectional synchronization"
 msgstr "Двостороння синхронізація"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"Якщо увімкнено, і вибрані інтервал синхронізації та папка хмарного диска, "
-"інформація про періодичне збереження (інтервал, папка та ім'я файлу) з "
-"іншого комп'ютера, для якого налаштовано синхронізацію, буде скопійована на "
-"цей комп'ютер."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
-"Відтепер ви можете синхронізувати налаштування з меню на панелі заголовка"
 
 msgid "Keyboard shortcuts"
 msgstr "Клавіатурні скорочення"
@@ -451,6 +460,25 @@ msgid "Translator credits"
 msgstr ""
 "Kefir2105 https://github.com/Kefir2105\n"
 "volkov <volkovissocool@gmail.com>"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Обирання даних Flatpak додатків"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "Якщо увімкнено, і вибрані інтервал синхронізації та папка хмарного диска, "
+#~ "інформація про періодичне збереження (інтервал, папка та ім'я файлу) з "
+#~ "іншого комп'ютера, для якого налаштовано синхронізацію, буде скопійована "
+#~ "на цей комп'ютер."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr ""
+#~ "Відтепер ви можете синхронізувати налаштування з меню на панелі заголовка"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Елементи для включення в архів конфігурації"

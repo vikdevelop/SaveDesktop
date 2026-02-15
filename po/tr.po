@@ -55,6 +55,24 @@ msgstr "Masaüstü"
 msgid "File manager bookmarks"
 msgstr "Dosya yöneticisi imleri"
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Flatpak uygulamaları"
 
@@ -64,8 +82,8 @@ msgstr "Kurulu Flatpak uygulamalarının listesi"
 msgid "User data of installed Flatpak apps"
 msgstr "Kurulu Flatpak uygulamalarının kullanıcı verileri"
 
-msgid "Flatpak apps data selection"
-msgstr "Flatpak uygulamaları veri seçimi"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr "Var olan Flatpak uygulamalarını ve verilerini tut"
@@ -409,18 +427,11 @@ msgstr "Düzenli eşzamanlama"
 msgid "Bidirectional synchronization"
 msgstr "Çift yönlü eşzamanlama"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"Etkinse ve eşzamanlama aralığı ve bulut sürücü klasörü seçilirse, "
-"eşzamanlama ayarlı diğer bilgisayardaki düzenli kayıt bilgileri (aralık, "
-"klasör ve dosya adı) bu bilgisayara kopyalanır."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr "Artık yapılandırmayı başlık çubuğundaki menüden eşzamanlayabilirsiniz"
 
 msgid "Keyboard shortcuts"
 msgstr "Klavye kısayolları"
@@ -466,6 +477,24 @@ msgid "Translator credits"
 msgstr ""
 "Batmanly https://github.com/batmanly\n"
 "Sabri Ünal https://github.com/yakushabb"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Flatpak uygulamaları veri seçimi"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "Etkinse ve eşzamanlama aralığı ve bulut sürücü klasörü seçilirse, "
+#~ "eşzamanlama ayarlı diğer bilgisayardaki düzenli kayıt bilgileri (aralık, "
+#~ "klasör ve dosya adı) bu bilgisayara kopyalanır."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr ""
+#~ "Artık yapılandırmayı başlık çubuğundaki menüden eşzamanlayabilirsiniz"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Yapılandırma arşivine eklenecek ögeler"

@@ -57,6 +57,24 @@ msgstr "Área de trabalho"
 msgid "File manager bookmarks"
 msgstr "Favoritos do gerenciador de arquivos"
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Aplicativos Flatpak"
 
@@ -66,8 +84,8 @@ msgstr "Lista de aplicativos Flatpak instalados"
 msgid "User data of installed Flatpak apps"
 msgstr "Dados do usuário de aplicativos Flatpak instalados"
 
-msgid "Flatpak apps data selection"
-msgstr "Seleção de dados de aplicativos Flatpak"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr "Manter aplicativos Flatpak e dados existentes"
@@ -413,21 +431,11 @@ msgstr "Sincronização periódica"
 msgid "Bidirectional synchronization"
 msgstr "Sincronização bidirecional"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"Se ativado e o intervalo de sincronização e a pasta da unidade na nuvem "
-"estiverem selecionados, as informações de salvamento periódico (intervalo, "
-"pasta e nome do arquivo) do outro computador, com sincronização definida, "
-"serão copiadas para este computador."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr ""
-"De agora em diante, você pode sincronizar a configuração no menu da barra de "
-"cabeçalho"
 
 msgid "Keyboard shortcuts"
 msgstr "Atalhos do teclado"
@@ -474,6 +482,26 @@ msgstr ""
 "Isaac Dias https://hosted.weblate.org/user/IsaacDias/\n"
 "Filipe Motta <luizfilipemotta@gmail.com>\n"
 "Ezilei Correia <ezilei@yahoo.com.br>"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Seleção de dados de aplicativos Flatpak"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "Se ativado e o intervalo de sincronização e a pasta da unidade na nuvem "
+#~ "estiverem selecionados, as informações de salvamento periódico "
+#~ "(intervalo, pasta e nome do arquivo) do outro computador, com "
+#~ "sincronização definida, serão copiadas para este computador."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr ""
+#~ "De agora em diante, você pode sincronizar a configuração no menu da barra "
+#~ "de cabeçalho"
 
 #~ msgid "Items to include in the configuration archive"
 #~ msgstr "Itens a serem incluídos no arquivo de configuração"

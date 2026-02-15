@@ -57,6 +57,24 @@ msgstr "Plocha"
 msgid "File manager bookmarks"
 msgstr "Záložky správce souborů"
 
+msgid "Custom folders"
+msgstr ""
+
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+msgid "Add folder"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid ""
+"<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
+"selected path begins at /run/user/</b>, it would be necessary to grant "
+"access to the folder you want to select.</i>"
+msgstr ""
+
 msgid "Flatpak apps"
 msgstr "Aplikace Flatpak"
 
@@ -66,8 +84,8 @@ msgstr "Seznam nainstalovaných aplikací Flatpak"
 msgid "User data of installed Flatpak apps"
 msgstr "Uživatelská data nainstalovaných aplikací Flatpak"
 
-msgid "Flatpak apps data selection"
-msgstr "Výběr dat aplikací Flatpak"
+msgid "Select Flatpak apps"
+msgstr ""
 
 msgid "Keep existing Flatpak apps and data"
 msgstr "Zachovat existující aplikace Flatpak a jejich data"
@@ -407,19 +425,11 @@ msgstr "Pravidelná synchronizace"
 msgid "Bidirectional synchronization"
 msgstr "Obousměrná synchronizace"
 
-# Translation key: bidirectional_sync_desc
 msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the "
-"periodic saving information (interval, folder, and file name) from the other "
-"computer with synchronization set to synchronize is copied to this computer."
+"Enables full two-way synchronization, allowing this computer to use the same "
+"backup schedule, archive name, and selected configuration items as the other "
+"computer with synchronization set up."
 msgstr ""
-"Pokud je tato funkce povolena a je vybrán interval synchronizace a složka "
-"cloudové jednotky, informace o pravidelném ukládání (interval, složka a "
-"název souboru) z druhého počítače s nastavenou synchronizací se zkopírují do "
-"tohoto počítače."
-
-msgid "From now on, you can sync the config from the menu in the header bar"
-msgstr "Od teď můžete synchronizovat konfiguraci z nabídky v záhlaví"
 
 msgid "Keyboard shortcuts"
 msgstr "Klávesové zkratky"
@@ -461,6 +471,24 @@ msgstr ""
 
 msgid "Translator credits"
 msgstr "vikdevelop https://github.com/vikdevelop"
+
+#~ msgid "Flatpak apps data selection"
+#~ msgstr "Výběr dat aplikací Flatpak"
+
+# Translation key: bidirectional_sync_desc
+#~ msgid ""
+#~ "If enabled, and the sync interval and cloud drive folder are selected, "
+#~ "the periodic saving information (interval, folder, and file name) from "
+#~ "the other computer with synchronization set to synchronize is copied to "
+#~ "this computer."
+#~ msgstr ""
+#~ "Pokud je tato funkce povolena a je vybrán interval synchronizace a složka "
+#~ "cloudové jednotky, informace o pravidelném ukládání (interval, složka a "
+#~ "název souboru) z druhého počítače s nastavenou synchronizací se zkopírují "
+#~ "do tohoto počítače."
+
+#~ msgid "From now on, you can sync the config from the menu in the header bar"
+#~ msgstr "Od teď můžete synchronizovat konfiguraci z nabídky v záhlaví"
 
 #~ msgid "GTK application settings"
 #~ msgstr "Nastavení aplikací GTK"
