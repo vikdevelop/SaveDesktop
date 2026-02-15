@@ -101,7 +101,7 @@ msgid "User data of installed Flatpak apps"
 msgstr ""
 
 #: src/gui/items_dialog.py
-msgid "Flatpak apps selection"
+msgid "Select Flatpak apps"
 msgstr ""
 
 #: src/gui/items_dialog.py

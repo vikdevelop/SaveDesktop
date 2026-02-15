@@ -142,12 +142,12 @@ class itemsDialog(Adw.AlertDialog):
             self.appsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
             self.appsButton.add_css_class("flat")
             self.appsButton.set_valign(Gtk.Align.CENTER)
-            self.appsButton.set_tooltip_text(_("Flatpak apps selection"))
             self.appsButton.connect("clicked", self.manage_data_list)
 
             self.mngmt_row = Adw.ActionRow.new()
-            self.mngmt_row.set_title(_("Flatpak apps selection"))
+            self.mngmt_row.set_title(_("Select Flatpak apps"))
             self.mngmt_row.add_suffix(self.appsButton)
+            self.mngmt_row.set_activatable_widget(self.appsButton)
             self.flatpak_row.add_row(self.mngmt_row)
 
             # Switch and row of option 'Save installed flatpaks'

@@ -46,7 +46,7 @@ class FolderSwitchRow(Adw.ActionRow):
 class FlatpakAppsDialog(Adw.AlertDialog):
     def __init__(self, parent):
         super().__init__()
-        self.set_heading(_("Flatpak apps selection"))
+        self.set_heading(_("Select Flatpak apps"))
 
         self.old_disabled_flatpaks = settings["disabled-flatpak-apps-data"]
 
