@@ -66,6 +66,18 @@
     </screenshots>
           
     <releases>
+       <release version="4.0" date="2026-02-22">
+          <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/4.0</url>
+          <description>
+            <ul>
+              <li>New: Include custom folders in backups (#505)</li>
+              <li>Redesigned Flatpak apps selection: shows app names (not IDs) and backs up selected apps together with their user data</li>
+              <li>New: Sync selected configuration items across PCs to keep archives consistent</li>
+              <li>Updated archive structure with full backward compatibility for older backups</li>
+              <li>Updated translations</li>
+            </ul>
+          </description>
+        </release>
        <release version="3.9" date="2026-01-18">
          <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/3.9</url>
          <description>

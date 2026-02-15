@@ -1,4 +1,4 @@
-import subprocess, re, os
+import subprocess, re, os, json
 from savedesktop.globals import *
 
 # Check if the cloud drive folder uses GVFS or Rclone FS or if it is a Syncthing folder
@@ -11,8 +11,28 @@ def check_fs(folder):
 
 # Create the SaveDesktop.json file in the cloud drive folder, which contains periodic saving filename and interval
 def create_savedesktop_json():
-    with open(f"{settings['periodic-saving-folder']}/SaveDesktop.json", "w") as json:
-        json.write('{\n "periodic-saving-interval": "%s",\n "filename": "%s"\n}' % (settings["periodic-saving"], settings["filename-format"]))
+    output_data = {
+        "periodic-saving-interval": settings["periodic-saving"],
+        "filename": settings["filename-format"],
+        "include": {
+            "icons": settings["save-icons"],
+            "themes": settings["save-themes"],
+            "backgrounds": settings["save-backgrounds"],
+            "fonts": settings["save-fonts"],
+            "extensions": settings["save-extensions"],
+            "bookmarks": settings["save-bookmarks"],
+            "desktop": settings["save-desktop-folder"],
+            "custom-dirs": settings["custom-dirs"] if settings["custom-dirs"] else [],
+            "flatpaks": settings["save-installed-flatpaks"],
+            "disabled-flatpaks": settings["disabled-flatpak-apps-data"] if settings["save-installed-flatpaks"] else [],
+            "flatpak-data": settings["save-flatpak-data"],
+            "keep-flatpaks": settings["keep-flatpaks"]
+        }
+    }
+
+    file_path = f"{settings['periodic-saving-folder']}/SaveDesktop.json"
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(output_data, f, indent=4)
     print("The SaveDesktop.json file has been created or modified (if it already exists).")
 
 # Set up auto-mounting of the cloud drives after logging in to the system

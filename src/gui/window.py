@@ -8,7 +8,7 @@ from pathlib import Path
 from threading import Thread
 from savedesktop.globals import *
 from savedesktop.gui.more_options_dialog import MoreOptionsDialog
-from savedesktop.gui.items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
+from savedesktop.gui.items_dialog import itemsDialog
 from savedesktop.gui.synchronization_dialogs import InitSetupDialog, SetDialog, CloudDialog
 
 # Application window
@@ -368,7 +368,7 @@ class MainWindow(Adw.ApplicationWindow):
             if status == True:
                 GLib.idle_add(self.check_password_dialog)
             else:
-                self.import_config()
+                GLib.idle_add(self.import_config)
 
         # Get path from the dialog
         def open_selected(source, res, data):
@@ -546,7 +546,7 @@ class MainWindow(Adw.ApplicationWindow):
     def _on_items_dialog_response(self, dialog, response, *args):
         if response == "cancel":
             pass
-        else:
+        elif response == "ok":
             print("Importing the configuration is in progress…")
             self.please_wait()
             import_thread = Thread(target=self._call_archive_command)
@@ -569,7 +569,7 @@ class MainWindow(Adw.ApplicationWindow):
             print("Cancelled by user.")
         else:
             GLib.idle_add(self.show_err_msg, err)
-            self._set_default_widgets_state()
+            GLib.idle_add(self._set_default_widgets_state)
 
     # "Please wait" information page
     def please_wait(self):

@@ -3,7 +3,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib
 from savedesktop.gui.window import MainWindow
-from savedesktop.gui.items_dialog import FolderSwitchRow, FlatpakAppsDialog, itemsDialog
+from savedesktop.gui.items_dialog import itemsDialog
 from savedesktop.globals import *
 
 @Gtk.Template(resource_path="/io/github/vikdevelop/SaveDesktop/gui/templates/shortcuts_window.ui")

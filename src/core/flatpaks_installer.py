@@ -30,33 +30,60 @@ if dest_dir:
 
     copy_data = j["copy-data"]
     install_flatpaks = j["install-flatpaks"]
+    disabled_flatpaks = j["disabled-flatpaks"]
     keep_flatpaks = j["keep-flatpaks"]
 
     # Restore Flatpak user data archive
     if copy_data:
+        print("[DEBUG] Copying the Flatpak's user data to ~/.var/app")
         if os.path.exists(f"app"):
-            print("copying the Flatpak apps' user data to the ~/.var/app directory")
+            print("Copying the Flatpak apps' user data to the ~/.var/app directory (backward compatibility mode)")
             os.system(f"cp -au ./app/ ~/.var/")
 
-        if os.path.exists(f"flatpak-apps-data.tgz"):
-            subprocess.run(["tar", "-xzvf", "flatpak-apps-data.tgz", "-C", f"{Path.home()}/.var"])
+        archive_file = "Flatpak_Apps/flatpak-apps-data.tgz" if os.path.exists("Flatpak_Apps/flatpak-apps-data.tgz") else "flatpak-apps-data.tgz"
+
+        if os.path.exists(archive_file):
+            tar_cmd = ["tar", "-xzvf", archive_file, "-C", f"{Path.home()}/.var"]
+            for d_app in disabled_flatpaks:
+                tar_cmd.extend([f"--exclude={d_app}", f"--exclude=app/{d_app}"])
+            subprocess.run(tar_cmd)
 
     # Load Flatpaks from bash scripts
     if install_flatpaks:
-        installed_flatpaks_files = ['installed_flatpaks.sh', 'installed_user_flatpaks.sh']
+        print("[DEBUG] Scanning the Bash scripts...")
+        if os.path.exists("Flatpak_Apps"):
+            installed_flatpaks_files = ['Flatpak_Apps/installed_flatpaks.sh', 'Flatpak_Apps/installed_user_flatpaks.sh']
+        else:
+            installed_flatpaks_files = ['installed_flatpaks.sh', 'installed_user_flatpaks.sh']
+
         desired_flatpaks = {}
         for file in installed_flatpaks_files:
             if os.path.exists(file):
+                print(f"[DEBUG] Reading: {file}")
                 with open(file, 'r') as f:
                     for line in f:
-                        line = line.strip()
-                        if line.startswith('flatpak install'):
+                        if 'flatpak' in line and 'install' in line:
                             parts = line.split()
-                            if len(parts) < 4:
+
+                            app_id = None
+                            for part in parts:
+                                if "." in part and not part.startswith("-"):
+                                    app_id = part
+                                    break
+
+                            if not app_id:
                                 continue
-                            app_id = parts[3]
+
+                            if app_id in disabled_flatpaks:
+                                print(f"[SKIP] Disabled app: {app_id}")
+                                continue
+
                             method = "--user" if "--user" in parts else "--system"
                             desired_flatpaks[app_id] = method
+                            print(f"[DEBUG] Added to the installation queue: {app_id} ({method})")
+
+        if not desired_flatpaks:
+            print("[DEBUG] The installation queue is empty. It couldn't find any valid Flatpaks to install.")
 
         # Get currently installed Flatpaks
         system_flatpak_dir = '/var/lib/flatpak/app'
@@ -75,7 +102,7 @@ if dest_dir:
                     os.system("flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo")
                 subprocess.run(['flatpak', 'install', method, 'flathub', app, '-y'])
             else:
-                print("All Flatpak apps are installed.")
+                print(f"[INFO] {app} is available in the system.")
 
     # Remove Flatpaks, which are not in the list (only if it's allowed by the user)
     if not keep_flatpaks:

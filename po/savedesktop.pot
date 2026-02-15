@@ -68,6 +68,27 @@ msgid "File manager bookmarks"
 msgstr ""
 
 #: src/gui/items_dialog.py
+#: src/gui/custom_dirs_dialog.py
+msgid "Custom folders"
+msgstr ""
+
+#: src/gui/custom_dirs_dialog.py
+msgid "Select custom folders to include in the configuration archive."
+msgstr ""
+
+#: src/gui/custom_dirs_dialog.py
+msgid "Add folder"
+msgstr ""
+
+#: src/gui/custom_dirs_dialog.py
+msgid "Remove"
+msgstr ""
+
+#: src/gui/custom_dirs_dialog.py
+msgid "<i>Since you are using Flatpak, pay attention to the path format. <b>If the selected path begins at /run/user/</b>, it would be necessary to grant access to the folder you want to select.</i>"
+msgstr ""
+
+#: src/gui/items_dialog.py
 msgid "Flatpak apps"
 msgstr ""
 
@@ -80,7 +101,7 @@ msgid "User data of installed Flatpak apps"
 msgstr ""
 
 #: src/gui/items_dialog.py
-msgid "Flatpak apps data selection"
+msgid "Select Flatpak apps"
 msgstr ""
 
 #: src/gui/items_dialog.py
@@ -411,12 +432,7 @@ msgid "Bidirectional synchronization"
 msgstr ""
 
 #: src/gui/synchronization_dialogs.py
-msgid ""
-"If enabled, and the sync interval and cloud drive folder are selected, the periodic saving information (interval, folder, and file name) from the other computer with synchronization set to synchronize is copied to this computer."
-msgstr ""
-
-#: src/gui/window.py
-msgid "From now on, you can sync the config from the menu in the header bar"
+msgid "Enables full two-way synchronization, allowing this computer to use the same backup schedule, archive name, and selected configuration items as the other computer with synchronization set up."
 msgstr ""
 
 #: src/gui/templates/shortcuts_window.ui:36
