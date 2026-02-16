@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-23 18:02+0000\n"
+"PO-Revision-Date: 2026-02-17 16:33+0000\n"
 "Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/pl/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 msgid "Save"
 msgstr "Zapisz"
@@ -63,10 +63,10 @@ msgid "Select custom folders to include in the configuration archive."
 msgstr ""
 
 msgid "Add folder"
-msgstr ""
+msgstr "Dodaj katalog"
 
 msgid "Remove"
-msgstr ""
+msgstr "Usuń"
 
 msgid ""
 "<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
@@ -138,7 +138,7 @@ msgid "Manual saving"
 msgstr "Ręczne zapisywanie"
 
 msgid "Archive encryption"
-msgstr ""
+msgstr "Szyfrowanie archiwów"
 
 # Translation key: archive_encryption_desc
 msgid ""
@@ -328,7 +328,7 @@ msgid "Use Syncthing folder instead"
 msgstr ""
 
 msgid "Almost done!"
-msgstr ""
+msgstr "Wszystko gotowe!"
 
 # Translation key: almost_done_desc
 msgid ""
