@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-23 18:02+0000\n"
-"Last-Translator: \"Quentin B.\" <bihetq@icloud.com>\n"
+"PO-Revision-Date: 2026-02-17 16:33+0000\n"
+"Last-Translator: brochard <brochard@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/fr/>\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 msgid "Save"
 msgstr "Sauvegarder"
@@ -65,7 +65,7 @@ msgid "Add folder"
 msgstr ""
 
 msgid "Remove"
-msgstr ""
+msgstr "Supprimer"
 
 msgid ""
 "<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
@@ -83,7 +83,7 @@ msgid "User data of installed Flatpak apps"
 msgstr "Données utilisateur des applications Flatpak installées"
 
 msgid "Select Flatpak apps"
-msgstr ""
+msgstr "Sélectionner les applications Flatpak"
 
 msgid "Keep existing Flatpak apps and data"
 msgstr ""
@@ -257,7 +257,8 @@ msgid ""
 "<i>{}</i>\n"
 msgstr ""
 "<big><b>Import de la configuration ...</b></big>\n"
-"Import de la configuration à partir de : {}\n"
+"Import de la configuration à partir de :\n"
+"<i>{}</i>\n"
 
 msgid "The configuration has been applied!"
 msgstr "La configuration a été appliquée !"
@@ -333,7 +334,7 @@ msgid ""
 msgstr ""
 
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
@@ -354,10 +355,10 @@ msgid ""
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "Sélectionner"
 
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 msgid "Set up the sync file"
 msgstr "Configurer le fichier de synchronisation"
@@ -369,13 +370,13 @@ msgid "Periodic saving file does not exist."
 msgstr ""
 
 msgid "Create"
-msgstr ""
+msgstr "Créer"
 
 msgid "Please wait …"
 msgstr "Veuillez patienter …"
 
 msgid "Change"
-msgstr ""
+msgstr "Changer"
 
 msgid "Connect to the cloud storage"
 msgstr ""
@@ -398,7 +399,7 @@ msgid "Periodic synchronization"
 msgstr "Synchronisation périodique"
 
 msgid "Bidirectional synchronization"
-msgstr ""
+msgstr "Synchronisation bidirectionnelle"
 
 msgid ""
 "Enables full two-way synchronization, allowing this computer to use the same "
@@ -410,7 +411,7 @@ msgid "Keyboard shortcuts"
 msgstr "Raccourcis clavier"
 
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Ouvrir le wiki de l'application"
 
 msgid "Quit"
 msgstr "Quitter"
