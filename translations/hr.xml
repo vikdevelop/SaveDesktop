@@ -33,4 +33,46 @@ Ako je **Dvosmjerna sinkronizacija** uključena na oba računala:
   <str key="synchronization_files">## Datoteke koje se koriste u sinkronizaciji
 * **Datoteka periodičnog spremanja** – '.sd.zip' arhiva tvoje konfiguracije radne površine, koja se redovito aktualizira.
 * **SaveDesktop.json** – mala pomoćna datoteka koja spremaime datoteke arhive i interval spremanja, koja se koristi tijekom postavljanja sinkronizacije.</str>
+  <str key="flatpak_wiki_title"># Spremanje, uvoz i sinkroniziranje Flatpak aplikacija</str>
+  <str key="flatpak_wiki_intro">Save Desktop omogućuje spremanje, uvoz i sinkroniziranje Flatpak aplikacija zajedno s njihovim korisničkim podacima, kao i ikona, tema, postavki i proširenja.</str>
+  <str key="flatpak_wiki_dest">## Gdje mogu to pronaći?
+
+Opcije vezane uz Flatpak nalaze se u dijaloškom okviru **Odaberi stavke konfiguracije**.
+Može se otvoriti iz izbornika zaglavlja (tri točkice u naslovnoj traci prozora).</str>
+  <str key="flatpak_wiki_sync_mode">### Modus sinkronizacije
+
+U modusu sinkronizacije se Flatpak aplikacije obrađuju **odmah nakon završetka sinkronizacije** (ponovno prijavljivanje nije potrebno).</str>
+  <str key="flatpak_wiki_note">## Važna napomena
+
+Ako je opcija **Zadrži instalirane Flatpak aplikacije i podatke** deaktivirana, a imaš instalirane Flatpak aplikacije koje nisu uključene u uvezenu arhivu, one će se **trajno ukloniti zajedno sa svojim korisničkim podacima**.</str>
+  <str key="flatpak_wiki_options">## Dostupne opcije
+
+### Popis instaliranih Flatpak aplikacija
+
+Sprema i obnavlja popis instaliranih Flatpak aplikacija.
+
+### Korisnički podaci instaliranih Flatpak aplikacija
+
+Omogućuje uključivanje korisničkih podataka odabranih Flatpak aplikacija.
+Klikni gumb **"&gt;"** za biranje aplikacija za koje se trebaju spremiti podaci.
+
+### Zadrži instalirane Flatpak aplikacije i podatke (standardno aktivirano)
+
+Kada je aktivirano, Save Desktop **neće uklanjati Flatpak aplikacije ili njihove podatke koji nisu prisutni u arhivi**.
+
+Kada je deaktivirano, Save Desktop će **ukloniti sve instalirane Flatpak aplikacije koje nisu navedene u uvezenoj arhivi – uključujući njihove korisničke podatke**.
+
+⚠️ **Upozorenje:**
+Deaktiviraj ovu opciju samo ako namjerno želiš da tvoj sustav točno odgovara uvezenoj arhivi. Uklonjene aplikacije i njihovi podaci **se ne mogu obnoviti**.</str>
+  <str key="flatpak_wiki_import_process">## Kako funkcionira uvoz?
+
+Nakon odabira arhive ili mape će se pojaviti pitanje, koje stavke konfiguracije želiš uvesti.
+Klikni **Primijeni** za pokretanje uvoza.
+
+Redoslijed uvoza:
+
+1. Konfiguracija radne površine (ikone, teme, fontovi, proširenja, postavke i sl.)
+2. Flatpak aplikacije i njihovi korisnički podaci (nakon sljedeće prijave)
+
+Instalacija i uklanjanje Flatpak aplikacija počinje **nakon što se ponovo prijaviš u sustav**.</str>
 </root>
