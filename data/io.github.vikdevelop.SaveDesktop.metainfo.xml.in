@@ -74,6 +74,7 @@
               <li>Redesigned Flatpak apps selection: shows app names (not IDs) and backs up selected apps together with their user data</li>
               <li>New: Sync selected configuration items across PCs to keep archives consistent</li>
               <li>Updated archive structure with full backward compatibility for older backups</li>
+              <li>During import, only what is actually in the archive will be displayed in the item selection dialog</li>
               <li>Updated translations</li>
             </ul>
           </description>

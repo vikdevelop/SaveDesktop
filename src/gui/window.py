@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, sys, re, zipfile, random, string, gi, subprocess, locale, shutil
+import os, sys, re, zipfile, random, string, gi, subprocess, locale, shutil, tarfile
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib, Gdk
@@ -537,20 +537,71 @@ class MainWindow(Adw.ApplicationWindow):
 
         self._show_items_dialog()
 
+    # Get items which are available in the configuration archive or folder
+    def _get_archive_items(self):
+        tmp_file_path = f"{CACHE}/workspace/temp_file"
+        if os.path.exists(tmp_file_path):
+            with open(tmp_file_path) as f:
+                password = f.read().strip()
+        else:
+            password = None
+
+        if self.archive_name.endswith(".sd.zip"):
+            if password:
+                result = subprocess.run(
+                    ["7z", "l", "-slt", f"-p{password}", self.archive_name],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+            else:
+                result = subprocess.run(
+                    ["7z", "l", "-slt", self.archive_name],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+
+            paths = []
+            for line in result.stdout.splitlines():
+                if line.startswith("Path = "):
+                    paths.append(line[7:])
+
+        elif self.archive_name.endswith(".sd.tar.gz"):
+            with tarfile.open(self.archive_name, "r:*") as tar:
+                paths = [m.name for m in tar.getmembers()]
+        else:
+            cfg = Path(self.archive_name)
+
+            paths = [
+                str(f.relative_to(cfg))
+                for f in cfg.rglob("*")
+                if f.is_file()
+            ]
+
+        return paths
+
     def _show_items_dialog(self):
-        self.items_dialog = itemsDialog(self)
-        self.items_dialog.choose(self, None, None, None)
-        self.items_dialog.connect("response", self._on_items_dialog_response)
-        self.items_dialog.present(self)
+        self.archive_items = self._get_archive_items()
+        self.items_dialog = itemsDialog(self, self.archive_items)
+        if not self.items_dialog.itemsBox.observe_children().get_n_items() == 0:
+            self.items_dialog.choose(self, None, None, None)
+            self.items_dialog.connect("response", self._on_items_dialog_response)
+            self.items_dialog.present(self)
+        else:
+            self._start_gui()
 
     def _on_items_dialog_response(self, dialog, response, *args):
         if response == "cancel":
             pass
         elif response == "ok":
             print("Importing the configuration is in progress…")
-            self.please_wait()
-            import_thread = Thread(target=self._call_archive_command)
-            import_thread.start()
+            self._start_gui()
+
+    def _start_gui(self):
+        self.please_wait()
+        import_thread = Thread(target=self._call_archive_command)
+        import_thread.start()
 
     def _call_archive_command(self):
         self.archive_proc = subprocess.Popen(

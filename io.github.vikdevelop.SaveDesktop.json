@@ -47,8 +47,8 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/ip7z/7zip.git",
-                    "tag" : "25.01",
-                    "commit" : "5e96a8279489832924056b1fa82f29d5837c9469"
+                    "tag" : "26.00",
+                    "commit" : "839151eaaad24771892afaae6bac690e31e58384"
                 }
             ],
             "x-checker-data" : {
