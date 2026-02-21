@@ -84,6 +84,7 @@ def export_flatpaks(path, output_file, install_type):
                     f.write(f"flatpak install --{install_type} {app} -y\n")
 
 def create_flatpak_list():
+    os.makedirs("Flatpak_Apps", exist_ok=True)
     export_flatpaks('/var/lib/flatpak/app/', 'Flatpak_Apps/installed_flatpaks.sh', 'system')
     export_flatpaks(f'{home}/.local/share/flatpak/app', 'Flatpak_Apps/installed_user_flatpaks.sh', 'user')
     print("[OK] Saving Flatpak app list")
@@ -264,8 +265,6 @@ class Save:
     def __init__(self):
         os.makedirs("General", exist_ok=True)
         os.makedirs("DE", exist_ok=True)
-        os.makedirs("Flatpak_Apps", exist_ok=True)
-        os.makedirs("Custom_Dirs", exist_ok=True)
 
         # General dirs
         for item in GENERAL_ITEMS.values():
@@ -280,6 +279,7 @@ class Save:
 
         # Custom dirs
         for folder in settings["custom-dirs"]:
+            os.makedirs("Custom_Dirs", exist_ok=True)
             short_folder = Path(folder).relative_to(home)
             safe_copytree(folder, f"Custom_Dirs/{short_folder}")
 

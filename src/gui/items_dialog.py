@@ -6,11 +6,13 @@ from savedesktop.gui.custom_dirs_dialog import CustomDirsDialog
 from savedesktop.gui.flatpak_apps_dialog import FolderSwitchRow, FlatpakAppsDialog
 from savedesktop.core.synchronization_setup import create_savedesktop_json
 from savedesktop.globals import *
-            
+
 class itemsDialog(Adw.AlertDialog):
-    def __init__(self, parent):
+    def __init__(self, parent, items_list=None):
         super().__init__()
         self.parent = parent
+        self.items_list = items_list if items_list is not None else []
+        print(self.items_list)
 
         self.set_heading(_("Select configuration items"))
         self.set_body(_("These settings are used for manual and periodic saves, imports, and synchronization."))
@@ -34,7 +36,8 @@ class itemsDialog(Adw.AlertDialog):
         self.icons_row.set_subtitle_lines(3)
         self.icons_row.add_suffix(self.switch_01)
         self.icons_row.set_activatable_widget(self.switch_01)
-        self.itemsBox.append(child=self.icons_row)
+        if self.should_show("icon-themes.tgz", "icon-themes-legacy.tgz"):
+            self.itemsBox.append(child=self.icons_row)
         
         # Switch and row of option 'Save themes'
         self.switch_02 = Gtk.Switch.new()
@@ -49,7 +52,8 @@ class itemsDialog(Adw.AlertDialog):
         self.themes_row.set_subtitle_lines(3)
         self.themes_row.add_suffix(self.switch_02)
         self.themes_row.set_activatable_widget(self.switch_02)
-        self.itemsBox.append(child=self.themes_row)
+        if self.should_show(".themes", "themes"):
+            self.itemsBox.append(child=self.themes_row)
         
         # Switch and row of option 'Save fonts'
         self.switch_03 = Gtk.Switch.new()
@@ -64,7 +68,8 @@ class itemsDialog(Adw.AlertDialog):
         self.fonts_row.set_subtitle_lines(3)
         self.fonts_row.add_suffix(self.switch_03)
         self.fonts_row.set_activatable_widget(self.switch_03)
-        self.itemsBox.append(child=self.fonts_row)
+        if self.should_show("fonts", ".fonts"):
+            self.itemsBox.append(child=self.fonts_row)
         
         # Switch and row of option 'Save backgrounds'
         self.switch_04 = Gtk.Switch.new()
@@ -79,7 +84,8 @@ class itemsDialog(Adw.AlertDialog):
         self.backgrounds_row.set_subtitle_lines(3)
         self.backgrounds_row.add_suffix(self.switch_04)
         self.backgrounds_row.set_activatable_widget(self.switch_04)
-        self.itemsBox.append(child=self.backgrounds_row)
+        if self.should_show("backgrounds"):
+            self.itemsBox.append(child=self.backgrounds_row)
         
         # show extension switch and row if user has installed these environments
         if environment["de_name"] in ["GNOME", "Cinnamon", "COSMIC (Old)", "KDE Plasma"]:
@@ -100,7 +106,8 @@ class itemsDialog(Adw.AlertDialog):
             self.gtk_row.set_subtitle_lines(3)
             self.gtk_row.add_suffix(self.switch_gtk)
             self.gtk_row.set_activatable_widget(self.switch_gtk)
-            self.itemsBox.append(child=self.gtk_row)
+            if self.should_show("gtk-3.0"):
+                self.itemsBox.append(child=self.gtk_row)
 
         # Switch and row of option 'Save Desktop' (~/Desktop)
         self.switch_de = Gtk.Switch.new()
@@ -116,7 +123,8 @@ class itemsDialog(Adw.AlertDialog):
         self.desktop_row.set_title_lines(2)
         self.desktop_row.add_suffix(self.switch_de)
         self.desktop_row.set_activatable_widget(self.switch_de)
-        self.itemsBox.append(child=self.desktop_row)
+        if self.should_show("desktop-folder.tgz"):
+            self.itemsBox.append(child=self.desktop_row)
 
         # Custom directories section
         self.custom_button = Gtk.Button.new_from_icon_name("go-next-symbolic")
@@ -128,9 +136,10 @@ class itemsDialog(Adw.AlertDialog):
         self.custom_row.set_title("Custom folders")
         self.custom_row.add_suffix(self.custom_button)
         self.custom_row.set_activatable_widget(self.custom_button)
-        self.itemsBox.append(child=self.custom_row)
+        if self.should_show("Custom_Dirs"):
+            self.itemsBox.append(child=self.custom_row)
 
-        if flatpak:
+        if flatpak and self.should_show("installed_flatpaks.sh"):
             self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_("Flatpak apps"))
             self.flatpak_row.set_subtitle(f"<a href='https://vikdevelop.github.io/SaveDesktop/wiki/flatpak_apps/{language}'>{_('Learn more')}</a>")
@@ -178,7 +187,6 @@ class itemsDialog(Adw.AlertDialog):
             if settings["save-flatpak-data"]:
                 self.switch_06.set_active(True)
                 self.data_row.add_suffix(self.appsButton)
-            self.flatpak_data_sw_state = settings["save-flatpak-data"]
             self.switch_06.set_valign(align=Gtk.Align.CENTER)
 
             self.switch_07 = Gtk.Switch.new()
@@ -207,7 +215,18 @@ class itemsDialog(Adw.AlertDialog):
         self.add_response('ok', _("Apply"))
         self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
         self.connect('response', self.itemsdialog_closed)
-        
+
+    def should_show(self, *search_terms):
+        if not self.items_list:
+            return True
+
+        for term in search_terms:
+            for item in self.items_list:
+                if term in item:
+                    return True
+
+        return False
+
     def _set_sw05_sensitivity(self, GParamBoolean, switch_05):
         if not self.switch_05.get_active():
             self.switch_06.set_sensitive(False)
@@ -219,7 +238,7 @@ class itemsDialog(Adw.AlertDialog):
             self.switch_07.set_sensitive(True)
 
     def _show_custom_dirs_dialog(self, w):
-        self.CDDialog = CustomDirsDialog(self.parent)
+        self.CDDialog = CustomDirsDialog(self.parent, self.items_list)
         self.CDDialog.choose(self.parent, None, None, None)
         self.CDDialog.present(self.parent)
 
@@ -244,7 +263,8 @@ class itemsDialog(Adw.AlertDialog):
         self.ext_row.set_subtitle_lines(3)
         self.ext_row.add_suffix(self.switch_ext)
         self.ext_row.set_activatable_widget(self.switch_ext)
-        self.itemsBox.append(child=self.ext_row)
+        if self.should_show("cinnamon", "gnome-shell", "plasma"):
+            self.itemsBox.append(child=self.ext_row)
 
     # Action after closing itemsDialog
     def itemsdialog_closed(self, w, response):
@@ -265,8 +285,3 @@ class itemsDialog(Adw.AlertDialog):
                 settings["keep-flatpaks"] = self.switch_07.get_active()
             if hasattr(self, "switch_ext"):
                 settings["save-extensions"] = self.switch_ext.get_active()
-                self.save_ext_switch_state = False
-        elif response == 'cancel':
-            if flatpak:
-                switch_status = self.flatpak_data_sw_state
-                settings["save-flatpak-data"] = switch_status
