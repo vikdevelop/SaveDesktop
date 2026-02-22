@@ -2,6 +2,7 @@ import os, shutil, subprocess, json
 from gi.repository import GLib
 from savedesktop.globals import *
 from pathlib import Path
+from datetime import date
 
 # ------------------------
 # Helpers
@@ -278,10 +279,15 @@ class Save:
                 item["save"]()
 
         # Custom dirs
-        for folder in settings["custom-dirs"]:
+        if settings["enable-custom-dirs"]:
             os.makedirs("Custom_Dirs", exist_ok=True)
-            short_folder = Path(folder).relative_to(home)
-            safe_copytree(folder, f"Custom_Dirs/{short_folder}")
+            for folder in settings["custom-dirs"]:
+                dst = Path("Custom_Dirs") / name
+                i = 2
+                while dst.exists():
+                    dst = Path("Custom_Dirs") / f"{name}_{i}"
+                    i += 1
+                safe_copytree(folder, str(dst))
 
         # DE configuration
         if environment:
@@ -332,9 +338,30 @@ class Import:
                 item["import"]()
 
         # Custom dirs
-        for folder in settings["custom-dirs"]:
-            short_folder = Path(folder).relative_to(home)
-            safe_copytree(f"Custom_Dirs/{short_folder}", folder)
+        if settings["enable-custom-dirs"]:
+            base = Path(download_dir) / f"SaveDesktop/Recovered_Custom_Dirs_{date.today()}"
+            rec_dir = base
+            i = 1
+            while rec_dir.exists():
+                rec_dir = Path(f"{base}_{i:02d}")
+                i += 1
+
+            rec_dir.mkdir(parents=True, exist_ok=True)
+
+            if settings["custom-dirs"]:
+                for folder in settings["custom-dirs"]:
+                    name = Path(folder).expanduser().name
+                    src = Path("Custom_Dirs") / name
+
+                    if src.exists():
+                        try:
+                            safe_copytree(str(src), str(Path(folder).expanduser()))
+                        except Exception:
+                            safe_copytree(str(src), str(rec_dir / name))
+                            print(f"[WARN] The {str(src)} custom directory were saved in: {str(rec_dir)}")
+            else:
+                safe_copytree("Custom_Dirs", str(rec_dir))
+                print(f"[WARN] Custom Dirs were saved in: {str(rec_dir)}")
 
         # DE configuration
         if environment:

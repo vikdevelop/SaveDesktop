@@ -57,6 +57,10 @@
 		  <default>[]</default>
 		  <summary>Selected custom directories</summary>
 		</key>
+	  <key name="enable-custom-dirs" type="b">
+	    <default>false</default>
+	    <summary>Enable/Disable custom directories</summary>
+	  </key>
 		<key name="periodic-saving" type="s">
 		  <choices>
 				<choice value="Never"/>

@@ -12,7 +12,6 @@ class itemsDialog(Adw.AlertDialog):
         super().__init__()
         self.parent = parent
         self.items_list = items_list if items_list is not None else []
-        print(self.items_list)
 
         self.set_heading(_("Select configuration items"))
         self.set_body(_("These settings are used for manual and periodic saves, imports, and synchronization."))
@@ -127,6 +126,11 @@ class itemsDialog(Adw.AlertDialog):
             self.itemsBox.append(child=self.desktop_row)
 
         # Custom directories section
+        self.custom_switch = Gtk.Switch.new()
+        self.custom_switch.set_valign(Gtk.Align.CENTER)
+        if settings["enable-custom-dirs"]:
+            self.custom_switch.set_active(True)
+
         self.custom_button = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.custom_button.add_css_class("flat")
         self.custom_button.set_valign(Gtk.Align.CENTER)
@@ -134,10 +138,13 @@ class itemsDialog(Adw.AlertDialog):
 
         self.custom_row = Adw.ActionRow.new()
         self.custom_row.set_title("Custom folders")
-        self.custom_row.add_suffix(self.custom_button)
-        self.custom_row.set_activatable_widget(self.custom_button)
+        self.custom_row.add_suffix(self.custom_switch)
+        if self.custom_switch.get_active():
+            self.custom_row.add_suffix(self.custom_button)
         if self.should_show("Custom_Dirs"):
             self.itemsBox.append(child=self.custom_row)
+
+        self.custom_switch.connect('notify::active', self._set_show_custom_button)
 
         if flatpak and self.should_show("installed_flatpaks.sh"):
             self.flatpak_row = Adw.ExpanderRow.new()
@@ -227,6 +234,12 @@ class itemsDialog(Adw.AlertDialog):
 
         return False
 
+    def _set_show_custom_button(self, GParamBoolean, custom_switch):
+        if self.custom_switch.get_active():
+            self.custom_row.add_suffix(self.custom_button)
+        else:
+            self.custom_row.remove(self.custom_button)
+
     def _set_sw05_sensitivity(self, GParamBoolean, switch_05):
         if not self.switch_05.get_active():
             self.switch_06.set_sensitive(False)
@@ -238,7 +251,7 @@ class itemsDialog(Adw.AlertDialog):
             self.switch_07.set_sensitive(True)
 
     def _show_custom_dirs_dialog(self, w):
-        self.CDDialog = CustomDirsDialog(self.parent, self.items_list)
+        self.CDDialog = CustomDirsDialog(self.parent)
         self.CDDialog.choose(self.parent, None, None, None)
         self.CDDialog.present(self.parent)
 
@@ -275,6 +288,7 @@ class itemsDialog(Adw.AlertDialog):
             settings["save-fonts"] = self.switch_03.get_active()
             settings["save-backgrounds"] = self.switch_04.get_active()
             settings["save-desktop-folder"] = self.switch_de.get_active()
+            settings["enable-custom-dirs"] = self.custom_switch.get_active()
             if hasattr(self, "switch_gtk"):
                 settings["save-bookmarks"] = self.switch_gtk.get_active()
             if settings["periodic-saving"] != "Never" and os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop.json"):
