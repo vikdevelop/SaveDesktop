@@ -102,10 +102,12 @@ class Syncing:
                 settings["save-bookmarks"] = info["include"]["bookmarks"]
                 settings["save-desktop-folder"] = info["include"]["desktop"]
                 settings["save-installed-flatpaks"] = info["include"]["flatpaks"]
-                settings["disabled-flatpak-apps-data"] = info["include"]["disabled-flatpaks"]
+                if info["include"]["disabled-flatpaks"]:
+                    settings["disabled-flatpak-apps-data"] = info["include"]["disabled-flatpaks"]
                 settings["save-flatpak-data"] = info["include"]["flatpak-data"]
                 settings["keep-flatpaks"] = info["include"]["keep-flatpaks"]
-                self._sanitize_custom_dirs(cd_list=info["include"]["custom-dirs"])
+                if info["include"]["custom-dirs"]:
+                    self._sanitize_custom_dirs(cd_list=info["include"]["custom-dirs"])
             except KeyError: # Backward compatibility for file formats created by older versions of Save Desktop
                 pass
 
