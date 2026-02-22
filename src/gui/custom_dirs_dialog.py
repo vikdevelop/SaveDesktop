@@ -28,12 +28,9 @@ class CustomDirsDialog(Adw.AlertDialog):
 
         if not settings["custom-dirs"] == []:
             self._activate_folders_list()
-
-        # if there are problems loading a folder, an error message is displayed
         try:
             self.load_folders()
-            self.set_initial_switch_state()
-        except Exception as e:
+        except AttributeError:
             self._show_add_button()
 
     def _activate_folders_list(self):
