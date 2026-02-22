@@ -282,6 +282,7 @@ class Save:
         if settings["enable-custom-dirs"]:
             os.makedirs("Custom_Dirs", exist_ok=True)
             for folder in settings["custom-dirs"]:
+                name = Path(folder).name
                 dst = Path("Custom_Dirs") / name
                 i = 2
                 while dst.exists():
@@ -339,15 +340,6 @@ class Import:
 
         # Custom dirs
         if settings["enable-custom-dirs"]:
-            base = Path(download_dir) / f"SaveDesktop/Recovered_Custom_Dirs_{date.today()}"
-            rec_dir = base
-            i = 1
-            while rec_dir.exists():
-                rec_dir = Path(f"{base}_{i:02d}")
-                i += 1
-
-            rec_dir.mkdir(parents=True, exist_ok=True)
-
             if settings["custom-dirs"]:
                 for folder in settings["custom-dirs"]:
                     name = Path(folder).expanduser().name
@@ -357,11 +349,13 @@ class Import:
                         try:
                             safe_copytree(str(src), str(Path(folder).expanduser()))
                         except Exception:
-                            safe_copytree(str(src), str(rec_dir / name))
-                            print(f"[WARN] The {str(src)} custom directory were saved in: {str(rec_dir)}")
+                            self._create_rec_dir()
+                            safe_copytree(str(src), str(self.rec_dir / name))
+                            print(f"[WARN] The {str(src)} custom directory was saved in: {str(self.rec_dir)}")
             else:
-                safe_copytree("Custom_Dirs", str(rec_dir))
-                print(f"[WARN] Custom Dirs were saved in: {str(rec_dir)}")
+                self._create_rec_dir()
+                safe_copytree("Custom_Dirs", str(self.rec_dir))
+                print(f"[WARN] Custom Dirs were saved in: {str(self.rec_dir)}")
 
         # DE configuration
         if environment:
@@ -383,6 +377,16 @@ class Import:
             print(f"[WARN] Unknown DE: {environment_key}")
 
         self.import_dconf()
+
+    def _create_rec_dir(self):
+        base = Path(download_dir) / f"SaveDesktop/Recovered_Custom_Dirs_{date.today()}"
+        self.rec_dir = base
+        i = 1
+        while self.rec_dir.exists():
+            self.rec_dir = Path(f"{base}_{i:02d}")
+            i += 1
+
+        self.rec_dir.mkdir(parents=True, exist_ok=True)
 
     def import_dconf(self):
         if flatpak:
