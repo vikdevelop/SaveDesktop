@@ -75,41 +75,37 @@ class FlatpakAppsDialog(Adw.AlertDialog):
     def load_folders(self):
         path = Path(f"{home}/.var/app")
         black_list = settings.get_strv("disabled-flatpak-apps-data")
+        folders_dict = {f.name: str(f) for f in path.iterdir() if f.is_dir()}
 
-        if path.exists():
-            folders_dict = {f.name: str(f) for f in path.iterdir() if f.is_dir()}
+        for name in folders_dict:
+            sys_path = f"/var/lib/flatpak/app/{name}/current/active/export/share/applications/{name}.desktop"
+            home_path = f"{home}/.local/share/flatpak/app/{name}/current/active/export/share/applications/{name}.desktop"
+            config = configparser.ConfigParser(interpolation=None)
 
-            for name in folders_dict:
-                sys_path = f"/var/lib/flatpak/app/{name}/current/active/export/share/applications/{name}.desktop"
-                home_path = f"{home}/.local/share/flatpak/app/{name}/current/active/export/share/applications/{name}.desktop"
-                config = configparser.ConfigParser(interpolation=None)
+            if os.path.exists(sys_path):
+                flatpak_path = sys_path
+            elif os.path.exists(home_path):
+                flatpak_path = home_path
+            else:
+                flatpak_path = None
 
-                if os.path.exists(sys_path):
-                    flatpak_path = sys_path
-                elif os.path.exists(home_path):
-                    flatpak_path = home_path
-                else:
-                    flatpak_path = None
+            if flatpak_path:
+                try:
+                    with open(flatpak_path, 'r', encoding='utf-8') as f:
+                        config.read_file(f)
 
-                if flatpak_path:
-                    try:
-                        with open(flatpak_path, 'r', encoding='utf-8') as f:
-                            config.read_file(f)
+                    app_name = config.get('Desktop Entry', f'Name[{language}]',
+                                        fallback=config.get('Desktop Entry', 'Name'))
 
-                        app_name = config.get('Desktop Entry', f'Name[{language}]',
-                                            fallback=config.get('Desktop Entry', 'Name'))
-
-                        self.folder_row = FolderSwitchRow(app_name)
-                        self.folder_row.set_subtitle(name)
-                        if name in black_list:
-                            self.folder_row.switch.set_active(False)
-                        self.flow_box.append(self.folder_row)
-                    except (configparser.Error, UnicodeDecodeError, IOError):
-                        print(f"Error while reading: {name}")
-                else:
-                    print(f"Desktop file doesn't exist for {name}.")
-        else:
-            raise FileNotFoundError(f"{home}/.var/app doesn't exist!")
+                    self.folder_row = FolderSwitchRow(app_name)
+                    self.folder_row.set_subtitle(name)
+                    if name in black_list:
+                        self.folder_row.switch.set_active(False)
+                    self.flow_box.append(self.folder_row)
+                except (configparser.Error, UnicodeDecodeError, IOError):
+                    print(f"Error while reading: {name}")
+            else:
+                print(f"Desktop file doesn't exist for {name}.")
 
     # if user clicks on the cancel button, the settings will not saved
     def apply_settings(self, w, response):

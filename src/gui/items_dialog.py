@@ -2,6 +2,7 @@ import gi, sys, os
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib
+from pathlib import Path
 from savedesktop.gui.custom_dirs_dialog import CustomDirsDialog
 from savedesktop.gui.flatpak_apps_dialog import FolderSwitchRow, FlatpakAppsDialog
 from savedesktop.core.synchronization_setup import create_savedesktop_json
@@ -155,16 +156,21 @@ class itemsDialog(Adw.AlertDialog):
             self.flatpak_row.set_subtitle_lines(3)
             self.itemsBox.append(child=self.flatpak_row)
             
-            self.appsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
-            self.appsButton.add_css_class("flat")
-            self.appsButton.set_valign(Gtk.Align.CENTER)
-            self.appsButton.connect("clicked", self.manage_data_list)
+            # If it's available only one folder in the dir below, the row will not be displayed
+            path = Path(f"{home}/.var/app")
+            folders_dict = {f.name: str(f) for f in path.iterdir() if f.is_dir()}
 
-            self.mngmt_row = Adw.ActionRow.new()
-            self.mngmt_row.set_title(_("Select Flatpak apps"))
-            self.mngmt_row.add_suffix(self.appsButton)
-            self.mngmt_row.set_activatable_widget(self.appsButton)
-            self.flatpak_row.add_row(self.mngmt_row)
+            if len(folders_dict) > 1:
+                self.appsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
+                self.appsButton.add_css_class("flat")
+                self.appsButton.set_valign(Gtk.Align.CENTER)
+                self.appsButton.connect("clicked", self.manage_data_list)
+
+                self.mngmt_row = Adw.ActionRow.new()
+                self.mngmt_row.set_title(_("Select Flatpak apps"))
+                self.mngmt_row.add_suffix(self.appsButton)
+                self.mngmt_row.set_activatable_widget(self.appsButton)
+                self.flatpak_row.add_row(self.mngmt_row)
 
             # Switch and row of option 'Save installed flatpaks'
             self.switch_05 = Gtk.Switch.new()
@@ -193,7 +199,6 @@ class itemsDialog(Adw.AlertDialog):
             
             if settings["save-flatpak-data"]:
                 self.switch_06.set_active(True)
-                self.data_row.add_suffix(self.appsButton)
             self.switch_06.set_valign(align=Gtk.Align.CENTER)
 
             self.switch_07 = Gtk.Switch.new()
