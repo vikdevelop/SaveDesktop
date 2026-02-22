@@ -137,7 +137,7 @@ class itemsDialog(Adw.AlertDialog):
         self.custom_button.connect("clicked", self._show_custom_dirs_dialog)
 
         self.custom_row = Adw.ActionRow.new()
-        self.custom_row.set_title("Custom folders")
+        self.custom_row.set_title(_("Custom folders"))
         self.custom_row.add_suffix(self.custom_switch)
         if self.custom_switch.get_active():
             self.custom_row.add_suffix(self.custom_button)

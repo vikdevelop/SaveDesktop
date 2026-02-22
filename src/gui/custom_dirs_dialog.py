@@ -28,10 +28,10 @@ class CustomDirsDialog(Adw.AlertDialog):
 
         if not settings["custom-dirs"] == []:
             self._activate_folders_list()
-        try:
+
+        if settings["custom-dirs"]:
             self.load_folders()
-        except AttributeError:
-            self._show_add_button()
+        self._show_add_button()
 
     def _activate_folders_list(self):
         # listbox for showing items
