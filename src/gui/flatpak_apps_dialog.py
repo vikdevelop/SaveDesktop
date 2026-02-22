@@ -96,10 +96,8 @@ class FlatpakAppsDialog(Adw.AlertDialog):
                         with open(flatpak_path, 'r', encoding='utf-8') as f:
                             config.read_file(f)
 
-                        if _("Translator credits") == "Translator credits":
-                            app_name = config.get('Desktop Entry', 'Name')
-                        else:
-                            app_name = config.get('Desktop Entry', f'Name[{language}]')
+                        app_name = config.get('Desktop Entry', f'Name[{language}]',
+                                            fallback=config.get('Desktop Entry', 'Name'))
 
                         self.folder_row = FolderSwitchRow(app_name)
                         self.folder_row.set_subtitle(name)
