@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+  <str key="synchronization_between_computers_title"># Sinkronisasi antar komputer dalam jaringan</str>
+  <str key="synchronization_intro">Selain menyimpan konfigurasi dan mengimpornya, Save Desktop juga memungkinkan Anda menyinkronkannya antar komputer di jaringan menggunakan folder cloud bersama atau folder Syncthing bersama.</str>
+  <str key="set_up_first_pc">## Pengaturan di Komputer Pertama
+1. Buka halaman **Sinkronisasi** di aplikasi Save Desktop.
+2. Klik **"Siapkan berkas sinkronisasi."**
+3. Wizard pengaturan cepat akan muncul:
+   * Jika Anda menggunakan GNOME, Cinnamon, Budgie, atau COSMIC versi lama, metode **Akun Online GNOME** digunakan.
+   * Untuk KDE Plasma atau desktop lainnya, beralih ke **Rclone** (Anda hanya perlu menyalin perintah dan menempelkannya ke terminal).
+   * Sebagai alternatif, Anda dapat menggunakan **Syncthing** dengan mengklik **"Gunakan folder Syncthing sebagai gantinya"** dan memilih folder yang disinkronkan.
+4. Setelah menyelesaikan wizard, dialog **"Siapkan berkas sinkronisasi"** akan terbuka:
+   * Sebuah **berkas penyimpanan berkala** (arsip konfigurasi desktop Anda) akan mulai dibuat di dalam folder yang dipilih.
+   * Anda dapat mengubah interval atau nama berkas menggunakan tombol **"Ubah"**.
+5. Klik **"Terapkan"**:
+   * Berkas kedua, `SaveDesktop.json`, dibuat di folder yang sama. Berkas ini berisi nama berkas sinkronisasi dan interval penyimpanan.
+   * Anda akan diminta untuk **keluar** dari sesi agar sinkronisasi dapat sepenuhnya aktif.</str>
+  <str key="set_up_second_pc">## Menghubungkan di Komputer Lain
+1. Di komputer lain, buka halaman **Sinkronisasi** lagi.
+2. Klik **"Hubungkan ke penyimpanan cloud."**
+3. Wizard yang sama akan muncul – pilih folder yang disinkronkan melalui GNOME OA, Rclone, atau Syncthing.
+4. Setelah wizard:
+   * Dialog **"Hubungkan ke penyimpanan cloud"** terbuka.
+ * Pilih **interval sinkronisasi** dan aktifkan atau nonaktifkan **Sinkronisasi dua arah**.
+5. Klik **"Terapkan"**:
+   * Anda akan diminta untuk **keluar**, atau (jika menggunakan sinkronisasi manual) diberitahu bahwa Anda dapat menyinkronkan dari menu header aplikasi.
+ * Setelah masuk kembali, Save Desktop terhubung ke folder bersama dan menyinkronkan konfigurasi Anda secara otomatis, dengan notifikasi di awal dan akhir.
+</str>
+  <str key="bidirectional_sync">### Sinkronisasi Dua Arah
+Jika **Sinkronisasi dua arah** diaktifkan di kedua komputer:
+* Save Desktop menyalin pengaturan sinkronisasi (seperti interval dan nama berkas) dari satu mesin ke mesin lainnya,
+* Ini menjaga sistem Anda tetap tersinkronisasi tanpa perlu mengonfigurasi masing-masing secara manual.</str>
+  <str key="synchronization_files">## Berkas yang Digunakan dalam Sinkronisasi
+* **Berkas penyimpanan berkala** – arsip `.sd.zip` dari konfigurasi desktop Anda, diperbarui secara berkala.
+* **SaveDesktop.json** – berkas pembantu kecil yang menyimpan nama berkas arsip dan interval penyimpanan, digunakan selama pengaturan sinkronisasi.</str>
+  <str key="flatpak_wiki_title"># Menyimpan, mengimpor, dan menyinkronkan aplikasi Flatpak</str>
+  <str key="flatpak_wiki_intro">Save Desktop memungkinkan Anda menyimpan, mengimpor, dan menyinkronkan aplikasi Flatpak beserta data penggunanya, selain ikon, tema, pengaturan, dan ekstensi.</str>
+  <str key="flatpak_wiki_dest">## Di mana saya dapat menemukannya?
+
+Opsi terkait Flatpak terletak di dialog **Pilih item konfigurasi**.
+Anda dapat membukanya dari menu header (tiga titik di bilah judul jendela).</str>
+  <str key="flatpak_wiki_options">## Opsi yang tersedia
+
+### Daftar aplikasi Flatpak yang terinstal
+
+Menyimpan dan memulihkan daftar aplikasi Flatpak yang terinstal.
+
+### Data pengguna aplikasi Flatpak yang terinstal
+
+Memungkinkan Anda menyertakan data pengguna dari aplikasi Flatpak yang dipilih.
+Klik tombol **"&gt;"** untuk memilih aplikasi mana yang datanya harus disimpan.
+
+### Pertahankan aplikasi dan data Flatpak yang terinstal (diaktifkan secara default)
+
+Saat diaktifkan, Save Desktop **TIDAK akan menghapus aplikasi Flatpak atau datanya yang tidak ada dalam arsip**.
+
+Saat dinonaktifkan, Save Desktop akan **menghapus aplikasi Flatpak yang terinstal yang tidak tercantum dalam arsip yang diimpor — termasuk data penggunanya**.
+
+⚠️ **Peringatan:**
+Nonaktifkan opsi ini hanya jika Anda sengaja ingin sistem Anda persis sesuai dengan arsip yang diimpor. Aplikasi yang dihapus beserta datanya **tidak dapat dipulihkan**.</str>
+  <str key="flatpak_wiki_import_process">## Bagaimana cara impor bekerja?
+
+Setelah memilih arsip atau folder, Anda akan ditanya item konfigurasi mana yang harus diimpor.
+Klik **Terapkan** untuk memulai proses impor.
+
+Urutan impor:
+
+1. Konfigurasi desktop (ikon, tema, font, ekstensi, pengaturan, dll.)
+2. Aplikasi Flatpak dan data penggunanya (setelah login berikutnya)
+
+Instalasi dan penghapusan Flatpak dimulai **setelah Anda masuk kembali ke sistem**.</str>
+  <str key="flatpak_wiki_sync_mode">### Mode sinkronisasi
+
+Dalam mode sinkronisasi, aplikasi Flatpak diproses **segera setelah sinkronisasi selesai** (tidak perlu masuk ulang).</str>
+  <str key="flatpak_wiki_note">## Catatan penting
+
+Jika **Pertahankan aplikasi dan data Flatpak yang terinstal** dinonaktifkan dan Anda memiliki aplikasi Flatpak yang terinstal yang tidak termasuk dalam arsip yang diimpor, aplikasi tersebut akan **dihapus secara permanen beserta data penggunanya**.</str>
+</root>
