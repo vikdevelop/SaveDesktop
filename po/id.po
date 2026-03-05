@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2026-03-05 07:33+0000\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/id/>\n"
 "Language: id\n"
@@ -14,24 +14,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 msgid "Save"
 msgstr "Simpan"
 
 msgid "Save the current configuration"
-msgstr "Menyimpan konfigurasi saat ini"
+msgstr "Simpan konfigurasi saat ini"
 
 msgid "Set the file name"
-msgstr "Tetapkan nama file"
+msgstr "Tetapkan nama berkas"
 
 msgid "Select configuration items"
-msgstr ""
+msgstr "Pilih item konfigurasi"
 
 msgid ""
 "These settings are used for manual and periodic saves, imports, and "
 "synchronization."
 msgstr ""
+"Pengaturan ini digunakan untuk penyimpanan manual dan berkala, impor, dan "
+"sinkronisasi."
 
 msgid "Icons"
 msgstr "Ikon"
@@ -47,64 +49,67 @@ msgid "Backgrounds"
 msgstr "Latar Belakang"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Ekstensi"
 
 msgid "Desktop"
-msgstr ""
+msgstr "Desktop"
 
 msgid "File manager bookmarks"
-msgstr ""
+msgstr "Bookmark manajer berkas"
 
 msgid "Custom folders"
-msgstr ""
+msgstr "Folder kustom"
 
 msgid "Select custom folders to include in the configuration archive."
-msgstr ""
+msgstr "Pilih folder kustom untuk disertakan dalam arsip konfigurasi."
 
 msgid "Add folder"
-msgstr ""
+msgstr "Tambah folder"
 
 msgid "Remove"
-msgstr ""
+msgstr "Hapus"
 
 msgid ""
 "<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
 "selected path begins at /run/user/</b>, it would be necessary to grant "
 "access to the folder you want to select.</i>"
 msgstr ""
+"<i>Karena Anda menggunakan Flatpak, perhatikan format jalur. <b>Jika jalur "
+"yang dipilih dimulai dari /run/user/</b>, Anda perlu memberikan akses ke "
+"folder yang ingin dipilih.</i>"
 
 msgid "Flatpak apps"
-msgstr "Aplikasi flatpak"
+msgstr "Aplikasi Flatpak"
 
 msgid "List of installed Flatpak apps"
-msgstr ""
+msgstr "Daftar aplikasi Flatpak yang terinstal"
 
 msgid "User data of installed Flatpak apps"
-msgstr ""
+msgstr "Data pengguna aplikasi Flatpak yang terinstal"
 
 msgid "Select Flatpak apps"
-msgstr ""
+msgstr "Pilih aplikasi Flatpak"
 
 msgid "Keep existing Flatpak apps and data"
-msgstr ""
+msgstr "Pertahankan aplikasi dan data Flatpak yang ada"
 
 msgid "More options"
-msgstr ""
+msgstr "Opsi lainnya"
 
 msgid "Periodic saving"
-msgstr "Simpan berkala"
+msgstr "Penyimpanan berkala"
 
 msgid "Changes will only take effect after the next login"
 msgstr "Perubahan hanya akan berlaku setelah login berikutnya"
 
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 msgid "Never"
-msgstr "Tidak Pernah"
+msgstr "Tidak pernah"
 
 msgid "Daily"
-msgstr "Setiap hari"
+msgstr "Harian"
 
 msgid "Weekly"
 msgstr "Mingguan"
@@ -119,25 +124,25 @@ msgid "Folder for periodic saving"
 msgstr "Folder untuk penyimpanan berkala"
 
 msgid "Choose custom folder for periodic saving"
-msgstr "Pilih folder khusus untuk penyimpanan berkala"
+msgstr "Pilih folder kustom untuk penyimpanan berkala"
 
 msgid "Choose another folder"
 msgstr "Pilih folder lain"
 
 msgid "File name format"
-msgstr "Format nama file"
+msgstr "Format nama berkas"
 
 msgid "Reset to default"
 msgstr "Setel ulang ke default"
 
 msgid "Password for encryption"
-msgstr ""
+msgstr "Kata sandi untuk enkripsi"
 
 msgid "Manual saving"
-msgstr ""
+msgstr "Penyimpanan manual"
 
 msgid "Archive encryption"
-msgstr ""
+msgstr "Enkripsi arsip"
 
 # Translation key: archive_encryption_desc
 msgid ""
@@ -145,12 +150,15 @@ msgid ""
 "password. This is useful when saving the configuration to portable media for "
 "better security of your data."
 msgstr ""
+"Saat menyimpan konfigurasi secara manual, Anda akan diminta membuat kata "
+"sandi. Ini berguna saat menyimpan konfigurasi ke media portabel untuk "
+"keamanan data yang lebih baik."
 
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Simpan konfigurasi tanpa membuat arsip"
 
 msgid "Create new password"
-msgstr ""
+msgstr "Buat kata sandi baru"
 
 # Translation key: create_pwd_desc
 msgid ""
@@ -158,15 +166,18 @@ msgid ""
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
+"Silakan buat kata sandi baru untuk arsip Anda. Kriteria mencakup panjang "
+"minimal 12 karakter, satu huruf kapital, satu huruf kecil, dan satu karakter "
+"khusus."
 
 msgid "Generate Password"
-msgstr ""
+msgstr "Buat Kata Sandi"
 
 msgid "Password"
-msgstr ""
+msgstr "Kata Sandi"
 
 msgid "Unlock the archive with a password"
-msgstr ""
+msgstr "Buka kunci arsip dengan kata sandi"
 
 # Translation key: check_pwd_desc
 msgid ""
@@ -174,11 +185,15 @@ msgid ""
 "you have forgotten it, you will not be able to unzip the archive and start "
 "importing your configuration."
 msgstr ""
+"Masukkan kata sandi di bawah untuk membuka kunci arsip dengan konfigurasi "
+"Anda. Jika Anda lupa, Anda tidak akan dapat membuka ritsleting arsip dan "
+"memulai impor konfigurasi."
 
 # Translation key: enter_password_title
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Masukkan kata sandi untuk membuka kunci arsip guna menyinkronkan konfigurasi"
 
 # Translation key: enter_password_desc
 msgid ""
@@ -186,12 +201,15 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
+"Arsip terenkripsi telah dipilih untuk sinkronisasi menggunakan aplikasi Save "
+"Desktop. Masukkan kata sandi di bawah untuk membukanya dan memulai "
+"sinkronisasi."
 
 msgid "Remember Password"
-msgstr ""
+msgstr "Ingat Kata Sandi"
 
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr ""
+msgstr "Kata sandi tidak dimasukkan, atau salah. Tidak dapat melanjutkan."
 
 # Translation key: saving_config_status
 msgid ""
@@ -199,12 +217,12 @@ msgid ""
 "The configuration of your desktop environment will be saved in:\n"
 " <i>{}/{}.sd.tar.gz</i>\n"
 msgstr ""
-"<big><b>Saving configuration ...</b></big>\n"
-"The configuration of your desktop environment will be saved in:\n"
+"<big><b>Menyimpan konfigurasi …</b></big>\n"
+"Konfigurasi lingkungan desktop Anda akan disimpan di:\n"
 " <i>{}/{}.sd.tar.gz</i>\n"
 
 msgid "Configuration has been saved!"
-msgstr "Konfigurasi telah tersimpan!"
+msgstr "Konfigurasi telah disimpan!"
 
 # Translation key: config_saved_desc
 msgid ""
@@ -212,27 +230,30 @@ msgid ""
 "You can now view the archive with the configuration of your desktop "
 "environment, or return to the previous page.\n"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"Anda sekarang dapat melihat arsip dengan konfigurasi lingkungan desktop "
+"Anda, atau kembali ke halaman sebelumnya.\n"
 
 msgid "Open the folder"
-msgstr "Membuka folder"
+msgstr "Buka folder"
 
 msgid "Import"
 msgstr "Impor"
 
 msgid "Import saved configuration"
-msgstr "Mengimpor konfigurasi yang tersimpan"
+msgstr "Impor konfigurasi yang tersimpan"
 
 msgid "Import from file"
-msgstr "Impor dari file"
+msgstr "Impor dari berkas"
 
 msgid "Import from folder"
-msgstr ""
+msgstr "Impor dari folder"
 
 msgid "Cancel"
 msgstr "Batal"
 
 msgid "Save Desktop files"
-msgstr "SimpanFile desktop"
+msgstr "Berkas Save Desktop"
 
 # Translation key: importing_config_status
 msgid ""
@@ -240,11 +261,12 @@ msgid ""
 "Importing configuration from:\n"
 "<i>{}</i>\n"
 msgstr ""
-"<big><b>Importing configuration ...</b></big>\n"
-"Importing configuration from: {}\n"
+"<big><b>Mengimpor konfigurasi …</b></big>\n"
+"Mengimpor konfigurasi dari:\n"
+"<i>{}</i>\n"
 
 msgid "The configuration has been applied!"
-msgstr "Konfigurasi ini telah diterapkan!"
+msgstr "Konfigurasi telah diterapkan!"
 
 msgid ""
 "<big><b>{}</b></big>\n"
@@ -254,15 +276,21 @@ msgid ""
 "<i>If your archive contains Flatpak apps, they will start installing after "
 "the next login.</i>"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"Anda dapat keluar dari sistem agar perubahan diterapkan, atau kembali ke "
+"halaman sebelumnya dan keluar nanti.\n"
+"\n"
+"<i>Jika arsip Anda berisi aplikasi Flatpak, aplikasi tersebut akan mulai "
+"diinstal setelah login berikutnya.</i>"
 
 msgid "Back to previous page"
-msgstr ""
+msgstr "Kembali ke halaman sebelumnya"
 
 msgid "Log Out"
-msgstr "Keluar Sesi"
+msgstr "Keluar"
 
 msgid "An error occurred"
-msgstr ""
+msgstr "Terjadi kesalahan"
 
 msgid "Apply"
 msgstr "Terapkan"
@@ -275,32 +303,38 @@ msgid ""
 "Sync your desktop environment configuration with other computers in the "
 "network."
 msgstr ""
-"Menyinkronkan konfigurasi lingkungan desktop Anda dengan komputer lain dalam "
+"Sinkronkan konfigurasi lingkungan desktop Anda dengan komputer lain di "
 "jaringan."
 
 msgid "Initial synchronization setup"
-msgstr ""
+msgstr "Pengaturan sinkronisasi awal"
 
 msgid "1. Open the system settings"
-msgstr ""
+msgstr "1. Buka pengaturan sistem"
 
 msgid "2. Go to the Online Accounts section"
-msgstr ""
+msgstr "2. Pergi ke bagian Akun Online"
 
 # Translation key: gnome_oa_section_desc
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
+"Di bagian ini pilih layanan cloud yang Anda inginkan, seperti Google, "
+"Microsoft 365, atau Nextcloud."
 
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
+"3. Klik tombol Berikutnya dan pilih folder cloud drive yang telah dibuat"
 
 # Translation key: gnome_oa_chooser_desc
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
+"Folder cloud drive yang dibuat dapat ditemukan di panel samping dialog "
+"pemilih berkas, dalam bentuk ini: [username@service.com]"
+"(mailto:username@service.com)."
 
 # Translation key: rclone_intro_desc
 msgid ""
@@ -308,6 +342,9 @@ msgid ""
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
+"Agar sinkronisasi berfungsi dengan baik, Anda perlu memiliki folder yang "
+"disinkronkan dengan layanan cloud Anda menggunakan Rclone.\n"
+"<b>Mulailah dengan memilih layanan cloud drive yang Anda gunakan.</b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
@@ -315,54 +352,61 @@ msgid ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
+"Sekarang, salin perintah untuk menyiapkan Rclone menggunakan tombol samping "
+"dan buka aplikasi terminal menggunakan pintasan keyboard Ctrl+Alt+T atau "
+"temukan di menu aplikasi."
 
 msgid "Copy"
-msgstr ""
+msgstr "Salin"
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
+"Setelah selesai menyiapkan Rclone menggunakan perintah yang diberikan, klik "
+"tombol \"Terapkan\""
 
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Gunakan folder Syncthing sebagai gantinya"
 
 msgid "Almost done!"
-msgstr ""
+msgstr "Hampir selesai!"
 
 # Translation key: almost_done_desc
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
+"Anda telah membuat folder cloud drive! Klik tombol Berikutnya untuk "
+"menyelesaikan pengaturan."
 
 msgid "Select"
-msgstr ""
+msgstr "Pilih"
 
 msgid "Next"
-msgstr ""
+msgstr "Berikutnya"
 
 msgid "Set up the sync file"
-msgstr "Atur file sinkronisasi"
+msgstr "Siapkan berkas sinkronisasi"
 
 msgid "Periodic saving file"
-msgstr ""
+msgstr "Berkas penyimpanan berkala"
 
 msgid "Periodic saving file does not exist."
-msgstr ""
+msgstr "Berkas penyimpanan berkala tidak ada."
 
 msgid "Create"
-msgstr ""
+msgstr "Buat"
 
 msgid "Please wait …"
-msgstr "Harap tunggu…"
+msgstr "Harap tunggu …"
 
 msgid "Change"
-msgstr ""
+msgstr "Ubah"
 
 msgid "Connect to the cloud storage"
-msgstr ""
+msgstr "Hubungkan ke penyimpanan cloud"
 
 # Translation key: connect_cloud_storage_desc
 msgid ""
@@ -371,33 +415,41 @@ msgid ""
 "computer, select the folder that you have synced with your cloud storage and "
 "also have saved the same periodic saving file."
 msgstr ""
+"Di komputer lain, buka aplikasi Save Desktop, dan di halaman ini, klik "
+"tombol \"Siapkan berkas sinkronisasi\" dan lakukan pengaturan yang "
+"diperlukan. Di komputer ini, pilih folder yang telah Anda sinkronkan dengan "
+"penyimpanan cloud Anda dan juga telah menyimpan berkas penyimpanan berkala "
+"yang sama."
 
 msgid "Select the cloud drive folder"
-msgstr ""
+msgstr "Pilih folder cloud drive"
 
 msgid "You didn't select the cloud drive folder!"
-msgstr ""
+msgstr "Anda tidak memilih folder cloud drive!"
 
 msgid "Periodic synchronization"
 msgstr "Sinkronisasi berkala"
 
 msgid "Bidirectional synchronization"
-msgstr ""
+msgstr "Sinkronisasi dua arah"
 
 msgid ""
 "Enables full two-way synchronization, allowing this computer to use the same "
 "backup schedule, archive name, and selected configuration items as the other "
 "computer with synchronization set up."
 msgstr ""
+"Mengaktifkan sinkronisasi dua arah penuh, memungkinkan komputer ini "
+"menggunakan jadwal pencadangan, nama arsip, dan item konfigurasi yang "
+"dipilih yang sama seperti komputer lain yang telah diatur sinkronisasinya."
 
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Pintasan keyboard"
 
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Buka wiki aplikasi"
 
 msgid "Quit"
-msgstr ""
+msgstr "Keluar"
 
 msgid "About app"
 msgstr "Tentang aplikasi"
@@ -407,11 +459,12 @@ msgid ""
 "<big><b>You have an unsupported environment installed.</b></big> \n"
 "Please use one of these environments: {}."
 msgstr ""
-"<big><b>Anda telah menginstal lingkungan yang tidak didukung.</b></big> \n"
+"<big><b>Anda memiliki lingkungan yang tidak didukung yang terinstal.</b></"
+"big> \n"
 "Silakan gunakan salah satu lingkungan berikut: {}."
 
 msgid "Save your desktop configuration"
-msgstr "Simpan konfigurasi lingkungan desktop Anda saat ini"
+msgstr "Simpan konfigurasi desktop Anda"
 
 msgid ""
 "Save Desktop helps you back up, restore, and synchronize your entire desktop "
@@ -421,9 +474,16 @@ msgid ""
 "keep your setup consistent across devices with automatic periodic saves and "
 "synchronization."
 msgstr ""
+"Save Desktop membantu Anda mencadangkan, memulihkan, dan menyinkronkan "
+"seluruh lingkungan desktop dengan mudah. Aplikasi ini menyimpan dan "
+"mengimpor tema, ikon, font, wallpaper, ekstensi, folder desktop, aplikasi "
+"Flatpak beserta datanya, serta pengaturan desktop lainnya — semuanya dalam "
+"satu arsip. Pilih apa yang ingin disertakan dan jaga konsistensi pengaturan "
+"Anda di berbagai perangkat dengan penyimpanan berkala dan sinkronisasi "
+"otomatis."
 
 msgid "Translator credits"
-msgstr "Penerjemah github-tautan"
+msgstr "Kredit penerjemah"
 
 #~ msgid "From now on, you can sync the config from the menu in the header bar"
 #~ msgstr ""
