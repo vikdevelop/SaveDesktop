@@ -46,23 +46,25 @@
         }
     </style>
     <!-- JS for redirecting to the correct wiki page (if the user enters an incorrect URL) -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var currentUrl = window.location.href;
-            if (currentUrl.includes("/wiki/synchronization/")) {
-                fetch(currentUrl, { method: 'HEAD' })
-                    .then(response => {
-                        if (response.status === 404) {
-                            var urlParts = currentUrl.split("/");
-                            urlParts[urlParts.length - 1] = 'en'; // Replace with 'en'
-                            var newUrl = urlParts.join("/");
-                            window.location.href = newUrl;
-                        }
-                    })
-                    .catch(error => console.error('Error checking URL:', error));
-            }
-        });
-    </script>
+    
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var currentUrl = window.location.href;
+        if (currentUrl.includes("/wiki/")) {
+            fetch(currentUrl, { method: 'HEAD' })
+                .then(response => {
+                    if (response.status === 404) {
+                        var urlParts = currentUrl.split("/");
+                        urlParts[urlParts.length - 1] = 'en'; // Replace with 'en'
+                        var newUrl = urlParts.join("/");
+                        window.location.href = newUrl;
+                    }
+                })
+                .catch(error => console.error('Error checking URL:', error));
+        }
+    });
+</script>
+
 </head>
 <!-- Show a message about non-exist page (if the entered URL doesn't contain the 'wiki' word) -->
 <body>
