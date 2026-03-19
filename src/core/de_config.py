@@ -105,7 +105,7 @@ def create_flatpak_autostart():
                 "[Desktop Entry]\n"
                 "Name=SaveDesktop (Flatpak Apps installer)\n"
                 "Type=Application\n"
-                f"Exec=python3 {CACHE}/workspace/flatpaks_installer.py\n"
+                f"Exec=flatpak run io.github.vikdevelop.SaveDesktop --show-flatpaks-installer & python3 -u {CACHE}/workspace/flatpaks_installer.py > {CACHE}/workspace/log.pipe 2>&1\n"
             )
 
     print("[OK] Created Flatpak autostart")

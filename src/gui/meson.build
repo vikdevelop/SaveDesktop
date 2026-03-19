@@ -5,7 +5,8 @@ gui_sources = [ '__init__.py',
                 'custom_dirs_dialog.py',
                 'flatpak_apps_dialog.py',
                 'more_options_dialog.py',
-                'synchronization_dialogs.py', 
+                'synchronization_dialogs.py',
+                'flatpaks_installer_window.py',
               ]
               
 install_data(gui_sources, install_dir: moduledir / 'gui')

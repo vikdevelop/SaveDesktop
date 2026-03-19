@@ -53,6 +53,7 @@ parser.add_argument("--save-without-archive", type=str, help="Save the configura
 parser.add_argument("--sync", "--periodic-sync", action="store_true", help="Start periodic synchronization")
 parser.add_argument("--sync-now", action="store_true", help="Sync the configuration immediately")
 parser.add_argument("--import-config", help="Import a configuration from a file (*.sd.zip or *.sd.tar.gz) or folder", type=str, dest="CFG_ARCHIVE_PATH")
+parser.add_argument("--show-flatpaks-installer", action="store_true", help="Show a status window about Flatpak apps' installation progress")
 cmd = parser.parse_args()
 
 # Import these modules before starting periodic saving or synchronization
@@ -85,6 +86,13 @@ elif cmd.CFG_ARCHIVE_PATH: # import a configuration from a file, or folder
             raise ValueError(f"Encrypted archives are not supported in this mode")
 
     Unpack(dir_path) # archive.py
+elif cmd.show_flatpaks_installer:
+    try:
+        from savedesktop.gui.flatpaks_installer_window import FlatpaksInstallerApp
+        app = FlatpaksInstallerApp()
+        app.run([])
+    except FileNotFoundError:
+        print("File CACHE/workspace/flatpak-prefs.json doesn't exist, so it's impossible to open the window.")
 else: # show the app window
     resource = Gio.Resource.load(os.path.join(pkgdatadir, 'savedesktop.gresource'))
     resource._register()
