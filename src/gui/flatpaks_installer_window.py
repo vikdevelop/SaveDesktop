@@ -1,4 +1,4 @@
-import sys, gi, threading, time, shutil, os
+import sys, gi, threading, time, shutil, os, re
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib
@@ -33,9 +33,17 @@ class FlatpaksWindow(Adw.ApplicationWindow):
 
         # Status page
         self.status_page = Adw.StatusPage.new()
-        self.status_page.set_icon_name("preferences-desktop-apps-symbolic")
         self.status_page.set_description(_("You can continue using your computer; everything runs in the background. Once the installation of your Flatpak apps and, if applicable, your user data is complete, a message will appear here and you’ll also see a system notification. You can also show the progress below."))
         self.winBox.append(self.status_page)
+
+        self.progress_bar = Gtk.ProgressBar()
+        # Add some margins so it doesn't touch the edges of the window
+        self.progress_bar.set_margin_start(20)
+        self.progress_bar.set_margin_end(20)
+        self.progress_bar.set_margin_bottom(10)
+        # Set initial state to 0%
+        self.progress_bar.set_fraction(0.0)
+        self.winBox.append(self.progress_bar)
 
         # Create TextView for logging
         self.text_view = Gtk.TextView()
@@ -98,19 +106,41 @@ class FlatpaksWindow(Adw.ApplicationWindow):
             print(f"[THREAD] FATAL ERROR: {e}")
 
     def add_text_to_ui(self, text):
+        print(f"DEBUG INCOMING: {text.strip()}")
         buffer = self.text_view.get_buffer()
         end_iter = buffer.get_end_iter()
 
-        # 1. Check for completion and trigger events
+        # 1. Full completion
         if "✔ All operations have been completed successfully." in text:
+            self.progress_bar.set_fraction(1.0)
             self.send_completion_notification()
             cleanup_thread = threading.Thread(target=self.cache_cleanup)
             cleanup_thread.start()
 
-        # Insert the text into the view
+        # 2. Pulse effect for ANY active operation
+        if any(keyword in text for keyword in ["↓ Installing", "[COPY]", "[REMOVE]"]):
+            self.progress_bar.pulse()
+
+        # 3. Unified hidden progress tracker
+        match = re.search(r"\[PROGRESS\] (\d+)/(\d+)", text)
+        if match:
+            try:
+                current_step = int(match.group(1))
+                total_steps = int(match.group(2))
+                if total_steps > 0:
+                    fraction = current_step / total_steps
+                    self.progress_bar.set_fraction(fraction)
+            except ValueError:
+                pass
+
+            # CRITICAL: We return False here immediately!
+            # We DO NOT want to show the "[PROGRESS] 1/5" text in the UI log.
+            return False
+
+        # Insert normal text into the view
         buffer.insert(end_iter, text)
 
-        # 2. Autoscroll to the bottom
+        # Autoscroll
         new_end_iter = buffer.get_end_iter()
         mark = buffer.create_mark(None, new_end_iter, False)
         self.text_view.scroll_to_mark(mark, 0.0, True, 0.0, 1.0)

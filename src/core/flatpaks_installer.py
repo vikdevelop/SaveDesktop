@@ -24,8 +24,7 @@ else:
    
 if dest_dir:
     os.chdir(dest_dir)
-    # Check Flatpak user preferences
-    with open(f"flatpak-prefs.json") as fl:
+    with open("flatpak-prefs.json") as fl:
         j = json.load(fl)
 
     copy_data = j["copy-data"]
@@ -33,121 +32,103 @@ if dest_dir:
     disabled_flatpaks = j["disabled-flatpaks"]
     keep_flatpaks = j["keep-flatpaks"]
 
-    # Restore Flatpak user data archive
-    if copy_data:
-        print("[COPY] Copying the Flatpak's user data to ~/.var/app", flush=True)
-        if os.path.exists(f"app"):
-            os.system(f"cp -au ./app/ ~/.var/")
-
-        archive_file = "Flatpak_Apps/flatpak-apps-data.tgz" if os.path.exists("Flatpak_Apps/flatpak-apps-data.tgz") else "flatpak-apps-data.tgz"
-
-        if os.path.exists(archive_file):
-            tar_cmd = ["tar", "-xzf", archive_file, "-C", f"{Path.home()}/.var"]
-            for d_app in disabled_flatpaks:
-                tar_cmd.extend([f"--exclude={d_app}", f"--exclude=app/{d_app}"])
-            subprocess.run(tar_cmd)
-        print("✔ Copied Flatpak's user data", flush=True)
-
-    # Load Flatpaks from bash scripts
+    # ==========================================
+    # PHASE 1: PRE-CALCULATION (Math only, no actions)
+    # ==========================================
+    desired_flatpaks = {}
     if install_flatpaks:
-        if os.path.exists("Flatpak_Apps"):
-            installed_flatpaks_files = ['Flatpak_Apps/installed_flatpaks.sh', 'Flatpak_Apps/installed_user_flatpaks.sh']
-        else:
-            installed_flatpaks_files = ['installed_flatpaks.sh', 'installed_user_flatpaks.sh']
-
-        desired_flatpaks = {}
-        for file in installed_flatpaks_files:
+        files_to_check = ['Flatpak_Apps/installed_flatpaks.sh', 'Flatpak_Apps/installed_user_flatpaks.sh'] if os.path.exists("Flatpak_Apps") else ['installed_flatpaks.sh', 'installed_user_flatpaks.sh']
+        for file in files_to_check:
             if os.path.exists(file):
                 with open(file, 'r') as f:
-                    # Read all lines into memory
-                    lines = f.readlines()
+                    for line in f.readlines():
+                        if 'flatpak' in line and 'install' in line:
+                            parts = line.split()
+                            app_id = next((p for p in parts if "." in p and not p.startswith("-")), None)
+                            if app_id and app_id not in disabled_flatpaks:
+                                desired_flatpaks[app_id] = "--user" if "--user" in parts else "--system"
 
-                # The file is safely closed here, we process the list in memory
-                for line in lines:
-                    if 'flatpak' in line and 'install' in line:
-                        parts = line.split()
+    installed_apps = {}
+    for directory, method in [('/var/lib/flatpak/app', '--system'), (os.path.expanduser('~/.local/share/flatpak/app'), '--user')]:
+        if os.path.exists(directory):
+            for app in os.listdir(directory):
+                if os.path.isdir(os.path.join(directory, app)):
+                    installed_apps[app] = method
 
-                        app_id = None
-                        for part in parts:
-                            # Look for something that looks like an app ID (e.g. com.obsproject.Studio)
-                            if "." in part and not part.startswith("-"):
-                                app_id = part
-                                break
+    apps_to_install = {app: method for app, method in desired_flatpaks.items() if app not in installed_apps}
+    apps_to_remove = {app: method for app, method in installed_apps.items() if app not in desired_flatpaks} if not keep_flatpaks else {}
 
-                        if not app_id:
-                            continue
-
-                        if app_id in disabled_flatpaks:
-                            print(f"[SKIP] Disabled app: {app_id}", flush=True)
-                            continue
-
-                        # Determine if it's a user or system install
-                        method = "--user" if "--user" in parts else "--system"
-                        desired_flatpaks[app_id] = method
-
-        # Count the actual valid apps we found, not just raw lines in the file
-        apps_count = len(desired_flatpaks)
-        if not desired_flatpaks:
-            print("Installation queue is empty.", flush=True)
-        else:
-            print(f"Installing {apps_count} apps", flush=True)
-
-        # Get currently installed Flatpaks first, before doing any math
-        system_flatpak_dir = '/var/lib/flatpak/app'
-        user_flatpak_dir = os.path.expanduser('~/.local/share/flatpak/app')
-        installed_apps = {}
-
-        for directory, method in [(system_flatpak_dir, '--system'), (user_flatpak_dir, '--user')]:
-            if os.path.exists(directory):
-                for app in os.listdir(directory):
-                    if os.path.isdir(os.path.join(directory, app)):
-                        installed_apps[app] = method
-
-        # Filter out the apps that are already on the system
-        apps_to_install = {app: method for app, method in desired_flatpaks.items() if app not in installed_apps}
-        apps_count = len(apps_to_install)
-
-        # Print the ones we are skipping just so the user knows
-        for app in desired_flatpaks:
-            if app in installed_apps:
-                print(f"[INFO] {app} is already available in the system.", flush=True)
-
-        # Now handle the actual installation queue
-        if apps_count == 0:
-            print("Installation queue is empty. Nothing new to install.", flush=True)
-        else:
-            print(f"Installing {apps_count} new apps", flush=True)
-
-            # Start the installation loop only for the missing apps
-            for i, (app, method) in enumerate(apps_to_install.items(), start=1):
-                print(f"↓ Installing {app} ({i}/{apps_count})", flush=True)
-
-                # Ensure the user repo exists if we are doing a user install
-                if method == '--user':
-                    os.system("flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo")
-
-                # Run the actual Flatpak install command
-                subprocess.run(['flatpak', 'install', method, 'flathub', app, '-y'])
-
-        print("✔ All apps have been installed", flush=True)
-
-    # Remove Flatpaks, which are not in the list (only if it's allowed by the user)
+    # Calculate exact total steps
+    total_steps = 0
+    if copy_data: total_steps += 1
+    if install_flatpaks: total_steps += len(apps_to_install)
     if not keep_flatpaks:
-        for app, method in installed_apps.items():
-            if app not in desired_flatpaks:
+        total_steps += len(apps_to_remove)
+        total_steps += 1 # 1 extra step for orphaned dir cleanup
+
+    current_step = 0
+
+    def report_progress():
+        """Helper to print the hidden progress tag for the GTK UI"""
+        global current_step
+        current_step += 1
+        print(f"[PROGRESS] {current_step}/{total_steps}", flush=True)
+
+    if total_steps == 0:
+        print("Nothing to do.", flush=True)
+    else:
+        # ==========================================
+        # PHASE 2: EXECUTION
+        # ==========================================
+
+        # 1. Restore Data
+        if copy_data:
+            print("[COPY] Copying the Flatpak's user data to ~/.var/app", flush=True)
+            if os.path.exists("app"):
+                os.system("cp -au ./app/ ~/.var/")
+            archive_file = "Flatpak_Apps/flatpak-apps-data.tgz" if os.path.exists("Flatpak_Apps/flatpak-apps-data.tgz") else "flatpak-apps-data.tgz"
+            if os.path.exists(archive_file):
+                tar_cmd = ["tar", "-xzf", archive_file, "-C", f"{Path.home()}/.var"]
+                for d_app in disabled_flatpaks:
+                    tar_cmd.extend([f"--exclude={d_app}", f"--exclude=app/{d_app}"])
+                subprocess.run(tar_cmd)
+            print("✔ Copied Flatpak's user data", flush=True)
+            report_progress() # <--- SEND UPDATE TO UI
+
+        # 2. Install Apps
+        if install_flatpaks:
+            for app in desired_flatpaks:
+                if app in installed_apps:
+                    print(f"[INFO] {app} is already available in the system.", flush=True)
+
+            if apps_to_install:
+                print(f"Installing {len(apps_to_install)} new apps", flush=True)
+                for i, (app, method) in enumerate(apps_to_install.items(), start=1):
+                    print(f"↓ Installing {app} ({i}/{len(apps_to_install)})", flush=True)
+                    if method == '--user':
+                        os.system("flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo")
+                    subprocess.run(['flatpak', 'install', method, 'flathub', app, '-y'])
+                    print(f"✔ Finished installing {app}", flush=True)
+                    report_progress() # <--- SEND UPDATE TO UI
+
+        # 3. Remove Apps & Cleanup
+        if not keep_flatpaks:
+            for app, method in apps_to_remove.items():
                 print(f"[REMOVE] {method.title()} Flatpak: {app}", flush=True)
                 subprocess.run(['flatpak', 'uninstall', method, app, '--delete-data', '-y'])
+                report_progress() # <--- SEND UPDATE TO UI
 
-        # Remove orphaned ~/.var/app directories
-        user_var_app = Path.home() / ".var/app"
-        if user_var_app.exists():
-            for app_dir in user_var_app.iterdir():
-                if app_dir.is_dir() and app_dir.name not in desired_flatpaks:
-                    print(f"[REMOVE] Orphaned Flatpak user data: {app_dir.name}", flush=True)
-                    shutil.rmtree(app_dir)
-        print("[OK] All useless apps have been removed", flush=True)
+            print("[REMOVE] Cleaning up orphaned user data...", flush=True)
+            user_var_app = Path.home() / ".var/app"
+            if user_var_app.exists():
+                for app_dir in user_var_app.iterdir():
+                    if app_dir.is_dir() and app_dir.name not in desired_flatpaks:
+                        print(f"  -> Deleted: {app_dir.name}", flush=True)
+                        shutil.rmtree(app_dir)
+            print("[OK] All useless apps and orphaned data have been removed", flush=True)
+            report_progress() # <--- SEND UPDATE TO UI
 
-    print("✔ All operations have been completed successfully.")
+        print("✔ All operations have been completed successfully.", flush=True)
 
 else:
     print("Nothing to do.", flush=True)
