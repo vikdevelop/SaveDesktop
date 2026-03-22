@@ -111,7 +111,7 @@ class FlatpaksWindow(Adw.ApplicationWindow):
         end_iter = buffer.get_end_iter()
 
         # 1. Full completion
-        if "✔ All operations have been completed successfully." in text:
+        if "✔ All operations have been completed successfully." in text or "There's no need to install any new apps, since they're all available on your system." in text:
             self.progress_bar.set_fraction(1.0)
             self.send_completion_notification()
             cleanup_thread = threading.Thread(target=self.cache_cleanup)

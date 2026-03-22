@@ -75,7 +75,7 @@ if dest_dir:
         print(f"[PROGRESS] {current_step}/{total_steps}", flush=True)
 
     if total_steps == 0:
-        print("Nothing to do.", flush=True)
+        print("There's no need to install any new apps, since they're all available on your system.", flush=True)
     else:
         # ==========================================
         # PHASE 2: EXECUTION
@@ -131,7 +131,7 @@ if dest_dir:
         print("✔ All operations have been completed successfully.", flush=True)
 
 else:
-    print("Nothing to do.", flush=True)
+    print("There's no need to install any new apps, since they're all available on your system.", flush=True)
 
 # Remove the autostart file after finishing the operations
 autostart_file = f"{Path.home()}/.config/autostart/io.github.vikdevelop.SaveDesktop.Flatpak.desktop"
