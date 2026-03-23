@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2026-03-25 11:09+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/nl/>\n"
 "Language: nl\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 msgid "Save"
 msgstr "Opslaan"
@@ -26,12 +26,14 @@ msgid "Set the file name"
 msgstr "Geef het bestand een naam"
 
 msgid "Select configuration items"
-msgstr ""
+msgstr "Kies instellingenitems"
 
 msgid ""
 "These settings are used for manual and periodic saves, imports, and "
 "synchronization."
 msgstr ""
+"Deze instellingen worden gebruikt voor het handmatig en periodiek opslaan, "
+"import en synchronisatie."
 
 msgid "Icons"
 msgstr "Pictogrammen"
@@ -47,49 +49,52 @@ msgid "Backgrounds"
 msgstr "Achtergronden"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Extensies"
 
 msgid "Desktop"
-msgstr ""
+msgstr "Bureaublad"
 
 msgid "File manager bookmarks"
-msgstr ""
+msgstr "Bladwijzers van bestandsbeheerder"
 
 msgid "Custom folders"
-msgstr ""
+msgstr "Zelfgekozen mappen"
 
 msgid "Select custom folders to include in the configuration archive."
-msgstr ""
+msgstr "Kies de mappen die u wilt toevoegen aan het archief."
 
 msgid "Add folder"
-msgstr ""
+msgstr "Map toevoegen"
 
 msgid "Remove"
-msgstr ""
+msgstr "Verwijderen"
 
 msgid ""
 "<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
 "selected path begins at /run/user/</b>, it would be necessary to grant "
 "access to the folder you want to select.</i>"
 msgstr ""
+"<i>U maakt gebruik van Flatpak, dus is het van belang op te letten op de "
+"locatie. <b>Als die begint met /run/user/</b>, is het nodig om toestemming "
+"tot de toe te voegen map te verlenen.</i>"
 
 msgid "Flatpak apps"
 msgstr "Flatpaktoepassingen"
 
 msgid "List of installed Flatpak apps"
-msgstr ""
+msgstr "Lijst met geïnstalleerde Flatpak-toepassingen"
 
 msgid "User data of installed Flatpak apps"
 msgstr "Gebruikersgegevens van geïnstalleerde Flatpaktoepassingen"
 
 msgid "Select Flatpak apps"
-msgstr ""
+msgstr "Flatpaktoepassingen kiezen"
 
 msgid "Keep existing Flatpak apps and data"
-msgstr ""
+msgstr "Bestaande Flatpaktoepassingen en -gegevens behouden"
 
 msgid "More options"
-msgstr ""
+msgstr "Meer opties"
 
 msgid "Periodic saving"
 msgstr "Periodiek opslaan"
@@ -98,7 +103,7 @@ msgid "Changes will only take effect after the next login"
 msgstr "Meld u opnieuw aan om de wĳzigingen toe te passen"
 
 msgid "Interval"
-msgstr ""
+msgstr "Tussenpoos"
 
 msgid "Never"
 msgstr "Nooit"
