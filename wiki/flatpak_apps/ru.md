@@ -1,11 +1,11 @@
-# Saving, importing, and syncing Flatpak apps
+# Сохранение, импорт и синхронизация приложений Flatpak
 
-Save Desktop allows you to save, import, and sync Flatpak applications together with their user data, in addition to icons, themes, settings, and extensions.
+Save Desktop позволяет сохранять, импортировать и синхронизировать приложения Flatpak вместе с пользовательскими данными, а также значками, темами, настройками и расширениями.
 
-## Where can I find this?
+## Где я могу это найти?
 
-Flatpak-related options are located in the **Select configuration items** dialog.
-You can open it from the header menu (three dots in the window title bar).
+Параметры, связанные с Flatpak, находятся в диалоговом окне «Выбор элементов конфигурации».
+Вы можете открыть его из меню заголовка (три точки в строке заголовка окна).
 
 ## Available options
 
@@ -39,9 +39,9 @@ Import order:
 
 Flatpak installation and removal start **after you log back into the system**.
 
-### Synchronization mode
+### Режим синхронизации
 
-In synchronization mode, Flatpak applications are processed **immediately after synchronization finishes** (no relog required).
+В режиме синхронизации приложения Flatpak обрабатываются **сразу после завершения синхронизации** (повторный вход в систему не требуется).
 
 ## Important note
 
