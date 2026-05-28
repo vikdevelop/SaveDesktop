@@ -296,8 +296,8 @@ class Save:
                 print("Saving KDE Plasma configuration...")
                 os.makedirs("DE/xdg-config", exist_ok=True)
                 os.makedirs("DE/xdg-data", exist_ok=True)
-                os.system(f"cp -R {home}/.config/[k]* ./DE/xdg-config/")
-                os.system(f"cp -R {home}/.local/share/[k]* ./DE/xdg-data/")
+                os.system(f"find {home}/.config/ -maxdepth 1 -name '[k]*' ! -name 'kdeconnect' -exec cp -R {} ./DE/xdg-config/ \;")
+                os.system(f"find {home}/.local/share -maxdepth 1 -name '[k]*' ! -name 'kdeconnect' -exec cp -R {} ./DE/xdg-data/ \;")
                 for src, dst in KDE_DIRS_SAVE:
                     if os.path.isfile(src):
                         safe_copy(src, os.path.join("DE", dst))
