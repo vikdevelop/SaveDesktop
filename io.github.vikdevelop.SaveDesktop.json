@@ -2,7 +2,7 @@
     "app-id" : "io.github.vikdevelop.SaveDesktop",
     "desktop-file-name-suffix" : " (Development)",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "49",
+    "runtime-version" : "50",
     "sdk" : "org.gnome.Sdk",
     "command" : "savedesktop",
     "finish-args" : [
@@ -47,8 +47,8 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/ip7z/7zip.git",
-                    "tag" : "26.00",
-                    "commit" : "839151eaaad24771892afaae6bac690e31e58384"
+                    "tag" : "26.01",
+                    "commit" : "8c63d71ff886bda90c86db28466287f977374237"
                 }
             ],
             "x-checker-data" : {
