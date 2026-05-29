@@ -7,13 +7,17 @@ from savedesktop.globals import *
 class FlatpaksWindow(Adw.ApplicationWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.set_title(_("Installing your Flatpak apps..."))
+
+        self.win_title = f'{_("Installing your Flatpak apps...")} | Save Desktop'
+        self.set_title(self.win_title)
 
         # header bar and toolbarview
         self.headerbar = Adw.HeaderBar.new()
         self.toolbarview = Adw.ToolbarView.new()
         self.toolbarview.add_top_bar(self.headerbar)
         self.set_content(self.toolbarview)
+
+        self.headerbar.pack_start(Gtk.Image.new_from_icon_name("io.github.vikdevelop.SaveDesktop-symbolic"))
 
         self.set_size_request(360, 600)
 
@@ -137,8 +141,11 @@ class FlatpaksWindow(Adw.ApplicationWindow):
             # We DO NOT want to show the "[PROGRESS] 1/5" text in the UI log.
             return False
 
+        # 2. TRANSLATION (Translate the text right before showing it)
+        translated_text = self.translate_log_line(text)
+
         # Insert normal text into the view
-        buffer.insert(end_iter, text)
+        buffer.insert(end_iter, translated_text)
 
         # Autoscroll
         new_end_iter = buffer.get_end_iter()
@@ -147,6 +154,62 @@ class FlatpaksWindow(Adw.ApplicationWindow):
         buffer.delete_mark(mark)
 
         return False
+
+    def translate_log_line(self, original_text):
+        # Remove whitespace/newlines for easier exact matching
+        text = original_text.strip()
+
+        # --- STATIC EXACT MATCHES ---
+        if text == "✔ All operations have been completed successfully.":
+            return _("✔ All operations have been completed successfully.") + "\n"
+
+        elif text == "Installation queue is empty. Nothing new to install.":
+            return _("Installation queue is empty. Nothing new to install.") + "\n"
+
+        elif text == "[COPY] Copying the Flatpak's user data to ~/.var/app":
+            return _("Copying the Flatpak's user data to ~/.var/app") + "[COPY]\n"
+
+        elif text == "✔ Copied Flatpak's user data":
+            return _("✔ Copied Flatpak's user data") + "\n"
+
+        elif text == "[REMOVE] Cleaning up orphaned user data...":
+            return _("Cleaning up orphaned user data...") + "[REMOVE]\n"
+
+        elif text == "[OK] All useless apps and orphaned data have been removed":
+            return _("All useless apps and orphaned data have been removed") + "[OK]\n"
+
+        # --- DYNAMIC MATCHES (REGEX) ---
+        # 1. Matches: "↓ Installing com.example.App (1/5)"
+        match_installing = re.search(r"↓ Installing (.*) \((\d+)/(\d+)\)", text)
+        if match_installing:
+            app = match_installing.group(1)
+            current = match_installing.group(2)
+            total = match_installing.group(3)
+            # We translate the string with placeholders, then format it with variables
+            return _("↓ Installing {app} ({current}/{total})").format(
+                app=app, current=current, total=total
+            ) + "\n"
+
+        # 2. Matches: "✔ Finished installing com.example.App"
+        match_finished = re.search(r"✔ Finished installing (.*)", text)
+        if match_finished:
+            app = match_finished.group(1)
+            return _("✔ Finished installing {app}").format(app=app) + "\n"
+
+        # 3. Matches: "Installing 5 new apps"
+        match_new_apps = re.search(r"Installing (\d+) new apps", text)
+        if match_new_apps:
+            count = match_new_apps.group(1)
+            return _("Installing {count} new apps").format(count=count) + "\n"
+
+        # 4. Matches: "[INFO] com.example.App is already available in the system."
+        match_info = re.search(r"\[INFO\] (.*) is already available in the system\.", text)
+        if match_info:
+            app = match_info.group(1)
+            return _("{app} is already available in the system.").format(app=app) + "[INFO]\n"
+
+        # If no translation matches, just return the original English text
+        return original_text
 
     def send_completion_notification(self):
         # Create the notification object with a title
