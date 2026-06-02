@@ -75,33 +75,29 @@ class FlatpaksWindow(Adw.ApplicationWindow):
         log_path = os.path.expanduser(f"{CACHE}/workspace/log.pipe")
         print(f"[THREAD] Looking for log file at: {log_path}")
 
-        # 1. Wait patiently until the logic script actually creates the file
+        # Wait patiently until the logic script actually creates the file
         while not os.path.exists(log_path):
             print(f"[THREAD] Still waiting for {log_path} to exist...")
             time.sleep(0.5)
 
         print("[THREAD] File found! Opening it now...")
 
-        # 2. Open the regular file ONCE and read it continuously
+        # Open the regular file ONCE and read it continuously
         try:
             with open(log_path, 'r') as log_file:
                 while True:
                     line = log_file.readline()
 
                     if not line:
-                        # Check if the host script finished and deleted the file
                         if not os.path.exists(log_path):
                             print("[THREAD] File was deleted. Killing thread cleanly.")
-                            break # Kill the thread
+                            break
 
-                        # If file exists but no new data, chill for 100ms
                         time.sleep(0.1)
                         continue
 
-                    # Send the new line to the main UI thread
                     GLib.idle_add(self.add_text_to_ui, line)
 
-                    # 3. Explicit kill switch: FIXED TO MATCH YOUR REAL STRING
                     if "✔ All operations have been completed successfully." in line:
                         print("[THREAD] Success string found. Stopping background read.")
                         break
@@ -114,18 +110,18 @@ class FlatpaksWindow(Adw.ApplicationWindow):
         buffer = self.text_view.get_buffer()
         end_iter = buffer.get_end_iter()
 
-        # 1. Full completion
+        # Full completion
         if "✔ All operations have been completed successfully." in text or "There's no need to install any new apps, since they're all available on your system." in text:
             self.progress_bar.set_fraction(1.0)
             self.send_completion_notification()
             cleanup_thread = threading.Thread(target=self.cache_cleanup)
             cleanup_thread.start()
 
-        # 2. Pulse effect for ANY active operation
+        # Pulse effect for ANY active operation
         if any(keyword in text for keyword in ["↓ Installing", "[COPY]", "[REMOVE]"]):
             self.progress_bar.pulse()
 
-        # 3. Unified hidden progress tracker
+        # Unified hidden progress tracker
         match = re.search(r"\[PROGRESS\] (\d+)/(\d+)", text)
         if match:
             try:
@@ -137,17 +133,13 @@ class FlatpaksWindow(Adw.ApplicationWindow):
             except ValueError:
                 pass
 
-            # CRITICAL: We return False here immediately!
-            # We DO NOT want to show the "[PROGRESS] 1/5" text in the UI log.
             return False
 
-        # 2. TRANSLATION (Translate the text right before showing it)
         translated_text = self.translate_log_line(text)
 
-        # Insert normal text into the view
+
         buffer.insert(end_iter, translated_text)
 
-        # Autoscroll
         new_end_iter = buffer.get_end_iter()
         mark = buffer.create_mark(None, new_end_iter, False)
         self.text_view.scroll_to_mark(mark, 0.0, True, 0.0, 1.0)
@@ -159,7 +151,6 @@ class FlatpaksWindow(Adw.ApplicationWindow):
         # Remove whitespace/newlines for easier exact matching
         text = original_text.strip()
 
-        # --- STATIC EXACT MATCHES ---
         if text == "✔ All operations have been completed successfully.":
             return _("✔ All operations have been completed successfully.") + "\n"
 
@@ -178,25 +169,20 @@ class FlatpaksWindow(Adw.ApplicationWindow):
         elif text == "[OK] All useless apps and orphaned data have been removed":
             return _("All useless apps and orphaned data have been removed") + "[OK]\n"
 
-        # --- DYNAMIC MATCHES (REGEX) ---
-        # 1. Matches: "↓ Installing com.example.App (1/5)"
         match_installing = re.search(r"↓ Installing (.*) \((\d+)/(\d+)\)", text)
         if match_installing:
             app = match_installing.group(1)
             current = match_installing.group(2)
             total = match_installing.group(3)
-            # We translate the string with placeholders, then format it with variables
             return _("↓ Installing {app} ({current}/{total})").format(
                 app=app, current=current, total=total
             ) + "\n"
 
-        # 2. Matches: "✔ Finished installing com.example.App"
         match_finished = re.search(r"✔ Finished installing (.*)", text)
         if match_finished:
             app = match_finished.group(1)
             return _("✔ Finished installing {app}").format(app=app) + "\n"
 
-        # 3. Matches: "Installing 5 new apps"
         match_new_apps = re.search(r"Installing (\d+) new apps", text)
         if match_new_apps:
             count = match_new_apps.group(1)
@@ -240,14 +226,14 @@ class FlatpaksWindow(Adw.ApplicationWindow):
         self.status_page.set_icon_name("done")
         self.status_page.set_description(_("This window will be closed automatically in 2 minutes."))
 
-        return False # Mandatory: tells idle_add to only run this setup once
+        return False # tells idle_add to only run this setup once
 
     def close_app(self):
         # This is triggered when the 2 minutes are up.
         # Safely closes the current GTK window.
         self.close()
 
-        return False # Mandatory: tells the timeout timer not to repeat itself
+        return False # tells the timeout timer not to repeat itself
 
 class FlatpaksInstallerApp(Adw.Application):
     def __init__(self, **kwargs):

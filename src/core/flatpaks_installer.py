@@ -32,9 +32,7 @@ if dest_dir:
     disabled_flatpaks = j["disabled-flatpaks"]
     keep_flatpaks = j["keep-flatpaks"]
 
-    # ==========================================
-    # PHASE 1: PRE-CALCULATION (Math only, no actions)
-    # ==========================================
+    # pre-calculation (math only, no actions)
     desired_flatpaks = {}
     if install_flatpaks:
         files_to_check = ['Flatpak_Apps/installed_flatpaks.sh', 'Flatpak_Apps/installed_user_flatpaks.sh'] if os.path.exists("Flatpak_Apps") else ['installed_flatpaks.sh', 'installed_user_flatpaks.sh']
@@ -64,7 +62,7 @@ if dest_dir:
     if install_flatpaks: total_steps += len(apps_to_install)
     if not keep_flatpaks:
         total_steps += len(apps_to_remove)
-        total_steps += 1 # 1 extra step for orphaned dir cleanup
+        total_steps += 1 # one extra step for orphaned dir cleanup
 
     current_step = 0
 
@@ -77,11 +75,9 @@ if dest_dir:
     if total_steps == 0:
         print("There's no need to install any new apps, since they're all available on your system.", flush=True)
     else:
-        # ==========================================
-        # PHASE 2: EXECUTION
-        # ==========================================
+        # phase 2: execution
 
-        # 1. Restore Data
+        # Restore Data
         if copy_data:
             print("[COPY] Copying the Flatpak's user data to ~/.var/app", flush=True)
             if os.path.exists("app"):
@@ -93,9 +89,9 @@ if dest_dir:
                     tar_cmd.extend([f"--exclude={d_app}", f"--exclude=app/{d_app}"])
                 subprocess.run(tar_cmd)
             print("✔ Copied Flatpak's user data", flush=True)
-            report_progress() # <--- SEND UPDATE TO UI
+            report_progress() # sends update to UI
 
-        # 2. Install Apps
+        # Install Apps
         if install_flatpaks:
             for app in desired_flatpaks:
                 if app in installed_apps:
@@ -109,9 +105,9 @@ if dest_dir:
                         os.system("flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo")
                     subprocess.run(['flatpak', 'install', method, 'flathub', app, '-y'])
                     print(f"✔ Finished installing {app}", flush=True)
-                    report_progress() # <--- SEND UPDATE TO UI
+                    report_progress() # sends update to UI
 
-        # 3. Remove Apps & Cleanup
+        # Remove Apps and Cleanup
         if not keep_flatpaks:
             for app, method in apps_to_remove.items():
                 print(f"[REMOVE] {method.title()} Flatpak: {app}", flush=True)
