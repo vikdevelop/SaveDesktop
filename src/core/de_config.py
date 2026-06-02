@@ -296,7 +296,7 @@ class Save:
                 print("Saving KDE Plasma configuration...")
                 os.makedirs("DE/xdg-config", exist_ok=True)
                 os.makedirs("DE/xdg-data", exist_ok=True)
-                self.save_kde_cfg_data_dirs()
+                self.save_kde_config_data_dirs()
                 for src, dst in KDE_DIRS_SAVE:
                     if os.path.isfile(src):
                         safe_copy(src, os.path.join("DE", dst))
