@@ -185,7 +185,7 @@ msgid "File name format"
 msgstr "Formato do nome do ficheiro"
 
 msgid "Reset to default"
-msgstr "Repor predefinição"
+msgstr "Repor a predefinição"
 
 msgid "Password for encryption"
 msgstr "Palavra-passe de encriptação"
