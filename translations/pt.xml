@@ -1,16 +1,78 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <root>
-  <str key="synchronization_between_computers_title"></str>
-  <str key="synchronization_intro"></str>
-  <str key="set_up_first_pc"></str>
-  <str key="set_up_second_pc"></str>
-  <str key="bidirectional_sync"></str>
-  <str key="synchronization_files"></str>
-  <str key="flatpak_wiki_title"></str>
-  <str key="flatpak_wiki_intro"></str>
-  <str key="flatpak_wiki_dest"></str>
-  <str key="flatpak_wiki_options"></str>
-  <str key="flatpak_wiki_import_process"></str>
-  <str key="flatpak_wiki_sync_mode"></str>
-  <str key="flatpak_wiki_note"></str>
+  <str key="synchronization_between_computers_title"># Sincronização entre computadores na rede</str>
+  <str key="synchronization_intro">Além de guardar e importar a configuração, o Save Desktop também permite sincronizá-la entre computadores na tua rede através de uma pasta partilhada na nuvem ou de uma pasta partilhada do Syncthing.</str>
+  <str key="set_up_first_pc">## Configuração no primeiro computador
+1. Abre a página **Sincronizar** na aplicação Save Desktop.
+2. Clica em **“Configurar o ficheiro de sincronização”**.
+3. Será apresentado um assistente de configuração rápida:
+   * Se usares GNOME, Cinnamon, Budgie ou uma versão antiga do COSMIC, será usado o método **Contas online do GNOME**.
+   * No KDE Plasma ou noutros ambientes de trabalho, será usado o **Rclone** (só terás de copiar um comando e colá-lo no terminal).
+   * Em alternativa, podes usar o **Syncthing** clicando em **“Usar uma pasta do Syncthing em alternativa”** e selecionando uma pasta sincronizada.
+4. Depois de concluíres o assistente, será aberta a janela **“Configurar o ficheiro de sincronização”**:
+   * Um **ficheiro de cópia de segurança periódica** (o arquivo de configuração do teu ambiente de trabalho) começará a ser gerado dentro da pasta selecionada.
+   * Opcionalmente, podes alterar o intervalo ou o nome do ficheiro com o botão **“Alterar”**.
+5. Clica em **“Aplicar”**:
+   * Um segundo ficheiro, `SaveDesktop.json`, é criado na mesma pasta. Contém o nome do ficheiro de sincronização e o intervalo de cópia de segurança.
+   * Ser-te-á pedido que **termines sessão** para que a sincronização possa ser totalmente ativada.</str>
+  <str key="set_up_second_pc">## Ligar noutro computador
+1. No outro computador, volta à página **Sincronizar**.
+2. Clica em **“Ligar ao armazenamento na nuvem”**.
+3. Será apresentado o mesmo assistente — escolhe a tua pasta sincronizada através das Contas online do GNOME, Rclone ou Syncthing.
+4. Depois do assistente:
+   * A janela **“Ligar ao armazenamento na nuvem”** é aberta.
+   * Seleciona o **intervalo de sincronização** e ativa ou desativa a **Sincronização bidirecional**.
+5. Clica em **“Aplicar”**:
+   * Ser-te-á pedido que **termines sessão** ou, se usares a sincronização manual, serás informado de que podes sincronizar a partir do menu da barra de cabeçalho da aplicação.
+   * Depois de voltares a iniciar sessão, o Save Desktop liga-se à pasta partilhada e sincroniza automaticamente a tua configuração, com uma notificação no início e no fim.
+</str>
+  <str key="bidirectional_sync">### Sincronização bidirecional
+Se a **Sincronização bidirecional** estiver ativa em ambos os computadores:
+* O Save Desktop copia as definições de sincronização (como o intervalo e o nome do arquivo) de uma máquina para a outra;
+* Isto mantém os sistemas sincronizados sem ser necessário configurar cada um manualmente.</str>
+  <str key="synchronization_files">## Ficheiros usados na sincronização
+* **Ficheiro de cópia de segurança periódica** — um arquivo `.sd.zip` da configuração do teu ambiente de trabalho, atualizado regularmente.
+* **SaveDesktop.json** — um pequeno ficheiro auxiliar que guarda o nome do arquivo e o intervalo de cópia de segurança, usado durante a configuração da sincronização.</str>
+  <str key="flatpak_wiki_title"># Guardar, importar e sincronizar aplicações Flatpak</str>
+  <str key="flatpak_wiki_intro">O Save Desktop permite guardar, importar e sincronizar aplicações Flatpak juntamente com os respetivos dados de utilizador, além de ícones, temas, definições e extensões.</str>
+  <str key="flatpak_wiki_dest">## Onde posso encontrar isto?
+
+As opções relacionadas com Flatpak encontram-se na janela **Selecionar itens da configuração**.
+Podes abri-la a partir do menu da barra de cabeçalho (três pontos na barra de título da janela).</str>
+  <str key="flatpak_wiki_options">## Opções disponíveis
+
+### Lista de aplicações Flatpak instaladas
+
+Guarda e restaura a lista de aplicações Flatpak instaladas.
+
+### Dados de utilizador das aplicações Flatpak instaladas
+
+Permite incluir os dados de utilizador das aplicações Flatpak selecionadas.
+Clica no botão **"&gt;"** para escolher as aplicações cujos dados devem ser guardados.
+
+### Manter aplicações e dados Flatpak instalados (ativo por predefinição)
+
+Quando esta opção está ativa, o Save Desktop **NÃO remove aplicações Flatpak nem os respetivos dados que não estejam presentes no arquivo**.
+
+Quando está desativada, o Save Desktop **remove qualquer aplicação Flatpak instalada que não esteja listada no arquivo importado — incluindo os respetivos dados de utilizador**.
+
+⚠️ **Aviso:**
+Desativa esta opção apenas se quiseres que o teu sistema corresponda exatamente ao arquivo importado. As aplicações removidas e os respetivos dados **não podem ser recuperados**.</str>
+  <str key="flatpak_wiki_import_process">## Como funciona a importação?
+
+Depois de selecionares um arquivo ou uma pasta, ser-te-á pedido que escolhas os itens da configuração a importar.
+Clica em **Aplicar** para iniciar o processo de importação.
+
+Ordem de importação:
+
+1. Configuração do ambiente de trabalho (ícones, temas, tipos de letra, extensões, definições, etc.)
+2. Aplicações Flatpak e respetivos dados de utilizador (após o próximo início de sessão)
+
+A instalação e remoção de aplicações Flatpak começam **depois de voltares a iniciar sessão no sistema**.</str>
+  <str key="flatpak_wiki_sync_mode">### Modo de sincronização
+
+No modo de sincronização, as aplicações Flatpak são processadas **imediatamente após a conclusão da sincronização** (sem ser necessário voltar a iniciar sessão).</str>
+  <str key="flatpak_wiki_note">## Nota importante
+
+Se **Manter aplicações e dados Flatpak instalados** estiver desativado e tiveres aplicações Flatpak instaladas que não estejam incluídas no arquivo importado, estas serão **removidas permanentemente juntamente com os respetivos dados de utilizador**.</str>
 </root>
