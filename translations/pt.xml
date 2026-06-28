@@ -8,7 +8,7 @@
 3. Será apresentado um assistente de configuração rápida:
    * Se usares GNOME, Cinnamon, Budgie ou uma versão antiga do COSMIC, será usado o método **Contas online do GNOME**.
    * No KDE Plasma ou noutros ambientes de trabalho, será usado o **Rclone** (só terás de copiar um comando e colá-lo no terminal).
-   * Em alternativa, podes usar o **Syncthing** clicando em **“Usar uma pasta do Syncthing em alternativa”** e selecionando uma pasta sincronizada.
+   * Em alternativa, podes usar o **Syncthing** clicando em **"Usar uma pasta do Syncthing em alternativa"** e selecionando uma pasta sincronizada.
 4. Depois de concluíres o assistente, será aberta a janela **"Configurar o ficheiro de sincronização"**:
    * Um **ficheiro de cópia de segurança periódica** (o arquivo de configuração do teu ambiente de trabalho) começará a ser gerado dentro da pasta selecionada.
    * Opcionalmente, podes alterar o intervalo ou o nome do ficheiro com o botão **"Alterar"**.
