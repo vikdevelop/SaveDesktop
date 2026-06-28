@@ -27,7 +27,7 @@ It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones),
 - Include **Flatpak apps and user data**
 - Restore everything in one click
 - Sync with cloud folders
-- Works with **GNOME, KDE Plasma, Xfce, Cinnamon, Budgie, COSMIC (GNOME and Rust version), Pantheon, MATE, Deepin** and **Hyprland**
+- Works with **GNOME, KDE Plasma, Xfce, Cinnamon, Budgie, COSMIC (GNOME and Rust version), Pantheon, MATE, Deepin, LXQt, Niri** and **Hyprland**
 
 <details>
   <summary><b>Full list of supported desktops & directories</b></summary>
@@ -118,6 +118,14 @@ It can save your themes, icons, fonts, settings, wallpapers (even dynamic ones),
   ```
   - ~/.config/deepin
   - ~/.local/share/deepin
+  ```
+  - **LXQt**
+  ```
+  - ~/.config/lxqt
+  ```
+  - **Niri**
+  ```
+  - ~/.config/niri
   ```
   - **Hyprland**
   ```
