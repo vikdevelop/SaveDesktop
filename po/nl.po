@@ -93,6 +93,52 @@ msgstr "Flatpakprogramma's kiezen"
 msgid "Keep existing Flatpak apps and data"
 msgstr "Bestaande Flatpakprogramma's en -instellingen behouden"
 
+msgid "Installing your Flatpak apps..."
+msgstr ""
+
+msgid ""
+"You can continue using your computer; everything runs in the background. "
+"Once the installation of your Flatpak apps and, if applicable, your user "
+"data is complete, a message will appear here and you’ll also see a system "
+"notification. You can also show the progress below."
+msgstr ""
+
+msgid "Installation queue is empty. Nothing new to install."
+msgstr ""
+
+msgid "Copying the Flatpak's user data to ~/.var/app"
+msgstr ""
+
+msgid "✔ Copied Flatpak's user data"
+msgstr ""
+
+msgid "Cleaning up orphaned user data..."
+msgstr ""
+
+msgid "All useless apps and orphaned data have been removed"
+msgstr ""
+
+msgid "Installing {count} new apps"
+msgstr ""
+
+msgid "{app} is already available in the system."
+msgstr ""
+
+msgid "↓ Installing {app} ({current}/{total})"
+msgstr ""
+
+msgid "✔ Finished installing {app}"
+msgstr ""
+
+msgid "✔ All operations have been completed successfully."
+msgstr ""
+
+msgid "Your apps have been installed!"
+msgstr ""
+
+msgid "This window will be closed automatically in 2 minutes."
+msgstr ""
+
 msgid "More options"
 msgstr "Meer opties"
 
@@ -412,8 +458,8 @@ msgid ""
 "computer, select the folder that you have synced with your cloud storage and "
 "also have saved the same periodic saving file."
 msgstr ""
-"Open dit programma op een andere computer, ga naar deze pagina en klik op ‘"
-"Synchronisatiebestand instellen’, om de juiste zaken af te stellen. Kies "
+"Open dit programma op een andere computer, ga naar deze pagina en klik op "
+"‘Synchronisatiebestand instellen’, om de juiste zaken af te stellen. Kies "
 "vervolgens op déze computer de map die u gesynchroniseerd heeft met de "
 "cloudopslag en het periodiek opgeslagen bestand."
 
