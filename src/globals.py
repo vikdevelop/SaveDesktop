@@ -83,6 +83,8 @@ ENVIRONMENTS = {
     "MATE": {"de_name": "MATE", "dirs": [(f"{home}/.config/caja", "caja")]},
     "Deepin": {"de_name": "Deepin", "dirs": [(f"{home}/.config/deepin", "deepin"), (f"{home}/.local/share/deepin", "deepin-data")]},
     "Hyprland": {"de_name": "Hyprland", "dirs": [(f"{home}/.config/hypr", "hypr")]},
+    "LXQt": {"de_name": "LXQt", "dirs": [(f"{home}/.config/lxqt", "lxqt")]},
+    "niri": {"de_name": "Niri", "dirs": [(f"{home}/.config/niri", "niri")]},
     "KDE": {"de_name": "KDE Plasma"},
 }
 

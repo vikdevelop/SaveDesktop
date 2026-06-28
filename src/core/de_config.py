@@ -105,7 +105,7 @@ def create_flatpak_autostart():
                 "[Desktop Entry]\n"
                 "Name=SaveDesktop (Flatpak Apps installer)\n"
                 "Type=Application\n"
-                f"Exec=python3 {CACHE}/workspace/flatpaks_installer.py\n"
+                f"Exec=sh -c \"flatpak run io.github.vikdevelop.SaveDesktop --show-flatpaks-installer & python3 -u {CACHE}/workspace/flatpaks_installer.py > {CACHE}/workspace/log.pipe 2>&1\""
             )
 
     print("[OK] Created Flatpak autostart")
@@ -296,8 +296,7 @@ class Save:
                 print("Saving KDE Plasma configuration...")
                 os.makedirs("DE/xdg-config", exist_ok=True)
                 os.makedirs("DE/xdg-data", exist_ok=True)
-                os.system(f"cp -R {home}/.config/[k]* ./DE/xdg-config/")
-                os.system(f"cp -R {home}/.local/share/[k]* ./DE/xdg-data/")
+                self.save_kde_config_data_dirs()
                 for src, dst in KDE_DIRS_SAVE:
                     if os.path.isfile(src):
                         safe_copy(src, os.path.join("DE", dst))
@@ -315,6 +314,36 @@ class Save:
     def save_dconf(self):
         os.system("dconf dump / > ./General/dconf-settings.ini")
         print("[OK] Saved dconf")
+
+    def save_kde_config_data_dirs(self):
+        # Target dirs
+        target_base_dir = "./DE"
+        mapping = [
+            (f"{self.home}/.config", Path(target_base_dir) / "xdg-config"),
+            (f"{self.home}/.local/share", Path(target_base_dir) / "xdg-data"),
+        ]
+
+        for src_dir, dst_path in mapping:
+            # Creating destination dir
+            dst_path.mkdir(parents=True, exist_ok=True)
+
+            # Find folders begining with 'k' or 'K'
+            for path_str in glob.glob(f"{src_dir}/[kK]*"):
+                src_path = Path(path_str)
+
+                # Ignore kdeconnect
+                if src_path.name.lower() == "kdeconnect":
+                    continue
+
+                target = dst_path / src_path.name
+
+                # Copying folders and files
+                if src_path.is_dir():
+                    if target.exists():
+                        shutil.rmtree(target)
+                    shutil.copytree(src_path, target)
+                else:
+                    shutil.copy2(src_path, target)
 
 # ------------------------
 # Import pipeline

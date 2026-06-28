@@ -108,6 +108,62 @@ msgstr ""
 msgid "Keep existing Flatpak apps and data"
 msgstr ""
 
+#: src/gui/flatpaks_installer_window.py
+msgid "Installing your Flatpak apps..."
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "You can continue using your computer; everything runs in the background. Once the installation of your Flatpak apps and, if applicable, your user data is complete, a message will appear here and you’ll also see a system notification. You can also show the progress below."
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "Installation queue is empty. Nothing new to install."
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "Copying the Flatpak's user data to ~/.var/app"
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "✔ Copied Flatpak's user data"
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "Cleaning up orphaned user data..."
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "All useless apps and orphaned data have been removed"
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "Installing {count} new apps"
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "{app} is already available in the system."
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "↓ Installing {app} ({current}/{total})"
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "✔ Finished installing {app}"
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "✔ All operations have been completed successfully."
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "Your apps have been installed!"
+msgstr ""
+
+#: src/gui/flatpaks_installer_window.py
+msgid "This window will be closed automatically in 2 minutes."
+msgstr ""
+
 #: src/gui/templates/shortcuts_window.ui:50
 #: src/gui/more_options_dialog.py
 msgid "More options"
