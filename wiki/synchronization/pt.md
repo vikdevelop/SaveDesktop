@@ -1,39 +1,39 @@
-# Synchronization between computers in the network
+# Sincronização entre computadores na rede
 
-In addition to saving the configuration and importing it, Save Desktop also allows you to synchronize it between computers on your network using a shared cloud folder or a shared Syncthing folder.
+Além de guardar e importar a configuração, o Save Desktop também permite sincronizá-la entre computadores na tua rede através de uma pasta partilhada na nuvem ou de uma pasta partilhada do Syncthing.
 
-## Setting Up on the First Computer
-1. Open the **Sync** page in the Save Desktop app.
-2. Click **“Set up the sync file.”**
-3. A quick setup wizard will appear:
-   * If you're using GNOME, Cinnamon, Budgie, or older COSMIC, the **GNOME Online Accounts** method is used.
-   * For KDE Plasma or other desktops, it switches to **Rclone** (you’ll just need to copy a command and paste it into the terminal).
-   * Alternatively, you can use **Syncthing** by clicking **“Use Syncthing’s folder instead”** and selecting a synced folder.
-4. After finishing the wizard, the **“Set up the sync file”** dialog will open:
-   * A **periodic saving file** (your desktop config archive) will start generating inside the selected folder.
-   * You can optionally change the interval or filename using the **“Change”** button.
-5. Click **“Apply”**:
-   * A second file, `SaveDesktop.json`, is created in the same folder. It contains the sync file name and saving interval.
-   * You will be prompted to **log out** of your session so synchronization can fully activate.
+## Configuração no primeiro computador
+1. Abre a página **Sincronizar** na aplicação Save Desktop.
+2. Clica em **"Configurar o ficheiro de sincronização"**.
+3. Será apresentado um assistente de configuração rápida:
+   * Se usares GNOME, Cinnamon, Budgie ou uma versão antiga do COSMIC, será usado o método **Contas online do GNOME**.
+   * No KDE Plasma ou noutros ambientes de trabalho, será usado o **Rclone** (só terás de copiar um comando e colá-lo no terminal).
+   * Em alternativa, podes usar o **Syncthing** clicando em **"Usar uma pasta do Syncthing em alternativa"** e selecionando uma pasta sincronizada.
+4. Depois de concluíres o assistente, será aberta a janela **"Configurar o ficheiro de sincronização"**:
+   * Um **ficheiro de cópia de segurança periódica** (o arquivo de configuração do teu ambiente de trabalho) começará a ser gerado dentro da pasta selecionada.
+   * Opcionalmente, podes alterar o intervalo ou o nome do ficheiro com o botão **"Alterar"**.
+5. Clica em **"Aplicar"**:
+   * Um segundo ficheiro, `SaveDesktop.json`, é criado na mesma pasta. Contém o nome do ficheiro de sincronização e o intervalo de cópia de segurança.
+   * Ser-te-á pedido que **termines sessão** para que a sincronização possa ser totalmente ativada.
 
-## Connecting on Another Computer
-1. On the other computer, go to the **Sync** page again.
-2. Click **“Connect to the cloud storage.”**
-3. The same wizard will appear – choose your synced folder via GNOME OA, Rclone, or Syncthing.
-4. After the wizard:
-   * The **“Connect to the cloud storage”** dialog opens.
-   * Select the **sync interval** and enable or disable **Bidirectional synchronization**.
-5. Click **“Apply”**:
-   * You will be prompted to **log out**, or (if using manual sync) informed that you can sync from the app’s header menu.
-   * After logging back in, Save Desktop connects to the shared folder and syncs your configuration automatically, with a notification at the start and end.
+## Ligar noutro computador
+1. No outro computador, volta à página **Sincronizar**.
+2. Clica em **"Ligar ao armazenamento na nuvem"**.
+3. Será apresentado o mesmo assistente — escolhe a tua pasta sincronizada através das Contas online do GNOME, Rclone ou Syncthing.
+4. Depois do assistente:
+   * A janela **"Ligar ao armazenamento na nuvem"** é aberta.
+   * Seleciona o **intervalo de sincronização** e ativa ou desativa a **Sincronização bidirecional**.
+5. Clica em **"Aplicar"**:
+   * Ser-te-á pedido que **termines sessão** ou, se usares a sincronização manual, serás informado de que podes sincronizar a partir do menu da barra de cabeçalho da aplicação.
+   * Depois de voltares a iniciar sessão, o Save Desktop liga-se à pasta partilhada e sincroniza automaticamente a tua configuração, com uma notificação no início e no fim.
 
-### Bidirectional Synchronization
-If **Bidirectional synchronization** is enabled on both computers:
-* Save Desktop copies sync settings (such as interval and filename) from one machine to the other,
-* This keeps your systems in sync without needing to configure each one manually.
+### Sincronização bidirecional
+Se a **Sincronização bidirecional** estiver ativa em ambos os computadores:
+* O Save Desktop copia as definições de sincronização (como o intervalo e o nome do arquivo) de uma máquina para a outra;
+* Isto mantém os sistemas sincronizados sem ser necessário configurar cada um manualmente.
 
-## Files Used in Synchronization
-* **Periodic saving file** – a `.sd.zip` archive of your desktop configuration, updated regularly.
-* **SaveDesktop.json** – a small helper file that stores the archive’s filename and saving interval, used during sync setup.
+## Ficheiros usados na sincronização
+* **Ficheiro de cópia de segurança periódica** — um arquivo `.sd.zip` da configuração do teu ambiente de trabalho, atualizado regularmente.
+* **SaveDesktop.json** — um pequeno ficheiro auxiliar que guarda o nome do arquivo e o intervalo de cópia de segurança, usado durante a configuração da sincronização.
 
 {% include footer.html %}
