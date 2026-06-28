@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2026-02-15 16:51+0000\n"
+"PO-Revision-Date: 2026-06-28 10:35+0000\n"
 "Last-Translator: vikdevelop <vikdevelop@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/cs/>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 2026.7.dev0\n"
 
 msgid "Save"
 msgstr "Uložit"
@@ -92,6 +92,56 @@ msgstr "Vybrat aplikace Flatpak"
 
 msgid "Keep existing Flatpak apps and data"
 msgstr "Zachovat existující aplikace Flatpak a jejich data"
+
+msgid "Installing your Flatpak apps..."
+msgstr "Probíhá instalace vašich aplikací Flatpak…"
+
+msgid ""
+"You can continue using your computer; everything runs in the background. "
+"Once the installation of your Flatpak apps and, if applicable, your user "
+"data is complete, a message will appear here and you’ll also see a system "
+"notification. You can also show the progress below."
+msgstr ""
+"Můžete dál používat počítač, vše probíhá na pozadí. Jakmile bude instalace "
+"aplikací Flatpak a případně i vašich uživatelských dat dokončena, zobrazí se "
+"zde zpráva a objeví se také systémová notifikace. Průběh instalace si můžete "
+"zobrazit také níže."
+
+msgid "Installation queue is empty. Nothing new to install."
+msgstr "Instalační fronta je prázdná. Není co nového instalovat."
+
+msgid "Copying the Flatpak's user data to ~/.var/app"
+msgstr "Kopírování uživatelských dat Flatpaku do adresáře ~/.var/app"
+
+msgid "✔ Copied Flatpak's user data"
+msgstr "✔ Uživatelská data Flatpaku zkopírována"
+
+msgid "Cleaning up orphaned user data..."
+msgstr "Mazání opuštěných uživatelských dat..."
+
+msgid "All useless apps and orphaned data have been removed"
+msgstr "Všechny nepotřebné aplikace a opuštěná data byly odstraněny"
+
+msgid "Installing {count} new apps"
+msgstr "Instalace {count} nových aplikací"
+
+msgid "{app} is already available in the system."
+msgstr "Aplikace {app} je v systému již k dispozici."
+
+msgid "↓ Installing {app} ({current}/{total})"
+msgstr "↓ Instalace {app} ({current}/{total})"
+
+msgid "✔ Finished installing {app}"
+msgstr "✔ Dokončena instalace {app}"
+
+msgid "✔ All operations have been completed successfully."
+msgstr "✔ Veškeré operace byly dokončeny úspěšně."
+
+msgid "Your apps have been installed!"
+msgstr "Vaše aplikace byly nainstalovány!"
+
+msgid "This window will be closed automatically in 2 minutes."
+msgstr "Toto okno bude uzavřeno automaticky do 2 minut."
 
 msgid "More options"
 msgstr "Více možností"

@@ -75,8 +75,8 @@ msgid ""
 "selected path begins at /run/user/</b>, it would be necessary to grant "
 "access to the folder you want to select.</i>"
 msgstr ""
-"<i>Поскольку вы используете Flatpak, обратите внимание на формат пути. <b>"
-"Если выбранный путь начинается с /run/user/</b>, может потребоваться "
+"<i>Поскольку вы используете Flatpak, обратите внимание на формат пути. "
+"<b>Если выбранный путь начинается с /run/user/</b>, может потребоваться "
 "предоставить доступ к папке, которую вы хотите выбрать.</i>"
 
 msgid "Flatpak apps"
@@ -93,6 +93,52 @@ msgstr "Выбрать приложения Flatpak"
 
 msgid "Keep existing Flatpak apps and data"
 msgstr "Сохранить существующие Flatpak-приложения и данные"
+
+msgid "Installing your Flatpak apps..."
+msgstr ""
+
+msgid ""
+"You can continue using your computer; everything runs in the background. "
+"Once the installation of your Flatpak apps and, if applicable, your user "
+"data is complete, a message will appear here and you’ll also see a system "
+"notification. You can also show the progress below."
+msgstr ""
+
+msgid "Installation queue is empty. Nothing new to install."
+msgstr ""
+
+msgid "Copying the Flatpak's user data to ~/.var/app"
+msgstr ""
+
+msgid "✔ Copied Flatpak's user data"
+msgstr ""
+
+msgid "Cleaning up orphaned user data..."
+msgstr ""
+
+msgid "All useless apps and orphaned data have been removed"
+msgstr ""
+
+msgid "Installing {count} new apps"
+msgstr ""
+
+msgid "{app} is already available in the system."
+msgstr ""
+
+msgid "↓ Installing {app} ({current}/{total})"
+msgstr ""
+
+msgid "✔ Finished installing {app}"
+msgstr ""
+
+msgid "✔ All operations have been completed successfully."
+msgstr ""
+
+msgid "Your apps have been installed!"
+msgstr ""
+
+msgid "This window will be closed automatically in 2 minutes."
+msgstr ""
 
 msgid "More options"
 msgstr "Больше опций"
