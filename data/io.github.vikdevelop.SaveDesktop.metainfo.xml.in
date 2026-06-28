@@ -67,12 +67,13 @@
           
     <releases>
        <release version="4.1" date="2026-07-05">
-          <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/4.0</url>
+          <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/4.1</url>
           <description>
             <ul>
               <li>Added support for Niri WM and LXQt DE</li>
-              <li>Added a status window for showing the progress of Flatpak apps installation after configuration import</li>
-              <li>Updated the GNOME runtime and 7-Zip to the latest versions</li>
+              <li>Added a status window for showing the progress of Flatpak apps installation after configuration import (#521)</li>
+              <li>Excluded the KDE Connect configuration from synchronization (#533)</li>
+              <li>Updated the GNOME runtime and 7-Zip to the latest versions (#534)</li>
             </ul>
           </description>
        </release>
