@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2026-03-29 10:09+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/nl/>\n"
 "Language: nl\n"
@@ -14,24 +14,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 msgid "Save"
 msgstr "Opslaan"
 
 msgid "Save the current configuration"
-msgstr "Huidige voorkeuren opslaan"
+msgstr "Huidige instellingen opslaan"
 
 msgid "Set the file name"
 msgstr "Geef het bestand een naam"
 
 msgid "Select configuration items"
-msgstr ""
+msgstr "Kies instellingenitems"
 
 msgid ""
 "These settings are used for manual and periodic saves, imports, and "
 "synchronization."
 msgstr ""
+"Deze instellingen worden gebruikt voor het handmatig en periodiek opslaan, "
+"importeren en synchronisatie."
 
 msgid "Icons"
 msgstr "Pictogrammen"
@@ -47,49 +49,52 @@ msgid "Backgrounds"
 msgstr "Achtergronden"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Uitbreidingen"
 
 msgid "Desktop"
-msgstr ""
+msgstr "Bureaublad"
 
 msgid "File manager bookmarks"
-msgstr ""
+msgstr "Bladwijzers van bestandsbeheerder"
 
 msgid "Custom folders"
-msgstr ""
+msgstr "Zelfgekozen mappen"
 
 msgid "Select custom folders to include in the configuration archive."
-msgstr ""
+msgstr "Kies de mappen die u wilt toevoegen aan het archief."
 
 msgid "Add folder"
-msgstr ""
+msgstr "Map toevoegen"
 
 msgid "Remove"
-msgstr ""
+msgstr "Verwijderen"
 
 msgid ""
 "<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
 "selected path begins at /run/user/</b>, it would be necessary to grant "
 "access to the folder you want to select.</i>"
 msgstr ""
+"<i>U maakt gebruik van Flatpak, dus is het van belang op te letten op de "
+"locatie. <b>Als die begint met /run/user/</b>, is het nodig om toestemming "
+"tot de toe te voegen map te verlenen.</i>"
 
 msgid "Flatpak apps"
-msgstr "Flatpaktoepassingen"
+msgstr "Flatpakprogramma's"
 
 msgid "List of installed Flatpak apps"
-msgstr ""
+msgstr "Lijst met geïnstalleerde Flatpakprogramma's"
 
 msgid "User data of installed Flatpak apps"
-msgstr "Gebruikersgegevens van geïnstalleerde Flatpaktoepassingen"
+msgstr "Instellingen van geïnstalleerde Flatpakprogramma's"
 
 msgid "Select Flatpak apps"
-msgstr ""
+msgstr "Flatpakprogramma's kiezen"
 
 msgid "Keep existing Flatpak apps and data"
-msgstr ""
+msgstr "Bestaande Flatpakprogramma's en -instellingen behouden"
 
 msgid "More options"
-msgstr ""
+msgstr "Meer opties"
 
 msgid "Periodic saving"
 msgstr "Periodiek opslaan"
@@ -98,7 +103,7 @@ msgid "Changes will only take effect after the next login"
 msgstr "Meld u opnieuw aan om de wĳzigingen toe te passen"
 
 msgid "Interval"
-msgstr ""
+msgstr "Tussenpoos"
 
 msgid "Never"
 msgstr "Nooit"
@@ -116,7 +121,7 @@ msgid "Learn more"
 msgstr "Meer informatie"
 
 msgid "Folder for periodic saving"
-msgstr "Periodieke-opslagmap"
+msgstr "Periodiek opslaan in"
 
 msgid "Choose custom folder for periodic saving"
 msgstr "Kies een map waarin periodiek reservekopieën dienen te worden bewaard"
@@ -131,13 +136,13 @@ msgid "Reset to default"
 msgstr "Standaardwaarden"
 
 msgid "Password for encryption"
-msgstr ""
+msgstr "Wachtwoord om te versleutelen"
 
 msgid "Manual saving"
-msgstr ""
+msgstr "Handmatig opslaan"
 
 msgid "Archive encryption"
-msgstr ""
+msgstr "Archief versleutelen"
 
 # Translation key: archive_encryption_desc
 msgid ""
@@ -145,12 +150,14 @@ msgid ""
 "password. This is useful when saving the configuration to portable media for "
 "better security of your data."
 msgstr ""
+"Als u de instellingen handmatig opslaat, wordt gevraagd om een wachtwoord in "
+"te stellen. Hiermee voegt u een extra beveiligingslaag toe aan uw gegevens."
 
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Instellingen opslaan zonder archief samen te stellen"
 
 msgid "Create new password"
-msgstr ""
+msgstr "Nieuw wachtwoord instellen"
 
 # Translation key: create_pwd_desc
 msgid ""
@@ -158,15 +165,18 @@ msgid ""
 "least 12 characters, one uppercase letter, one lowercase letter, and one "
 "special character."
 msgstr ""
+"Beveilig uw archief met een wachtwoord. Het wachtwoord dient minimaal 12 "
+"tekens te bevatten, waarvan één hoofdletter, één kleine letter en één "
+"speciaal teken."
 
 msgid "Generate Password"
-msgstr ""
+msgstr "Wachtwoord genereren"
 
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 msgid "Unlock the archive with a password"
-msgstr ""
+msgstr "Archief ontgrendelen met wachtwoord"
 
 # Translation key: check_pwd_desc
 msgid ""
@@ -174,11 +184,15 @@ msgid ""
 "you have forgotten it, you will not be able to unzip the archive and start "
 "importing your configuration."
 msgstr ""
+"Voer hieronder het wachtwoord in om het archief te ontgrendelen. Als u het "
+"wachtwoord vergeten bent, kunt u het archief niet uitpakken en de "
+"instellingen niet importeren."
 
 # Translation key: enter_password_title
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Wachtwoord invoeren om archief te ontgrendelen en synchronisatie te starten"
 
 # Translation key: enter_password_desc
 msgid ""
@@ -186,12 +200,17 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
+"U heeft een beveiligd archief gekozen om te synchroniseren. Voer hieronder "
+"het wachtwoord in om het archief te ontgrendelen en de synchronisatie te "
+"starten."
 
 msgid "Remember Password"
-msgstr ""
+msgstr "Wachtwoord onthouden"
 
 msgid "Password not entered, or it's incorrect. Unable to continue."
 msgstr ""
+"U heeft geen of een onjuist wachtwoord ingevoerd. Er kan niet verder worden "
+"gegaan."
 
 # Translation key: saving_config_status
 msgid ""
@@ -199,12 +218,12 @@ msgid ""
 "The configuration of your desktop environment will be saved in:\n"
 " <i>{}/{}.sd.tar.gz</i>\n"
 msgstr ""
-"<big><b>Saving configuration ...</b></big>\n"
-"The configuration of your desktop environment will be saved in:\n"
+"<big><b>Bezig met opslaan van instellingen…</b></big>\n"
+"Ze worden opgeslagen in:\n"
 " <i>{}/{}.sd.tar.gz</i>\n"
 
 msgid "Configuration has been saved!"
-msgstr "De voorkeuren zĳn opgeslagen!"
+msgstr "De instellingen zĳn opgeslagen!"
 
 # Translation key: config_saved_desc
 msgid ""
@@ -212,6 +231,9 @@ msgid ""
 "You can now view the archive with the configuration of your desktop "
 "environment, or return to the previous page.\n"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"U kunt nu het archief met instellingen van uw werkomgeving bekijken of "
+"terugkeren naar de vorige pagina.\n"
 
 msgid "Open the folder"
 msgstr "Map openen"
@@ -220,13 +242,13 @@ msgid "Import"
 msgstr "Importeren"
 
 msgid "Import saved configuration"
-msgstr "Voorkeuren importeren"
+msgstr "Instellingen importeren"
 
 msgid "Import from file"
 msgstr "Importeren uit bestand"
 
 msgid "Import from folder"
-msgstr ""
+msgstr "Importeren uit map"
 
 msgid "Cancel"
 msgstr "Annuleren"
@@ -240,11 +262,12 @@ msgid ""
 "Importing configuration from:\n"
 "<i>{}</i>\n"
 msgstr ""
-"<big><b>Importing configuration ...</b></big>\n"
-"Importing configuration from: {}\n"
+"<big><b>Bezig met importeren van instellingen…</b></big>\n"
+"Ze worden geïmporteerd uit:\n"
+"<i>{}</i>\n"
 
 msgid "The configuration has been applied!"
-msgstr "De voorkeuren zĳn ingesteld!"
+msgstr "De instellingen zĳn ingesteld!"
 
 msgid ""
 "<big><b>{}</b></big>\n"
@@ -254,15 +277,21 @@ msgid ""
 "<i>If your archive contains Flatpak apps, they will start installing after "
 "the next login.</i>"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"U kunt nu afmelden om de instellingen toe te passen of terugkeren naar de "
+"vorige pagina en u op een later moment af te melden.\n"
+"\n"
+"<i>Als uw archief Flatpak-programma's bevat, worden die na de volgende keer "
+"aanmelden geïnstalleerd.</i>"
 
 msgid "Back to previous page"
-msgstr ""
+msgstr "Terug naar vorige pagina"
 
 msgid "Log Out"
 msgstr "Afmelden"
 
 msgid "An error occurred"
-msgstr ""
+msgstr "Er is een fout opgetreden"
 
 msgid "Apply"
 msgstr "Toepassen"
@@ -278,28 +307,32 @@ msgstr ""
 "Synchroniseer uw werkomgevingsvoorkeuren met andere computers op het netwerk."
 
 msgid "Initial synchronization setup"
-msgstr ""
+msgstr "Synchronisatie instellen"
 
 msgid "1. Open the system settings"
-msgstr ""
+msgstr "1. Open de systeeminstellingen"
 
 msgid "2. Go to the Online Accounts section"
-msgstr ""
+msgstr "2. Ga naar de sectie ‘Online-accounts’"
 
 # Translation key: gnome_oa_section_desc
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
+"In deze sectie kunt u de gewenste clouddienst kiezen, zoals Google, "
+"Microsoft 365 of Nextcloud."
 
 msgid "3. Click on the Next button and select the created cloud drive folder"
-msgstr ""
+msgstr "3. Klik op de knop ‘Volgende’ en kies de gekozen cloudopslagmap"
 
 # Translation key: gnome_oa_chooser_desc
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
+"De gekozen cloudopslagmap wordt getoond op het zijpaneel van de "
+"bestandskiezer in de vorm van gebruikersnaam@dienst.nl."
 
 # Translation key: rclone_intro_desc
 msgid ""
@@ -307,6 +340,9 @@ msgid ""
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
+"Voor het juist laten verlopen van de synchronisatie, dient u te beschikken "
+"over de map die wordt gesynchroniseerd met behulp van Rclone.\n"
+"<b>Kies eerst de te gebruiken clouddienst.</b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
@@ -314,33 +350,39 @@ msgid ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
+"Kopieer nu de opdracht om Rclone in te stellen en de open het "
+"terminalprogramma, via Ctrl+Alt+T of het programmamenu."
 
 msgid "Copy"
-msgstr ""
+msgstr "Kopiëren"
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
+"Als u Rclone aan de hand van onderstaande opdracht hebt ingesteld, klikt u "
+"op ‘Toepassen’"
 
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Syncthing-map gebruiken"
 
 msgid "Almost done!"
-msgstr ""
+msgstr "Bijna klaar!"
 
 # Translation key: almost_done_desc
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
+"U heeft de cloudopslagmap aangemaakt! Klik op de knop ‘Volgende’ om de "
+"instelhulp af te ronden."
 
 msgid "Select"
-msgstr ""
+msgstr "Kiezen"
 
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 msgid "Set up the sync file"
 msgstr "Synchronisatiebestand instellen"
@@ -349,19 +391,19 @@ msgid "Periodic saving file"
 msgstr "Periodiek opgeslagen bestand"
 
 msgid "Periodic saving file does not exist."
-msgstr ""
+msgstr "Het periodiek opgeslagen bestand bestaat niet."
 
 msgid "Create"
-msgstr ""
+msgstr "Maken"
 
 msgid "Please wait …"
 msgstr "Even geduld…"
 
 msgid "Change"
-msgstr ""
+msgstr "Wĳzigen"
 
 msgid "Connect to the cloud storage"
-msgstr ""
+msgstr "Koppelen aan cloudopslag"
 
 # Translation key: connect_cloud_storage_desc
 msgid ""
@@ -370,36 +412,43 @@ msgid ""
 "computer, select the folder that you have synced with your cloud storage and "
 "also have saved the same periodic saving file."
 msgstr ""
+"Open dit programma op een andere computer, ga naar deze pagina en klik op ‘"
+"Synchronisatiebestand instellen’, om de juiste zaken af te stellen. Kies "
+"vervolgens op déze computer de map die u gesynchroniseerd heeft met de "
+"cloudopslag en het periodiek opgeslagen bestand."
 
 msgid "Select the cloud drive folder"
-msgstr ""
+msgstr "Cloudopslagmap kiezen"
 
 msgid "You didn't select the cloud drive folder!"
-msgstr ""
+msgstr "U heeft geen cloudopslagmap gekozen!"
 
 msgid "Periodic synchronization"
 msgstr "Periodieke synchronisatie"
 
 msgid "Bidirectional synchronization"
-msgstr ""
+msgstr "Tweerichtingssynchronisatie"
 
 msgid ""
 "Enables full two-way synchronization, allowing this computer to use the same "
 "backup schedule, archive name, and selected configuration items as the other "
 "computer with synchronization set up."
 msgstr ""
+"Schakel synchronisatie in twee richtingen in, zodat deze computer "
+"gebruikmaakt van hetzelfde reservekopieschema, archiefnaam en gekozen "
+"instellingenitems als de andere computer."
 
 msgid "Keyboard shortcuts"
-msgstr ""
+msgstr "Sneltoetsen"
 
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Wikipagina openen"
 
 msgid "Quit"
-msgstr ""
+msgstr "Afsluiten"
 
 msgid "About app"
-msgstr "Over de toepassing"
+msgstr "Over dit programma"
 
 # Translation key: unsuppurted_env_desc
 msgid ""
@@ -410,7 +459,7 @@ msgstr ""
 "De volgende werkomgevingen worden ondersteund: {}."
 
 msgid "Save your desktop configuration"
-msgstr "Sla de huidige voorkeuren van uw werkomgeving op"
+msgstr "Sla de huidige instellingen van uw werkomgeving op"
 
 msgid ""
 "Save Desktop helps you back up, restore, and synchronize your entire desktop "
@@ -420,6 +469,12 @@ msgid ""
 "keep your setup consistent across devices with automatic periodic saves and "
 "synchronization."
 msgstr ""
+"Met behulp van Save Desktop kunt u een reservekopie maken van uw gehele "
+"werkomgeving, deze synchroniseren en desgewenst op een later moment "
+"herstellen. Al uw thema's, pictogrammen, lettertypen, "
+"bureaubladachtergronden en -map, uitbreidingen, Flatpak-programma's en "
+"andere instellingen worden opgeslagen in één archief. Kies zelf wat u wilt "
+"bewaren, en stel periodiek opslaan en synchronisatie in."
 
 msgid "Translator credits"
 msgstr "https://github.com/Vistaus"
