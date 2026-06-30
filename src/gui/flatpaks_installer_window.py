@@ -16,6 +16,7 @@ class FlatpaksWindow(Adw.ApplicationWindow):
         self.toolbarview = Adw.ToolbarView.new()
         self.toolbarview.add_top_bar(self.headerbar)
         self.set_content(self.toolbarview)
+        self.connect("close-request", self.on_manual_close)
 
         self.headerbar.pack_start(Gtk.Image.new_from_icon_name("io.github.vikdevelop.SaveDesktop-symbolic"))
 
@@ -137,7 +138,6 @@ class FlatpaksWindow(Adw.ApplicationWindow):
 
         translated_text = self.translate_log_line(text)
 
-
         buffer.insert(end_iter, translated_text)
 
         new_end_iter = buffer.get_end_iter()
@@ -220,7 +220,7 @@ class FlatpaksWindow(Adw.ApplicationWindow):
     def start_auto_close_timer(self):
         # 300 seconds = 2 minutes
         # GLib.timeout_add_seconds will wait in the background and then execute 'self.close_app'
-        GLib.timeout_add_seconds(120, self.close_app)
+        GLib.timeout_add_seconds(120, self.close_app_after_timer)
 
         self.set_title(_("Your apps have been installed!"))
         self.status_page.set_icon_name("done")
@@ -228,12 +228,21 @@ class FlatpaksWindow(Adw.ApplicationWindow):
 
         return False # tells idle_add to only run this setup once
 
-    def close_app(self):
+    # Close the app window after 2 minutes
+    def close_app_after_timer(self):
         # This is triggered when the 2 minutes are up.
         # Safely closes the current GTK window.
         self.close()
 
         return False # tells the timeout timer not to repeat itself
+
+    # Close the app window manually by clicking on the window's close button
+    def on_manual_close(self, w):
+        self.hide()
+
+        # If the mentioned path exists, the app window will not be destroyed
+        if os.path.exists(f"{CACHE}/workspace"):
+            return True
 
 class FlatpaksInstallerApp(Adw.Application):
     def __init__(self, **kwargs):
