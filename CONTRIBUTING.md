@@ -29,6 +29,6 @@ No Python knowledge? Never mind. For example, you can contribute to the [applica
 *It should be noted that this app is available under the [GNU GPL 3.0](https://github.com/vikdevelop/SaveDesktop/blob/main/LICENSE) license, so it is necessary to follow the license conditions.*
 
 ## Reporting issues
-Have you found a bug in the app? Do you have a suggestion for a new feature, or is something not clear? You can use [Github issues](https://github.com/vikdevelop/SaveDesktop/issues) for this purpose, but make sure someone else hasn't reported a similar issue before you. Don't prefer Github issues? If so, you can use [this form](https://vikdevelop.github.io/SaveDesktop/open-issue/) or [Github discussions](https://github.com/vikdevelop/SaveDesktop/discussions).
+Have you found a bug in the app? Do you have a suggestion for a new feature, or is something not clear? You can use [Github issues](https://github.com/vikdevelop/SaveDesktop/issues) for this purpose, but make sure someone else hasn't reported a similar issue before you. Don't prefer Github issues? If so, you can use [this form](https://vikdevelop.github.io/SaveDesktop/issue-report/) or [Github discussions](https://github.com/vikdevelop/SaveDesktop/discussions).
 
 **I look forward to your contributions to this app!**
