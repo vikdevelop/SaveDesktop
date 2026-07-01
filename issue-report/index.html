@@ -43,42 +43,9 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            <label for="installation-methods"></label>
-            <select class="btn" id="issue-type" onchange="openLink()">
-                <option value="">Select an issue type</option>
-                <option value="#bug">Bug report</option>
-                <option value="#feature">Feature request</option>
-                <option value="#question">Question</option>
-            </select>
-
-            <script>
-                function openLink() {
-                    var select = document.getElementById("issue-type");
-                    var url = select.value;
-                    if (url) {
-                        window.location.href = url;
-                    }
-                }
-            </script>
+            <a class="btn btn-primary" href="https://github.com/vikdevelop/SaveDesktop/issues">Report via Github</a>
+            <a class="btn btn-secondary" href="mailto:vikdevelop@proton.me?subject=Issue:%20&body=Hi,%20I%20would%20like%20to%20report%20this%20issue:">Report via email</a>
         </header>
-        
-        <section class="page-section portfolio" id="bug">
-            <div class="container">
-                <script type="text/javascript" src="https://form.jotform.com/jsform/232703172625047"></script>
-            </div>
-        </section>
-        <hr>
-        <section class="page-section portfolio" id="feature">
-            <div class="container">
-                <script type="text/javascript" src="https://form.jotform.com/jsform/232703872503049"></script>
-            </div>
-        </section>
-        <hr>
-        <section class="page-section portfolio" id="question">
-            <div class="container">
-                <script type="text/javascript" src="https://form.jotform.com/jsform/232703216609048"></script>
-            </div>
-        </section>
         
         <!-- Footer-->
         <!-- Copyright Section-->
