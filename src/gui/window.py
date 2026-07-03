@@ -670,6 +670,7 @@ class MainWindow(Adw.ApplicationWindow):
     def _kill_process(self):
         if hasattr(self, "archive_proc") and self.archive_proc.poll() is None:
             self.archive_proc.kill()
+            print("The process was stopped.")
 
     # config has been saved action
     def done(self):

@@ -40,8 +40,7 @@
             "subdir" : "CPP/7zip/Bundles/Alone2",
             "build-commands" : [
                 "make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc",
-                "install -D ./_o/7zz -t /app/bin",
-                "ln -s /app/bin/7zz /app/bin/7z"
+                "install -D ./_o/7zz /app/bin/7z"
             ],
             "sources" : [
                 {
