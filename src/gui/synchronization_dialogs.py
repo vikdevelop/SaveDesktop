@@ -312,10 +312,11 @@ class SetDialog(Adw.AlertDialog):
 
     # Action after closing dialog for setting synchronization file
     def setDialog_closed(self, w, response):
-        os.remove(f"{CACHE}/expand_pb_row")
         if response == 'ok':
             thread = Thread(target=self._save_file)
             thread.start()
+        elif response == 'cancel':
+            os.remove(f"{CACHE}/expand_pb_row")
 
     # save the SaveDesktop.json file to the periodic saving folder and set up the auto-mounting the cloud drive
     def _save_file(self):
