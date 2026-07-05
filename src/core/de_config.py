@@ -319,8 +319,8 @@ class Save:
         # Target dirs
         target_base_dir = "./DE"
         mapping = [
-            (f"{self.home}/.config", Path(target_base_dir) / "xdg-config"),
-            (f"{self.home}/.local/share", Path(target_base_dir) / "xdg-data"),
+            (f"{home}/.config", Path(target_base_dir) / "xdg-config"),
+            (f"{home}/.local/share", Path(target_base_dir) / "xdg-data"),
         ]
 
         for src_dir, dst_path in mapping:
