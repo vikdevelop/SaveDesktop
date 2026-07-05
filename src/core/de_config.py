@@ -1,4 +1,4 @@
-import os, shutil, subprocess, json
+import os, shutil, subprocess, json, glob
 from gi.repository import GLib
 from savedesktop.globals import *
 from pathlib import Path
