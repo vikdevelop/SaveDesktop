@@ -1,9 +1,10 @@
-import os, sys, gi, subprocess
+import os, sys, gi, subprocess, shutil
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, Gio, GLib
 from savedesktop.gui.window import MainWindow
 from savedesktop.gui.items_dialog import itemsDialog
+from savedesktop.gui.reset_dialog import ResetDialog
 from savedesktop.globals import *
 
 class ShortcutsWindow:
@@ -33,6 +34,7 @@ class SaveDesktopApp(Adw.Application):
         self.create_action('shortcuts', self.shortcuts, ["<primary>question"])
         self.create_action('logout', self.logout)
         self.create_action('open_dir', self.open_dir)
+        self.create_action('reset-cfg-to-default', self.reset_app_config)
         self.create_action('about', self.on_about_action)
         self.connect('activate', self.on_activate)
 
@@ -96,6 +98,11 @@ class SaveDesktopApp(Adw.Application):
             path = f"{self.win.folder}/{self.win.filename_text}.sd.zip"
 
         Gtk.FileLauncher.new(Gio.File.new_for_path(path)).open_containing_folder()
+
+    def reset_app_config(self, action, param):
+        self.reset_dialog = ResetDialog(self.win)
+        self.reset_dialog.choose(self.win, None, None, None)
+        self.reset_dialog.present(self.win)
 
     # "About app" dialog
     def on_about_action(self, action, param):

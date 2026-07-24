@@ -29,6 +29,14 @@ msgstr ""
 msgid "Set the file name"
 msgstr ""
 
+#: src/gui/window.py
+msgid "Reset app settings"
+msgstr ""
+
+#: src/gui/reset_dialog.py
+msgid "You will lose all of the app's preferences and settings (e.g. periodic saving or synchronization settings). Your existing archives, whether stored in the cloud or locally, will remain unaffected."
+msgid ""
+
 #: src/gui/templates/shortcuts_window.ui:57
 #: src/gui/window.py
 #: src/gui/items_dialog.py

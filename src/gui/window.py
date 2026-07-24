@@ -39,6 +39,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.general_menu = Gio.Menu()
         self.general_menu.append(_("Keyboard shortcuts"), 'app.shortcuts')
         self.general_menu.append(_("Select configuration items"), 'app.items-dialog')
+        self.general_menu.append(_("Reset app settings"), 'app.reset-cfg-to-default')
         self.general_menu.append(_("About app"), 'app.about')
         self.main_menu.append_section(None, self.general_menu)
 
