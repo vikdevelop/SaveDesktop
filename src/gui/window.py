@@ -389,6 +389,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_filter.set_name(_("Save Desktop files"))
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_filter.add_pattern('*.sd.zip')
+        self.file_filter.add_pattern('*.sdar')
         self.file_filter_list = Gio.ListStore.new(Gtk.FileFilter);
         self.file_filter_list.append(self.file_filter)
         self.file_chooser.set_filters(self.file_filter_list)
@@ -509,7 +510,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.archive_name = f"{self.folder}/{self.filename_text}"
 
         if not settings["save-without-archive"]:
-            self.archive_name += ".sd.zip"
+            self.archive_name += ".sdar"
 
         self.status_title = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n").split('</b>')[0].split('<b>')[-1]
         self.status_desc = self._set_status_desc_save()
@@ -522,12 +523,16 @@ class MainWindow(Adw.ApplicationWindow):
 
     def _set_status_desc_save(self):
         status_old = _("<big><b>Saving configuration …</b></big>\nThe configuration of your desktop environment will be saved in:\n <i>{}/{}.sd.tar.gz</i>\n")
-        status = status_old.replace("sd.tar.gz", "sd.zip") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
+        status = status_old.replace("sd.tar.gz", "sdar") if not settings["save-without-archive"] else status_old.replace("sd.tar.gz", "")
         return status.format(self.folder, self.filename_text)
 
     # Import configuration
     def import_config(self):
         self.toast_overlay.dismiss_all()
+
+        if os.path.exists(f"{CACHE}/mime-tmp"):
+            self.path_to_import = open(f"{CACHE}/mime-tmp").read()
+            os.remove(f"{CACHE}/mime-tmp")
 
         self.archive_name = self.path_to_import
         self.archive_mode = "--unpack"
@@ -547,7 +552,7 @@ class MainWindow(Adw.ApplicationWindow):
         else:
             password = None
 
-        if self.archive_name.endswith(".sd.zip"):
+        if self.archive_name.endswith(".sd.zip") or self.archive_name.endswith(".sdar"):
             if password:
                 result = subprocess.run(
                     ["7z", "l", "-slt", f"-p{password}", self.archive_name],

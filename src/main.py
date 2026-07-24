@@ -21,7 +21,7 @@ class ShortcutsWindow:
 
 class SaveDesktopApp(Adw.Application):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs, flags=Gio.ApplicationFlags.FLAGS_NONE,
+        super().__init__(**kwargs, flags=Gio.ApplicationFlags.HANDLES_OPEN,
                          application_id="io.github.vikdevelop.SaveDesktop")
         self.create_action('save-config', self.call_saving_config, ["<primary>s"])
         self.create_action('import-config', self.call_importing_config, ["<primary>o"])
@@ -73,6 +73,19 @@ class SaveDesktopApp(Adw.Application):
         self.win.on_close(w="")
         self.quit()
 
+    # Open the Save Desktop Archive from file manager and start importing
+    def do_open(self, files, n_files, hint):
+        for gio_file in files:
+            self.path = gio_file.get_path()
+
+        with open(f"{CACHE}/mime-tmp", "w") as m:
+            m.write(self.path)
+
+        self.win = MainWindow(application=app)
+        self.win.import_config()
+
+        self.activate()
+
     # Show Keyboard Shortcuts window
     def shortcuts(self, action, param):
         ShortcutsWindow(parent_window=self.get_active_window()).present()
@@ -95,7 +108,7 @@ class SaveDesktopApp(Adw.Application):
         if settings["save-without-archive"]:
             path = f"{self.win.folder}/{self.win.filename_text}"
         else:
-            path = f"{self.win.folder}/{self.win.filename_text}.sd.zip"
+            path = f"{self.win.folder}/{self.win.filename_text}.sdar"
 
         Gtk.FileLauncher.new(Gio.File.new_for_path(path)).open_containing_folder()
 

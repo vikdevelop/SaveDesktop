@@ -44,7 +44,7 @@ class Create:
 
         # In the periodic saving mode, it's not allowed to save the
         # configuration without creating the archive
-        if not self.path_with_filename.endswith(".sd.zip"):
+        if not self.path_with_filename.endswith(".sdar"):
             print("Moving the configuration to the user-defined directory")
             self._copy_config_to_folder()
         else:
@@ -62,7 +62,7 @@ class Create:
 
     # Create a new ZIP archive with 7-Zip
     def _create_archive(self):
-        cmd = ['7z', 'a', '-snL', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sd.zip',  "."]
+        cmd = ['7z', 'a', '-snL', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sdar',  "."]
         if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb"):
             if password:
                 cmd.insert(4, "-mem=AES256")
@@ -78,7 +78,7 @@ class Create:
             print("7z finished with warnings:", proc.stderr)
 
         print("Moving the configuration archive to the user-defined directory")
-        shutil.copyfile('cfg.sd.zip', self.path_with_filename)
+        shutil.copyfile('cfg.sdar', self.path_with_filename)
 
 class Unpack:
     def __init__(self, dir_path):
@@ -104,7 +104,7 @@ class Unpack:
     # Check, if the input is archive or folder
     def _check_config_type(self):
         # Check, if the input is folder or not
-        if self.path_with_filename.endswith(".sd.zip"):
+        if self.path_with_filename.endswith(".sd.zip") or self.path_with_filename.endswith(".sdar"):
             self._unpack_zip_archive()
         elif self.path_with_filename.endswith(".sd.tar.gz"):
             self._unpack_tar_archive()

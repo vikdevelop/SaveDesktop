@@ -45,6 +45,17 @@ locale.bindtextdomain('savedesktop', localedir)
 locale.textdomain('savedesktop')
 gettext.install('savedesktop', localedir)
 
+mime_files = []
+clean_argv = [sys.argv[0]]
+
+for arg in sys.argv[1:]:
+    if arg.startswith('/'):
+        mime_files.append(arg)
+    else:
+        clean_argv.append(arg)
+
+sys.argv = clean_argv
+
 # Command-line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("--background", "--periodic-save", action="store_true", help="Start periodic saving")
@@ -96,5 +107,7 @@ elif cmd.show_flatpaks_installer:
 else: # show the app window
     resource = Gio.Resource.load(os.path.join(pkgdatadir, 'savedesktop.gresource'))
     resource._register()
+
+    sys.argv.extend(mime_files)
 
     from savedesktop import main

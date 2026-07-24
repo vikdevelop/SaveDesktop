@@ -1,7 +1,8 @@
 [Desktop Entry]
 Name=Save Desktop
-Categories=Utility
+Categories=Utility;
 Comment=Save your desktop configuration
-Exec=savedesktop
+Exec=savedesktop %f
 Type=Application
 Icon=io.github.vikdevelop.SaveDesktop
+MimeType=application/x-save-desktop-archive;

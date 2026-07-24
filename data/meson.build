@@ -34,3 +34,9 @@ test('Validate schema file',
      args: ['--strict', '--dry-run', meson.current_source_dir()])
 
 subdir('icons')
+
+# MIMETYPE
+install_data(
+    'io.github.vikdevelop.SaveDesktop.Mime.xml',
+    install_dir: join_paths(get_option('datadir'), 'mime', 'packages')
+)
