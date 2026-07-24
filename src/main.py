@@ -6,12 +6,17 @@ from savedesktop.gui.window import MainWindow
 from savedesktop.gui.items_dialog import itemsDialog
 from savedesktop.globals import *
 
-@Gtk.Template(resource_path="/io/github/vikdevelop/SaveDesktop/gui/templates/shortcuts_window.ui")
-class ShortcutsWindow(Gtk.ShortcutsWindow):
-    __gtype_name__ = 'SaveDesktopShortcutsWindow'
+class ShortcutsWindow:
+    def __init__(self, parent_window):
+        self.builder = Gtk.Builder()
+        self.builder.add_from_resource("/io/github/vikdevelop/SaveDesktop/gui/templates/shortcuts_window.ui")
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        # Get the dialog instance from Builder
+        self.dialog = self.builder.get_object("SaveDesktopShortcutsDialog")
+        self.parent_window = parent_window
+
+    def present(self):
+        self.dialog.present(self.parent_window)
 
 class SaveDesktopApp(Adw.Application):
     def __init__(self, **kwargs):
@@ -68,7 +73,7 @@ class SaveDesktopApp(Adw.Application):
 
     # Show Keyboard Shortcuts window
     def shortcuts(self, action, param):
-        ShortcutsWindow(transient_for=self.get_active_window()).present()
+        ShortcutsWindow(parent_window=self.get_active_window()).present()
 
     # log out of the system after clicking on the "Log Out" button
     def logout(self, action, param):
@@ -113,6 +118,7 @@ class SaveDesktopApp(Adw.Application):
         if _("Translator credits") != "Translator credits":
             dialog.set_translator_credits(_("Translator credits"))
 
+        dialog.add_link(_("Open the application wiki"), "https://vikdevelop.github.io/SaveDesktop/wiki")
         dialog.present(app.get_active_window())
 
     # create Gio actions for opening the folder, logging out of the system, etc.
