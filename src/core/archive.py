@@ -104,7 +104,7 @@ class Unpack:
     # Check, if the input is archive or folder
     def _check_config_type(self):
         # Check, if the input is folder or not
-        if self.path_with_filename.endswith(".sd.zip") or self.path_with_filename.endswith(".sdar"):
+        if self.path_with_filename.endswith((".sdar", ".sd.zip")):
             self._unpack_zip_archive()
         elif self.path_with_filename.endswith(".sd.tar.gz"):
             self._unpack_tar_archive()

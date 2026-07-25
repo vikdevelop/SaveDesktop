@@ -554,7 +554,7 @@ class MainWindow(Adw.ApplicationWindow):
         else:
             password = None
 
-        if self.archive_name.endswith(".sd.zip") or self.archive_name.endswith(".sdar"):
+        if self.archive_name.endswith((".sd.zip", ".sdar")):
             if password:
                 result = subprocess.run(
                     ["7z", "l", "-slt", f"-p{password}", self.archive_name],

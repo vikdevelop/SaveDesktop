@@ -148,20 +148,28 @@ class SaveDesktopApp(Adw.Application):
 
     # Open the Archive from file manager and start importing
     def do_open(self, files, n_files, hint):
-        # 1. Get path to the file
+        window = self.get_or_create_window()
         self.path = ""
+
+        # 1. Get path to the file
         for gio_file in files:
             self.path = gio_file.get_path()
 
-        with open(f"{CACHE}/mime-tmp", "w") as m:
-            m.write(f"{self.path}")
+        if self.path.endswith((".sdar", ".sd.zip", ".sd.tar.gz")):
+            # 2. Write the path to cache
+            with open(f"{CACHE}/mime-tmp", "w") as m:
+                m.write(f"{self.path}")
 
-        # 2. Create or get window
-        window = self.get_or_create_window()
-        window.present()
+            # 3. Display the app window
+            window.present()
 
-        # 3. Start importing
-        window.import_config()
+            # 4. Start importing
+            window.import_config()
+        else:
+            self.notification_alert = Gio.Notification.new("Save Desktop")
+            self.notification_alert.set_body(_("You selected an incorrect archive format!"))
+            self.send_notification(None, self.notification_alert)
+            self.quit()
 
 app = SaveDesktopApp()
 sys.exit(app.run(sys.argv))
