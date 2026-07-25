@@ -85,6 +85,7 @@ ENVIRONMENTS = {
     "Hyprland": {"de_name": "Hyprland", "dirs": [(f"{home}/.config/hypr", "hypr")]},
     "LXQt": {"de_name": "LXQt", "dirs": [(f"{home}/.config/lxqt", "lxqt")]},
     "niri": {"de_name": "Niri", "dirs": [(f"{home}/.config/niri", "niri")]},
+    "Phosh:GNOME": {"de_name": "Phosh", "dirs": [(f"{home}/.config/phosh", "phosh"), (f"{home}/.local/share/squeekboard", "squeekboard")]},
     "KDE": {"de_name": "KDE Plasma"},
 }
 
