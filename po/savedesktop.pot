@@ -337,6 +337,10 @@ msgstr ""
 msgid "Save Desktop files"
 msgstr ""
 
+#: src/main.py
+msgid "This archive format is not supported."
+msgstr ""
+
 #: src/gui/window.py
 msgid ""
 "<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n"

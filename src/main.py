@@ -167,7 +167,7 @@ class SaveDesktopApp(Adw.Application):
             window.import_config()
         else:
             self.notification_alert = Gio.Notification.new("Save Desktop")
-            self.notification_alert.set_body(_("You selected an incorrect archive format!"))
+            self.notification_alert.set_body(_("This archive format is not supported."))
             self.send_notification(None, self.notification_alert)
             self.quit()
 
