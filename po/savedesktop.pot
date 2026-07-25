@@ -20,7 +20,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:22
+#: src/gui/templates/shortcuts_window.ui:20
 #: src/gui/window.py
 msgid "Save the current configuration"
 msgstr ""
@@ -30,6 +30,7 @@ msgid "Set the file name"
 msgstr ""
 
 #: src/gui/window.py
+#: src/gui/reset_dialog.py
 msgid "Reset app settings"
 msgstr ""
 
@@ -37,7 +38,7 @@ msgstr ""
 msgid "You will lose all of the app's preferences and settings (e.g. periodic saving or synchronization settings). Your existing archives, whether stored in the cloud or locally, will remain unaffected."
 msgid ""
 
-#: src/gui/templates/shortcuts_window.ui:57
+#: src/gui/templates/shortcuts_window.ui:60
 #: src/gui/window.py
 #: src/gui/items_dialog.py
 msgid "Select configuration items"
@@ -172,7 +173,7 @@ msgstr ""
 msgid "This window will be closed automatically in 2 minutes."
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:50
+#: src/gui/templates/shortcuts_window.ui:52
 #: src/gui/more_options_dialog.py
 msgid "More options"
 msgstr ""
@@ -226,6 +227,7 @@ msgid "File name format"
 msgstr ""
 
 #: src/gui/more_options_dialog.py
+#: src/gui/reset_dialog.py
 msgid "Reset to default"
 msgstr ""
 
@@ -320,7 +322,7 @@ msgstr ""
 msgid "Import saved configuration"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:29
+#: src/gui/templates/shortcuts_window.ui:28
 #: src/gui/window.py
 msgid "Import from file"
 msgstr ""
@@ -446,7 +448,7 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:64
+#: src/gui/templates/shortcuts_window.ui:68
 #: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Set up the sync file"
@@ -472,7 +474,7 @@ msgstr ""
 msgid "Change"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:71
+#: src/gui/templates/shortcuts_window.ui:76
 #: src/gui/synchronization_dialogs.py
 #: src/gui/window.py
 msgid "Connect to the cloud storage"
@@ -508,11 +510,11 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:15
+#: src/gui/templates/shortcuts_window.ui:12
 msgid "Open the application wiki"
 msgstr ""
 
-#: src/gui/templates/shortcuts_window.ui:43
+#: src/gui/templates/shortcuts_window.ui:44
 msgid "Quit"
 msgstr ""
 
