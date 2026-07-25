@@ -287,20 +287,23 @@ class itemsDialog(Adw.AlertDialog):
     # Action after closing itemsDialog
     def itemsdialog_closed(self, w, response):
         if response == 'ok':
-            # Saving the selected options to GSettings database
-            settings["save-icons"] = self.switch_01.get_active()
-            settings["save-themes"] = self.switch_02.get_active()
-            settings["save-fonts"] = self.switch_03.get_active()
-            settings["save-backgrounds"] = self.switch_04.get_active()
-            settings["save-desktop-folder"] = self.switch_de.get_active()
-            settings["enable-custom-dirs"] = self.custom_switch.get_active()
-            if hasattr(self, "switch_gtk"):
-                settings["save-bookmarks"] = self.switch_gtk.get_active()
-            if settings["periodic-saving"] != "Never" and os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop.json"):
-                create_savedesktop_json()
-            if flatpak:
-                settings["save-installed-flatpaks"] = self.switch_05.get_active()
-                settings["save-flatpak-data"] = self.switch_06.get_active()
-                settings["keep-flatpaks"] = self.switch_07.get_active()
-            if hasattr(self, "switch_ext"):
-                settings["save-extensions"] = self.switch_ext.get_active()
+            try:
+                # Saving the selected options to GSettings database
+                settings["save-icons"] = self.switch_01.get_active()
+                settings["save-themes"] = self.switch_02.get_active()
+                settings["save-fonts"] = self.switch_03.get_active()
+                settings["save-backgrounds"] = self.switch_04.get_active()
+                settings["save-desktop-folder"] = self.switch_de.get_active()
+                settings["enable-custom-dirs"] = self.custom_switch.get_active()
+                if hasattr(self, "switch_gtk"):
+                    settings["save-bookmarks"] = self.switch_gtk.get_active()
+                if settings["periodic-saving"] != "Never" and os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop.json"):
+                    create_savedesktop_json()
+                if flatpak:
+                    settings["save-installed-flatpaks"] = self.switch_05.get_active()
+                    settings["save-flatpak-data"] = self.switch_06.get_active()
+                    settings["keep-flatpaks"] = self.switch_07.get_active()
+                if hasattr(self, "switch_ext"):
+                    settings["save-extensions"] = self.switch_ext.get_active()
+            except AttributeError:
+                pass

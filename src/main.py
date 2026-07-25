@@ -73,19 +73,6 @@ class SaveDesktopApp(Adw.Application):
         self.win.on_close(w="")
         self.quit()
 
-    # Open the Save Desktop Archive from file manager and start importing
-    def do_open(self, files, n_files, hint):
-        for gio_file in files:
-            self.path = gio_file.get_path()
-
-        with open(f"{CACHE}/mime-tmp", "w") as m:
-            m.write(self.path)
-
-        self.win = MainWindow(application=app)
-        self.win.import_config()
-
-        self.activate()
-
     # Show Keyboard Shortcuts window
     def shortcuts(self, action, param):
         ShortcutsWindow(parent_window=self.get_active_window()).present()
@@ -149,10 +136,32 @@ class SaveDesktopApp(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f'app.{name}', shortcuts)
 
+    def get_or_create_window(self):
+        if not hasattr(self, 'win') or self.win is None:
+            self.win = MainWindow(application=self)
+        return self.win
+
     # Show the main window of the application
     def on_activate(self, app):
-        self.win = MainWindow(application=app)
-        self.win.present()
+        window = self.get_or_create_window()
+        window.present()
+
+    # Open the Archive from file manager and start importing
+    def do_open(self, files, n_files, hint):
+        # 1. Get path to the file
+        self.path = ""
+        for gio_file in files:
+            self.path = gio_file.get_path()
+
+        with open(f"{CACHE}/mime-tmp", "w") as m:
+            m.write(f"{self.path}")
+
+        # 2. Create or get window
+        window = self.get_or_create_window()
+        window.present()
+
+        # 3. Start importing
+        window.import_config()
 
 app = SaveDesktopApp()
-app.run(sys.argv)
+sys.exit(app.run(sys.argv))

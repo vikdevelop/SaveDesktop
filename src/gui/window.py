@@ -534,6 +534,8 @@ class MainWindow(Adw.ApplicationWindow):
             self.path_to_import = open(f"{CACHE}/mime-tmp").read()
             os.remove(f"{CACHE}/mime-tmp")
 
+        print(f"Path to import: {self.path_to_import}")
+
         self.archive_name = self.path_to_import
         self.archive_mode = "--unpack"
         self.status_title = _("<big><b>Importing configuration …</b></big>\nImporting configuration from:\n<i>{}</i>\n").split('</b>')[0].split('<b>')[-1]
