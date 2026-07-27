@@ -111,35 +111,39 @@ class MoreOptionsDialog(Adw.AlertDialog):
         self.manRow.set_expanded(True)
         self.msBox.append(self.manRow)
 
-        # action row and switch for showing options of the archive encryption
-        self.encryptSwitch = Gtk.Switch.new()
-        self.archSwitch = Gtk.Switch.new()
-        self.encryptSwitch.set_valign(Gtk.Align.CENTER)
-        self.encryptSwitch.connect('notify::active', self._set_encryptswitch_sensitivity)
-        if settings["enable-encryption"] == True:
-            self.encryptSwitch.set_active(True)
-            self.archSwitch.set_sensitive(False)
+        # Pre-define archRow
+        self.archRow = Adw.SwitchRow.new()
 
-        self.encryptRow = Adw.ActionRow.new()
+        # Archive encryption - Adw.SwitchRow()
+        self.encryptRow = Adw.SwitchRow.new()
         self.encryptRow.set_title(_("Archive encryption"))
-        self.encryptRow.set_subtitle(f'{_("When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.")}')
+        self.encryptRow.set_subtitle(
+            _("When manually saving the configuration, you will be prompted to create a password. This is useful when saving the configuration to portable media for better security of your data.")
+        )
         self.encryptRow.set_subtitle_lines(15)
-        self.encryptRow.add_suffix(self.encryptSwitch)
-        self.encryptRow.set_activatable_widget(self.encryptSwitch)
+
+        # Watching changes
+        self.encryptRow.connect('notify::active', self._set_encryptrow_sensitivity)
+
+        # Set default state from GSettings
+        if settings["enable-encryption"] == True:
+            self.encryptRow.set_active(True)
+
         self.manRow.add_row(self.encryptRow)
 
-        # action row and switch for showing the "Save a configuration without creating the archive" option
-        self.archSwitch.set_valign(Gtk.Align.CENTER)
-        self.archSwitch.connect('notify::active', self._set_archswitch_sensitivity)
-        if settings["save-without-archive"] == True:
-            self.archSwitch.set_active(True)
-            self.encryptSwitch.set_sensitive(False)
-
-        self.archRow = Adw.ActionRow.new()
+        # Saving the configuration without archive - Adw.SwitchRow()
         self.archRow.set_title(_("Save the configuration without creating an archive"))
-        self.archRow.add_suffix(self.archSwitch)
-        self.archRow.set_activatable_widget(self.archSwitch)
+        self.archRow.connect('notify::active', self._set_archrow_sensitivity)
+
+        if settings["save-without-archive"] == True:
+            self.archRow.set_active(True)
+            self.encryptRow.set_sensitive(False)
+
         self.manRow.add_row(self.archRow)
+
+        # Set sensitivity
+        if settings["enable-encryption"] == True:
+            self.archRow.set_sensitive(False)
 
     # Get an encrypted password from the {DATA}/password file
     def _get_password_from_file(self):
@@ -178,19 +182,16 @@ class MoreOptionsDialog(Adw.AlertDialog):
     def _reset_fileformat(self, w):
         self.filefrmtEntry.set_text("Latest_configuration")
 
-    # Set sensitivity of the encryptSwitch
-    def _set_encryptswitch_sensitivity(self, GParamBoolean, encryptSwitch):
-        if self.encryptSwitch.get_active():
-            self.archSwitch.set_sensitive(False)
-        else:
-            self.archSwitch.set_sensitive(True)
+    # Set sensitivity for archRow based on status from encryptRow
+    def _set_encryptrow_sensitivity(self, switch_row, gparam):
+        is_active = switch_row.get_active()
+        self.archRow.set_sensitive(not is_active)
 
-    # Set sensitivity of the archSwitch
-    def _set_archswitch_sensitivity(self, GParamBoolean, archSwitch):
-        if self.archSwitch.get_active():
-            self.encryptSwitch.set_sensitive(False)
-        else:
-            self.encryptSwitch.set_sensitive(True)
+    # Set sensitivity for encryptRow based on status from archRow
+    def _set_archrow_sensitivity(self, switch_row, gparam):
+        is_active = switch_row.get_active()
+        self.encryptRow.set_sensitive(not is_active)
+
 
     # Expand "Periodic saving" row if the below file exists
     def _expand_periodic_row(self):
@@ -202,8 +203,8 @@ class MoreOptionsDialog(Adw.AlertDialog):
     def msDialog_closed(self, w, response):
         if response == 'ok':
             settings["filename-format"] = self.filefrmtEntry.get_text() # save the file name format entry
-            settings["enable-encryption"] = self.encryptSwitch.get_active() # save the archive encryption's switch state
-            settings["save-without-archive"] = self.archSwitch.get_active() # save the switch state of the "Save a configuration without creating the configuration archive" option
+            settings["enable-encryption"] = self.encryptRow.get_active() # save the archive encryption's switch state
+            settings["save-without-archive"] = self.archRow.get_active() # save the switch state of the "Save a configuration without creating the configuration archive" option
             settings["periodic-saving-folder"] = self.dirRow.get_subtitle()
             self._save_periodic_saving_values()
             self._save_password()

@@ -648,9 +648,8 @@ class MainWindow(Adw.ApplicationWindow):
         self.set_title(self.status_title)
 
         # Create spinner for this page
-        self.spinner = Gtk.Spinner.new()
-        self.spinner.set_size_request(100, 100)
-        self.spinner.start()
+        self.spinner = Adw.Spinner.new()
+        self.spinner.set_size_request(128, 128)
         self.status_box.append(self.spinner)
 
         # Adw.StatusPage()
@@ -676,8 +675,10 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Kill a process for saving/importing configuration
     def _kill_process(self):
-        if hasattr(self, "archive_proc") and self.archive_proc.poll() is None:
+        if hasattr(self, "archive_proc"):
             self.archive_proc.kill()
+            self.rem_cache = Thread(target=self.remove_cache)
+            self.rem_cache.start()
             print("The process was stopped.")
 
     # config has been saved action
@@ -685,7 +686,6 @@ class MainWindow(Adw.ApplicationWindow):
         self._send_notification()
 
         # stop spinner animation
-        self.spinner.stop()
         self.status_box.remove(self.cancel_button)
         self.status_box.remove(self.spinner)
 
