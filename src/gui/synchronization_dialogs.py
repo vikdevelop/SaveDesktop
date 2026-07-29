@@ -471,7 +471,7 @@ class CloudDialog(Adw.AlertDialog):
             settings["periodic-import"] = sync_item
 
             # save the status of the Bidirectional Synchronization switch
-            settings["bidirectional-sync"] = self.bsSwitch.get_active()
+            settings["bidirectional-sync"] = self.bsyncRow.get_active()
 
             check_thread = Thread(target=self._call_automount)
             check_thread.start()
