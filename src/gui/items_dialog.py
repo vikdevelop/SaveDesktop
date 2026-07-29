@@ -24,66 +24,46 @@ class itemsDialog(Adw.AlertDialog):
         self.set_extra_child(self.itemsBox)
         
         # Switch and row of option 'Save icons'
-        self.switch_01 = Gtk.Switch.new()
-        if settings["save-icons"]:
-            self.switch_01.set_active(True)
-        self.switch_01.set_valign(align=Gtk.Align.CENTER)
-        
-        self.icons_row = Adw.ActionRow.new()
+        self.icons_row = Adw.SwitchRow.new()
         self.icons_row.set_title(title=_("Icons"))
         self.icons_row.set_use_markup(True)
         self.icons_row.set_title_lines(2)
         self.icons_row.set_subtitle_lines(3)
-        self.icons_row.add_suffix(self.switch_01)
-        self.icons_row.set_activatable_widget(self.switch_01)
+        if settings["save-icons"]:
+            self.icons_row.set_active(True)
         if self.should_show("icon-themes.tgz", "icon-themes-legacy.tgz"):
             self.itemsBox.append(child=self.icons_row)
         
         # Switch and row of option 'Save themes'
-        self.switch_02 = Gtk.Switch.new()
-        if settings["save-themes"]:
-            self.switch_02.set_active(True)
-        self.switch_02.set_valign(align=Gtk.Align.CENTER)
-         
-        self.themes_row = Adw.ActionRow.new()
+        self.themes_row = Adw.SwitchRow.new()
         self.themes_row.set_title(title=_("Themes"))
         self.themes_row.set_use_markup(True)
         self.themes_row.set_title_lines(2)
         self.themes_row.set_subtitle_lines(3)
-        self.themes_row.add_suffix(self.switch_02)
-        self.themes_row.set_activatable_widget(self.switch_02)
+        if settings["save-themes"]:
+            self.themes_row.set_active(True)
         if self.should_show(".themes", "themes"):
             self.itemsBox.append(child=self.themes_row)
         
         # Switch and row of option 'Save fonts'
-        self.switch_03 = Gtk.Switch.new()
-        if settings["save-fonts"]:
-            self.switch_03.set_active(True)
-        self.switch_03.set_valign(align=Gtk.Align.CENTER)
-         
-        self.fonts_row = Adw.ActionRow.new()
+        self.fonts_row = Adw.SwitchRow.new()
         self.fonts_row.set_title(title=_("Fonts"))
         self.fonts_row.set_use_markup(True)
         self.fonts_row.set_title_lines(2)
         self.fonts_row.set_subtitle_lines(3)
-        self.fonts_row.add_suffix(self.switch_03)
-        self.fonts_row.set_activatable_widget(self.switch_03)
+        if settings["save-fonts"]:
+            self.fonts_row.set_active(True)
         if self.should_show("fonts", ".fonts"):
             self.itemsBox.append(child=self.fonts_row)
         
         # Switch and row of option 'Save backgrounds'
-        self.switch_04 = Gtk.Switch.new()
-        if settings["save-backgrounds"]:
-            self.switch_04.set_active(True)
-        self.switch_04.set_valign(align=Gtk.Align.CENTER)
-         
-        self.backgrounds_row = Adw.ActionRow.new()
+        self.backgrounds_row = Adw.SwitchRow.new()
         self.backgrounds_row.set_title(title=_("Backgrounds"))
         self.backgrounds_row.set_use_markup(True)
         self.backgrounds_row.set_title_lines(2)
         self.backgrounds_row.set_subtitle_lines(3)
-        self.backgrounds_row.add_suffix(self.switch_04)
-        self.backgrounds_row.set_activatable_widget(self.switch_04)
+        if settings["save-backgrounds"]:
+            self.backgrounds_row.set_active(True)
         if self.should_show("backgrounds"):
             self.itemsBox.append(child=self.backgrounds_row)
         
@@ -91,61 +71,47 @@ class itemsDialog(Adw.AlertDialog):
         if environment["de_name"] in ["GNOME", "Cinnamon", "COSMIC (Old)", "KDE Plasma"]:
             self.show_extensions_row()
         
-        # Switch and row of the option: GTK Settings
+        # Switch and row of the option: File Manager Bookmarks
         if environment["de_name"] in ["GNOME", "Cinnamon", "Xfce", "Budgie", "Pantheon", "MATE", "COSMIC (Old)"]:
-            self.switch_gtk = Gtk.Switch.new()
-            if settings["save-bookmarks"]:
-                self.switch_gtk.set_active(True)
-            self.switch_gtk.set_valign(align=Gtk.Align.CENTER)
-
-            self.gtk_row = Adw.ActionRow.new()
+            self.gtk_row = Adw.SwitchRow.new()
             self.gtk_row.set_title(title=_("File manager bookmarks"))
             self.gtk_row.set_subtitle_selectable(True)
             self.gtk_row.set_use_markup(True)
             self.gtk_row.set_title_lines(2)
             self.gtk_row.set_subtitle_lines(3)
-            self.gtk_row.add_suffix(self.switch_gtk)
-            self.gtk_row.set_activatable_widget(self.switch_gtk)
+            if settings["save-bookmarks"]:
+                self.gtk_row.set_active(True)
             if self.should_show("gtk-3.0"):
                 self.itemsBox.append(child=self.gtk_row)
 
         # Switch and row of option 'Save Desktop' (~/Desktop)
-        self.switch_de = Gtk.Switch.new()
-        if settings["save-desktop-folder"]:
-            self.switch_de.set_active(True)
-        self.switch_de.set_valign(align=Gtk.Align.CENTER)
-
-        self.desktop_row = Adw.ActionRow.new()
+        self.desktop_row = Adw.SwitchRow.new()
         self.desktop_row.set_title(title=_("Desktop"))
         self.desktop_row.set_tooltip_text(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DESKTOP))
         self.desktop_row.set_subtitle_selectable(True)
         self.desktop_row.set_use_markup(True)
         self.desktop_row.set_title_lines(2)
-        self.desktop_row.add_suffix(self.switch_de)
-        self.desktop_row.set_activatable_widget(self.switch_de)
+        if settings["save-desktop-folder"]:
+            self.desktop_row.set_active(True)
         if self.should_show("desktop-folder.tgz"):
             self.itemsBox.append(child=self.desktop_row)
 
         # Custom directories section
-        self.custom_switch = Gtk.Switch.new()
-        self.custom_switch.set_valign(Gtk.Align.CENTER)
-        if settings["enable-custom-dirs"]:
-            self.custom_switch.set_active(True)
-
         self.custom_button = Gtk.Button.new_from_icon_name("go-next-symbolic")
         self.custom_button.add_css_class("flat")
         self.custom_button.set_valign(Gtk.Align.CENTER)
         self.custom_button.connect("clicked", self._show_custom_dirs_dialog)
 
-        self.custom_row = Adw.ActionRow.new()
+        self.custom_row = Adw.SwitchRow.new()
         self.custom_row.set_title(_("Custom folders"))
-        self.custom_row.add_suffix(self.custom_switch)
-        if self.custom_switch.get_active():
+        if settings["enable-custom-dirs"]:
+            self.custom_row.set_active(True)
+        if self.custom_row.get_active():
             self.custom_row.add_suffix(self.custom_button)
         if self.should_show("Custom_Dirs"):
             self.itemsBox.append(child=self.custom_row)
 
-        self.custom_switch.connect('notify::active', self._set_show_custom_button)
+        self.custom_row.connect('notify::active', self._set_show_custom_button)
 
         if flatpak and self.should_show("installed_flatpaks.sh"):
             self.flatpak_row = Adw.ExpanderRow.new()
@@ -173,55 +139,41 @@ class itemsDialog(Adw.AlertDialog):
                 self.flatpak_row.add_row(self.mngmt_row)
 
             # Switch and row of option 'Save installed flatpaks'
-            self.switch_05 = Gtk.Switch.new()
-            if settings["save-installed-flatpaks"]:
-                self.switch_05.set_active(True)
-            self.switch_05.set_valign(align=Gtk.Align.CENTER)
-            
-            self.list_row = Adw.ActionRow.new()
+            self.list_row = Adw.SwitchRow.new()
             self.list_row.set_title(title=_("List of installed Flatpak apps"))
             self.list_row.set_use_markup(True)
             self.list_row.set_title_lines(4)
-            self.list_row.add_suffix(self.switch_05)
-            self.list_row.set_activatable_widget(self.switch_05)
+            if settings["save-installed-flatpaks"]:
+                self.list_row.set_active(True)
             self.flatpak_row.add_row(child=self.list_row)
             
-            # Switch, button and row of option 'Save SaveDesktop app settings'
-            self.switch_06 = Gtk.Switch.new()
-            
-            self.data_row = Adw.ActionRow.new()
+            # Switch and row of this option: 'User data of installed Flatpak apps'
+            self.data_row = Adw.SwitchRow.new()
             self.data_row.set_title(title=_("User data of installed Flatpak apps"))
             self.data_row.set_use_markup(True)
             self.data_row.set_title_lines(4)
-            self.data_row.add_suffix(self.switch_06)
-            self.data_row.set_activatable_widget(self.switch_06)
             self.flatpak_row.add_row(child=self.data_row)
             
             if settings["save-flatpak-data"]:
-                self.switch_06.set_active(True)
-            self.switch_06.set_valign(align=Gtk.Align.CENTER)
+                self.data_row.set_active(True)
 
-            self.switch_07 = Gtk.Switch.new()
-            self.switch_07.set_valign(Gtk.Align.CENTER)
-            if settings["keep-flatpaks"]:
-                self.switch_07.set_active(True)
-
-            self.remove_row = Adw.ActionRow.new()
+            # Switch and row of this option: 'Keep existing Flatpak apps and data'
+            self.remove_row = Adw.SwitchRow.new()
             self.remove_row.set_title(_("Keep existing Flatpak apps and data"))
             self.remove_row.set_title_lines(3)
-            self.remove_row.add_suffix(self.switch_07)
-            self.remove_row.set_activatable_widget(self.switch_07)
+            if settings["keep-flatpaks"]:
+                self.remove_row.set_active(True)
             self.flatpak_row.add_row(child=self.remove_row)
 
-            if not self.switch_05.get_active():
-                self.switch_06.set_sensitive(False)
-                self.switch_06.set_active(False)
-                self.switch_07.set_sensitive(False)
-                self.switch_07.set_active(True)
+            if not self.list_row.get_active():
+                self.data_row.set_sensitive(False)
+                self.data_row.set_active(False)
+                self.remove_row.set_sensitive(False)
+                self.remove_row.set_active(True)
                 settings["save-flatpak-data"] = False
                 settings["keep-flatpaks"] = True
 
-            self.switch_05.connect('notify::active', self._set_sw05_sensitivity)
+            self.list_row.connect('notify::active', self._set_sw05_sensitivity)
         
         self.add_response('cancel', _("Cancel"))
         self.add_response('ok', _("Apply"))
@@ -239,21 +191,21 @@ class itemsDialog(Adw.AlertDialog):
 
         return False
 
-    def _set_show_custom_button(self, GParamBoolean, custom_switch):
-        if self.custom_switch.get_active():
+    def _set_show_custom_button(self, GParamBoolean, custom_row):
+        if self.custom_row.get_active():
             self.custom_row.add_suffix(self.custom_button)
         else:
             self.custom_row.remove(self.custom_button)
 
-    def _set_sw05_sensitivity(self, GParamBoolean, switch_05):
-        if not self.switch_05.get_active():
-            self.switch_06.set_sensitive(False)
-            self.switch_06.set_active(False)
-            self.switch_07.set_sensitive(False)
-            self.switch_07.set_active(True)
+    def _set_sw05_sensitivity(self, GParamBoolean, list_row):
+        if not self.list_row.get_active():
+            self.data_row.set_sensitive(False)
+            self.data_row.set_active(False)
+            self.remove_row.set_sensitive(False)
+            self.remove_row.set_active(True)
         else:
-            self.switch_06.set_sensitive(True)
-            self.switch_07.set_sensitive(True)
+            self.data_row.set_sensitive(True)
+            self.remove_row.set_sensitive(True)
 
     def _show_custom_dirs_dialog(self, w):
         self.CDDialog = CustomDirsDialog(self.parent)
@@ -269,18 +221,13 @@ class itemsDialog(Adw.AlertDialog):
     # show extensions row, if user has installed GNOME, Cinnamon or KDE Plasma DE
     def show_extensions_row(self):
         # Switch and row of option 'Save extensions'
-        self.switch_ext = Gtk.Switch.new()
-        if settings["save-extensions"]:
-            self.switch_ext.set_active(True)
-        self.switch_ext.set_valign(align=Gtk.Align.CENTER)
-
-        self.ext_row = Adw.ActionRow.new()
+        self.ext_row = Adw.SwitchRow.new()
         self.ext_row.set_title(title=_("Extensions"))
         self.ext_row.set_use_markup(True)
         self.ext_row.set_title_lines(2)
         self.ext_row.set_subtitle_lines(3)
-        self.ext_row.add_suffix(self.switch_ext)
-        self.ext_row.set_activatable_widget(self.switch_ext)
+        if settings["save-extensions"]:
+            self.ext_row.set_active(True)
         if self.should_show("cinnamon", "gnome-shell", "plasma"):
             self.itemsBox.append(child=self.ext_row)
 
@@ -289,21 +236,21 @@ class itemsDialog(Adw.AlertDialog):
         if response == 'ok':
             try:
                 # Saving the selected options to GSettings database
-                settings["save-icons"] = self.switch_01.get_active()
-                settings["save-themes"] = self.switch_02.get_active()
-                settings["save-fonts"] = self.switch_03.get_active()
-                settings["save-backgrounds"] = self.switch_04.get_active()
-                settings["save-desktop-folder"] = self.switch_de.get_active()
-                settings["enable-custom-dirs"] = self.custom_switch.get_active()
-                if hasattr(self, "switch_gtk"):
-                    settings["save-bookmarks"] = self.switch_gtk.get_active()
+                settings["save-icons"] = self.icons_row.get_active()
+                settings["save-themes"] = self.themes_row.get_active()
+                settings["save-fonts"] = self.fonts_row.get_active()
+                settings["save-backgrounds"] = self.backgrounds_row.get_active()
+                settings["save-desktop-folder"] = self.desktop_row.get_active()
+                settings["enable-custom-dirs"] = self.custom_row.get_active()
+                if hasattr(self, "gtk_row"):
+                    settings["save-bookmarks"] = self.gtk_row.get_active()
                 if settings["periodic-saving"] != "Never" and os.path.exists(f"{settings['periodic-saving-folder']}/SaveDesktop.json"):
                     create_savedesktop_json()
                 if flatpak:
-                    settings["save-installed-flatpaks"] = self.switch_05.get_active()
-                    settings["save-flatpak-data"] = self.switch_06.get_active()
-                    settings["keep-flatpaks"] = self.switch_07.get_active()
-                if hasattr(self, "switch_ext"):
-                    settings["save-extensions"] = self.switch_ext.get_active()
+                    settings["save-installed-flatpaks"] = self.list_row.get_active()
+                    settings["save-flatpak-data"] = self.data_row.get_active()
+                    settings["keep-flatpaks"] = self.remove_row.get_active()
+                if hasattr(self, "ext_row"):
+                    settings["save-extensions"] = self.ext_row.get_active()
             except AttributeError:
                 pass

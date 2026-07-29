@@ -6,40 +6,55 @@ from pathlib import Path
 from savedesktop.globals import *
 
 # Row for showing available apps
-class FolderSwitchRow(Adw.ActionRow):
+class FolderSwitchRow(Adw.Bin):
     def __init__(self, folder_name):
         super().__init__()
         self.folder_name = folder_name
 
-        # switch for all items
-        self.switch = Gtk.Switch()
-        self.switch.set_halign(Gtk.Align.END)
-        self.switch.set_valign(Gtk.Align.CENTER)
-        self.switch.connect("state-set", self.on_switch_activated)
+        # Switch row for each app
+        self.switch_row = Adw.SwitchRow.new()
+        self.switch_row.set_title(self.folder_name)
+        self.switch_row.set_title_lines(4)
+        self.switch_row.set_hexpand(True)
+
+        # Get default state from GSettings
         if settings["disabled-flatpak-apps-data"] == []:
-            self.switch.set_active(True)
+            self.switch_row.set_active(True)
 
-        # row for all items
-        self.set_title(self.folder_name)
-        self.add_suffix(self.switch)
-        self.set_title_lines(4)
-        self.set_activatable_widget(self.switch)
-        self.set_hexpand(True)
-
-        # set switch states from the Gsettings database
         switch_state = self.folder_name not in settings.get_strv("disabled-flatpak-apps-data")
-        self.switch.set_active(switch_state)
+        self.switch_row.set_active(switch_state)
 
-    # save switch state
-    def on_switch_activated(self, switch, state):
-        appid = self.get_subtitle()
+        # Connect a signal to the switch row
+        self.switch_row.connect("notify::active", self.on_switch_activated)
+        self.set_child(self.switch_row)
+
+        # A mechanism that allows changing the status of a switch by clicking with the mouse on any part of the row
+        gesture = Gtk.GestureClick.new()
+        gesture.connect("released", self._on_row_clicked)
+        self.add_controller(gesture)
+
+        self.set_child(self.switch_row)
+
+    def _on_row_clicked(self, gesture, n_press, x, y):
+        current_state = self.switch_row.get_active()
+        self.switch_row.set_active(not current_state)
+
+    def on_switch_activated(self, switch_row, gparam):
+        state = switch_row.get_active()
+
+        appid = switch_row.get_subtitle()
+        if not appid:
+            appid = self.folder_name
+
         disabled_flatpaks = settings.get_strv("disabled-flatpak-apps-data")
+
         if not state:
             if appid not in disabled_flatpaks:
                 disabled_flatpaks.append(appid)
         else:
             if appid in disabled_flatpaks:
                 disabled_flatpaks.remove(appid)
+
         settings.set_strv("disabled-flatpak-apps-data", disabled_flatpaks)
 
 # dialog for showing installed Flatpak apps
@@ -98,9 +113,9 @@ class FlatpakAppsDialog(Adw.AlertDialog):
                                         fallback=config.get('Desktop Entry', 'Name'))
 
                     self.folder_row = FolderSwitchRow(app_name)
-                    self.folder_row.set_subtitle(name)
+                    self.folder_row.switch_row.set_subtitle(name)
                     if name in black_list:
-                        self.folder_row.switch.set_active(False)
+                        self.folder_row.switch_row.set_active(False)
                     self.flow_box.append(self.folder_row)
                 except (configparser.Error, UnicodeDecodeError, IOError):
                     print(f"Error while reading: {name}")

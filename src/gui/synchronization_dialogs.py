@@ -412,19 +412,15 @@ class CloudDialog(Adw.AlertDialog):
             self.set_response_enabled('ok', True)
 
         # Bidirectional Synchronization section
-        ## Switch
-        self.bsSwitch = Gtk.Switch.new()
-        if settings["bidirectional-sync"] == True:
-            self.bsSwitch.set_active(True)
-        self.bsSwitch.set_valign(Gtk.Align.CENTER)
-
-        ## Action Row
-        self.bsyncRow = Adw.ActionRow.new()
+        self.bsyncRow = Adw.SwitchRow.new()
         self.bsyncRow.set_title(_("Bidirectional synchronization"))
         self.bsyncRow.set_subtitle(_("Enables full two-way synchronization, allowing this computer to use the same backup schedule, archive name, and selected configuration items as the other computer with synchronization set up."))
         self.bsyncRow.set_subtitle_lines(10)
-        self.bsyncRow.add_suffix(self.bsSwitch)
-        self.bsyncRow.set_activatable_widget(self.bsSwitch)
+
+        # Set default value from GSettings
+        if settings["bidirectional-sync"] == True:
+            self.bsyncRow.set_active(True)
+
         self.cloudBox.append(self.bsyncRow)
 
     # Select folder for syncing the configuration with other computers in the network

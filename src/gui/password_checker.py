@@ -46,15 +46,10 @@ class PasswordWindow(Gtk.ApplicationWindow):
         self.passEntry.connect("changed", self._empty_check)
         self.winBox.append(self.passEntry)
         
-        # Switch and row for showing the "Remember a password" option
-        self.remSwitch = Gtk.Switch.new()
-        self.remSwitch.set_valign(Gtk.Align.CENTER)
-        self.remSwitch.set_active(True)
-        
-        self.remRow = Adw.ActionRow.new()
+        # Remember password - Adw.SwitchRow()
+        self.remRow = Adw.SwitchRow.new()
         self.remRow.set_title(_("Remember Password"))
-        self.remRow.add_suffix(self.remSwitch)
-        self.remRow.set_activatable_widget(self.remSwitch)
+        self.remRow.set_active(True)
         self.winBox.append(self.remRow)
         
         self.applyButton = Gtk.Button.new_with_label(_("Apply"))
