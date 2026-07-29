@@ -69,7 +69,7 @@ class PasswordWindow(Gtk.ApplicationWindow):
 
     # Save the entered password to the file
     def save_password(self, w):
-        if self.remSwitch.get_active():
+        if self.remRow.get_active():
             PasswordStore(self.passEntry.get_text())
         else:
             with open(f"{CACHE}/temp_file", "w") as ep:
