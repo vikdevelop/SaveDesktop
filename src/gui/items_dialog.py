@@ -31,7 +31,7 @@ class itemsDialog(Adw.AlertDialog):
         self.icons_row.set_subtitle_lines(3)
         if settings["save-icons"]:
             self.icons_row.set_active(True)
-        if self.should_show("icon-themes.tgz", "icon-themes-legacy.tgz"):
+        if self.should_show("/icon-themes.tgz", "/icon-themes-legacy.tgz"):
             self.itemsBox.append(child=self.icons_row)
         
         # Switch and row of option 'Save themes'
@@ -42,7 +42,7 @@ class itemsDialog(Adw.AlertDialog):
         self.themes_row.set_subtitle_lines(3)
         if settings["save-themes"]:
             self.themes_row.set_active(True)
-        if self.should_show(".themes", "themes"):
+        if self.should_show("/.themes", "/themes"):
             self.itemsBox.append(child=self.themes_row)
         
         # Switch and row of option 'Save fonts'
@@ -53,7 +53,7 @@ class itemsDialog(Adw.AlertDialog):
         self.fonts_row.set_subtitle_lines(3)
         if settings["save-fonts"]:
             self.fonts_row.set_active(True)
-        if self.should_show("fonts", ".fonts"):
+        if self.should_show("/fonts", "/.fonts"):
             self.itemsBox.append(child=self.fonts_row)
         
         # Switch and row of option 'Save backgrounds'
@@ -64,7 +64,7 @@ class itemsDialog(Adw.AlertDialog):
         self.backgrounds_row.set_subtitle_lines(3)
         if settings["save-backgrounds"]:
             self.backgrounds_row.set_active(True)
-        if self.should_show("backgrounds"):
+        if self.should_show("/backgrounds"):
             self.itemsBox.append(child=self.backgrounds_row)
         
         # show extension switch and row if user has installed these environments
@@ -73,12 +73,12 @@ class itemsDialog(Adw.AlertDialog):
         
         # Switch and row of the option: System settings
         self.systemset_row = Adw.SwitchRow.new()
-        self.systemset_row.set_title(title=_("System Settings"))
+        self.systemset_row.set_title(title=_("System settings"))
         self.systemset_row.set_use_markup(True)
         self.systemset_row.set_title_lines(2)
         if settings["save-system-settings"]:
             self.systemset_row.set_active(True)
-        if self.should_show("dconf-settings.ini", "xdg-config"):
+        if self.should_show("/dconf-settings.ini", "/xdg-config"):
             self.itemsBox.append(child=self.systemset_row)
 
         # Switch and row of the option: File Manager Bookmarks
@@ -91,7 +91,7 @@ class itemsDialog(Adw.AlertDialog):
             self.gtk_row.set_subtitle_lines(3)
             if settings["save-bookmarks"]:
                 self.gtk_row.set_active(True)
-            if self.should_show("gtk-3.0"):
+            if self.should_show("/gtk-3.0/bookmarks"):
                 self.itemsBox.append(child=self.gtk_row)
 
         # Switch and row of option 'Save Desktop' (~/Desktop)
@@ -103,7 +103,7 @@ class itemsDialog(Adw.AlertDialog):
         self.desktop_row.set_title_lines(2)
         if settings["save-desktop-folder"]:
             self.desktop_row.set_active(True)
-        if self.should_show("desktop-folder.tgz"):
+        if self.should_show("/desktop-folder.tgz"):
             self.itemsBox.append(child=self.desktop_row)
 
         # Custom directories section
@@ -118,12 +118,12 @@ class itemsDialog(Adw.AlertDialog):
             self.custom_row.set_active(True)
         if self.custom_row.get_active():
             self.custom_row.add_suffix(self.custom_button)
-        if self.should_show("Custom_Dirs"):
+        if self.should_show("/Custom_Dirs"):
             self.itemsBox.append(child=self.custom_row)
 
         self.custom_row.connect('notify::active', self._set_show_custom_button)
 
-        if flatpak and self.should_show("installed_flatpaks.sh"):
+        if flatpak and self.should_show("/installed_flatpaks.sh"):
             self.flatpak_row = Adw.ExpanderRow.new()
             self.flatpak_row.set_title(title=_("Flatpak apps"))
             self.flatpak_row.set_subtitle(f"<a href='https://vikdevelop.github.io/SaveDesktop/wiki/flatpak_apps/{language}'>{_('Learn more')}</a>")

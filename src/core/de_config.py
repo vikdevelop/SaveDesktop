@@ -5,6 +5,32 @@ from pathlib import Path
 from datetime import date
 
 # ------------------------
+# KDE Plasma dirs
+# ------------------------
+
+# Directories for KDE Plasma DE
+KDE_DIRS_SAVE = [
+    (f"{home}/.config/plasmarc", "xdg-config/plasmarc"),
+    (f"{home}/.config/plasmashellrc", "xdg-config/plasmashellrc"),
+    (f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc", "xdg-config/plasma-org.kde.plasma.desktop-appletsrc"),
+    (f"{home}/.config/dolphinrc", "xdg-config/dolphinrc"),
+    (f"{home}/.config/gtkrc", "xdg-config/gtkrc"),
+    (f"{home}/.config/Kvantum", "xdg-config/Kvantum"),
+    (f"{home}/.config/latte", "xdg-config/latte"),
+    (f"{home}/.local/share/dolphin", "xdg-data/dolphin"),
+    (f"{home}/.local/share/sddm", "xdg-data/sddm"),
+    (f"{home}/.local/share/aurorae", "xdg-data/aurorae"),
+    (f"{home}/.local/share/plasma-systemmonitor", "xdg-data/plasma-systemmonitor"),
+    (f"{home}/.local/share/color-schemes", "xdg-data/color-schemes"),
+]
+
+KDE_DIRS_IMPORT = [
+    ("xdg-config", f"{home}/.config"),
+    ("xdg-data", f"{home}/.local/share"),
+]
+
+
+# ------------------------
 # Helpers
 # ------------------------
 
@@ -159,13 +185,16 @@ def import_desktop_folder():
 
 # Disable importing directories to the ~/.config directory, if the value from GSettings is FALSE
 def disable_config_dirs():
+    if environment and "dirs" in environment:
+        environment["dirs"] = [
+            ent for ent in environment["dirs"]
+            if ".config/" not in ent[0]
+        ]
+
+def remove_kde_config_dir():
     if not settings["save-system-settings"]:
-        if environment and "dirs" in environment:
-            environment["dirs"] = [
-                ent for ent in environment["dirs"]
-                if ".config/" not in ent[0]
-            ]
-        print(environment["dirs"])
+        if os.path.exists("DE/xdg-config"):
+            shutil.rmtree("DE/xdg-config")
 
 # ------------------------
 # GENERAL ITEMS (DATA MODEL)
@@ -246,27 +275,6 @@ SPECIAL_ITEMS = {
 
 }
 
-# Directories for KDE Plasma DE
-KDE_DIRS_SAVE = [
-    (f"{home}/.config/plasmarc", "xdg-config/plasmarc"),
-    (f"{home}/.config/plasmashellrc", "xdg-config/plasmashellrc"),
-    (f"{home}/.config/plasma-org.kde.plasma.desktop-appletsrc", "xdg-config/plasma-org.kde.plasma.desktop-appletsrc"),
-    (f"{home}/.config/dolphinrc", "xdg-config/dolphinrc"),
-    (f"{home}/.config/gtkrc", "xdg-config/gtkrc"),
-    (f"{home}/.config/Kvantum", "xdg-config/Kvantum"),
-    (f"{home}/.config/latte", "xdg-config/latte"),
-    (f"{home}/.local/share/dolphin", "xdg-data/dolphin"),
-    (f"{home}/.local/share/sddm", "xdg-data/sddm"),
-    (f"{home}/.local/share/aurorae", "xdg-data/aurorae"),
-    (f"{home}/.local/share/plasma-systemmonitor", "xdg-data/plasma-systemmonitor"),
-    (f"{home}/.local/share/color-schemes", "xdg-data/color-schemes"),
-]
-
-KDE_DIRS_IMPORT = [
-    ("xdg-config", f"{home}/.config"),
-    ("xdg-data", f"{home}/.local/share"),
-]
-
 # ------------------------
 # Save pipeline
 # ------------------------
@@ -313,6 +321,7 @@ class Save:
                         safe_copy(src, os.path.join("DE", dst))
                     else:
                         safe_copytree(src, os.path.join("DE", dst))
+                remove_kde_config_dir()
             else:
                 print(f"Saving environment-specific config for: {environment['de_name']}")
                 for src, dst in environment["dirs"]:
@@ -403,6 +412,7 @@ class Import:
             disable_config_dirs() # Only if the "save-system-value" from GSettings is FALSE
             if environment["de_name"] == "KDE Plasma":
                 print("Importing KDE Plasma configuration...")
+                remove_kde_config_dir()
                 for src, dst in KDE_DIRS_IMPORT:
                     if os.path.exists("DE"):
                         safe_copytree(os.path.join("DE", src), dst)
@@ -433,21 +443,20 @@ class Import:
     def import_dconf(self):
         if settings["save-system-settings"]:
             ini_path = "./General/dconf-settings.ini" if os.path.exists("General") else "./dconf-settings.ini"
+            if os.path.exists(ini_path):
+                if flatpak:
+                    with open(ini_path, "r") as f:
+                        subprocess.run(["dconf", "load", "/"], stdin=f, check=True)
+                else:
+                    with open("temporary-profile", "w") as f:
+                        f.write("user-db:user\n")
 
-            if flatpak:
-                with open(ini_path, "r") as f:
-                    subprocess.run(["dconf", "load", "/"], stdin=f, check=True)
-            else:
-                with open("temporary-profile", "w") as f:
-                    f.write("user-db:user\n")
+                    abs_profile_path = os.path.abspath("temporary-profile")
 
-                abs_profile_path = os.path.abspath("temporary-profile")
+                    custom_env = os.environ.copy()
+                    custom_env["DCONF_PROFILE"] = abs_profile_path
 
-                custom_env = os.environ.copy()
-                custom_env["DCONF_PROFILE"] = abs_profile_path
-
-                with open(ini_path, "r") as f:
-                    subprocess.run(["dconf", "load", "/"], stdin=f, env=custom_env, check=True)
-
+                    with open(ini_path, "r") as f:
+                        subprocess.run(["dconf", "load", "/"], stdin=f, env=custom_env, check=True)
 
             print("[OK] Imported system settings")

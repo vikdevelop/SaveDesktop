@@ -374,7 +374,7 @@ class MainWindow(Adw.ApplicationWindow):
         self.file_chooser.set_modal(True)
         self.file_chooser.set_title(_("Import from file"))
         self.file_filter = Gtk.FileFilter.new()
-        self.file_filter.set_name(_("Save Desktop files"))
+        self.file_filter.set_name(_("Save Desktop Archive"))
         self.file_filter.add_pattern('*.sd.tar.gz')
         self.file_filter.add_pattern('*.sd.zip')
         self.file_filter.add_pattern('*.sdar')

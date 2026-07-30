@@ -2,6 +2,7 @@
 # Please keep this file sorted alphabetically.
 data/io.github.vikdevelop.SaveDesktop.desktop.in
 data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in
+data/io.github.vikdevelop.SaveDesktop.Mime.xml.in
 data/io.github.vikdevelop.SaveDesktop.gschema.xml
 src/core/synchronization.py
 src/gui/more_options_dialog.py

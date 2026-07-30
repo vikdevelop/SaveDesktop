@@ -340,7 +340,8 @@ msgid "Cancel"
 msgstr ""
 
 #: src/gui/window.py
-msgid "Save Desktop files"
+#: data/io.github.vikdevelop.SaveDesktop.Mime.xml.in:4
+msgid "Save Desktop Archive"
 msgstr ""
 
 #: src/main.py

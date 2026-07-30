@@ -36,7 +36,11 @@ test('Validate schema file',
 subdir('icons')
 
 # MIMETYPE
-install_data(
-    'io.github.vikdevelop.SaveDesktop.Mime.xml',
-    install_dir: join_paths(get_option('datadir'), 'mime', 'packages')
+mime_file = i18n.merge_file(
+        input: 'io.github.vikdevelop.SaveDesktop.Mime.xml.in',
+       output: 'io.github.vikdevelop.SaveDesktop.Mime.xml',
+         type: 'xml',
+       po_dir: '../po',
+      install: true,
+  install_dir: get_option('datadir') / 'mime' / 'packages'
 )
