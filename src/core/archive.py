@@ -62,11 +62,15 @@ class Create:
 
     # Create a new ZIP archive with 7-Zip
     def _create_archive(self):
-        cmd = ['7z', 'a', '-snL', '-mx=3', '-x!*.zip', '-x!saving_status', 'cfg.sdar',  "."]
+        cmd = ['7z', 'a', '-snL', '-mx=3', '-x!*.zip', '-x!saving_status']
+
         if settings["enable-encryption"] or os.path.exists(f"{CACHE}/pb"):
             if password:
-                cmd.insert(4, "-mem=AES256")
-                cmd.insert(5, f"-p{password}")
+                cmd.append("-tzip")
+                cmd.append("-mem=AES256")
+                cmd.append(f"-p{password}")
+
+        cmd.extend(['cfg.sdar', '.'])
 
         proc = subprocess.run(cmd, capture_output=True, text=True)
         print(proc.stdout)

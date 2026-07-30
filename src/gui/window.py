@@ -360,17 +360,6 @@ class MainWindow(Adw.ApplicationWindow):
             self.toast.set_timeout(5)
             self.toast_overlay.add_toast(self.toast)
 
-        # Check, if the archive is encrypted or not
-        def get_status_of_encryption():
-            try:
-                status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.path_to_import).infolist() if not z.filename.endswith("/"))
-            except:
-                status = False
-            if status == True:
-                GLib.idle_add(self.check_password_dialog)
-            else:
-                GLib.idle_add(self.import_config)
-
         # Get path from the dialog
         def open_selected(source, res, data):
             try:
@@ -379,8 +368,7 @@ class MainWindow(Adw.ApplicationWindow):
                 return
             self.path_to_import = file.get_path()
             show_please_wait_toast()
-            check_thread = Thread(target=get_status_of_encryption)
-            check_thread.start()
+            self.import_config()
 
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
@@ -501,7 +489,7 @@ class MainWindow(Adw.ApplicationWindow):
             with open(f"{CACHE}/temp_file", "w") as tmp:
                 tmp.write(self.checkEntry.get_text())
 
-            self.import_config()
+            self._show_items_dialog()
 
     # Save configuration
     def save_config(self):
@@ -543,7 +531,17 @@ class MainWindow(Adw.ApplicationWindow):
         self.done_title = _("The configuration has been applied!")
         self.done_desc = _("<big><b>{}</b></big>\nYou can log out of the system for the changes to take effect, or go back to the previous page and log out later.\n\n<i>If your archive contains Flatpak apps, they will start installing after the next login.</i>").format(_("The configuration has been applied!"))
 
-        self._show_items_dialog()
+        self._check_enc_status()
+
+    def _check_enc_status(self):
+        try:
+            status = any(z.flag_bits & 0x1 for z in zipfile.ZipFile(self.path_to_import).infolist() if not z.filename.endswith("/"))
+        except:
+            status = False
+        if status == True:
+            GLib.idle_add(self.check_password_dialog)
+        else:
+            self._show_items_dialog()
 
     # Get items which are available in the configuration archive or folder
     def _get_archive_items(self):
