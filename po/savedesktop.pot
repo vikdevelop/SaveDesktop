@@ -69,6 +69,10 @@ msgid "Extensions"
 msgstr ""
 
 #: src/gui/items_dialog.py
+msgid "System settings"
+msgstr ""
+
+#: src/gui/items_dialog.py
 msgid "Desktop"
 msgstr ""
 

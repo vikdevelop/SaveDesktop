@@ -71,6 +71,16 @@ class itemsDialog(Adw.AlertDialog):
         if environment["de_name"] in ["GNOME", "Cinnamon", "COSMIC (Old)", "KDE Plasma"]:
             self.show_extensions_row()
         
+        # Switch and row of the option: System settings
+        self.systemset_row = Adw.SwitchRow.new()
+        self.systemset_row.set_title(title=_("System Settings"))
+        self.systemset_row.set_use_markup(True)
+        self.systemset_row.set_title_lines(2)
+        if settings["save-system-settings"]:
+            self.systemset_row.set_active(True)
+        if self.should_show("dconf-settings.ini", "xdg-config"):
+            self.itemsBox.append(child=self.systemset_row)
+
         # Switch and row of the option: File Manager Bookmarks
         if environment["de_name"] in ["GNOME", "Cinnamon", "Xfce", "Budgie", "Pantheon", "MATE", "COSMIC (Old)"]:
             self.gtk_row = Adw.SwitchRow.new()
@@ -240,6 +250,7 @@ class itemsDialog(Adw.AlertDialog):
                 settings["save-themes"] = self.themes_row.get_active()
                 settings["save-fonts"] = self.fonts_row.get_active()
                 settings["save-backgrounds"] = self.backgrounds_row.get_active()
+                settings["save-system-settings"] = self.systemset_row.get_active()
                 settings["save-desktop-folder"] = self.desktop_row.get_active()
                 settings["enable-custom-dirs"] = self.custom_row.get_active()
                 if hasattr(self, "gtk_row"):

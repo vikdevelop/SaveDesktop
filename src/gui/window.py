@@ -607,7 +607,7 @@ class MainWindow(Adw.ApplicationWindow):
             self._start_gui()
 
     def _start_gui(self):
-        self.please_wait()
+        timeout = GLib.timeout_add(1, self.please_wait)
         import_thread = Thread(target=self._call_archive_command)
         import_thread.start()
 

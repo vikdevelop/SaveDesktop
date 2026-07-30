@@ -157,6 +157,16 @@ def import_desktop_folder():
         safe_copytree("gvfs-metadata", f"{home}/.local/share/gvfs-metadata")
         print("[OK] Restored Desktop folder")
 
+# Disable importing directories to the ~/.config directory, if the value from GSettings is FALSE
+def disable_config_dirs():
+    if not settings["save-system-settings"]:
+        if environment and "dirs" in environment:
+            environment["dirs"] = [
+                ent for ent in environment["dirs"]
+                if ".config/" not in ent[0]
+            ]
+        print(environment["dirs"])
+
 # ------------------------
 # GENERAL ITEMS (DATA MODEL)
 # ------------------------
@@ -292,6 +302,7 @@ class Save:
 
         # DE configuration
         if environment:
+            disable_config_dirs()
             if environment["de_name"] == "KDE Plasma":
                 print("Saving KDE Plasma configuration...")
                 os.makedirs("DE/xdg-config", exist_ok=True)
@@ -312,8 +323,10 @@ class Save:
         self.save_dconf()
 
     def save_dconf(self):
-        os.system("dconf dump / > ./General/dconf-settings.ini")
-        print("[OK] Saved dconf")
+        if settings["save-system-settings"]:
+            with open("./General/dconf-settings.ini", "w") as f:
+                subprocess.run(["dconf", "dump", "/"], stdout=f, check=True)
+            print("[OK] Saved system settings")
 
     def save_kde_config_data_dirs(self):
         # Target dirs
@@ -352,7 +365,6 @@ class Save:
 class Import:
 
     def __init__(self):
-
         # General dirs (reverse copy)
         for item in GENERAL_ITEMS.values():
             if settings[item["key"]]:
@@ -388,6 +400,7 @@ class Import:
 
         # DE configuration
         if environment:
+            disable_config_dirs() # Only if the "save-system-value" from GSettings is FALSE
             if environment["de_name"] == "KDE Plasma":
                 print("Importing KDE Plasma configuration...")
                 for src, dst in KDE_DIRS_IMPORT:
@@ -418,17 +431,23 @@ class Import:
         self.rec_dir.mkdir(parents=True, exist_ok=True)
 
     def import_dconf(self):
-        if flatpak:
-            if os.path.exists("General"):
-                os.system("dconf load / < ./General/dconf-settings.ini")
-            else:
-                os.system("dconf load / < ./dconf-settings.ini")
-        else:
-            os.system("echo user-db:user > temporary-profile")
+        if settings["save-system-settings"]:
+            ini_path = "./General/dconf-settings.ini" if os.path.exists("General") else "./dconf-settings.ini"
 
-            if os.path.exists("General"):
-                os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < ./General/dconf-settings.ini')
+            if flatpak:
+                with open(ini_path, "r") as f:
+                    subprocess.run(["dconf", "load", "/"], stdin=f, check=True)
             else:
-                os.system('DCONF_PROFILE="$(pwd)/temporary-profile" dconf load / < ./dconf-settings.ini')
+                with open("temporary-profile", "w") as f:
+                    f.write("user-db:user\n")
 
-        print("[OK] Imported dconf")
+                abs_profile_path = os.path.abspath("temporary-profile")
+
+                custom_env = os.environ.copy()
+                custom_env["DCONF_PROFILE"] = abs_profile_path
+
+                with open(ini_path, "r") as f:
+                    subprocess.run(["dconf", "load", "/"], stdin=f, env=custom_env, check=True)
+
+
+            print("[OK] Imported system settings")

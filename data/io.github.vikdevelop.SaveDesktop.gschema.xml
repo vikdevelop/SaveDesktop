@@ -29,6 +29,10 @@
 			<default>true</default>
 			<summary>Save GNOME, Cinnamon, or Plasma extensions</summary>
 		</key>
+	  <key name="save-system-settings" type="b">
+	    <default>true</default>
+	    <summary>Save system settings from GSettings</summary>
+	  </key>
 		<key name="save-desktop-folder" type="b">
 			<default>false</default>
 			<summary>Save the user desktop folder</summary>
