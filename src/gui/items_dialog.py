@@ -113,7 +113,7 @@ class itemsDialog(Adw.AlertDialog):
         self.custom_button.connect("clicked", self._show_custom_dirs_dialog)
 
         self.custom_row = Adw.SwitchRow.new()
-        self.custom_row.set_title(_("Custom folders"))
+        self.custom_row.set_title(_("Custom folders and files"))
         if settings["enable-custom-dirs"]:
             self.custom_row.set_active(True)
         if self.custom_row.get_active():

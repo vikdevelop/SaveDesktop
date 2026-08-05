@@ -11,11 +11,11 @@ class CustomDirsDialog(Adw.AlertDialog):
         self.parent = parent
         self.old_settings = settings["custom-dirs"]
 
-        self.subtitle = f'{_("Select custom folders to include in the configuration archive.")}'
+        self.subtitle = f'{_("Select custom folders and files to include in the configuration archive.")}'
         if flatpak:
             self.subtitle += f'\n{_("<i>Since you are using Flatpak, pay attention to the path format. <b>If the selected path begins at /run/user/</b>, it would be necessary to grant access to the folder you want to select.</i>")} <a href="https://linuxconfig.org/how-to-manage-flatpaks-privileges-with-flatseal">{_("Learn more")}</a>'
 
-        self.set_heading(_("Custom folders"))
+        self.set_heading(_("Custom folders and files"))
         self.set_body(self.subtitle)
         self.set_body_use_markup(True)
 
@@ -31,7 +31,7 @@ class CustomDirsDialog(Adw.AlertDialog):
 
         if settings["custom-dirs"]:
             self.load_folders()
-        self._show_add_button()
+        self._show_add_section()
 
     def _activate_folders_list(self):
         # listbox for showing items
@@ -43,17 +43,39 @@ class CustomDirsDialog(Adw.AlertDialog):
         self.add_response('ok', _("Apply"))
         self.set_response_appearance('ok', Adw.ResponseAppearance.SUGGESTED)
 
-    def _show_add_button(self):
-        self.button = Gtk.Button.new_with_label(_("Add folder"))
-        self.button.add_css_class("suggested-action")
-        self.button.add_css_class("pill")
-        self.button.set_valign(Gtk.Align.CENTER)
-        self.button.set_halign(Gtk.Align.CENTER)
-        self.button.connect("clicked", self._show_file_dialog)
-        self.box.append(self.button)
+    def _show_add_section(self):
+        self.add_box = Gtk.ListBox.new()
+        self.add_box.set_selection_mode(mode=Gtk.SelectionMode.NONE)
+        self.add_box.add_css_class(css_class='boxed-list')
+        self.box.append(self.add_box)
 
-    def _show_file_dialog(self, w):
-        def import_selected(source, res, data):
+        self.add_folder_button = Gtk.Button.new_from_icon_name("list-add-symbolic")
+        self.add_folder_button.add_css_class("suggested-action")
+        self.add_folder_button.add_css_class("circular")
+        self.add_folder_button.set_valign(Gtk.Align.CENTER)
+        self.add_folder_button.set_halign(Gtk.Align.CENTER)
+        self.add_folder_button.connect("clicked", self._show_folders_dialog)
+
+        self.add_folder_row = Adw.ActionRow.new()
+        self.add_folder_row.set_title(_("Add folder"))
+        self.add_folder_row.set_activatable_widget(self.add_folder_button)
+        self.add_folder_row.add_suffix(self.add_folder_button)
+        self.add_box.append(self.add_folder_row)
+
+        self.add_file_button = Gtk.Button.new_from_icon_name("list-add-symbolic")
+        self.add_file_button.add_css_class("circular")
+        self.add_file_button.set_valign(Gtk.Align.CENTER)
+        self.add_file_button.set_halign(Gtk.Align.CENTER)
+        self.add_file_button.connect("clicked", self._show_files_dialog)
+
+        self.add_file_row = Adw.ActionRow.new()
+        self.add_file_row.set_title(_("Add file"))
+        self.add_file_row.set_activatable_widget(self.add_file_button)
+        self.add_file_row.add_suffix(self.add_file_button)
+        self.add_box.append(self.add_file_row)
+
+    def _show_folders_dialog(self, w):
+        def set_selected(source, res, data):
             try:
                 folder = source.select_folder_finish(res)
             except GLib.Error:
@@ -61,32 +83,51 @@ class CustomDirsDialog(Adw.AlertDialog):
 
             folder_path = folder.get_path()
 
-            del_button = Gtk.Button.new_from_icon_name("user-trash-symbolic")
-            del_button.add_css_class("destructive-action")
-            del_button.set_tooltip_text(_("Remove"))
-            del_button.set_valign(Gtk.Align.CENTER)
-            del_button.connect("clicked", self._remove_folder)
-
-            if "/run/user" in folder_path:
-                folder_path = f"<span color='orange'>{folder_path}</span>"
-
-            row = Adw.ActionRow.new()
-            row.set_title(folder_path)
-            row.set_use_markup(True)
-            row.add_suffix(del_button)
-
-            try:
-                self.flow_box.append(row)
-            except AttributeError:
-                self._activate_folders_list()
-                self.flow_box.append(row)
-                self.box.remove(self.button)
-                self.box.append(self.button)
+            self._add_new_path(folder_path)
 
         self.file_chooser = Gtk.FileDialog.new()
         self.file_chooser.set_modal(True)
         self.file_chooser.set_title(_("Choose another folder"))
-        self.file_chooser.select_folder(self.parent, None, import_selected, None)
+        self.file_chooser.select_folder(self.parent, None, set_selected, None)
+
+    def _show_files_dialog(self, w):
+        def set_selected(source, res, data):
+            try:
+                file = source.open_finish(res)
+            except GLib.Error:
+                return # User cancelled selection
+
+            folder_path = file.get_path()
+
+            self._add_new_path(folder_path)
+
+        self.file_chooser = Gtk.FileDialog.new()
+        self.file_chooser.set_modal(True)
+        self.file_chooser.set_title(_("Choose another folder"))
+        self.file_chooser.open(self.parent, None, set_selected, None)
+
+    def _add_new_path(self, folder_path):
+        del_button = Gtk.Button.new_from_icon_name("user-trash-symbolic")
+        del_button.add_css_class("destructive-action")
+        del_button.set_tooltip_text(_("Remove"))
+        del_button.set_valign(Gtk.Align.CENTER)
+        del_button.connect("clicked", self._remove_folder)
+
+        if "/run/user" in folder_path:
+            folder_path = f"<span color='orange'>{folder_path}</span>"
+
+        row = Adw.ActionRow.new()
+        row.set_title(folder_path)
+        row.set_use_markup(True)
+        row.add_suffix(del_button)
+
+        try:
+            self.flow_box.append(row)
+        except AttributeError:
+            self._activate_folders_list()
+            self.flow_box.append(row)
+            self.box.remove(self.button)
+            self.box.append(self.button)
 
     def load_folders(self):
         while child := self.flow_box.get_first_child():

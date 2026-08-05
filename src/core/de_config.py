@@ -300,13 +300,16 @@ class Save:
         if settings["enable-custom-dirs"]:
             os.makedirs("Custom_Dirs", exist_ok=True)
             for folder in settings["custom-dirs"]:
-                name = Path(folder).name
-                dst = Path("Custom_Dirs") / name
-                i = 2
-                while dst.exists():
-                    dst = Path("Custom_Dirs") / f"{name}_{i}"
-                    i += 1
-                safe_copytree(folder, str(dst))
+                abs_path = Path(folder)
+
+                name = abs_path.name
+                input_path = Path(name)
+                dst = Path("Custom_Dirs") / input_path
+
+                if input_path.is_dir():
+                    safe_copytree(str(abs_path), str(dst))
+                else:
+                    safe_copy(str(abs_path), str(dst))
 
         # DE configuration
         if environment:

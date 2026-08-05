@@ -6,96 +6,106 @@
     "sdk" : "org.gnome.Sdk",
     "command" : "savedesktop",
     "finish-args" : [
-        "--share=ipc",
-        "--socket=wayland",
-        "--socket=fallback-x11",
-        "--device=dri",
-        "--filesystem=xdg-run/gvfs",
-        "--filesystem=xdg-run/gvfsd",
-        "--filesystem=~/.config",
-        "--filesystem=~/.local/share",
-        "--filesystem=xdg-download",
-        "--filesystem=xdg-desktop",
-        "--filesystem=~/.themes:create",
-        "--filesystem=~/.icons:create",
-        "--filesystem=~/.cinnamon:create",
-        "--filesystem=~/.xfce4:create",
-        "--filesystem=~/.fonts:create",
-        "--filesystem=/var/lib/flatpak:ro",
-        "--filesystem=~/.local/share/flatpak/app:ro",
-        "--filesystem=~/.var/app:ro",
-        "--talk-name=org.gnome.SessionManager",
-        "--talk-name=org.xfce.SessionManager",
-        "--talk-name=org.kde.LogoutPrompt",
-        "--talk-name=com.system76.CosmicSession",
-        "--talk-name=org.freedesktop.FileManager1",
-        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
-        "--filesystem=xdg-run/dconf",
-        "--talk-name=ca.desrt.dconf"
+	"--share=ipc",
+	"--socket=wayland",
+	"--socket=fallback-x11",
+	"--device=dri",
+	"--filesystem=xdg-run/gvfs",
+	"--filesystem=xdg-run/gvfsd",
+	"--filesystem=~/.config",
+	"--filesystem=~/.local/share",
+	"--filesystem=xdg-download",
+	"--filesystem=xdg-desktop",
+	"--filesystem=~/.themes:create",
+	"--filesystem=~/.icons:create",
+	"--filesystem=~/.cinnamon:create",
+	"--filesystem=~/.xfce4:create",
+	"--filesystem=~/.fonts:create",
+	"--filesystem=/var/lib/flatpak:ro",
+	"--filesystem=~/.local/share/flatpak/app:ro",
+	"--filesystem=~/.var/app:ro",
+	"--talk-name=org.gnome.SessionManager",
+	"--talk-name=org.xfce.SessionManager",
+	"--talk-name=org.kde.LogoutPrompt",
+	"--talk-name=com.system76.CosmicSession",
+	"--talk-name=org.freedesktop.FileManager1",
+	"--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+	"--filesystem=xdg-run/dconf",
+	"--talk-name=ca.desrt.dconf"
     ],
     "modules" : [
-        {
-            "name" : "7zip",
-            "buildsystem" : "simple",
-            "subdir" : "CPP/7zip/Bundles/Alone2",
-            "build-commands" : [
-                "make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc",
-                "install -D ./_o/7zz /app/bin/7z"
-            ],
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://github.com/ip7z/7zip.git",
-                    "tag" : "26.02",
-                    "commit" : "f9d78aff31a5f2521ae7ddbdc97c4a8855808959"
-                }
-            ],
-            "x-checker-data" : {
-                "type" : "git",
-                "tag-pattern" : "^([\\d.]+)$"
-            }
-        },
-        {
-            "name" : "dconf",
-            "buildsystem" : "simple",
-            "build-commands" : [
-                "cp -R dconf/* /app"
-            ],
-            "sources" : [
-                {
-                    "type" : "archive",
-                    "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/3.7.1/dconf-build-override-049-amd64.tar.xz",
-                    "sha256" : "a1e644bbf755cccf531260a78bcc631d18c29518f86004256cd4b32d9e8a85f3",
-                    "only-arches" : [
-                        "x86_64"
-                    ]
-                },
-                {
-                    "type" : "archive",
-                    "url" : "https://github.com/vikdevelop/SaveDesktop/releases/download/3.7.1/dconf-build-override-049-aarch64.tar.xz",
-                    "sha256" : "a60390607bda144a17b56e0557ec9bb3d1b7a5c6465270652769cfe7642dd528",
-                    "only-arches" : [
-                        "aarch64"
-                    ]
-                }
-            ]
-        },
-        {
-            "name" : "savedesktop",
-            "builddir" : true,
-            "buildsystem" : "meson",
-            "sources" : [
-                {
-                    "type" : "dir",
-                    "path" : "."
-                }
-            ],
-            "config-opts" : [
-                "--libdir=lib"
-            ]
-        }
+	{
+	    "name" : "7zip",
+	    "buildsystem" : "simple",
+	    "subdir" : "CPP/7zip/Bundles/Alone2",
+	    "build-commands" : [
+		"make -j $FLATPAK_BUILDER_N_JOBS -f makefile.gcc",
+		"install -D ./_o/7zz /app/bin/7z"
+	    ],
+	    "sources" : [
+		{
+		    "type" : "git",
+		    "url" : "https://github.com/ip7z/7zip.git",
+		    "tag" : "26.02",
+		    "commit" : "f9d78aff31a5f2521ae7ddbdc97c4a8855808959"
+		}
+	    ],
+	    "x-checker-data" : {
+		"type" : "git",
+		"tag-pattern" : "^([\\d.]+)$"
+	    }
+	},
+	{
+	    "name": "dconf",
+	    "buildsystem": "meson",
+	    "config-opts": [
+		"-Dsystemduserunitdir=/app/lib/systemd/user/",
+		"-Dbash_completion=false",
+		"-Dman=false"
+	    ],
+	    "cleanup": [
+		"/include",
+		"/lib/pkgconfig",
+		"/libexec",
+		"/share/dbus-1"
+	    ],
+	    "post-install": [
+		"rm -f /app/lib/libdconf.so /app/lib/libdconf.so.1",
+		"cp /app/lib/libdconf.so.1.0.0 /app/lib/libdconf.so.1",
+		"cp /app/lib/libdconf.so.1.0.0 /app/lib/libdconf.so"
+	    ],
+	    "sources": [
+		{
+		    "type": "archive",
+		    "url": "https://download.gnome.org/sources/dconf/0.49/dconf-0.49.0.tar.xz",
+		    "sha256": "16a47e49a58156dbb96578e1708325299e4c19eea9be128d5bd12fd0963d6c36",
+		    "x-checker-data": {
+			"type": "gnome",
+			"name": "dconf"
+		    }
+		},
+		{
+		    "type": "patch",
+		    "path": "data/dconf-override.patch"
+		}
+	    ]
+	},
+	{
+	    "name" : "savedesktop",
+	    "builddir" : true,
+	    "buildsystem" : "meson",
+	    "sources" : [
+		{
+		    "type" : "dir",
+		    "path" : "."
+		}
+	    ],
+	    "config-opts" : [
+		"--libdir=lib"
+	    ]
+	}
     ],
     "build-options" : {
-        "env" : {        }
+	"env" : {        }
     }
 }

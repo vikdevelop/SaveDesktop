@@ -82,15 +82,19 @@ msgstr ""
 
 #: src/gui/items_dialog.py
 #: src/gui/custom_dirs_dialog.py
-msgid "Custom folders"
+msgid "Custom folders and files"
 msgstr ""
 
 #: src/gui/custom_dirs_dialog.py
-msgid "Select custom folders to include in the configuration archive."
+msgid "Select custom folders and files to include in the configuration archive."
 msgstr ""
 
 #: src/gui/custom_dirs_dialog.py
 msgid "Add folder"
+msgstr ""
+
+#: src/gui/custom_dirs_dialog.py
+msgid "Add file"
 msgstr ""
 
 #: src/gui/custom_dirs_dialog.py
