@@ -66,6 +66,20 @@
     </screenshots>
           
     <releases>
+       <release version="4.2" date="2026-09-20">
+          <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/4.2</url>
+          <description>
+            <ul>
+              <li>Added support for Phosh DE</li>
+              <li>Added an option for selecting custom files (#550)</li>
+              <li>Added an option for reseting Save Desktop configuration to default values (#549)</li>
+              <li>Improved selection of Flatpak applications, which can now be selected even if the ~/.var/app directory is empty (#548)</li>
+              <li>Transitioned from .sd.zip to the new .sdar extension. The internal structure remains unchanged, allowing older files to be simply renamed</li>
+              <li>Added an option for opening Save Desktop archives from the file manager</li>
+              <li>Added an option to include or exclude system settings (specifically DConf and .config dirs) from the configuration</li>
+            </ul>
+          </description>
+       </release>
        <release version="4.1" date="2026-07-05">
           <url>https://github.com/vikdevelop/SaveDesktop/releases/tag/4.1</url>
           <description>
