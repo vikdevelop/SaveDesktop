@@ -9,10 +9,11 @@ from savedesktop.core.synchronization_setup import create_savedesktop_json
 from savedesktop.globals import *
 
 class itemsDialog(Adw.AlertDialog):
-    def __init__(self, parent, items_list=None):
+    def __init__(self, parent, items_list=None, flatpaks_list=None):
         super().__init__()
         self.parent = parent
         self.items_list = items_list if items_list is not None else []
+        self.flatpaks_list = flatpaks_list if flatpaks_list is not None else []
 
         self.set_heading(_("Select configuration items"))
         self.set_body(_("These settings are used for manual and periodic saves, imports, and synchronization."))
@@ -134,9 +135,9 @@ class itemsDialog(Adw.AlertDialog):
             
             # If it's available only one folder in the dir below, the row will not be displayed
             path = Path(f"{home}/.var/app")
-            folders_dict = {f.name: str(f) for f in path.iterdir() if f.is_dir()}
+            folders_dict_home = {f.name: str(f) for f in path.iterdir() if f.is_dir()}
 
-            if len(folders_dict) > 1:
+            if len(folders_dict_home) > 1 or len(self.flatpaks_list) > 1:
                 self.appsButton = Gtk.Button.new_from_icon_name("go-next-symbolic")
                 self.appsButton.add_css_class("flat")
                 self.appsButton.set_valign(Gtk.Align.CENTER)
@@ -224,7 +225,7 @@ class itemsDialog(Adw.AlertDialog):
 
     # show dialog for managing Flatpak applications data
     def manage_data_list(self, w):
-        self.appd = FlatpakAppsDialog(self.parent)
+        self.appd = FlatpakAppsDialog(self.parent, flatpaks_list=self.flatpaks_list)
         self.appd.choose(self.parent, None, None, None)
         self.appd.present(self.parent)
 

@@ -59,8 +59,10 @@ class FolderSwitchRow(Adw.Bin):
 
 # dialog for showing installed Flatpak apps
 class FlatpakAppsDialog(Adw.AlertDialog):
-    def __init__(self, parent):
+    def __init__(self, parent, flatpaks_list=None):
         super().__init__()
+        self.flatpaks_list = flatpaks_list if flatpaks_list is not None else []
+
         self.set_heading(_("Select Flatpak apps"))
 
         self.old_disabled_flatpaks = settings["disabled-flatpak-apps-data"]
@@ -86,8 +88,21 @@ class FlatpakAppsDialog(Adw.AlertDialog):
         except Exception as e:
             self.set_body(f"Error: {e}")
 
-    # load items from ~/.var/app directory
+    # load items from ~/.var/app directory or archive
     def load_folders(self):
+        self.var_app_dirs_num = os.listdir(f"{home}/.var/app")
+
+        print(f"Number of apps in the .var/app dir: {len(self.var_app_dirs_num)}")
+        print(f"Number of apps in the archive: {len(self.flatpaks_list)}")
+
+        if len(self.var_app_dirs_num) > len(self.flatpaks_list):
+            self._load_in_normal_mode()
+        elif len(self.flatpaks_list) > len(self.var_app_dirs_num):
+            self._load_in_rescue_mode()
+        else:
+            raise AttributeError("Found 0 apps")
+
+    def _load_in_normal_mode(self):
         path = Path(f"{home}/.var/app")
         black_list = settings.get_strv("disabled-flatpak-apps-data")
         folders_dict = {f.name: str(f) for f in path.iterdir() if f.is_dir()}
@@ -121,6 +136,11 @@ class FlatpakAppsDialog(Adw.AlertDialog):
                     print(f"Error while reading: {name}")
             else:
                 print(f"Desktop file doesn't exist for {name}.")
+
+    def _load_in_rescue_mode(self):
+        for app_id in self.flatpaks_list:
+            self.folder_row = FolderSwitchRow(app_id)
+            self.flow_box.append(self.folder_row)
 
     # if user clicks on the cancel button, the settings will not saved
     def apply_settings(self, w, response):

@@ -516,8 +516,6 @@ class MainWindow(Adw.ApplicationWindow):
 
     # Import configuration
     def import_config(self):
-        self.toast_overlay.dismiss_all()
-
         if os.path.exists(f"{CACHE}/mime-tmp"):
             self.path_to_import = open(f"{CACHE}/mime-tmp").read()
             os.remove(f"{CACHE}/mime-tmp")
@@ -573,6 +571,11 @@ class MainWindow(Adw.ApplicationWindow):
                 if line.startswith("Path = "):
                     paths.append(line[7:])
 
+            # Get installed Flatpak apps from the archive
+            fl_thread = Thread(target=self._extract_flatpak_data_archive)
+            fl_thread.start()
+            fl_thread.join()
+
         elif self.archive_name.endswith(".sd.tar.gz"):
             with tarfile.open(self.archive_name, "r:*") as tar:
                 paths = [m.name for m in tar.getmembers()]
@@ -587,9 +590,26 @@ class MainWindow(Adw.ApplicationWindow):
 
         return paths
 
+    def _extract_flatpak_data_archive(self):
+        subprocess.run(["7z", "x", self.archive_name, "Flatpak_Apps/installed_flatpaks.sh", f"-o{CACHE}/workspace"])
+        subprocess.run(["7z", "x", self.archive_name, "Flatpak_Apps/installed_user_flatpaks.sh", f"-o{CACHE}/workspace"])
+
+        # Load and extract user Flatpaks
+        with open(f"{CACHE}/workspace/Flatpak_Apps/installed_user_flatpaks.sh") as fl_user:
+            user_app_ids = re.findall(r'--user\s+([^\s]+)', fl_user.read())
+
+        # Load and extract system Flatpaks
+        with open(f"{CACHE}/workspace/Flatpak_Apps/installed_flatpaks.sh") as fl_system:
+            system_app_ids = re.findall(r'--system\s+([^\s]+)', fl_system.read())
+
+        # Merge lists into a set (removes duplicates) and convert back to a list
+        self.flatpak_apps = list(set(user_app_ids + system_app_ids))
+
     def _show_items_dialog(self):
+        self.toast_overlay.dismiss_all()
+
         self.archive_items = self._get_archive_items()
-        self.items_dialog = itemsDialog(self, self.archive_items)
+        self.items_dialog = itemsDialog(self, items_list=self.archive_items, flatpaks_list=self.flatpak_apps)
         if not self.items_dialog.itemsBox.observe_children().get_n_items() == 0:
             self.items_dialog.choose(self, None, None, None)
             self.items_dialog.connect("response", self._on_items_dialog_response)
