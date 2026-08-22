@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: savedesktop\n"
 "POT-Creation-Date: 2025-09-03 19:10\n"
-"PO-Revision-Date: 2025-09-14 10:44+0000\n"
-"Last-Translator: Prefill add-on <noreply-addon-prefill@weblate.org>\n"
+"PO-Revision-Date: 2026-08-24 18:51+0000\n"
+"Last-Translator: BennyBeat <bennybeat@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/vikdevelop/"
 "savedesktop/ca/>\n"
 "Language: ca\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 msgid "Save"
 msgstr "Desa"
@@ -26,12 +26,14 @@ msgid "Set the file name"
 msgstr "Nom del fitxer"
 
 msgid "Select configuration items"
-msgstr ""
+msgstr "Trieu els elements de configuració"
 
 msgid ""
 "These settings are used for manual and periodic saves, imports, and "
 "synchronization."
 msgstr ""
+"Aquesta configuració s'utilitza per a la importació, sincronització i còpies "
+"(manuals/automàtiques)."
 
 msgid "Icons"
 msgstr "Icones"
@@ -40,38 +42,42 @@ msgid "Themes"
 msgstr "Temes"
 
 msgid "Fonts"
-msgstr ""
+msgstr "Fonts"
 
 # Translation key: backgrounds
 msgid "Backgrounds"
 msgstr "Fons d'escriptori"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Complements"
 
 msgid "Desktop"
 msgstr "Escriptori"
 
 msgid "File manager bookmarks"
-msgstr ""
+msgstr "Favorits de l'explorador de fitxers"
 
 msgid "Custom folders"
-msgstr ""
+msgstr "Carpetes addicionals"
 
 msgid "Select custom folders to include in the configuration archive."
 msgstr ""
+"Trieu quines carpetes addicionals incloure dins el fitxer de configuració."
 
 msgid "Add folder"
-msgstr ""
+msgstr "Afegeix una carpeta"
 
 msgid "Remove"
-msgstr ""
+msgstr "Suprimeix"
 
 msgid ""
 "<i>Since you are using Flatpak, pay attention to the path format. <b>If the "
 "selected path begins at /run/user/</b>, it would be necessary to grant "
 "access to the folder you want to select.</i>"
 msgstr ""
+"<i>Com utilitzeu Flatpak, aneu amb compte amb la selecció final. <b>Si la "
+"ruta triada comença per «/run/user/»</b>, caldrà accés a la carpeta que "
+"voleu triar.</i>"
 
 msgid "Flatpak apps"
 msgstr "Programari Flatpak"
@@ -83,13 +89,13 @@ msgid "User data of installed Flatpak apps"
 msgstr "Dades d'usuari del programari Flatpak instal·lat"
 
 msgid "Select Flatpak apps"
-msgstr ""
+msgstr "Selecció dels paquets Flatpak"
 
 msgid "Keep existing Flatpak apps and data"
-msgstr ""
+msgstr "Conserva el programari Flatpak i les seves dades"
 
 msgid "Installing your Flatpak apps..."
-msgstr ""
+msgstr "S'està instal·lant el vostre programari Flatpak..."
 
 msgid ""
 "You can continue using your computer; everything runs in the background. "
@@ -97,42 +103,46 @@ msgid ""
 "data is complete, a message will appear here and you’ll also see a system "
 "notification. You can also show the progress below."
 msgstr ""
+"Podeu continuar utilitzant el vostre ordinador; tot s'executa en rerefons. "
+"Un cop finalitzi la instal·lació dels paquets Flatpak (i la restauració de "
+"les dades si escau), es mostra un missatge a l'aplicació i a les "
+"notificacions del sistema. També podeu veure el progrés a sota."
 
 msgid "Installation queue is empty. Nothing new to install."
-msgstr ""
+msgstr "La cua d'instal·lació és buida. No hi ha res nou per a afegir."
 
 msgid "Copying the Flatpak's user data to ~/.var/app"
-msgstr ""
+msgstr "S'estan copiant les dades d'usuari a ~/.var/app"
 
 msgid "✔ Copied Flatpak's user data"
-msgstr ""
+msgstr "✔ S'han copiat les dades Flatpak d'usuari"
 
 msgid "Cleaning up orphaned user data..."
-msgstr ""
+msgstr "S'estan netejant les dades òrfenes..."
 
 msgid "All useless apps and orphaned data have been removed"
-msgstr ""
+msgstr "S'han netejat totes les dades i programari orfe correctament"
 
 msgid "Installing {count} new apps"
-msgstr ""
+msgstr "S'està instal·lant {count} aplicacions noves"
 
 msgid "{app} is already available in the system."
-msgstr ""
+msgstr "{app} ja està disponible al sistema."
 
 msgid "↓ Installing {app} ({current}/{total})"
-msgstr ""
+msgstr "↓ Instal·lació de: {app} ({current}/{total})"
 
 msgid "✔ Finished installing {app}"
-msgstr ""
+msgstr "✔ Ha finalitzat la instal·lació de: {app}"
 
 msgid "✔ All operations have been completed successfully."
-msgstr ""
+msgstr "✔ Totes les tasques han finalitzat correctament."
 
 msgid "Your apps have been installed!"
-msgstr ""
+msgstr "S'ha instal·lat el vostre programari!"
 
 msgid "This window will be closed automatically in 2 minutes."
-msgstr ""
+msgstr "Aquesta finestra estancarà automàticament en 2 minuts."
 
 msgid "More options"
 msgstr "Més opcions"
@@ -141,10 +151,10 @@ msgid "Periodic saving"
 msgstr "Còpia automàtica"
 
 msgid "Changes will only take effect after the next login"
-msgstr "Els canvis seran efectius al proper inici de sessió"
+msgstr "(canvis efectius el pròxim inici de sessió)"
 
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 msgid "Never"
 msgstr "Mai"
@@ -177,13 +187,13 @@ msgid "Reset to default"
 msgstr "Restaura als valors per defecte"
 
 msgid "Password for encryption"
-msgstr ""
+msgstr "Contrasenya de xifratge"
 
 msgid "Manual saving"
-msgstr ""
+msgstr "Còpia manual"
 
 msgid "Archive encryption"
-msgstr "Xifrat de ftxer"
+msgstr "Protecció del fitxer"
 
 # Translation key: archive_encryption_desc
 msgid ""
@@ -191,12 +201,12 @@ msgid ""
 "password. This is useful when saving the configuration to portable media for "
 "better security of your data."
 msgstr ""
-"En desar la configuració de forma manual, si us demanarà crear una "
-"contrasenya. Això és útil quan deseu la configuració en mitjans extraïbles "
-"per mantenir segures les vostres dades."
+"Si us demanarà crear una contrasenya en finalitzar la configuració manual. "
+"És útil p. ex. en desar la configuració a mitjans extraïbles i mantenir així "
+"segures les vostres dades."
 
 msgid "Save the configuration without creating an archive"
-msgstr ""
+msgstr "Desa la configuració sense crear-ne cap còpia"
 
 msgid "Create new password"
 msgstr "Crea una contrasenya nova"
@@ -233,6 +243,8 @@ msgstr ""
 msgid ""
 "Please enter a password to unlock the archive for sync the configuration"
 msgstr ""
+"Inseriu la contrasenya per a desblocar el fitxer i sincronitzar la "
+"configuració"
 
 # Translation key: enter_password_desc
 msgid ""
@@ -240,12 +252,15 @@ msgid ""
 "Desktop app. Please enter the password below to unlock it and start "
 "synchronization."
 msgstr ""
+"Heu seleccionat un fitxer xifrat per a sincronitzar l'aplicació Save "
+"Desktop. Inseriu la contrasenya per a desblocar-ho i llavors iniciar la "
+"sincronització."
 
 msgid "Remember Password"
-msgstr ""
+msgstr "Recorda la contrasenya"
 
 msgid "Password not entered, or it's incorrect. Unable to continue."
-msgstr ""
+msgstr "Contrasenya errònia o no inserida. No es pot continuar."
 
 # Translation key: saving_config_status
 msgid ""
@@ -283,7 +298,7 @@ msgid "Import from file"
 msgstr "Des d'un fitxer"
 
 msgid "Import from folder"
-msgstr ""
+msgstr "Des d'una carpeta"
 
 msgid "Cancel"
 msgstr "Cancel·la"
@@ -312,6 +327,12 @@ msgid ""
 "<i>If your archive contains Flatpak apps, they will start installing after "
 "the next login.</i>"
 msgstr ""
+"<big><b>{}</b></big>\n"
+"Podeu tancar ara la sessió per a aplicar els canvis, o podeu anar a la "
+"pàgina anterior i tancar la sessió més tard.\n"
+"\n"
+"<i>Si el vostre fitxer contenia programari Flatpak, aquest s'instal·larà al "
+"següent inici de sessió.</i>"
 
 msgid "Back to previous page"
 msgstr "Torna a la pàgina anterior"
@@ -336,28 +357,34 @@ msgstr ""
 "Sincronitzeu el vostre entorn d'escriptori amb altres equips de la xarxa."
 
 msgid "Initial synchronization setup"
-msgstr ""
+msgstr "Configuració inicial de sincronització"
 
 msgid "1. Open the system settings"
-msgstr ""
+msgstr "1. Obriu la configuració del sistema"
 
 msgid "2. Go to the Online Accounts section"
-msgstr ""
+msgstr "2. Aneu a Comptes en línia"
 
 # Translation key: gnome_oa_section_desc
 msgid ""
 "In this section select the cloud service you want, such as Google, Microsoft "
 "365 or Nextcloud."
 msgstr ""
+"Seleccioneu el servei al núvol de la vostra preferència, com ara Google, "
+"Microsoft o Nextcloud."
 
 msgid "3. Click on the Next button and select the created cloud drive folder"
 msgstr ""
+"3. Feu clic al botó Endavant i trieu la carpeta creada del servei al núvol"
 
 # Translation key: gnome_oa_chooser_desc
 msgid ""
 "The created cloud drive folder can be found in the side panel of the file "
 "chooser dialog, in this form: username@service.com."
 msgstr ""
+"La carpeta de la unitat creada al núvol es pot trobar al panell lateral del "
+"quadre de diàleg del selector de fitxers, amb un format tipus: "
+"usuari@servei.com."
 
 # Translation key: rclone_intro_desc
 msgid ""
@@ -365,6 +392,9 @@ msgid ""
 "synced with your cloud service using Rclone.\n"
 "<b>Start by selecting the cloud drive service you use.</b>"
 msgstr ""
+"Perquè la tasca funcioni correctament, la carpeta s'ha de sincronitzar al "
+"núvol mitjançant Rclone.\n"
+"<b>Seleccioneu primer el servei d'emmagatzematge al núvol que utilitzeu.</b>"
 
 # Translation key: rclone_copy_cmd
 msgid ""
@@ -372,33 +402,40 @@ msgid ""
 "terminal app using the Ctrl+Alt+T keyboard shortcut or finding it in the "
 "apps' menu."
 msgstr ""
+"A continuació, copieu l'ordre de configuració del Rclone amb el botó lateral "
+"i enganxeu-la en un terminal que podeu obrir mitjançant la drecera "
+"Ctrl+Alt+T o des del menú d'aplicacions."
 
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 # Translation key: rclone_cmd_copied_msg
 msgid ""
 "Once you have finished setting up Rclone using the command provided, click "
 "the \"Apply\" button"
 msgstr ""
+"Un cop finalitzada la configuració del Rclone amb l'ordre subministrada, feu "
+"clic al botó «Aplica»"
 
 msgid "Use Syncthing folder instead"
-msgstr ""
+msgstr "Mètode alternatiu mitjançant el Syncthing"
 
 msgid "Almost done!"
-msgstr ""
+msgstr "Gairebé heu acabat!"
 
 # Translation key: almost_done_desc
 msgid ""
 "You've now created the cloud drive folder! Click on the Next button to "
 "complete the setup."
 msgstr ""
+"Heu creat la carpeta de sincronització! Feu clic al botó Endavant per a "
+"completar la configuració."
 
 msgid "Select"
-msgstr ""
+msgstr "Selecciona"
 
 msgid "Next"
-msgstr ""
+msgstr "Endavant"
 
 msgid "Set up the sync file"
 msgstr "Configura el fitxer de sincronització"
@@ -450,12 +487,16 @@ msgid ""
 "backup schedule, archive name, and selected configuration items as the other "
 "computer with synchronization set up."
 msgstr ""
+"Habilita la sincronització bidireccional completa, cosa que permet que "
+"aquest ordinador utilitzi la mateixa programació de còpia de seguretat, nom "
+"d'arxiu i elements de configuració seleccionats que l'altre ordinador amb la "
+"sincronització configurada."
 
 msgid "Keyboard shortcuts"
 msgstr "Dreceres de teclat"
 
 msgid "Open the application wiki"
-msgstr ""
+msgstr "Obre el Wiki de l'aplicació"
 
 msgid "Quit"
 msgstr "Surt"
@@ -482,6 +523,13 @@ msgid ""
 "keep your setup consistent across devices with automatic periodic saves and "
 "synchronization."
 msgstr ""
+"El Save Desktop us ajuda a crear i restaurar còpies de seguretat, i "
+"sincronitzar tot l'entorn d'escriptori amb facilitat. Podeu importar i desar "
+"els temes, icones, fonts, fons de pantalla, extensions, contingut de "
+"l'escriptori, aplicacions Flatpak i les seves dades... i d'altres "
+"configuracions d'escriptori, tot en un sol arxiu. Trieu què incloure i "
+"mantingueu una configuració coherent entre dispositius mitjançant la "
+"sincronització i desat periòdic automàtic."
 
 msgid "Translator credits"
 msgstr "BennyBeat https://github.com/BennyBeat"
