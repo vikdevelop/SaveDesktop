@@ -9,10 +9,15 @@ temp_file = f"{CACHE}/temp_file"
 # Cleanup the cache dir before saving
 def cleanup_cache_dir():
     print("Cleaning up the cache directory")
-    try:
-        shutil.rmtree(TEMP_CACHE)
-    except FileNotFoundError:
-        pass
+    # The workspace path can be left behind as a file or a symlink instead of a
+    # directory, and shutil.rmtree is not able to remove either of them
+    if os.path.islink(TEMP_CACHE) or os.path.isfile(TEMP_CACHE):
+        os.remove(TEMP_CACHE)
+    else:
+        try:
+            shutil.rmtree(TEMP_CACHE)
+        except FileNotFoundError:
+            pass
     os.makedirs(TEMP_CACHE, exist_ok=True)
     os.chdir(TEMP_CACHE)
 
