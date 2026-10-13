@@ -91,6 +91,8 @@ def create_flatpak_list():
     print("[OK] Saving Flatpak app list")
 
 def create_flatpak_autostart():
+    # Without this, cp creates the workspace path as a file when it is missing
+    os.makedirs(f"{CACHE}/workspace", exist_ok=True)
     os.system(f"cp /app/share/savedesktop/savedesktop/core/flatpaks_installer.py {CACHE}/workspace")
 
     # Create a JSON file with the user's preferences for Flatpak apps
