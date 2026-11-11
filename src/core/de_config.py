@@ -343,9 +343,9 @@ class Save:
                 if src_path.is_dir():
                     if target.exists():
                         shutil.rmtree(target)
-                    shutil.copytree(src_path, target)
+                    safe_copytree(str(src_path), str(target))
                 else:
-                    shutil.copy2(src_path, target)
+                    safe_copy(str(src_path), str(target))
 
 # ------------------------
 # Import pipeline
