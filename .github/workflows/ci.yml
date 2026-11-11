@@ -15,7 +15,7 @@ jobs:
 
       - name: Validate AppStream metainfo
         run: |
-          appstreamcli validate data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in
+          appstreamcli validate --no-net data/io.github.vikdevelop.SaveDesktop.metainfo.xml.in
 
       - name: Install dependencies
         run: |
